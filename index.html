@@ -1,9 +1,19 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Workout Timer</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#0e8f9b">
+
+<link rel="apple-touch-icon" href="logo.png">
 
 <style>
 
@@ -12,8 +22,6 @@ margin:0;
 font-family:Arial;
 background:#f4f6f9;
 }
-
-/* HEADER */
 
 header{
 display:flex;
@@ -33,8 +41,6 @@ h1{
 font-size:42px;
 color:#0e8f9b;
 }
-
-/* BOUTON SESSION */
 
 .startSessionContainer{
 display:flex;
@@ -79,6 +85,22 @@ font-weight:bold;
 color:#0e8f9b;
 }
 
+.installContainer{
+text-align:center;
+margin-top:20px;
+}
+
+.installBtn{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#4CAF50;
+color:white;
+cursor:pointer;
+display:none;
+}
+
 @keyframes pulse{
 
 0%{
@@ -94,8 +116,6 @@ box-shadow:0 0 0 0 rgba(14,143,155,0);
 }
 
 }
-
-/* LAYOUT */
 
 .container{
 display:flex;
@@ -154,6 +174,7 @@ margin-top:5px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -175,6 +196,10 @@ margin-top:5px;
 
 </div>
 
+</div>
+
+<div class="installContainer">
+<button id="installBtn" class="installBtn">Installer l'application</button>
 </div>
 
 <div class="container">
@@ -355,7 +380,40 @@ localStorage.setItem("exercises",JSON.stringify(exercises));
 
 renderExercises();
 
+/* SERVICE WORKER */
+
+if ('serviceWorker' in navigator) {
+
+navigator.serviceWorker.register('service-worker.js');
+
+}
+
+/* INSTALL BUTTON */
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+document.getElementById("installBtn").style.display = "inline-block";
+
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+}
+
+});
+
 </script>
 
 </body>
 </html>
+```
