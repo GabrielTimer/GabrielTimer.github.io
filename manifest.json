@@ -1,4 +1,3 @@
-```json
 {
 "name": "Workout Timer",
 "short_name": "Timer",
@@ -7,7 +6,6 @@
 "background_color": "#0e8f9b",
 "theme_color": "#0e8f9b",
 "description": "Workout Timer pour séances HIIT et entraînement fitness",
-"orientation": "portrait",
 "icons": [
 {
 "src": "logo.png",
@@ -21,4 +19,3 @@
 }
 ]
 }
-```
