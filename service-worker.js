@@ -1,11 +1,12 @@
+```javascript
 const CACHE_NAME = "workout-timer-v1";
 
 const urlsToCache = [
 "/",
 "/index.html",
 "/timer.html",
-"/logo.png",
-"/manifest.json"
+"/manifest.json",
+"/logo.png"
 ];
 
 self.addEventListener("install", event => {
@@ -29,3 +30,4 @@ caches.match(event.request)
 );
 
 });
+```
