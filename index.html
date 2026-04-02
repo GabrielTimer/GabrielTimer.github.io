@@ -1,26 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>FunKiné Timer</title>
 
 <style>
-
 body{
-margin:0;
-font-family:Arial, sans-serif;
+font-family:Arial;
 background:linear-gradient(135deg,#e0f7fa,#f4f6f9);
 display:flex;
-flex-direction:column;
-align-items:center;
 justify-content:center;
+align-items:center;
 height:100vh;
 }
-
-/* CARD */
 
 .card{
 background:white;
@@ -31,116 +24,62 @@ text-align:center;
 width:300px;
 }
 
-/* LOGO */
-
-.logo{
-height:90px;
-margin-bottom:10px;
-}
-
-/* TITRE */
-
-h1{
-color:#0e8f9b;
-margin-bottom:20px;
-}
-
-/* INPUT */
-
 input{
 width:100%;
 padding:12px;
 margin:8px 0;
 border-radius:10px;
 border:1px solid #ccc;
-font-size:16px;
 }
-
-/* BOUTONS */
 
 button{
 width:100%;
 padding:14px;
 margin-top:10px;
-font-size:16px;
 border:none;
 border-radius:12px;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
-.primary{
-background:#0e8f9b;
-color:white;
-}
-
-.primary:hover{
-background:#0b6f78;
-}
-
-.secondary{
-background:#ff9800;
-color:white;
-}
-
-.secondary:hover{
-background:#e68900;
-}
-
+.primary{background:#0e8f9b;color:white;}
+.secondary{background:#ff9800;color:white;}
 </style>
-
 </head>
 
 <body>
 
 <div class="card">
+<h2>FunKiné Timer</h2>
 
-<img src="logo.png" class="logo">
-
-<h1>FunKiné Timer</h1>
-
-<input type="text" id="prenom" placeholder="Prénom">
-<input type="text" id="nom" placeholder="Nom">
+<input id="prenom" placeholder="Prénom">
+<input id="nom" placeholder="Nom">
 
 <button class="primary" onclick="acceder()">Accéder à mon programme</button>
-
 <button class="secondary" onclick="modeLibre()">Mode libre</button>
-
 </div>
 
 <script>
-
 function acceder(){
-
 let prenom = document.getElementById("prenom").value.trim();
 let nom = document.getElementById("nom").value.trim();
 
-if(prenom === "" || nom === ""){
-alert("Veuillez entrer votre nom et prénom");
+if(!prenom || !nom){
+alert("Veuillez remplir les champs");
 return;
 }
 
-// identifiant unique patient
-let id = prenom.toLowerCase() + "_" + nom.toLowerCase();
-
-// sauvegarde pour le timer
+let id = prenom.toLowerCase()+"_"+nom.toLowerCase();
 localStorage.setItem("currentUser", id);
 
-// redirection
-window.location = "timer.html";
-
+window.location = "config.html";
 }
 
 function modeLibre(){
-
 localStorage.removeItem("currentUser");
-
-window.location = "timer.html";
-
+window.location = "config.html";
 }
-
 </script>
 
 </body>
-
 </html>
