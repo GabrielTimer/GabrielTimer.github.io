@@ -1,206 +1,87 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Workout Timer V2</title>
+<title>Timer</title>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#111;
-color:white;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-height:100vh;
-}
-
-.timer-circle{
-
-width:260px;
-height:260px;
-border-radius:50%;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:60px;
-font-weight:bold;
-
-background:conic-gradient(#0e8f9b 0%, #333 0%);
-
-transition:background 0.2s linear;
-
-}
-
-.phase{
-
-font-size:28px;
-margin-bottom:20px;
-
-}
-
-.progress{
-
-width:80%;
-height:20px;
-background:#333;
-border-radius:20px;
-margin-top:40px;
-overflow:hidden;
-
-}
-
-.progress-bar{
-
-height:100%;
-width:0%;
-background:#0e8f9b;
-transition:width 1s linear;
-
-}
-
-button{
-
-margin-top:40px;
-padding:15px 30px;
-font-size:20px;
-border:none;
-border-radius:10px;
-background:#0e8f9b;
-color:white;
-cursor:pointer;
-
-}
-
+body{font-family:Arial;text-align:center;background:#222;color:white;}
+.timer{font-size:80px;margin:20px;}
+.exercise{font-size:30px;}
 </style>
-
 </head>
 
 <body>
 
-<div class="phase" id="phase">Prêt</div>
-
-<div class="timer-circle" id="circle">
-<span id="time">5</span>
-</div>
-
-<div class="progress">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-
-<button onclick="start()">Démarrer</button>
+<div class="exercise" id="exo"></div>
+<div class="timer" id="timer"></div>
 
 <script>
 
-let prepTime=5;
-let exerciseTime=30;
-let restTime=15;
+let data = localStorage.getItem("programme_temp");
 
-let phase="prep";
-let timeLeft=prepTime;
-
-let totalTime=prepTime+exerciseTime+restTime;
-let elapsed=0;
-
-let timer;
-
-function speak(text){
-
-let msg=new SpeechSynthesisUtterance(text);
-msg.lang="fr-FR";
-speechSynthesis.speak(msg);
-
+if(!data){
+let user = localStorage.getItem("currentUser");
+if(user){
+data = localStorage.getItem("programme_"+user);
+}
 }
 
-function updateCircle(){
+let p = data ? JSON.parse(data) : null;
 
-let percent=(elapsed/totalTime)*100;
+let i=0, rep=1, serie=1, phase="ex";
+let t;
 
-circle.style.background=
-`conic-gradient(#0e8f9b ${percent}%, #333 ${percent}%)`;
+function startPhase(){
 
-progressBar.style.width=percent+"%";
-
+if(serie>p.series){
+exo.innerText="FIN 🎉";
+timer.innerText="";
+return;
 }
 
-function start(){
-
-phase="prep";
-timeLeft=prepTime;
-elapsed=0;
-
-speak("Préparation");
-
-clearInterval(timer);
-
-timer=setInterval(()=>{
-
-time.innerText=timeLeft;
-
-updateCircle();
-
-timeLeft--;
-elapsed++;
-
-if(timeLeft<0){
-
-if(phase==="prep"){
-
-phase="exercise";
-timeLeft=exerciseTime;
-
-phaseText.innerText="Exercice";
-
-speak("3");
-setTimeout(()=>speak("2"),800);
-setTimeout(()=>speak("1"),1600);
-setTimeout(()=>speak("C'est parti"),2400);
-
+if(phase==="ex"){
+t=p.tempsEx;
+exo.innerText=p.exercices[i];
+}else{
+t=p.tempsRepos;
+exo.innerText="Repos";
 }
 
-else if(phase==="exercise"){
+timer.innerText=t;
 
-phase="rest";
-timeLeft=restTime;
+let inter=setInterval(()=>{
+t--;
+timer.innerText=t;
 
-phaseText.innerText="Repos";
-
-speak("Repos");
-
+if(t<=0){
+clearInterval(inter);
+next();
 }
-
-else{
-
-clearInterval(timer);
-
-phaseText.innerText="Terminé";
-
-speak("Séance terminée");
-
-}
-
-}
-
 },1000);
-
 }
 
-let phaseText=document.getElementById("phase");
-let circle=document.getElementById("circle");
-let progressBar=document.getElementById("progressBar");
-let time=document.getElementById("time");
+function next(){
+if(phase==="ex"){
+phase="repos";
+}else{
+phase="ex";
+i++;
+if(i>=p.exercices.length){
+i=0;
+rep++;
+if(rep>p.reps){
+rep=1;
+serie++;
+}
+}
+}
+startPhase();
+}
+
+startPhase();
 
 </script>
 
 </body>
 </html>
-```
