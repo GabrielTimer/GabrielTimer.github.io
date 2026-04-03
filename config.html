@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Configuration</title>
+
+<style>
+body{font-family:Arial;text-align:center;background:#f4f4f4;}
+.card{background:white;padding:20px;border-radius:15px;max-width:400px;margin:auto;margin-top:40px;}
+input{width:80%;padding:10px;margin:5px;}
+button{padding:12px;margin:5px;border:none;border-radius:10px;cursor:pointer;}
+.save{background:#2ecc71;color:white;}
+.start{background:#0e8f9b;color:white;}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Configurer la séance</h2>
+
+Nombre d'exercices<br>
+<input type="number" id="nbEx" value="3" onchange="generer()">
+
+<div id="exo"></div>
+
+Temps exercice<br>
+<input type="number" id="tempsEx" value="30">
+
+Temps repos<br>
+<input type="number" id="tempsRepos" value="15">
+
+Répétitions<br>
+<input type="number" id="reps" value="5">
+
+Séries<br>
+<input type="number" id="series" value="2">
+
+<br>
+
+<button class="save" onclick="save()">💾 Enregistrer</button>
+<button class="start" onclick="start()">▶ Démarrer</button>
+
+</div>
+
+<script>
+
+let exercices=[];
+
+function generer(){
+let n = document.getElementById("nbEx").value;
+let div = document.getElementById("exo");
+div.innerHTML="";
+exercices=[];
+
+for(let i=0;i<n;i++){
+let input=document.createElement("input");
+input.value="Exercice "+(i+1);
+input.oninput=()=>exercices[i]=input.value;
+div.appendChild(input);
+exercices.push(input.value);
+}
+}
+
+function charger(){
+let user = localStorage.getItem("currentUser");
+
+if(user){
+let data = localStorage.getItem("programme_"+user);
+if(data){
+let p = JSON.parse(data);
+
+document.getElementById("tempsEx").value=p.tempsEx;
+document.getElementById("tempsRepos").value=p.tempsRepos;
+document.getElementById("reps").value=p.reps;
+document.getElementById("series").value=p.series;
+
+exercices=p.exercices;
+document.getElementById("nbEx").value=exercices.length;
+
+generer();
+
+setTimeout(()=>{
+let inputs=document.querySelectorAll("#exo input");
+inputs.forEach((i,idx)=>i.value=exercices[idx]);
+},100);
+return;
+}
+}
+
+generer();
+}
+
+function save(){
+let user = localStorage.getItem("currentUser");
+
+let prog={
+exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
+series:+series.value
+};
+
+if(user){
+localStorage.setItem("programme_"+user,JSON.stringify(prog));
+alert("Enregistré !");
+}else{
+alert("Mode libre non sauvegardé");
+}
+}
+
+function start(){
+let prog={
+exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
+series:+series.value
+};
+
+localStorage.setItem("programme_temp",JSON.stringify(prog));
+window.location="timer.html";
+}
+
+charger();
+
+</script>
+
+</body>
+</html>
