@@ -61,8 +61,8 @@ cursor:pointer;
 
 <script>
 function acceder(){
-let prenom = document.getElementById("prenom").value.trim();
-let nom = document.getElementById("nom").value.trim();
+let prenom = prenomEl.value.trim();
+let nom = nomEl.value.trim();
 
 if(!prenom || !nom){
 alert("Veuillez remplir les champs");
@@ -79,6 +79,9 @@ function modeLibre(){
 localStorage.removeItem("currentUser");
 window.location = "config.html";
 }
+
+let prenomEl = document.getElementById("prenom");
+let nomEl = document.getElementById("nom");
 </script>
 
 </body>
