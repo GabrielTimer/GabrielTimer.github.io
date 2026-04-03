@@ -38,12 +38,13 @@ transform-origin:50% 50%;
 
 button{
 padding:12px 20px;
-margin-top:15px;
+margin:10px;
 border:none;
 border-radius:10px;
 cursor:pointer;
 background:#0e8f9b;
 color:white;
+font-size:16px;
 }
 </style>
 </head>
@@ -61,90 +62,152 @@ color:white;
 
 <div class="timer" id="timer"></div>
 
+<div>
+<button onclick="togglePause()" id="pauseBtn">Pause</button>
 <button onclick="back()">Réglages</button>
+</div>
 
 <script>
 
+// 🔹 récupération programme
 let data = localStorage.getItem("programme_temp");
+
 if(!data){
 let u = localStorage.getItem("currentUser");
-if(u) data = localStorage.getItem("programme_"+u);
+if(u){
+data = localStorage.getItem("programme_"+u);
+}
 }
 
 let p = JSON.parse(data);
 
+// 🔹 variables
 let i=0, rep=1, serie=1;
 let phase="prep";
 let t=5, total=5;
+let paused=false;
 
 let progress=document.getElementById("progress");
 let circ=880;
 
+// 🔊 voix
 function speak(txt){
 let msg=new SpeechSynthesisUtterance(txt);
 msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
 
+// 🔁 changement phase
 function next(){
 
 if(phase==="prep"){
-phase="ex"; t=p.tempsEx; total=t; speak("C'est parti");
+phase="ex";
+t=p.tempsEx;
+total=t;
+speak("C'est parti");
 document.body.style.background="#1b5e20";
 }
+
 else if(phase==="ex"){
-phase="rest"; t=p.tempsRepos; total=t; speak("Repos");
+phase="rest";
+t=p.tempsRepos;
+total=t;
+speak("Repos");
 document.body.style.background="#b71c1c";
 }
+
 else{
 phase="ex";
 i++;
+
 if(i>=p.exercices.length){
-i=0; rep++;
-if(rep>p.reps){rep=1; serie++;}
+i=0;
+rep++;
+if(rep>p.reps){
+rep=1;
+serie++;
+}
 }
 
 if(serie>p.series){
-phaseEl.innerText="Terminé";
+phaseEl.innerText="Terminé 🎉";
 timerEl.innerText="";
 return;
 }
 
-t=p.tempsEx; total=t;
+t=p.tempsEx;
+total=t;
 speak("Exercice");
+document.body.style.background="#1b5e20";
 }
 
 update();
 }
 
+// 🔄 affichage
 function update(){
 
 timerEl.innerText=t;
-nameEl.innerText = phase==="prep"?"Préparez-vous":phase==="rest"?"Repos":p.exercices[i];
-phaseEl.innerText = phase;
-infoEl.innerText="Série "+serie+" | Rép "+rep;
 
-progress.style.strokeDashoffset=circ*(1-(t/total));
+nameEl.innerText =
+phase==="prep" ? "Préparez-vous" :
+phase==="rest" ? "Repos" :
+p.exercices[i];
+
+phaseEl.innerText =
+phase==="prep" ? "Préparation" :
+phase==="rest" ? "Repos" :
+"Exercice";
+
+infoEl.innerText = "Série "+serie+" | Rép "+rep;
+
+progress.style.strokeDashoffset = circ*(1-(t/total));
 }
 
+// 🔁 boucle timer
 function loop(){
+
+if(paused) return;
+
 t--;
 update();
 
-if(t<=0) next();
+if(t<=0){
+next();
+}
 }
 
+// ⏸️ pause
+function togglePause(){
+
+let btn = document.getElementById("pauseBtn");
+
+paused = !paused;
+
+if(paused){
+btn.innerText="Reprendre";
+}else{
+btn.innerText="Pause";
+}
+
+}
+
+// 🔙 retour config
+function back(){
+window.location="config.html";
+}
+
+// 🔹 éléments DOM
 let timerEl=document.getElementById("timer");
 let nameEl=document.getElementById("name");
 let phaseEl=document.getElementById("phase");
 let infoEl=document.getElementById("info");
 
+// 🔁 lancement
+update();
 setInterval(loop,1000);
 
-function back(){
-window.location="config.html";
-}
-
+// 🔊 début
 speak("Préparez-vous");
 
 </script>
