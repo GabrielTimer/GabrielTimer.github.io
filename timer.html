@@ -6,131 +6,146 @@
 
 <style>
 body{
-font-family:Arial;
-text-align:center;
-background:#222;
+margin:0;
+background:#111;
 color:white;
+font-family:Arial;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+height:100vh;
+text-align:center;
+transition:background 0.3s;
 }
 
-.timer{
-font-size:80px;
-margin:20px;
-}
+.phase{font-size:42px;margin-bottom:10px;}
+.exerciseName{font-size:30px;}
+.seriesInfo{font-size:20px;margin-bottom:20px;}
 
-.exercise{
-font-size:30px;
+.timer{font-size:100px;}
+
+svg{width:250px;height:250px;}
+circle{fill:none;stroke-width:12;}
+.bg{stroke:#333;}
+.progress{
+stroke:#00c6ff;
+stroke-dasharray:880;
+stroke-dashoffset:880;
+transform:rotate(-90deg);
+transform-origin:50% 50%;
 }
 
 button{
-padding:10px 20px;
-margin-top:20px;
+padding:12px 20px;
+margin-top:15px;
 border:none;
 border-radius:10px;
 cursor:pointer;
+background:#0e8f9b;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<div class="exercise" id="exo"></div>
+<div class="phase" id="phase"></div>
+<div class="exerciseName" id="name"></div>
+<div class="seriesInfo" id="info"></div>
+
+<svg>
+<circle class="bg" cx="125" cy="125" r="110"/>
+<circle class="progress" id="progress" cx="125" cy="125" r="110"/>
+</svg>
+
 <div class="timer" id="timer"></div>
 
-<button onclick="retour()">⬅ Retour</button>
+<button onclick="back()">Réglages</button>
 
 <script>
 
-// 🔹 récupération programme
 let data = localStorage.getItem("programme_temp");
-
 if(!data){
-let user = localStorage.getItem("currentUser");
-if(user){
-data = localStorage.getItem("programme_"+user);
-}
+let u = localStorage.getItem("currentUser");
+if(u) data = localStorage.getItem("programme_"+u);
 }
 
-let p = data ? JSON.parse(data) : null;
+let p = JSON.parse(data);
 
-if(!p){
-document.getElementById("exo").innerText="Erreur : aucun programme";
-throw new Error("No program");
-}
-
-// 🔹 variables
-let i=0;
-let rep=1;
-let serie=1;
+let i=0, rep=1, serie=1;
 let phase="prep";
-let temps=5;
-let interval;
+let t=5, total=5;
 
-// 🔹 lancement
-lancer();
+let progress=document.getElementById("progress");
+let circ=880;
 
-function lancer(){
+function speak(txt){
+let msg=new SpeechSynthesisUtterance(txt);
+msg.lang="fr-FR";
+speechSynthesis.speak(msg);
+}
+
+function next(){
 
 if(phase==="prep"){
-temps=5;
-exo.innerText="Préparation";
-}else if(phase==="ex"){
-temps=p.tempsEx;
-exo.innerText=p.exercices[i];
-}else{
-temps=p.tempsRepos;
-exo.innerText="Repos";
+phase="ex"; t=p.tempsEx; total=t; speak("C'est parti");
+document.body.style.background="#1b5e20";
 }
-
-timer.innerText=temps;
-
-interval=setInterval(()=>{
-temps--;
-timer.innerText=temps;
-
-if(temps<=0){
-clearInterval(interval);
-changerPhase();
+else if(phase==="ex"){
+phase="rest"; t=p.tempsRepos; total=t; speak("Repos");
+document.body.style.background="#b71c1c";
 }
-},1000);
-
-}
-
-// 🔹 changement de phase
-function changerPhase(){
-
-if(phase==="prep"){
-phase="ex";
-}else if(phase==="ex"){
-phase="repos";
-}else{
+else{
 phase="ex";
 i++;
-
 if(i>=p.exercices.length){
-i=0;
-rep++;
-
-if(rep>p.reps){
-rep=1;
-serie++;
-}
-}
+i=0; rep++;
+if(rep>p.reps){rep=1; serie++;}
 }
 
-// 🔹 fin programme
 if(serie>p.series){
-exo.innerText="Programme terminé 🎉";
-timer.innerText="";
+phaseEl.innerText="Terminé";
+timerEl.innerText="";
 return;
 }
 
-lancer();
+t=p.tempsEx; total=t;
+speak("Exercice");
 }
 
-// 🔹 bouton retour
-function retour(){
+update();
+}
+
+function update(){
+
+timerEl.innerText=t;
+nameEl.innerText = phase==="prep"?"Préparez-vous":phase==="rest"?"Repos":p.exercices[i];
+phaseEl.innerText = phase;
+infoEl.innerText="Série "+serie+" | Rép "+rep;
+
+progress.style.strokeDashoffset=circ*(1-(t/total));
+}
+
+function loop(){
+t--;
+update();
+
+if(t<=0) next();
+}
+
+let timerEl=document.getElementById("timer");
+let nameEl=document.getElementById("name");
+let phaseEl=document.getElementById("phase");
+let infoEl=document.getElementById("info");
+
+setInterval(loop,1000);
+
+function back(){
 window.location="config.html";
 }
+
+speak("Préparez-vous");
 
 </script>
 
