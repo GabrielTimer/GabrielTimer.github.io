@@ -49,16 +49,15 @@ Séries<br>
 let exercices=[];
 
 function generer(){
-let n = document.getElementById("nbEx").value;
-let div = document.getElementById("exo");
-div.innerHTML="";
+let n = nbEx.value;
+exo.innerHTML="";
 exercices=[];
 
 for(let i=0;i<n;i++){
 let input=document.createElement("input");
 input.value="Exercice "+(i+1);
 input.oninput=()=>exercices[i]=input.value;
-div.appendChild(input);
+exo.appendChild(input);
 exercices.push(input.value);
 }
 }
@@ -71,24 +70,24 @@ let data = localStorage.getItem("programme_"+user);
 if(data){
 let p = JSON.parse(data);
 
-document.getElementById("tempsEx").value=p.tempsEx;
-document.getElementById("tempsRepos").value=p.tempsRepos;
-document.getElementById("reps").value=p.reps;
-document.getElementById("series").value=p.series;
+tempsEx.value=p.tempsEx;
+tempsRepos.value=p.tempsRepos;
+reps.value=p.reps;
+series.value=p.series;
 
 exercices=p.exercices;
-document.getElementById("nbEx").value=exercices.length;
+nbEx.value=exercices.length;
 
 generer();
 
 setTimeout(()=>{
-let inputs=document.querySelectorAll("#exo input");
-inputs.forEach((i,idx)=>i.value=exercices[idx]);
+document.querySelectorAll("#exo input")
+.forEach((i,idx)=>i.value=exercices[idx]);
 },100);
+
 return;
 }
 }
-
 generer();
 }
 
@@ -105,13 +104,14 @@ series:+series.value
 
 if(user){
 localStorage.setItem("programme_"+user,JSON.stringify(prog));
-alert("Enregistré !");
+alert("Programme enregistré !");
 }else{
 alert("Mode libre non sauvegardé");
 }
 }
 
 function start(){
+
 let prog={
 exercices,
 tempsEx:+tempsEx.value,
