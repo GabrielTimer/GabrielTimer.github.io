@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Timer</title>
 
 <style>
@@ -16,18 +17,35 @@ align-items:center;
 justify-content:center;
 height:100vh;
 text-align:center;
-transition:background 0.3s;
+padding:10px;
 }
 
-.phase{font-size:42px;margin-bottom:10px;}
-.exerciseName{font-size:30px;}
-.seriesInfo{font-size:20px;margin-bottom:20px;}
+.phase{font-size:8vw;}
+.exerciseName{font-size:6vw;}
+.seriesInfo{font-size:4vw;}
 
-.timer{font-size:100px;}
+.timer{
+font-size:20vw;
+font-weight:bold;
+margin:10px 0;
+}
 
-svg{width:250px;height:250px;}
+/* 🔥 IMAGE EXERCICE */
+.exoImg{
+width:60%;
+max-width:250px;
+margin:10px;
+border-radius:10px;
+}
+
+svg{
+width:70vw;
+max-width:300px;
+}
+
 circle{fill:none;stroke-width:12;}
 .bg{stroke:#333;}
+
 .progress{
 stroke:#00c6ff;
 stroke-dasharray:880;
@@ -36,16 +54,24 @@ transform:rotate(-90deg);
 transform-origin:50% 50%;
 }
 
-button{
-padding:12px 20px;
-margin:10px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-background:#0e8f9b;
-color:white;
-font-size:16px;
+.buttons{
+display:flex;
+gap:10px;
+width:100%;
+max-width:400px;
 }
+
+button{
+flex:1;
+padding:16px;
+font-size:16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+
+.pause{background:#ff9800;}
+.menu{background:#0e8f9b;}
 </style>
 </head>
 
@@ -55,6 +81,9 @@ font-size:16px;
 <div class="exerciseName" id="name"></div>
 <div class="seriesInfo" id="info"></div>
 
+<!-- 🔥 IMAGE -->
+<img id="exoImg" class="exoImg">
+
 <svg>
 <circle class="bg" cx="125" cy="125" r="110"/>
 <circle class="progress" id="progress" cx="125" cy="125" r="110"/>
@@ -62,26 +91,22 @@ font-size:16px;
 
 <div class="timer" id="timer"></div>
 
-<div>
-<button onclick="togglePause()" id="pauseBtn">Pause</button>
-<button onclick="back()">Réglages</button>
+<div class="buttons">
+<button class="pause" onclick="togglePause()" id="pauseBtn">Pause</button>
+<button class="menu" onclick="back()">Réglages</button>
 </div>
 
 <script>
 
-// 🔹 récupération programme
 let data = localStorage.getItem("programme_temp");
 
 if(!data){
 let u = localStorage.getItem("currentUser");
-if(u){
-data = localStorage.getItem("programme_"+u);
-}
+if(u) data = localStorage.getItem("programme_"+u);
 }
 
 let p = JSON.parse(data);
 
-// 🔹 variables
 let i=0, rep=1, serie=1;
 let phase="prep";
 let t=5, total=5;
@@ -90,32 +115,22 @@ let paused=false;
 let progress=document.getElementById("progress");
 let circ=880;
 
-// 🔊 voix
-function speak(txt){
-let msg=new SpeechSynthesisUtterance(txt);
-msg.lang="fr-FR";
-speechSynthesis.speak(msg);
-}
+let img = document.getElementById("exoImg");
 
-// 🔁 changement phase
 function next(){
 
 if(phase==="prep"){
 phase="ex";
 t=p.tempsEx;
 total=t;
-speak("C'est parti");
 document.body.style.background="#1b5e20";
 }
-
 else if(phase==="ex"){
 phase="rest";
 t=p.tempsRepos;
 total=t;
-speak("Repos");
 document.body.style.background="#b71c1c";
 }
-
 else{
 phase="ex";
 i++;
@@ -132,19 +147,18 @@ serie++;
 if(serie>p.series){
 phaseEl.innerText="Terminé 🎉";
 timerEl.innerText="";
+img.style.display="none";
 return;
 }
 
 t=p.tempsEx;
 total=t;
-speak("Exercice");
 document.body.style.background="#1b5e20";
 }
 
 update();
 }
 
-// 🔄 affichage
 function update(){
 
 timerEl.innerText=t;
@@ -161,54 +175,43 @@ phase==="rest" ? "Repos" :
 
 infoEl.innerText = "Série "+serie+" | Rép "+rep;
 
+/* 🔥 IMAGE PAR EXERCICE */
+if(phase==="ex"){
+img.style.display="block";
+img.src = "tendinitedelacoiffe" + (i+1) + ".jpg?v=" + Date.now();
+}else{
+img.style.display="none";
+}
+
 progress.style.strokeDashoffset = circ*(1-(t/total));
 }
 
-// 🔁 boucle timer
 function loop(){
-
 if(paused) return;
 
 t--;
 update();
 
-if(t<=0){
-next();
-}
+if(t<=0) next();
 }
 
-// ⏸️ pause
 function togglePause(){
-
-let btn = document.getElementById("pauseBtn");
-
-paused = !paused;
-
-if(paused){
-btn.innerText="Reprendre";
-}else{
-btn.innerText="Pause";
+paused=!paused;
+pauseBtn.innerText = paused ? "Reprendre" : "Pause";
 }
 
-}
-
-// 🔙 retour config
 function back(){
 window.location="config.html";
 }
 
-// 🔹 éléments DOM
 let timerEl=document.getElementById("timer");
 let nameEl=document.getElementById("name");
 let phaseEl=document.getElementById("phase");
 let infoEl=document.getElementById("info");
+let pauseBtn=document.getElementById("pauseBtn");
 
-// 🔁 lancement
 update();
 setInterval(loop,1000);
-
-// 🔊 début
-speak("Préparez-vous");
 
 </script>
 
