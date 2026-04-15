@@ -13,37 +13,42 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
 }
 
 .card{
 background:white;
-padding:30px;
+padding:25px;
 border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
 text-align:center;
-width:300px;
+width:90%;
+max-width:350px;
 }
 
 input{
 width:100%;
-padding:12px;
+padding:14px;
 margin:8px 0;
 border-radius:10px;
 border:1px solid #ccc;
+font-size:16px;
 }
 
 button{
 width:100%;
-padding:14px;
+padding:16px;
 margin-top:10px;
 border:none;
 border-radius:12px;
 font-weight:bold;
+font-size:16px;
 cursor:pointer;
 }
 
 .primary{background:#0e8f9b;color:white;}
 .secondary{background:#ff9800;color:white;}
+.patho{background:#9c27b0;color:white;}
 </style>
 </head>
 
@@ -57,9 +62,11 @@ cursor:pointer;
 
 <button class="primary" onclick="acceder()">Accéder à mon programme</button>
 <button class="secondary" onclick="modeLibre()">Mode libre</button>
+<button class="patho" onclick="pathologies()">🩺 Pathologies</button>
 </div>
 
 <script>
+
 function acceder(){
 let prenom = prenomEl.value.trim();
 let nom = nomEl.value.trim();
@@ -80,8 +87,13 @@ localStorage.removeItem("currentUser");
 window.location = "config.html";
 }
 
-let prenomEl = document.getElementById("prenom");
-let nomEl = document.getElementById("nom");
+function pathologies(){
+window.location="pathologies.html";
+}
+
+let prenomEl=document.getElementById("prenom");
+let nomEl=document.getElementById("nom");
+
 </script>
 
 </body>
