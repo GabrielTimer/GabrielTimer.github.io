@@ -8,7 +8,7 @@
 <style>
 body{
 margin:0;
-background:#111;
+background:#1b5e20;
 color:white;
 font-family:Arial;
 display:flex;
@@ -19,28 +19,51 @@ height:100vh;
 text-align:center;
 }
 
+h1{font-size:30px;}
+h2{font-size:20px;}
+
 .timer{
-font-size:100px;
+font-size:90px;
+margin:20px;
+}
+
+img{
+max-width:250px;
+margin:20px;
 }
 
 button{
-padding:15px;
-margin-top:20px;
+padding:12px 20px;
+margin:5px;
 border:none;
 border-radius:10px;
+font-size:16px;
 }
 
+.pause{background:#ff9800;}
+.back{background:#0e8f9b;}
 </style>
 </head>
 
 <body>
 
-<h1 id="name"></h1>
-<div id="timer" class="timer"></div>
+<h1 id="phase"></h1>
+<h2 id="name"></h2>
+<h3 id="info"></h3>
 
-<button onclick="back()">Retour</button>
+<img id="img" src="">
+
+<div class="timer" id="timer"></div>
+
+<button class="pause" onclick="pause()">Pause</button>
+<button class="back" onclick="back()">Réglages</button>
 
 <script>
+
+// 🔴 sécurité
+if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
+    window.location="index.html";
+}
 
 let data = localStorage.getItem("programme_temp");
 
@@ -52,29 +75,84 @@ if(u) data = localStorage.getItem("programme_"+u);
 let p = JSON.parse(data);
 
 let i=0;
+let rep=1;
+let serie=1;
+let phase="ex";
 let t=p.tempsEx;
+let paused=false;
 
-function loop(){
+function update(){
 
 timer.innerText = t;
-name.innerText = p.exercices[i];
 
-t--;
+name.innerText = phase==="ex" ? p.exercices[i] : "Repos";
+phaseEl.innerText = phase==="ex" ? "Exercice" : "Repos";
+info.innerText = "Série "+serie+" | Rép "+rep;
 
-if(t<0){
+/* image */
+if(phase==="ex"){
+img.src="./tendinitedelacoiffe"+(i+1)+".jpg";
+img.style.display="block";
+}else{
+img.style.display="none";
+}
+}
+
+function next(){
+
+if(phase==="ex"){
+phase="repos";
+t=p.tempsRepos;
+document.body.style.background="#b71c1c";
+}
+else{
+phase="ex";
 i++;
+
 if(i>=p.exercices.length){
 i=0;
+rep++;
+if(rep>p.reps){
+rep=1;
+serie++;
 }
-t=p.tempsEx;
 }
 
+if(serie>p.series){
+phaseEl.innerText="Terminé 🎉";
+timer.innerText="";
+img.style.display="none";
+return;
+}
+
+t=p.tempsEx;
+document.body.style.background="#1b5e20";
+}
+
+update();
+}
+
+function loop(){
+if(paused) return;
+
+t--;
+update();
+
+if(t<=0) next();
+}
+
+function pause(){
+paused=!paused;
 }
 
 function back(){
 window.location="config.html";
 }
 
+let timer=document.getElementById("timer");
+let phaseEl=document.getElementById("phase");
+
+update();
 setInterval(loop,1000);
 
 </script>
