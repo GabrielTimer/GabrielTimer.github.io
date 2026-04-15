@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathologies</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;}
+button{
+width:90%;
+padding:15px;
+margin:10px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+background:#0e8f9b;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Choisir une pathologie</h2>
+
+<button onclick="selectPatho('epaule')">Coiffe des rotateurs</button>
+<button onclick="selectPatho('dos')">Lombalgie</button>
+<button onclick="selectPatho('genou')">Syndrome rotulien</button>
+
+<button onclick="back()">⬅ Retour</button>
+
+<script>
+
+function selectPatho(p){
+localStorage.setItem("pathologie", p);
+window.location="config.html";
+}
+
+function back(){
+window.location="index.html";
+}
+
+</script>
+
+</body>
+</html>
