@@ -6,14 +6,85 @@
 <title>Configuration</title>
 
 <style>
-body{font-family:Arial;text-align:center;background:#f4f4f4;margin:0;}
-.card{background:white;padding:20px;border-radius:15px;max-width:400px;margin:auto;margin-top:20px;}
-input{width:90%;padding:12px;margin:6px;}
-button{padding:14px;margin:5px;border:none;border-radius:10px;width:90%;}
+body{
+font-family:Arial;
+text-align:center;
+background:#f4f4f4;
+margin:0;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+max-width:450px;
+margin:auto;
+margin-top:20px;
+}
+
+input{
+width:95%;
+padding:12px;
+margin:6px;
+font-size:16px;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+button{
+padding:14px;
+margin:5px;
+border:none;
+border-radius:10px;
+width:95%;
+font-size:16px;
+cursor:pointer;
+}
+
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
-img{width:100%;border-radius:10px;margin-bottom:10px;}
+.pdf{background:#9c27b0;color:white;}
+
+img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+/* 🔥 PRINT IMAGE SEULE */
+@media print {
+
+body *{
+visibility:hidden;
+}
+
+#printZone, #printZone *{
+visibility:visible;
+}
+
+#printZone{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+#printZone img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
+
+}
 </style>
 </head>
 
@@ -23,15 +94,38 @@ img{width:100%;border-radius:10px;margin-bottom:10px;}
 
 <h2>Configurer la séance</h2>
 
+<!-- IMAGE PATHO -->
 <img id="pathoImage" style="display:none;">
 
-<input type="number" id="nbEx" value="3" onchange="generer()">
+<!-- BOUTONS IMAGE -->
+<div id="imageButtons" style="display:none;">
+<button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
+<button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
+</div>
+
+<!-- ZONE PRINT -->
+<div id="printZone" style="display:none;">
+<img id="printImage">
+</div>
+
+<label>Nombre d'exercices</label>
+<input type="number" id="nbEx" value="5" onchange="generer()">
+
 <div id="exo"></div>
 
+<label>Temps exercice (secondes)</label>
 <input id="tempsEx" type="number">
+
+<label>Temps repos (secondes)</label>
 <input id="tempsRepos" type="number">
+
+<label>Répétitions</label>
 <input id="reps" type="number">
+
+<label>Séries</label>
 <input id="series" type="number">
+
+<br>
 
 <button class="save" onclick="save()">💾 Enregistrer</button>
 <button class="start" onclick="start()">▶ Démarrer</button>
@@ -43,24 +137,31 @@ img{width:100%;border-radius:10px;margin-bottom:10px;}
 
 let exercices=[];
 
+// 🔹 PROGRAMME ÉPAULE
 const programmes = {
 epaule:{
-exercices:["Rotation externe","Élévation latérale","Pendulaire"],
-tempsEx:20,tempsRepos:15,reps:3,series:2
-},
-dos:{
-exercices:["Gainage","Superman","Étirement dos"],
-tempsEx:30,tempsRepos:20,reps:3,series:2
-},
-genou:{
-exercices:["Squat léger","Chaise","Montée marche"],
-tempsEx:25,tempsRepos:20,reps:3,series:2
+exercices:[
+"Rotation externe",
+"Élévation latérale",
+"Pendulaire",
+"Exercice 4",
+"Exercice 5",
+"Exercice 6",
+"Exercice 7",
+"Exercice 8"
+],
+tempsEx:20,
+tempsRepos:15,
+reps:3,
+series:2
 }
 };
 
+// 🔹 générer exercices
 function generer(){
 exo.innerHTML="";
 exercices=[];
+
 for(let i=0;i<nbEx.value;i++){
 let input=document.createElement("input");
 input.value="Exercice "+(i+1);
@@ -70,13 +171,16 @@ exercices.push(input.value);
 }
 }
 
+// 🔹 appliquer programme
 function apply(p){
+
 tempsEx.value=p.tempsEx;
 tempsRepos.value=p.tempsRepos;
 reps.value=p.reps;
 series.value=p.series;
 
 nbEx.value=p.exercices.length;
+
 generer();
 
 setTimeout(()=>{
@@ -87,48 +191,54 @@ document.querySelectorAll("#exo input")
 exercices=[...p.exercices];
 }
 
+// 🔹 chargement
 function charger(){
 
-let user = localStorage.getItem("currentUser");
 let patho = localStorage.getItem("pathologie");
+
 let img = document.getElementById("pathoImage");
+let printImg = document.getElementById("printImage");
+let btns = document.getElementById("imageButtons");
 
-// patient
-if(user){
-let data = localStorage.getItem("programme_"+user);
-if(data){
-apply(JSON.parse(data));
-return;
-}
-}
-
-// custom
-let custom = JSON.parse(localStorage.getItem("customPathos")) || [];
-let found = custom.find(p => p.nom === patho);
-
-if(found){
-img.style.display="none";
-apply(found);
-return;
-}
-
-// défaut
-if(patho && programmes[patho]){
-
+// 🔥 PATHO ÉPAULE
 if(patho==="epaule"){
-img.src="tendinitedelacoiffe.jpg";
-img.style.display="block";
-}else{
-img.style.display="none";
-}
 
-apply(programmes[patho]);
+let src="tendinitedelacoiffe.jpg?v="+Date.now();
+
+img.src=src;
+img.style.display="block";
+
+printImg.src=src;
+
+// afficher boutons
+btns.style.display="block";
+
+// appliquer programme
+apply(programmes.epaule);
+
 return;
 }
+
+// 🔹 sinon
+img.style.display="none";
+btns.style.display="none";
 
 generer();
 }
 
+// 🔹 PDF IMAGE SEULE
+function printPDF(){
+
+document.getElementById("printZone").style.display="flex";
+
+window.print();
+
+setTimeout(()=>{
+document.getElementById("printZone").style.display="none";
+},500);
+}
+
+// 🔹 sauvegarde patient
 function save(){
 
 let user = localStorage.getItem("currentUser");
@@ -146,21 +256,41 @@ user = prenom.toLowerCase()+"_"+nom.toLowerCase();
 localStorage.setItem("currentUser", user);
 }
 
-let prog={exercices,tempsEx:+tempsEx.value,tempsRepos:+tempsRepos.value,reps:+reps.value,series:+series.value};
+let prog={
+exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
+series:+series.value
+};
 
 localStorage.setItem("programme_"+user,JSON.stringify(prog));
 
 alert("Programme enregistré !");
 }
 
+// 🔹 démarrer
 function start(){
-let prog={exercices,tempsEx:+tempsEx.value,tempsRepos:+tempsRepos.value,reps:+reps.value,series:+series.value};
+
+let prog={
+exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
+series:+series.value
+};
+
 localStorage.setItem("programme_temp",JSON.stringify(prog));
+
 window.location="timer.html";
 }
 
-function home(){window.location="index.html";}
+// 🔹 accueil
+function home(){
+window.location="index.html";
+}
 
+// 🔹 init
 charger();
 
 </script>
