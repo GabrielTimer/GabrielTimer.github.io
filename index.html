@@ -2,152 +2,90 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Exercice Kiné</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gabriel Timer</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+body{
+font-family:Arial;
+background:linear-gradient(135deg,#e0f7fa,#f4f6f9);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
 }
 
-/* Layout global */
-.container {
-  display: flex;
-  height: 100vh;
-  background: #1f5f2e;
-  color: white;
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+text-align:center;
+width:90%;
+max-width:350px;
 }
 
-/* Partie gauche */
-.left {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 50px;
+input{
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:10px;
+border:1px solid #ccc;
 }
 
-/* Texte */
-.text h1 {
-  font-size: 42px;
-  margin: 0;
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+font-weight:bold;
 }
 
-.text h2 {
-  font-size: 28px;
-  margin: 5px 0;
-  font-weight: normal;
-}
-
-.text p {
-  opacity: 0.8;
-}
-
-/* Bloc timer */
-.timer-block {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Chiffre */
-.timer-text {
-  position: absolute;
-  font-size: 110px;
-  font-weight: bold;
-}
-
-/* Cercle */
-.progress-ring {
-  transform: rotate(-90deg);
-}
-
-.circle-bg {
-  fill: none;
-  stroke: rgba(255,255,255,0.2);
-  stroke-width: 12;
-}
-
-.circle-progress {
-  fill: none;
-  stroke: #00cfff;
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-dasharray: 691;
-  stroke-dashoffset: 691;
-  transition: stroke-dashoffset 0.1s linear;
-}
-
-/* Partie droite */
-.right {
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.right img {
-  width: 95%;
-  height: auto;
-  border-radius: 20px;
-}
+.primary{background:#0e8f9b;color:white;}
+.secondary{background:#ff9800;color:white;}
+.patho{background:#9c27b0;color:white;}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-  <div class="left">
-    <div class="text">
-      <h1>Exercice</h1>
-      <h2>Élévation latérale</h2>
-      <p>Série 1 | Rép 1</p>
-    </div>
+<div class="card">
+<h2>Gabriel Timer</h2>
 
-    <div class="timer-block">
-      <div class="timer-text" id="timer">10</div>
+<input id="prenom" placeholder="Prénom">
+<input id="nom" placeholder="Nom">
 
-      <svg class="progress-ring" width="260" height="260">
-        <circle class="circle-bg" cx="130" cy="130" r="110"/>
-        <circle class="circle-progress" cx="130" cy="130" r="110"/>
-      </svg>
-    </div>
-  </div>
-
-  <div class="right">
-    <!-- remplace par ton image -->
-    <img src="https://via.placeholder.com/600x400" alt="exercice">
-  </div>
+<button class="primary" onclick="acceder()">Accéder à mon programme</button>
+<button class="secondary" onclick="modeLibre()">Mode libre</button>
+<button class="patho" onclick="pathologies()">Pathologies</button>
 </div>
 
 <script>
-const duration = 10;
-const start = Date.now();
+function acceder(){
+let p = prenom.value.trim();
+let n = nom.value.trim();
 
-const circle = document.querySelector('.circle-progress');
-const text = document.getElementById('timer');
-
-const radius = 110;
-const circumference = 2 * Math.PI * radius;
-
-function update() {
-  const now = Date.now();
-  const elapsed = (now - start) / 1000;
-  const remaining = Math.max(0, duration - elapsed);
-
-  text.textContent = Math.ceil(remaining);
-
-  const progress = elapsed / duration;
-  circle.style.strokeDashoffset = circumference * (1 - progress);
-
-  if (remaining > 0) {
-    requestAnimationFrame(update);
-  }
+if(!p || !n){
+alert("Remplir les champs");
+return;
 }
 
-update();
+let id = p.toLowerCase()+"_"+n.toLowerCase();
+localStorage.setItem("currentUser", id);
+
+window.location="config.html";
+}
+
+function modeLibre(){
+localStorage.removeItem("currentUser");
+window.location="config.html";
+}
+
+function pathologies(){
+window.location="pathologies.html";
+}
 </script>
 
 </body>
