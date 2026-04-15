@@ -17,16 +17,15 @@ margin:0;
 background:white;
 padding:20px;
 border-radius:15px;
-max-width:450px;
+max-width:400px;
 margin:auto;
 margin-top:20px;
 }
 
 input{
-width:95%;
+width:90%;
 padding:12px;
 margin:6px;
-font-size:16px;
 }
 
 label{
@@ -40,51 +39,12 @@ padding:14px;
 margin:5px;
 border:none;
 border-radius:10px;
-width:95%;
-font-size:16px;
-cursor:pointer;
+width:90%;
 }
 
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
-.pdf{background:#9c27b0;color:white;}
-
-img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
-
-/* 🔥 PRINT IMAGE SEULE */
-@media print {
-
-body *{
-visibility:hidden;
-}
-
-#printZone, #printZone *{
-visibility:visible;
-}
-
-#printZone{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-#printZone img{
-max-width:100%;
-max-height:100%;
-object-fit:contain;
-}
-
-}
 </style>
 </head>
 
@@ -94,38 +54,22 @@ object-fit:contain;
 
 <h2>Configurer la séance</h2>
 
-<!-- IMAGE PATHO -->
-<img id="pathoImage" style="display:none;">
-
-<!-- BOUTONS IMAGE -->
-<div id="imageButtons" style="display:none;">
-<button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
-<button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
-</div>
-
-<!-- ZONE PRINT -->
-<div id="printZone" style="display:none;">
-<img id="printImage">
-</div>
-
 <label>Nombre d'exercices</label>
-<input type="number" id="nbEx" value="5" onchange="generer()">
+<input type="number" id="nbEx" value="3" onchange="generer()">
 
 <div id="exo"></div>
 
-<label>Temps exercice (secondes)</label>
-<input id="tempsEx" type="number">
+<label>Temps exercice (sec)</label>
+<input id="tempsEx" type="number" value="20">
 
-<label>Temps repos (secondes)</label>
-<input id="tempsRepos" type="number">
+<label>Temps repos (sec)</label>
+<input id="tempsRepos" type="number" value="15">
 
 <label>Répétitions</label>
-<input id="reps" type="number">
+<input id="reps" type="number" value="3">
 
 <label>Séries</label>
-<input id="series" type="number">
-
-<br>
+<input id="series" type="number" value="2">
 
 <button class="save" onclick="save()">💾 Enregistrer</button>
 <button class="start" onclick="start()">▶ Démarrer</button>
@@ -137,27 +81,6 @@ object-fit:contain;
 
 let exercices=[];
 
-// 🔹 PROGRAMME ÉPAULE
-const programmes = {
-epaule:{
-exercices:[
-"Rotation externe",
-"Élévation latérale",
-"Pendulaire",
-"Exercice 4",
-"Exercice 5",
-"Exercice 6",
-"Exercice 7",
-"Exercice 8"
-],
-tempsEx:20,
-tempsRepos:15,
-reps:3,
-series:2
-}
-};
-
-// 🔹 générer exercices
 function generer(){
 exo.innerHTML="";
 exercices=[];
@@ -171,74 +94,6 @@ exercices.push(input.value);
 }
 }
 
-// 🔹 appliquer programme
-function apply(p){
-
-tempsEx.value=p.tempsEx;
-tempsRepos.value=p.tempsRepos;
-reps.value=p.reps;
-series.value=p.series;
-
-nbEx.value=p.exercices.length;
-
-generer();
-
-setTimeout(()=>{
-document.querySelectorAll("#exo input")
-.forEach((i,idx)=>i.value=p.exercices[idx]);
-},100);
-
-exercices=[...p.exercices];
-}
-
-// 🔹 chargement
-function charger(){
-
-let patho = localStorage.getItem("pathologie");
-
-let img = document.getElementById("pathoImage");
-let printImg = document.getElementById("printImage");
-let btns = document.getElementById("imageButtons");
-
-// 🔥 PATHO ÉPAULE
-if(patho==="epaule"){
-
-let src="tendinitedelacoiffe.jpg?v="+Date.now();
-
-img.src=src;
-img.style.display="block";
-
-printImg.src=src;
-
-// afficher boutons
-btns.style.display="block";
-
-// appliquer programme
-apply(programmes.epaule);
-
-return;
-}
-
-// 🔹 sinon
-img.style.display="none";
-btns.style.display="none";
-
-generer();
-}
-
-// 🔹 PDF IMAGE SEULE
-function printPDF(){
-
-document.getElementById("printZone").style.display="flex";
-
-window.print();
-
-setTimeout(()=>{
-document.getElementById("printZone").style.display="none";
-},500);
-}
-
-// 🔹 sauvegarde patient
 function save(){
 
 let user = localStorage.getItem("currentUser");
@@ -247,12 +102,9 @@ if(!user){
 let prenom = prompt("Prénom");
 let nom = prompt("Nom");
 
-if(!prenom || !nom){
-alert("Annulé");
-return;
-}
+if(!prenom || !nom) return;
 
-user = prenom.toLowerCase()+"_"+nom.toLowerCase();
+user = prenom+"_"+nom;
 localStorage.setItem("currentUser", user);
 }
 
@@ -269,7 +121,6 @@ localStorage.setItem("programme_"+user,JSON.stringify(prog));
 alert("Programme enregistré !");
 }
 
-// 🔹 démarrer
 function start(){
 
 let prog={
@@ -285,13 +136,11 @@ localStorage.setItem("programme_temp",JSON.stringify(prog));
 window.location="timer.html";
 }
 
-// 🔹 accueil
 function home(){
 window.location="index.html";
 }
 
-// 🔹 init
-charger();
+generer();
 
 </script>
 
