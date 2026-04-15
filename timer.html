@@ -11,149 +11,34 @@ margin:0;
 background:#111;
 color:white;
 font-family:Arial;
-}
-
-/* 🔥 LAYOUT */
-.container{
 display:flex;
 flex-direction:column;
+align-items:center;
+justify-content:center;
 height:100vh;
+text-align:center;
 }
 
-/* PC */
-@media(min-width:768px){
-.container{
-flex-direction:row;
-}
-.left{
-width:50%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
-.right{
-width:50%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-}
-}
-
-/* MOBILE */
-.left, .right{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-/* TEXTE */
-.phase{font-size:5vw;}
-.exerciseName{font-size:4vw;}
-.seriesInfo{font-size:3vw;}
-
-@media(min-width:768px){
-.phase{font-size:40px;}
-.exerciseName{font-size:30px;}
-.seriesInfo{font-size:20px;}
-}
-
-/* TIMER */
 .timer{
-font-size:20vw;
-font-weight:bold;
-}
-
-@media(min-width:768px){
-.timer{
-font-size:120px;
-}
-}
-
-/* IMAGE */
-.exoImg{
-width:80%;
-max-width:400px;
-margin:10px;
-border-radius:10px;
-}
-
-/* CERCLE */
-svg{
-width:200px;
-height:200px;
-}
-
-circle{fill:none;stroke-width:12;}
-.bg{stroke:#333;}
-.progress{
-stroke:#00c6ff;
-stroke-dasharray:880;
-stroke-dashoffset:880;
-transform:rotate(-90deg);
-transform-origin:50% 50%;
-}
-
-/* BOUTONS */
-.buttons{
-position:absolute;
-bottom:10px;
-width:100%;
-display:flex;
-justify-content:center;
-gap:10px;
+font-size:100px;
 }
 
 button{
-padding:15px 20px;
+padding:15px;
+margin-top:20px;
 border:none;
-border-radius:12px;
-cursor:pointer;
-font-size:16px;
+border-radius:10px;
 }
-
-.pause{background:#ff9800;}
-.menu{background:#0e8f9b;}
 
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<h1 id="name"></h1>
+<div id="timer" class="timer"></div>
 
-<!-- 🔹 GAUCHE -->
-<div class="left">
-
-<div class="phase" id="phase"></div>
-<div class="exerciseName" id="name"></div>
-<div class="seriesInfo" id="info"></div>
-
-<div class="timer" id="timer"></div>
-
-</div>
-
-<!-- 🔹 DROITE -->
-<div class="right">
-
-<img id="exoImg" class="exoImg">
-
-<svg>
-<circle class="bg" cx="100" cy="100" r="90"/>
-<circle class="progress" id="progress" cx="100" cy="100" r="90"/>
-</svg>
-
-</div>
-
-</div>
-
-<!-- 🔹 BOUTONS -->
-<div class="buttons">
-<button class="pause" onclick="togglePause()" id="pauseBtn">Pause</button>
-<button class="menu" onclick="back()">Réglages</button>
-</div>
+<button onclick="back()">Retour</button>
 
 <script>
 
@@ -166,111 +51,30 @@ if(u) data = localStorage.getItem("programme_"+u);
 
 let p = JSON.parse(data);
 
-let i=0, rep=1, serie=1;
-let phase="prep";
-let t=5, total=5;
-let paused=false;
-
-let progress=document.getElementById("progress");
-let circ=565;
-
-let img=document.getElementById("exoImg");
-
-function next(){
-
-if(phase==="prep"){
-phase="ex";
-t=p.tempsEx;
-total=t;
-document.body.style.background="#1b5e20";
-}
-else if(phase==="ex"){
-phase="rest";
-t=p.tempsRepos;
-total=t;
-document.body.style.background="#b71c1c";
-}
-else{
-phase="ex";
-i++;
-
-if(i>=p.exercices.length){
-i=0;
-rep++;
-if(rep>p.reps){
-rep=1;
-serie++;
-}
-}
-
-if(serie>p.series){
-phaseEl.innerText="Terminé 🎉";
-timerEl.innerText="";
-img.style.display="none";
-return;
-}
-
-t=p.tempsEx;
-total=t;
-document.body.style.background="#1b5e20";
-}
-
-update();
-}
-
-function update(){
-
-timerEl.innerText=t;
-
-nameEl.innerText =
-phase==="prep" ? "Préparez-vous" :
-phase==="rest" ? "Repos" :
-p.exercices[i];
-
-phaseEl.innerText =
-phase==="prep" ? "Préparation" :
-phase==="rest" ? "Repos" :
-"Exercice";
-
-infoEl.innerText = "Série "+serie+" | Rép "+rep;
-
-/* 🔥 IMAGE */
-if(phase==="ex"){
-img.style.display="block";
-img.src = "tendinitedelacoiffe" + (i+1) + ".jpg?v=" + Date.now();
-}else{
-img.style.display="none";
-}
-
-/* 🔵 PROGRESSION */
-progress.style.strokeDashoffset = circ*(1-(t/total));
-}
+let i=0;
+let t=p.tempsEx;
 
 function loop(){
-if(paused) return;
+
+timer.innerText = t;
+name.innerText = p.exercices[i];
 
 t--;
-update();
 
-if(t<=0) next();
+if(t<0){
+i++;
+if(i>=p.exercices.length){
+i=0;
+}
+t=p.tempsEx;
 }
 
-function togglePause(){
-paused=!paused;
-pauseBtn.innerText = paused ? "Reprendre" : "Pause";
 }
 
 function back(){
 window.location="config.html";
 }
 
-let timerEl=document.getElementById("timer");
-let nameEl=document.getElementById("name");
-let phaseEl=document.getElementById("phase");
-let infoEl=document.getElementById("info");
-let pauseBtn=document.getElementById("pauseBtn");
-
-update();
 setInterval(loop,1000);
 
 </script>
