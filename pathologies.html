@@ -48,52 +48,37 @@ margin:5px;
 <button class="add" onclick="showForm()">➕ Ajouter une pathologie</button>
 <button class="back" onclick="back()">⬅ Retour</button>
 
-<!-- FORMULAIRE -->
 <div class="form" id="form">
-
 <h3>Nouvelle pathologie</h3>
 
-<input id="nom" placeholder="Nom (ex: Épaule)">
+<input id="nom" placeholder="Nom">
 <input id="tempsEx" placeholder="Temps exercice">
 <input id="tempsRepos" placeholder="Temps repos">
 <input id="reps" placeholder="Répétitions">
 <input id="series" placeholder="Séries">
 
 <button onclick="save()">💾 Enregistrer</button>
-
 </div>
 
 <script>
 
-// 🔹 PATHOS PAR DÉFAUT
 let basePathos = [
 {nom:"Coiffe des rotateurs", id:"epaule"},
 {nom:"Lombalgie", id:"dos"},
 {nom:"Syndrome rotulien", id:"genou"}
 ];
 
-// 🔹 charger
 function load(){
-
 let list=document.getElementById("list");
 list.innerHTML="";
 
-// base
-basePathos.forEach(p=>{
-createBtn(p.nom,p.id);
-});
+basePathos.forEach(p=>createBtn(p.nom,p.id));
 
-// ajoutées
 let custom = JSON.parse(localStorage.getItem("customPathos")) || [];
-
-custom.forEach(p=>{
-createBtn(p.nom,p.nom);
-});
-
+custom.forEach(p=>createBtn(p.nom,p.nom));
 }
 
 function createBtn(name,id){
-
 let btn=document.createElement("button");
 btn.innerText=name;
 
@@ -105,12 +90,10 @@ window.location="config.html";
 list.appendChild(btn);
 }
 
-// 🔹 afficher form
 function showForm(){
 document.getElementById("form").style.display="block";
 }
 
-// 🔹 sauvegarde
 function save(){
 
 let p={
@@ -131,13 +114,11 @@ alert("Pathologie ajoutée !");
 location.reload();
 }
 
-// 🔹 retour
 function back(){
 window.location="index.html";
 }
 
 load();
-
 </script>
 
 </body>
