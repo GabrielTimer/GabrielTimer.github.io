@@ -6,13 +6,14 @@
 <title>Configuration</title>
 
 <style>
-body{font-family:Arial;text-align:center;background:#f4f4f4;}
+body{font-family:Arial;text-align:center;background:#f4f4f4;margin:0;}
 .card{background:white;padding:20px;border-radius:15px;max-width:400px;margin:auto;margin-top:20px;}
-input{width:90%;padding:12px;margin:5px;}
+input{width:90%;padding:12px;margin:6px;}
 button{padding:14px;margin:5px;border:none;border-radius:10px;width:90%;}
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
+img{width:100%;border-radius:10px;margin-bottom:10px;}
 </style>
 </head>
 
@@ -21,6 +22,8 @@ button{padding:14px;margin:5px;border:none;border-radius:10px;width:90%;}
 <div class="card">
 
 <h2>Configurer la séance</h2>
+
+<img id="pathoImage" style="display:none;">
 
 <input type="number" id="nbEx" value="3" onchange="generer()">
 <div id="exo"></div>
@@ -40,7 +43,6 @@ button{padding:14px;margin:5px;border:none;border-radius:10px;width:90%;}
 
 let exercices=[];
 
-// 🔥 PROGRAMMES PAR PATHO
 const programmes = {
 epaule:{
 exercices:["Rotation externe","Élévation latérale","Pendulaire"],
@@ -59,7 +61,6 @@ tempsEx:25,tempsRepos:20,reps:3,series:2
 function generer(){
 exo.innerHTML="";
 exercices=[];
-
 for(let i=0;i<nbEx.value;i++){
 let input=document.createElement("input");
 input.value="Exercice "+(i+1);
@@ -67,29 +68,6 @@ input.oninput=()=>exercices[i]=input.value;
 exo.appendChild(input);
 exercices.push(input.value);
 }
-}
-
-function charger(){
-
-let user=localStorage.getItem("currentUser");
-let patho=localStorage.getItem("pathologie");
-
-// priorité patient
-if(user){
-let data=localStorage.getItem("programme_"+user);
-if(data){
-apply(JSON.parse(data));
-return;
-}
-}
-
-// sinon pathologie
-if(patho && programmes[patho]){
-apply(programmes[patho]);
-return;
-}
-
-generer();
 }
 
 function apply(p){
@@ -106,18 +84,73 @@ document.querySelectorAll("#exo input")
 .forEach((i,idx)=>i.value=p.exercices[idx]);
 },100);
 
-exercices=p.exercices;
+exercices=[...p.exercices];
+}
+
+function charger(){
+
+let user = localStorage.getItem("currentUser");
+let patho = localStorage.getItem("pathologie");
+let img = document.getElementById("pathoImage");
+
+// patient
+if(user){
+let data = localStorage.getItem("programme_"+user);
+if(data){
+apply(JSON.parse(data));
+return;
+}
+}
+
+// custom
+let custom = JSON.parse(localStorage.getItem("customPathos")) || [];
+let found = custom.find(p => p.nom === patho);
+
+if(found){
+img.style.display="none";
+apply(found);
+return;
+}
+
+// défaut
+if(patho && programmes[patho]){
+
+if(patho==="epaule"){
+img.src="tendinitedelacoiffe.jpg";
+img.style.display="block";
+}else{
+img.style.display="none";
+}
+
+apply(programmes[patho]);
+return;
+}
+
+generer();
 }
 
 function save(){
-let user=localStorage.getItem("currentUser");
+
+let user = localStorage.getItem("currentUser");
+
+if(!user){
+let prenom = prompt("Prénom");
+let nom = prompt("Nom");
+
+if(!prenom || !nom){
+alert("Annulé");
+return;
+}
+
+user = prenom.toLowerCase()+"_"+nom.toLowerCase();
+localStorage.setItem("currentUser", user);
+}
 
 let prog={exercices,tempsEx:+tempsEx.value,tempsRepos:+tempsRepos.value,reps:+reps.value,series:+series.value};
 
-if(user){
 localStorage.setItem("programme_"+user,JSON.stringify(prog));
-alert("Enregistré !");
-}
+
+alert("Programme enregistré !");
 }
 
 function start(){
