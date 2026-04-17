@@ -37,7 +37,7 @@ flex-direction:column;
 align-items:center;
 }
 
-/* TIMER CIRCLE */
+/* CERCLE TEMPS */
 .circle{
 width:180px;
 height:180px;
@@ -50,7 +50,7 @@ font-size:50px;
 margin-top:20px;
 }
 
-/* GLOBAL CIRCLE */
+/* CERCLE GLOBAL */
 .progress{
 width:120px;
 height:120px;
@@ -101,7 +101,6 @@ cursor:pointer;
 
 <button class="pause" onclick="pause()">⏸ Pause</button>
 <button class="back" onclick="back()">⚙️ Réglages</button>
-
 </div>
 
 </div>
@@ -146,7 +145,6 @@ phaseEl.innerText = phase==="ex"?"Exercice":"Repos";
 
 info.innerText="Série "+serie+" | Rép "+rep;
 
-// image
 if(phase==="ex"){
 img.src="./tendinitedelacoiffe"+(i+1)+".jpg";
 img.style.display="block";
