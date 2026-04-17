@@ -8,21 +8,24 @@
 <style>
 body{
 font-family:Arial;
-text-align:center;
 background:#f4f4f4;
 margin:0;
+text-align:center;
 }
 
+/* CARD */
 .card{
 background:white;
 padding:20px;
 border-radius:15px;
 max-width:400px;
+width:90%;
 margin:auto;
 margin-top:20px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
+/* IMAGE */
 img{
 width:100%;
 border-radius:10px;
@@ -36,6 +39,8 @@ padding:12px;
 margin:6px 0;
 border-radius:10px;
 border:1px solid #ccc;
+font-size:16px;
+box-sizing:border-box;
 }
 
 label{
@@ -51,6 +56,7 @@ margin:6px 0;
 border:none;
 border-radius:10px;
 width:100%;
+font-size:16px;
 cursor:pointer;
 transition:0.2s;
 }
@@ -63,6 +69,39 @@ transform:scale(1.03);
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
 .pdf{background:#9c27b0;color:white;}
+
+/* MOBILE */
+@media(max-width:500px){
+.card{
+width:95%;
+padding:15px;
+}
+}
+
+/* PRINT IMAGE SEULE */
+@media print{
+body *{
+visibility:hidden;
+}
+#printZone, #printZone *{
+visibility:visible;
+}
+#printZone{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+#printZone img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
+}
 </style>
 </head>
 
@@ -72,23 +111,29 @@ transform:scale(1.03);
 
 <h2>Configurer la séance</h2>
 
-<!-- IMAGE -->
+<!-- IMAGE PATHO -->
 <img id="pathoImage" style="display:none;">
 
-<div id="buttonsPDF" style="display:none;">
+<!-- BOUTONS PDF -->
+<div id="imageButtons" style="display:none;">
 <button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
 <button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
 </div>
 
+<!-- PRINT -->
+<div id="printZone" style="display:none;">
+<img id="printImage">
+</div>
+
 <label>Nombre d'exercices</label>
-<input type="number" id="nbEx" value="3" onchange="generer()">
+<input type="number" id="nbEx" value="5" onchange="generer()">
 
 <div id="exo"></div>
 
-<label>Temps exercice</label>
+<label>Temps exercice (sec)</label>
 <input id="tempsEx" type="number" value="20">
 
-<label>Temps repos</label>
+<label>Temps repos (sec)</label>
 <input id="tempsRepos" type="number" value="15">
 
 <label>Répétitions</label>
@@ -107,7 +152,7 @@ transform:scale(1.03);
 
 let exercices=[];
 
-/* GENERER */
+/* 🔹 générer exercices */
 function generer(){
 exo.innerHTML="";
 exercices=[];
@@ -115,19 +160,22 @@ exercices=[];
 for(let i=0;i<nbEx.value;i++){
 let input=document.createElement("input");
 input.value="Exercice "+(i+1);
+
 input.oninput=()=>exercices[i]=input.value;
+
 exo.appendChild(input);
 exercices.push(input.value);
 }
 }
 
-/* IMAGE PATHO */
-function chargerPathologie(){
+/* 🔹 charger pathologie */
+function charger(){
 
 let patho = localStorage.getItem("pathologie");
 
 let img = document.getElementById("pathoImage");
-let btns = document.getElementById("buttonsPDF");
+let printImg = document.getElementById("printImage");
+let btns = document.getElementById("imageButtons");
 
 /* MODE LIBRE */
 if(!patho){
@@ -136,24 +184,31 @@ btns.style.display="none";
 return;
 }
 
-/* PATHO EPAULE */
+/* EPAULE */
 if(patho==="epaule"){
 
-let src = "./tendinitedelacoiffe.jpg";
+let src="tendinitedelacoiffe.jpg";
 
-img.src = src;
+img.src=src;
+printImg.src=src;
+
 img.style.display="block";
-
 btns.style.display="block";
+
 }
 }
 
-/* PDF */
+/* 🔹 PDF */
 function printPDF(){
+document.getElementById("printZone").style.display="flex";
 window.print();
+
+setTimeout(()=>{
+document.getElementById("printZone").style.display="none";
+},500);
 }
 
-/* SAVE */
+/* 🔹 sauvegarde */
 function save(){
 
 let user = localStorage.getItem("currentUser");
@@ -161,6 +216,7 @@ let user = localStorage.getItem("currentUser");
 if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
+
 if(!p || !n) return;
 
 user = p+"_"+n;
@@ -180,7 +236,7 @@ localStorage.setItem("programme_"+user,JSON.stringify(prog));
 alert("Programme enregistré !");
 }
 
-/* START */
+/* 🔹 démarrer */
 function start(){
 
 let prog={
@@ -196,13 +252,14 @@ localStorage.setItem("programme_temp",JSON.stringify(prog));
 window.location="timer.html";
 }
 
+/* 🔹 accueil */
 function home(){
 window.location="index.html";
 }
 
 /* INIT */
 generer();
-chargerPathologie();
+charger();
 
 </script>
 
