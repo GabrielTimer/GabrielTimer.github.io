@@ -17,6 +17,15 @@ align-items:center;
 height:100vh;
 }
 
+/* 🔵 LOGO DISCRET */
+.logo{
+position:absolute;
+top:10px;
+right:10px;
+width:60px;
+opacity:0.7;
+}
+
 /* LAYOUT */
 .container{
 display:flex;
@@ -27,6 +36,7 @@ width:95%;
 }
 
 .left{flex:1;}
+
 .right{
 flex:1;
 display:flex;
@@ -75,11 +85,6 @@ border-radius:10px;
 transition:0.3s;
 }
 
-/* TEXTE */
-h1{margin:0;}
-h2{margin:5px 0;}
-h3{margin:5px 0;opacity:0.8;}
-
 /* BOUTONS */
 button{
 padding:12px 20px;
@@ -103,15 +108,25 @@ transform:scale(0.95);
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
 .back{background:#0e8f9b;}
+.sound{background:#607d8b;}
 
 @media(max-width:800px){
 .container{flex-direction:column;}
 .left{text-align:center;}
+
+.logo{
+width:45px;
+top:5px;
+right:5px;
+}
 }
 </style>
 </head>
 
 <body>
+
+<!-- 🔵 LOGO -->
+<img src="logo.png" class="logo">
 
 <div class="container">
 
@@ -150,6 +165,7 @@ stroke-dashoffset="502"/>
 
 <button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
 <button class="next" onclick="nextManual()">⏭ Exercice suivant</button>
+<button id="soundBtn" class="sound" onclick="toggleSound()">🔊 Son</button>
 <button class="back" onclick="back()">⚙️ Réglages</button>
 
 </div>
@@ -158,13 +174,12 @@ stroke-dashoffset="502"/>
 
 <script>
 
-/* 🔐 sécurité */
+/* sécurité */
 if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
 window.location="index.html";
 }
 
 let data = localStorage.getItem("programme_temp");
-
 if(!data){
 let u = localStorage.getItem("currentUser");
 if(u) data = localStorage.getItem("programme_"+u);
@@ -172,28 +187,45 @@ if(u) data = localStorage.getItem("programme_"+u);
 
 let p = JSON.parse(data);
 
-/* VARIABLES */
 let i=0, rep=1, serie=1;
 let phase="prep";
 let t=3;
 let totalTime=3;
 let paused=false;
 
-/* 🔊 VOIX */
+let soundOn = localStorage.getItem("sound") !== "off";
+
+/* VOIX */
 function speak(text){
+if(!soundOn) return;
 let msg = new SpeechSynthesisUtterance(text);
 msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
 
-/* 🔵 CERCLE */
+/* SON */
+function toggleSound(){
+soundOn = !soundOn;
+let btn = document.getElementById("soundBtn");
+
+if(soundOn){
+btn.innerText = "🔊 Son";
+localStorage.setItem("sound","on");
+}else{
+btn.innerText = "🔇 Son coupé";
+localStorage.setItem("sound","off");
+speechSynthesis.cancel();
+}
+}
+
+/* CERCLE */
 function updateCircle(){
 let percent = t / totalTime;
 let offset = 502 * (1 - percent);
 document.getElementById("progressCircle").style.strokeDashoffset = offset;
 }
 
-/* 🔵 BARRE */
+/* BARRE */
 function updateBar(){
 let total = p.exercices.length * p.reps * p.series;
 let current = (serie-1)*p.reps*p.exercices.length + (rep-1)*p.exercices.length + i;
@@ -201,7 +233,7 @@ let percent = (current / total) * 100;
 document.getElementById("bar").style.width = percent + "%";
 }
 
-/* 🔄 UPDATE UI */
+/* UI */
 function update(){
 
 document.getElementById("timer").innerText = t;
@@ -221,7 +253,7 @@ updateCircle();
 updateBar();
 }
 
-/* 🔄 LOGIQUE */
+/* LOGIQUE */
 function next(){
 
 if(phase==="prep"){
@@ -263,13 +295,12 @@ totalTime=p.tempsEx;
 }
 }
 
-/* ⏭ MANUEL */
 function nextManual(){
 next();
 update();
 }
 
-/* ⏸ PAUSE / REPRENDRE */
+/* PAUSE */
 function togglePause(){
 
 paused = !paused;
@@ -286,7 +317,7 @@ btn.style.background = "#ff9800";
 }
 }
 
-/* ⏱ LOOP */
+/* LOOP */
 function loop(){
 if(paused) return;
 
@@ -296,7 +327,7 @@ update();
 if(t<=0) next();
 }
 
-/* 🔙 RETOUR */
+/* RETOUR */
 function back(){
 window.location="config.html";
 }
@@ -305,6 +336,10 @@ window.location="config.html";
 let phaseEl=document.getElementById("phase");
 let name=document.getElementById("name");
 let info=document.getElementById("info");
+
+if(!soundOn){
+document.getElementById("soundBtn").innerText = "🔇 Son coupé";
+}
 
 update();
 setInterval(loop,1000);
