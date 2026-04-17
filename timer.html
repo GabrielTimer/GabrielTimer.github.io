@@ -17,28 +17,7 @@ align-items:center;
 height:100vh;
 }
 
-/* LOGO */
-.logo{
-position:absolute;
-top:10px;
-right:10px;
-width:60px;
-opacity:0.6;
-}
-
-/* LAYOUT */
 .container{
-display:flex;
-gap:40px;
-align-items:center;
-max-width:900px;
-width:95%;
-}
-
-.left{flex:1;}
-
-.right{
-flex:1;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -46,9 +25,10 @@ align-items:center;
 
 /* IMAGE */
 #img{
-max-width:260px;
+max-width:250px;
 border-radius:12px;
-margin-bottom:10px;
+margin-bottom:15px;
+display:none;
 }
 
 /* CERCLE */
@@ -77,11 +57,11 @@ font-weight:bold;
 
 /* BARRE */
 .barContainer{
-width:220px;
-height:10px;
+width:200px;
+height:8px;
 background:rgba(255,255,255,0.2);
 border-radius:10px;
-margin-top:20px;
+margin-top:15px;
 }
 
 #bar{
@@ -94,7 +74,7 @@ transition:0.3s;
 
 /* BOUTONS */
 button{
-padding:12px 20px;
+padding:12px 18px;
 margin:6px;
 border:none;
 border-radius:10px;
@@ -107,36 +87,26 @@ button:active{transform:scale(0.95);}
 
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
-.back{background:#0e8f9b;}
 .sound{background:#607d8b;}
+.back{background:#0e8f9b;}
 
-@media(max-width:800px){
-.container{flex-direction:column;}
-}
 </style>
 </head>
 
 <body>
 
-<img src="logo.png" class="logo">
-
 <div class="container">
 
-<div class="left">
-<h1 id="phase"></h1>
-<h2 id="name"></h2>
-<h3 id="info"></h3>
-</div>
-
-<div class="right">
-
-<img id="img" style="display:none;">
+<img id="img">
 
 <div class="circleWrap">
 <svg width="180" height="180">
 <circle cx="90" cy="90" r="80" stroke="rgba(255,255,255,0.2)" stroke-width="10" fill="none"/>
-<circle id="progressCircle" cx="90" cy="90" r="80"
-stroke="#00e5ff" stroke-width="10" fill="none"
+<circle id="progressCircle"
+cx="90" cy="90" r="80"
+stroke="#00e5ff"
+stroke-width="10"
+fill="none"
 stroke-linecap="round"
 transform="rotate(-90 90 90)"
 stroke-dasharray="502"
@@ -153,11 +123,10 @@ stroke-dashoffset="502"/>
 <button class="back" onclick="back()">⚙️ Réglages</button>
 
 </div>
-</div>
 
 <script>
 
-/* sécurité */
+/* 🔐 sécurité */
 if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
 window.location="index.html";
 }
@@ -170,6 +139,7 @@ if(u) data = localStorage.getItem("programme_"+u);
 
 let p = JSON.parse(data);
 
+/* VARIABLES */
 let i=0, rep=1, serie=1;
 let phase="prep";
 let t=3, totalTime=3;
@@ -188,19 +158,28 @@ speechSynthesis.speak(msg);
 /* SON */
 function toggleSound(){
 soundOn=!soundOn;
-soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son coupé";
+soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
 localStorage.setItem("sound", soundOn ? "on":"off");
 speechSynthesis.cancel();
 }
 
-/* IMAGE PATHO */
+/* IMAGE (CORRIGÉE) */
 function updateImage(){
 
 let patho = localStorage.getItem("pathologie");
 
+/* DEBUG sécurité */
+if(!patho){
+img.style.display="none";
+return;
+}
+
+/* UNIQUEMENT EPAULE */
 if(patho === "epaule" && phase==="ex"){
 
-img.src = "./tendinitedelacoiffe" + (i+1) + ".jpg";
+let src = "tendinitedelacoiffe" + (i+1) + ".jpg";
+
+img.src = src;
 img.style.display="block";
 
 }else{
@@ -227,19 +206,10 @@ function update(){
 
 timer.innerText=t;
 
-if(phase==="prep"){
-phaseEl.innerText="Préparation";
-name.innerText="3...2...1...";
-}else{
-phaseEl.innerText = phase==="ex"?"Exercice":"Repos";
-name.innerText = phase==="ex"?p.exercices[i]:"Repos";
-}
-
-info.innerText="Série "+serie+" | Rép "+rep;
-
 updateCircle();
 updateBar();
 updateImage();
+
 }
 
 /* LOGIQUE */
@@ -268,12 +238,10 @@ if(rep>p.reps){rep=1; serie++;}
 }
 
 if(serie>p.series){
-phaseEl.innerText="Terminé 🎉";
-timer.innerText="";
+timer.innerText="✔";
 return;
 }
 
-speak("Exercice suivant");
 t=p.tempsEx;
 totalTime=p.tempsEx;
 }
@@ -281,11 +249,13 @@ totalTime=p.tempsEx;
 
 function nextManual(){next(); update();}
 
+/* PAUSE */
 function togglePause(){
 paused=!paused;
 pauseBtn.innerText = paused?"▶ Reprendre":"⏸ Pause";
 }
 
+/* LOOP */
 function loop(){
 if(paused) return;
 t--;
