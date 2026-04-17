@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Timer</title>
 
 <style>
@@ -19,17 +20,48 @@ height:100vh;
 text-align:center;
 }
 
-h1{font-size:30px;}
-h2{font-size:20px;}
+/* LAYOUT */
+.container{
+display:flex;
+gap:40px;
+align-items:center;
+}
 
-.timer{
-font-size:90px;
-margin:20px;
+.left{
+text-align:left;
+}
+
+.right{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* TIMER CIRCLE */
+.circle{
+width:180px;
+height:180px;
+border-radius:50%;
+border:10px solid rgba(255,255,255,0.2);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:50px;
+margin-top:20px;
+}
+
+/* GLOBAL CIRCLE */
+.progress{
+width:120px;
+height:120px;
+border-radius:50%;
+border:8px solid #00e5ff;
+margin-top:20px;
 }
 
 img{
 max-width:250px;
-margin:20px;
+border-radius:10px;
 }
 
 button{
@@ -38,35 +70,50 @@ margin:5px;
 border:none;
 border-radius:10px;
 font-size:16px;
+cursor:pointer;
 }
 
 .pause{background:#ff9800;}
 .back{background:#0e8f9b;}
+
+@media(max-width:800px){
+.container{flex-direction:column;}
+.left{text-align:center;}
+}
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
+<div class="left">
 <h1 id="phase"></h1>
 <h2 id="name"></h2>
 <h3 id="info"></h3>
+</div>
 
-<img id="img" src="">
+<div class="right">
+<img id="img">
 
-<div class="timer" id="timer"></div>
+<div class="circle" id="timer">0</div>
+<div class="progress" id="progress"></div>
 
-<button class="pause" onclick="pause()">Pause</button>
-<button class="back" onclick="back()">Réglages</button>
+<button class="pause" onclick="pause()">⏸ Pause</button>
+<button class="back" onclick="back()">⚙️ Réglages</button>
+
+</div>
+
+</div>
 
 <script>
 
-// 🔴 sécurité
+// sécurité
 if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
-    window.location="index.html";
+window.location="index.html";
 }
 
 let data = localStorage.getItem("programme_temp");
-
 if(!data){
 let u = localStorage.getItem("currentUser");
 if(u) data = localStorage.getItem("programme_"+u);
@@ -74,22 +121,32 @@ if(u) data = localStorage.getItem("programme_"+u);
 
 let p = JSON.parse(data);
 
-let i=0;
-let rep=1;
-let serie=1;
-let phase="ex";
-let t=p.tempsEx;
+let i=0, rep=1, serie=1;
+let phase="prep";
+let t=3;
 let paused=false;
+
+function speak(text){
+let msg = new SpeechSynthesisUtterance(text);
+speechSynthesis.speak(msg);
+}
 
 function update(){
 
-timer.innerText = t;
+timer.innerText=t;
 
-name.innerText = phase==="ex" ? p.exercices[i] : "Repos";
-phaseEl.innerText = phase==="ex" ? "Exercice" : "Repos";
-info.innerText = "Série "+serie+" | Rép "+rep;
+if(phase==="prep"){
+phaseEl.innerText="Préparation";
+name.innerText="3,2,1...";
+}
+else{
+name.innerText = phase==="ex"?p.exercices[i]:"Repos";
+phaseEl.innerText = phase==="ex"?"Exercice":"Repos";
+}
 
-/* image */
+info.innerText="Série "+serie+" | Rép "+rep;
+
+// image
 if(phase==="ex"){
 img.src="./tendinitedelacoiffe"+(i+1)+".jpg";
 img.style.display="block";
@@ -100,10 +157,17 @@ img.style.display="none";
 
 function next(){
 
+if(phase==="prep"){
+speak("C'est parti");
+phase="ex";
+t=p.tempsEx;
+return;
+}
+
 if(phase==="ex"){
+speak("Repos");
 phase="repos";
 t=p.tempsRepos;
-document.body.style.background="#b71c1c";
 }
 else{
 phase="ex";
@@ -121,19 +185,16 @@ serie++;
 if(serie>p.series){
 phaseEl.innerText="Terminé 🎉";
 timer.innerText="";
-img.style.display="none";
 return;
 }
 
+speak("Exercice suivant");
 t=p.tempsEx;
-document.body.style.background="#1b5e20";
 }
-
-update();
 }
 
 function loop(){
-if(paused) return;
+if(paused)return;
 
 t--;
 update();
