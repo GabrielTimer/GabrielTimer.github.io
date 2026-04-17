@@ -17,7 +17,6 @@ align-items:center;
 height:100vh;
 }
 
-/* CONTAINER FIXE */
 .container{
 width:100%;
 max-width:400px;
@@ -30,6 +29,14 @@ padding:10px;
 box-sizing:border-box;
 }
 
+/* MESSAGE FIN */
+.endMessage{
+text-align:center;
+font-size:22px;
+display:none;
+margin-top:20px;
+}
+
 /* INFOS */
 .infoBox{
 text-align:center;
@@ -39,7 +46,7 @@ text-align:center;
 font-size:16px;
 }
 
-/* IMAGE ADAPTATIVE */
+/* IMAGE */
 #img{
 width:100%;
 max-height:180px;
@@ -49,12 +56,11 @@ margin:5px 0;
 display:none;
 }
 
-/* TIMER */
+/* CERCLE */
 .circleWrap{
 position:relative;
 width:160px;
 height:160px;
-flex-shrink:0;
 }
 
 .circleWrap svg{
@@ -104,11 +110,7 @@ border:none;
 border-radius:10px;
 cursor:pointer;
 font-size:14px;
-transition:0.2s;
 }
-
-button:hover{transform:scale(1.03);}
-button:active{transform:scale(0.97);}
 
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
@@ -120,6 +122,12 @@ button:active{transform:scale(0.97);}
 <body>
 
 <div class="container">
+
+<div id="endMessage" class="endMessage">
+👏 Avec les félicitations du kiné ! 👍
+</div>
+
+<div id="mainContent">
 
 <div class="infoBox">
 <div id="exoInfo"></div>
@@ -156,6 +164,8 @@ stroke-dashoffset="440"/>
 
 </div>
 
+</div>
+
 <script>
 
 let data = localStorage.getItem("programme_temp");
@@ -168,8 +178,7 @@ let serieIndex = 1;
 let phase="prep";
 let t=3, totalTime=3;
 let paused=false;
-
-let soundOn = localStorage.getItem("sound") !== "off";
+let finished=false;
 
 /* IMAGE */
 function updateImage(){
@@ -208,6 +217,8 @@ bar.style.width = (current/total)*100+"%";
 
 /* UPDATE */
 function update(){
+if(finished) return;
+
 timer.innerText = t;
 updateCircle();
 updateBar();
@@ -215,8 +226,19 @@ updateImage();
 updateInfos();
 }
 
+/* FIN */
+function endSession(){
+
+finished = true;
+
+document.getElementById("mainContent").style.display = "none";
+document.getElementById("endMessage").style.display = "block";
+}
+
 /* LOGIQUE */
 function next(){
+
+if(finished) return;
 
 if(phase==="prep"){
 phase="ex";
@@ -243,7 +265,7 @@ exIndex = 0;
 serieIndex++;
 
 if(serieIndex > p.series){
-timer.innerText="✔";
+endSession();
 return;
 }
 }
@@ -257,6 +279,8 @@ totalTime=p.tempsEx;
 /* EXO SUIVANT */
 function nextExercise(){
 
+if(finished) return;
+
 repIndex = 1;
 exIndex++;
 
@@ -265,7 +289,7 @@ exIndex = 0;
 serieIndex++;
 
 if(serieIndex > p.series){
-timer.innerText="✔";
+endSession();
 return;
 }
 }
@@ -279,17 +303,15 @@ update();
 
 /* CONTROLES */
 function togglePause(){
+if(finished) return;
 paused=!paused;
 pauseBtn.innerText = paused?"▶ Reprendre":"⏸ Pause";
 }
 
-function toggleSound(){
-soundOn=!soundOn;
-soundBtn.innerText = soundOn?"🔊 Son":"🔇 Son";
-}
+function toggleSound(){}
 
 function loop(){
-if(paused) return;
+if(paused || finished) return;
 t--;
 update();
 if(t<=0) next();
