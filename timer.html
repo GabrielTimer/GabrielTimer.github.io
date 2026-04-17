@@ -23,6 +23,17 @@ flex-direction:column;
 align-items:center;
 }
 
+/* INFOS */
+.infoBox{
+text-align:center;
+margin-bottom:10px;
+}
+
+.infoBox div{
+margin:3px 0;
+font-size:18px;
+}
+
 /* IMAGE */
 #img{
 max-width:250px;
@@ -89,13 +100,18 @@ button:active{transform:scale(0.95);}
 .next{background:#4caf50;}
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
-
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
+<div class="infoBox">
+<div id="exoInfo"></div>
+<div id="repInfo"></div>
+<div id="serieInfo"></div>
+</div>
 
 <img id="img">
 
@@ -126,21 +142,14 @@ stroke-dashoffset="502"/>
 
 <script>
 
-/* 🔐 sécurité */
-if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
-window.location="index.html";
-}
-
 let data = localStorage.getItem("programme_temp");
-if(!data){
-let u = localStorage.getItem("currentUser");
-if(u) data = localStorage.getItem("programme_"+u);
-}
-
 let p = JSON.parse(data);
 
-/* VARIABLES */
-let i=0, rep=1, serie=1;
+/* INDEX */
+let exIndex = 0;
+let repIndex = 1;
+let serieIndex = 1;
+
 let phase="prep";
 let t=3, totalTime=3;
 let paused=false;
@@ -155,37 +164,23 @@ msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
 
-/* SON */
-function toggleSound(){
-soundOn=!soundOn;
-soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
-localStorage.setItem("sound", soundOn ? "on":"off");
-speechSynthesis.cancel();
-}
-
-/* IMAGE (CORRIGÉE) */
+/* IMAGE */
 function updateImage(){
-
 let patho = localStorage.getItem("pathologie");
 
-/* DEBUG sécurité */
-if(!patho){
-img.style.display="none";
-return;
-}
-
-/* UNIQUEMENT EPAULE */
-if(patho === "epaule" && phase==="ex"){
-
-let src = "tendinitedelacoiffe" + (i+1) + ".jpg";
-
-img.src = src;
+if(patho==="epaule" && phase==="ex"){
+img.src = "tendinitedelacoiffe"+(exIndex+1)+".jpg";
 img.style.display="block";
-
 }else{
 img.style.display="none";
 }
+}
 
+/* INFOS */
+function updateInfos(){
+exoInfo.innerText = "Exercice " + (exIndex+1) + " / " + p.exercices.length;
+repInfo.innerText = "Répétition " + repIndex + " / " + p.reps;
+serieInfo.innerText = "Série " + serieIndex + " / " + p.series;
 }
 
 /* CERCLE */
@@ -196,27 +191,28 @@ progressCircle.style.strokeDashoffset = 502*(1-percent);
 
 /* BARRE */
 function updateBar(){
-let total = p.exercices.length*p.reps*p.series;
-let current = (serie-1)*p.reps*p.exercices.length + (rep-1)*p.exercices.length + i;
+let total = p.series * p.exercices.length * p.reps;
+let current =
+(serieIndex-1)*p.exercices.length*p.reps +
+(exIndex)*p.reps +
+(repIndex-1);
+
 bar.style.width = (current/total)*100+"%";
 }
 
 /* UPDATE */
 function update(){
-
-timer.innerText=t;
-
+timer.innerText = t;
 updateCircle();
 updateBar();
 updateImage();
-
+updateInfos();
 }
 
 /* LOGIQUE */
 function next(){
 
 if(phase==="prep"){
-speak("C'est parti");
 phase="ex";
 t=p.tempsEx;
 totalTime=p.tempsEx;
@@ -224,38 +220,51 @@ return;
 }
 
 if(phase==="ex"){
-speak("Repos");
 phase="repos";
 t=p.tempsRepos;
 totalTime=p.tempsRepos;
-}else{
-phase="ex";
-i++;
-
-if(i>=p.exercices.length){
-i=0; rep++;
-if(rep>p.reps){rep=1; serie++;}
-}
-
-if(serie>p.series){
-timer.innerText="✔";
 return;
 }
 
+/* repos */
+repIndex++;
+
+if(repIndex > p.reps){
+repIndex = 1;
+exIndex++;
+
+if(exIndex >= p.exercices.length){
+exIndex = 0;
+serieIndex++;
+
+if(serieIndex > p.series){
+timer.innerText="✔";
+return;
+}
+}
+}
+
+phase="ex";
 t=p.tempsEx;
 totalTime=p.tempsEx;
 }
+
+/* CONTROLES */
+function nextManual(){
+next();
+update();
 }
 
-function nextManual(){next(); update();}
-
-/* PAUSE */
 function togglePause(){
 paused=!paused;
 pauseBtn.innerText = paused?"▶ Reprendre":"⏸ Pause";
 }
 
-/* LOOP */
+function toggleSound(){
+soundOn=!soundOn;
+soundBtn.innerText = soundOn?"🔊 Son":"🔇 Son";
+}
+
 function loop(){
 if(paused) return;
 t--;
@@ -263,7 +272,9 @@ update();
 if(t<=0) next();
 }
 
-function back(){window.location="config.html";}
+function back(){
+window.location="config.html";
+}
 
 /* INIT */
 update();
