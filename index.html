@@ -23,15 +23,21 @@ border-radius:20px;
 box-shadow:0 10px 30px rgba(0,0,0,0.2);
 text-align:center;
 width:90%;
-max-width:350px;
+max-width:320px;
+}
+
+.logo{
+width:80px;
+margin-bottom:10px;
 }
 
 input{
 width:100%;
-padding:14px;
-margin:8px 0;
+padding:12px;
+margin:6px 0;
 border-radius:10px;
 border:1px solid #ccc;
+box-sizing:border-box;
 }
 
 button{
@@ -41,6 +47,13 @@ margin-top:10px;
 border:none;
 border-radius:12px;
 font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.03);
+opacity:0.9;
 }
 
 .primary{background:#0e8f9b;color:white;}
@@ -52,14 +65,18 @@ font-weight:bold;
 <body>
 
 <div class="card">
+
+<img src="logo.png" class="logo">
+
 <h2>Gabriel Timer</h2>
 
 <input id="prenom" placeholder="Prénom">
 <input id="nom" placeholder="Nom">
 
-<button class="primary" onclick="acceder()">Accéder à mon programme</button>
-<button class="secondary" onclick="modeLibre()">Mode libre</button>
-<button class="patho" onclick="pathologies()">Pathologies</button>
+<button class="primary" onclick="acceder()">📋 Accéder à mon programme</button>
+<button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
+<button class="patho" onclick="pathologies()">🩺 Pathologies</button>
+
 </div>
 
 <script>
@@ -80,6 +97,7 @@ window.location="config.html";
 
 function modeLibre(){
 localStorage.removeItem("currentUser");
+localStorage.removeItem("pathologie"); // 🔴 IMPORTANT
 window.location="config.html";
 }
 
