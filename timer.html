@@ -34,13 +34,6 @@ flex-direction:column;
 align-items:center;
 }
 
-/* IMAGE */
-img{
-max-width:260px;
-border-radius:12px;
-margin-bottom:10px;
-}
-
 /* CERCLE */
 .circleWrap{
 position:relative;
@@ -67,7 +60,7 @@ font-weight:bold;
 
 /* BARRE */
 .barContainer{
-width:200px;
+width:220px;
 height:10px;
 background:rgba(255,255,255,0.2);
 border-radius:10px;
@@ -81,6 +74,11 @@ background:#00e5ff;
 border-radius:10px;
 transition:0.3s;
 }
+
+/* TEXTE */
+h1{margin:0;}
+h2{margin:5px 0;}
+h3{margin:5px 0;opacity:0.8;}
 
 /* BOUTONS */
 button{
@@ -125,8 +123,6 @@ transform:scale(0.95);
 
 <div class="right">
 
-<img id="img">
-
 <div class="circleWrap">
 <svg width="180" height="180">
 <circle cx="90" cy="90" r="80"
@@ -152,7 +148,7 @@ stroke-dashoffset="502"/>
 <div id="bar"></div>
 </div>
 
-<button class="pause" onclick="pause()">⏸ Pause</button>
+<button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
 <button class="next" onclick="nextManual()">⏭ Exercice suivant</button>
 <button class="back" onclick="back()">⚙️ Réglages</button>
 
@@ -162,12 +158,13 @@ stroke-dashoffset="502"/>
 
 <script>
 
-/* sécurité */
+/* 🔐 sécurité */
 if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
 window.location="index.html";
 }
 
 let data = localStorage.getItem("programme_temp");
+
 if(!data){
 let u = localStorage.getItem("currentUser");
 if(u) data = localStorage.getItem("programme_"+u);
@@ -175,38 +172,39 @@ if(u) data = localStorage.getItem("programme_"+u);
 
 let p = JSON.parse(data);
 
+/* VARIABLES */
 let i=0, rep=1, serie=1;
 let phase="prep";
 let t=3;
 let totalTime=3;
 let paused=false;
 
-/* voix */
+/* 🔊 VOIX */
 function speak(text){
 let msg = new SpeechSynthesisUtterance(text);
 msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
 
-/* cercle */
+/* 🔵 CERCLE */
 function updateCircle(){
 let percent = t / totalTime;
 let offset = 502 * (1 - percent);
-progressCircle.style.strokeDashoffset = offset;
+document.getElementById("progressCircle").style.strokeDashoffset = offset;
 }
 
-/* barre */
+/* 🔵 BARRE */
 function updateBar(){
 let total = p.exercices.length * p.reps * p.series;
 let current = (serie-1)*p.reps*p.exercices.length + (rep-1)*p.exercices.length + i;
 let percent = (current / total) * 100;
-bar.style.width = percent + "%";
+document.getElementById("bar").style.width = percent + "%";
 }
 
-/* UI */
+/* 🔄 UPDATE UI */
 function update(){
 
-timer.innerText=t;
+document.getElementById("timer").innerText = t;
 
 if(phase==="prep"){
 phaseEl.innerText="Préparation";
@@ -219,19 +217,11 @@ phaseEl.innerText = phase==="ex"?"Exercice":"Repos";
 
 info.innerText="Série "+serie+" | Rép "+rep;
 
-/* image */
-if(phase==="ex"){
-img.src="./tendinitedelacoiffe"+(i+1)+".jpg";
-img.style.display="block";
-}else{
-img.style.display="none";
-}
-
 updateCircle();
 updateBar();
 }
 
-/* logique */
+/* 🔄 LOGIQUE */
 function next(){
 
 if(phase==="prep"){
@@ -263,7 +253,7 @@ serie++;
 
 if(serie>p.series){
 phaseEl.innerText="Terminé 🎉";
-timer.innerText="";
+document.getElementById("timer").innerText="";
 return;
 }
 
@@ -273,15 +263,32 @@ totalTime=p.tempsEx;
 }
 }
 
-/* bouton manuel */
+/* ⏭ MANUEL */
 function nextManual(){
 next();
 update();
 }
 
-/* loop */
+/* ⏸ PAUSE / REPRENDRE */
+function togglePause(){
+
+paused = !paused;
+
+let btn = document.getElementById("pauseBtn");
+
+if(paused){
+btn.innerText = "▶ Reprendre";
+btn.style.background = "#4caf50";
+phaseEl.innerText = "⏸ En pause";
+}else{
+btn.innerText = "⏸ Pause";
+btn.style.background = "#ff9800";
+}
+}
+
+/* ⏱ LOOP */
 function loop(){
-if(paused)return;
+if(paused) return;
 
 t--;
 update();
@@ -289,18 +296,15 @@ update();
 if(t<=0) next();
 }
 
-function pause(){
-paused=!paused;
-}
-
+/* 🔙 RETOUR */
 function back(){
 window.location="config.html";
 }
 
-let timer=document.getElementById("timer");
+/* INIT */
 let phaseEl=document.getElementById("phase");
-let progressCircle=document.getElementById("progressCircle");
-let bar=document.getElementById("bar");
+let name=document.getElementById("name");
+let info=document.getElementById("info");
 
 update();
 setInterval(loop,1000);
