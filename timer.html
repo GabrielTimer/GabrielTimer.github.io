@@ -18,21 +18,16 @@ height:100vh;
 overflow:hidden;
 }
 
-/* 🔥 LOGO */
+/* LOGO */
 .logo{
 position:fixed;
 top:10px;
 right:10px;
-width:50px;
+width:45px;
 opacity:0.8;
-z-index:1000;
-}
-.logo:hover{
-opacity:1;
-transform:scale(1.05);
-transition:0.2s;
 }
 
+/* LAYOUT */
 .container{
 width:100%;
 max-width:380px;
@@ -45,12 +40,32 @@ padding:10px;
 box-sizing:border-box;
 }
 
-.infoBox{text-align:center;height:60px;display:flex;flex-direction:column;justify-content:center;}
-#img{width:100%;max-height:140px;object-fit:contain;border-radius:10px;}
+.infoBox{
+text-align:center;
+height:60px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
 
-.timerZone{height:200px;display:flex;align-items:center;justify-content:center;}
+#img{
+width:100%;
+max-height:130px;
+object-fit:contain;
+}
 
-.circleWrap{position:relative;width:160px;height:160px;}
+.timerZone{
+height:200px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.circleWrap{
+position:relative;
+width:160px;
+height:160px;
+}
 
 #timer{
 position:absolute;
@@ -59,12 +74,23 @@ height:100%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:42px;
+font-size:40px;
 font-weight:bold;
 }
 
-.barContainer{width:100%;height:8px;background:rgba(255,255,255,0.2);border-radius:10px;margin-top:10px;}
-#bar{height:100%;width:0%;background:#00e5ff;border-radius:10px;}
+.barContainer{
+width:100%;
+height:8px;
+background:rgba(255,255,255,0.2);
+border-radius:10px;
+}
+
+#bar{
+height:100%;
+width:0%;
+background:#00e5ff;
+border-radius:10px;
+}
 
 .buttons{
 width:100%;
@@ -75,7 +101,12 @@ margin-top:10px;
 }
 
 button{
-height:45px;border:none;border-radius:10px;color:white;font-size:14px;cursor:pointer;
+height:45px;
+border:none;
+border-radius:10px;
+color:white;
+font-size:14px;
+cursor:pointer;
 }
 
 .pause{background:#ff9800;}
@@ -83,19 +114,7 @@ height:45px;border:none;border-radius:10px;color:white;font-size:14px;cursor:poi
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
 
-.confetti{
-position:fixed;
-width:8px;
-height:8px;
-top:-10px;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{transform:translateY(100vh) rotate(360deg);}
-}
-
-/* 🎯 FIN */
+/* FIN */
 #endScreen{
 position:fixed;
 top:0;
@@ -113,9 +132,8 @@ text-align:center;
 </style>
 </head>
 
-<body onclick="enableFullScreen()">
+<body>
 
-<!-- 🔥 LOGO -->
 <img src="logo.png" class="logo">
 
 <div class="container" id="main">
@@ -156,7 +174,6 @@ stroke-dashoffset="440"/>
 
 </div>
 
-<!-- 🔥 FIN -->
 <div id="endScreen">
 <div>🎉 Bravo ! 🎉</div>
 <div>👏 Avec les félicitations du kiné 👍</div>
@@ -164,7 +181,158 @@ stroke-dashoffset="440"/>
 
 <script>
 
-/* TON JS NE CHANGE PAS → GARDE LE MÊME */
+let p = JSON.parse(localStorage.getItem("programme_temp"));
+
+let exIndex=0, repIndex=1, serieIndex=1;
+let phase="prep";
+let t=3, totalTime=3;
+let paused=false, finished=false;
+let soundOn=true;
+
+/* SON SIMPLE */
+function beep(freq){
+if(!soundOn) return;
+let ctx=new AudioContext();
+let o=ctx.createOscillator();
+o.type="sine";
+o.frequency.value=freq;
+o.connect(ctx.destination);
+o.start();
+setTimeout(()=>o.stop(),150);
+}
+
+/* CONFETTI */
+function confetti(){
+for(let i=0;i<50;i++){
+let d=document.createElement("div");
+d.style.position="fixed";
+d.style.width="6px";
+d.style.height="6px";
+d.style.background="hsl("+Math.random()*360+",100%,50%)";
+d.style.left=Math.random()*100+"vw";
+d.style.top="-10px";
+d.style.transition="3s";
+document.body.appendChild(d);
+setTimeout(()=>d.style.top="100vh",50);
+setTimeout(()=>d.remove(),3000);
+}
+}
+
+/* UPDATE */
+function update(){
+if(finished) return;
+
+timer.innerText=t;
+
+progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
+
+let total=p.series*p.exercices.length*p.reps;
+let current=(serieIndex-1)*p.exercices.length*p.reps+(exIndex)*p.reps+(repIndex-1);
+bar.style.width=(current/total)*100+"%";
+
+exoInfo.innerText="Exercice "+(exIndex+1);
+repInfo.innerText="Rép "+repIndex+"/"+p.reps;
+serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+
+let patho=localStorage.getItem("pathologie");
+img.src=(patho==="epaule" && phase==="ex")
+? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
+: "";
+}
+
+/* LOGIQUE */
+function next(){
+
+if(phase==="prep"){
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+return;
+}
+
+if(phase==="ex"){
+
+let last =
+exIndex===p.exercices.length-1 &&
+repIndex===p.reps &&
+serieIndex===p.series;
+
+if(last){
+endSession();
+return;
+}
+
+beep(500);
+phase="repos";
+t=p.tempsRepos;
+totalTime=p.tempsRepos;
+return;
+}
+
+beep(800);
+
+repIndex++;
+
+if(repIndex>p.reps){
+repIndex=1;
+exIndex++;
+
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
+
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+}
+
+/* FIN */
+function endSession(){
+finished=true;
+main.style.display="none";
+endScreen.style.display="flex";
+beep(700);
+setTimeout(()=>beep(900),150);
+confetti();
+}
+
+/* CONTROLES */
+function togglePause(){
+paused=!paused;
+pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";
+}
+
+function toggleSound(){
+soundOn=!soundOn;
+soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";
+}
+
+function nextExercise(){
+repIndex=1;
+exIndex++;
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+update();
+}
+
+function back(){
+window.location="config.html";
+}
+
+/* LOOP */
+function loop(){
+if(paused||finished) return;
+t--;
+update();
+if(t<=0) next();
+}
+
+/* INIT */
+update();
+setInterval(loop,1000);
 
 </script>
 
