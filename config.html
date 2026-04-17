@@ -20,6 +20,7 @@ border-radius:15px;
 max-width:400px;
 margin:auto;
 margin-top:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 /* IMAGE */
@@ -29,25 +30,15 @@ border-radius:10px;
 margin-bottom:10px;
 }
 
-button{
-padding:14px;
-margin:5px;
-border:none;
-border-radius:10px;
-width:90%;
-font-size:16px;
-cursor:pointer;
-}
-
-.save{background:#2ecc71;color:white;}
-.start{background:#0e8f9b;color:white;}
-.home{background:#777;color:white;}
-.pdf{background:#9c27b0;color:white;}
-
+/* INPUTS */
 input{
-width:90%;
+width:100%;
 padding:12px;
-margin:6px;
+margin:6px 0;
+border-radius:10px;
+border:1px solid #ccc;
+box-sizing:border-box;
+font-size:16px;
 }
 
 label{
@@ -55,6 +46,28 @@ display:block;
 margin-top:10px;
 font-weight:bold;
 }
+
+/* BOUTONS */
+button{
+padding:14px;
+margin:6px 0;
+border:none;
+border-radius:10px;
+width:100%;
+font-size:16px;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.03);
+opacity:0.9;
+}
+
+.save{background:#2ecc71;color:white;}
+.start{background:#0e8f9b;color:white;}
+.home{background:#777;color:white;}
+.pdf{background:#9c27b0;color:white;}
 
 /* PRINT */
 @media print{
@@ -124,6 +137,7 @@ object-fit:contain;
 
 let exercices=[];
 
+/* 🔹 GENERER EXERCICES */
 function generer(){
 exo.innerHTML="";
 exercices=[];
@@ -137,38 +151,45 @@ exercices.push(input.value);
 }
 }
 
+/* 🔹 AFFICHER IMAGE PATHO */
 function chargerPathologie(){
 
 let patho = localStorage.getItem("pathologie");
+let user = localStorage.getItem("currentUser");
 
 let img = document.getElementById("pathoImage");
 let printImg = document.getElementById("printImage");
 let btns = document.getElementById("buttonsPDF");
 
+/* ❌ MODE LIBRE → PAS D’IMAGE */
+if(!user){
+img.style.display="none";
+btns.style.display="none";
+return;
+}
+
+/* ✔️ PATHO ÉPAULE */
 if(patho==="epaule"){
+let src="./tendinitedelacoiffe.jpg";
 
-let src = "./tendinitedelacoiffe.jpg";
+img.src=src;
+img.style.display="block";
 
-img.src = src;
-img.style.display = "block";
-
-printImg.src = src;
-btns.style.display = "block";
-
+printImg.src=src;
+btns.style.display="block";
 }
 }
 
+/* 🔹 PDF */
 function printPDF(){
-
 document.getElementById("printZone").style.display="flex";
-
 window.print();
-
 setTimeout(()=>{
 document.getElementById("printZone").style.display="none";
 },500);
 }
 
+/* 🔹 SAUVEGARDE */
 function save(){
 
 let user = localStorage.getItem("currentUser");
@@ -196,6 +217,7 @@ localStorage.setItem("programme_"+user,JSON.stringify(prog));
 alert("Programme enregistré !");
 }
 
+/* 🔹 DEMARRER */
 function start(){
 
 let prog={
@@ -211,10 +233,12 @@ localStorage.setItem("programme_temp",JSON.stringify(prog));
 window.location="timer.html";
 }
 
+/* 🔹 ACCUEIL */
 function home(){
 window.location="index.html";
 }
 
+/* INIT */
 generer();
 chargerPathologie();
 
