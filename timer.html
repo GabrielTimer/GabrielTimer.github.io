@@ -26,10 +26,7 @@ max-width:900px;
 width:95%;
 }
 
-.left{
-flex:1;
-}
-
+.left{flex:1;}
 .right{
 flex:1;
 display:flex;
@@ -44,7 +41,7 @@ border-radius:12px;
 margin-bottom:10px;
 }
 
-/* TIMER CERCLE */
+/* CERCLE */
 .circleWrap{
 position:relative;
 width:180px;
@@ -68,7 +65,7 @@ font-size:48px;
 font-weight:bold;
 }
 
-/* BARRE PROGRESSION */
+/* BARRE */
 .barContainer{
 width:200px;
 height:10px;
@@ -85,22 +82,28 @@ border-radius:10px;
 transition:0.3s;
 }
 
-/* TEXTE */
-h1{margin:0;}
-h2{margin:5px 0;}
-h3{margin:5px 0;opacity:0.8;}
-
 /* BOUTONS */
 button{
 padding:12px 20px;
-margin:5px;
+margin:6px;
 border:none;
 border-radius:10px;
 font-size:16px;
 cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+transform:scale(1.05);
+opacity:0.9;
+}
+
+button:active{
+transform:scale(0.95);
 }
 
 .pause{background:#ff9800;}
+.next{background:#4caf50;}
 .back{background:#0e8f9b;}
 
 @media(max-width:800px){
@@ -125,7 +128,6 @@ cursor:pointer;
 <img id="img">
 
 <div class="circleWrap">
-
 <svg width="180" height="180">
 <circle cx="90" cy="90" r="80"
 stroke="rgba(255,255,255,0.2)"
@@ -144,7 +146,6 @@ stroke-dashoffset="502"/>
 </svg>
 
 <div id="timer">0</div>
-
 </div>
 
 <div class="barContainer">
@@ -152,6 +153,7 @@ stroke-dashoffset="502"/>
 </div>
 
 <button class="pause" onclick="pause()">⏸ Pause</button>
+<button class="next" onclick="nextManual()">⏭ Exercice suivant</button>
 <button class="back" onclick="back()">⚙️ Réglages</button>
 
 </div>
@@ -160,7 +162,7 @@ stroke-dashoffset="502"/>
 
 <script>
 
-// 🔐 sécurité
+/* sécurité */
 if(!localStorage.getItem("programme_temp") && !localStorage.getItem("currentUser")){
 window.location="index.html";
 }
@@ -179,29 +181,29 @@ let t=3;
 let totalTime=3;
 let paused=false;
 
-/* 🔊 voix */
+/* voix */
 function speak(text){
 let msg = new SpeechSynthesisUtterance(text);
 msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
 
-/* 🔵 update cercle */
+/* cercle */
 function updateCircle(){
 let percent = t / totalTime;
 let offset = 502 * (1 - percent);
-document.getElementById("progressCircle").style.strokeDashoffset = offset;
+progressCircle.style.strokeDashoffset = offset;
 }
 
-/* 🔵 barre progression */
+/* barre */
 function updateBar(){
 let total = p.exercices.length * p.reps * p.series;
 let current = (serie-1)*p.reps*p.exercices.length + (rep-1)*p.exercices.length + i;
 let percent = (current / total) * 100;
-document.getElementById("bar").style.width = percent + "%";
+bar.style.width = percent + "%";
 }
 
-/* 🔄 update UI */
+/* UI */
 function update(){
 
 timer.innerText=t;
@@ -229,7 +231,7 @@ updateCircle();
 updateBar();
 }
 
-/* 🔄 changement phase */
+/* logique */
 function next(){
 
 if(phase==="prep"){
@@ -271,9 +273,15 @@ totalTime=p.tempsEx;
 }
 }
 
-/* ⏱ loop */
+/* bouton manuel */
+function nextManual(){
+next();
+update();
+}
+
+/* loop */
 function loop(){
-if(paused) return;
+if(paused)return;
 
 t--;
 update();
@@ -281,18 +289,18 @@ update();
 if(t<=0) next();
 }
 
-/* ⏸ pause */
 function pause(){
 paused=!paused;
 }
 
-/* 🔙 retour */
 function back(){
 window.location="config.html";
 }
 
 let timer=document.getElementById("timer");
 let phaseEl=document.getElementById("phase");
+let progressCircle=document.getElementById("progressCircle");
+let bar=document.getElementById("bar");
 
 update();
 setInterval(loop,1000);
