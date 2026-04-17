@@ -15,6 +15,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
+overflow:hidden;
 }
 
 .container{
@@ -58,12 +59,6 @@ justify-content:center;
 position:relative;
 width:160px;
 height:160px;
-}
-
-.circleWrap svg{
-position:absolute;
-top:0;
-left:0;
 }
 
 #timer{
@@ -113,12 +108,44 @@ cursor:pointer;
 .next{background:#4caf50;}
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
+
+/* 🎉 CONFETTIS */
+.confetti{
+position:fixed;
+width:8px;
+height:8px;
+background:red;
+top:-10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
+
+/* 🎯 MESSAGE FIN */
+#endScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#1b5e20;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:22px;
+text-align:center;
+}
 </style>
 </head>
 
-<body>
+<body onclick="enableFullScreen()">
 
-<div class="container">
+<div class="container" id="main">
 
 <div class="infoBox">
 <div id="exoInfo"></div>
@@ -137,7 +164,6 @@ cx="80" cy="80" r="70"
 stroke="#00e5ff"
 stroke-width="10"
 fill="none"
-stroke-linecap="round"
 transform="rotate(-90 80 80)"
 stroke-dasharray="440"
 stroke-dashoffset="440"/>
@@ -157,6 +183,12 @@ stroke-dashoffset="440"/>
 
 </div>
 
+<!-- 🎯 ÉCRAN FIN -->
+<div id="endScreen">
+<div>🎉 Bravo ! 🎉</div>
+<div style="margin-top:10px;">👏 Avec les félicitations du kiné 👍</div>
+</div>
+
 <script>
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
@@ -165,13 +197,12 @@ let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTime=3;
 let paused=false, finished=false;
-
-let soundOn = true;
+let soundOn=true;
 
 /* 🔊 VOIX */
 function speak(text){
 if(!soundOn) return;
-let msg = new SpeechSynthesisUtterance(text);
+let msg=new SpeechSynthesisUtterance(text);
 msg.lang="fr-FR";
 speechSynthesis.speak(msg);
 }
@@ -179,6 +210,7 @@ speechSynthesis.speak(msg);
 /* 🔔 SONS */
 function beepExo(){
 if(!soundOn) return;
+navigator.vibrate && navigator.vibrate(200);
 let ctx=new AudioContext();
 let o=ctx.createOscillator();
 o.frequency.value=500;
@@ -189,6 +221,7 @@ setTimeout(()=>o.stop(),150);
 
 function beepRepos(){
 if(!soundOn) return;
+navigator.vibrate && navigator.vibrate([100,50,100]);
 let ctx=new AudioContext();
 let o=ctx.createOscillator();
 o.frequency.value=900;
@@ -197,21 +230,65 @@ o.start();
 setTimeout(()=>o.stop(),150);
 }
 
-/* 🔇 SON TOGGLE */
+/* 🎺 TROMPETTE */
+function trumpet(){
+if(!soundOn) return;
+
+let ctx=new AudioContext();
+let o1=ctx.createOscillator();
+let o2=ctx.createOscillator();
+
+o1.frequency.value=523;
+o2.frequency.value=659;
+
+o1.connect(ctx.destination);
+o2.connect(ctx.destination);
+
+o1.start();
+o2.start();
+
+setTimeout(()=>{
+o1.frequency.value=784;
+o2.frequency.value=988;
+},150);
+
+setTimeout(()=>{
+o1.stop();
+o2.stop();
+},400);
+}
+
+/* 🎉 CONFETTIS */
+function launchConfetti(){
+for(let i=0;i<120;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.style.left=Math.random()*100+"vw";
+c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+c.style.animationDuration=(Math.random()*2+2)+"s";
+document.body.appendChild(c);
+
+setTimeout(()=>c.remove(),4000);
+}
+}
+
+/* 🔇 SON */
 function toggleSound(){
 soundOn=!soundOn;
 soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
-speechSynthesis.cancel();
+}
+
+/* 📱 FULLSCREEN */
+function enableFullScreen(){
+document.documentElement.requestFullscreen?.();
 }
 
 /* IMAGE */
 function updateImage(){
-let patho = localStorage.getItem("pathologie");
-if(patho==="epaule" && phase==="ex"){
-img.src="tendinitedelacoiffe"+(exIndex+1)+".jpg";
-}else{
-img.src="";
-}
+let patho=localStorage.getItem("pathologie");
+img.src=(patho==="epaule" && phase==="ex")
+? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
+: "";
 }
 
 /* INFOS */
@@ -223,8 +300,7 @@ serieInfo.innerText="Série "+serieIndex+" / "+p.series;
 
 /* CERCLE */
 function updateCircle(){
-let percent=t/totalTime;
-progressCircle.style.strokeDashoffset=440*(1-percent);
+progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
 }
 
 /* BARRE */
@@ -247,8 +323,14 @@ updateInfos();
 /* FIN */
 function endSession(){
 finished=true;
-timer.innerText="👍";
-alert("👏 Avec les félicitations du kiné !");
+
+document.getElementById("main").style.display="none";
+document.getElementById("endScreen").style.display="flex";
+
+trumpet();
+launchConfetti();
+
+navigator.vibrate && navigator.vibrate([200,100,200,100,300]);
 }
 
 /* LOGIQUE */
@@ -296,7 +378,6 @@ totalTime=p.tempsEx;
 
 /* NEXT EXO */
 function nextExercise(){
-
 repIndex=1;
 exIndex++;
 
