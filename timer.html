@@ -23,7 +23,6 @@ flex-direction:column;
 align-items:center;
 }
 
-/* INFOS */
 .infoBox{
 text-align:center;
 margin-bottom:10px;
@@ -34,7 +33,6 @@ margin:3px 0;
 font-size:18px;
 }
 
-/* IMAGE */
 #img{
 max-width:250px;
 border-radius:12px;
@@ -42,7 +40,6 @@ margin-bottom:15px;
 display:none;
 }
 
-/* CERCLE */
 .circleWrap{
 position:relative;
 width:180px;
@@ -66,7 +63,6 @@ font-size:48px;
 font-weight:bold;
 }
 
-/* BARRE */
 .barContainer{
 width:200px;
 height:8px;
@@ -83,7 +79,6 @@ border-radius:10px;
 transition:0.3s;
 }
 
-/* BOUTONS */
 button{
 padding:12px 18px;
 margin:6px;
@@ -134,7 +129,7 @@ stroke-dashoffset="502"/>
 <div class="barContainer"><div id="bar"></div></div>
 
 <button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
-<button class="next" onclick="nextManual()">⏭ Exercice suivant</button>
+<button class="next" onclick="nextExercise()">⏭ Exercice suivant</button>
 <button id="soundBtn" class="sound" onclick="toggleSound()">🔊 Son</button>
 <button class="back" onclick="back()">⚙️ Réglages</button>
 
@@ -145,7 +140,6 @@ stroke-dashoffset="502"/>
 let data = localStorage.getItem("programme_temp");
 let p = JSON.parse(data);
 
-/* INDEX */
 let exIndex = 0;
 let repIndex = 1;
 let serieIndex = 1;
@@ -156,18 +150,30 @@ let paused=false;
 
 let soundOn = localStorage.getItem("sound") !== "off";
 
-/* VOIX */
-function speak(text){
+/* SONS */
+function soundExerciceFin(){
 if(!soundOn) return;
-let msg = new SpeechSynthesisUtterance(text);
-msg.lang="fr-FR";
-speechSynthesis.speak(msg);
+let ctx = new AudioContext();
+let osc = ctx.createOscillator();
+osc.frequency.value=600;
+osc.connect(ctx.destination);
+osc.start();
+setTimeout(()=>osc.stop(),150);
+}
+
+function soundReposFin(){
+if(!soundOn) return;
+let ctx = new AudioContext();
+let osc = ctx.createOscillator();
+osc.frequency.value=900;
+osc.connect(ctx.destination);
+osc.start();
+setTimeout(()=>osc.stop(),150);
 }
 
 /* IMAGE */
 function updateImage(){
 let patho = localStorage.getItem("pathologie");
-
 if(patho==="epaule" && phase==="ex"){
 img.src = "tendinitedelacoiffe"+(exIndex+1)+".jpg";
 img.style.display="block";
@@ -209,7 +215,7 @@ updateImage();
 updateInfos();
 }
 
-/* LOGIQUE */
+/* LOGIQUE NORMALE */
 function next(){
 
 if(phase==="prep"){
@@ -220,13 +226,15 @@ return;
 }
 
 if(phase==="ex"){
+soundExerciceFin();
 phase="repos";
 t=p.tempsRepos;
 totalTime=p.tempsRepos;
 return;
 }
 
-/* repos */
+soundReposFin();
+
 repIndex++;
 
 if(repIndex > p.reps){
@@ -249,12 +257,30 @@ t=p.tempsEx;
 totalTime=p.tempsEx;
 }
 
-/* CONTROLES */
-function nextManual(){
-next();
+/* 🔥 NOUVEAU : EXERCICE SUIVANT DIRECT */
+function nextExercise(){
+
+repIndex = 1;
+exIndex++;
+
+if(exIndex >= p.exercices.length){
+exIndex = 0;
+serieIndex++;
+
+if(serieIndex > p.series){
+timer.innerText="✔";
+return;
+}
+}
+
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+
 update();
 }
 
+/* CONTROLES */
 function togglePause(){
 paused=!paused;
 pauseBtn.innerText = paused?"▶ Reprendre":"⏸ Pause";
