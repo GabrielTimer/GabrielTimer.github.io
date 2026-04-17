@@ -70,7 +70,6 @@ transform:scale(1.03);
 .home{background:#777;color:white;}
 .pdf{background:#9c27b0;color:white;}
 
-/* MOBILE */
 @media(max-width:500px){
 .card{
 width:95%;
@@ -78,23 +77,14 @@ padding:15px;
 }
 }
 
-/* PRINT IMAGE SEULE */
+/* PRINT */
 @media print{
-body *{
-visibility:hidden;
-}
-#printZone, #printZone *{
-visibility:visible;
-}
+body *{visibility:hidden;}
+#printZone, #printZone *{visibility:visible;}
 #printZone{
 position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
+top:0;left:0;width:100%;height:100%;
+display:flex;justify-content:center;align-items:center;
 }
 #printZone img{
 max-width:100%;
@@ -111,16 +101,13 @@ object-fit:contain;
 
 <h2>Configurer la séance</h2>
 
-<!-- IMAGE PATHO -->
 <img id="pathoImage" style="display:none;">
 
-<!-- BOUTONS PDF -->
 <div id="imageButtons" style="display:none;">
 <button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
 <button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
 </div>
 
-<!-- PRINT -->
 <div id="printZone" style="display:none;">
 <img id="printImage">
 </div>
@@ -160,15 +147,13 @@ exercices=[];
 for(let i=0;i<nbEx.value;i++){
 let input=document.createElement("input");
 input.value="Exercice "+(i+1);
-
 input.oninput=()=>exercices[i]=input.value;
-
 exo.appendChild(input);
 exercices.push(input.value);
 }
 }
 
-/* 🔹 charger pathologie */
+/* 🔹 charger */
 function charger(){
 
 let patho = localStorage.getItem("pathologie");
@@ -179,8 +164,7 @@ let btns = document.getElementById("imageButtons");
 
 /* MODE LIBRE */
 if(!patho){
-img.style.display="none";
-btns.style.display="none";
+generer();
 return;
 }
 
@@ -195,10 +179,14 @@ printImg.src=src;
 img.style.display="block";
 btns.style.display="block";
 
+/* 🔥 8 EXERCICES PAR DÉFAUT */
+nbEx.value = 8;
+generer();
+
 }
 }
 
-/* 🔹 PDF */
+/* PDF */
 function printPDF(){
 document.getElementById("printZone").style.display="flex";
 window.print();
@@ -208,7 +196,7 @@ document.getElementById("printZone").style.display="none";
 },500);
 }
 
-/* 🔹 sauvegarde */
+/* SAVE */
 function save(){
 
 let user = localStorage.getItem("currentUser");
@@ -216,7 +204,6 @@ let user = localStorage.getItem("currentUser");
 if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
-
 if(!p || !n) return;
 
 user = p+"_"+n;
@@ -236,7 +223,7 @@ localStorage.setItem("programme_"+user,JSON.stringify(prog));
 alert("Programme enregistré !");
 }
 
-/* 🔹 démarrer */
+/* START */
 function start(){
 
 let prog={
@@ -252,13 +239,11 @@ localStorage.setItem("programme_temp",JSON.stringify(prog));
 window.location="timer.html";
 }
 
-/* 🔹 accueil */
 function home(){
 window.location="index.html";
 }
 
 /* INIT */
-generer();
 charger();
 
 </script>
