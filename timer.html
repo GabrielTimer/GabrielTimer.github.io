@@ -43,6 +43,13 @@ text-align:center;
 height:60px;
 }
 
+/* IMAGE */
+#img{
+width:100%;
+max-height:130px;
+object-fit:contain;
+}
+
 #prepText{
 font-size:26px;
 font-weight:bold;
@@ -121,6 +128,7 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 font-size:22px;
+text-align:center;
 }
 </style>
 </head>
@@ -136,6 +144,9 @@ font-size:22px;
 <div id="repInfo"></div>
 <div id="serieInfo"></div>
 </div>
+
+<!-- IMAGE EXERCICE -->
+<img id="img">
 
 <div class="timerZone">
 
@@ -210,7 +221,6 @@ function update(){
 let exo=p.exercices[exIndex];
 
 timer.innerText = t;
-
 prepText.innerText = phase==="prep" ? "PRÉPAREZ-VOUS !" : "";
 
 exoInfo.innerText = exo.nom;
@@ -220,6 +230,15 @@ serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
 /* cercle */
 let percent = t / totalTime;
 progressCircle.style.strokeDashoffset = 440*(1-percent);
+
+/* IMAGE EPAULE UNIQUEMENT */
+let patho = localStorage.getItem("pathologie");
+
+if(patho === "epaule" && phase === "ex"){
+img.src = "tendinitedelacoiffe" + (exIndex+1) + ".jpg";
+}else{
+img.src = "";
+}
 }
 
 /* NEXT */
@@ -313,13 +332,12 @@ function back(){
 window.location="config.html";
 }
 
-/* LOOP FIX */
+/* LOOP */
 setInterval(()=>{
 
 if(paused || finished) return;
 
-/* descente */
-t = t - 1;
+t--;
 
 /* voix 3 2 1 */
 if(phase==="prep" && t>0 && t<=3){
