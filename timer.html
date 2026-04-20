@@ -53,12 +53,10 @@ font-weight:bold;
 color:#ffeb3b;
 }
 
-/* 🔥 TEXTE REPOS */
 #restText{
 font-size:34px;
 font-weight:bold;
 display:none;
-color:#ffffff;
 }
 
 .timerZone{
@@ -86,20 +84,6 @@ font-size:42px;
 font-weight:bold;
 }
 
-.barContainer{
-width:100%;
-height:8px;
-background:rgba(255,255,255,0.2);
-border-radius:10px;
-}
-
-#bar{
-height:100%;
-width:0%;
-background:#00e5ff;
-border-radius:10px;
-}
-
 .buttons{
 width:100%;
 display:grid;
@@ -112,7 +96,6 @@ height:45px;
 border:none;
 border-radius:10px;
 color:white;
-font-size:14px;
 cursor:pointer;
 }
 
@@ -174,8 +157,6 @@ stroke-dashoffset="440"/>
 
 </div>
 
-<div class="barContainer"><div id="bar"></div></div>
-
 <div class="buttons">
 <button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
 <button class="next" onclick="nextExercise()">⏭ Exercice</button>
@@ -192,21 +173,15 @@ stroke-dashoffset="440"/>
 
 <script>
 
-/* DATA */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-if(!p || !p.exercices){
-alert("Programme manquant");
-window.location="config.html";
-}
+let patho = localStorage.getItem("pathologie");
 
-/* STATE */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 
 let t=3, totalTime=3;
 let paused=false, finished=false, soundOn=true;
 
-/* VOIX */
 function speak(text){
 if(!soundOn) return;
 let u=new SpeechSynthesisUtterance(text);
@@ -215,44 +190,39 @@ speechSynthesis.cancel();
 speechSynthesis.speak(u);
 }
 
-/* UPDATE */
 function update(){
 
 let exo=p.exercices[exIndex];
 
 timer.innerText = t;
 prepText.innerText = phase==="prep" ? "PRÉPAREZ-VOUS !" : "";
-
-/* 🔥 TEXTE REPOS */
 restText.style.display = phase==="repos" ? "block" : "none";
 
 exoInfo.innerText = exo.nom;
 repInfo.innerText = "Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
 
+/* couleur */
+if(phase==="ex"){
+document.body.style.background="#c62828";
+}else if(phase==="repos"){
+document.body.style.background="#1565c0";
+}else{
+document.body.style.background="#1b5e20";
+}
+
+/* image */
+if(patho && phase==="ex"){
+img.src = "images/" + patho + "/ex" + (exIndex+1) + ".jpg";
+}else{
+img.src = "";
+}
+
 /* cercle */
 let percent = t / totalTime;
 progressCircle.style.strokeDashoffset = 440*(1-percent);
-
-/* 🔥 COULEUR FOND */
-if(phase==="ex"){
-document.body.style.background="#c62828"; // rouge
-}else if(phase==="repos"){
-document.body.style.background="#1565c0"; // bleu
-}else{
-document.body.style.background="#1b5e20"; // vert
 }
 
-/* IMAGE EPAULE */
-let patho = localStorage.getItem("pathologie");
-if(patho==="epaule" && phase==="ex"){
-img.src="tendinitedelacoiffe"+(exIndex+1)+".jpg";
-}else{
-img.src="";
-}
-}
-
-/* NEXT */
 function next(){
 
 let exo=p.exercices[exIndex];
@@ -301,7 +271,6 @@ totalTime=t;
 speak("C'est parti");
 }
 
-/* FIN */
 function endSession(){
 finished=true;
 main.style.display="none";
@@ -309,7 +278,6 @@ endScreen.style.display="flex";
 speak("Bravo");
 }
 
-/* CONTROLES */
 function togglePause(){
 paused=!paused;
 pauseBtn.innerText = paused ? "▶ Reprendre" : "⏸ Pause";
@@ -337,7 +305,6 @@ function back(){
 window.location="config.html";
 }
 
-/* LOOP */
 setInterval(()=>{
 if(paused || finished) return;
 
@@ -355,7 +322,6 @@ update();
 
 },1000);
 
-/* INIT */
 speak("Préparez-vous");
 update();
 
