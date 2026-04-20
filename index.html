@@ -27,7 +27,7 @@ max-width:320px;
 }
 
 .logo{
-width:80px;
+width:120px;
 margin-bottom:10px;
 }
 
@@ -75,7 +75,7 @@ opacity:0.9;
 
 <button class="primary" onclick="acceder()">📋 Accéder à mon programme</button>
 <button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
-<button class="patho" onclick="pathologies()">🩺 Pathologies</button>
+<button class="patho" onclick="zones()">📍 ZONES</button>
 
 </div>
 
@@ -97,12 +97,13 @@ window.location="config.html";
 
 function modeLibre(){
 localStorage.removeItem("currentUser");
-localStorage.removeItem("pathologie"); // 🔴 IMPORTANT
+localStorage.removeItem("pathologie");
 window.location="config.html";
 }
 
-function pathologies(){
-window.location="pathologies.html";
+/* 🔥 CORRECTION ICI */
+function zones(){
+window.location="config.html";
 }
 </script>
 
