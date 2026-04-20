@@ -3,118 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accueil</title>
+<title>Gabriel Timer</title>
 
 <style>
 body{
 font-family:Arial;
-background:#1b5e20;
-color:white;
-margin:0;
+background:linear-gradient(135deg,#e0f7fa,#f4f6f9);
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
 height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 text-align:center;
+width:90%;
+max-width:320px;
 }
 
 .logo{
-position:absolute;
-top:10px;
-right:10px;
-width:50px;
-opacity:0.8;
-}
-
-h1{margin-bottom:20px;}
-
-.container{
-display:flex;
-flex-direction:column;
-gap:10px;
-width:260px;
+width:80px;
+margin-bottom:10px;
 }
 
 input{
+width:100%;
 padding:12px;
+margin:6px 0;
 border-radius:10px;
-border:none;
-font-size:16px;
-text-align:center;
+border:1px solid #ccc;
+box-sizing:border-box;
 }
 
 button{
-padding:15px;
+width:100%;
+padding:14px;
+margin-top:10px;
 border:none;
 border-radius:12px;
-font-size:18px;
+font-weight:bold;
 cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
+transition:0.2s;
 }
 
-.zones{background:#0e8f9b;color:white;}
-.libre{background:#ff9800;color:white;}
+button:hover{
+transform:scale(1.03);
+opacity:0.9;
+}
+
+.primary{background:#0e8f9b;color:white;}
+.secondary{background:#ff9800;color:white;}
+.patho{background:#9c27b0;color:white;}
 </style>
 </head>
 
 <body>
 
+<div class="card">
+
 <img src="logo.png" class="logo">
 
-<h1>Rééducation</h1>
+<h2>Gabriel Timer</h2>
 
-<div class="container">
-
-<input id="nom" placeholder="Nom">
 <input id="prenom" placeholder="Prénom">
+<input id="nom" placeholder="Nom">
 
-<button class="zones" onclick="goZones()">
-📍 ZONES
-</button>
-
-<button class="libre" onclick="goLibre()">
-⏱ Mode libre
-</button>
+<button class="primary" onclick="acceder()">📋 Accéder à mon programme</button>
+<button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
+<button class="patho" onclick="pathologies()">🩺 Pathologies</button>
 
 </div>
 
 <script>
+function acceder(){
+let p = prenom.value.trim();
+let n = nom.value.trim();
 
-function savePatient(){
-let nom = document.getElementById("nom").value.trim();
-let prenom = document.getElementById("prenom").value.trim();
-
-if(nom && prenom){
-let key = "patient_" + nom + "_" + prenom;
-localStorage.setItem("patient_actuel", key);
-}
+if(!p || !n){
+alert("Remplir les champs");
+return;
 }
 
-function goZones(){
-savePatient();
+let id = p.toLowerCase()+"_"+n.toLowerCase();
+localStorage.setItem("currentUser", id);
+
 window.location="config.html";
 }
 
-function goLibre(){
-savePatient();
-window.location="timer.html";
+function modeLibre(){
+localStorage.removeItem("currentUser");
+localStorage.removeItem("pathologie"); // 🔴 IMPORTANT
+window.location="config.html";
 }
 
-/* AUTO REMPLISSAGE */
-let current = localStorage.getItem("patient_actuel");
-
-if(current){
-let parts = current.replace("patient_","").split("_");
-if(parts.length===2){
-document.getElementById("nom").value = parts[0];
-document.getElementById("prenom").value = parts[1];
+function pathologies(){
+window.location="pathologies.html";
 }
-}
-
 </script>
 
 </body>
