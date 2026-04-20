@@ -17,7 +17,6 @@ margin:auto;
 margin-top:20px;
 }
 
-/* 🔥 PATHO BUTTONS */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -41,11 +40,7 @@ object-fit:cover;
 border-radius:8px;
 }
 
-/* 🔥 ZONE CONFIG (CACHÉE AU DEPART) */
-#configZone{
-display:none;
-margin-top:20px;
-}
+#configZone{display:none;margin-top:20px;}
 
 #cover{
 width:100%;
@@ -53,7 +48,6 @@ border-radius:10px;
 margin-bottom:10px;
 }
 
-/* EXOS */
 .exo{
 background:#eee;
 margin:8px 0;
@@ -105,11 +99,10 @@ cursor:pointer;
 
 <div class="card">
 
-<h2>Choisir une pathologie</h2>
+<h2>ZONES</h2>
 
 <div id="grid" class="grid"></div>
 
-<!-- 🔥 CONFIG -->
 <div id="configZone">
 
 <img id="cover">
@@ -137,20 +130,25 @@ cursor:pointer;
 let selectedPatho=null;
 let exercices=[];
 
-/* 🔥 MENU PATHO */
-fetch("pathos.json")
-.then(r=>r.json())
-.then(data=>{
+/* 🔥 MAPPING NOM + DOSSIER */
+const zones = [
+{ id:"tendinite_coiffe", nom:"Membre supérieur" },
+{ id:"lombalgie", nom:"Dos" },
+{ id:"syndrome_rotulien", nom:"Membre inférieur" },
+{ id:"cervicales", nom:"Cervicales" },
+{ id:"autres", nom:"Autres" }
+];
 
+/* 🔥 GENERATION BOUTONS */
 let grid=document.getElementById("grid");
 
-data.forEach(p=>{
+zones.forEach(p=>{
 
 let div=document.createElement("div");
 div.className="pathoBtn";
 
 div.innerHTML=`
-<img src="images/${p.id}/cover.jpg">
+<img src="images/${p.id}/cover.jpg" onerror="this.style.display='none'">
 <div>${p.nom}</div>
 `;
 
@@ -160,22 +158,15 @@ grid.appendChild(div);
 
 });
 
-});
-
-/* 🔥 SELECT PATHO */
-
+/* SELECT */
 function selectPatho(id){
 
 selectedPatho=id;
 
-/* cacher menu */
-document.getElementById("grid").style.display="none";
+grid.style.display="none";
+configZone.style.display="block";
 
-/* afficher config */
-document.getElementById("configZone").style.display="block";
-
-/* image */
-document.getElementById("cover").src="images/"+id+"/cover.jpg";
+cover.src="images/"+id+"/cover.jpg";
 
 /* reset exos */
 exercices=[];
@@ -183,7 +174,6 @@ addExo();addExo();addExo();
 }
 
 /* EXOS */
-
 function addExo(){
 exercices.push({
 nom:"Exercice "+(exercices.length+1),
@@ -230,13 +220,7 @@ function updateNom(i,val){exercices[i].nom=val;render();}
 function removeExo(i){exercices.splice(i,1);render();}
 
 /* START */
-
 function start(){
-
-if(!selectedPatho){
-alert("Choisir une pathologie");
-return;
-}
 
 localStorage.setItem("pathologie",selectedPatho);
 
@@ -248,11 +232,10 @@ series:+series.value
 window.location="timer.html";
 }
 
-/* RETOUR */
-
+/* BACK */
 function back(){
-document.getElementById("grid").style.display="grid";
-document.getElementById("configZone").style.display="none";
+grid.style.display="grid";
+configZone.style.display="none";
 }
 
 </script>
