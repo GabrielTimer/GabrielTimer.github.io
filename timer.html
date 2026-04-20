@@ -18,7 +18,6 @@ height:100vh;
 overflow:hidden;
 }
 
-/* LOGO */
 .logo{
 position:fixed;
 top:10px;
@@ -27,7 +26,6 @@ width:45px;
 opacity:0.8;
 }
 
-/* LAYOUT */
 .container{
 width:100%;
 max-width:380px;
@@ -114,7 +112,6 @@ cursor:pointer;
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
 
-/* FIN */
 #endScreen{
 position:fixed;
 top:0;
@@ -181,15 +178,31 @@ stroke-dashoffset="440"/>
 
 <script>
 
-let p = JSON.parse(localStorage.getItem("programme_temp"));
+/* 🔥 RECUP PROGRAMME (CORRIGÉ) */
+let p = null;
 
+let user = localStorage.getItem("currentUser");
+
+if(user && localStorage.getItem("programme_"+user)){
+p = JSON.parse(localStorage.getItem("programme_"+user));
+}else{
+p = JSON.parse(localStorage.getItem("programme_temp"));
+}
+
+/* 🔴 SECURITE */
+if(!p){
+alert("Aucun programme trouvé !");
+window.location="config.html";
+}
+
+/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTime=3;
 let paused=false, finished=false;
 let soundOn=true;
 
-/* SON SIMPLE */
+/* SON */
 function beep(freq){
 if(!soundOn) return;
 let ctx=new AudioContext();
@@ -234,10 +247,14 @@ exoInfo.innerText="Exercice "+(exIndex+1);
 repInfo.innerText="Rép "+repIndex+"/"+p.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* IMAGE */
 let patho=localStorage.getItem("pathologie");
-img.src=(patho==="epaule" && phase==="ex")
-? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
-: "";
+
+if(patho==="epaule" && phase==="ex"){
+img.src="tendinitedelacoiffe"+(exIndex+1)+".jpg";
+}else{
+img.src="";
+}
 }
 
 /* LOGIQUE */
