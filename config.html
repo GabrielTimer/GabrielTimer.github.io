@@ -13,85 +13,56 @@ margin:0;
 text-align:center;
 }
 
-/* CARD */
 .card{
 background:white;
 padding:20px;
 border-radius:15px;
 max-width:400px;
-width:90%;
 margin:auto;
 margin-top:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* IMAGE */
-img{
-width:100%;
+.exo{
+background:#eee;
+margin:8px 0;
+padding:12px;
 border-radius:10px;
-margin-bottom:10px;
+cursor:pointer;
+text-align:left;
 }
 
-/* INPUT */
+.exo:hover{
+background:#ddd;
+}
+
+.panel{
+display:none;
+padding:10px;
+background:#fafafa;
+border-radius:10px;
+margin-top:5px;
+}
+
 input{
 width:100%;
-padding:12px;
-margin:6px 0;
-border-radius:10px;
+padding:10px;
+margin:5px 0;
+border-radius:8px;
 border:1px solid #ccc;
-font-size:16px;
-box-sizing:border-box;
 }
 
-label{
-display:block;
-margin-top:10px;
-font-weight:bold;
-}
-
-/* BOUTONS */
 button{
-padding:14px;
-margin:6px 0;
+padding:12px;
+margin:5px;
 border:none;
 border-radius:10px;
 width:100%;
-font-size:16px;
 cursor:pointer;
-transition:0.2s;
 }
 
-button:hover{
-transform:scale(1.03);
-}
-
+.add{background:#4caf50;color:white;}
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
-.home{background:#777;color:white;}
-.pdf{background:#9c27b0;color:white;}
-
-@media(max-width:500px){
-.card{
-width:95%;
-padding:15px;
-}
-}
-
-/* PRINT */
-@media print{
-body *{visibility:hidden;}
-#printZone, #printZone *{visibility:visible;}
-#printZone{
-position:absolute;
-top:0;left:0;width:100%;height:100%;
-display:flex;justify-content:center;align-items:center;
-}
-#printZone img{
-max-width:100%;
-max-height:100%;
-object-fit:contain;
-}
-}
 </style>
 </head>
 
@@ -101,37 +72,15 @@ object-fit:contain;
 
 <h2>Configurer la séance</h2>
 
-<img id="pathoImage" style="display:none;">
+<div id="exoList"></div>
 
-<div id="imageButtons" style="display:none;">
-<button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
-<button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
-</div>
+<button class="add" onclick="addExo()">➕ Ajouter exercice</button>
 
-<div id="printZone" style="display:none;">
-<img id="printImage">
-</div>
-
-<label>Nombre d'exercices</label>
-<input type="number" id="nbEx" value="5" onchange="generer()">
-
-<div id="exo"></div>
-
-<label>Temps exercice (sec)</label>
-<input id="tempsEx" type="number" value="20">
-
-<label>Temps repos (sec)</label>
-<input id="tempsRepos" type="number" value="15">
-
-<label>Répétitions</label>
-<input id="reps" type="number" value="3">
-
-<label>Séries</label>
-<input id="series" type="number" value="2">
+<h3>Séries</h3>
+<input type="number" id="series" value="2">
 
 <button class="save" onclick="save()">💾 Enregistrer</button>
 <button class="start" onclick="start()">▶ Démarrer</button>
-<button class="home" onclick="home()">🏠 Accueil</button>
 
 </div>
 
@@ -139,112 +88,91 @@ object-fit:contain;
 
 let exercices=[];
 
-/* 🔹 générer exercices */
-function generer(){
-exo.innerHTML="";
-exercices=[];
+/* 🔥 AJOUT */
+function addExo(){
 
-for(let i=0;i<nbEx.value;i++){
-let input=document.createElement("input");
-input.value="Exercice "+(i+1);
-input.oninput=()=>exercices[i]=input.value;
-exo.appendChild(input);
-exercices.push(input.value);
-}
-}
+exercices.push({
+nom:"Exercice "+(exercices.length+1),
+tempsEx:20,
+tempsRepos:15,
+reps:3
+});
 
-/* 🔹 charger */
-function charger(){
-
-let patho = localStorage.getItem("pathologie");
-
-let img = document.getElementById("pathoImage");
-let printImg = document.getElementById("printImage");
-let btns = document.getElementById("imageButtons");
-
-/* MODE LIBRE */
-if(!patho){
-generer();
-return;
+render();
 }
 
-/* EPAULE */
-if(patho==="epaule"){
+/* 🔥 AFFICHAGE */
+function render(){
 
-let src="tendinitedelacoiffe.jpg";
+exoList.innerHTML="";
 
-img.src=src;
-printImg.src=src;
+exercices.forEach((exo,i)=>{
 
-img.style.display="block";
-btns.style.display="block";
+let div=document.createElement("div");
 
-/* 🔥 8 EXERCICES PAR DÉFAUT */
-nbEx.value = 8;
-generer();
+div.innerHTML=`
+<div class="exo" onclick="toggle(${i})">
+${exo.nom} ▶
+</div>
 
+<div class="panel" id="panel${i}">
+<input value="${exo.nom}" onchange="updateNom(${i},this.value)">
+
+<input type="number" value="${exo.tempsEx}" onchange="update(${i},'tempsEx',this.value)" placeholder="Temps ex">
+
+<input type="number" value="${exo.tempsRepos}" onchange="update(${i},'tempsRepos',this.value)" placeholder="Repos">
+
+<input type="number" value="${exo.reps}" onchange="update(${i},'reps',this.value)" placeholder="Rép">
+
+<button onclick="removeExo(${i})">❌ Supprimer</button>
+</div>
+`;
+
+exoList.appendChild(div);
+});
 }
+
+/* 🔽 OUVRIR / FERMER */
+function toggle(i){
+let p=document.getElementById("panel"+i);
+p.style.display = p.style.display==="block" ? "none" : "block";
 }
 
-/* PDF */
-function printPDF(){
-document.getElementById("printZone").style.display="flex";
-window.print();
-
-setTimeout(()=>{
-document.getElementById("printZone").style.display="none";
-},500);
+/* 🔄 UPDATE */
+function update(i,key,val){
+exercices[i][key]=+val;
 }
 
-/* SAVE */
+function updateNom(i,val){
+exercices[i].nom=val;
+render();
+}
+
+/* ❌ SUPPRIMER */
+function removeExo(i){
+exercices.splice(i,1);
+render();
+}
+
+/* 💾 SAVE */
 function save(){
-
-let user = localStorage.getItem("currentUser");
-
-if(!user){
-let p = prompt("Prénom");
-let n = prompt("Nom");
-if(!p || !n) return;
-
-user = p+"_"+n;
-localStorage.setItem("currentUser", user);
-}
-
-let prog={
+localStorage.setItem("programme_temp",JSON.stringify({
 exercices,
-tempsEx:+tempsEx.value,
-tempsRepos:+tempsRepos.value,
-reps:+reps.value,
 series:+series.value
-};
-
-localStorage.setItem("programme_"+user,JSON.stringify(prog));
-
-alert("Programme enregistré !");
+}));
+alert("Enregistré");
 }
 
-/* START */
+/* ▶ START */
 function start(){
-
-let prog={
-exercices,
-tempsEx:+tempsEx.value,
-tempsRepos:+tempsRepos.value,
-reps:+reps.value,
-series:+series.value
-};
-
-localStorage.setItem("programme_temp",JSON.stringify(prog));
-
+save();
 window.location="timer.html";
 }
 
-function home(){
-window.location="index.html";
-}
-
 /* INIT */
-charger();
+addExo();
+addExo();
+addExo();
 
 </script>
 
