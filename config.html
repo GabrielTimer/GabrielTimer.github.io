@@ -3,95 +3,95 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zones</title>
+<title>Configuration</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;margin:0;text-align:center;}
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+text-align:center;
+}
 
+/* CARD */
 .card{
 background:white;
 padding:20px;
 border-radius:15px;
-max-width:420px;
+max-width:400px;
+width:90%;
 margin:auto;
 margin-top:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* ZONES */
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.zone{
-background:#eee;
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-}
-
-.zone img{
-width:100%;
-height:90px;
-object-fit:cover;
-border-radius:8px;
-}
-
-/* CONFIG */
-#configZone{display:none;}
-
-#cover{
+/* IMAGE */
+img{
 width:100%;
 border-radius:10px;
-margin:10px 0;
+margin-bottom:10px;
 }
 
-/* EXOS */
-.exo{
-background:#eee;
-margin:8px 0;
-padding:12px;
-border-radius:10px;
-cursor:pointer;
-text-align:left;
-}
-
-.panel{
-display:none;
-padding:10px;
-background:#fafafa;
-border-radius:10px;
-}
-
+/* INPUT */
 input{
 width:100%;
-padding:10px;
-margin:5px 0;
-border-radius:8px;
-border:1px solid #ccc;
-}
-
-.smallInput{
-width:120px;
-margin:auto;
-display:block;
-}
-
-button{
 padding:12px;
-margin:5px;
+margin:6px 0;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+box-sizing:border-box;
+}
+
+label{
+display:block;
+margin-top:10px;
+font-weight:bold;
+}
+
+/* BOUTONS */
+button{
+padding:14px;
+margin:6px 0;
 border:none;
 border-radius:10px;
 width:100%;
+font-size:16px;
 cursor:pointer;
+transition:0.2s;
 }
 
-.add{background:#4caf50;color:white;}
+button:hover{
+transform:scale(1.03);
+}
+
+.save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
-.print{background:#ff9800;color:white;}
+.home{background:#777;color:white;}
 .pdf{background:#9c27b0;color:white;}
-.back{background:#777;color:white;}
+
+@media(max-width:500px){
+.card{
+width:95%;
+padding:15px;
+}
+}
+
+/* PRINT */
+@media print{
+body *{visibility:hidden;}
+#printZone, #printZone *{visibility:visible;}
+#printZone{
+position:absolute;
+top:0;left:0;width:100%;height:100%;
+display:flex;justify-content:center;align-items:center;
+}
+#printZone img{
+max-width:100%;
+max-height:100%;
+object-fit:contain;
+}
+}
 </style>
 </head>
 
@@ -99,155 +99,152 @@ cursor:pointer;
 
 <div class="card">
 
-<h2 id="title">ZONES</h2>
+<h2>Configurer la séance</h2>
 
-<div id="grid" class="grid">
+<img id="pathoImage" style="display:none;">
 
-<div class="zone" onclick="select('tendinite_coiffe','Membre supérieur')">
-<img src="images/tendinite_coiffe/cover.jpg">
-<p>Membre supérieur</p>
+<div id="imageButtons" style="display:none;">
+<button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
+<button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
 </div>
 
-<div class="zone" onclick="select('lombalgie','Dos')">
-<img src="images/lombalgie/cover.jpg">
-<p>Dos</p>
+<div id="printZone" style="display:none;">
+<img id="printImage">
 </div>
 
-<div class="zone" onclick="select('syndrome_rotulien','Membre inférieur')">
-<img src="images/syndrome_rotulien/cover.jpg">
-<p>Membre inférieur</p>
-</div>
+<label>Nombre d'exercices</label>
+<input type="number" id="nbEx" value="5" onchange="generer()">
 
-<div class="zone" onclick="select('cervicales','Cervicales')">
-<img src="images/cervicales/cover.jpg">
-<p>Cervicales</p>
-</div>
+<div id="exo"></div>
 
-<div class="zone" onclick="select('autres','Autres')">
-<img src="images/autres/cover.jpg">
-<p>Autres</p>
-</div>
+<label>Temps exercice (sec)</label>
+<input id="tempsEx" type="number" value="20">
 
-</div>
+<label>Temps repos (sec)</label>
+<input id="tempsRepos" type="number" value="15">
 
-<div id="configZone">
+<label>Répétitions</label>
+<input id="reps" type="number" value="3">
 
-<img id="cover">
+<label>Séries</label>
+<input id="series" type="number" value="2">
 
-<button class="pdf" onclick="window.print()">📄 PDF</button>
-<button class="print" onclick="window.print()">🖨 Imprimer</button>
-
-<h2>Exercices</h2>
-<div id="exoList"></div>
-
-<button class="add" onclick="addExo()">➕ Ajouter exercice</button>
-
-<h3>Séries</h3>
-<input id="series" type="number" class="smallInput" value="2">
-
+<button class="save" onclick="save()">💾 Enregistrer</button>
 <button class="start" onclick="start()">▶ Démarrer</button>
-<button class="back" onclick="back()">⬅ Retour</button>
-
-</div>
+<button class="home" onclick="home()">🏠 Accueil</button>
 
 </div>
 
 <script>
 
-let patho=null;
 let exercices=[];
 
-function select(id,nom){
-
-patho=id;
-localStorage.setItem("pathologie",id);
-
-grid.style.display="none";
-configZone.style.display="block";
-
-title.innerText=nom;
-cover.src="images/"+id+"/cover.jpg";
-
+/* 🔹 générer exercices */
+function generer(){
+exo.innerHTML="";
 exercices=[];
-addExo();addExo();addExo();
+
+for(let i=0;i<nbEx.value;i++){
+let input=document.createElement("input");
+input.value="Exercice "+(i+1);
+input.oninput=()=>exercices[i]=input.value;
+exo.appendChild(input);
+exercices.push(input.value);
+}
 }
 
-/* EXOS */
+/* 🔹 charger */
+function charger(){
 
-function addExo(){
-exercices.push({
-nom:"Exercice "+(exercices.length+1),
-tempsEx:20,
-tempsRepos:15,
-reps:3
-});
-render();
+let patho = localStorage.getItem("pathologie");
+
+let img = document.getElementById("pathoImage");
+let printImg = document.getElementById("printImage");
+let btns = document.getElementById("imageButtons");
+
+/* MODE LIBRE */
+if(!patho){
+generer();
+return;
 }
 
-function render(){
-exoList.innerHTML="";
+/* EPAULE */
+if(patho==="epaule"){
 
-exercices.forEach((exo,i)=>{
-let div=document.createElement("div");
+let src="tendinitedelacoiffe.jpg";
 
-div.innerHTML=`
-<div class="exo" onclick="toggle(${i})">${exo.nom}</div>
+img.src=src;
+printImg.src=src;
 
-<div class="panel" id="p${i}">
-<input value="${exo.nom}" onchange="updateNom(${i},this.value)">
-<input type="number" value="${exo.tempsEx}" onchange="update(${i},'tempsEx',this.value)">
-<input type="number" value="${exo.tempsRepos}" onchange="update(${i},'tempsRepos',this.value)">
-<input type="number" value="${exo.reps}" onchange="update(${i},'reps',this.value)">
-<button onclick="removeExo(${i})">❌ Supprimer</button>
-</div>
-`;
+img.style.display="block";
+btns.style.display="block";
 
-exoList.appendChild(div);
-});
+/* 🔥 8 EXERCICES PAR DÉFAUT */
+nbEx.value = 8;
+generer();
+
+}
 }
 
-function toggle(i){
-let p=document.getElementById("p"+i);
-p.style.display = p.style.display==="block" ? "none":"block";
+/* PDF */
+function printPDF(){
+document.getElementById("printZone").style.display="flex";
+window.print();
+
+setTimeout(()=>{
+document.getElementById("printZone").style.display="none";
+},500);
 }
 
-function update(i,key,val){exercices[i][key]=+val;}
-function updateNom(i,val){exercices[i].nom=val;render();}
-function removeExo(i){exercices.splice(i,1);render();}
+/* SAVE */
+function save(){
 
-/* START */
+let user = localStorage.getItem("currentUser");
 
-function start(){
+if(!user){
+let p = prompt("Prénom");
+let n = prompt("Nom");
+if(!p || !n) return;
 
-let programme = {
+user = p+"_"+n;
+localStorage.setItem("currentUser", user);
+}
+
+let prog={
 exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
 series:+series.value
 };
 
-localStorage.setItem("programme_temp", JSON.stringify(programme));
+localStorage.setItem("programme_"+user,JSON.stringify(prog));
 
-let patient = localStorage.getItem("patient_actuel");
-
-if(patient){
-localStorage.setItem(patient, JSON.stringify({
-pathologie: patho,
-programme: programme
-}));
+alert("Programme enregistré !");
 }
+
+/* START */
+function start(){
+
+let prog={
+exercices,
+tempsEx:+tempsEx.value,
+tempsRepos:+tempsRepos.value,
+reps:+reps.value,
+series:+series.value
+};
+
+localStorage.setItem("programme_temp",JSON.stringify(prog));
 
 window.location="timer.html";
 }
 
-/* BACK */
-
-function back(){
-grid.style.display="grid";
-configZone.style.display="none";
-title.innerText="ZONES";
+function home(){
+window.location="index.html";
 }
 
 /* INIT */
-addExo();addExo();addExo();
+charger();
 
 </script>
 
