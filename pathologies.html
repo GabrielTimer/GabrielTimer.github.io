@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zones</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+margin:0;
+}
+
+.container{
+max-width:400px;
+margin:auto;
+padding:20px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+background:#0e8f9b;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Choisir une zone</h2>
+
+<button onclick="go('epaule')">💪 Épaule</button>
+<button onclick="go('dos')">🦴 Dos</button>
+<button onclick="go('genou')">🦵 Genou</button>
+
+<button onclick="back()">⬅ Retour</button>
+
+</div>
+
+<script>
+
+function go(p){
+localStorage.setItem("pathologie", p);
+window.location="config.html";
+}
+
+function back(){
+window.location="index.html";
+}
+
+</script>
+
+</body>
+</html>
