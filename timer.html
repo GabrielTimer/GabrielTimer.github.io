@@ -16,6 +16,7 @@ justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
+transition:background 0.4s;
 }
 
 .logo{
@@ -38,12 +39,8 @@ padding:10px;
 box-sizing:border-box;
 }
 
-.infoBox{
-text-align:center;
-height:60px;
-}
+.infoBox{text-align:center;height:60px;}
 
-/* IMAGE */
 #img{
 width:100%;
 max-height:130px;
@@ -54,6 +51,14 @@ object-fit:contain;
 font-size:26px;
 font-weight:bold;
 color:#ffeb3b;
+}
+
+/* 🔥 TEXTE REPOS */
+#restText{
+font-size:34px;
+font-weight:bold;
+display:none;
+color:#ffffff;
 }
 
 .timerZone{
@@ -145,12 +150,12 @@ text-align:center;
 <div id="serieInfo"></div>
 </div>
 
-<!-- IMAGE EXERCICE -->
 <img id="img">
 
 <div class="timerZone">
 
 <div id="prepText"></div>
+<div id="restText">REPOS</div>
 
 <div class="circleWrap">
 <svg width="160" height="160">
@@ -189,7 +194,6 @@ stroke-dashoffset="440"/>
 
 /* DATA */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-
 if(!p || !p.exercices){
 alert("Programme manquant");
 window.location="config.html";
@@ -199,12 +203,8 @@ window.location="config.html";
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 
-let t = 3;
-let totalTime = 3;
-
-let paused=false;
-let finished=false;
-let soundOn=true;
+let t=3, totalTime=3;
+let paused=false, finished=false, soundOn=true;
 
 /* VOIX */
 function speak(text){
@@ -223,6 +223,9 @@ let exo=p.exercices[exIndex];
 timer.innerText = t;
 prepText.innerText = phase==="prep" ? "PRÉPAREZ-VOUS !" : "";
 
+/* 🔥 TEXTE REPOS */
+restText.style.display = phase==="repos" ? "block" : "none";
+
 exoInfo.innerText = exo.nom;
 repInfo.innerText = "Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
@@ -231,31 +234,37 @@ serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
 let percent = t / totalTime;
 progressCircle.style.strokeDashoffset = 440*(1-percent);
 
-/* IMAGE EPAULE UNIQUEMENT */
-let patho = localStorage.getItem("pathologie");
-
-if(patho === "epaule" && phase === "ex"){
-img.src = "tendinitedelacoiffe" + (exIndex+1) + ".jpg";
+/* 🔥 COULEUR FOND */
+if(phase==="ex"){
+document.body.style.background="#c62828"; // rouge
+}else if(phase==="repos"){
+document.body.style.background="#1565c0"; // bleu
 }else{
-img.src = "";
+document.body.style.background="#1b5e20"; // vert
+}
+
+/* IMAGE EPAULE */
+let patho = localStorage.getItem("pathologie");
+if(patho==="epaule" && phase==="ex"){
+img.src="tendinitedelacoiffe"+(exIndex+1)+".jpg";
+}else{
+img.src="";
 }
 }
 
 /* NEXT */
 function next(){
 
-let exo = p.exercices[exIndex];
+let exo=p.exercices[exIndex];
 
-/* PREP → EX */
 if(phase==="prep"){
 phase="ex";
-t = exo.tempsEx;
-totalTime = t;
+t=exo.tempsEx;
+totalTime=t;
 speak("C'est parti");
 return;
 }
 
-/* EX → REPOS */
 if(phase==="ex"){
 
 let last =
@@ -269,19 +278,17 @@ return;
 }
 
 phase="repos";
-t = exo.tempsRepos;
-totalTime = t;
+t=exo.tempsRepos;
+totalTime=t;
 speak("Repos");
 return;
 }
 
-/* REPOS → NEXT */
 repIndex++;
 
 if(repIndex>exo.reps){
 repIndex=1;
 exIndex++;
-
 if(exIndex>=p.exercices.length){
 exIndex=0;
 serieIndex++;
@@ -289,8 +296,8 @@ serieIndex++;
 }
 
 phase="ex";
-t = p.exercices[exIndex].tempsEx;
-totalTime = t;
+t=p.exercices[exIndex].tempsEx;
+totalTime=t;
 speak("C'est parti");
 }
 
@@ -316,15 +323,13 @@ soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
 function nextExercise(){
 repIndex=1;
 exIndex++;
-
 if(exIndex>=p.exercices.length){
 exIndex=0;
 serieIndex++;
 }
-
 phase="ex";
-t = p.exercices[exIndex].tempsEx;
-totalTime = t;
+t=p.exercices[exIndex].tempsEx;
+totalTime=t;
 update();
 }
 
@@ -334,17 +339,15 @@ window.location="config.html";
 
 /* LOOP */
 setInterval(()=>{
-
 if(paused || finished) return;
 
 t--;
 
-/* voix 3 2 1 */
 if(phase==="prep" && t>0 && t<=3){
 speak(String(t));
 }
 
-if(t < 0){
+if(t<0){
 next();
 }else{
 update();
