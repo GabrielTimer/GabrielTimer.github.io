@@ -17,14 +17,14 @@ margin:auto;
 margin-top:20px;
 }
 
+/* 🔥 PATHO BUTTONS */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-margin-bottom:15px;
 }
 
-.pathoCard{
+.pathoBtn{
 background:#eee;
 padding:10px;
 border-radius:10px;
@@ -32,20 +32,28 @@ cursor:pointer;
 transition:0.2s;
 }
 
-.pathoCard:hover{transform:scale(1.05);}
+.pathoBtn:hover{transform:scale(1.05);}
 
-.pathoCard img{
+.pathoBtn img{
 width:100%;
-height:80px;
+height:90px;
 object-fit:cover;
 border-radius:8px;
 }
 
-.selected{
-border:3px solid #0e8f9b;
+/* 🔥 ZONE CONFIG (CACHÉE AU DEPART) */
+#configZone{
+display:none;
+margin-top:20px;
 }
 
-/* EXERCICES */
+#cover{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+/* EXOS */
 .exo{
 background:#eee;
 margin:8px 0;
@@ -60,7 +68,6 @@ display:none;
 padding:10px;
 background:#fafafa;
 border-radius:10px;
-margin-top:5px;
 }
 
 input{
@@ -69,14 +76,12 @@ padding:10px;
 margin:5px 0;
 border-radius:8px;
 border:1px solid #ccc;
-box-sizing:border-box;
 }
 
 .smallInput{
 width:120px;
 margin:auto;
 display:block;
-text-align:center;
 }
 
 button{
@@ -90,6 +95,9 @@ cursor:pointer;
 
 .add{background:#4caf50;color:white;}
 .start{background:#0e8f9b;color:white;}
+.print{background:#ff9800;color:white;}
+.pdf{background:#9c27b0;color:white;}
+.back{background:#777;color:white;}
 </style>
 </head>
 
@@ -98,7 +106,16 @@ cursor:pointer;
 <div class="card">
 
 <h2>Choisir une pathologie</h2>
+
 <div id="grid" class="grid"></div>
+
+<!-- 🔥 CONFIG -->
+<div id="configZone">
+
+<img id="cover">
+
+<button class="pdf" onclick="window.print()">📄 Télécharger PDF</button>
+<button class="print" onclick="window.print()">🖨 Imprimer</button>
 
 <h2>Exercices</h2>
 <div id="exoList"></div>
@@ -109,40 +126,63 @@ cursor:pointer;
 <input id="series" type="number" class="smallInput" value="2">
 
 <button class="start" onclick="start()">▶ Démarrer</button>
+<button class="back" onclick="back()">⬅ Retour</button>
+
+</div>
 
 </div>
 
 <script>
 
-let selectedPatho = null;
-let exercices = [];
+let selectedPatho=null;
+let exercices=[];
 
-/* MENU AUTO PATHO */
+/* 🔥 MENU PATHO */
 fetch("pathos.json")
 .then(r=>r.json())
 .then(data=>{
-let grid = document.getElementById("grid");
+
+let grid=document.getElementById("grid");
 
 data.forEach(p=>{
-let div = document.createElement("div");
-div.className = "pathoCard";
 
-div.innerHTML = `
+let div=document.createElement("div");
+div.className="pathoBtn";
+
+div.innerHTML=`
 <img src="images/${p.id}/cover.jpg">
 <div>${p.nom}</div>
 `;
 
-div.onclick = ()=>{
-selectedPatho = p.id;
-document.querySelectorAll(".pathoCard").forEach(c=>c.classList.remove("selected"));
-div.classList.add("selected");
-};
+div.onclick=()=>selectPatho(p.id);
 
 grid.appendChild(div);
-});
+
 });
 
-/* EXERCICES */
+});
+
+/* 🔥 SELECT PATHO */
+
+function selectPatho(id){
+
+selectedPatho=id;
+
+/* cacher menu */
+document.getElementById("grid").style.display="none";
+
+/* afficher config */
+document.getElementById("configZone").style.display="block";
+
+/* image */
+document.getElementById("cover").src="images/"+id+"/cover.jpg";
+
+/* reset exos */
+exercices=[];
+addExo();addExo();addExo();
+}
+
+/* EXOS */
 
 function addExo(){
 exercices.push({
@@ -155,6 +195,7 @@ render();
 }
 
 function render(){
+
 exoList.innerHTML="";
 
 exercices.forEach((exo,i)=>{
@@ -162,9 +203,9 @@ exercices.forEach((exo,i)=>{
 let div=document.createElement("div");
 
 div.innerHTML=`
-<div class="exo" onclick="toggle(${i})">${exo.nom} ▶</div>
+<div class="exo" onclick="toggle(${i})">${exo.nom}</div>
 
-<div class="panel" id="panel${i}">
+<div class="panel" id="p${i}">
 <input value="${exo.nom}" onchange="updateNom(${i},this.value)">
 <input type="number" value="${exo.tempsEx}" onchange="update(${i},'tempsEx',this.value)">
 <input type="number" value="${exo.tempsRepos}" onchange="update(${i},'tempsRepos',this.value)">
@@ -174,12 +215,14 @@ div.innerHTML=`
 `;
 
 exoList.appendChild(div);
+
 });
+
 }
 
 function toggle(i){
-let p=document.getElementById("panel"+i);
-p.style.display = p.style.display==="block" ? "none" : "block";
+let p=document.getElementById("p"+i);
+p.style.display = p.style.display==="block" ? "none":"block";
 }
 
 function update(i,key,val){exercices[i][key]=+val;}
@@ -195,14 +238,9 @@ alert("Choisir une pathologie");
 return;
 }
 
-if(exercices.length===0){
-alert("Ajouter au moins un exercice");
-return;
-}
+localStorage.setItem("pathologie",selectedPatho);
 
-localStorage.setItem("pathologie", selectedPatho);
-
-localStorage.setItem("programme_temp", JSON.stringify({
+localStorage.setItem("programme_temp",JSON.stringify({
 exercices,
 series:+series.value
 }));
@@ -210,10 +248,12 @@ series:+series.value
 window.location="timer.html";
 }
 
-/* INIT */
-addExo();
-addExo();
-addExo();
+/* RETOUR */
+
+function back(){
+document.getElementById("grid").style.display="grid";
+document.getElementById("configZone").style.display="none";
+}
 
 </script>
 
