@@ -31,9 +31,7 @@ cursor:pointer;
 text-align:left;
 }
 
-.exo:hover{
-background:#ddd;
-}
+.exo:hover{background:#ddd;}
 
 .panel{
 display:none;
@@ -49,6 +47,15 @@ padding:10px;
 margin:5px 0;
 border-radius:8px;
 border:1px solid #ccc;
+box-sizing:border-box;
+}
+
+/* 🔥 FIX largeur séries */
+.smallInput{
+width:120px;
+margin:auto;
+display:block;
+text-align:center;
 }
 
 button{
@@ -63,6 +70,7 @@ cursor:pointer;
 .add{background:#4caf50;color:white;}
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
+.home{background:#777;color:white;}
 </style>
 </head>
 
@@ -77,10 +85,11 @@ cursor:pointer;
 <button class="add" onclick="addExo()">➕ Ajouter exercice</button>
 
 <h3>Séries</h3>
-<input type="number" id="series" value="2">
+<input type="number" id="series" class="smallInput" value="2">
 
 <button class="save" onclick="save()">💾 Enregistrer</button>
 <button class="start" onclick="start()">▶ Démarrer</button>
+<button class="home" onclick="home()">🏠 Accueil</button>
 
 </div>
 
@@ -88,22 +97,17 @@ cursor:pointer;
 
 let exercices=[];
 
-/* 🔥 AJOUT */
 function addExo(){
-
 exercices.push({
 nom:"Exercice "+(exercices.length+1),
 tempsEx:20,
 tempsRepos:15,
 reps:3
 });
-
 render();
 }
 
-/* 🔥 AFFICHAGE */
 function render(){
-
 exoList.innerHTML="";
 
 exercices.forEach((exo,i)=>{
@@ -117,13 +121,9 @@ ${exo.nom} ▶
 
 <div class="panel" id="panel${i}">
 <input value="${exo.nom}" onchange="updateNom(${i},this.value)">
-
 <input type="number" value="${exo.tempsEx}" onchange="update(${i},'tempsEx',this.value)" placeholder="Temps ex">
-
 <input type="number" value="${exo.tempsRepos}" onchange="update(${i},'tempsRepos',this.value)" placeholder="Repos">
-
 <input type="number" value="${exo.reps}" onchange="update(${i},'reps',this.value)" placeholder="Rép">
-
 <button onclick="removeExo(${i})">❌ Supprimer</button>
 </div>
 `;
@@ -132,13 +132,11 @@ exoList.appendChild(div);
 });
 }
 
-/* 🔽 OUVRIR / FERMER */
 function toggle(i){
 let p=document.getElementById("panel"+i);
 p.style.display = p.style.display==="block" ? "none" : "block";
 }
 
-/* 🔄 UPDATE */
 function update(i,key,val){
 exercices[i][key]=+val;
 }
@@ -148,13 +146,11 @@ exercices[i].nom=val;
 render();
 }
 
-/* ❌ SUPPRIMER */
 function removeExo(i){
 exercices.splice(i,1);
 render();
 }
 
-/* 💾 SAVE */
 function save(){
 localStorage.setItem("programme_temp",JSON.stringify({
 exercices,
@@ -163,10 +159,13 @@ series:+series.value
 alert("Enregistré");
 }
 
-/* ▶ START */
 function start(){
 save();
 window.location="timer.html";
+}
+
+function home(){
+window.location="index.html";
 }
 
 /* INIT */
