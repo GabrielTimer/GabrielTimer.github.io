@@ -17,37 +17,13 @@ margin:auto;
 margin-top:20px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
-
-.pathoBtn{
-background:#eee;
-padding:10px;
-border-radius:10px;
-cursor:pointer;
-transition:0.2s;
-}
-
-.pathoBtn:hover{transform:scale(1.05);}
-
-.pathoBtn img{
-width:100%;
-height:90px;
-object-fit:cover;
-border-radius:8px;
-}
-
-#configZone{display:none;margin-top:20px;}
-
 #cover{
 width:100%;
 border-radius:10px;
 margin-bottom:10px;
 }
 
+/* EXOS */
 .exo{
 background:#eee;
 margin:8px 0;
@@ -99,11 +75,7 @@ cursor:pointer;
 
 <div class="card">
 
-<h2>ZONES</h2>
-
-<div id="grid" class="grid"></div>
-
-<div id="configZone">
+<h2 id="title">Configuration</h2>
 
 <img id="cover">
 
@@ -123,57 +95,17 @@ cursor:pointer;
 
 </div>
 
-</div>
-
 <script>
 
-let selectedPatho=null;
+let patho = localStorage.getItem("pathologie");
 let exercices=[];
 
-/* 🔥 MAPPING NOM + DOSSIER */
-const zones = [
-{ id:"tendinite_coiffe", nom:"Membre supérieur" },
-{ id:"lombalgie", nom:"Dos" },
-{ id:"syndrome_rotulien", nom:"Membre inférieur" },
-{ id:"cervicales", nom:"Cervicales" },
-{ id:"autres", nom:"Autres" }
-];
-
-/* 🔥 GENERATION BOUTONS */
-let grid=document.getElementById("grid");
-
-zones.forEach(p=>{
-
-let div=document.createElement("div");
-div.className="pathoBtn";
-
-div.innerHTML=`
-<img src="images/${p.id}/cover.jpg" onerror="this.style.display='none'">
-<div>${p.nom}</div>
-`;
-
-div.onclick=()=>selectPatho(p.id);
-
-grid.appendChild(div);
-
-});
-
-/* SELECT */
-function selectPatho(id){
-
-selectedPatho=id;
-
-grid.style.display="none";
-configZone.style.display="block";
-
-cover.src="images/"+id+"/cover.jpg";
-
-/* reset exos */
-exercices=[];
-addExo();addExo();addExo();
-}
+/* 🔥 TITRE + IMAGE */
+document.getElementById("title").innerText = patho || "Configuration";
+document.getElementById("cover").src = "images/"+patho+"/cover.jpg";
 
 /* EXOS */
+
 function addExo(){
 exercices.push({
 nom:"Exercice "+(exercices.length+1),
@@ -220,9 +152,8 @@ function updateNom(i,val){exercices[i].nom=val;render();}
 function removeExo(i){exercices.splice(i,1);render();}
 
 /* START */
-function start(){
 
-localStorage.setItem("pathologie",selectedPatho);
+function start(){
 
 localStorage.setItem("programme_temp",JSON.stringify({
 exercices,
@@ -233,10 +164,13 @@ window.location="timer.html";
 }
 
 /* BACK */
+
 function back(){
-grid.style.display="grid";
-configZone.style.display="none";
+window.location="pathologies.html";
 }
+
+/* INIT */
+addExo();addExo();addExo();
 
 </script>
 
