@@ -15,69 +15,324 @@ display:flex;
 justify-content:center;
 align-items:center;
 height:100vh;
-text-align:center;
+overflow:hidden;
 }
 
+/* LOGO */
+.logo{
+position:fixed;
+top:10px;
+right:10px;
+width:45px;
+opacity:0.8;
+}
+
+/* LAYOUT */
 .container{
+width:100%;
+max-width:380px;
+height:100vh;
 display:flex;
 flex-direction:column;
-gap:20px;
+justify-content:space-between;
+align-items:center;
+padding:10px;
+box-sizing:border-box;
+}
+
+.infoBox{
+text-align:center;
+height:60px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+#img{
+width:100%;
+max-height:130px;
+object-fit:contain;
+}
+
+.timerZone{
+height:200px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.circleWrap{
+position:relative;
+width:160px;
+height:160px;
+}
+
+#timer{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+font-weight:bold;
+}
+
+.barContainer{
+width:100%;
+height:8px;
+background:rgba(255,255,255,0.2);
+border-radius:10px;
+}
+
+#bar{
+height:100%;
+width:0%;
+background:#00e5ff;
+border-radius:10px;
+}
+
+.buttons{
+width:100%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:10px;
 }
 
 button{
-padding:15px;
+height:45px;
 border:none;
 border-radius:10px;
+color:white;
+font-size:14px;
 cursor:pointer;
 }
 
-.start{background:#0e8f9b;color:white;}
+.pause{background:#ff9800;}
+.next{background:#4caf50;}
+.sound{background:#607d8b;}
+.back{background:#0e8f9b;}
+
+/* FIN */
+#endScreen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#1b5e20;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:22px;
+text-align:center;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<img src="logo.png" class="logo">
 
-<h2 id="status">Chargement...</h2>
+<div class="container" id="main">
 
-<button class="start" onclick="start()">▶ Lancer séance</button>
+<div class="infoBox">
+<div id="exoInfo"></div>
+<div id="repInfo"></div>
+<div id="serieInfo"></div>
+</div>
 
+<img id="img">
+
+<div class="timerZone">
+<div class="circleWrap">
+<svg width="160" height="160">
+<circle cx="80" cy="80" r="70" stroke="rgba(255,255,255,0.2)" stroke-width="10" fill="none"/>
+<circle id="progressCircle"
+cx="80" cy="80" r="70"
+stroke="#00e5ff"
+stroke-width="10"
+fill="none"
+transform="rotate(-90 80 80)"
+stroke-dasharray="440"
+stroke-dashoffset="440"/>
+</svg>
+<div id="timer">0</div>
+</div>
+</div>
+
+<div class="barContainer"><div id="bar"></div></div>
+
+<div class="buttons">
+<button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
+<button class="next" onclick="nextExercise()">⏭ Exercice</button>
+<button id="soundBtn" class="sound" onclick="toggleSound()">🔊 Son</button>
+<button class="back" onclick="back()">⚙️ Réglages</button>
+</div>
+
+</div>
+
+<div id="endScreen">
+<div>🎉 Bravo ! 🎉</div>
+<div>👏 Avec les félicitations du kiné 👍</div>
 </div>
 
 <script>
 
-/* 🔥 RECUPERATION DATA */
+let p = JSON.parse(localStorage.getItem("programme_temp"));
 
-let patient = localStorage.getItem("patient_actuel");
+let exIndex=0, repIndex=1, serieIndex=1;
+let phase="prep";
+let t=3, totalTime=3;
+let paused=false, finished=false;
+let soundOn=true;
 
-let data = null;
-
-if(patient && localStorage.getItem(patient)){
-data = JSON.parse(localStorage.getItem(patient)).programme;
-}else{
-data = JSON.parse(localStorage.getItem("programme_temp"));
+/* SON SIMPLE */
+function beep(freq){
+if(!soundOn) return;
+let ctx=new AudioContext();
+let o=ctx.createOscillator();
+o.type="sine";
+o.frequency.value=freq;
+o.connect(ctx.destination);
+o.start();
+setTimeout(()=>o.stop(),150);
 }
 
-/* SI RIEN → MESSAGE */
-if(!data){
-document.getElementById("status").innerText = "⚠️ Aucun programme trouvé";
-}else{
-document.getElementById("status").innerText = "Programme chargé ✔";
+/* CONFETTI */
+function confetti(){
+for(let i=0;i<50;i++){
+let d=document.createElement("div");
+d.style.position="fixed";
+d.style.width="6px";
+d.style.height="6px";
+d.style.background="hsl("+Math.random()*360+",100%,50%)";
+d.style.left=Math.random()*100+"vw";
+d.style.top="-10px";
+d.style.transition="3s";
+document.body.appendChild(d);
+setTimeout(()=>d.style.top="100vh",50);
+setTimeout(()=>d.remove(),3000);
+}
 }
 
-/* DEMARRAGE */
-function start(){
+/* UPDATE */
+function update(){
+if(finished) return;
 
-if(!data){
-alert("Aucun programme !");
-window.location="config.html";
+timer.innerText=t;
+
+progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
+
+let total=p.series*p.exercices.length*p.reps;
+let current=(serieIndex-1)*p.exercices.length*p.reps+(exIndex)*p.reps+(repIndex-1);
+bar.style.width=(current/total)*100+"%";
+
+exoInfo.innerText="Exercice "+(exIndex+1);
+repInfo.innerText="Rép "+repIndex+"/"+p.reps;
+serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+
+let patho=localStorage.getItem("pathologie");
+img.src=(patho==="epaule" && phase==="ex")
+? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
+: "";
+}
+
+/* LOGIQUE */
+function next(){
+
+if(phase==="prep"){
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
 return;
 }
 
-alert("Timer OK (prochaine étape = remettre ton vrai timer)");
+if(phase==="ex"){
 
+let last =
+exIndex===p.exercices.length-1 &&
+repIndex===p.reps &&
+serieIndex===p.series;
+
+if(last){
+endSession();
+return;
 }
+
+beep(500);
+phase="repos";
+t=p.tempsRepos;
+totalTime=p.tempsRepos;
+return;
+}
+
+beep(800);
+
+repIndex++;
+
+if(repIndex>p.reps){
+repIndex=1;
+exIndex++;
+
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
+
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+}
+
+/* FIN */
+function endSession(){
+finished=true;
+main.style.display="none";
+endScreen.style.display="flex";
+beep(700);
+setTimeout(()=>beep(900),150);
+confetti();
+}
+
+/* CONTROLES */
+function togglePause(){
+paused=!paused;
+pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";
+}
+
+function toggleSound(){
+soundOn=!soundOn;
+soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";
+}
+
+function nextExercise(){
+repIndex=1;
+exIndex++;
+phase="ex";
+t=p.tempsEx;
+totalTime=p.tempsEx;
+update();
+}
+
+function back(){
+window.location="config.html";
+}
+
+/* LOOP */
+function loop(){
+if(paused||finished) return;
+t--;
+update();
+if(t<=0) next();
+}
+
+/* INIT */
+update();
+setInterval(loop,1000);
 
 </script>
 
