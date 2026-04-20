@@ -21,6 +21,7 @@ margin-top:20px;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
+margin-bottom:15px;
 }
 
 .pathoCard{
@@ -44,18 +45,38 @@ border-radius:8px;
 border:3px solid #0e8f9b;
 }
 
+/* EXERCICES */
+.exo{
+background:#eee;
+margin:8px 0;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+text-align:left;
+}
+
+.panel{
+display:none;
+padding:10px;
+background:#fafafa;
+border-radius:10px;
+margin-top:5px;
+}
+
 input{
 width:100%;
 padding:10px;
 margin:5px 0;
 border-radius:8px;
 border:1px solid #ccc;
+box-sizing:border-box;
 }
 
 .smallInput{
 width:120px;
 margin:auto;
 display:block;
+text-align:center;
 }
 
 button{
@@ -64,8 +85,10 @@ margin:5px;
 border:none;
 border-radius:10px;
 width:100%;
+cursor:pointer;
 }
 
+.add{background:#4caf50;color:white;}
 .start{background:#0e8f9b;color:white;}
 </style>
 </head>
@@ -75,8 +98,12 @@ width:100%;
 <div class="card">
 
 <h2>Choisir une pathologie</h2>
-
 <div id="grid" class="grid"></div>
+
+<h2>Exercices</h2>
+<div id="exoList"></div>
+
+<button class="add" onclick="addExo()">➕ Ajouter exercice</button>
 
 <h3>Séries</h3>
 <input id="series" type="number" class="smallInput" value="2">
@@ -88,15 +115,15 @@ width:100%;
 <script>
 
 let selectedPatho = null;
+let exercices = [];
 
+/* MENU AUTO PATHO */
 fetch("pathos.json")
 .then(r=>r.json())
 .then(data=>{
-
 let grid = document.getElementById("grid");
 
 data.forEach(p=>{
-
 let div = document.createElement("div");
 div.className = "pathoCard";
 
@@ -112,10 +139,54 @@ div.classList.add("selected");
 };
 
 grid.appendChild(div);
-
+});
 });
 
+/* EXERCICES */
+
+function addExo(){
+exercices.push({
+nom:"Exercice "+(exercices.length+1),
+tempsEx:20,
+tempsRepos:15,
+reps:3
 });
+render();
+}
+
+function render(){
+exoList.innerHTML="";
+
+exercices.forEach((exo,i)=>{
+
+let div=document.createElement("div");
+
+div.innerHTML=`
+<div class="exo" onclick="toggle(${i})">${exo.nom} ▶</div>
+
+<div class="panel" id="panel${i}">
+<input value="${exo.nom}" onchange="updateNom(${i},this.value)">
+<input type="number" value="${exo.tempsEx}" onchange="update(${i},'tempsEx',this.value)">
+<input type="number" value="${exo.tempsRepos}" onchange="update(${i},'tempsRepos',this.value)">
+<input type="number" value="${exo.reps}" onchange="update(${i},'reps',this.value)">
+<button onclick="removeExo(${i})">❌ Supprimer</button>
+</div>
+`;
+
+exoList.appendChild(div);
+});
+}
+
+function toggle(i){
+let p=document.getElementById("panel"+i);
+p.style.display = p.style.display==="block" ? "none" : "block";
+}
+
+function update(i,key,val){exercices[i][key]=+val;}
+function updateNom(i,val){exercices[i].nom=val;render();}
+function removeExo(i){exercices.splice(i,1);render();}
+
+/* START */
 
 function start(){
 
@@ -124,14 +195,12 @@ alert("Choisir une pathologie");
 return;
 }
 
-localStorage.setItem("pathologie", selectedPatho);
+if(exercices.length===0){
+alert("Ajouter au moins un exercice");
+return;
+}
 
-let exercices = Array.from({length:8}, (_,i)=>({
-nom:"Exercice "+(i+1),
-tempsEx:20,
-tempsRepos:15,
-reps:3
-}));
+localStorage.setItem("pathologie", selectedPatho);
 
 localStorage.setItem("programme_temp", JSON.stringify({
 exercices,
@@ -140,6 +209,11 @@ series:+series.value
 
 window.location="timer.html";
 }
+
+/* INIT */
+addExo();
+addExo();
+addExo();
 
 </script>
 
