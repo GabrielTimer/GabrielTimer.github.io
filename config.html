@@ -17,7 +17,7 @@ margin:auto;
 margin-top:20px;
 }
 
-/* GRID ZONES */
+/* ZONES */
 .grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -101,7 +101,6 @@ cursor:pointer;
 
 <h2 id="title">ZONES</h2>
 
-<!-- 🔥 ZONES -->
 <div id="grid" class="grid">
 
 <div class="zone" onclick="select('tendinite_coiffe','Membre supérieur')">
@@ -131,7 +130,6 @@ cursor:pointer;
 
 </div>
 
-<!-- 🔥 CONFIG -->
 <div id="configZone">
 
 <img id="cover">
@@ -159,7 +157,6 @@ cursor:pointer;
 let patho=null;
 let exercices=[];
 
-/* SELECT ZONE */
 function select(id,nom){
 
 patho=id;
@@ -171,12 +168,12 @@ configZone.style.display="block";
 title.innerText=nom;
 cover.src="images/"+id+"/cover.jpg";
 
-/* reset */
 exercices=[];
 addExo();addExo();addExo();
 }
 
 /* EXOS */
+
 function addExo(){
 exercices.push({
 nom:"Exercice "+(exercices.length+1),
@@ -219,15 +216,30 @@ function updateNom(i,val){exercices[i].nom=val;render();}
 function removeExo(i){exercices.splice(i,1);render();}
 
 /* START */
+
 function start(){
-localStorage.setItem("programme_temp",JSON.stringify({
+
+let programme = {
 exercices,
 series:+series.value
+};
+
+localStorage.setItem("programme_temp", JSON.stringify(programme));
+
+let patient = localStorage.getItem("patient_actuel");
+
+if(patient){
+localStorage.setItem(patient, JSON.stringify({
+pathologie: patho,
+programme: programme
 }));
+}
+
 window.location="timer.html";
 }
 
 /* BACK */
+
 function back(){
 grid.style.display="grid";
 configZone.style.display="none";
