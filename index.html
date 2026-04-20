@@ -19,7 +19,6 @@ height:100vh;
 text-align:center;
 }
 
-/* LOGO */
 .logo{
 position:absolute;
 top:10px;
@@ -28,29 +27,39 @@ width:50px;
 opacity:0.8;
 }
 
-/* TITRE */
-h1{
-margin-bottom:30px;
-}
+h1{margin-bottom:20px;}
 
-/* BOUTONS */
 .container{
 display:flex;
 flex-direction:column;
-gap:15px;
-width:250px;
+gap:10px;
+width:260px;
 }
 
+/* INPUT */
+input{
+padding:12px;
+border-radius:10px;
+border:none;
+font-size:16px;
+text-align:center;
+}
+
+/* BOUTONS */
 button{
 padding:15px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 font-size:18px;
 cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
 }
 
-/* COULEURS */
 .zones{background:#0e8f9b;color:white;}
+.libre{background:#ff9800;color:white;}
 .autre{background:#607d8b;color:white;}
 </style>
 </head>
@@ -63,16 +72,55 @@ cursor:pointer;
 
 <div class="container">
 
-<button class="zones" onclick="window.location='config.html'">
-ZONES
+<input id="nom" placeholder="Nom">
+<input id="prenom" placeholder="Prénom">
+
+<button class="zones" onclick="goZones()">
+📍 ZONES
 </button>
 
-<!-- tu peux rajouter d'autres boutons ici -->
-<button class="autre" onclick="alert('Fonction à venir')">
-Autre fonctionnalité
+<button class="libre" onclick="goLibre()">
+⏱ Mode libre
 </button>
 
 </div>
+
+<script>
+
+/* SAUVEGARDE */
+function savePatient(){
+let nom = document.getElementById("nom").value.trim();
+let prenom = document.getElementById("prenom").value.trim();
+
+if(nom && prenom){
+let key = "patient_" + nom + "_" + prenom;
+localStorage.setItem("patient_actuel", key);
+}
+}
+
+/* NAVIGATION */
+function goZones(){
+savePatient();
+window.location="config.html";
+}
+
+function goLibre(){
+savePatient();
+window.location="timer.html";
+}
+
+/* AUTO REMPLISSAGE */
+let current = localStorage.getItem("patient_actuel");
+
+if(current){
+let parts = current.replace("patient_","").split("_");
+if(parts.length===2){
+document.getElementById("nom").value = parts[0];
+document.getElementById("prenom").value = parts[1];
+}
+}
+
+</script>
 
 </body>
 </html>
