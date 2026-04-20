@@ -38,7 +38,10 @@ padding:10px;
 box-sizing:border-box;
 }
 
-.infoBox{text-align:center;height:60px;}
+.infoBox{
+text-align:center;
+height:60px;
+}
 
 #prepText{
 font-size:26px;
@@ -175,6 +178,7 @@ stroke-dashoffset="440"/>
 
 /* DATA */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
+
 if(!p || !p.exercices){
 alert("Programme manquant");
 window.location="config.html";
@@ -183,10 +187,13 @@ window.location="config.html";
 /* STATE */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
-let t=3, totalTime=3;
-let paused=false, finished=false;
+
+let t = 3;
+let totalTime = 3;
+
+let paused=false;
+let finished=false;
 let soundOn=true;
-let interval;
 
 /* VOIX */
 function speak(text){
@@ -197,53 +204,39 @@ speechSynthesis.cancel();
 speechSynthesis.speak(u);
 }
 
-/* CONFETTI */
-function confetti(){
-for(let i=0;i<50;i++){
-let d=document.createElement("div");
-d.style.position="fixed";
-d.style.width="6px";
-d.style.height="6px";
-d.style.background="hsl("+Math.random()*360+",100%,50%)";
-d.style.left=Math.random()*100+"vw";
-d.style.top="-10px";
-d.style.transition="3s";
-document.body.appendChild(d);
-setTimeout(()=>d.style.top="100vh",50);
-setTimeout(()=>d.remove(),3000);
-}
-}
-
 /* UPDATE */
 function update(){
 
-if(finished) return;
-
 let exo=p.exercices[exIndex];
 
-timer.innerText=t;
+timer.innerText = t;
+
 prepText.innerText = phase==="prep" ? "PRÉPAREZ-VOUS !" : "";
 
-progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
+exoInfo.innerText = exo.nom;
+repInfo.innerText = "Rép "+repIndex+"/"+exo.reps;
+serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
 
-exoInfo.innerText=exo.nom;
-repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
-serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+/* cercle */
+let percent = t / totalTime;
+progressCircle.style.strokeDashoffset = 440*(1-percent);
 }
 
-/* LOGIQUE */
+/* NEXT */
 function next(){
 
-let exo=p.exercices[exIndex];
+let exo = p.exercices[exIndex];
 
+/* PREP → EX */
 if(phase==="prep"){
-speak("C'est parti");
 phase="ex";
-t=exo.tempsEx;
-totalTime=t;
+t = exo.tempsEx;
+totalTime = t;
+speak("C'est parti");
 return;
 }
 
+/* EX → REPOS */
 if(phase==="ex"){
 
 let last =
@@ -256,13 +249,14 @@ endSession();
 return;
 }
 
-speak("Repos");
 phase="repos";
-t=exo.tempsRepos;
-totalTime=t;
+t = exo.tempsRepos;
+totalTime = t;
+speak("Repos");
 return;
 }
 
+/* REPOS → NEXT */
 repIndex++;
 
 if(repIndex>exo.reps){
@@ -275,10 +269,10 @@ serieIndex++;
 }
 }
 
-speak("C'est parti");
 phase="ex";
-t=p.exercices[exIndex].tempsEx;
-totalTime=t;
+t = p.exercices[exIndex].tempsEx;
+totalTime = t;
+speak("C'est parti");
 }
 
 /* FIN */
@@ -287,7 +281,6 @@ finished=true;
 main.style.display="none";
 endScreen.style.display="flex";
 speak("Bravo");
-confetti();
 }
 
 /* CONTROLES */
@@ -304,13 +297,15 @@ soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
 function nextExercise(){
 repIndex=1;
 exIndex++;
+
 if(exIndex>=p.exercices.length){
 exIndex=0;
 serieIndex++;
 }
+
 phase="ex";
-t=p.exercices[exIndex].tempsEx;
-totalTime=t;
+t = p.exercices[exIndex].tempsEx;
+totalTime = t;
 update();
 }
 
@@ -318,37 +313,30 @@ function back(){
 window.location="config.html";
 }
 
-/* 🔥 LOOP FIX */
-function startLoop(){
-
-clearInterval(interval);
-
-interval = setInterval(()=>{
+/* LOOP FIX */
+setInterval(()=>{
 
 if(paused || finished) return;
 
-/* décrémente */
-t--;
+/* descente */
+t = t - 1;
 
-/* VOIX 3-2-1 */
-if(phase==="prep" && t<=3 && t>0){
+/* voix 3 2 1 */
+if(phase==="prep" && t>0 && t<=3){
 speak(String(t));
 }
 
-update();
-
-if(t<=0){
+if(t < 0){
 next();
+}else{
+update();
 }
 
 },1000);
 
-}
-
 /* INIT */
 speak("Préparez-vous");
 update();
-startLoop();
 
 </script>
 
