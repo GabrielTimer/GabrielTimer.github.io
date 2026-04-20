@@ -26,7 +26,6 @@ width:45px;
 opacity:0.8;
 }
 
-/* LAYOUT */
 .container{
 width:100%;
 max-width:380px;
@@ -39,25 +38,12 @@ padding:10px;
 box-sizing:border-box;
 }
 
-.infoBox{
-text-align:center;
-height:60px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
+.infoBox{text-align:center;height:60px;}
 
 #prepText{
 font-size:26px;
 font-weight:bold;
 color:#ffeb3b;
-margin-bottom:6px;
-}
-
-#img{
-width:100%;
-max-height:130px;
-object-fit:contain;
 }
 
 .timerZone{
@@ -132,7 +118,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 font-size:22px;
-text-align:center;
 }
 </style>
 </head>
@@ -190,7 +175,10 @@ stroke-dashoffset="440"/>
 
 /* DATA */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-if(!p || !p.exercices){ alert("Programme manquant"); window.location="config.html"; }
+if(!p || !p.exercices){
+alert("Programme manquant");
+window.location="config.html";
+}
 
 /* STATE */
 let exIndex=0, repIndex=1, serieIndex=1;
@@ -198,18 +186,18 @@ let phase="prep";
 let t=3, totalTime=3;
 let paused=false, finished=false;
 let soundOn=true;
+let interval;
 
-/* 🎤 VOIX */
+/* VOIX */
 function speak(text){
 if(!soundOn) return;
-let u = new SpeechSynthesisUtterance(text);
-u.lang = "fr-FR";
-u.rate = 1;
+let u=new SpeechSynthesisUtterance(text);
+u.lang="fr-FR";
 speechSynthesis.cancel();
 speechSynthesis.speak(u);
 }
 
-/* 🎉 CONFETTI */
+/* CONFETTI */
 function confetti(){
 for(let i=0;i<50;i++){
 let d=document.createElement("div");
@@ -226,7 +214,7 @@ setTimeout(()=>d.remove(),3000);
 }
 }
 
-/* UPDATE UI */
+/* UPDATE */
 function update(){
 
 if(finished) return;
@@ -234,7 +222,6 @@ if(finished) return;
 let exo=p.exercices[exIndex];
 
 timer.innerText=t;
-
 prepText.innerText = phase==="prep" ? "PRÉPAREZ-VOUS !" : "";
 
 progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
@@ -242,12 +229,6 @@ progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
-
-/* image épaule */
-let patho=localStorage.getItem("pathologie");
-img.src=(patho==="epaule" && phase==="ex")
-? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
-: "";
 }
 
 /* LOGIQUE */
@@ -282,12 +263,12 @@ totalTime=t;
 return;
 }
 
-/* repos -> ex */
 repIndex++;
 
 if(repIndex>exo.reps){
 repIndex=1;
 exIndex++;
+
 if(exIndex>=p.exercices.length){
 exIndex=0;
 serieIndex++;
@@ -320,7 +301,6 @@ soundOn=!soundOn;
 soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
 }
 
-/* bouton exo suivant */
 function nextExercise(){
 repIndex=1;
 exIndex++;
@@ -338,27 +318,37 @@ function back(){
 window.location="config.html";
 }
 
-/* LOOP */
-function loop(){
+/* 🔥 LOOP FIX */
+function startLoop(){
+
+clearInterval(interval);
+
+interval = setInterval(()=>{
 
 if(paused || finished) return;
 
+/* décrémente */
 t--;
 
-/* VOIX 3 2 1 */
+/* VOIX 3-2-1 */
 if(phase==="prep" && t<=3 && t>0){
 speak(String(t));
 }
 
 update();
 
-if(t<=0) next();
+if(t<=0){
+next();
+}
+
+},1000);
+
 }
 
 /* INIT */
 speak("Préparez-vous");
 update();
-setInterval(loop,1000);
+startLoop();
 
 </script>
 
