@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Configuration</title>
+<title>Zones</title>
 
 <style>
 body{font-family:Arial;background:#f4f4f4;margin:0;text-align:center;}
@@ -17,10 +17,34 @@ margin:auto;
 margin-top:20px;
 }
 
+/* GRID ZONES */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.zone{
+background:#eee;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.zone img{
+width:100%;
+height:90px;
+object-fit:cover;
+border-radius:8px;
+}
+
+/* CONFIG */
+#configZone{display:none;}
+
 #cover{
 width:100%;
 border-radius:10px;
-margin-bottom:10px;
+margin:10px 0;
 }
 
 /* EXOS */
@@ -75,11 +99,44 @@ cursor:pointer;
 
 <div class="card">
 
-<h2 id="title">Configuration</h2>
+<h2 id="title">ZONES</h2>
+
+<!-- 🔥 ZONES -->
+<div id="grid" class="grid">
+
+<div class="zone" onclick="select('tendinite_coiffe','Membre supérieur')">
+<img src="images/tendinite_coiffe/cover.jpg">
+<p>Membre supérieur</p>
+</div>
+
+<div class="zone" onclick="select('lombalgie','Dos')">
+<img src="images/lombalgie/cover.jpg">
+<p>Dos</p>
+</div>
+
+<div class="zone" onclick="select('syndrome_rotulien','Membre inférieur')">
+<img src="images/syndrome_rotulien/cover.jpg">
+<p>Membre inférieur</p>
+</div>
+
+<div class="zone" onclick="select('cervicales','Cervicales')">
+<img src="images/cervicales/cover.jpg">
+<p>Cervicales</p>
+</div>
+
+<div class="zone" onclick="select('autres','Autres')">
+<img src="images/autres/cover.jpg">
+<p>Autres</p>
+</div>
+
+</div>
+
+<!-- 🔥 CONFIG -->
+<div id="configZone">
 
 <img id="cover">
 
-<button class="pdf" onclick="window.print()">📄 Télécharger PDF</button>
+<button class="pdf" onclick="window.print()">📄 PDF</button>
 <button class="print" onclick="window.print()">🖨 Imprimer</button>
 
 <h2>Exercices</h2>
@@ -95,17 +152,31 @@ cursor:pointer;
 
 </div>
 
+</div>
+
 <script>
 
-let patho = localStorage.getItem("pathologie");
+let patho=null;
 let exercices=[];
 
-/* 🔥 TITRE + IMAGE */
-document.getElementById("title").innerText = patho || "Configuration";
-document.getElementById("cover").src = "images/"+patho+"/cover.jpg";
+/* SELECT ZONE */
+function select(id,nom){
+
+patho=id;
+localStorage.setItem("pathologie",id);
+
+grid.style.display="none";
+configZone.style.display="block";
+
+title.innerText=nom;
+cover.src="images/"+id+"/cover.jpg";
+
+/* reset */
+exercices=[];
+addExo();addExo();addExo();
+}
 
 /* EXOS */
-
 function addExo(){
 exercices.push({
 nom:"Exercice "+(exercices.length+1),
@@ -117,11 +188,9 @@ render();
 }
 
 function render(){
-
 exoList.innerHTML="";
 
 exercices.forEach((exo,i)=>{
-
 let div=document.createElement("div");
 
 div.innerHTML=`
@@ -137,9 +206,7 @@ div.innerHTML=`
 `;
 
 exoList.appendChild(div);
-
 });
-
 }
 
 function toggle(i){
@@ -152,21 +219,19 @@ function updateNom(i,val){exercices[i].nom=val;render();}
 function removeExo(i){exercices.splice(i,1);render();}
 
 /* START */
-
 function start(){
-
 localStorage.setItem("programme_temp",JSON.stringify({
 exercices,
 series:+series.value
 }));
-
 window.location="timer.html";
 }
 
 /* BACK */
-
 function back(){
-window.location="pathologies.html";
+grid.style.display="grid";
+configZone.style.display="none";
+title.innerText="ZONES";
 }
 
 /* INIT */
