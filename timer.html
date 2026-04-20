@@ -183,13 +183,19 @@ stroke-dashoffset="440"/>
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 
+if(!p || !p.exercices){
+alert("Programme manquant !");
+window.location="config.html";
+}
+
+/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTime=3;
 let paused=false, finished=false;
 let soundOn=true;
 
-/* SON SIMPLE */
+/* SON */
 function beep(freq){
 if(!soundOn) return;
 let ctx=new AudioContext();
@@ -198,7 +204,7 @@ o.type="sine";
 o.frequency.value=freq;
 o.connect(ctx.destination);
 o.start();
-setTimeout(()=>o.stop(),150);
+setTimeout(()=>o.stop(),120);
 }
 
 /* CONFETTI */
@@ -220,22 +226,29 @@ setTimeout(()=>d.remove(),3000);
 
 /* UPDATE */
 function update(){
+
 if(finished) return;
 
-timer.innerText=t;
+timer.innerText = isNaN(t) ? 0 : t;
 
-progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
+/* cercle */
+progressCircle.style.strokeDashoffset = 440*(1-(t/totalTime));
 
-let total=p.series*p.exercices.length*p.reps;
-let current=(serieIndex-1)*p.exercices.length*p.reps+(exIndex)*p.reps+(repIndex-1);
-bar.style.width=(current/total)*100+"%";
+/* progression globale */
+let total = p.series * p.exercices.length;
+let current = (serieIndex-1)*p.exercices.length + exIndex;
+bar.style.width = (current/total)*100+"%";
 
-exoInfo.innerText="Exercice "+(exIndex+1);
-repInfo.innerText="Rép "+repIndex+"/"+p.reps;
-serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+/* infos */
+let exo = p.exercices[exIndex];
 
-let patho=localStorage.getItem("pathologie");
-img.src=(patho==="epaule" && phase==="ex")
+exoInfo.innerText = exo.nom || ("Exercice "+(exIndex+1));
+repInfo.innerText = "Rép "+repIndex+"/"+(exo.reps || 1);
+serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
+
+/* image uniquement patho épaule */
+let patho = localStorage.getItem("pathologie");
+img.src = (patho==="epaule" && phase==="ex")
 ? "tendinitedelacoiffe"+(exIndex+1)+".jpg"
 : "";
 }
@@ -243,18 +256,22 @@ img.src=(patho==="epaule" && phase==="ex")
 /* LOGIQUE */
 function next(){
 
+let exo = p.exercices[exIndex];
+
+/* PREP */
 if(phase==="prep"){
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t = exo.tempsEx || 10;
+totalTime = t;
 return;
 }
 
+/* EXERCICE */
 if(phase==="ex"){
 
 let last =
 exIndex===p.exercices.length-1 &&
-repIndex===p.reps &&
+repIndex===exo.reps &&
 serieIndex===p.series;
 
 if(last){
@@ -264,28 +281,29 @@ return;
 
 beep(500);
 phase="repos";
-t=p.tempsRepos;
-totalTime=p.tempsRepos;
+t = exo.tempsRepos || 5;
+totalTime = t;
 return;
 }
 
+/* REPOS */
 beep(800);
 
 repIndex++;
 
-if(repIndex>p.reps){
-repIndex=1;
+if(repIndex > (exo.reps || 1)){
+repIndex = 1;
 exIndex++;
 
-if(exIndex>=p.exercices.length){
-exIndex=0;
+if(exIndex >= p.exercices.length){
+exIndex = 0;
 serieIndex++;
 }
 }
 
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t = p.exercices[exIndex].tempsEx || 10;
+totalTime = t;
 }
 
 /* FIN */
@@ -301,20 +319,26 @@ confetti();
 /* CONTROLES */
 function togglePause(){
 paused=!paused;
-pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";
+pauseBtn.innerText = paused ? "▶ Reprendre" : "⏸ Pause";
 }
 
 function toggleSound(){
 soundOn=!soundOn;
-soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";
+soundBtn.innerText = soundOn ? "🔊 Son" : "🔇 Son";
 }
 
 function nextExercise(){
 repIndex=1;
 exIndex++;
+
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t = p.exercices[exIndex].tempsEx || 10;
+totalTime = t;
 update();
 }
 
@@ -324,7 +348,7 @@ window.location="config.html";
 
 /* LOOP */
 function loop(){
-if(paused||finished) return;
+if(paused || finished) return;
 t--;
 update();
 if(t<=0) next();
