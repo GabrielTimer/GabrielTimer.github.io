@@ -3,122 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pathologies</title>
+<title>Zones</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;text-align:center;}
-
-button{
-width:90%;
-padding:15px;
-margin:10px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-background:#0e8f9b;
-color:white;
+body{
+font-family:Arial;
+background:#f4f6f9;
+text-align:center;
+margin:0;
 }
 
-.add{background:#2ecc71;}
-.back{background:#777;}
+/* TITRE */
+h1{
+margin-top:20px;
+}
 
-.form{
-display:none;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+padding:20px;
+max-width:500px;
+margin:auto;
+}
+
+/* CARTE */
+.card{
 background:white;
-padding:15px;
-margin:10px;
+border-radius:15px;
+padding:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+/* IMAGE */
+.card img{
+width:100%;
+height:100px;
+object-fit:cover;
 border-radius:10px;
 }
 
-input{
+/* TEXTE */
+.card p{
+margin:8px 0 0;
+font-weight:bold;
+}
+
+/* BOUTON RETOUR */
+.back{
+background:#777;
+color:white;
+border:none;
+padding:15px;
+margin:20px;
+border-radius:10px;
 width:90%;
-padding:10px;
-margin:5px;
+max-width:400px;
+cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Pathologies</h2>
+<h1>ZONES</h1>
 
-<div id="list"></div>
+<div class="grid">
 
-<button class="add" onclick="showForm()">➕ Ajouter une pathologie</button>
-<button class="back" onclick="back()">⬅ Retour</button>
-
-<div class="form" id="form">
-<h3>Nouvelle pathologie</h3>
-
-<input id="nom" placeholder="Nom">
-<input id="tempsEx" placeholder="Temps exercice">
-<input id="tempsRepos" placeholder="Temps repos">
-<input id="reps" placeholder="Répétitions">
-<input id="series" placeholder="Séries">
-
-<button onclick="save()">💾 Enregistrer</button>
+<div class="card" onclick="go('tendinite_coiffe')">
+<img src="images/tendinite_coiffe/cover.jpg">
+<p>Membre supérieur</p>
 </div>
 
+<div class="card" onclick="go('lombalgie')">
+<img src="images/lombalgie/cover.jpg">
+<p>Dos</p>
+</div>
+
+<div class="card" onclick="go('syndrome_rotulien')">
+<img src="images/syndrome_rotulien/cover.jpg">
+<p>Membre inférieur</p>
+</div>
+
+<div class="card" onclick="go('cervicales')">
+<img src="images/cervicales/cover.jpg">
+<p>Cervicales</p>
+</div>
+
+<div class="card" onclick="go('autres')">
+<img src="images/autres/cover.jpg">
+<p>Autres</p>
+</div>
+
+</div>
+
+<button class="back" onclick="window.location='index.html'">⬅ Retour</button>
+
 <script>
-
-let basePathos = [
-{nom:"Coiffe des rotateurs", id:"epaule"},
-{nom:"Lombalgie", id:"dos"},
-{nom:"Syndrome rotulien", id:"genou"}
-];
-
-function load(){
-let list=document.getElementById("list");
-list.innerHTML="";
-
-basePathos.forEach(p=>createBtn(p.nom,p.id));
-
-let custom = JSON.parse(localStorage.getItem("customPathos")) || [];
-custom.forEach(p=>createBtn(p.nom,p.nom));
-}
-
-function createBtn(name,id){
-let btn=document.createElement("button");
-btn.innerText=name;
-
-btn.onclick=()=>{
-localStorage.setItem("pathologie", id);
+function go(patho){
+localStorage.setItem("pathologie", patho);
 window.location="config.html";
-};
-
-list.appendChild(btn);
 }
-
-function showForm(){
-document.getElementById("form").style.display="block";
-}
-
-function save(){
-
-let p={
-nom:nom.value,
-tempsEx:+tempsEx.value,
-tempsRepos:+tempsRepos.value,
-reps:+reps.value,
-series:+series.value,
-exercices:["Exercice 1","Exercice 2"]
-};
-
-let custom = JSON.parse(localStorage.getItem("customPathos")) || [];
-custom.push(p);
-
-localStorage.setItem("customPathos", JSON.stringify(custom));
-
-alert("Pathologie ajoutée !");
-location.reload();
-}
-
-function back(){
-window.location="index.html";
-}
-
-load();
 </script>
 
 </body>
