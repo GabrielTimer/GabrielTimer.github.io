@@ -18,9 +18,6 @@ margin-top:20px;
 
 /* CARD */
 .card{
-display:flex;
-align-items:center;
-justify-content:space-between;
 width:90%;
 max-width:420px;
 margin:15px auto;
@@ -37,26 +34,29 @@ transform:scale(1.03);
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* zone image + titre */
-.content{
-flex:1;
-}
-
+/* contenu */
 .content img{
 width:100%;
 border-radius:10px;
 }
 
-h3{
+/* ligne titre + bouton */
+.titleRow{
+display:flex;
+justify-content:space-between;
+align-items:center;
 margin-top:8px;
+}
+
+h3{
+margin:0;
 }
 
 /* bouton PDF */
 .pdfBtn{
-margin-left:10px;
 background:#00e5ff;
 border:none;
-padding:10px;
+padding:6px 10px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
@@ -67,7 +67,7 @@ white-space:nowrap;
 background:#00c4dd;
 }
 
-/* fallback image */
+/* fallback */
 .img-error{
 background:#ddd;
 height:180px;
@@ -128,7 +128,6 @@ div.className = "card";
 
 /* CONTENU */
 let content = document.createElement("div");
-content.className = "content";
 
 /* IMAGE */
 let img = document.createElement("img");
@@ -145,22 +144,30 @@ content.appendChild(err);
 
 content.appendChild(img);
 
-/* TITRE */
+/* LIGNE TITRE + BOUTON */
+let row = document.createElement("div");
+row.className = "titleRow";
+
+/* titre */
 let title = document.createElement("h3");
 title.innerText = p.nom;
-content.appendChild(title);
 
-/* BOUTON PDF */
+/* bouton */
 let btn = document.createElement("button");
 btn.className = "pdfBtn";
-btn.innerText = "📄 PDF";
+btn.innerText = "🖨️ Télécharger";
 
 btn.onclick = function(e){
 e.stopPropagation();
 window.open("images/"+p.dossier+"/fiche.pdf");
 };
 
-/* CLICK CARD = séance */
+row.appendChild(title);
+row.appendChild(btn);
+
+content.appendChild(row);
+
+/* CLICK CARD */
 div.onclick = ()=>{
 localStorage.setItem("pathologie", p.dossier);
 window.location = "config.html?v="+Date.now();
@@ -168,8 +175,6 @@ window.location = "config.html?v="+Date.now();
 
 /* STRUCTURE */
 div.appendChild(content);
-div.appendChild(btn);
-
 container.appendChild(div);
 
 });
