@@ -56,7 +56,7 @@ object-fit:contain;
 flex-shrink:0;
 }
 
-/* TIMER CENTRE */
+/* TIMER */
 .timerZone{
 flex:1;
 display:flex;
@@ -86,7 +86,7 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* BAS COMPACT */
+/* BAS */
 .bottomBlock{
 flex-shrink:0;
 margin-top:2px;
@@ -111,7 +111,7 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* BOUTONS TOUJOURS VISIBLES */
+/* BOUTONS */
 .buttons{
 flex-shrink:0;
 display:grid;
@@ -187,9 +187,11 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
+/* PROGRAMME */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
+/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
@@ -199,10 +201,12 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
+/* CERCLE */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
+/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -216,6 +220,7 @@ function formatTime(s){
 let m=Math.floor(s/60);
 return m+":"+(s%60<10?"0":"")+s%60;
 }
+
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
 /* SON */
@@ -238,30 +243,45 @@ speechSynthesis.speak(u);
 
 function toggleSound(){soundOn=!soundOn;}
 
+/* UPDATE */
 function update(){
 
-/* 🔥 COULEURS REMISES */
+/* COULEURS */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
+/* ANIMATION */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
+/* TEXTE */
 if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
 if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
 
+/* BARRE */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
+/* INFOS */
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+
+/* 🔥 IMAGE FIX */
+let patho = localStorage.getItem("pathologie");
+if(patho){
+img.src = "images/" + patho + "/ex" + (exIndex+1) + ".jpg";
+}else{
+img.src = "";
 }
 
+}
+
+/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -281,10 +301,12 @@ serieIndex++;
 }
 }
 
+/* CONTROLES */
 function togglePause(){paused=!paused;}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
+/* LOOP */
 function loop(){
 if(paused)return;
 t--;
