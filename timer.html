@@ -46,7 +46,6 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-/* 🔥 ZONE IMAGE / TEXTE */
 .imageZone{
 flex:1;
 display:flex;
@@ -56,14 +55,12 @@ overflow:hidden;
 position:relative;
 }
 
-/* IMAGE */
 #img{
 max-width:100%;
 max-height:100%;
 object-fit:contain;
 }
 
-/* 🔥 TEXTE REPOS */
 #restText{
 position:absolute;
 font-size:48px;
@@ -71,7 +68,6 @@ font-weight:bold;
 display:none;
 }
 
-/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -102,7 +98,6 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* bas */
 .bottomBlock{
 text-align:center;
 }
@@ -125,7 +120,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -174,17 +168,8 @@ button:active{transform:scale(0.95);}
 <div class="circleWrap">
 
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
-<circle id="progressCircle"
-cx="50" cy="50" r="45"
-stroke="#00e5ff"
-stroke-width="6"
-fill="none"
-transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
+<circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
 </svg>
 
 <div id="timer">
@@ -246,7 +231,6 @@ return m+":"+(s%60<10?"0":"")+s%60;
 
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
-/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -284,9 +268,6 @@ if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-timerValue.classList.add("tick");
-setTimeout(()=>timerValue.classList.remove("tick"),120);
-
 timerValue.innerText=t;
 
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
@@ -302,7 +283,6 @@ serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
 let patho = localStorage.getItem("pathologie");
 
-/* 🔥 SWITCH IMAGE / REPOS */
 if(phase==="repos"){
 img.style.display="none";
 restText.style.display="block";
@@ -311,7 +291,6 @@ img.style.display="block";
 restText.style.display="none";
 img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 }
-
 }
 
 /* LOGIQUE */
@@ -355,6 +334,30 @@ serieIndex++;
 update();
 }
 
+/* 🔥 FIX COMPLET DU BOUTON EXERCICE */
+function nextExercise(){
+
+exIndex++;
+repIndex = 1;
+
+if(exIndex >= p.exercices.length){
+exIndex = 0;
+serieIndex++;
+}
+
+let exo = p.exercices[exIndex];
+
+phase = "ex";
+t = exo.ex;
+totalTimePhase = exo.ex;
+
+/* cohérence progression */
+elapsedTime += 1;
+
+beep();
+update();
+}
+
 function loop(){
 if(paused)return;
 
@@ -368,7 +371,6 @@ update();
 }
 }
 
-function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
 update();
