@@ -134,6 +134,52 @@ align-items:center;
 font-size:22px;
 text-align:center;
 }
+
+/* 📱 MOBILE AUTO */
+@media (max-width:600px){
+
+.container{
+height:100dvh;
+padding:8px;
+}
+
+.infoBox{
+height:45px;
+font-size:13px;
+}
+
+.timerZone{
+height:150px;
+}
+
+.circleWrap{
+width:130px;
+height:130px;
+}
+
+svg{
+width:130px;
+height:130px;
+}
+
+#timer{
+font-size:32px;
+}
+
+#img{
+max-height:90px;
+}
+
+button{
+height:38px;
+font-size:13px;
+}
+
+#totalTime{
+font-size:14px;
+}
+
+}
 </style>
 </head>
 
@@ -203,7 +249,7 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* CALCUL TEMPS TOTAL */
+/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime += (exo.ex + exo.repos) * exo.reps;
@@ -214,17 +260,15 @@ totalSessionTime -= last.repos;
 }
 computeTotal();
 
-/* FORMAT */
 function formatTime(sec){
 let m = Math.floor(sec/60);
 let s = sec%60;
 return m+":"+(s<10?"0"+s:s);
 }
 
-/* 👉 AFFICHAGE DURÉE TOTALE (UNE FOIS) */
 totalTime.innerText = "Durée de ma séance : " + formatTime(totalSessionTime);
 
-/* VOIX */
+/* VOIX / BEEP */
 function speak(t){
 if(!soundOn) return;
 let u=new SpeechSynthesisUtterance(t);
@@ -232,7 +276,6 @@ u.lang="fr-FR";
 speechSynthesis.speak(u);
 }
 
-/* BEEP */
 function beep(){
 if(!soundOn) return;
 let ctx=new AudioContext();
@@ -245,12 +288,10 @@ setTimeout(()=>o.stop(),150);
 
 /* UPDATE */
 function update(){
-
 let exo = p.exercices[exIndex];
 
 progressCircle.style.strokeDashoffset=440*(1-(t/totalTimePhase));
 
-/* BARRE GLOBALE */
 let progress = elapsedTime / totalSessionTime;
 if(progress>1) progress=1;
 bar.style.width = (progress*100)+"%";
@@ -279,56 +320,22 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* IMAGE */
 let patho=localStorage.getItem("pathologie");
-if(patho && phase==="ex"){
-img.src="images/"+patho+"/ex"+(exIndex+1)+".jpg";
-}else{
-img.src="";
-}
+img.src=(patho && phase==="ex")?"images/"+patho+"/ex"+(exIndex+1)+".jpg":"";
 }
 
 /* LOGIQUE */
 function next(){
-
 let exo = p.exercices[exIndex];
 
-if(phase==="prep"){
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-return;
-}
+if(phase==="prep"){phase="ex";t=exo.ex;totalTimePhase=exo.ex;beep();return;}
+if(phase==="ex"){phase="repos";t=exo.repos;totalTimePhase=exo.repos;speak("repos");return;}
 
-if(phase==="ex"){
-phase="repos";
-t=exo.repos;
-totalTimePhase=exo.repos;
-speak("repos");
-return;
-}
-
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-
+phase="ex";t=exo.ex;totalTimePhase=exo.ex;beep();
 repIndex++;
 
-if(repIndex>exo.reps){
-repIndex=1;
-exIndex++;
-
-if(exIndex>=p.exercices.length){
-exIndex=0;
-serieIndex++;
-}
-}
-
-if(serieIndex>p.series){
-endSession();
-}
+if(repIndex>exo.reps){repIndex=1;exIndex++;if(exIndex>=p.exercices.length){exIndex=0;serieIndex++;}}
+if(serieIndex>p.series) endSession();
 }
 
 /* FIN */
@@ -340,46 +347,16 @@ speak("Bravo");
 }
 
 /* CONTROLES */
-function togglePause(){
-paused=!paused;
-pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";
-}
-
-function toggleSound(){
-soundOn=!soundOn;
-soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";
-}
-
-function nextExercise(){
-repIndex=1;
-exIndex++;
-if(exIndex>=p.exercices.length) exIndex=0;
-phase="ex";
-t=p.exercices[exIndex].ex;
-totalTimePhase=t;
-update();
-}
-
-function back(){
-window.location="config.html?v="+Date.now();
-}
+function togglePause(){paused=!paused;pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";}
+function toggleSound(){soundOn=!soundOn;soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";}
+function nextExercise(){repIndex=1;exIndex++;if(exIndex>=p.exercices.length) exIndex=0;phase="ex";t=p.exercices[exIndex].ex;totalTimePhase=t;update();}
+function back(){window.location="config.html?v="+Date.now();}
 
 /* LOOP */
-function loop(){
-if(paused||finished) return;
-
-t--;
-elapsedTime++;
-
-update();
-
-if(t<=0) next();
-}
-
+function loop(){if(paused||finished) return;t--;elapsedTime++;update();if(t<=0) next();}
 update();
 setInterval(loop,1000);
 
 </script>
-
 </body>
 </html>
