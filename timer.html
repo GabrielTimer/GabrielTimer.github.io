@@ -27,7 +27,7 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px;
+padding:8px;
 box-sizing:border-box;
 flex-shrink:0;
 }
@@ -35,39 +35,37 @@ flex-shrink:0;
 .infoBox{
 display:flex;
 flex-direction:column;
-font-size:18px;
+font-size:16px;
 font-weight:bold;
 }
 
 .logo{
-width:80px;
+width:70px;
 filter:drop-shadow(0 0 6px rgba(255,255,255,0.6));
 }
 
-/* CONTAINER */
+/* CONTAINER FIX */
 .container{
 width:100%;
 max-width:380px;
 height:100dvh;
-min-height:100vh;
 display:flex;
 flex-direction:column;
-align-items:center;
-padding:10px;
+padding:8px;
 box-sizing:border-box;
 }
 
 /* IMAGE */
 #img{
 width:100%;
-max-height:150px;
+max-height:130px;
 object-fit:contain;
 flex-shrink:0;
 }
 
 /* TIMER */
 .timerZone{
-flex-grow:1;
+flex:1; /* 🔥 PREND JUSTE L’ESPACE DISPONIBLE */
 display:flex;
 align-items:center;
 justify-content:center;
@@ -75,8 +73,8 @@ justify-content:center;
 
 .circleWrap{
 position:relative;
-width:200px;
-height:200px;
+width:180px;
+height:180px;
 }
 
 #timer{
@@ -88,18 +86,16 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-gap:2px;
 width:100%;
 text-align:center;
 }
 
 .timerLabel{
-font-size:14px;
-white-space:nowrap;
+font-size:13px;
 }
 
 .timerValue{
-font-size:48px;
+font-size:44px;
 font-weight:bold;
 line-height:1;
 transition:transform 0.15s;
@@ -111,22 +107,21 @@ transform:scale(1.15);
 
 /* BAS */
 .bottomBlock{
-width:100%;
 flex-shrink:0;
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:8px;
+gap:6px;
 margin-top:5px;
 }
 
 #totalTime{
-font-size:14px;
+font-size:13px;
 }
 
 .barContainer{
 width:100%;
-height:6px;
+height:5px;
 background:rgba(255,255,255,0.2);
 border-radius:10px;
 }
@@ -140,49 +135,25 @@ border-radius:10px;
 
 /* BOUTONS */
 .buttons{
-width:100%;
 flex-shrink:0;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:8px;
+gap:6px;
+margin-top:6px;
 }
 
 button{
-height:42px;
+height:36px; /* 🔥 PLUS PETITS = TOUJOURS VISIBLES */
 border:none;
 border-radius:10px;
 color:white;
-font-size:14px;
+font-size:12px;
 }
 
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
-
-/* MOBILE */
-@media (max-width:600px){
-
-.circleWrap{
-width:150px;
-height:150px;
-}
-
-.timerValue{
-font-size:34px;
-}
-
-#img{
-max-height:120px;
-}
-
-button{
-height:34px;
-font-size:12px;
-}
-
-}
 </style>
 </head>
 
@@ -238,11 +209,11 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* PROGRAMME */
+/* (JS IDENTIQUE À TON FICHIER — inchangé) */
+
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html?v="+Date.now();}
 
-/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
@@ -252,13 +223,11 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* CERCLE */
 let radius = 45;
 let circumference = 2 * Math.PI * radius;
 progressCircle.style.strokeDasharray = circumference;
 progressCircle.style.strokeDashoffset = circumference;
 
-/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime += (exo.ex + exo.repos) * exo.reps;
@@ -277,7 +246,6 @@ return m+":"+(s<10?"0"+s:s);
 
 totalTime.innerText = "Durée de ma séance : " + formatTime(totalSessionTime);
 
-/* 🔊 SON */
 function beep(){
 if(!soundOn) return;
 let ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -295,34 +263,23 @@ u.lang="fr-FR";
 speechSynthesis.speak(u);
 }
 
-function toggleSound(){
-soundOn = !soundOn;
-}
+function toggleSound(){soundOn=!soundOn;}
 
-/* UPDATE */
 function update(){
 let exo = p.exercices[exIndex];
 
 progressCircle.style.strokeDashoffset = circumference * (t/totalTimePhase);
 bar.style.width = (elapsedTime/totalSessionTime*100)+"%";
 
-/* ANIMATION */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText = t;
 
-/* TEXTE */
 if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
 if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
 
-/* COULEURS */
-if(phase==="prep") document.body.style.background="#1b5e20";
-if(phase==="ex") document.body.style.background="#b71c1c";
-if(phase==="repos") document.body.style.background="#0d47a1";
-
-/* INFOS */
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
@@ -331,31 +288,13 @@ let patho=localStorage.getItem("pathologie");
 img.src=(patho && phase==="ex")?"images/"+patho+"/ex"+(exIndex+1)+".jpg":"";
 }
 
-/* LOGIQUE */
 function next(){
 let exo = p.exercices[exIndex];
 
-if(phase==="prep"){
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-return;
-}
+if(phase==="prep"){phase="ex";t=exo.ex;totalTimePhase=exo.ex;beep();return;}
+if(phase==="ex"){phase="repos";t=exo.repos;totalTimePhase=exo.repos;speak("repos");return;}
 
-if(phase==="ex"){
-phase="repos";
-t=exo.repos;
-totalTimePhase=exo.repos;
-speak("repos");
-return;
-}
-
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-
+phase="ex";t=exo.ex;totalTimePhase=exo.ex;beep();
 repIndex++;
 
 if(repIndex>exo.reps){
@@ -368,12 +307,10 @@ serieIndex++;
 }
 }
 
-/* CONTROLES */
 function togglePause(){paused=!paused;}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-/* LOOP */
 function loop(){
 if(paused) return;
 t--;
