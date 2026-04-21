@@ -16,6 +16,7 @@ justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
+transition:background 0.3s;
 }
 
 .logo{
@@ -74,6 +75,7 @@ align-items:center;
 justify-content:center;
 font-size:40px;
 font-weight:bold;
+text-align:center;
 }
 
 .barContainer{
@@ -178,21 +180,11 @@ stroke-dashoffset="440"/>
 
 <script>
 
-/* 🔥 RECUP PROGRAMME (CORRIGÉ) */
-let p = null;
-
-let user = localStorage.getItem("currentUser");
-
-if(user && localStorage.getItem("programme_"+user)){
-p = JSON.parse(localStorage.getItem("programme_"+user));
-}else{
-p = JSON.parse(localStorage.getItem("programme_temp"));
-}
-
-/* 🔴 SECURITE */
+/* RECUP PROGRAMME */
+let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){
-alert("Aucun programme trouvé !");
-window.location="config.html";
+alert("Aucun programme !");
+location="config.html";
 }
 
 /* VARIABLES */
@@ -202,54 +194,54 @@ let t=3, totalTime=3;
 let paused=false, finished=false;
 let soundOn=true;
 
-/* SON */
+/* VOIX */
+function speak(text){
+if(!soundOn) return;
+let u=new SpeechSynthesisUtterance(text);
+u.lang="fr-FR";
+speechSynthesis.speak(u);
+}
+
+/* BEEP */
 function beep(freq){
 if(!soundOn) return;
 let ctx=new AudioContext();
 let o=ctx.createOscillator();
-o.type="sine";
 o.frequency.value=freq;
 o.connect(ctx.destination);
 o.start();
 setTimeout(()=>o.stop(),150);
 }
 
-/* CONFETTI */
-function confetti(){
-for(let i=0;i<50;i++){
-let d=document.createElement("div");
-d.style.position="fixed";
-d.style.width="6px";
-d.style.height="6px";
-d.style.background="hsl("+Math.random()*360+",100%,50%)";
-d.style.left=Math.random()*100+"vw";
-d.style.top="-10px";
-d.style.transition="3s";
-document.body.appendChild(d);
-setTimeout(()=>d.style.top="100vh",50);
-setTimeout(()=>d.remove(),3000);
-}
-}
-
 /* UPDATE */
 function update(){
+
 if(finished) return;
 
-timer.innerText=t;
+let exo = p.exercices[exIndex];
 
 progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
 
-let total=p.series*p.exercices.length*p.reps;
-let current=(serieIndex-1)*p.exercices.length*p.reps+(exIndex)*p.reps+(repIndex-1);
-bar.style.width=(current/total)*100+"%";
+/* COULEURS */
+if(phase==="prep") document.body.style.background="#1b5e20";
+if(phase==="ex") document.body.style.background="#b71c1c";
+if(phase==="repos") document.body.style.background="#0d47a1";
 
-exoInfo.innerText="Exercice "+(exIndex+1);
-repInfo.innerText="Rép "+repIndex+"/"+p.reps;
+/* TEXTE */
+if(phase==="prep"){
+timer.innerHTML="PRÉPAREZ-VOUS<br>"+t;
+if(t===3) speak("Préparez vous");
+}else{
+timer.innerText=t;
+}
+
+/* INFOS */
+exoInfo.innerText=exo.nom;
+repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
 /* IMAGE */
 let patho=localStorage.getItem("pathologie");
-
 if(patho && phase==="ex"){
 img.src="images/"+patho+"/ex"+(exIndex+1)+".jpg";
 }else{
@@ -260,29 +252,20 @@ img.src="";
 /* LOGIQUE */
 function next(){
 
+let exo = p.exercices[exIndex];
+
 if(phase==="prep"){
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t=exo.ex;
+totalTime=exo.ex;
 return;
 }
 
 if(phase==="ex"){
-
-let last =
-exIndex===p.exercices.length-1 &&
-repIndex===p.reps &&
-serieIndex===p.series;
-
-if(last){
-endSession();
-return;
-}
-
 beep(500);
 phase="repos";
-t=p.tempsRepos;
-totalTime=p.tempsRepos;
+t=exo.repos;
+totalTime=exo.repos;
 return;
 }
 
@@ -290,7 +273,7 @@ beep(800);
 
 repIndex++;
 
-if(repIndex>p.reps){
+if(repIndex>exo.reps){
 repIndex=1;
 exIndex++;
 
@@ -300,9 +283,14 @@ serieIndex++;
 }
 }
 
+if(serieIndex>p.series){
+endSession();
+return;
+}
+
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t=p.exercices[exIndex].ex;
+totalTime=p.exercices[exIndex].ex;
 }
 
 /* FIN */
@@ -310,9 +298,7 @@ function endSession(){
 finished=true;
 main.style.display="none";
 endScreen.style.display="flex";
-beep(700);
-setTimeout(()=>beep(900),150);
-confetti();
+speak("Bravo");
 }
 
 /* CONTROLES */
@@ -330,8 +316,8 @@ function nextExercise(){
 repIndex=1;
 exIndex++;
 phase="ex";
-t=p.tempsEx;
-totalTime=p.tempsEx;
+t=p.exercices[exIndex].ex;
+totalTime=p.exercices[exIndex].ex;
 update();
 }
 
@@ -347,7 +333,6 @@ update();
 if(t<=0) next();
 }
 
-/* INIT */
 update();
 setInterval(loop,1000);
 

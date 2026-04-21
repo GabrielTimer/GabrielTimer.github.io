@@ -13,7 +13,6 @@ margin:0;
 text-align:center;
 }
 
-/* CARD */
 .card{
 background:white;
 padding:20px;
@@ -25,31 +24,27 @@ margin-top:20px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* IMAGE */
 img{
 width:100%;
 border-radius:10px;
 margin-bottom:10px;
 }
 
-/* INPUT */
 input{
 width:100%;
-padding:12px;
-margin:6px 0;
+padding:10px;
+margin:4px 0;
 border-radius:10px;
 border:1px solid #ccc;
-font-size:16px;
-box-sizing:border-box;
+font-size:14px;
 }
 
 label{
-display:block;
-margin-top:10px;
 font-weight:bold;
+margin-top:5px;
+display:block;
 }
 
-/* BOUTONS */
 button{
 padding:14px;
 margin:6px 0;
@@ -58,11 +53,6 @@ border-radius:10px;
 width:100%;
 font-size:16px;
 cursor:pointer;
-transition:0.2s;
-}
-
-button:hover{
-transform:scale(1.03);
 }
 
 .save{background:#2ecc71;color:white;}
@@ -70,27 +60,12 @@ transform:scale(1.03);
 .home{background:#777;color:white;}
 .pdf{background:#9c27b0;color:white;}
 
-@media(max-width:500px){
-.card{
-width:95%;
-padding:15px;
-}
-}
-
-/* PRINT */
-@media print{
-body *{visibility:hidden;}
-#printZone, #printZone *{visibility:visible;}
-#printZone{
-position:absolute;
-top:0;left:0;width:100%;height:100%;
-display:flex;justify-content:center;align-items:center;
-}
-#printZone img{
-max-width:100%;
-max-height:100%;
-object-fit:contain;
-}
+.exoBloc{
+background:#f9f9f9;
+padding:10px;
+margin:10px 0;
+border-radius:10px;
+text-align:left;
 }
 </style>
 </head>
@@ -117,15 +92,6 @@ object-fit:contain;
 
 <div id="exo"></div>
 
-<label>Temps exercice (sec)</label>
-<input id="tempsEx" type="number" value="20">
-
-<label>Temps repos (sec)</label>
-<input id="tempsRepos" type="number" value="15">
-
-<label>Répétitions</label>
-<input id="reps" type="number" value="3">
-
 <label>Séries</label>
 <input id="series" type="number" value="2">
 
@@ -137,19 +103,26 @@ object-fit:contain;
 
 <script>
 
-let exercices=[];
-
-/* 🔹 générer exercices */
 function generer(){
+
 exo.innerHTML="";
-exercices=[];
 
 for(let i=0;i<nbEx.value;i++){
-let input=document.createElement("input");
-input.value="Exercice "+(i+1);
-input.oninput=()=>exercices[i]=input.value;
-exo.appendChild(input);
-exercices.push(input.value);
+
+let bloc=document.createElement("div");
+bloc.className="exoBloc";
+
+bloc.innerHTML=`
+<input id="nom${i}" value="Exercice ${i+1}">
+<label>Temps exercice</label>
+<input id="ex${i}" type="number" value="20">
+<label>Temps repos</label>
+<input id="repos${i}" type="number" value="15">
+<label>Répétitions</label>
+<input id="rep${i}" type="number" value="3">
+`;
+
+exo.appendChild(bloc);
 }
 }
 
@@ -162,16 +135,12 @@ let img = document.getElementById("pathoImage");
 let printImg = document.getElementById("printImage");
 let btns = document.getElementById("imageButtons");
 
-/* MODE LIBRE */
 if(!patho){
 generer();
 return;
 }
 
-/* EPAULE */
-if(patho==="epaule"){
-
-let src="tendinitedelacoiffe.jpg";
+let src="images/"+patho+"/cover.jpg";
 
 img.src=src;
 printImg.src=src;
@@ -179,21 +148,36 @@ printImg.src=src;
 img.style.display="block";
 btns.style.display="block";
 
-/* 🔥 8 EXERCICES PAR DÉFAUT */
-nbEx.value = 8;
+/* auto */
+nbEx.value=8;
 generer();
-
-}
 }
 
 /* PDF */
 function printPDF(){
 document.getElementById("printZone").style.display="flex";
 window.print();
+setTimeout(()=>document.getElementById("printZone").style.display="none",500);
+}
 
-setTimeout(()=>{
-document.getElementById("printZone").style.display="none";
-},500);
+/* BUILD PROGRAMME */
+function buildProgramme(){
+
+let list=[];
+
+for(let i=0;i<nbEx.value;i++){
+list.push({
+nom:document.getElementById("nom"+i).value,
+ex:+document.getElementById("ex"+i).value,
+repos:+document.getElementById("repos"+i).value,
+reps:+document.getElementById("rep"+i).value
+});
+}
+
+return {
+exercices:list,
+series:+series.value
+};
 }
 
 /* SAVE */
@@ -210,13 +194,7 @@ user = p+"_"+n;
 localStorage.setItem("currentUser", user);
 }
 
-let prog={
-exercices,
-tempsEx:+tempsEx.value,
-tempsRepos:+tempsRepos.value,
-reps:+reps.value,
-series:+series.value
-};
+let prog = buildProgramme();
 
 localStorage.setItem("programme_"+user,JSON.stringify(prog));
 
@@ -226,13 +204,7 @@ alert("Programme enregistré !");
 /* START */
 function start(){
 
-let prog={
-exercices,
-tempsEx:+tempsEx.value,
-tempsRepos:+tempsRepos.value,
-reps:+reps.value,
-series:+series.value
-};
+let prog = buildProgramme();
 
 localStorage.setItem("programme_temp",JSON.stringify(prog));
 
