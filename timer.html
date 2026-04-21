@@ -71,19 +71,23 @@ justify-content:center;
 
 .circleWrap{
 position:relative;
-width:190px; /* 🔥 plus grand */
-height:190px;
+width:220px;
+height:220px;
 }
 
+/* 🔥 CENTRAGE PARFAIT */
 #timer{
 position:absolute;
-width:100%;
-height:100%;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
 display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-gap:4px;
+gap:2px;
+width:100%;
+text-align:center;
 }
 
 .timerLabel{
@@ -92,9 +96,11 @@ white-space:nowrap;
 opacity:0.9;
 }
 
+/* 🔥 CHIFFRE CORRIGÉ */
 .timerValue{
-font-size:54px; /* 🔥 plus gros */
+font-size:48px;
 font-weight:bold;
+line-height:1;
 transition:transform 0.15s ease;
 }
 
@@ -109,7 +115,8 @@ width:100%;
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:8px;
+gap:12px;
+margin-top:10px;
 }
 
 #totalTime{
@@ -155,8 +162,8 @@ cursor:pointer;
 @media (max-width:600px){
 
 .circleWrap{
-width:140px;
-height:140px;
+width:160px;
+height:160px;
 }
 
 .timerValue{
@@ -272,7 +279,7 @@ progressCircle.style.strokeDashoffset = circumference * (1 - progressPhase);
 let progress = elapsedTime / totalSessionTime;
 bar.style.width = (progress*100)+"%";
 
-/* 🔥 ANIMATION */
+/* ANIMATION */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
