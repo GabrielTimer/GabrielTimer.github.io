@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gabriel Timer</title>
 
-<!-- 🔥 ANTI CACHE -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -42,7 +41,6 @@ padding:12px;
 margin:6px 0;
 border-radius:10px;
 border:1px solid #ccc;
-box-sizing:border-box;
 }
 
 button{
@@ -85,7 +83,6 @@ return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
 
 function acceder(){
-
 let p = prenom.value;
 let n = nom.value;
 
@@ -95,25 +92,20 @@ return;
 }
 
 let id = makeId(p,n);
-
-/* 🔥 IMPORTANT */
 localStorage.setItem("currentUser", id);
 
-/* 🔥 DEBUG */
-console.log("LOGIN →", id);
-console.log("STORAGE →", localStorage);
-
-window.location="config.html";
+window.location="config.html?v=" + Date.now();
 }
 
 function modeLibre(){
 localStorage.removeItem("currentUser");
 localStorage.removeItem("pathologie");
-window.location="config.html";
+
+window.location="config.html?v=" + Date.now();
 }
 
 function zones(){
-window.location="pathologies.html";
+window.location="pathologies.html?v=" + Date.now();
 }
 
 </script>

@@ -30,15 +30,9 @@ padding:10px;
 margin:4px 0;
 border-radius:10px;
 border:1px solid #ccc;
-font-size:14px;
-box-sizing:border-box;
 }
 
-label{
-font-weight:bold;
-margin-top:5px;
-display:block;
-}
+label{font-weight:bold;}
 
 button{
 padding:14px;
@@ -54,31 +48,9 @@ cursor:pointer;
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
 
-.exoBloc{
-background:#f9f9f9;
-margin:10px 0;
-border-radius:10px;
-overflow:hidden;
-}
-
-.exoHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#eee;
-padding:10px;
-cursor:pointer;
-font-weight:bold;
-gap:10px;
-}
-
-.exoContent{
-display:none;
-padding:10px;
-}
-
-.arrow{font-size:18px;}
-.resume{font-size:12px;color:#555;}
+.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;}
+.exoHeader{background:#eee;padding:10px;cursor:pointer;}
+.exoContent{display:none;padding:10px;}
 </style>
 </head>
 
@@ -108,128 +80,32 @@ function makeId(p,n){
 return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
 
-/* GENERATION */
 function generer(){
 exo.innerHTML="";
 for(let i=0;i<nbEx.value;i++){
-let bloc=document.createElement("div");
-bloc.className="exoBloc";
-
-bloc.innerHTML=`
-<div class="exoHeader" onclick="toggle(${i})">
-<div>
-<span>▶ Exercice ${i+1}</span><br>
-<span id="resume${i}" class="resume">20s / 15s / 3 reps</span>
+exo.innerHTML+=`
+<div class="exoBloc">
+<div class="exoHeader" onclick="toggle(${i})">▶ Exercice ${i+1}</div>
+<div class="exoContent" id="c${i}">
+Nom<input id="nom${i}" value="Exercice ${i+1}">
+Ex<input id="ex${i}" type="number" value="20">
+Repos<input id="repos${i}" type="number" value="15">
+Rep<input id="rep${i}" type="number" value="3">
 </div>
-<span id="arrow${i}" class="arrow">▶</span>
-</div>
-
-<div class="exoContent" id="content${i}">
-<label>Nom</label>
-<input id="nom${i}" value="Exercice ${i+1}" oninput="updateResume(${i})">
-
-<label>Temps exercice</label>
-<input id="ex${i}" type="number" value="20" oninput="updateResume(${i})">
-
-<label>Temps repos</label>
-<input id="repos${i}" type="number" value="15" oninput="updateResume(${i})">
-
-<label>Répétitions</label>
-<input id="rep${i}" type="number" value="3" oninput="updateResume(${i})">
-</div>
-`;
-
-exo.appendChild(bloc);
+</div>`;
 }
 }
 
 function toggle(i){
-for(let j=0;j<nbEx.value;j++){
-document.getElementById("content"+j).style.display="none";
-document.getElementById("arrow"+j).innerText="▶";
-}
-let c=document.getElementById("content"+i);
-let a=document.getElementById("arrow"+i);
-if(c.style.display==="block"){
-c.style.display="none";
-a.innerText="▶";
-}else{
-c.style.display="block";
-a.innerText="▼";
-}
+let c=document.getElementById("c"+i);
+c.style.display=(c.style.display==="block")?"none":"block";
 }
 
-function updateResume(i){
-let ex=document.getElementById("ex"+i).value;
-let repos=document.getElementById("repos"+i).value;
-let rep=document.getElementById("rep"+i).value;
-document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
-}
-
-/* 🔥 INIT ULTRA FIABLE */
-function init(){
-
-let user = localStorage.getItem("currentUser");
-
-console.log("USER →", user);
-
-if(user){
-let data = localStorage.getItem("programme_"+user);
-
-console.log("DATA →", data);
-
-if(data){
-let prog = JSON.parse(data);
-
-series.value = prog.series;
-nbEx.value = prog.exercices.length;
-
-generer();
-
-prog.exercices.forEach((e,i)=>{
-document.getElementById("nom"+i).value=e.nom;
-document.getElementById("ex"+i).value=e.ex;
-document.getElementById("repos"+i).value=e.repos;
-document.getElementById("rep"+i).value=e.reps;
-updateResume(i);
-});
-
-return;
-}
-}
-
-/* fallback */
-generer();
-}
-
-/* SAVE */
-function save(){
-
-let user = localStorage.getItem("currentUser");
-
-if(!user){
-let p = prompt("Prénom");
-let n = prompt("Nom");
-if(!p || !n) return;
-
-user = makeId(p,n);
-localStorage.setItem("currentUser",user);
-}
-
-let prog = buildProgramme();
-
-localStorage.setItem("programme_"+user,JSON.stringify(prog));
-
-console.log("SAVE →", user, prog);
-
-alert("Programme enregistré !");
-}
-
-function buildProgramme(){
+function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
 list.push({
-nom:document.getElementById("nom"+i).value,
+nom:nom0.value,
 ex:+document.getElementById("ex"+i).value,
 repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
@@ -238,16 +114,30 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
+function save(){
+let user = localStorage.getItem("currentUser");
+
+if(!user){
+let p = prompt("Prénom");
+let n = prompt("Nom");
+user = makeId(p,n);
+localStorage.setItem("currentUser",user);
+}
+
+localStorage.setItem("programme_"+user,JSON.stringify(build()));
+alert("Sauvegardé");
+}
+
 function start(){
-localStorage.setItem("programme_temp",JSON.stringify(buildProgramme()));
-window.location="timer.html";
+localStorage.setItem("programme_temp",JSON.stringify(build()));
+window.location="timer.html?v=" + Date.now();
 }
 
 function home(){
-window.location="index.html";
+window.location="index.html?v=" + Date.now();
 }
 
-init();
+generer();
 
 </script>
 
