@@ -53,7 +53,6 @@ object-fit:contain;
 margin-top:5px;
 }
 
-/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -84,15 +83,7 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* bas */
-.bottomBlock{
-text-align:center;
-}
-
-#totalTime{
-font-size:12px;
-margin-bottom:2px;
-}
+.bottomBlock{text-align:center;}
 
 .barContainer{
 height:4px;
@@ -107,7 +98,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -274,6 +264,7 @@ if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
 
+/* 🔥 recalcul propre barre */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
@@ -326,7 +317,31 @@ serieIndex++;
 update();
 }
 
-/* LOOP STABLE */
+/* 🔥 FIX PROPRE */
+function nextExercise(){
+
+exIndex++;
+repIndex=1;
+
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+
+let exo=p.exercices[exIndex];
+
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+
+/* avance proprement la progression */
+elapsedTime += 1;
+
+beep();
+update();
+}
+
+/* LOOP */
 function loop(){
 if(paused)return;
 
@@ -340,10 +355,8 @@ update();
 }
 }
 
-function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-/* START */
 update();
 setInterval(loop,1000);
 
