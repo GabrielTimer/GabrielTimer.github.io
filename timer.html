@@ -21,6 +21,7 @@ transition:background 0.4s;
 padding-bottom:env(safe-area-inset-bottom);
 }
 
+/* HEADER */
 .header{
 width:100%;
 display:flex;
@@ -28,6 +29,7 @@ justify-content:space-between;
 align-items:center;
 padding:10px;
 box-sizing:border-box;
+flex-shrink:0;
 }
 
 .infoBox{
@@ -35,7 +37,6 @@ display:flex;
 flex-direction:column;
 font-size:18px;
 font-weight:bold;
-line-height:1.2;
 }
 
 .logo{
@@ -43,6 +44,7 @@ width:80px;
 filter:drop-shadow(0 0 6px rgba(255,255,255,0.6));
 }
 
+/* CONTAINER */
 .container{
 width:100%;
 max-width:380px;
@@ -50,20 +52,22 @@ height:100dvh;
 min-height:100vh;
 display:flex;
 flex-direction:column;
-justify-content:space-around;
 align-items:center;
 padding:10px;
 box-sizing:border-box;
 }
 
+/* IMAGE */
 #img{
 width:100%;
-max-height:180px;
+max-height:150px;
 object-fit:contain;
+flex-shrink:0;
 }
 
-/* 🔥 TIMER */
+/* TIMER */
 .timerZone{
+flex-grow:1;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -71,11 +75,10 @@ justify-content:center;
 
 .circleWrap{
 position:relative;
-width:220px;
-height:220px;
+width:200px;
+height:200px;
 }
 
-/* 🔥 CENTRAGE PARFAIT */
 #timer{
 position:absolute;
 top:50%;
@@ -93,18 +96,15 @@ text-align:center;
 .timerLabel{
 font-size:14px;
 white-space:nowrap;
-opacity:0.9;
 }
 
-/* 🔥 CHIFFRE CORRIGÉ */
 .timerValue{
 font-size:48px;
 font-weight:bold;
 line-height:1;
-transition:transform 0.15s ease;
+transition:transform 0.15s;
 }
 
-/* 🔥 ANIMATION */
 .tick{
 transform:scale(1.15);
 }
@@ -112,15 +112,16 @@ transform:scale(1.15);
 /* BAS */
 .bottomBlock{
 width:100%;
+flex-shrink:0;
 display:flex;
 flex-direction:column;
 align-items:center;
-gap:12px;
-margin-top:10px;
+gap:8px;
+margin-top:5px;
 }
 
 #totalTime{
-font-size:15px;
+font-size:14px;
 }
 
 .barContainer{
@@ -137,20 +138,22 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+/* BOUTONS */
 .buttons{
 width:100%;
+flex-shrink:0;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:8px;
+margin-top:8px;
 }
 
 button{
-height:45px;
+height:42px;
 border:none;
 border-radius:10px;
 color:white;
 font-size:14px;
-cursor:pointer;
 }
 
 .pause{background:#ff9800;}
@@ -158,20 +161,20 @@ cursor:pointer;
 .sound{background:#607d8b;}
 .back{background:#0e8f9b;}
 
-/* 📱 MOBILE */
+/* MOBILE */
 @media (max-width:600px){
 
 .circleWrap{
-width:160px;
-height:160px;
+width:150px;
+height:150px;
 }
 
 .timerValue{
-font-size:36px;
+font-size:34px;
 }
 
 #img{
-max-height:130px;
+max-height:120px;
 }
 
 button{
@@ -185,7 +188,7 @@ font-size:12px;
 
 <body>
 
-<div class="container" id="main">
+<div class="container">
 
 <div class="header">
 <div class="infoBox">
@@ -225,32 +228,37 @@ transform="rotate(-90 50 50)"/>
 </div>
 
 <div class="buttons">
-<button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
-<button class="next" onclick="nextExercise()">⏭ Exercice</button>
-<button id="soundBtn" class="sound" onclick="toggleSound()">🔊 Son</button>
-<button class="back" onclick="back()">⚙️ Réglages</button>
+<button onclick="togglePause()">⏸ Pause</button>
+<button onclick="nextExercise()">⏭ Exercice</button>
+<button onclick="toggleSound()">🔊 Son</button>
+<button onclick="back()">⚙️ Réglages</button>
 </div>
 
 </div>
 
 <script>
 
+/* PROGRAMME */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html?v="+Date.now();}
 
+/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
 let paused=false;
+let soundOn=true;
 
 let totalSessionTime=0;
 let elapsedTime=0;
 
+/* CERCLE */
 let radius = 45;
 let circumference = 2 * Math.PI * radius;
 progressCircle.style.strokeDasharray = circumference;
 progressCircle.style.strokeDashoffset = circumference;
 
+/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime += (exo.ex + exo.repos) * exo.reps;
@@ -269,23 +277,42 @@ return m+":"+(s<10?"0"+s:s);
 
 totalTime.innerText = "Durée de ma séance : " + formatTime(totalSessionTime);
 
-function update(){
+/* 🔊 SON */
+function beep(){
+if(!soundOn) return;
+let ctx = new (window.AudioContext || window.webkitAudioContext)();
+let o = ctx.createOscillator();
+o.frequency.value = 800;
+o.connect(ctx.destination);
+o.start();
+setTimeout(()=>o.stop(),150);
+}
 
+function speak(text){
+if(!soundOn) return;
+let u = new SpeechSynthesisUtterance(text);
+u.lang="fr-FR";
+speechSynthesis.speak(u);
+}
+
+function toggleSound(){
+soundOn = !soundOn;
+}
+
+/* UPDATE */
+function update(){
 let exo = p.exercices[exIndex];
 
-let progressPhase = 1 - (t / totalTimePhase);
-progressCircle.style.strokeDashoffset = circumference * (1 - progressPhase);
-
-let progress = elapsedTime / totalSessionTime;
-bar.style.width = (progress*100)+"%";
+progressCircle.style.strokeDashoffset = circumference * (t/totalTimePhase);
+bar.style.width = (elapsedTime/totalSessionTime*100)+"%";
 
 /* ANIMATION */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
-/* TEXTE */
 timerValue.innerText = t;
 
+/* TEXTE */
 if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
 if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
@@ -304,13 +331,31 @@ let patho=localStorage.getItem("pathologie");
 img.src=(patho && phase==="ex")?"images/"+patho+"/ex"+(exIndex+1)+".jpg":"";
 }
 
+/* LOGIQUE */
 function next(){
 let exo = p.exercices[exIndex];
 
-if(phase==="prep"){phase="ex";t=exo.ex;totalTimePhase=exo.ex;return;}
-if(phase==="ex"){phase="repos";t=exo.repos;totalTimePhase=exo.repos;return;}
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+return;
+}
 
-phase="ex";t=exo.ex;totalTimePhase=exo.ex;
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
+return;
+}
+
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+
 repIndex++;
 
 if(repIndex>exo.reps){
@@ -323,10 +368,12 @@ serieIndex++;
 }
 }
 
+/* CONTROLES */
 function togglePause(){paused=!paused;}
-function toggleSound(){}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
+function back(){window.location="config.html";}
 
+/* LOOP */
 function loop(){
 if(paused) return;
 t--;
