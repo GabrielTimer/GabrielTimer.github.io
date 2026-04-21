@@ -62,10 +62,33 @@ cursor:pointer;
 
 .exoBloc{
 background:#f9f9f9;
-padding:10px;
 margin:10px 0;
 border-radius:10px;
-text-align:left;
+overflow:hidden;
+}
+
+.exoHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#eee;
+padding:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.exoContent{
+display:none;
+padding:10px;
+}
+
+.arrow{
+font-size:18px;
+}
+
+.resume{
+font-size:12px;
+color:#555;
 }
 </style>
 </head>
@@ -103,6 +126,7 @@ text-align:left;
 
 <script>
 
+/* 🔥 GENERATION AVEC RESUME */
 function generer(){
 
 exo.innerHTML="";
@@ -113,17 +137,64 @@ let bloc=document.createElement("div");
 bloc.className="exoBloc";
 
 bloc.innerHTML=`
-<input id="nom${i}" value="Exercice ${i+1}">
+
+<div class="exoHeader" onclick="toggle(${i})">
+<div>
+<span id="title${i}">▶ Exercice ${i+1}</span><br>
+<span id="resume${i}" class="resume">20s / 15s / 3 reps</span>
+</div>
+<span id="arrow${i}" class="arrow">▶</span>
+</div>
+
+<div class="exoContent" id="content${i}">
+<label>Nom</label>
+<input id="nom${i}" value="Exercice ${i+1}" oninput="updateResume(${i})">
+
 <label>Temps exercice</label>
-<input id="ex${i}" type="number" value="20">
+<input id="ex${i}" type="number" value="20" oninput="updateResume(${i})">
+
 <label>Temps repos</label>
-<input id="repos${i}" type="number" value="15">
+<input id="repos${i}" type="number" value="15" oninput="updateResume(${i})">
+
 <label>Répétitions</label>
-<input id="rep${i}" type="number" value="3">
+<input id="rep${i}" type="number" value="3" oninput="updateResume(${i})">
+</div>
+
 `;
 
 exo.appendChild(bloc);
 }
+}
+
+/* 🔽 toggle */
+function toggle(i){
+
+for(let j=0;j<nbEx.value;j++){
+document.getElementById("content"+j).style.display="none";
+document.getElementById("arrow"+j).innerText="▶";
+}
+
+let c=document.getElementById("content"+i);
+let a=document.getElementById("arrow"+i);
+
+if(c.style.display==="block"){
+c.style.display="none";
+a.innerText="▶";
+}else{
+c.style.display="block";
+a.innerText="▼";
+}
+}
+
+/* 🔥 MAJ RESUME */
+function updateResume(i){
+
+let ex=document.getElementById("ex"+i).value;
+let repos=document.getElementById("repos"+i).value;
+let rep=document.getElementById("rep"+i).value;
+
+document.getElementById("resume"+i).innerText=
+ex+"s / "+repos+"s / "+rep+" reps";
 }
 
 /* 🔹 charger */
@@ -148,7 +219,6 @@ printImg.src=src;
 img.style.display="block";
 btns.style.display="block";
 
-/* auto */
 nbEx.value=8;
 generer();
 }
