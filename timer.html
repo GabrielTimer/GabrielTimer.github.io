@@ -3,8 +3,19 @@
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
+/* 🔥 FIX CRASH (OBLIGATOIRE) */
 const timerLabel = document.querySelector(".timerLabel");
+const timerValue = document.getElementById("timerValue");
+const progressCircle = document.getElementById("progressCircle");
+const bar = document.getElementById("bar");
+const img = document.getElementById("img");
 const restText = document.getElementById("restText");
+const exoInfo = document.getElementById("exoInfo");
+const repInfo = document.getElementById("repInfo");
+const serieInfo = document.getElementById("serieInfo");
+const totalTime = document.getElementById("totalTime");
+const pauseBtn = document.getElementById("pauseBtn");
+const soundBtn = document.getElementById("soundBtn");
 
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
@@ -15,10 +26,12 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
+/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
+/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -72,9 +85,6 @@ progressCircle.style.strokeDashoffset = circumference * progress;
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
-
-timerValue.classList.add("tick");
-setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
@@ -144,10 +154,10 @@ serieIndex++;
 update();
 }
 
-/* 🔥 FIX RÉEL DU BOUTON */
+/* 🔥 FIX PROPRE DU BOUTON */
 function nextExercise(){
 
-paused = true; // évite conflit loop
+paused = true;
 
 exIndex++;
 repIndex = 1;
@@ -165,7 +175,6 @@ totalTimePhase = exo.ex;
 
 update();
 
-/* relance propre */
 setTimeout(()=>{ paused=false; },50);
 }
 
@@ -185,6 +194,7 @@ update();
 
 function back(){window.location="config.html";}
 
+/* START */
 update();
 setInterval(loop,1000);
 
