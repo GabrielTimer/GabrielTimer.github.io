@@ -34,7 +34,6 @@ box-sizing:border-box;
 display:flex;
 justify-content:space-between;
 align-items:center;
-flex-shrink:0;
 }
 
 .infoBox{
@@ -51,11 +50,10 @@ filter:drop-shadow(0 0 6px white);
 width:100%;
 max-height:180px;
 object-fit:contain;
-flex-shrink:0;
 margin-top:5px;
 }
 
-/* 🔥 cercle légèrement remonté */
+/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -86,9 +84,8 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
+/* bas */
 .bottomBlock{
-flex-shrink:0;
-margin-top:2px;
 text-align:center;
 }
 
@@ -110,9 +107,8 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* 🔥 boutons gris clair */
+/* boutons */
 .buttons{
-flex-shrink:0;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:8px;
@@ -134,9 +130,7 @@ font-weight:bold;
 .sound{background:#bdbdbd;}
 .back{background:#9e9e9e;}
 
-button:active{
-transform:scale(0.95);
-}
+button:active{transform:scale(0.95);}
 </style>
 </head>
 
@@ -196,8 +190,11 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
+/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
+
+const timerLabel = document.querySelector(".timerLabel");
 
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
@@ -208,11 +205,10 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* 🔥 cercle config */
+/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
-progressCircle.style.strokeDashoffset=0;
 
 /* calcul */
 function computeTotal(){
@@ -259,43 +255,37 @@ paused=!paused;
 pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
-/* 🔥 UPDATE CORRIGÉ */
+/* UPDATE */
 function update(){
 
-/* progression cercle */
 let progress = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * progress;
 
-/* couleurs */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-/* anim */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
-/* texte */
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
 
-/* barre */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
-/* infos */
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* image */
 let patho = localStorage.getItem("pathologie");
 img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 }
 
+/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -304,6 +294,7 @@ phase="ex";
 t=exo.ex;
 totalTimePhase=exo.ex;
 beep();
+update();
 return;
 }
 
@@ -312,6 +303,7 @@ phase="repos";
 t=exo.repos;
 totalTimePhase=exo.repos;
 speak("repos");
+update();
 return;
 }
 
@@ -330,19 +322,28 @@ exIndex=0;
 serieIndex++;
 }
 }
+
+update();
+}
+
+/* LOOP STABLE */
+function loop(){
+if(paused)return;
+
+t--;
+
+if(t<=0){
+next();
+}else{
+elapsedTime++;
+update();
+}
 }
 
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-function loop(){
-if(paused)return;
-t--;
-elapsedTime++;
-update();
-if(t<=0)next();
-}
-
+/* START */
 update();
 setInterval(loop,1000);
 
