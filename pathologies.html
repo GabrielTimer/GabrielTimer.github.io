@@ -2,45 +2,85 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZONES</title>
+<title>Pathologies</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;text-align:center;}
-button{
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+}
+
+.card{
 width:90%;
-padding:15px;
-margin:10px;
-border:none;
-border-radius:10px;
-font-size:16px;
+max-width:350px;
+margin:10px auto;
+background:white;
+border-radius:15px;
+padding:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 cursor:pointer;
-background:#0e8f9b;
-color:white;
+}
+
+img{
+width:100%;
+border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>Choisir une zone</h2>
+<h2>Choisir une pathologie</h2>
 
-<button onclick="goZone('epaule')">💪 Membre supérieur</button>
-<button onclick="goZone('dos')">🦴 Dos</button>
-<button onclick="goZone('genou')">🦵 Membre inférieur</button>
-<button onclick="goZone('cervical')">🧠 Cervicales</button>
-<button onclick="goZone('autre')">➕ Autres</button>
+<div id="list"></div>
 
 <button onclick="back()">⬅ Retour</button>
 
 <script>
-function goZone(z){
-localStorage.setItem("zone", z);
-window.location="liste_pathologies.html";
+
+/* 🔥 CONFIG PATHOS */
+const data = {
+
+epaule: [
+{nom:"Tendinite coiffe", dossier:"tendinite_coiffe"}
+],
+
+dos: [
+{nom:"Lombalgie 1", dossier:"lombalgie_1"}
+]
+
+};
+
+let zone = localStorage.getItem("zone");
+
+let container = document.getElementById("list");
+
+if(data[zone]){
+data[zone].forEach(p=>{
+
+let div=document.createElement("div");
+div.className="card";
+
+div.innerHTML = `
+<img src="images/${p.dossier}/cover.png">
+<h3>${p.nom}</h3>
+`;
+
+div.onclick=()=>{
+localStorage.setItem("pathologie", p.dossier);
+window.location="config.html";
+};
+
+container.appendChild(div);
+
+});
 }
+
 function back(){
-window.location="index.html";
+window.location="pathologies.html";
 }
+
 </script>
 
 </body>
