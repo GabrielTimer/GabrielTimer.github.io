@@ -16,7 +16,7 @@ justify-content:center;
 align-items:center;
 height:100vh;
 overflow:hidden;
-transition:background 0.3s;
+transition:background 0.4s;
 }
 
 .logo{
@@ -53,6 +53,7 @@ max-height:130px;
 object-fit:contain;
 }
 
+/* TIMER */
 .timerZone{
 height:200px;
 display:flex;
@@ -64,6 +65,7 @@ justify-content:center;
 position:relative;
 width:160px;
 height:160px;
+overflow:visible;
 }
 
 #timer{
@@ -71,18 +73,38 @@ position:absolute;
 width:100%;
 height:100%;
 display:flex;
+flex-direction:column;
 align-items:center;
 justify-content:center;
-font-size:40px;
-font-weight:bold;
-text-align:center;
+gap:2px;
 }
 
+/* 🔥 TEXTE PREMIUM */
+.timerLabel{
+font-size:14px;
+letter-spacing:1px;
+opacity:0.9;
+white-space:nowrap;
+}
+
+.timerValue{
+font-size:42px;
+font-weight:bold;
+transition:transform 0.2s ease;
+}
+
+/* petite animation */
+.tick{
+transform:scale(1.1);
+}
+
+/* BARRE */
 .barContainer{
 width:100%;
-height:8px;
+height:6px;
 background:rgba(255,255,255,0.2);
 border-radius:10px;
+margin-top:6px;
 }
 
 #bar{
@@ -158,16 +180,16 @@ width:110px;
 height:110px;
 }
 
-#timer{
-font-size:24px;
+.timerValue{
+font-size:30px;
+}
+
+.timerLabel{
+font-size:12px;
 }
 
 #img{
 max-height:70px;
-}
-
-.buttons{
-gap:6px;
 }
 
 button{
@@ -177,7 +199,6 @@ font-size:12px;
 
 #totalTime{
 font-size:13px;
-margin-top:2px;
 }
 
 }
@@ -201,25 +222,21 @@ margin-top:2px;
 <div class="timerZone">
 <div class="circleWrap">
 
-<!-- 🔥 SVG RESPONSIVE -->
-<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-
-<circle id="bgCircle"
-cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
+<svg viewBox="0 0 100 100">
+<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
 <circle id="progressCircle"
 cx="50" cy="50" r="45"
 stroke="#00e5ff"
 stroke-width="6"
 fill="none"
 transform="rotate(-90 50 50)"/>
-
 </svg>
 
-<div id="timer">0</div>
+<div id="timer">
+<div class="timerLabel">PRÉPAREZ VOUS</div>
+<div class="timerValue" id="timerValue">0</div>
+</div>
+
 </div>
 </div>
 
@@ -242,13 +259,9 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* RECUP */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-if(!p){
-window.location="config.html?v="+Date.now();
-}
+if(!p){window.location="config.html?v="+Date.now();}
 
-/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
@@ -258,13 +271,11 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* 🔥 CERCLE FIX */
 let radius = 45;
 let circumference = 2 * Math.PI * radius;
 progressCircle.style.strokeDasharray = circumference;
 progressCircle.style.strokeDashoffset = circumference;
 
-/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime += (exo.ex + exo.repos) * exo.reps;
@@ -277,13 +288,12 @@ computeTotal();
 
 function formatTime(sec){
 let m = Math.floor(sec/60);
-let s = sec%10<10?sec%60:"0"+sec%60;
+let s = sec%60;
 return m+":"+(s<10?"0"+s:s);
 }
 
 totalTime.innerText = "Durée de ma séance : " + formatTime(totalSessionTime);
 
-/* VOIX / BEEP */
 function speak(t){
 if(!soundOn) return;
 let u=new SpeechSynthesisUtterance(t);
@@ -301,34 +311,41 @@ o.start();
 setTimeout(()=>o.stop(),150);
 }
 
-/* UPDATE */
 function update(){
 
 let exo = p.exercices[exIndex];
 
-/* cercle */
 let progressPhase = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * (1 - progressPhase);
 
-/* barre */
 let progress = elapsedTime / totalSessionTime;
 if(progress>1) progress=1;
 bar.style.width = (progress*100)+"%";
 
-/* couleurs */
+/* ANIMATION */
+timerValue.classList.add("tick");
+setTimeout(()=>timerValue.classList.remove("tick"),150);
+
+/* TEXTE */
+if(phase==="prep"){
+timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
+if(t===3) speak("Préparez vous");
+}
+if(phase==="ex"){
+timer.querySelector(".timerLabel").innerText="EXERCICE";
+}
+if(phase==="repos"){
+timer.querySelector(".timerLabel").innerText="REPOS";
+}
+
+timerValue.innerText = t;
+
+/* COULEURS */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-/* texte */
-if(phase==="prep"){
-timer.innerHTML="PRÉPAREZ-VOUS<br>"+t;
-if(t===3) speak("Préparez vous");
-}
-if(phase==="ex"){timer.innerHTML="EXERCICE<br>"+t;}
-if(phase==="repos"){timer.innerHTML="REPOS<br>"+t;}
-
-/* infos */
+/* INFOS */
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
@@ -337,7 +354,6 @@ let patho=localStorage.getItem("pathologie");
 img.src=(patho && phase==="ex")?"images/"+patho+"/ex"+(exIndex+1)+".jpg":"";
 }
 
-/* logique */
 function next(){
 let exo = p.exercices[exIndex];
 
@@ -351,7 +367,6 @@ if(repIndex>exo.reps){repIndex=1;exIndex++;if(exIndex>=p.exercices.length){exInd
 if(serieIndex>p.series) endSession();
 }
 
-/* fin */
 function endSession(){
 finished=true;
 main.style.display="none";
@@ -359,13 +374,11 @@ endScreen.style.display="flex";
 speak("Bravo");
 }
 
-/* controls */
 function togglePause(){paused=!paused;pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";}
 function toggleSound(){soundOn=!soundOn;soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";}
 function nextExercise(){repIndex=1;exIndex++;if(exIndex>=p.exercices.length) exIndex=0;phase="ex";t=p.exercices[exIndex].ex;totalTimePhase=t;update();}
 function back(){window.location="config.html?v="+Date.now();}
 
-/* loop */
 function loop(){if(paused||finished) return;t--;elapsedTime++;update();if(t<=0) next();}
 update();
 setInterval(loop,1000);
