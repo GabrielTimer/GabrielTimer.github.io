@@ -34,6 +34,7 @@ border:1px solid #ccc;
 
 label{font-weight:bold;}
 
+/* 🔥 BOUTONS GLOBAL */
 button{
 padding:14px;
 margin:6px 0;
@@ -42,10 +43,49 @@ border-radius:10px;
 width:100%;
 font-size:16px;
 cursor:pointer;
+transition:transform 0.15s, box-shadow 0.15s;
 }
 
+button:hover{
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+/* styles */
 .save{background:#2ecc71;color:white;}
-.start{background:#0e8f9b;color:white;}
+
+.start{
+background:linear-gradient(135deg,#00c6ff,#0072ff);
+color:white;
+font-weight:bold;
+letter-spacing:1px;
+position:relative;
+overflow:hidden;
+}
+
+.start:hover{
+box-shadow:0 0 15px rgba(0,198,255,0.7);
+}
+
+.start::after{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+transition:0.4s;
+}
+
+.start:hover::after{
+left:100%;
+}
+
 .home{background:#777;color:white;}
 
 .exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;}
@@ -69,43 +109,32 @@ cursor:pointer;
 <input id="series" type="number" value="2">
 
 <button class="save" onclick="save()">💾 Enregistrer</button>
-<button class="start" onclick="start()">▶ Démarrer</button>
+<button class="start" onclick="start()">🚀 Lancer la séance</button>
 <button class="home" onclick="home()">🏠 Accueil</button>
 
 </div>
 
 <script>
 
-/* PATHO */
 let patho = localStorage.getItem("pathologie");
 
-/* ---------- CONFIG AUTO ---------- */
 function applyDefault(){
-
 if(patho === "tendinite_coiffe"){
-
 nbEx.value = 8;
 series.value = 2;
-
 generer();
-
-/* appliquer aux exercices */
 for(let i=0;i<8;i++){
 document.getElementById("ex"+i).value = 90;
 document.getElementById("repos"+i).value = 30;
 document.getElementById("rep"+i).value = 1;
 }
-
+}
 }
 
-}
-
-/* ---------- UTILS ---------- */
 function makeId(p,n){
 return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
 
-/* ---------- GENERATION ---------- */
 function generer(){
 exo.innerHTML="";
 for(let i=0;i<nbEx.value;i++){
@@ -122,13 +151,11 @@ Rep<input id="rep${i}" type="number" value="3">
 }
 }
 
-/* ---------- TOGGLE ---------- */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=(c.style.display==="block")?"none":"block";
 }
 
-/* ---------- BUILD ---------- */
 function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
@@ -142,37 +169,30 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
-/* ---------- SAVE ---------- */
 function save(){
 let user = localStorage.getItem("currentUser");
-
 if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
 user = makeId(p,n);
 localStorage.setItem("currentUser",user);
 }
-
 localStorage.setItem("programme_"+user,JSON.stringify(build()));
 alert("Sauvegardé");
 }
 
-/* ---------- START ---------- */
 function start(){
 localStorage.setItem("programme_temp",JSON.stringify(build()));
 window.location="timer.html?v=" + Date.now();
 }
 
-/* ---------- HOME ---------- */
 function home(){
 window.location="index.html?v=" + Date.now();
 }
 
-/* ---------- INIT ---------- */
 generer();
 applyDefault();
 
 </script>
-
 </body>
 </html>

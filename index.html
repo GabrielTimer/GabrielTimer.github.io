@@ -5,10 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gabriel Timer</title>
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-
 <style>
 body{
 font-family:Arial;
@@ -43,6 +39,7 @@ border-radius:10px;
 border:1px solid #ccc;
 }
 
+/* 🔥 BOUTONS */
 button{
 width:100%;
 padding:14px;
@@ -51,6 +48,16 @@ border:none;
 border-radius:12px;
 font-weight:bold;
 cursor:pointer;
+transition:transform 0.15s, box-shadow 0.15s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:active{
+transform:scale(0.95);
 }
 
 .primary{background:#0e8f9b;color:white;}
@@ -77,7 +84,6 @@ cursor:pointer;
 </div>
 
 <script>
-
 function makeId(p,n){
 return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
@@ -85,29 +91,21 @@ return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 function acceder(){
 let p = prenom.value;
 let n = nom.value;
-
-if(!p || !n){
-alert("Remplir les champs");
-return;
-}
-
+if(!p || !n){alert("Remplir les champs");return;}
 let id = makeId(p,n);
 localStorage.setItem("currentUser", id);
-
 window.location="config.html?v=" + Date.now();
 }
 
 function modeLibre(){
 localStorage.removeItem("currentUser");
 localStorage.removeItem("pathologie");
-
 window.location="config.html?v=" + Date.now();
 }
 
 function zones(){
 window.location="pathologies.html?v=" + Date.now();
 }
-
 </script>
 
 </body>
