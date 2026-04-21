@@ -76,10 +76,36 @@ cursor:pointer;
 
 <script>
 
+/* PATHO */
+let patho = localStorage.getItem("pathologie");
+
+/* ---------- CONFIG AUTO ---------- */
+function applyDefault(){
+
+if(patho === "tendinite_coiffe"){
+
+nbEx.value = 8;
+series.value = 2;
+
+generer();
+
+/* appliquer aux exercices */
+for(let i=0;i<8;i++){
+document.getElementById("ex"+i).value = 90;
+document.getElementById("repos"+i).value = 30;
+document.getElementById("rep"+i).value = 1;
+}
+
+}
+
+}
+
+/* ---------- UTILS ---------- */
 function makeId(p,n){
 return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
 
+/* ---------- GENERATION ---------- */
 function generer(){
 exo.innerHTML="";
 for(let i=0;i<nbEx.value;i++){
@@ -96,16 +122,18 @@ Rep<input id="rep${i}" type="number" value="3">
 }
 }
 
+/* ---------- TOGGLE ---------- */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=(c.style.display==="block")?"none":"block";
 }
 
+/* ---------- BUILD ---------- */
 function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
 list.push({
-nom:nom0.value,
+nom:document.getElementById("nom"+i).value,
 ex:+document.getElementById("ex"+i).value,
 repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
@@ -114,6 +142,7 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
+/* ---------- SAVE ---------- */
 function save(){
 let user = localStorage.getItem("currentUser");
 
@@ -128,16 +157,20 @@ localStorage.setItem("programme_"+user,JSON.stringify(build()));
 alert("Sauvegardé");
 }
 
+/* ---------- START ---------- */
 function start(){
 localStorage.setItem("programme_temp",JSON.stringify(build()));
 window.location="timer.html?v=" + Date.now();
 }
 
+/* ---------- HOME ---------- */
 function home(){
 window.location="index.html?v=" + Date.now();
 }
 
+/* ---------- INIT ---------- */
 generer();
+applyDefault();
 
 </script>
 
