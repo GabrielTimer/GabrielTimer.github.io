@@ -231,8 +231,14 @@ if(phase==="repos") document.body.style.background="#0d47a1";
 if(phase==="prep"){
 timer.innerHTML="PRÉPAREZ-VOUS<br>"+t;
 if(t===3) speak("Préparez vous");
-}else{
-timer.innerText=t;
+}
+
+if(phase==="ex"){
+timer.innerHTML="EXERCICE<br>"+t;
+}
+
+if(phase==="repos"){
+timer.innerHTML="REPOS<br>"+t;
 }
 
 /* INFOS */
@@ -258,17 +264,30 @@ if(phase==="prep"){
 phase="ex";
 t=exo.ex;
 totalTime=exo.ex;
+
+/* 🔊 1 bip EXERCICE */
+beep(800);
+
 return;
 }
 
 if(phase==="ex"){
-beep(500);
 phase="repos";
 t=exo.repos;
 totalTime=exo.repos;
+
+/* 🔊 voix repos */
+speak("repos");
+
 return;
 }
 
+/* retour exercice */
+phase="ex";
+t=p.exercices[exIndex].ex;
+totalTime=p.exercices[exIndex].ex;
+
+/* 🔊 bip exercice */
 beep(800);
 
 repIndex++;
@@ -287,10 +306,6 @@ if(serieIndex>p.series){
 endSession();
 return;
 }
-
-phase="ex";
-t=p.exercices[exIndex].ex;
-totalTime=p.exercices[exIndex].ex;
 }
 
 /* FIN */
