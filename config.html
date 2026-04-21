@@ -104,7 +104,6 @@ padding:10px;
 
 <script>
 
-/* 🔥 NORMALISATION */
 function makeId(p,n){
 return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
 }
@@ -144,7 +143,6 @@ exo.appendChild(bloc);
 }
 }
 
-/* TOGGLE */
 function toggle(i){
 for(let j=0;j<nbEx.value;j++){
 document.getElementById("content"+j).style.display="none";
@@ -168,13 +166,17 @@ let rep=document.getElementById("rep"+i).value;
 document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
 }
 
-/* INIT */
+/* 🔥 INIT ROBUSTE */
 function init(){
 
 let user = localStorage.getItem("currentUser");
 
+console.log("LOAD USER →", user);
+
 if(user){
 let data = localStorage.getItem("programme_"+user);
+
+console.log("LOAD DATA →", data);
 
 if(data){
 let prog = JSON.parse(data);
@@ -196,7 +198,6 @@ return;
 }
 }
 
-/* sinon */
 generer();
 }
 
@@ -209,11 +210,16 @@ if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
 if(!p || !n) return;
+
 user = makeId(p,n);
 localStorage.setItem("currentUser",user);
 }
 
-localStorage.setItem("programme_"+user,JSON.stringify(buildProgramme()));
+let prog = buildProgramme();
+
+localStorage.setItem("programme_"+user,JSON.stringify(prog));
+
+console.log("SAVE →", user, prog);
 
 alert("Programme enregistré !");
 }

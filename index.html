@@ -74,20 +74,29 @@ cursor:pointer;
 </div>
 
 <script>
+
+function makeId(p,n){
+return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
+}
+
 function acceder(){
 
-let p = prenom.value.trim();
-let n = nom.value.trim();
+let p = prenom.value;
+let n = nom.value;
 
 if(!p || !n){
 alert("Remplir les champs");
 return;
 }
 
-let id = p+"_"+n;
+let id = makeId(p,n);
+
+/* 🔥 ON FORCE */
 localStorage.setItem("currentUser", id);
 
-/* 🔥 accès direct */
+/* 🔥 DEBUG */
+console.log("LOGIN →", id);
+
 window.location="config.html";
 }
 
@@ -100,6 +109,7 @@ window.location="config.html";
 function zones(){
 window.location="pathologies.html";
 }
+
 </script>
 
 </body>
