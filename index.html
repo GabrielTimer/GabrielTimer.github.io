@@ -48,12 +48,6 @@ border:none;
 border-radius:12px;
 font-weight:bold;
 cursor:pointer;
-transition:0.2s;
-}
-
-button:hover{
-transform:scale(1.03);
-opacity:0.9;
 }
 
 .primary{background:#0e8f9b;color:white;}
@@ -76,10 +70,12 @@ opacity:0.9;
 <button class="primary" onclick="acceder()">📋 Accéder à mon programme</button>
 <button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
 <button class="patho" onclick="zones()">🩺 Pathologies</button>
+
 </div>
 
 <script>
 function acceder(){
+
 let p = prenom.value.trim();
 let n = nom.value.trim();
 
@@ -88,10 +84,16 @@ alert("Remplir les champs");
 return;
 }
 
-let id = p.toLowerCase()+"_"+n.toLowerCase();
+let id = p+"_"+n;
 localStorage.setItem("currentUser", id);
 
+/* 🔥 charge si existe */
+if(localStorage.getItem("programme_"+id)){
 window.location="config.html";
+}else{
+alert("Aucun programme enregistré");
+window.location="config.html";
+}
 }
 
 function modeLibre(){
@@ -100,7 +102,6 @@ localStorage.removeItem("pathologie");
 window.location="config.html";
 }
 
-/* 🔥 CORRECTION ICI */
 function zones(){
 window.location="pathologies.html";
 }

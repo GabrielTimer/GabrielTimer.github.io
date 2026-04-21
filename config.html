@@ -18,7 +18,7 @@ background:white;
 padding:20px;
 border-radius:15px;
 max-width:400px;
-width:90%;
+width:95%;
 margin:auto;
 margin-top:20px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
@@ -37,6 +37,7 @@ margin:4px 0;
 border-radius:10px;
 border:1px solid #ccc;
 font-size:14px;
+box-sizing:border-box;
 }
 
 label{
@@ -75,6 +76,7 @@ background:#eee;
 padding:10px;
 cursor:pointer;
 font-weight:bold;
+gap:10px;
 }
 
 .exoContent{
@@ -82,14 +84,8 @@ display:none;
 padding:10px;
 }
 
-.arrow{
-font-size:18px;
-}
-
-.resume{
-font-size:12px;
-color:#555;
-}
+.arrow{font-size:18px;}
+.resume{font-size:12px;color:#555;}
 </style>
 </head>
 
@@ -126,7 +122,7 @@ color:#555;
 
 <script>
 
-/* 🔥 GENERATION AVEC RESUME */
+/* GENERATION */
 function generer(){
 
 exo.innerHTML="";
@@ -137,10 +133,9 @@ let bloc=document.createElement("div");
 bloc.className="exoBloc";
 
 bloc.innerHTML=`
-
 <div class="exoHeader" onclick="toggle(${i})">
 <div>
-<span id="title${i}">▶ Exercice ${i+1}</span><br>
+<span>▶ Exercice ${i+1}</span><br>
 <span id="resume${i}" class="resume">20s / 15s / 3 reps</span>
 </div>
 <span id="arrow${i}" class="arrow">▶</span>
@@ -159,16 +154,13 @@ bloc.innerHTML=`
 <label>Répétitions</label>
 <input id="rep${i}" type="number" value="3" oninput="updateResume(${i})">
 </div>
-
 `;
 
 exo.appendChild(bloc);
 }
 }
 
-/* 🔽 toggle */
 function toggle(i){
-
 for(let j=0;j<nbEx.value;j++){
 document.getElementById("content"+j).style.display="none";
 document.getElementById("arrow"+j).innerText="▶";
@@ -186,55 +178,64 @@ a.innerText="▼";
 }
 }
 
-/* 🔥 MAJ RESUME */
 function updateResume(i){
-
 let ex=document.getElementById("ex"+i).value;
 let repos=document.getElementById("repos"+i).value;
 let rep=document.getElementById("rep"+i).value;
-
-document.getElementById("resume"+i).innerText=
-ex+"s / "+repos+"s / "+rep+" reps";
+document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
 }
 
-/* 🔹 charger */
+/* 🔥 CHARGER PATHO */
 function charger(){
-
 let patho = localStorage.getItem("pathologie");
-
-let img = document.getElementById("pathoImage");
-let printImg = document.getElementById("printImage");
-let btns = document.getElementById("imageButtons");
-
-if(!patho){
-generer();
-return;
-}
-
-let src="images/"+patho+"/cover.jpg";
-
-img.src=src;
-printImg.src=src;
-
-img.style.display="block";
-btns.style.display="block";
-
+if(!patho){generer(); return;}
+pathoImage.src="images/"+patho+"/cover.jpg";
+pathoImage.style.display="block";
 nbEx.value=8;
 generer();
 }
 
-/* PDF */
-function printPDF(){
-document.getElementById("printZone").style.display="flex";
-window.print();
-setTimeout(()=>document.getElementById("printZone").style.display="none",500);
+/* 🔥 CHARGER PROGRAMME PATIENT */
+function chargerProgramme(){
+let user = localStorage.getItem("currentUser");
+if(!user) return;
+
+let data = localStorage.getItem("programme_"+user);
+if(!data) return;
+
+let prog = JSON.parse(data);
+
+series.value = prog.series;
+nbEx.value = prog.exercices.length;
+generer();
+
+prog.exercices.forEach((e,i)=>{
+document.getElementById("nom"+i).value=e.nom;
+document.getElementById("ex"+i).value=e.ex;
+document.getElementById("repos"+i).value=e.repos;
+document.getElementById("rep"+i).value=e.reps;
+updateResume(i);
+});
 }
 
-/* BUILD PROGRAMME */
+/* SAVE */
+function save(){
+let user = localStorage.getItem("currentUser");
+if(!user){
+let p = prompt("Prénom");
+let n = prompt("Nom");
+if(!p || !n) return;
+user=p+"_"+n;
+localStorage.setItem("currentUser",user);
+}
+
+let prog=buildProgramme();
+localStorage.setItem("programme_"+user,JSON.stringify(prog));
+alert("Programme enregistré !");
+}
+
 function buildProgramme(){
-
 let list=[];
-
 for(let i=0;i<nbEx.value;i++){
 list.push({
 nom:document.getElementById("nom"+i).value,
@@ -243,41 +244,11 @@ repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
 });
 }
-
-return {
-exercices:list,
-series:+series.value
-};
+return {exercices:list,series:+series.value};
 }
 
-/* SAVE */
-function save(){
-
-let user = localStorage.getItem("currentUser");
-
-if(!user){
-let p = prompt("Prénom");
-let n = prompt("Nom");
-if(!p || !n) return;
-
-user = p+"_"+n;
-localStorage.setItem("currentUser", user);
-}
-
-let prog = buildProgramme();
-
-localStorage.setItem("programme_"+user,JSON.stringify(prog));
-
-alert("Programme enregistré !");
-}
-
-/* START */
 function start(){
-
-let prog = buildProgramme();
-
-localStorage.setItem("programme_temp",JSON.stringify(prog));
-
+localStorage.setItem("programme_temp",JSON.stringify(buildProgramme()));
 window.location="timer.html";
 }
 
@@ -287,6 +258,7 @@ window.location="index.html";
 
 /* INIT */
 charger();
+chargerProgramme();
 
 </script>
 
