@@ -166,17 +166,17 @@ let rep=document.getElementById("rep"+i).value;
 document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
 }
 
-/* 🔥 INIT ROBUSTE */
+/* 🔥 INIT ULTRA FIABLE */
 function init(){
 
 let user = localStorage.getItem("currentUser");
 
-console.log("LOAD USER →", user);
+console.log("USER →", user);
 
 if(user){
 let data = localStorage.getItem("programme_"+user);
 
-console.log("LOAD DATA →", data);
+console.log("DATA →", data);
 
 if(data){
 let prog = JSON.parse(data);
@@ -198,6 +198,7 @@ return;
 }
 }
 
+/* fallback */
 generer();
 }
 
