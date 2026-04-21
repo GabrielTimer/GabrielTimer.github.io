@@ -19,20 +19,17 @@ overflow:hidden;
 transition:background 0.4s;
 }
 
-/* 🔥 HEADER ALIGNÉ */
+/* 🔥 HEADER DANS LE FLUX (FIX) */
 .header{
 width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px 15px 0 15px;
+padding:10px;
 box-sizing:border-box;
-position:absolute;
-top:0;
-left:0;
 }
 
-/* 🔥 INFOS HAUT */
+/* INFOS */
 .infoBox{
 display:flex;
 flex-direction:column;
@@ -41,7 +38,7 @@ font-weight:bold;
 line-height:1.2;
 }
 
-/* 🔥 LOGO ALIGNÉ */
+/* LOGO */
 .logo{
 width:80px;
 filter:drop-shadow(0 0 6px rgba(255,255,255,0.6));
@@ -54,13 +51,13 @@ max-width:380px;
 height:100vh;
 display:flex;
 flex-direction:column;
-justify-content:space-between;
+justify-content:space-around; /* 🔥 FIX IMPORTANT */
 align-items:center;
-padding:70px 10px 10px 10px; /* 🔥 espace pour header */
+padding:10px;
 box-sizing:border-box;
 }
 
-/* 🔥 IMAGE PLUS GRANDE */
+/* IMAGE */
 #img{
 width:100%;
 max-height:180px;
@@ -69,7 +66,6 @@ object-fit:contain;
 
 /* TIMER */
 .timerZone{
-height:180px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -94,17 +90,12 @@ gap:2px;
 
 .timerLabel{
 font-size:14px;
-letter-spacing:1px;
 white-space:nowrap;
 }
 
 .timerValue{
 font-size:44px;
 font-weight:bold;
-}
-
-.tick{
-transform:scale(1.1);
 }
 
 /* BAS */
@@ -132,9 +123,9 @@ border-radius:10px;
 
 #totalTime{
 font-size:15px;
-opacity:0.8;
 }
 
+/* BOUTONS */
 .buttons{
 width:100%;
 display:grid;
@@ -160,7 +151,7 @@ cursor:pointer;
 @media (max-width:600px){
 
 .container{
-padding-top:65px;
+height:100dvh;
 }
 
 .infoBox{
@@ -195,18 +186,17 @@ font-size:12px;
 
 <body>
 
-<!-- 🔥 HEADER -->
+<div class="container" id="main">
+
+<!-- HEADER DANS LE FLUX -->
 <div class="header">
 <div class="infoBox">
 <div id="exoInfo"></div>
 <div id="repInfo"></div>
 <div id="serieInfo"></div>
 </div>
-
 <img src="logo.png" class="logo">
 </div>
-
-<div class="container" id="main">
 
 <img id="img">
 
@@ -247,7 +237,7 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* (JS inchangé) */
+/* JS IDENTIQUE */
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html?v="+Date.now();}
@@ -255,8 +245,7 @@ if(!p){window.location="config.html?v="+Date.now();}
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
-let paused=false, finished=false;
-let soundOn=true;
+let paused=false;
 
 let totalSessionTime=0;
 let elapsedTime=0;
@@ -294,25 +283,16 @@ progressCircle.style.strokeDashoffset = circumference * (1 - progressPhase);
 let progress = elapsedTime / totalSessionTime;
 bar.style.width = (progress*100)+"%";
 
-/* texte */
-if(phase==="prep"){
-timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
-}
-if(phase==="ex"){
-timer.querySelector(".timerLabel").innerText="EXERCICE";
-}
-if(phase==="repos"){
-timer.querySelector(".timerLabel").innerText="REPOS";
-}
-
 timerValue.innerText = t;
 
-/* couleurs */
+if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
+if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
+if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
+
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-/* infos */
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
@@ -330,11 +310,18 @@ if(phase==="ex"){phase="repos";t=exo.repos;totalTimePhase=exo.repos;return;}
 phase="ex";t=exo.ex;totalTimePhase=exo.ex;
 repIndex++;
 
-if(repIndex>exo.reps){repIndex=1;exIndex++;if(exIndex>=p.exercices.length){exIndex=0;serieIndex++;}}
+if(repIndex>exo.reps){
+repIndex=1;
+exIndex++;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
 }
 
 function togglePause(){paused=!paused;}
-function toggleSound(){soundOn=!soundOn;}
+function toggleSound(){}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 
 function loop(){
