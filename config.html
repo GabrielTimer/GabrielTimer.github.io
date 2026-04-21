@@ -24,12 +24,6 @@ margin-top:20px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
-
 input{
 width:100%;
 padding:10px;
@@ -59,7 +53,6 @@ cursor:pointer;
 .save{background:#2ecc71;color:white;}
 .start{background:#0e8f9b;color:white;}
 .home{background:#777;color:white;}
-.pdf{background:#9c27b0;color:white;}
 
 .exoBloc{
 background:#f9f9f9;
@@ -95,8 +88,6 @@ padding:10px;
 
 <h2>Configurer la séance</h2>
 
-<img id="pathoImage" style="display:none;">
-
 <label>Nombre d'exercices</label>
 <input type="number" id="nbEx" value="5" onchange="generer()">
 
@@ -113,13 +104,15 @@ padding:10px;
 
 <script>
 
+/* 🔥 NORMALISATION */
+function makeId(p,n){
+return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
+}
+
 /* GENERATION */
 function generer(){
-
 exo.innerHTML="";
-
 for(let i=0;i<nbEx.value;i++){
-
 let bloc=document.createElement("div");
 bloc.className="exoBloc";
 
@@ -175,11 +168,13 @@ let rep=document.getElementById("rep"+i).value;
 document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
 }
 
-/* 🔥 CHARGEMENT UNIQUE */
+/* INIT */
 function init(){
 
 let user = localStorage.getItem("currentUser");
-let data = user ? localStorage.getItem("programme_"+user) : null;
+
+if(user){
+let data = localStorage.getItem("programme_"+user);
 
 if(data){
 let prog = JSON.parse(data);
@@ -197,9 +192,12 @@ document.getElementById("rep"+i).value=e.reps;
 updateResume(i);
 });
 
-}else{
-generer();
+return;
 }
+}
+
+/* sinon */
+generer();
 }
 
 /* SAVE */
@@ -211,7 +209,7 @@ if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
 if(!p || !n) return;
-user=p+"_"+n;
+user = makeId(p,n);
 localStorage.setItem("currentUser",user);
 }
 
@@ -242,7 +240,6 @@ function home(){
 window.location="index.html";
 }
 
-/* INIT */
 init();
 
 </script>
