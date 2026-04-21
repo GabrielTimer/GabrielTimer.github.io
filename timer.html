@@ -143,6 +143,7 @@ font-weight:bold;
 
 <div class="timerZone">
 <div class="circleWrap">
+
 <svg viewBox="0 0 100 100">
 <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
 <circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
@@ -150,7 +151,7 @@ font-weight:bold;
 
 <div id="timer">
 <div class="timerLabel"></div>
-<div id="timerValue"></div>
+<div class="timerValue" id="timerValue"></div>
 </div>
 
 </div>
@@ -173,31 +174,39 @@ font-weight:bold;
 <script>
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-let exIndex=0, repIndex=1, serieIndex=1;
 
+let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
 let paused=false;
+let soundOn=true;
 
 let totalSessionTime=0;
 let elapsedTime=0;
 
+let radius=45;
+let circumference=2*Math.PI*radius;
+progressCircle.style.strokeDasharray=circumference;
+
 p.exercices.forEach(exo=>{
-totalSessionTime += (exo.ex + exo.repos) * exo.reps;
+totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
 });
-totalSessionTime *= p.series;
+totalSessionTime*=p.series;
 
 function update(){
 
-bar.style.width = (elapsedTime/totalSessionTime*100)+"%";
+let progress = 1 - (t / totalTimePhase);
+progressCircle.style.strokeDashoffset = circumference * progress;
+
+bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
 
-exoInfo.innerText = exo.nom;
-repInfo.innerText = "Rép "+repIndex+"/"+exo.reps;
-serieInfo.innerText = "Série "+serieIndex+"/"+p.series;
+exoInfo.innerText=exo.nom;
+repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
+serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-timerValue.innerText = t;
+timerValue.innerText=t;
 
 if(phase==="repos"){
 img.style.display="none";
@@ -207,31 +216,57 @@ img.style.display="block";
 restText.style.display="none";
 img.src="images/ex"+(exIndex+1)+".jpg";
 }
+
 }
 
-/* 🔥 CORRECTION PRINCIPALE */
-function nextExercise(){
+function next(){
+let exo=p.exercices[exIndex];
 
-let exo = p.exercices[exIndex];
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+return;
+}
 
-/* avancer correctement le temps total */
-elapsedTime += (exo.ex + exo.repos);
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+return;
+}
 
-/* avancer index */
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+
+repIndex++;
+
+if(repIndex>exo.reps){
+repIndex=1;
 exIndex++;
-repIndex = 1;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
+}
 
-if(exIndex >= p.exercices.length){
-exIndex = 0;
+/* 🔥 VERSION STABLE */
+function nextExercise(){
+exIndex++;
+repIndex=1;
+
+if(exIndex>=p.exercices.length){
+exIndex=0;
 serieIndex++;
 }
 
-/* reset phase */
-let newExo = p.exercices[exIndex];
+let exo=p.exercices[exIndex];
 
 phase="ex";
-t=newExo.ex;
-totalTimePhase=newExo.ex;
+t=exo.ex;
+totalTimePhase=exo.ex;
 
 update();
 }
@@ -249,24 +284,9 @@ next();
 update();
 }
 
-function next(){
-let exo=p.exercices[exIndex];
-
-if(phase==="ex"){
-phase="repos";
-t=exo.repos;
-return;
-}
-
-phase="ex";
-t=exo.ex;
-repIndex++;
-
-if(repIndex>exo.reps){
-repIndex=1;
-exIndex++;
-}
-}
+function togglePause(){paused=!paused;}
+function toggleSound(){soundOn=!soundOn;}
+function back(){window.location="config.html";}
 
 setInterval(loop,1000);
 update();
