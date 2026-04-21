@@ -46,11 +46,29 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
+/* 🔥 ZONE IMAGE / TEXTE */
+.imageZone{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+position:relative;
+}
+
+/* IMAGE */
 #img{
-width:100%;
-max-height:180px;
+max-width:100%;
+max-height:100%;
 object-fit:contain;
-margin-top:5px;
+}
+
+/* 🔥 TEXTE REPOS */
+#restText{
+position:absolute;
+font-size:48px;
+font-weight:bold;
+display:none;
 }
 
 /* cercle */
@@ -59,7 +77,7 @@ flex:1;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin-bottom:12px;
+margin-bottom:6px;
 }
 
 .circleWrap{
@@ -147,7 +165,10 @@ button:active{transform:scale(0.95);}
 <img src="logo.png" class="logo">
 </div>
 
+<div class="imageZone">
 <img id="img">
+<div id="restText">REPOS</div>
+</div>
 
 <div class="timerZone">
 <div class="circleWrap">
@@ -190,11 +211,11 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
 const timerLabel = document.querySelector(".timerLabel");
+const restText = document.getElementById("restText");
 
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
@@ -205,12 +226,10 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -282,7 +301,17 @@ repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
 let patho = localStorage.getItem("pathologie");
+
+/* 🔥 SWITCH IMAGE / REPOS */
+if(phase==="repos"){
+img.style.display="none";
+restText.style.display="block";
+}else{
+img.style.display="block";
+restText.style.display="none";
 img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
+}
+
 }
 
 /* LOGIQUE */
@@ -326,7 +355,6 @@ serieIndex++;
 update();
 }
 
-/* LOOP STABLE */
 function loop(){
 if(paused)return;
 
@@ -343,7 +371,6 @@ update();
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-/* START */
 update();
 setInterval(loop,1000);
 
