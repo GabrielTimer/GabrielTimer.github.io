@@ -18,9 +18,11 @@ margin-top:20px;
 
 /* CARD */
 .card{
-position:relative;
+display:flex;
+align-items:center;
+justify-content:space-between;
 width:90%;
-max-width:350px;
+max-width:420px;
 margin:15px auto;
 background:white;
 border-radius:15px;
@@ -28,7 +30,6 @@ padding:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 cursor:pointer;
 transition:transform 0.2s, box-shadow 0.2s;
-overflow:hidden;
 }
 
 .card:hover{
@@ -36,45 +37,34 @@ transform:scale(1.03);
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-.card:active{
-transform:scale(0.97);
+/* zone image + titre */
+.content{
+flex:1;
 }
 
-img{
+.content img{
 width:100%;
 border-radius:10px;
 }
 
-/* overlay bouton */
-.overlay{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.4);
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-transition:opacity 0.2s;
+h3{
+margin-top:8px;
 }
 
-.card:hover .overlay{
-opacity:1;
-}
-
-.overlay button{
-background:white;
+/* bouton PDF */
+.pdfBtn{
+margin-left:10px;
+background:#00e5ff;
 border:none;
-padding:10px 15px;
+padding:10px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
+white-space:nowrap;
 }
 
-.overlay button:hover{
-background:#00e5ff;
+.pdfBtn:hover{
+background:#00c4dd;
 }
 
 /* fallback image */
@@ -110,7 +100,7 @@ font-weight:bold;
 
 <script>
 
-/* CONFIG PATHOS */
+/* CONFIG */
 const data = {
 
 epaule: [
@@ -126,94 +116,65 @@ dos: [
 let zone = localStorage.getItem("zone");
 let container = document.getElementById("list");
 
-/* sécurité */
 if(!zone){
 window.location="pathologies.html";
 }
 
-/* affichage */
-if(data[zone]){
-
+/* AFFICHAGE */
 data[zone].forEach(p=>{
 
-let div=document.createElement("div");
-div.className="card";
+let div = document.createElement("div");
+div.className = "card";
+
+/* CONTENU */
+let content = document.createElement("div");
+content.className = "content";
 
 /* IMAGE */
 let img = document.createElement("img");
 img.src = "images/"+p.dossier+"/cover.png?v="+Date.now();
 
-/* fallback image */
+/* fallback */
 img.onerror = function(){
 this.style.display="none";
 let err = document.createElement("div");
 err.className="img-error";
-err.innerText = "Image indisponible";
-div.prepend(err);
+err.innerText="Image indisponible";
+content.appendChild(err);
 };
 
-/* OVERLAY */
-let overlay = document.createElement("div");
-overlay.className = "overlay";
-
-let btn = document.createElement("button");
-btn.innerText = "🖨️ Imprimer / Enregistrer";
-
-btn.onclick = function(e){
-e.stopPropagation();
-printCard(p.dossier);
-};
-
-overlay.appendChild(btn);
+content.appendChild(img);
 
 /* TITRE */
 let title = document.createElement("h3");
 title.innerText = p.nom;
+content.appendChild(title);
 
-/* CLICK CARD */
-div.onclick=()=>{
-localStorage.setItem("pathologie", p.dossier);
-window.location="config.html?v="+Date.now();
+/* BOUTON PDF */
+let btn = document.createElement("button");
+btn.className = "pdfBtn";
+btn.innerText = "📄 PDF";
+
+btn.onclick = function(e){
+e.stopPropagation();
+window.open("images/"+p.dossier+"/fiche.pdf");
 };
 
-/* APPEND */
-div.appendChild(img);
-div.appendChild(overlay);
-div.appendChild(title);
+/* CLICK CARD = séance */
+div.onclick = ()=>{
+localStorage.setItem("pathologie", p.dossier);
+window.location = "config.html?v="+Date.now();
+};
+
+/* STRUCTURE */
+div.appendChild(content);
+div.appendChild(btn);
 
 container.appendChild(div);
 
 });
 
-}else{
-container.innerHTML = "<p>Aucune pathologie trouvée</p>";
-}
-
-/* IMPRESSION */
-function printCard(dossier){
-
-let url = "images/"+dossier+"/cover.png";
-
-let win = window.open("");
-
-win.document.write(`
-<html>
-<head>
-<title>Impression</title>
-</head>
-<body style="text-align:center;">
-<img src="${url}" style="max-width:100%;">
-<script>
-window.onload = function(){
-window.print();
-}
-<\/script>
-</body>
-</html>
-`);
-}
-
-/* retour */
+/* RETOUR */
 function back(){
 window.location="pathologies.html?v="+Date.now();
 }
