@@ -97,15 +97,6 @@ padding:10px;
 
 <img id="pathoImage" style="display:none;">
 
-<div id="imageButtons" style="display:none;">
-<button class="pdf" onclick="printPDF()">📄 Télécharger PDF</button>
-<button class="pdf" onclick="printPDF()">🖨️ Imprimer</button>
-</div>
-
-<div id="printZone" style="display:none;">
-<img id="printImage">
-</div>
-
 <label>Nombre d'exercices</label>
 <input type="number" id="nbEx" value="5" onchange="generer()">
 
@@ -160,15 +151,14 @@ exo.appendChild(bloc);
 }
 }
 
+/* TOGGLE */
 function toggle(i){
 for(let j=0;j<nbEx.value;j++){
 document.getElementById("content"+j).style.display="none";
 document.getElementById("arrow"+j).innerText="▶";
 }
-
 let c=document.getElementById("content"+i);
 let a=document.getElementById("arrow"+i);
-
 if(c.style.display==="block"){
 c.style.display="none";
 a.innerText="▶";
@@ -185,28 +175,18 @@ let rep=document.getElementById("rep"+i).value;
 document.getElementById("resume"+i).innerText=ex+"s / "+repos+"s / "+rep+" reps";
 }
 
-/* 🔥 CHARGER PATHO */
-function charger(){
-let patho = localStorage.getItem("pathologie");
-if(!patho){generer(); return;}
-pathoImage.src="images/"+patho+"/cover.jpg";
-pathoImage.style.display="block";
-nbEx.value=8;
-generer();
-}
+/* 🔥 CHARGEMENT UNIQUE */
+function init(){
 
-/* 🔥 CHARGER PROGRAMME PATIENT */
-function chargerProgramme(){
 let user = localStorage.getItem("currentUser");
-if(!user) return;
+let data = user ? localStorage.getItem("programme_"+user) : null;
 
-let data = localStorage.getItem("programme_"+user);
-if(!data) return;
-
+if(data){
 let prog = JSON.parse(data);
 
 series.value = prog.series;
 nbEx.value = prog.exercices.length;
+
 generer();
 
 prog.exercices.forEach((e,i)=>{
@@ -216,11 +196,17 @@ document.getElementById("repos"+i).value=e.repos;
 document.getElementById("rep"+i).value=e.reps;
 updateResume(i);
 });
+
+}else{
+generer();
+}
 }
 
 /* SAVE */
 function save(){
+
 let user = localStorage.getItem("currentUser");
+
 if(!user){
 let p = prompt("Prénom");
 let n = prompt("Nom");
@@ -229,8 +215,8 @@ user=p+"_"+n;
 localStorage.setItem("currentUser",user);
 }
 
-let prog=buildProgramme();
-localStorage.setItem("programme_"+user,JSON.stringify(prog));
+localStorage.setItem("programme_"+user,JSON.stringify(buildProgramme()));
+
 alert("Programme enregistré !");
 }
 
@@ -257,8 +243,7 @@ window.location="index.html";
 }
 
 /* INIT */
-charger();
-chargerProgramme();
+init();
 
 </script>
 

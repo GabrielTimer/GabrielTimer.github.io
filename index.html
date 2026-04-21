@@ -87,13 +87,8 @@ return;
 let id = p+"_"+n;
 localStorage.setItem("currentUser", id);
 
-/* 🔥 charge si existe */
-if(localStorage.getItem("programme_"+id)){
+/* 🔥 accès direct */
 window.location="config.html";
-}else{
-alert("Aucun programme enregistré");
-window.location="config.html";
-}
 }
 
 function modeLibre(){
