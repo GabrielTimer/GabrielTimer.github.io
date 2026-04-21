@@ -250,8 +250,8 @@ serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 /* IMAGE */
 let patho=localStorage.getItem("pathologie");
 
-if(patho==="epaule" && phase==="ex"){
-img.src="tendinitedelacoiffe"+(exIndex+1)+".jpg";
+if(patho && phase==="ex"){
+img.src="images/"+patho+"/ex"+(exIndex+1)+".jpg";
 }else{
 img.src="";
 }

@@ -3,29 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zones</title>
+<title>ZONES</title>
 
 <style>
-body{
-font-family:Arial;
-background:#f4f4f4;
-text-align:center;
-margin:0;
-}
-
-.container{
-max-width:400px;
-margin:auto;
-padding:20px;
-}
-
+body{font-family:Arial;background:#f4f4f4;text-align:center;}
 button{
-width:100%;
+width:90%;
 padding:15px;
-margin:10px 0;
+margin:10px;
 border:none;
 border-radius:10px;
-font-size:18px;
+font-size:16px;
 cursor:pointer;
 background:#0e8f9b;
 color:white;
@@ -35,29 +23,24 @@ color:white;
 
 <body>
 
-<div class="container">
-
 <h2>Choisir une zone</h2>
 
-<button onclick="go('epaule')">💪 Épaule</button>
-<button onclick="go('dos')">🦴 Dos</button>
-<button onclick="go('genou')">🦵 Genou</button>
+<button onclick="goZone('epaule')">💪 Membre supérieur</button>
+<button onclick="goZone('dos')">🦴 Dos</button>
+<button onclick="goZone('genou')">🦵 Membre inférieur</button>
+<button onclick="goZone('cervical')">🧠 Cervicales</button>
+<button onclick="goZone('autre')">➕ Autres</button>
 
 <button onclick="back()">⬅ Retour</button>
 
-</div>
-
 <script>
-
-function go(p){
-localStorage.setItem("pathologie", p);
-window.location="config.html";
+function goZone(z){
+localStorage.setItem("zone", z);
+window.location="liste_pathologies.html";
 }
-
 function back(){
 window.location="index.html";
 }
-
 </script>
 
 </body>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pathologies</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;}
+
+.card{
+width:90%;
+max-width:350px;
+margin:10px auto;
+background:white;
+border-radius:15px;
+padding:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+img{
+width:100%;
+border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Choisir une pathologie</h2>
+
+<div id="list"></div>
+
+<button onclick="back()">⬅ Retour</button>
+
+<script>
+
+/* 🔥 CONFIG PATHOS */
+const data = {
+epaule: [
+{nom:"Tendinite coiffe", dossier:"tendinite_coiffe"}
+]
+};
+
+let zone = localStorage.getItem("zone");
+
+let container = document.getElementById("list");
+
+if(data[zone]){
+data[zone].forEach(p=>{
+
+let div=document.createElement("div");
+div.className="card";
+
+div.innerHTML = `
+<img src="images/${p.dossier}/cover.jpg">
+<h3>${p.nom}</h3>
+`;
+
+div.onclick=()=>{
+localStorage.setItem("pathologie", p.dossier);
+window.location="config.html";
+};
+
+container.appendChild(div);
+
+});
+}
+
+function back(){
+window.location="pathologies.html";
+}
+
+</script>
+
+</body>
+</html>
