@@ -92,6 +92,12 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+#totalTime{
+font-size:16px;
+margin-top:5px;
+opacity:0.8;
+}
+
 .buttons{
 width:100%;
 display:grid;
@@ -163,6 +169,7 @@ stroke-dashoffset="440"/>
 </div>
 
 <div class="barContainer"><div id="bar"></div></div>
+<div id="totalTime"></div>
 
 <div class="buttons">
 <button id="pauseBtn" class="pause" onclick="togglePause()">⏸ Pause</button>
@@ -180,7 +187,7 @@ stroke-dashoffset="440"/>
 
 <script>
 
-/* RECUP PROGRAMME */
+/* RECUP */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){
 window.location="config.html?v="+Date.now();
@@ -189,14 +196,35 @@ window.location="config.html?v="+Date.now();
 /* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
-let t=3, totalTime=3;
+let t=3, totalTimePhase=3;
 let paused=false, finished=false;
 let soundOn=true;
 
+let totalSessionTime=0;
+let elapsedTime=0;
+
+/* CALCUL TEMPS TOTAL */
+function computeTotal(){
+p.exercices.forEach(exo=>{
+totalSessionTime += (exo.ex + exo.repos) * exo.reps;
+});
+totalSessionTime *= p.series;
+let last = p.exercices[p.exercices.length-1];
+totalSessionTime -= last.repos;
+}
+computeTotal();
+
+/* FORMAT */
+function formatTime(sec){
+let m = Math.floor(sec/60);
+let s = sec%60;
+return m+":"+(s<10?"0"+s:s);
+}
+
 /* VOIX */
-function speak(text){
+function speak(t){
 if(!soundOn) return;
-let u=new SpeechSynthesisUtterance(text);
+let u=new SpeechSynthesisUtterance(t);
 u.lang="fr-FR";
 speechSynthesis.speak(u);
 }
@@ -215,12 +243,18 @@ setTimeout(()=>o.stop(),150);
 /* UPDATE */
 function update(){
 
-if(finished) return;
-
 let exo = p.exercices[exIndex];
 
-progressCircle.style.strokeDashoffset=440*(1-(t/totalTime));
-bar.style.width=(1-(t/totalTime))*100+"%";
+progressCircle.style.strokeDashoffset=440*(1-(t/totalTimePhase));
+
+/* BARRE GLOBALE */
+let progress = elapsedTime / totalSessionTime;
+bar.style.width = (progress*100)+"%";
+
+/* TEMPS RESTANT */
+let remaining = totalSessionTime - elapsedTime;
+if(remaining < 0) remaining = 0;
+totalTime.innerText = "Temps restant : " + formatTime(remaining);
 
 /* COULEURS */
 if(phase==="prep") document.body.style.background="#1b5e20";
@@ -263,7 +297,7 @@ let exo = p.exercices[exIndex];
 if(phase==="prep"){
 phase="ex";
 t=exo.ex;
-totalTime=exo.ex;
+totalTimePhase=exo.ex;
 beep();
 return;
 }
@@ -271,15 +305,14 @@ return;
 if(phase==="ex"){
 phase="repos";
 t=exo.repos;
-totalTime=exo.repos;
+totalTimePhase=exo.repos;
 speak("repos");
 return;
 }
 
-/* retour exercice */
 phase="ex";
 t=exo.ex;
-totalTime=exo.ex;
+totalTimePhase=exo.ex;
 beep();
 
 repIndex++;
@@ -324,7 +357,7 @@ exIndex++;
 if(exIndex>=p.exercices.length) exIndex=0;
 phase="ex";
 t=p.exercices[exIndex].ex;
-totalTime=t;
+totalTimePhase=t;
 update();
 }
 
@@ -335,8 +368,12 @@ window.location="config.html?v="+Date.now();
 /* LOOP */
 function loop(){
 if(paused||finished) return;
+
 t--;
+elapsedTime++;
+
 update();
+
 if(t<=0) next();
 }
 
