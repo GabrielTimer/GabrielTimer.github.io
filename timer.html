@@ -135,7 +135,7 @@ font-size:22px;
 text-align:center;
 }
 
-/* 📱 MOBILE FIX PROPRE */
+/* 📱 MOBILE FIX FINAL */
 @media (max-width:600px){
 
 .container{
@@ -154,21 +154,21 @@ height:auto;
 }
 
 .circleWrap{
-width:120px;
-height:120px;
+width:110px;
+height:110px;
 }
 
 svg{
-width:120px;
-height:120px;
+width:110px;
+height:110px;
 }
 
 #timer{
-font-size:28px;
+font-size:24px;
 }
 
 #img{
-max-height:80px;
+max-height:70px;
 }
 
 .buttons{
@@ -177,7 +177,7 @@ gap:6px;
 }
 
 button{
-height:36px;
+height:34px;
 font-size:12px;
 }
 
@@ -206,16 +206,15 @@ margin-top:2px;
 
 <div class="timerZone">
 <div class="circleWrap">
-<svg width="160" height="160">
-<circle cx="80" cy="80" r="70" stroke="rgba(255,255,255,0.2)" stroke-width="10" fill="none"/>
+<svg id="svgCircle" width="160" height="160">
+<circle id="bgCircle" cx="80" cy="80" r="70"
+stroke="rgba(255,255,255,0.2)" stroke-width="10" fill="none"/>
 <circle id="progressCircle"
 cx="80" cy="80" r="70"
 stroke="#00e5ff"
 stroke-width="10"
 fill="none"
-transform="rotate(-90 80 80)"
-stroke-dasharray="440"
-stroke-dashoffset="440"/>
+transform="rotate(-90 80 80)"/>
 </svg>
 <div id="timer">0</div>
 </div>
@@ -255,6 +254,12 @@ let soundOn=true;
 
 let totalSessionTime=0;
 let elapsedTime=0;
+
+/* 🔥 CERCLE RESPONSIVE */
+let radius = 70;
+let circumference = 2 * Math.PI * radius;
+progressCircle.style.strokeDasharray = circumference;
+progressCircle.style.strokeDashoffset = circumference;
 
 /* CALCUL */
 function computeTotal(){
@@ -297,18 +302,21 @@ setTimeout(()=>o.stop(),150);
 function update(){
 let exo = p.exercices[exIndex];
 
-progressCircle.style.strokeDashoffset=440*(1-(t/totalTimePhase));
+/* cercle FIX */
+let progressPhase = 1 - (t / totalTimePhase);
+progressCircle.style.strokeDashoffset = circumference * (1 - progressPhase);
 
+/* barre globale */
 let progress = elapsedTime / totalSessionTime;
 if(progress>1) progress=1;
 bar.style.width = (progress*100)+"%";
 
-/* COULEURS */
+/* couleurs */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-/* TEXTE */
+/* texte */
 if(phase==="prep"){
 timer.innerHTML="PRÉPAREZ-VOUS<br>"+t;
 if(t===3) speak("Préparez vous");
@@ -322,7 +330,7 @@ if(phase==="repos"){
 timer.innerHTML="REPOS<br>"+t;
 }
 
-/* INFOS */
+/* infos */
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
@@ -331,7 +339,7 @@ let patho=localStorage.getItem("pathologie");
 img.src=(patho && phase==="ex")?"images/"+patho+"/ex"+(exIndex+1)+".jpg":"";
 }
 
-/* LOGIQUE */
+/* logique */
 function next(){
 let exo = p.exercices[exIndex];
 
@@ -345,7 +353,7 @@ if(repIndex>exo.reps){repIndex=1;exIndex++;if(exIndex>=p.exercices.length){exInd
 if(serieIndex>p.series) endSession();
 }
 
-/* FIN */
+/* fin */
 function endSession(){
 finished=true;
 main.style.display="none";
@@ -353,13 +361,13 @@ endScreen.style.display="flex";
 speak("Bravo");
 }
 
-/* CONTROLES */
+/* controls */
 function togglePause(){paused=!paused;pauseBtn.innerText=paused?"▶ Reprendre":"⏸ Pause";}
 function toggleSound(){soundOn=!soundOn;soundBtn.innerText=soundOn?"🔊 Son":"🔇 Son";}
 function nextExercise(){repIndex=1;exIndex++;if(exIndex>=p.exercices.length) exIndex=0;phase="ex";t=p.exercices[exIndex].ex;totalTimePhase=t;update();}
 function back(){window.location="config.html?v="+Date.now();}
 
-/* LOOP */
+/* loop */
 function loop(){if(paused||finished) return;t--;elapsedTime++;update();if(t<=0) next();}
 update();
 setInterval(loop,1000);
