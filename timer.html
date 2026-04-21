@@ -30,7 +30,6 @@ padding:8px;
 box-sizing:border-box;
 }
 
-/* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
@@ -48,7 +47,6 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-/* 🔥 IMAGE PLUS GRANDE */
 #img{
 width:100%;
 max-height:180px;
@@ -57,7 +55,6 @@ flex-shrink:0;
 margin-top:5px;
 }
 
-/* 🔥 TIMER DESCENDU */
 .timerZone{
 flex:1;
 display:flex;
@@ -88,7 +85,6 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* BAS */
 .bottomBlock{
 flex-shrink:0;
 margin-top:2px;
@@ -113,7 +109,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* 🔥 BOUTONS LISIBLES */
 .buttons{
 flex-shrink:0;
 display:grid;
@@ -136,6 +131,10 @@ font-weight:bold;
 .next{background:#4caf50;}
 .sound{background:#555;}
 .back{background:#777;}
+
+button:active{
+transform:scale(0.95);
+}
 </style>
 </head>
 
@@ -181,9 +180,9 @@ transform="rotate(-90 50 50)"/>
 </div>
 
 <div class="buttons">
-<button onclick="togglePause()">⏸ Pause</button>
+<button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
 <button onclick="nextExercise()">⏭ Exercice</button>
-<button onclick="toggleSound()">🔊 Son</button>
+<button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
 <button onclick="back()">⚙️ Réglages</button>
 </div>
 
@@ -191,11 +190,9 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* PROGRAMME */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
-/* VARIABLES */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
@@ -205,12 +202,10 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* CERCLE */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* CALCUL */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -227,7 +222,7 @@ return m+":"+(s%60<10?"0":"")+s%60;
 
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
-/* SON */
+/* 🔊 SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -245,9 +240,19 @@ u.lang="fr-FR";
 speechSynthesis.speak(u);
 }
 
-function toggleSound(){soundOn=!soundOn;}
+function toggleSound(){
+soundOn=!soundOn;
+let btn=document.getElementById("soundBtn");
+btn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
+}
 
-/* UPDATE */
+/* ⏸ PAUSE */
+function togglePause(){
+paused=!paused;
+let btn=document.getElementById("pauseBtn");
+btn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
+}
+
 function update(){
 
 if(phase==="prep") document.body.style.background="#1b5e20";
@@ -270,13 +275,8 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* IMAGE */
 let patho = localStorage.getItem("pathologie");
-if(patho){
-img.src = "images/" + patho + "/ex" + (exIndex+1) + ".jpg";
-}else{
-img.src = "";
-}
+img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 }
 
 function next(){
@@ -298,7 +298,6 @@ serieIndex++;
 }
 }
 
-function togglePause(){paused=!paused;}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
