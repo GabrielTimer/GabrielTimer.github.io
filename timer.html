@@ -16,6 +16,8 @@ justify-content:center;
 align-items:center;
 height:100dvh;
 overflow:hidden;
+transition:background 0.3s;
+padding-bottom:env(safe-area-inset-bottom);
 }
 
 .container{
@@ -34,40 +36,30 @@ justify-content:space-between;
 align-items:center;
 }
 
-.infoBox{font-size:15px;font-weight:bold;}
+.infoBox{
+font-size:15px;
+font-weight:bold;
+}
 
 .logo{
 width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-.imageZone{
-flex:1;
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
-
 #img{
-max-width:100%;
-max-height:100%;
+width:100%;
+max-height:180px;
 object-fit:contain;
+margin-top:5px;
 }
 
-#restText{
-position:absolute;
-font-size:48px;
-font-weight:bold;
-display:none;
-}
-
+/* cercle */
 .timerZone{
 flex:1;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin-bottom:6px;
+margin-bottom:12px;
 }
 
 .circleWrap{
@@ -85,7 +77,22 @@ text-align:center;
 }
 
 .timerLabel{font-size:13px;}
-.timerValue{font-size:42px;font-weight:bold;}
+.timerValue{
+font-size:42px;
+font-weight:bold;
+transition:transform .15s;
+}
+.tick{transform:scale(1.15);}
+
+/* bas */
+.bottomBlock{
+text-align:center;
+}
+
+#totalTime{
+font-size:12px;
+margin-bottom:2px;
+}
 
 .barContainer{
 height:4px;
@@ -97,8 +104,10 @@ border-radius:10px;
 height:100%;
 width:0%;
 background:#00e5ff;
+border-radius:10px;
 }
 
+/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -112,8 +121,16 @@ border:none;
 border-radius:10px;
 background:#d0d0d0;
 color:#222;
+font-size:13px;
 font-weight:bold;
 }
+
+.pause{background:#ff9800;}
+.next{background:#4caf50;}
+.sound{background:#bdbdbd;}
+.back{background:#9e9e9e;}
+
+button:active{transform:scale(0.95);}
 </style>
 </head>
 
@@ -130,62 +147,55 @@ font-weight:bold;
 <img src="logo.png" class="logo">
 </div>
 
-<div class="imageZone">
 <img id="img">
-<div id="restText">REPOS</div>
-</div>
 
 <div class="timerZone">
 <div class="circleWrap">
 
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
-<circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="45"
+stroke="rgba(255,255,255,0.2)"
+stroke-width="6"
+fill="none"/>
+
+<circle id="progressCircle"
+cx="50" cy="50" r="45"
+stroke="#00e5ff"
+stroke-width="6"
+fill="none"
+transform="rotate(-90 50 50)"/>
 </svg>
 
 <div id="timer">
-<div class="timerLabel"></div>
-<div class="timerValue" id="timerValue"></div>
+<div class="timerLabel">PRÉPAREZ VOUS</div>
+<div class="timerValue" id="timerValue">0</div>
 </div>
 
 </div>
 </div>
 
-<div>
+<div class="bottomBlock">
 <div id="totalTime"></div>
 <div class="barContainer"><div id="bar"></div></div>
 </div>
 
 <div class="buttons">
-<button onclick="togglePause()">⏸</button>
-<button onclick="nextExercise()">⏭</button>
-<button onclick="toggleSound()">🔊</button>
-<button onclick="back()">⚙️</button>
+<button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+<button onclick="nextExercise()">⏭ Exercice</button>
+<button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
+<button onclick="back()">⚙️ Réglages</button>
 </div>
 
 </div>
 
 <script>
 
-/* SAFE START */
-window.onload = function(){
-
+/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
-/* DOM */
 const timerLabel = document.querySelector(".timerLabel");
-const timerValue = document.getElementById("timerValue");
-const progressCircle = document.getElementById("progressCircle");
-const bar = document.getElementById("bar");
-const img = document.getElementById("img");
-const restText = document.getElementById("restText");
-const exoInfo = document.getElementById("exoInfo");
-const repInfo = document.getElementById("repInfo");
-const serieInfo = document.getElementById("serieInfo");
-const totalTime = document.getElementById("totalTime");
 
-/* STATE */
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
@@ -200,81 +210,142 @@ let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* total */
+/* calcul */
+function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
 });
 totalSessionTime*=p.series;
+totalSessionTime-=p.exercices[p.exercices.length-1].repos;
+}
+computeTotal();
 
-totalTime.innerText="Durée : "+totalSessionTime+"s";
+function formatTime(s){
+let m=Math.floor(s/60);
+return m+":"+(s%60<10?"0":"")+s%60;
+}
 
-/* update */
+totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
+
+/* SON */
+function beep(){
+if(!soundOn)return;
+let ctx=new AudioContext();
+let o=ctx.createOscillator();
+o.frequency.value=800;
+o.connect(ctx.destination);
+o.start();
+setTimeout(()=>o.stop(),150);
+}
+
+function speak(t){
+if(!soundOn)return;
+let u=new SpeechSynthesisUtterance(t);
+u.lang="fr-FR";
+speechSynthesis.speak(u);
+}
+
+function toggleSound(){
+soundOn=!soundOn;
+soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
+}
+
+function togglePause(){
+paused=!paused;
+pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
+}
+
+/* UPDATE */
 function update(){
 
-progressCircle.style.strokeDashoffset = circumference * (1 - t/totalTimePhase);
+let progress = 1 - (t / totalTimePhase);
+progressCircle.style.strokeDashoffset = circumference * progress;
+
+if(phase==="prep") document.body.style.background="#1b5e20";
+if(phase==="ex") document.body.style.background="#b71c1c";
+if(phase==="repos") document.body.style.background="#0d47a1";
+
+timerValue.classList.add("tick");
+setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
+
+if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
+if(phase==="ex") timerLabel.innerText="EXERCICE";
+if(phase==="repos") timerLabel.innerText="REPOS";
+
+bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
-
-if(phase==="repos"){
-img.style.display="none";
-restText.style.display="block";
-}else{
-img.style.display="block";
-restText.style.display="none";
-img.src="images/ex"+(exIndex+1)+".jpg";
-}
+let patho = localStorage.getItem("pathologie");
+img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 }
 
-/* logique */
+/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
-if(phase==="prep"){phase="ex";t=exo.ex;return;}
-if(phase==="ex"){phase="repos";t=exo.repos;return;}
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+update();
+return;
+}
+
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
+update();
+return;
+}
 
 phase="ex";
 t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+
 repIndex++;
 
 if(repIndex>exo.reps){
 repIndex=1;
 exIndex++;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
 }
 }
 
-/* FIX bouton */
-window.nextExercise = function(){
-exIndex++;
-repIndex=1;
-phase="ex";
-t=p.exercices[exIndex].ex;
 update();
 }
 
-/* loop */
+/* LOOP STABLE */
 function loop(){
 if(paused)return;
+
 t--;
+
+if(t<=0){
+next();
+}else{
 elapsedTime++;
-if(t<=0)next();
 update();
 }
+}
 
-window.togglePause = ()=>paused=!paused;
-window.toggleSound = ()=>{};
-window.back = ()=>window.location="config.html";
+function nextExercise(){repIndex=1;exIndex++;phase="ex";}
+function back(){window.location="config.html";}
 
+/* START */
+update();
 setInterval(loop,1000);
-update();
-
-}
 
 </script>
 
