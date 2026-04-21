@@ -18,9 +18,12 @@ margin-top:20px;
 
 /* CARD */
 .card{
+display:flex;
+align-items:center;
+gap:12px;
 width:90%;
 max-width:420px;
-margin:15px auto;
+margin:12px auto;
 background:white;
 border-radius:15px;
 padding:10px;
@@ -30,14 +33,22 @@ transition:transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover{
-transform:scale(1.03);
+transform:scale(1.02);
 box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-/* contenu */
-.content img{
-width:100%;
+/* IMAGE (petite !) */
+.card img{
+width:90px;
+height:90px;
+object-fit:cover;
 border-radius:10px;
+}
+
+/* bloc texte */
+.info{
+flex:1;
+text-align:left;
 }
 
 /* ligne titre + bouton */
@@ -45,14 +56,14 @@ border-radius:10px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-margin-top:8px;
 }
 
 h3{
 margin:0;
+font-size:16px;
 }
 
-/* bouton PDF */
+/* bouton */
 .pdfBtn{
 background:#00e5ff;
 border:none;
@@ -60,7 +71,7 @@ padding:6px 10px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
-white-space:nowrap;
+font-size:12px;
 }
 
 .pdfBtn:hover{
@@ -69,16 +80,17 @@ background:#00c4dd;
 
 /* fallback */
 .img-error{
+width:90px;
+height:90px;
 background:#ddd;
-height:180px;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#666;
-font-weight:bold;
+font-size:10px;
 border-radius:10px;
 }
 
+/* bouton retour */
 button{
 margin-top:15px;
 padding:10px 20px;
@@ -102,15 +114,12 @@ font-weight:bold;
 
 /* CONFIG */
 const data = {
-
 epaule: [
 {nom:"Tendinite coiffe", dossier:"tendinite_coiffe"}
 ],
-
 dos: [
 {nom:"Lombalgie 1", dossier:"lombalgie_1"}
 ]
-
 };
 
 let zone = localStorage.getItem("zone");
@@ -126,29 +135,26 @@ data[zone].forEach(p=>{
 let div = document.createElement("div");
 div.className = "card";
 
-/* CONTENU */
-let content = document.createElement("div");
-
 /* IMAGE */
 let img = document.createElement("img");
 img.src = "images/"+p.dossier+"/cover.png?v="+Date.now();
 
-/* fallback */
 img.onerror = function(){
 this.style.display="none";
 let err = document.createElement("div");
 err.className="img-error";
-err.innerText="Image indisponible";
-content.appendChild(err);
+err.innerText="Image";
+div.prepend(err);
 };
 
-content.appendChild(img);
+/* INFOS */
+let info = document.createElement("div");
+info.className="info";
 
-/* LIGNE TITRE + BOUTON */
+/* ligne titre */
 let row = document.createElement("div");
-row.className = "titleRow";
+row.className="titleRow";
 
-/* titre */
 let title = document.createElement("h3");
 title.innerText = p.nom;
 
@@ -164,8 +170,7 @@ window.open("images/"+p.dossier+"/fiche.pdf");
 
 row.appendChild(title);
 row.appendChild(btn);
-
-content.appendChild(row);
+info.appendChild(row);
 
 /* CLICK CARD */
 div.onclick = ()=>{
@@ -174,7 +179,9 @@ window.location = "config.html?v="+Date.now();
 };
 
 /* STRUCTURE */
-div.appendChild(content);
+div.appendChild(img);
+div.appendChild(info);
+
 container.appendChild(div);
 
 });
