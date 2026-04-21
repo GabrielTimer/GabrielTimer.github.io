@@ -55,12 +55,13 @@ flex-shrink:0;
 margin-top:5px;
 }
 
+/* 🔥 cercle légèrement remonté */
 .timerZone{
 flex:1;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin-bottom:5px;
+margin-bottom:12px;
 }
 
 .circleWrap{
@@ -109,6 +110,7 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+/* 🔥 boutons gris clair */
 .buttons{
 flex-shrink:0;
 display:grid;
@@ -121,16 +123,16 @@ button{
 height:38px;
 border:none;
 border-radius:10px;
-background:#444;
-color:white;
+background:#d0d0d0;
+color:#222;
 font-size:13px;
 font-weight:bold;
 }
 
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
-.sound{background:#555;}
-.back{background:#777;}
+.sound{background:#bdbdbd;}
+.back{background:#9e9e9e;}
 
 button:active{
 transform:scale(0.95);
@@ -157,7 +159,11 @@ transform:scale(0.95);
 <div class="circleWrap">
 
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
+<circle cx="50" cy="50" r="45"
+stroke="rgba(255,255,255,0.2)"
+stroke-width="6"
+fill="none"/>
+
 <circle id="progressCircle"
 cx="50" cy="50" r="45"
 stroke="#00e5ff"
@@ -202,10 +208,13 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
+/* 🔥 cercle config */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
+progressCircle.style.strokeDashoffset=0;
 
+/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -222,7 +231,7 @@ return m+":"+(s%60<10?"0":"")+s%60;
 
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
-/* 🔊 SON */
+/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -242,39 +251,47 @@ speechSynthesis.speak(u);
 
 function toggleSound(){
 soundOn=!soundOn;
-let btn=document.getElementById("soundBtn");
-btn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
+soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
-/* ⏸ PAUSE */
 function togglePause(){
 paused=!paused;
-let btn=document.getElementById("pauseBtn");
-btn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
+pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
+/* 🔥 UPDATE CORRIGÉ */
 function update(){
 
+/* progression cercle */
+let progress = 1 - (t / totalTimePhase);
+progressCircle.style.strokeDashoffset = circumference * progress;
+
+/* couleurs */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
+/* anim */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
-if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
-if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
-if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
+/* texte */
+if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
+if(phase==="ex") timerLabel.innerText="EXERCICE";
+if(phase==="repos") timerLabel.innerText="REPOS";
 
+/* barre */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
+/* infos */
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* image */
 let patho = localStorage.getItem("pathologie");
 img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 }
@@ -282,10 +299,27 @@ img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
 function next(){
 let exo=p.exercices[exIndex];
 
-if(phase==="prep"){phase="ex";t=exo.ex;beep();return;}
-if(phase==="ex"){phase="repos";t=exo.repos;speak("repos");return;}
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+return;
+}
 
-phase="ex";t=exo.ex;beep();
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
+return;
+}
+
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+
 repIndex++;
 
 if(repIndex>exo.reps){
