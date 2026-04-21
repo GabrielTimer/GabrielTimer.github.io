@@ -221,6 +221,9 @@ let s = sec%60;
 return m+":"+(s<10?"0"+s:s);
 }
 
+/* 👉 AFFICHAGE DURÉE TOTALE (UNE FOIS) */
+totalTime.innerText = "Durée : " + formatTime(totalSessionTime);
+
 /* VOIX */
 function speak(t){
 if(!soundOn) return;
@@ -249,12 +252,8 @@ progressCircle.style.strokeDashoffset=440*(1-(t/totalTimePhase));
 
 /* BARRE GLOBALE */
 let progress = elapsedTime / totalSessionTime;
+if(progress>1) progress=1;
 bar.style.width = (progress*100)+"%";
-
-/* TEMPS RESTANT */
-let remaining = totalSessionTime - elapsedTime;
-if(remaining < 0) remaining = 0;
-totalTime.innerText = "Temps restant : " + formatTime(remaining);
 
 /* COULEURS */
 if(phase==="prep") document.body.style.background="#1b5e20";
