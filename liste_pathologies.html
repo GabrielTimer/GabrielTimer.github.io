@@ -37,6 +37,18 @@ width:100%;
 border-radius:10px;
 }
 
+/* image par défaut si erreur */
+.img-error{
+background:#ddd;
+height:180px;
+display:flex;
+align-items:center;
+justify-content:center;
+color:#666;
+font-weight:bold;
+border-radius:10px;
+}
+
 button{
 margin-top:15px;
 padding:10px 20px;
@@ -72,40 +84,56 @@ dos: [
 };
 
 let zone = localStorage.getItem("zone");
-
 let container = document.getElementById("list");
 
-/* sécurité */
+/* 🔥 sécurité : si pas de zone → retour */
 if(!zone){
-container.innerHTML = "<p>Aucune zone sélectionnée</p>";
+window.location="pathologies.html";
 }
 
-/* affichage */
+/* 🔥 affichage */
 if(data[zone]){
+
 data[zone].forEach(p=>{
 
 let div=document.createElement("div");
 div.className="card";
 
-div.innerHTML = `
-<img src="images/${p.dossier}/cover.png">
-<h3>${p.nom}</h3>
-`;
+/* création image */
+let img = document.createElement("img");
+img.src = "images/"+p.dossier+"/cover.png";
+
+/* fallback si image cassée */
+img.onerror = function(){
+this.style.display="none";
+let err = document.createElement("div");
+err.className="img-error";
+err.innerText = "Image indisponible";
+div.prepend(err);
+};
+
+let title = document.createElement("h3");
+title.innerText = p.nom;
+
+div.appendChild(img);
+div.appendChild(title);
 
 div.onclick=()=>{
 localStorage.setItem("pathologie", p.dossier);
-window.location="config.html";
+window.location="config.html?v="+Date.now();
 };
 
 container.appendChild(div);
 
 });
+
 }else{
 container.innerHTML = "<p>Aucune pathologie trouvée</p>";
 }
 
+/* retour */
 function back(){
-window.location="pathologies.html";
+window.location="pathologies.html?v="+Date.now();
 }
 
 </script>
