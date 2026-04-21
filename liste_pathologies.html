@@ -5,17 +5,31 @@
 <title>Pathologies</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;text-align:center;}
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+margin:0;
+}
+
+h2{
+margin-top:20px;
+}
 
 .card{
 width:90%;
 max-width:350px;
-margin:10px auto;
+margin:15px auto;
 background:white;
 border-radius:15px;
 padding:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 cursor:pointer;
+transition:transform 0.15s;
+}
+
+.card:active{
+transform:scale(0.97);
 }
 
 img{
@@ -23,6 +37,14 @@ width:100%;
 border-radius:10px;
 }
 
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:10px;
+background:#ccc;
+font-weight:bold;
+}
 </style>
 </head>
 
@@ -38,15 +60,27 @@ border-radius:10px;
 
 /* 🔥 CONFIG PATHOS */
 const data = {
+
 epaule: [
 {nom:"Tendinite coiffe", dossier:"tendinite_coiffe"}
+],
+
+dos: [
+{nom:"Lombalgie 1", dossier:"lombalgie_1"}
 ]
+
 };
 
 let zone = localStorage.getItem("zone");
 
 let container = document.getElementById("list");
 
+/* sécurité */
+if(!zone){
+container.innerHTML = "<p>Aucune zone sélectionnée</p>";
+}
+
+/* affichage */
 if(data[zone]){
 data[zone].forEach(p=>{
 
@@ -54,7 +88,7 @@ let div=document.createElement("div");
 div.className="card";
 
 div.innerHTML = `
-<img src="images/${p.dossier}/cover.jpg">
+<img src="images/${p.dossier}/cover.png">
 <h3>${p.nom}</h3>
 `;
 
@@ -66,6 +100,8 @@ window.location="config.html";
 container.appendChild(div);
 
 });
+}else{
+container.innerHTML = "<p>Aucune pathologie trouvée</p>";
 }
 
 function back(){
