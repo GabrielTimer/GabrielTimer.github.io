@@ -125,11 +125,6 @@ font-size:13px;
 font-weight:bold;
 }
 
-.pause{background:#ff9800;}
-.next{background:#4caf50;}
-.sound{background:#bdbdbd;}
-.back{background:#9e9e9e;}
-
 button:active{transform:scale(0.95);}
 </style>
 </head>
@@ -281,8 +276,22 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* 🔥 CORRECTION IMAGE */
 let patho = localStorage.getItem("pathologie");
-img.src = patho ? "images/"+patho+"/ex"+(exIndex+1)+".jpg" : "";
+
+if(patho){
+
+let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
+let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
+
+img.src = urlJpg;
+
+img.onerror = function(){
+this.onerror=null;
+this.src = urlPng;
+};
+
+}
 }
 
 /* LOGIQUE */
@@ -326,7 +335,6 @@ serieIndex++;
 update();
 }
 
-/* LOOP STABLE */
 function loop(){
 if(paused)return;
 
