@@ -264,7 +264,6 @@ if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
 
-/* 🔥 recalcul propre barre */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
@@ -317,11 +316,13 @@ serieIndex++;
 update();
 }
 
-/* 🔥 FIX PROPRE */
+/* 🔥 FIX FINAL */
 function nextExercise(){
 
+paused = true;
+
 exIndex++;
-repIndex=1;
+repIndex = 1;
 
 if(exIndex>=p.exercices.length){
 exIndex=0;
@@ -334,11 +335,11 @@ phase="ex";
 t=exo.ex;
 totalTimePhase=exo.ex;
 
-/* avance proprement la progression */
-elapsedTime += 1;
-
-beep();
+/* IMPORTANT */
 update();
+
+/* relance propre */
+setTimeout(()=>{ paused=false; },50);
 }
 
 /* LOOP */
