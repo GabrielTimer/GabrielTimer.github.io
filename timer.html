@@ -48,20 +48,22 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-/* IMAGE */
+/* 🔥 IMAGE PLUS GRANDE */
 #img{
 width:100%;
-max-height:120px;
+max-height:180px;
 object-fit:contain;
 flex-shrink:0;
+margin-top:5px;
 }
 
-/* TIMER */
+/* 🔥 TIMER DESCENDU */
 .timerZone{
 flex:1;
 display:flex;
-align-items:center;
+align-items:flex-end;
 justify-content:center;
+margin-bottom:5px;
 }
 
 .circleWrap{
@@ -111,27 +113,29 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* BOUTONS */
+/* 🔥 BOUTONS LISIBLES */
 .buttons{
 flex-shrink:0;
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:6px;
-margin-top:4px;
+gap:8px;
+margin-top:6px;
 }
 
 button{
-height:34px;
+height:38px;
 border:none;
-border-radius:8px;
+border-radius:10px;
+background:#444;
 color:white;
-font-size:12px;
+font-size:13px;
+font-weight:bold;
 }
 
 .pause{background:#ff9800;}
 .next{background:#4caf50;}
-.sound{background:#607d8b;}
-.back{background:#0e8f9b;}
+.sound{background:#555;}
+.back{background:#777;}
 </style>
 </head>
 
@@ -246,42 +250,35 @@ function toggleSound(){soundOn=!soundOn;}
 /* UPDATE */
 function update(){
 
-/* COULEURS */
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 
-/* ANIMATION */
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
-/* TEXTE */
 if(phase==="prep") timer.querySelector(".timerLabel").innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timer.querySelector(".timerLabel").innerText="EXERCICE";
 if(phase==="repos") timer.querySelector(".timerLabel").innerText="REPOS";
 
-/* BARRE */
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
-/* INFOS */
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* 🔥 IMAGE FIX */
+/* IMAGE */
 let patho = localStorage.getItem("pathologie");
 if(patho){
 img.src = "images/" + patho + "/ex" + (exIndex+1) + ".jpg";
 }else{
 img.src = "";
 }
-
 }
 
-/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -301,12 +298,10 @@ serieIndex++;
 }
 }
 
-/* CONTROLES */
 function togglePause(){paused=!paused;}
 function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-/* LOOP */
 function loop(){
 if(paused)return;
 t--;
