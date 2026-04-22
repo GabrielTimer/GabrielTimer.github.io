@@ -76,51 +76,49 @@ button:active{transform:scale(0.95);}
 
 <script>
 
+/* 🔥 CONFIG CENTRALISÉE */
+const PATHO_CONFIG = {
+
+tendinite_coiffe: {
+series: 2,
+exercices: Array(8).fill().map(()=>({ex:90,repos:30,rep:1}))
+},
+
+lombalgie_1: {
+series: 2,
+exercices: [
+{ex:30,repos:10,rep:3},
+{ex:5,repos:5,rep:10},
+{ex:3,repos:2,rep:15},
+{ex:30,repos:5,rep:3},
+{ex:30,repos:10,rep:4},
+{ex:3,repos:3,rep:10},
+{ex:30,repos:10,rep:3},
+{ex:30,repos:10,rep:4}
+]
+}
+
+};
+
 let patho = localStorage.getItem("pathologie");
 
-/* 🔥 CONFIG AUTO */
+/* 🔥 APPLY DEFAULT */
 function applyDefault(){
 
-/* ===== TENDINITE ===== */
-if(patho === "tendinite_coiffe"){
+if(!patho || !PATHO_CONFIG[patho]) return;
 
-nbEx.value = 8;
-series.value = 2;
+let cfg = PATHO_CONFIG[patho];
+
+nbEx.value = cfg.exercices.length;
+series.value = cfg.series;
+
 generer();
 
-for(let i=0;i<8;i++){
-document.getElementById("ex"+i).value = 90;
-document.getElementById("repos"+i).value = 30;
-document.getElementById("rep"+i).value = 1;
-}
-
-}
-
-/* ===== LOMBALGIE 1 ===== */
-if(patho === "lombalgie_1"){
-
-nbEx.value = 8;
-series.value = 2;
-generer();
-
-let data = [
-[30,10,3],
-[5,5,10],
-[3,2,15],
-[30,5,3],
-[30,10,4],
-[3,3,10],
-[30,10,3],
-[30,10,4]
-];
-
-for(let i=0;i<8;i++){
-document.getElementById("ex"+i).value = data[i][0];
-document.getElementById("repos"+i).value = data[i][1];
-document.getElementById("rep"+i).value = data[i][2];
-}
-
-}
+cfg.exercices.forEach((exo,i)=>{
+document.getElementById("ex"+i).value = exo.ex;
+document.getElementById("repos"+i).value = exo.repos;
+document.getElementById("rep"+i).value = exo.rep;
+});
 
 }
 
@@ -162,7 +160,7 @@ return {exercices:list,series:+series.value};
 
 /* save */
 function saveData(type){
-let list=JSON.parse(localStorage.getItem("programmes")||"[]");
+let list=JSON.parse(localStorage.getItem("programmes")||[]);
 
 list.push({
 nom:patho||"Libre",
