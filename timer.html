@@ -107,10 +107,10 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
+/* 🔥 BOUTONS AMÉLIORÉS */
 .buttons{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1fr 1fr 1fr;
 gap:8px;
 margin-top:6px;
 }
@@ -123,6 +123,10 @@ background:#d0d0d0;
 color:#222;
 font-size:13px;
 font-weight:bold;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:6px;
 }
 
 button:active{transform:scale(0.95);}
@@ -184,7 +188,7 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* INIT */
+/* TON JS INCHANGÉ */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -199,12 +203,10 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -221,7 +223,6 @@ return m+":"+(s%60<10?"0":"")+s%60;
 
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
-/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -249,9 +250,7 @@ paused=!paused;
 pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
-/* UPDATE */
 function update(){
-
 let progress = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * progress;
 
@@ -289,7 +288,6 @@ this.src = urlPng;
 }
 }
 
-/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -345,7 +343,6 @@ update();
 
 function back(){window.location="config.html";}
 
-/* START */
 update();
 setInterval(loop,1000);
 
