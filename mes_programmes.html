@@ -14,18 +14,53 @@ padding:15px;
 border-radius:10px;
 box-shadow:0 5px 15px rgba(0,0,0,0.1);
 cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .card:hover{transform:scale(1.02);}
 
-.fav{color:gold;}
+.left{
+text-align:left;
+}
+
+.fav{color:gold;font-weight:bold;}
 .hist{color:#666;}
+
+.actions button{
+margin-left:5px;
+padding:5px 8px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.delete{background:#ff5252;color:white;}
+.star{background:#ffd54f;}
+
+.topbar{
+margin:10px;
+}
+
+button.main{
+margin:5px;
+padding:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
 </style>
 </head>
 
 <body>
 
 <h2>⭐ Mes Programmes</h2>
+
+<div class="topbar">
+<button class="main" onclick="clearHist()">🧹 Vider historique</button>
+</div>
 
 <div id="list"></div>
 
@@ -34,32 +69,107 @@ cursor:pointer;
 <script>
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
+
+/* TRI : favoris en haut */
+list.sort((a,b)=>{
+if(a.type==="favori" && b.type!=="favori") return -1;
+if(a.type!=="favori" && b.type==="favori") return 1;
+return 0;
+});
+
 let container=document.getElementById("list");
 
-list.reverse().forEach(p=>{
+list.forEach((p,index)=>{
 
 let div=document.createElement("div");
 div.className="card";
 
-div.innerHTML=`
+/* LEFT */
+let left=document.createElement("div");
+left.className="left";
+
+left.innerHTML=`
 <div class="${p.type==='favori'?'fav':'hist'}">
 ${p.type==='favori'?'⭐ Favori':'🕒 Historique'}
 </div>
-<b>${p.nom}</b><br>${p.date}
+<b>${formatName(p.nom)}</b><br>${p.date}
 `;
 
+/* ACTIONS */
+let actions=document.createElement("div");
+actions.className="actions";
+
+/* DELETE */
+let del=document.createElement("button");
+del.className="delete";
+del.innerText="🗑";
+del.onclick=(e)=>{
+e.stopPropagation();
+remove(index);
+};
+
+/* TOGGLE FAVORI */
+let star=document.createElement("button");
+star.className="star";
+star.innerText="⭐";
+star.onclick=(e)=>{
+e.stopPropagation();
+toggleFav(index);
+};
+
+actions.appendChild(star);
+actions.appendChild(del);
+
+/* CLICK = lancer */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
 window.location="timer.html";
 };
 
+div.appendChild(left);
+div.appendChild(actions);
+
 container.appendChild(div);
 
 });
 
+/* supprimer */
+function remove(i){
+if(confirm("Supprimer ce programme ?")){
+list.splice(i,1);
+save();
+}
+}
+
+/* toggle favori */
+function toggleFav(i){
+list[i].type = list[i].type==="favori" ? "historique" : "favori";
+save();
+}
+
+/* vider historique */
+function clearHist(){
+if(confirm("Supprimer tout l'historique ?")){
+list = list.filter(p=>p.type==="favori");
+save();
+}
+}
+
+/* save */
+function save(){
+localStorage.setItem("programmes",JSON.stringify(list));
+location.reload();
+}
+
+/* format nom */
+function formatName(n){
+return n.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
+}
+
 function back(){
 window.location="index.html";
 }
+
 </script>
 
 </body>
