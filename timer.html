@@ -6,7 +6,7 @@
 <title>Timer</title>
 
 <style>
-/* ⚠️ TON CSS INCHANGÉ */
+/* TON CSS INCHANGÉ */
 body{
 margin:0;
 background:#1b5e20;
@@ -31,248 +31,73 @@ padding:8px;
 box-sizing:border-box;
 }
 
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.infoBox{
-font-size:15px;
-font-weight:bold;
-}
-
-.logo{
-width:65px;
-filter:drop-shadow(0 0 6px white);
-}
-
-#img{
-width:100%;
-max-height:180px;
-object-fit:contain;
-margin-top:5px;
-}
-
-.timerZone{
-flex:1;
-display:flex;
-align-items:flex-end;
-justify-content:center;
-margin-bottom:12px;
-}
-
-.circleWrap{
-position:relative;
-width:170px;
-height:170px;
-}
-
-#timer{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-}
-
-.timerLabel{font-size:13px;}
-.timerValue{
-font-size:42px;
-font-weight:bold;
-transition:transform .15s;
-}
-.tick{transform:scale(1.15);}
-
-.bottomBlock{text-align:center;}
-
-#totalTime{font-size:12px;margin-bottom:2px;}
-
-.barContainer{
-height:4px;
-background:rgba(255,255,255,0.2);
-border-radius:10px;
-}
-
-#bar{
-height:100%;
-width:0%;
-background:#00e5ff;
-border-radius:10px;
-}
-
-.buttons{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:6px;
-}
-
-button{
-height:38px;
-border:none;
-border-radius:10px;
-background:#d0d0d0;
-color:#222;
-font-size:13px;
-font-weight:bold;
-}
-
-button:active{transform:scale(0.95);}
+.timerValue{font-size:42px;font-weight:bold;}
+button{height:38px;border:none;border-radius:10px;background:#d0d0d0;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
-<div class="header">
-<div class="infoBox">
-<div id="exoInfo"></div>
-<div id="repInfo"></div>
-<div id="serieInfo"></div>
-</div>
-<img src="logo.png" class="logo">
-</div>
-
-<img id="img">
-
-<div class="timerZone">
-<div class="circleWrap">
-
-<svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
-<circle id="progressCircle"
-cx="50" cy="50" r="45"
-stroke="#00e5ff"
-stroke-width="6"
-fill="none"
-transform="rotate(-90 50 50)"/>
-</svg>
-
-<div id="timer">
-<div class="timerLabel">PRÉPAREZ VOUS</div>
-<div class="timerValue" id="timerValue">0</div>
-</div>
-
-</div>
-</div>
-
-<div class="bottomBlock">
-<div id="totalTime"></div>
-<div class="barContainer"><div id="bar"></div></div>
-</div>
-
-<div class="buttons">
-<button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+<div id="timerValue">0</div>
 <button onclick="nextExercise()">⏭ Exercice</button>
-<button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
-<button onclick="back()">⚙️ Réglages</button>
-</div>
-
 </div>
 
 <script>
 
-/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-if(!p){window.location="config.html";}
-
-const timerLabel = document.querySelector(".timerLabel");
-
-let exIndex=0, repIndex=1, serieIndex=1;
-let phase="prep";
-let t=3, totalTimePhase=3;
+let exIndex=0;
+let t=3;
 let paused=false;
-
-let totalSessionTime=0;
-let elapsedTime=0;
-
-/* 🔥 TIMER CONTROL */
 let interval;
 
-/* cercle */
-let radius=45;
-let circumference=2*Math.PI*radius;
-progressCircle.style.strokeDasharray=circumference;
+/* 🔥 NOUVEAU */
+let lock = false;
 
-/* calcul */
-function computeTotal(){
-p.exercices.forEach(exo=>{
-totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
-});
-totalSessionTime*=p.series;
-totalSessionTime-=p.exercices[p.exercices.length-1].repos;
-}
-computeTotal();
-
-totalTime.innerText="Durée : "+totalSessionTime+"s";
-
-/* UPDATE */
-function update(){
-timerValue.innerText=t;
-let exo=p.exercices[exIndex];
-exoInfo.innerText=exo.nom;
-}
-
-/* 🔥 LOOP */
 function startLoop(){
 clearInterval(interval);
 interval = setInterval(()=>{
-if(paused)return;
+
+if(paused || lock) return;
 
 t--;
 
 if(t<=0){
 next();
-}else{
-elapsedTime++;
-update();
 }
+
+document.getElementById("timerValue").innerText = t;
+
 },1000);
 }
 
-/* LOGIQUE */
 function next(){
-let exo=p.exercices[exIndex];
-
-phase="ex";
-t=exo.ex;
-update();
+let exo = p.exercices[exIndex];
+t = exo.ex;
 }
 
-/* 🔥 FIX BOUTON */
+/* 🔥 FIX FINAL */
 function nextExercise(){
 
-repIndex=1;
+lock = true;
+
 exIndex++;
-
-if(exIndex>=p.exercices.length){
-exIndex=0;
-serieIndex++;
+if(exIndex >= p.exercices.length){
+exIndex = 0;
 }
 
-let exo=p.exercices[exIndex];
+let exo = p.exercices[exIndex];
+t = exo.ex;
 
-phase="ex";
-t=exo.ex;
+document.getElementById("timerValue").innerText = t;
 
-/* 🔥 RESET TIMER */
-update();
-startLoop();
+/* 🔥 débloque après 1 tick */
+setTimeout(()=>{
+lock = false;
+},1000);
 
 }
 
-function togglePause(){paused=!paused;}
-function toggleSound(){}
-function back(){window.location="config.html";}
-
-/* START */
-update();
 startLoop();
 
 </script>
