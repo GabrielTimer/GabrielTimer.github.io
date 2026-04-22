@@ -16,8 +16,6 @@ justify-content:center;
 align-items:center;
 height:100dvh;
 overflow:hidden;
-transition:background 0.3s;
-padding-bottom:env(safe-area-inset-bottom);
 }
 
 .container{
@@ -27,7 +25,6 @@ height:100%;
 display:flex;
 flex-direction:column;
 padding:8px;
-box-sizing:border-box;
 }
 
 .header{
@@ -36,21 +33,12 @@ justify-content:space-between;
 align-items:center;
 }
 
-.infoBox{
-font-size:15px;
-font-weight:bold;
-}
-
-.logo{
-width:65px;
-filter:drop-shadow(0 0 6px white);
-}
+.infoBox{font-size:15px;font-weight:bold;}
 
 #img{
 width:100%;
 max-height:180px;
 object-fit:contain;
-margin-top:5px;
 }
 
 .timerZone{
@@ -58,32 +46,12 @@ flex:1;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin-bottom:12px;
 }
 
-.circleWrap{
-position:relative;
-width:170px;
-height:170px;
-}
-
-#timer{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-}
-
-.timerLabel{font-size:13px;}
 .timerValue{
 font-size:42px;
 font-weight:bold;
 }
-
-.bottomBlock{text-align:center;}
-
-#totalTime{font-size:12px;margin-bottom:2px;}
 
 .barContainer{
 height:4px;
@@ -95,7 +63,6 @@ border-radius:10px;
 height:100%;
 width:0%;
 background:#00e5ff;
-border-radius:10px;
 }
 
 .buttons{
@@ -110,12 +77,7 @@ height:38px;
 border:none;
 border-radius:10px;
 background:#d0d0d0;
-color:#222;
-font-size:13px;
-font-weight:bold;
 }
-
-button:active{transform:scale(0.95);}
 </style>
 </head>
 
@@ -129,45 +91,22 @@ button:active{transform:scale(0.95);}
 <div id="repInfo"></div>
 <div id="serieInfo"></div>
 </div>
-<img src="logo.png" class="logo">
 </div>
 
 <img id="img">
 
 <div class="timerZone">
-<div class="circleWrap">
-
-<svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
-<circle id="progressCircle"
-cx="50" cy="50" r="45"
-stroke="#00e5ff"
-stroke-width="6"
-fill="none"
-transform="rotate(-90 50 50)"/>
-</svg>
-
-<div id="timer">
-<div class="timerLabel">PRÉPAREZ VOUS</div>
+<div>
+<div id="timerLabel">PRÉPAREZ VOUS</div>
 <div class="timerValue" id="timerValue">0</div>
 </div>
-
-</div>
 </div>
 
-<div class="bottomBlock">
-<div id="totalTime"></div>
 <div class="barContainer"><div id="bar"></div></div>
-</div>
 
 <div class="buttons">
-<button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+<button onclick="togglePause()">⏸ Pause</button>
 <button onclick="nextExercise()">⏭ Exercice</button>
-<button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
 <button onclick="back()">⚙️ Réglages</button>
 </div>
 
@@ -175,62 +114,47 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
-if(!p){window.location="config.html";}
-
-const timerLabel = document.querySelector(".timerLabel");
+if(!p) location="config.html";
 
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
 let paused=false;
-let soundOn=true;
 let finished=false;
 
 let totalSessionTime=0;
 let elapsedTime=0;
+let interval;
 
-/* cercle */
-let radius=45;
-let circumference=2*Math.PI*radius;
-progressCircle.style.strokeDasharray=circumference;
-
-/* calcul */
-function computeTotal(){
-p.exercices.forEach(exo=>{
-totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
+/* total */
+p.exercices.forEach(e=>{
+totalSessionTime+=(e.ex+e.repos)*e.reps;
 });
 totalSessionTime*=p.series;
-totalSessionTime-=p.exercices[p.exercices.length-1].repos;
-}
-computeTotal();
 
-function formatTime(s){
-let m=Math.floor(s/60);
-return m+":"+(s%60<10?"0":"")+s%60;
+/* LOOP CONTROL */
+function startLoop(){
+clearInterval(interval);
+interval=setInterval(loop,1000);
 }
-
-totalTime.innerText="Durée : "+formatTime(totalSessionTime);
 
 /* UPDATE */
 function update(){
 
-let progress = 1 - (t / totalTimePhase);
-progressCircle.style.strokeDashoffset = circumference * progress;
-
 timerValue.innerText=t;
 
-if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
-if(phase==="ex") timerLabel.innerText="EXERCICE";
-if(phase==="repos") timerLabel.innerText="REPOS";
-
-bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
+timerLabel.innerText =
+phase==="prep"?"PRÉPAREZ VOUS":
+phase==="ex"?"EXERCICE":"REPOS";
 
 let exo=p.exercices[exIndex];
+
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
+
+bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 /* image */
 let patho = localStorage.getItem("pathologie");
@@ -240,7 +164,7 @@ img.src="images/"+patho+"/ex"+(exIndex+1)+".png";
 
 }
 
-/* LOGIQUE */
+/* NEXT LOGIC */
 function next(){
 
 let exo=p.exercices[exIndex];
@@ -286,8 +210,9 @@ return;
 update();
 }
 
+/* LOOP */
 function loop(){
-if(paused || finished) return;
+if(paused||finished)return;
 
 t--;
 
@@ -299,7 +224,7 @@ update();
 }
 }
 
-/* 🔥 FIX BOUTON NEXT */
+/* 🔥 FIX FINAL */
 function nextExercise(){
 
 repIndex=1;
@@ -310,6 +235,7 @@ exIndex=0;
 serieIndex++;
 }
 
+/* RESET TOTAL */
 phase="ex";
 t=p.exercices[exIndex].ex;
 totalTimePhase=t;
@@ -328,10 +254,13 @@ let e=p.exercices[i];
 elapsedTime+=(e.ex+e.repos)*e.reps;
 }
 
+/* 🔥 RESET TIMER REEL */
 update();
+startLoop();
+
 }
 
-/* FIN */
+/* END */
 function showEnd(){
 timerLabel.innerText="TERMINÉ 🎉";
 timerValue.innerText="✔";
@@ -339,15 +268,15 @@ exoInfo.innerText="Bravo 💪";
 repInfo.innerText="Félicitations 👏";
 serieInfo.innerText="Séance terminée";
 bar.style.width="100%";
+clearInterval(interval);
 }
+
+function togglePause(){paused=!paused;}
+function back(){location="config.html";}
 
 /* START */
 update();
-setInterval(loop,1000);
-
-function togglePause(){paused=!paused;}
-function toggleSound(){}
-function back(){window.location="config.html";}
+startLoop();
 
 </script>
 
