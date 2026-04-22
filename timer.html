@@ -206,7 +206,8 @@ let totalSessionTime=0;
 let elapsedTime=0;
 
 /* 🔥 NOUVEAU */
-let transitionTime = 5;
+let waitingResume = false;
+let countdownInterval = null;
 
 let radius=45;
 let circumference=2*Math.PI*radius;
@@ -238,20 +239,38 @@ o.start();
 setTimeout(()=>o.stop(),150);
 }
 
-function speak(t){
-if(!soundOn)return;
-let u=new SpeechSynthesisUtterance(t);
-u.lang="fr-FR";
-speechSynthesis.speak(u);
-}
-
 function toggleSound(){
 soundOn=!soundOn;
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
 function togglePause(){
-paused=!paused;
+
+if(waitingResume){
+
+let count = 3;
+timerLabel.innerText = count;
+
+countdownInterval = setInterval(()=>{
+count--;
+
+if(count > 0){
+timerLabel.innerText = count;
+}else{
+clearInterval(countdownInterval);
+
+waitingResume = false;
+paused = false;
+
+timerLabel.innerText = "EXERCICE";
+beep();
+}
+},1000);
+
+return;
+}
+
+paused = !paused;
 pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
@@ -265,15 +284,12 @@ if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
 if(phase==="pause") document.body.style.background="#6a1b9a";
 
-timerValue.classList.add("tick");
-setTimeout(()=>timerValue.classList.remove("tick"),120);
-
 timerValue.innerText=t;
 
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
-if(phase==="pause") timerLabel.innerText="PRÉPAREZ VOUS";
+if(phase==="pause") timerLabel.innerText="PRÊT ?";
 
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
@@ -285,14 +301,7 @@ serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
-let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
-let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
-
-img.src = urlJpg;
-img.onerror = function(){
-this.onerror=null;
-this.src = urlPng;
-};
+img.src = "images/"+patho+"/ex"+(exIndex+1)+".png";
 }
 }
 
@@ -312,24 +321,12 @@ if(phase==="ex"){
 phase="repos";
 t=exo.repos;
 totalTimePhase=exo.repos;
-speak("repos");
 update();
 return;
 }
 
-/* 🔥 NOUVELLE PAUSE */
+/* 🔥 PAUSE AUTO */
 if(phase==="repos"){
-phase="pause";
-t=transitionTime;
-totalTimePhase=transitionTime;
-update();
-return;
-}
-
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
 
 repIndex++;
 
@@ -342,7 +339,17 @@ serieIndex++;
 }
 }
 
+paused = true;
+waitingResume = true;
+
+phase="pause";
+t=0;
+totalTimePhase=1;
+
+pauseBtn.innerHTML = "▶️ Reprendre";
 update();
+return;
+}
 }
 
 function loop(){
