@@ -53,6 +53,7 @@ object-fit:contain;
 margin-top:5px;
 }
 
+/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -83,6 +84,7 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
+/* bas */
 .bottomBlock{
 text-align:center;
 }
@@ -105,6 +107,7 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -197,9 +200,6 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-/* 🔥 FIX */
-let skipTick = false;
-
 /* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
@@ -276,29 +276,67 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* 🔥 CORRECTION IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
+
 let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
 let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
 
 img.src = urlJpg;
+
 img.onerror = function(){
 this.onerror=null;
 this.src = urlPng;
 };
+
 }
 }
 
-/* LOOP */
-function loop(){
-if(paused)return;
+/* LOGIQUE */
+function next(){
+let exo=p.exercices[exIndex];
 
-/* 🔥 ignore 1 tick après clic */
-if(skipTick){
-skipTick=false;
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+update();
 return;
 }
+
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
+update();
+return;
+}
+
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+
+repIndex++;
+
+if(repIndex>exo.reps){
+repIndex=1;
+exIndex++;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
+
+update();
+}
+
+function loop(){
+if(paused)return;
 
 t--;
 
@@ -310,29 +348,7 @@ update();
 }
 }
 
-/* 🔥 FIX FINAL */
-function nextExercise(){
-
-repIndex = 1;
-exIndex++;
-
-if(exIndex >= p.exercices.length){
-exIndex = 0;
-serieIndex++;
-}
-
-let exo = p.exercices[exIndex];
-
-phase = "ex";
-t = exo.ex;
-totalTimePhase = exo.ex;
-
-/* 🔥 empêche le -1 instantané */
-skipTick = true;
-
-update();
-}
-
+function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
 /* START */
