@@ -46,20 +46,14 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-.imageZone{
-flex:1;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
 #img{
-max-width:85%;
-max-height:150px;
+width:100%;
+max-height:180px;
 object-fit:contain;
-display:block;
+margin-top:5px;
 }
 
+/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -86,8 +80,11 @@ text-align:center;
 .timerValue{
 font-size:42px;
 font-weight:bold;
+transition:transform .15s;
 }
+.tick{transform:scale(1.15);}
 
+/* bas */
 .bottomBlock{
 text-align:center;
 }
@@ -110,6 +107,7 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -126,6 +124,8 @@ color:#222;
 font-size:13px;
 font-weight:bold;
 }
+
+button:active{transform:scale(0.95);}
 </style>
 </head>
 
@@ -142,9 +142,7 @@ font-weight:bold;
 <img src="logo.png" class="logo">
 </div>
 
-<div class="imageZone">
 <img id="img">
-</div>
 
 <div class="timerZone">
 <div class="circleWrap">
@@ -187,6 +185,7 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
+/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -201,12 +200,12 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
-let waitingResume = false;
-
+/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
+/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -216,8 +215,14 @@ totalSessionTime-=p.exercices[p.exercices.length-1].repos;
 }
 computeTotal();
 
-totalTime.innerText="Durée : "+totalSessionTime+"s";
+function formatTime(s){
+let m=Math.floor(s/60);
+return m+":"+(s%60<10?"0":"")+s%60;
+}
 
+totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
+
+/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -228,56 +233,54 @@ o.start();
 setTimeout(()=>o.stop(),150);
 }
 
+function speak(t){
+if(!soundOn)return;
+let u=new SpeechSynthesisUtterance(t);
+u.lang="fr-FR";
+speechSynthesis.speak(u);
+}
+
 function toggleSound(){
 soundOn=!soundOn;
+soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
 function togglePause(){
-
-if(waitingResume){
-
-let count = 3;
-timerLabel.innerText = count;
-
-let interval = setInterval(()=>{
-count--;
-
-if(count>0){
-timerLabel.innerText = count;
-}else{
-clearInterval(interval);
-
-waitingResume = false;
-paused = false;
-
-next();
-}
-},1000);
-
-return;
+paused=!paused;
+pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
-paused = !paused;
-}
-
+/* UPDATE */
 function update(){
+
+let progress = 1 - (t / totalTimePhase);
+progressCircle.style.strokeDashoffset = circumference * progress;
+
+if(phase==="prep") document.body.style.background="#1b5e20";
+if(phase==="ex") document.body.style.background="#b71c1c";
+if(phase==="repos") document.body.style.background="#0d47a1";
+
+timerValue.classList.add("tick");
+setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
-if(phase==="pause") timerLabel.innerText="PRÊT ?";
+
+bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* 🔥 IMAGE CORRIGÉE */
+/* 🔥 CORRECTION IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
+
 let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
 let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
 
@@ -287,17 +290,19 @@ img.onerror = function(){
 this.onerror=null;
 this.src = urlPng;
 };
-}
 
 }
+}
 
+/* LOGIQUE */
 function next(){
-
 let exo=p.exercices[exIndex];
 
 if(phase==="prep"){
 phase="ex";
 t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
 update();
 return;
 }
@@ -305,36 +310,29 @@ return;
 if(phase==="ex"){
 phase="repos";
 t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
 update();
 return;
 }
 
-if(phase==="repos"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
 
 repIndex++;
 
 if(repIndex>exo.reps){
 repIndex=1;
 exIndex++;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
 }
-
-paused = true;
-waitingResume = true;
-
-phase="pause";
-t=0;
+}
 
 update();
-return;
-}
-
-if(phase==="pause"){
-phase="ex";
-t=p.exercices[exIndex].ex;
-update();
-return;
-}
-
 }
 
 function loop(){
@@ -345,22 +343,17 @@ t--;
 if(t<=0){
 next();
 }else{
+elapsedTime++;
 update();
 }
 }
 
-function nextExercise(){
-repIndex=1;
-exIndex++;
-phase="ex";
-t=p.exercices[exIndex].ex;
-update();
-}
-
+function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
-setInterval(loop,1000);
+/* START */
 update();
+setInterval(loop,1000);
 
 </script>
 
