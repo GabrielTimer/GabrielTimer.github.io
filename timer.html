@@ -46,7 +46,6 @@ width:65px;
 filter:drop-shadow(0 0 6px white);
 }
 
-/* 🔥 NOUVELLE ZONE IMAGE */
 .imageZone{
 flex:1;
 display:flex;
@@ -54,7 +53,6 @@ align-items:center;
 justify-content:center;
 }
 
-/* 🔥 IMAGE AJUSTÉE */
 #img{
 max-width:85%;
 max-height:150px;
@@ -62,7 +60,6 @@ object-fit:contain;
 display:block;
 }
 
-/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -93,7 +90,6 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* bas */
 .bottomBlock{
 text-align:center;
 }
@@ -116,7 +112,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -151,7 +146,6 @@ button:active{transform:scale(0.95);}
 <img src="logo.png" class="logo">
 </div>
 
-<!-- 🔥 IMAGE CENTRÉE -->
 <div class="imageZone">
 <img id="img">
 </div>
@@ -197,7 +191,6 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* JS INCHANGÉ */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -211,6 +204,9 @@ let soundOn=true;
 
 let totalSessionTime=0;
 let elapsedTime=0;
+
+/* 🔥 NOUVEAU */
+let transitionTime = 5;
 
 let radius=45;
 let circumference=2*Math.PI*radius;
@@ -267,6 +263,7 @@ progressCircle.style.strokeDashoffset = circumference * progress;
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
+if(phase==="pause") document.body.style.background="#6a1b9a";
 
 timerValue.classList.add("tick");
 setTimeout(()=>timerValue.classList.remove("tick"),120);
@@ -276,6 +273,7 @@ timerValue.innerText=t;
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
+if(phase==="pause") timerLabel.innerText="PRÉPAREZ VOUS";
 
 bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
 
@@ -315,6 +313,15 @@ phase="repos";
 t=exo.repos;
 totalTimePhase=exo.repos;
 speak("repos");
+update();
+return;
+}
+
+/* 🔥 NOUVELLE PAUSE */
+if(phase==="repos"){
+phase="pause";
+t=transitionTime;
+totalTimePhase=transitionTime;
 update();
 return;
 }
