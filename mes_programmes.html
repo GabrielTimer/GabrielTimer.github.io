@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes Programmes</title>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center;margin:0;}
+
+.card{
+background:white;
+margin:10px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+.card:hover{transform:scale(1.02);}
+
+.fav{color:gold;}
+.hist{color:#666;}
+</style>
+</head>
+
+<body>
+
+<h2>⭐ Mes Programmes</h2>
+
+<div id="list"></div>
+
+<button onclick="back()">⬅ Retour</button>
+
+<script>
+
+let list = JSON.parse(localStorage.getItem("programmes")||[]);
+let container=document.getElementById("list");
+
+list.reverse().forEach(p=>{
+
+let div=document.createElement("div");
+div.className="card";
+
+div.innerHTML=`
+<div class="${p.type==='favori'?'fav':'hist'}">
+${p.type==='favori'?'⭐ Favori':'🕒 Historique'}
+</div>
+<b>${p.nom}</b><br>${p.date}
+`;
+
+div.onclick=()=>{
+localStorage.setItem("programme_temp",JSON.stringify(p.data));
+window.location="timer.html";
+};
+
+container.appendChild(div);
+
+});
+
+function back(){
+window.location="index.html";
+}
+</script>
+
+</body>
+</html>

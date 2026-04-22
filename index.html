@@ -31,15 +31,6 @@ width:120px;
 margin-bottom:10px;
 }
 
-input{
-width:100%;
-padding:12px;
-margin:6px 0;
-border-radius:10px;
-border:1px solid #ccc;
-}
-
-/* 🔥 BOUTONS */
 button{
 width:100%;
 padding:14px;
@@ -48,17 +39,11 @@ border:none;
 border-radius:12px;
 font-weight:bold;
 cursor:pointer;
-transition:transform 0.15s, box-shadow 0.15s;
+transition:0.15s;
 }
 
-button:hover{
-transform:scale(1.05);
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-button:active{
-transform:scale(0.95);
-}
+button:hover{transform:scale(1.05);}
+button:active{transform:scale(0.95);}
 
 .primary{background:#0e8f9b;color:white;}
 .secondary{background:#ff9800;color:white;}
@@ -74,37 +59,24 @@ transform:scale(0.95);
 
 <h2>Gabriel Timer</h2>
 
-<input id="prenom" placeholder="Prénom">
-<input id="nom" placeholder="Nom">
-
-<button class="primary" onclick="acceder()">📋 Accéder à mon programme</button>
+<button class="primary" onclick="goProg()">⭐ Mes programmes</button>
 <button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
 <button class="patho" onclick="zones()">🩺 Pathologies</button>
 
 </div>
 
 <script>
-function makeId(p,n){
-return (p.trim().toLowerCase()+"_"+n.trim().toLowerCase()).replace(/\s+/g,"");
-}
-
-function acceder(){
-let p = prenom.value;
-let n = nom.value;
-if(!p || !n){alert("Remplir les champs");return;}
-let id = makeId(p,n);
-localStorage.setItem("currentUser", id);
-window.location="config.html?v=" + Date.now();
+function goProg(){
+window.location="mes_programmes.html";
 }
 
 function modeLibre(){
-localStorage.removeItem("currentUser");
 localStorage.removeItem("pathologie");
-window.location="config.html?v=" + Date.now();
+window.location="config.html";
 }
 
 function zones(){
-window.location="pathologies.html?v=" + Date.now();
+window.location="pathologies.html";
 }
 </script>
 
