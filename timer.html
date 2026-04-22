@@ -348,8 +348,31 @@ update();
 }
 }
 
-function nextExercise(){repIndex=1;exIndex++;phase="ex";}
-function back(){window.location="config.html";}
+function nextExercise(){
+
+repIndex = 1;
+exIndex++;
+
+if(exIndex >= p.exercices.length){
+exIndex = 0;
+serieIndex++;
+}
+
+/* reset */
+let exo = p.exercices[exIndex];
+phase = "ex";
+t = exo.ex;
+totalTimePhase = exo.ex;
+
+/* 🔥 STOP mini pour éviter le -1 */
+paused = true;
+update();
+
+setTimeout(()=>{
+paused = false;
+}, 150);
+
+}
 
 /* START */
 update();
