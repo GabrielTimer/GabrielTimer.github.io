@@ -70,6 +70,28 @@ button:active{transform:scale(0.95);}
 
 let patho = localStorage.getItem("pathologie");
 
+/* 🔥 CONFIG AUTO */
+function applyDefault(){
+
+if(patho === "tendinite_coiffe"){
+
+nbEx.value = 8;
+series.value = 2;
+
+generer();
+
+/* appliquer valeurs */
+for(let i=0;i<8;i++){
+document.getElementById("ex"+i).value = 90;
+document.getElementById("repos"+i).value = 30;
+document.getElementById("rep"+i).value = 1;
+}
+
+}
+
+}
+
+/* GENERATION */
 function generer(){
 exo.innerHTML="";
 for(let i=0;i<nbEx.value;i++){
@@ -85,11 +107,13 @@ Rep<input id="rep${i}" value="3">
 }
 }
 
+/* toggle */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=c.style.display==="block"?"none":"block";
 }
 
+/* build */
 function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
@@ -103,6 +127,7 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
+/* save */
 function saveData(type){
 let list=JSON.parse(localStorage.getItem("programmes")||"[]");
 
@@ -116,22 +141,27 @@ data:build()
 localStorage.setItem("programmes",JSON.stringify(list));
 }
 
+/* favoris */
 function addFavori(){
 saveData("favori");
 alert("Ajouté ⭐");
 }
 
+/* start */
 function start(){
 saveData("historique");
 localStorage.setItem("programme_temp",JSON.stringify(build()));
 window.location="timer.html";
 }
 
+/* home */
 function home(){
 window.location="index.html";
 }
 
+/* INIT */
 generer();
+applyDefault();
 
 </script>
 
