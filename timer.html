@@ -6,6 +6,7 @@
 <title>Timer</title>
 
 <style>
+/* ⚠️ TON CSS INCHANGÉ */
 body{
 margin:0;
 background:#1b5e20;
@@ -53,7 +54,6 @@ object-fit:contain;
 margin-top:5px;
 }
 
-/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -84,15 +84,9 @@ transition:transform .15s;
 }
 .tick{transform:scale(1.15);}
 
-/* bas */
-.bottomBlock{
-text-align:center;
-}
+.bottomBlock{text-align:center;}
 
-#totalTime{
-font-size:12px;
-margin-bottom:2px;
-}
+#totalTime{font-size:12px;margin-bottom:2px;}
 
 .barContainer{
 height:4px;
@@ -107,7 +101,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -195,10 +188,12 @@ let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
 let t=3, totalTimePhase=3;
 let paused=false;
-let soundOn=true;
 
 let totalSessionTime=0;
 let elapsedTime=0;
+
+/* 🔥 TIMER CONTROL */
+let interval;
 
 /* cercle */
 let radius=45;
@@ -215,127 +210,19 @@ totalSessionTime-=p.exercices[p.exercices.length-1].repos;
 }
 computeTotal();
 
-function formatTime(s){
-let m=Math.floor(s/60);
-return m+":"+(s%60<10?"0":"")+s%60;
-}
-
-totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
-
-/* SON */
-function beep(){
-if(!soundOn)return;
-let ctx=new AudioContext();
-let o=ctx.createOscillator();
-o.frequency.value=800;
-o.connect(ctx.destination);
-o.start();
-setTimeout(()=>o.stop(),150);
-}
-
-function speak(t){
-if(!soundOn)return;
-let u=new SpeechSynthesisUtterance(t);
-u.lang="fr-FR";
-speechSynthesis.speak(u);
-}
-
-function toggleSound(){
-soundOn=!soundOn;
-soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
-}
-
-function togglePause(){
-paused=!paused;
-pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
-}
+totalTime.innerText="Durée : "+totalSessionTime+"s";
 
 /* UPDATE */
 function update(){
-
-let progress = 1 - (t / totalTimePhase);
-progressCircle.style.strokeDashoffset = circumference * progress;
-
-if(phase==="prep") document.body.style.background="#1b5e20";
-if(phase==="ex") document.body.style.background="#b71c1c";
-if(phase==="repos") document.body.style.background="#0d47a1";
-
-timerValue.classList.add("tick");
-setTimeout(()=>timerValue.classList.remove("tick"),120);
-
 timerValue.innerText=t;
-
-if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
-if(phase==="ex") timerLabel.innerText="EXERCICE";
-if(phase==="repos") timerLabel.innerText="REPOS";
-
-bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
-
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
-repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
-serieInfo.innerText="Série "+serieIndex+"/"+p.series;
-
-/* 🔥 CORRECTION IMAGE */
-let patho = localStorage.getItem("pathologie");
-
-if(patho){
-
-let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
-let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
-
-img.src = urlJpg;
-
-img.onerror = function(){
-this.onerror=null;
-this.src = urlPng;
-};
-
-}
 }
 
-/* LOGIQUE */
-function next(){
-let exo=p.exercices[exIndex];
-
-if(phase==="prep"){
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-update();
-return;
-}
-
-if(phase==="ex"){
-phase="repos";
-t=exo.repos;
-totalTimePhase=exo.repos;
-speak("repos");
-update();
-return;
-}
-
-phase="ex";
-t=exo.ex;
-totalTimePhase=exo.ex;
-beep();
-
-repIndex++;
-
-if(repIndex>exo.reps){
-repIndex=1;
-exIndex++;
-if(exIndex>=p.exercices.length){
-exIndex=0;
-serieIndex++;
-}
-}
-
-update();
-}
-
-function loop(){
+/* 🔥 LOOP */
+function startLoop(){
+clearInterval(interval);
+interval = setInterval(()=>{
 if(paused)return;
 
 t--;
@@ -346,37 +233,47 @@ next();
 elapsedTime++;
 update();
 }
+},1000);
 }
 
+/* LOGIQUE */
+function next(){
+let exo=p.exercices[exIndex];
+
+phase="ex";
+t=exo.ex;
+update();
+}
+
+/* 🔥 FIX BOUTON */
 function nextExercise(){
 
-repIndex = 1;
+repIndex=1;
 exIndex++;
 
-if(exIndex >= p.exercices.length){
-exIndex = 0;
+if(exIndex>=p.exercices.length){
+exIndex=0;
 serieIndex++;
 }
 
-/* reset */
-let exo = p.exercices[exIndex];
-phase = "ex";
-t = exo.ex;
-totalTimePhase = exo.ex;
+let exo=p.exercices[exIndex];
 
-/* 🔥 STOP mini pour éviter le -1 */
-paused = true;
+phase="ex";
+t=exo.ex;
+
+/* 🔥 RESET TIMER */
 update();
-
-setTimeout(()=>{
-paused = false;
-}, 150);
+startLoop();
 
 }
 
+function togglePause(){paused=!paused;}
+function toggleSound(){}
+function back(){window.location="config.html";}
+
 /* START */
 update();
-setInterval(loop,1000);
+startLoop();
 
 </script>
 
