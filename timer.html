@@ -107,10 +107,10 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* 🔥 BOUTONS AMÉLIORÉS */
+/* boutons */
 .buttons{
 display:grid;
-grid-template-columns:1fr 1fr 1fr;
+grid-template-columns:1fr 1fr;
 gap:8px;
 margin-top:6px;
 }
@@ -123,10 +123,6 @@ background:#d0d0d0;
 color:#222;
 font-size:13px;
 font-weight:bold;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:6px;
 }
 
 button:active{transform:scale(0.95);}
@@ -180,6 +176,7 @@ transform="rotate(-90 50 50)"/>
 
 <div class="buttons">
 <button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
+<button onclick="nextExercise()">⏭ Exercice</button>
 <button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
 <button onclick="back()">⚙️ Réglages</button>
 </div>
@@ -188,7 +185,7 @@ transform="rotate(-90 50 50)"/>
 
 <script>
 
-/* TON JS INCHANGÉ */
+/* INIT */
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -203,10 +200,12 @@ let soundOn=true;
 let totalSessionTime=0;
 let elapsedTime=0;
 
+/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
+/* calcul */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
@@ -223,6 +222,7 @@ return m+":"+(s%60<10?"0":"")+s%60;
 
 totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
 
+/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -250,7 +250,9 @@ paused=!paused;
 pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
 }
 
+/* UPDATE */
 function update(){
+
 let progress = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * progress;
 
@@ -274,20 +276,25 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* 🔥 CORRECTION IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
+
 let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
 let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
 
 img.src = urlJpg;
+
 img.onerror = function(){
 this.onerror=null;
 this.src = urlPng;
 };
+
 }
 }
 
+/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -341,8 +348,10 @@ update();
 }
 }
 
+function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
+/* START */
 update();
 setInterval(loop,1000);
 
