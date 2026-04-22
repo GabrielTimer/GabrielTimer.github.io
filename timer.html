@@ -250,7 +250,6 @@ clearInterval(interval);
 waitingResume = false;
 paused = false;
 
-/* 🔥 RELANCE CORRECTE */
 next();
 }
 },1000);
@@ -275,6 +274,21 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
+/* 🔥 IMAGE CORRIGÉE */
+let patho = localStorage.getItem("pathologie");
+
+if(patho){
+let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
+let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
+
+img.src = urlJpg;
+
+img.onerror = function(){
+this.onerror=null;
+this.src = urlPng;
+};
+}
+
 }
 
 function next(){
@@ -295,7 +309,6 @@ update();
 return;
 }
 
-/* 🔥 PAUSE */
 if(phase==="repos"){
 
 repIndex++;
@@ -315,7 +328,6 @@ update();
 return;
 }
 
-/* reprise */
 if(phase==="pause"){
 phase="ex";
 t=p.exercices[exIndex].ex;
@@ -336,6 +348,16 @@ next();
 update();
 }
 }
+
+function nextExercise(){
+repIndex=1;
+exIndex++;
+phase="ex";
+t=p.exercices[exIndex].ex;
+update();
+}
+
+function back(){window.location="config.html";}
 
 setInterval(loop,1000);
 update();
