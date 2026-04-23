@@ -76,12 +76,8 @@ text-align:center;
 }
 
 .timerLabel{font-size:13px;}
-.timerValue{
-font-size:42px;
-font-weight:bold;
-}
+.timerValue{font-size:42px;font-weight:bold;}
 
-/* play */
 #playIcon{
 font-size:34px;
 margin-top:5px;
@@ -89,26 +85,17 @@ display:inline-block;
 transition:transform 0.2s;
 }
 
-.circleWrap:hover #playIcon{
-transform:scale(1.2);
-}
+.circleWrap:hover #playIcon{transform:scale(1.2);}
+.circleWrap:active #playIcon{transform:scale(0.9);}
 
-.circleWrap:active #playIcon{
-transform:scale(0.9);
-}
-
-/* pulse */
 @keyframes pulse {
 0% { transform: scale(1); opacity:1;}
 50% { transform: scale(1.35); opacity:0.6;}
 100% { transform: scale(1); opacity:1;}
 }
 
-.pulse{
-animation: pulse 0.9s infinite;
-}
+.pulse{animation: pulse 0.9s infinite;}
 
-/* bas */
 .bottomBlock{text-align:center;}
 
 #totalTime{font-size:12px;margin-bottom:2px;}
@@ -126,7 +113,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -169,17 +155,8 @@ button:active{transform:scale(0.95);}
 <div class="circleWrap" onclick="togglePause()">
 
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
-<circle id="progressCircle"
-cx="50" cy="50" r="45"
-stroke="#00e5ff"
-stroke-width="6"
-fill="none"
-transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
+<circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
 </svg>
 
 <div id="timer">
@@ -213,7 +190,6 @@ let phase="prep";
 let t=3, totalTimePhase=3;
 let paused=false;
 let soundOn=true;
-let finished=false;
 
 let totalSessionTime=0;
 let elapsedTime=0;
@@ -230,12 +206,15 @@ totalSessionTime*=p.series;
 }
 computeTotal();
 
+function formatTime(s){
+let m=Math.floor(s/60);
+return m+":"+(s%60<10?"0":"")+s%60;
+}
+
+totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
+
 function togglePause(){
-
-if(finished) return;
-
 paused=!paused;
-
 let icon=document.getElementById("playIcon");
 
 if(paused){
@@ -245,7 +224,7 @@ icon.classList.add("pulse");
 icon.innerText="⏸";
 icon.classList.remove("pulse");
 
-/* 🔥 si on sort d'une pause → lancer exo */
+/* reprise après pause */
 if(phase==="pause"){
 phase="ex";
 let exo=p.exercices[exIndex];
@@ -264,11 +243,6 @@ function update(){
 
 timerValue.innerText=t;
 
-if(finished){
-timerLabel.innerText="🎉 Bravo !\nFélicitations du kiné 💪👏";
-return;
-}
-
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
@@ -279,7 +253,6 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* IMAGE */
 let patho = localStorage.getItem("pathologie");
 if(patho){
 let urlJpg="images/"+patho+"/ex"+(exIndex+1)+".jpg";
@@ -298,7 +271,9 @@ t=exo.ex;
 return;
 }
 
+/* EXERCICE */
 if(phase==="ex"){
+
 repIndex++;
 
 if(repIndex>exo.reps){
@@ -309,12 +284,13 @@ exIndex++;
 if(exIndex>=p.exercices.length){
 exIndex=0;
 serieIndex++;
-
-if(serieIndex>p.series){
-finished=true;
-paused=true;
-return;
 }
+
+/* FIN SÉANCE */
+if(serieIndex>p.series){
+paused=true;
+timerLabel.innerText="🎉 Félicitations du kiné 💪👏";
+return;
 }
 
 /* 🔥 PAUSE ENTRE EXOS */
@@ -330,10 +306,17 @@ phase="repos";
 t=exo.repos;
 return;
 }
+
+/* REPOS → EX */
+if(phase==="repos"){
+phase="ex";
+t=exo.ex;
+return;
+}
 }
 
 function loop(){
-if(paused || finished)return;
+if(paused)return;
 
 t--;
 
