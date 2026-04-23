@@ -17,7 +17,6 @@ align-items:center;
 height:100dvh;
 overflow:hidden;
 transition:background 0.3s;
-padding-bottom:env(safe-area-inset-bottom);
 }
 
 .container{
@@ -66,6 +65,7 @@ margin-bottom:12px;
 position:relative;
 width:170px;
 height:170px;
+cursor:pointer;
 }
 
 #timer{
@@ -80,9 +80,7 @@ text-align:center;
 .timerValue{
 font-size:42px;
 font-weight:bold;
-transition:transform .15s;
 }
-.tick{transform:scale(1.15);}
 
 /* bas */
 .bottomBlock{
@@ -123,9 +121,16 @@ background:#d0d0d0;
 color:#222;
 font-size:13px;
 font-weight:bold;
+transition:transform 0.2s;
 }
 
-button:active{transform:scale(0.95);}
+button:hover{
+transform:scale(1.08);
+}
+
+button:active{
+transform:scale(0.95);
+}
 </style>
 </head>
 
@@ -145,7 +150,7 @@ button:active{transform:scale(0.95);}
 <img id="img">
 
 <div class="timerZone">
-<div class="circleWrap">
+<div class="circleWrap" onclick="togglePause()">
 
 <svg viewBox="0 0 100 100">
 <circle cx="50" cy="50" r="45"
@@ -164,6 +169,7 @@ transform="rotate(-90 50 50)"/>
 <div id="timer">
 <div class="timerLabel">PRÉPAREZ VOUS</div>
 <div class="timerValue" id="timerValue">0</div>
+<div id="playIcon">⏸</div>
 </div>
 
 </div>
@@ -175,8 +181,6 @@ transform="rotate(-90 50 50)"/>
 </div>
 
 <div class="buttons">
-<button id="pauseBtn" onclick="togglePause()">⏸ Pause</button>
-<button onclick="nextExercise()">⏭ Exercice</button>
 <button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
 <button onclick="back()">⚙️ Réglages</button>
 </div>
@@ -245,9 +249,10 @@ soundOn=!soundOn;
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
+/* 🔥 NOUVEAU PLAY/PAUSE */
 function togglePause(){
 paused=!paused;
-pauseBtn.innerHTML = paused ? "▶️ Reprendre" : "⏸ Pause";
+document.getElementById("playIcon").innerText = paused ? "▶️" : "⏸";
 }
 
 /* UPDATE */
@@ -259,9 +264,6 @@ progressCircle.style.strokeDashoffset = circumference * progress;
 if(phase==="prep") document.body.style.background="#1b5e20";
 if(phase==="ex") document.body.style.background="#b71c1c";
 if(phase==="repos") document.body.style.background="#0d47a1";
-
-timerValue.classList.add("tick");
-setTimeout(()=>timerValue.classList.remove("tick"),120);
 
 timerValue.innerText=t;
 
@@ -276,21 +278,18 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* 🔥 CORRECTION IMAGE */
+/* IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
-
 let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
 let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
 
 img.src = urlJpg;
-
 img.onerror = function(){
 this.onerror=null;
 this.src = urlPng;
 };
-
 }
 }
 
@@ -348,7 +347,6 @@ update();
 }
 }
 
-function nextExercise(){repIndex=1;exIndex++;phase="ex";}
 function back(){window.location="config.html";}
 
 /* START */
