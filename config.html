@@ -1,38 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Configuration</title>
+
 <style>
-body{
-font-family:Arial;
-background:#f4f4f4;
-margin:0;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100dvh;
-}
+body{font-family:Arial;background:#f4f4f4;text-align:center;margin:0;}
 
 .card{
 background:white;
 padding:20px;
-border-radius:20px;
-width:92%;
-max-width:420px;
-box-shadow:0 8px 25px rgba(0,0,0,0.15);
+border-radius:15px;
+max-width:400px;
+margin:20px auto;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-h2{font-size:22px;}
-
-label{font-size:16px;}
+label{
+font-weight:bold;
+display:block;
+margin-top:10px;
+}
 
 input{
-font-size:16px;
-padding:12px;
+width:100%;
+padding:10px;
+margin:4px 0;
+border-radius:10px;
+border:1px solid #ccc;
 }
 
 button{
-font-size:18px;
-padding:16px;
+padding:14px;
+margin:6px 0;
+border:none;
+border-radius:10px;
+width:100%;
+font-size:16px;
+cursor:pointer;
+transition:0.15s;
 }
 
-.exoHeader{
-font-size:16px;
-}
+button:hover{transform:scale(1.05);}
+button:active{transform:scale(0.95);}
+
+.start{background:#0072ff;color:white;}
+.fav{background:#ffd54f;}
+.home{background:#777;color:white;}
+
+.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;}
+.exoHeader{background:#eee;padding:10px;cursor:pointer;}
+.exoContent{display:none;padding:10px;}
 </style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Configurer la séance</h2>
+
+<label>Nombre d'exercices</label>
+<input type="number" id="nbEx" value="5" onchange="generer()">
+
+<div id="exo"></div>
+
+<label>Nombre de séries</label>
+<input id="series" type="number" value="2">
+
+<button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
+<button class="start" onclick="start()">🚀 Lancer</button>
+<button class="home" onclick="home()">🏠 Accueil</button>
+
+</div>
+
+<script>
+
+/* 🔥 CONFIG CENTRALISÉE */
+const PATHO_CONFIG = {
+
+tendinite_coiffe: {
+series: 2,
+exercices: Array(8).fill().map(()=>({ex:90,repos:30,rep:1}))
+},
+
+lombalgie_1: {
+series: 2,
+exercices: [
+{ex:30,repos:10,rep:3},
+{ex:5,repos:5,rep:10},
+{ex:3,repos:2,rep:15},
+{ex:30,repos:5,rep:3},
+{ex:30,repos:10,rep:4},
+{ex:3,repos:3,rep:10},
+{ex:30,repos:10,rep:3},
+{ex:30,repos:10,rep:4}
+]
+}
+
+};
+
+let patho = localStorage.getItem("pathologie");
+
+/* 🔥 APPLY DEFAULT */
+function applyDefault(){
+
+if(!patho || !PATHO_CONFIG[patho]) return;
+
+let cfg = PATHO_CONFIG[patho];
+
+nbEx.value = cfg.exercices.length;
+series.value = cfg.series;
+
+generer();
+
+cfg.exercices.forEach((exo,i)=>{
+document.getElementById("ex"+i).value = exo.ex;
+document.getElementById("repos"+i).value = exo.repos;
+document.getElementById("rep"+i).value = exo.rep;
+});
+
+}
+
+/* GENERATION */
+function generer(){
+exo.innerHTML="";
+for(let i=0;i<nbEx.value;i++){
+exo.innerHTML+=`
+<div class="exoBloc">
+<div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
+<div class="exoContent" id="c${i}">
+Nom<input id="nom${i}" value="Ex ${i+1}">
+Ex<input id="ex${i}" value="20">
+Repos<input id="repos${i}" value="15">
+Rep<input id="rep${i}" value="3">
+</div></div>`;
+}
+}
+
+/* toggle */
+function toggle(i){
+let c=document.getElementById("c"+i);
+c.style.display=c.style.display==="block"?"none":"block";
+}
+
+/* build */
+function build(){
+let list=[];
+for(let i=0;i<nbEx.value;i++){
+list.push({
+nom:document.getElementById("nom"+i).value,
+ex:+document.getElementById("ex"+i).value,
+repos:+document.getElementById("repos"+i).value,
+reps:+document.getElementById("rep"+i).value
+});
+}
+return {exercices:list,series:+series.value};
+}
+
+/* save */
+function saveData(type){
+let list=JSON.parse(localStorage.getItem("programmes")||[]);
+
+list.push({
+nom:patho||"Libre",
+date:new Date().toLocaleDateString(),
+type:type,
+data:build()
+});
+
+localStorage.setItem("programmes",JSON.stringify(list));
+}
+
+/* favoris */
+function addFavori(){
+saveData("favori");
+alert("Ajouté ⭐");
+}
+
+/* start */
+function start(){
+saveData("historique");
+localStorage.setItem("programme_temp",JSON.stringify(build()));
+window.location="timer.html";
+}
+
+/* home */
+function home(){
+window.location="index.html";
+}
+
+/* INIT */
+generer();
+applyDefault();
+
+</script>
+
+</body>
+</html>
