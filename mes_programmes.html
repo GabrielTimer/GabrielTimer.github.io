@@ -2,48 +2,128 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mes Programmes</title>
 
 <style>
-body{font-family:Arial;background:#f4f4f4;text-align:center;margin:0;}
 
+/* BASE IDENTIQUE */
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+/* TITRE */
+h2{
+font-size:28px;
+margin-bottom:20px;
+}
+
+/* BOUTON HISTORIQUE */
+.topbar{
+margin-bottom:10px;
+}
+
+button.main{
+padding:12px 18px;
+border:none;
+border-radius:12px;
+background:#ddd;
+font-size:14px;
+cursor:pointer;
+}
+
+/* CARD STYLE HARMONISÉ */
 .card{
+width:85%;
+max-width:360px;
+margin:12px auto;
 background:white;
-margin:10px;
+border-radius:20px;
 padding:15px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+box-shadow:0 8px 25px rgba(0,0,0,0.12);
 cursor:pointer;
 display:flex;
 justify-content:space-between;
 align-items:center;
+transition:transform 0.2s, box-shadow 0.2s;
 }
 
-.card:hover{transform:scale(1.02);}
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 12px 30px rgba(0,0,0,0.2);
+}
 
-.left{text-align:left;}
-.fav{color:gold;font-weight:bold;}
+/* TEXTE */
+.left{
+text-align:left;
+font-size:14px;
+}
 
+.fav{
+color:gold;
+font-weight:bold;
+}
+
+/* ACTIONS */
 .actions button{
 margin-left:5px;
-padding:5px 8px;
+padding:6px 8px;
 border:none;
 border-radius:8px;
 cursor:pointer;
+font-size:14px;
 }
 
 .delete{background:#ff5252;color:white;}
 .star{background:#ffd54f;}
 
-.topbar{margin:10px;}
-
-button.main{
-margin:5px;
-padding:10px;
+/* BOUTON RETOUR */
+button.back{
+margin-top:20px;
+padding:14px 20px;
 border:none;
-border-radius:10px;
+border-radius:12px;
+background:#ccc;
+font-size:16px;
 cursor:pointer;
 }
+
+/* 📱 MOBILE */
+@media (max-width:600px){
+
+h2{
+font-size:28px;
+}
+
+.card{
+width:85%;
+max-width:340px;
+padding:16px;
+}
+
+.left{
+font-size:15px;
+}
+
+button.main{
+font-size:15px;
+}
+
+button.back{
+font-size:17px;
+padding:14px;
+}
+
+}
+
 </style>
 </head>
 
@@ -52,12 +132,12 @@ cursor:pointer;
 <h2>⭐ Mes Programmes</h2>
 
 <div class="topbar">
-<button class="main" onclick="goHist()">🕒 Voir historique</button>
+<button class="main" onclick="goHist()">🕒 Historique</button>
 </div>
 
 <div id="list"></div>
 
-<button onclick="back()">⬅ Retour</button>
+<button class="back" onclick="back()">⬅ Retour</button>
 
 <script>
 
