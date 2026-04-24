@@ -15,6 +15,16 @@ margin:0;
 height:100vh;
 display:flex;
 flex-direction:column;
+align-items:center; /* 🔥 clé pour alignement parfait */
+}
+
+/* CONTENEUR GLOBAL */
+.wrapper{
+width:100%;
+max-width:420px;
+display:flex;
+flex-direction:column;
+height:100%;
 }
 
 /* ZONE SCROLL */
@@ -29,8 +39,7 @@ padding:10px;
 background:white;
 padding:15px;
 border-radius:15px;
-max-width:420px;
-margin:auto;
+width:100%;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
@@ -86,15 +95,14 @@ display:none;
 padding:10px;
 }
 
-/* 🔥 FOOTER AMÉLIORÉ (harmonisé) */
+/* FOOTER HARMONISÉ */
 .footer{
 position:sticky;
 bottom:10px;
 
 background:white;
 
-max-width:420px;
-margin:0 auto 10px auto;
+width:100%; /* 🔥 identique à card */
 
 padding:12px;
 
@@ -123,7 +131,9 @@ cursor:pointer;
 
 <body>
 
-<!-- ZONE SCROLL -->
+<div class="wrapper">
+
+<!-- SCROLL -->
 <div class="main">
 
 <div class="card">
@@ -152,6 +162,8 @@ cursor:pointer;
 <button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
 <button class="home" onclick="home()">🏠 Accueil</button>
+
+</div>
 
 </div>
 
