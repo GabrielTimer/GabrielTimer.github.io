@@ -1,70 +1,25 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Zones</title>
-
 <style>
 body{
 font-family:Arial;
 background:#f4f4f4;
-text-align:center;
 margin:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100dvh;
 }
 
-h2{margin-top:20px;}
+h2{font-size:24px;}
 
 .card{
-width:90%;
-max-width:350px;
-margin:15px auto;
-background:white;
-border-radius:15px;
-padding:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-cursor:pointer;
-font-size:18px;
-font-weight:bold;
-transition:transform 0.15s, box-shadow 0.15s;
-}
-
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+font-size:22px;
+padding:25px;
+border-radius:20px;
 }
 
 button{
-margin-top:20px;
-padding:10px 20px;
-border:none;
-border-radius:10px;
-background:#ccc;
-transition:transform 0.15s;
+font-size:18px;
+padding:14px 25px;
 }
-
-button:hover{transform:scale(1.05);}
 </style>
-</head>
-
-<body>
-
-<h2>Choisir une zone</h2>
-
-<div class="card" onclick="go('epaule')">💪 Épaule</div>
-<div class="card" onclick="go('dos')">🧍 Dos</div>
-
-<button onclick="back()">⬅ Retour</button>
-
-<script>
-function go(zone){
-localStorage.setItem("zone", zone);
-window.location="liste_pathologies.html?v="+Date.now();
-}
-
-function back(){
-window.location="index.html";
-}
-</script>
-
-</body>
-</html>
