@@ -158,10 +158,10 @@ exo.innerHTML+=`
 <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
 <div class="exoContent" id="c${i}">
 <div class="grid2">
-<div class="field"><label>Nom</label><input id="nom${i}" value="Ex ${i+1}"></div>
-<div class="field"><label>Ex</label><input id="ex${i}" value="20"></div>
-<div class="field"><label>Repos</label><input id="repos${i}" value="15"></div>
-<div class="field"><label>Rep</label><input id="rep${i}" value="3"></div>
+<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="Ex ${i+1}"></div>
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="20"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="15"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="3"></div>
 </div>
 </div>
 </div>`;
@@ -192,7 +192,7 @@ function saveData(type){
 
 let list=JSON.parse(localStorage.getItem("programmes")||[]);
 
-/* 🔥 supprimer ancien si edit */
+/* supprimer ancien si edit */
 let editData = localStorage.getItem("edit_programme");
 if(editData){
 let old = JSON.parse(editData);
@@ -215,29 +215,10 @@ function addFavori(){saveData("favori");alert("Sauvegardé");}
 function start(){saveData("historique");localStorage.setItem("programme_temp",JSON.stringify(build()));window.location="timer.html";}
 function home(){window.location="index.html";}
 
-/* 🔥 NOM PAR DÉFAUT */
-function setDefaultName(){
-
-/* si mode édition → ne rien changer */
-if(localStorage.getItem("edit_programme")) return;
-
-/* récupérer pathologie */
-let patho = localStorage.getItem("pathologie");
-
-if(patho){
-sessionName.value = patho
-.replaceAll("_"," ")
-.replace(/\b\w/g,l=>l.toUpperCase());
-}else{
-sessionName.value = "Libre";
-}
-
-}
-
-/* 🔥 LOAD EDIT */
+/* 🔥 LOAD EDIT (prioritaire) */
 function loadEdit(){
 let data = localStorage.getItem("edit_programme");
-if(!data) return;
+if(!data) return false;
 
 let p = JSON.parse(data);
 
@@ -253,12 +234,31 @@ document.getElementById("ex"+i).value = exo.ex;
 document.getElementById("repos"+i).value = exo.repos;
 document.getElementById("rep"+i).value = exo.reps;
 });
+
+return true;
+}
+
+/* 🔥 NOM PAR DÉFAUT */
+function setDefaultName(){
+
+let patho = localStorage.getItem("pathologie");
+
+if(patho){
+sessionName.value = patho
+.replaceAll("_"," ")
+.replace(/\b\w/g,l=>l.toUpperCase());
+}else{
+sessionName.value = "Libre";
+}
+
 }
 
 /* INIT */
 generer();
-setDefaultName(); /* 🔥 FIX IMPORTANT */
-loadEdit();
+
+if(!loadEdit()){  // 🔥 si pas en édition
+setDefaultName();
+}
 
 </script>
 
