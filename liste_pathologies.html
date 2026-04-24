@@ -2,56 +2,65 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pathologies</title>
 
 <style>
+
+/* BASE IDENTIQUE À ZONE */
 body{
 font-family:Arial;
 background:#f4f4f4;
-text-align:center;
 margin:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
 }
 
+/* TITRE */
 h2{
-margin-top:20px;
+font-size:28px;
+margin-bottom:25px;
 }
 
-/* CARD */
+/* CARD (harmonisée) */
 .card{
 display:flex;
 align-items:center;
 gap:12px;
-width:90%;
-max-width:420px;
+width:85%;
+max-width:360px;
 margin:12px auto;
 background:white;
-border-radius:15px;
-padding:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+border-radius:20px;
+padding:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.12);
 cursor:pointer;
 transition:transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover{
-transform:scale(1.02);
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+transform:scale(1.03);
+box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
 /* IMAGE */
 .card img{
-width:90px;
-height:90px;
+width:80px;
+height:80px;
 object-fit:cover;
-border-radius:10px;
+border-radius:12px;
 }
 
-/* bloc texte */
+/* TEXTE */
 .info{
 flex:1;
 text-align:left;
 }
 
-/* ligne titre + bouton */
 .titleRow{
 display:flex;
 justify-content:space-between;
@@ -63,7 +72,7 @@ margin:0;
 font-size:16px;
 }
 
-/* bouton PDF */
+/* BOUTON PDF */
 .pdfBtn{
 background:#00e5ff;
 border:none;
@@ -72,23 +81,12 @@ border-radius:10px;
 font-weight:bold;
 cursor:pointer;
 font-size:12px;
-transition:transform 0.15s, box-shadow 0.15s;
 }
 
-.pdfBtn:hover{
-background:#00c4dd;
-transform:scale(1.08);
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
-}
-
-.pdfBtn:active{
-transform:scale(0.95);
-}
-
-/* fallback */
+/* FALLBACK */
 .img-error{
-width:90px;
-height:90px;
+width:80px;
+height:80px;
 background:#ddd;
 display:flex;
 align-items:center;
@@ -97,26 +95,46 @@ font-size:10px;
 border-radius:10px;
 }
 
-/* bouton retour */
+/* BOUTON RETOUR */
 button{
-margin-top:15px;
-padding:10px 20px;
+margin-top:20px;
+padding:14px 20px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:#ccc;
-font-weight:bold;
+font-size:16px;
 cursor:pointer;
-transition:transform 0.15s, box-shadow 0.15s;
 }
 
-button:hover{
-transform:scale(1.05);
-box-shadow:0 5px 10px rgba(0,0,0,0.2);
+/* 📱 MOBILE */
+@media (max-width:600px){
+
+h2{
+font-size:28px;
 }
 
-button:active{
-transform:scale(0.95);
+.card{
+width:85%;
+max-width:340px;
+padding:16px;
 }
+
+.card img{
+width:70px;
+height:70px;
+}
+
+h3{
+font-size:17px;
+}
+
+button{
+font-size:17px;
+padding:14px;
+}
+
+}
+
 </style>
 </head>
 
@@ -179,7 +197,7 @@ title.innerText = p.nom;
 /* bouton PDF */
 let btn = document.createElement("button");
 btn.className = "pdfBtn";
-btn.innerText = "🖨️ Télécharger";
+btn.innerText = "🖨️ PDF";
 
 btn.onclick = function(e){
 e.stopPropagation();
@@ -196,7 +214,6 @@ localStorage.setItem("pathologie", p.dossier);
 window.location = "config.html?v="+Date.now();
 };
 
-/* STRUCTURE */
 div.appendChild(img);
 div.appendChild(info);
 
