@@ -103,7 +103,7 @@ return {exercices:list,series:+series.value};
 
 /* SAVE */
 function saveData(type){
-let list=JSON.parse(localStorage.getItem("programmes")||[]);
+let list=JSON.parse(localStorage.getItem("programmes")||"[]");
 
 let editData = localStorage.getItem("edit_programme");
 if(editData){
@@ -126,7 +126,7 @@ function addFavori(){saveData("favori");alert("Sauvegardé");}
 function start(){saveData("historique");localStorage.setItem("programme_temp",JSON.stringify(build()));window.location="timer.html";}
 function home(){window.location="index.html";}
 
-/* 🔥 LOAD EDIT */
+/* LOAD EDIT */
 function loadEdit(){
 let data = localStorage.getItem("edit_programme");
 if(!data) return false;
@@ -149,7 +149,7 @@ document.getElementById("rep"+i).value = exo.reps;
 return true;
 }
 
-/* 🔥 LOAD PATHO */
+/* LOAD PATHO */
 function loadPatho(){
 
 let data = localStorage.getItem("patho_data");
@@ -172,7 +172,7 @@ document.getElementById("rep"+i).value = exo.reps;
 return true;
 }
 
-/* 🔥 NOM */
+/* NOM */
 function setDefaultName(){
 let patho = localStorage.getItem("pathologie");
 
@@ -186,10 +186,16 @@ sessionName.value = "Libre";
 /* INIT */
 generer();
 
-if(!loadEdit()){
-if(!loadPatho()){
-setDefaultName();
+let isEdit = loadEdit();
+let isPatho = false;
+
+if(!isEdit){
+isPatho = loadPatho();
 }
+
+// 🔥 FIX ICI : toujours définir le nom si pas en édition
+if(!isEdit){
+setDefaultName();
 }
 
 </script>
