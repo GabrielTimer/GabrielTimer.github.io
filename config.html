@@ -73,9 +73,9 @@ exo.innerHTML+=`
 <div class="exoContent" id="c${i}">
 <div class="grid2">
 <div class="field"><label>🏷 Nom</label><input id="nom${i}" value="Ex ${i+1}"></div>
-<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="20"></div>
-<div class="field"><label>😌 Repos</label><input id="repos${i}" value="15"></div>
-<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="3"></div>
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="30"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="10"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="10"></div>
 </div>
 </div>
 </div>`;
@@ -193,7 +193,6 @@ if(!isEdit){
 isPatho = loadPatho();
 }
 
-// 🔥 FIX ICI : toujours définir le nom si pas en édition
 if(!isEdit){
 setDefaultName();
 }
