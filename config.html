@@ -63,6 +63,11 @@ button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-
 
 <script>
 
+/* 🔥 NETTOYAGE IMMÉDIAT (clé du fix) */
+if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
+    localStorage.removeItem("patho_data");
+}
+
 /* GENERATION */
 function generer(){
 exo.innerHTML="";
@@ -151,7 +156,6 @@ return true;
 
 /* LOAD PATHO */
 function loadPatho(){
-
 let data = localStorage.getItem("patho_data");
 if(!data) return false;
 
@@ -189,13 +193,8 @@ generer();
 let isEdit = loadEdit();
 let isPatho = false;
 
-if(!isEdit && localStorage.getItem("patho_data")){
+if(!isEdit){
 isPatho = loadPatho();
-}
-
-// 🔥 nettoyage automatique si mode libre
-if(!isEdit && !isPatho){
-localStorage.removeItem("patho_data");
 }
 
 if(!isEdit){
