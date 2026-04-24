@@ -53,7 +53,6 @@ cursor:pointer;
 
 <div class="topbar">
 <button class="main" onclick="goHist()">🕒 Voir historique</button>
-<button class="main" onclick="clearHist()">🧹 Effacer historique</button>
 </div>
 
 <div id="list"></div>
@@ -64,7 +63,7 @@ cursor:pointer;
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
 
-/* 🔥 FILTRE UNIQUEMENT FAVORIS */
+/* FAVORIS UNIQUEMENT */
 list = list.filter(p=>p.type==="favori");
 
 let container=document.getElementById("list");
@@ -74,7 +73,6 @@ list.forEach((p,index)=>{
 let div=document.createElement("div");
 div.className="card";
 
-/* LEFT */
 let left=document.createElement("div");
 left.className="left";
 
@@ -83,11 +81,10 @@ left.innerHTML=`
 <b>${formatName(p.nom)}</b><br>${p.date}
 `;
 
-/* ACTIONS */
 let actions=document.createElement("div");
 actions.className="actions";
 
-/* DELETE */
+/* delete */
 let del=document.createElement("button");
 del.className="delete";
 del.innerText="🗑";
@@ -96,7 +93,7 @@ e.stopPropagation();
 remove(index);
 };
 
-/* UNFAV */
+/* unfav */
 let star=document.createElement("button");
 star.className="star";
 star.innerText="⭐";
@@ -108,7 +105,6 @@ unfav(index);
 actions.appendChild(star);
 actions.appendChild(del);
 
-/* CLICK */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
 window.location="timer.html";
@@ -126,7 +122,6 @@ let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let favs = all.filter(p=>p.type==="favori");
 
 let target = favs[i];
-
 all = all.filter(p=>p !== target);
 
 localStorage.setItem("programmes",JSON.stringify(all));
@@ -145,17 +140,6 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* vider historique */
-function clearHist(){
-if(confirm("Supprimer tout l'historique ?")){
-let all = JSON.parse(localStorage.getItem("programmes")||[]);
-all = all.filter(p=>p.type==="favori");
-localStorage.setItem("programmes",JSON.stringify(all));
-alert("Historique supprimé");
-}
-}
-
-/* navigation */
 function goHist(){
 window.location="historique.html";
 }

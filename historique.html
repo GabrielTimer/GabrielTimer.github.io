@@ -33,12 +33,25 @@ cursor:pointer;
 .delete{background:#ff5252;color:white;}
 .star{background:#ffd54f;}
 
+.topbar{margin:10px;}
+
+button.main{
+margin:5px;
+padding:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
 <h2>🕒 Historique</h2>
+
+<div class="topbar">
+<button class="main" onclick="clearHist()">🧹 Effacer tout l’historique</button>
+</div>
 
 <div id="list"></div>
 
@@ -48,7 +61,7 @@ cursor:pointer;
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
 
-/* 🔥 UNIQUEMENT HISTORIQUE */
+/* HISTORIQUE UNIQUEMENT */
 list = list.filter(p=>p.type==="historique");
 
 let container=document.getElementById("list");
@@ -78,7 +91,7 @@ e.stopPropagation();
 remove(index);
 };
 
-/* add fav */
+/* ajouter favori */
 let star=document.createElement("button");
 star.className="star";
 star.innerText="⭐";
@@ -101,7 +114,7 @@ container.appendChild(div);
 
 });
 
-/* supprimer */
+/* supprimer un */
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
@@ -123,6 +136,16 @@ target.type="favori";
 
 localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
+}
+
+/* 🔥 supprimer tout historique */
+function clearHist(){
+if(confirm("Supprimer tout l'historique ?")){
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+all = all.filter(p=>p.type==="favori");
+localStorage.setItem("programmes",JSON.stringify(all));
+location.reload();
+}
 }
 
 function back(){
