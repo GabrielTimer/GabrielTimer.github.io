@@ -109,7 +109,6 @@ cursor:pointer;
 .start{background:#0072ff;color:white;}
 .fav{background:#ffd54f;}
 .home{background:#777;color:white;}
-
 </style>
 </head>
 
@@ -216,6 +215,25 @@ function addFavori(){saveData("favori");alert("Sauvegardé");}
 function start(){saveData("historique");localStorage.setItem("programme_temp",JSON.stringify(build()));window.location="timer.html";}
 function home(){window.location="index.html";}
 
+/* 🔥 NOM PAR DÉFAUT */
+function setDefaultName(){
+
+/* si mode édition → ne rien changer */
+if(localStorage.getItem("edit_programme")) return;
+
+/* récupérer pathologie */
+let patho = localStorage.getItem("pathologie");
+
+if(patho){
+sessionName.value = patho
+.replaceAll("_"," ")
+.replace(/\b\w/g,l=>l.toUpperCase());
+}else{
+sessionName.value = "Libre";
+}
+
+}
+
 /* 🔥 LOAD EDIT */
 function loadEdit(){
 let data = localStorage.getItem("edit_programme");
@@ -239,6 +257,7 @@ document.getElementById("rep"+i).value = exo.reps;
 
 /* INIT */
 generer();
+setDefaultName(); /* 🔥 FIX IMPORTANT */
 loadEdit();
 
 </script>
