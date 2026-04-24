@@ -48,7 +48,7 @@ font-size:12px;
 margin-bottom:2px;
 }
 
-/* INPUT COMPACT */
+/* INPUT */
 input{
 width:85%;
 max-width:140px;
@@ -56,13 +56,6 @@ padding:8px;
 border-radius:8px;
 border:1px solid #ccc;
 font-size:14px;
-}
-
-/* CENTRAGE DES CHAMPS */
-.field{
-display:flex;
-flex-direction:column;
-align-items:center;
 }
 
 /* GRID */
@@ -73,11 +66,12 @@ gap:10px;
 margin-top:8px;
 }
 
-/* COULEURS PAR TYPE */
-.field.nom input{border-left:4px solid #607d8b;}
-.field.ex input{border-left:4px solid #e53935;}
-.field.repos input{border-left:4px solid #1e88e5;}
-.field.rep input{border-left:4px solid #43a047;}
+/* FIELD */
+.field{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
 
 /* EXERCICES */
 .exoBloc{
@@ -110,10 +104,17 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* INPUT FOOTER */
+/* GRID FOOTER */
+.footerGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-bottom:10px;
+}
+
 .footer input{
-width:120px;
-display:block;
+width:100%;
+max-width:140px;
 margin:auto;
 }
 
@@ -156,8 +157,19 @@ cursor:pointer;
 
 <div class="footer">
 
+<div class="footerGrid">
+
+<div class="field">
 <label>Nombre de séries</label>
 <input id="series" type="number" value="2">
+</div>
+
+<div class="field">
+<label>Nom de la séance</label>
+<input id="sessionName">
+</div>
+
+</div>
 
 <button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
@@ -190,7 +202,16 @@ exercices:[
 
 let patho = localStorage.getItem("pathologie");
 
-/* DEFAULT */
+/* DEFAULT NOM */
+function setDefaultName(){
+if(patho){
+sessionName.value = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
+}else{
+sessionName.value = "Libre";
+}
+}
+
+/* DEFAULT CONFIG */
 function applyDefault(){
 if(!patho || !PATHO_CONFIG[patho]) return;
 
@@ -215,33 +236,30 @@ for(let i=0;i<nbEx.value;i++){
 exo.innerHTML+=`
 <div class="exoBloc">
 <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
-
 <div class="exoContent" id="c${i}">
-
 <div class="grid2">
 
-<div class="field nom">
-<label>📝 Nom</label>
+<div class="field">
+<label>Nom</label>
 <input id="nom${i}" value="Ex ${i+1}">
 </div>
 
-<div class="field ex">
-<label>🔥 Exercice</label>
+<div class="field">
+<label>Exercice</label>
 <input id="ex${i}" value="20">
 </div>
 
-<div class="field repos">
-<label>💤 Repos</label>
+<div class="field">
+<label>Repos</label>
 <input id="repos${i}" value="15">
 </div>
 
-<div class="field rep">
-<label>🔁 Répétitions</label>
+<div class="field">
+<label>Répétitions</label>
 <input id="rep${i}" value="3">
 </div>
 
 </div>
-
 </div>
 </div>`;
 }
@@ -264,14 +282,17 @@ repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
 });
 }
-return {exercices:list,series:+series.value};
+return {
+exercices:list,
+series:+series.value
+};
 }
 
 /* SAVE */
 function saveData(type){
 let list=JSON.parse(localStorage.getItem("programmes")||[]);
 list.push({
-nom:patho||"Libre",
+nom:sessionName.value || "Libre",
 date:new Date().toLocaleDateString(),
 type:type,
 data:build()
@@ -298,6 +319,7 @@ window.location="index.html";
 /* INIT */
 generer();
 applyDefault();
+setDefaultName();
 
 </script>
 
