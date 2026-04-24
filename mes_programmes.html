@@ -6,8 +6,6 @@
 <title>Mes Programmes</title>
 
 <style>
-
-/* BASE IDENTIQUE */
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -20,16 +18,12 @@ min-height:100vh;
 padding:20px;
 }
 
-/* TITRE */
 h2{
 font-size:28px;
 margin-bottom:20px;
 }
 
-/* BOUTON HISTORIQUE */
-.topbar{
-margin-bottom:10px;
-}
+.topbar{margin-bottom:10px;}
 
 button.main{
 padding:12px 18px;
@@ -40,7 +34,6 @@ font-size:14px;
 cursor:pointer;
 }
 
-/* CARD STYLE HARMONISÉ */
 .card{
 width:85%;
 max-width:360px;
@@ -53,7 +46,7 @@ cursor:pointer;
 display:flex;
 justify-content:space-between;
 align-items:center;
-transition:transform 0.2s, box-shadow 0.2s;
+transition:0.2s;
 }
 
 .card:hover{
@@ -61,18 +54,9 @@ transform:scale(1.03);
 box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
-/* TEXTE */
-.left{
-text-align:left;
-font-size:14px;
-}
+.left{text-align:left;font-size:14px;}
+.fav{color:gold;font-weight:bold;}
 
-.fav{
-color:gold;
-font-weight:bold;
-}
-
-/* ACTIONS */
 .actions button{
 margin-left:5px;
 padding:6px 8px;
@@ -85,7 +69,6 @@ font-size:14px;
 .delete{background:#ff5252;color:white;}
 .star{background:#ffd54f;}
 
-/* BOUTON RETOUR */
 button.back{
 margin-top:20px;
 padding:14px 20px;
@@ -96,34 +79,10 @@ font-size:16px;
 cursor:pointer;
 }
 
-/* 📱 MOBILE */
 @media (max-width:600px){
-
-h2{
-font-size:28px;
+.card{max-width:340px;}
+.left{font-size:15px;}
 }
-
-.card{
-width:85%;
-max-width:340px;
-padding:16px;
-}
-
-.left{
-font-size:15px;
-}
-
-button.main{
-font-size:15px;
-}
-
-button.back{
-font-size:17px;
-padding:14px;
-}
-
-}
-
 </style>
 </head>
 
@@ -142,8 +101,6 @@ padding:14px;
 <script>
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
-
-/* FAVORIS UNIQUEMENT */
 list = list.filter(p=>p.type==="favori");
 
 let container=document.getElementById("list");
@@ -158,7 +115,7 @@ left.className="left";
 
 left.innerHTML=`
 <div class="fav">⭐ Favori</div>
-<b>${formatName(p.nom)}</b><br>${p.date}
+<b>${getName(p)}</b><br>${p.date}
 `;
 
 let actions=document.createElement("div");
@@ -168,19 +125,13 @@ actions.className="actions";
 let del=document.createElement("button");
 del.className="delete";
 del.innerText="🗑";
-del.onclick=(e)=>{
-e.stopPropagation();
-remove(index);
-};
+del.onclick=(e)=>{e.stopPropagation();remove(index);};
 
 /* unfav */
 let star=document.createElement("button");
 star.className="star";
 star.innerText="⭐";
-star.onclick=(e)=>{
-e.stopPropagation();
-unfav(index);
-};
+star.onclick=(e)=>{e.stopPropagation();unfav(index);};
 
 actions.appendChild(star);
 actions.appendChild(del);
@@ -196,43 +147,37 @@ container.appendChild(div);
 
 });
 
-/* supprimer */
+/* 🔥 NOM SÉCURISÉ */
+function getName(p){
+if(p.nom && p.nom !== "undefined"){
+return p.nom;
+}
+return "Séance";
+}
+
+/* delete */
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let favs = all.filter(p=>p.type==="favori");
-
 let target = favs[i];
 all = all.filter(p=>p !== target);
-
 localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* enlever favori */
+/* unfav */
 function unfav(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let favs = all.filter(p=>p.type==="favori");
-
 let target = favs[i];
 target.type="historique";
-
 localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-function goHist(){
-window.location="historique.html";
-}
-
-function back(){
-window.location="index.html";
-}
-
-function formatName(n){
-return n.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
-}
+function goHist(){window.location="historique.html";}
+function back(){window.location="index.html";}
 
 </script>
-
 </body>
 </html>
