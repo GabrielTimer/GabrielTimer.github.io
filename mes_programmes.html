@@ -6,6 +6,7 @@
 <title>Mes Programmes</title>
 
 <style>
+
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -42,11 +43,11 @@ background:white;
 border-radius:20px;
 padding:15px;
 box-shadow:0 8px 25px rgba(0,0,0,0.12);
-cursor:pointer;
 display:flex;
 justify-content:space-between;
 align-items:center;
 transition:0.2s;
+cursor:pointer;
 }
 
 .card:hover{
@@ -54,9 +55,26 @@ transform:scale(1.03);
 box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
-.left{text-align:left;font-size:14px;}
-.fav{color:gold;font-weight:bold;}
+.left{
+text-align:left;
+font-size:14px;
+}
 
+.fav{
+color:gold;
+font-weight:bold;
+}
+
+/* INPUT RENOMMAGE */
+.renameInput{
+width:120px;
+padding:4px;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:13px;
+}
+
+/* ACTIONS */
 .actions button{
 margin-left:5px;
 padding:6px 8px;
@@ -67,7 +85,7 @@ font-size:14px;
 }
 
 .delete{background:#ff5252;color:white;}
-.star{background:#ffd54f;}
+.edit{background:#4caf50;color:white;}
 
 button.back{
 margin-top:20px;
@@ -83,6 +101,7 @@ cursor:pointer;
 .card{max-width:340px;}
 .left{font-size:15px;}
 }
+
 </style>
 </head>
 
@@ -100,8 +119,8 @@ cursor:pointer;
 
 <script>
 
-let list = JSON.parse(localStorage.getItem("programmes")||[]);
-list = list.filter(p=>p.type==="favori");
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+let list = all.filter(p=>p.type==="favori");
 
 let container=document.getElementById("list");
 
@@ -113,27 +132,59 @@ div.className="card";
 let left=document.createElement("div");
 left.className="left";
 
-left.innerHTML=`
-<div class="fav">⭐ Favori</div>
-<b>${getName(p)}</b><br>${p.date}
-`;
+/* affichage nom */
+let nameSpan=document.createElement("span");
+nameSpan.innerHTML="<b>"+getName(p)+"</b>";
+
+/* input caché */
+let input=document.createElement("input");
+input.className="renameInput";
+input.style.display="none";
+input.value=getName(p);
+
+/* switch affichage */
+left.innerHTML=`<div class="fav">⭐ Favori</div>`;
+left.appendChild(nameSpan);
+left.appendChild(input);
+
+let date=document.createElement("div");
+date.innerText=p.date;
+left.appendChild(date);
 
 let actions=document.createElement("div");
-actions.className="actions";
 
-/* delete */
+/* ✏️ rename */
+let edit=document.createElement("button");
+edit.className="edit";
+edit.innerText="✏️";
+
+edit.onclick=(e)=>{
+e.stopPropagation();
+
+/* toggle mode */
+if(input.style.display==="none"){
+input.style.display="block";
+nameSpan.style.display="none";
+input.focus();
+}else{
+saveName(index,input.value);
+}
+};
+
+/* ENTER = save */
+input.addEventListener("keypress",(e)=>{
+if(e.key==="Enter"){
+saveName(index,input.value);
+}
+});
+
+/* 🗑 delete */
 let del=document.createElement("button");
 del.className="delete";
 del.innerText="🗑";
 del.onclick=(e)=>{e.stopPropagation();remove(index);};
 
-/* unfav */
-let star=document.createElement("button");
-star.className="star";
-star.innerText="⭐";
-star.onclick=(e)=>{e.stopPropagation();unfav(index);};
-
-actions.appendChild(star);
+actions.appendChild(edit);
 actions.appendChild(del);
 
 div.onclick=()=>{
@@ -147,12 +198,26 @@ container.appendChild(div);
 
 });
 
-/* 🔥 NOM SÉCURISÉ */
+/* 🔥 NOM SAFE */
 function getName(p){
 if(p.nom && p.nom !== "undefined"){
 return p.nom;
 }
 return "Séance";
+}
+
+/* 💾 SAVE NAME */
+function saveName(i,newName){
+if(!newName.trim()) return;
+
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+let favs = all.filter(p=>p.type==="favori");
+
+let target = favs[i];
+target.nom = newName;
+
+localStorage.setItem("programmes",JSON.stringify(all));
+location.reload();
 }
 
 /* delete */
@@ -165,19 +230,10 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* unfav */
-function unfav(i){
-let all = JSON.parse(localStorage.getItem("programmes")||[]);
-let favs = all.filter(p=>p.type==="favori");
-let target = favs[i];
-target.type="historique";
-localStorage.setItem("programmes",JSON.stringify(all));
-location.reload();
-}
-
 function goHist(){window.location="historique.html";}
 function back(){window.location="index.html";}
 
 </script>
+
 </body>
 </html>
