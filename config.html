@@ -15,7 +15,7 @@ margin:0;
 height:100vh;
 display:flex;
 flex-direction:column;
-align-items:center; /* 🔥 clé pour alignement parfait */
+align-items:center;
 }
 
 /* CONTENEUR GLOBAL */
@@ -31,7 +31,7 @@ height:100%;
 .main{
 flex:1;
 overflow-y:auto;
-padding:10px;
+padding:15px 10px 5px 10px; /* 🔥 espace haut pour coins arrondis */
 }
 
 /* CARD */
@@ -95,20 +95,20 @@ display:none;
 padding:10px;
 }
 
-/* FOOTER HARMONISÉ */
+/* FOOTER CORRIGÉ */
 .footer{
 position:sticky;
 bottom:10px;
 
 background:white;
-
-width:100%; /* 🔥 identique à card */
+width:100%;
 
 padding:12px;
 
 border-radius:15px;
 
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+/* 🔥 ombre uniquement vers le bas */
+box-shadow:0 8px 20px rgba(0,0,0,0.12);
 }
 
 /* BOUTONS */
@@ -133,7 +133,6 @@ cursor:pointer;
 
 <div class="wrapper">
 
-<!-- SCROLL -->
 <div class="main">
 
 <div class="card">
@@ -151,7 +150,6 @@ cursor:pointer;
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
 
 <label>Nombre de séries</label>
@@ -169,7 +167,8 @@ cursor:pointer;
 
 <script>
 
-/* CONFIG */
+/* (JS inchangé) */
+
 const PATHO_CONFIG = {
 tendinite_coiffe:{
 series:2,
@@ -192,7 +191,6 @@ exercices:[
 
 let patho = localStorage.getItem("pathologie");
 
-/* DEFAULT */
 function applyDefault(){
 if(!patho || !PATHO_CONFIG[patho]) return;
 
@@ -210,7 +208,6 @@ document.getElementById("rep"+i).value = exo.rep;
 });
 }
 
-/* GENERATION */
 function generer(){
 exo.innerHTML="";
 for(let i=0;i<nbEx.value;i++){
@@ -226,13 +223,11 @@ Rep<input id="rep${i}" value="3">
 }
 }
 
-/* TOGGLE */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=c.style.display==="block"?"none":"block";
 }
 
-/* BUILD */
 function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
@@ -246,7 +241,6 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
-/* SAVE */
 function saveData(type){
 let list=JSON.parse(localStorage.getItem("programmes")||[]);
 list.push({
@@ -258,7 +252,6 @@ data:build()
 localStorage.setItem("programmes",JSON.stringify(list));
 }
 
-/* ACTIONS */
 function addFavori(){
 saveData("favori");
 alert("Ajouté ⭐");
@@ -274,7 +267,6 @@ function home(){
 window.location="index.html";
 }
 
-/* INIT */
 generer();
 applyDefault();
 
