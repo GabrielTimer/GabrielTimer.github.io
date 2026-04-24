@@ -28,9 +28,9 @@ margin-bottom:25px;
 
 /* CARD */
 .card{
-width:85%; /* 🔥 réduit pour créer marge visible */
+width:85%;
 max-width:360px;
-margin:12px auto; /* 🔥 centre propre */
+margin:12px auto;
 background:white;
 border-radius:20px;
 padding:20px;
@@ -60,14 +60,11 @@ transition:transform 0.15s;
 
 button:hover{transform:scale(1.05);}
 
-/* 📱 MODE SMARTPHONE */
+/* 📱 MOBILE */
 @media (max-width:600px){
 
-h2{
-font-size:28px;
-}
+h2{font-size:28px;}
 
-/* 🔥 marge bien visible */
 .card{
 width:85%;
 max-width:340px;
@@ -97,14 +94,22 @@ border-radius:14px;
 <button onclick="back()">⬅ Retour</button>
 
 <script>
+
 function go(zone){
+
+/* 🔥 FIX IMPORTANT */
+localStorage.removeItem("edit_programme");
+
+/* garder logique existante */
 localStorage.setItem("zone", zone);
+
 window.location="liste_pathologies.html?v="+Date.now();
 }
 
 function back(){
 window.location="index.html";
 }
+
 </script>
 
 </body>
