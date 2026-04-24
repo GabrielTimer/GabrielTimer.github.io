@@ -6,6 +6,7 @@
 <title>Historique</title>
 
 <style>
+
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -18,7 +19,11 @@ min-height:100vh;
 padding:20px;
 }
 
-h2{font-size:28px;margin-bottom:20px;}
+h2{
+font-size:28px;
+margin-bottom:20px;
+}
+
 .topbar{margin-bottom:10px;}
 
 button.main{
@@ -29,13 +34,14 @@ background:#ddd;
 cursor:pointer;
 }
 
+/* CARD */
 .card{
 width:85%;
 max-width:360px;
 margin:12px auto;
 background:white;
 border-radius:20px;
-padding:15px;
+padding:16px;
 box-shadow:0 8px 25px rgba(0,0,0,0.12);
 display:flex;
 justify-content:space-between;
@@ -49,19 +55,66 @@ transform:scale(1.03);
 box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
-.left{text-align:left;font-size:14px;}
-.hist{color:#666;}
-
-.actions button{
-margin-left:5px;
-padding:6px 8px;
-border:none;
-border-radius:8px;
-cursor:pointer;
+/* TEXTE */
+.left{
+display:flex;
+flex-direction:column;
+gap:4px;
 }
 
-.delete{background:#ff5252;color:white;}
-.star{background:#ffd54f;}
+.hist{
+color:#777;
+font-size:13px;
+}
+
+.title{
+font-size:16px;
+font-weight:bold;
+}
+
+.date{
+font-size:13px;
+color:#999;
+}
+
+/* ACTIONS */
+.actions{
+display:flex;
+gap:8px;
+}
+
+.iconBtn{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+border:none;
+cursor:pointer;
+font-size:16px;
+transition:0.2s;
+}
+
+/* ⭐ favori */
+.star{
+background:#fff8e1;
+color:#f9a825;
+}
+.star:hover{
+background:#ffecb3;
+transform:scale(1.1);
+}
+
+/* 🗑 */
+.delete{
+background:#ffebee;
+color:#c62828;
+}
+.delete:hover{
+background:#ffcdd2;
+transform:scale(1.1);
+}
 
 button.back{
 margin-top:20px;
@@ -69,6 +122,10 @@ padding:14px;
 border:none;
 border-radius:12px;
 background:#ccc;
+}
+
+@media (max-width:600px){
+.card{max-width:340px;}
 }
 
 </style>
@@ -98,43 +155,66 @@ list.forEach((p,index)=>{
 let div=document.createElement("div");
 div.className="card";
 
+/* LEFT */
 let left=document.createElement("div");
 left.className="left";
 
-left.innerHTML=`
-<div class="hist">🕒 Historique</div>
-<b>${getName(p)}</b><br>${p.date}
-`;
+let hist=document.createElement("div");
+hist.className="hist";
+hist.innerText="🕒 Historique";
 
+let title=document.createElement("div");
+title.className="title";
+title.innerText=getName(p);
+
+let date=document.createElement("div");
+date.className="date";
+date.innerText=p.date;
+
+/* ACTIONS */
 let actions=document.createElement("div");
+actions.className="actions";
 
-/* delete */
-let del=document.createElement("button");
-del.className="delete";
-del.innerText="🗑";
-del.onclick=(e)=>{e.stopPropagation();remove(index);};
-
-/* fav */
+/* ⭐ ajouter favori */
 let star=document.createElement("button");
-star.className="star";
-star.innerText="⭐";
-star.onclick=(e)=>{e.stopPropagation();addFav(index);};
+star.className="iconBtn star";
+star.innerHTML="⭐";
+star.onclick=(e)=>{
+e.stopPropagation();
+addFav(index);
+};
+
+/* 🗑 supprimer */
+let del=document.createElement("button");
+del.className="iconBtn delete";
+del.innerHTML="🗑";
+del.onclick=(e)=>{
+e.stopPropagation();
+remove(index);
+};
+
+/* BUILD */
+left.appendChild(hist);
+left.appendChild(title);
+left.appendChild(date);
 
 actions.appendChild(star);
 actions.appendChild(del);
 
+div.appendChild(left);
+div.appendChild(actions);
+
+/* CLICK */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
 window.location="timer.html";
 };
 
-div.appendChild(left);
-div.appendChild(actions);
 container.appendChild(div);
 
 });
 
-/* 🔥 NOM SÉCURISÉ */
+/* NOM SAFE */
 function getName(p){
 if(p.nom && p.nom !== "undefined"){
 return p.nom;
@@ -142,7 +222,7 @@ return p.nom;
 return "Séance";
 }
 
-/* delete */
+/* DELETE */
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
@@ -152,7 +232,7 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* fav */
+/* ADD FAV */
 function addFav(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
@@ -162,6 +242,7 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
+/* CLEAR */
 function clearHist(){
 if(confirm("Supprimer tout l'historique ?")){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
@@ -174,5 +255,6 @@ location.reload();
 function back(){window.location="mes_programmes.html";}
 
 </script>
+
 </body>
 </html>
