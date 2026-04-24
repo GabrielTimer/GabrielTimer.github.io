@@ -7,21 +7,30 @@
 
 <style>
 
+/* BASE */
 body{
 font-family:Arial;
 background:#f4f4f4;
-text-align:center;
 margin:0;
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* ZONE SCROLL */
+.main{
+flex:1;
+overflow-y:auto;
 padding:10px;
 }
 
-/* carte principale */
+/* CARD */
 .card{
 background:white;
-padding:18px;
+padding:15px;
 border-radius:15px;
 max-width:420px;
-margin:15px auto;
+margin:auto;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
@@ -29,6 +38,7 @@ box-shadow:0 5px 20px rgba(0,0,0,0.1);
 h2{
 font-size:22px;
 margin-bottom:10px;
+text-align:center;
 }
 
 /* LABEL */
@@ -36,42 +46,31 @@ label{
 font-weight:bold;
 display:block;
 margin-top:12px;
-font-size:16px;
+font-size:15px;
 }
 
-/* INPUT */
+/* INPUTS (corrigé largeur) */
 input{
-width:100%;
-padding:12px;
+width:120px;
+max-width:100%;
+padding:10px;
 margin:6px 0;
 border-radius:10px;
 border:1px solid #ccc;
 font-size:16px;
 }
 
-/* BOUTONS */
-button{
-padding:16px;
-margin:8px 0;
-border:none;
-border-radius:12px;
-width:100%;
-font-size:18px;
-cursor:pointer;
-transition:0.15s;
+/* bloc inputs alignés */
+.inputRow{
+display:flex;
+justify-content:center;
+gap:10px;
 }
-
-button:hover{transform:scale(1.03);}
-button:active{transform:scale(0.95);}
-
-.start{background:#0072ff;color:white;}
-.fav{background:#ffd54f;}
-.home{background:#777;color:white;}
 
 /* EXERCICES */
 .exoBloc{
 background:#f9f9f9;
-margin:12px 0;
+margin:10px 0;
 border-radius:10px;
 }
 
@@ -79,7 +78,7 @@ border-radius:10px;
 background:#eee;
 padding:12px;
 cursor:pointer;
-font-size:16px;
+font-size:15px;
 }
 
 .exoContent{
@@ -87,53 +86,60 @@ display:none;
 padding:10px;
 }
 
-/* 📱 amélioration mobile */
-@media (max-width:600px){
-
-body{
-padding:8px;
+/* BAS FIXE */
+.footer{
+position:sticky;
+bottom:0;
+background:white;
+padding:10px;
+box-shadow:0 -5px 15px rgba(0,0,0,0.1);
 }
 
-.card{
-margin:10px auto;
-padding:15px;
-}
-
-h2{
-font-size:24px;
-}
-
-label{
-font-size:17px;
-}
-
-input{
-font-size:17px;
-}
-
+/* BOUTONS */
 button{
-font-size:18px;
-padding:16px;
+padding:14px;
+margin:6px 0;
+border:none;
+border-radius:12px;
+width:100%;
+font-size:17px;
+cursor:pointer;
 }
 
-}
+.start{background:#0072ff;color:white;}
+.fav{background:#ffd54f;}
+.home{background:#777;color:white;}
 
 </style>
 </head>
 
 <body>
 
+<!-- ZONE QUI SCROLL -->
+<div class="main">
+
 <div class="card">
 
 <h2>Configurer la séance</h2>
 
 <label>Nombre d'exercices</label>
+<div class="inputRow">
 <input type="number" id="nbEx" value="5" onchange="generer()">
+</div>
 
 <div id="exo"></div>
 
+</div>
+
+</div>
+
+<!-- BAS FIXE -->
+<div class="footer">
+
 <label>Nombre de séries</label>
+<div class="inputRow">
 <input id="series" type="number" value="2">
+</div>
 
 <button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
@@ -143,17 +149,15 @@ padding:16px;
 
 <script>
 
-/* 🔥 CONFIG CENTRALISÉE */
+/* CONFIG */
 const PATHO_CONFIG = {
-
-tendinite_coiffe: {
-series: 2,
-exercices: Array(8).fill().map(()=>({ex:90,repos:30,rep:1}))
+tendinite_coiffe:{
+series:2,
+exercices:Array(8).fill().map(()=>({ex:90,repos:30,rep:1}))
 },
-
-lombalgie_1: {
-series: 2,
-exercices: [
+lombalgie_1:{
+series:2,
+exercices:[
 {ex:30,repos:10,rep:3},
 {ex:5,repos:5,rep:10},
 {ex:3,repos:2,rep:15},
@@ -164,14 +168,12 @@ exercices: [
 {ex:30,repos:10,rep:4}
 ]
 }
-
 };
 
 let patho = localStorage.getItem("pathologie");
 
-/* APPLY DEFAULT */
+/* DEFAULT */
 function applyDefault(){
-
 if(!patho || !PATHO_CONFIG[patho]) return;
 
 let cfg = PATHO_CONFIG[patho];
@@ -186,7 +188,6 @@ document.getElementById("ex"+i).value = exo.ex;
 document.getElementById("repos"+i).value = exo.repos;
 document.getElementById("rep"+i).value = exo.rep;
 });
-
 }
 
 /* GENERATION */
@@ -205,13 +206,13 @@ Rep<input id="rep${i}" value="3">
 }
 }
 
-/* toggle */
+/* TOGGLE */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=c.style.display==="block"?"none":"block";
 }
 
-/* build */
+/* BUILD */
 function build(){
 let list=[];
 for(let i=0;i<nbEx.value;i++){
@@ -225,34 +226,30 @@ reps:+document.getElementById("rep"+i).value
 return {exercices:list,series:+series.value};
 }
 
-/* save */
+/* SAVE */
 function saveData(type){
 let list=JSON.parse(localStorage.getItem("programmes")||[]);
-
 list.push({
 nom:patho||"Libre",
 date:new Date().toLocaleDateString(),
 type:type,
 data:build()
 });
-
 localStorage.setItem("programmes",JSON.stringify(list));
 }
 
-/* favoris */
+/* ACTIONS */
 function addFavori(){
 saveData("favori");
 alert("Ajouté ⭐");
 }
 
-/* start */
 function start(){
 saveData("historique");
 localStorage.setItem("programme_temp",JSON.stringify(build()));
 window.location="timer.html";
 }
 
-/* home */
 function home(){
 window.location="index.html";
 }
