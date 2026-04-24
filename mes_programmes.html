@@ -77,12 +77,21 @@ font-size:16px;
 transition:0.2s;
 }
 
+/* ✏️ */
 .edit{
 background:#e8f5e9;
 color:#2e7d32;
 }
 .edit:hover{background:#c8e6c9;transform:scale(1.1);}
 
+/* 📄 DUPLIQUER */
+.dup{
+background:#e3f2fd;
+color:#1565c0;
+}
+.dup:hover{background:#bbdefb;transform:scale(1.1);}
+
+/* 🗑 */
 .delete{
 background:#ffebee;
 color:#c62828;
@@ -138,14 +147,31 @@ left.innerHTML=`
 let actions=document.createElement("div");
 actions.className="actions";
 
-/* ✏️ EDIT COMPLET */
+/* ✏️ EDIT */
 let edit=document.createElement("button");
 edit.className="iconBtn edit";
 edit.innerHTML="✏️";
 edit.onclick=(e)=>{
 e.stopPropagation();
-
 localStorage.setItem("edit_programme", JSON.stringify(p));
+window.location="config.html?edit=1";
+};
+
+/* 📄 DUPLIQUER */
+let dup=document.createElement("button");
+dup.className="iconBtn dup";
+dup.innerHTML="📄";
+dup.onclick=(e)=>{
+e.stopPropagation();
+
+/* copier programme */
+let copy = JSON.parse(JSON.stringify(p));
+
+/* renommer */
+copy.nom = getName(p) + " (copie)";
+
+/* envoyer vers config */
+localStorage.setItem("edit_programme", JSON.stringify(copy));
 window.location="config.html?edit=1";
 };
 
@@ -159,6 +185,7 @@ remove(index);
 };
 
 actions.appendChild(edit);
+actions.appendChild(dup);
 actions.appendChild(del);
 
 div.appendChild(left);
