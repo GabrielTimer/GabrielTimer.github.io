@@ -44,27 +44,29 @@ text-align:center;
 /* LABEL */
 label{
 font-weight:bold;
-display:block;
-margin-top:12px;
+font-size:13px;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
 font-size:15px;
 }
 
-/* INPUTS */
-input{
-width:120px;
-max-width:100%;
-padding:10px;
-margin:6px 0;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
+/* 🔥 GRID COMPACT */
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px 10px;
+margin-top:8px;
 }
 
-/* ALIGNEMENT INPUT */
-.inputRow{
+.field{
 display:flex;
-justify-content:center;
-gap:10px;
+flex-direction:column;
 }
 
 /* EXERCICES */
@@ -86,20 +88,15 @@ display:none;
 padding:10px;
 }
 
-/* 🔥 FOOTER AMÉLIORÉ (harmonisé) */
+/* FOOTER */
 .footer{
 position:sticky;
 bottom:10px;
-
 background:white;
-
 max-width:420px;
 margin:0 auto 10px auto;
-
 padding:12px;
-
 border-radius:15px;
-
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
@@ -123,7 +120,6 @@ cursor:pointer;
 
 <body>
 
-<!-- ZONE SCROLL -->
 <div class="main">
 
 <div class="card">
@@ -131,9 +127,7 @@ cursor:pointer;
 <h2>Configurer la séance</h2>
 
 <label>Nombre d'exercices</label>
-<div class="inputRow">
 <input type="number" id="nbEx" value="5" onchange="generer()">
-</div>
 
 <div id="exo"></div>
 
@@ -141,13 +135,10 @@ cursor:pointer;
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
 
 <label>Nombre de séries</label>
-<div class="inputRow">
 <input id="series" type="number" value="2">
-</div>
 
 <button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
@@ -205,12 +196,35 @@ for(let i=0;i<nbEx.value;i++){
 exo.innerHTML+=`
 <div class="exoBloc">
 <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
+
 <div class="exoContent" id="c${i}">
-Nom<input id="nom${i}" value="Ex ${i+1}">
-Ex<input id="ex${i}" value="20">
-Repos<input id="repos${i}" value="15">
-Rep<input id="rep${i}" value="3">
-</div></div>`;
+
+<div class="grid2">
+
+<div class="field">
+<label>Nom</label>
+<input id="nom${i}" value="Ex ${i+1}">
+</div>
+
+<div class="field">
+<label>Exercice</label>
+<input id="ex${i}" value="20">
+</div>
+
+<div class="field">
+<label>Repos</label>
+<input id="repos${i}" value="15">
+</div>
+
+<div class="field">
+<label>Répétitions</label>
+<input id="rep${i}" value="3">
+</div>
+
+</div>
+
+</div>
+</div>`;
 }
 }
 
