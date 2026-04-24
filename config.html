@@ -44,30 +44,40 @@ text-align:center;
 /* LABEL */
 label{
 font-weight:bold;
-font-size:13px;
+font-size:12px;
+margin-bottom:2px;
 }
 
-/* INPUT */
+/* INPUT COMPACT */
 input{
-width:100%;
-padding:10px;
-border-radius:10px;
+width:85%;
+max-width:140px;
+padding:8px;
+border-radius:8px;
 border:1px solid #ccc;
-font-size:15px;
+font-size:14px;
 }
 
-/* 🔥 GRID COMPACT */
-.grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px 10px;
-margin-top:8px;
-}
-
+/* CENTRAGE DES CHAMPS */
 .field{
 display:flex;
 flex-direction:column;
+align-items:center;
 }
+
+/* GRID */
+.grid2{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:8px;
+}
+
+/* COULEURS PAR TYPE */
+.field.nom input{border-left:4px solid #607d8b;}
+.field.ex input{border-left:4px solid #e53935;}
+.field.repos input{border-left:4px solid #1e88e5;}
+.field.rep input{border-left:4px solid #43a047;}
 
 /* EXERCICES */
 .exoBloc{
@@ -100,6 +110,13 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
+/* INPUT FOOTER */
+.footer input{
+width:120px;
+display:block;
+margin:auto;
+}
+
 /* BOUTONS */
 button{
 padding:14px;
@@ -127,7 +144,9 @@ cursor:pointer;
 <h2>Configurer la séance</h2>
 
 <label>Nombre d'exercices</label>
+<div style="text-align:center;">
 <input type="number" id="nbEx" value="5" onchange="generer()">
+</div>
 
 <div id="exo"></div>
 
@@ -201,23 +220,23 @@ exo.innerHTML+=`
 
 <div class="grid2">
 
-<div class="field">
-<label>Nom</label>
+<div class="field nom">
+<label>📝 Nom</label>
 <input id="nom${i}" value="Ex ${i+1}">
 </div>
 
-<div class="field">
-<label>Exercice</label>
+<div class="field ex">
+<label>🔥 Exercice</label>
 <input id="ex${i}" value="20">
 </div>
 
-<div class="field">
-<label>Repos</label>
+<div class="field repos">
+<label>💤 Repos</label>
 <input id="repos${i}" value="15">
 </div>
 
-<div class="field">
-<label>Répétitions</label>
+<div class="field rep">
+<label>🔁 Répétitions</label>
 <input id="rep${i}" value="3">
 </div>
 
