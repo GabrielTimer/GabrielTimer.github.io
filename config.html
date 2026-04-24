@@ -6,8 +6,6 @@
 <title>Configuration</title>
 
 <style>
-
-/* BASE */
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -17,14 +15,12 @@ display:flex;
 flex-direction:column;
 }
 
-/* ZONE SCROLL */
 .main{
 flex:1;
 overflow-y:auto;
 padding:10px;
 }
 
-/* CARD */
 .card{
 background:white;
 padding:15px;
@@ -34,46 +30,37 @@ margin:auto;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* TITRE */
 h2{
 font-size:22px;
 margin-bottom:10px;
 text-align:center;
 }
 
-/* LABEL */
 label{
 font-weight:bold;
 font-size:12px;
-margin-bottom:2px;
 }
 
-/* INPUT */
 input{
 width:85%;
 max-width:140px;
 padding:8px;
 border-radius:8px;
 border:1px solid #ccc;
-font-size:14px;
 }
 
-/* GRID */
 .grid2{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
-margin-top:8px;
 }
 
-/* FIELD */
 .field{
 display:flex;
 flex-direction:column;
 align-items:center;
 }
 
-/* EXERCICES */
 .exoBloc{
 background:#f9f9f9;
 margin:10px 0;
@@ -84,7 +71,6 @@ border-radius:10px;
 background:#eee;
 padding:12px;
 cursor:pointer;
-font-size:15px;
 }
 
 .exoContent{
@@ -92,7 +78,6 @@ display:none;
 padding:10px;
 }
 
-/* FOOTER */
 .footer{
 position:sticky;
 bottom:10px;
@@ -104,7 +89,6 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* GRID FOOTER */
 .footerGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -112,13 +96,6 @@ gap:10px;
 margin-bottom:10px;
 }
 
-.footer input{
-width:100%;
-max-width:140px;
-margin:auto;
-}
-
-/* BOUTONS */
 button{
 padding:14px;
 margin:6px 0;
@@ -139,95 +116,39 @@ cursor:pointer;
 <body>
 
 <div class="main">
-
 <div class="card">
 
 <h2>Configurer la séance</h2>
 
 <label>Nombre d'exercices</label>
-<div style="text-align:center;">
 <input type="number" id="nbEx" value="5" onchange="generer()">
-</div>
 
 <div id="exo"></div>
 
 </div>
-
 </div>
 
 <div class="footer">
 
 <div class="footerGrid">
-
 <div class="field">
-<label>Nombre de séries</label>
+<label>Séries</label>
 <input id="series" type="number" value="2">
 </div>
 
 <div class="field">
-<label>Nom de la séance</label>
+<label>Nom</label>
 <input id="sessionName">
 </div>
-
 </div>
 
-<button class="fav" onclick="addFavori()">⭐ Ajouter aux favoris</button>
+<button class="fav" onclick="addFavori()">⭐ Sauvegarder</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
 <button class="home" onclick="home()">🏠 Accueil</button>
 
 </div>
 
 <script>
-
-/* CONFIG */
-const PATHO_CONFIG = {
-tendinite_coiffe:{
-series:2,
-exercices:Array(8).fill().map(()=>({ex:90,repos:30,rep:1}))
-},
-lombalgie_1:{
-series:2,
-exercices:[
-{ex:30,repos:10,rep:3},
-{ex:5,repos:5,rep:10},
-{ex:3,repos:2,rep:15},
-{ex:30,repos:5,rep:3},
-{ex:30,repos:10,rep:4},
-{ex:3,repos:3,rep:10},
-{ex:30,repos:10,rep:3},
-{ex:30,repos:10,rep:4}
-]
-}
-};
-
-let patho = localStorage.getItem("pathologie");
-
-/* DEFAULT NOM */
-function setDefaultName(){
-if(patho){
-sessionName.value = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
-}else{
-sessionName.value = "Libre";
-}
-}
-
-/* DEFAULT CONFIG */
-function applyDefault(){
-if(!patho || !PATHO_CONFIG[patho]) return;
-
-let cfg = PATHO_CONFIG[patho];
-
-nbEx.value = cfg.exercices.length;
-series.value = cfg.series;
-
-generer();
-
-cfg.exercices.forEach((exo,i)=>{
-document.getElementById("ex"+i).value = exo.ex;
-document.getElementById("repos"+i).value = exo.repos;
-document.getElementById("rep"+i).value = exo.rep;
-});
-}
 
 /* GENERATION */
 function generer(){
@@ -238,34 +159,16 @@ exo.innerHTML+=`
 <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
 <div class="exoContent" id="c${i}">
 <div class="grid2">
-
-<div class="field">
-<label>Nom</label>
-<input id="nom${i}" value="Ex ${i+1}">
-</div>
-
-<div class="field">
-<label>Exercice</label>
-<input id="ex${i}" value="20">
-</div>
-
-<div class="field">
-<label>Repos</label>
-<input id="repos${i}" value="15">
-</div>
-
-<div class="field">
-<label>Répétitions</label>
-<input id="rep${i}" value="3">
-</div>
-
+<div class="field"><label>Nom</label><input id="nom${i}" value="Ex ${i+1}"></div>
+<div class="field"><label>Ex</label><input id="ex${i}" value="20"></div>
+<div class="field"><label>Repos</label><input id="repos${i}" value="15"></div>
+<div class="field"><label>Rep</label><input id="rep${i}" value="3"></div>
 </div>
 </div>
 </div>`;
 }
 }
 
-/* TOGGLE */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=c.style.display==="block"?"none":"block";
@@ -282,44 +185,61 @@ repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
 });
 }
-return {
-exercices:list,
-series:+series.value
-};
+return {exercices:list,series:+series.value};
 }
 
 /* SAVE */
 function saveData(type){
+
 let list=JSON.parse(localStorage.getItem("programmes")||[]);
+
+/* 🔥 supprimer ancien si edit */
+let editData = localStorage.getItem("edit_programme");
+if(editData){
+let old = JSON.parse(editData);
+list = list.filter(p => JSON.stringify(p) !== JSON.stringify(old));
+localStorage.removeItem("edit_programme");
+}
+
+/* ajout */
 list.push({
 nom:sessionName.value || "Libre",
 date:new Date().toLocaleDateString(),
 type:type,
 data:build()
 });
+
 localStorage.setItem("programmes",JSON.stringify(list));
 }
 
-/* ACTIONS */
-function addFavori(){
-saveData("favori");
-alert("Ajouté ⭐");
-}
+function addFavori(){saveData("favori");alert("Sauvegardé");}
+function start(){saveData("historique");localStorage.setItem("programme_temp",JSON.stringify(build()));window.location="timer.html";}
+function home(){window.location="index.html";}
 
-function start(){
-saveData("historique");
-localStorage.setItem("programme_temp",JSON.stringify(build()));
-window.location="timer.html";
-}
+/* 🔥 LOAD EDIT */
+function loadEdit(){
+let data = localStorage.getItem("edit_programme");
+if(!data) return;
 
-function home(){
-window.location="index.html";
+let p = JSON.parse(data);
+
+sessionName.value = p.nom;
+series.value = p.data.series;
+nbEx.value = p.data.exercices.length;
+
+generer();
+
+p.data.exercices.forEach((exo,i)=>{
+document.getElementById("nom"+i).value = exo.nom;
+document.getElementById("ex"+i).value = exo.ex;
+document.getElementById("repos"+i).value = exo.repos;
+document.getElementById("rep"+i).value = exo.reps;
+});
 }
 
 /* INIT */
 generer();
-applyDefault();
-setDefaultName();
+loadEdit();
 
 </script>
 

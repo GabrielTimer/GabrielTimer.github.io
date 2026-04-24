@@ -6,7 +6,6 @@
 <title>Mes Programmes</title>
 
 <style>
-
 body{
 font-family:Arial;
 background:#f4f4f4;
@@ -19,11 +18,7 @@ min-height:100vh;
 padding:20px;
 }
 
-h2{
-font-size:28px;
-margin-bottom:20px;
-}
-
+h2{font-size:28px;margin-bottom:20px;}
 .topbar{margin-bottom:10px;}
 
 button.main{
@@ -31,11 +26,9 @@ padding:12px 18px;
 border:none;
 border-radius:12px;
 background:#ddd;
-font-size:14px;
 cursor:pointer;
 }
 
-/* CARD */
 .card{
 width:85%;
 max-width:360px;
@@ -47,8 +40,8 @@ box-shadow:0 8px 25px rgba(0,0,0,0.12);
 display:flex;
 justify-content:space-between;
 align-items:center;
-transition:0.2s;
 cursor:pointer;
+transition:0.2s;
 }
 
 .card:hover{
@@ -56,39 +49,16 @@ transform:scale(1.03);
 box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
-/* TEXTE */
 .left{
 display:flex;
 flex-direction:column;
 gap:4px;
 }
 
-.fav{
-color:#fbc02d;
-font-size:13px;
-font-weight:bold;
-}
+.fav{color:#fbc02d;font-size:13px;font-weight:bold;}
+.title{font-size:16px;font-weight:bold;}
+.date{font-size:13px;color:#777;}
 
-.title{
-font-size:16px;
-font-weight:bold;
-}
-
-.date{
-font-size:13px;
-color:#777;
-}
-
-/* INPUT RENOMMAGE */
-.renameInput{
-width:130px;
-padding:6px;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:14px;
-}
-
-/* ACTIONS */
 .actions{
 display:flex;
 gap:8px;
@@ -107,25 +77,17 @@ font-size:16px;
 transition:0.2s;
 }
 
-/* ✏️ */
 .edit{
 background:#e8f5e9;
 color:#2e7d32;
 }
-.edit:hover{
-background:#c8e6c9;
-transform:scale(1.1);
-}
+.edit:hover{background:#c8e6c9;transform:scale(1.1);}
 
-/* 🗑 */
 .delete{
 background:#ffebee;
 color:#c62828;
 }
-.delete:hover{
-background:#ffcdd2;
-transform:scale(1.1);
-}
+.delete:hover{background:#ffcdd2;transform:scale(1.1);}
 
 button.back{
 margin-top:20px;
@@ -133,12 +95,6 @@ padding:14px 20px;
 border:none;
 border-radius:12px;
 background:#ccc;
-font-size:16px;
-cursor:pointer;
-}
-
-@media (max-width:600px){
-.card{max-width:340px;}
 }
 
 </style>
@@ -172,62 +128,28 @@ div.className="card";
 let left=document.createElement("div");
 left.className="left";
 
-let fav=document.createElement("div");
-fav.className="fav";
-fav.innerText="⭐ Favori";
-
-/* titre */
-let title=document.createElement("div");
-title.className="title";
-title.innerText=getName(p);
-
-/* input */
-let input=document.createElement("input");
-input.className="renameInput";
-input.style.display="none";
-input.value=getName(p);
-
-/* date */
-let date=document.createElement("div");
-date.className="date";
-date.innerText=p.date;
-
-/* toggle rename */
-function enableEdit(){
-title.style.display="none";
-input.style.display="block";
-input.focus();
-}
-
-function saveEdit(){
-if(!input.value.trim()) return;
-saveName(index,input.value);
-}
-
-input.addEventListener("keypress",(e)=>{
-if(e.key==="Enter"){
-saveEdit();
-}
-});
+left.innerHTML=`
+<div class="fav">⭐ Favori</div>
+<div class="title">${getName(p)}</div>
+<div class="date">${p.date}</div>
+`;
 
 /* ACTIONS */
 let actions=document.createElement("div");
 actions.className="actions";
 
-/* edit */
+/* ✏️ EDIT COMPLET */
 let edit=document.createElement("button");
 edit.className="iconBtn edit";
 edit.innerHTML="✏️";
 edit.onclick=(e)=>{
 e.stopPropagation();
-if(input.style.display==="none"){
-enableEdit();
-}else{
-saveEdit();
-}
+
+localStorage.setItem("edit_programme", JSON.stringify(p));
+window.location="config.html?edit=1";
 };
 
-/* delete */
+/* 🗑 DELETE */
 let del=document.createElement("button");
 del.className="iconBtn delete";
 del.innerHTML="🗑";
@@ -236,19 +158,13 @@ e.stopPropagation();
 remove(index);
 };
 
-/* BUILD */
-left.appendChild(fav);
-left.appendChild(title);
-left.appendChild(input);
-left.appendChild(date);
-
 actions.appendChild(edit);
 actions.appendChild(del);
 
 div.appendChild(left);
 div.appendChild(actions);
 
-/* CLICK CARD */
+/* CLICK → lancer */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
 window.location="timer.html";
@@ -260,20 +176,8 @@ container.appendChild(div);
 
 /* NOM SAFE */
 function getName(p){
-if(p.nom && p.nom !== "undefined"){
-return p.nom;
-}
+if(p.nom && p.nom !== "undefined") return p.nom;
 return "Séance";
-}
-
-/* SAVE NAME */
-function saveName(i,newName){
-let all = JSON.parse(localStorage.getItem("programmes")||[]);
-let favs = all.filter(p=>p.type==="favori");
-let target = favs[i];
-target.nom = newName;
-localStorage.setItem("programmes",JSON.stringify(all));
-location.reload();
 }
 
 /* DELETE */
@@ -290,6 +194,5 @@ function goHist(){window.location="historique.html";}
 function back(){window.location="index.html";}
 
 </script>
-
 </body>
 </html>
