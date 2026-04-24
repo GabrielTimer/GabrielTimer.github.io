@@ -189,8 +189,13 @@ generer();
 let isEdit = loadEdit();
 let isPatho = false;
 
-if(!isEdit){
+if(!isEdit && localStorage.getItem("patho_data")){
 isPatho = loadPatho();
+}
+
+// 🔥 nettoyage automatique si mode libre
+if(!isEdit && !isPatho){
+localStorage.removeItem("patho_data");
 }
 
 if(!isEdit){
