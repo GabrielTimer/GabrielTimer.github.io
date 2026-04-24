@@ -35,13 +35,14 @@ font-size:14px;
 cursor:pointer;
 }
 
+/* CARD */
 .card{
 width:85%;
 max-width:360px;
 margin:12px auto;
 background:white;
 border-radius:20px;
-padding:15px;
+padding:16px;
 box-shadow:0 8px 25px rgba(0,0,0,0.12);
 display:flex;
 justify-content:space-between;
@@ -55,37 +56,76 @@ transform:scale(1.03);
 box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
+/* TEXTE */
 .left{
-text-align:left;
-font-size:14px;
+display:flex;
+flex-direction:column;
+gap:4px;
 }
 
 .fav{
-color:gold;
+color:#fbc02d;
+font-size:13px;
 font-weight:bold;
+}
+
+.title{
+font-size:16px;
+font-weight:bold;
+}
+
+.date{
+font-size:13px;
+color:#777;
 }
 
 /* INPUT RENOMMAGE */
 .renameInput{
-width:120px;
-padding:4px;
-border-radius:6px;
-border:1px solid #ccc;
-font-size:13px;
-}
-
-/* ACTIONS */
-.actions button{
-margin-left:5px;
-padding:6px 8px;
-border:none;
+width:130px;
+padding:6px;
 border-radius:8px;
-cursor:pointer;
+border:1px solid #ccc;
 font-size:14px;
 }
 
-.delete{background:#ff5252;color:white;}
-.edit{background:#4caf50;color:white;}
+/* ACTIONS */
+.actions{
+display:flex;
+gap:8px;
+}
+
+.iconBtn{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+border:none;
+cursor:pointer;
+font-size:16px;
+transition:0.2s;
+}
+
+/* ✏️ */
+.edit{
+background:#e8f5e9;
+color:#2e7d32;
+}
+.edit:hover{
+background:#c8e6c9;
+transform:scale(1.1);
+}
+
+/* 🗑 */
+.delete{
+background:#ffebee;
+color:#c62828;
+}
+.delete:hover{
+background:#ffcdd2;
+transform:scale(1.1);
+}
 
 button.back{
 margin-top:20px;
@@ -99,7 +139,6 @@ cursor:pointer;
 
 @media (max-width:600px){
 .card{max-width:340px;}
-.left{font-size:15px;}
 }
 
 </style>
@@ -129,76 +168,97 @@ list.forEach((p,index)=>{
 let div=document.createElement("div");
 div.className="card";
 
+/* LEFT */
 let left=document.createElement("div");
 left.className="left";
 
-/* affichage nom */
-let nameSpan=document.createElement("span");
-nameSpan.innerHTML="<b>"+getName(p)+"</b>";
+let fav=document.createElement("div");
+fav.className="fav";
+fav.innerText="⭐ Favori";
 
-/* input caché */
+/* titre */
+let title=document.createElement("div");
+title.className="title";
+title.innerText=getName(p);
+
+/* input */
 let input=document.createElement("input");
 input.className="renameInput";
 input.style.display="none";
 input.value=getName(p);
 
-/* switch affichage */
-left.innerHTML=`<div class="fav">⭐ Favori</div>`;
-left.appendChild(nameSpan);
-left.appendChild(input);
-
+/* date */
 let date=document.createElement("div");
+date.className="date";
 date.innerText=p.date;
-left.appendChild(date);
 
-let actions=document.createElement("div");
-
-/* ✏️ rename */
-let edit=document.createElement("button");
-edit.className="edit";
-edit.innerText="✏️";
-
-edit.onclick=(e)=>{
-e.stopPropagation();
-
-/* toggle mode */
-if(input.style.display==="none"){
+/* toggle rename */
+function enableEdit(){
+title.style.display="none";
 input.style.display="block";
-nameSpan.style.display="none";
 input.focus();
-}else{
+}
+
+function saveEdit(){
+if(!input.value.trim()) return;
 saveName(index,input.value);
 }
-};
 
-/* ENTER = save */
 input.addEventListener("keypress",(e)=>{
 if(e.key==="Enter"){
-saveName(index,input.value);
+saveEdit();
 }
 });
 
-/* 🗑 delete */
+/* ACTIONS */
+let actions=document.createElement("div");
+actions.className="actions";
+
+/* edit */
+let edit=document.createElement("button");
+edit.className="iconBtn edit";
+edit.innerHTML="✏️";
+edit.onclick=(e)=>{
+e.stopPropagation();
+if(input.style.display==="none"){
+enableEdit();
+}else{
+saveEdit();
+}
+};
+
+/* delete */
 let del=document.createElement("button");
-del.className="delete";
-del.innerText="🗑";
-del.onclick=(e)=>{e.stopPropagation();remove(index);};
+del.className="iconBtn delete";
+del.innerHTML="🗑";
+del.onclick=(e)=>{
+e.stopPropagation();
+remove(index);
+};
+
+/* BUILD */
+left.appendChild(fav);
+left.appendChild(title);
+left.appendChild(input);
+left.appendChild(date);
 
 actions.appendChild(edit);
 actions.appendChild(del);
 
+div.appendChild(left);
+div.appendChild(actions);
+
+/* CLICK CARD */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
 window.location="timer.html";
 };
 
-div.appendChild(left);
-div.appendChild(actions);
 container.appendChild(div);
 
 });
 
-/* 🔥 NOM SAFE */
+/* NOM SAFE */
 function getName(p){
 if(p.nom && p.nom !== "undefined"){
 return p.nom;
@@ -206,21 +266,17 @@ return p.nom;
 return "Séance";
 }
 
-/* 💾 SAVE NAME */
+/* SAVE NAME */
 function saveName(i,newName){
-if(!newName.trim()) return;
-
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let favs = all.filter(p=>p.type==="favori");
-
 let target = favs[i];
 target.nom = newName;
-
 localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* delete */
+/* DELETE */
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let favs = all.filter(p=>p.type==="favori");
