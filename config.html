@@ -20,20 +20,37 @@ input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #
 .exoHeader{background:#eee;padding:12px;cursor:pointer;font-weight:bold;}
 .exoContent{display:none;padding:10px;}
 
+/* 🔥 BOUTON DELETE FIX */
 .deleteBtn{
 position:absolute;
-top:8px;
-right:8px;
-background:#ff5252;
+top:10px;
+right:10px;
+background:#ff3b30;
 color:white;
 border:none;
 border-radius:50%;
-width:28px;
-height:28px;
+width:32px;
+height:32px;
 cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
 font-weight:bold;
+box-shadow:0 2px 6px rgba(0,0,0,0.2);
+transition:0.15s;
 }
 
+.deleteBtn:hover{
+transform:scale(1.15);
+background:#ff1f1f;
+}
+
+.deleteBtn:active{
+transform:scale(0.9);
+}
+
+/* 🔥 BOUTON ADD */
 .addBtn{
 background:#4caf50;
 color:white;
@@ -87,14 +104,14 @@ button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-
 
 <script>
 
-/* 🔥 CLEAN */
+/* CLEAN */
 if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
     localStorage.removeItem("patho_data");
 }
 
 let exercices = [];
 
-/* AJOUT EXO */
+/* ADD */
 function addExo(data=null){
     exercices.push(data || {
         nom:"Ex "+(exercices.length+1),
@@ -119,7 +136,7 @@ function render(){
         exo.innerHTML+=`
         <div class="exoBloc">
         
-        <button class="deleteBtn" onclick="removeExo(${i})">✖</button>
+        <button class="deleteBtn" onclick="removeExo(${i})">✕</button>
         
         <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
         
