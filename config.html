@@ -10,16 +10,41 @@ body{font-family:Arial;background:#f4f4f4;margin:0;height:100vh;display:flex;fle
 .main{flex:1;overflow-y:auto;padding:10px;}
 .card{background:white;padding:15px;border-radius:15px;max-width:420px;margin:auto;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
 h2{font-size:22px;margin-bottom:10px;text-align:center;}
-label{font-weight:bold;font-size:12px;}
-input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #ccc;}
+
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .field{display:flex;flex-direction:column;align-items:center;}
-.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;}
-.exoHeader{background:#eee;padding:12px;cursor:pointer;}
+
+input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #ccc;}
+
+.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;position:relative;}
+.exoHeader{background:#eee;padding:12px;cursor:pointer;font-weight:bold;}
 .exoContent{display:none;padding:10px;}
+
+.deleteBtn{
+position:absolute;
+top:8px;
+right:8px;
+background:#ff5252;
+color:white;
+border:none;
+border-radius:50%;
+width:28px;
+height:28px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.addBtn{
+background:#4caf50;
+color:white;
+margin-top:10px;
+}
+
 .footer{position:sticky;bottom:10px;background:white;max-width:420px;margin:0 auto 10px auto;padding:12px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
 .footerGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+
 button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-size:17px;cursor:pointer;}
+
 .start{background:#0072ff;color:white;}
 .fav{background:#ffd54f;}
 .home{background:#777;color:white;}
@@ -33,10 +58,9 @@ button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-
 
 <h2>Configurer la séance</h2>
 
-<label>Nombre d'exercices</label>
-<input type="number" id="nbEx" value="5" onchange="generer()">
-
 <div id="exo"></div>
+
+<button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
 
 </div>
 </div>
@@ -63,30 +87,72 @@ button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-
 
 <script>
 
-/* 🔥 NETTOYAGE IMMÉDIAT (clé du fix) */
+/* 🔥 CLEAN */
 if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
     localStorage.removeItem("patho_data");
 }
 
-/* GENERATION */
-function generer(){
-exo.innerHTML="";
-for(let i=0;i<nbEx.value;i++){
-exo.innerHTML+=`
-<div class="exoBloc">
-<div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
-<div class="exoContent" id="c${i}">
-<div class="grid2">
-<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="Ex ${i+1}"></div>
-<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="30"></div>
-<div class="field"><label>😌 Repos</label><input id="repos${i}" value="10"></div>
-<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="10"></div>
-</div>
-</div>
-</div>`;
-}
+let exercices = [];
+
+/* AJOUT EXO */
+function addExo(data=null){
+    exercices.push(data || {
+        nom:"Ex "+(exercices.length+1),
+        ex:30,
+        repos:10,
+        reps:10
+    });
+    render();
 }
 
+/* DELETE */
+function removeExo(index){
+    exercices.splice(index,1);
+    render();
+}
+
+/* RENDER */
+function render(){
+    exo.innerHTML="";
+
+    exercices.forEach((e,i)=>{
+        exo.innerHTML+=`
+        <div class="exoBloc">
+        
+        <button class="deleteBtn" onclick="removeExo(${i})">✖</button>
+        
+        <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
+        
+        <div class="exoContent" id="c${i}">
+        <div class="grid2">
+        
+        <div class="field">
+        <label>🏷 Nom</label>
+        <input id="nom${i}" value="${e.nom}">
+        </div>
+
+        <div class="field">
+        <label>⏱ Exercice</label>
+        <input id="ex${i}" value="${e.ex}">
+        </div>
+
+        <div class="field">
+        <label>😌 Repos</label>
+        <input id="repos${i}" value="${e.repos}">
+        </div>
+
+        <div class="field">
+        <label>🔁 Répétitions</label>
+        <input id="rep${i}" value="${e.reps}">
+        </div>
+
+        </div>
+        </div>
+        </div>`;
+    });
+}
+
+/* TOGGLE */
 function toggle(i){
 let c=document.getElementById("c"+i);
 c.style.display=c.style.display==="block"?"none":"block";
@@ -95,7 +161,8 @@ c.style.display=c.style.display==="block"?"none":"block";
 /* BUILD */
 function build(){
 let list=[];
-for(let i=0;i<nbEx.value;i++){
+
+for(let i=0;i<exercices.length;i++){
 list.push({
 nom:document.getElementById("nom"+i).value,
 ex:+document.getElementById("ex"+i).value,
@@ -103,6 +170,7 @@ repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
 });
 }
+
 return {exercices:list,series:+series.value};
 }
 
@@ -140,16 +208,9 @@ let p = JSON.parse(data);
 
 sessionName.value = p.nom;
 series.value = p.data.series;
-nbEx.value = p.data.exercices.length;
 
-generer();
-
-p.data.exercices.forEach((exo,i)=>{
-document.getElementById("nom"+i).value = exo.nom;
-document.getElementById("ex"+i).value = exo.ex;
-document.getElementById("repos"+i).value = exo.repos;
-document.getElementById("rep"+i).value = exo.reps;
-});
+exercices = p.data.exercices;
+render();
 
 return true;
 }
@@ -162,16 +223,9 @@ if(!data) return false;
 let p = JSON.parse(data);
 
 series.value = p.series;
-nbEx.value = p.exercices.length;
 
-generer();
-
-p.exercices.forEach((exo,i)=>{
-document.getElementById("nom"+i).value = exo.nom;
-document.getElementById("ex"+i).value = exo.ex;
-document.getElementById("repos"+i).value = exo.repos;
-document.getElementById("rep"+i).value = exo.reps;
-});
+exercices = p.exercices;
+render();
 
 return true;
 }
@@ -188,7 +242,6 @@ sessionName.value = "Libre";
 }
 
 /* INIT */
-generer();
 
 let isEdit = loadEdit();
 let isPatho = false;
@@ -197,10 +250,15 @@ if(!isEdit){
 isPatho = loadPatho();
 }
 
+if(!isEdit && !isPatho){
+addExo();
+}
+
 if(!isEdit){
 setDefaultName();
 }
 
 </script>
+
 </body>
 </html>
