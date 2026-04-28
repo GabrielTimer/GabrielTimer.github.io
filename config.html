@@ -121,7 +121,7 @@ if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie"
 
 let exercices = [];
 
-/* 🔥 SYNC (FIX PRINCIPAL) */
+/* SYNC */
 function syncInputs(){
     for(let i=0;i<exercices.length;i++){
         exercices[i].nom = document.getElementById("nom"+i).value;
@@ -133,8 +133,7 @@ function syncInputs(){
 
 /* ADD */
 function addExo(data=null){
-    syncInputs(); // 🔥 IMPORTANT
-
+    syncInputs();
     exercices.push(data || {
         nom:"Ex "+(exercices.length+1),
         ex:30,
@@ -146,8 +145,7 @@ function addExo(data=null){
 
 /* DELETE */
 function removeExo(index){
-    syncInputs(); // 🔥 IMPORTANT
-
+    syncInputs();
     exercices.splice(index,1);
     render();
 }
@@ -162,7 +160,9 @@ function render(){
         
         <button class="deleteBtn" onclick="removeExo(${i})">−</button>
         
-        <div class="exoHeader" onclick="toggle(${i})">▶ Ex ${i+1}</div>
+        <div class="exoHeader" onclick="toggle(${i})">
+            <span id="arrow${i}">▶</span>&nbsp;Ex ${i+1}
+        </div>
         
         <div class="exoContent" id="c${i}">
         <div class="grid2">
@@ -193,10 +193,18 @@ function render(){
     });
 }
 
-/* TOGGLE */
+/* TOGGLE AVEC FLÈCHE */
 function toggle(i){
-let c=document.getElementById("c"+i);
-c.style.display=c.style.display==="block"?"none":"block";
+    let c=document.getElementById("c"+i);
+    let arrow=document.getElementById("arrow"+i);
+
+    if(c.style.display==="block"){
+        c.style.display="none";
+        arrow.innerText="▶";
+    }else{
+        c.style.display="block";
+        arrow.innerText="▼";
+    }
 }
 
 /* BUILD */
