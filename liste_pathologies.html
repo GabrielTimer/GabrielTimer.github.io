@@ -74,7 +74,6 @@ border:none;
 border-radius:12px;
 background:#ccc;
 }
-
 </style>
 </head>
 
@@ -94,9 +93,14 @@ const PATHO_DATA = {
 lombalgie_1:{
 series:2,
 exercices:[
-{nom:"Gainage", ex:30, repos:10, reps:3},
-{nom:"Pont fessier", ex:5, repos:5, reps:10},
-{nom:"Bird dog", ex:30, repos:10, reps:4}
+{nom:"Ex1", ex:30, repos:10, reps:3},
+{nom:"Ex2", ex:5, repos:5, reps:10},
+{nom:"Ex3", ex:3, repos:2, reps:15},
+{nom:"Ex4", ex:30, repos:5, reps:3},
+{nom:"Ex5", ex:30, repos:10, reps:4},
+{nom:"Ex6", ex:3, repos:3, reps:10},
+{nom:"Ex7", ex:30, repos:10, reps:3},
+{nom:"Ex8", ex:30, repos:10, reps:4}
 ]
 },
 
@@ -160,10 +164,8 @@ div.onclick=()=>{
 
 localStorage.removeItem("edit_programme");
 
-/* 🔥 récupération config */
 let config = PATHO_DATA[p.dossier];
 
-/* fallback si pas encore défini */
 if(!config){
 config={
 series:2,
