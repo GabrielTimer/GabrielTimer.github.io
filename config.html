@@ -19,22 +19,22 @@ input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #
 .exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;position:relative;}
 .exoHeader{
 background:#eee;
-padding:12px 44px 12px 12px; /* espace à droite pour le bouton */
+padding:12px 44px 12px 12px;
 cursor:pointer;
 font-weight:bold;
 display:flex;
 align-items:center;
-min-height:44px; /* 🔥 garantit centrage parfait */
+min-height:44px;
 }
 .exoContent{display:none;padding:10px;}
 
-/* 🔥 DELETE PARFAIT */
+/* DELETE */
 .deleteBtn{
 position:absolute;
 top:50%;
 right:12px;
 transform:translateY(-50%);
-background:#e53935; /* rouge plus doux */
+background:#e53935;
 color:white;
 border:none;
 border-radius:50%;
@@ -121,8 +121,20 @@ if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie"
 
 let exercices = [];
 
+/* 🔥 SYNC (FIX PRINCIPAL) */
+function syncInputs(){
+    for(let i=0;i<exercices.length;i++){
+        exercices[i].nom = document.getElementById("nom"+i).value;
+        exercices[i].ex = +document.getElementById("ex"+i).value;
+        exercices[i].repos = +document.getElementById("repos"+i).value;
+        exercices[i].reps = +document.getElementById("rep"+i).value;
+    }
+}
+
 /* ADD */
 function addExo(data=null){
+    syncInputs(); // 🔥 IMPORTANT
+
     exercices.push(data || {
         nom:"Ex "+(exercices.length+1),
         ex:30,
@@ -134,6 +146,8 @@ function addExo(data=null){
 
 /* DELETE */
 function removeExo(index){
+    syncInputs(); // 🔥 IMPORTANT
+
     exercices.splice(index,1);
     render();
 }
