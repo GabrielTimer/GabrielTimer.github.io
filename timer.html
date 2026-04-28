@@ -11,22 +11,29 @@ margin:0;
 background:#1b5e20;
 color:white;
 font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-display:flex;
-justify-content:center;
 height:100dvh;
 overflow:hidden;
 transition:background 0.3s;
 }
 
+/* 🔥 CONTENEUR PLEIN ÉCRAN */
 .container{
 width:100%;
-max-width:380px;
 height:100%;
 display:flex;
 flex-direction:column;
 padding:10px;
 box-sizing:border-box;
-background:#1b5e20;
+}
+
+/* 🔥 CONTENU CENTRÉ PROPRE */
+.inner{
+max-width:380px;
+width:100%;
+margin:auto;
+display:flex;
+flex-direction:column;
+height:100%;
 }
 
 /* HEADER */
@@ -45,7 +52,7 @@ font-weight:600;
 width:60px;
 }
 
-/* IMAGE FIXE PROPRE */
+/* IMAGE */
 #img{
 width:100%;
 height:150px;
@@ -100,12 +107,12 @@ margin-top:5px;
 }
 .pulse{animation: pulse 0.9s infinite;}
 
-/* BAS FIXE PROPRE */
+/* BAS FIXE */
 .bottomFixed{
 position:sticky;
 bottom:0;
 padding-top:10px;
-background:#1b5e20;
+background:inherit;
 }
 
 /* BAR */
@@ -156,6 +163,7 @@ button:active{transform:scale(0.95);}
 <body>
 
 <div class="container">
+<div class="inner">
 
 <div class="header">
 <div class="infoBox">
@@ -201,10 +209,11 @@ button:active{transform:scale(0.95);}
 </div>
 
 </div>
+</div>
 
 <script>
 
-/* JS STRICTEMENT IDENTIQUE + FIX IMAGE */
+/* JS STRICTEMENT IDENTIQUE */
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
@@ -317,7 +326,7 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* 🔥 FIX IMAGE */
+/* IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
