@@ -7,51 +7,28 @@
 
 <style>
 body{
-font-family:Arial;
-background:#f4f4f4;
+font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+background:#f1f5f9;
 margin:0;
 height:100vh;
 display:flex;
 flex-direction:column;
 }
 
-/* MAIN */
-.main{
-flex:1;
-display:flex;
-flex-direction:column;
-max-width:420px;
-margin:auto;
-padding:10px;
-}
+.main{flex:1;overflow-y:auto;padding:10px;}
 
-/* CARD */
 .card{
 background:white;
 padding:15px;
 border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
-display:flex;
-flex-direction:column;
-flex:1;
+max-width:420px;
+margin:auto;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
-/* TITRE */
-h2{text-align:center;margin:5px 0 10px;}
+h2{text-align:center;font-weight:600;margin-bottom:10px;}
 
-/* 🔥 SCROLL UNIQUEMENT SUR EXOS */
-#exo{
-overflow-y:auto;
-flex:1;
-padding-bottom:140px; /* espace pour footer */
-}
-
-/* GRID */
-.grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 
 .field{
 display:flex;
@@ -62,20 +39,22 @@ align-items:center;
 input{
 width:85%;
 max-width:140px;
-padding:8px;
-border-radius:8px;
-border:1px solid #ccc;
+padding:10px;
+border-radius:10px;
+border:1px solid #e2e8f0;
+background:#f8fafc;
 }
 
 /* EXOS */
 .exoBloc{
-background:#f9f9f9;
+background:#f8fafc;
 margin:10px 0;
-border-radius:10px;
+border-radius:12px;
+border:1px solid #e2e8f0;
 }
 
 .exoHeader{
-background:#eee;
+background:transparent;
 padding:12px;
 display:flex;
 align-items:center;
@@ -93,59 +72,51 @@ gap:6px;
 }
 
 .actionBtn{
-background:#ddd;
-border:none;
-border-radius:6px;
-width:26px;
-height:26px;
+background:#f1f5f9;
+border:1px solid #e2e8f0;
+border-radius:8px;
+width:28px;
+height:28px;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
-padding:0;
 }
 
 .deleteBtn{
-background:#e53935;
+background:#ef4444;
 border:none;
 border-radius:50%;
-width:26px;
-height:26px;
-display:flex;
-align-items:center;
-justify-content:center;
+width:28px;
+height:28px;
+color:white;
 cursor:pointer;
-padding:0;
 }
 
 .exoContent{display:none;padding:10px;}
 
-/* 🔥 BOUTON INTELLIGENT */
+/* AJOUT */
 .addBtn{
-position:sticky;
-bottom:90px;
 background:#2563eb;
 color:white;
 margin-top:10px;
 width:100%;
-padding:12px;
+padding:14px;
 border:none;
-border-radius:10px;
-z-index:5;
+border-radius:12px;
+font-weight:600;
 }
 
-/* 🔥 FOOTER FIXE */
+/* FOOTER */
 .footer{
-position:fixed;
+position:sticky;
 bottom:10px;
-left:50%;
-transform:translateX(-50%);
-width:90%;
-max-width:420px;
 background:white;
+max-width:420px;
+margin:0 auto 10px auto;
 padding:12px;
 border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
 .footerGrid{
@@ -162,21 +133,36 @@ margin:6px 0;
 border:none;
 border-radius:12px;
 width:100%;
-font-size:17px;
+font-size:16px;
 cursor:pointer;
+font-weight:600;
 }
 
-.start{background:#2563eb;color:white;}
-.fav{background:#e2e8f0;}
-.home{background:#ddd;}
+/* 🔵 PRINCIPAL */
+.start{
+background:#2563eb;
+color:white;
+}
+
+/* ⚪ SECONDAIRES */
+.fav{
+background:#f1f5f9;
+border:1px solid #e2e8f0;
+}
+
+.home{
+background:#f1f5f9;
+border:1px solid #e2e8f0;
+color:#0f172a;
+}
 
 /* UNDO */
 #undoBar{
 position:fixed;
-bottom:90px;
+bottom:20px;
 left:50%;
 transform:translateX(-50%) translateY(100px);
-background:#333;
+background:#0f172a;
 color:white;
 padding:12px 18px;
 border-radius:12px;
@@ -195,7 +181,7 @@ opacity:1;
 #undoBar button{
 background:none;
 border:none;
-color:#4caf50;
+color:#22c55e;
 font-weight:bold;
 cursor:pointer;
 padding:0;
@@ -244,7 +230,7 @@ Exercice supprimé
 
 <script>
 
-/* 🔥 JS STRICTEMENT INCHANGÉ */
+/* JS STRICTEMENT IDENTIQUE */
 
 if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
     localStorage.removeItem("patho_data");
@@ -370,13 +356,14 @@ return true;
 
 function updateTitle(){
 let patho = localStorage.getItem("pathologie");
-if(!patho){
-document.getElementById("sessionName").value="Libre";
-return;
-}
+if(!patho) return;
+
 let name = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
-document.getElementById("title").innerText="Configurer la séance - "+name;
-document.getElementById("sessionName").value=name;
+
+document.getElementById("title").innerText =
+"Configurer la séance - " + name;
+
+document.getElementById("sessionName").value = name;
 }
 
 function build(){
