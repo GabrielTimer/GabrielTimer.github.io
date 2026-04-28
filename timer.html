@@ -10,10 +10,9 @@ body{
 margin:0;
 background:#1b5e20;
 color:white;
-font-family:Arial;
+font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 display:flex;
 justify-content:center;
-align-items:center;
 height:100dvh;
 overflow:hidden;
 transition:background 0.3s;
@@ -25,10 +24,11 @@ max-width:380px;
 height:100%;
 display:flex;
 flex-direction:column;
-padding:8px;
+padding:10px;
 box-sizing:border-box;
 }
 
+/* HEADER */
 .header{
 display:flex;
 justify-content:space-between;
@@ -37,33 +37,34 @@ align-items:center;
 
 .infoBox{
 font-size:15px;
-font-weight:bold;
+font-weight:600;
 }
 
 .logo{
-width:65px;
-filter:drop-shadow(0 0 6px white);
+width:60px;
 }
 
+/* IMAGE FIXE */
 #img{
 width:100%;
-max-height:180px;
+height:160px;
 object-fit:contain;
-margin-top:5px;
+margin:5px 0;
 }
 
+/* ZONE CENTRALE */
 .timerZone{
 flex:1;
 display:flex;
-align-items:flex-end;
+align-items:center;
 justify-content:center;
-margin-bottom:12px;
 }
 
+/* CERCLE */
 .circleWrap{
 position:relative;
-width:170px;
-height:170px;
+width:190px;
+height:190px;
 cursor:pointer;
 }
 
@@ -75,38 +76,42 @@ transform:translate(-50%,-50%);
 text-align:center;
 }
 
-.timerLabel{font-size:13px;}
+.timerLabel{font-size:14px;opacity:0.8;}
 .timerValue{
-font-size:42px;
+font-size:46px;
 font-weight:bold;
 }
 
 #playIcon{
-font-size:34px;
+font-size:30px;
 margin-top:5px;
-display:inline-block;
-transition:transform 0.2s;
 }
 
+/* ANIMATIONS */
 .circleWrap:hover #playIcon{transform:scale(1.2);}
 .circleWrap:active #playIcon{transform:scale(0.9);}
 
 @keyframes pulse {
 0% { transform: scale(1); opacity: 1; }
-50% { transform: scale(1.35); opacity: 0.6; }
+50% { transform: scale(1.3); opacity: 0.6; }
 100% { transform: scale(1); opacity: 1; }
 }
-
 .pulse{animation: pulse 0.9s infinite;}
 
-.bottomBlock{text-align:center;}
+/* 🔥 BAS FIXE */
+.bottomFixed{
+position:sticky;
+bottom:0;
+padding-top:10px;
+background:linear-gradient(to top, rgba(27,94,32,1) 80%, transparent);
+}
 
-#totalTime{font-size:12px;margin-bottom:2px;}
-
+/* BAR */
 .barContainer{
-height:4px;
+height:6px;
 background:rgba(255,255,255,0.2);
 border-radius:10px;
+margin-bottom:6px;
 }
 
 #bar{
@@ -116,25 +121,32 @@ background:#00e5ff;
 border-radius:10px;
 }
 
+#totalTime{
+font-size:12px;
+margin-bottom:4px;
+text-align:center;
+opacity:0.8;
+}
+
+/* BOUTONS */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:8px;
-margin-top:6px;
 }
 
 button{
-height:38px;
+height:40px;
 border:none;
-border-radius:10px;
-background:#d0d0d0;
-color:#222;
+border-radius:12px;
+background:#e2e8f0;
+color:#0f172a;
 font-size:13px;
-font-weight:bold;
-transition:transform 0.2s;
+font-weight:600;
+transition:0.2s;
 }
 
-button:hover{transform:scale(1.08);}
+button:hover{transform:scale(1.05);}
 button:active{transform:scale(0.95);}
 </style>
 </head>
@@ -171,9 +183,13 @@ button:active{transform:scale(0.95);}
 </div>
 </div>
 
-<div class="bottomBlock">
+<!-- 🔥 BAS FIXE -->
+<div class="bottomFixed">
+
 <div id="totalTime"></div>
-<div class="barContainer"><div id="bar"></div></div>
+
+<div class="barContainer">
+<div id="bar"></div>
 </div>
 
 <div class="buttons">
@@ -183,9 +199,12 @@ button:active{transform:scale(0.95);}
 
 </div>
 
+</div>
+
 <script>
 
-/* INIT */
+/* JS STRICTEMENT IDENTIQUE */
+
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -198,16 +217,13 @@ let t=PREP_TIME, totalTimePhase=PREP_TIME;
 let paused=false;
 let soundOn=true;
 
-/* TEMPS */
 let totalSessionTime=0;
 let remainingTime=0;
 
-/* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* 🔥 CALCUL EXACT + PREP */
 function computeTotal(){
 totalSessionTime = 0;
 
@@ -227,26 +243,22 @@ totalSessionTime += exo.repos;
 });
 
 totalSessionTime *= p.series;
-
-/* 🔥 FIX PRINCIPAL */
 totalSessionTime += PREP_TIME;
 
 remainingTime = totalSessionTime;
 }
 computeTotal();
 
-/* format */
 function formatTime(s){
 let m=Math.floor(s/60);
 return m+":"+(s%60<10?"0":"")+s%60;
 }
 
 function updateTotal(){
-totalTime.innerText="Durée de ma séance : "+formatTime(remainingTime);
+totalTime.innerText="Durée : "+formatTime(remainingTime);
 }
 updateTotal();
 
-/* SON */
 function beep(){
 if(!soundOn)return;
 let ctx=new AudioContext();
@@ -269,7 +281,6 @@ soundOn=!soundOn;
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
-/* PAUSE */
 function togglePause(){
 paused=!paused;
 let icon = document.getElementById("playIcon");
@@ -283,7 +294,6 @@ icon.classList.remove("pulse");
 }
 }
 
-/* UPDATE */
 function update(){
 
 let progress = 1 - (t / totalTimePhase);
@@ -321,7 +331,6 @@ this.src = urlPng;
 }
 }
 
-/* LOGIQUE */
 function next(){
 let exo=p.exercices[exIndex];
 
@@ -362,7 +371,6 @@ serieIndex++;
 update();
 }
 
-/* LOOP */
 function loop(){
 if(paused) return;
 
@@ -385,11 +393,9 @@ update();
 
 function back(){window.location="config.html";}
 
-/* START */
 update();
 setInterval(loop,1000);
 
 </script>
-
 </body>
 </html>
