@@ -24,8 +24,20 @@ cursor:pointer;
 font-weight:bold;
 display:flex;
 align-items:center;
+gap:8px;
 min-height:44px;
 }
+
+/* 🔥 FLECHE ANIMÉE */
+.arrow{
+display:inline-block;
+transition:transform 0.25s ease;
+}
+
+.arrow.open{
+transform:rotate(90deg);
+}
+
 .exoContent{display:none;padding:10px;}
 
 /* DELETE */
@@ -161,7 +173,8 @@ function render(){
         <button class="deleteBtn" onclick="removeExo(${i})">−</button>
         
         <div class="exoHeader" onclick="toggle(${i})">
-            <span id="arrow${i}">▶</span>&nbsp;Ex ${i+1}
+            <span id="arrow${i}" class="arrow">▶</span>
+            Ex ${i+1}
         </div>
         
         <div class="exoContent" id="c${i}">
@@ -193,17 +206,17 @@ function render(){
     });
 }
 
-/* TOGGLE AVEC FLÈCHE */
+/* TOGGLE AVEC ANIMATION */
 function toggle(i){
     let c=document.getElementById("c"+i);
     let arrow=document.getElementById("arrow"+i);
 
     if(c.style.display==="block"){
         c.style.display="none";
-        arrow.innerText="▶";
+        arrow.classList.remove("open");
     }else{
         c.style.display="block";
-        arrow.innerText="▼";
+        arrow.classList.add("open");
     }
 }
 
