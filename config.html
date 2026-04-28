@@ -6,6 +6,7 @@
 <title>Configuration</title>
 
 <style>
+/* CSS STRICTEMENT IDENTIQUE */
 body{
 font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 background:#f1f5f9;
@@ -35,7 +36,6 @@ opacity:0.95;
 
 h2{text-align:center;font-weight:600;margin-bottom:10px;}
 
-/* 🔥 3 COLONNES */
 .grid3{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
@@ -56,7 +56,6 @@ border:1px solid #e2e8f0;
 background:#f8fafc;
 }
 
-/* EXOS */
 .exoBloc{
 background:#f8fafc;
 margin:10px 0;
@@ -124,7 +123,6 @@ transform:scale(0.95);
 
 .exoContent{display:none;padding:10px;}
 
-/* 🔥 NOM MASQUÉ PAR DÉFAUT */
 .exoNameInput{
 display:none;
 margin-bottom:8px;
@@ -280,6 +278,28 @@ let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;
 
+/* 🔥 AJOUT : chargement pathologie */
+window.addEventListener("DOMContentLoaded", ()=>{
+let pathoData = localStorage.getItem("patho_data");
+let patho = localStorage.getItem("pathologie");
+
+if(pathoData){
+let data = JSON.parse(pathoData);
+
+exercices = data.exercices || [];
+document.getElementById("series").value = data.series || 1;
+
+if(patho){
+document.getElementById("sessionName").value = patho;
+document.getElementById("title").innerText = patho;
+}
+}else{
+addExo();
+}
+
+render();
+});
+
 function syncInputs(){
 for(let i=0;i<exercices.length;i++){
 let input = document.getElementById("nom"+i);
@@ -350,7 +370,6 @@ c.style.display="none";
 a.classList.remove("open");
 bloc.classList.remove("open");
 
-/* 🔥 update titre */
 let val = document.getElementById("nom"+i).value;
 if(val.trim()!==""){
 document.getElementById("title"+i).innerText = val;
@@ -418,15 +437,22 @@ alert("Sauvegardé");
 
 function start(){
 saveData("historique");
-localStorage.setItem("programme_temp",JSON.stringify(build()));
+
+let programme = build();
+let patho = localStorage.getItem("pathologie");
+
+programme.nom = patho 
+? patho 
+: (document.getElementById("sessionName").value || "Libre");
+
+localStorage.setItem("programme_temp",JSON.stringify(programme));
+
 window.location="timer.html";
 }
 
 function home(){
 window.location="index.html";
 }
-
-addExo();
 
 </script>
 </body>
