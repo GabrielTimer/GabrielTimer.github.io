@@ -52,7 +52,6 @@ object-fit:contain;
 margin-top:5px;
 }
 
-/* cercle */
 .timerZone{
 flex:1;
 display:flex;
@@ -82,7 +81,6 @@ font-size:42px;
 font-weight:bold;
 }
 
-/* 🔥 PLAY ICON */
 #playIcon{
 font-size:34px;
 margin-top:5px;
@@ -90,35 +88,20 @@ display:inline-block;
 transition:transform 0.2s;
 }
 
-/* hover / clic */
-.circleWrap:hover #playIcon{
-transform:scale(1.2);
-}
+.circleWrap:hover #playIcon{transform:scale(1.2);}
+.circleWrap:active #playIcon{transform:scale(0.9);}
 
-.circleWrap:active #playIcon{
-transform:scale(0.9);
-}
-
-/* 🔥 PULSE AMÉLIORÉ */
 @keyframes pulse {
 0% { transform: scale(1); opacity: 1; }
 50% { transform: scale(1.35); opacity: 0.6; }
 100% { transform: scale(1); opacity: 1; }
 }
 
-.pulse{
-animation: pulse 0.9s infinite;
-}
+.pulse{animation: pulse 0.9s infinite;}
 
-/* bas */
-.bottomBlock{
-text-align:center;
-}
+.bottomBlock{text-align:center;}
 
-#totalTime{
-font-size:12px;
-margin-bottom:2px;
-}
+#totalTime{font-size:12px;margin-bottom:2px;}
 
 .barContainer{
 height:4px;
@@ -133,7 +116,6 @@ background:#00e5ff;
 border-radius:10px;
 }
 
-/* boutons */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -152,13 +134,8 @@ font-weight:bold;
 transition:transform 0.2s;
 }
 
-button:hover{
-transform:scale(1.08);
-}
-
-button:active{
-transform:scale(0.95);
-}
+button:hover{transform:scale(1.08);}
+button:active{transform:scale(0.95);}
 </style>
 </head>
 
@@ -181,17 +158,8 @@ transform:scale(0.95);
 <div class="circleWrap" onclick="togglePause()">
 
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45"
-stroke="rgba(255,255,255,0.2)"
-stroke-width="6"
-fill="none"/>
-
-<circle id="progressCircle"
-cx="50" cy="50" r="45"
-stroke="#00e5ff"
-stroke-width="6"
-fill="none"
-transform="rotate(-90 50 50)"/>
+<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
+<circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
 </svg>
 
 <div id="timer">
@@ -229,30 +197,37 @@ let t=3, totalTimePhase=3;
 let paused=false;
 let soundOn=true;
 
+/* 🔥 NOUVEAU */
 let totalSessionTime=0;
-let elapsedTime=0;
+let remainingTime=0;
 
 /* cercle */
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* calcul */
+/* calcul total */
 function computeTotal(){
 p.exercices.forEach(exo=>{
 totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
 });
 totalSessionTime*=p.series;
 totalSessionTime-=p.exercices[p.exercices.length-1].repos;
+
+remainingTime = totalSessionTime;
 }
 computeTotal();
 
+/* format */
 function formatTime(s){
 let m=Math.floor(s/60);
 return m+":"+(s%60<10?"0":"")+s%60;
 }
 
-totalTime.innerText="Durée de ma séance : "+formatTime(totalSessionTime);
+function updateTotal(){
+totalTime.innerText="Durée de ma séance : "+formatTime(remainingTime);
+}
+updateTotal();
 
 /* SON */
 function beep(){
@@ -277,10 +252,9 @@ soundOn=!soundOn;
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
-/* 🔥 PLAY/PAUSE + PULSE */
+/* PAUSE */
 function togglePause(){
 paused=!paused;
-
 let icon = document.getElementById("playIcon");
 
 if(paused){
@@ -308,7 +282,7 @@ if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
 
-bar.style.width=(elapsedTime/totalSessionTime*100)+"%";
+bar.style.width=((totalSessionTime-remainingTime)/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
 exoInfo.innerText=exo.nom;
@@ -371,15 +345,23 @@ serieIndex++;
 update();
 }
 
+/* 🔥 LOOP MODIFIÉ */
 function loop(){
-if(paused)return;
+if(paused) return;
 
 t--;
+remainingTime--;
+
+if(remainingTime <= 0){
+window.location="fin.html";
+return;
+}
+
+updateTotal();
 
 if(t<=0){
 next();
 }else{
-elapsedTime++;
 update();
 }
 }
