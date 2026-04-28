@@ -22,17 +22,18 @@ overflow:hidden;
 .container{
 z-index:2;
 padding:20px;
+max-width:350px;
 }
 
 h1{
-font-size:42px;
+font-size:38px;
 margin-bottom:10px;
 animation:pop 0.6s ease;
 }
 
-p{
+.message{
 font-size:22px;
-margin:5px 0;
+margin:10px 0;
 }
 
 .small{
@@ -41,6 +42,17 @@ opacity:0.9;
 margin-top:10px;
 }
 
+/* résumé */
+.stats{
+margin-top:15px;
+font-size:18px;
+line-height:1.6;
+background:rgba(255,255,255,0.1);
+padding:12px;
+border-radius:12px;
+}
+
+/* bouton */
 button{
 margin-top:20px;
 padding:16px 24px;
@@ -57,15 +69,14 @@ transition:0.2s;
 button:hover{transform:scale(1.1);}
 button:active{transform:scale(0.95);}
 
-/* 🎉 animation titre */
+/* animation */
 @keyframes pop{
 0%{transform:scale(0.5);opacity:0;}
 100%{transform:scale(1);opacity:1;}
 }
 
-/* 👏 pulse emoji */
 .emoji{
-font-size:50px;
+font-size:48px;
 animation:pulse 1s infinite;
 }
 
@@ -75,12 +86,11 @@ animation:pulse 1s infinite;
 100%{transform:scale(1);}
 }
 
-/* 🎊 confettis */
+/* confettis */
 .confetti{
 position:absolute;
 width:8px;
 height:8px;
-background:red;
 top:-10px;
 animation:fall linear infinite;
 }
@@ -95,8 +105,8 @@ transform:translateY(110vh) rotate(360deg);
 
 <body>
 
-<!-- 🎊 confettis -->
 <script>
+/* 🎊 confettis */
 for(let i=0;i<80;i++){
 let c=document.createElement("div");
 c.className="confetti";
@@ -105,21 +115,68 @@ c.style.animationDuration=(Math.random()*3+2)+"s";
 c.style.background=["#ff0","#0ff","#f0f","#0f0","#fff"][Math.floor(Math.random()*5)];
 document.body.appendChild(c);
 }
+
+/* 🔥 messages dynamiques */
+let messages = [
+"Excellent travail 💪",
+"Très bonne séance 👏",
+"Continue comme ça 🔥",
+"Objectif atteint 🎯"
+];
+
+let randomMessage = messages[Math.floor(Math.random()*messages.length)];
+
+/* 🔥 récupération données séance */
+let prog = JSON.parse(localStorage.getItem("programme_temp"));
+
+let totalTime = 0;
+let exCount = 0;
+let series = 0;
+
+if(prog){
+series = prog.series || 1;
+exCount = prog.exercices.length;
+
+/* recalcul rapide durée */
+prog.exercices.forEach(ex=>{
+totalTime += (ex.ex + ex.repos) * ex.reps;
+});
+totalTime *= series;
+}
+
+/* format temps */
+function formatTime(s){
+let m=Math.floor(s/60);
+return m+" min "+(s%60)+" s";
+}
 </script>
 
 <div class="container">
 
-<div class="emoji">👏🎉👏</div>
+<div class="emoji">✨👏✨</div>
 
 <h1>🎉 Séance terminée !</h1>
 
-<p>Bravo 💪</p>
+<div class="message" id="msg"></div>
+
+<div class="stats" id="stats"></div>
 
 <p class="small">Avec les félicitations du kiné !</p>
 
 <button onclick="window.location='index.html'">🏠 Retour accueil</button>
 
 </div>
+
+<script>
+/* inject message */
+document.getElementById("msg").innerText = randomMessage;
+
+/* inject stats */
+document.getElementById("stats").innerHTML =
+"⏱ "+formatTime(totalTime)+"<br>" +
+"🏋️ "+exCount+" exercices<br>" +
+"🔁 "+series+" séries";
+</script>
 
 </body>
 </html>
