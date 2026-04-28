@@ -11,16 +11,16 @@ body{font-family:Arial;background:#f4f4f4;margin:0;height:100vh;display:flex;fle
 .card{background:white;padding:15px;border-radius:15px;max-width:420px;margin:auto;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
 h2{text-align:center;}
 
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.field{display:flex;flex-direction:column;align-items:center;}
+
+input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #ccc;}
+
 .exoBloc{
 background:#f9f9f9;
 margin:10px 0;
 border-radius:10px;
-transition:0.2s;
-}
-
-.exoBloc.dragging{
-opacity:0.5;
-transform:scale(0.98);
+transition:transform 0.2s;
 }
 
 .exoHeader{
@@ -48,7 +48,21 @@ cursor:pointer;
 
 .exoContent{display:none;padding:10px;}
 
-.addBtn{background:#4caf50;color:white;margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;}
+.dragging{
+opacity:0.7;
+transform:scale(1.02);
+z-index:10;
+}
+
+.addBtn{
+background:#4caf50;
+color:white;
+margin-top:10px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+}
 
 </style>
 </head>
@@ -57,9 +71,11 @@ cursor:pointer;
 
 <div class="main">
 <div class="card">
-<h2>Configurer</h2>
+<h2>Configurer la séance</h2>
+
 <div id="exo"></div>
-<button class="addBtn" onclick="addExo()">➕ Ajouter</button>
+
+<button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
 </div>
 </div>
 
@@ -67,18 +83,22 @@ cursor:pointer;
 
 let exercices = [];
 let dragIndex = null;
+let startY = 0;
 
 /* SYNC */
 function syncInputs(){
 for(let i=0;i<exercices.length;i++){
 exercices[i].nom = document.getElementById("nom"+i).value;
+exercices[i].ex = +document.getElementById("ex"+i).value;
+exercices[i].repos = +document.getElementById("repos"+i).value;
+exercices[i].reps = +document.getElementById("rep"+i).value;
 }
 }
 
 /* ADD */
-function addExo(){
+function addExo(data=null){
 syncInputs();
-exercices.push({nom:"Ex "+(exercices.length+1)});
+exercices.push(data || {nom:"Ex "+(exercices.length+1),ex:30,repos:10,reps:10});
 render();
 }
 
@@ -96,19 +116,24 @@ exo.innerHTML="";
 exercices.forEach((e,i)=>{
 exo.innerHTML+=`
 <div class="exoBloc" 
-onmousedown="startDrag(${i})" 
-onmouseup="endDrag(${i})"
-ontouchstart="startDrag(${i})"
-ontouchend="endDrag(${i})">
+onpointerdown="dragStart(${i}, event)"
+onpointermove="dragMove(event)"
+onpointerup="dragEnd()"
+onpointerleave="dragEnd()">
 
 <div class="exoHeader" onclick="toggle(${i})">
 <span id="arrow${i}" class="arrow">▶</span>
-<input id="nom${i}" value="${e.nom}">
+Ex ${i+1}
 <button class="deleteBtn" onclick="event.stopPropagation(); removeExo(${i})">−</button>
 </div>
 
 <div class="exoContent" id="c${i}">
-Contenu
+<div class="grid2">
+<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="${e.nom}"></div>
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
+</div>
 </div>
 
 </div>`;
@@ -129,26 +154,43 @@ a.classList.add("open");
 }
 }
 
-/* DRAG SIMPLE */
-function startDrag(i){
+/* DRAG FLUIDE */
+function dragStart(i,e){
 dragIndex=i;
+startY=e.clientY;
+syncInputs();
+document.querySelectorAll(".exoBloc")[i].classList.add("dragging");
 }
 
-function endDrag(i){
-if(dragIndex===null || dragIndex===i) return;
+function dragMove(e){
+if(dragIndex===null) return;
 
-syncInputs();
+let currentY=e.clientY;
+let blocs=[...document.querySelectorAll(".exoBloc")];
 
+for(let j=0;j<blocs.length;j++){
+let rect=blocs[j].getBoundingClientRect();
+
+if(currentY > rect.top && currentY < rect.bottom && j !== dragIndex){
 let moved = exercices.splice(dragIndex,1)[0];
-exercices.splice(i,0,moved);
-
-dragIndex=null;
+exercices.splice(j,0,moved);
+dragIndex=j;
 render();
+break;
+}
+}
+}
+
+function dragEnd(){
+let blocs=document.querySelectorAll(".exoBloc");
+blocs.forEach(b=>b.classList.remove("dragging"));
+dragIndex=null;
 }
 
 /* INIT */
 addExo();
 
 </script>
+
 </body>
 </html>
