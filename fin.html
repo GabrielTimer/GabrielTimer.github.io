@@ -13,8 +13,25 @@ font-family:Arial;
 background:#111;
 color:white;
 text-align:center;
+flex-direction:column;
+gap:10px;
 }
 h1{font-size:40px;}
+p{margin:5px 0;}
+.small{
+font-size:14px;
+opacity:0.8;
+}
+button{
+margin-top:15px;
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:#00e5ff;
+color:#111;
+font-weight:bold;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -23,6 +40,10 @@ h1{font-size:40px;}
 <div>
 <h1>🎉 Séance terminée !</h1>
 <p>Bravo 💪</p>
+
+<!-- 🔥 AJOUT -->
+<p class="small">Avec les félicitations du kiné !</p>
+
 <button onclick="window.location='index.html'">Accueil</button>
 </div>
 
