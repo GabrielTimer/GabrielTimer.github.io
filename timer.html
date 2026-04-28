@@ -49,7 +49,6 @@ height:190px;
 object-fit:contain;
 margin:10px 0 10px 0;
 display:none;
-transition:opacity 0.2s;
 }
 
 .timerZone{
@@ -224,7 +223,6 @@ let soundOn=true;
 let totalSessionTime=0;
 let remainingTime=0;
 
-/* 🔥 AJOUT IMPORTANT */
 let lastImage = "";
 
 let radius=45;
@@ -327,26 +325,23 @@ if(patho){
 img.style.display="block";
 
 let base = "images/"+patho+"/ex"+(exIndex+1);
-let newSrc = base + ".jpg";
+let jpg = base + ".jpg";
+let png = base + ".png";
 
-/* 🔥 CORRECTION ICI */
-if(newSrc !== lastImage){
-img.style.opacity = 0;
+if(lastImage !== jpg && lastImage !== png){
 
-setTimeout(()=>{
-img.src = newSrc + "?t=" + Date.now();
-img.style.opacity = 1;
-},100);
+img.onerror = null;
 
-lastImage = newSrc;
-}
+img.src = jpg;
+lastImage = jpg;
 
 img.onerror = function(){
-this.onerror=null;
-let fallback = base + ".png";
-this.src = fallback + "?t=" + Date.now();
-lastImage = fallback;
+this.onerror = null;
+this.src = png;
+lastImage = png;
 };
+
+}
 
 }else{
 img.style.display="none";
