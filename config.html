@@ -13,16 +13,15 @@ margin:0;
 height:100vh;
 display:flex;
 flex-direction:column;
-align-items:center;
 }
 
-/* 🔥 CONTENEUR PRINCIPAL */
+/* MAIN */
 .main{
-width:100%;
-max-width:420px;
+flex:1;
 display:flex;
 flex-direction:column;
-flex:1;
+max-width:420px;
+margin:auto;
 padding:10px;
 }
 
@@ -37,20 +36,14 @@ flex-direction:column;
 flex:1;
 }
 
-/* LOGO */
-.logo{
-width:70px;
-display:block;
-margin:0 auto 5px;
-}
-
+/* TITRE */
 h2{text-align:center;margin:5px 0 10px;}
 
-/* 🔥 ZONE SCROLL EXOS */
+/* 🔥 SCROLL UNIQUEMENT SUR EXOS */
 #exo{
 overflow-y:auto;
 flex:1;
-padding-right:5px;
+padding-bottom:140px; /* espace pour footer */
 }
 
 /* GRID */
@@ -127,7 +120,10 @@ padding:0;
 
 .exoContent{display:none;padding:10px;}
 
+/* 🔥 BOUTON INTELLIGENT */
 .addBtn{
+position:sticky;
+bottom:90px;
 background:#2563eb;
 color:white;
 margin-top:10px;
@@ -135,6 +131,7 @@ width:100%;
 padding:12px;
 border:none;
 border-radius:10px;
+z-index:5;
 }
 
 /* 🔥 FOOTER FIXE */
@@ -151,7 +148,6 @@ border-radius:15px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* FOOTER GRID */
 .footerGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -177,7 +173,7 @@ cursor:pointer;
 /* UNDO */
 #undoBar{
 position:fixed;
-bottom:80px;
+bottom:90px;
 left:50%;
 transform:translateX(-50%) translateY(100px);
 background:#333;
@@ -211,8 +207,6 @@ padding:0;
 
 <div class="main">
 <div class="card">
-
-<img src="logo.png" class="logo">
 
 <h2 id="title">Configurer la séance</h2>
 
@@ -250,7 +244,7 @@ Exercice supprimé
 
 <script>
 
-/* 🔥 TON JS ORIGINAL (INCHANGÉ) */
+/* 🔥 JS STRICTEMENT INCHANGÉ */
 
 if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
     localStorage.removeItem("patho_data");
@@ -377,16 +371,12 @@ return true;
 function updateTitle(){
 let patho = localStorage.getItem("pathologie");
 if(!patho){
-document.getElementById("sessionName").value = "Libre";
+document.getElementById("sessionName").value="Libre";
 return;
 }
-
 let name = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
-
-document.getElementById("title").innerText =
-"Configurer la séance - " + name;
-
-document.getElementById("sessionName").value = name;
+document.getElementById("title").innerText="Configurer la séance - "+name;
+document.getElementById("sessionName").value=name;
 }
 
 function build(){
