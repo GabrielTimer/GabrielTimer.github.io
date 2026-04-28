@@ -20,7 +20,7 @@ input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #
 background:#f9f9f9;
 margin:10px 0;
 border-radius:10px;
-transition:transform 0.2s;
+transition:transform 0.25s ease;
 }
 
 .exoHeader{
@@ -28,13 +28,25 @@ background:#eee;
 padding:12px;
 display:flex;
 align-items:center;
-gap:8px;
-cursor:grab;
+gap:10px;
 }
 
+/* poignée */
+.dragHandle{
+cursor:grab;
+font-size:18px;
+padding:4px;
+}
+
+.dragHandle:active{
+cursor:grabbing;
+}
+
+/* flèche */
 .arrow{transition:0.25s;}
 .arrow.open{transform:rotate(90deg);}
 
+/* delete */
 .deleteBtn{
 margin-left:auto;
 background:#e53935;
@@ -46,12 +58,22 @@ height:24px;
 cursor:pointer;
 }
 
+/* contenu */
 .exoContent{display:none;padding:10px;}
 
+/* drag */
 .dragging{
-opacity:0.7;
-transform:scale(1.02);
-z-index:10;
+position:relative;
+z-index:1000;
+pointer-events:none;
+opacity:0.9;
+transform:scale(1.03);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* animation des autres */
+.moving{
+transition:transform 0.25s ease;
 }
 
 .addBtn{
@@ -82,8 +104,9 @@ border-radius:10px;
 <script>
 
 let exercices = [];
-let dragIndex = null;
+let dragEl = null;
 let startY = 0;
+let currentIndex = null;
 
 /* SYNC */
 function syncInputs(){
@@ -115,16 +138,17 @@ exo.innerHTML="";
 
 exercices.forEach((e,i)=>{
 exo.innerHTML+=`
-<div class="exoBloc" 
-onpointerdown="dragStart(${i}, event)"
-onpointermove="dragMove(event)"
-onpointerup="dragEnd()"
-onpointerleave="dragEnd()">
+<div class="exoBloc" data-index="${i}">
 
-<div class="exoHeader" onclick="toggle(${i})">
-<span id="arrow${i}" class="arrow">▶</span>
-Ex ${i+1}
-<button class="deleteBtn" onclick="event.stopPropagation(); removeExo(${i})">−</button>
+<div class="exoHeader">
+
+<span class="dragHandle"
+onpointerdown="dragStart(event, ${i})">≡</span>
+
+<span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
+<span onclick="toggle(${i})">Ex ${i+1}</span>
+
+<button class="deleteBtn" onclick="removeExo(${i})">−</button>
 </div>
 
 <div class="exoContent" id="c${i}">
@@ -154,37 +178,63 @@ a.classList.add("open");
 }
 }
 
-/* DRAG FLUIDE */
-function dragStart(i,e){
-dragIndex=i;
-startY=e.clientY;
+/* DRAG START */
+function dragStart(e,i){
 syncInputs();
-document.querySelectorAll(".exoBloc")[i].classList.add("dragging");
+
+dragEl = e.target.closest(".exoBloc");
+currentIndex = i;
+startY = e.clientY;
+
+dragEl.classList.add("dragging");
+
+document.addEventListener("pointermove", dragMove);
+document.addEventListener("pointerup", dragEnd);
 }
 
+/* DRAG MOVE */
 function dragMove(e){
-if(dragIndex===null) return;
+if(!dragEl) return;
 
-let currentY=e.clientY;
-let blocs=[...document.querySelectorAll(".exoBloc")];
+let dy = e.clientY - startY;
+dragEl.style.transform = `translateY(${dy}px)`;
 
-for(let j=0;j<blocs.length;j++){
-let rect=blocs[j].getBoundingClientRect();
+let blocs = [...document.querySelectorAll(".exoBloc")];
 
-if(currentY > rect.top && currentY < rect.bottom && j !== dragIndex){
-let moved = exercices.splice(dragIndex,1)[0];
-exercices.splice(j,0,moved);
-dragIndex=j;
+blocs.forEach((b, index)=>{
+if(b===dragEl) return;
+
+let rect = b.getBoundingClientRect();
+
+if(e.clientY > rect.top && e.clientY < rect.bottom){
+if(index !== currentIndex){
+
+let moved = exercices.splice(currentIndex,1)[0];
+exercices.splice(index,0,moved);
+currentIndex = index;
+
 render();
-break;
+
+/* relancer drag */
+dragEl = document.querySelectorAll(".exoBloc")[currentIndex];
+dragEl.classList.add("dragging");
+startY = e.clientY;
 }
 }
+});
 }
 
+/* DRAG END */
 function dragEnd(){
-let blocs=document.querySelectorAll(".exoBloc");
-blocs.forEach(b=>b.classList.remove("dragging"));
-dragIndex=null;
+if(!dragEl) return;
+
+dragEl.classList.remove("dragging");
+dragEl.style.transform = "";
+
+dragEl = null;
+
+document.removeEventListener("pointermove", dragMove);
+document.removeEventListener("pointerup", dragEnd);
 }
 
 /* INIT */
