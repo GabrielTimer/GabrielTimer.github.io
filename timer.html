@@ -193,11 +193,12 @@ const timerLabel = document.querySelector(".timerLabel");
 
 let exIndex=0, repIndex=1, serieIndex=1;
 let phase="prep";
-let t=3, totalTimePhase=3;
+let PREP_TIME = 3;
+let t=PREP_TIME, totalTimePhase=PREP_TIME;
 let paused=false;
 let soundOn=true;
 
-/* 🔥 TEMPS */
+/* TEMPS */
 let totalSessionTime=0;
 let remainingTime=0;
 
@@ -206,7 +207,7 @@ let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* 🔥 CALCUL EXACT */
+/* 🔥 CALCUL EXACT + PREP */
 function computeTotal(){
 totalSessionTime = 0;
 
@@ -226,6 +227,9 @@ totalSessionTime += exo.repos;
 });
 
 totalSessionTime *= p.series;
+
+/* 🔥 FIX PRINCIPAL */
+totalSessionTime += PREP_TIME;
 
 remainingTime = totalSessionTime;
 }
@@ -358,7 +362,7 @@ serieIndex++;
 update();
 }
 
-/* 🔥 LOOP */
+/* LOOP */
 function loop(){
 if(paused) return;
 
