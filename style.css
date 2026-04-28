@@ -5,7 +5,6 @@
 --text:#0f172a;
 --text-light:#64748b;
 
---accent:#22c55e;
 --border:#e2e8f0;
 }
 
@@ -26,7 +25,7 @@ align-items:center;
 height:100vh;
 }
 
-/* CARD APPLE STYLE */
+/* CARD */
 .card{
 background:var(--card);
 backdrop-filter:blur(12px);
@@ -51,7 +50,7 @@ margin:10px 0 20px 0;
 font-weight:600;
 }
 
-/* BOUTONS */
+/* BOUTONS BASE */
 button{
 width:100%;
 padding:15px;
@@ -62,27 +61,27 @@ font-weight:600;
 cursor:pointer;
 font-size:15px;
 backdrop-filter:blur(8px);
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* VARIANTES */
+/* 🔵 PRINCIPAL */
 .primary{
 background:var(--primary);
 color:white;
 }
 
-.secondary{
-background:#f59e0b;
-color:white;
-}
-
+/* ⚪ NEUTRES */
+.secondary,
 .patho{
-background:#8b5cf6;
-color:white;
+background:rgba(255,255,255,0.6);
+color:var(--text);
+border:1px solid var(--border);
 }
 
 /* HOVER */
 button:hover{
 transform:scale(1.04);
+filter:brightness(1.03);
 }
 
 button:active{
