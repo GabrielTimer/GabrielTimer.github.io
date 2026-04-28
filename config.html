@@ -5,71 +5,93 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Configuration</title>
 
-<link rel="stylesheet" href="style.css?v=1">
-
 <style>
-
 body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+height:100vh;
 display:flex;
 flex-direction:column;
 align-items:center;
-height:auto;
 }
 
+/* 🔥 CONTENEUR PRINCIPAL */
 .main{
 width:100%;
 max-width:420px;
-padding:20px 15px 10px;
+display:flex;
+flex-direction:column;
+flex:1;
+padding:10px;
 }
 
+/* CARD */
 .card{
-margin:0 auto 15px auto;
+background:white;
+padding:15px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+display:flex;
+flex-direction:column;
+flex:1;
 }
 
+/* LOGO */
 .logo{
+width:70px;
 display:block;
-margin:0 auto 10px;
+margin:0 auto 5px;
 }
 
-h2{
-text-align:center;
-margin-bottom:10px;
+h2{text-align:center;margin:5px 0 10px;}
+
+/* 🔥 ZONE SCROLL EXOS */
+#exo{
+overflow-y:auto;
+flex:1;
+padding-right:5px;
 }
 
+/* GRID */
 .grid2{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
+gap:10px;
 }
 
 .field{
 display:flex;
 flex-direction:column;
-gap:4px;
+align-items:center;
 }
 
 input{
-width:100%;
-padding:10px;
-border-radius:12px;
-border:1px solid var(--border);
-background:rgba(255,255,255,0.6);
+width:85%;
+max-width:140px;
+padding:8px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
+/* EXOS */
 .exoBloc{
-background:rgba(255,255,255,0.5);
-border-radius:16px;
-margin:12px 0;
-border:1px solid var(--border);
-overflow:hidden;
+background:#f9f9f9;
+margin:10px 0;
+border-radius:10px;
 }
 
 .exoHeader{
+background:#eee;
 padding:12px;
 display:flex;
 align-items:center;
 gap:8px;
+min-height:44px;
 }
+
+.arrow{transition:0.25s;}
+.arrow.open{transform:rotate(90deg);}
 
 .actions{
 margin-left:auto;
@@ -78,72 +100,87 @@ gap:6px;
 }
 
 .actionBtn{
-background:rgba(255,255,255,0.6);
-border:1px solid var(--border);
-border-radius:8px;
-width:28px;
-height:28px;
+background:#ddd;
+border:none;
+border-radius:6px;
+width:26px;
+height:26px;
 display:flex;
 align-items:center;
 justify-content:center;
 cursor:pointer;
+padding:0;
 }
 
 .deleteBtn{
-background:#ef4444;
-color:white;
+background:#e53935;
 border:none;
 border-radius:50%;
-width:28px;
-height:28px;
+width:26px;
+height:26px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+padding:0;
 }
 
-.exoContent{
-display:none;
-padding:10px;
-}
+.exoContent{display:none;padding:10px;}
 
 .addBtn{
-background:var(--primary);
+background:#2563eb;
 color:white;
 margin-top:10px;
-}
-
-.footer{
 width:100%;
-max-width:420px;
-margin:0 auto 20px;
-padding:14px;
-border-radius:20px;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(10px);
-border:1px solid var(--border);
+padding:12px;
+border:none;
+border-radius:10px;
 }
 
+/* 🔥 FOOTER FIXE */
+.footer{
+position:fixed;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+max-width:420px;
+background:white;
+padding:12px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* FOOTER GRID */
 .footerGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
+gap:10px;
 margin-bottom:10px;
 }
 
-.start{
-background:var(--primary);
-color:white;
+/* BOUTONS */
+button{
+padding:14px;
+margin:6px 0;
+border:none;
+border-radius:12px;
+width:100%;
+font-size:17px;
+cursor:pointer;
 }
 
-.fav,
-.home{
-background:rgba(255,255,255,0.6);
-border:1px solid var(--border);
-}
+.start{background:#2563eb;color:white;}
+.fav{background:#e2e8f0;}
+.home{background:#ddd;}
 
+/* UNDO */
 #undoBar{
 position:fixed;
-bottom:20px;
+bottom:80px;
 left:50%;
 transform:translateX(-50%) translateY(100px);
-background:#0f172a;
+background:#333;
 color:white;
 padding:12px 18px;
 border-radius:12px;
@@ -162,11 +199,11 @@ opacity:1;
 #undoBar button{
 background:none;
 border:none;
-color:#22c55e;
+color:#4caf50;
 font-weight:bold;
 cursor:pointer;
+padding:0;
 }
-
 </style>
 </head>
 
@@ -196,7 +233,7 @@ cursor:pointer;
 
 <div class="field">
 <label>Nom</label>
-<input id="sessionName">
+<input id="sessionName" value="Libre">
 </div>
 </div>
 
@@ -213,7 +250,7 @@ Exercice supprimé
 
 <script>
 
-/* 🔥 TON JS ORIGINAL COMPLET (remis correctement) */
+/* 🔥 TON JS ORIGINAL (INCHANGÉ) */
 
 if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
     localStorage.removeItem("patho_data");
@@ -339,7 +376,10 @@ return true;
 
 function updateTitle(){
 let patho = localStorage.getItem("pathologie");
-if(!patho) return;
+if(!patho){
+document.getElementById("sessionName").value = "Libre";
+return;
+}
 
 let name = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
 
@@ -398,6 +438,5 @@ addExo();
 }
 
 </script>
-
 </body>
 </html>
