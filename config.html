@@ -26,7 +26,6 @@ margin:auto;
 box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
-/* LOGO */
 .logo{
 width:65px;
 display:block;
@@ -36,7 +35,12 @@ opacity:0.95;
 
 h2{text-align:center;font-weight:600;margin-bottom:10px;}
 
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+/* 🔥 3 COLONNES */
+.grid3{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+}
 
 .field{
 display:flex;
@@ -45,8 +49,7 @@ align-items:center;
 }
 
 input{
-width:85%;
-max-width:140px;
+width:90%;
 padding:10px;
 border-radius:10px;
 border:1px solid #e2e8f0;
@@ -85,13 +88,11 @@ justify-content:center;
 transition:0.2s;
 }
 
-/* 🔥 HOVER */
 .actionBtn:hover{
 background:#e2e8f0;
 transform:scale(1.05);
 }
 
-/* ACTION */
 .actionBtn{
 background:#f1f5f9;
 border:1px solid #e2e8f0;
@@ -101,7 +102,6 @@ height:28px;
 cursor:pointer;
 }
 
-/* DELETE */
 .deleteBtn{
 background:#ef4444;
 border:none;
@@ -118,14 +118,23 @@ background:#dc2626;
 transform:scale(1.08);
 }
 
-/* CLICK EFFECT */
 button:active, .actionBtn:active, .deleteBtn:active{
 transform:scale(0.95);
 }
 
 .exoContent{display:none;padding:10px;}
 
-/* AJOUT */
+/* 🔥 NOM MASQUÉ PAR DÉFAUT */
+.exoNameInput{
+display:none;
+margin-bottom:8px;
+width:95%;
+}
+
+.open .exoNameInput{
+display:block;
+}
+
 .addBtn{
 background:#2563eb;
 color:white;
@@ -143,7 +152,6 @@ background:#1d4ed8;
 transform:scale(1.02);
 }
 
-/* FOOTER */
 .footer{
 position:sticky;
 bottom:10px;
@@ -162,7 +170,6 @@ gap:10px;
 margin-bottom:10px;
 }
 
-/* BOUTONS */
 button{
 padding:14px;
 margin:6px 0;
@@ -175,7 +182,6 @@ font-weight:600;
 transition:0.2s;
 }
 
-/* PRINCIPAL */
 .start{
 background:#2563eb;
 color:white;
@@ -186,7 +192,6 @@ background:#1d4ed8;
 transform:scale(1.02);
 }
 
-/* SECONDAIRES */
 .fav, .home{
 background:#f1f5f9;
 border:1px solid #e2e8f0;
@@ -196,7 +201,6 @@ border:1px solid #e2e8f0;
 background:#e2e8f0;
 }
 
-/* UNDO */
 #undoBar{
 position:fixed;
 bottom:20px;
@@ -272,19 +276,16 @@ Exercice supprimé
 
 <script>
 
-/* JS STRICTEMENT IDENTIQUE */
-
-if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
-    localStorage.removeItem("patho_data");
-}
-
 let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;
 
 function syncInputs(){
 for(let i=0;i<exercices.length;i++){
-exercices[i].nom = document.getElementById("nom"+i).value;
+let input = document.getElementById("nom"+i);
+if(input && input.value.trim() !== ""){
+exercices[i].nom = input.value;
+}
 exercices[i].ex = +document.getElementById("ex"+i).value;
 exercices[i].repos = +document.getElementById("repos"+i).value;
 exercices[i].reps = +document.getElementById("rep"+i).value;
@@ -306,23 +307,61 @@ showUndo();
 if(navigator.vibrate) navigator.vibrate(30);
 }
 
-function undoDelete(){
-if(!lastDeleted) return;
-exercices.splice(lastDeleted.index,0,lastDeleted.exo);
-lastDeleted = null;
-render();
-hideUndo();
+function render(){
+exo.innerHTML="";
+exercices.forEach((e,i)=>{
+
+let title = e.nom || "Ex "+(i+1);
+
+exo.innerHTML+=`
+<div class="exoBloc" id="exoBloc${i}">
+<div class="exoHeader">
+<span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
+<span onclick="toggle(${i})" id="title${i}">${title}</span>
+
+<div class="actions">
+<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
+<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
+<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
+<button class="deleteBtn" onclick="removeExo(${i})">🗑️</button>
+</div>
+</div>
+
+<div class="exoContent" id="c${i}">
+<input class="exoNameInput" id="nom${i}" value="${e.nom}">
+
+<div class="grid3">
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
+</div>
+</div>
+</div>`;
+});
 }
 
-function showUndo(){
-let bar = document.getElementById("undoBar");
-bar.classList.add("show");
-clearTimeout(undoTimer);
-undoTimer = setTimeout(()=>{hideUndo();lastDeleted=null;},4000);
+function toggle(i){
+let c=document.getElementById("c"+i);
+let a=document.getElementById("arrow"+i);
+let bloc=document.getElementById("exoBloc"+i);
+
+if(c.style.display==="block"){
+c.style.display="none";
+a.classList.remove("open");
+bloc.classList.remove("open");
+
+/* 🔥 update titre */
+let val = document.getElementById("nom"+i).value;
+if(val.trim()!==""){
+document.getElementById("title"+i).innerText = val;
+exercices[i].nom = val;
 }
 
-function hideUndo(){
-document.getElementById("undoBar").classList.remove("show");
+}else{
+c.style.display="block";
+a.classList.add("open");
+bloc.classList.add("open");
+}
 }
 
 function moveUp(i){
@@ -346,73 +385,11 @@ exercices.splice(i+1,0,copy);
 render();
 }
 
-function render(){
-exo.innerHTML="";
-exercices.forEach((e,i)=>{
-exo.innerHTML+=`
-<div class="exoBloc">
-<div class="exoHeader">
-<span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
-<span onclick="toggle(${i})">Ex ${i+1}</span>
-<div class="actions">
-<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
-<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
-<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
-<button class="deleteBtn" onclick="removeExo(${i})">🗑️</button>
-</div>
-</div>
-
-<div class="exoContent" id="c${i}">
-<div class="grid2">
-<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="${e.nom}"></div>
-<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
-<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
-<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
-</div>
-</div>
-</div>`;
-});
-}
-
-function toggle(i){
-let c=document.getElementById("c"+i);
-let a=document.getElementById("arrow"+i);
-if(c.style.display==="block"){c.style.display="none";a.classList.remove("open");}
-else{c.style.display="block";a.classList.add("open");}
-}
-
-function loadPatho(){
-let data = localStorage.getItem("patho_data");
-if(!data) return false;
-
-let p = JSON.parse(data);
-
-if(!p.exercices || p.exercices.length === 0) return false;
-
-exercices = JSON.parse(JSON.stringify(p.exercices));
-series.value = p.series || 1;
-
-render();
-return true;
-}
-
-function updateTitle(){
-let patho = localStorage.getItem("pathologie");
-if(!patho) return;
-
-let name = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
-
-document.getElementById("title").innerText =
-"Configurer la séance - " + name;
-
-document.getElementById("sessionName").value = name;
-}
-
 function build(){
 let list=[];
 for(let i=0;i<exercices.length;i++){
 list.push({
-nom:document.getElementById("nom"+i).value,
+nom:exercices[i].nom,
 ex:+document.getElementById("ex"+i).value,
 repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
@@ -449,12 +426,7 @@ function home(){
 window.location="index.html";
 }
 
-let isPatho = loadPatho();
-updateTitle();
-
-if(!isPatho){
 addExo();
-}
 
 </script>
 </body>
