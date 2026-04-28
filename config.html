@@ -42,21 +42,28 @@ gap:6px;
 background:#ddd;
 border:none;
 border-radius:6px;
-padding:4px 6px;
+width:26px;
+height:26px;
+display:flex;
+align-items:center;
+justify-content:center;
 cursor:pointer;
-font-size:14px;
+padding:0;
 }
 
 .actionBtn:hover{background:#ccc;}
 
 .deleteBtn{
 background:#e53935;
-color:white;
 border:none;
 border-radius:50%;
-width:24px;
-height:24px;
+width:26px;
+height:26px;
+display:flex;
+align-items:center;
+justify-content:center;
 cursor:pointer;
+padding:0;
 }
 
 /* contenu */
@@ -210,10 +217,32 @@ exo.innerHTML+=`
 <span onclick="toggle(${i})">Ex ${i+1}</span>
 
 <div class="actions">
-<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
-<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
-<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
-<button class="deleteBtn" onclick="removeExo(${i})">−</button>
+
+<button class="actionBtn" onclick="moveUp(${i})">
+<svg viewBox="0 0 24 24" width="14" height="14" stroke="black" fill="none">
+  <polyline points="6 15 12 9 18 15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>
+
+<button class="actionBtn" onclick="moveDown(${i})">
+<svg viewBox="0 0 24 24" width="14" height="14" stroke="black" fill="none">
+  <polyline points="6 9 12 15 18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>
+
+<button class="actionBtn" onclick="duplicateExo(${i})">
+<svg viewBox="0 0 24 24" width="14" height="14" stroke="black" fill="none">
+  <rect x="9" y="9" width="10" height="10" stroke-width="2" rx="2"/>
+  <rect x="5" y="5" width="10" height="10" stroke-width="2" rx="2"/>
+</svg>
+</button>
+
+<button class="deleteBtn" onclick="removeExo(${i})">
+<svg viewBox="0 0 24 24" width="14" height="14" stroke="white" fill="none">
+  <line x1="5" y1="12" x2="19" y2="12" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+</button>
+
 </div>
 </div>
 
