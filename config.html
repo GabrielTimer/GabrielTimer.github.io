@@ -20,7 +20,6 @@ input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #
 background:#f9f9f9;
 margin:10px 0;
 border-radius:10px;
-transition:transform 0.25s ease;
 }
 
 .exoHeader{
@@ -28,27 +27,36 @@ background:#eee;
 padding:12px;
 display:flex;
 align-items:center;
-gap:10px;
-}
-
-/* poignée */
-.dragHandle{
-cursor:grab;
-font-size:18px;
-padding:4px;
-}
-
-.dragHandle:active{
-cursor:grabbing;
+gap:8px;
+min-height:44px;
 }
 
 /* flèche */
 .arrow{transition:0.25s;}
 .arrow.open{transform:rotate(90deg);}
 
+/* actions */
+.actions{
+margin-left:auto;
+display:flex;
+gap:6px;
+}
+
+.actionBtn{
+background:#ddd;
+border:none;
+border-radius:6px;
+padding:4px 6px;
+cursor:pointer;
+font-size:14px;
+}
+
+.actionBtn:hover{
+background:#ccc;
+}
+
 /* delete */
 .deleteBtn{
-margin-left:auto;
 background:#e53935;
 color:white;
 border:none;
@@ -56,25 +64,13 @@ border-radius:50%;
 width:24px;
 height:24px;
 cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 /* contenu */
 .exoContent{display:none;padding:10px;}
-
-/* drag */
-.dragging{
-position:relative;
-z-index:1000;
-pointer-events:none;
-opacity:0.9;
-transform:scale(1.03);
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-}
-
-/* animation des autres */
-.moving{
-transition:transform 0.25s ease;
-}
 
 .addBtn{
 background:#4caf50;
@@ -104,9 +100,6 @@ border-radius:10px;
 <script>
 
 let exercices = [];
-let dragEl = null;
-let startY = 0;
-let currentIndex = null;
 
 /* SYNC */
 function syncInputs(){
@@ -121,7 +114,12 @@ exercices[i].reps = +document.getElementById("rep"+i).value;
 /* ADD */
 function addExo(data=null){
 syncInputs();
-exercices.push(data || {nom:"Ex "+(exercices.length+1),ex:30,repos:10,reps:10});
+exercices.push(data || {
+nom:"Ex "+(exercices.length+1),
+ex:30,
+repos:10,
+reps:10
+});
 render();
 }
 
@@ -132,31 +130,72 @@ exercices.splice(i,1);
 render();
 }
 
+/* MOVE */
+function moveUp(i){
+if(i===0) return;
+syncInputs();
+[exercices[i-1], exercices[i]] = [exercices[i], exercices[i-1]];
+render();
+}
+
+function moveDown(i){
+if(i===exercices.length-1) return;
+syncInputs();
+[exercices[i+1], exercices[i]] = [exercices[i], exercices[i+1]];
+render();
+}
+
+/* DUPLICATE */
+function duplicateExo(i){
+syncInputs();
+let copy = JSON.parse(JSON.stringify(exercices[i]));
+exercices.splice(i+1,0,copy);
+render();
+}
+
 /* RENDER */
 function render(){
 exo.innerHTML="";
 
 exercices.forEach((e,i)=>{
 exo.innerHTML+=`
-<div class="exoBloc" data-index="${i}">
+<div class="exoBloc">
 
 <div class="exoHeader">
-
-<span class="dragHandle"
-onpointerdown="dragStart(event, ${i})">≡</span>
-
 <span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
 <span onclick="toggle(${i})">Ex ${i+1}</span>
 
+<div class="actions">
+<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
+<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
+<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
 <button class="deleteBtn" onclick="removeExo(${i})">−</button>
+</div>
 </div>
 
 <div class="exoContent" id="c${i}">
 <div class="grid2">
-<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="${e.nom}"></div>
-<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
-<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
-<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
+
+<div class="field">
+<label>🏷 Nom</label>
+<input id="nom${i}" value="${e.nom}">
+</div>
+
+<div class="field">
+<label>⏱ Exercice</label>
+<input id="ex${i}" value="${e.ex}">
+</div>
+
+<div class="field">
+<label>😌 Repos</label>
+<input id="repos${i}" value="${e.repos}">
+</div>
+
+<div class="field">
+<label>🔁 Répétitions</label>
+<input id="rep${i}" value="${e.reps}">
+</div>
+
 </div>
 </div>
 
@@ -176,65 +215,6 @@ a.classList.remove("open");
 c.style.display="block";
 a.classList.add("open");
 }
-}
-
-/* DRAG START */
-function dragStart(e,i){
-syncInputs();
-
-dragEl = e.target.closest(".exoBloc");
-currentIndex = i;
-startY = e.clientY;
-
-dragEl.classList.add("dragging");
-
-document.addEventListener("pointermove", dragMove);
-document.addEventListener("pointerup", dragEnd);
-}
-
-/* DRAG MOVE */
-function dragMove(e){
-if(!dragEl) return;
-
-let dy = e.clientY - startY;
-dragEl.style.transform = `translateY(${dy}px)`;
-
-let blocs = [...document.querySelectorAll(".exoBloc")];
-
-blocs.forEach((b, index)=>{
-if(b===dragEl) return;
-
-let rect = b.getBoundingClientRect();
-
-if(e.clientY > rect.top && e.clientY < rect.bottom){
-if(index !== currentIndex){
-
-let moved = exercices.splice(currentIndex,1)[0];
-exercices.splice(index,0,moved);
-currentIndex = index;
-
-render();
-
-/* relancer drag */
-dragEl = document.querySelectorAll(".exoBloc")[currentIndex];
-dragEl.classList.add("dragging");
-startY = e.clientY;
-}
-}
-});
-}
-
-/* DRAG END */
-function dragEnd(){
-if(!dragEl) return;
-
-dragEl.classList.remove("dragging");
-dragEl.style.transform = "";
-
-dragEl = null;
-
-document.removeEventListener("pointermove", dragMove);
-document.removeEventListener("pointerup", dragEnd);
 }
 
 /* INIT */
