@@ -16,7 +16,7 @@ overflow:hidden;
 transition:background 0.3s;
 }
 
-/* 🔥 CONTENEUR PLEIN ÉCRAN */
+/* CONTENEUR */
 .container{
 width:100%;
 height:100%;
@@ -26,7 +26,7 @@ padding:10px;
 box-sizing:border-box;
 }
 
-/* 🔥 CONTENU CENTRÉ PROPRE */
+/* CONTENU CENTRÉ */
 .inner{
 max-width:380px;
 width:100%;
@@ -52,21 +52,22 @@ font-weight:600;
 width:60px;
 }
 
-/* IMAGE */
+/* 🔥 IMAGE CORRIGÉE */
 #img{
 width:100%;
-height:150px;
+height:180px;              /* plus grande */
 object-fit:contain;
-margin:5px 0;
+margin:20px 0 10px 0;     /* descend */
 display:none;
 }
 
-/* ZONE CENTRALE */
+/* 🔥 ZONE TIMER STABLE */
 .timerZone{
 flex:1;
 display:flex;
 align-items:center;
 justify-content:center;
+min-height:240px;         /* empêche le cercle de bouger */
 }
 
 /* CERCLE */
@@ -326,7 +327,6 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-/* IMAGE */
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
