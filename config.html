@@ -16,10 +16,10 @@ h2{font-size:22px;margin-bottom:10px;text-align:center;}
 
 input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #ccc;}
 
-.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;position:relative;}
+.exoBloc{background:#f9f9f9;margin:10px 0;border-radius:10px;}
 .exoHeader{
 background:#eee;
-padding:12px 44px 12px 12px;
+padding:12px;
 cursor:pointer;
 font-weight:bold;
 display:flex;
@@ -28,7 +28,7 @@ gap:8px;
 min-height:44px;
 }
 
-/* 🔥 FLECHE ANIMÉE */
+/* FLECHE */
 .arrow{
 display:inline-block;
 transition:transform 0.25s ease;
@@ -38,14 +38,9 @@ transition:transform 0.25s ease;
 transform:rotate(90deg);
 }
 
-.exoContent{display:none;padding:10px;}
-
-/* DELETE */
+/* DELETE DANS HEADER */
 .deleteBtn{
-position:absolute;
-top:50%;
-right:12px;
-transform:translateY(-50%);
+margin-left:auto;
 background:#e53935;
 color:white;
 border:none;
@@ -64,13 +59,15 @@ transition:0.15s;
 }
 
 .deleteBtn:hover{
-transform:translateY(-50%) scale(1.15);
+transform:scale(1.15);
 background:#c62828;
 }
 
 .deleteBtn:active{
-transform:translateY(-50%) scale(0.9);
+transform:scale(0.9);
 }
+
+.exoContent{display:none;padding:10px;}
 
 /* ADD */
 .addBtn{
@@ -170,11 +167,11 @@ function render(){
         exo.innerHTML+=`
         <div class="exoBloc">
         
-        <button class="deleteBtn" onclick="removeExo(${i})">−</button>
-        
         <div class="exoHeader" onclick="toggle(${i})">
             <span id="arrow${i}" class="arrow">▶</span>
             Ex ${i+1}
+
+            <button class="deleteBtn" onclick="event.stopPropagation(); removeExo(${i})">−</button>
         </div>
         
         <div class="exoContent" id="c${i}">
@@ -206,7 +203,7 @@ function render(){
     });
 }
 
-/* TOGGLE AVEC ANIMATION */
+/* TOGGLE */
 function toggle(i){
     let c=document.getElementById("c"+i);
     let arrow=document.getElementById("arrow"+i);
@@ -223,7 +220,6 @@ function toggle(i){
 /* BUILD */
 function build(){
 let list=[];
-
 for(let i=0;i<exercices.length;i++){
 list.push({
 nom:document.getElementById("nom"+i).value,
@@ -232,7 +228,6 @@ repos:+document.getElementById("repos"+i).value,
 reps:+document.getElementById("rep"+i).value
 });
 }
-
 return {exercices:list,series:+series.value};
 }
 
