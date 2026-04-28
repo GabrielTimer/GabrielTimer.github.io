@@ -9,7 +9,6 @@
 
 <style>
 
-/* 🔥 CORRECTION LAYOUT PRINCIPALE */
 body{
 display:flex;
 flex-direction:column;
@@ -17,31 +16,26 @@ align-items:center;
 height:auto;
 }
 
-/* CONTENEUR GLOBAL */
 .main{
 width:100%;
 max-width:420px;
 padding:20px 15px 10px;
 }
 
-/* CARD */
 .card{
 margin:0 auto 15px auto;
 }
 
-/* LOGO */
 .logo{
 display:block;
 margin:0 auto 10px;
 }
 
-/* TITRE */
 h2{
 text-align:center;
 margin-bottom:10px;
 }
 
-/* GRID */
 .grid2{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -54,7 +48,6 @@ flex-direction:column;
 gap:4px;
 }
 
-/* INPUT */
 input{
 width:100%;
 padding:10px;
@@ -63,7 +56,6 @@ border:1px solid var(--border);
 background:rgba(255,255,255,0.6);
 }
 
-/* EXERCICES */
 .exoBloc{
 background:rgba(255,255,255,0.5);
 border-radius:16px;
@@ -79,7 +71,6 @@ align-items:center;
 gap:8px;
 }
 
-/* ACTIONS */
 .actions{
 margin-left:auto;
 display:flex;
@@ -107,20 +98,17 @@ width:28px;
 height:28px;
 }
 
-/* CONTENT */
 .exoContent{
 display:none;
 padding:10px;
 }
 
-/* ADD BUTTON */
 .addBtn{
 background:var(--primary);
 color:white;
 margin-top:10px;
 }
 
-/* 🔥 FOOTER FIXÉ PROPREMENT */
 .footer{
 width:100%;
 max-width:420px;
@@ -132,7 +120,6 @@ backdrop-filter:blur(10px);
 border:1px solid var(--border);
 }
 
-/* FOOTER GRID */
 .footerGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -140,7 +127,6 @@ gap:12px;
 margin-bottom:10px;
 }
 
-/* BOUTONS */
 .start{
 background:var(--primary);
 color:white;
@@ -152,7 +138,6 @@ background:rgba(255,255,255,0.6);
 border:1px solid var(--border);
 }
 
-/* UNDO */
 #undoBar{
 position:fixed;
 bottom:20px;
@@ -226,9 +211,192 @@ Exercice supprimé
 <button onclick="undoDelete()">Annuler</button>
 </div>
 
-<!-- 🔥 JS STRICTEMENT IDENTIQUE -->
 <script>
-/* (ton JS inchangé ici) */
+
+/* 🔥 TON JS ORIGINAL COMPLET (remis correctement) */
+
+if(!localStorage.getItem("edit_programme") && !localStorage.getItem("pathologie")){
+    localStorage.removeItem("patho_data");
+}
+
+let exercices = [];
+let lastDeleted = null;
+let undoTimer = null;
+
+function syncInputs(){
+for(let i=0;i<exercices.length;i++){
+exercices[i].nom = document.getElementById("nom"+i).value;
+exercices[i].ex = +document.getElementById("ex"+i).value;
+exercices[i].repos = +document.getElementById("repos"+i).value;
+exercices[i].reps = +document.getElementById("rep"+i).value;
+}
+}
+
+function addExo(data=null){
+syncInputs();
+exercices.push(data || {nom:"Ex "+(exercices.length+1),ex:30,repos:10,reps:10});
+render();
+}
+
+function removeExo(i){
+syncInputs();
+lastDeleted = {exo: JSON.parse(JSON.stringify(exercices[i])),index: i};
+exercices.splice(i,1);
+render();
+showUndo();
+if(navigator.vibrate) navigator.vibrate(30);
+}
+
+function undoDelete(){
+if(!lastDeleted) return;
+exercices.splice(lastDeleted.index,0,lastDeleted.exo);
+lastDeleted = null;
+render();
+hideUndo();
+}
+
+function showUndo(){
+let bar = document.getElementById("undoBar");
+bar.classList.add("show");
+clearTimeout(undoTimer);
+undoTimer = setTimeout(()=>{hideUndo();lastDeleted=null;},4000);
+}
+
+function hideUndo(){
+document.getElementById("undoBar").classList.remove("show");
+}
+
+function moveUp(i){
+if(i===0) return;
+syncInputs();
+[exercices[i-1], exercices[i]] = [exercices[i], exercices[i-1]];
+render();
+}
+
+function moveDown(i){
+if(i===exercices.length-1) return;
+syncInputs();
+[exercices[i+1], exercices[i]] = [exercices[i], exercices[i+1]];
+render();
+}
+
+function duplicateExo(i){
+syncInputs();
+let copy = JSON.parse(JSON.stringify(exercices[i]));
+exercices.splice(i+1,0,copy);
+render();
+}
+
+function render(){
+exo.innerHTML="";
+exercices.forEach((e,i)=>{
+exo.innerHTML+=`
+<div class="exoBloc">
+<div class="exoHeader">
+<span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
+<span onclick="toggle(${i})">Ex ${i+1}</span>
+<div class="actions">
+<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
+<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
+<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
+<button class="deleteBtn" onclick="removeExo(${i})">−</button>
+</div>
+</div>
+
+<div class="exoContent" id="c${i}">
+<div class="grid2">
+<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="${e.nom}"></div>
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
+</div>
+</div>
+</div>`;
+});
+}
+
+function toggle(i){
+let c=document.getElementById("c"+i);
+let a=document.getElementById("arrow"+i);
+if(c.style.display==="block"){c.style.display="none";a.classList.remove("open");}
+else{c.style.display="block";a.classList.add("open");}
+}
+
+function loadPatho(){
+let data = localStorage.getItem("patho_data");
+if(!data) return false;
+
+let p = JSON.parse(data);
+
+if(!p.exercices || p.exercices.length === 0) return false;
+
+exercices = JSON.parse(JSON.stringify(p.exercices));
+series.value = p.series || 1;
+
+render();
+return true;
+}
+
+function updateTitle(){
+let patho = localStorage.getItem("pathologie");
+if(!patho) return;
+
+let name = patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase());
+
+document.getElementById("title").innerText =
+"Configurer la séance - " + name;
+
+document.getElementById("sessionName").value = name;
+}
+
+function build(){
+let list=[];
+for(let i=0;i<exercices.length;i++){
+list.push({
+nom:document.getElementById("nom"+i).value,
+ex:+document.getElementById("ex"+i).value,
+repos:+document.getElementById("repos"+i).value,
+reps:+document.getElementById("rep"+i).value
+});
+}
+return {exercices:list,series:+document.getElementById("series").value};
+}
+
+function saveData(type){
+let list=JSON.parse(localStorage.getItem("programmes")||"[]");
+
+list.push({
+nom:document.getElementById("sessionName").value || "Libre",
+date:new Date().toLocaleDateString(),
+type:type,
+data:build()
+});
+
+localStorage.setItem("programmes",JSON.stringify(list));
+}
+
+function addFavori(){
+saveData("favori");
+alert("Sauvegardé");
+}
+
+function start(){
+saveData("historique");
+localStorage.setItem("programme_temp",JSON.stringify(build()));
+window.location="timer.html";
+}
+
+function home(){
+window.location="index.html";
+}
+
+let isPatho = loadPatho();
+updateTitle();
+
+if(!isPatho){
+addExo();
+}
+
 </script>
 
 </body>
