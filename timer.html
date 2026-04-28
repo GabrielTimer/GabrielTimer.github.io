@@ -6,7 +6,6 @@
 <title>Timer</title>
 
 <style>
-/* (CSS IDENTIQUE — INCHANGÉ) */
 body{
 margin:0;
 background:#1b5e20;
@@ -209,8 +208,6 @@ button:active{transform:scale(0.95);}
 
 <script>
 
-/* JS IDENTIQUE + FIX IMAGE CACHE */
-
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
@@ -330,7 +327,6 @@ img.style.display="block";
 let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
 let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
 
-/* 🔥 FIX FREEZE */
 img.src = urlJpg + "?t=" + Date.now();
 
 img.onerror = function(){
@@ -343,8 +339,67 @@ img.style.display="none";
 }
 }
 
-function next(){ /* inchangé */ }
-function loop(){ /* inchangé */ }
+/* 🔥 FIX ICI */
+function next(){
+let exo=p.exercices[exIndex];
+
+if(phase==="prep"){
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+update();
+return;
+}
+
+if(phase==="ex"){
+phase="repos";
+t=exo.repos;
+totalTimePhase=exo.repos;
+speak("repos");
+update();
+return;
+}
+
+phase="ex";
+t=exo.ex;
+totalTimePhase=exo.ex;
+beep();
+
+repIndex++;
+
+if(repIndex>exo.reps){
+repIndex=1;
+exIndex++;
+if(exIndex>=p.exercices.length){
+exIndex=0;
+serieIndex++;
+}
+}
+
+update();
+}
+
+function loop(){
+if(paused) return;
+
+t--;
+remainingTime = Math.max(0, remainingTime - 1);
+
+if(remainingTime <= 0){
+window.location="fin.html";
+return;
+}
+
+updateTotal();
+
+if(t<=0){
+next();
+}else{
+update();
+}
+}
+
 function back(){window.location="config.html";}
 
 update();
