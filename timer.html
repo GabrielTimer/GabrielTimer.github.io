@@ -49,6 +49,7 @@ height:190px;
 object-fit:contain;
 margin:10px 0 10px 0;
 display:none;
+transition:opacity 0.2s;
 }
 
 .timerZone{
@@ -223,6 +224,9 @@ let soundOn=true;
 let totalSessionTime=0;
 let remainingTime=0;
 
+/* 🔥 AJOUT IMPORTANT */
+let lastImage = "";
+
 let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
@@ -232,7 +236,6 @@ totalSessionTime = 0;
 
 p.exercices.forEach((exo, index)=>{
 for(let r=0; r<exo.reps; r++){
-
 totalSessionTime += exo.ex;
 
 let isLastExo = index === p.exercices.length - 1;
@@ -241,7 +244,6 @@ let isLastRep = r === exo.reps - 1;
 if(!(isLastExo && isLastRep)){
 totalSessionTime += exo.repos;
 }
-
 }
 });
 
@@ -324,14 +326,26 @@ let patho = localStorage.getItem("pathologie");
 if(patho){
 img.style.display="block";
 
-let urlJpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
-let urlPng = "images/"+patho+"/ex"+(exIndex+1)+".png";
+let base = "images/"+patho+"/ex"+(exIndex+1);
+let newSrc = base + ".jpg";
 
-img.src = urlJpg + "?t=" + Date.now();
+/* 🔥 CORRECTION ICI */
+if(newSrc !== lastImage){
+img.style.opacity = 0;
+
+setTimeout(()=>{
+img.src = newSrc + "?t=" + Date.now();
+img.style.opacity = 1;
+},100);
+
+lastImage = newSrc;
+}
 
 img.onerror = function(){
 this.onerror=null;
-this.src = urlPng + "?t=" + Date.now();
+let fallback = base + ".png";
+this.src = fallback + "?t=" + Date.now();
+lastImage = fallback;
 };
 
 }else{
@@ -339,7 +353,6 @@ img.style.display="none";
 }
 }
 
-/* 🔥 FIX ICI */
 function next(){
 let exo=p.exercices[exIndex];
 
