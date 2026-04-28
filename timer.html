@@ -197,7 +197,7 @@ let t=3, totalTimePhase=3;
 let paused=false;
 let soundOn=true;
 
-/* 🔥 NOUVEAU */
+/* 🔥 TEMPS */
 let totalSessionTime=0;
 let remainingTime=0;
 
@@ -206,13 +206,26 @@ let radius=45;
 let circumference=2*Math.PI*radius;
 progressCircle.style.strokeDasharray=circumference;
 
-/* calcul total */
+/* 🔥 CALCUL EXACT */
 function computeTotal(){
-p.exercices.forEach(exo=>{
-totalSessionTime+=(exo.ex+exo.repos)*exo.reps;
+totalSessionTime = 0;
+
+p.exercices.forEach((exo, index)=>{
+for(let r=0; r<exo.reps; r++){
+
+totalSessionTime += exo.ex;
+
+let isLastExo = index === p.exercices.length - 1;
+let isLastRep = r === exo.reps - 1;
+
+if(!(isLastExo && isLastRep)){
+totalSessionTime += exo.repos;
+}
+
+}
 });
-totalSessionTime*=p.series;
-totalSessionTime-=p.exercices[p.exercices.length-1].repos;
+
+totalSessionTime *= p.series;
 
 remainingTime = totalSessionTime;
 }
@@ -345,12 +358,12 @@ serieIndex++;
 update();
 }
 
-/* 🔥 LOOP MODIFIÉ */
+/* 🔥 LOOP */
 function loop(){
 if(paused) return;
 
 t--;
-remainingTime--;
+remainingTime = Math.max(0, remainingTime - 1);
 
 if(remainingTime <= 0){
 window.location="fin.html";
