@@ -26,6 +26,14 @@ margin:auto;
 box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
+/* 🔥 LOGO */
+.logo{
+width:65px;
+display:block;
+margin:0 auto 8px;
+opacity:0.95;
+}
+
 h2{text-align:center;font-weight:600;margin-bottom:10px;}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -71,15 +79,19 @@ display:flex;
 gap:6px;
 }
 
+/* 🔥 FIX ALIGNEMENT */
+.actionBtn, .deleteBtn{
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
 .actionBtn{
 background:#f1f5f9;
 border:1px solid #e2e8f0;
 border-radius:8px;
 width:28px;
 height:28px;
-display:flex;
-align-items:center;
-justify-content:center;
 cursor:pointer;
 }
 
@@ -91,6 +103,8 @@ width:28px;
 height:28px;
 color:white;
 cursor:pointer;
+line-height:1;
+padding:0;
 }
 
 .exoContent{display:none;padding:10px;}
@@ -138,13 +152,11 @@ cursor:pointer;
 font-weight:600;
 }
 
-/* 🔵 PRINCIPAL */
 .start{
 background:#2563eb;
 color:white;
 }
 
-/* ⚪ SECONDAIRES */
 .fav{
 background:#f1f5f9;
 border:1px solid #e2e8f0;
@@ -193,6 +205,9 @@ padding:0;
 
 <div class="main">
 <div class="card">
+
+<!-- 🔥 LOGO AJOUTÉ -->
+<img src="logo.png" class="logo">
 
 <h2 id="title">Configurer la séance</h2>
 
