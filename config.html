@@ -9,46 +9,32 @@
 body{font-family:Arial;background:#f4f4f4;margin:0;height:100vh;display:flex;flex-direction:column;}
 .main{flex:1;overflow-y:auto;padding:10px;}
 .card{background:white;padding:15px;border-radius:15px;max-width:420px;margin:auto;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-h2{font-size:22px;margin-bottom:10px;text-align:center;}
-
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.field{display:flex;flex-direction:column;align-items:center;}
-
-input{width:85%;max-width:140px;padding:8px;border-radius:8px;border:1px solid #ccc;}
+h2{text-align:center;}
 
 .exoBloc{
 background:#f9f9f9;
 margin:10px 0;
 border-radius:10px;
-touch-action: none; /* 🔥 mobile drag */
+transition:0.2s;
+}
+
+.exoBloc.dragging{
+opacity:0.5;
+transform:scale(0.98);
 }
 
 .exoHeader{
 background:#eee;
 padding:12px;
-cursor:grab;
-font-weight:bold;
 display:flex;
 align-items:center;
 gap:8px;
-min-height:44px;
+cursor:grab;
 }
 
-/* pendant drag */
-.dragging{
-opacity:0.5;
-}
+.arrow{transition:0.25s;}
+.arrow.open{transform:rotate(90deg);}
 
-/* FLECHE */
-.arrow{
-display:inline-block;
-transition:transform 0.25s ease;
-}
-.arrow.open{
-transform:rotate(90deg);
-}
-
-/* DELETE */
 .deleteBtn{
 margin-left:auto;
 background:#e53935;
@@ -58,37 +44,12 @@ border-radius:50%;
 width:24px;
 height:24px;
 cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:16px;
-font-weight:bold;
-line-height:1;
-box-shadow:0 1px 3px rgba(0,0,0,0.2);
-transition:0.15s;
-}
-
-.deleteBtn:hover{
-transform:scale(1.15);
-background:#c62828;
-}
-
-.deleteBtn:active{
-transform:scale(0.9);
 }
 
 .exoContent{display:none;padding:10px;}
 
-.addBtn{background:#4caf50;color:white;margin-top:10px;}
+.addBtn{background:#4caf50;color:white;margin-top:10px;width:100%;padding:12px;border:none;border-radius:10px;}
 
-.footer{position:sticky;bottom:10px;background:white;max-width:420px;margin:0 auto 10px auto;padding:12px;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-.footerGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-
-button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-size:17px;cursor:pointer;}
-
-.start{background:#0072ff;color:white;}
-.fav{background:#ffd54f;}
-.home{background:#777;color:white;}
 </style>
 </head>
 
@@ -96,60 +57,35 @@ button{padding:14px;margin:6px 0;border:none;border-radius:12px;width:100%;font-
 
 <div class="main">
 <div class="card">
-
-<h2>Configurer la séance</h2>
-
+<h2>Configurer</h2>
 <div id="exo"></div>
-
-<button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
-
+<button class="addBtn" onclick="addExo()">➕ Ajouter</button>
 </div>
-</div>
-
-<div class="footer">
-<div class="footerGrid">
-<div class="field">
-<label>Séries</label>
-<input id="series" type="number" value="2">
-</div>
-
-<div class="field">
-<label>Nom</label>
-<input id="sessionName">
-</div>
-</div>
-
-<button class="fav" onclick="addFavori()">⭐ Sauvegarder</button>
-<button class="start" onclick="start()">🚀 Lancer</button>
-<button class="home" onclick="home()">🏠 Accueil</button>
 </div>
 
 <script>
 
 let exercices = [];
-let draggedIndex = null;
+let dragIndex = null;
 
 /* SYNC */
 function syncInputs(){
 for(let i=0;i<exercices.length;i++){
 exercices[i].nom = document.getElementById("nom"+i).value;
-exercices[i].ex = +document.getElementById("ex"+i).value;
-exercices[i].repos = +document.getElementById("repos"+i).value;
-exercices[i].reps = +document.getElementById("rep"+i).value;
 }
 }
 
 /* ADD */
-function addExo(data=null){
+function addExo(){
 syncInputs();
-exercices.push(data || {nom:"Ex "+(exercices.length+1),ex:30,repos:10,reps:10});
+exercices.push({nom:"Ex "+(exercices.length+1)});
 render();
 }
 
 /* DELETE */
-function removeExo(index){
+function removeExo(i){
 syncInputs();
-exercices.splice(index,1);
+exercices.splice(i,1);
 render();
 }
 
@@ -160,27 +96,21 @@ exo.innerHTML="";
 exercices.forEach((e,i)=>{
 exo.innerHTML+=`
 <div class="exoBloc" 
-ontouchstart="startDrag(${i}, event)" 
-ontouchmove="moveDrag(${i}, event)" 
-ontouchend="endDrag()">
+onmousedown="startDrag(${i})" 
+onmouseup="endDrag(${i})"
+ontouchstart="startDrag(${i})"
+ontouchend="endDrag(${i})">
 
 <div class="exoHeader" onclick="toggle(${i})">
 <span id="arrow${i}" class="arrow">▶</span>
-Ex ${i+1}
-
+<input id="nom${i}" value="${e.nom}">
 <button class="deleteBtn" onclick="event.stopPropagation(); removeExo(${i})">−</button>
 </div>
 
 <div class="exoContent" id="c${i}">
-<div class="grid2">
-
-<div class="field"><label>🏷 Nom</label><input id="nom${i}" value="${e.nom}"></div>
-<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
-<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
-<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
-
+Contenu
 </div>
-</div>
+
 </div>`;
 });
 }
@@ -188,116 +118,36 @@ Ex ${i+1}
 /* TOGGLE */
 function toggle(i){
 let c=document.getElementById("c"+i);
-let arrow=document.getElementById("arrow"+i);
+let a=document.getElementById("arrow"+i);
 
 if(c.style.display==="block"){
 c.style.display="none";
-arrow.classList.remove("open");
+a.classList.remove("open");
 }else{
 c.style.display="block";
-arrow.classList.add("open");
+a.classList.add("open");
 }
 }
 
-/* DRAG TOUCH */
-function startDrag(i,e){
-draggedIndex=i;
+/* DRAG SIMPLE */
+function startDrag(i){
+dragIndex=i;
 }
 
-function moveDrag(i,e){
-if(draggedIndex===null) return;
+function endDrag(i){
+if(dragIndex===null || dragIndex===i) return;
 
-let touch=e.touches[0];
-let element=document.elementFromPoint(touch.clientX,touch.clientY);
-
-let target=[...document.querySelectorAll(".exoBloc")].findIndex(el=>el===element.closest(".exoBloc"));
-
-if(target>=0 && target!==draggedIndex){
 syncInputs();
-let moved = exercices.splice(draggedIndex,1)[0];
-exercices.splice(target,0,moved);
-draggedIndex=target;
+
+let moved = exercices.splice(dragIndex,1)[0];
+exercices.splice(i,0,moved);
+
+dragIndex=null;
 render();
-}
-}
-
-function endDrag(){
-draggedIndex=null;
-}
-
-/* BUILD */
-function build(){
-let list=[];
-for(let i=0;i<exercices.length;i++){
-list.push({
-nom:document.getElementById("nom"+i).value,
-ex:+document.getElementById("ex"+i).value,
-repos:+document.getElementById("repos"+i).value,
-reps:+document.getElementById("rep"+i).value
-});
-}
-return {exercices:list,series:+series.value};
-}
-
-/* SAVE */
-function saveData(type){
-let list=JSON.parse(localStorage.getItem("programmes")||"[]");
-
-let editData = localStorage.getItem("edit_programme");
-if(editData){
-let old = JSON.parse(editData);
-list = list.filter(p => JSON.stringify(p) !== JSON.stringify(old));
-localStorage.removeItem("edit_programme");
-}
-
-list.push({
-nom:sessionName.value || "Libre",
-date:new Date().toLocaleDateString(),
-type:type,
-data:build()
-});
-
-localStorage.setItem("programmes",JSON.stringify(list));
-}
-
-function addFavori(){saveData("favori");alert("Sauvegardé");}
-function start(){saveData("historique");localStorage.setItem("programme_temp",JSON.stringify(build()));window.location="timer.html";}
-function home(){window.location="index.html";}
-
-/* LOAD */
-function loadEdit(){
-let data = localStorage.getItem("edit_programme");
-if(!data) return false;
-let p = JSON.parse(data);
-sessionName.value = p.nom;
-series.value = p.data.series;
-exercices = p.data.exercices;
-render();
-return true;
-}
-
-function loadPatho(){
-let data = localStorage.getItem("patho_data");
-if(!data) return false;
-let p = JSON.parse(data);
-series.value = p.series;
-exercices = p.exercices;
-render();
-return true;
-}
-
-function setDefaultName(){
-let patho = localStorage.getItem("pathologie");
-sessionName.value = patho ? patho.replaceAll("_"," ").replace(/\b\w/g,l=>l.toUpperCase()) : "Libre";
 }
 
 /* INIT */
-let isEdit = loadEdit();
-if(!isEdit){
-let isPatho = loadPatho();
-if(!isPatho) addExo();
-}
-if(!isEdit) setDefaultName();
+addExo();
 
 </script>
 </body>
