@@ -486,7 +486,27 @@ alert("Sauvegardé");
 }
 
 function start(){
-localStorage.setItem("programme_temp",JSON.stringify(build()));
+
+let all = JSON.parse(localStorage.getItem("programmes") || "[]");
+
+let programme = {
+type: "historique",
+nom: document.getElementById("sessionName").value,
+date: new Date().toLocaleString(),
+data: build()
+};
+
+// 🔥 ajouter en premier
+all.unshift(programme);
+
+// 🔥 garder seulement 30 historiques
+let historiques = all.filter(p => p.type === "historique").slice(0,30);
+let autres = all.filter(p => p.type !== "historique");
+
+localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
+
+// 🔥 lancement normal
+localStorage.setItem("programme_temp", JSON.stringify(programme.data));
 window.location="timer.html";
 }
 
