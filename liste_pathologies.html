@@ -91,7 +91,7 @@ background:#ccc;
 const PATHO_DATA = {
 
 lombalgie_1:{
-series:2,
+series:1,
 exercices:[
 {nom:"Étirement de prière", ex:30, repos:10, reps:3},
 {nom:"Chat Chien Étirement", ex:5, repos:5, reps:10},
@@ -105,7 +105,7 @@ exercices:[
 },
 
 tendinite_coiffe:{
-series:2,
+series:1,
 exercices:[
 {nom:"Écarter les bras", ex:10, repos:5, reps:10},
 {nom:"Taper des mains", ex:10, repos:5, reps:10},
@@ -116,13 +116,28 @@ exercices:[
 {nom:"Lever le coude", ex:10, repos:5, reps:10},
 {nom:"Rapprocher les omoplates", ex:10, repos:5, reps:10}
 ]
+},
+
+"nevralgie_cervico_brachiale": {
+nom: "Névralgie cervico-brachiale",
+series: 1,
+exercices: [
+
+{nom:"Inclinaison latérale assistée", ex:30, repos:10, reps:3},
+{nom:"Rotation + main épaule", ex:30, repos:10, reps:3},
+{nom:"Extension cervicale", ex:30, repos:10, reps:3},
+{nom:"Neuro C6", ex:20, repos:10, reps:10},
+]
 }
 
 };
 
 /* CONFIG AFFICHAGE */
 const data = {
-epaule:[{nom:"Tendinite coiffe", dossier:"tendinite_coiffe"}],
+epaule:[
+{nom:"Tendinite coiffe", dossier:"tendinite_coiffe"},
+{nom:"Névralgie cervico-brachiale", dossier:"nevralgie_cervico_brachiale"}
+],
 dos:[{nom:"Lombalgie 1", dossier:"lombalgie_1"}]
 };
 
