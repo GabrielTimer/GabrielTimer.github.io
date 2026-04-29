@@ -53,11 +53,18 @@ border-radius:12px;
 display:flex;
 justify-content:space-between;
 align-items:center;
+gap:10px;
 }
 
-h3{margin:0;font-size:16px;}
+/* 🔥 TEXTE QUI S'ADAPTE */
+h3{
+margin:0;
+font-size:16px;
+flex:1;
+min-width:0;
+}
 
-/* 🔥 BOUTON UNIFIÉ */
+/* 🔥 BOUTON FIXE IDENTIQUE */
 .actionBtn{
 background:#1976d2;
 color:white;
@@ -68,6 +75,11 @@ font-weight:bold;
 cursor:pointer;
 font-size:13px;
 transition:0.2s;
+
+/* 🔥 IMPORTANT */
+width:80px;
+text-align:center;
+flex-shrink:0;
 }
 
 .actionBtn:hover{
@@ -79,6 +91,7 @@ background:#1565c0;
 transform:scale(0.95);
 }
 
+/* bouton retour */
 button{
 margin-top:20px;
 padding:14px 20px;
