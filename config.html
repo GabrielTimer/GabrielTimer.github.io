@@ -460,7 +460,21 @@ return {exercices:list,series:+document.getElementById("series").value};
 }
 
 function addFavori(){
+
+let favoris = JSON.parse(localStorage.getItem("favoris") || "[]");
+
+let programme = build();
+
+/* éviter doublons */
+let exists = favoris.some(f => JSON.stringify(f) === JSON.stringify(programme));
+
+if(!exists){
+favoris.push(programme);
+localStorage.setItem("favoris", JSON.stringify(favoris));
+}
+
 alert("Sauvegardé");
+
 }
 
 function start(){
