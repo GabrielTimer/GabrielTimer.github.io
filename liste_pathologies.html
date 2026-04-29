@@ -245,7 +245,8 @@ exercices:[{nom:"Ex 1", ex:30, repos:10, reps:3}]
 }
 
 localStorage.setItem("patho_data",JSON.stringify(config));
-localStorage.setItem("pathologie",p.dossier);
+localStorage.setItem("pathologie", p.dossier);
+localStorage.setItem("pathologie_nom", p.nom);
 
 window.location="config.html?v="+Date.now();
 };
