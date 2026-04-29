@@ -52,27 +52,41 @@ padding:12px;
 border-radius:12px;
 }
 
+/* 🔥 animation bouton */
+@keyframes pulseBtn{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
 /* bouton */
 button{
 margin-top:20px;
 padding:16px 24px;
 border:none;
 border-radius:12px;
-background:#00e5ff;
-color:#111;
+background:#1976d2;
+color:white;
 font-size:18px;
 font-weight:bold;
 cursor:pointer;
 transition:0.2s;
+
+/* 🔥 effet premium */
+box-shadow:0 6px 18px rgba(0,0,0,0.25);
+
+/* 🔥 animation douce */
+animation:pulseBtn 2.5s infinite;
 }
 
-button:hover{transform:scale(1.1);}
-button:active{transform:scale(0.95);}
+button:hover{
+transform:scale(1.1);
+background:#1565c0;
+animation:none;
+}
 
-/* animation */
-@keyframes pop{
-0%{transform:scale(0.5);opacity:0;}
-100%{transform:scale(1);opacity:1;}
+button:active{
+transform:scale(0.95);
 }
 
 .emoji{
@@ -137,14 +151,12 @@ if(prog){
 series = prog.series || 1;
 exCount = prog.exercices.length;
 
-/* recalcul rapide durée */
 prog.exercices.forEach(ex=>{
 totalTime += (ex.ex + ex.repos) * ex.reps;
 });
 totalTime *= series;
 }
 
-/* format temps */
 function formatTime(s){
 let m=Math.floor(s/60);
 return m+" min "+(s%60)+" s";
@@ -168,10 +180,8 @@ return m+" min "+(s%60)+" s";
 </div>
 
 <script>
-/* inject message */
 document.getElementById("msg").innerText = randomMessage;
 
-/* inject stats */
 document.getElementById("stats").innerHTML =
 "⏱ "+formatTime(totalTime)+"<br>" +
 "🏋️ "+exCount+" exercices<br>" +
