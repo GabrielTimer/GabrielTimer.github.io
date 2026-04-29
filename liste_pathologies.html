@@ -57,14 +57,26 @@ align-items:center;
 
 h3{margin:0;font-size:16px;}
 
-.pdfBtn{
-background:#00e5ff;
+/* 🔥 BOUTON UNIFIÉ */
+.actionBtn{
+background:#1976d2;
+color:white;
 border:none;
-padding:6px 10px;
+padding:8px 12px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
-font-size:12px;
+font-size:13px;
+transition:0.2s;
+}
+
+.actionBtn:hover{
+transform:scale(1.05);
+background:#1565c0;
+}
+
+.actionBtn:active{
+transform:scale(0.95);
 }
 
 button{
@@ -118,32 +130,28 @@ exercices:[
 ]
 },
 
-"nevralgie_cervico_brachiale": {
-nom: "Névralgie cervico-brachiale",
-series: 1,
-exercices: [
-
+"nevralgie_cervico_brachiale":{
+series:1,
+exercices:[
 {nom:"Inclinaison latérale assistée", ex:30, repos:10, reps:3},
 {nom:"Rotation + main épaule", ex:30, repos:10, reps:3},
 {nom:"Extension cervicale", ex:30, repos:10, reps:3},
 {nom:"Neuro C6", ex:20, repos:10, reps:10},
 {nom:"Neuro C7", ex:20, repos:10, reps:10},
-{nom:"Neuro C8", ex:20, repos:10, reps:10},
+{nom:"Neuro C8", ex:20, repos:10, reps:10}
 ]
 },
 
 "capsulite":{
 series:2,
 exercices:[
-
 {nom:"Pendulaire", ex:30, repos:10, reps:3},
 {nom:"Flexion assistée", ex:30, repos:10, reps:3},
 {nom:"Abduction assistée", ex:30, repos:10, reps:3},
 {nom:"Rotation externe coude au corps", ex:30, repos:10, reps:3},
-{nom:"Montée murale", ex:30, repos:10, reps:3},
-
+{nom:"Montée murale", ex:30, repos:10, reps:3}
 ]
-},
+}
 
 };
 
@@ -154,7 +162,9 @@ epaule:[
 {nom:"Névralgie cervico-brachiale", dossier:"nevralgie_cervico_brachiale"},
 {nom:"Capsulite Rétractile", dossier:"capsulite"}
 ],
-dos:[{nom:"Lombalgie 1", dossier:"lombalgie_1"}]
+dos:[
+{nom:"Lombalgie 1", dossier:"lombalgie_1"}
+]
 };
 
 let zone = localStorage.getItem("zone");
@@ -171,11 +181,11 @@ let div=document.createElement("div");
 div.className="card";
 
 let img=document.createElement("img");
-img.src = "images/" + p.dossier + "/cover.png?v=" + Date.now();
+img.src="images/"+p.dossier+"/cover.png?v="+Date.now();
 
-img.onerror = function(){
-this.onerror = null;
-this.src = "images/" + p.dossier + "/cover.jpg?v=" + Date.now();
+img.onerror=function(){
+this.onerror=null;
+this.src="images/"+p.dossier+"/cover.jpg?v="+Date.now();
 };
 
 let info=document.createElement("div");
@@ -188,7 +198,7 @@ let title=document.createElement("h3");
 title.innerText=p.nom;
 
 let btn=document.createElement("button");
-btn.className="pdfBtn";
+btn.className="actionBtn";
 btn.innerText="🖨️ PDF";
 
 btn.onclick=(e)=>{
@@ -200,24 +210,21 @@ row.appendChild(title);
 row.appendChild(btn);
 info.appendChild(row);
 
-/* 🔥 CLICK */
+/* CLICK */
 div.onclick=()=>{
-
 localStorage.removeItem("edit_programme");
 
-let config = PATHO_DATA[p.dossier];
+let config=PATHO_DATA[p.dossier];
 
 if(!config){
 config={
 series:2,
-exercices:[
-{nom:"Ex 1", ex:30, repos:10, reps:3}
-]
+exercices:[{nom:"Ex 1", ex:30, repos:10, reps:3}]
 };
 }
 
-localStorage.setItem("patho_data", JSON.stringify(config));
-localStorage.setItem("pathologie", p.dossier);
+localStorage.setItem("patho_data",JSON.stringify(config));
+localStorage.setItem("pathologie",p.dossier);
 
 window.location="config.html?v="+Date.now();
 };
