@@ -488,13 +488,41 @@ date: new Date().toLocaleDateString(),
 data: build()
 };
 
-/* éviter doublons */
+// 🔥 on vérifie si on vient d’un mode édition
+let editIndex = localStorage.getItem("edit_index");
+
+if(editIndex !== null){
+
+// récupérer les favoris uniquement
+let favs = all.filter(p => p.type === "favori");
+let target = favs[editIndex];
+
+// retrouver l'index réel dans "all"
+let realIndex = all.findIndex(p =>
+JSON.stringify(p) === JSON.stringify(target)
+);
+
+// remplacer
+if(realIndex !== -1){
+all[realIndex] = programme;
+}
+
+// nettoyage
+localStorage.removeItem("edit_index");
+
+}else{
+
+// ajout normal (sans doublon)
 let exists = all.some(p => JSON.stringify(p.data) === JSON.stringify(programme.data));
 
 if(!exists){
 all.push(programme);
-localStorage.setItem("programmes", JSON.stringify(all));
 }
+
+}
+
+// sauvegarde finale
+localStorage.setItem("programmes", JSON.stringify(all));
 
 alert("Sauvegardé");
 

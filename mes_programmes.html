@@ -153,6 +153,7 @@ edit.innerHTML="✏️";
 edit.onclick=(e)=>{
 e.stopPropagation();
 localStorage.setItem("edit_programme", JSON.stringify(p.data || p));
+localStorage.setItem("edit_index", index); // 🔥 AJOUT
 window.location="config.html?edit=1";
 };
 
