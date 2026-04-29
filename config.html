@@ -464,20 +464,26 @@ series:+document.getElementById("series").value
 }
 function addFavori(){
 
-let favoris = JSON.parse(localStorage.getItem("favoris") || "[]");
+let all = JSON.parse(localStorage.getItem("programmes") || "[]");
 
-let programme = build();
+let programme = {
+type: "favori",
+nom: document.getElementById("sessionName").value,
+date: new Date().toLocaleDateString(),
+data: build()
+};
 
 /* éviter doublons */
-let exists = favoris.some(f => JSON.stringify(f) === JSON.stringify(programme));
+let exists = all.some(p => JSON.stringify(p.data) === JSON.stringify(programme.data));
 
 if(!exists){
-favoris.push(programme);
-localStorage.setItem("favoris", JSON.stringify(favoris));
+all.push(programme);
+localStorage.setItem("programmes", JSON.stringify(all));
 }
 
 alert("Sauvegardé");
 
+}
 }
 
 function start(){
