@@ -146,7 +146,7 @@ background:#ccc;
 <script>
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
-list = list.filter(p=>p.type==="historique");
+list = list.filter(p=>p.type==="historique").slice(0,30); // 🔥 LIMITE 30
 
 let container=document.getElementById("list");
 
