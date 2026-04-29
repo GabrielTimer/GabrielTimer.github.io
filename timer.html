@@ -132,9 +132,10 @@ text-align:center;
 opacity:0.8;
 }
 
+/* 🔥 FIX GRID POUR 3 BOUTONS */
 .buttons{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1fr 1fr 1fr;
 gap:8px;
 }
 
@@ -198,7 +199,8 @@ button:active{transform:scale(0.95);}
 
 <div class="buttons">
 <button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
-<button onclick="back()">⚙️ Réglages</button>
+<button onclick="skipExo()">⏭</button>
+<button onclick="back()">⚙️</button>
 </div>
 
 </div>
@@ -207,6 +209,8 @@ button:active{transform:scale(0.95);}
 </div>
 
 <script>
+
+/* ===== CODE ORIGINAL INTACT ===== */
 
 let p = JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
@@ -347,6 +351,67 @@ lastImage = png;
 img.style.display="none";
 }
 }
+
+/* ===== AJOUTS SAFE ===== */
+
+function recomputeRemainingTime(){
+
+let time = 0;
+
+for(let s = serieIndex - 1; s < p.series; s++){
+
+for(let e = (s === serieIndex - 1 ? exIndex : 0); e < p.exercices.length; e++){
+
+let exo = p.exercices[e];
+
+let startRep = (s === serieIndex - 1 && e === exIndex) ? repIndex : 1;
+
+for(let r = startRep; r <= exo.reps; r++){
+
+time += exo.ex;
+
+let isLastSerie = s === p.series - 1;
+let isLastExo = e === p.exercices.length - 1;
+let isLastRep = r === exo.reps;
+
+if(!(isLastSerie && isLastExo && isLastRep)){
+time += exo.repos;
+}
+
+}
+
+}
+
+}
+
+remainingTime = time + t;
+updateTotal();
+}
+
+function skipExo(){
+
+repIndex = 1;
+exIndex++;
+
+if(exIndex >= p.exercices.length){
+exIndex = 0;
+serieIndex++;
+}
+
+if(serieIndex > p.series){
+window.location="fin.html";
+return;
+}
+
+phase = "ex";
+t = p.exercices[exIndex].ex;
+totalTimePhase = t;
+
+recomputeRemainingTime();
+update();
+}
+
+/* ===== ORIGINAL ===== */
 
 function next(){
 let exo=p.exercices[exIndex];
