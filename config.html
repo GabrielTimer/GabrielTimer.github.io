@@ -6,8 +6,6 @@
 <title>Configuration</title>
 
 <style>
-/* TON CSS INTACT */
-
 body{
 font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 background:#f1f5f9;
@@ -57,7 +55,6 @@ border:1px solid #e2e8f0;
 background:#f8fafc;
 }
 
-/* FIX MOBILE */
 @media (max-width:480px){
 .grid3{gap:6px;}
 .grid3 .field{width:100%;}
@@ -65,20 +62,29 @@ background:#f8fafc;
 .field label{font-size:13px;}
 }
 
-/* 🔥 TRIANGLE AMÉLIORÉ */
+/* 🔵 TRIANGLE */
 .arrow{
 transition:0.25s;
 font-size:18px;
 color:#2563eb;
 cursor:pointer;
 }
+.arrow.open{transform:rotate(90deg);}
 
-.arrow.open{
-transform:rotate(90deg);
-color:#1d4ed8;
+.exoBloc{
+background:#f8fafc;
+margin:10px 0;
+border-radius:12px;
+border:1px solid #e2e8f0;
 }
 
-/* reste inchangé */
+.exoHeader{
+padding:12px;
+display:flex;
+align-items:center;
+gap:8px;
+min-height:44px;
+}
 
 .actions{
 margin-left:auto;
@@ -230,8 +236,6 @@ padding:0;
 
 <body>
 
-<!-- HTML identique -->
-
 <div class="main">
 <div class="card">
 
@@ -272,53 +276,171 @@ Exercice supprimé
 
 <script>
 
-/* TON JS ORIGINAL + FIX toggle uniquement */
+let exercices = [];
+let lastDeleted = null;
+let undoTimer = null;
 
+window.addEventListener("DOMContentLoaded", ()=>{
+let pathoData = localStorage.getItem("patho_data");
+let patho = localStorage.getItem("pathologie");
+
+if(pathoData){
+let data = JSON.parse(pathoData);
+
+exercices = data.exercices || [];
+document.getElementById("series").value = data.series || 1;
+
+if(patho){
+document.getElementById("sessionName").value = patho;
+document.getElementById("title").innerText = patho;
+}
+}else{
+addExo();
+}
+
+render();
+});
+
+function syncInputs(){
+for(let i=0;i<exercices.length;i++){
+let input = document.getElementById("nom"+i);
+if(input && input.value.trim() !== ""){
+exercices[i].nom = input.value;
+}
+exercices[i].ex = +document.getElementById("ex"+i).value;
+exercices[i].repos = +document.getElementById("repos"+i).value;
+exercices[i].reps = +document.getElementById("rep"+i).value;
+}
+}
+
+function addExo(data=null){
+syncInputs();
+exercices.push(data || {nom:"Ex "+(exercices.length+1),ex:30,repos:10,reps:10});
+render();
+}
+
+function removeExo(i){
+syncInputs();
+lastDeleted = {exo: JSON.parse(JSON.stringify(exercices[i])),index: i};
+exercices.splice(i,1);
+render();
+if(navigator.vibrate) navigator.vibrate(30);
+}
+
+function render(){
+exo.innerHTML="";
+exercices.forEach((e,i)=>{
+
+let title = e.nom || "Ex "+(i+1);
+
+exo.innerHTML+=`
+<div class="exoBloc" id="exoBloc${i}">
+<div class="exoHeader">
+<span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
+<span onclick="toggle(${i})" id="title${i}">${title}</span>
+
+<div class="actions">
+<button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
+<button class="actionBtn" onclick="moveDown(${i})">⬇️</button>
+<button class="actionBtn" onclick="duplicateExo(${i})">📄</button>
+<button class="deleteBtn" onclick="removeExo(${i})">🗑️</button>
+</div>
+</div>
+
+<div class="exoContent" id="c${i}">
+<input class="exoNameInput" id="nom${i}" value="${e.nom}">
+
+<div class="grid3">
+<div class="field"><label>⏱ Exercice</label><input id="ex${i}" value="${e.ex}"></div>
+<div class="field"><label>😌 Repos</label><input id="repos${i}" value="${e.repos}"></div>
+<div class="field"><label>🔁 Répétitions</label><input id="rep${i}" value="${e.reps}"></div>
+</div>
+</div>
+</div>`;
+});
+}
+
+/* 🔥 toggle SAFE */
 function toggle(i){
 
-let c = document.getElementById("c"+i);
-let a = document.getElementById("arrow"+i);
-let bloc = document.getElementById("exoBloc"+i);
+let c=document.getElementById("c"+i);
+let a=document.getElementById("arrow"+i);
+let bloc=document.getElementById("exoBloc"+i);
 
 if(!c) return;
 
-/* fermer les autres proprement */
-document.querySelectorAll(".exoContent").forEach((el, index)=>{
-if(index !== i && el.style.display === "block"){
-
-el.style.display = "none";
-
-let arrow = document.getElementById("arrow"+index);
-let bloc2 = document.getElementById("exoBloc"+index);
-
-if(arrow) arrow.classList.remove("open");
-if(bloc2) bloc2.classList.remove("open");
-
-/* sauvegarde nom */
-let input = document.getElementById("nom"+index);
-if(input && input.value.trim() !== ""){
-let title = document.getElementById("title"+index);
-if(title) title.innerText = input.value;
-exercices[index].nom = input.value;
+/* fermer les autres */
+for(let j=0;j<exercices.length;j++){
+if(j!==i){
+let c2=document.getElementById("c"+j);
+if(c2 && c2.style.display==="block"){
+c2.style.display="none";
+let a2=document.getElementById("arrow"+j);
+let b2=document.getElementById("exoBloc"+j);
+if(a2) a2.classList.remove("open");
+if(b2) b2.classList.remove("open");
+}
+}
 }
 
-}
-});
-
-/* toggle normal */
-if(c.style.display === "block"){
-c.style.display = "none";
+if(c.style.display==="block"){
+c.style.display="none";
 a.classList.remove("open");
 bloc.classList.remove("open");
 }else{
-c.style.display = "block";
+c.style.display="block";
 a.classList.add("open");
 bloc.classList.add("open");
 }
+}
 
+function moveUp(i){
+if(i===0) return;
+syncInputs();
+[exercices[i-1], exercices[i]] = [exercices[i], exercices[i-1]];
+render();
+}
+
+function moveDown(i){
+if(i===exercices.length-1) return;
+syncInputs();
+[exercices[i+1], exercices[i]] = [exercices[i], exercices[i+1]];
+render();
+}
+
+function duplicateExo(i){
+syncInputs();
+let copy = JSON.parse(JSON.stringify(exercices[i]));
+exercices.splice(i+1,0,copy);
+render();
+}
+
+function build(){
+let list=[];
+for(let i=0;i<exercices.length;i++){
+list.push({
+nom:exercices[i].nom,
+ex:+document.getElementById("ex"+i).value,
+repos:+document.getElementById("repos"+i).value,
+reps:+document.getElementById("rep"+i).value
+});
+}
+return {exercices:list,series:+document.getElementById("series").value};
+}
+
+function addFavori(){
+alert("Sauvegardé");
+}
+
+function start(){
+localStorage.setItem("programme_temp",JSON.stringify(build()));
+window.location="timer.html";
+}
+
+function home(){
+window.location="index.html";
 }
 
 </script>
-
 </body>
 </html>
