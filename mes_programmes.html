@@ -105,7 +105,6 @@ border:none;
 border-radius:12px;
 background:#ccc;
 }
-
 </style>
 </head>
 
@@ -140,7 +139,7 @@ left.className="left";
 left.innerHTML=`
 <div class="fav">⭐ Favori</div>
 <div class="title">${getName(p)}</div>
-<div class="date">${p.date}</div>
+<div class="date">${p.date || ""}</div>
 `;
 
 /* ACTIONS */
@@ -153,7 +152,7 @@ edit.className="iconBtn edit";
 edit.innerHTML="✏️";
 edit.onclick=(e)=>{
 e.stopPropagation();
-localStorage.setItem("edit_programme", JSON.stringify(p));
+localStorage.setItem("edit_programme", JSON.stringify(p.data || p));
 window.location="config.html?edit=1";
 };
 
@@ -164,13 +163,10 @@ dup.innerHTML="📄";
 dup.onclick=(e)=>{
 e.stopPropagation();
 
-/* copier programme */
-let copy = JSON.parse(JSON.stringify(p));
-
-/* renommer */
+let base = p.data || p;
+let copy = JSON.parse(JSON.stringify(base));
 copy.nom = getName(p) + " (copie)";
 
-/* envoyer vers config */
 localStorage.setItem("edit_programme", JSON.stringify(copy));
 window.location="config.html?edit=1";
 };
@@ -193,7 +189,7 @@ div.appendChild(actions);
 
 /* CLICK → lancer */
 div.onclick=()=>{
-localStorage.setItem("programme_temp",JSON.stringify(p.data));
+localStorage.setItem("programme_temp", JSON.stringify(p.data || p));
 window.location="timer.html";
 };
 
