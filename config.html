@@ -320,17 +320,18 @@ return;
 }
 let pathoData = localStorage.getItem("patho_data");
 let patho = localStorage.getItem("pathologie");
+let pathoNom = localStorage.getItem("pathologie_nom");
 
 if(patho){
 
-// 👉 MODE PATHO (inchangé)
 let data = JSON.parse(pathoData || "{}");
 
 exercices = data.exercices || [];
 document.getElementById("series").value = data.series || 1;
 
-document.getElementById("sessionName").value = patho;
-document.getElementById("title").innerText = patho;
+/* 🔥 UTILISE LE NOM PROPRE */
+document.getElementById("sessionName").value = pathoNom || patho;
+document.getElementById("title").innerText = pathoNom || patho;
 
 }else{
 
