@@ -55,11 +55,29 @@ border:1px solid #e2e8f0;
 background:#f8fafc;
 }
 
+/* 🔥 FIX MOBILE (SEUL AJOUT) */
 @media (max-width:480px){
-.grid3{gap:6px;}
-.grid3 .field{width:100%;}
-.grid3 input{width:100%;padding:8px;}
-.field label{font-size:13px;}
+
+.grid3{
+gap:5px;
+}
+
+.grid3 > .field{
+min-width:0;
+}
+
+.grid3 input{
+width:100%;
+padding:6px;
+font-size:14px;
+box-sizing:border-box;
+}
+
+.field label{
+font-size:12px;
+line-height:1.1;
+}
+
 }
 
 /* 🔵 TRIANGLE */
@@ -236,6 +254,8 @@ padding:0;
 
 <body>
 
+<!-- 🔒 HTML IDENTIQUE -->
+
 <div class="main">
 <div class="card">
 
@@ -275,6 +295,8 @@ Exercice supprimé
 </div>
 
 <script>
+
+/* 🔒 JS STRICTEMENT IDENTIQUE */
 
 let exercices = [];
 let lastDeleted = null;
@@ -369,7 +391,6 @@ let bloc=document.getElementById("exoBloc"+i);
 
 if(!c) return;
 
-/* fermer les autres */
 for(let j=0;j<exercices.length;j++){
 if(j!==i){
 let c2=document.getElementById("c"+j);
