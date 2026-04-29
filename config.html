@@ -303,6 +303,21 @@ let lastDeleted = null;
 let undoTimer = null;
 
 window.addEventListener("DOMContentLoaded", ()=>{
+let edit = localStorage.getItem("edit_programme");
+
+if(edit){
+let data = JSON.parse(edit);
+
+exercices = data.exercices || [];
+document.getElementById("series").value = data.series || 1;
+
+document.getElementById("sessionName").value = data.nom || "Séance";
+document.getElementById("title").innerText = data.nom || "Modifier";
+
+localStorage.removeItem("edit_programme"); // 🔥 évite bug retour
+render();
+return;
+}
 let pathoData = localStorage.getItem("patho_data");
 let patho = localStorage.getItem("pathologie");
 
