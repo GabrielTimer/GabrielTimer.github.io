@@ -8,8 +8,8 @@
 <style>
 body{
 margin:0;
-background:#1b5e20;
-color:white;
+background:#f1f5f9;
+color:#0f172a;
 font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 height:100dvh;
 overflow:hidden;
@@ -306,17 +306,17 @@ function update(){
 let progress = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * progress;
 
-/* 🎨 COULEURS CORRIGÉES SANS BUG */
+/* 🎨 VERSION COHÉRENTE AVEC TON SITE */
 if(phase==="prep"){
-    document.body.style.background="#ffffff";
-    document.body.style.color="#000000";
+    document.body.style.background="#f1f5f9";
+    document.body.style.color="#0f172a";
 }
 if(phase==="ex"){
-    document.body.style.background="#b71c1c";
+    document.body.style.background="#ef4444";
     document.body.style.color="#ffffff";
 }
 if(phase==="repos"){
-    document.body.style.background="#0d47a1";
+    document.body.style.background="#2563eb";
     document.body.style.color="#ffffff";
 }
 
