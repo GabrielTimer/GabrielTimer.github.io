@@ -6,6 +6,7 @@
 <title>Gabriel Timer</title>
 
 <link rel="stylesheet" href="style.css?v=1">
+<link rel="manifest" href="manifest.json">
 
 </head>
 
@@ -35,6 +36,13 @@ window.location="config.html";
 
 function zones(){
 window.location="pathologies.html";
+}
+</script>
+
+<!-- Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
 }
 </script>
 
