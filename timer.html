@@ -306,9 +306,19 @@ function update(){
 let progress = 1 - (t / totalTimePhase);
 progressCircle.style.strokeDashoffset = circumference * progress;
 
-if(phase==="prep") document.body.style.background="#1b5e20";
-if(phase==="ex") document.body.style.background="#b71c1c";
-if(phase==="repos") document.body.style.background="#0d47a1";
+/* 🎨 COULEURS CORRIGÉES SANS BUG */
+if(phase==="prep"){
+    document.body.style.background="#ffffff";
+    document.body.style.color="#000000";
+}
+if(phase==="ex"){
+    document.body.style.background="#b71c1c";
+    document.body.style.color="#ffffff";
+}
+if(phase==="repos"){
+    document.body.style.background="#0d47a1";
+    document.body.style.color="#ffffff";
+}
 
 timerValue.innerText=t;
 
@@ -351,7 +361,6 @@ lastImage = png;
 img.style.display="none";
 }
 }
-
 /* ===== AJOUTS SAFE ===== */
 
 function recomputeRemainingTime(){
