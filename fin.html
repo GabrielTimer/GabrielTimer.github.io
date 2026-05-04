@@ -42,7 +42,6 @@ opacity:0.9;
 margin-top:10px;
 }
 
-/* résumé */
 .stats{
 margin-top:15px;
 font-size:18px;
@@ -52,7 +51,6 @@ padding:12px;
 border-radius:12px;
 }
 
-/* bouton */
 @keyframes pulseBtn{
 0%{transform:scale(1);}
 50%{transform:scale(1.06);}
@@ -95,7 +93,6 @@ animation:pulse 1s infinite;
 100%{transform:scale(1);}
 }
 
-/* confettis */
 .confetti{
 position:absolute;
 width:8px;
@@ -118,9 +115,10 @@ text-align:center;
 
 #evaImg{
 width:90px;
+height:90px; /* 🔥 fixe taille */
+object-fit:contain;
 margin:10px auto;
 display:block;
-transition:0.2s;
 }
 
 #evaSlider{
@@ -198,7 +196,7 @@ return m+" min "+(s%60)+" s";
 
 <h3>Avez-vous ressenti des douleurs pendant la séance ?</h3>
 
-<img id="evaImg" src="images/eva/0.png">
+<img id="evaImg" src="./images/eva/0.png">
 
 <input type="range" min="0" max="10" value="0" id="evaSlider">
 
@@ -218,6 +216,14 @@ document.getElementById("stats").innerHTML =
 "🏋️ "+exCount+" exercices<br>" +
 "🔁 "+series+" séries";
 
+/* 🔥 PRELOAD IMAGES */
+const evaImages = [];
+for(let i=0;i<6;i++){
+let im = new Image();
+im.src = "./images/eva/"+i+".png";
+evaImages.push(im);
+}
+
 /* EVA */
 const slider = document.getElementById("evaSlider");
 const img = document.getElementById("evaImg");
@@ -228,28 +234,24 @@ function updateEva(val){
 val = parseInt(val);
 let step = Math.floor(val / 2);
 
+img.src = evaImages[step].src;
+
 if(step === 0){
-img.src="images/eva/0.png";
 label.innerText="Très bien";
 }
 else if(step === 1){
-img.src="images/eva/1.png";
 label.innerText="Bénigne";
 }
 else if(step === 2){
-img.src="images/eva/2.png";
 label.innerText="Inconfort modéré";
 }
 else if(step === 3){
-img.src="images/eva/3.png";
 label.innerText="Douleur intense";
 }
 else if(step === 4){
-img.src="images/eva/4.png";
 label.innerText="Douleur très intense";
 }
 else{
-img.src="images/eva/5.png";
 label.innerText="Le plus de douleur possible";
 }
 
