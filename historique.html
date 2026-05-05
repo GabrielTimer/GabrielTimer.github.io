@@ -154,7 +154,11 @@ background:#ccc;
 
 <script>
 
-let list = JSON.parse(localStorage.getItem("programmes")||[]);
+let list = localStorage.getItem("programmes");
+list = list ? JSON.parse(list) : [];
+
+if(!Array.isArray(list)) list = [];
+
 list = list.filter(p=>p.type==="historique").slice(0,30);
 
 let container=document.getElementById("list");

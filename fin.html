@@ -200,7 +200,7 @@ return m+" min "+(s%60)+" s";
 
 </div>
 
-<button onclick="window.location='index.html'">🏠 Retour accueil</button>
+<button onclick="saveAndExit()">🏠 Retour accueil</button>
 
 </div>
 
@@ -260,6 +260,45 @@ updateEva(e.target.value);
 });
 
 updateEva(0);
+
+</script>
+<script>
+
+function saveAndExit(){
+
+let all = localStorage.getItem("programmes");
+all = all ? JSON.parse(all) : [];
+
+if(!Array.isArray(all)) all = [];
+
+let eva = parseInt(localStorage.getItem("eva_temp") || 0);
+
+let prog = JSON.parse(localStorage.getItem("programme_temp") || "{}");
+
+let programme = {
+type: "historique",
+nom: prog.nom || "Séance",
+date: new Date().toLocaleString(),
+data: {
+...prog,
+eva: eva
+}
+};
+
+/* 🔥 ajout correct */
+all.unshift(programme);
+
+/* 🔥 garder 30 */
+let historiques = all.filter(p => p.type === "historique").slice(0,30);
+let autres = all.filter(p => p.type !== "historique");
+
+localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
+
+/* nettoyage */
+localStorage.removeItem("eva_temp");
+
+window.location="index.html";
+}
 
 </script>
 
