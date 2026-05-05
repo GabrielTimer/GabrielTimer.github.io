@@ -539,22 +539,14 @@ data: {
 eva: eva}
 };
 
-// 🔥 ajouter en premier
-all.unshift(programme);
+/* ❌ SUPPRIMÉ : enregistrement ici (trop tôt) */
 
-// 🔥 garder seulement 30 historiques
-let historiques = all.filter(p => p.type === "historique").slice(0,30);
-let autres = all.filter(p => p.type !== "historique");
-
-localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
-
-// 🔥 lancement normal
+/* 🔥 lancement normal */
 localStorage.removeItem("eva_temp");
 
 localStorage.setItem("programme_temp", JSON.stringify(programme.data));
 window.location="timer.html";
 }
-
 function home(){
 window.location="index.html";
 }
