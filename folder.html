@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dossier</title>
+</head>
+
+<body>
+
+<h2 id="title"></h2>
+<div id="list"></div>
+
+<button onclick="back()">⬅ Retour</button>
+
+<script>
+
+let name = localStorage.getItem("folder_name");
+
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+
+let list = all
+.filter(p=>p.type==="historique" && p.nom===name)
+.sort((a,b)=> new Date(b.date) - new Date(a.date));
+
+document.getElementById("title").innerText = name;
+
+let container=document.getElementById("list");
+
+list.forEach(p=>{
+
+let div=document.createElement("div");
+div.innerHTML = `
+<div>
+<b>${p.date}</b>
+</div>
+`;
+
+container.appendChild(div);
+
+});
+
+function back(){
+window.location="historique.html";
+}
+
+</script>
+
+</body>
+</html>

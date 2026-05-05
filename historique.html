@@ -117,7 +117,7 @@ background:#ffcdd2;
 transform:scale(1.1);
 }
 
-/* 🔵 EVA DOT CORRIGÉ */
+/* 🔵 EVA DOT */
 .evaDot{
 width:18px;
 height:18px;
@@ -131,10 +131,6 @@ padding:14px;
 border:none;
 border-radius:12px;
 background:#ccc;
-}
-
-@media (max-width:600px){
-.card{max-width:340px;}
 }
 
 </style>
@@ -154,31 +150,54 @@ background:#ccc;
 
 <script>
 
-let list = localStorage.getItem("programmes");
-list = list ? JSON.parse(list) : [];
+let all = localStorage.getItem("programmes");
+all = all ? JSON.parse(all) : [];
+if(!Array.isArray(all)) all = [];
 
-if(!Array.isArray(list)) list = [];
+let hist = all.filter(p=>p.type==="historique").slice(0,30);
 
-list = list.filter(p=>p.type==="historique").slice(0,30);
+/* GROUP BY NOM */
+let grouped = {};
+hist.forEach(p=>{
+let name = p.nom || "Séance";
+if(!grouped[name]) grouped[name]=[];
+grouped[name].push(p);
+});
 
 let container=document.getElementById("list");
 
-list.forEach((p,index)=>{
+/* DISPLAY */
+Object.keys(grouped).forEach(name=>{
+
+let group = grouped[name];
+
+if(group.length >=2){
+renderFolder(name, group);
+}else{
+renderCard(group[0], name);
+}
+
+});
+
+/* ---------- CARD ---------- */
+
+function renderCard(p, name){
+
+let index = hist.indexOf(p);
 
 let div=document.createElement("div");
 div.className="card";
 
-/* LEFT */
 let left=document.createElement("div");
 left.className="left";
 
-let hist=document.createElement("div");
-hist.className="hist";
-hist.innerText="🕒 Historique";
+let histDiv=document.createElement("div");
+histDiv.className="hist";
+histDiv.innerText="🕒 Historique";
 
 let title=document.createElement("div");
 title.className="title";
-title.innerText=getName(p);
+title.innerText=name;
 
 let date=document.createElement("div");
 date.className="date";
@@ -197,29 +216,13 @@ e.stopPropagation();
 addFav(index);
 };
 
-/* 🔵 EVA DOT CORRIGÉ */
+/* EVA */
 let evaDot=document.createElement("div");
 evaDot.className="evaDot";
 
-let eva = (p.data && p.data.eva !== undefined) ? p.data.eva : 0;
-
-let step;
-if(eva <=1) step = 0;
-else if(eva <=3) step = 1;
-else if(eva <=5) step = 2;
-else if(eva <=7) step = 3;
-else if(eva <=9) step = 4;
-else step = 5;
-
-let colors = [
-"#16a34a",
-"#84cc16",
-"#eab308",
-"#f97316",
-"#ef4444",
-"#b91c1c"
-];
-
+let eva = p.data?.eva || 0;
+let step = Math.floor(eva/2);
+let colors=["#16a34a","#84cc16","#eab308","#f97316","#ef4444","#b91c1c"];
 evaDot.style.background = colors[step];
 
 /* 🗑 */
@@ -232,7 +235,7 @@ remove(index);
 };
 
 /* BUILD */
-left.appendChild(hist);
+left.appendChild(histDiv);
 left.appendChild(title);
 left.appendChild(date);
 
@@ -250,18 +253,58 @@ window.location="timer.html";
 };
 
 container.appendChild(div);
-
-});
-
-/* NOM */
-function getName(p){
-if(p.nom && p.nom !== "undefined"){
-return p.nom;
-}
-return "Séance";
 }
 
-/* DELETE */
+/* ---------- FOLDER ---------- */
+
+function renderFolder(name, group){
+
+let div=document.createElement("div");
+div.className="card";
+
+let left=document.createElement("div");
+left.className="left";
+
+left.innerHTML=`
+<div class="hist">📁 Dossier</div>
+<div class="title">${name}</div>
+<div class="date">${group.length} séances</div>
+`;
+
+let actions=document.createElement("div");
+actions.className="actions";
+
+/* 🗑 SUPPRIMER DOSSIER */
+let del=document.createElement("button");
+del.className="iconBtn delete";
+del.innerHTML="🗑";
+del.onclick=(e)=>{
+e.stopPropagation();
+if(!confirm("Supprimer tout le dossier ?")) return;
+
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+all = all.filter(p=>!(p.nom===name && p.type==="historique"));
+
+localStorage.setItem("programmes",JSON.stringify(all));
+location.reload();
+};
+
+actions.appendChild(del);
+
+div.appendChild(left);
+div.appendChild(actions);
+
+/* CLICK */
+div.onclick=()=>{
+localStorage.setItem("folder_name", name);
+window.location="folder.html";
+};
+
+container.appendChild(div);
+}
+
+/* ---------- ACTIONS ---------- */
+
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
@@ -271,7 +314,6 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* FAVORI */
 function addFav(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
@@ -281,7 +323,6 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* CLEAR */
 function clearHist(){
 if(confirm("Supprimer tout l'historique ?")){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
