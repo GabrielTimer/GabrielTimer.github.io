@@ -144,7 +144,7 @@ let list = all
 
 document.getElementById("title").innerText = "📁 " + name;
 document.getElementById("count").innerText = list.length + " séances";
-/* 🎯 GRAPH EVA */
+/* 🎯 GRAPH EVA PRO */
 const canvas = document.getElementById("evaChart");
 const ctx = canvas.getContext("2d");
 
@@ -157,6 +157,18 @@ let h = canvas.height;
 
 ctx.clearRect(0,0,w,h);
 
+/* 🎨 ZONES (vert / jaune / rouge) */
+let zoneH = (h-40);
+
+ctx.fillStyle = "rgba(34,197,94,0.15)"; // vert
+ctx.fillRect(20, h-20 - zoneH*(3/10), w-40, zoneH*(3/10));
+
+ctx.fillStyle = "rgba(234,179,8,0.15)"; // jaune
+ctx.fillRect(20, h-20 - zoneH*(6/10), w-40, zoneH*(3/10));
+
+ctx.fillStyle = "rgba(239,68,68,0.15)"; // rouge
+ctx.fillRect(20, 10, w-40, zoneH*(4/10));
+
 /* axes */
 ctx.strokeStyle = "#aaa";
 ctx.beginPath();
@@ -165,12 +177,40 @@ ctx.lineTo(20,h-20);
 ctx.lineTo(w-10,h-20);
 ctx.stroke();
 
-/* courbe */
-ctx.strokeStyle = "#4cafef";
+/* 📊 MOYENNE */
+let avg = values.reduce((a,b)=>a+b,0)/values.length;
+let avgY = (h-20) - (avg/10)*(h-40);
+
+ctx.strokeStyle = "#999";
+ctx.setLineDash([5,5]);
+ctx.beginPath();
+ctx.moveTo(20, avgY);
+ctx.lineTo(w-10, avgY);
+ctx.stroke();
+ctx.setLineDash([]);
+
+/* texte moyenne */
+ctx.fillStyle = "#999";
+ctx.font = "12px Arial";
+ctx.fillText("moy: " + avg.toFixed(1), w-60, avgY-5);
+
+/* 🎯 COULEUR DYNAMIQUE */
+let first = values[0];
+let last = values[values.length-1];
+
+if(last < first){
+ctx.strokeStyle = "#16a34a"; // amélioration
+}else if(last > first){
+ctx.strokeStyle = "#ef4444"; // aggravation
+}else{
+ctx.strokeStyle = "#eab308"; // stable
+}
+
 ctx.lineWidth = 2;
 
 let stepX = (w-40)/(values.length-1);
 
+/* courbe */
 ctx.beginPath();
 
 values.forEach((v,i)=>{
@@ -188,7 +228,7 @@ values.forEach((v,i)=>{
 let x = 20 + i*stepX;
 let y = (h-20) - (v/10)*(h-40);
 
-ctx.fillStyle="#4cafef";
+ctx.fillStyle=ctx.strokeStyle;
 ctx.beginPath();
 ctx.arc(x,y,4,0,Math.PI*2);
 ctx.fill();
