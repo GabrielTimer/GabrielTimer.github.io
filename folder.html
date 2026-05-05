@@ -325,9 +325,23 @@ location.reload();
 }
 
 function addFav(p){
-p.type="favori";
+
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
-localStorage.setItem("programmes",JSON.stringify(all));
+
+/* retrouver l’élément dans le vrai tableau */
+let index = all.findIndex(x =>
+x.date === p.date &&
+x.nom === p.nom
+);
+
+if(index === -1) return;
+
+/* modification réelle */
+all[index].type = "favori";
+
+/* sauvegarde */
+localStorage.setItem("programmes", JSON.stringify(all));
+
 location.reload();
 }
 
