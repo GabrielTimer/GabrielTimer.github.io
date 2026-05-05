@@ -278,13 +278,15 @@ updateEva(e.target.value);
 });
 
 /* IMPORTANT : pas d'activation automatique */
-updateEva(0);
+/* affichage initial SANS valider */
+img.src = evaImages[0].src;
+label.innerText = "Très bien";
 
 /* clic bouton sécurisé */
 btn.onclick = () => {
 
 if(evaValue === null){
-alert("Veuillez évaluer votre douleur avant de continuer");
+label.innerText = "👉 Merci d’indiquer votre ressenti";
 return;
 }
 
