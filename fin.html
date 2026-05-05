@@ -145,6 +145,22 @@ c.style.background=["#ff0","#0ff","#f0f","#0f0","#fff"][Math.floor(Math.random()
 document.body.appendChild(c);
 }
 
+/* 🔥 fade + suppression */
+setTimeout(()=>{
+document.querySelectorAll(".confetti").forEach(c=>{
+c.style.transition="opacity 1s";
+c.style.opacity="0";
+});
+}, 3000);
+
+setTimeout(()=>{
+document.querySelectorAll(".confetti").forEach(c=>c.remove());
+}, 4000);
+
+</script>
+
+<script>
+
 let messages = [
 "Excellent travail 💪",
 "Très bonne séance 👏",
@@ -174,6 +190,7 @@ function formatTime(s){
 let m=Math.floor(s/60);
 return m+" min "+(s%60)+" s";
 }
+
 </script>
 
 <div class="container">
