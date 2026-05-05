@@ -81,6 +81,7 @@ color:#999;
 .actions{
 display:flex;
 gap:8px;
+align-items:center;
 }
 
 .iconBtn{
@@ -96,7 +97,7 @@ font-size:16px;
 transition:0.2s;
 }
 
-/* ⭐ favori */
+/* ⭐ */
 .star{
 background:#fff8e1;
 color:#f9a825;
@@ -116,15 +117,12 @@ background:#ffcdd2;
 transform:scale(1.1);
 }
 
-/* 🔵 EVA DOT */
+/* 🔵 EVA DOT CORRIGÉ */
 .evaDot{
-width:36px;
-height:36px;
+width:18px;
+height:18px;
 border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 3px 8px rgba(0,0,0,0.2);
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
 }
 
 button.back{
@@ -195,12 +193,19 @@ e.stopPropagation();
 addFav(index);
 };
 
-/* 🔵 EVA DOT */
+/* 🔵 EVA DOT CORRIGÉ */
 let evaDot=document.createElement("div");
 evaDot.className="evaDot";
 
 let eva = (p.data && p.data.eva !== undefined) ? p.data.eva : 0;
-let step = Math.floor(eva / 2);
+
+let step;
+if(eva <=1) step = 0;
+else if(eva <=3) step = 1;
+else if(eva <=5) step = 2;
+else if(eva <=7) step = 3;
+else if(eva <=9) step = 4;
+else step = 5;
 
 let colors = [
 "#16a34a",
