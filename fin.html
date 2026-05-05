@@ -137,6 +137,26 @@ margin-top:10px;
 margin-top:8px;
 font-weight:bold;
 }
+@keyframes blinkSoft{
+0%{opacity:1;}
+50%{opacity:0.6;}
+100%{opacity:1;}
+}
+
+#evaBloc h3{
+animation:blinkSoft 2s infinite;
+}
+
+/* animation bouton */
+@keyframes unlockPop{
+0%{transform:scale(0.7);}
+50%{transform:scale(1.15);}
+100%{transform:scale(1);}
+}
+
+button.unlock{
+animation:unlockPop 0.4s ease;
+}
 </style>
 </head>
 
@@ -254,25 +274,43 @@ btn.classList.add("disabled");
 function updateEva(val){
 
 val = parseInt(val);
-let step = Math.floor(val / 2);
 
+/* IMAGE */
+let step = Math.floor(val / 2);
+if(step < 0) step = 0;
+if(step > 5) step = 5;
 img.src = evaImages[step].src;
 
-if(step === 0) label.innerText="Très bien";
-else if(step === 1) label.innerText="Bénigne";
-else if(step === 2) label.innerText="Inconfort modéré";
-else if(step === 3) label.innerText="Douleur intense";
-else if(step === 4) label.innerText="Douleur très intense";
+/* TEXTE EVA CLINIQUE */
+if(val <= 1) label.innerText="Très bien";
+else if(val <= 3) label.innerText="Bénigne";
+else if(val <= 5) label.innerText="Inconfort modéré";
+else if(val <= 7) label.innerText="Douleur intense";
+else if(val <= 9) label.innerText="Douleur très intense";
 else label.innerText="Le plus de douleur possible";
+
+/* + valeur */
+label.innerText += " ("+val+"/10)";
 
 /* sauvegarde */
 localStorage.setItem("eva_temp", val);
 
-/* 🔥 activation bouton */
-evaValue = val;
+/* 🔥 activation bouton + animation UNE FOIS */
+if(evaValue === null){
+
 btn.classList.remove("disabled");
+btn.classList.add("unlock");
+
+/* vibration mobile */
+if(navigator.vibrate){
+navigator.vibrate(50);
 }
 
+setTimeout(()=>btn.classList.remove("unlock"), 400);
+}
+
+evaValue = val;
+}
 slider.addEventListener("input", e=>{
 updateEva(e.target.value);
 });
