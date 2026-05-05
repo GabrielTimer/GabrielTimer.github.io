@@ -124,6 +124,7 @@ background:#ccc;
 
 <h2 id="title"></h2>
 <div class="subtitle" id="count"></div>
+<canvas id="evaChart" width="320" height="160" style="margin-bottom:20px;"></canvas>
 
 <div id="list"></div>
 
@@ -143,6 +144,57 @@ let list = all
 
 document.getElementById("title").innerText = "📁 " + name;
 document.getElementById("count").innerText = list.length + " séances";
+/* 🎯 GRAPH EVA */
+const canvas = document.getElementById("evaChart");
+const ctx = canvas.getContext("2d");
+
+if(list.length > 1){
+
+let values = list.map(p=>p.data?.eva || 0).reverse();
+
+let w = canvas.width;
+let h = canvas.height;
+
+ctx.clearRect(0,0,w,h);
+
+/* axes */
+ctx.strokeStyle = "#aaa";
+ctx.beginPath();
+ctx.moveTo(20,10);
+ctx.lineTo(20,h-20);
+ctx.lineTo(w-10,h-20);
+ctx.stroke();
+
+/* courbe */
+ctx.strokeStyle = "#4cafef";
+ctx.lineWidth = 2;
+
+let stepX = (w-40)/(values.length-1);
+
+ctx.beginPath();
+
+values.forEach((v,i)=>{
+let x = 20 + i*stepX;
+let y = (h-20) - (v/10)*(h-40);
+
+if(i===0) ctx.moveTo(x,y);
+else ctx.lineTo(x,y);
+});
+
+ctx.stroke();
+
+/* points */
+values.forEach((v,i)=>{
+let x = 20 + i*stepX;
+let y = (h-20) - (v/10)*(h-40);
+
+ctx.fillStyle="#4cafef";
+ctx.beginPath();
+ctx.arc(x,y,4,0,Math.PI*2);
+ctx.fill();
+});
+
+}
 
 let container=document.getElementById("list");
 
