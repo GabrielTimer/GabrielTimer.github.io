@@ -529,11 +529,14 @@ function start(){
 
 let all = JSON.parse(localStorage.getItem("programmes") || "[]");
 
+let eva = parseInt(localStorage.getItem("eva_temp") || 0);
 let programme = {
 type: "historique",
 nom: document.getElementById("sessionName").value,
 date: new Date().toLocaleString(),
-data: build()
+data: {
+...build(),
+eva: eva}
 };
 
 // 🔥 ajouter en premier
@@ -546,6 +549,8 @@ let autres = all.filter(p => p.type !== "historique");
 localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
 
 // 🔥 lancement normal
+localStorage.removeItem("eva_temp");
+
 localStorage.setItem("programme_temp", JSON.stringify(programme.data));
 window.location="timer.html";
 }
