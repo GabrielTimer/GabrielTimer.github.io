@@ -1,43 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dossier</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f4f4;
+margin:0;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:20px;
+}
+
+h2{
+font-size:26px;
+margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+width:85%;
+max-width:360px;
+margin:12px auto;
+background:white;
+border-radius:20px;
+padding:16px;
+box-shadow:0 8px 25px rgba(0,0,0,0.12);
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+transition:0.2s;
+}
+
+.card:hover{
+transform:scale(1.03);
+box-shadow:0 12px 30px rgba(0,0,0,0.2);
+}
+
+.left{
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.hist{
+color:#777;
+font-size:13px;
+}
+
+.title{
+font-size:16px;
+font-weight:bold;
+}
+
+.date{
+font-size:13px;
+color:#999;
+}
+
+/* ACTIONS */
+.actions{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.iconBtn{
+width:36px;
+height:36px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+border:none;
+cursor:pointer;
+font-size:16px;
+}
+
+/* ⭐ */
+.star{
+background:#fff8e1;
+color:#f9a825;
+}
+
+/* 🗑 */
+.delete{
+background:#ffebee;
+color:#c62828;
+}
+
+/* EVA */
+.evaDot{
+width:18px;
+height:18px;
+border-radius:50%;
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+button.back{
+margin-top:20px;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#ccc;
+}
+
+</style>
 </head>
 
 <body>
 
 <h2 id="title"></h2>
+
 <div id="list"></div>
 
-<button onclick="back()">⬅ Retour</button>
+<button class="back" onclick="back()">⬅ Retour</button>
 
 <script>
 
 let name = localStorage.getItem("folder_name");
 
-let all = JSON.parse(localStorage.getItem("programmes")||[]);
+let all = localStorage.getItem("programmes");
+all = all ? JSON.parse(all) : [];
+if(!Array.isArray(all)) all = [];
 
 let list = all
 .filter(p=>p.type==="historique" && p.nom===name)
 .sort((a,b)=> new Date(b.date) - new Date(a.date));
 
-document.getElementById("title").innerText = name;
+document.getElementById("title").innerText = "📁 " + name;
 
 let container=document.getElementById("list");
 
-list.forEach(p=>{
+/* RENDER */
+list.forEach((p,index)=>{
 
 let div=document.createElement("div");
-div.innerHTML = `
-<div>
-<b>${p.date}</b>
-</div>
-`;
+div.className="card";
+
+/* LEFT */
+let left=document.createElement("div");
+left.className="left";
+
+let hist=document.createElement("div");
+hist.className="hist";
+hist.innerText="🕒 Séance";
+
+let title=document.createElement("div");
+title.className="title";
+title.innerText=name;
+
+let date=document.createElement("div");
+date.className="date";
+date.innerText=p.date;
+
+/* ACTIONS */
+let actions=document.createElement("div");
+actions.className="actions";
+
+/* ⭐ */
+let star=document.createElement("button");
+star.className="iconBtn star";
+star.innerHTML="⭐";
+star.onclick=(e)=>{
+e.stopPropagation();
+addFav(p);
+};
+
+/* EVA */
+let evaDot=document.createElement("div");
+evaDot.className="evaDot";
+
+let eva = p.data?.eva || 0;
+let step = Math.floor(eva/2);
+let colors=["#16a34a","#84cc16","#eab308","#f97316","#ef4444","#b91c1c"];
+evaDot.style.background = colors[step];
+
+/* 🗑 */
+let del=document.createElement("button");
+del.className="iconBtn delete";
+del.innerHTML="🗑";
+del.onclick=(e)=>{
+e.stopPropagation();
+remove(p);
+};
+
+/* BUILD */
+left.appendChild(hist);
+left.appendChild(title);
+left.appendChild(date);
+
+actions.appendChild(star);
+actions.appendChild(evaDot);
+actions.appendChild(del);
+
+div.appendChild(left);
+div.appendChild(actions);
+
+/* CLICK */
+div.onclick=()=>{
+localStorage.setItem("programme_temp",JSON.stringify(p.data));
+window.location="timer.html";
+};
 
 container.appendChild(div);
 
 });
+
+/* ACTIONS */
+
+function remove(p){
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+all = all.filter(x=>x!==p);
+localStorage.setItem("programmes",JSON.stringify(all));
+location.reload();
+}
+
+function addFav(p){
+p.type="favori";
+let all = JSON.parse(localStorage.getItem("programmes")||[]);
+localStorage.setItem("programmes",JSON.stringify(all));
+location.reload();
+}
 
 function back(){
 window.location="historique.html";
