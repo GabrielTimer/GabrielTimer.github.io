@@ -167,7 +167,13 @@ grouped[name].push(p);
 let container=document.getElementById("list");
 
 /* DISPLAY */
-Object.keys(grouped).forEach(name=>{
+Object.keys(grouped)
+.sort((a,b)=>{
+let da = new Date(grouped[a][0].date);
+let db = new Date(grouped[b][0].date);
+return db - da;
+})
+.forEach(name=>{
 
 let group = grouped[name];
 
@@ -222,6 +228,8 @@ evaDot.className="evaDot";
 
 let eva = p.data?.eva || 0;
 let step = Math.floor(eva/2);
+if(step < 0) step = 0;
+if(step > 5) step = 5;
 let colors=["#16a34a","#84cc16","#eab308","#f97316","#ef4444","#b91c1c"];
 evaDot.style.background = colors[step];
 
@@ -262,6 +270,18 @@ function renderFolder(name, group){
 let div=document.createElement("div");
 div.className="card";
 
+/* EVA MOYENNE */
+let avg = 0;
+group.forEach(p=>{
+avg += p.data?.eva || 0;
+});
+avg = Math.round(avg / group.length);
+
+let step = Math.floor(avg/2);
+if(step < 0) step = 0;
+if(step > 5) step = 5;
+let colors=["#16a34a","#84cc16","#eab308","#f97316","#ef4444","#b91c1c"];
+
 let left=document.createElement("div");
 left.className="left";
 
@@ -274,7 +294,12 @@ left.innerHTML=`
 let actions=document.createElement("div");
 actions.className="actions";
 
-/* 🗑 SUPPRIMER DOSSIER */
+/* EVA DOT */
+let evaDot=document.createElement("div");
+evaDot.className="evaDot";
+evaDot.style.background = colors[step];
+
+/* DELETE */
 let del=document.createElement("button");
 del.className="iconBtn delete";
 del.innerHTML="🗑";
@@ -289,6 +314,7 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 };
 
+actions.appendChild(evaDot);
 actions.appendChild(del);
 
 div.appendChild(left);

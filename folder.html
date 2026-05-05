@@ -13,7 +13,6 @@ background:#f4f4f4;
 margin:0;
 display:flex;
 flex-direction:column;
-justify-content:center;
 align-items:center;
 min-height:100vh;
 padding:20px;
@@ -21,6 +20,11 @@ padding:20px;
 
 h2{
 font-size:26px;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#666;
 margin-bottom:20px;
 }
 
@@ -119,6 +123,7 @@ background:#ccc;
 <body>
 
 <h2 id="title"></h2>
+<div class="subtitle" id="count"></div>
 
 <div id="list"></div>
 
@@ -137,6 +142,7 @@ let list = all
 .sort((a,b)=> new Date(b.date) - new Date(a.date));
 
 document.getElementById("title").innerText = "📁 " + name;
+document.getElementById("count").innerText = list.length + " séances";
 
 let container=document.getElementById("list");
 
@@ -181,6 +187,8 @@ evaDot.className="evaDot";
 
 let eva = p.data?.eva || 0;
 let step = Math.floor(eva/2);
+if(step < 0) step = 0;
+if(step > 5) step = 5;
 let colors=["#16a34a","#84cc16","#eab308","#f97316","#ef4444","#b91c1c"];
 evaDot.style.background = colors[step];
 
