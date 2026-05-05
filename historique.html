@@ -116,6 +116,17 @@ background:#ffcdd2;
 transform:scale(1.1);
 }
 
+/* 🔵 EVA DOT */
+.evaDot{
+width:36px;
+height:36px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 3px 8px rgba(0,0,0,0.2);
+}
+
 button.back{
 margin-top:20px;
 padding:14px;
@@ -146,7 +157,7 @@ background:#ccc;
 <script>
 
 let list = JSON.parse(localStorage.getItem("programmes")||[]);
-list = list.filter(p=>p.type==="historique").slice(0,30); // 🔥 LIMITE 30
+list = list.filter(p=>p.type==="historique").slice(0,30);
 
 let container=document.getElementById("list");
 
@@ -175,7 +186,7 @@ date.innerText=p.date;
 let actions=document.createElement("div");
 actions.className="actions";
 
-/* ⭐ ajouter favori */
+/* ⭐ */
 let star=document.createElement("button");
 star.className="iconBtn star";
 star.innerHTML="⭐";
@@ -184,7 +195,25 @@ e.stopPropagation();
 addFav(index);
 };
 
-/* 🗑 supprimer */
+/* 🔵 EVA DOT */
+let evaDot=document.createElement("div");
+evaDot.className="evaDot";
+
+let eva = (p.data && p.data.eva !== undefined) ? p.data.eva : 0;
+let step = Math.floor(eva / 2);
+
+let colors = [
+"#16a34a",
+"#84cc16",
+"#eab308",
+"#f97316",
+"#ef4444",
+"#b91c1c"
+];
+
+evaDot.style.background = colors[step];
+
+/* 🗑 */
 let del=document.createElement("button");
 del.className="iconBtn delete";
 del.innerHTML="🗑";
@@ -199,6 +228,7 @@ left.appendChild(title);
 left.appendChild(date);
 
 actions.appendChild(star);
+actions.appendChild(evaDot);
 actions.appendChild(del);
 
 div.appendChild(left);
@@ -214,7 +244,7 @@ container.appendChild(div);
 
 });
 
-/* NOM SAFE */
+/* NOM */
 function getName(p){
 if(p.nom && p.nom !== "undefined"){
 return p.nom;
@@ -232,7 +262,7 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-/* ADD FAV */
+/* FAVORI */
 function addFav(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let hist = all.filter(p=>p.type==="historique");
