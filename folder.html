@@ -328,18 +328,13 @@ function addFav(p){
 
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 
-/* retrouver l’élément dans le vrai tableau */
-let index = all.findIndex(x =>
-x.date === p.date &&
-x.nom === p.nom
-);
+/* comparaison complète */
+let index = all.findIndex(x => JSON.stringify(x) === JSON.stringify(p));
 
 if(index === -1) return;
 
-/* modification réelle */
 all[index].type = "favori";
 
-/* sauvegarde */
 localStorage.setItem("programmes", JSON.stringify(all));
 
 location.reload();
