@@ -82,6 +82,13 @@ button:active{
 transform:scale(0.95);
 }
 
+/* 🔒 bouton bloqué */
+button.disabled{
+opacity:0.4;
+pointer-events:none;
+animation:none;
+}
+
 .emoji{
 font-size:48px;
 animation:pulse 1s infinite;
@@ -145,7 +152,6 @@ c.style.background=["#ff0","#0ff","#f0f","#0f0","#fff"][Math.floor(Math.random()
 document.body.appendChild(c);
 }
 
-/* 🔥 fade + suppression */
 setTimeout(()=>{
 document.querySelectorAll(".confetti").forEach(c=>{
 c.style.transition="opacity 1s";
@@ -156,11 +162,9 @@ c.style.opacity="0";
 setTimeout(()=>{
 document.querySelectorAll(".confetti").forEach(c=>c.remove());
 }, 4000);
-
 </script>
 
 <script>
-
 let messages = [
 "Excellent travail 💪",
 "Très bonne séance 👏",
@@ -190,7 +194,6 @@ function formatTime(s){
 let m=Math.floor(s/60);
 return m+" min "+(s%60)+" s";
 }
-
 </script>
 
 <div class="container">
@@ -217,7 +220,7 @@ return m+" min "+(s%60)+" s";
 
 </div>
 
-<button onclick="saveAndExit()">🏠 Retour accueil</button>
+<button id="btnRetour">🏠 Retour accueil</button>
 
 </div>
 
@@ -241,6 +244,12 @@ evaImages.push(im);
 const slider = document.getElementById("evaSlider");
 const img = document.getElementById("evaImg");
 const label = document.getElementById("evaLabel");
+const btn = document.getElementById("btnRetour");
+
+let evaValue = null;
+
+/* bouton bloqué au départ */
+btn.classList.add("disabled");
 
 function updateEva(val){
 
@@ -249,47 +258,49 @@ let step = Math.floor(val / 2);
 
 img.src = evaImages[step].src;
 
-if(step === 0){
-label.innerText="Très bien";
-}
-else if(step === 1){
-label.innerText="Bénigne";
-}
-else if(step === 2){
-label.innerText="Inconfort modéré";
-}
-else if(step === 3){
-label.innerText="Douleur intense";
-}
-else if(step === 4){
-label.innerText="Douleur très intense";
-}
-else{
-label.innerText="Le plus de douleur possible";
-}
+if(step === 0) label.innerText="Très bien";
+else if(step === 1) label.innerText="Bénigne";
+else if(step === 2) label.innerText="Inconfort modéré";
+else if(step === 3) label.innerText="Douleur intense";
+else if(step === 4) label.innerText="Douleur très intense";
+else label.innerText="Le plus de douleur possible";
 
-/* 🔥 EVA STABLE */
+/* sauvegarde */
 localStorage.setItem("eva_temp", val);
+
+/* 🔥 activation bouton */
+evaValue = val;
+btn.classList.remove("disabled");
 }
 
-slider.addEventListener("input", function(e){
+slider.addEventListener("input", e=>{
 updateEva(e.target.value);
 });
 
+/* IMPORTANT : pas d'activation automatique */
 updateEva(0);
 
-</script>
-<script>
+/* clic bouton sécurisé */
+btn.onclick = () => {
 
+if(evaValue === null){
+alert("Veuillez évaluer votre douleur avant de continuer");
+return;
+}
+
+saveAndExit();
+};
+
+</script>
+
+<script>
 function saveAndExit(){
 
 let all = localStorage.getItem("programmes");
 all = all ? JSON.parse(all) : [];
-
 if(!Array.isArray(all)) all = [];
 
 let eva = parseInt(localStorage.getItem("eva_temp") || 0);
-
 let prog = JSON.parse(localStorage.getItem("programme_temp") || "{}");
 
 let programme = {
@@ -302,21 +313,17 @@ eva: eva
 }
 };
 
-/* 🔥 ajout correct */
 all.unshift(programme);
 
-/* 🔥 garder 30 */
 let historiques = all.filter(p => p.type === "historique").slice(0,30);
 let autres = all.filter(p => p.type !== "historique");
 
 localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
 
-/* nettoyage */
 localStorage.removeItem("eva_temp");
 
 window.location="index.html";
 }
-
 </script>
 
 </body>
