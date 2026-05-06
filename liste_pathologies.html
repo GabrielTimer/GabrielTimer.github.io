@@ -256,7 +256,40 @@ conseil:"Descendre les mains lentement sans décoller les paumes."
 }
 ]
 },
+"epaule_1":{
+series:1,
+exercices:[
 
+{
+nom:"Tirage coudes pliés",
+ex:10,
+repos:5,
+reps:15
+},
+
+{
+nom:"Bras tendus bas",
+ex:10,
+repos:5,
+reps:15
+},
+
+{
+nom:"Rotation externe",
+ex:10,
+repos:5,
+reps:15
+},
+
+{
+nom:"Bras tendus devant",
+ex:10,
+repos:5,
+reps:15
+}
+
+]
+}
 };
 
 /* CONFIG AFFICHAGE */
@@ -275,6 +308,10 @@ dos:[
 
 gym_prevention:[
 {nom:"Étirement Bureau", dossier:"etirements_bureau"}
+],
+
+cabinet:[
+{nom:"Épaule 1", dossier:"epaule_1"}
 ]
 
 };
@@ -293,8 +330,20 @@ let div=document.createElement("div");
 div.className="card";
 
 let img=document.createElement("img");
+
+if(p.dossier !== "epaule_1"){
+
 img.src="images/"+p.dossier+"/cover.png?v="+Date.now();
 
+img.onerror=function(){
+this.onerror=null;
+this.src="images/"+p.dossier+"/cover.jpg?v="+Date.now();
+};
+
+}
+else{
+img.style.display="none";
+}
 img.onerror=function(){
 this.onerror=null;
 this.src="images/"+p.dossier+"/cover.jpg?v="+Date.now();
@@ -312,6 +361,9 @@ title.innerText=p.nom;
 let btn=document.createElement("button");
 btn.className="actionBtn";
 btn.innerText="🖨️ PDF";
+if(p.dossier==="epaule_1"){
+btn.style.display="none";
+}
 
 btn.onclick=(e)=>{
 e.stopPropagation();
