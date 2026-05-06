@@ -193,7 +193,70 @@ exercices:[
 {nom:"Étirement piriforme", ex:30, repos:10, reps:5},
 {nom:"Étirement dorsal", ex:30, repos:10, reps:5}
 ]
+},
+
+"etirements_bureau":{
+series:1,
+exercices:[
+{
+nom:"Allonger sa colonne",
+ex:15,
+repos:10,
+reps:3,
+conseil:"Pousser les mains vers le ciel en gardant les épaules abaissées."
+},
+{
+nom:"Relâcher les épaules",
+ex:10,
+repos:10,
+reps:3,
+conseil:"Monter les épaules puis les laisser retomber complètement."
+},
+{
+nom:"Étirement latéral",
+ex:15,
+repos:10,
+reps:2,
+conseil:"Incliner le buste doucement jusqu’à sentir l’étirement du flanc."
+},
+{
+nom:"Étirement nuque",
+ex:15,
+repos:10,
+reps:2,
+conseil:"Incliner lentement la tête sans forcer."
+},
+{
+nom:"Étirement haut du dos",
+ex:15,
+repos:10,
+reps:3,
+conseil:"Pousser les mains vers l’avant pour ouvrir le haut du dos."
+},
+{
+nom:"Soulager les lombaires",
+ex:15,
+repos:10,
+reps:2,
+conseil:"Ouvrir doucement la cage thoracique sans casser les lombaires."
+},
+{
+nom:"Torsion assise",
+ex:15,
+repos:10,
+reps:2,
+conseil:"Faire partir la rotation depuis les hanches."
+},
+{
+nom:"Étirement poignets",
+ex:15,
+repos:10,
+reps:2,
+conseil:"Descendre les mains lentement sans décoller les paumes."
 }
+]
+},
+
 };
 
 /* CONFIG AFFICHAGE */
@@ -208,7 +271,12 @@ dos:[
 {nom:"Hernie discale", dossier:"hernie_discale"},
 {nom:"Canal lombaire étroit", dossier:"canal_lombaire_etroit"},
 {nom:"Lumbago", dossier:"lumbago"}
+],
+
+gym_prevention:[
+{nom:"Étirement Bureau", dossier:"etirements_bureau"}
 ]
+
 };
 
 let zone = localStorage.getItem("zone");
