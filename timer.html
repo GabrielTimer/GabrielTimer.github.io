@@ -255,6 +255,7 @@ let totalSessionTime=0;
 let remainingTime=0;
 
 let lastImage = "";
+let lastExoIndex = -1;
 
 let radius=45;
 let circumference=2*Math.PI*radius;
@@ -387,7 +388,12 @@ if(phase==="repos") timerLabel.innerText="REPOS";
 bar.style.width=((totalSessionTime-remainingTime)/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
+if(lastExoIndex !== exIndex){
+
 updateConseil(exo);
+lastExoIndex = exIndex;
+
+}
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
