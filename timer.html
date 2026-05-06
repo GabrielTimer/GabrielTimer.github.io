@@ -139,6 +139,28 @@ grid-template-columns:1fr 1fr 1fr;
 gap:8px;
 }
 
+#conseilBtn{
+margin-top:12px;
+font-size:14px;
+background:rgba(255,255,255,0.25);
+padding:8px 14px;
+border-radius:12px;
+cursor:pointer;
+display:none;
+font-weight:bold;
+}
+
+#conseilBox{
+display:none;
+margin-top:10px;
+background:white;
+color:#111;
+padding:12px;
+border-radius:14px;
+font-size:14px;
+line-height:1.4;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
 button{
 height:40px;
 border:none;
@@ -185,6 +207,10 @@ button:active{transform:scale(0.95);}
 <div id="exoInfo"></div>
 <div id="repInfo"></div>
 <div id="serieInfo"></div>
+
+<div id="conseilBtn">💡 Conseil</div>
+<div id="conseilBox"></div>
+
 </div>
 
 </div>
@@ -288,6 +314,22 @@ soundOn=!soundOn;
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
 }
 
+function updateConseil(exo){
+
+let btn = document.getElementById("conseilBtn");
+let box = document.getElementById("conseilBox");
+
+if(!exo.conseil){
+btn.style.display="none";
+box.style.display="none";
+return;
+}
+
+btn.style.display="inline-block";
+box.innerText = exo.conseil;
+
+}
+
 function togglePause(){
 paused=!paused;
 let icon = document.getElementById("playIcon");
@@ -300,6 +342,23 @@ icon.innerText = "⏸";
 icon.classList.remove("pulse");
 }
 }
+document.getElementById("conseilBtn").onclick=()=>{
+
+let box = document.getElementById("conseilBox");
+
+if(box.style.display==="block"){
+box.style.display="none";
+}else{
+
+box.style.display="block";
+
+setTimeout(()=>{
+box.style.display="none";
+},5000);
+
+}
+
+};
 
 function update(){
 
@@ -329,6 +388,7 @@ if(phase==="repos") timerLabel.innerText="REPOS";
 bar.style.width=((totalSessionTime-remainingTime)/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
+updateConseil(exo);
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
