@@ -260,7 +260,9 @@ button:active{transform:scale(0.95);}
 
 /* ===== CODE ORIGINAL INTACT ===== */
 
-let p = JSON.parse(localStorage.getItem("programme_temp"));
+let p =
+JSON.parse(localStorage.getItem("patho_data")) ||
+JSON.parse(localStorage.getItem("programme_temp"));
 if(!p){window.location="config.html";}
 
 const timerLabel = document.querySelector(".timerLabel");
