@@ -47,11 +47,17 @@ width:60px;
 /* IMAGE */
 
 .image-container{
+
 height:32vh;
+
 display:flex;
 align-items:center;
 justify-content:center;
+
 position:relative;
+
+width:100%;
+
 }
 
 #img{
@@ -69,19 +75,34 @@ background:white;
 /* BOUTON CONSEIL */
 
 #floatingConseilBtn{
+
 position:absolute;
-right:10px;
+
+left:calc(50% + 150px);
 top:50%;
+
 transform:translateY(-50%);
-width:42px;
-height:42px;
+
+width:48px;
+height:48px;
+
 border-radius:50%;
 border:none;
+
 background:white;
-font-size:20px;
+
+font-size:22px;
+
 cursor:pointer;
+
 box-shadow:0 4px 14px rgba(0,0,0,0.25);
+
 z-index:10;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
 }
 
 /* OVERLAY CONSEIL */
