@@ -140,14 +140,36 @@ gap:8px;
 }
 
 #conseilBtn{
-margin-top:12px;
-font-size:14px;
-background:rgba(255,255,255,0.25);
-padding:8px 14px;
-border-radius:12px;
+margin-top:16px;
+font-size:15px;
+background:#ffffff;
+color:#111;
+padding:10px 16px;
+border:none;
+border-radius:14px;
 cursor:pointer;
-display:inline-block;
+display:block;
 font-weight:bold;
+width:200px;
+margin-left:auto;
+margin-right:auto;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+height:auto;
+}
+
+#conseilBox{
+display:none;
+margin-top:12px;
+background:white;
+color:#111;
+padding:14px;
+border-radius:14px;
+font-size:15px;
+line-height:1.5;
+box-shadow:0 5px 20px rgba(0,0,0,0.25);
+max-width:320px;
+margin-left:auto;
+margin-right:auto;
 }
 
 #conseilBox{
@@ -208,7 +230,7 @@ button:active{transform:scale(0.95);}
 <div id="repInfo"></div>
 <div id="serieInfo"></div>
 
-<div id="conseilBtn">💡 Conseil</div>
+<button id="conseilBtn">💡 Conseil</button>
 <div id="conseilBox"></div>
 
 </div>
@@ -319,14 +341,13 @@ function updateConseil(exo){
 let btn = document.getElementById("conseilBtn");
 let box = document.getElementById("conseilBox");
 
-if(!exo.conseil){
-btn.style.display="inline-block";
-box.innerText="Aucun conseil";
-return;
-}
+btn.style.display = "block";
 
-btn.style.display="inline-block";
+if(!exo.conseil){
+box.innerText = "Aucun conseil disponible";
+}else{
 box.innerText = exo.conseil;
+}
 
 }
 
