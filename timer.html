@@ -6,11 +6,12 @@
 <title>Timer</title>
 
 <style>
+
 body{
 margin:0;
 background:#f1f5f9;
 color:#0f172a;
-font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+font-family:-apple-system, BlinkMacSystemFont,"Segoe UI",sans-serif;
 height:100dvh;
 overflow:hidden;
 transition:background 0.3s;
@@ -26,7 +27,7 @@ box-sizing:border-box;
 }
 
 .inner{
-max-width:380px;
+max-width:420px;
 width:100%;
 margin:auto;
 display:flex;
@@ -43,26 +44,101 @@ margin-bottom:5px;
 width:60px;
 }
 
+/* IMAGE */
+
 .image-container{
 height:32vh;
 display:flex;
 align-items:center;
 justify-content:center;
+position:relative;
 }
 
 #img{
 max-width:85vw;
 max-height:30vh;
-
 width:auto;
 height:auto;
-
 object-fit:contain;
 margin:0;
 display:none;
-
-border-radius:12px;
+border-radius:16px;
+background:white;
 }
+
+/* BOUTON CONSEIL */
+
+#floatingConseilBtn{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+width:42px;
+height:42px;
+border-radius:50%;
+border:none;
+background:white;
+font-size:20px;
+cursor:pointer;
+box-shadow:0 4px 14px rgba(0,0,0,0.25);
+z-index:10;
+}
+
+/* OVERLAY CONSEIL */
+
+#conseilOverlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.92);
+display:none;
+z-index:9999;
+padding:20px;
+box-sizing:border-box;
+}
+
+.overlayContent{
+display:flex;
+gap:24px;
+align-items:center;
+justify-content:center;
+height:100%;
+}
+
+#overlayImg{
+max-width:55vw;
+max-height:85vh;
+object-fit:contain;
+border-radius:20px;
+background:white;
+padding:10px;
+}
+
+#overlayText{
+background:white;
+color:#111;
+padding:28px;
+border-radius:20px;
+font-size:28px;
+font-weight:600;
+line-height:1.5;
+max-width:32vw;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+#closeConseil{
+position:absolute;
+top:20px;
+right:20px;
+width:52px;
+height:52px;
+border-radius:50%;
+border:none;
+background:white;
+font-size:24px;
+cursor:pointer;
+}
+
+/* TIMER */
 
 .timerZone{
 flex:1;
@@ -88,7 +164,11 @@ transform:translate(-50%,-50%);
 text-align:center;
 }
 
-.timerLabel{font-size:14px;opacity:0.8;}
+.timerLabel{
+font-size:14px;
+opacity:0.8;
+}
+
 .timerValue{
 font-size:46px;
 font-weight:bold;
@@ -102,20 +182,28 @@ margin-top:5px;
 .infoBottom{
 text-align:center;
 margin-top:16px;
-font-size:22px; /* ⬅️ plus gros */
+font-size:22px;
 font-weight:700;
 line-height:1.4;
 }
 
-.circleWrap:hover #playIcon{transform:scale(1.2);}
-.circleWrap:active #playIcon{transform:scale(0.9);}
-
-@keyframes pulse {
-0% { transform: scale(1); opacity: 1; }
-50% { transform: scale(1.3); opacity: 0.6; }
-100% { transform: scale(1); opacity: 1; }
+.circleWrap:hover #playIcon{
+transform:scale(1.2);
 }
-.pulse{animation: pulse 0.9s infinite;}
+
+.circleWrap:active #playIcon{
+transform:scale(0.9);
+}
+
+@keyframes pulse{
+0%{transform:scale(1);opacity:1;}
+50%{transform:scale(1.3);opacity:0.6;}
+100%{transform:scale(1);opacity:1;}
+}
+
+.pulse{
+animation:pulse 0.9s infinite;
+}
 
 .bottomFixed{
 position:sticky;
@@ -145,34 +233,11 @@ text-align:center;
 opacity:0.8;
 }
 
-/* 🔥 FIX GRID POUR 3 BOUTONS */
 .buttons{
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
 gap:8px;
 }
-
-#conseilBtn{
-margin-top:16px;
-font-size:15px;
-background:#ffffff;
-color:#111;
-padding:10px 16px;
-border:none;
-border-radius:14px;
-cursor:pointer;
-display:block;
-font-weight:bold;
-width:200px;
-margin-left:auto;
-margin-right:auto;
-box-shadow:0 4px 12px rgba(0,0,0,0.2);
-height:auto;
-min-height:60px;
-white-space:normal;
-line-height:1.5;
-}
-
 
 button{
 height:40px;
@@ -185,8 +250,34 @@ font-weight:600;
 transition:0.2s;
 }
 
-button:hover{transform:scale(1.05);}
-button:active{transform:scale(0.95);}
+button:hover{
+transform:scale(1.05);
+}
+
+button:active{
+transform:scale(0.95);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.overlayContent{
+flex-direction:column;
+}
+
+#overlayImg{
+max-width:90vw;
+max-height:45vh;
+}
+
+#overlayText{
+max-width:90vw;
+font-size:20px;
+}
+
+}
+
 </style>
 </head>
 
@@ -200,30 +291,60 @@ button:active{transform:scale(0.95);}
 </div>
 
 <div class="image-container">
+
 <img id="img">
+
+<button id="floatingConseilBtn">💡</button>
+
 </div>
 
 <div class="timerZone">
 
 <div class="circleWrap" onclick="togglePause()">
+
 <svg viewBox="0 0 100 100">
-<circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none"/>
-<circle id="progressCircle" cx="50" cy="50" r="45" stroke="#00e5ff" stroke-width="6" fill="none" transform="rotate(-90 50 50)"/>
+
+<circle
+cx="50"
+cy="50"
+r="45"
+stroke="rgba(255,255,255,0.2)"
+stroke-width="6"
+fill="none"
+/>
+
+<circle
+id="progressCircle"
+cx="50"
+cy="50"
+r="45"
+stroke="#00e5ff"
+stroke-width="6"
+fill="none"
+transform="rotate(-90 50 50)"
+/>
+
 </svg>
 
 <div id="timer">
+
 <div class="timerLabel">PRÉPAREZ VOUS</div>
+
 <div class="timerValue" id="timerValue">0</div>
+
 <div id="playIcon">⏸</div>
+
 </div>
+
 </div>
 
 <div class="infoBottom">
-<div id="exoInfo"></div>
-<div id="repInfo"></div>
-<div id="serieInfo"></div>
 
-<button id="conseilBtn">💡 Conseil</button>
+<div id="exoInfo"></div>
+
+<div id="repInfo"></div>
+
+<div id="serieInfo"></div>
 
 </div>
 
@@ -238,160 +359,240 @@ button:active{transform:scale(0.95);}
 </div>
 
 <div class="buttons">
+
 <button id="soundBtn" onclick="toggleSound()">🔊 Son</button>
+
 <button onclick="skipExo()">⏭</button>
+
 <button onclick="back()">⚙️</button>
-</div>
 
 </div>
 
 </div>
+
+</div>
+</div>
+
+<!-- OVERLAY CONSEIL -->
+
+<div id="conseilOverlay">
+
+<button id="closeConseil">✖</button>
+
+<div class="overlayContent">
+
+<img id="overlayImg">
+
+<div id="overlayText"></div>
+
+</div>
+
 </div>
 
 <script>
 
-/* ===== CODE ORIGINAL INTACT ===== */
+/* ===== CODE ORIGINAL ===== */
 
 let p =
 JSON.parse(localStorage.getItem("patho_data")) ||
 JSON.parse(localStorage.getItem("programme_temp"));
-if(!p){window.location="config.html";}
+
+if(!p){
+window.location="config.html";
+}
 
 const timerLabel = document.querySelector(".timerLabel");
 
-let exIndex=0, repIndex=1, serieIndex=1;
+let exIndex=0;
+let repIndex=1;
+let serieIndex=1;
+
 let phase="prep";
-let PREP_TIME = 3;
-let t=PREP_TIME, totalTimePhase=PREP_TIME;
+
+let PREP_TIME=3;
+
+let t=PREP_TIME;
+let totalTimePhase=PREP_TIME;
+
 let paused=false;
 let soundOn=true;
 
 let totalSessionTime=0;
 let remainingTime=0;
 
-let lastImage = "";
-let lastExoIndex = -1;
+let lastImage="";
 
 let radius=45;
 let circumference=2*Math.PI*radius;
+
 progressCircle.style.strokeDasharray=circumference;
 
+/* TOTAL */
+
 function computeTotal(){
-totalSessionTime = 0;
 
-p.exercices.forEach((exo, index)=>{
-for(let r=0; r<exo.reps; r++){
-totalSessionTime += exo.ex;
+totalSessionTime=0;
 
-let isLastExo = index === p.exercices.length - 1;
-let isLastRep = r === exo.reps - 1;
+p.exercices.forEach((exo,index)=>{
+
+for(let r=0;r<exo.reps;r++){
+
+totalSessionTime+=exo.ex;
+
+let isLastExo=index===p.exercices.length-1;
+let isLastRep=r===exo.reps-1;
 
 if(!(isLastExo && isLastRep)){
-totalSessionTime += exo.repos;
+totalSessionTime+=exo.repos;
 }
+
 }
+
 });
 
-totalSessionTime *= p.series;
-totalSessionTime += PREP_TIME;
+totalSessionTime*=p.series;
+totalSessionTime+=PREP_TIME;
 
-remainingTime = totalSessionTime;
+remainingTime=totalSessionTime;
+
 }
+
 computeTotal();
 
+/* TIME */
+
 function formatTime(s){
+
 let m=Math.floor(s/60);
+
 return m+":"+(s%60<10?"0":"")+s%60;
+
 }
 
 function updateTotal(){
+
 totalTime.innerText="Durée : "+formatTime(remainingTime);
+
 }
+
 updateTotal();
 
+/* AUDIO */
+
 function beep(){
+
 if(!soundOn)return;
+
 let ctx=new AudioContext();
+
 let o=ctx.createOscillator();
+
 o.frequency.value=800;
+
 o.connect(ctx.destination);
+
 o.start();
+
 setTimeout(()=>o.stop(),150);
+
 }
 
 function speak(t){
+
 if(!soundOn)return;
+
 let u=new SpeechSynthesisUtterance(t);
+
 u.lang="fr-FR";
+
 speechSynthesis.speak(u);
+
 }
 
 function toggleSound(){
+
 soundOn=!soundOn;
+
 soundBtn.innerHTML = soundOn ? "🔊 Son" : "🔇 Muet";
+
 }
 
-let conseilVisible = false;
-
-function updateConseil(exo){
-
-let btn = document.getElementById("conseilBtn");
-
-conseilVisible = false;
-
-btn.innerHTML = "💡 Conseil";
-}
+/* PAUSE */
 
 function togglePause(){
+
 paused=!paused;
-let icon = document.getElementById("playIcon");
+
+let icon=document.getElementById("playIcon");
 
 if(paused){
-icon.innerText = "▶️";
+
+icon.innerText="▶️";
 icon.classList.add("pulse");
+
 }else{
-icon.innerText = "⏸";
+
+icon.innerText="⏸";
 icon.classList.remove("pulse");
-}
+
 }
 
-document.getElementById("conseilBtn").onclick = () => {
+}
 
-const btn = document.getElementById("conseilBtn");
+/* CONSEIL */
+
+const overlay = document.getElementById("conseilOverlay");
+
+document.getElementById("floatingConseilBtn").onclick = ()=>{
+
+paused = true;
+
+let icon=document.getElementById("playIcon");
+
+icon.innerText="▶️";
+icon.classList.add("pulse");
 
 let exo = p.exercices[exIndex];
 
-if(conseilVisible){
+document.getElementById("overlayImg").src = img.src;
 
-btn.innerHTML = "💡 Conseil";
-conseilVisible = false;
+document.getElementById("overlayText").innerHTML =
+exo.conseil || "Aucun conseil disponible";
 
-}else{
-
-btn.innerHTML = exo.conseil || "Aucun conseil disponible";
-conseilVisible = true;
-
-}
+overlay.style.display = "block";
 
 };
+
+document.getElementById("closeConseil").onclick = ()=>{
+
+overlay.style.display = "none";
+
+};
+
+/* UPDATE */
 
 function update(){
 
 let progress = 1 - (t / totalTimePhase);
-progressCircle.style.strokeDashoffset = circumference * progress;
 
-/* 🎨 VERSION COHÉRENTE AVEC TON SITE */
+progressCircle.style.strokeDashoffset =
+circumference * progress;
+
+/* COULEURS */
+
 if(phase==="prep"){
-    document.body.style.background="#f1f5f9";
-    document.body.style.color="#0f172a";
+document.body.style.background="#f1f5f9";
+document.body.style.color="#0f172a";
 }
+
 if(phase==="ex"){
-    document.body.style.background="#ef4444";
-    document.body.style.color="#ffffff";
+document.body.style.background="#ef4444";
+document.body.style.color="#ffffff";
 }
+
 if(phase==="repos"){
-    document.body.style.background="#2563eb";
-    document.body.style.color="#ffffff";
+document.body.style.background="#2563eb";
+document.body.style.color="#ffffff";
 }
 
 timerValue.innerText=t;
@@ -400,15 +601,11 @@ if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
 if(phase==="repos") timerLabel.innerText="REPOS";
 
-bar.style.width=((totalSessionTime-remainingTime)/totalSessionTime*100)+"%";
+bar.style.width=
+((totalSessionTime-remainingTime)/totalSessionTime*100)+"%";
 
 let exo=p.exercices[exIndex];
-if(lastExoIndex !== exIndex){
 
-updateConseil(exo);
-lastExoIndex = exIndex;
-
-}
 exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
@@ -416,9 +613,11 @@ serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 let patho = localStorage.getItem("pathologie");
 
 if(patho){
+
 img.style.display="block";
 
 let base = "images/"+patho+"/ex"+(exIndex+1);
+
 let jpg = base + ".jpg";
 let png = base + ".png";
 
@@ -427,21 +626,30 @@ if(lastImage !== jpg && lastImage !== png){
 img.onerror = null;
 
 img.src = jpg;
+
 lastImage = jpg;
 
 img.onerror = function(){
+
 this.onerror = null;
+
 this.src = png;
+
 lastImage = png;
+
 };
 
 }
 
 }else{
+
 img.style.display="none";
+
 }
+
 }
-/* ===== AJOUTS SAFE ===== */
+
+/* SAFE */
 
 function recomputeRemainingTime(){
 
@@ -449,11 +657,16 @@ let time = 0;
 
 for(let s = serieIndex - 1; s < p.series; s++){
 
-for(let e = (s === serieIndex - 1 ? exIndex : 0); e < p.exercices.length; e++){
+for(let e = (s === serieIndex - 1 ? exIndex : 0);
+e < p.exercices.length;
+e++){
 
 let exo = p.exercices[e];
 
-let startRep = (s === serieIndex - 1 && e === exIndex) ? repIndex : 1;
+let startRep =
+(s === serieIndex - 1 && e === exIndex)
+? repIndex
+: 1;
 
 for(let r = startRep; r <= exo.reps; r++){
 
@@ -474,99 +687,158 @@ time += exo.repos;
 }
 
 remainingTime = time + t;
+
 updateTotal();
+
 }
+
+/* SKIP */
 
 function skipExo(){
 
-repIndex = 1;
+repIndex=1;
+
 exIndex++;
 
-if(exIndex >= p.exercices.length){
-exIndex = 0;
+if(exIndex>=p.exercices.length){
+
+exIndex=0;
+
 serieIndex++;
+
 }
 
-if(serieIndex > p.series){
+if(serieIndex>p.series){
+
 window.location="fin.html";
+
 return;
+
 }
 
-phase = "ex";
-t = p.exercices[exIndex].ex;
-totalTimePhase = t;
+phase="ex";
+
+t=p.exercices[exIndex].ex;
+
+totalTimePhase=t;
 
 recomputeRemainingTime();
+
 update();
+
 }
 
-/* ===== ORIGINAL ===== */
+/* NEXT */
 
 function next(){
+
 let exo=p.exercices[exIndex];
 
 if(phase==="prep"){
+
 phase="ex";
+
 t=exo.ex;
+
 totalTimePhase=exo.ex;
+
 beep();
+
 update();
+
 return;
+
 }
 
 if(phase==="ex"){
+
 phase="repos";
+
 t=exo.repos;
+
 totalTimePhase=exo.repos;
+
 speak("repos");
+
 update();
+
 return;
+
 }
 
 phase="ex";
+
 t=exo.ex;
+
 totalTimePhase=exo.ex;
+
 beep();
 
 repIndex++;
 
 if(repIndex>exo.reps){
+
 repIndex=1;
+
 exIndex++;
+
 if(exIndex>=p.exercices.length){
+
 exIndex=0;
+
 serieIndex++;
+
 }
+
 }
 
 update();
+
 }
 
+/* LOOP */
+
 function loop(){
-if(paused) return;
+
+if(paused)return;
 
 t--;
+
 remainingTime = Math.max(0, remainingTime - 1);
 
 if(remainingTime <= 0){
+
 window.location="fin.html";
+
 return;
+
 }
 
 updateTotal();
 
 if(t<=0){
+
 next();
+
 }else{
-update();
-}
-}
-
-function back(){window.location="config.html";}
 
 update();
+
+}
+
+}
+
+function back(){
+
+window.location="config.html";
+
+}
+
+update();
+
 setInterval(loop,1000);
 
 </script>
+
 </body>
 </html>
