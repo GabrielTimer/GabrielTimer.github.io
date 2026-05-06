@@ -77,6 +77,7 @@ background:white;
 #floatingConseilBtn{
 
 position:absolute;
+transition:0.2s;
 
 left:calc(50% + 150px);
 top:50%;
@@ -102,6 +103,42 @@ z-index:10;
 display:flex;
 align-items:center;
 justify-content:center;
+
+}
+
+#floatingConseilBtn:hover{
+transform:translateY(-50%) scale(1.12);
+}
+
+#hoverConseil{
+
+position:absolute;
+
+left:calc(50% + 210px);
+top:50%;
+
+opacity:0;
+transition:0.2s;
+
+transform:translateY(-50%);
+
+background:white;
+color:#111;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+font-size:16px;
+font-weight:600;
+
+max-width:240px;
+
+box-shadow:0 6px 18px rgba(0,0,0,0.25);
+
+display:none;
+
+z-index:20;
 
 }
 
@@ -316,6 +353,7 @@ font-size:20px;
 <img id="img">
 
 <button id="floatingConseilBtn">💡</button>
+<div id="hoverConseil"></div>
 
 </div>
 
@@ -563,6 +601,30 @@ icon.classList.remove("pulse");
 /* CONSEIL */
 
 const overlay = document.getElementById("conseilOverlay");
+const hoverBox =
+document.getElementById("hoverConseil");
+
+const conseilBtn =
+document.getElementById("floatingConseilBtn");
+
+conseilBtn.onmouseenter = ()=>{
+
+let exo = p.exercices[exIndex];
+
+hoverBox.innerHTML =
+exo.conseil || "Aucun conseil";
+
+hoverBox.style.display="block";
+setTimeout(()=>hoverBox.style.opacity="1",10);
+
+};
+
+conseilBtn.onmouseleave = ()=>{
+
+hoverBox.style.opacity="0";
+setTimeout(()=>hoverBox.style.display="none",200);
+
+};
 
 document.getElementById("floatingConseilBtn").onclick = ()=>{
 
