@@ -363,18 +363,23 @@ icon.innerText = "⏸";
 icon.classList.remove("pulse");
 }
 }
-document.getElementById("conseilBtn").onclick=()=>{
 
-let box = document.getElementById("conseilBox");
+document.getElementById("conseilBtn").onclick = () => {
 
-if(box.style.display==="block"){
-box.style.display="none";
+const box = document.getElementById("conseilBox");
+
+if(box.style.display === "block"){
+
+box.style.display = "none";
+
 }else{
 
-box.style.display="block";
+box.style.display = "block";
 
-setTimeout(()=>{
-box.style.display="none";
+clearTimeout(window.conseilTimeout);
+
+window.conseilTimeout = setTimeout(()=>{
+box.style.display = "none";
 },5000);
 
 }
