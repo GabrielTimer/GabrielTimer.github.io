@@ -121,6 +121,7 @@ background:#ccc;
 <button class="back" onclick="back()">⬅ Retour</button>
 
 <script>
+const VERSION = "1.2";
 
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
 let list = all.filter(p=>p.type==="favori");
@@ -154,7 +155,7 @@ edit.onclick=(e)=>{
 e.stopPropagation();
 localStorage.setItem("edit_programme", JSON.stringify(p.data || p));
 localStorage.setItem("edit_index", index); // 🔥 AJOUT
-window.location="config.html?edit=1";
+window.location="config.html?edit=1&v="+VERSION;
 };
 
 /* 📄 DUPLIQUER */
@@ -169,7 +170,7 @@ let copy = JSON.parse(JSON.stringify(base));
 copy.nom = getName(p) + " (copie)";
 
 localStorage.setItem("edit_programme", JSON.stringify(copy));
-window.location="config.html?edit=1";
+window.location="config.html?edit=1&v="+VERSION;
 };
 
 /* 🗑 DELETE */
@@ -191,7 +192,7 @@ div.appendChild(actions);
 /* CLICK → lancer */
 div.onclick=()=>{
 localStorage.setItem("programme_temp", JSON.stringify(p.data || p));
-window.location="timer.html";
+window.location="timer.html?v="+VERSION;
 };
 
 container.appendChild(div);
@@ -214,8 +215,8 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-function goHist(){window.location="historique.html";}
-function back(){window.location="index.html";}
+function goHist(){window.location="historique.html?v="+VERSION;}
+function back(){window.location="index.html?v="+VERSION;}
 
 </script>
 </body>

@@ -97,19 +97,19 @@ border-radius:14px;
 
 <script>
 
+const VERSION = "1.2";
+
 function go(zone){
 
-/* 🔥 FIX IMPORTANT */
 localStorage.removeItem("edit_programme");
 
-/* garder logique existante */
 localStorage.setItem("zone", zone);
 
-window.location="liste_pathologies.html?v="+Date.now();
+window.location="liste_pathologies.html?v="+VERSION;
 }
 
 function back(){
-window.location="index.html";
+window.location="index.html?v="+VERSION;
 }
 
 </script>

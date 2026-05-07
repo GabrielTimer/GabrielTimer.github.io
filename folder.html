@@ -131,6 +131,7 @@ background:#ccc;
 <button class="back" onclick="back()">⬅ Retour</button>
 
 <script>
+const VERSION = "1.2";
 
 let name = localStorage.getItem("folder_name");
 
@@ -308,7 +309,7 @@ div.appendChild(actions);
 /* CLICK */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
-window.location="timer.html";
+window.location="timer.html?v="+VERSION;
 };
 
 container.appendChild(div);
@@ -345,6 +346,7 @@ window.location="historique.html";
 }
 
 </script>
+const VERSION = "1.2";
 
 </body>
 </html>

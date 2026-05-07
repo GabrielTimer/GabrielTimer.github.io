@@ -25,17 +25,20 @@
 </div>
 
 <script>
+
+const VERSION = "1.2";
+
 function goProg(){
-window.location="mes_programmes.html";
+window.location="mes_programmes.html?v="+VERSION;
 }
 
 function modeLibre(){
 localStorage.removeItem("pathologie");
-window.location="config.html";
+window.location="config.html?v="+VERSION;
 }
 
 function zones(){
-window.location="pathologies.html";
+window.location="pathologies.html?v="+VERSION;
 }
 </script>
 

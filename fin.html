@@ -334,6 +334,9 @@ saveAndExit();
 </script>
 
 <script>
+
+const VERSION = "1.2";
+
 function saveAndExit(){
 
 let all = localStorage.getItem("programmes");
@@ -362,7 +365,7 @@ localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
 
 localStorage.removeItem("eva_temp");
 
-window.location="index.html";
+window.location="index.html?v="+VERSION;
 }
 </script>
 

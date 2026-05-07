@@ -106,6 +106,7 @@ background:#ccc;
 <button onclick="back()">⬅ Retour</button>
 
 <script>
+const VERSION = "1.2";
 
 /* 🔥 BASE PATHO */
 const PATHO_DATA = {
@@ -371,11 +372,10 @@ div.className="card";
 
 let img=document.createElement("img");
 
-img.src="images/"+p.dossier+"/cover.png?v="+Date.now();
-
+img.src="images/"+p.dossier+"/cover.png?v="+VERSION;
 img.onerror=function(){
 this.onerror=null;
-this.src="images/"+p.dossier+"/cover.jpg?v="+Date.now();
+this.src="images/"+p.dossier+"/cover.jpg?v="+VERSION;
 };
 
 let info=document.createElement("div");
@@ -417,7 +417,7 @@ localStorage.setItem("patho_data",JSON.stringify(config));
 localStorage.setItem("pathologie", p.dossier);
 localStorage.setItem("pathologie_nom", p.nom);
 
-window.location="config.html?v="+Date.now();
+window.location="config.html?v="+VERSION;
 };
 
 div.appendChild(img);
@@ -427,10 +427,11 @@ container.appendChild(div);
 });
 
 function back(){
-window.location="pathologies.html";
+window.location="pathologies.html?v="+VERSION;
 }
 
 </script>
+const VERSION = "1.2";
 
 </body>
 </html>

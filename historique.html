@@ -149,6 +149,7 @@ background:#ccc;
 <button class="back" onclick="back()">⬅ Retour</button>
 
 <script>
+const VERSION = "1.2";
 
 let all = localStorage.getItem("programmes");
 all = all ? JSON.parse(all) : [];
@@ -257,7 +258,7 @@ div.appendChild(actions);
 /* CLICK */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
-window.location="timer.html";
+window.location="timer.html?v="+VERSION;
 };
 
 container.appendChild(div);
@@ -323,7 +324,7 @@ div.appendChild(actions);
 /* CLICK */
 div.onclick=()=>{
 localStorage.setItem("folder_name", name);
-window.location="folder.html";
+window.location="folder.html?v="+VERSION;
 };
 
 container.appendChild(div);

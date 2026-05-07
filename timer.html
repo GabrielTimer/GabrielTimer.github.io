@@ -486,6 +486,7 @@ transform="rotate(-90 50 50)"
 </div>
 
 <script>
+const VERSION = "1.2";
 
 /* ===== CODE ORIGINAL ===== */
 
@@ -494,7 +495,7 @@ JSON.parse(localStorage.getItem("patho_data")) ||
 JSON.parse(localStorage.getItem("programme_temp"));
 
 if(!p){
-window.location="config.html";
+window.location="config.html?v="+VERSION;
 }
 
 const timerLabel = document.querySelector(".timerLabel");
@@ -830,7 +831,7 @@ serieIndex++;
 
 if(serieIndex>p.series){
 
-window.location="fin.html";
+window.location="fin.html?v="+VERSION;
 
 return;
 
