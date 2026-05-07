@@ -740,21 +740,21 @@ img.style.display="block";
 let png = "images/"+patho+"/"+(exIndex+1)+".png";
 let jpg = "images/"+patho+"/"+(exIndex+1)+".jpg";
 
-if(lastImage !== jpg && lastImage !== png){
+if(lastImage !== png && lastImage !== jpg){
 
 img.onerror = null;
 
-img.src = jpg;
+img.src = png;
 
-lastImage = jpg;
+lastImage = png;
 
 img.onerror = function(){
 
 this.onerror = null;
 
-this.src = png;
+this.src = jpg;
 
-lastImage = png;
+lastImage = jpg;
 
 };
 
