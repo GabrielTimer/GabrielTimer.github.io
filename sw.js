@@ -1,5 +1,4 @@
-const CACHE_STATIC = "kine-static-v1";
-const CACHE_DYNAMIC = "kine-dynamic-v1";
+const CACHE_STATIC = "kine-static-v1.2";
 
 /* fichiers essentiels */
 const STATIC_FILES = [
@@ -14,68 +13,99 @@ const STATIC_FILES = [
 "/pathologies.html",
 "/liste_pathologies.html",
 "/style.css",
-"/logo.png",
-
-/* EVA */
-"/images/eva/0.png",
-"/images/eva/1.png",
-"/images/eva/2.png",
-"/images/eva/3.png",
-"/images/eva/4.png",
-"/images/eva/5.png"
+"/logo.png"
 ];
 
 /* INSTALL */
 self.addEventListener("install", e=>{
+
 self.skipWaiting();
+
 e.waitUntil(
+
 caches.open(CACHE_STATIC).then(cache=>{
+
 return cache.addAll(STATIC_FILES);
+
 })
+
 );
+
 });
 
 /* ACTIVATE */
 self.addEventListener("activate", e=>{
+
 e.waitUntil(
+
 caches.keys().then(keys=>{
+
 return Promise.all(
+
 keys.map(k=>{
-if(k !== CACHE_STATIC && k !== CACHE_DYNAMIC){
+
+if(k !== CACHE_STATIC){
+
 return caches.delete(k);
+
 }
+
 })
+
 );
+
 })
+
 );
+
 self.clients.claim();
+
 });
 
 /* FETCH */
+
 self.addEventListener("fetch", e=>{
 
-/* images → cache dynamique */
-if(e.request.url.includes("/images/")){
+/* HTML = toujours réseau d'abord */
+
+if(e.request.destination === "document"){
 
 e.respondWith(
-caches.open(CACHE_DYNAMIC).then(cache=>{
-return cache.match(e.request).then(res=>{
-return res || fetch(e.request).then(fetchRes=>{
-cache.put(e.request, fetchRes.clone());
-return fetchRes;
+
+fetch(e.request)
+
+.then(res=>{
+
+let clone = res.clone();
+
+caches.open(CACHE_STATIC).then(cache=>{
+
+cache.put(e.request, clone);
+
 });
-});
+
+return res;
+
 })
+
+.catch(()=>caches.match(e.request))
+
 );
 
 return;
+
 }
 
-/* reste */
+/* reste = cache */
+
 e.respondWith(
+
 caches.match(e.request).then(res=>{
+
 return res || fetch(e.request);
+
 })
+
 );
 
 });
