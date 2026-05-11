@@ -113,7 +113,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(468px);
+    transform:translateX(-50%) translateY(455px);
     width:150px;
     height:150px;
     border-radius:50%;
@@ -646,7 +646,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(468,settings.exhale);
+        animateBubble(455,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -670,7 +670,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(468,2);
+    animateBubble(455,2);
 
     breathText.textContent = "Terminé";
 
@@ -835,6 +835,14 @@ document.body.addEventListener("click",(e)=>{
 
     if(e.target.closest(".overlay-controls")) return;
 
+    if(
+        e.target.closest("#startBtn") ||
+        e.target.closest(".mode") ||
+        e.target.closest(".popup")
+    ){
+        return;
+    }
+
     overlayOpened = !overlayOpened;
 
     if(overlayOpened){
@@ -848,7 +856,6 @@ document.body.addEventListener("click",(e)=>{
     }
 
 });
-
 document.getElementById("returnBtn")
 .addEventListener("click",(e)=>{
 
@@ -862,4 +869,3 @@ document.getElementById("returnBtn")
 
 </body>
 </html>
-```
