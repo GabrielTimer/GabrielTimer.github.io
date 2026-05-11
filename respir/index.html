@@ -113,7 +113,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(455px);
+    transform:translateX(-50%) translateY(462px);
     width:150px;
     height:150px;
     border-radius:50%;
@@ -646,7 +646,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(455,settings.exhale);
+        animateBubble(462,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -670,7 +670,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(455,2);
+    animateBubble(462,2);
 
     breathText.textContent = "Terminé";
 
