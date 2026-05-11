@@ -114,7 +114,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(315px);
+    transform:translateX(-50%) translateY(calc(100% + 5px));
     width:130px;
     height:130px;;
     border-radius:50%;
@@ -346,42 +346,151 @@ input[type="range"]::-webkit-slider-thumb{
     cursor:pointer;
 }
 
-@media(max-width:480px){
+@media(max-width:768px){
+
+    body{
+        overflow-x:hidden;
+    }
 
     .app{
-        padding:18px 14px;
+        padding:14px 14px 120px;
+        justify-content:flex-start;
     }
 
-    .center-zone{
-        padding-top:20px;
+    /* ===== MENU ===== */
+
+    .mode-selector{
+        width:100%;
+        position:relative;
+        z-index:20;
     }
 
-    .track-container{
-        width:135px;
-        height:430px;
+    .mode-track{
+
+        display:flex;
+        gap:14px;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        padding-left:72px;
+        padding-right:10px;
+
+        scrollbar-width:none;
+
+        -webkit-overflow-scrolling:touch;
     }
 
-    .bubble{
-        transform:translateX(-50%) translateY(295px);
-        width:115px;
-        height:115px;
-
-    }
-
-    .breath-text{
-        font-size:2.2rem;
-        margin-top:24px;
+    .mode-track::-webkit-scrollbar{
+        display:none;
     }
 
     .mode{
-        padding:10px 18px;
-        font-size:1rem;
+
+        flex:0 0 auto;
+
+        min-width:170px;
+        height:58px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        padding:0 24px;
+
+        font-size:1.05rem;
+        border-radius:999px;
     }
 
+    /* ===== HOME ===== */
+
     .home-btn{
-        width:48px;
-        height:48px;
-        font-size:22px;
+
+        width:56px;
+        height:56px;
+
+        top:12px;
+        left:12px;
+
+        font-size:26px;
+    }
+
+    /* ===== CENTRE ===== */
+
+    .center-zone{
+
+        flex:1;
+
+        width:100%;
+
+        padding-top:28px;
+
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+    }
+
+    /* ===== TUBE ===== */
+
+    .track-container{
+
+        width:170px;
+
+        height:min(60vh,520px);
+
+        border-radius:999px;
+    }
+
+    /* ===== BULLE ===== */
+
+    .bubble{
+
+    width:120px;
+    height:120px;
+
+    transform:translateX(-50%) translateY(calc(100% + 5px));
+}
+
+    /* ===== TEXTE ===== */
+
+    .breath-text{
+
+        font-size:4rem;
+
+        margin-top:26px;
+
+        text-align:center;
+    }
+
+    /* ===== BAS ===== */
+
+    .bottom-zone{
+
+        position:fixed;
+
+        left:0;
+        right:0;
+        bottom:18px;
+
+        width:100%;
+
+        padding:0 18px;
+
+        z-index:40;
+    }
+
+    .duration-container{
+        gap:12px;
+    }
+
+    .duration-label{
+        font-size:1.15rem;
+    }
+
+    .main-button{
+        padding:18px;
+        font-size:1.15rem;
     }
 
 }
@@ -625,8 +734,11 @@ const soundBtn = document.getElementById("soundBtn");
 
 function animateBubble(position,duration){
 
-    bubble.style.transition = `transform ${duration}s ease-in-out`;
-    bubble.style.transform = `translateX(-50%) translateY(${position}px)`;
+    bubble.style.transition =
+        `transform ${duration}s ease-in-out`;
+
+    bubble.style.transform =
+        `translateX(-50%) translateY(${position})`;
 
 }
 
@@ -684,7 +796,7 @@ function runBreathingCycle(){
 
     breathText.textContent = "Inspirez...";
 
-    animateBubble(0,settings.inhale);
+    animateBubble("0px",settings.inhale);
 
     breathTimeout = setTimeout(()=>{
 
@@ -712,7 +824,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(315,settings.exhale);
+        animateBubble("calc(100% + 5px)",settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -736,7 +848,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(315,2);
+    animateBubble("calc(100% + 5px)",2);
 
     breathText.textContent = "Terminé";
 
