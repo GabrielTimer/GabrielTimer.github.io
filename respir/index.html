@@ -114,7 +114,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(385px);
+    transform:translateX(-50%) translateY(315px);
     width:130px;
     height:130px;;
     border-radius:50%;
@@ -348,17 +348,40 @@ input[type="range"]::-webkit-slider-thumb{
 
 @media(max-width:480px){
 
+    .app{
+        padding:18px 14px;
+    }
+
+    .center-zone{
+        padding-top:20px;
+    }
+
     .track-container{
-        width:170px;
+        width:135px;
+        height:430px;
     }
 
     .bubble{
-        width:150px;
-        height:150px;
+        transform:translateX(-50%) translateY(295px);
+        width:115px;
+        height:115px;
+
     }
 
     .breath-text{
-        font-size:2.5rem;
+        font-size:2.2rem;
+        margin-top:24px;
+    }
+
+    .mode{
+        padding:10px 18px;
+        font-size:1rem;
+    }
+
+    .home-btn{
+        width:48px;
+        height:48px;
+        font-size:22px;
     }
 
 }
@@ -689,7 +712,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(385,settings.exhale);
+        animateBubble(315,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -713,7 +736,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(385,2);
+    animateBubble(315,2);
 
     breathText.textContent = "Terminé";
 
