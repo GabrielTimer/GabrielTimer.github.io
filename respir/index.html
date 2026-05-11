@@ -19,11 +19,14 @@
 body{
     height:100vh;
     overflow:hidden;
+
     background:
         radial-gradient(circle at top,#00115f 0%,#00083a 45%,#000428 100%);
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     color:white;
     position:relative;
 }
@@ -32,50 +35,72 @@ body::before{
     content:"";
     position:absolute;
     inset:0;
+
     background:
-        radial-gradient(circle at center,rgba(30,90,255,0.15),transparent 60%);
+        radial-gradient(
+            circle at center,
+            rgba(30,90,255,0.15),
+            transparent 60%
+        );
+
     animation:bgMove 12s ease-in-out infinite alternate;
+
     pointer-events:none;
 }
 
 @keyframes bgMove{
+
     from{
         transform:scale(1);
     }
+
     to{
         transform:scale(1.08);
     }
+
 }
 
 .app{
+
     width:100%;
     max-width:520px;
     height:100vh;
+
     position:relative;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:space-between;
+
     padding:30px 20px 30px;
+
 }
 
 .mode-selector,
 .bottom-zone{
+
     width:100%;
     transition:opacity .4s ease;
+
 }
 
 .session-active .mode-selector,
 .session-active .bottom-zone{
+
     opacity:0;
     pointer-events:none;
+
 }
 
 .mode-track{
+
     display:flex;
     gap:12px;
+
     overflow:auto;
     scrollbar-width:none;
+
 }
 
 .mode-track::-webkit-scrollbar{
@@ -83,38 +108,57 @@ body::before{
 }
 
 .mode{
+
     flex:0 0 auto;
+
     padding:12px 20px;
+
     border-radius:999px;
+
     background:rgba(255,255,255,0.08);
+
     border:1px solid rgba(255,255,255,0.08);
+
     color:rgba(255,255,255,0.7);
+
     cursor:pointer;
+
     transition:.25s;
+
 }
 
 .mode.active{
+
     background:rgba(255,255,255,0.18);
     color:white;
+
 }
 
 .center-zone{
+
     flex:1;
     width:100%;
+
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
+
     position:relative;
+
 }
 
 .track-container{
-    width:190px;
-    height:760px;
+
+    width:170px;
+    height:620px;
     max-height:65vh;
+
     border-radius:999px;
+
     position:relative;
     overflow:hidden;
+
     display:flex;
     justify-content:center;
     align-items:center;
@@ -122,85 +166,117 @@ body::before{
     background:
         linear-gradient(
             180deg,
-            rgba(70,100,255,0.28),
-            rgba(30,50,200,0.45)
+            rgba(60,90,255,0.18),
+            rgba(25,45,180,0.28)
         );
 
-    border:2px solid rgba(110,150,255,0.55);
+    border:2px solid rgba(120,170,255,0.38);
 
     box-shadow:
-        inset 0 0 25px rgba(255,255,255,0.08),
-        0 0 35px rgba(60,120,255,0.18);
+        inset 0 0 22px rgba(255,255,255,0.04),
+        0 0 22px rgba(60,120,255,0.12);
+
 }
 
 .track-container::before{
+
     content:"";
+
     position:absolute;
+
     top:0;
     left:0;
+
     width:100%;
     height:110px;
 
     background:
-        radial-gradient(circle at 50% 0%,rgba(0,0,0,0.18),transparent 75%);
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(0,0,0,0.18),
+            transparent 75%
+        );
 
     pointer-events:none;
+
 }
 
 .bubble{
+
     position:absolute;
 
-    width:170px;
-    height:170px;
+    width:150px;
+    height:150px;
+
     border-radius:50%;
 
     background:
-        radial-gradient(circle at 30% 30%,
-        rgba(255,255,255,0.95),
-        rgba(180,220,255,0.35) 30%,
-        rgba(40,90,255,0.95) 100%);
+        radial-gradient(
+            circle at 30% 30%,
+            rgba(255,255,255,0.92),
+            rgba(180,220,255,0.30) 26%,
+            rgba(40,90,255,0.96) 100%
+        );
 
     box-shadow:
-        inset 0 0 25px rgba(255,255,255,0.3),
-        0 0 35px rgba(80,180,255,0.45),
-        0 0 60px rgba(50,120,255,0.2);
+        inset 0 0 22px rgba(255,255,255,0.18),
+        0 0 25px rgba(90,180,255,0.22),
+        0 0 45px rgba(50,120,255,0.12);
 
-    transition:
-        transform linear;
+    transition:transform linear;
 
-    transform:translateY(220px);
+    transform:translateY(175px);
+
 }
 
 .bubble::after{
+
     content:"";
+
     position:absolute;
+
     width:35%;
     height:35%;
+
     border-radius:50%;
+
     top:18%;
     left:18%;
+
     background:rgba(255,255,255,0.5);
+
     filter:blur(8px);
+
 }
 
 .breath-text{
+
     margin-top:38px;
+
     font-size:3rem;
     font-weight:700;
+
     letter-spacing:.5px;
-    text-shadow:0 0 18px rgba(255,255,255,0.18);
+
+    text-shadow:
+        0 0 18px rgba(255,255,255,0.18);
+
 }
 
 .bottom-zone{
+
     display:flex;
     flex-direction:column;
     gap:20px;
+
 }
 
 .duration-container{
+
     display:flex;
     flex-direction:column;
     gap:10px;
+
 }
 
 .duration-label{
@@ -208,56 +284,91 @@ body::before{
 }
 
 input[type="range"]{
+
     width:100%;
+
     appearance:none;
+
     height:6px;
+
     border-radius:999px;
+
     background:rgba(255,255,255,0.12);
+
 }
 
 input[type="range"]::-webkit-slider-thumb{
+
     appearance:none;
+
     width:24px;
     height:24px;
+
     border-radius:50%;
+
     background:white;
+
 }
 
 .main-button{
+
     border:none;
+
     padding:18px;
+
     border-radius:999px;
+
     background:rgba(255,255,255,0.15);
+
     color:white;
+
     font-size:1.1rem;
+
     cursor:pointer;
+
 }
 
 .popup{
+
     position:fixed;
     inset:0;
+
     display:none;
+
     justify-content:center;
     align-items:center;
+
     background:rgba(0,0,0,0.55);
+
     backdrop-filter:blur(10px);
+
     z-index:999;
+
     padding:20px;
+
 }
 
 .popup-content{
+
     width:100%;
     max-width:420px;
+
     background:rgba(10,18,50,0.96);
+
     border-radius:28px;
+
     padding:28px;
+
     border:1px solid rgba(255,255,255,0.08);
+
 }
 
 .popup-content h2{
+
     text-align:center;
     margin-bottom:25px;
     font-weight:500;
+
 }
 
 .setting{
@@ -265,24 +376,37 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .setting label{
+
     display:flex;
     justify-content:space-between;
+
     margin-bottom:8px;
+
 }
 
 .popup-buttons{
+
     display:flex;
     gap:12px;
+
     margin-top:20px;
+
 }
 
 .popup-buttons button{
+
     flex:1;
+
     border:none;
+
     padding:14px;
+
     border-radius:16px;
+
     color:white;
+
     cursor:pointer;
+
 }
 
 .cancel-btn{
@@ -294,10 +418,14 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .overlay-controls{
+
     position:fixed;
+
     left:50%;
     bottom:20px;
+
     transform:translateX(-50%);
+
     width:calc(100% - 20px);
     max-width:760px;
 
@@ -322,27 +450,41 @@ input[type="range"]::-webkit-slider-thumb{
     pointer-events:none;
 
     transition:.3s;
+
 }
 
 .overlay-controls.visible{
+
     opacity:1;
     pointer-events:auto;
+
 }
 
 .drag-bar{
+
     width:70px;
     height:8px;
+
     border-radius:999px;
+
     background:rgba(255,255,255,0.5);
+
     margin:0 auto 22px;
+
 }
 
 .info-box{
+
     background:rgba(255,255,255,0.05);
+
     border-radius:22px;
+
     padding:18px;
+
     line-height:1.4;
+
     margin-bottom:24px;
+
 }
 
 .info-box b{
@@ -350,86 +492,132 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .control-row{
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     gap:28px;
+
     margin-bottom:22px;
+
 }
 
 .circle-btn{
+
     width:82px;
     height:82px;
+
     border-radius:50%;
+
     border:none;
+
     cursor:pointer;
+
     font-size:2rem;
+
 }
 
 .play-btn{
+
     width:110px;
     height:110px;
+
     background:white;
+
     color:black;
+
 }
 
 .secondary-btn{
+
     background:rgba(255,255,255,0.08);
+
     color:white;
+
 }
 
 .progress{
+
     width:100%;
     height:8px;
+
     border-radius:999px;
+
     background:rgba(255,255,255,0.15);
+
     overflow:hidden;
+
     margin-bottom:12px;
+
 }
 
 .progress-fill{
-    width:50%;
+
+    width:0%;
     height:100%;
+
     background:white;
+
 }
 
 .time-row{
+
     display:flex;
     justify-content:space-between;
+
     opacity:.8;
+
     margin-bottom:22px;
+
 }
 
 .return-btn{
+
     width:100%;
+
     border:none;
+
     padding:20px;
+
     border-radius:22px;
+
     background:rgba(255,255,255,0.08);
+
     color:white;
+
     font-size:1.15rem;
+
     cursor:pointer;
+
 }
 
 .close-btn{
+
     position:fixed;
+
     top:24px;
     right:24px;
 
     width:82px;
     height:82px;
+
     border-radius:50%;
 
     background:rgba(255,255,255,0.08);
 
     border:none;
+
     color:white;
+
     font-size:2.5rem;
+
     cursor:pointer;
 
     z-index:1000;
 
     display:none;
+
 }
 
 .session-active .close-btn{
@@ -439,12 +627,12 @@ input[type="range"]::-webkit-slider-thumb{
 @media(max-width:480px){
 
     .track-container{
-        width:180px;
+        width:170px;
     }
 
     .bubble{
-        width:160px;
-        height:160px;
+        width:150px;
+        height:150px;
     }
 
     .breath-text{
@@ -531,8 +719,13 @@ input[type="range"]::-webkit-slider-thumb{
     <div class="drag-bar"></div>
 
     <div class="info-box">
+
         <b>Conseil :</b>
-        Pour de meilleurs résultats, nous vous conseillons de reprendre votre séance depuis le début.
+
+        Pour de meilleurs résultats,
+        nous vous conseillons de reprendre
+        votre séance depuis le début.
+
     </div>
 
     <div class="control-row">
@@ -542,22 +735,27 @@ input[type="range"]::-webkit-slider-thumb{
         </button>
 
         <button class="circle-btn play-btn" id="pauseBtn">
-            ▶
+            ❚❚
         </button>
 
-        <button class="circle-btn secondary-btn">
+        <button class="circle-btn secondary-btn" id="soundBtn">
             🔊
         </button>
 
     </div>
 
     <div class="progress">
+
         <div class="progress-fill" id="progressFill"></div>
+
     </div>
 
     <div class="time-row">
+
         <span id="currentTime">00:00</span>
+
         <span id="totalTime">05:00</span>
+
     </div>
 
     <button class="return-btn" id="returnBtn">
@@ -575,8 +773,11 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
+
                 <span>Inspiration</span>
+
                 <span id="inhaleValue">4 sec</span>
+
             </label>
 
             <input type="range" min="1" max="20" value="4" id="inhaleSlider">
@@ -586,8 +787,11 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
+
                 <span>Expiration</span>
+
                 <span id="exhaleValue">6 sec</span>
+
             </label>
 
             <input type="range" min="1" max="20" value="6" id="exhaleSlider">
@@ -597,8 +801,11 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
+
                 <span>Apnée</span>
+
                 <span id="holdValue">0 sec</span>
+
             </label>
 
             <input type="range" min="0" max="20" value="0" id="holdSlider">
@@ -652,40 +859,73 @@ const modes = {
 };
 
 let currentMode = "beginner";
+
 let running = false;
 let paused = false;
 
 let sessionMinutes = 5;
 let remainingSeconds = 0;
 
-const bubble = document.getElementById("bubble");
-const breathText = document.getElementById("breathText");
+let soundEnabled = true;
 
-const durationSlider = document.getElementById("durationSlider");
-const durationText = document.getElementById("durationText");
+const bubble =
+    document.getElementById("bubble");
 
-const startBtn = document.getElementById("startBtn");
+const breathText =
+    document.getElementById("breathText");
 
-const overlayControls = document.getElementById("overlayControls");
+const durationSlider =
+    document.getElementById("durationSlider");
 
-const pauseBtn = document.getElementById("pauseBtn");
+const durationText =
+    document.getElementById("durationText");
 
-const currentTime = document.getElementById("currentTime");
-const totalTime = document.getElementById("totalTime");
+const startBtn =
+    document.getElementById("startBtn");
 
-const progressFill = document.getElementById("progressFill");
+const overlayControls =
+    document.getElementById("overlayControls");
 
-const closeBtn = document.getElementById("closeBtn");
+const pauseBtn =
+    document.getElementById("pauseBtn");
 
-const popup = document.getElementById("customPopup");
+const currentTime =
+    document.getElementById("currentTime");
+
+const totalTime =
+    document.getElementById("totalTime");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const closeBtn =
+    document.getElementById("closeBtn");
+
+const popup =
+    document.getElementById("customPopup");
+
+const soundBtn =
+    document.getElementById("soundBtn");
 
 durationSlider.addEventListener("input",()=>{
 
     sessionMinutes = durationSlider.value;
-    durationText.textContent = sessionMinutes;
+
+    durationText.textContent =
+        sessionMinutes;
 
     totalTime.textContent =
-        String(sessionMinutes).padStart(2,"0") + ":00";
+        String(sessionMinutes)
+        .padStart(2,"0") + ":00";
+
+});
+
+soundBtn.addEventListener("click",()=>{
+
+    soundEnabled = !soundEnabled;
+
+    soundBtn.style.opacity =
+        soundEnabled ? "1" : "0.4";
 
 });
 
@@ -719,13 +959,19 @@ document.getElementById("saveCustom")
 .addEventListener("click",()=>{
 
     modes.custom.inhale =
-        parseInt(document.getElementById("inhaleSlider").value);
+        parseInt(
+            document.getElementById("inhaleSlider").value
+        );
 
     modes.custom.exhale =
-        parseInt(document.getElementById("exhaleSlider").value);
+        parseInt(
+            document.getElementById("exhaleSlider").value
+        );
 
     modes.custom.hold =
-        parseInt(document.getElementById("holdSlider").value);
+        parseInt(
+            document.getElementById("holdSlider").value
+        );
 
     popup.style.display = "none";
 
@@ -761,6 +1007,8 @@ function wait(ms){
 
 function playGong(freq=432,duration=2){
 
+    if(!soundEnabled) return;
+
     const audioCtx =
         new(window.AudioContext || window.webkitAudioContext)();
 
@@ -776,7 +1024,10 @@ function playGong(freq=432,duration=2){
 
     osc.type = "sine";
 
-    gain.gain.setValueAtTime(0.001,audioCtx.currentTime);
+    gain.gain.setValueAtTime(
+        0.001,
+        audioCtx.currentTime
+    );
 
     gain.gain.exponentialRampToValueAtTime(
         0.2,
@@ -796,29 +1047,37 @@ function playGong(freq=432,duration=2){
 
 function updateProgress(){
 
-    const total = sessionMinutes * 60;
+    const total =
+        sessionMinutes * 60;
 
-    const done = total - remainingSeconds;
+    const done =
+        total - remainingSeconds;
 
-    const percent = (done / total) * 100;
+    const percent =
+        (done / total) * 100;
 
-    progressFill.style.width = percent + "%";
+    progressFill.style.width =
+        percent + "%";
 
     const min =
-        String(Math.floor(remainingSeconds / 60))
-        .padStart(2,"0");
+        String(
+            Math.floor(remainingSeconds / 60)
+        ).padStart(2,"0");
 
     const sec =
-        String(remainingSeconds % 60)
-        .padStart(2,"0");
+        String(
+            remainingSeconds % 60
+        ).padStart(2,"0");
 
-    currentTime.textContent = `${min}:${sec}`;
+    currentTime.textContent =
+        `${min}:${sec}`;
 
 }
 
 async function breathingLoop(){
 
-    const settings = modes[currentMode];
+    const settings =
+        modes[currentMode];
 
     while(running){
 
@@ -829,13 +1088,14 @@ async function breathingLoop(){
 
         }
 
-        breathText.textContent = "Inspirez...";
+        breathText.textContent =
+            "Inspirez...";
 
         bubble.style.transition =
             `transform ${settings.inhale}s ease-in-out`;
 
         bubble.style.transform =
-            "translateY(-230px)";
+            "translateY(-175px)";
 
         await wait(settings.inhale * 1000);
 
@@ -843,19 +1103,21 @@ async function breathingLoop(){
 
         if(settings.hold > 0){
 
-            breathText.textContent = "Apnée...";
+            breathText.textContent =
+                "Apnée...";
 
             await wait(settings.hold * 1000);
 
         }
 
-        breathText.textContent = "Expirez...";
+        breathText.textContent =
+            "Expirez...";
 
         bubble.style.transition =
             `transform ${settings.exhale}s ease-in-out`;
 
         bubble.style.transform =
-            "translateY(230px)";
+            "translateY(175px)";
 
         await wait(settings.exhale * 1000);
 
@@ -868,17 +1130,24 @@ startBtn.addEventListener("click",async()=>{
     if(running) return;
 
     running = true;
-
     paused = false;
 
-    document.body.classList.add("session-active");
+    pauseBtn.innerHTML = "❚❚";
+
+    document.body.classList.add(
+        "session-active"
+    );
 
     playGong();
 
-    remainingSeconds = sessionMinutes * 60;
+    remainingSeconds =
+        sessionMinutes * 60;
 
     totalTime.textContent =
-        String(sessionMinutes).padStart(2,"0") + ":00";
+        String(sessionMinutes)
+        .padStart(2,"0") + ":00";
+
+    updateProgress();
 
     const timer = setInterval(()=>{
 
@@ -915,31 +1184,48 @@ pauseBtn.addEventListener("click",()=>{
 
     paused = !paused;
 
-    pauseBtn.textContent = paused ? "▶" : "❚❚";
+    if(paused){
+
+        pauseBtn.innerHTML = "▶";
+
+    }else{
+
+        pauseBtn.innerHTML = "❚❚";
+
+        breathingLoop();
+
+    }
 
 });
 
 function stopSession(){
 
     running = false;
-
     paused = false;
 
     playGong(320,3);
 
-    bubble.style.transition = "transform 2s ease";
+    bubble.style.transition =
+        "transform 2s ease";
 
-    bubble.style.transform = "translateY(220px)";
+    bubble.style.transform =
+        "translateY(175px)";
 
-    breathText.textContent = "Terminé";
+    breathText.textContent =
+        "Terminé";
 
-    document.body.classList.remove("session-active");
+    document.body.classList.remove(
+        "session-active"
+    );
 
-    overlayControls.classList.remove("visible");
+    overlayControls.classList.remove(
+        "visible"
+    );
 
     setTimeout(()=>{
 
-        breathText.textContent = "Prêt";
+        breathText.textContent =
+            "Prêt";
 
     },2500);
 
@@ -962,14 +1248,18 @@ document.body.addEventListener("click",(e)=>{
         return;
     }
 
-    overlayControls.classList.toggle("visible");
+    overlayControls.classList.toggle(
+        "visible"
+    );
 
 });
 
 document.getElementById("returnBtn")
 .addEventListener("click",()=>{
 
-    overlayControls.classList.remove("visible");
+    overlayControls.classList.remove(
+        "visible"
+    );
 
 });
 
