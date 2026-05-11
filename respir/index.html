@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Respir</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(180deg, #071a2f 0%, #0f2f55 40%, #1f5f9c 100%);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 40%),
+        radial-gradient(circle at bottom, rgba(255,255,255,0.04), transparent 40%);
+      animation: backgroundMove 12s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes backgroundMove {
+      from {
+        transform: scale(1) translateY(0px);
+      }
+      to {
+        transform: scale(1.05) translateY(-10px);
+      }
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 20px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mode-selector {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .mode-track {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 10px;
+    }
+
+    .mode-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mode {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+    }
+
+    .mode.active {
+      background: rgba(255,255,255,0.18);
+      color: white;
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,255,255,0.12);
+    }
+
+    .center-zone {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .breath-label {
+      position: absolute;
+      top: 12%;
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.95;
+      transition: all 0.5s ease;
+      text-shadow: 0 0 20px rgba(255,255,255,0.25);
+    }
+
+    .bubble-wrapper {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .bubble-glow {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(173, 228, 255, 0.35), transparent 70%);
+      filter: blur(20px);
+      transition: transform linear;
+    }
+
+    .bubble {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 30%, rgba(91, 200, 255, 0.55) 100%);
+      box-shadow:
+        inset 0 0 25px rgba(255,255,255,0.35),
+        0 0 50px rgba(125, 215, 255, 0.35),
+        0 0 120px rgba(125, 215, 255, 0.12);
+      backdrop-filter: blur(6px);
+      transition: transform linear;
+      position: relative;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      top: 18%;
+      left: 22%;
+      width: 30%;
+      height: 30%;
+      background: rgba(255,255,255,0.35);
+      border-radius: 50%;
+      filter: blur(10px);
+    }
+
+    .session-time {
+      margin-top: 40px;
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .bottom-zone {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .duration-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .duration-label {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.15);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+
+    .main-button {
+      width: 100%;
+      padding: 18px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      backdrop-filter: blur(12px);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .main-button:hover {
+      background: rgba(255,255,255,0.24);
+      transform: scale(1.02);
+    }
+
+    .controls {
+      display: none;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .controls button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .popup-content {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(12, 24, 45, 0.95);
+      border-radius: 28px;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 50px rgba(0,0,0,0.4);
+    }
+
+    .popup-content h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .setting {
+      margin-bottom: 22px;
+    }
+
+    .setting label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      opacity: 0.85;
+    }
+
+    .popup-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .popup-buttons button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 16px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .cancel-btn {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .save-btn {
+      background: rgba(90, 180, 255, 0.5);
+    }
+
+    @media (max-width: 480px) {
+      .bubble-wrapper {
+        width: 240px;
+        height: 240px;
+      }
+
+      .bubble {
+        width: 180px;
+        height: 180px;
+      }
+
+      .breath-label {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app">
+
+    <div class="mode-selector">
+      <div class="mode-track">
+        <div class="mode active" data-mode="beginner">Débuter</div>
+        <div class="mode" data-mode="balance">Équilibrer</div>
+        <div class="mode" data-mode="calm">Apaiser</div>
+        <div class="mode" data-mode="custom">Personnalisé</div>
+      </div>
+    </div>
+
+    <div class="center-zone">
+      <div class="breath-label">Prêt</div>
+
+      <div class="bubble-wrapper">
+        <div class="bubble-glow"></div>
+        <div class="bubble"></div>
+      </div>
+
+      <div class="session-time">5 minutes</div>
+    </div>
+
+    <div class="bottom-zone">
+
+      <div class="duration-container">
+        <div class="duration-label">Durée de séance</div>
+
+        <input
+          type="range"
+          min="1"
+          max="20"
+          value="5"
+          id="durationSlider"
+        />
+      </div>
+
+      <button class="main-button" id="startBtn">
+        Lancer la séance
+      </button>
+
+      <div class="controls" id="controls">
+        <button id="pauseBtn">Pause</button>
+        <button id="stopBtn">Arrêter</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="popup" id="customPopup">
+    <div class="popup-content">
+      <h2>Mode personnalisé</h2>
+
+      <div class="setting">
+        <label>
+          <span>Inspiration</span>
+          <span id="inhaleValue">4 sec</span>
+        </label>
+        <input type="range" min="1" max="20" value="4" id="inhaleSlider">
+      </div>
+
+      <div class="setting">
+        <label>
+          <span>Expiration</span>
+          <span id="exhaleValue">6 sec</span>
+        </label>
+        <input type="range" min="1" max="20" value="6" id="exhaleSlider">
+      </div>
+
+      <div class="setting">
+        <label>
+          <span>Apnée</span>
+          <span id="holdValue">0 sec</span>
+        </label>
+        <input type="range" min="0" max="20" value="0" id="holdSlider">
+      </div>
+
+      <div class="popup-buttons">
+        <button class="cancel-btn" id="cancelCustom">Annuler</button>
+        <button class="save-btn" id="saveCustom">Valider</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    const modes = {
+      beginner: {
+        inhale: 3,
+        exhale: 5,
+        hold: 0
+      },
+      balance: {
+        inhale: 5,
+        exhale: 5,
+        hold: 0
+      },
+      calm: {
+        inhale: 4,
+        exhale: 8,
+        hold: 0
+      },
+      custom: {
+        inhale: 4,
+        exhale: 6,
+        hold: 0
+      }
+    };
+
+    let currentMode = 'beginner';
+    let sessionDuration = 5;
+    let running = false;
+    let paused = false;
+    let breathingTimeout;
+
+    const bubble = document.querySelector('.bubble');
+    const glow = document.querySelector('.bubble-glow');
+    const label = document.querySelector('.breath-label');
+    const durationSlider = document.getElementById('durationSlider');
+    const sessionTime = document.querySelector('.session-time');
+    const startBtn = document.getElementById('startBtn');
+    const controls = document.getElementById('controls');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+
+    const popup = document.getElementById('customPopup');
+
+    const inhaleSlider = document.getElementById('inhaleSlider');
+    const exhaleSlider = document.getElementById('exhaleSlider');
+    const holdSlider = document.getElementById('holdSlider');
+
+    const inhaleValue = document.getElementById('inhaleValue');
+    const exhaleValue = document.getElementById('exhaleValue');
+    const holdValue = document.getElementById('holdValue');
+
+    function updateCustomLabels() {
+      inhaleValue.textContent = inhaleSlider.value + ' sec';
+      exhaleValue.textContent = exhaleSlider.value + ' sec';
+      holdValue.textContent = holdSlider.value + ' sec';
+    }
+
+    inhaleSlider.addEventListener('input', updateCustomLabels);
+    exhaleSlider.addEventListener('input', updateCustomLabels);
+    holdSlider.addEventListener('input', updateCustomLabels);
+
+    document.querySelectorAll('.mode').forEach(mode => {
+      mode.addEventListener('click', () => {
+
+        document.querySelectorAll('.mode').forEach(m => m.classList.remove('active'));
+        mode.classList.add('active');
+
+        currentMode = mode.dataset.mode;
+
+        if (currentMode === 'custom') {
+          popup.style.display = 'flex';
+        }
+      });
+    });
+
+    document.getElementById('cancelCustom').addEventListener('click', () => {
+      popup.style.display = 'none';
+    });
+
+    document.getElementById('saveCustom').addEventListener('click', () => {
+      modes.custom.inhale = parseInt(inhaleSlider.value);
+      modes.custom.exhale = parseInt(exhaleSlider.value);
+      modes.custom.hold = parseInt(holdSlider.value);
+
+      popup.style.display = 'none';
+    });
+
+    durationSlider.addEventListener('input', () => {
+      sessionDuration = durationSlider.value;
+      sessionTime.textContent = sessionDuration + ' minutes';
+    });
+
+    function playGong(frequency = 432, duration = 2) {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.type = 'sine';
+      oscillator.frequency.value = frequency;
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.2, audioCtx.currentTime + 0.02);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + duration);
+    }
+
+    async function breathingLoop() {
+
+      const settings = modes[currentMode];
+
+      while (running) {
+
+        if (paused) {
+          await wait(300);
+          continue;
+        }
+
+        label.textContent = 'Inspirez';
+
+        animateBubble(
+          1.35,
+          -50,
+          settings.inhale
+        );
+
+        await wait(settings.inhale * 1000);
+
+        if (!running) break;
+
+        if (settings.hold > 0) {
+          label.textContent = 'Apnée';
+          await wait(settings.hold * 1000);
+        }
+
+        label.textContent = 'Expirez';
+
+        animateBubble(
+          1,
+          50,
+          settings.exhale
+        );
+
+        await wait(settings.exhale * 1000);
+      }
+    }
+
+    function animateBubble(scale, translateY, duration) {
+
+      bubble.style.transition = `transform ${duration}s linear`;
+      glow.style.transition = `transform ${duration}s linear`;
+
+      bubble.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      glow.style.transform = `translateY(${translateY}px) scale(${scale})`;
+    }
+
+    function wait(ms) {
+      return new Promise(resolve => {
+        breathingTimeout = setTimeout(resolve, ms);
+      });
+    }
+
+    startBtn.addEventListener('click', async () => {
+
+      if (running) return;
+
+      running = true;
+      paused = false;
+
+      playGong(432, 2.5);
+
+      startBtn.style.display = 'none';
+      controls.style.display = 'flex';
+
+      const totalDurationMs = sessionDuration * 60 * 1000;
+
+      setTimeout(() => {
+        stopSession();
+      }, totalDurationMs);
+
+      breathingLoop();
+    });
+
+    pauseBtn.addEventListener('click', () => {
+
+      paused = !paused;
+
+      pauseBtn.textContent = paused ? 'Reprendre' : 'Pause';
+
+      if (!paused) {
+        breathingLoop();
+      }
+    });
+
+    stopBtn.addEventListener('click', () => {
+      stopSession();
+    });
+
+    function stopSession() {
+
+      running = false;
+      paused = false;
+
+      clearTimeout(breathingTimeout);
+
+      playGong(320, 3);
+
+      label.textContent = 'Terminé';
+
+      bubble.style.transition = 'all 2s ease';
+      glow.style.transition = 'all 2s ease';
+
+      bubble.style.transform = 'translateY(0px) scale(1)';
+      glow.style.transform = 'translateY(0px) scale(1)';
+
+      startBtn.style.display = 'block';
+      controls.style.display = 'none';
+
+      pauseBtn.textContent = 'Pause';
+
+      setTimeout(() => {
+        label.textContent = 'Prêt';
+      }, 3000);
+    }
+
+  </script>
+</body>
+</html>
