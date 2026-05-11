@@ -362,11 +362,53 @@ input[type="range"]::-webkit-slider-thumb{
     }
 
 }
+.home-btn{
 
+position:fixed;
+
+top:18px;
+left:18px;
+
+width:52px;
+height:52px;
+
+border:none;
+border-radius:50%;
+
+background:rgba(255,255,255,0.12);
+
+backdrop-filter:blur(10px);
+
+color:white;
+
+font-size:24px;
+
+cursor:pointer;
+
+z-index:999;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 4px 20px rgba(0,0,0,0.25);
+
+transition:.2s;
+
+}
+
+.home-btn:hover{
+
+transform:scale(1.08);
+
+background:rgba(255,255,255,0.18);
+
+}
 </style>
 </head>
 
 <body>
+<button class="home-btn" onclick="goHome()">🏠</button>
 
 <div class="app">
 
@@ -866,6 +908,11 @@ document.getElementById("returnBtn")
 
 });
 
+function goHome(){
+
+window.location="../index.html";
+
+}
 </script>
 
 </body>
