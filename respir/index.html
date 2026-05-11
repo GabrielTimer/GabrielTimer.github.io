@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Respir</title>
 
@@ -61,46 +61,35 @@ body::before{
 }
 
 .app{
-
     width:100%;
     max-width:520px;
     height:100vh;
 
-    position:relative;
-
     display:flex;
     flex-direction:column;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 
-    padding:30px 20px 30px;
-
+    padding:30px 20px;
 }
 
 .mode-selector,
 .bottom-zone{
-
     width:100%;
     transition:opacity .4s ease;
-
 }
 
 .session-active .mode-selector,
 .session-active .bottom-zone{
-
     opacity:0;
     pointer-events:none;
-
 }
 
 .mode-track{
-
     display:flex;
     gap:12px;
-
     overflow:auto;
     scrollbar-width:none;
-
 }
 
 .mode-track::-webkit-scrollbar{
@@ -108,7 +97,6 @@ body::before{
 }
 
 .mode{
-
     flex:0 0 auto;
 
     padding:12px 20px;
@@ -124,44 +112,35 @@ body::before{
     cursor:pointer;
 
     transition:.25s;
-
 }
 
 .mode.active{
-
     background:rgba(255,255,255,0.18);
     color:white;
-
 }
 
 .center-zone{
-
     flex:1;
+
     width:100%;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-
-    position:relative;
-
 }
 
 .track-container{
 
     width:170px;
     height:620px;
+
     max-height:65vh;
 
     border-radius:999px;
 
     position:relative;
     overflow:hidden;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
 
     background:
         linear-gradient(
@@ -178,32 +157,12 @@ body::before{
 
 }
 
-.track-container::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:110px;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(0,0,0,0.18),
-            transparent 75%
-        );
-
-    pointer-events:none;
-
-}
-
 .bubble{
 
     position:absolute;
+
+    left:50%;
+    transform:translateX(-50%) translateY(175px);
 
     width:150px;
     height:150px;
@@ -222,10 +181,6 @@ body::before{
         inset 0 0 22px rgba(255,255,255,0.18),
         0 0 25px rgba(90,180,255,0.22),
         0 0 45px rgba(50,120,255,0.12);
-
-    transition:transform linear;
-
-    transform:translateY(175px);
 
 }
 
@@ -265,18 +220,19 @@ body::before{
 
 .bottom-zone{
 
+    width:100%;
+
     display:flex;
     flex-direction:column;
+
     gap:20px;
 
 }
 
 .duration-container{
-
     display:flex;
     flex-direction:column;
     gap:10px;
-
 }
 
 .duration-label{
@@ -366,7 +322,9 @@ input[type="range"]::-webkit-slider-thumb{
 .popup-content h2{
 
     text-align:center;
+
     margin-bottom:25px;
+
     font-weight:500;
 
 }
@@ -450,14 +408,11 @@ input[type="range"]::-webkit-slider-thumb{
     pointer-events:none;
 
     transition:.3s;
-
 }
 
 .overlay-controls.visible{
-
     opacity:1;
     pointer-events:auto;
-
 }
 
 .drag-bar{
@@ -485,10 +440,6 @@ input[type="range"]::-webkit-slider-thumb{
 
     margin-bottom:24px;
 
-}
-
-.info-box b{
-    font-size:1.1rem;
 }
 
 .control-row{
@@ -745,9 +696,7 @@ input[type="range"]::-webkit-slider-thumb{
     </div>
 
     <div class="progress">
-
         <div class="progress-fill" id="progressFill"></div>
-
     </div>
 
     <div class="time-row">
@@ -773,11 +722,8 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
-
                 <span>Inspiration</span>
-
                 <span id="inhaleValue">4 sec</span>
-
             </label>
 
             <input type="range" min="1" max="20" value="4" id="inhaleSlider">
@@ -787,11 +733,8 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
-
                 <span>Expiration</span>
-
                 <span id="exhaleValue">6 sec</span>
-
             </label>
 
             <input type="range" min="1" max="20" value="6" id="exhaleSlider">
@@ -801,11 +744,8 @@ input[type="range"]::-webkit-slider-thumb{
         <div class="setting">
 
             <label>
-
                 <span>Apnée</span>
-
                 <span id="holdValue">0 sec</span>
-
             </label>
 
             <input type="range" min="0" max="20" value="0" id="holdSlider">
@@ -868,6 +808,9 @@ let remainingSeconds = 0;
 
 let soundEnabled = true;
 
+let breathTimeout = null;
+let sessionTimer = null;
+
 const bubble =
     document.getElementById("bubble");
 
@@ -915,12 +858,13 @@ durationSlider.addEventListener("input",()=>{
         sessionMinutes;
 
     totalTime.textContent =
-        String(sessionMinutes)
-        .padStart(2,"0") + ":00";
+        String(sessionMinutes).padStart(2,"0") + ":00";
 
 });
 
-soundBtn.addEventListener("click",()=>{
+soundBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
 
     soundEnabled = !soundEnabled;
 
@@ -928,6 +872,41 @@ soundBtn.addEventListener("click",()=>{
         soundEnabled ? "1" : "0.4";
 
 });
+
+function playGong(freq=432,duration=2){
+
+    if(!soundEnabled) return;
+
+    const audioCtx =
+        new(window.AudioContext || window.webkitAudioContext)();
+
+    const osc = audioCtx.createOscillator();
+
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.001,audioCtx.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.2,
+        audioCtx.currentTime + 0.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioCtx.currentTime + duration
+    );
+
+    osc.start();
+
+    osc.stop(audioCtx.currentTime + duration);
+
+}
 
 document.querySelectorAll(".mode").forEach(mode=>{
 
@@ -959,19 +938,13 @@ document.getElementById("saveCustom")
 .addEventListener("click",()=>{
 
     modes.custom.inhale =
-        parseInt(
-            document.getElementById("inhaleSlider").value
-        );
+        parseInt(document.getElementById("inhaleSlider").value);
 
     modes.custom.exhale =
-        parseInt(
-            document.getElementById("exhaleSlider").value
-        );
+        parseInt(document.getElementById("exhaleSlider").value);
 
     modes.custom.hold =
-        parseInt(
-            document.getElementById("holdSlider").value
-        );
+        parseInt(document.getElementById("holdSlider").value);
 
     popup.style.display = "none";
 
@@ -999,52 +972,6 @@ document.getElementById("exhaleSlider")
 document.getElementById("holdSlider")
 .addEventListener("input",updateCustomLabels);
 
-function wait(ms){
-
-    return new Promise(resolve=>setTimeout(resolve,ms));
-
-}
-
-function playGong(freq=432,duration=2){
-
-    if(!soundEnabled) return;
-
-    const audioCtx =
-        new(window.AudioContext || window.webkitAudioContext)();
-
-    const osc = audioCtx.createOscillator();
-
-    const gain = audioCtx.createGain();
-
-    osc.connect(gain);
-
-    gain.connect(audioCtx.destination);
-
-    osc.frequency.value = freq;
-
-    osc.type = "sine";
-
-    gain.gain.setValueAtTime(
-        0.001,
-        audioCtx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.2,
-        audioCtx.currentTime + 0.02
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.0001,
-        audioCtx.currentTime + duration
-    );
-
-    osc.start();
-
-    osc.stop(audioCtx.currentTime + duration);
-
-}
-
 function updateProgress(){
 
     const total =
@@ -1060,55 +987,58 @@ function updateProgress(){
         percent + "%";
 
     const min =
-        String(
-            Math.floor(remainingSeconds / 60)
-        ).padStart(2,"0");
+        String(Math.floor(remainingSeconds / 60))
+        .padStart(2,"0");
 
     const sec =
-        String(
-            remainingSeconds % 60
-        ).padStart(2,"0");
+        String(remainingSeconds % 60)
+        .padStart(2,"0");
 
     currentTime.textContent =
         `${min}:${sec}`;
 
 }
 
-async function breathingLoop(){
+function runBreathingCycle(){
+
+    if(!running || paused) return;
 
     const settings =
         modes[currentMode];
 
-    while(running){
+    breathText.textContent =
+        "Inspirez...";
 
-        if(paused){
+    bubble.style.transition =
+        `transform ${settings.inhale}s ease-in-out`;
 
-            await wait(200);
-            continue;
+    bubble.style.transform =
+        "translateX(-50%) translateY(0px)";
 
-        }
+    breathTimeout = setTimeout(()=>{
 
-        breathText.textContent =
-            "Inspirez...";
-
-        bubble.style.transition =
-            `transform ${settings.inhale}s ease-in-out`;
-
-        bubble.style.transform =
-            "translateY(-175px)";
-
-        await wait(settings.inhale * 1000);
-
-        if(!running) break;
+        if(!running || paused) return;
 
         if(settings.hold > 0){
 
             breathText.textContent =
                 "Apnée...";
 
-            await wait(settings.hold * 1000);
+            breathTimeout = setTimeout(startExhale,
+                settings.hold * 1000
+            );
+
+        }else{
+
+            startExhale();
 
         }
+
+    },settings.inhale * 1000);
+
+    function startExhale(){
+
+        if(!running || paused) return;
 
         breathText.textContent =
             "Expirez...";
@@ -1117,15 +1047,19 @@ async function breathingLoop(){
             `transform ${settings.exhale}s ease-in-out`;
 
         bubble.style.transform =
-            "translateY(175px)";
+            "translateX(-50%) translateY(315px)";
 
-        await wait(settings.exhale * 1000);
+        breathTimeout = setTimeout(()=>{
+
+            runBreathingCycle();
+
+        },settings.exhale * 1000);
 
     }
 
 }
 
-startBtn.addEventListener("click",async()=>{
+startBtn.addEventListener("click",()=>{
 
     if(running) return;
 
@@ -1149,42 +1083,37 @@ startBtn.addEventListener("click",async()=>{
 
     updateProgress();
 
-    const timer = setInterval(()=>{
+    sessionTimer = setInterval(()=>{
 
-        if(!running){
+        if(!running || paused) return;
 
-            clearInterval(timer);
-            return;
+        remainingSeconds--;
 
-        }
+        updateProgress();
 
-        if(!paused){
+        if(remainingSeconds <= 0){
 
-            remainingSeconds--;
-
-            updateProgress();
-
-            if(remainingSeconds <= 0){
-
-                clearInterval(timer);
-
-                stopSession();
-
-            }
+            stopSession();
 
         }
 
     },1000);
 
-    breathingLoop();
+    runBreathingCycle();
 
 });
 
-pauseBtn.addEventListener("click",()=>{
+pauseBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    if(!running) return;
 
     paused = !paused;
 
     if(paused){
+
+        clearTimeout(breathTimeout);
 
         pauseBtn.innerHTML = "▶";
 
@@ -1192,7 +1121,7 @@ pauseBtn.addEventListener("click",()=>{
 
         pauseBtn.innerHTML = "❚❚";
 
-        breathingLoop();
+        runBreathingCycle();
 
     }
 
@@ -1203,13 +1132,16 @@ function stopSession(){
     running = false;
     paused = false;
 
+    clearTimeout(breathTimeout);
+    clearInterval(sessionTimer);
+
     playGong(320,3);
 
     bubble.style.transition =
         "transform 2s ease";
 
     bubble.style.transform =
-        "translateY(175px)";
+        "translateX(-50%) translateY(315px)";
 
     breathText.textContent =
         "Terminé";
@@ -1231,7 +1163,9 @@ function stopSession(){
 
 }
 
-closeBtn.addEventListener("click",()=>{
+closeBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
 
     stopSession();
 
@@ -1255,7 +1189,9 @@ document.body.addEventListener("click",(e)=>{
 });
 
 document.getElementById("returnBtn")
-.addEventListener("click",()=>{
+.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
 
     overlayControls.classList.remove(
         "visible"
