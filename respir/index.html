@@ -102,7 +102,6 @@ body::before{
 .track-container{
     width:170px;
     height:620px;
-    max-height:65vh;
     border-radius:999px;
     position:relative;
     overflow:hidden;
@@ -114,7 +113,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(395px);
+    transform:translateX(-50%) translateY(468px);
     width:150px;
     height:150px;
     border-radius:50%;
@@ -647,7 +646,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(395,settings.exhale);
+        animateBubble(468,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -671,7 +670,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(395,2);
+    animateBubble(468,2);
 
     breathText.textContent = "Terminé";
 
