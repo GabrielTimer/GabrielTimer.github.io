@@ -43,7 +43,7 @@ body::before{
 .app{
     width:100%;
     max-width:520px;
-    height:100vh;
+    height:100dvh;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -92,7 +92,7 @@ body::before{
 
 .center-zone{
     flex:1;
-    padding-top:25px;
+    padding-top:55px;
     width:100%;
     display:flex;
     flex-direction:column;
@@ -101,8 +101,8 @@ body::before{
 }
 
 .track-container{
-    width:170px;
-    height:620px;
+    width:150px;
+    height:520px;
     border-radius:999px;
     position:relative;
     overflow:hidden;
@@ -114,9 +114,9 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(465px);
-    width:150px;
-    height:150px;
+    transform:translateX(-50%) translateY(385px);
+    width:130px;
+    height:130px;;
     border-radius:50%;
     background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.92),rgba(180,220,255,0.30) 26%,rgba(40,90,255,0.96) 100%);
     box-shadow:inset 0 0 22px rgba(255,255,255,0.18),0 0 25px rgba(90,180,255,0.22),0 0 45px rgba(50,120,255,0.12);
@@ -689,7 +689,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(465,settings.exhale);
+        animateBubble(385,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -713,7 +713,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(465,2);
+    animateBubble(385,2);
 
     breathText.textContent = "Terminé";
 
