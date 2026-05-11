@@ -1,9 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Respir</title>
 
 <style>
@@ -19,14 +19,10 @@
 body{
     height:100vh;
     overflow:hidden;
-
-    background:
-        radial-gradient(circle at top,#00115f 0%,#00083a 45%,#000428 100%);
-
+    background:radial-gradient(circle at top,#00115f 0%,#00083a 45%,#000428 100%);
     display:flex;
     justify-content:center;
     align-items:center;
-
     color:white;
     position:relative;
 }
@@ -35,41 +31,24 @@ body::before{
     content:"";
     position:absolute;
     inset:0;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(30,90,255,0.15),
-            transparent 60%
-        );
-
+    background:radial-gradient(circle at center,rgba(30,90,255,0.15),transparent 60%);
     animation:bgMove 12s ease-in-out infinite alternate;
-
     pointer-events:none;
 }
 
 @keyframes bgMove{
-
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
-
+    from{ transform:scale(1); }
+    to{ transform:scale(1.08); }
 }
 
 .app{
     width:100%;
     max-width:520px;
     height:100vh;
-
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     align-items:center;
-
     padding:30px 20px;
 }
 
@@ -98,19 +77,12 @@ body::before{
 
 .mode{
     flex:0 0 auto;
-
     padding:12px 20px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,0.08);
-
     border:1px solid rgba(255,255,255,0.08);
-
     color:rgba(255,255,255,0.7);
-
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -121,9 +93,7 @@ body::before{
 
 .center-zone{
     flex:1;
-
     width:100%;
-
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -131,102 +101,53 @@ body::before{
 }
 
 .track-container{
-
     width:170px;
     height:620px;
-
     max-height:65vh;
-
     border-radius:999px;
-
     position:relative;
     overflow:hidden;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(60,90,255,0.18),
-            rgba(25,45,180,0.28)
-        );
-
+    background:linear-gradient(180deg,rgba(60,90,255,0.18),rgba(25,45,180,0.28));
     border:2px solid rgba(120,170,255,0.38);
-
-    box-shadow:
-        inset 0 0 22px rgba(255,255,255,0.04),
-        0 0 22px rgba(60,120,255,0.12);
-
+    box-shadow:inset 0 0 22px rgba(255,255,255,0.04),0 0 22px rgba(60,120,255,0.12);
 }
 
 .bubble{
-
     position:absolute;
-
     left:50%;
-    transform:translateX(-50%) translateY(175px);
-
+    transform:translateX(-50%) translateY(360px);
     width:150px;
     height:150px;
-
     border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle at 30% 30%,
-            rgba(255,255,255,0.92),
-            rgba(180,220,255,0.30) 26%,
-            rgba(40,90,255,0.96) 100%
-        );
-
-    box-shadow:
-        inset 0 0 22px rgba(255,255,255,0.18),
-        0 0 25px rgba(90,180,255,0.22),
-        0 0 45px rgba(50,120,255,0.12);
-
+    background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.92),rgba(180,220,255,0.30) 26%,rgba(40,90,255,0.96) 100%);
+    box-shadow:inset 0 0 22px rgba(255,255,255,0.18),0 0 25px rgba(90,180,255,0.22),0 0 45px rgba(50,120,255,0.12);
 }
 
 .bubble::after{
-
     content:"";
-
     position:absolute;
-
     width:35%;
     height:35%;
-
     border-radius:50%;
-
     top:18%;
     left:18%;
-
     background:rgba(255,255,255,0.5);
-
     filter:blur(8px);
-
 }
 
 .breath-text{
-
     margin-top:38px;
-
     font-size:3rem;
     font-weight:700;
-
     letter-spacing:.5px;
-
-    text-shadow:
-        0 0 18px rgba(255,255,255,0.18);
-
+    text-shadow:0 0 18px rgba(255,255,255,0.18);
 }
 
 .bottom-zone{
-
     width:100%;
-
     display:flex;
     flex-direction:column;
-
     gap:20px;
-
 }
 
 .duration-container{
@@ -240,93 +161,56 @@ body::before{
 }
 
 input[type="range"]{
-
     width:100%;
-
     appearance:none;
-
     height:6px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,0.12);
-
 }
 
 input[type="range"]::-webkit-slider-thumb{
-
     appearance:none;
-
     width:24px;
     height:24px;
-
     border-radius:50%;
-
     background:white;
-
 }
 
 .main-button{
-
     border:none;
-
     padding:18px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,0.15);
-
     color:white;
-
     font-size:1.1rem;
-
     cursor:pointer;
-
 }
 
 .popup{
-
     position:fixed;
     inset:0;
-
     display:none;
-
     justify-content:center;
     align-items:center;
-
     background:rgba(0,0,0,0.55);
-
     backdrop-filter:blur(10px);
-
     z-index:999;
-
     padding:20px;
-
 }
 
 .popup-content{
-
     width:100%;
     max-width:420px;
-
     background:rgba(10,18,50,0.96);
-
     border-radius:28px;
-
     padding:28px;
-
     border:1px solid rgba(255,255,255,0.08);
-
 }
 
 .popup-content h2{
-
     text-align:center;
-
     margin-bottom:25px;
-
     font-weight:500;
-
 }
 
 .setting{
@@ -334,37 +218,24 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .setting label{
-
     display:flex;
     justify-content:space-between;
-
     margin-bottom:8px;
-
 }
 
 .popup-buttons{
-
     display:flex;
     gap:12px;
-
     margin-top:20px;
-
 }
 
 .popup-buttons button{
-
     flex:1;
-
     border:none;
-
     padding:14px;
-
     border-radius:16px;
-
     color:white;
-
     cursor:pointer;
-
 }
 
 .cancel-btn{
@@ -376,37 +247,20 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .overlay-controls{
-
     position:fixed;
-
     left:50%;
     bottom:20px;
-
     transform:translateX(-50%);
-
     width:calc(100% - 20px);
     max-width:760px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8,15,55,0.96),
-            rgba(5,10,40,0.96)
-        );
-
+    background:linear-gradient(180deg,rgba(8,15,55,0.96),rgba(5,10,40,0.96));
     border-radius:30px;
-
     padding:22px;
-
     border:1px solid rgba(255,255,255,0.08);
-
     backdrop-filter:blur(18px);
-
     z-index:999;
-
     opacity:0;
     pointer-events:none;
-
     transition:.3s;
 }
 
@@ -416,163 +270,81 @@ input[type="range"]::-webkit-slider-thumb{
 }
 
 .drag-bar{
-
     width:70px;
     height:8px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,0.5);
-
     margin:0 auto 22px;
-
 }
 
 .info-box{
-
     background:rgba(255,255,255,0.05);
-
     border-radius:22px;
-
     padding:18px;
-
     line-height:1.4;
-
     margin-bottom:24px;
-
 }
 
 .control-row{
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     gap:28px;
-
     margin-bottom:22px;
-
 }
 
 .circle-btn{
-
     width:82px;
     height:82px;
-
     border-radius:50%;
-
     border:none;
-
     cursor:pointer;
-
     font-size:2rem;
-
 }
 
 .play-btn{
-
     width:110px;
     height:110px;
-
     background:white;
-
     color:black;
-
 }
 
 .secondary-btn{
-
     background:rgba(255,255,255,0.08);
-
     color:white;
-
 }
 
 .progress{
-
     width:100%;
     height:8px;
-
     border-radius:999px;
-
     background:rgba(255,255,255,0.15);
-
     overflow:hidden;
-
     margin-bottom:12px;
-
 }
 
 .progress-fill{
-
     width:0%;
     height:100%;
-
     background:white;
-
 }
 
 .time-row{
-
     display:flex;
     justify-content:space-between;
-
     opacity:.8;
-
     margin-bottom:22px;
-
 }
 
 .return-btn{
-
     width:100%;
-
     border:none;
-
     padding:20px;
-
     border-radius:22px;
-
     background:rgba(255,255,255,0.08);
-
     color:white;
-
     font-size:1.15rem;
-
     cursor:pointer;
-
-}
-
-.close-btn{
-
-    position:fixed;
-
-    top:24px;
-    right:24px;
-
-    width:82px;
-    height:82px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,0.08);
-
-    border:none;
-
-    color:white;
-
-    font-size:2.5rem;
-
-    cursor:pointer;
-
-    z-index:1000;
-
-    display:none;
-
-}
-
-.session-active .close-btn{
-    display:block;
 }
 
 @media(max-width:480px){
@@ -596,8 +368,6 @@ input[type="range"]::-webkit-slider-thumb{
 </head>
 
 <body>
-
-<button class="close-btn" id="closeBtn">×</button>
 
 <div class="app">
 
@@ -628,9 +398,7 @@ input[type="range"]::-webkit-slider-thumb{
     <div class="center-zone">
 
         <div class="track-container">
-
             <div class="bubble" id="bubble"></div>
-
         </div>
 
         <div class="breath-text" id="breathText">
@@ -647,13 +415,7 @@ input[type="range"]::-webkit-slider-thumb{
                 Durée : <span id="durationText">5</span> min
             </div>
 
-            <input
-                type="range"
-                min="1"
-                max="20"
-                value="5"
-                id="durationSlider"
-            >
+            <input type="range" min="1" max="20" value="5" id="durationSlider">
 
         </div>
 
@@ -670,13 +432,8 @@ input[type="range"]::-webkit-slider-thumb{
     <div class="drag-bar"></div>
 
     <div class="info-box">
-
         <b>Conseil :</b>
-
-        Pour de meilleurs résultats,
-        nous vous conseillons de reprendre
-        votre séance depuis le début.
-
+        Pour de meilleurs résultats, nous vous conseillons de reprendre votre séance depuis le début.
     </div>
 
     <div class="control-row">
@@ -700,11 +457,8 @@ input[type="range"]::-webkit-slider-thumb{
     </div>
 
     <div class="time-row">
-
         <span id="currentTime">00:00</span>
-
         <span id="totalTime">05:00</span>
-
     </div>
 
     <button class="return-btn" id="returnBtn">
@@ -720,48 +474,32 @@ input[type="range"]::-webkit-slider-thumb{
         <h2>Mode personnalisé</h2>
 
         <div class="setting">
-
             <label>
                 <span>Inspiration</span>
                 <span id="inhaleValue">4 sec</span>
             </label>
-
             <input type="range" min="1" max="20" value="4" id="inhaleSlider">
-
         </div>
 
         <div class="setting">
-
             <label>
                 <span>Expiration</span>
                 <span id="exhaleValue">6 sec</span>
             </label>
-
             <input type="range" min="1" max="20" value="6" id="exhaleSlider">
-
         </div>
 
         <div class="setting">
-
             <label>
                 <span>Apnée</span>
                 <span id="holdValue">0 sec</span>
             </label>
-
             <input type="range" min="0" max="20" value="0" id="holdSlider">
-
         </div>
 
         <div class="popup-buttons">
-
-            <button class="cancel-btn" id="cancelCustom">
-                Annuler
-            </button>
-
-            <button class="save-btn" id="saveCustom">
-                Valider
-            </button>
-
+            <button class="cancel-btn" id="cancelCustom">Annuler</button>
+            <button class="save-btn" id="saveCustom">Valider</button>
         </div>
 
     </div>
@@ -799,93 +537,45 @@ const modes = {
 };
 
 let currentMode = "beginner";
-
 let running = false;
 let paused = false;
-
 let sessionMinutes = 5;
 let remainingSeconds = 0;
-
 let soundEnabled = true;
-
 let breathTimeout = null;
 let sessionTimer = null;
+let overlayOpened = false;
 
-const bubble =
-    document.getElementById("bubble");
+const bubble = document.getElementById("bubble");
+const breathText = document.getElementById("breathText");
+const durationSlider = document.getElementById("durationSlider");
+const durationText = document.getElementById("durationText");
+const startBtn = document.getElementById("startBtn");
+const overlayControls = document.getElementById("overlayControls");
+const pauseBtn = document.getElementById("pauseBtn");
+const currentTime = document.getElementById("currentTime");
+const totalTime = document.getElementById("totalTime");
+const progressFill = document.getElementById("progressFill");
+const popup = document.getElementById("customPopup");
+const soundBtn = document.getElementById("soundBtn");
 
-const breathText =
-    document.getElementById("breathText");
+function animateBubble(position,duration){
 
-const durationSlider =
-    document.getElementById("durationSlider");
+    bubble.style.transition = `transform ${duration}s ease-in-out`;
+    bubble.style.transform = `translateX(-50%) translateY(${position}px)`;
 
-const durationText =
-    document.getElementById("durationText");
-
-const startBtn =
-    document.getElementById("startBtn");
-
-const overlayControls =
-    document.getElementById("overlayControls");
-
-const pauseBtn =
-    document.getElementById("pauseBtn");
-
-const currentTime =
-    document.getElementById("currentTime");
-
-const totalTime =
-    document.getElementById("totalTime");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const closeBtn =
-    document.getElementById("closeBtn");
-
-const popup =
-    document.getElementById("customPopup");
-
-const soundBtn =
-    document.getElementById("soundBtn");
-
-durationSlider.addEventListener("input",()=>{
-
-    sessionMinutes = durationSlider.value;
-
-    durationText.textContent =
-        sessionMinutes;
-
-    totalTime.textContent =
-        String(sessionMinutes).padStart(2,"0") + ":00";
-
-});
-
-soundBtn.addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    soundEnabled = !soundEnabled;
-
-    soundBtn.style.opacity =
-        soundEnabled ? "1" : "0.4";
-
-});
+}
 
 function playGong(freq=432,duration=2){
 
     if(!soundEnabled) return;
 
-    const audioCtx =
-        new(window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
     const osc = audioCtx.createOscillator();
-
     const gain = audioCtx.createGain();
 
     osc.connect(gain);
-
     gain.connect(audioCtx.destination);
 
     osc.frequency.value = freq;
@@ -903,10 +593,117 @@ function playGong(freq=432,duration=2){
     );
 
     osc.start();
-
     osc.stop(audioCtx.currentTime + duration);
 
 }
+
+function updateProgress(){
+
+    const total = sessionMinutes * 60;
+    const done = total - remainingSeconds;
+    const percent = (done / total) * 100;
+
+    progressFill.style.width = percent + "%";
+
+    const min = String(Math.floor(remainingSeconds / 60)).padStart(2,"0");
+    const sec = String(remainingSeconds % 60).padStart(2,"0");
+
+    currentTime.textContent = `${min}:${sec}`;
+
+}
+
+function runBreathingCycle(){
+
+    if(!running || paused) return;
+
+    const settings = modes[currentMode];
+
+    breathText.textContent = "Inspirez...";
+
+    animateBubble(0,settings.inhale);
+
+    breathTimeout = setTimeout(()=>{
+
+        if(!running || paused) return;
+
+        if(settings.hold > 0){
+
+            breathText.textContent = "Apnée...";
+
+            breathTimeout = setTimeout(()=>{
+                startExhale();
+            },settings.hold * 1000);
+
+        }else{
+
+            startExhale();
+
+        }
+
+    },settings.inhale * 1000);
+
+    function startExhale(){
+
+        if(!running || paused) return;
+
+        breathText.textContent = "Expirez...";
+
+        animateBubble(360,settings.exhale);
+
+        breathTimeout = setTimeout(()=>{
+            runBreathingCycle();
+        },settings.exhale * 1000);
+
+    }
+
+}
+
+function stopSession(){
+
+    running = false;
+    paused = false;
+
+    clearTimeout(breathTimeout);
+    clearInterval(sessionTimer);
+
+    overlayOpened = false;
+
+    overlayControls.classList.remove("visible");
+
+    playGong(320,3);
+
+    animateBubble(360,2);
+
+    breathText.textContent = "Terminé";
+
+    document.body.classList.remove("session-active");
+
+    setTimeout(()=>{
+        breathText.textContent = "Prêt";
+    },2500);
+
+}
+
+durationSlider.addEventListener("input",()=>{
+
+    sessionMinutes = durationSlider.value;
+
+    durationText.textContent = sessionMinutes;
+
+    totalTime.textContent =
+        String(sessionMinutes).padStart(2,"0") + ":00";
+
+});
+
+soundBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    soundEnabled = !soundEnabled;
+
+    soundBtn.style.opacity = soundEnabled ? "1" : "0.4";
+
+});
 
 document.querySelectorAll(".mode").forEach(mode=>{
 
@@ -929,9 +726,7 @@ document.querySelectorAll(".mode").forEach(mode=>{
 
 document.getElementById("cancelCustom")
 .addEventListener("click",()=>{
-
     popup.style.display = "none";
-
 });
 
 document.getElementById("saveCustom")
@@ -972,93 +767,6 @@ document.getElementById("exhaleSlider")
 document.getElementById("holdSlider")
 .addEventListener("input",updateCustomLabels);
 
-function updateProgress(){
-
-    const total =
-        sessionMinutes * 60;
-
-    const done =
-        total - remainingSeconds;
-
-    const percent =
-        (done / total) * 100;
-
-    progressFill.style.width =
-        percent + "%";
-
-    const min =
-        String(Math.floor(remainingSeconds / 60))
-        .padStart(2,"0");
-
-    const sec =
-        String(remainingSeconds % 60)
-        .padStart(2,"0");
-
-    currentTime.textContent =
-        `${min}:${sec}`;
-
-}
-
-function runBreathingCycle(){
-
-    if(!running || paused) return;
-
-    const settings =
-        modes[currentMode];
-
-    breathText.textContent =
-        "Inspirez...";
-
-    bubble.style.transition =
-        `transform ${settings.inhale}s ease-in-out`;
-
-    bubble.style.transform =
-        "translateX(-50%) translateY(0px)";
-
-    breathTimeout = setTimeout(()=>{
-
-        if(!running || paused) return;
-
-        if(settings.hold > 0){
-
-            breathText.textContent =
-                "Apnée...";
-
-            breathTimeout = setTimeout(startExhale,
-                settings.hold * 1000
-            );
-
-        }else{
-
-            startExhale();
-
-        }
-
-    },settings.inhale * 1000);
-
-    function startExhale(){
-
-        if(!running || paused) return;
-
-        breathText.textContent =
-            "Expirez...";
-
-        bubble.style.transition =
-            `transform ${settings.exhale}s ease-in-out`;
-
-        bubble.style.transform =
-            "translateX(-50%) translateY(315px)";
-
-        breathTimeout = setTimeout(()=>{
-
-            runBreathingCycle();
-
-        },settings.exhale * 1000);
-
-    }
-
-}
-
 startBtn.addEventListener("click",()=>{
 
     if(running) return;
@@ -1066,20 +774,18 @@ startBtn.addEventListener("click",()=>{
     running = true;
     paused = false;
 
+    overlayOpened = false;
+
     pauseBtn.innerHTML = "❚❚";
 
-    document.body.classList.add(
-        "session-active"
-    );
+    document.body.classList.add("session-active");
 
     playGong();
 
-    remainingSeconds =
-        sessionMinutes * 60;
+    remainingSeconds = sessionMinutes * 60;
 
     totalTime.textContent =
-        String(sessionMinutes)
-        .padStart(2,"0") + ":00";
+        String(sessionMinutes).padStart(2,"0") + ":00";
 
     updateProgress();
 
@@ -1092,9 +798,7 @@ startBtn.addEventListener("click",()=>{
         updateProgress();
 
         if(remainingSeconds <= 0){
-
             stopSession();
-
         }
 
     },1000);
@@ -1127,64 +831,23 @@ pauseBtn.addEventListener("click",(e)=>{
 
 });
 
-function stopSession(){
-
-    running = false;
-    paused = false;
-
-    clearTimeout(breathTimeout);
-    clearInterval(sessionTimer);
-
-    playGong(320,3);
-
-    bubble.style.transition =
-        "transform 2s ease";
-
-    bubble.style.transform =
-        "translateX(-50%) translateY(315px)";
-
-    breathText.textContent =
-        "Terminé";
-
-    document.body.classList.remove(
-        "session-active"
-    );
-
-    overlayControls.classList.remove(
-        "visible"
-    );
-
-    setTimeout(()=>{
-
-        breathText.textContent =
-            "Prêt";
-
-    },2500);
-
-}
-
-closeBtn.addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    stopSession();
-
-});
-
 document.body.addEventListener("click",(e)=>{
 
     if(!running) return;
 
-    if(
-        e.target.closest(".overlay-controls") ||
-        e.target.closest(".close-btn")
-    ){
-        return;
-    }
+    if(e.target.closest(".overlay-controls")) return;
 
-    overlayControls.classList.toggle(
-        "visible"
-    );
+    overlayOpened = !overlayOpened;
+
+    if(overlayOpened){
+
+        overlayControls.classList.add("visible");
+
+    }else{
+
+        overlayControls.classList.remove("visible");
+
+    }
 
 });
 
@@ -1193,9 +856,7 @@ document.getElementById("returnBtn")
 
     e.stopPropagation();
 
-    overlayControls.classList.remove(
-        "visible"
-    );
+    stopSession();
 
 });
 
@@ -1203,3 +864,4 @@ document.getElementById("returnBtn")
 
 </body>
 </html>
+```
