@@ -39,37 +39,9 @@ border:1px solid rgba(255,255,255,0.4);
 }
 
 .respir{
-
-    width:100%;
-
-    padding:16px;
-
-    border:none;
-
-    border-radius:18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #1d4ed8,
-            #2563eb
-        );
-
-    color:white;
-
-    font-size:1.05rem;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    margin-top:12px;
-
-    box-shadow:
-        0 10px 30px rgba(37,99,235,0.25);
-
-    transition:.2s;
-
+background:rgba(255,255,255,0.6);
+color:var(--text);
+border:1px solid var(--border);
 }
 
 .respir:hover{
