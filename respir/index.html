@@ -460,26 +460,30 @@ input[type="range"]::-webkit-slider-thumb{
 
 .track-container{
 
-    width:160px;
+    width:210px;
 
-    height:42vh;
+    height:62vh;
 
-    min-height:320px;
-    max-height:420px;
+    min-height:520px;
+    max-height:680px;
 
     border-radius:999px;
 }
 
     /* ===== BULLE ===== */
 
-    .bubble{
+.bubble{
 
-    width:120px;
-    height:120px;
+    width:150px;
+    height:150px;
 
-    bottom:8px;
+    left:50%;
+    bottom:12px;
+
+    transform:
+    translateX(-50%)
+    translateY(0);
 }
-
     /* ===== TEXTE ===== */
 
 .breath-text{
@@ -754,13 +758,25 @@ const totalTime = document.getElementById("totalTime");
 const progressFill = document.getElementById("progressFill");
 const popup = document.getElementById("customPopup");
 const soundBtn = document.getElementById("soundBtn");
+
 function getBubbleTop(){
 
-    if(window.innerWidth <= 768){
-        return -250;
-    }
+    const tube =
+        document.querySelector(".track-container");
 
-    return -350;
+    const bubble =
+        document.querySelector(".bubble");
+
+    const topPadding = 12;
+    const bottomPadding = 12;
+
+    const maxMove =
+        tube.clientHeight
+        - bubble.clientHeight
+        - topPadding
+        - bottomPadding;
+
+    return -maxMove;
 }
 
 function animateBubble(position,duration){
