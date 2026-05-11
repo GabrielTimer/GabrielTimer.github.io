@@ -232,10 +232,36 @@
       transform: scale(1.02);
     }
 
-    .controls {
-      display: none;
+    .session-active .mode-selector,
+    .session-active .bottom-zone,
+    .session-active .session-time,
+    .session-active #countdown {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .floating-controls {
+      position: fixed;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(20, 25, 70, 0.82);
+      backdrop-filter: blur(16px);
+      border-radius: 30px;
+      padding: 18px;
+      width: calc(100% - 30px);
+      max-width: 720px;
+      transition: all 0.35s ease;
+      z-index: 999;
+      display: flex;
       gap: 12px;
-      width: 100%;
+    }
+
+    .floating-controls.hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(30px);
+      pointer-events: none;
     }
 
     .controls button {
@@ -376,7 +402,7 @@
         Plein écran
       </button>
 
-      <div class="controls" id="controls">
+      <div class="floating-controls hidden" id="controls">
         <button id="pauseBtn">Pause</button>
         <button id="stopBtn">Arrêter</button>
       </div>
@@ -462,6 +488,7 @@
     let breathingTimeout;
     let countdownInterval;
     let wakeLock = null;
+    let controlsVisible = false;
 
     const bubble = document.querySelector('.bubble');
     const glow = document.querySelector('.bubble-glow');
@@ -630,6 +657,20 @@
       }
     }
 
+    document.body.addEventListener('click', () => {
+
+      if (!running) return;
+
+      controlsVisible = !controlsVisible;
+
+      if (controlsVisible) {
+        controls.classList.remove('hidden');
+      } else {
+        controls.classList.add('hidden');
+      }
+
+    });
+
     document.getElementById('fullscreenBtn').addEventListener('click', async () => {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
@@ -641,6 +682,8 @@
     startBtn.addEventListener('click', async () => {
 
       requestWakeLock();
+
+      document.body.classList.add('session-active');
 
       let remainingSeconds = sessionDuration * 60;
       const countdown = document.getElementById('countdown');
@@ -667,7 +710,7 @@
       playGong(432, 2.5);
 
       startBtn.style.display = 'none';
-      controls.style.display = 'flex';
+      controls.classList.remove('hidden');
 
       const totalDurationMs = sessionDuration * 60 * 1000;
 
@@ -718,7 +761,10 @@
       glow.style.transform = 'translateY(0px) scale(1)';
 
       startBtn.style.display = 'block';
-      controls.style.display = 'none';
+
+      document.body.classList.remove('session-active');
+
+      controls.classList.add('hidden');
 
       pauseBtn.textContent = 'Pause';
 
