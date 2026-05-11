@@ -16,7 +16,7 @@
 }
 
 body{
-    height:100vh;
+    height:100dvh;
     overflow:hidden;
     background:radial-gradient(circle at top,#00115f 0%,#00083a 45%,#000428 100%);
     display:flex;
@@ -375,7 +375,7 @@ input[type="range"]::-webkit-slider-thumb{
     }
 
     .app{
-        padding:14px 14px 150px;
+        padding:14px 14px 120px;
         justify-content:flex-start;
     }
 
@@ -439,30 +439,36 @@ input[type="range"]::-webkit-slider-thumb{
 
     /* ===== CENTRE ===== */
 
-    .center-zone{
+.center-zone{
 
-        flex:1;
+    flex:1;
 
-        width:100%;
+    width:100%;
 
-        padding-top:28px;
+    padding-top:10px;
 
-        display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
-    }
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    justify-content:flex-start;
+
+    gap:18px;
+}
 
     /* ===== TUBE ===== */
 
-    .track-container{
+.track-container{
 
-        width:170px;
+    width:160px;
 
-        height:min(60vh,520px);
+    height:42vh;
 
-        border-radius:999px;
-    }
+    min-height:320px;
+    max-height:420px;
+
+    border-radius:999px;
+}
 
     /* ===== BULLE ===== */
 
@@ -476,34 +482,27 @@ input[type="range"]::-webkit-slider-thumb{
 
     /* ===== TEXTE ===== */
 
-    .breath-text{
+.breath-text{
 
-        font-size:2.4rem;
-line-height:1.2;
-min-height:60px;
+    font-size:2.2rem;
 
-        margin-top:26px;
+    line-height:1.1;
 
-        text-align:center;
-    }
+    min-height:auto;
+
+    margin-top:0;
+
+    text-align:center;
+}
 
     /* ===== BAS ===== */
 
-    .bottom-zone{
+.bottom-zone{
 
-        position:fixed;
+    margin-top:auto;
 
-        left:0;
-        right:0;
-        bottom:18px;
-
-        width:100%;
-
-        padding:0 18px;
-
-        z-index:40;
-    }
-
+    padding-top:10px;
+}
     .duration-container{
         gap:12px;
     }
@@ -767,8 +766,7 @@ function getBubbleTop(){
 function animateBubble(position,duration){
 
     bubble.style.transition =
-        bubble.style.transition =
-    `transform ${duration}s cubic-bezier(.4,0,.2,1)`;
+        `transform ${duration}s cubic-bezier(.4,0,.2,1)`;
 
     bubble.style.transform =
         `translateX(-50%) translateY(${position}px)`;
