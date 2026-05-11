@@ -120,6 +120,7 @@
     }
 
     .bubble-wrapper {
+      overflow: visible;
       width: 300px;
       height: 300px;
       display: flex;
@@ -556,8 +557,8 @@
         label.textContent = 'Inspirez';
 
         animateBubble(
-          1.35,
-          -50,
+          1.08,
+          -95,
           settings.inhale
         );
 
@@ -573,8 +574,8 @@
         label.textContent = 'Expirez';
 
         animateBubble(
-          1,
-          50,
+          0.96,
+          95,
           settings.exhale
         );
 
@@ -588,12 +589,18 @@
         navigator.vibrate(duration * 120);
       }
 
+      // Animation plus proche de Respirelax :
+      // principalement verticale avec légère expansion.
+
+      bubble.style.transition = `transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1)`;
+      glow.style.transition = `transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1)`;
+
       bubble.animate([
         {
           borderRadius: '50%'
         },
         {
-          borderRadius: '48% 52% 50% 50% / 52% 48% 52% 48%'
+          borderRadius: '49% 51% 50% 50% / 51% 49% 51% 49%'
         },
         {
           borderRadius: '50%'
@@ -602,9 +609,6 @@
         duration: duration * 1000,
         iterations: 1
       });
-
-      bubble.style.transition = `transform ${duration}s linear`;
-      glow.style.transition = `transform ${duration}s linear`;
 
       bubble.style.transform = `translateY(${translateY}px) scale(${scale})`;
       glow.style.transform = `translateY(${translateY}px) scale(${scale})`;
