@@ -92,6 +92,7 @@ body::before{
 
 .center-zone{
     flex:1;
+    padding-top:35px;
     width:100%;
     display:flex;
     flex-direction:column;
@@ -113,7 +114,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(462px);
+    transform:translateX(-50%) translateY(465px);
     width:150px;
     height:150px;
     border-radius:50%;
@@ -646,7 +647,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(462,settings.exhale);
+        animateBubble(465,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -670,7 +671,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(462,2);
+    animateBubble(465,2);
 
     breathText.textContent = "Terminé";
 
