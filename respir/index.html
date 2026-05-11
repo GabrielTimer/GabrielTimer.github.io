@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -115,7 +114,7 @@ body::before{
 .bubble{
     position:absolute;
     left:50%;
-    transform:translateX(-50%) translateY(360px);
+    transform:translateX(-50%) translateY(395px);
     width:150px;
     height:150px;
     border-radius:50%;
@@ -648,7 +647,7 @@ function runBreathingCycle(){
 
         breathText.textContent = "Expirez...";
 
-        animateBubble(360,settings.exhale);
+        animateBubble(395,settings.exhale);
 
         breathTimeout = setTimeout(()=>{
             runBreathingCycle();
@@ -672,7 +671,7 @@ function stopSession(){
 
     playGong(320,3);
 
-    animateBubble(360,2);
+    animateBubble(395,2);
 
     breathText.textContent = "Terminé";
 
