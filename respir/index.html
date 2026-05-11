@@ -350,6 +350,7 @@
       </div>
 
       <div class="session-time">5 minutes</div>
+      <div id="countdown" style="margin-top:10px;opacity:0.6;font-size:0.95rem;">00:00</div>
     </div>
 
     <div class="bottom-zone">
@@ -368,6 +369,10 @@
 
       <button class="main-button" id="startBtn">
         Lancer la séance
+      </button>
+
+      <button class="main-button" id="fullscreenBtn" style="margin-top:-10px;background:rgba(255,255,255,0.08);font-size:0.95rem;">
+        Plein écran
       </button>
 
       <div class="controls" id="controls">
@@ -416,6 +421,16 @@
 
   <script>
 
+    // ===== VERSION PREMIUM V2 =====
+    // Ajouts :
+    // - vibration mobile
+    // - mode plein écran
+    // - minuterie visible
+    // - respiration plus organique
+    // - verrouillage veille écran si supporté
+    // - halo dynamique
+
+
     const modes = {
       beginner: {
         inhale: 3,
@@ -444,6 +459,8 @@
     let running = false;
     let paused = false;
     let breathingTimeout;
+    let countdownInterval;
+    let wakeLock = null;
 
     const bubble = document.querySelector('.bubble');
     const glow = document.querySelector('.bubble-glow');
@@ -567,6 +584,25 @@
 
     function animateBubble(scale, translateY, duration) {
 
+      if (navigator.vibrate) {
+        navigator.vibrate(duration * 120);
+      }
+
+      bubble.animate([
+        {
+          borderRadius: '50%'
+        },
+        {
+          borderRadius: '48% 52% 50% 50% / 52% 48% 52% 48%'
+        },
+        {
+          borderRadius: '50%'
+        }
+      ], {
+        duration: duration * 1000,
+        iterations: 1
+      });
+
       bubble.style.transition = `transform ${duration}s linear`;
       glow.style.transition = `transform ${duration}s linear`;
 
@@ -580,7 +616,44 @@
       });
     }
 
+    async function requestWakeLock() {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock = await navigator.wakeLock.request('screen');
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    document.getElementById('fullscreenBtn').addEventListener('click', async () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
     startBtn.addEventListener('click', async () => {
+
+      requestWakeLock();
+
+      let remainingSeconds = sessionDuration * 60;
+      const countdown = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const min = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+        const sec = String(remainingSeconds % 60).padStart(2, '0');
+        countdown.textContent = `${min}:${sec}`;
+
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+        }
+      }
+
+      updateCountdown();
+
+      countdownInterval = setInterval(updateCountdown, 1000);
 
       if (running) return;
 
@@ -617,6 +690,13 @@
     });
 
     function stopSession() {
+
+      clearInterval(countdownInterval);
+
+      if (wakeLock) {
+        wakeLock.release();
+        wakeLock = null;
+      }
 
       running = false;
       paused = false;
