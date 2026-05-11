@@ -1,7 +1,6 @@
-const CACHE_STATIC = "kine-static-v1.2";
+const CACHE_NAME = "kine-v1.3";
 
-/* fichiers essentiels */
-const STATIC_FILES = [
+const FILES = [
 "/",
 "/index.html",
 "/config.html",
@@ -13,7 +12,8 @@ const STATIC_FILES = [
 "/pathologies.html",
 "/liste_pathologies.html",
 "/style.css",
-"/logo.png"
+"/logo.png",
+"/respir/index.html"
 ];
 
 /* INSTALL */
@@ -23,9 +23,9 @@ self.skipWaiting();
 
 e.waitUntil(
 
-caches.open(CACHE_STATIC).then(cache=>{
+caches.open(CACHE_NAME).then(cache=>{
 
-return cache.addAll(STATIC_FILES);
+return cache.addAll(FILES);
 
 })
 
@@ -44,7 +44,7 @@ return Promise.all(
 
 keys.map(k=>{
 
-if(k !== CACHE_STATIC){
+if(k !== CACHE_NAME){
 
 return caches.delete(k);
 
@@ -63,10 +63,9 @@ self.clients.claim();
 });
 
 /* FETCH */
-
 self.addEventListener("fetch", e=>{
 
-/* HTML = toujours réseau d'abord */
+/* HTML toujours réseau d'abord */
 
 if(e.request.destination === "document"){
 
@@ -78,7 +77,7 @@ fetch(e.request)
 
 let clone = res.clone();
 
-caches.open(CACHE_STATIC).then(cache=>{
+caches.open(CACHE_NAME).then(cache=>{
 
 cache.put(e.request, clone);
 
@@ -96,7 +95,7 @@ return;
 
 }
 
-/* reste = cache */
+/* autres fichiers */
 
 e.respondWith(
 

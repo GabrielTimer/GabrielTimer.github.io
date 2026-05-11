@@ -38,6 +38,46 @@ box-shadow:0 8px 30px rgba(0,0,0,0.08);
 border:1px solid rgba(255,255,255,0.4);
 }
 
+.respir{
+
+    width:100%;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #2563eb
+        );
+
+    color:white;
+
+    font-size:1.05rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    margin-top:12px;
+
+    box-shadow:
+        0 10px 30px rgba(37,99,235,0.25);
+
+    transition:.2s;
+
+}
+
+.respir:hover{
+
+    transform:translateY(-2px);
+
+}
+
 /* LOGO */
 .logo{
 width:110px;
