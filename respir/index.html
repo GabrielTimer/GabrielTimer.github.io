@@ -757,6 +757,29 @@ const totalTime = document.getElementById("totalTime");
 const progressFill = document.getElementById("progressFill");
 const popup = document.getElementById("customPopup");
 const soundBtn = document.getElementById("soundBtn");
+const dingSound = new Audio("ding.wav");
+const dongSound = new Audio("dong.wav");
+
+dingSound.volume = 0.9;
+dongSound.volume = 0.9;
+
+function playDing(){
+
+    if(!soundEnabled) return;
+
+    dingSound.currentTime = 0;
+    dingSound.play();
+
+}
+
+function playDong(){
+
+    if(!soundEnabled) return;
+
+    dongSound.currentTime = 0;
+    dongSound.play();
+
+}
 
 function getBubbleTop(){
 
@@ -841,6 +864,7 @@ function runBreathingCycle(){
     const settings = modes[currentMode];
 
     breathText.textContent = "Inspirez...";
+playDing();
 
     animateBubble(getBubbleTop(),settings.inhale);
 
@@ -869,6 +893,7 @@ function runBreathingCycle(){
         if(!running || paused) return;
 
         breathText.textContent = "Expirez...";
+playDong();
 
         animateBubble(0,settings.exhale);
 
