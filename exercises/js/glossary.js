@@ -18,8 +18,7 @@ fetch('data/exercises.json?v=' + VERSION)
       card.innerHTML = `
         
         <div class="image-wrapper">
-          <img src="${exercise.image}" alt="${exercise.nom}">
-          
+          <img src="${exercise.image.replace('exercises/','')}" alt="${exercise.nom}">
           <div class="level-badge">
             Niveau ${exercise.niveau}
           </div>
