@@ -6,6 +6,10 @@ fetch('data/exercises.json')
 
     exercises.forEach(exercise => {
 
+      const tagsHTML = exercise.tags
+        .map(tag => `<span>${tag}</span>`)
+        .join('');
+
       const card = document.createElement('div');
       card.className = 'exercise-card';
 
@@ -31,10 +35,12 @@ fetch('data/exercises.json')
             ${exercise.objectif}
           </p>
 
+          <p class="duration">
+            ${exercise.duree}
+          </p>
+
           <div class="tags">
-            <span>Senior</span>
-            <span>Assis</span>
-            <span>Posture</span>
+            ${tagsHTML}
           </div>
 
           <button>Lancer</button>
