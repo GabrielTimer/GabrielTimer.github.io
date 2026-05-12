@@ -491,8 +491,11 @@ const VERSION = "1.2";
 /* ===== CODE ORIGINAL ===== */
 
 let p =
+JSON.parse(localStorage.getItem("programme_temp")) ||
+
 JSON.parse(localStorage.getItem("patho_data")) ||
-JSON.parse(localStorage.getItem("programme_temp"));
+
+JSON.parse(localStorage.getItem("current_programme"));
 
 if(!p){
 window.location="config.html?v="+VERSION;
