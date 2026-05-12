@@ -307,7 +307,29 @@ let undoTimer = null;
 
 window.addEventListener("DOMContentLoaded", ()=>{
 let edit = localStorage.getItem("edit_programme");
+let temp =
+localStorage.getItem("programme_temp");
 
+if(temp){
+
+let data = JSON.parse(temp);
+
+exercices = data.exercices || [];
+
+document.getElementById("series").value =
+data.series || 1;
+
+document.getElementById("sessionName").value =
+data.nom || "Libre";
+
+document.getElementById("title").innerText =
+data.nom || "Libre";
+
+render();
+
+return;
+
+}
 if(edit){
 let data = JSON.parse(edit);
 
