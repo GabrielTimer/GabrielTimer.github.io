@@ -526,20 +526,39 @@ render();
 }
 
 function build(){
+
 let list=[];
+
 for(let i=0;i<exercices.length;i++){
+
 list.push({
-nom:exercices[i].nom,
-ex:+document.getElementById("ex"+i).value,
-repos:+document.getElementById("repos"+i).value,
-reps:+document.getElementById("rep"+i).value
+
+nom: exercices[i].nom,
+
+image: exercices[i].image || "",
+
+conseil: exercices[i].conseil || "",
+
+ex: +document.getElementById("ex"+i).value,
+
+repos: +document.getElementById("repos"+i).value,
+
+reps: +document.getElementById("rep"+i).value
+
 });
+
 }
+
 return {
+
 nom: document.getElementById("sessionName").value,
-exercices:list,
-series:+document.getElementById("series").value
+
+series: +document.getElementById("series").value,
+
+exercices: list
+
 };
+
 }
 function addFavori(){
 
