@@ -137,8 +137,7 @@ document.getElementById('modal-launch')
       repos: 10,
       reps: 5,
 
-      image:
-exercise.image.replace('exercises/',''),
+      image: exercise.image,
 
       conseil:
       exercise.objectif || ""
