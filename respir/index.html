@@ -593,7 +593,19 @@ background:rgba(255,255,255,0.18);
         </div>
 
     </div>
+<div id="exerciseInfo" class="exercise-info hidden">
 
+    <img id="exerciseImage">
+
+    <div class="exercise-text">
+
+        <h2 id="exerciseTitle"></h2>
+
+        <p id="exerciseDescription"></p>
+
+    </div>
+
+</div>
     <div class="center-zone">
 
         <div class="track-container">
@@ -1111,6 +1123,38 @@ document.getElementById("returnBtn")
     stopSession();
 
 });
+const params =
+    new URLSearchParams(window.location.search);
+
+const exerciseId =
+    params.get("exercise");
+
+if(exerciseId){
+
+    fetch("../exercises/data/exercises.json")
+    .then(response => response.json())
+    .then(exercises => {
+
+        const exercise =
+            exercises.find(ex => ex.id === exerciseId);
+
+        if(!exercise) return;
+
+        document.getElementById("exerciseInfo")
+        .classList.remove("hidden");
+
+        document.getElementById("exerciseImage")
+        .src = `../exercises/${exercise.image}`;
+
+        document.getElementById("exerciseTitle")
+        .innerText = exercise.nom;
+
+        document.getElementById("exerciseDescription")
+        .innerText = exercise.duree;
+
+    });
+
+}
 
 function goHome(){
 
