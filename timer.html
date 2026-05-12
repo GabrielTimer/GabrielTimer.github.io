@@ -731,41 +731,23 @@ exoInfo.innerText=exo.nom;
 repInfo.innerText="Rép "+repIndex+"/"+exo.reps;
 serieInfo.innerText="Série "+serieIndex+"/"+p.series;
 
-let patho = localStorage.getItem("pathologie");
+if(exo.image){
 
-if(patho){
+img.style.display = "block";
 
-img.style.display="block";
+if(lastImage !== exo.image){
 
-let png = "images/"+patho+"/ex"+(exIndex+1)+".png";
-let jpg = "images/"+patho+"/ex"+(exIndex+1)+".jpg";
+img.src = exo.image;
 
-if(lastImage !== png && lastImage !== jpg){
-
-img.onerror = null;
-
-img.src = png;
-
-lastImage = png;
-
-img.onerror = function(){
-
-this.onerror = null;
-
-this.src = jpg;
-
-lastImage = jpg;
-
-};
+lastImage = exo.image;
 
 }
 
 }else{
 
-img.style.display="none";
+img.style.display = "none";
 
 }
-
 }
 
 /* SAFE */
