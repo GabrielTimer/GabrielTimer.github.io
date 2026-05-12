@@ -307,6 +307,11 @@ let undoTimer = null;
 
 window.addEventListener("DOMContentLoaded", ()=>{
 let edit = localStorage.getItem("edit_programme");
+if(edit){
+
+localStorage.removeItem("programme_temp");
+
+}
 let temp =
 localStorage.getItem("programme_temp");
 
