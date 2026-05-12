@@ -566,31 +566,26 @@ background:rgba(255,255,255,0.18);
    EXERCISE MODE
 ========================= */
 
+/* =========================
+   EXERCISE MODE
+========================= */
+
 .exercise-info{
 
     position:absolute;
 
-    top:95px;
-    left:50%;
+    top:110px;
+    left:34px;
 
-    transform:translateX(-50%);
-
-    width:min(760px,90vw);
+    width:220px;
 
     display:none;
 
-    align-items:center;
-    justify-content:center;
+    flex-direction:column;
 
-    gap:24px;
+    align-items:flex-start;
 
-    padding:20px 24px;
-
-    border-radius:28px;
-
-    background:rgba(255,255,255,0.08);
-
-    backdrop-filter:blur(14px);
+    gap:16px;
 
     z-index:30;
 }
@@ -601,40 +596,60 @@ background:rgba(255,255,255,0.18);
 
 #exerciseImage{
 
-    width:220px;
-
-    max-width:35vw;
+    width:180px;
 
     height:auto;
 
     object-fit:contain;
 
-    border-radius:22px;
+    border-radius:24px;
 
     background:white;
 
-    flex-shrink:0;
+    padding:10px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
 }
 
 .exercise-text{
 
-    flex:1;
+    width:100%;
 }
 
 .exercise-text h2{
 
-    font-size:2rem;
+    font-size:1.1rem;
 
-    margin-bottom:12px;
+    line-height:1.15;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+    color:white;
 }
 
 .exercise-text p{
 
-    font-size:1.1rem;
+    font-size:0.95rem;
 
-    line-height:1.5;
+    line-height:1.4;
 
     opacity:.9;
+
+    color:white;
+}
+
+/* respiration plus basse */
+
+@media(min-width:769px){
+
+    .center-zone{
+
+        padding-top:140px;
+    }
+
 }
 
 /* =========================
@@ -645,43 +660,40 @@ background:rgba(255,255,255,0.18);
 
     .exercise-info{
 
-        top:78px;
+        top:86px;
 
-        left:14px;
-        right:14px;
+        left:50%;
 
-        transform:none;
+        transform:translateX(-50%);
 
-        width:auto;
+        width:88vw;
 
-        flex-direction:column;
+        align-items:center;
 
         text-align:center;
-
-        gap:18px;
-
-        padding:18px;
     }
 
     #exerciseImage{
 
         width:130px;
-
-        max-width:60vw;
     }
 
     .exercise-text h2{
 
-        font-size:1.5rem;
+        font-size:1.45rem;
     }
 
     .exercise-text p{
 
-        font-size:1rem;
+        font-size:0.95rem;
     }
 
-}
-</style>
+    .center-zone{
+
+        padding-top:240px;
+    }
+
+}</style>
 </head>
 
 <body>
