@@ -93,8 +93,8 @@ fetch('data/exercises.json')
 document.querySelector('.launch-btn')
   .onclick = () => {
 
-    window.location.href =
-      `/respir/index.html?exercise=${exercise.id}`;
+   window.location.href =
+  `../respir/index.html?exercise=${exercise.id}`;
 
 };
 
