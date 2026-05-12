@@ -68,7 +68,7 @@ if(localStorage.getItem("return_to_config")){
 
 }
   document.getElementById('modal-image').src =
-    exercise.image;
+exercise.image.replace('exercises/','');
 
   document.getElementById('modal-title').innerText =
     exercise.nom;
@@ -137,7 +137,8 @@ document.getElementById('modal-launch')
       repos: 10,
       reps: 5,
 
-      image: exercise.image,
+      image:
+exercise.image.replace('exercises/',''),
 
       conseil:
       exercise.objectif || ""
