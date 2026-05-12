@@ -1,37 +1,139 @@
 body{
   font-family:Arial,sans-serif;
-  background:#f5f7fb;
+  background:#f3f5f9;
   padding:40px;
+}
+
+h1{
+  margin-bottom:40px;
+  font-size:52px;
 }
 
 #exercise-container{
   display:flex;
-  gap:20px;
+  flex-wrap:wrap;
+  gap:30px;
 }
 
 .exercise-card{
+  width:340px;
   background:white;
-  border-radius:20px;
-  padding:20px;
-  width:300px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+  transition:0.25s;
 }
 
-.exercise-card img{
+.exercise-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 34px rgba(0,0,0,0.12);
+}
+
+.image-wrapper{
+  position:relative;
+  background:#f7f8fb;
+}
+
+.image-wrapper img{
   width:100%;
-  border-radius:12px;
+  display:block;
+}
+
+.level-badge{
+  position:absolute;
+  top:18px;
+  right:18px;
+
+  background:#2d6cdf;
+  color:white;
+
+  padding:10px 16px;
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:bold;
+}
+
+.card-content{
+  padding:26px;
+}
+
+.category{
+  color:#2d6cdf;
+  font-weight:bold;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:14px;
 }
 
 .exercise-card h2{
-  margin-top:15px;
+  font-size:40px;
+  line-height:1.1;
+  margin-bottom:18px;
+}
+
+.objective{
+  color:#666;
+  font-size:24px;
+  margin-bottom:22px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+}
+
+.tags span{
+  background:#eef3ff;
+  color:#2d6cdf;
+
+  padding:8px 14px;
+  border-radius:999px;
+
+  font-size:14px;
+  font-weight:600;
 }
 
 .exercise-card button{
-  margin-top:15px;
-  padding:12px 18px;
+  width:100%;
   border:none;
-  border-radius:12px;
+  border-radius:18px;
+
+  padding:18px;
+
   background:#2d6cdf;
   color:white;
+
+  font-size:18px;
+  font-weight:bold;
+
   cursor:pointer;
+
+  transition:0.2s;
+}
+
+.exercise-card button:hover{
+  background:#1d54b8;
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:20px;
+  }
+
+  h1{
+    font-size:36px;
+  }
+
+  .exercise-card{
+    width:100%;
+  }
+
+  .exercise-card h2{
+    font-size:32px;
+  }
+
 }
