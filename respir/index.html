@@ -1149,8 +1149,11 @@ if(exerciseId){
         document.getElementById("exerciseTitle")
         .innerText = exercise.nom;
 
-        document.getElementById("exerciseDescription")
-        .innerText = exercise.duree;
+document.getElementById("exerciseDescription")
+.innerText =
+    exercise.duree ||
+    exercise.objectif ||
+    "";
 
     });
 
