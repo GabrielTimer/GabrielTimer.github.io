@@ -43,7 +43,9 @@ fetch('data/exercises.json')
             ${tagsHTML}
           </div>
 
-          <button>Lancer</button>
+          <button class="launch-btn">
+  Lancer
+</button>
 
         </div>
 
@@ -88,6 +90,13 @@ fetch('data/exercises.json')
 
   document.getElementById('exercise-modal')
     .style.display = 'flex';
+document.querySelector('.launch-btn')
+  .onclick = () => {
+
+    window.location.href =
+      `/respir/index.html?exercise=${exercise.id}`;
+
+};
 
 });
 
@@ -101,5 +110,17 @@ document.querySelector('.close-modal')
 
     document.getElementById('exercise-modal')
       .style.display = 'none';
+
+});
+window.addEventListener('click', (e) => {
+
+  const modal =
+    document.getElementById('exercise-modal');
+
+  if(e.target === modal){
+
+    modal.style.display = 'none';
+
+  }
 
 });
