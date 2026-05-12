@@ -265,6 +265,9 @@ padding:0;
 <div id="exo"></div>
 
 <button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
+<button class="addBtn" onclick="openGlossaire()">
+📚 Bibliothèque exercices
+</button>
 
 </div>
 </div>
@@ -550,7 +553,17 @@ window.location="timer.html";
 function home(){
 window.location="index.html";
 }
+function openGlossaire(){
 
+localStorage.setItem(
+"return_to_config",
+"1"
+);
+
+window.location =
+"exercises/glossary.html";
+
+}
 </script>
 </body>
 </html>
