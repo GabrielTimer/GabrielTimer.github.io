@@ -52,7 +52,20 @@ fetch('data/exercises.json')
       `;
 
       card.addEventListener('click', () => {
+const launchBtn =
+document.getElementById('modal-launch');
 
+if(localStorage.getItem("return_to_config")){
+
+  launchBtn.innerText =
+  "Ajouter à ma séance";
+
+}else{
+
+  launchBtn.innerText =
+  "Lancer l'exercice";
+
+}
   document.getElementById('modal-image').src =
     exercise.image;
 
@@ -90,7 +103,7 @@ fetch('data/exercises.json')
 
   document.getElementById('exercise-modal')
     .style.display = 'flex';
-document.querySelector('.launch-btn')
+document.getElementById('modal-launch')
 .onclick = () => {
 
   let fromConfig =
