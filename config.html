@@ -532,6 +532,9 @@ let list=[];
 for(let i=0;i<exercices.length;i++){
 
 list.push({
+id: exercices[i].id || "",
+
+type: exercices[i].type || "timer",
 
 nom: exercices[i].nom,
 
@@ -627,9 +630,37 @@ eva: eva}
 localStorage.removeItem("eva_temp");
 
 localStorage.setItem("programme_temp", JSON.stringify(programme.data));
-localStorage.removeItem("return_to_config");
-window.location="timer.html";
+localStorage.removeItem("return_to_config");let p = programme.data;
+
+/* =========================
+   EXERCICE RESPIRATOIRE
+========================= */
+
+if(
+
+p.exercices.length === 1 &&
+
+p.exercices[0].type === "respir"
+
+){
+
+window.location =
+
+"respir/index.html?exercise=" +
+
+p.exercices[0].id;
+
 }
+
+/* =========================
+   TIMER NORMAL
+========================= */
+
+else{
+
+window.location = "timer.html";
+
+}}
 function home(){
 window.location="index.html";
 }
