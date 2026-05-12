@@ -629,42 +629,18 @@ eva: eva}
 /* 🔥 lancement normal */
 localStorage.removeItem("eva_temp");
 
-localStorage.setItem("programme_temp", JSON.stringify(programme.data));
-localStorage.removeItem("return_to_config");let p = programme.data;
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(programme.data)
+);
 
-/* =========================
-   EXERCICE RESPIRATOIRE
-========================= */
+localStorage.removeItem(
+"return_to_config"
+);
 
-if(
+window.location="timer.html";
 
-p.exercices.length === 1 &&
-
-p.exercices[0].type === "respir"
-
-){
-
-window.location =
-
-"respir/index.html?exercise=" +
-
-p.exercices[0].id;
-
-}
-
-/* =========================
-   TIMER NORMAL
-========================= */
-
-else{
-
-window.location = "timer.html";
-
-}}
-function home(){
-window.location="index.html";
-}
-function openGlossaire(){
+}function openGlossaire(){
 
 localStorage.setItem(
 "return_to_config",
