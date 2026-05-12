@@ -917,7 +917,7 @@ function stopSession(){
 
     overlayControls.classList.remove("visible");
 
-    playGong(320,3);
+    playDong();
 
     animateBubble(0,2);
 
@@ -1013,8 +1013,8 @@ document.getElementById("exhaleSlider")
 
 document.getElementById("holdSlider")
 .addEventListener("input",updateCustomLabels);
-
 startBtn.addEventListener("click",()=>{
+
 
     if(running) return;
 
@@ -1026,8 +1026,6 @@ startBtn.addEventListener("click",()=>{
     pauseBtn.innerHTML = "❚❚";
 
     document.body.classList.add("session-active");
-
-    playGong();
 
     remainingSeconds = sessionMinutes * 60;
 
