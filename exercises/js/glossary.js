@@ -91,10 +91,77 @@ fetch('data/exercises.json')
   document.getElementById('exercise-modal')
     .style.display = 'flex';
 document.querySelector('.launch-btn')
-  .onclick = () => {
+.onclick = () => {
 
-   window.location.href =
-  `../respir/index.html?exercise=${exercise.id}`;
+  let fromConfig =
+  localStorage.getItem("return_to_config");
+
+  /* ===== AJOUT AU MODE LIBRE ===== */
+
+  if(fromConfig){
+
+    let current =
+    JSON.parse(
+
+      localStorage.getItem("programme_temp")
+
+      ||
+
+      '{"nom":"Libre","series":1,"exercices":[]}'
+
+    );
+
+    current.exercices.push({
+
+      id: exercise.id,
+
+      nom: exercise.nom,
+
+      mode: exercise.mode || "respir",
+
+      ex: 30,
+      repos: 10,
+      reps: 5,
+
+      image: exercise.image,
+
+      conseil:
+      exercise.objectif || ""
+
+    });
+
+    localStorage.setItem(
+
+      "programme_temp",
+
+      JSON.stringify(current)
+
+    );
+
+    localStorage.removeItem(
+      "return_to_config"
+    );
+
+    window.location.href =
+    "../config.html";
+
+    return;
+
+  }
+
+  /* ===== LANCEMENT NORMAL ===== */
+
+  if(exercise.mode === "respir"){
+
+    window.location.href =
+    `../respir/index.html?exercise=${exercise.id}`;
+
+  }else{
+
+    window.location.href =
+    `../timer.html?exercise=${exercise.id}`;
+
+  }
 
 };
 
