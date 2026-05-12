@@ -306,23 +306,49 @@ let lastDeleted = null;
 let undoTimer = null;
 
 window.addEventListener("DOMContentLoaded", ()=>{
+
 let edit = localStorage.getItem("edit_programme");
+
+let pathoData = localStorage.getItem("patho_data");
+let patho = localStorage.getItem("pathologie");
+let pathoNom = localStorage.getItem("pathologie_nom");
+
+/* =========================
+   MODE ÉDITION PROGRAMME
+========================= */
+
 if(edit){
 
 localStorage.removeItem("programme_temp");
 
+let data = JSON.parse(edit);
+
+exercices = data.exercices || [];
+
+document.getElementById("series").value =
+data.series || 1;
+
+document.getElementById("sessionName").value =
+data.nom || "Séance";
+
+document.getElementById("title").innerText =
+data.nom || "Modifier";
+
+localStorage.removeItem("edit_programme");
+
+render();
+
+return;
+
 }
-let edit =
-localStorage.getItem("edit_programme");
 
-/* MODE LIBRE uniquement */
+/* =========================
+   MODE LIBRE TEMP
+========================= */
 
-if(!edit){
+let temp = localStorage.getItem("programme_temp");
 
-let temp =
-localStorage.getItem("programme_temp");
-
-if(temp){
+if(temp && !patho){
 
 let data = JSON.parse(temp);
 
@@ -339,54 +365,54 @@ data.nom || "Libre";
 
 render();
 
-}
-
-}
-if(edit){
-let data = JSON.parse(edit);
-
-exercices = data.exercices || [];
-document.getElementById("series").value = data.series || 1;
-
-document.getElementById("sessionName").value = data.nom || "Séance";
-document.getElementById("title").innerText = data.nom || "Modifier";
-
-localStorage.removeItem("edit_programme"); // 🔥 évite bug retour
-render();
 return;
+
 }
-let pathoData = localStorage.getItem("patho_data");
-let patho = localStorage.getItem("pathologie");
-let pathoNom = localStorage.getItem("pathologie_nom");
+
+/* =========================
+   MODE PATHOLOGIE
+========================= */
 
 if(patho){
 
 let data = JSON.parse(pathoData || "{}");
 
 exercices = data.exercices || [];
-document.getElementById("series").value = data.series || 1;
 
-/* 🔥 UTILISE LE NOM PROPRE */
-document.getElementById("sessionName").value = pathoNom || patho;
-document.getElementById("title").innerText = pathoNom || patho;
+document.getElementById("series").value =
+data.series || 1;
 
-}else{
+document.getElementById("sessionName").value =
+pathoNom || patho;
 
-// 👉 MODE LIBRE (RESET PROPRE)
+document.getElementById("title").innerText =
+pathoNom || patho;
+
+render();
+
+return;
+
+}
+
+/* =========================
+   MODE LIBRE VIDE
+========================= */
+
 exercices = [
 {nom:"Ex 1", ex:30, repos:10, reps:10}
 ];
 
 document.getElementById("series").value = 3;
-document.getElementById("sessionName").value = "Libre";
-document.getElementById("title").innerText = "Libre";
 
-}
+document.getElementById("sessionName").value =
+"Libre";
+
+document.getElementById("title").innerText =
+"Libre";
 
 render();
-});
 
-function syncInputs(){
+});function syncInputs(){
 for(let i=0;i<exercices.length;i++){
 let input = document.getElementById("nom"+i);
 if(input && input.value.trim() !== ""){
@@ -582,6 +608,7 @@ eva: eva}
 localStorage.removeItem("eva_temp");
 
 localStorage.setItem("programme_temp", JSON.stringify(programme.data));
+localStorage.removeItem("return_to_config");
 window.location="timer.html";
 }
 function home(){
