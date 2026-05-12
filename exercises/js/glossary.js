@@ -10,13 +10,37 @@ fetch('data/exercises.json')
       card.className = 'exercise-card';
 
       card.innerHTML = `
-        <img src="${exercise.image}" alt="${exercise.nom}">
         
-        <h2>${exercise.nom}</h2>
+        <div class="image-wrapper">
+          <img src="${exercise.image}" alt="${exercise.nom}">
+          
+          <div class="level-badge">
+            Niveau ${exercise.niveau}
+          </div>
+        </div>
 
-        <p>${exercise.objectif}</p>
+        <div class="card-content">
 
-        <button>Lancer</button>
+          <div class="category">
+            ${exercise.categorie}
+          </div>
+
+          <h2>${exercise.nom}</h2>
+
+          <p class="objective">
+            ${exercise.objectif}
+          </p>
+
+          <div class="tags">
+            <span>Senior</span>
+            <span>Assis</span>
+            <span>Posture</span>
+          </div>
+
+          <button>Lancer</button>
+
+        </div>
+
       `;
 
       container.appendChild(card);
