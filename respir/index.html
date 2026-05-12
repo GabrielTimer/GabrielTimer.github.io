@@ -1161,6 +1161,125 @@ function goHome(){
 window.location="../index.html";
 
 }
+/* =========================
+   EXERCISE MODE
+========================= */
+
+.exercise-info{
+
+    position:absolute;
+
+    top:100px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:min(760px,90vw);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:24px;
+
+    padding:20px 24px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+
+    z-index:30;
+}
+
+.exercise-info:not(.hidden){
+    display:flex;
+}
+
+#exerciseImage{
+
+    width:220px;
+
+    max-width:35vw;
+
+    height:auto;
+
+    object-fit:contain;
+
+    border-radius:22px;
+
+    background:white;
+
+    flex-shrink:0;
+}
+
+.exercise-text{
+
+    flex:1;
+}
+
+.exercise-text h2{
+
+    font-size:2rem;
+
+    margin-bottom:12px;
+}
+
+.exercise-text p{
+
+    font-size:1.1rem;
+
+    line-height:1.5;
+
+    opacity:.9;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .exercise-info{
+
+        top:78px;
+
+        left:14px;
+        right:14px;
+
+        transform:none;
+
+        width:auto;
+
+        flex-direction:column;
+
+        text-align:center;
+
+        gap:18px;
+
+        padding:18px;
+    }
+
+    #exerciseImage{
+
+        width:130px;
+
+        max-width:60vw;
+    }
+
+    .exercise-text h2{
+
+        font-size:1.5rem;
+    }
+
+    .exercise-text p{
+
+        font-size:1rem;
+    }
+
+}
 </script>
 
 </body>
