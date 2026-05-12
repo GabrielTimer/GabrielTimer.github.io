@@ -4,6 +4,8 @@
 
     "nom": "Auto-grandissement simple",
 
+    "type":"respir",
+
     "player": "respirelax",
 
     "categorie": "fauteuil",
@@ -42,6 +44,6 @@
       "cycles": 5
     },
 
-    "image": "images/fauteuil/FAUT_POST_01.webp"
+    "image":"exercises/images/fauteuil/FAUT_POST_01.webp"
   }
 ]
