@@ -1,0 +1,11 @@
+[
+  {
+    "id": "FAUT_POST_01",
+    "nom": "Auto-grandissement simple",
+    "categorie": "fauteuil",
+    "objectif": "posture",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "image": "images/fauteuil/FAUT_POST_01.webp"
+  }
+]
