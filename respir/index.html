@@ -460,25 +460,24 @@ input[type="range"]::-webkit-slider-thumb{
 
 .track-container{
 
-    width:118px;
+    width:92px;
 
-    height:48vh;
+    height:44vh;
 
-    min-height:360px;
-    max-height:520px;
+    min-height:300px;
+    max-height:420px;
 
     border-radius:999px;
 }
-
     /* ===== BULLE ===== */
 
 .bubble{
 
-    width:108px;
-    height:108px;
+    width:84px;
+    height:84px;
 
     left:50%;
-    bottom:3px;
+    bottom:2px;
 
     transform:
     translateX(-50%)
@@ -767,16 +766,19 @@ function getBubbleTop(){
     const bubble =
         document.querySelector(".bubble");
 
-    const borderOffset = 6;
+    const computed =
+        getComputedStyle(bubble);
+
+    const bottom =
+        parseFloat(computed.bottom);
 
     const maxMove =
         tube.clientHeight
         - bubble.clientHeight
-        - borderOffset;
+        - (bottom * 2);
 
     return -maxMove;
 }
-
 function animateBubble(position,duration){
 
     bubble.style.transition =
