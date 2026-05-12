@@ -460,12 +460,12 @@ input[type="range"]::-webkit-slider-thumb{
 
 .track-container{
 
-    width:168px;
+    width:118px;
 
-    height:62vh;
+    height:48vh;
 
-    min-height:520px;
-    max-height:680px;
+    min-height:360px;
+    max-height:520px;
 
     border-radius:999px;
 }
@@ -474,11 +474,11 @@ input[type="range"]::-webkit-slider-thumb{
 
 .bubble{
 
-    width:150px;
-    height:150px;
+    width:108px;
+    height:108px;
 
     left:50%;
-    bottom:12px;
+    bottom:3px;
 
     transform:
     translateX(-50%)
@@ -767,14 +767,12 @@ function getBubbleTop(){
     const bubble =
         document.querySelector(".bubble");
 
-    const topPadding = 12;
-    const bottomPadding = 12;
+    const borderOffset = 6;
 
     const maxMove =
         tube.clientHeight
         - bubble.clientHeight
-        - topPadding
-        - bottomPadding;
+        - borderOffset;
 
     return -maxMove;
 }
