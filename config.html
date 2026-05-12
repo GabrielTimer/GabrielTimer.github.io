@@ -312,6 +312,13 @@ if(edit){
 localStorage.removeItem("programme_temp");
 
 }
+let edit =
+localStorage.getItem("edit_programme");
+
+/* MODE LIBRE uniquement */
+
+if(!edit){
+
 let temp =
 localStorage.getItem("programme_temp");
 
@@ -332,7 +339,7 @@ data.nom || "Libre";
 
 render();
 
-return;
+}
 
 }
 if(edit){
