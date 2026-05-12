@@ -131,7 +131,7 @@ document.getElementById('modal-launch')
 
       nom: exercise.nom,
 
-      mode: exercise.mode || "respir",
+      mode: "timer",
 
       ex: 30,
       repos: 10,
@@ -166,17 +166,8 @@ exercise.image.replace('exercises/',''),
 
   /* ===== LANCEMENT NORMAL ===== */
 
-  if(exercise.mode === "respir"){
-
-    window.location.href =
-    `../respir/index.html?exercise=${exercise.id}`;
-
-  }else{
-
-    window.location.href =
-    `../timer.html?exercise=${exercise.id}`;
-
-  }
+window.location.href =
+`../timer.html?exercise=${exercise.id}`;
 
 };
 
