@@ -49,8 +49,57 @@ fetch('data/exercises.json')
 
       `;
 
-      container.appendChild(card);
+      card.addEventListener('click', () => {
+
+  document.getElementById('modal-image').src =
+    exercise.image;
+
+  document.getElementById('modal-title').innerText =
+    exercise.nom;
+
+  document.getElementById('modal-duration').innerText =
+    exercise.duree;
+
+  const consignesList =
+    document.getElementById('modal-consignes');
+
+  consignesList.innerHTML = '';
+
+  exercise.consignes.forEach(consigne => {
+
+    consignesList.innerHTML += `
+      <li>${consigne}</li>
+    `;
+
+  });
+
+  const precautionsList =
+    document.getElementById('modal-precautions');
+
+  precautionsList.innerHTML = '';
+
+  exercise.precautions.forEach(precaution => {
+
+    precautionsList.innerHTML += `
+      <li>${precaution}</li>
+    `;
+
+  });
+
+  document.getElementById('exercise-modal')
+    .style.display = 'flex';
+
+});
+
+container.appendChild(card);
 
     });
 
   });
+document.querySelector('.close-modal')
+  .addEventListener('click', () => {
+
+    document.getElementById('exercise-modal')
+      .style.display = 'none';
+
+});
