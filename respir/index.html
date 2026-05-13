@@ -34,7 +34,6 @@ body::before{
     animation:bgMove 12s ease-in-out infinite alternate;
     pointer-events:none;
 }
-
 @keyframes bgMove{
     from{ transform:scale(1); }
     to{ transform:scale(1.08); }
@@ -215,6 +214,8 @@ inset 0 1px 1px rgba(255,255,255,0.08);
     margin-top:0;
     line-height:1.1;
     min-height:70px;
+letter-spacing:-1px;
+margin-top:-5px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -550,7 +551,8 @@ font-size:1rem;
 
     width:100%;
 
-    padding-top:10px;
+    padding-top:40px;
+transform:translateY(30px);
 
     display:flex;
     flex-direction:column;
@@ -607,9 +609,13 @@ font-size:1rem;
 
 .bottom-zone{
 
-    margin-top:auto;
+margin-top:auto;
 
-    padding-top:10px;
+padding-top:40px;
+
+padding-bottom:25px;
+
+gap:28px;
 }
     .duration-container{
         gap:12px;
@@ -620,8 +626,12 @@ font-size:1rem;
     }
 
     .main-button{
-        padding:18px;
-        font-size:1.15rem;
+        padding:16px;
+
+font-size:1.05rem;
+
+border-radius:26px;
+height:78px;
     }
 
 .home-btn{
@@ -737,6 +747,21 @@ background:rgba(255,255,255,0.18);
 
     color:white;
 }
+.mode-sidebar{
+    transition:.35s;
+}
+.session-active .mode-sidebar{
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:
+    translateY(-50%)
+    translateX(30px);
+
+    transition:.35s;
+}
 
 .exercise-text p{
 
@@ -754,8 +779,7 @@ background:rgba(255,255,255,0.18);
 @media(min-width:769px){
 
     .center-zone{
-
-        padding-top:140px;
+        transform:translateX(-70px) translateY(30px);
     }
 
 }
@@ -765,13 +789,7 @@ background:rgba(255,255,255,0.18);
 ========================= */
 
 
-@media(min-width:769px){
 
-    .center-zone{
-        transform:translateX(-70px);
-    }
-
-}
 /* =========================
    SIDEBAR RESPONSIVE
 ========================= */
@@ -782,7 +800,9 @@ background:rgba(255,255,255,0.18);
 
     .mode-sidebar{
 
-        right:14px;
+        right:20px;
+
+        top:56%;
     }
 
 }
@@ -793,9 +813,9 @@ background:rgba(255,255,255,0.18);
 
     .mode-sidebar{
 
-        right:8px;
+        right:16px;
 
-        top:54%;
+        top:58%;
 
         gap:10px;
     }
@@ -1262,7 +1282,32 @@ document.getElementById("saveCustom")
     popup.style.display = "none";
 
 });
+function updateCustomPresetDisplay(){
 
+    const inhale =
+        document.getElementById("inhaleSlider").value;
+
+    const exhale =
+        document.getElementById("exhaleSlider").value;
+
+    const hold =
+        document.getElementById("holdSlider").value;
+
+    document.querySelector(
+        '[data-mode="custom"] .mode-times'
+    ).textContent =
+        `${inhale} • ${exhale} • ${hold}`;
+
+    document.querySelectorAll(".mode")
+    .forEach(m=>m.classList.remove("active"));
+
+    document
+    .querySelector('[data-mode="custom"]')
+    .classList.add("active");
+
+    currentMode = "custom";
+
+}
 function updateCustomLabels(){
 
     document.getElementById("inhaleValue").textContent =
@@ -1275,15 +1320,30 @@ function updateCustomLabels(){
         document.getElementById("holdSlider").value + " sec";
 
 }
-
 document.getElementById("inhaleSlider")
-.addEventListener("input",updateCustomLabels);
+.addEventListener("input",()=>{
+
+    updateCustomLabels();
+    updateCustomPresetDisplay();
+
+});
 
 document.getElementById("exhaleSlider")
-.addEventListener("input",updateCustomLabels);
+.addEventListener("input",()=>{
+
+    updateCustomLabels();
+    updateCustomPresetDisplay();
+
+});
 
 document.getElementById("holdSlider")
-.addEventListener("input",updateCustomLabels);
+.addEventListener("input",()=>{
+
+    updateCustomLabels();
+    updateCustomPresetDisplay();
+
+});
+
 startBtn.addEventListener("click",()=>{
 
 
