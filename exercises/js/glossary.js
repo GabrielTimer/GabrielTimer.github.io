@@ -178,11 +178,26 @@ window.location.href = "../timer.html";
 
   }
 
-  /* ===== LANCEMENT NORMAL ===== */
+ /* ===== AJOUT AU MODE LIBRE ===== */
+localStorage.setItem(
+"programme_temp",
+JSON.stringify({
+nom:"Libre",
+series:1,
+exercices:[{
+id: exercise.id,
+nom: exercise.nom,
+mode:"timer",
+ex:30,
+repos:10,
+reps:5,
+image: exercise.image,
+conseil: exercise.objectif || ""
+}]
+})
+);
 
-window.location.href =
-`../timer.html?exercise=${exercise.id}`;
-
+window.location.href = "../timer.html";
 };
 
 });
