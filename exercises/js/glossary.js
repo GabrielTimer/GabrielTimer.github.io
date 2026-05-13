@@ -4,40 +4,43 @@ fetch('/exercises/data/exercises.json?v=' + VERSION)
   .then(response => response.json())
   .then(exercises => {
 
-    const container = document.getElementById('exercise-container');
+    const container =
+    document.getElementById('exercise-container');
 
     exercises.forEach(exercise => {
 
-      const tagsHTML = exercise.tags
+      const tagsHTML = (exercise.tags || [])
         .map(tag => `<span>${tag}</span>`)
         .join('');
 
       const card = document.createElement('div');
+
       card.className = 'exercise-card';
 
       card.innerHTML = `
-        
+
         <div class="image-wrapper">
           <img src="${exercise.image}" alt="${exercise.nom}">
+
           <div class="level-badge">
-            Niveau ${exercise.niveau}
+            Niveau ${exercise.niveau || 1}
           </div>
         </div>
 
         <div class="card-content">
 
           <div class="category">
-            ${exercise.categorie}
+            ${exercise.categorie || ""}
           </div>
 
           <h2>${exercise.nom}</h2>
 
           <p class="objective">
-            ${exercise.objectif}
+            ${exercise.objectif || ""}
           </p>
 
           <p class="duration">
-            ${exercise.duree}
+            ${exercise.duree || ""}
           </p>
 
           <div class="tags">
@@ -45,168 +48,105 @@ fetch('/exercises/data/exercises.json?v=' + VERSION)
           </div>
 
           <button class="launch-btn">
-  Lancer
-</button>
+            Ajouter à ma séance
+          </button>
 
         </div>
 
       `;
 
       card.addEventListener('click', () => {
-const launchBtn =
-document.getElementById('modal-launch');
 
-if(localStorage.getItem("return_to_config")){
+        document.getElementById('modal-image').src =
+          exercise.image;
 
-  launchBtn.innerText =
-  "Ajouter à ma séance";
+        document.getElementById('modal-title').innerText =
+          exercise.nom;
 
-}else{
+        document.getElementById('modal-duration').innerText =
+          exercise.duree || "";
 
-  launchBtn.innerText =
-  "Lancer l'exercice";
+        const consignesList =
+          document.getElementById('modal-consignes');
 
-}
-  document.getElementById('modal-image').src =
-exercise.image;
-  document.getElementById('modal-title').innerText =
-    exercise.nom;
+        consignesList.innerHTML = '';
 
-  document.getElementById('modal-duration').innerText =
-    exercise.duree;
+        (exercise.consignes || []).forEach(consigne => {
 
-  const consignesList =
-    document.getElementById('modal-consignes');
+          consignesList.innerHTML += `
+            <li>${consigne}</li>
+          `;
 
-  consignesList.innerHTML = '';
+        });
 
-  exercise.consignes.forEach(consigne => {
+        const precautionsList =
+          document.getElementById('modal-precautions');
 
-    consignesList.innerHTML += `
-      <li>${consigne}</li>
-    `;
+        precautionsList.innerHTML = '';
 
-  });
+        (exercise.precautions || []).forEach(precaution => {
 
-  const precautionsList =
-    document.getElementById('modal-precautions');
+          precautionsList.innerHTML += `
+            <li>${precaution}</li>
+          `;
 
-  precautionsList.innerHTML = '';
+        });
 
-  exercise.precautions.forEach(precaution => {
+        document.getElementById('exercise-modal')
+          .style.display = 'flex';
 
-    precautionsList.innerHTML += `
-      <li>${precaution}</li>
-    `;
+        document.getElementById('modal-launch')
+        .onclick = () => {
 
-  });
+          let current =
+          JSON.parse(
+            localStorage.getItem("programme_temp")
+            ||
+            '{"nom":"Libre","series":1,"exercices":[]}'
+          );
 
-  document.getElementById('exercise-modal')
-    .style.display = 'flex';
-document.getElementById('modal-launch')
-.onclick = () => {
+          current.exercices.push({
 
-  let fromConfig =
-  localStorage.getItem("return_to_config");
+            id: exercise.id,
 
-  /* ===== AJOUT AU MODE LIBRE ===== */
+            nom: exercise.nom,
 
-  if(fromConfig){
+            type: "timer",
 
-    let current =
-    JSON.parse(
+            image: exercise.image,
 
-      localStorage.getItem("programme_temp")
+            conseil:
+            (exercise.consignes || []).join("<br>"),
 
-      ||
+            ex:
+            exercise.timer_config?.phase_monte || 30,
 
-      '{"nom":"Libre","series":1,"exercices":[]}'
+            repos:
+            exercise.timer_config?.phase_descente || 10,
 
-    );
+            reps:
+            exercise.timer_config?.cycles || 5
 
-    current.exercices.push({
+          });
 
-      id: exercise.id,
+          localStorage.setItem(
+            "programme_temp",
+            JSON.stringify(current)
+          );
 
-      nom: exercise.nom,
+          window.location.href =
+          "../config.html";
 
-      mode: "timer",
+        };
 
-      ex: 30,
-      repos: 10,
-      reps: 5,
+      });
 
-      image: exercise.image,
-
-      conseil:
-      exercise.objectif || ""
-
-    });
-
-    localStorage.setItem(
-
-      "programme_temp",
-
-      JSON.stringify(current)
-
-    );
-
-    localStorage.removeItem(
-      "return_to_config"
-    );
-
-    localStorage.setItem(
-"programme_temp",
-JSON.stringify({
-nom:"Libre",
-series:1,
-exercices:[{
-id: exercise.id,
-nom: exercise.nom,
-mode:"timer",
-ex:30,
-repos:10,
-reps:5,
-image: exercise.image,
-conseil: exercise.objectif || ""
-}]
-})
-);
-
-window.location.href = "../timer.html";
-    return;
-
-  }
-
- /* ===== AJOUT AU MODE LIBRE ===== */
-localStorage.setItem(
-"programme_temp",
-JSON.stringify({
-nom:"Libre",
-series:1,
-exercices:[{
-id: exercise.id,
-nom: exercise.nom,
-mode:"timer",
-ex:30,
-repos:10,
-reps:5,
-image: exercise.image,
-conseil: exercise.objectif || ""
-}]
-})
-);
-
-window.location.href = "../timer.html";
-};
-
-});
-
-container.appendChild(card);
+      container.appendChild(card);
 
     });
 
   });
+
 document.querySelector('.close-modal')
   .addEventListener('click', () => {
 
@@ -214,6 +154,7 @@ document.querySelector('.close-modal')
       .style.display = 'none';
 
 });
+
 window.addEventListener('click', (e) => {
 
   const modal =
