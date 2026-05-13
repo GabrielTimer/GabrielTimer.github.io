@@ -45,5 +45,32 @@
     },
 
     "image":"exercises/images/fauteuil/FAUT_POST_01.webp"
-  }
+  },
+
+{
+  "id":"lombalgie1_ex1",
+
+  "nom":"Étirement de prière",
+
+"image":"exercises/images/pathologies/lombalgie_1/ex1.png",
+
+  "categorie":"Lombalgie",
+
+  "niveau":1,
+
+  "objectif":"Mobilité lombaire",
+
+  "duree":"30 sec",
+
+  "tags":["lombalgie"],
+
+  "consignes":[
+    "Descendre doucement",
+    "Respirer calmement"
+  ],
+
+  "precautions":[
+    "Pas de douleur vive"
+  ]
+}
 ]
