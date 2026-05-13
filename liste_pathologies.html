@@ -515,11 +515,7 @@ div.className="card";
 
 let img=document.createElement("img");
 
-img.src="images/"+p.dossier+"/cover.png?v="+VERSION;
-img.onerror=function(){
-this.onerror=null;
-this.src="images/"+p.dossier+"/cover.jpg?v="+VERSION;
-};
+img.src="exercises/images/pathologies/"+p.dossier+"/cover.png?v="+VERSION;
 
 let info=document.createElement("div");
 info.className="info";
@@ -537,7 +533,7 @@ btn.innerText="🖨️ PDF";
 
 btn.onclick=(e)=>{
 e.stopPropagation();
-window.open("images/"+p.dossier+"/fiche.pdf");
+window.open("exercises/images/pathologies/"+p.dossier+"/fiche.pdf");
 };
 
 row.appendChild(title);
