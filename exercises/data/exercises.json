@@ -43,7 +43,8 @@
       "cycles": 5
     },
 
-    "image":"/exercises/images/fauteuil/FAUT_POST_01.png",
+    "image":"/exercises/images/fauteuil/FAUT_POST_01.png"
+    },
   {
     "id": "FAUT_POST_02",
 
@@ -88,7 +89,8 @@
       "cycles": 5
     },
 
-    "image":"images/fauteuil/FAUT_POST_02.png"  },
+    "image":"/exercises/images/fauteuil/FAUT_POST_02.png"
+    },
 {
   "id": "FAUT_POST_03",
 
@@ -133,8 +135,8 @@
     "cycles": 5
   },
 
-  "image":"images/fauteuil/FAUT_POST_03.png"
-},
+ "image":"/exercises/images/fauteuil/FAUT_POST_03.png"
+    },
 {
   "id": "FAUT_POST_04",
 
@@ -179,8 +181,8 @@
     "cycles": 5
   },
 
-  "image":"images/fauteuil/FAUT_POST_04.png"
-},
+ "image":"/exercises/images/fauteuil/FAUT_POST_04.png"
+    },
 {
   "id": "FAUT_POST_05",
 
@@ -225,15 +227,15 @@
     "cycles": 10
   },
 
-  "image":"images/fauteuil/FAUT_POST_05.png"
-},
+ "image":"/exercises/images/fauteuil/FAUT_POST_05.png"
+    },
 
 {
   "id":"lombalgie1_ex1",
 
   "nom":"Étirement de prière",
 
-"image":"images/pathologies/lombalgie_1/ex1.png",
+"image":"/exercises/images/pathologies/lombalgie_1/ex1.png",
 
   "categorie":"Lombalgie",
 
