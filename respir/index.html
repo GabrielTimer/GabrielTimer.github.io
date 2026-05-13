@@ -51,27 +51,11 @@ body::before{
     padding:30px 20px;
 }
 
-.mode-selector,
-.bottom-zone{
-    width:100%;
-    transition:opacity .4s ease;
-}
 
 .session-active .mode-selector,
 .session-active .bottom-zone{
     opacity:0;
     pointer-events:none;
-}
-
-.mode-track{
-    display:flex;
-    gap:12px;
-    overflow:auto;
-    scrollbar-width:none;
-}
-
-.mode-track::-webkit-scrollbar{
-    display:none;
 }
 
 .mode{
@@ -112,6 +96,82 @@ body::before{
     box-shadow:inset 0 0 22px rgba(255,255,255,0.04),0 0 22px rgba(60,120,255,0.12);
 }
 
+.mode-sidebar{
+
+    position:fixed;
+
+    top:50%;
+    right:32px;
+
+    transform:translateY(-50%);
+
+    display:flex;
+    flex-direction:column;
+
+    gap:14px;
+
+    z-index:50;
+
+    max-height:80vh;
+
+    overflow-y:auto;
+}
+
+.mode{
+
+    width:145px;
+
+    padding:16px 18px;
+
+    border-radius:24px;
+
+    background:rgba(255,255,255,0.08);
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:6px;
+box-shadow:
+0 8px 30px rgba(0,0,0,0.25),
+inset 0 1px 1px rgba(255,255,255,0.08);
+}
+
+.mode:hover{
+    transform:translateX(-4px);
+}
+
+.mode.active{
+
+    background:rgba(255,255,255,0.18);
+
+    border:1px solid rgba(120,170,255,0.35);
+}
+
+.mode-title{
+
+    font-size:1rem;
+
+    font-weight:600;
+
+    color:white;
+}
+
+.mode-times{
+
+    font-size:.9rem;
+
+    opacity:.7;
+
+    color:white;
+}
 .bubble{
     position:absolute;
 
@@ -451,21 +511,6 @@ font-size:1rem;
         z-index:20;
     }
 
-    .mode-track{
-
-        display:flex;
-        gap:14px;
-
-        overflow-x:auto;
-        overflow-y:hidden;
-
-        padding-left:72px;
-        padding-right:10px;
-
-        scrollbar-width:none;
-
-        -webkit-overflow-scrolling:touch;
-    }
 
     .mode-track::-webkit-scrollbar{
         display:none;
@@ -724,6 +769,14 @@ background:rgba(255,255,255,0.18);
 ========================= */
 
 
+@media(min-width:769px){
+
+    .center-zone{
+        transform:translateX(-70px);
+    }
+
+}
+
 </style>
 </head>
 
@@ -732,29 +785,30 @@ background:rgba(255,255,255,0.18);
 
 <div class="app">
 
-    <div class="mode-selector">
 
-        <div class="mode-track">
+<div class="mode-sidebar">
 
-            <div class="mode active" data-mode="beginner">
-                Débuter
-            </div>
-
-            <div class="mode" data-mode="balance">
-                Équilibrer
-            </div>
-
-            <div class="mode" data-mode="calm">
-                Apaiser
-            </div>
-
-            <div class="mode" data-mode="custom">
-                Personnalisé
-            </div>
-
-        </div>
-
+    <div class="mode active" data-mode="beginner">
+        <span class="mode-title">Débuter</span>
+        <span class="mode-times">3 • 5 • 0</span>
     </div>
+
+    <div class="mode" data-mode="balance">
+        <span class="mode-title">Équilibrer</span>
+        <span class="mode-times">5 • 5 • 0</span>
+    </div>
+
+    <div class="mode" data-mode="calm">
+        <span class="mode-title">Apaiser</span>
+        <span class="mode-times">4 • 8 • 0</span>
+    </div>
+
+    <div class="mode" data-mode="custom">
+        <span class="mode-title">Personnalisé</span>
+        <span class="mode-times">4 • 6 • 0</span>
+    </div>
+</div>
+
 <div id="exerciseInfo" class="exercise-info hidden">
 
     <img id="exerciseImage">
