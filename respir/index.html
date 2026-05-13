@@ -519,10 +519,6 @@ font-size:1rem;
     .mode{
 
         flex:0 0 auto;
-
-        min-width:170px;
-        height:58px;
-
         display:flex;
         align-items:center;
         justify-content:center;
@@ -776,7 +772,54 @@ background:rgba(255,255,255,0.18);
     }
 
 }
+/* =========================
+   SIDEBAR RESPONSIVE
+========================= */
 
+/* ----- PC ----- */
+
+@media(min-width:769px){
+
+    .mode-sidebar{
+
+        right:14px;
+    }
+
+}
+
+/* ----- MOBILE ----- */
+
+@media(max-width:768px){
+
+    .mode-sidebar{
+
+        right:8px;
+
+        top:54%;
+
+        gap:10px;
+    }
+
+    .mode{
+
+        width:112px;
+
+        padding:10px 12px;
+
+        border-radius:20px;
+    }
+
+    .mode-title{
+
+        font-size:.82rem;
+    }
+
+    .mode-times{
+
+        font-size:.72rem;
+    }
+
+}
 </style>
 </head>
 
