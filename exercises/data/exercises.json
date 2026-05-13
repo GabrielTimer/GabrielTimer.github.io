@@ -4,9 +4,7 @@
 
     "nom": "Auto-grandissement simple",
 
-    "type":"respir",
-
-    "player": "respirelax",
+    "type":"timer",
 
     "categorie": "fauteuil",
 
@@ -33,7 +31,8 @@
     "tags": [
       "Senior",
       "Assis",
-      "Posture"
+      "Posture",
+      "Respiration"
     ],
 
     "timer_config": {
@@ -45,6 +44,51 @@
     },
 
     "image":"images/fauteuil/FAUT_POST_01.png"  },
+  {
+    "id": "FAUT_POST_02",
+
+    "nom": "Auto-grandissement avec appuis",
+
+    "type":"timer",
+
+    "categorie": "fauteuil",
+
+    "objectif": "posture",
+
+    "niveau": 1,
+
+    "exercise_mode": "statique",
+
+    "duree": "5 répétitions • maintien 5 sec",
+
+    "consignes": [
+      "S’asseoir au fond du fauteuil",
+      "Grandir la colonne vers le haut",
+      "Prendre apuuis sur les accoudoirs",
+      "Respirer calmement"
+    ],
+
+    "precautions": [
+      "Ne pas creuser le bas du dos",
+      "Rester dans une position confortable"
+    ],
+
+    "tags": [
+      "Senior",
+      "Assis",
+      "Posture",
+      "Respiration"
+    ],
+
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 3,
+      "maintien": 5,
+      "phase_descente": 3,
+      "cycles": 5
+    },
+
+    "image":"images/fauteuil/FAUT_POST_02.png"  },
 
 {
   "id":"lombalgie1_ex1",
