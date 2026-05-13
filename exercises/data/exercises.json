@@ -44,15 +44,14 @@
       "cycles": 5
     },
 
-    "image":"exercises/images/fauteuil/FAUT_POST_01.webp"
-  },
+    "image":"images/fauteuil/FAUT_POST_01.png"  },
 
 {
   "id":"lombalgie1_ex1",
 
   "nom":"Étirement de prière",
 
-"image":"exercises/images/pathologies/lombalgie_1/ex1.png",
+"image":"images/pathologies/lombalgie_1/ex1.png",
 
   "categorie":"Lombalgie",
 
