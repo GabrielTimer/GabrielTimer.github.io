@@ -1,6 +1,6 @@
 const VERSION = Date.now();
 
-fetch('data/exercises.json?v=' + VERSION)
+fetch('/data/exercises.json?v=' + VERSION)
   .then(response => response.json())
   .then(exercises => {
 
