@@ -18,7 +18,7 @@ fetch('data/exercises.json?v=' + VERSION)
       card.innerHTML = `
         
         <div class="image-wrapper">
-          <img src="${exercise.image.replace('exercises/','')}" alt="${exercise.nom}">
+          <img src="${exercise.image}" alt="${exercise.nom}">
           <div class="level-badge">
             Niveau ${exercise.niveau}
           </div>
@@ -68,8 +68,7 @@ if(localStorage.getItem("return_to_config")){
 
 }
   document.getElementById('modal-image').src =
-exercise.image.replace('exercises/','');
-
+exercise.image;
   document.getElementById('modal-title').innerText =
     exercise.nom;
 
