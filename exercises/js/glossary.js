@@ -155,9 +155,25 @@ document.getElementById('modal-launch')
       "return_to_config"
     );
 
-    window.location.href =
-    "../config.html";
+    localStorage.setItem(
+"programme_temp",
+JSON.stringify({
+nom:"Libre",
+series:1,
+exercices:[{
+id: exercise.id,
+nom: exercise.nom,
+mode:"timer",
+ex:30,
+repos:10,
+reps:5,
+image: exercise.image,
+conseil: exercise.objectif || ""
+}]
+})
+);
 
+window.location.href = "../timer.html";
     return;
 
   }
