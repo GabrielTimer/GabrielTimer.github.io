@@ -370,6 +370,70 @@ input[type="range"]::-webkit-slider-thumb{
 
 @media(max-width:768px){
 
+html,body{
+height:100%;
+overflow:hidden;
+}
+
+.app{
+height:100vh;
+padding-top:70px;
+padding-bottom:20px;
+justify-content:flex-start;
+}
+
+.mode-selector{
+margin-top:0;
+transform:scale(.9);
+}
+
+.exercise-info{
+
+top:110px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:150px;
+
+gap:10px;
+}
+
+#exerciseImage{
+width:140px;
+}
+
+.exercise-text h2{
+font-size:1.2rem;
+}
+
+.exercise-text p{
+font-size:.85rem;
+}
+
+.center-zone{
+
+padding-top:20px;
+
+transform:scale(.82);
+}
+
+.bottom-zone{
+
+margin-top:10px;
+
+padding-bottom:30px;
+}
+
+.main-button{
+
+padding:16px 24px;
+
+font-size:1rem;
+}
+
+}
     body{
         overflow-x:hidden;
     }
@@ -660,46 +724,8 @@ background:rgba(255,255,255,0.18);
    MOBILE
 ========================= */
 
-@media(max-width:768px){
 
-.exercise-info{
-
-    top:170px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:170px;
-
-    align-items:center;
-
-    text-align:center;
-
-    gap:12px;
-}
-
-    #exerciseImage{
-
-        width:170px;
-    }
-
-    .exercise-text h2{
-
-        font-size:1.9rem;
-    }
-
-    .exercise-text p{
-
-        font-size:0.95rem;
-    }
-
-    .center-zone{
-
-        padding-top:240px;
-    }
-
-}</style>
+</style>
 </head>
 
 <body>
@@ -1301,7 +1327,7 @@ if(exerciseId){
 
 function goHome(){
 
-    window.location="../index.html";
+    window.location="../index.html?v=" + Date.now();
 
 }
 
