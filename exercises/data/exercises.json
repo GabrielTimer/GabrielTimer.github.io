@@ -43,7 +43,7 @@
       "cycles": 5
     },
 
-    "image":"images/fauteuil/FAUT_POST_01.png"  },
+    "image":"/exercises/images/fauteuil/FAUT_POST_01.png",
   {
     "id": "FAUT_POST_02",
 
