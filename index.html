@@ -36,8 +36,15 @@ window.location="mes_programmes.html?v="+VERSION;
 }
 
 function modeLibre(){
+
 localStorage.removeItem("pathologie");
-window.location="config.html?v="+VERSION;
+
+localStorage.removeItem("programme_temp");
+localStorage.removeItem("current_programme");
+localStorage.removeItem("patho_data");
+
+window.location="config.html?v="+Date.now();
+
 }
 
 function zones(){

@@ -492,11 +492,11 @@ const VERSION = "1.2";
 
 let p =
 JSON.parse(localStorage.getItem("programme_temp")) ||
+JSON.parse(localStorage.getItem("patho_data"));
 
-JSON.parse(localStorage.getItem("patho_data")) ||
-
-JSON.parse(localStorage.getItem("current_programme"));
-
+if(!p){
+window.location="config.html?v="+VERSION;
+}
 if(!p){
 window.location="config.html?v="+VERSION;
 }
@@ -740,7 +740,34 @@ img.style.display = "block";
 
 if(lastImage !== exo.image){
 
-img.src = exo.image;
+if(exo.image){
+
+img.style.display = "block";
+
+if(lastImage !== exo.image){
+
+let finalPath = exo.image;
+
+// correction automatique anciens chemins
+if(
+!finalPath.startsWith("http") &&
+!finalPath.startsWith("images/") &&
+!finalPath.startsWith("./")
+){
+finalPath = "images/" + finalPath;
+}
+
+img.src = finalPath + "?v=" + VERSION;
+
+lastImage = exo.image;
+
+}
+
+}else{
+
+img.style.display = "none";
+
+}
 
 lastImage = exo.image;
 
