@@ -449,6 +449,7 @@ exo.innerHTML+=`
 <div class="exoHeader">
 <span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
 <span onclick="toggle(${i})" id="title${i}">${title}</span>
+${e.image ? `<img src="${e.image}" style="width:40px;height:40px;object-fit:contain;">` : ""}
 
 <div class="actions">
 <button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
