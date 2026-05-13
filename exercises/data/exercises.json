@@ -89,6 +89,144 @@
     },
 
     "image":"images/fauteuil/FAUT_POST_02.png"  },
+{
+  "id": "FAUT_POST_03",
+
+  "nom": "Auto-grandissement avec translation menton",
+
+  "type":"timer",
+
+  "categorie": "fauteuil",
+
+  "objectif": "posture cervicale",
+
+  "niveau": 1,
+
+  "exercise_mode": "statique",
+
+  "duree": "5 répétitions • maintien 5 sec",
+
+  "consignes": [
+    "Grandir la colonne vers le haut",
+    "Rentrer légèrement le menton",
+    "Garder le regard horizontal",
+    "Respirer calmement"
+  ],
+
+  "precautions": [
+    "Ne pas baisser la tête",
+    "Rester dans une amplitude confortable"
+  ],
+
+  "tags": [
+    "Senior",
+    "Assis",
+    "Posture",
+    "Cervicales"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 5,
+    "phase_descente": 3,
+    "cycles": 5
+  },
+
+  "image":"images/fauteuil/FAUT_POST_03.png"
+},
+{
+  "id": "FAUT_POST_04",
+
+  "nom": "Respiration diaphragmatique",
+
+  "type":"timer",
+
+  "categorie": "fauteuil",
+
+  "objectif": "respiration",
+
+  "niveau": 1,
+
+  "exercise_mode": "respiration",
+
+  "duree": "5 respirations lentes",
+
+  "consignes": [
+    "Inspirer par le nez",
+    "Gonfler doucement le ventre",
+    "Expirer lentement par la bouche",
+    "Relâcher les épaules"
+  ],
+
+  "precautions": [
+    "Ne pas forcer la respiration",
+    "Respirer calmement"
+  ],
+
+  "tags": [
+    "Senior",
+    "Assis",
+    "Respiration",
+    "Relaxation"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 4,
+    "maintien": 2,
+    "phase_descente": 6,
+    "cycles": 5
+  },
+
+  "image":"images/fauteuil/FAUT_POST_04.png"
+},
+{
+  "id": "FAUT_POST_05",
+
+  "nom": "Tirage élastique assis",
+
+  "type":"timer",
+
+  "categorie": "fauteuil",
+
+  "objectif": "renforcement dos",
+
+  "niveau": 1,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "10 répétitions",
+
+  "consignes": [
+    "Garder le dos droit",
+    "Tirer les coudes vers l’arrière",
+    "Rapprocher les omoplates",
+    "Revenir lentement"
+  ],
+
+  "precautions": [
+    "Ne pas hausser les épaules",
+    "Contrôler le retour"
+  ],
+
+  "tags": [
+    "Senior",
+    "Assis",
+    "Dos",
+    "Élastique"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+
+  "image":"images/fauteuil/FAUT_POST_05.png"
+},
 
 {
   "id":"lombalgie1_ex1",
