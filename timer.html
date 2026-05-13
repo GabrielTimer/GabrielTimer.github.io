@@ -740,34 +740,7 @@ img.style.display = "block";
 
 if(lastImage !== exo.image){
 
-if(exo.image){
-
-img.style.display = "block";
-
-if(lastImage !== exo.image){
-
-let finalPath = exo.image;
-
-// correction automatique anciens chemins
-if(
-!finalPath.startsWith("http") &&
-!finalPath.startsWith("images/") &&
-!finalPath.startsWith("./")
-){
-finalPath = "images/" + finalPath;
-}
-
-img.src = finalPath + "?v=" + VERSION;
-
-lastImage = exo.image;
-
-}
-
-}else{
-
-img.style.display = "none";
-
-}
+img.src = exo.image + "?v=" + Date.now();
 
 lastImage = exo.image;
 
