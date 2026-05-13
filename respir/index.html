@@ -796,16 +796,18 @@ background:rgba(255,255,255,0.18);
 
 /* ----- PC ----- */
 
-@media(min-width:769px){
+@media(max-width:768px){
 
     .mode-sidebar{
 
-        right:20px;
+        right:12px;
 
-        top:56%;
+        top:44%;
+
+        transform:translateY(-50%);
+
+        gap:10px;
     }
-
-}
 
 /* ----- MOBILE ----- */
 
@@ -813,14 +815,14 @@ background:rgba(255,255,255,0.18);
 
     .mode-sidebar{
 
-    right:12px;
+        right:12px;
 
-    top:49%;
+        top:44%;
 
-    transform:translateY(-50%);
+        transform:translateY(-50%);
 
-    gap:10px;
-}
+        gap:10px;
+    }
 
     .mode{
 
@@ -841,8 +843,7 @@ background:rgba(255,255,255,0.18);
         font-size:.72rem;
     }
 
-}
-</style>
+}</style>
 </head>
 
 <body>
