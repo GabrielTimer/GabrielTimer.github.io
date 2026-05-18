@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Cloud</title>
+
+<style>
+
+body{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f1f5f9;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:15px;
+margin-bottom:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer;
+margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>☁️ Programmes Cloud</h2>
+
+<div id="list"></div>
+
+<script type="module">
+
+import {
+loadProgramsFromCloud
+} from "./exercises/js/cloud.js";
+
+async function init(){
+
+const programmes =
+await loadProgramsFromCloud();
+
+const list =
+document.getElementById("list");
+
+list.innerHTML = "";
+
+programmes.forEach((p)=>{
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>${p.nom}</h3>
+
+<div>
+Auteur : ${p.auteur}
+</div>
+
+<div>
+Exercices :
+${p.data.exercices.length}
+</div>
+
+<button onclick="launch('${p.firebaseId}')">
+Lancer
+</button>
+
+</div>
+
+`;
+
+});
+
+window.launch = function(id){
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(prog.data)
+);
+
+window.location =
+"timer.html";
+
+}
+
+}
+
+init();
+
+</script>
+
+</body>
+</html>
