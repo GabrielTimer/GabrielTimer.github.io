@@ -91,15 +91,31 @@ document.getElementById("patientsList");
 const programmes =
 await loadProgramsFromCloud();
 
+const ignored = [
+"demo",
+"test"
+];
+
 const patients =
 [
 ...new Set(
-programmes
-.map(p => p.patientId)
-.filter(Boolean)
-)
-];
 
+programmes
+
+.map(p =>
+p.patientId?.trim().toLowerCase()
+)
+
+.filter(Boolean)
+
+.filter(p =>
+!ignored.includes(p)
+)
+
+)
+]
+
+.sort();
 patients.forEach(patient => {
 
 const btn =
