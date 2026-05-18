@@ -62,3 +62,38 @@ error
 }
 
 }
+
+
+export async function loadProgramsFromCloud(){
+
+    try{
+
+        const querySnapshot =
+        await getDocs(
+            collection(db, "programmes")
+        );
+
+        let programmes = [];
+
+        querySnapshot.forEach((doc)=>{
+
+            programmes.push({
+                firebaseId: doc.id,
+                ...doc.data()
+            });
+
+        });
+
+        console.log(programmes);
+
+        return programmes;
+
+    }catch(error){
+
+        console.error(error);
+
+        return [];
+
+    }
+
+}
