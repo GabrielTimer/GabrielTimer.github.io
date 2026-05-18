@@ -57,17 +57,7 @@ background:#1d4ed8;
 
 <h1>Mes programmes</h1>
 
-<button onclick="openPatient('gab')">
-Gab
-</button>
-
-<button onclick="openPatient('luc')">
-Luc
-</button>
-
-<button onclick="openPatient('marie')">
-Marie
-</button>
+<div id="patientsList"></div>
 
 </div>
 
@@ -86,6 +76,57 @@ window.location =
 }
 
 </script>
+<script type="module">
 
+import {
+loadProgramsFromCloud
+}
+from "./exercises/js/cloud.js";
+
+async function init(){
+
+const list =
+document.getElementById("patientsList");
+
+const programmes =
+await loadProgramsFromCloud();
+
+const patients =
+[
+...new Set(
+programmes
+.map(p => p.patientId)
+.filter(Boolean)
+)
+];
+
+patients.forEach(patient => {
+
+const btn =
+document.createElement("button");
+
+btn.textContent = patient;
+
+btn.onclick = () => {
+
+localStorage.setItem(
+"currentPatient",
+patient
+);
+
+window.location =
+"cloud.html";
+
+};
+
+list.appendChild(btn);
+
+});
+
+}
+
+init();
+
+</script>
 </body>
 </html>
