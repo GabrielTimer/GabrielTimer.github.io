@@ -72,7 +72,7 @@ Auteur : ${p.auteur}
 
 <div>
 Exercices :
-${p.data.exercices.length}
+${p.données.exercices.length}
 </div>
 
 <button onclick="launch('${p.firebaseId}')">
@@ -94,7 +94,7 @@ p => p.firebaseId === id
 
 localStorage.setItem(
 "programme_temp",
-JSON.stringify(prog.data)
+JSON.stringify(prog.données)
 );
 
 window.location =
