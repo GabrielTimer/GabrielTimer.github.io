@@ -35,3 +35,30 @@ export const auth = getAuth(app);
 
 // TEST CONNEXION
 console.log("Firebase connecté");
+
+export async function saveProgramToCloud(programme){
+
+try{
+
+const docRef = await addDoc(
+collection(db, "programmes"),
+programme
+);
+
+console.log(
+"Programme cloud enregistré :",
+docRef.id
+);
+
+return docRef.id;
+
+}catch(error){
+
+console.error(
+"Erreur cloud :",
+error
+);
+
+}
+
+}
