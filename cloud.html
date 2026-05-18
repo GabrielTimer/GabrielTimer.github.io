@@ -52,7 +52,7 @@ async function init(){
 
 const programmes =
 await loadProgramsFromCloud();
-
+const currentPatient = "demo";
 const list =
 document.getElementById("list");
 
@@ -60,9 +60,17 @@ list.innerHTML = "";
 programmes
 .filter(
 p =>
+
+(
 (p.données && p.données.exercices)
 ||
 (p.data && p.data.exercices)
+)
+
+&&
+
+p.patientId === currentPatient
+
 )
 .forEach((p)=>{
 

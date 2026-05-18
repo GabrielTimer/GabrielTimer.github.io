@@ -276,6 +276,14 @@ padding:0;
 
 <div class="footerGrid">
 <div class="field">
+<label>Patient</label>
+
+<input
+id="patientId"
+placeholder="luc"
+value="demo">
+</div>
+<div class="field">
 <label>Séries</label>
 <input id="series" type="number" value="2">
 </div>
@@ -675,6 +683,8 @@ nom: document.getElementById("sessionName").value,
 updatedAt: Date.now(),
 
 auteur: "gabriel",
+patientId:
+document.getElementById("patientId").value,
 
 data: build()
 
