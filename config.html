@@ -287,6 +287,9 @@ padding:0;
 </div>
 
 <button class="fav" onclick="addFavori()">⭐ Sauvegarder</button>
+<button class="fav" onclick="saveCloud()">
+☁️ Envoyer cloud
+</button>
 <button class="start" onclick="start()">🚀 Lancer</button>
 <button class="home" onclick="home()">🏠 Accueil</button>
 
@@ -297,7 +300,11 @@ Exercice supprimé
 <button onclick="undoDelete()">Annuler</button>
 </div>
 
-<script>
+<script type="module">
+
+import {
+saveProgramToCloud
+} from "./exercises/js/cloud.js";
 
 /* 🔒 JS STRICTEMENT IDENTIQUE */
 
@@ -655,6 +662,28 @@ window.location =
 
 function home(){
 window.location.href = "index.html?v=" + Date.now();
+}
+
+window.saveCloud = async function(){
+
+let programme = {
+
+id: crypto.randomUUID(),
+
+nom: document.getElementById("sessionName").value,
+
+updatedAt: Date.now(),
+
+auteur: "gabriel",
+
+data: build()
+
+};
+
+await saveProgramToCloud(programme);
+
+alert("Programme envoyé au cloud");
+
 }
 </script>
 <script type="module" src="exercises/js/cloud.js"></script>
