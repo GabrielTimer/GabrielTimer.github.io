@@ -68,6 +68,12 @@ document.getElementById("list");
 
 list.innerHTML = "";
 programmes
+.sort((a,b)=>(
+(b.updatedAt || 0)
+-
+(a.updatedAt || 0)
+))
+
 .filter(p => {
 
 const hasExercises =
@@ -80,7 +86,19 @@ if(!hasExercises) return false;
 
 if(isAdmin) return true;
 
-return p.patientId === currentPatient;
+return (
+
+p.patientId === currentPatient
+
+||
+
+p.data?.patientId === currentPatient
+
+||
+
+p.données?.patientId === currentPatient
+
+);
 
 })
 .forEach((p)=>{
@@ -90,6 +108,10 @@ list.innerHTML += `
 <div class="card">
 
 <h3>${p.nom}</h3>
+
+<div>
+Patient : ${p.patientId || "?"}
+</div>
 
 <div>
 Auteur : ${p.auteur}
