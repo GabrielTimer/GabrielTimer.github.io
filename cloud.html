@@ -57,8 +57,9 @@ const list =
 document.getElementById("list");
 
 list.innerHTML = "";
-
-programmes.forEach((p)=>{
+programmes
+.filter(p => p.données && p.données.exercices)
+.forEach((p)=>{
 
 list.innerHTML += `
 
@@ -72,7 +73,7 @@ Auteur : ${p.auteur}
 
 <div>
 Exercices :
-${p.données.exercices.length}
+${p.données?.exercices?.length || 0}
 </div>
 
 <button onclick="launch('${p.firebaseId}')">
