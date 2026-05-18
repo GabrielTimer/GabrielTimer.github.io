@@ -52,27 +52,37 @@ async function init(){
 
 const programmes =
 await loadProgramsFromCloud();
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const isAdmin =
+params.get("admin") === "true";
+
 const currentPatient =
-localStorage.getItem("currentPatient");
+params.get("patient");
 const list =
 document.getElementById("list");
 
 list.innerHTML = "";
 programmes
-.filter(
-p =>
+.filter(p => {
 
-(
+const hasExercises =
+
 (p.données && p.données.exercices)
 ||
-(p.data && p.data.exercices)
-)
+(p.data && p.data.exercices);
 
-&&
+if(!hasExercises) return false;
 
-p.patientId === currentPatient
+if(isAdmin) return true;
 
-)
+return p.patientId === currentPatient;
+
+})
 .forEach((p)=>{
 
 list.innerHTML += `
