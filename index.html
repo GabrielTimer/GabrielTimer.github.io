@@ -30,10 +30,18 @@
 <script>
 
 const VERSION = "1.2";
-
 function goProg(){
-window.location="mes_programmes.html?v="+VERSION;
+
+localStorage.setItem(
+"currentPatient",
+"demo"
+);
+
+window.location =
+"cloud.html";
+
 }
+
 
 function modeLibre(){
 
@@ -44,6 +52,18 @@ localStorage.removeItem("current_programme");
 localStorage.removeItem("patho_data");
 
 window.location="config.html?v="+Date.now();
+
+}
+
+function openPatient(patient){
+
+localStorage.setItem(
+"currentPatient",
+patient
+);
+
+window.location =
+"cloud.html";
 
 }
 
