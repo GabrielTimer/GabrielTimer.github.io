@@ -52,7 +52,8 @@ async function init(){
 
 const programmes =
 await loadProgramsFromCloud();
-const currentPatient = "demo";
+const currentPatient =
+localStorage.getItem("currentPatient");
 const list =
 document.getElementById("list");
 
