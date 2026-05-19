@@ -385,8 +385,6 @@ let pathoNom = localStorage.getItem("pathologie_nom");
 
 if(edit){
 
-localStorage.removeItem("programme_temp");
-
 let data = JSON.parse(edit);
 
 exercices = data.exercices || [];

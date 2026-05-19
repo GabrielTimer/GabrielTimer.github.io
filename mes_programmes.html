@@ -173,7 +173,17 @@ edit.onclick=(e)=>{
 e.stopPropagation();
 localStorage.setItem("edit_programme", JSON.stringify(p.data || p));
 localStorage.setItem("edit_index", index); // 🔥 AJOUT
-window.location="config.html?edit=1&v="+VERSION;
+window.location =
+"config.html?edit=1"
++
+(
+patient !== "admin"
+? "&patient=" + patient
+: ""
+)
++
+"&v=" + VERSION;
+
 };
 
 /* 📄 DUPLIQUER */
@@ -188,8 +198,18 @@ let copy = JSON.parse(JSON.stringify(base));
 copy.nom = getName(p) + " (copie)";
 
 localStorage.setItem("edit_programme", JSON.stringify(copy));
-window.location="config.html?edit=1&v="+VERSION;
+window.location =
+"config.html?edit=1"
++
+(
+patient !== "admin"
+? "&patient=" + patient
+: ""
+)
++
+"&v=" + VERSION;
 };
+
 
 /* 🗑 DELETE */
 let del=document.createElement("button");
