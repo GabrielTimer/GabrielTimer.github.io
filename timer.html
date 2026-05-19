@@ -514,14 +514,46 @@ localStorage.getItem(
 )
 );
 
-if(cloudId && !localStorage.getItem("programme_temp")){
+if(cloudId){
 
 loadCloudProgram(cloudId);
+return;
 
 }
 
 if(!p){
-window.location="config.html?v="+VERSION;
+
+const patient =
+params.get("patient");
+
+if(cloudId){
+
+window.location =
+"config.html?cloud="
++ cloudId +
+(
+patient
+? "&patient=" + patient
+: ""
+)
++
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"config.html"
++
+(
+patient
+? "?patient=" + patient
+: ""
+)
++
+"&v=" + VERSION;
+
+}
+
 }
 
 const timerLabel = document.querySelector(".timerLabel");
@@ -1030,6 +1062,9 @@ update();
 setInterval(loop,1000);
 
 async function loadCloudProgram(id){
+localStorage.removeItem(
+"programme_temp"
+);
 
 const module =
 await import(
