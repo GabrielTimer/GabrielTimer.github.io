@@ -63,6 +63,22 @@ background:#1d4ed8;
 
 <script>
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+/* 🔒 SI MODE PATIENT */
+if(patient){
+
+window.location =
+"cloud.html?patient=" + patient;
+
+}
+
 function openPatient(patient){
 
 localStorage.setItem(
