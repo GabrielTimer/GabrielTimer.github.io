@@ -60,6 +60,14 @@ background:#1d4ed8;
 🏠 Retour menu
 </button>
 
+<button onclick="openFavs()">
+⭐ Favoris
+</button>
+
+<button onclick="openHistory()">
+🕘 Historique
+</button>
+
 <div id="list"></div>
 
 <script type="module">
@@ -83,6 +91,7 @@ params.get("admin") === "true";
 
 const currentPatient =
 params.get("patient");
+
 const list =
 document.getElementById("list");
 
@@ -224,49 +233,101 @@ p => p.firebaseId === id
 
 if(!prog)return;
 
-let favs =
+let all =
 JSON.parse(
-localStorage.getItem(
-"favorites"
-) || "[]"
+localStorage.getItem("programmes")
+|| "[]"
 );
+
+const data =
+prog.données || prog.data;
 
 /* éviter doublons */
 
-const already =
-favs.some(f =>
+const exists =
+all.some(p =>
 
-f.nom ===
-(prog.données?.nom
-||
-prog.data?.nom)
+p.type === "favori"
+
+&&
+
+p.nom === data.nom
+
+&&
+
+(p.patientId || "admin")
+=== (currentPatient || "admin")
 
 );
 
-if(already){
+if(exists){
 
-alert(
-"Déjà en favoris"
-);
-
+alert("Déjà en favoris");
 return;
 
 }
 
-/* sauvegarde locale */
+/* ajout vrai favori */
 
-favs.push(
-prog.données || prog.data
-);
+all.push({
+
+type:"favori",
+
+patientId:
+currentPatient || "admin",
+
+nom:
+data.nom || "Programme",
+
+date:
+new Date()
+.toLocaleDateString(),
+
+data:data
+
+});
 
 localStorage.setItem(
-"favorites",
-JSON.stringify(favs)
+"programmes",
+JSON.stringify(all)
 );
 
 alert(
 "Ajouté aux favoris ⭐"
 );
+
+}
+window.openFavs = function(){
+
+if(currentPatient){
+
+window.location =
+"mes_programmes.html?patient="
++ currentPatient;
+
+}else{
+
+window.location =
+"mes_programmes.html";
+
+}
+
+}
+
+window.openHistory = function(){
+
+if(currentPatient){
+
+window.location =
+"historique.html?patient="
++ currentPatient;
+
+}else{
+
+window.location =
+"historique.html";
+
+}
 
 }
 

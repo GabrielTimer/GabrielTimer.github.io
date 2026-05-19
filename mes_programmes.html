@@ -124,7 +124,25 @@ background:#ccc;
 const VERSION = "1.2";
 
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
-let list = all.filter(p=>p.type==="favori");
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+|| "admin";
+
+let list = all.filter(p =>
+
+p.type === "favori"
+
+&&
+
+(p.patientId || "admin")
+=== patient
+
+);
 
 let container=document.getElementById("list");
 
@@ -192,7 +210,19 @@ div.appendChild(actions);
 /* CLICK → lancer */
 div.onclick=()=>{
 localStorage.setItem("programme_temp", JSON.stringify(p.data || p));
-window.location="timer.html?v="+VERSION;
+if(patient !== "admin"){
+
+window.location =
+"timer.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"timer.html?v=" + VERSION;
+
+}
 };
 
 container.appendChild(div);
@@ -215,9 +245,40 @@ localStorage.setItem("programmes",JSON.stringify(all));
 location.reload();
 }
 
-function goHist(){window.location="historique.html?v="+VERSION;}
-function back(){window.location="index.html?v="+VERSION;}
+function goHist(){
 
+if(patient !== "admin"){
+
+window.location =
+"historique.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"historique.html?v=" + VERSION;
+
+}
+
+}
+function back(){
+
+if(patient !== "admin"){
+
+window.location =
+"index.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"index.html?v=" + VERSION;
+
+}
+
+}
 </script>
 </body>
 </html>

@@ -626,6 +626,10 @@ let all = JSON.parse(localStorage.getItem("programmes") || "[]");
 
 let programme = {
 type: "favori",
+patientId:
+patientMode
+? params.get("patient")
+: "admin",
 nom: document.getElementById("sessionName").value,
 date: new Date().toLocaleDateString(),
 data: build()
@@ -674,6 +678,10 @@ let all = JSON.parse(localStorage.getItem("programmes") || "[]");
 let eva = parseInt(localStorage.getItem("eva_temp") || 0);
 let programme = {
 type: "historique",
+patientId:
+patientMode
+? params.get("patient")
+: "admin",
 nom: document.getElementById("sessionName").value,
 date: new Date().toLocaleString(),
 data: {

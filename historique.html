@@ -155,7 +155,25 @@ let all = localStorage.getItem("programmes");
 all = all ? JSON.parse(all) : [];
 if(!Array.isArray(all)) all = [];
 
-let hist = all.filter(p=>p.type==="historique").slice(0,30);
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+|| "admin";
+
+let hist = all.filter(p =>
+
+p.type === "historique"
+
+&&
+
+(p.patientId || "admin")
+=== patient
+
+).slice(0,30);
 
 /* GROUP BY NOM */
 let grouped = {};
@@ -324,7 +342,19 @@ div.appendChild(actions);
 /* CLICK */
 div.onclick=()=>{
 localStorage.setItem("folder_name", name);
-window.location="folder.html?v="+VERSION;
+if(patient !== "admin"){
+
+window.location =
+"folder.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"folder.html?v=" + VERSION;
+
+}
 };
 
 container.appendChild(div);
@@ -334,7 +364,25 @@ container.appendChild(div);
 
 function remove(i){
 let all = JSON.parse(localStorage.getItem("programmes")||[]);
-let hist = all.filter(p=>p.type==="historique");
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+|| "admin";
+
+let hist = all.filter(p =>
+
+p.type === "historique"
+
+&&
+
+(p.patientId || "admin")
+=== patient
+
+).slice(0,30);
 let target = hist[i];
 all = all.filter(p=>p !== target);
 localStorage.setItem("programmes",JSON.stringify(all));
@@ -359,7 +407,22 @@ location.reload();
 }
 }
 
-function back(){window.location="mes_programmes.html";}
+function back(){
+
+if(patient !== "admin"){
+
+window.location =
+"mes_programmes.html?patient="
++ patient;
+
+}else{
+
+window.location =
+"mes_programmes.html";
+
+}
+
+}
 
 </script>
 

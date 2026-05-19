@@ -139,8 +139,30 @@ let all = localStorage.getItem("programmes");
 all = all ? JSON.parse(all) : [];
 if(!Array.isArray(all)) all = [];
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+|| "admin";
+
 let list = all
-.filter(p=>p.type==="historique" && p.nom===name)
+.filter(p =>
+
+p.type === "historique"
+
+&&
+
+p.nom === name
+
+&&
+
+(p.patientId || "admin")
+=== patient
+
+)
 .sort((a,b)=> new Date(b.date) - new Date(a.date));
 
 document.getElementById("title").innerText = "📁 " + name;
