@@ -212,7 +212,9 @@ if(patient){
 setTimeout(()=>{
 
 window.location =
-"timer.html?patient="
+"timer.html?cloud="
++ id +
+"&patient="
 + patient +
 "&v=" + Date.now();
 
@@ -223,7 +225,9 @@ window.location =
 setTimeout(()=>{
 
 window.location =
-"timer.html?v=" +
+"timer.html?cloud="
++ id +
+"&v=" +
 Date.now();
 
 },80);
@@ -389,7 +393,9 @@ data.patientId
 "";
 
 window.location =
-"config.html?patient="
+"config.html?cloud="
++ id +
+"&patient="
 + patient +
 "&edit=1&v="
 + Date.now();
