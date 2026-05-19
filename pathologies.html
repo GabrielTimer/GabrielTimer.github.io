@@ -102,10 +102,14 @@ onclick="go('cabinet')">
 <button onclick="back()">⬅ Retour</button>
 
 <script>
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
 const patientMode =
-localStorage.getItem(
-"patientMode"
-) === "true";
+params.has("patient");
 
 const VERSION = "1.2";
 

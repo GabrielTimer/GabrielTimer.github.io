@@ -350,10 +350,13 @@ saveProgramToCloud
 
 /* 🔒 JS STRICTEMENT IDENTIQUE */
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
 const patientMode =
-localStorage.getItem(
-"patientMode"
-) === "true";
+params.has("patient");
 let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;

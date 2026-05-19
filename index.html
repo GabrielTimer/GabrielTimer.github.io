@@ -30,20 +30,19 @@
 <script>
 
 const VERSION = "1.2";
+
 function goProg(){
 
-const patientMode =
-localStorage.getItem(
-"patientMode"
-) === "true";
-
-/* 🔒 MODE PATIENT */
-if(patientMode){
+const params =
+new URLSearchParams(
+window.location.search
+);
 
 const patient =
-localStorage.getItem(
-"currentPatient"
-);
+params.get("patient");
+
+/* 🔒 MODE PATIENT */
+if(patient){
 
 window.location =
 "cloud.html?patient=" + patient;
@@ -66,7 +65,27 @@ localStorage.removeItem("programme_temp");
 localStorage.removeItem("current_programme");
 localStorage.removeItem("patho_data");
 
-window.location="config.html?v="+Date.now();
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"config.html?patient="
++ patient +
+"&v=" + Date.now();
+
+}else{
+
+window.location =
+"config.html?v=" + Date.now();
+
+}
 
 }
 const params =
@@ -84,21 +103,6 @@ localStorage.setItem(
 patient
 );
 
-localStorage.setItem(
-"patientMode",
-"true"
-);
-
-}else{
-
-localStorage.removeItem(
-"patientMode"
-);
-
-localStorage.removeItem(
-"currentPatient"
-);
-
 }
 
 function openPatient(patient){
@@ -114,10 +118,36 @@ window.location =
 }
 
 function zones(){
-window.location="pathologies.html?v="+VERSION;
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"pathologies.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"pathologies.html?v=" + VERSION;
+
 }
+
+}
+
 function respir(){
-window.location="respir/index.html?v="+VERSION;
+
+window.location =
+"respir/index.html?v="+VERSION;
+
 }
 </script>
 
