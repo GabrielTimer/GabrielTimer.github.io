@@ -171,7 +171,7 @@ Lancer
 ⭐ Favori
 </button>
 
-<button onclick="sendMail('${p.patientId || ""}')">
+<button onclick="sendMail('${p.patientId || ""}','${p.firebaseId}')">
 ✉️ Envoyer
 </button>
 
@@ -301,7 +301,7 @@ alert(
 );
 
 }
-window.sendMail = function(patient){
+window.sendMail = function(patient,id){
 
 if(!patient){
 
@@ -314,7 +314,7 @@ return;
 }
 
 const lien =
-`https://gabrieltimer.github.io/index.html?patient=${patient}`;
+`https://gabrieltimer.github.io/timer.html?cloud=${id}&patient=${patient}`;
 
 const sujet =
 "Votre programme de rééducation";
@@ -322,14 +322,17 @@ const sujet =
 const message =
 `Bonjour,
 
-Voici votre accès à vos programmes :
+Cliquez directement sur ce lien pour lancer votre séance :
 
-${lien}`;
+${lien}
+
+Gabriel Laveau - Masseur-Kinésithérapeute`;
 
 window.location =
 `mailto:?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
 
 }
+
 window.openFavs = function(){
 
 if(currentPatient){

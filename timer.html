@@ -489,17 +489,37 @@ transform="rotate(-90 50 50)"
 </div>
 
 <script>
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const cloudId =
+params.get("cloud");
 const VERSION = "1.2";
 
 /* ===== CODE ORIGINAL ===== */
 
 let p =
-JSON.parse(localStorage.getItem("programme_temp")) ||
-JSON.parse(localStorage.getItem("patho_data"));
+JSON.parse(
+localStorage.getItem(
+"programme_temp"
+)
+)
+||
+JSON.parse(
+localStorage.getItem(
+"patho_data"
+)
+);
 
-if(!p){
-window.location="config.html?v="+VERSION;
+if(cloudId && !localStorage.getItem("programme_temp")){
+
+loadCloudProgram(cloudId);
+
 }
+
 if(!p){
 window.location="config.html?v="+VERSION;
 }
@@ -1010,6 +1030,52 @@ window.location =
 update();
 
 setInterval(loop,1000);
+
+async function loadCloudProgram(id){
+
+const module =
+await import(
+"./exercises/js/cloud.js"
+);
+
+const programmes =
+await module.loadProgramsFromCloud();
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog){
+
+alert(
+"Programme introuvable"
+);
+
+return;
+
+}
+
+const data =
+prog.données || prog.data;
+
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(data)
+);
+
+window.location =
+"timer.html?patient="
++
+(
+params.get("patient")
+|| ""
+)
++
+"&v="
++ Date.now();
+
+}
 
 </script>
 
