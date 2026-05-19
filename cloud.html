@@ -33,12 +33,32 @@ cursor:pointer;
 margin-top:10px;
 }
 
+#homeBtn{
+margin-bottom:20px;
+padding:12px 18px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+#homeBtn:hover{
+background:#1d4ed8;
+}
+
 </style>
 </head>
 
 <body>
 
 <h2>☁️ Programmes Cloud</h2>
+
+<button id="homeBtn" onclick="goHome()">
+🏠 Retour menu
+</button>
 
 <div id="list"></div>
 
@@ -163,6 +183,29 @@ window.location =
 
 }
 
+window.goHome = function(){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"index.html?patient=" + patient;
+
+}else{
+
+window.location =
+"index.html";
+
+}
+
+}
 }
 
 init();
