@@ -800,19 +800,35 @@ window.location.href =
 
 window.saveCloud = async function(){
 
+const editId =
+localStorage.getItem(
+"editCloudId"
+);
+
 let programme = {
 
-id: crypto.randomUUID(),
+id:
+editId
+||
+crypto.randomUUID(),
 
-nom: document.getElementById("sessionName").value,
+nom:
+document.getElementById(
+"sessionName"
+).value,
 
-createdAt: Date.now(),
+createdAt:
+Date.now(),
 
-updatedAt: Date.now(),
+updatedAt:
+Date.now(),
 
-auteur: "gabriel",
+auteur:"gabriel",
+
 patientId:
-document.getElementById("patientId").value,
+document.getElementById(
+"patientId"
+).value,
 
 data: build()
 
@@ -820,9 +836,26 @@ data: build()
 
 await saveProgramToCloud(programme);
 
-alert("Programme envoyé au cloud");
+if(editId){
+
+localStorage.removeItem(
+"editCloudId"
+);
+
+alert(
+"Programme modifié ☁️"
+);
+
+}else{
+
+alert(
+"Programme envoyé ☁️"
+);
 
 }
+
+}
+
 window.addExo = addExo;
 window.toggle = toggle;
 window.moveUp = moveUp;

@@ -175,6 +175,10 @@ Lancer
 ✉️ Envoyer
 </button>
 
+<button onclick="editProgram('${p.firebaseId}')">
+✏️ Modifier
+</button>
+
 </div>
 
 `;
@@ -330,6 +334,65 @@ Gabriel Laveau - Masseur-Kinésithérapeute`;
 
 window.location =
 `mailto:?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+
+}
+
+window.editProgram = async function(id){
+
+const module =
+await import(
+"./exercises/js/cloud.js"
+);
+
+const programmes =
+await module.loadProgramsFromCloud();
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog){
+
+alert(
+"Programme introuvable"
+);
+
+return;
+
+}
+
+const data =
+prog.données || prog.data;
+
+/* sauvegarde programme */
+
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(data)
+);
+
+/* mode édition */
+
+localStorage.setItem(
+"editCloudId",
+id
+);
+
+/* garder patient */
+
+const patient =
+data.patient
+||
+data.patientId
+||
+"";
+
+window.location =
+"config.html?patient="
++ patient +
+"&edit=1&v="
++ Date.now();
 
 }
 
