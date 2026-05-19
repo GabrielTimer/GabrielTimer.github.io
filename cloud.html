@@ -86,19 +86,25 @@ if(!hasExercises) return false;
 
 if(isAdmin) return true;
 
-return (
-
-p.patientId === currentPatient
-
+const pid = (
+p.patientId
 ||
-
-p.data?.patientId === currentPatient
-
+p.data?.patientId
 ||
+p.données?.patientId
+||
+""
+)
+.toString()
+.trim()
+.toLowerCase();
 
-p.données?.patientId === currentPatient
+const cp =
+(currentPatient || "")
+.trim()
+.toLowerCase();
 
-);
+return pid === cp;
 
 })
 .forEach((p)=>{
