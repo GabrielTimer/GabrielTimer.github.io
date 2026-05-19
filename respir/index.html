@@ -1486,7 +1486,27 @@ if(exerciseId){
 
 function goHome(){
 
-    window.location="../index.html?v=" + Date.now();
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"../index.html?patient="
++ patient +
+"&v=" + Date.now();
+
+}else{
+
+window.location =
+"../index.html?v=" + Date.now();
+
+}
 
 }
 
