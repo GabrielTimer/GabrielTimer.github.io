@@ -514,7 +514,17 @@ localStorage.getItem(
 )
 );
 
-if(cloudId){
+if(
+
+cloudId
+
+&&
+
+!localStorage.getItem(
+"programme_temp"
+)
+
+){
 
 loadCloudProgram(cloudId);
 return;
@@ -1075,9 +1085,6 @@ update();
 setInterval(loop,1000);
 
 async function loadCloudProgram(id){
-localStorage.removeItem(
-"programme_temp"
-);
 
 const module =
 await import(
