@@ -265,8 +265,13 @@ padding:0;
 <div id="exo"></div>
 
 <button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
-<button class="addBtn" onclick="openGlossaire()">
+<button
+id="glossaireBtn"
+class="addBtn"
+onclick="openGlossaire()">
+
 📚 Bibliothèque exercices
+
 </button>
 
 </div>
@@ -345,6 +350,10 @@ saveProgramToCloud
 
 /* 🔒 JS STRICTEMENT IDENTIQUE */
 
+const patientMode =
+localStorage.getItem(
+"patientMode"
+) === "true";
 let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;
@@ -694,6 +703,18 @@ localStorage.setItem(
 
 window.location =
 "exercises/glossary.html?v=1.3";
+
+}
+if(patientMode){
+
+const btn =
+document.getElementById(
+"glossaireBtn"
+);
+
+if(btn){
+btn.style.display = "none";
+}
 
 }
 
