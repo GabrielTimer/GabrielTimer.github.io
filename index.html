@@ -28,11 +28,6 @@
 </div>
 
 <script>
-
-const VERSION = "1.2";
-
-function goProg(){
-
 const params =
 new URLSearchParams(
 window.location.search
@@ -40,6 +35,27 @@ window.location.search
 
 const patient =
 params.get("patient");
+
+/* protection admin */
+
+if(!patient){
+
+if(
+sessionStorage.getItem(
+"admin_ok"
+)!=="true"
+){
+
+window.location =
+"login.html";
+
+}
+
+}
+const VERSION = "1.2";
+
+function goProg(){
+
 
 /* 🔒 MODE PATIENT */
 if(patient){
@@ -65,13 +81,6 @@ localStorage.removeItem("programme_temp");
 localStorage.removeItem("current_programme");
 localStorage.removeItem("patho_data");
 
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patient =
-params.get("patient");
 
 if(patient){
 
@@ -88,13 +97,6 @@ window.location =
 }
 
 }
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patient =
-params.get("patient");
 
 if(patient){
 
