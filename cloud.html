@@ -192,14 +192,24 @@ params.get("patient");
 
 if(patient){
 
+setTimeout(()=>{
+
 window.location =
 "timer.html?patient="
-+ patient;
++ patient +
+"&v=" + Date.now();
+
+},80);
 
 }else{
 
+setTimeout(()=>{
+
 window.location =
-"timer.html";
+"timer.html?v=" +
+Date.now();
+
+},80);
 
 }
 
@@ -283,6 +293,7 @@ window.location =
 }
 
 }
+
 }
 
 init();
