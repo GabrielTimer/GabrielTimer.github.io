@@ -32,6 +32,27 @@
 const VERSION = "1.2";
 function goProg(){
 
+const patientMode =
+localStorage.getItem(
+"patientMode"
+) === "true";
+
+/* 🔒 MODE PATIENT */
+if(patientMode){
+
+const patient =
+localStorage.getItem(
+"currentPatient"
+);
+
+window.location =
+"cloud.html?patient=" + patient;
+
+return;
+
+}
+
+/* 👨‍⚕️ MODE ADMIN */
 window.location =
 "patients.html";
 
@@ -46,6 +67,27 @@ localStorage.removeItem("current_programme");
 localStorage.removeItem("patho_data");
 
 window.location="config.html?v="+Date.now();
+
+}
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+localStorage.setItem(
+"currentPatient",
+patient
+);
+
+localStorage.setItem(
+"patientMode",
+"true"
+);
 
 }
 

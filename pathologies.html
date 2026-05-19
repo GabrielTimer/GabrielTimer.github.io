@@ -91,11 +91,21 @@ border-radius:14px;
 <div class="card" onclick="go('epaule')">💪 Épaule</div>
 <div class="card" onclick="go('dos')">🧍 Dos</div>
 <div class="card" onclick="go('gym_prevention')">🧘 Gym & Prévention</div>
-<div class="card" onclick="go('cabinet')">🏥 Cabinet</div>
+<div
+class="card cabinetCard"
+onclick="go('cabinet')">
+
+🏥 Cabinet
+
+</div>
 
 <button onclick="back()">⬅ Retour</button>
 
 <script>
+const patientMode =
+localStorage.getItem(
+"patientMode"
+) === "true";
 
 const VERSION = "1.2";
 
@@ -110,6 +120,18 @@ window.location="liste_pathologies.html?v="+VERSION;
 
 function back(){
 window.location="index.html?v="+VERSION;
+}
+if(patientMode){
+
+const cabinet =
+document.querySelector(
+".cabinetCard"
+);
+
+if(cabinet){
+cabinet.style.display = "none";
+}
+
 }
 
 </script>
