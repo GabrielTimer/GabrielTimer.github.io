@@ -707,24 +707,48 @@ if(patient){
 
 window.location =
 "timer.html?patient="
-+ patient;
++ patient +
+"&v=" +
+Date.now();
 
 }else{
 
 window.location =
-"timer.html";
+"timer.html?v=" +
+Date.now();
 
 }
 
-}function openGlossaire(){
+}
+
+function openGlossaire(){
 
 localStorage.setItem(
 "return_to_config",
 "1"
 );
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"exercises/glossary.html?patient="
++ patient +
+"&v=1.3";
+
+}else{
+
 window.location =
 "exercises/glossary.html?v=1.3";
+
+}
 
 }
 if(patientMode){
