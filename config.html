@@ -360,8 +360,18 @@ params.has("patient");
 let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;
+const cloudId =
+params.get("cloud");
 
 window.addEventListener("DOMContentLoaded", ()=>{
+if(cloudId){
+
+localStorage.setItem(
+"editCloudId",
+cloudId
+);
+
+}
 
 let edit = localStorage.getItem("edit_programme");
 
@@ -713,11 +723,25 @@ params.get("patient");
 
 if(patient){
 
+if(cloudId){
+
+window.location =
+"timer.html?cloud="
++ cloudId +
+"&patient="
++ patient +
+"&v=" +
+Date.now();
+
+}else{
+
 window.location =
 "timer.html?patient="
 + patient +
 "&v=" +
 Date.now();
+
+}
 
 }else{
 
