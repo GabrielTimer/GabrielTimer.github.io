@@ -695,7 +695,26 @@ localStorage.removeItem(
 "return_to_config"
 );
 
-window.location="timer.html";
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"timer.html?patient="
++ patient;
+
+}else{
+
+window.location =
+"timer.html";
+
+}
 
 }function openGlossaire(){
 
@@ -722,7 +741,29 @@ btn.style.display = "none";
 }
 
 function home(){
-window.location.href = "index.html?v=" + Date.now();
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location.href =
+"index.html?patient="
++ patient +
+"&v=" + Date.now();
+
+}else{
+
+window.location.href =
+"index.html?v=" + Date.now();
+
+}
+
 }
 
 window.saveCloud = async function(){
