@@ -145,8 +145,27 @@ window.location =
 
 function respir(){
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
 window.location =
-"respir/index.html?v="+VERSION;
+"respir/index.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"respir/index.html?v=" + VERSION;
+
+}
 
 }
 </script>
