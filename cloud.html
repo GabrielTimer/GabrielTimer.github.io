@@ -158,6 +158,10 @@ p.data?.exercices?.length
 Lancer
 </button>
 
+<button onclick="addFav('${p.firebaseId}')">
+⭐ Favori
+</button>
+
 </div>
 
 `;
@@ -196,6 +200,63 @@ window.location =
 
 window.location =
 "timer.html";
+
+}
+
+}
+
+window.addFav = function(id){
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog)return;
+
+let favs =
+JSON.parse(
+localStorage.getItem(
+"favorites"
+) || "[]"
+);
+
+/* éviter doublons */
+
+const already =
+favs.some(f =>
+
+f.nom ===
+(prog.données?.nom
+||
+prog.data?.nom)
+
+);
+
+if(already){
+
+alert(
+"Déjà en favoris"
+);
+
+return;
+
+}
+
+/* sauvegarde locale */
+
+favs.push(
+prog.données || prog.data
+);
+
+localStorage.setItem(
+"favorites",
+JSON.stringify(favs)
+);
+
+alert(
+"Ajouté aux favoris ⭐"
+);
 
 }
 }
