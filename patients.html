@@ -48,6 +48,20 @@ button:hover{
 background:#1d4ed8;
 }
 
+.backBtn{
+
+background:#ddd;
+color:#111;
+
+}
+
+.backBtn:hover{
+
+background:#ccc;
+
+}
+
+
 </style>
 </head>
 
@@ -56,6 +70,10 @@ background:#1d4ed8;
 <div class="card">
 
 <h1>Mes programmes</h1>
+
+<button class="backBtn" onclick="goBack()">
+🏠 Retour accueil
+</button>
 
 <div id="patientsList"></div>
 
@@ -158,6 +176,13 @@ list.appendChild(btn);
 }
 
 init();
+
+function goBack(){
+
+window.location =
+"index.html?v=1.2";
+
+}
 
 </script>
 </body>
