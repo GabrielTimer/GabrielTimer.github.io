@@ -331,7 +331,19 @@ div.appendChild(actions);
 /* CLICK */
 div.onclick=()=>{
 localStorage.setItem("programme_temp",JSON.stringify(p.data));
-window.location="timer.html?v="+VERSION;
+if(patient !== "admin"){
+
+window.location =
+"timer.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"timer.html?v=" + VERSION;
+
+}
 };
 
 container.appendChild(div);
@@ -364,11 +376,24 @@ location.reload();
 }
 
 function back(){
-window.location="historique.html";
+
+if(patient !== "admin"){
+
+window.location =
+"historique.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"historique.html?v=" + VERSION;
+
+}
+
 }
 
 </script>
-const VERSION = "1.2";
 
 </body>
 </html>
