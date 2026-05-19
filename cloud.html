@@ -178,9 +178,26 @@ prog.données || prog.data
 )
 );
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
+
+if(patient){
+
+window.location =
+"timer.html?patient="
++ patient;
+
+}else{
+
 window.location =
 "timer.html";
 
+}
 }
 
 window.goHome = function(){
