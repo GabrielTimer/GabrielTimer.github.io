@@ -171,6 +171,10 @@ Lancer
 ⭐ Favori
 </button>
 
+<button onclick="sendMail('${p.patientId || ""}')">
+✉️ Envoyer
+</button>
+
 </div>
 
 `;
@@ -295,6 +299,35 @@ JSON.stringify(all)
 alert(
 "Ajouté aux favoris ⭐"
 );
+
+}
+window.sendMail = function(patient){
+
+if(!patient){
+
+alert(
+"Aucun patient associé"
+);
+
+return;
+
+}
+
+const lien =
+`https://gabrieltimer.github.io/index.html?patient=${patient}`;
+
+const sujet =
+"Votre programme de rééducation";
+
+const message =
+`Bonjour,
+
+Voici votre accès à vos programmes :
+
+${lien}`;
+
+window.location =
+`mailto:?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
 
 }
 window.openFavs = function(){
