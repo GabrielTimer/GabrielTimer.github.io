@@ -338,6 +338,13 @@ saveAndExit();
 const VERSION = "1.2";
 
 function saveAndExit(){
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient");
 
 let all = localStorage.getItem("programmes");
 all = all ? JSON.parse(all) : [];
@@ -348,6 +355,8 @@ let prog = JSON.parse(localStorage.getItem("programme_temp") || "{}");
 
 let programme = {
 type: "historique",
+patientId:
+patient || "admin",
 nom: prog.nom || "Séance",
 date: new Date().toLocaleString(),
 data: {
@@ -365,7 +374,20 @@ localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
 
 localStorage.removeItem("eva_temp");
 
-window.location="index.html?v="+VERSION;
+if(patient){
+
+window.location =
+"index.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"index.html?v=" + VERSION;
+
+}
+
 }
 </script>
 
