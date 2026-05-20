@@ -463,7 +463,11 @@ transform="rotate(-90 50 50)"
 
 <button onclick="skipExo()">⏭</button>
 
-<button onclick="back()">⚙️</button>
+<button
+id="configBtn"
+onclick="back()">
+⚙️
+</button>
 
 </div>
 
@@ -500,6 +504,14 @@ params.get("cloud");
 
 const patient =
 params.get("patient");
+
+if(cloudId){
+
+document
+.getElementById("configBtn")
+.style.display = "none";
+
+}
 
 /* ===== CODE ORIGINAL ===== */
 
