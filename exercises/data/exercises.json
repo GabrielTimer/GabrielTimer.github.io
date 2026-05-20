@@ -255,5 +255,229 @@
   "precautions":[
     "Pas de douleur vive"
   ]
+},
+{
+  "id": "GENOU_01",
+
+  "nom": "Squat avec élastique",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Renforcement des membres inférieurs",
+
+  "niveau": 2,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "3 séries de 12 répétitions",
+
+  "consignes": [
+    "Garder le dos droit",
+    "Pousser légèrement contre l’élastique",
+    "Maintenir les genoux alignés"
+  ],
+
+  "precautions": [
+    "Ne pas laisser les genoux rentrer",
+    "Limiter l’amplitude si douleur"
+  ],
+
+  "tags": [
+    "Genou",
+    "Syndrome rotulien",
+    "Quadriceps",
+    "Fessiers"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 12
+  },
+
+  "image":"/exercises/images/genou/squat-elastique.png"
+},
+
+{
+  "id": "GENOU_02",
+
+  "nom": "Squat anti-valgus",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Contrôle moteur du genou",
+
+  "niveau": 3,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "3 séries de 10 répétitions",
+
+  "consignes": [
+    "Résister à la traction de l’élastique",
+    "Maintenir le genou aligné",
+    "Contrôler la descente"
+  ],
+
+  "precautions": [
+    "Ne pas laisser le genou rentrer vers l’intérieur"
+  ],
+
+  "tags": [
+    "Genou",
+    "Valgus",
+    "Contrôle moteur",
+    "Stabilité"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 10
+  },
+
+  "image":"/exercises/images/genou/squat-anti-valgus.png"
+},
+
+{
+  "id": "GENOU_03",
+
+  "nom": "Squat anti-varus",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Contrôle de l’alignement du genou",
+
+  "niveau": 3,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "3 séries de 10 répétitions",
+
+  "consignes": [
+    "Résister à la traction de l’élastique",
+    "Garder les genoux alignés"
+  ],
+
+  "precautions": [
+    "Limiter la flexion si douleur"
+  ],
+
+  "tags": [
+    "Genou",
+    "Varus",
+    "Contrôle moteur",
+    "Stabilité"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 10
+  },
+
+  "image":"/exercises/images/genou/squat-anti-varus.png"
+},
+
+{
+  "id": "GENOU_04",
+
+  "nom": "Équilibre unipodal avec balle",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Travail de stabilité et proprioception",
+
+  "niveau": 2,
+
+  "exercise_mode": "statique",
+
+  "duree": "3 séries de 30 secondes",
+
+  "consignes": [
+    "Garder l’équilibre sur une jambe",
+    "Contrôler les mouvements",
+    "Regarder devant soi"
+  ],
+
+  "precautions": [
+    "Prévoir un appui proche si besoin"
+  ],
+
+  "tags": [
+    "Genou",
+    "Équilibre",
+    "Proprioception",
+    "Stabilité"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 30,
+    "phase_descente": 2,
+    "cycles": 1
+  },
+
+  "image":"/exercises/images/genou/equilibre-balle-1.png"
+},
+
+{
+  "id": "GENOU_05",
+
+  "nom": "Squat latéral avec élastique",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Renforcement des fessiers et stabilité des genoux",
+
+  "niveau": 2,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "3 séries de 12 répétitions",
+
+  "consignes": [
+    "Pousser contre l’élastique",
+    "Garder les pieds parallèles",
+    "Contrôler le mouvement"
+  ],
+
+  "precautions": [
+    "Éviter les douleurs importantes"
+  ],
+
+  "tags": [
+    "Genou",
+    "Fessiers",
+    "Quadriceps",
+    "Stabilité"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 12
+  },
+
+  "image":"/exercises/images/genou/squat-lat-elastique.png"
 }
 ]
