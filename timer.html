@@ -498,6 +498,9 @@ window.location.search
 const cloudId =
 params.get("cloud");
 
+const patient =
+params.get("patient");
+
 /* ===== CODE ORIGINAL ===== */
 
 let p = null;
@@ -870,7 +873,19 @@ serieIndex++;
 
 if(serieIndex>p.series){
 
-window.location="fin.html?v="+VERSION;
+if(patient){
+
+window.location =
+"fin.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"fin.html?v=" + VERSION;
+
+}
 
 return;
 
@@ -968,7 +983,19 @@ remainingTime = Math.max(0, remainingTime - 1);
 
 if(remainingTime <= 0){
 
-window.location="fin.html";
+if(patient){
+
+window.location =
+"fin.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"fin.html?v=" + VERSION;
+
+}
 
 return;
 
