@@ -293,10 +293,10 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 2,
+    "phase_monte": 3,
     "maintien": 1,
     "phase_descente": 2,
-    "cycles": 12
+    "cycles": 20
   },
 
   "image":"/exercises/images/genou/squat-elastique.png"
@@ -338,10 +338,10 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 2,
+    "phase_monte": 3,
     "maintien": 1,
     "phase_descente": 2,
-    "cycles": 10
+    "cycles": 20
   },
 
   "image":"/exercises/images/genou/squat-anti-valgus.png"
@@ -382,10 +382,10 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 2,
+    "phase_monte": 3,
     "maintien": 1,
     "phase_descente": 2,
-    "cycles": 10
+    "cycles": 20
   },
 
   "image":"/exercises/images/genou/squat-anti-varus.png"
@@ -427,9 +427,9 @@
 
   "timer_config": {
     "mode": "statique",
-    "phase_monte": 2,
-    "maintien": 30,
-    "phase_descente": 2,
+    "phase_monte": 60,
+    "maintien": 1,
+    "phase_descente": 10,
     "cycles": 1
   },
 
@@ -472,10 +472,10 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 2,
+    "phase_monte": 60,
     "maintien": 1,
-    "phase_descente": 2,
-    "cycles": 12
+    "phase_descente": 10,
+    "cycles": 2
   },
 
   "image":"/exercises/images/genou/squat-lat-elastique.png"
@@ -516,9 +516,9 @@
 
   "timer_config": {
     "mode": "statique",
-    "phase_monte": 2,
-    "maintien": 30,
-    "phase_descente": 2,
+    "phase_monte": 60
+    "maintien":1,
+    "phase_descente": 10,
     "cycles": 1
   },
 
