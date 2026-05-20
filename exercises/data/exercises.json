@@ -479,5 +479,49 @@
   },
 
   "image":"/exercises/images/genou/squat-lat-elastique.png"
+},
+{
+  "id": "GENOU_06",
+
+  "nom": "Équilibre unipodal avec réception",
+
+  "type":"timer",
+
+  "categorie": "Genou",
+
+  "objectif": "Travail de stabilité dynamique",
+
+  "niveau": 3,
+
+  "exercise_mode": "statique",
+
+  "duree": "3 séries de 30 secondes",
+
+  "consignes": [
+    "Fléchir légèrement le genou",
+    "Maintenir l’équilibre",
+    "Contrôler la réception de balle"
+  ],
+
+  "precautions": [
+    "Prévoir un appui proche si besoin"
+  ],
+
+  "tags": [
+    "Genou",
+    "Équilibre",
+    "Proprioception",
+    "Stabilité dynamique"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 30,
+    "phase_descente": 2,
+    "cycles": 1
+  },
+
+  "image":"/exercises/images/genou/equilibre-balle-2.png"
 }
 ]
