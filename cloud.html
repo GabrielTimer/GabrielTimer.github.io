@@ -114,7 +114,9 @@ const hasExercises =
 
 if(!hasExercises) return false;
 
-if(isAdmin) return true;
+if(isAdmin && !currentPatient){
+return true;
+}
 
 const pid = (
 p.patientId
