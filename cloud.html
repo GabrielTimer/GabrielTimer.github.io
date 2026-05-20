@@ -480,17 +480,16 @@ window.location.search
 const patient =
 params.get("patient");
 
-if(patient){
+if(patient && !params.get("admin")){
 
 window.location =
 "index.html?patient="
-+ patient +
-"&admin=true";
++ patient;
 
 }else{
 
 window.location =
-"index.html";
+"index.html?admin=true";
 
 }
 
