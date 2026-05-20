@@ -1030,7 +1030,19 @@ function back(){
 
 localStorage.removeItem("programme_temp");
 
-window.location="config.html";
+if(patient){
+
+window.location =
+"config.html?patient="
++ patient +
+"&v=" + VERSION;
+
+}else{
+
+window.location =
+"config.html?v=" + VERSION;
+
+}
 
 }
 

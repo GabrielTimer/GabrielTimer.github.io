@@ -263,8 +263,12 @@ padding:0;
 <h2 id="title">Configurer la séance</h2>
 
 <div id="exo"></div>
-
-<button class="addBtn" onclick="addExo()">➕ Ajouter un exercice</button>
+<button
+id="addExoBtn"
+class="addBtn"
+onclick="addExo()">
+➕ Ajouter un exercice
+</button>
 <button
 id="glossaireBtn"
 class="addBtn"
@@ -711,15 +715,9 @@ localStorage.removeItem(
 "return_to_config"
 );
 
-const params =
-new URLSearchParams(
-window.location.search
-);
 
 const patient =
 params.get("patient");
-
-if(patient){
 
 if(cloudId){
 
@@ -731,15 +729,13 @@ window.location =
 "&v=" +
 Date.now();
 
-}else{
+}else if(patient){
 
 window.location =
 "timer.html?patient="
 + patient +
 "&v=" +
 Date.now();
-
-}
 
 }else{
 
@@ -783,17 +779,51 @@ window.location =
 }
 if(patientMode){
 
-const btn =
+const glossaireBtn =
 document.getElementById(
 "glossaireBtn"
 );
 
-if(btn){
+if(glossaireBtn){
+glossaireBtn.style.display = "none";
+}
+
+const addBtn =
+document.getElementById(
+"addExoBtn"
+);
+
+if(addBtn){
+addBtn.style.display = "none";
+}
+
+const cloudButtons =
+document.querySelectorAll(
+".fav"
+);
+
+cloudButtons.forEach(btn=>{
+
+if(
+btn.innerText.includes("☁️")
+){
 btn.style.display = "none";
 }
 
+});
+
+const patientInput =
+document.getElementById(
+"patientId"
+);
+
+if(patientInput){
+
+patientInput.disabled = true;
+
 }
 
+}
 function home(){
 
 const params =
