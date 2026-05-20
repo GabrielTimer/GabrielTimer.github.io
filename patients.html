@@ -89,11 +89,15 @@ window.location.search
 const patient =
 params.get("patient");
 
+const isAdmin =
+params.get("admin") === "true";
+
 /* 🔒 SI MODE PATIENT */
-if(patient){
+if(patient && !isAdmin){
 
 window.location =
-"cloud.html?patient=" + patient;
+"cloud.html?patient="
++ patient;
 
 }
 
@@ -106,7 +110,8 @@ patient
 
 window.location =
 "cloud.html?patient="
-+ patient;
++ patient +
+"&admin=true";
 
 }
 
@@ -167,7 +172,8 @@ patient
 
 window.location =
 "cloud.html?patient="
-+ patient;
++ patient +
+"&admin=true";
 
 };
 
