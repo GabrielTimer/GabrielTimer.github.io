@@ -490,15 +490,71 @@ transform="rotate(-90 50 50)"
 
 <script>
 const VERSION = "1.2";
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const cloudId =
+params.get("cloud");
 
 /* ===== CODE ORIGINAL ===== */
 
-let p =
-JSON.parse(localStorage.getItem("programme_temp")) ||
-JSON.parse(localStorage.getItem("patho_data"));
+let p = null;
+
+async function initProgram(){
+
+p =
+JSON.parse(
+localStorage.getItem("programme_temp")
+)
+||
+JSON.parse(
+localStorage.getItem("patho_data")
+);
+
+if(!p && cloudId){
+
+const module =
+await import(
+"./exercises/js/cloud.js"
+);
+
+const programmes =
+await module.loadProgramsFromCloud();
+
+const prog =
+programmes.find(
+p => p.firebaseId === cloudId
+);
+
+if(prog){
+
+p =
+prog.données
+||
+prog.data;
+
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(p)
+);
+
+}
+
+}
 
 if(!p){
-window.location="config.html?v="+VERSION;
+
+window.location =
+"config.html?v=" + VERSION;
+
+return false;
+
+}
+
+return true;
+
 }
 
 const timerLabel = document.querySelector(".timerLabel");
@@ -559,7 +615,6 @@ remainingTime=totalSessionTime;
 
 }
 
-computeTotal();
 
 /* TIME */
 
@@ -577,7 +632,6 @@ totalTime.innerText="Durée : "+formatTime(remainingTime);
 
 }
 
-updateTotal();
 
 /* AUDIO */
 
@@ -920,7 +974,6 @@ return;
 
 }
 
-updateTotal();
 
 if(t<=0){
 
@@ -942,10 +995,22 @@ window.location="config.html";
 
 }
 
+(async ()=>{
+
+const ok =
+await initProgram();
+
+if(!ok) return;
+
+computeTotal();
+
+updateTotal();
+
 update();
 
 setInterval(loop,1000);
 
+})();
 </script>
 
 </body>
