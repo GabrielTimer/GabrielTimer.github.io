@@ -516,7 +516,7 @@
 
   "timer_config": {
     "mode": "statique",
-    "phase_monte": 60
+    "phase_monte": 60,
     "maintien":1,
     "phase_descente": 10,
     "cycles": 1
