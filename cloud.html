@@ -171,6 +171,9 @@ Lancer
 ⭐ Favori
 </button>
 
+${
+!currentPatient
+? `
 <button onclick="sendMail('${p.patientId || ""}','${p.firebaseId}')">
 ✉️ Envoyer
 </button>
@@ -178,6 +181,9 @@ Lancer
 <button onclick="editProgram('${p.firebaseId}')">
 ✏️ Modifier
 </button>
+`
+: ""
+}
 
 </div>
 
