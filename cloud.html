@@ -73,7 +73,8 @@ background:#1d4ed8;
 <script type="module">
 
 import {
-loadProgramsFromCloud
+loadProgramsFromCloud,
+deleteProgramFromCloud
 } from "./exercises/js/cloud.js";
 
 async function init(){
@@ -181,6 +182,11 @@ isAdmin
 <button onclick="editProgram('${p.firebaseId}')">
 ✏️ Modifier
 </button>
+
+<button onclick="deleteProgram('${p.firebaseId}')">
+🗑️ Supprimer
+</button>
+
 `
 : ""
 }
@@ -407,6 +413,22 @@ window.location =
 "&admin=true"
 + "&edit=1&v="
 + Date.now();
+
+}
+
+window.deleteProgram =
+async function(id){
+
+const confirmDelete =
+confirm(
+"Supprimer définitivement ce programme ?"
+);
+
+if(!confirmDelete) return;
+
+await deleteProgramFromCloud(id);
+
+init();
 
 }
 
