@@ -431,6 +431,13 @@ data.nom || "Libre";
 document.getElementById("title").innerText =
 data.nom || "Libre";
 
+document.getElementById("patientId").value =
+data.patientId
+||
+data.patient
+||
+"";
+
 render();
 
 return;
