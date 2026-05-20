@@ -172,7 +172,7 @@ Lancer
 </button>
 
 ${
-!currentPatient
+isAdmin
 ? `
 <button onclick="sendMail('${p.patientId || ""}','${p.firebaseId}')">
 ✉️ Envoyer
@@ -222,7 +222,8 @@ window.location =
 + id +
 "&patient="
 + patient +
-"&v=" + Date.now();
+"&admin=true"
++ "&v=" + Date.now();
 
 },80);
 
@@ -403,7 +404,8 @@ window.location =
 + id +
 "&patient="
 + patient +
-"&edit=1&v="
+"&admin=true"
++ "&edit=1&v="
 + Date.now();
 
 }
@@ -414,12 +416,13 @@ if(currentPatient){
 
 window.location =
 "mes_programmes.html?patient="
-+ currentPatient;
++ currentPatient +
+"&admin=true";
 
 }else{
 
 window.location =
-"mes_programmes.html";
+"mes_programmes.html?admin=true";
 
 }
 
@@ -431,12 +434,13 @@ if(currentPatient){
 
 window.location =
 "historique.html?patient="
-+ currentPatient;
++ currentPatient +
+"&admin=true";
 
 }else{
 
 window.location =
-"historique.html";
+"historique.html?admin=true";
 
 }
 
@@ -455,7 +459,9 @@ params.get("patient");
 if(patient){
 
 window.location =
-"index.html?patient=" + patient;
+"index.html?patient="
++ patient +
+"&admin=true";
 
 }else{
 
