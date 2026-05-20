@@ -293,9 +293,9 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 3,
+    "phase_monte": 5,
     "maintien": 1,
-    "phase_descente": 2,
+    "phase_descente": 3,
     "cycles": 20
   },
 
@@ -338,9 +338,9 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 3,
+    "phase_monte": 5,
     "maintien": 1,
-    "phase_descente": 2,
+    "phase_descente": 3,
     "cycles": 20
   },
 
@@ -382,9 +382,9 @@
 
   "timer_config": {
     "mode": "dynamique",
-    "phase_monte": 3,
+    "phase_monte": 5,
     "maintien": 1,
-    "phase_descente": 2,
+    "phase_descente": 3,
     "cycles": 20
   },
 
