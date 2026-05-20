@@ -2,10 +2,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs
+getFirestore,
+collection,
+addDoc,
+getDocs,
+doc,
+setDoc,
+deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
@@ -40,6 +43,22 @@ export async function saveProgramToCloud(programme){
 
 try{
 
+if(programme.id){
+
+await setDoc(
+doc(db, "programmes", programme.id),
+programme
+);
+
+console.log(
+"Programme cloud modifié :",
+programme.id
+);
+
+return programme.id;
+
+}else{
+
 const docRef = await addDoc(
 collection(db, "programmes"),
 programme
@@ -51,6 +70,8 @@ docRef.id
 );
 
 return docRef.id;
+
+}
 
 }catch(error){
 
@@ -95,5 +116,27 @@ export async function loadProgramsFromCloud(){
         return [];
 
     }
+
+}
+export async function deleteProgramFromCloud(id){
+
+try{
+
+await deleteDoc(
+doc(db,"programmes",id)
+);
+
+console.log(
+"Programme supprimé :", id
+);
+
+}catch(error){
+
+console.error(
+"Erreur suppression :",
+error
+);
+
+}
 
 }
