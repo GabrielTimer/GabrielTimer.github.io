@@ -55,115 +55,55 @@ fetch('/exercises/data/exercises.json?v=' + VERSION)
 
       `;
 
-      card.addEventListener('click', () => {
+     const addButton =
+card.querySelector('.launch-btn');
 
-        document.getElementById('modal-image').src =
-          exercise.image;
+addButton.addEventListener('click', (e) => {
 
-        document.getElementById('modal-title').innerText =
-          exercise.nom;
+  e.stopPropagation();
 
-        document.getElementById('modal-duration').innerText =
-          exercise.duree || "";
+  let current =
+  JSON.parse(
+    localStorage.getItem("programme_temp")
+    ||
+    '{"nom":"Libre","series":1,"exercices":[]}'
+  );
 
-        const consignesList =
-          document.getElementById('modal-consignes');
+  current.exercices.push({
 
-        consignesList.innerHTML = '';
+    id: exercise.id,
 
-        (exercise.consignes || []).forEach(consigne => {
+    nom: exercise.nom,
 
-          consignesList.innerHTML += `
-            <li>${consigne}</li>
-          `;
+    type: "timer",
 
-        });
+    image: exercise.image,
 
-        const precautionsList =
-          document.getElementById('modal-precautions');
+    conseil:
+    (exercise.consignes || []).join("<br>"),
 
-        precautionsList.innerHTML = '';
+    ex:
+    exercise.timer_config?.phase_monte || 30,
 
-        (exercise.precautions || []).forEach(precaution => {
+    repos:
+    exercise.timer_config?.phase_descente || 10,
 
-          precautionsList.innerHTML += `
-            <li>${precaution}</li>
-          `;
+    reps:
+    exercise.timer_config?.cycles || 5
 
-        });
+  });
 
-        document.getElementById('exercise-modal')
-          .style.display = 'flex';
+  localStorage.setItem(
+    "programme_temp",
+    JSON.stringify(current)
+  );
 
-        document.getElementById('modal-launch')
-        .onclick = () => {
+  window.location.href =
+  "../config.html";
 
-          let current =
-          JSON.parse(
-            localStorage.getItem("programme_temp")
-            ||
-            '{"nom":"Libre","series":1,"exercices":[]}'
-          );
-
-          current.exercices.push({
-
-            id: exercise.id,
-
-            nom: exercise.nom,
-
-            type: "timer",
-
-            image: exercise.image,
-
-            conseil:
-            (exercise.consignes || []).join("<br>"),
-
-            ex:
-            exercise.timer_config?.phase_monte || 30,
-
-            repos:
-            exercise.timer_config?.phase_descente || 10,
-
-            reps:
-            exercise.timer_config?.cycles || 5
-
-          });
-
-          localStorage.setItem(
-            "programme_temp",
-            JSON.stringify(current)
-          );
-
-          window.location.href =
-          "../config.html";
-
-        };
-
-      });
-
+});
       container.appendChild(card);
 
     });
 
   });
-
-document.querySelector('.close-modal')
-  .addEventListener('click', () => {
-
-    document.getElementById('exercise-modal')
-      .style.display = 'none';
-
-});
-
-window.addEventListener('click', (e) => {
-
-  const modal =
-    document.getElementById('exercise-modal');
-
-  if(e.target === modal){
-
-    modal.style.display = 'none';
-
-  }
-
-});
