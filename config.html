@@ -779,6 +779,17 @@ window.location =
 }
 if(patientMode){
 
+const patientName =
+params.get("patient");
+
+if(patientName){
+
+document.getElementById(
+"patientId"
+).value = patientName;
+
+}
+
 const glossaireBtn =
 document.getElementById(
 "glossaireBtn"
