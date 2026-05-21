@@ -1105,27 +1105,67 @@ return;
 
 phase="ex";
 
-t=exo.ex;
-
-totalTimePhase=exo.ex;
-
-beep();
-
 repIndex++;
 
-if(repIndex>exo.reps){
+let nouvelExo = false;
 
-repIndex=1;
+if(repIndex > exo.reps){
+
+repIndex = 1;
 
 exIndex++;
 
-if(exIndex>=p.exercices.length){
+nouvelExo = true;
 
-exIndex=0;
+if(exIndex >= p.exercices.length){
+
+exIndex = 0;
 
 serieIndex++;
 
 }
+
+}
+
+if(serieIndex > p.series){
+
+if(patient){
+
+window.location =
+"fin.html?patient="
++ patient +
+"&admin=true"
++ "&v=" + VERSION;
+
+}else{
+
+window.location =
+"fin.html?v=" + VERSION;
+
+}
+
+return;
+
+}
+
+exo = p.exercices[exIndex];
+
+t = exo.ex;
+
+totalTimePhase = exo.ex;
+
+beep();
+
+/* PAUSE AUTO ENTRE EXOS */
+
+if(nouvelExo){
+
+paused = true;
+
+let icon = document.getElementById("playIcon");
+
+icon.innerText = "▶️";
+icon.classList.add("pulse");
 
 }
 
