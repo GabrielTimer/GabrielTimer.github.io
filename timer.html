@@ -796,6 +796,32 @@ document.getElementById("overlayImg").src = img.src;
 
 let html = "";
 
+if(exo.videos?.length){
+
+html += `
+<h3>🎥 Vidéo</h3>
+
+<a
+href="${exo.videos[0].url}"
+target="_blank"
+style="
+display:inline-block;
+padding:10px 14px;
+background:#2563eb;
+color:white;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+margin-top:10px;
+">
+
+▶ Voir la vidéo
+
+</a>
+`;
+
+}
+
 if(exo.conseil_posture?.length){
 
 html += `
@@ -861,31 +887,6 @@ ${exo.version_avancee
 
 }
 
-if(exo.videos?.length){
-
-html += `
-<h3>🎥 Vidéo</h3>
-
-<a
-href="${exo.videos[0].url}"
-target="_blank"
-style="
-display:inline-block;
-padding:10px 14px;
-background:#2563eb;
-color:white;
-border-radius:12px;
-text-decoration:none;
-font-weight:600;
-margin-top:10px;
-">
-
-▶ Voir la vidéo
-
-</a>
-`;
-
-}
 
 if(!html){
 
