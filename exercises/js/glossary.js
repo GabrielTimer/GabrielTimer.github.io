@@ -69,29 +69,44 @@ addButton.addEventListener('click', (e) => {
     '{"nom":"Libre","series":1,"exercices":[]}'
   );
 
-  current.exercices.push({
+current.exercices.push({
 
-    id: exercise.id,
+  id: exercise.id,
+  nom: exercise.nom,
+  type: "timer",
+  image: exercise.image,
 
-    nom: exercise.nom,
+  conseil:
+  (exercise.consignes || []).join("<br>"),
 
-    type: "timer",
+  conseil_posture:
+  exercise.conseil_posture || [],
 
-    image: exercise.image,
+  erreurs_frequentes:
+  exercise.erreurs_frequentes || [],
 
-    conseil:
-    (exercise.consignes || []).join("<br>"),
+  respiration:
+  exercise.respiration || [],
 
-    ex:
-    exercise.timer_config?.phase_monte || 30,
+  version_facile:
+  exercise.version_facile || [],
 
-    repos:
-    exercise.timer_config?.phase_descente || 10,
+  version_avancee:
+  exercise.version_avancee || [],
 
-    reps:
-    exercise.timer_config?.cycles || 5
+  videos:
+  exercise.videos || [],
 
-  });
+  ex:
+  exercise.timer_config?.phase_monte || 30,
+
+  repos:
+  exercise.timer_config?.phase_descente || 10,
+
+  reps:
+  exercise.timer_config?.cycles || 5
+
+});
 
   localStorage.setItem(
     "programme_temp",
