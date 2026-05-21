@@ -608,6 +608,7 @@ let list=[];
 for(let i=0;i<exercices.length;i++){
 
 list.push({
+
 id: exercices[i].id || "",
 
 type: exercices[i].type || "timer",
@@ -617,6 +618,24 @@ nom: exercices[i].nom,
 image: exercices[i].image || "",
 
 conseil: exercices[i].conseil || "",
+
+conseil_posture:
+exercices[i].conseil_posture || [],
+
+erreurs_frequentes:
+exercices[i].erreurs_frequentes || [],
+
+respiration:
+exercices[i].respiration || [],
+
+version_facile:
+exercices[i].version_facile || [],
+
+version_avancee:
+exercices[i].version_avancee || [],
+
+videos:
+exercices[i].videos || [],
 
 ex: +document.getElementById("ex"+i).value,
 
