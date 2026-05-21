@@ -1035,6 +1035,14 @@
       "cycles": 10
     },
     "image": "/exercises/images/post-partum/clamshell.png"
+
+  "videos": [
+    {
+      "url": "https://fr.physitrack.com/home-exercise-video/clam-shell-contre-r%25c3%25a9sistance",
+      "source": "Physitrack",
+      "titre": "Clamshell"
+    }
+  ]
   },
   {
     "id": "POSTPARTUM_06",
