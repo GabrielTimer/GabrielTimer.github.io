@@ -846,8 +846,20 @@ margin-top:10px;
 
 }
 
+if(!html){
+
+html = `
+<div style="font-size:22px;line-height:1.6;">
+
+${exo.conseil || "Aucun conseil disponible"}
+
+</div>
+`;
+
+}
+
 document.getElementById("overlayText").innerHTML =
-html || "Aucun conseil disponible";
+html;
 
 overlay.style.display = "block";
 
