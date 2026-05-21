@@ -504,6 +504,8 @@ params.get("cloud");
 
 const patient =
 params.get("patient");
+const isAdmin =
+params.get("admin") === "true";
 
 if(cloudId){
 
@@ -751,8 +753,101 @@ let exo = p.exercices[exIndex];
 
 document.getElementById("overlayImg").src = img.src;
 
+let html = "";
+
+if(exo.conseil_posture?.length){
+
+html += `
+<h3>💡 Posture</h3>
+<ul>
+${exo.conseil_posture
+.map(t=>`<li>${t}</li>`)
+.join("")}
+</ul>
+`;
+
+}
+
+if(exo.erreurs_frequentes?.length){
+
+html += `
+<h3>⚠ À éviter</h3>
+<ul>
+${exo.erreurs_frequentes
+.map(t=>`<li>${t}</li>`)
+.join("")}
+</ul>
+`;
+
+}
+
+if(exo.respiration?.length){
+
+html += `
+<h3>🫁 Respiration</h3>
+<ul>
+${exo.respiration
+.map(t=>`<li>${t}</li>`)
+.join("")}
+</ul>
+`;
+
+}
+
+if(exo.version_facile?.length){
+
+html += `
+<h3>🟢 Version facile</h3>
+<ul>
+${exo.version_facile
+.map(t=>`<li>${t}</li>`)
+.join("")}
+</ul>
+`;
+
+}
+
+if(exo.version_avancee?.length){
+
+html += `
+<h3>🔴 Version avancée</h3>
+<ul>
+${exo.version_avancee
+.map(t=>`<li>${t}</li>`)
+.join("")}
+</ul>
+`;
+
+}
+
+if(exo.videos?.length){
+
+html += `
+<h3>🎥 Vidéo</h3>
+
+<a
+href="${exo.videos[0].url}"
+target="_blank"
+style="
+display:inline-block;
+padding:10px 14px;
+background:#2563eb;
+color:white;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+margin-top:10px;
+">
+
+▶ Voir la vidéo
+
+</a>
+`;
+
+}
+
 document.getElementById("overlayText").innerHTML =
-exo.conseil || "Aucun conseil disponible";
+html || "Aucun conseil disponible";
 
 overlay.style.display = "block";
 
@@ -890,7 +985,8 @@ if(patient){
 window.location =
 "fin.html?patient="
 + patient +
-"&v=" + VERSION;
+"&admin=true"
++ "&v=" + VERSION;
 
 }else{
 
@@ -1000,7 +1096,8 @@ if(patient){
 window.location =
 "fin.html?patient="
 + patient +
-"&v=" + VERSION;
+"&admin=true"
++ "&v=" + VERSION;
 
 }else{
 
@@ -1033,7 +1130,8 @@ if(patient){
 window.location =
 "config.html?patient="
 + patient +
-"&v=" + VERSION;
+"&admin=true"
++ "&v=" + VERSION;
 
 }else{
 
