@@ -1,40 +1,29 @@
 [
   {
     "id": "FAUT_POST_01",
-
     "nom": "Auto-grandissement simple",
-
-    "type":"timer",
-
+    "type": "timer",
     "categorie": "fauteuil",
-
     "objectif": "posture",
-
     "niveau": 1,
-
     "exercise_mode": "statique",
-
     "duree": "5 répétitions • maintien 5 sec",
-
     "consignes": [
       "S’asseoir au fond du fauteuil",
       "Grandir la colonne vers le haut",
       "Relâcher les épaules",
       "Respirer calmement"
     ],
-
     "precautions": [
       "Ne pas creuser le bas du dos",
       "Rester dans une position confortable"
     ],
-
     "tags": [
       "Senior",
       "Assis",
       "Posture",
       "Respiration"
     ],
-
     "timer_config": {
       "mode": "statique",
       "phase_monte": 3,
@@ -42,45 +31,48 @@
       "phase_descente": 3,
       "cycles": 5
     },
-
-    "image":"/exercises/images/fauteuil/FAUT_POST_01.png"
-    },
+    "image": "/exercises/images/fauteuil/FAUT_POST_01.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
+  },
   {
     "id": "FAUT_POST_02",
-
     "nom": "Auto-grandissement avec appuis",
-
-    "type":"timer",
-
+    "type": "timer",
     "categorie": "fauteuil",
-
     "objectif": "posture",
-
     "niveau": 1,
-
     "exercise_mode": "statique",
-
     "duree": "5 répétitions • maintien 5 sec",
-
     "consignes": [
       "S’asseoir au fond du fauteuil",
       "Grandir la colonne vers le haut",
       "Prendre apuuis sur les accoudoirs",
       "Respirer calmement"
     ],
-
     "precautions": [
       "Ne pas creuser le bas du dos",
       "Rester dans une position confortable"
     ],
-
     "tags": [
       "Senior",
       "Assis",
       "Posture",
       "Respiration"
     ],
-
     "timer_config": {
       "mode": "statique",
       "phase_monte": 3,
@@ -88,440 +80,2764 @@
       "phase_descente": 3,
       "cycles": 5
     },
-
-    "image":"/exercises/images/fauteuil/FAUT_POST_02.png"
+    "image": "/exercises/images/fauteuil/FAUT_POST_02.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
+  },
+  {
+    "id": "FAUT_POST_03",
+    "nom": "Auto-grandissement avec translation menton",
+    "type": "timer",
+    "categorie": "fauteuil",
+    "objectif": "posture cervicale",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "duree": "5 répétitions • maintien 5 sec",
+    "consignes": [
+      "Grandir la colonne vers le haut",
+      "Rentrer légèrement le menton",
+      "Garder le regard horizontal",
+      "Respirer calmement"
+    ],
+    "precautions": [
+      "Ne pas baisser la tête",
+      "Rester dans une amplitude confortable"
+    ],
+    "tags": [
+      "Senior",
+      "Assis",
+      "Posture",
+      "Cervicales"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 3,
+      "maintien": 5,
+      "phase_descente": 3,
+      "cycles": 5
     },
-{
-  "id": "FAUT_POST_03",
-
-  "nom": "Auto-grandissement avec translation menton",
-
-  "type":"timer",
-
-  "categorie": "fauteuil",
-
-  "objectif": "posture cervicale",
-
-  "niveau": 1,
-
-  "exercise_mode": "statique",
-
-  "duree": "5 répétitions • maintien 5 sec",
-
-  "consignes": [
-    "Grandir la colonne vers le haut",
-    "Rentrer légèrement le menton",
-    "Garder le regard horizontal",
-    "Respirer calmement"
-  ],
-
-  "precautions": [
-    "Ne pas baisser la tête",
-    "Rester dans une amplitude confortable"
-  ],
-
-  "tags": [
-    "Senior",
-    "Assis",
-    "Posture",
-    "Cervicales"
-  ],
-
-  "timer_config": {
-    "mode": "statique",
-    "phase_monte": 3,
-    "maintien": 5,
-    "phase_descente": 3,
-    "cycles": 5
+    "image": "/exercises/images/fauteuil/FAUT_POST_03.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
- "image":"/exercises/images/fauteuil/FAUT_POST_03.png"
+  {
+    "id": "FAUT_POST_04",
+    "nom": "Respiration diaphragmatique",
+    "type": "timer",
+    "categorie": "fauteuil",
+    "objectif": "respiration",
+    "niveau": 1,
+    "exercise_mode": "respiration",
+    "duree": "5 respirations lentes",
+    "consignes": [
+      "Inspirer par le nez",
+      "Gonfler doucement le ventre",
+      "Expirer lentement par la bouche",
+      "Relâcher les épaules"
+    ],
+    "precautions": [
+      "Ne pas forcer la respiration",
+      "Respirer calmement"
+    ],
+    "tags": [
+      "Senior",
+      "Assis",
+      "Respiration",
+      "Relaxation"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 4,
+      "maintien": 2,
+      "phase_descente": 6,
+      "cycles": 5
     },
-{
-  "id": "FAUT_POST_04",
-
-  "nom": "Respiration diaphragmatique",
-
-  "type":"timer",
-
-  "categorie": "fauteuil",
-
-  "objectif": "respiration",
-
-  "niveau": 1,
-
-  "exercise_mode": "respiration",
-
-  "duree": "5 respirations lentes",
-
-  "consignes": [
-    "Inspirer par le nez",
-    "Gonfler doucement le ventre",
-    "Expirer lentement par la bouche",
-    "Relâcher les épaules"
-  ],
-
-  "precautions": [
-    "Ne pas forcer la respiration",
-    "Respirer calmement"
-  ],
-
-  "tags": [
-    "Senior",
-    "Assis",
-    "Respiration",
-    "Relaxation"
-  ],
-
-  "timer_config": {
-    "mode": "statique",
-    "phase_monte": 4,
-    "maintien": 2,
-    "phase_descente": 6,
-    "cycles": 5
+    "image": "/exercises/images/fauteuil/FAUT_POST_04.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
- "image":"/exercises/images/fauteuil/FAUT_POST_04.png"
+  {
+    "id": "FAUT_POST_05",
+    "nom": "Tirage élastique assis",
+    "type": "timer",
+    "categorie": "fauteuil",
+    "objectif": "renforcement dos",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 répétitions",
+    "consignes": [
+      "Garder le dos droit",
+      "Tirer les coudes vers l’arrière",
+      "Rapprocher les omoplates",
+      "Revenir lentement"
+    ],
+    "precautions": [
+      "Ne pas hausser les épaules",
+      "Contrôler le retour"
+    ],
+    "tags": [
+      "Senior",
+      "Assis",
+      "Dos",
+      "Élastique"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 2,
+      "maintien": 1,
+      "phase_descente": 3,
+      "cycles": 10
     },
-{
-  "id": "FAUT_POST_05",
-
-  "nom": "Tirage élastique assis",
-
-  "type":"timer",
-
-  "categorie": "fauteuil",
-
-  "objectif": "renforcement dos",
-
-  "niveau": 1,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "10 répétitions",
-
-  "consignes": [
-    "Garder le dos droit",
-    "Tirer les coudes vers l’arrière",
-    "Rapprocher les omoplates",
-    "Revenir lentement"
-  ],
-
-  "precautions": [
-    "Ne pas hausser les épaules",
-    "Contrôler le retour"
-  ],
-
-  "tags": [
-    "Senior",
-    "Assis",
-    "Dos",
-    "Élastique"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 2,
-    "maintien": 1,
-    "phase_descente": 3,
-    "cycles": 10
+    "image": "/exercises/images/fauteuil/FAUT_POST_05.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
- "image":"/exercises/images/fauteuil/FAUT_POST_05.png"
+  {
+    "id": "lombalgie1_ex1",
+    "nom": "Étirement de prière",
+    "image": "/exercises/images/pathologies/lombalgie_1/ex1.png",
+    "categorie": "Lombalgie",
+    "niveau": 1,
+    "objectif": "Mobilité lombaire",
+    "duree": "30 sec",
+    "tags": [
+      "lombalgie"
+    ],
+    "consignes": [
+      "Descendre doucement",
+      "Respirer calmement"
+    ],
+    "precautions": [
+      "Pas de douleur vive"
+    ],
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
+  },
+  {
+    "id": "GENOU_01",
+    "nom": "Squat avec élastique",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcement des membres inférieurs",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "3 séries de 12 répétitions",
+    "consignes": [
+      "Garder le dos droit",
+      "Pousser légèrement contre l’élastique",
+      "Maintenir les genoux alignés"
+    ],
+    "precautions": [
+      "Ne pas laisser les genoux rentrer",
+      "Limiter l’amplitude si douleur"
+    ],
+    "tags": [
+      "Genou",
+      "Syndrome rotulien",
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 5,
+      "maintien": 1,
+      "phase_descente": 3,
+      "cycles": 20
     },
-
-{
-  "id":"lombalgie1_ex1",
-
-  "nom":"Étirement de prière",
-
-"image":"/exercises/images/pathologies/lombalgie_1/ex1.png",
-
-  "categorie":"Lombalgie",
-
-  "niveau":1,
-
-  "objectif":"Mobilité lombaire",
-
-  "duree":"30 sec",
-
-  "tags":["lombalgie"],
-
-  "consignes":[
-    "Descendre doucement",
-    "Respirer calmement"
-  ],
-
-  "precautions":[
-    "Pas de douleur vive"
-  ]
-},
-{
-  "id": "GENOU_01",
-
-  "nom": "Squat avec élastique",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Renforcement des membres inférieurs",
-
-  "niveau": 2,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "3 séries de 12 répétitions",
-
-  "consignes": [
-    "Garder le dos droit",
-    "Pousser légèrement contre l’élastique",
-    "Maintenir les genoux alignés"
-  ],
-
-  "precautions": [
-    "Ne pas laisser les genoux rentrer",
-    "Limiter l’amplitude si douleur"
-  ],
-
-  "tags": [
-    "Genou",
-    "Syndrome rotulien",
-    "Quadriceps",
-    "Fessiers"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 5,
-    "maintien": 1,
-    "phase_descente": 3,
-    "cycles": 20
+    "image": "/exercises/images/genou/squat-elastique.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
-  "image":"/exercises/images/genou/squat-elastique.png"
-},
-
-{
-  "id": "GENOU_02",
-
-  "nom": "Squat anti-valgus",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Contrôle moteur du genou",
-
-  "niveau": 3,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "3 séries de 10 répétitions",
-
-  "consignes": [
-    "Résister à la traction de l’élastique",
-    "Maintenir le genou aligné",
-    "Contrôler la descente"
-  ],
-
-  "precautions": [
-    "Ne pas laisser le genou rentrer vers l’intérieur"
-  ],
-
-  "tags": [
-    "Genou",
-    "Valgus",
-    "Contrôle moteur",
-    "Stabilité"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 5,
-    "maintien": 1,
-    "phase_descente": 3,
-    "cycles": 20
+  {
+    "id": "GENOU_02",
+    "nom": "Squat anti-valgus",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Contrôle moteur du genou",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "duree": "3 séries de 10 répétitions",
+    "consignes": [
+      "Résister à la traction de l’élastique",
+      "Maintenir le genou aligné",
+      "Contrôler la descente"
+    ],
+    "precautions": [
+      "Ne pas laisser le genou rentrer vers l’intérieur"
+    ],
+    "tags": [
+      "Genou",
+      "Valgus",
+      "Contrôle moteur",
+      "Stabilité"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 5,
+      "maintien": 1,
+      "phase_descente": 3,
+      "cycles": 20
+    },
+    "image": "/exercises/images/genou/squat-anti-valgus.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
-  "image":"/exercises/images/genou/squat-anti-valgus.png"
-},
-
-{
-  "id": "GENOU_03",
-
-  "nom": "Squat anti-varus",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Contrôle de l’alignement du genou",
-
-  "niveau": 3,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "3 séries de 10 répétitions",
-
-  "consignes": [
-    "Résister à la traction de l’élastique",
-    "Garder les genoux alignés"
-  ],
-
-  "precautions": [
-    "Limiter la flexion si douleur"
-  ],
-
-  "tags": [
-    "Genou",
-    "Varus",
-    "Contrôle moteur",
-    "Stabilité"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 5,
-    "maintien": 1,
-    "phase_descente": 3,
-    "cycles": 20
+  {
+    "id": "GENOU_03",
+    "nom": "Squat anti-varus",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Contrôle de l’alignement du genou",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "duree": "3 séries de 10 répétitions",
+    "consignes": [
+      "Résister à la traction de l’élastique",
+      "Garder les genoux alignés"
+    ],
+    "precautions": [
+      "Limiter la flexion si douleur"
+    ],
+    "tags": [
+      "Genou",
+      "Varus",
+      "Contrôle moteur",
+      "Stabilité"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 5,
+      "maintien": 1,
+      "phase_descente": 3,
+      "cycles": 20
+    },
+    "image": "/exercises/images/genou/squat-anti-varus.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
-  "image":"/exercises/images/genou/squat-anti-varus.png"
-},
-
-{
-  "id": "GENOU_04",
-
-  "nom": "Équilibre unipodal avec balle",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Travail de stabilité et proprioception",
-
-  "niveau": 2,
-
-  "exercise_mode": "statique",
-
-  "duree": "3 séries de 30 secondes",
-
-  "consignes": [
-    "Garder l’équilibre sur une jambe",
-    "Contrôler les mouvements",
-    "Regarder devant soi"
-  ],
-
-  "precautions": [
-    "Prévoir un appui proche si besoin"
-  ],
-
-  "tags": [
-    "Genou",
-    "Équilibre",
-    "Proprioception",
-    "Stabilité"
-  ],
-
-  "timer_config": {
-    "mode": "statique",
-    "phase_monte": 60,
-    "maintien": 1,
-    "phase_descente": 10,
-    "cycles": 1
+  {
+    "id": "GENOU_04",
+    "nom": "Équilibre unipodal avec balle",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Travail de stabilité et proprioception",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Garder l’équilibre sur une jambe",
+      "Contrôler les mouvements",
+      "Regarder devant soi"
+    ],
+    "precautions": [
+      "Prévoir un appui proche si besoin"
+    ],
+    "tags": [
+      "Genou",
+      "Équilibre",
+      "Proprioception",
+      "Stabilité"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 60,
+      "maintien": 1,
+      "phase_descente": 10,
+      "cycles": 1
+    },
+    "image": "/exercises/images/genou/equilibre-balle-1.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
-  "image":"/exercises/images/genou/equilibre-balle-1.png"
-},
-
-{
-  "id": "GENOU_05",
-
-  "nom": "Squat latéral avec élastique",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Renforcement des fessiers et stabilité des genoux",
-
-  "niveau": 2,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "3 séries de 12 répétitions",
-
-  "consignes": [
-    "Pousser contre l’élastique",
-    "Garder les pieds parallèles",
-    "Contrôler le mouvement"
-  ],
-
-  "precautions": [
-    "Éviter les douleurs importantes"
-  ],
-
-  "tags": [
-    "Genou",
-    "Fessiers",
-    "Quadriceps",
-    "Stabilité"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 60,
-    "maintien": 1,
-    "phase_descente": 10,
-    "cycles": 2
+  {
+    "id": "GENOU_05",
+    "nom": "Squat latéral avec élastique",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcement des fessiers et stabilité des genoux",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "3 séries de 12 répétitions",
+    "consignes": [
+      "Pousser contre l’élastique",
+      "Garder les pieds parallèles",
+      "Contrôler le mouvement"
+    ],
+    "precautions": [
+      "Éviter les douleurs importantes"
+    ],
+    "tags": [
+      "Genou",
+      "Fessiers",
+      "Quadriceps",
+      "Stabilité"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 60,
+      "maintien": 1,
+      "phase_descente": 10,
+      "cycles": 2
+    },
+    "image": "/exercises/images/genou/squat-lat-elastique.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
-
-  "image":"/exercises/images/genou/squat-lat-elastique.png"
-},
-{
-  "id": "GENOU_06",
-
-  "nom": "Équilibre unipodal avec réception",
-
-  "type":"timer",
-
-  "categorie": "Genou",
-
-  "objectif": "Travail de stabilité dynamique",
-
-  "niveau": 3,
-
-  "exercise_mode": "statique",
-
-  "duree": "3 séries de 30 secondes",
-
-  "consignes": [
-    "Fléchir légèrement le genou",
-    "Maintenir l’équilibre",
-    "Contrôler la réception de balle"
-  ],
-
-  "precautions": [
-    "Prévoir un appui proche si besoin"
-  ],
-
-  "tags": [
-    "Genou",
-    "Équilibre",
-    "Proprioception",
-    "Stabilité dynamique"
-  ],
-
-  "timer_config": {
-    "mode": "statique",
-    "phase_monte": 60,
-    "maintien":1,
-    "phase_descente": 10,
-    "cycles": 1
+  {
+    "id": "GENOU_06",
+    "nom": "Équilibre unipodal avec réception",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Travail de stabilité dynamique",
+    "niveau": 3,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Fléchir légèrement le genou",
+      "Maintenir l’équilibre",
+      "Contrôler la réception de balle"
+    ],
+    "precautions": [
+      "Prévoir un appui proche si besoin"
+    ],
+    "tags": [
+      "Genou",
+      "Équilibre",
+      "Proprioception",
+      "Stabilité dynamique"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 60,
+      "maintien": 1,
+      "phase_descente": 10,
+      "cycles": 1
+    },
+    "image": "/exercises/images/genou/equilibre-balle-2.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
   },
+  {
+    "id": "FUN",
+    "nom": "Jouer à Geoguess avec mon Gahaabder!",
+    "type": "timer",
+    "categorie": "fun",
+    "objectif": "Fun",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "duree": "1 séries de 999 secondes",
+    "consignes": [
+      "Appeler Gahaabder",
+      "L'aimer de tout son coeur",
+      "Accepte son amour par les fesses"
+    ],
+    "precautions": [
+      "Prévoir crème si besoin"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "phase_monte": 60,
+      "maintien": 1,
+      "phase_descente": 60,
+      "cycles": 5
+    },
+    "image": "/exercises/images/genou/fun.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [],
+    "conseil_posture": [],
+    "erreurs_frequentes": [],
+    "version_facile": [],
+    "version_avancee": [],
+    "respiration": [],
+    "muscles_cibles": [],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [],
+    "audio_cues": [],
+    "coaching_court": [],
+    "validation_medicale": true
+  },
+  {
+    "id": "POSTPARTUM_01",
+    "nom": "Respiration transverse",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
 
-  "image":"/exercises/images/genou/equilibre-balle-2.png"
-}
+"videos": [
+  {
+    "url": "https://fr.physitrack.com/home-exercise-video/respiration-correcte---d%25c3%25a9cubitus-dorsal",
+    "qr_code": "/exercises/qrcodes/postpartum-respiration-transverse.png",
+    "source": "Physitrack",
+    "titre": "Respiration correcte - décubitus dorsal"
+  }
+]
+  },
+  {
+    "id": "POSTPARTUM_02",
+    "nom": "Heel slide contrôlé",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/heel-slide.png",
+"videos": [
+  {
+    "url": "https://uk.physitrack.com/home-exercise-video/supine-alternate-heel-slides---movement-control",
+    "qr_code": "/exercises/qrcodes/postpartum-heel-slide.png",
+    "source": "Physitrack",
+    "titre": "Heel slide - contrôle moteur"
+  }
+]
+  },
+  {
+    "id": "POSTPARTUM_03",
+    "nom": "Dead bug bras seuls",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/dead-bug-bras.png",
+"videos": [
+  {
+    "url": "https://au.physitrack.com/home-exercise-video/supine-dead-bugs",
+    "qr_code": "/exercises/qrcodes/postpartum-dead-bug.png",
+    "source": "Physitrack",
+    "titre": "Supine dead bugs"
+  }
+]
+  },
+  {
+    "id": "POSTPARTUM_04",
+    "nom": "Pont fessier",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/pont-fessier.png"
+  },
+  {
+    "id": "POSTPARTUM_05",
+    "nom": "Clamshell",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/clamshell.png"
+  },
+  {
+    "id": "POSTPARTUM_06",
+    "nom": "Gainage quadrupédie",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/gainage-quadrupedie.png"
+  },
+  {
+    "id": "POSTPARTUM_07",
+    "nom": "Sit-to-stand contrôlé",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/sit-to-stand.png"
+  },
+  {
+    "id": "POSTPARTUM_08",
+    "nom": "Bird dog bras seuls",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/bird-dog-bras.png"
+  },
+  {
+    "id": "POSTPARTUM_09",
+    "nom": "Marche gainée",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/marche-gainee.png"
+  },
+  {
+    "id": "POSTPARTUM_10",
+    "nom": "Dead bug complet",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/dead-bug-complet.png"
+  },
+  {
+    "id": "POSTPARTUM_11",
+    "nom": "Pont fessier une jambe",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/pont-fessier-1jambe.png"
+  },
+  {
+    "id": "POSTPARTUM_12",
+    "nom": "Pallof press",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/pallof-press.png"
+  },
+  {
+    "id": "POSTPARTUM_13",
+    "nom": "Bird dog complet",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/bird-dog-complet.png"
+  },
+  {
+    "id": "POSTPARTUM_14",
+    "nom": "Squat partiel",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/squat-partiel.png"
+  },
+  {
+    "id": "POSTPARTUM_15",
+    "nom": "Side plank genoux",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/side-plank-genoux.png"
+  },
+  {
+    "id": "POSTPARTUM_16",
+    "nom": "Farmer carry",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/farmer-carry.png"
+  },
+  {
+    "id": "POSTPARTUM_17",
+    "nom": "Step up bas",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/step-up-bas.png"
+  },
+  {
+    "id": "POSTPARTUM_18",
+    "nom": "Bear hover",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/bear-hover.png"
+  },
+  {
+    "id": "POSTPARTUM_19",
+    "nom": "Dead bug élastique",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/dead-bug-elastique.png"
+  },
+  {
+    "id": "POSTPARTUM_20",
+    "nom": "Side plank jambes tendues",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/side-plank-jambes.png"
+  },
+  {
+    "id": "POSTPARTUM_21",
+    "nom": "Squat tempo",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/squat-tempo.png"
+  },
+  {
+    "id": "POSTPARTUM_22",
+    "nom": "Bird dog pause",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/bird-dog-pause.png"
+  },
+  {
+    "id": "POSTPARTUM_23",
+    "nom": "Fente arrière contrôlée",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/fente-arriere.png"
+  },
+  {
+    "id": "POSTPARTUM_24",
+    "nom": "Bear crawl",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/bear-crawl.png"
+  },
+  {
+    "id": "POSTPARTUM_25",
+    "nom": "Carry asymétrique",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/carry-asymetrique.png"
+  },
+  {
+    "id": "POSTPARTUM_26",
+    "nom": "Mountain climber lent",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/mountain-climber-lent.png"
+  },
+  {
+    "id": "POSTPARTUM_27",
+    "nom": "Step up dynamique",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement transverse, périnée et stabilité",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "type_contraction": "dynamique",
+    "duree": "2 séries de 45 secondes",
+    "difficulte_percue": 4,
+    "zones_corporelles": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ],
+    "consignes": [
+      "Contrôler le mouvement",
+      "Expirer pendant l'effort",
+      "Maintenir le gainage"
+    ],
+    "precautions": [
+      "Arrêter si douleur",
+      "Éviter le ventre qui bombe"
+    ],
+    "conseil_posture": [
+      "Garder le bassin neutre",
+      "Relâcher les épaules",
+      "Allonger la nuque"
+    ],
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Aller trop vite",
+      "Cambrer le dos"
+    ],
+    "version_facile": [
+      "Réduire l'amplitude",
+      "Faire moins de répétitions"
+    ],
+    "version_avancee": [
+      "Ajouter un élastique",
+      "Augmenter le temps sous tension"
+    ],
+    "respiration": [
+      "Inspirer au retour",
+      "Expirer pendant l'effort"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Obliques",
+      "Périnée",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la stabilité",
+      "Renforce le gainage profond"
+    ],
+    "audio_cues": [
+      "Soufflez",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Gainé",
+      "Lent"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage"
+    ],
+    "validation_medicale": true,
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 4,
+      "maintien": 1,
+      "phase_descente": 4,
+      "cycles": 10
+    },
+    "image": "/exercises/images/post-partum/step-up-dynamique.png"
+  }
 ]
