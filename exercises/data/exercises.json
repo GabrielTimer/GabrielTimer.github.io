@@ -3248,5 +3248,434 @@
       "Périnée",
       "Lombaires"
     ]
+  },
+  {
+    "id": "CHEV_001",
+    "nom": "Mobilité cheville flexion extension",
+    "categorie": "Cheville",
+    "niveau": 1,
+    "tags": [
+      "Mobilité",
+      "Cheville",
+      "Retour sport"
+    ],
+    "objectif": "Mobilité",
+    "objectifs": [
+      "Mobilité",
+      "Réveil articulaire"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Mobilisation douce de la cheville en flexion et extension.",
+    "consignes": [
+      "Faire des mouvements lents",
+      "Ne pas provoquer de douleur importante",
+      "Respirer calmement"
+    ],
+    "timer_config": {
+      "mode": "repetitions",
+      "repetitions": 15
+    }
+  },
+  {
+    "id": "CHEV_002",
+    "nom": "Cercles de cheville assis",
+    "categorie": "Cheville",
+    "niveau": 1,
+    "tags": [
+      "Mobilité",
+      "Cheville",
+      "Contrôle moteur"
+    ],
+    "objectif": "Mobilité",
+    "objectifs": [
+      "Mobilité",
+      "Contrôle articulaire"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [
+      "Chaise/Fauteuil"
+    ],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Cercles contrôlés de la cheville en position assise.",
+    "consignes": [
+      "Faire des cercles amples",
+      "Garder le genou stable",
+      "Changer de sens"
+    ],
+    "timer_config": {
+      "mode": "repetitions",
+      "repetitions": 10
+    }
+  },
+  {
+    "id": "CHEV_003",
+    "nom": "Équilibre bipodal yeux ouverts",
+    "categorie": "Cheville",
+    "niveau": 1,
+    "tags": [
+      "Équilibre",
+      "Proprioception",
+      "Cheville"
+    ],
+    "objectif": "Proprioception",
+    "objectifs": [
+      "Équilibre",
+      "Proprioception"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Travail d’équilibre debout pieds écartés.",
+    "consignes": [
+      "Regarder devant soi",
+      "Répartir le poids sur les deux pieds",
+      "Rester stable"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 30
+    }
+  },
+  {
+    "id": "CHEV_004",
+    "nom": "Montée sur demi-pointes",
+    "categorie": "Cheville",
+    "niveau": 1,
+    "tags": [
+      "Renforcement",
+      "Mollets",
+      "Cheville"
+    ],
+    "objectif": "Renforcement",
+    "objectifs": [
+      "Renforcement",
+      "Stabilité"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville",
+      "Mollets"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Montée contrôlée sur les pointes de pieds.",
+    "consignes": [
+      "Monter lentement",
+      "Contrôler la descente",
+      "Garder les chevilles alignées"
+    ],
+    "timer_config": {
+      "mode": "repetitions",
+      "repetitions": 12
+    }
+  },
+  {
+    "id": "CHEV_005",
+    "nom": "Équilibre unipodal simple",
+    "categorie": "Cheville",
+    "niveau": 2,
+    "tags": [
+      "Équilibre",
+      "Proprioception",
+      "Cheville"
+    ],
+    "objectif": "Proprioception",
+    "objectifs": [
+      "Équilibre",
+      "Contrôle moteur"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Maintien de l’équilibre sur une jambe.",
+    "consignes": [
+      "Fixer un point devant soi",
+      "Garder le bassin stable",
+      "Éviter les mouvements brusques"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 30
+    }
+  },
+  {
+    "id": "CHEV_006",
+    "nom": "Équilibre unipodal avec mouvements bras",
+    "categorie": "Cheville",
+    "niveau": 2,
+    "tags": [
+      "Proprioception",
+      "Coordination",
+      "Cheville"
+    ],
+    "objectif": "Proprioception",
+    "objectifs": [
+      "Coordination",
+      "Équilibre"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Travail d’équilibre dynamique avec mouvements des bras.",
+    "consignes": [
+      "Lever les bras lentement",
+      "Garder l’équilibre",
+      "Respirer calmement"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 40
+    }
+  },
+  {
+    "id": "CHEV_007",
+    "nom": "Marche latérale élastique",
+    "categorie": "Cheville",
+    "niveau": 2,
+    "tags": [
+      "Renforcement",
+      "Cheville",
+      "Élastique"
+    ],
+    "objectif": "Renforcement",
+    "objectifs": [
+      "Stabilité",
+      "Contrôle moteur"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville",
+      "Hanches"
+    ],
+    "materiel": [
+      "Élastique"
+    ],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Déplacements latéraux avec résistance élastique.",
+    "consignes": [
+      "Garder les pieds parallèles",
+      "Faire des petits pas",
+      "Rester gainé"
+    ],
+    "timer_config": {
+      "mode": "repetitions",
+      "repetitions": 12
+    }
+  },
+  {
+    "id": "CHEV_008",
+    "nom": "Sauts sur place légers",
+    "categorie": "Cheville",
+    "niveau": 2,
+    "tags": [
+      "Pliométrie",
+      "Cheville",
+      "Retour sport"
+    ],
+    "objectif": "Retour sport",
+    "objectifs": [
+      "Réactivité",
+      "Reprise sportive"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Petits sauts contrôlés sur place.",
+    "consignes": [
+      "Amortir doucement",
+      "Garder les genoux souples",
+      "Rester léger sur les appuis"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 20
+    }
+  },
+  {
+    "id": "CHEV_009",
+    "nom": "Équilibre sur coussin",
+    "categorie": "Cheville",
+    "niveau": 3,
+    "tags": [
+      "Proprioception",
+      "Instabilité",
+      "Cheville"
+    ],
+    "objectif": "Proprioception",
+    "objectifs": [
+      "Instabilité",
+      "Équilibre avancé"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [
+      "Coussin"
+    ],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Travail proprioceptif sur surface instable.",
+    "consignes": [
+      "Garder le tronc stable",
+      "Regarder devant soi",
+      "Contrôler les oscillations"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 45
+    }
+  },
+  {
+    "id": "CHEV_010",
+    "nom": "Sauts latéraux unipodaux",
+    "categorie": "Cheville",
+    "niveau": 3,
+    "tags": [
+      "Pliométrie",
+      "Cheville",
+      "Retour sport"
+    ],
+    "objectif": "Retour sport",
+    "objectifs": [
+      "Réactivité",
+      "Explosivité"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Petits sauts latéraux sur une jambe.",
+    "consignes": [
+      "Amortir les réceptions",
+      "Rester gainé",
+      "Contrôler le genou"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 20
+    }
+  },
+  {
+    "id": "CHEV_011",
+    "nom": "Course légère avec changements direction",
+    "categorie": "Cheville",
+    "niveau": 3,
+    "tags": [
+      "Retour sport",
+      "Course",
+      "Cheville"
+    ],
+    "objectif": "Retour sport",
+    "objectifs": [
+      "Course",
+      "Changements direction"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville",
+      "Membres inférieurs"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Course légère avec changements de direction progressifs.",
+    "consignes": [
+      "Commencer lentement",
+      "Rester fluide",
+      "Éviter les douleurs"
+    ],
+    "timer_config": {
+      "mode": "temps",
+      "temps": 60
+    }
+  },
+  {
+    "id": "CHEV_012",
+    "nom": "Réceptions unipodales contrôlées",
+    "categorie": "Cheville",
+    "niveau": 3,
+    "tags": [
+      "Réception",
+      "Proprioception",
+      "Retour sport"
+    ],
+    "objectif": "Retour sport",
+    "objectifs": [
+      "Réception",
+      "Contrôle moteur"
+    ],
+    "pathologies": [
+      "Entorse chronique cheville"
+    ],
+    "zones": [
+      "Cheville droite"
+    ],
+    "materiel": [],
+    "image": "/images/placeholders/cheville.webp",
+    "video": "",
+    "description": "Travail de réception contrôlée sur une jambe.",
+    "consignes": [
+      "Amortir doucement",
+      "Aligner genou et pied",
+      "Stabiliser rapidement"
+    ],
+    "timer_config": {
+      "mode": "repetitions",
+      "repetitions": 10
+    }
   }
 ]
