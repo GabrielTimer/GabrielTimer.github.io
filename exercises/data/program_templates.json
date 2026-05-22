@@ -18,8 +18,11 @@
 
   {
     "id": "EPAULE_PROG_01",
+
     "nom": "Tendinite coiffe des rotateurs - Niveau 1",
+
     "categorie": "Epaule",
+
     "niveau": 1,
 
     "tags": [
@@ -60,27 +63,11 @@
       "Rester sous le seuil douloureux"
     ],
 
-    "timer_config": {
-      "type": "sequence",
-
-      "exercices": [
-        {
-          "exercise_id": "EPAULE_01",
-          "repos": 20
-        },
-        {
-          "exercise_id": "EPAULE_02",
-          "repos": 30
-        },
-        {
-          "exercise_id": "EPAULE_03",
-          "repos": 40
-        },
-        {
-          "exercise_id": "EPAULE_04",
-          "repos": 40
-        }
-      ]
-    }
+    "exercices": [
+      "EPAULE_01",
+      "EPAULE_02",
+      "EPAULE_03",
+      "EPAULE_04"
+    ]
   }
 ]
