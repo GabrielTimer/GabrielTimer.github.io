@@ -81,6 +81,16 @@ background:#ccc;
 
 <script>
 
+if(
+  sessionStorage.getItem("admin_ok")
+  !== "true"
+){
+
+  window.location.href =
+  "login.html";
+
+}
+
 const params =
 new URLSearchParams(
 window.location.search
