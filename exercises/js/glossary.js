@@ -99,11 +99,24 @@ function createFilterGroup(field, title){
   const panel =
   group.querySelector('.dropdown-panel');
 
-  toggle.addEventListener('click', () => {
+toggle.addEventListener('click', () => {
 
-    panel.classList.toggle('open');
+  document
+  .querySelectorAll('.dropdown-panel')
+
+  .forEach(otherPanel => {
+
+    if(otherPanel !== panel){
+
+      otherPanel.classList.remove('open');
+
+    }
 
   });
+
+  panel.classList.toggle('open');
+
+});
 
   const buttonsContainer =
   group.querySelector('.filter-buttons');
@@ -137,6 +150,23 @@ function createFilterGroup(field, title){
 
   container.appendChild(group);
 }
+
+document.addEventListener('click', (e) => {
+
+  if(!e.target.closest('.filter-group')){
+
+    document
+    .querySelectorAll('.dropdown-panel')
+
+    .forEach(panel => {
+
+      panel.classList.remove('open');
+
+    });
+
+  }
+
+});
 
 function getUniqueValues(field){
 
@@ -536,3 +566,27 @@ function updateResultsCount(filtered){
 
   `${filtered.length} exercices`;
 }
+
+window.addEventListener('scroll', () => {
+
+  const toolbar =
+  document.querySelector('.toolbar');
+
+  if(window.scrollY > 120){
+document
+.querySelectorAll('.dropdown-panel')
+
+.forEach(panel => {
+
+  panel.classList.remove('open');
+
+});
+    toolbar.classList.add('hidden');
+
+  } else {
+
+    toolbar.classList.remove('hidden');
+
+  }
+
+}, { passive:true });
