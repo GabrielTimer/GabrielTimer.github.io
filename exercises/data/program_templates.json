@@ -1,18 +1,13 @@
 [
   {
     "id": "PROG_CHEV_001",
-
     "nom": "Entorse chronique cheville retour sport",
-
     "pathologie": "Entorse chronique cheville",
-
     "niveau": 2,
-
     "objectifs": [
       "Retour sport",
       "Proprioception"
     ],
-
     "exercices": [
       "CHEV_002",
       "CHEV_005",
