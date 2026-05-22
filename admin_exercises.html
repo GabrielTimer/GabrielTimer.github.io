@@ -217,27 +217,58 @@ Tu écris ici le programme souhaité puis tu demandes à ChatGPT de générer le
 
 <div class="card">
 
-<label>JSON généré</label>
+<h2>Gestion Exercices</h2>
 
-<textarea id="generatedJson" placeholder='Colle ici le JSON généré par ChatGPT...'></textarea>
+<label>JSON exercices</label>
+
+<textarea
+id="exercisesJson"
+placeholder='Colle ici les exercices JSON...'></textarea>
 
 <div style="margin-top:20px;">
 
-<button class="primary" onclick="loadCurrentJson()">
-Charger exercises.json actuel
+<button
+class="secondary"
+onclick="mergeExercisesOnly()">
+Importer exercices
 </button>
 
-<button class="secondary" onclick="mergeExercises()">
-Ajouter au fichier actuel
-</button>
-
-<button class="success" onclick="exportExercisesJson()">
+<button
+class="success"
+onclick="exportExercisesJson()">
 Exporter exercises.json
 </button>
 
-<button class="success" onclick="exportProgramsJson()">
+</div>
+
+<hr style="margin:40px 0;">
+
+<h2>Gestion Programmes</h2>
+
+<label>JSON programmes</label>
+
+<textarea
+id="programsJson"
+placeholder='Colle ici les programmes JSON...'></textarea>
+
+<div style="margin-top:20px;">
+
+<button
+class="primary"
+onclick="mergeProgramsOnly()">
+Importer programmes
+</button>
+
+<button
+class="success"
+onclick="exportProgramsJson()">
 Exporter program_templates.json
 </button>
+
+</div>
+
+<div style="margin-top:20px;">
+
 
 </div>
 
@@ -336,123 +367,45 @@ async function loadCurrentJson(){
   }
 }
 
-function mergeExercises(){
+function mergeExercisesOnly(){
 
   try{
 
     const jsonText =
-    document.getElementById('generatedJson').value;
+    document.getElementById(
+      'exercisesJson'
+    ).value;
 
     if(!jsonText.trim()){
 
-      alert('Aucun JSON');
+      alert('Aucun JSON exercices');
 
       return;
     }
 
-const parsed = JSON.parse(jsonText);
+    const parsed =
+    JSON.parse(jsonText);
 
-let newExercises = [];
-let newPrograms = [];
+    const newExercises =
+    Array.isArray(parsed)
+    ? parsed
+    : [parsed];
 
-// TABLEAU JSON
-if(Array.isArray(parsed)){
-
-  // tableau d'exercices
-  if(parsed.length && parsed[0].type){
-
-    newExercises = parsed;
-
-  }
-
-  // tableau de programmes
-  else{
-
-    newPrograms = parsed;
-
-  }
-
-}
-
-// FORMAT COMPLET
-else if(parsed.exercises || parsed.programs){
-
-  newExercises = parsed.exercises || [];
-  newPrograms = parsed.programs || [];
-
-}
-
-// OBJET EXERCICE UNIQUE
-else if(
-  parsed.timer_config &&
-  parsed.type
-){
-
-  newExercises = [parsed];
-
-}
-
-// OBJET PROGRAMME UNIQUE
-else if(
-  parsed.timer_config &&
-  !parsed.type
-){
-
-  newPrograms = [parsed];
-
-}
-    mergedExercises = [...currentExercises];
-
-    mergedPrograms = [...currentPrograms];
-
-    let addedExercises = 0;
+    let added = 0;
 
     newExercises.forEach(newEx => {
 
-      const normalizedNewName =
-      normalizeText(newEx.nom);
+      const exists =
+      mergedExercises.some(ex =>
+        ex.id === newEx.id
+      );
 
-      const alreadyExists =
-      mergedExercises.some(ex => {
-
-        return (
-          ex.id === newEx.id ||
-
-          normalizeText(ex.nom)
-          === normalizedNewName ||
-
-          (
-            ex.image &&
-            newEx.image &&
-            ex.image === newEx.image
-          )
-        );
-
-      });
-
-      if(!alreadyExists){
+      if(!exists){
 
         mergedExercises.push(newEx);
 
-        addedExercises++;
-      }
+        added++;
 
-    });
-
-    let addedPrograms = 0;
-
-    newPrograms.forEach(newProg => {
-
-      const alreadyExists =
-      mergedPrograms.some(prog =>
-        prog.id === newProg.id
-      );
-
-      if(!alreadyExists){
-
-        mergedPrograms.push(newProg);
-
-        addedPrograms++;
       }
 
     });
@@ -460,21 +413,124 @@ else if(
     updateStats(newExercises);
 
     alert(
-      addedExercises +
-      ' exercices ajoutés | ' +
-      addedPrograms +
-      ' programmes ajoutés'
+      added +
+      ' exercices ajoutés'
     );
 
-  } catch(error){
+  }catch(error){
 
     console.error(error);
 
-    alert('JSON invalide');
+    alert(
+      'JSON exercices invalide'
+    );
 
   }
 
 }
+
+function mergeProgramsOnly(){
+
+  try{
+
+    const jsonText =
+    document.getElementById(
+      'programsJson'
+    ).value;
+
+    if(!jsonText.trim()){
+
+      alert('Aucun JSON programmes');
+
+      return;
+    }
+
+    const parsed =
+    JSON.parse(jsonText);
+
+    const newPrograms =
+    Array.isArray(parsed)
+    ? parsed
+    : [parsed];
+
+    let added = 0;
+
+    newPrograms.forEach(program => {
+
+      const exists =
+      mergedPrograms.some(p =>
+        p.id === program.id
+      );
+
+      if(!exists){
+
+        mergedPrograms.push(program);
+
+        added++;
+
+      }
+
+    });
+
+    validatePrograms();
+
+    alert(
+      added +
+      ' programmes ajoutés'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'JSON programmes invalide'
+    );
+
+  }
+
+}
+
+function validatePrograms(){
+
+  let errors = [];
+
+  mergedPrograms.forEach(program => {
+
+    (program.exercices || [])
+    .forEach(id => {
+
+      const exists =
+      mergedExercises.some(ex =>
+        ex.id === id
+      );
+
+      if(!exists){
+
+        errors.push(
+          program.nom +
+          ' -> exercice manquant : ' +
+          id
+        );
+
+      }
+
+    });
+
+  });
+
+  if(errors.length){
+
+    console.error(errors);
+
+    alert(
+      'Erreurs programmes. Voir console.'
+    );
+
+  }
+
+}
+
 function exportExercisesJson(){
 
   if(!mergedExercises.length){
