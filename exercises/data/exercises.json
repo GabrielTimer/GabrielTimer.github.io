@@ -3930,7 +3930,7 @@
   "materiel": [
     "Mur"
   ]
-}
+},
 
 {
   "id": "EPAULE_CAPS_02",
@@ -4000,7 +4000,8 @@
   ],
 
   "materiel": []
-}
+},
+
 {
   "id": "EPAULE_CAPS_03",
 
@@ -4071,7 +4072,8 @@
   "materiel": [
     "Bâton"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_04",
 
@@ -4142,7 +4144,8 @@
   "materiel": [
     "Bâton"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_05",
 
@@ -4214,7 +4217,8 @@
   "materiel": [
     "Mur"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_06",
 
@@ -4286,7 +4290,8 @@
   "materiel": [
     "Élastique"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_07",
 
@@ -4357,7 +4362,8 @@
   "materiel": [
     "Mur"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_08",
 
@@ -4428,7 +4434,8 @@
   "materiel": [
     "Haltère léger"
   ]
-}
+},
+
 {
   "id": "EPAULE_CAPS_09",
 
