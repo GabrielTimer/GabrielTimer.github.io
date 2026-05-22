@@ -76,9 +76,9 @@ function renderPrograms(){
 
 function generateProgram(program){
 
-  const selectedExercises =
+const selectedExercises =
 
-  program.exercices
+  (program.exercices || program.exercises || [])
 
   .map(id =>
 
