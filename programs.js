@@ -15,7 +15,8 @@ Promise.all([
 
 .then(([programData, exerciseData]) => {
 
-  programs = programData;
+  programs =
+programData.programs || programData;
 
   exercises = exerciseData;
 
