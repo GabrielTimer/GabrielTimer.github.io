@@ -231,8 +231,12 @@ Charger exercises.json actuel
 Ajouter au fichier actuel
 </button>
 
-<button class="success" onclick="exportJson()">
+<button class="success" onclick="exportExercisesJson()">
 Exporter exercises.json
+</button>
+
+<button class="success" onclick="exportProgramsJson()">
+Exporter program_templates.json
 </button>
 
 </div>
@@ -262,6 +266,9 @@ Total final : <span id="finalCount">0</span>
 let currentExercises = [];
 let mergedExercises = [];
 
+let currentPrograms = [];
+let mergedPrograms = [];
+
 function updateStats(newExercises = []){
 
   document.getElementById('currentCount').textContent =
@@ -274,25 +281,47 @@ function updateStats(newExercises = []){
   mergedExercises.length;
 }
 
+function normalizeText(text){
+
+  return (text || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]/g,'');
+
+}
+
 async function loadCurrentJson(){
 
   try{
 
-    const response = await fetch('./exercises/data/exercises.json');
+    const exResponse =
+    await fetch('./exercises/data/exercises.json');
 
-    currentExercises = await response.json();
+    currentExercises =
+    await exResponse.json();
 
     mergedExercises = [...currentExercises];
 
+    const progResponse =
+    await fetch('./exercises/data/program_templates.json');
+
+    currentPrograms =
+    await progResponse.json();
+
+    mergedPrograms = [...currentPrograms];
+
     updateStats();
 
-    alert('exercises.json chargé avec succès');
+
+
+    alert('JSON chargés avec succès');
 
   } catch(error){
 
     console.error(error);
 
-    alert('Impossible de charger exercises.json');
+    alert('Erreur chargement JSON');
 
   }
 }
@@ -305,37 +334,84 @@ function mergeExercises(){
     document.getElementById('generatedJson').value;
 
     if(!jsonText.trim()){
-      alert('Aucun JSON à ajouter');
+
+      alert('Aucun JSON');
+
       return;
     }
 
     const parsed = JSON.parse(jsonText);
 
     const newExercises =
-    Array.isArray(parsed)
-    ? parsed
-    : [parsed];
+    parsed.exercises || [];
+
+    const newPrograms =
+    parsed.programs || [];
 
     mergedExercises = [...currentExercises];
 
+    mergedPrograms = [...currentPrograms];
+
+    let addedExercises = 0;
+
     newExercises.forEach(newEx => {
 
+      const normalizedNewName =
+      normalizeText(newEx.nom);
+
       const alreadyExists =
-      mergedExercises.some(ex =>
-        ex.id === newEx.id
-      );
+      mergedExercises.some(ex => {
+
+        return (
+          ex.id === newEx.id ||
+
+          normalizeText(ex.nom)
+          === normalizedNewName ||
+
+          (
+            ex.image &&
+            newEx.image &&
+            ex.image === newEx.image
+          )
+        );
+
+      });
 
       if(!alreadyExists){
 
         mergedExercises.push(newEx);
 
+        addedExercises++;
+      }
+
+    });
+
+    let addedPrograms = 0;
+
+    newPrograms.forEach(newProg => {
+
+      const alreadyExists =
+      mergedPrograms.some(prog =>
+        prog.id === newProg.id
+      );
+
+      if(!alreadyExists){
+
+        mergedPrograms.push(newProg);
+
+        addedPrograms++;
       }
 
     });
 
     updateStats(newExercises);
 
-    alert('Exercices fusionnés avec succès');
+    alert(
+      addedExercises +
+      ' exercices ajoutés | ' +
+      addedPrograms +
+      ' programmes ajoutés'
+    );
 
   } catch(error){
 
@@ -344,13 +420,13 @@ function mergeExercises(){
     alert('JSON invalide');
 
   }
-}
 
-function exportJson(){
+}
+function exportExercisesJson(){
 
   if(!mergedExercises.length){
 
-    alert('Aucun exercice à exporter');
+    alert('Aucun exercice');
 
     return;
   }
@@ -358,18 +434,46 @@ function exportJson(){
   const jsonString =
   JSON.stringify(mergedExercises, null, 2);
 
+  downloadJson(
+    jsonString,
+    'exercises.json'
+  );
+}
+
+function exportProgramsJson(){
+
+  if(!mergedPrograms.length){
+
+    alert('Aucun programme');
+
+    return;
+  }
+
+  const jsonString =
+  JSON.stringify(mergedPrograms, null, 2);
+
+  downloadJson(
+    jsonString,
+    'program_templates.json'
+  );
+}
+
+function downloadJson(jsonString, filename){
+
   const blob = new Blob(
     [jsonString],
     { type:'application/json' }
   );
 
-  const url = URL.createObjectURL(blob);
+  const url =
+  URL.createObjectURL(blob);
 
-  const a = document.createElement('a');
+  const a =
+  document.createElement('a');
 
   a.href = url;
 
-  a.download = 'exercises.json';
+  a.download = filename;
 
   a.click();
 
