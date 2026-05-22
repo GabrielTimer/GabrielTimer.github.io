@@ -74,14 +74,36 @@ function createFilterGroup(field, title){
   'filter-group';
 
   group.innerHTML = `
-    <div class="filter-title">
+
+    <button class="dropdown-toggle">
+
       ${title}
+
+      <span>▼</span>
+
+    </button>
+
+    <div class="dropdown-panel">
+
+      <div class="filter-buttons">
+
+      </div>
+
     </div>
 
-    <div class="filter-buttons"
-         id="filter-${field}">
-    </div>
   `;
+
+  const toggle =
+  group.querySelector('.dropdown-toggle');
+
+  const panel =
+  group.querySelector('.dropdown-panel');
+
+  toggle.addEventListener('click', () => {
+
+    panel.classList.toggle('open');
+
+  });
 
   const buttonsContainer =
   group.querySelector('.filter-buttons');
