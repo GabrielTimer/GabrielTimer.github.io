@@ -151,11 +151,51 @@ Créer et fusionner rapidement des exercices/programmes JSON.
 
 <label>Prompt programme</label>
 
-<textarea id="promptInput" placeholder="Exemple :
-Programme entorse cheville
-3 niveaux
-15 exercices
-objectif retour sport"></textarea>
+<textarea id="promptInput">
+Tu es un kinésithérapeute expert.
+
+Génère le JSON complet pour ce programme.
+
+Respecte STRICTEMENT ce format :
+
+{
+  "id": "",
+  "nom": "",
+  "categorie": "",
+  "niveau": 1,
+
+  "tags": [],
+
+  "objectif": "",
+
+  "objectifs": [],
+
+  "pathologies": [],
+
+  "zones": [],
+
+  "materiel": [],
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "description": "",
+
+  "consignes": [],
+
+  "timer_config": {}
+}
+
+Le programme doit être :
+- cohérent
+- progressif
+- réaliste
+- adapté à la pathologie
+- avec niveaux progressifs
+
+Programme :
+</textarea>
 
 <div class="small">
 Tu écris ici le programme souhaité puis tu demandes à ChatGPT de générer le JSON.
