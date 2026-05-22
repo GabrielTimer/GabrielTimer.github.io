@@ -41,12 +41,22 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Chaise/Fauteuil"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Prévention chute",
+      "Senior"
+    ],
+    "objectifs": [
+      "posture"
+    ],
+    "zones": []
   },
   {
     "id": "FAUT_POST_02",
@@ -90,12 +100,22 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Chaise/Fauteuil"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Prévention chute",
+      "Senior"
+    ],
+    "objectifs": [
+      "posture"
+    ],
+    "zones": []
   },
   {
     "id": "FAUT_POST_03",
@@ -139,12 +159,23 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Chaise/Fauteuil"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Cervicalgie",
+      "Prévention chute",
+      "Senior"
+    ],
+    "objectifs": [
+      "posture cervicale"
+    ],
+    "zones": []
   },
   {
     "id": "FAUT_POST_04",
@@ -188,12 +219,22 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Chaise/Fauteuil"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Prévention chute",
+      "Senior"
+    ],
+    "objectifs": [
+      "respiration"
+    ],
+    "zones": []
   },
   {
     "id": "FAUT_POST_05",
@@ -237,12 +278,23 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Élastique",
+      "Chaise/Fauteuil"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Prévention chute",
+      "Senior"
+    ],
+    "objectifs": [
+      "renforcement dos"
+    ],
+    "zones": []
   },
   {
     "id": "lombalgie1_ex1",
@@ -276,7 +328,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Lombalgie"
+    ],
+    "objectifs": [
+      "Mobilité lombaire"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_01",
@@ -324,7 +383,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Renforcement des membres inférieurs"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_02",
@@ -371,7 +437,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Contrôle moteur du genou"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_03",
@@ -417,7 +490,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Contrôle de l’alignement du genou"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_04",
@@ -464,7 +544,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Travail de stabilité et proprioception"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_05",
@@ -511,7 +598,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Renforcement des fessiers et stabilité des genoux"
+    ],
+    "zones": []
   },
   {
     "id": "GENOU_06",
@@ -558,7 +652,14 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Genou"
+    ],
+    "objectifs": [
+      "Travail de stabilité dynamique"
+    ],
+    "zones": []
   },
   {
     "id": "FUN",
@@ -599,7 +700,12 @@
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [],
+    "objectifs": [
+      "Fun"
+    ],
+    "zones": []
   },
   {
     "id": "POSTPARTUM_01",
@@ -682,15 +788,25 @@
       "cycles": 10
     },
     "image": "/exercises/images/post-partum/respiration-transverse.png",
-
-"videos": [
-  {
-    "url": "https://fr.physitrack.com/home-exercise-video/respiration-correcte---d%25c3%25a9cubitus-dorsal",
-    "qr_code": "/exercises/qrcodes/postpartum-respiration-transverse.png",
-    "source": "Physitrack",
-    "titre": "Respiration correcte - décubitus dorsal"
-  }
-]
+    "videos": [
+      {
+        "url": "https://fr.physitrack.com/home-exercise-video/respiration-correcte---d%25c3%25a9cubitus-dorsal",
+        "qr_code": "/exercises/qrcodes/postpartum-respiration-transverse.png",
+        "source": "Physitrack",
+        "titre": "Respiration correcte - décubitus dorsal"
+      }
+    ],
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_02",
@@ -773,14 +889,25 @@
       "cycles": 10
     },
     "image": "/exercises/images/post-partum/heel-slide.png",
-"videos": [
-  {
-    "url": "https://uk.physitrack.com/home-exercise-video/supine-alternate-heel-slides---movement-control",
-    "qr_code": "/exercises/qrcodes/postpartum-heel-slide.png",
-    "source": "Physitrack",
-    "titre": "Heel slide - contrôle moteur"
-  }
-]
+    "videos": [
+      {
+        "url": "https://uk.physitrack.com/home-exercise-video/supine-alternate-heel-slides---movement-control",
+        "qr_code": "/exercises/qrcodes/postpartum-heel-slide.png",
+        "source": "Physitrack",
+        "titre": "Heel slide - contrôle moteur"
+      }
+    ],
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_03",
@@ -863,14 +990,25 @@
       "cycles": 10
     },
     "image": "/exercises/images/post-partum/dead-bug-bras.png",
-"videos": [
-  {
-    "url": "https://au.physitrack.com/home-exercise-video/supine-dead-bugs",
-    "qr_code": "/exercises/qrcodes/postpartum-dead-bug.png",
-    "source": "Physitrack",
-    "titre": "Supine dead bugs"
-  }
-]
+    "videos": [
+      {
+        "url": "https://au.physitrack.com/home-exercise-video/supine-dead-bugs",
+        "qr_code": "/exercises/qrcodes/postpartum-dead-bug.png",
+        "source": "Physitrack",
+        "titre": "Supine dead bugs"
+      }
+    ],
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_04",
@@ -952,7 +1090,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pont-fessier.png"
+    "image": "/exercises/images/post-partum/pont-fessier.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_05",
@@ -1035,14 +1184,24 @@
       "cycles": 10
     },
     "image": "/exercises/images/post-partum/clamshell.png",
-
-  "videos": [
-    {
-      "url": "https://fr.physitrack.com/home-exercise-video/clam-shell-contre-r%25c3%25a9sistance",
-      "source": "Physitrack",
-      "titre": "Clamshell"
-    }
-  ]
+    "videos": [
+      {
+        "url": "https://fr.physitrack.com/home-exercise-video/clam-shell-contre-r%25c3%25a9sistance",
+        "source": "Physitrack",
+        "titre": "Clamshell"
+      }
+    ],
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_06",
@@ -1124,7 +1283,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/gainage-quadrupedie.png"
+    "image": "/exercises/images/post-partum/gainage-quadrupedie.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_07",
@@ -1206,7 +1376,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/sit-to-stand.png"
+    "image": "/exercises/images/post-partum/sit-to-stand.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_08",
@@ -1288,7 +1469,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bird-dog-bras.png"
+    "image": "/exercises/images/post-partum/bird-dog-bras.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_09",
@@ -1370,7 +1562,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/marche-gainee.png"
+    "image": "/exercises/images/post-partum/marche-gainee.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_10",
@@ -1452,7 +1655,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/dead-bug-complet.png"
+    "image": "/exercises/images/post-partum/dead-bug-complet.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_11",
@@ -1534,7 +1748,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pont-fessier-1jambe.png"
+    "image": "/exercises/images/post-partum/pont-fessier-1jambe.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_12",
@@ -1616,7 +1841,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pallof-press.png"
+    "image": "/exercises/images/post-partum/pallof-press.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_13",
@@ -1698,7 +1934,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bird-dog-complet.png"
+    "image": "/exercises/images/post-partum/bird-dog-complet.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_14",
@@ -1780,7 +2027,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/squat-partiel.png"
+    "image": "/exercises/images/post-partum/squat-partiel.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_15",
@@ -1862,7 +2120,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/side-plank-genoux.png"
+    "image": "/exercises/images/post-partum/side-plank-genoux.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_16",
@@ -1944,7 +2213,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/farmer-carry.png"
+    "image": "/exercises/images/post-partum/farmer-carry.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_17",
@@ -2026,7 +2306,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/step-up-bas.png"
+    "image": "/exercises/images/post-partum/step-up-bas.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_18",
@@ -2108,7 +2399,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bear-hover.png"
+    "image": "/exercises/images/post-partum/bear-hover.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_19",
@@ -2190,7 +2492,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/dead-bug-elastique.png"
+    "image": "/exercises/images/post-partum/dead-bug-elastique.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_20",
@@ -2272,7 +2585,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/side-plank-jambes.png"
+    "image": "/exercises/images/post-partum/side-plank-jambes.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_21",
@@ -2354,7 +2678,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/squat-tempo.png"
+    "image": "/exercises/images/post-partum/squat-tempo.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_22",
@@ -2436,7 +2771,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bird-dog-pause.png"
+    "image": "/exercises/images/post-partum/bird-dog-pause.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_23",
@@ -2518,7 +2864,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/fente-arriere.png"
+    "image": "/exercises/images/post-partum/fente-arriere.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_24",
@@ -2600,7 +2957,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bear-crawl.png"
+    "image": "/exercises/images/post-partum/bear-crawl.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_25",
@@ -2682,7 +3050,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/carry-asymetrique.png"
+    "image": "/exercises/images/post-partum/carry-asymetrique.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_26",
@@ -2764,7 +3143,18 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/mountain-climber-lent.png"
+    "image": "/exercises/images/post-partum/mountain-climber-lent.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   },
   {
     "id": "POSTPARTUM_27",
@@ -2846,6 +3236,17 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/step-up-dynamique.png"
+    "image": "/exercises/images/post-partum/step-up-dynamique.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "objectifs": [
+      "Renforcement transverse, périnée et stabilité"
+    ],
+    "zones": [
+      "Abdomen",
+      "Périnée",
+      "Lombaires"
+    ]
   }
 ]
