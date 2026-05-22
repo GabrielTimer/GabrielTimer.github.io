@@ -70,4 +70,181 @@
       "EPAULE_04"
     ]
   }
+
+{
+  "id": "EPAULE_CAPS_PROG_01",
+
+  "nom": "Capsulite rétractile de l’épaule - Niveau 1",
+
+  "categorie": "Epaule",
+
+  "niveau": 1,
+
+  "tags": [
+    "epaule",
+    "capsulite",
+    "mobilité",
+    "raideur",
+    "douleur"
+  ],
+
+  "objectif": "Diminuer la douleur et récupérer progressivement la mobilité de l’épaule.",
+
+  "objectifs": [
+    "Mobilité",
+    "Diminution douleur",
+    "Contrôle moteur"
+  ],
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Mur",
+    "Bâton"
+  ],
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "description": "Programme débutant visant à restaurer progressivement la mobilité de l’épaule douloureuse.",
+
+  "consignes": [
+    "Faire les mouvements lentement",
+    "Rester sous le seuil douloureux",
+    "Respirer calmement pendant les exercices"
+  ],
+
+  "exercices": [
+    "EPAULE_CAPS_01",
+    "EPAULE_CAPS_02",
+    "EPAULE_CAPS_03",
+    "EPAULE_CAPS_04"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_PROG_02",
+
+  "nom": "Capsulite rétractile de l’épaule - Niveau 2",
+
+  "categorie": "Epaule",
+
+  "niveau": 2,
+
+  "tags": [
+    "epaule",
+    "capsulite",
+    "mobilité",
+    "renforcement",
+    "stabilité"
+  ],
+
+  "objectif": "Améliorer la mobilité active et débuter le renforcement de l’épaule.",
+
+  "objectifs": [
+    "Mobilité active",
+    "Renforcement léger",
+    "Stabilité scapulaire"
+  ],
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Élastique",
+    "Mur",
+    "Bâton"
+  ],
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "description": "Programme intermédiaire pour améliorer le contrôle moteur et récupérer les amplitudes fonctionnelles.",
+
+  "consignes": [
+    "Contrôler les mouvements",
+    "Éviter les compensations du tronc",
+    "Respecter une douleur modérée maximum"
+  ],
+
+  "exercices": [
+    "EPAULE_CAPS_03",
+    "EPAULE_CAPS_04",
+    "EPAULE_CAPS_05",
+    "EPAULE_CAPS_06",
+    "EPAULE_CAPS_07"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_PROG_03",
+
+  "nom": "Capsulite rétractile de l’épaule - Niveau 3",
+
+  "categorie": "Epaule",
+
+  "niveau": 3,
+
+  "tags": [
+    "epaule",
+    "capsulite",
+    "renforcement",
+    "fonctionnel",
+    "mobilité"
+  ],
+
+  "objectif": "Retrouver une fonction complète de l’épaule et améliorer la force.",
+
+  "objectifs": [
+    "Mobilité complète",
+    "Renforcement",
+    "Fonctionnel"
+  ],
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Élastique",
+    "Haltère léger",
+    "Mur"
+  ],
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "description": "Programme avancé visant le retour aux gestes fonctionnels et le renforcement progressif.",
+
+  "consignes": [
+    "Faire des mouvements fluides",
+    "Contrôler la posture",
+    "Augmenter progressivement l’amplitude"
+  ],
+
+  "exercices": [
+    "EPAULE_CAPS_05",
+    "EPAULE_CAPS_06",
+    "EPAULE_CAPS_07",
+    "EPAULE_CAPS_08",
+    "EPAULE_CAPS_09"
+  ]
+}
+
 ]

@@ -3856,4 +3856,650 @@
   ]
 }
 
+{
+  "id": "EPAULE_CAPS_01",
+
+  "nom": "Glissement mural assisté",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Mobilité douce de l’épaule et diminution des raideurs",
+
+  "niveau": 1,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 10 répétitions lentes",
+
+  "consignes": [
+    "Se placer face à un mur",
+    "Faire glisser lentement la main vers le haut",
+    "Monter jusqu’à une tension supportable sans douleur vive",
+    "Redescendre lentement en contrôlant le mouvement",
+    "Garder les épaules relâchées pendant l’exercice"
+  ],
+
+  "precautions": [
+    "Ne pas forcer dans la douleur",
+    "Éviter de hausser l’épaule",
+    "Limiter l’amplitude en cas d’irritation importante"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Capsulite",
+    "Mobilité",
+    "Raideur",
+    "Mur"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 4,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 10
+  },
+
+  "ex": 40,
+
+  "repos": 30,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Mobilité",
+    "Diminution des raideurs",
+    "Contrôle moteur"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Mur"
+  ]
+}
+
+{
+  "id": "EPAULE_CAPS_02",
+
+  "nom": "Pendulaire de Codman",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Décoaptation et mobilité douce de l’épaule",
+
+  "niveau": 1,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 30 secondes",
+
+  "consignes": [
+    "Se pencher légèrement en avant",
+    "Laisser le bras détendu",
+    "Faire de petits mouvements circulaires",
+    "Respirer calmement"
+  ],
+
+  "precautions": [
+    "Ne pas contracter l’épaule",
+    "Faire de petits mouvements sans douleur vive"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Capsulite",
+    "Mobilité",
+    "Décompression"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+
+  "ex": 30,
+
+  "repos": 20,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Mobilité",
+    "Diminution douleur"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": []
+}
+{
+  "id": "EPAULE_CAPS_03",
+
+  "nom": "Flexion assistée avec bâton",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Récupération progressive de la flexion d’épaule",
+
+  "niveau": 1,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 10 répétitions",
+
+  "consignes": [
+    "Tenir un bâton avec les deux mains",
+    "Aider le bras douloureux avec le bras sain",
+    "Monter lentement dans une amplitude confortable",
+    "Redescendre doucement"
+  ],
+
+  "precautions": [
+    "Ne pas forcer la douleur",
+    "Garder les épaules relâchées"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Capsulite",
+    "Bâton",
+    "Mobilité"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 4,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 10
+  },
+
+  "ex": 40,
+
+  "repos": 30,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Mobilité",
+    "Flexion épaule"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Bâton"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_04",
+
+  "nom": "Rotation externe assistée avec bâton",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Amélioration de la rotation externe",
+
+  "niveau": 1,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 10 répétitions",
+
+  "consignes": [
+    "Garder les coudes près du corps",
+    "Pousser doucement avec le bras sain",
+    "Aller jusqu’à une tension modérée",
+    "Revenir lentement"
+  ],
+
+  "precautions": [
+    "Ne pas compenser avec le tronc",
+    "Limiter l’amplitude si douleur importante"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Capsulite",
+    "Rotation externe",
+    "Bâton"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 4,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 10
+  },
+
+  "ex": 40,
+
+  "repos": 30,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Mobilité",
+    "Rotation externe"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Bâton"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_05",
+
+  "nom": "Auto-grandissement scapulaire au mur",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Contrôle scapulaire et posture",
+
+  "niveau": 2,
+
+  "exercise_mode": "statique",
+
+  "duree": "2 séries de 30 secondes",
+
+  "consignes": [
+    "Se placer dos au mur",
+    "Grandir la colonne",
+    "Rentrer légèrement les omoplates",
+    "Maintenir une respiration calme"
+  ],
+
+  "precautions": [
+    "Ne pas hausser les épaules",
+    "Rester dans une posture confortable"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Posture",
+    "Scapula",
+    "Mur"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 30,
+    "phase_descente": 3,
+    "cycles": 2
+  },
+
+  "ex": 30,
+
+  "repos": 20,
+
+  "reps": 2,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Posture",
+    "Contrôle scapulaire"
+  ],
+
+  "zones": [
+    "Epaule",
+    "Haut du dos"
+  ],
+
+  "materiel": [
+    "Mur"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_06",
+
+  "nom": "Tirage élastique léger",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Renforcement doux des fixateurs scapulaires",
+
+  "niveau": 2,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 12 répétitions",
+
+  "consignes": [
+    "Garder le dos droit",
+    "Tirer les coudes vers l’arrière",
+    "Rapprocher légèrement les omoplates",
+    "Contrôler le retour"
+  ],
+
+  "precautions": [
+    "Ne pas compenser avec le cou",
+    "Utiliser une faible résistance"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Élastique",
+    "Scapula",
+    "Renforcement"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 12
+  },
+
+  "ex": 45,
+
+  "repos": 30,
+
+  "reps": 12,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Renforcement",
+    "Contrôle scapulaire"
+  ],
+
+  "zones": [
+    "Epaule",
+    "Dos"
+  ],
+
+  "materiel": [
+    "Élastique"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_07",
+
+  "nom": "Rotation externe isométrique contre mur",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Activation douce de la coiffe des rotateurs",
+
+  "niveau": 2,
+
+  "exercise_mode": "statique",
+
+  "duree": "2 séries de 8 répétitions de 5 secondes",
+
+  "consignes": [
+    "Placer le coude contre le corps",
+    "Pousser doucement contre le mur",
+    "Maintenir sans douleur",
+    "Relâcher progressivement"
+  ],
+
+  "precautions": [
+    "Ne pas forcer",
+    "Éviter les douleurs persistantes après l’exercice"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Coiffe",
+    "Isométrique",
+    "Mur"
+  ],
+
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 5,
+    "phase_descente": 2,
+    "cycles": 8
+  },
+
+  "ex": 25,
+
+  "repos": 20,
+
+  "reps": 8,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Activation musculaire",
+    "Stabilité"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Mur"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_08",
+
+  "nom": "Élévation frontale légère",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Renforcement fonctionnel progressif",
+
+  "niveau": 3,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 12 répétitions",
+
+  "consignes": [
+    "Lever lentement le bras devant soi",
+    "Monter jusqu’à une amplitude confortable",
+    "Contrôler la descente",
+    "Garder le tronc stable"
+  ],
+
+  "precautions": [
+    "Utiliser une charge légère",
+    "Éviter les mouvements brusques"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Renforcement",
+    "Fonctionnel",
+    "Haltère"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 12
+  },
+
+  "ex": 45,
+
+  "repos": 30,
+
+  "reps": 12,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Renforcement",
+    "Fonctionnel"
+  ],
+
+  "zones": [
+    "Epaule"
+  ],
+
+  "materiel": [
+    "Haltère léger"
+  ]
+}
+{
+  "id": "EPAULE_CAPS_09",
+
+  "nom": "Wall slide avec élastique",
+
+  "type": "timer",
+
+  "categorie": "Epaule",
+
+  "objectif": "Mobilité active et stabilité scapulaire",
+
+  "niveau": 3,
+
+  "exercise_mode": "dynamique",
+
+  "duree": "2 séries de 10 répétitions",
+
+  "consignes": [
+    "Placer les avant-bras contre le mur",
+    "Faire glisser lentement vers le haut",
+    "Maintenir une légère tension dans l’élastique",
+    "Redescendre lentement"
+  ],
+
+  "precautions": [
+    "Ne pas cambrer le dos",
+    "Limiter l’amplitude si douleur"
+  ],
+
+  "tags": [
+    "Epaule",
+    "Wall slide",
+    "Élastique",
+    "Scapula"
+  ],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 4,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 10
+  },
+
+  "ex": 40,
+
+  "repos": 30,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [
+    "Capsulite rétractile de l’épaule"
+  ],
+
+  "objectifs": [
+    "Mobilité active",
+    "Stabilité scapulaire"
+  ],
+
+  "zones": [
+    "Epaule",
+    "Haut du dos"
+  ],
+
+  "materiel": [
+    "Mur",
+    "Élastique"
+  ]
+}
 ]
