@@ -356,9 +356,10 @@ function renderExercises(list){
       <div class="image-wrapper">
 
         <img
-          src="${exercise.image}"
-          alt="${exercise.nom}"
-        >
+  src="${exercise.image}"
+  alt="${exercise.nom}"
+  onerror="this.onerror=null;this.src='/exercises/images/placeholders/default.png';"
+>
 
         <div class="level-badge">
           Niveau ${exercise.niveau || 1}
