@@ -25,6 +25,15 @@
 🫁 RespiR
 </button>
 
+<button
+id="adminExercisesBtn"
+class="secondary"
+onclick="adminExercises()"
+style="display:none;"
+>
+🛠️ Admin Exercises
+</button>
+
 </div>
 
 <script>
@@ -41,7 +50,7 @@ params.get("patient");
 if(!patient){
 
 if(
-sessionStorage.getItem(
+localStorage.getItem(
 "admin_ok"
 )!=="true"
 ){
@@ -142,6 +151,26 @@ window.location =
 "pathologies.html?v=" + VERSION;
 
 }
+
+}
+
+if(
+localStorage.getItem("admin_ok")
+==="true"
+){
+
+document.getElementById(
+"adminExercisesBtn"
+).style.display =
+"inline-block";
+
+}
+
+function adminExercises(){
+
+window.location =
+"admin_exercises.html?v="
++ VERSION;
 
 }
 
