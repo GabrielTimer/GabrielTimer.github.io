@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Exercises V1</title>
+
+<style>
+
+body{
+  margin:0;
+  padding:30px;
+  background:#f5f7fb;
+  font-family:Arial,sans-serif;
+  color:#222;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+.subtitle{
+  color:#666;
+  margin-bottom:30px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+}
+
+label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+textarea{
+  width:100%;
+  min-height:180px;
+  border:none;
+  border-radius:16px;
+  padding:18px;
+  background:#f2f5fb;
+  resize:vertical;
+  font-size:15px;
+  box-sizing:border-box;
+}
+
+#generatedJson{
+  min-height:420px;
+  font-family:monospace;
+}
+
+button{
+  border:none;
+  border-radius:14px;
+  padding:14px 22px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
+  margin-right:12px;
+  margin-bottom:12px;
+}
+
+.primary{
+  background:#2d6cdf;
+  color:white;
+}
+
+.primary:hover{
+  background:#1f56b8;
+}
+
+.secondary{
+  background:#e9eefb;
+  color:#2d6cdf;
+}
+
+.secondary:hover{
+  background:#d9e4ff;
+}
+
+.success{
+  background:#17b26a;
+  color:white;
+}
+
+.success:hover{
+  background:#119455;
+}
+
+.stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:20px;
+}
+
+.stat{
+  background:#f2f5fb;
+  padding:14px 18px;
+  border-radius:14px;
+  font-weight:bold;
+}
+
+.small{
+  color:#777;
+  font-size:14px;
+  margin-top:12px;
+}
+
+@media(max-width:768px){
+
+  body{
+    padding:14px;
+  }
+
+  .card{
+    padding:16px;
+  }
+
+  button{
+    width:100%;
+  }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Admin Exercises V1</h1>
+
+<div class="subtitle">
+Créer et fusionner rapidement des exercices/programmes JSON.
+</div>
+
+<div class="card">
+
+<label>Prompt programme</label>
+
+<textarea id="promptInput" placeholder="Exemple :
+Programme entorse cheville
+3 niveaux
+15 exercices
+objectif retour sport"></textarea>
+
+<div class="small">
+Tu écris ici le programme souhaité puis tu demandes à ChatGPT de générer le JSON.
+</div>
+
+</div>
+
+<div class="card">
+
+<label>JSON généré</label>
+
+<textarea id="generatedJson" placeholder='Colle ici le JSON généré par ChatGPT...'></textarea>
+
+<div style="margin-top:20px;">
+
+<button class="primary" onclick="loadCurrentJson()">
+Charger exercises.json actuel
+</button>
+
+<button class="secondary" onclick="mergeExercises()">
+Ajouter au fichier actuel
+</button>
+
+<button class="success" onclick="exportJson()">
+Exporter exercises.json
+</button>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+Exercices actuels : <span id="currentCount">0</span>
+</div>
+
+<div class="stat">
+Nouveaux exercices : <span id="newCount">0</span>
+</div>
+
+<div class="stat">
+Total final : <span id="finalCount">0</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let currentExercises = [];
+let mergedExercises = [];
+
+function updateStats(newExercises = []){
+
+  document.getElementById('currentCount').textContent =
+  currentExercises.length;
+
+  document.getElementById('newCount').textContent =
+  newExercises.length;
+
+  document.getElementById('finalCount').textContent =
+  mergedExercises.length;
+}
+
+async function loadCurrentJson(){
+
+  try{
+
+    const response = await fetch('./data/exercises.json');
+
+    currentExercises = await response.json();
+
+    mergedExercises = [...currentExercises];
+
+    updateStats();
+
+    alert('exercises.json chargé avec succès');
+
+  } catch(error){
+
+    console.error(error);
+
+    alert('Impossible de charger exercises.json');
+
+  }
+}
+
+function mergeExercises(){
+
+  try{
+
+    const jsonText =
+    document.getElementById('generatedJson').value;
+
+    if(!jsonText.trim()){
+      alert('Aucun JSON à ajouter');
+      return;
+    }
+
+    const parsed = JSON.parse(jsonText);
+
+    const newExercises =
+    Array.isArray(parsed)
+    ? parsed
+    : [parsed];
+
+    mergedExercises = [...currentExercises];
+
+    newExercises.forEach(newEx => {
+
+      const alreadyExists =
+      mergedExercises.some(ex =>
+        ex.id === newEx.id
+      );
+
+      if(!alreadyExists){
+
+        mergedExercises.push(newEx);
+
+      }
+
+    });
+
+    updateStats(newExercises);
+
+    alert('Exercices fusionnés avec succès');
+
+  } catch(error){
+
+    console.error(error);
+
+    alert('JSON invalide');
+
+  }
+}
+
+function exportJson(){
+
+  if(!mergedExercises.length){
+
+    alert('Aucun exercice à exporter');
+
+    return;
+  }
+
+  const jsonString =
+  JSON.stringify(mergedExercises, null, 2);
+
+  const blob = new Blob(
+    [jsonString],
+    { type:'application/json' }
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+
+  a.href = url;
+
+  a.download = 'exercises.json';
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+</script>
+
+</body>
+</html>
