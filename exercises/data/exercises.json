@@ -3678,4 +3678,182 @@
       "repetitions": 10
     }
   }
+
+,
+{
+  "id": "EPAULE_01",
+  "nom": "Pendulaire d’épaule",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Mobilité douce",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "30 secondes",
+  "consignes": [
+    "Se pencher légèrement",
+    "Relâcher le bras",
+    "Faire de petits mouvements"
+  ],
+  "precautions": [
+    "Rester sous le seuil douloureux"
+  ],
+  "tags": [
+    "Epaule",
+    "Coiffe",
+    "Mobilité"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 20,
+  "reps": 10,
+  "image": "/exercises/images/placeholders/default.png",
+  "pathologies": [
+    "Tendinite coiffe des rotateurs"
+  ],
+  "objectifs": [
+    "Mobilité douce"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
+  "id": "EPAULE_02",
+  "nom": "Rotation externe élastique coude au corps",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Activation coiffe",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Garder le coude collé au corps",
+    "Tourner lentement vers l’extérieur",
+    "Contrôler le retour"
+  ],
+  "precautions": [
+    "Ne pas compenser avec le dos"
+  ],
+  "tags": [
+    "Epaule",
+    "Coiffe",
+    "Élastique"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/placeholders/default.png",
+  "pathologies": [
+    "Tendinite coiffe des rotateurs"
+  ],
+  "objectifs": [
+    "Activation coiffe"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
+  "id": "EPAULE_03",
+  "nom": "Wall slide",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Contrôle scapulaire",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Glisser les bras contre le mur",
+    "Monter lentement",
+    "Garder les épaules basses"
+  ],
+  "precautions": [
+    "Ne pas hausser les épaules"
+  ],
+  "tags": [
+    "Epaule",
+    "Scapula",
+    "Mur"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/placeholders/default.png",
+  "pathologies": [
+    "Tendinite coiffe des rotateurs"
+  ],
+  "objectifs": [
+    "Contrôle scapulaire"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
+  "id": "EPAULE_04",
+  "nom": "Isométrique rotation externe contre mur",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Renforcement isométrique",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "duree": "10 répétitions de 5 sec",
+  "consignes": [
+    "Pousser doucement contre le mur",
+    "Maintenir sans douleur",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Ne pas forcer"
+  ],
+  "tags": [
+    "Epaule",
+    "Isométrique",
+    "Coiffe"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 5,
+    "maintien": 5,
+    "phase_descente": 5,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 40,
+  "reps": 10,
+  "image": "/exercises/images/placeholders/default.png",
+  "pathologies": [
+    "Tendinite coiffe des rotateurs"
+  ],
+  "objectifs": [
+    "Renforcement isométrique"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+}
+
 ]
