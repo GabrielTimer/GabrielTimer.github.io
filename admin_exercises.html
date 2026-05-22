@@ -226,7 +226,7 @@ async function loadCurrentJson(){
 
   try{
 
-    const response = await fetch('./data/exercises.json');
+    const response = await fetch('./exercises/data/exercises.json');
 
     currentExercises = await response.json();
 
