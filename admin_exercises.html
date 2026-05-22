@@ -355,8 +355,27 @@ const parsed = JSON.parse(jsonText);
 let newExercises = [];
 let newPrograms = [];
 
+// TABLEAU JSON
+if(Array.isArray(parsed)){
+
+  // tableau d'exercices
+  if(parsed.length && parsed[0].type){
+
+    newExercises = parsed;
+
+  }
+
+  // tableau de programmes
+  else{
+
+    newPrograms = parsed;
+
+  }
+
+}
+
 // FORMAT COMPLET
-if(parsed.exercises || parsed.programs){
+else if(parsed.exercises || parsed.programs){
 
   newExercises = parsed.exercises || [];
   newPrograms = parsed.programs || [];
@@ -382,13 +401,6 @@ else if(
   newPrograms = [parsed];
 
 }
-
-// TABLEAU D'EXERCICES
-else if(Array.isArray(parsed)){
-
-  newExercises = parsed;
-}
-
     mergedExercises = [...currentExercises];
 
     mergedPrograms = [...currentPrograms];
