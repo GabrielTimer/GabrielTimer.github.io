@@ -9,11 +9,13 @@ const filters = {
 
 let exercises = [];
 
-fetch('/exercises/data/exercises.json?v=' + VERSION)
+fetch('./data/exercises.json?v=' + VERSION)
 
 .then(response => response.json())
 
 .then(data => {
+
+  console.log("EXERCISES LOADED", data);
 
   exercises = data;
 
@@ -25,7 +27,14 @@ fetch('/exercises/data/exercises.json?v=' + VERSION)
 
   updateGlossary();
 
+})
+
+.catch(error => {
+
+  console.error("ERREUR FETCH JSON", error);
+
 });
+
 
 function buildFilters(){
 
