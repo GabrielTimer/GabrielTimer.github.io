@@ -22,6 +22,9 @@ programData.programs || programData;
 
   renderPrograms();
 
+console.log(programs);
+console.log(exercises);
+
 });
 
 function renderPrograms(){
