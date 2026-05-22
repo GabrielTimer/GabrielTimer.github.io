@@ -4,16 +4,36 @@
   <meta charset="UTF-8">
   <title>Glossaire Exercices</title>
 
-  <link rel="stylesheet" href="css/glossary.css">
+  <link rel="stylesheet" href="css/glossary.css?v=999">
 </head>
 
 <body>
 
-  <h1>Glossaire Exercices</h1>
+<h1>Glossaire Exercices</h1>
 
-  <div id="exercise-container"></div>
+<div class="toolbar">
 
-  <script src="js/glossary.js?v=1.3"></script>
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Rechercher un exercice..."
+  >
+
+  <div id="filters"></div>
+
+  <button id="resetFilters">
+    Réinitialiser
+  </button>
+
+</div>
+
+<div id="activeFilters"></div>
+
+<div id="resultsCount"></div>
+
+<div id="exercise-container"></div>
+
+  <script src="js/glossary.js?v=999"></script>
 
 </body>
 </html>
