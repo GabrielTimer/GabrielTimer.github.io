@@ -14,5 +14,73 @@
       "CHEV_008",
       "CHEV_010"
     ]
+  },
+
+  {
+    "id": "EPAULE_PROG_01",
+    "nom": "Tendinite coiffe des rotateurs - Niveau 1",
+    "categorie": "Epaule",
+    "niveau": 1,
+
+    "tags": [
+      "epaule",
+      "coiffe",
+      "tendinite"
+    ],
+
+    "objectif": "Réduire la douleur et améliorer le contrôle de l’épaule.",
+
+    "objectifs": [
+      "Mobilité",
+      "Activation coiffe",
+      "Contrôle scapulaire"
+    ],
+
+    "pathologies": [
+      "Tendinite coiffe des rotateurs"
+    ],
+
+    "zones": [
+      "Epaule"
+    ],
+
+    "materiel": [
+      "Élastique",
+      "Mur"
+    ],
+
+    "image": "/exercises/images/placeholders/default.png",
+
+    "video": "",
+
+    "description": "Programme débutant de rééducation de la coiffe des rotateurs.",
+
+    "consignes": [
+      "Faire les mouvements lentement",
+      "Rester sous le seuil douloureux"
+    ],
+
+    "timer_config": {
+      "type": "sequence",
+
+      "exercices": [
+        {
+          "exercise_id": "EPAULE_01",
+          "repos": 20
+        },
+        {
+          "exercise_id": "EPAULE_02",
+          "repos": 30
+        },
+        {
+          "exercise_id": "EPAULE_03",
+          "repos": 40
+        },
+        {
+          "exercise_id": "EPAULE_04",
+          "repos": 40
+        }
+      ]
+    }
   }
 ]
