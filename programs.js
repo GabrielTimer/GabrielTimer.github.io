@@ -130,18 +130,26 @@ const selectedExercises =
       videos:
       exercise.videos || [],
 
-      ex:
-      exercise.timer_config
-      ?.phase_monte || 30,
+ex:
+exercise.ex
+||
+exercise.timer_config?.phase_monte
+||
+30,
 
-      repos:
-      exercise.timer_config
-      ?.phase_descente || 10,
+repos:
+exercise.repos
+||
+exercise.timer_config?.phase_descente
+||
+10,
 
-      reps:
-      exercise.timer_config
-      ?.cycles || 5
-
+reps:
+exercise.reps
+||
+exercise.timer_config?.cycles
+||
+10
     }))
 
   };
