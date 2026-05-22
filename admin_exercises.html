@@ -350,13 +350,44 @@ function mergeExercises(){
       return;
     }
 
-    const parsed = JSON.parse(jsonText);
+const parsed = JSON.parse(jsonText);
 
-    const newExercises =
-    parsed.exercises || [];
+let newExercises = [];
+let newPrograms = [];
 
-    const newPrograms =
-    parsed.programs || [];
+// FORMAT COMPLET
+if(parsed.exercises || parsed.programs){
+
+  newExercises = parsed.exercises || [];
+  newPrograms = parsed.programs || [];
+
+}
+
+// OBJET EXERCICE UNIQUE
+else if(
+  parsed.timer_config &&
+  parsed.type
+){
+
+  newExercises = [parsed];
+
+}
+
+// OBJET PROGRAMME UNIQUE
+else if(
+  parsed.timer_config &&
+  !parsed.type
+){
+
+  newPrograms = [parsed];
+
+}
+
+// TABLEAU D'EXERCICES
+else if(Array.isArray(parsed)){
+
+  newExercises = parsed;
+}
 
     mergedExercises = [...currentExercises];
 
