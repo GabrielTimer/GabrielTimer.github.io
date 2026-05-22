@@ -61,6 +61,9 @@ function buildFilters(){
 
 function createFilterGroup(field, title){
 
+  const container =
+  document.getElementById('filters');
+
   const values =
   getUniqueValues(field);
 
