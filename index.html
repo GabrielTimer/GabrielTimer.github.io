@@ -14,7 +14,7 @@
 
 <div class="card">
 
-<img src="logo.png" class="logo">
+<img src="logo.png" class="logo" id="logo">
 
 <h2>Gabriel Timer</h2>
 
@@ -45,22 +45,7 @@ window.location.search
 const patient =
 params.get("patient");
 
-/* protection admin */
 
-if(!patient){
-
-if(
-localStorage.getItem(
-"admin_ok"
-)!=="true"
-){
-
-window.location =
-"login.html";
-
-}
-
-}
 const VERSION = "1.2";
 
 function goProg(){
@@ -210,5 +195,29 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 <script type="module" src="exercises/js/cloud.js"></script>
+
+<script>
+const logo = document.getElementById("logo");
+
+let tapCount = 0;
+let tapTimer;
+
+logo.addEventListener("click", () => {
+  tapCount++;
+
+  if (tapCount === 1) {
+    tapTimer = setTimeout(() => {
+      tapCount = 0;
+    }, 800);
+  }
+
+  if (tapCount >= 3) {
+    clearTimeout(tapTimer);
+    tapCount = 0;
+    window.location.href = "login.html";
+  }
+});
+</script>
+
 </body>
 </html>
