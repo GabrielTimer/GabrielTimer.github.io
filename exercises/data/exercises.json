@@ -4508,5 +4508,192 @@
     "Mur",
     "Élastique"
   ]
+},
+
+{
+  "id": "huber",
+  "nom": "Huber",
+  "type": "timer",
+  "categorie": "Cabinet",
+  "objectif": "Échauffement global et activation musculaire",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "5 min",
+  "consignes": [
+    "Se placer stable sur la plateforme",
+    "Garder le dos droit",
+    "Respirer régulièrement",
+    "Accompagner le mouvement sans forcer"
+  ],
+  "precautions": [
+    "Rester dans une amplitude confortable",
+    "Arrêter en cas de douleur ou vertige"
+  ],
+  "tags": ["cabinet", "huber", "cardio", "échauffement"],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 45,
+  "repos": 15,
+  "reps": 10,
+  "image": "/exercises/images/cabinet/huber.png",
+  "video": "",
+  "pathologies": [],
+  "objectifs": ["échauffement", "cardio"],
+  "zones": ["corps entier"],
+  "materiel": ["Huber"]
+},
+
+{
+  "id": "rameur",
+  "nom": "Rameur",
+  "type": "timer",
+  "categorie": "Cabinet",
+  "objectif": "Travail cardio-respiratoire global",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "5 min",
+  "consignes": [
+    "Pousser avec les jambes",
+    "Tirer ensuite avec les bras",
+    "Revenir lentement",
+    "Garder le dos allongé"
+  ],
+  "precautions": [
+    "Ne pas arrondir le dos",
+    "Rester en respiration confortable"
+  ],
+  "tags": ["cabinet", "rameur", "cardio"],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 4,
+    "maintien": 1,
+    "phase_descente": 4,
+    "cycles": 10
+  },
+  "ex": 60,
+  "repos": 20,
+  "reps": 10,
+  "image": "/exercises/images/cabinet/rameur.png",
+  "video": "",
+  "pathologies": [],
+  "objectifs": ["endurance", "cardio"],
+  "zones": ["corps entier"],
+  "materiel": ["Rameur"]
+},
+
+{
+  "id": "tapiscourse",
+  "nom": "Tapis course",
+  "type": "timer",
+  "categorie": "Cabinet",
+  "objectif": "Marche active ou course légère",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "5 min",
+  "consignes": [
+    "Regarder devant soi",
+    "Marcher ou courir à rythme confortable",
+    "Laisser les bras accompagner le mouvement"
+  ],
+  "precautions": [
+    "Adapter la vitesse selon la fatigue",
+    "Tenir les barres si besoin"
+  ],
+  "tags": ["cabinet", "tapis", "course", "cardio"],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 45,
+  "repos": 15,
+  "reps": 10,
+  "image": "/exercises/images/cabinet/tapiscourse.png",
+  "video": "",
+  "pathologies": [],
+  "objectifs": ["cardio", "endurance"],
+  "zones": ["membres inférieurs"],
+  "materiel": ["Tapis de course"]
+},
+
+{
+  "id": "tapismarche",
+  "nom": "Tapis marche",
+  "type": "timer",
+  "categorie": "Cabinet",
+  "objectif": "Marche douce et récupération active",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "4 min",
+  "consignes": [
+    "Marcher lentement et régulièrement",
+    "Dérouler le pas naturellement",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Ralentir en cas d’essoufflement",
+    "Rester relâché"
+  ],
+  "tags": ["cabinet", "tapis", "marche", "récupération"],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 8
+  },
+  "ex": 40,
+  "repos": 20,
+  "reps": 8,
+  "image": "/exercises/images/cabinet/tapismarche.png",
+  "video": "",
+  "pathologies": [],
+  "objectifs": ["récupération", "mobilité"],
+  "zones": ["membres inférieurs"],
+  "materiel": ["Tapis de marche"]
+},
+
+{
+  "id": "velo",
+  "nom": "Vélo",
+  "type": "timer",
+  "categorie": "Cabinet",
+  "objectif": "Réveil cardio-vasculaire progressif",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "5 min",
+  "consignes": [
+    "Pédaler à rythme régulier",
+    "Garder les épaules relâchées",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Bien régler la hauteur de selle",
+    "Ne pas forcer sur les genoux"
+  ],
+  "tags": ["cabinet", "vélo", "cardio"],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 45,
+  "repos": 15,
+  "reps": 10,
+  "image": "/exercises/images/cabinet/velo.png",
+  "video": "",
+  "pathologies": [],
+  "objectifs": ["cardio", "endurance"],
+  "zones": ["membres inférieurs"],
+  "materiel": ["Vélo"]
 }
 ]
