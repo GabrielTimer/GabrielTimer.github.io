@@ -939,7 +939,10 @@ document.body.style.background="#2563eb";
 document.body.style.color="#ffffff";
 }
 
-timerValue.innerText=t;
+timerValue.innerText =
+t >= 60
+? Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0")
+: t;
 
 if(phase==="prep") timerLabel.innerText="PRÉPAREZ VOUS";
 if(phase==="ex") timerLabel.innerText="EXERCICE";
