@@ -104,10 +104,7 @@ document.getElementById("pwd")
 
 if(value === PASSWORD){
 
-sessionStorage.setItem(
-  "admin_ok",
-  "true"
-);
+localStorage.setItem("admin_ok", "true");
 
 window.location =
 "index.html?v=1.2";
