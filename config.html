@@ -359,8 +359,7 @@ new URLSearchParams(
 window.location.search
 );
 
-const patientMode =
-params.has("patient");
+const patientMode = !!params.get("patient");
 let exercices = [];
 let lastDeleted = null;
 let undoTimer = null;
