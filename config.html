@@ -401,6 +401,13 @@ data.nom || "Séance";
 document.getElementById("title").innerText =
 data.nom || "Modifier";
 
+document.getElementById("patientId").value =
+data.patientId
+||
+data.patient
+||
+"";
+
 localStorage.removeItem("edit_programme");
 
 render();
