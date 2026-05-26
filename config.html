@@ -936,6 +936,20 @@ alert(
 
 }
 
+if(
+  localStorage.getItem("admin_ok")
+  !== "true"
+){
+  const glossaireBtn =
+  document.getElementById(
+    "glossaireBtn"
+  );
+
+  if(glossaireBtn){
+    glossaireBtn.style.display = "none";
+  }
+}
+
 window.addExo = addExo;
 window.toggle = toggle;
 window.moveUp = moveUp;

@@ -158,7 +158,10 @@ window.location =
 
 }
 
-if(patientMode){
+if(
+  patientMode ||
+  localStorage.getItem("admin_ok") !== "true"
+){
 
 const cabinet =
 document.querySelector(
