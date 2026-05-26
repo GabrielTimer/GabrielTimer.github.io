@@ -6,143 +6,215 @@
 <title>MusiMix</title>
 
 <style>
+:root{
+--bg:#111;
+--panel:#181818;
+--line:#2a2a2a;
+--text:#fff;
+--muted:#aaa;
+--accent:#ffd166;
+}
+
+*{box-sizing:border-box}
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+.topbar{
+position:sticky;
+top:0;
+z-index:50;
+display:flex;
+gap:8px;
+align-items:center;
+padding:12px;
 background:#111;
-color:#fff;
-padding-bottom:180px;
+border-bottom:1px solid var(--line);
+overflow:auto;
+}
+
+.topbar button{
+white-space:nowrap;
+}
+
+.layout{
+display:grid;
+grid-template-columns:280px 1fr;
+min-height:100vh;
+}
+
+.sidebar{
+background:#0f0f0f;
+padding:18px;
+border-right:1px solid var(--line);
+}
+
+.main{
+padding:0;
 }
 
 .header{
-padding:16px;
-border-bottom:1px solid #333;
-position:sticky;
-top:0;
-background:#111;
-z-index:10;
+padding:18px 24px;
+border-bottom:1px solid var(--line);
 }
 
-h1{margin:0}
-.meta{color:#aaa;margin-top:4px}
-
-.toolbar{
-padding:12px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+h1{
+margin:0;
+font-size:1.7rem;
 }
 
-button,input{
-border:none;
-border-radius:10px;
-padding:12px;
-font-size:1rem;
-}
-
-button{
-background:#242424;
-color:white;
-cursor:pointer;
+.meta{
+margin-top:6px;
+color:var(--muted);
 }
 
 .lyrics{
-padding:20px;
-font-size:1.45rem;
+padding:30px;
+font-size:1.5rem;
 line-height:1.45;
 }
 
-.line{margin-bottom:14px}
+.line{
+margin-bottom:14px;
+white-space:nowrap;
+}
+
 .segment{
 display:inline-block;
 vertical-align:top;
 white-space:pre;
 }
+
 .chord{
 display:block;
-color:#ffd166;
 font-weight:700;
-font-size:.8em;
+font-size:.78em;
+color:var(--accent);
+line-height:1;
+margin-bottom:2px;
 }
+
 .word{
 display:block;
 white-space:pre;
 }
 
-.library{
-padding:0 20px 20px;
+.section{
+margin-top:28px;
+margin-bottom:16px;
+font-size:1rem;
+font-weight:700;
+color:#9a9a9a;
+text-transform:uppercase;
+letter-spacing:.08em;
+}
+
+.slider-wrap{
+margin-bottom:26px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-size:.95rem;
+}
+
+input[type=range]{
+width:100%;
+}
+
+button{
+background:#242424;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:12px;
+font-size:1rem;
+cursor:pointer;
 }
 
 .song-item{
 padding:10px;
-background:#1d1d1d;
+background:#1e1e1e;
 border-radius:10px;
-margin-bottom:8px;
-cursor:pointer;
+margin-top:10px;
+font-size:.95rem;
 }
 
-.controls{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-padding:12px;
-background:#111;
-border-top:1px solid #333;
+@media(max-width:900px){
+.layout{
+grid-template-columns:1fr;
+}
+.sidebar{
+border-right:none;
+border-bottom:1px solid var(--line);
+}
 }
 </style>
 </head>
 <body>
 
+<div class="topbar">
+<button onclick="togglePlay()">▶︎ Play / Pause</button>
+<button onclick="toggleScroll()">⇅ AutoScroll</button>
+<button onclick="changeScrollSpeed(-0.2)">🐢</button>
+<button onclick="changeScrollSpeed(0.2)">🐇</button>
+<button onclick="transpose(-1)">♭</button>
+<button onclick="transpose(1)">♯</button>
+<button onclick="changeFont(-0.1)">A−</button>
+<button onclick="changeFont(0.1)">A+</button>
+<button onclick="document.getElementById('bundleInput').click()">➕ Ajouter morceau</button>
+<input id="bundleInput" hidden type="file" multiple accept=".mp3,.cho,.chopro,.txt" onchange="loadBundle(event)">
+</div>
+
+<div class="layout">
+
+<aside class="sidebar">
+
+<div class="slider-wrap">
+<label>🎤 Voix</label>
+<input type="range" min="0" max="1" step="0.01" value="1" oninput="vocals.volume=this.value">
+</div>
+
+<div class="slider-wrap">
+<label>🎵 Instrumental</label>
+<input type="range" min="0" max="1" step="0.01" value="1" oninput="instr.volume=this.value">
+</div>
+
+<div id="library"></div>
+
+</aside>
+
+<main class="main">
+
 <div class="header">
 <h1 id="title">MusiMix</h1>
-<div id="meta" class="meta">Charge un morceau</div>
+<div class="meta" id="meta">Ajoute un morceau</div>
 </div>
 
-<div class="toolbar">
-<input type="file" accept=".cho,.chopro,.txt" onchange="loadChordFile(event)">
-<button onclick="document.getElementById('bundleInput').click()">➕ Ajouter morceau</button>
-<input id="bundleInput" type="file" multiple accept=".mp3,.cho,.chopro,.txt" hidden onchange="loadBundle(event)">
-</div>
-
-<div id="library" class="library"></div>
 <div id="lyrics" class="lyrics"></div>
+
+</main>
+</div>
 
 <audio id="vocals"></audio>
 <audio id="instr"></audio>
 
-<div class="controls">
-<button onclick="togglePlay()">▶︎ / ⏸</button>
-<button onclick="changeVocals(-0.1)">🎤 −</button>
-<button onclick="changeVocals(0.1)">🎤 +</button>
-
-<button onclick="changeInstr(-0.1)">🎵 −</button>
-<button onclick="changeInstr(0.1)">🎵 +</button>
-<button onclick="toggleScroll()">⇅ Scroll</button>
-
-<button onclick="changeScrollSpeed(-0.2)">🐢 −</button>
-<button onclick="changeScrollSpeed(0.2)">🐇 +</button>
-<button onclick="transpose(-1)">♭ -1</button>
-
-<button onclick="transpose(1)">♯ +1</button>
-<button onclick="changeFont(-0.1)">A−</button>
-<button onclick="changeFont(0.1)">A+</button>
-</div>
-
 <script>
-let parsedSong=[];
-let semitoneShift=0;
-let fontSize=1.45;
-let scrolling=false;
-let scrollTimer;
-let scrollSpeed=1;
-
 const vocals=document.getElementById('vocals');
 const instr=document.getElementById('instr');
 const lyrics=document.getElementById('lyrics');
+
+let parsedSong=[];
+let semitoneShift=0;
+let fontSize=1.5;
+let scrolling=false;
+let scrollTimer=null;
+let scrollSpeed=1;
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
@@ -155,14 +227,6 @@ instr.play();
 vocals.pause();
 instr.pause();
 }
-}
-
-function changeVocals(v){
-vocals.volume=Math.max(0,Math.min(1,vocals.volume+v));
-}
-
-function changeInstr(v){
-instr.volume=Math.max(0,Math.min(1,instr.volume+v));
 }
 
 function toggleScroll(){
@@ -179,7 +243,7 @@ scrollSpeed=Math.max(.4,Math.min(4,scrollSpeed+v));
 }
 
 function changeFont(v){
-fontSize=Math.max(.8,Math.min(2.6,fontSize+v));
+fontSize=Math.max(.8,Math.min(2.8,fontSize+v));
 lyrics.style.fontSize=fontSize+'rem';
 }
 
@@ -196,34 +260,26 @@ if(i<0) return chord;
 return NOTES[(i+shift+12)%12]+m[3];
 }
 
-function loadChordFile(e){
-const file=e.target.files[0];
-if(!file) return;
-const r=new FileReader();
-r.onload=ev=>parseChordPro(ev.target.result);
-r.readAsText(file);
-}
-
 function loadBundle(e){
 const files=[...e.target.files];
 
-let cho=files.find(f=>f.name.match(/\.(cho|chopro|txt)$/i));
-let v=files.find(f=>f.name.toLowerCase().includes('vocals'));
-let i=files.find(f=>f.name.toLowerCase().includes('instrumental'));
+const cho=files.find(f=>/\.(cho|chopro|txt)$/i.test(f.name));
+const vocal=files.find(f=>f.name.toLowerCase().includes('vocals'));
+const instrumental=files.find(f=>f.name.toLowerCase().includes('instrumental'));
+
+if(vocal) vocals.src=URL.createObjectURL(vocal);
+if(instrumental) instr.src=URL.createObjectURL(instrumental);
 
 if(cho){
 const r=new FileReader();
-r.onload=ev=>parseChordPro(ev.target.result);
+r.onload=(ev)=>parseChordPro(ev.target.result);
 r.readAsText(cho);
 }
 
-if(v) vocals.src=URL.createObjectURL(v);
-if(i) instr.src=URL.createObjectURL(i);
-
-saveSongToLibrary(files);
+saveToLibrary(files);
 }
 
-function saveSongToLibrary(files){
+function saveToLibrary(files){
 let lib=JSON.parse(localStorage.getItem('musimix-library')||'[]');
 lib.push(files.map(f=>f.name));
 localStorage.setItem('musimix-library',JSON.stringify(lib));
@@ -237,9 +293,10 @@ lib.map(song=>`<div class="song-item">🎵 ${song[0]}</div>`).join('');
 }
 
 function parseChordPro(text){
-const lines=text.split(/\r?\n/);
 parsedSong=[];
+
 let title='',artist='',key='',capo='';
+const lines=text.split(/\r?\n/);
 
 for(let line of lines){
 
@@ -260,18 +317,26 @@ parsedSong.push({type:'line',text:line});
 
 document.getElementById('title').textContent=title||'MusiMix';
 document.getElementById('meta').textContent=
-[artist,key&&`Tonalité ${key}`,capo&&`Capodastre ${capo}`].filter(Boolean).join(' • ');
+[artist,key&&`Tonalité ${key}`,capo&&`Capodastre ${capo}`]
+.filter(Boolean)
+.join(' • ');
 
 renderSong();
 }
 
 function renderSong(){
+
 lyrics.innerHTML='';
 
 parsedSong.forEach(item=>{
 
 if(item.type==='section'){
-lyrics.innerHTML+=`<h3>${item.text}</h3>`;
+lyrics.innerHTML+=`<div class="section">${item.text}</div>`;
+return;
+}
+
+if(!item.text.trim()){
+lyrics.innerHTML+='<br>';
 return;
 }
 
@@ -281,18 +346,24 @@ line.className='line';
 const regex=/\[(.*?)\]([^\[]*)/g;
 let m;
 
-while((m=regex.exec(item.text))){
+while((m=regex.exec(item.text))!==null){
+
+let chord=shiftChord(m[1],semitoneShift);
+let word=m[2]||' ';
+
 let seg=document.createElement('span');
 seg.className='segment';
 
 seg.innerHTML=
-`<span class="chord">${shiftChord(m[1],semitoneShift)}</span>
-<span class="word">${m[2]}</span>`;
+'<span class="chord">'+chord+'</span>'+
+'<span class="word">'+word+'</span>';
 
 line.appendChild(seg);
 }
 
-if(line.innerHTML==='') line.textContent=item.text;
+if(line.innerHTML===''){
+line.textContent=item.text;
+}
 
 lyrics.appendChild(line);
 
