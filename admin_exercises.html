@@ -154,17 +154,81 @@ Créer et fusionner rapidement des exercices/programmes JSON.
 <textarea id="promptInput">
 Tu es un kinésithérapeute expert.
 
-Génère le JSON complet pour ce programme.
+Génère un JSON compatible avec mon site.
 
-Respecte STRICTEMENT ce format :
+IMPORTANT :
+- Si la demande concerne un EXERCICE :
+  → générer un exercice complet
+
+- Si la demande concerne un PROGRAMME :
+  → générer uniquement un programme contenant des IDs exercices
+
+────────────────────
+FORMAT EXERCICE
+────────────────────
 
 {
   "id": "",
   "nom": "",
+  "type": "timer",
+
   "categorie": "",
+
+  "objectif": "",
+
   "niveau": 1,
 
+  "exercise_mode": "dynamique",
+
+  "duree": "",
+
+  "consignes": [],
+
+  "precautions": [],
+
   "tags": [],
+
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+
+  "ex": 30,
+
+  "repos": 20,
+
+  "reps": 10,
+
+  "image": "/exercises/images/placeholders/default.png",
+
+  "video": "",
+
+  "pathologies": [],
+
+  "objectifs": [],
+
+  "zones": [],
+
+  "materiel": []
+}
+
+────────────────────
+FORMAT PROGRAMME
+────────────────────
+
+{
+  "id": "",
+
+  "nom": "",
+
+  "categorie": "",
+
+  "niveau": 1,
+
+  "description": "",
 
   "objectif": "",
 
@@ -176,38 +240,24 @@ Respecte STRICTEMENT ce format :
 
   "materiel": [],
 
+  "tags": [],
+
   "image": "/exercises/images/placeholders/default.png",
 
   "video": "",
 
-  "description": "",
-
   "consignes": [],
 
-  "timer_config": {}
+  "exercices": []
 }
 
-Le programme doit être :
-- cohérent
-- progressif
-- réaliste
-- adapté à la pathologie
-- avec niveaux progressifs
-
-Utilise PRIORITAIREMENT les exercices déjà existants lorsque c’est pertinent.
-
-Ne crée un nouvel exercice QUE si aucun exercice existant ne correspond correctement.
-
-Évite les doublons et les exercices quasi identiques.
-
-Privilégie :
-- la réutilisation
-- les variantes de niveau
-- les progressions
-plutôt que créer de nouveaux exercices inutiles.
-
-Programme :
-</textarea>
+IMPORTANT :
+- Un programme NE contient PAS les exercices complets
+- "exercices" contient uniquement des IDs
+- Ne jamais utiliser timer_config dans un programme
+- Réutiliser les exercices existants au maximum
+- Éviter les doublons inutiles
+- Construire des progressions cohérentes et réalistes</textarea>
 
 <div class="small">
 Tu écris ici le programme souhaité puis tu demandes à ChatGPT de générer le JSON.
