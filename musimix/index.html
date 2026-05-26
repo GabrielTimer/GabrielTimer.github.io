@@ -1,127 +1,377 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-<title>Song Player V1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>MusiMix</title>
+
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;padding-bottom:110px}
-.header{position:sticky;top:0;background:#111;padding:16px 20px;border-bottom:1px solid #333;z-index:10}
-h1{margin:0;font-size:1.3rem} .artist{color:#aaa;font-size:.95rem;margin-top:4px}
-.lyrics{padding:20px;font-size:1.35rem;line-height:1.9;white-space:pre-wrap}
-.chord{color:#ffd166;font-weight:bold}
-.controls{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;border-top:1px solid #333;padding:12px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-button{padding:14px;border:none;border-radius:12px;background:#2c2c2c;color:#fff;font-size:1rem}
-button:active{transform:scale(.98)}
-.small{font-size:.85rem;color:#bbb;text-align:center;margin-top:8px}
+:root{
+--bg:#111;
+--panel:#1b1b1b;
+--text:#fff;
+--muted:#aaa;
+--accent:#ffd166;
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:Arial,sans-serif;
+padding-bottom:170px;
+}
+
+.header{
+position:sticky;
+top:0;
+z-index:20;
+background:#111;
+padding:16px;
+border-bottom:1px solid #2a2a2a;
+}
+
+h1{
+margin:0;
+font-size:1.4rem;
+}
+
+.meta{
+margin-top:6px;
+font-size:.95rem;
+color:var(--muted);
+}
+
+.upload{
+padding:12px 16px;
+}
+
+input[type=file]{
+width:100%;
+color:white;
+}
+
+.lyrics{
+padding:20px;
+font-size:1.45rem;
+line-height:1.35;
+}
+
+.line{
+margin-bottom:12px;
+white-space:nowrap;
+}
+
+.segment{
+display:inline-block;
+vertical-align:top;
+white-space:pre;
+}
+
+.chord{
+display:block;
+font-weight:700;
+color:var(--accent);
+font-size:.8em;
+line-height:1;
+margin-bottom:2px;
+}
+
+.word{
+display:block;
+white-space:pre;
+}
+
+.section{
+margin-top:28px;
+margin-bottom:12px;
+font-size:.95rem;
+font-weight:700;
+color:#9e9e9e;
+text-transform:uppercase;
+letter-spacing:.08em;
+}
+
+.controls{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#111;
+padding:12px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+border-top:1px solid #333;
+}
+
+button{
+padding:14px;
+font-size:1rem;
+border:none;
+border-radius:14px;
+background:#242424;
+color:white;
+}
+
+button:active{
+transform:scale(.98);
+}
 </style>
 </head>
 <body>
+
 <div class="header">
-  <h1 id="title">Amazing Grace</h1>
-  <div class="artist" id="artist">Traditional</div>
+<h1 id="title">MusiMix</h1>
+<div class="meta" id="meta">Charge un fichier .cho</div>
 </div>
 
-<div class="lyrics" id="lyrics">
-<span class="chord">C</span>               <span class="chord">G</span>
-Amazing grace how sweet the sound
-
-<span class="chord">Am</span>              <span class="chord">F</span>
-That saved a wretch like me
+<div class="upload">
+<input type="file" accept=".cho,.chopro,.txt" onchange="loadSong(event)">
 </div>
+
+<div class="lyrics" id="lyrics"></div>
 
 <audio id="vocals" preload="auto" src="vocals.wav"></audio>
 <audio id="instr" preload="auto" src="instrumental.wav"></audio>
 
-<div style="padding:12px 20px"><input type="file" accept=".cho,.chopro,.txt" onchange="loadChordPro(event)" style="color:white;width:100%"></div>
 <div class="controls">
-  <button onclick="togglePlay()">▶ / ⏸</button>
-  <button onclick="changeVocals(-0.1)">🎤 −</button>
-  <button onclick="changeVocals(0.1)">🎤 +</button>
-  <button onclick="changeInstr(-0.1)">🎵 −</button>
-  <button onclick="changeInstr(0.1)">🎵 +</button>
-  <button onclick="toggleScroll()">⇅ Scroll</button>
-  <button onclick="changeScrollSpeed(-0.2)">🐢</button>
-  <button onclick="changeScrollSpeed(0.2)">🐇</button>
-  <button onclick="transpose(-1)">♭ -1</button>
-  <button onclick="transpose(1)">♯ +1</button>
-  <button onclick="changeFont(-0.1)">A-</button>
-  <button onclick="changeFont(0.1)">A+</button>
+<button onclick="togglePlay()">▶︎ / ⏸</button>
+<button onclick="changeVocals(-0.1)">🎤 −</button>
+<button onclick="changeVocals(0.1)">🎤 +</button>
+
+<button onclick="changeInstr(-0.1)">🎵 −</button>
+<button onclick="changeInstr(0.1)">🎵 +</button>
+<button onclick="toggleScroll()">⇅ Scroll</button>
+
+<button onclick="changeScrollSpeed(-0.2)">🐢 −</button>
+<button onclick="changeScrollSpeed(0.2)">🐇 +</button>
+<button onclick="transpose(-1)">♭ -1</button>
+
+<button onclick="transpose(1)">♯ +1</button>
+<button onclick="changeFont(-0.1)">A−</button>
+<button onclick="changeFont(0.1)">A+</button>
 </div>
 
 <script>
-const vocals=document.getElementById('vocals');
-const instr=document.getElementById('instr');
+const vocals=document.getElementById("vocals");
+const instr=document.getElementById("instr");
+const lyrics=document.getElementById("lyrics");
+
 let playing=false;
 let scrolling=false;
 let scrollTimer=null;
+let scrollSpeed=1;
+let fontSize=1.45;
+let semitoneShift=0;
+let parsedSong=[];
+
+const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
 vocals.volume=1;
 instr.volume=1;
 
-function sync(){ instr.currentTime=vocals.currentTime; }
-vocals.addEventListener('play',sync);
-
 function togglePlay(){
- if(!playing){
-   instr.currentTime=vocals.currentTime;
-   vocals.play();
-   instr.play();
-   playing=true;
- }else{
-   vocals.pause();
-   instr.pause();
-   playing=false;
- }
+if(!playing){
+instr.currentTime=vocals.currentTime;
+Promise.all([vocals.play(),instr.play()]);
+playing=true;
+}else{
+vocals.pause();
+instr.pause();
+playing=false;
+}
 }
 
-function changeVocals(v){ vocals.volume=Math.min(1,Math.max(0,vocals.volume+v)); }
-function changeInstr(v){ instr.volume=Math.min(1,Math.max(0,instr.volume+v)); }
+function changeVocals(v){
+vocals.volume=Math.max(0,Math.min(1,vocals.volume+v));
+}
+
+function changeInstr(v){
+instr.volume=Math.max(0,Math.min(1,instr.volume+v));
+}
 
 function toggleScroll(){
- scrolling=!scrolling;
- if(scrolling){
-   scrollTimer=setInterval(()=>window.scrollBy(0,1),80);
- }else{
-   clearInterval(scrollTimer);
- }
+scrolling=!scrolling;
+if(scrolling){
+startScroll();
+}else{
+clearInterval(scrollTimer);
 }
-const lyricsEl=document.getElementById('lyrics');
-let scrollSpeed=1;
-let fontSize=1.35;
-let semitoneShift=0;
+}
 
-const CHORDS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-const FLAT_MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
-const originalLyrics=lyricsEl.innerHTML;
+function startScroll(){
+clearInterval(scrollTimer);
+scrollTimer=setInterval(()=>{
+window.scrollBy(0,1);
+},80/scrollSpeed);
+}
 
-function changeScrollSpeed(delta){
-  scrollSpeed=Math.max(0.5,Math.min(3,scrollSpeed+delta));
-  if(scrolling){ clearInterval(scrollTimer); startScroll(); }
+function changeScrollSpeed(v){
+scrollSpeed=Math.max(.4,Math.min(4,scrollSpeed+v));
+if(scrolling) startScroll();
 }
-function startScroll(){ scrollTimer=setInterval(()=>window.scrollBy(0,1),80/scrollSpeed); }
-function toggleScroll(){
- scrolling=!scrolling;
- if(scrolling){ startScroll(); } else { clearInterval(scrollTimer); }
+
+function changeFont(v){
+fontSize=Math.max(.8,Math.min(2.8,fontSize+v));
+lyrics.style.fontSize=fontSize+'rem';
 }
-function changeFont(delta){ fontSize=Math.max(0.9,Math.min(2.4,fontSize+delta)); lyricsEl.style.fontSize=fontSize+'rem'; }
-function transpose(delta){ semitoneShift+=delta; renderTransposed(); }
-function renderTransposed(){
-  lyricsEl.innerHTML=originalLyrics.replace(/<span class=\"chord\">(.*?)<\/span>/g,(m,ch)=>`<span class="chord">${shiftChord(ch,semitoneShift)}</span>`);
+
+function transpose(v){
+semitoneShift+=v;
+renderSong();
 }
+
 function shiftChord(chord,shift){
-  let c=FLAT_MAP[chord]||chord;
-  const i=CHORDS.indexOf(c); if(i===-1) return chord;
-  return CHORDS[(i+shift+12*10)%12];
+const m=chord.match(/^([A-G](#|b)?)(.*)$/);
+if(!m) return chord;
+
+let root=m[1];
+let suffix=m[3]||'';
+
+const flatMap={
+Db:'C#',Eb:'D#',Gb:'F#',Ab:'G#',Bb:'A#'
+};
+
+root=flatMap[root]||root;
+
+let i=NOTES.indexOf(root);
+if(i<0)return chord;
+
+return NOTES[(i+shift+12)%12]+suffix;
 }
-function loadChordPro(event){
- const file=event.target.files[0]; if(!file) return;
- const reader=new FileReader();
- reader.onload=e=>{
-   const txt=e.target.result;
-   lyricsEl.innerHTML=txt.replace(/\[(.*?)\]([^
-]*)/g,'<span class="chord">$1</span>$2');
-  };
- reader.readAsText(file);
+
+function loadSong(e){
+const file=e.target.files[0];
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=(ev)=>{
+parseChordPro(ev.target.result);
+};
+
+reader.readAsText(file,'utf-8');
+}
+
+function parseChordPro(text){
+
+const lines=text.split(/\r?\n/);
+
+parsedSong=[];
+let title='';
+let artist='';
+let key='';
+let capo='';
+
+for(let line of lines){
+
+if(line.startsWith('{title:')){
+title=line.slice(7,-1).trim();
+continue;
+}
+
+if(line.startsWith('{artist:')){
+artist=line.slice(8,-1).trim();
+continue;
+}
+
+if(line.startsWith('{key:')){
+key=line.slice(5,-1).trim();
+continue;
+}
+
+if(line.startsWith('{capo:')){
+capo=line.slice(6,-1).trim();
+continue;
+}
+
+if(line.startsWith('{comment:')){
+parsedSong.push({
+type:'section',
+text:line.replace('{comment:','').replace('}','').trim()
+});
+continue;
+}
+
+if(
+line.startsWith('{start_of_chorus}')||
+line.startsWith('{end_of_chorus}')
+){
+continue;
+}
+
+parsedSong.push({
+type:'line',
+text:line
+});
+}
+
+document.getElementById('title').textContent=title||'MusiMix';
+document.getElementById('meta').textContent=
+[artist,key?`Tonalité ${key}`:'',capo?`Capo ${capo}`:'']
+.filter(Boolean)
+.join(' • ');
+
+renderSong();
+}
+
+function renderSong(){
+
+lyrics.innerHTML='';
+
+parsedSong.forEach(item=>{
+
+if(item.type==='section'){
+const div=document.createElement('div');
+div.className='section';
+div.textContent=item.text;
+lyrics.appendChild(div);
+return;
+}
+
+if(!item.text.trim()){
+lyrics.appendChild(document.createElement('br'));
+return;
+}
+
+const div=document.createElement('div');
+div.className='line';
+
+const regex=/\[(.*?)\]([^\[]*)/g;
+let m;
+
+while((m=regex.exec(item.text))!==null){
+
+let chord=shiftChord(m[1],semitoneShift);
+let word=m[2]||' ';
+
+const seg=document.createElement('span');
+seg.className='segment';
+
+const c=document.createElement('span');
+c.className='chord';
+c.textContent=chord;
+
+const w=document.createElement('span');
+w.className='word';
+w.textContent=word;
+
+seg.appendChild(c);
+seg.appendChild(w);
+
+div.appendChild(seg);
+}
+
+if(div.innerHTML===''){
+div.textContent=item.text;
+}
+
+lyrics.appendChild(div);
+});
+
 }
 </script>
 </body>
