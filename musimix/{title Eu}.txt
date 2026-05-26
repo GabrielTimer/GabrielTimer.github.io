@@ -1,0 +1,82 @@
+{title: Eu}
+{artist: Mari Froes}
+{key: G}
+{capo: 2}
+
+{comment: Intro}
+[Gmaj7] [Cmaj7] [Bm7] [Cmaj7]
+[Gmaj7] [Cmaj7] [Bm7] [A#m7] [Am7] [D]
+
+{comment: Couplet 1}
+
+[Gmaj7]Ah, me mostra tua [Cmaj7]alma
+Que eu quero fugir de [Bm7]mim,
+Que eu quero fugir de [A#m7]mim [Am7] [D]
+
+[Gmaj7]Oh, me mostre alguma [Cmaj7]música,
+Funciona tão bem pra [Bm7]mim,
+Funciona tão bem pra [A#m7]mim [Am7] [D]
+
+{comment: Couplet 2}
+
+[Gmaj7]Ah, se tu pudesses ver o que eu [Cmaj7]vejo
+Sentir as pontas dos [Bm7]dedos
+Desa-[Am7]parecer [D]
+
+[Gmaj7]Ah, se tu pudesses ser o que [Cmaj7]sou
+Aeronave sem [Bm7]asas, prestes apontar [A#m7]vôo [Am7]
+[D]Tu compreenderá que [Gmaj7]sou
+
+{start_of_chorus}
+
+[Gmaj7]Obra inacabada, talvez uma [Cmaj7]apaixonada
+Pela van melan[Bm7]colia
+Talvez [A#m7]eu... [Am7] [D]
+
+[Gmaj7]Obra inacabada, talvez uma [Cmaj7]apaixonada
+Pela van melan[Bm7]colia que é
+Ser [A#m7]eu [Am7] [D]
+
+{end_of_chorus}
+
+{comment: Couplet 3}
+
+[Gmaj7]Ah, me fale dos teus [Cmaj7]medos
+Que eu quero fugir dos [Bm7]meus
+Preciso fu-[A#m7]gir dos [Am7]meus [D]
+
+[Gmaj7]Oh, me conte algum se[Cmaj7]gredo
+Pra que eu possa car[Bm7]regar
+Alguma impor-[A#m7]tância [Am7] [D]
+
+[Gmaj7]Ah, se tu pudesses ver o que eu [Cmaj7]vejo
+Sentir lá dentro do [Bm7]peito
+Uma roda de [A#m7]samba [Am7] [D]
+
+[Gmaj7]Ah, se tu pudesses ser o que [Cmaj7]sou
+Platéia indo em[Bm7]bora
+Acabou o [A#m7]show [Am7]
+
+[D]Tu compreenderá que [Gmaj7]sou
+
+{start_of_chorus}
+
+[Gmaj7]Obra inacabada, talvez uma [Cmaj7]apaixonada
+Pela van melan[Bm7]colia
+Talvez [A#m7]eu... [Am7] [D]
+
+[Gmaj7]Obra inacabada, talvez uma [Cmaj7]apaixonada
+Pela van melan[Bm7]colia que é
+Ser [A#m7]eu [Am7] [D]
+
+{end_of_chorus}
+
+{comment: Couplet 4}
+
+[Gmaj7]Eu, sempre [Cmaj7]eu
+Sempre [Bm7]eu (eu)
+Sempre [A#m7]eu [Am7] [D]
+
+{comment: Outro}
+
+[Gmaj7] [Cmaj7] [Gmaj7]
