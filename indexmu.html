@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<title>Song Player V1</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#111;color:#fff;padding-bottom:110px}
+.header{position:sticky;top:0;background:#111;padding:16px 20px;border-bottom:1px solid #333;z-index:10}
+h1{margin:0;font-size:1.3rem} .artist{color:#aaa;font-size:.95rem;margin-top:4px}
+.lyrics{padding:20px;font-size:1.35rem;line-height:1.9;white-space:pre-wrap}
+.chord{color:#ffd166;font-weight:bold}
+.controls{position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;border-top:1px solid #333;padding:12px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+button{padding:14px;border:none;border-radius:12px;background:#2c2c2c;color:#fff;font-size:1rem}
+button:active{transform:scale(.98)}
+.small{font-size:.85rem;color:#bbb;text-align:center;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1 id="title">Amazing Grace</h1>
+  <div class="artist" id="artist">Traditional</div>
+</div>
+
+<div class="lyrics" id="lyrics">
+<span class="chord">C</span>               <span class="chord">G</span>
+Amazing grace how sweet the sound
+
+<span class="chord">Am</span>              <span class="chord">F</span>
+That saved a wretch like me
+</div>
+
+<audio id="vocals" preload="auto" src="vocals.wav"></audio>
+<audio id="instr" preload="auto" src="instrumental.wav"></audio>
+
+<div style="padding:12px 20px"><input type="file" accept=".cho,.chopro,.txt" onchange="loadChordPro(event)" style="color:white;width:100%"></div>
+<div class="controls">
+  <button onclick="togglePlay()">▶ / ⏸</button>
+  <button onclick="changeVocals(-0.1)">🎤 −</button>
+  <button onclick="changeVocals(0.1)">🎤 +</button>
+  <button onclick="changeInstr(-0.1)">🎵 −</button>
+  <button onclick="changeInstr(0.1)">🎵 +</button>
+  <button onclick="toggleScroll()">⇅ Scroll</button>
+  <button onclick="changeScrollSpeed(-0.2)">🐢</button>
+  <button onclick="changeScrollSpeed(0.2)">🐇</button>
+  <button onclick="transpose(-1)">♭ -1</button>
+  <button onclick="transpose(1)">♯ +1</button>
+  <button onclick="changeFont(-0.1)">A-</button>
+  <button onclick="changeFont(0.1)">A+</button>
+</div>
+
+<script>
+const vocals=document.getElementById('vocals');
+const instr=document.getElementById('instr');
+let playing=false;
+let scrolling=false;
+let scrollTimer=null;
+vocals.volume=1;
+instr.volume=1;
+
+function sync(){ instr.currentTime=vocals.currentTime; }
+vocals.addEventListener('play',sync);
+
+function togglePlay(){
+ if(!playing){
+   instr.currentTime=vocals.currentTime;
+   vocals.play();
+   instr.play();
+   playing=true;
+ }else{
+   vocals.pause();
+   instr.pause();
+   playing=false;
+ }
+}
+
+function changeVocals(v){ vocals.volume=Math.min(1,Math.max(0,vocals.volume+v)); }
+function changeInstr(v){ instr.volume=Math.min(1,Math.max(0,instr.volume+v)); }
+
+function toggleScroll(){
+ scrolling=!scrolling;
+ if(scrolling){
+   scrollTimer=setInterval(()=>window.scrollBy(0,1),80);
+ }else{
+   clearInterval(scrollTimer);
+ }
+}
+const lyricsEl=document.getElementById('lyrics');
+let scrollSpeed=1;
+let fontSize=1.35;
+let semitoneShift=0;
+
+const CHORDS=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+const FLAT_MAP={'Db':'C#','Eb':'D#','Gb':'F#','Ab':'G#','Bb':'A#'};
+const originalLyrics=lyricsEl.innerHTML;
+
+function changeScrollSpeed(delta){
+  scrollSpeed=Math.max(0.5,Math.min(3,scrollSpeed+delta));
+  if(scrolling){ clearInterval(scrollTimer); startScroll(); }
+}
+function startScroll(){ scrollTimer=setInterval(()=>window.scrollBy(0,1),80/scrollSpeed); }
+function toggleScroll(){
+ scrolling=!scrolling;
+ if(scrolling){ startScroll(); } else { clearInterval(scrollTimer); }
+}
+function changeFont(delta){ fontSize=Math.max(0.9,Math.min(2.4,fontSize+delta)); lyricsEl.style.fontSize=fontSize+'rem'; }
+function transpose(delta){ semitoneShift+=delta; renderTransposed(); }
+function renderTransposed(){
+  lyricsEl.innerHTML=originalLyrics.replace(/<span class=\"chord\">(.*?)<\/span>/g,(m,ch)=>`<span class="chord">${shiftChord(ch,semitoneShift)}</span>`);
+}
+function shiftChord(chord,shift){
+  let c=FLAT_MAP[chord]||chord;
+  const i=CHORDS.indexOf(c); if(i===-1) return chord;
+  return CHORDS[(i+shift+12*10)%12];
+}
+function loadChordPro(event){
+ const file=event.target.files[0]; if(!file) return;
+ const reader=new FileReader();
+ reader.onload=e=>{
+   const txt=e.target.result;
+   lyricsEl.innerHTML=txt.replace(/\[(.*?)\]([^
+]*)/g,'<span class="chord">$1</span>$2');
+  };
+ reader.readAsText(file);
+}
+</script>
+</body>
+</html>
