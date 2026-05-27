@@ -16,153 +16,31 @@
 --muted:#aaa;
 --accent:#ffd166;
 }
-
 *{box-sizing:border-box}
-
-body{
-margin:0;
-background:#111;
-color:#fff;
-font-family:Arial,sans-serif;
-}
-
-.topbar{
-position:sticky;
-top:0;
-z-index:50;
-display:flex;
-gap:8px;
-padding:10px;
-background:#111;
-border-bottom:1px solid #2a2a2a;
-overflow:auto;
-}
-
-button{
-background:#242424;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:12px;
-cursor:pointer;
-white-space:nowrap;
-}
-
-.layout{
-display:grid;
-grid-template-columns:300px 1fr;
-}
-
-.sidebar{
-position:sticky;
-top:58px;
-height:calc(100vh - 58px);
-overflow:auto;
-padding:20px;
-background:#0d0d0d;
-border-right:1px solid #2a2a2a;
-}
-
-.main{
-min-height:100vh;
-}
-
-.header{
-padding:20px;
-border-bottom:1px solid #2a2a2a;
-}
-
-.meta{
-color:#aaa;
-margin-top:4px;
-}
-
-.lyrics{
-padding:30px;
-font-size:1.5rem;
-line-height:1.45;
-}
-
-.line{
-margin-bottom:12px;
-white-space:normal;
-overflow-wrap:anywhere;
-}
-
-.segment{
-display:inline-block;
-vertical-align:top;
-white-space:pre;
-}
-
-.chord{
-display:block;
-font-size:.8em;
-font-weight:700;
-color:#ffd166;
-line-height:1;
-}
-
-.word{
-display:block;
-white-space:pre-wrap;
-}
-
-.section{
-margin:28px 0 14px;
-font-size:1rem;
-font-weight:700;
-color:#9a9a9a;
-text-transform:uppercase;
-}
-
-canvas{
-width:100%;
-height:80px;
-background:#151515;
-border-radius:12px;
-margin-bottom:20px;
-}
-
-.slider-wrap{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:18px;
-}
-
-.slider-wrap label{
-width:110px;
-margin:0;
-display:flex;
-align-items:center;
-font-size:1rem;
-}
-
-.slider-wrap input[type=range]{
-flex:1;
-margin:0;
-accent-color:#20b8d6;
-}
-
-.song-item{
-padding:12px;
-background:#1d1d1d;
-border-radius:10px;
-margin-top:12px;
-font-size:.95rem;
-cursor:pointer;
-}
-
+body{margin:0;background:#111;color:#fff;font-family:Arial,sans-serif}
+.topbar{position:sticky;top:0;z-index:50;display:flex;gap:8px;padding:10px;background:#111;border-bottom:1px solid #2a2a2a;overflow:auto}
+button{background:#242424;color:white;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;white-space:nowrap}
+.layout{display:grid;grid-template-columns:320px 1fr}
+.sidebar{position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto;padding:20px;background:#0d0d0d;border-right:1px solid #2a2a2a}
+.main{min-height:100vh}
+.header{padding:20px;border-bottom:1px solid #2a2a2a}
+.meta{color:#aaa;margin-top:4px}
+.lyrics{padding:30px;font-size:1.5rem;line-height:1.45}
+.line{margin-bottom:12px;white-space:normal;overflow-wrap:anywhere}
+.segment{display:inline-block;vertical-align:top;white-space:pre}
+.chord{display:block;font-size:.8em;font-weight:700;color:#ffd166;line-height:1}
+.word{display:block;white-space:pre-wrap}
+.section{margin:28px 0 14px;font-size:1rem;font-weight:700;color:#9a9a9a;text-transform:uppercase}
+canvas{width:100%;height:80px;background:#151515;border-radius:12px;margin-bottom:20px}
+.slider-wrap{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.slider-wrap label{width:72px;margin:0;font-size:.95rem}
+.slider-wrap input[type=range]{flex:1;accent-color:#20b8d6}
+.track-btn{padding:4px 8px;border-radius:8px;font-size:.8rem}
+.track-btn.active{background:#20b8d6;color:#000}
+.song-item{padding:12px;background:#1d1d1d;border-radius:10px;margin-top:12px;font-size:.95rem;cursor:pointer}
 @media(max-width:900px){
-.layout{
-grid-template-columns:1fr;
-}
-.sidebar{
-position:relative;
-top:0;
-height:auto;
-}
+.layout{grid-template-columns:1fr}
+.sidebar{position:relative;top:0;height:auto}
 }
 </style>
 </head>
@@ -186,248 +64,254 @@ height:auto;
 
 <canvas id="waveform"></canvas>
 
-<div class="slider-wrap">
-<label>🎤 Voix</label>
-<input type="range" min="0" max="1" step="0.01" value="1"
-oninput="vocals.volume=this.value">
-</div>
-
-<div class="slider-wrap">
-<label>🎵 Instrumental</label>
-<input type="range" min="0" max="1" step="0.01" value="1"
-oninput="instr.volume=this.value">
-</div>
-
+<div id="mixer"></div>
 <div id="library"></div>
 
 </aside>
 
 <main class="main">
-
 <div class="header">
 <h1 id="title">MusiMix</h1>
 <div class="meta" id="meta"></div>
 </div>
-
 <div class="lyrics" id="lyrics"></div>
-
 </main>
 
 </div>
 
-<audio id="vocals"></audio>
-<audio id="instr"></audio>
-
 <script>
-const vocals=document.getElementById('vocals');
-const instr=document.getElementById('instr');
+let parsedSong=[]
+let scrollSpeed=1
+let scrollTimer=null
+let fontSize=1.5
+let semitoneShift=0
+let library=[]
+let tracks={}
+let soloTrackName=null
 
-let parsedSong=[];
-let scrollSpeed=1;
-let scrollTimer=null;
-let scrolling=false;
-let fontSize=1.5;
-let semitoneShift=0;
-let library=[];
+const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
-const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+function audioExt(name){
+return /\.(mp3|wav|flac)$/i.test(name)
+}
+
+function getStemType(name){
+const n=name.toLowerCase()
+if(n.includes('(vocals)')) return '🎤 Voix'
+if(n.includes('(drums)')) return '🥁 Drums'
+if(n.includes('(bass)')) return '🎸 Bass'
+if(n.includes('(guitar)')) return '🎸 Guitar'
+if(n.includes('(piano)')) return '🎹 Piano'
+if(n.includes('(other)')) return '🎵 Other'
+if(n.includes('instrumental')) return '🎵 Instrumental'
+return null
+}
 
 function togglePlay(){
-if(vocals.paused){
-instr.currentTime=vocals.currentTime;
-vocals.play();
-instr.play();
-startScroll();
+const arr=Object.values(tracks)
+if(!arr.length)return
+
+if(arr[0].paused){
+const t=arr[0].currentTime
+arr.forEach(a=>{a.currentTime=t;a.play()})
+startScroll()
 }else{
-vocals.pause();
-instr.pause();
-stopScroll();
+arr.forEach(a=>a.pause())
+stopScroll()
 }
 }
 
 function startScroll(){
-stopScroll();
-scrollTimer=setInterval(()=>{
-window.scrollBy(0,1);
-},80/scrollSpeed);
+stopScroll()
+scrollTimer=setInterval(()=>window.scrollBy(0,1),80/scrollSpeed)
 }
 
 function stopScroll(){
-clearInterval(scrollTimer);
+clearInterval(scrollTimer)
 }
 
 function changeScrollSpeed(v){
-scrollSpeed=Math.max(.3,Math.min(4,scrollSpeed+v));
-if(!vocals.paused) startScroll();
+scrollSpeed=Math.max(.3,Math.min(4,scrollSpeed+v))
+if(Object.values(tracks)[0] && !Object.values(tracks)[0].paused) startScroll()
 }
 
 function changeFont(v){
-fontSize=Math.max(.9,Math.min(3,fontSize+v));
-document.getElementById('lyrics').style.fontSize=fontSize+'rem';
+fontSize=Math.max(.9,Math.min(3,fontSize+v))
+document.getElementById('lyrics').style.fontSize=fontSize+'rem'
 }
 
 function transpose(v){
-semitoneShift+=v;
-renderSong();
+semitoneShift+=v
+renderSong()
 }
 
 function shiftChord(chord,s){
-const m=chord.match(/^([A-G](#|b)?)(.*)$/);
-if(!m)return chord;
-let i=NOTES.indexOf(m[1].replace('Bb','A#'));
-if(i<0)return chord;
-return NOTES[(i+s+12)%12]+m[3];
+const m=chord.match(/^([A-G](#|b)?)(.*)$/)
+if(!m)return chord
+let i=NOTES.indexOf(m[1].replace('Bb','A#'))
+if(i<0)return chord
+return NOTES[(i+s+12)%12]+m[3]
 }
 
 async function loadZip(e){
-const file=e.target.files[0];
-if(!file)return;
+const file=e.target.files[0]
+if(!file)return
+const zip=await JSZip.loadAsync(file)
 
-const zip=await JSZip.loadAsync(file);
-
-let choFile=null,vocalFile=null,instruFile=null;
+tracks={}
+let choFile=null
 
 for(const name in zip.files){
-if(name.endsWith('.cho')) choFile=name;
-if(name.toLowerCase().includes('vocals')) vocalFile=name;
-if(name.toLowerCase().includes('instrumental')) instruFile=name;
+
+if(name.endsWith('.cho')) choFile=name
+
+if(audioExt(name)){
+const stem=getStemType(name)
+if(stem){
+const blob=await zip.files[name].async('blob')
+tracks[stem]=new Audio(URL.createObjectURL(blob))
+}
+}
 }
 
 if(choFile){
-const txt=await zip.files[choFile].async('string');
-parseChordPro(txt);
+const txt=await zip.files[choFile].async('string')
+parseChordPro(txt)
 }
 
-if(vocalFile){
-vocals.src=URL.createObjectURL(
-await zip.files[vocalFile].async('blob')
-);
+library.push(file.name)
+renderLibrary()
+renderMixer()
+drawWaveform()
 }
 
-if(instruFile){
-instr.src=URL.createObjectURL(
-await zip.files[instruFile].async('blob')
-);
+function renderMixer(){
+const mixer=document.getElementById('mixer')
+mixer.innerHTML=''
+
+Object.entries(tracks).forEach(([name,audio])=>{
+
+const row=document.createElement('div')
+row.className='slider-wrap'
+
+row.innerHTML=`
+<label>${name}</label>
+<input type="range" min="0" max="1" step="0.01" value="${audio.volume||1}">
+<button class="track-btn">S</button>
+<button class="track-btn">M</button>
+`
+
+const slider=row.querySelector('input')
+slider.oninput=()=>audio.volume=slider.value
+
+const [soloBtn,muteBtn]=row.querySelectorAll('button')
+
+soloBtn.onclick=()=>{
+soloTrackName=(soloTrackName===name)?null:name
+Object.entries(tracks).forEach(([n,a])=>{
+a.muted=soloTrackName ? n!==soloTrackName : false
+})
+renderMixer()
 }
 
-library.push(file.name);
-renderLibrary();
-drawWaveform();
+muteBtn.onclick=()=>{
+audio.muted=!audio.muted
+muteBtn.classList.toggle('active',audio.muted)
+}
+
+if(soloTrackName===name) soloBtn.classList.add('active')
+if(audio.muted) muteBtn.classList.add('active')
+
+mixer.appendChild(row)
+})
 }
 
 function renderLibrary(){
 document.getElementById('library').innerHTML=
-library.map(n=>`<div class="song-item">${n}</div>`).join('');
+library.map(n=>`<div class="song-item">${n}</div>`).join('')
 }
 
 function parseChordPro(text){
-parsedSong=[];
-
-let title='',artist='',key='',capo='';
+parsedSong=[]
+let title='',artist='',key='',capo=''
 
 text.split(/\r?\n/).forEach(line=>{
 
-if(line.startsWith('{title:')){title=line.slice(7,-1).trim();return;}
-if(line.startsWith('{artist:')){artist=line.slice(8,-1).trim();return;}
-if(line.startsWith('{key:')){key=line.slice(5,-1).trim();return;}
-if(line.startsWith('{capo:')){capo=line.slice(6,-1).trim();return;}
+if(line.startsWith('{title:')){title=line.slice(7,-1).trim();return}
+if(line.startsWith('{artist:')){artist=line.slice(8,-1).trim();return}
+if(line.startsWith('{key:')){key=line.slice(5,-1).trim();return}
+if(line.startsWith('{capo:')){capo=line.slice(6,-1).trim();return}
 
 if(line.startsWith('{comment:')){
-parsedSong.push({
-type:'section',
-text:line.replace('{comment:','').replace('}','').trim()
-});
-return;
+parsedSong.push({type:'section',text:line.replace('{comment:','').replace('}','').trim()})
+return
 }
 
-if(line.startsWith('{')) return;
+if(line.startsWith('{')) return
+parsedSong.push({type:'line',text:line})
+})
 
-parsedSong.push({
-type:'line',
-text:line
-});
-});
-
-document.getElementById('title').textContent=title||'MusiMix';
+document.getElementById('title').textContent=title||'MusiMix'
 document.getElementById('meta').textContent=
-[artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo]
-.filter(Boolean)
-.join(' • ');
+[artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo].filter(Boolean).join(' • ')
 
-renderSong();
+renderSong()
 }
 
 function renderSong(){
-
-const lyrics=document.getElementById('lyrics');
-lyrics.innerHTML='';
+const lyrics=document.getElementById('lyrics')
+lyrics.innerHTML=''
 
 parsedSong.forEach(item=>{
 
 if(item.type==='section'){
-lyrics.innerHTML += `<div class="section">${item.text}</div>`;
-return;
+lyrics.innerHTML+=`<div class="section">${item.text}</div>`
+return
 }
 
-const line=document.createElement('div');
-line.className='line';
-
-const regex=/(\[.*?\])/g;
-const parts=item.text.split(regex);
+const line=document.createElement('div')
+line.className='line'
+const parts=item.text.split(/(\[.*?\])/g)
 
 parts.forEach(part=>{
 
-if(!part) return;
+if(!part)return
 
-if(part.startsWith('[') && part.endsWith(']')){
+if(part.startsWith('[')&&part.endsWith(']')){
+const chord=part.slice(1,-1)
 
-const chord=part.slice(1,-1);
-
-const seg=document.createElement('span');
-seg.className='segment';
-
-seg.innerHTML=
-`<span class="chord">${shiftChord(chord,semitoneShift)}</span>
-<span class="word">&nbsp;</span>`;
-
-line.appendChild(seg);
-
+line.innerHTML+=`
+<span class="segment">
+<span class="chord">${shiftChord(chord,semitoneShift)}</span>
+<span class="word">&nbsp;</span>
+</span>`
 }else{
-
-const seg=document.createElement('span');
-seg.className='segment';
-
-seg.innerHTML=
-`<span class="chord">&nbsp;</span>
-<span class="word">${part}</span>`;
-
-line.appendChild(seg);
-
+line.innerHTML+=`
+<span class="segment">
+<span class="chord">&nbsp;</span>
+<span class="word">${part}</span>
+</span>`
 }
+})
 
-});
-
-lyrics.appendChild(line);
-
-});
+lyrics.appendChild(line)
+})
 }
 
 function drawWaveform(){
-const c=document.getElementById('waveform');
-const ctx=c.getContext('2d');
-
-c.width=800;
-c.height=80;
-
-ctx.clearRect(0,0,c.width,c.height);
-ctx.strokeStyle='#2d7cff';
+const c=document.getElementById('waveform')
+const ctx=c.getContext('2d')
+c.width=800
+c.height=80
+ctx.clearRect(0,0,c.width,c.height)
+ctx.strokeStyle='#2d7cff'
 
 for(let x=0;x<c.width;x+=4){
-const h=Math.random()*60;
-ctx.beginPath();
-ctx.moveTo(x,40-h/2);
-ctx.lineTo(x,40+h/2);
-ctx.stroke();
+const h=Math.random()*60
+ctx.beginPath()
+ctx.moveTo(x,40-h/2)
+ctx.lineTo(x,40+h/2)
+ctx.stroke()
 }
 }
 </script>
