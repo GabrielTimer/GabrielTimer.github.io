@@ -1,6 +1,7 @@
 let CHORD_DB = {};
 window.currentInstrument = "guitar";
 window.currentChords = [];
+window.currentVoicingIndex = {};
 
 async function loadChordDatabase() {
   const res = await fetch("chords-db.json");
@@ -23,8 +24,9 @@ function renderChordBar(chords) {
     item.className = "chord-item";
     item.innerHTML = `<span>${chord}</span>`;
 
-    item.addEventListener("mouseenter", () => showChordPopup(chord, item));
-    item.addEventListener("mouseleave", hideChordPopup);
+    item.addEventListener("mouseenter", () => {
+      showChordPopup(chord, item);
+    });
 
     item.addEventListener("click", e => {
       e.stopPropagation();
@@ -41,10 +43,17 @@ function showChordPopup(chord, target) {
   const popup = document.createElement("div");
   popup.id = "chord-popup";
 
+  const currentIndex =
+    window.currentVoicingIndex[chord] || 0;
+
   popup.innerHTML =
     window.currentInstrument === "guitar"
-      ? renderGuitarSVG(chord)
+      ? renderGuitarSVG(chord, currentIndex)
       : renderPianoSVG(chord);
+
+  popup.addEventListener("click", e => {
+    e.stopPropagation();
+  });
 
   document.body.appendChild(popup);
 
@@ -53,10 +62,8 @@ function showChordPopup(chord, target) {
   let left = rect.left;
   let top = rect.bottom + 10;
 
-  const popupWidth = 170;
-
-  if (left + popupWidth > window.innerWidth - 10) {
-    left = window.innerWidth - popupWidth - 10;
+  if (left + 180 > window.innerWidth) {
+    left = window.innerWidth - 190;
   }
 
   popup.style.left = left + "px";
@@ -70,6 +77,29 @@ function hideChordPopup() {
 function switchInstrument(type) {
   window.currentInstrument = type;
   renderChordBar(window.currentChords);
+}
+
+function changeVoicing(chordName, dir) {
+  let voicings = CHORD_DB[chordName];
+  if (!Array.isArray(voicings)) return;
+
+  let i = window.currentVoicingIndex[chordName] || 0;
+
+  i += dir;
+
+  if (i < 0) i = voicings.length - 1;
+  if (i >= voicings.length) i = 0;
+
+  window.currentVoicingIndex[chordName] = i;
+
+  const popup = document.getElementById("chord-popup");
+  if (popup) {
+    popup.innerHTML = renderGuitarSVG(chordName, i);
+
+    popup.addEventListener("click", e => {
+      e.stopPropagation();
+    });
+  }
 }
 
 function renderGuitarSVG(chordName, voicingIndex = 0) {
@@ -100,20 +130,27 @@ function renderGuitarSVG(chordName, voicingIndex = 0) {
 
   return `
     <div class="popup-inner">
-
       <strong>${chordName}</strong>
 
       <svg width="140" height="150">
-        ${Array.from({length:6}, (_,i)=>`
-          <line x1="${22+i*18}" y1="35"
-                x2="${22+i*18}" y2="115"
-                stroke="black"/>
+        ${Array.from({ length: 6 }, (_, i) => `
+          <line
+            x1="${22 + i * 18}"
+            y1="35"
+            x2="${22 + i * 18}"
+            y2="115"
+            stroke="black"
+          />
         `).join("")}
 
-        ${Array.from({length:6}, (_,i)=>`
-          <line x1="22" y1="${35+i*16}"
-                x2="112" y2="${35+i*16}"
-                stroke="black"/>
+        ${Array.from({ length: 6 }, (_, i) => `
+          <line
+            x1="22"
+            y1="${35 + i * 16}"
+            x2="112"
+            y2="${35 + i * 16}"
+            stroke="black"
+          />
         `).join("")}
 
         ${dots}
@@ -121,23 +158,21 @@ function renderGuitarSVG(chordName, voicingIndex = 0) {
 
       ${
         voicings.length > 1
-        ? `
+          ? `
           <div style="
             display:flex;
             justify-content:center;
-            gap:12px;
             align-items:center;
+            gap:12px;
             margin-top:8px;
-            font-size:14px;
           ">
             <button onclick="changeVoicing('${chordName}',-1)">‹</button>
-            <span>${voicingIndex+1} / ${voicings.length}</span>
+            <span>${voicingIndex + 1} / ${voicings.length}</span>
             <button onclick="changeVoicing('${chordName}',1)">›</button>
           </div>
         `
-        : ''
+          : ""
       }
-
     </div>
   `;
 }
@@ -154,7 +189,10 @@ function renderPianoSVG(chordName) {
 }
 
 function getPianoNotes(chord) {
-  const notes = ["C","C#","D","Eb","E","F","F#","G","Ab","A","Bb","B"];
+  const notes = [
+    "C","C#","D","Eb","E","F",
+    "F#","G","Ab","A","Bb","B"
+  ];
 
   const root = chord.match(/^[A-G][#b]?/)?.[0];
   if (!root) return [];
@@ -176,4 +214,14 @@ function getPianoNotes(chord) {
   ];
 }
 
-document.addEventListener("click", hideChordPopup);
+document.addEventListener("click", (e) => {
+  const popup = document.getElementById("chord-popup");
+
+  if (
+    popup &&
+    !popup.contains(e.target) &&
+    !e.target.closest(".chord-item")
+  ) {
+    hideChordPopup();
+  }
+});
