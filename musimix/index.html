@@ -185,6 +185,33 @@ box-shadow:0 12px 30px rgba(0,0,0,.28);
 min-width:160px;
 }
 
+#toggleMixerBtn{
+  display:none;
+}
+
+@media(max-width:900px){
+
+  #toggleMixerBtn{
+    display:block;
+    width:100%;
+    margin-bottom:12px;
+    background:#1c1c1c;
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:12px;
+    font-size:15px;
+  }
+
+  #mobileMixerPanel{
+    display:none;
+  }
+
+  #mobileMixerPanel.open{
+    display:block;
+  }
+}
+
 .popup-inner{text-align:center;}
 
 </style>
@@ -207,10 +234,12 @@ min-width:160px;
 
 <aside class="sidebar">
 
-<canvas id="waveform"></canvas>
+<button id="toggleMixerBtn" onclick="toggleMixerPanel()">▼ Pistes</button>
 
-<div id="mixer"></div>
-<div id="library"></div>
+<div id="mobileMixerPanel" class="open">
+  <canvas id="waveform"></canvas>
+  <div id="mixer"></div>
+</div>
 
 </aside>
 
@@ -380,10 +409,6 @@ mixer.appendChild(row)
 })
 }
 
-function renderLibrary(){
-document.getElementById('library').innerHTML=
-library.map(n=>`<div class="song-item">${n}</div>`).join('')
-}
 
 function parseChordPro(text){
 parsedSong=[]
@@ -470,6 +495,21 @@ ctx.moveTo(x,40-h/2)
 ctx.lineTo(x,40+h/2)
 ctx.stroke()
 }
+}
+
+function renderLibrary(){
+  // volontairement vide : on masque le nom du ZIP
+}
+
+function toggleMixerPanel(){
+  const panel = document.getElementById('mobileMixerPanel');
+  const btn = document.getElementById('toggleMixerBtn');
+
+  panel.classList.toggle('open');
+
+  btn.textContent = panel.classList.contains('open')
+    ? '▲ Masquer pistes'
+    : '▼ Pistes';
 }
 </script>
 
