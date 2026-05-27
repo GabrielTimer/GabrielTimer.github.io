@@ -6,6 +6,7 @@
 <title>MusiMix</title>
 
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="chords.js"></script>
 
 <style>
 :root{
@@ -150,6 +151,43 @@ cursor:pointer
 
 }
 
+
+.instrument-switch{
+display:flex;
+gap:8px;
+margin-top:12px;
+margin-bottom:14px;
+flex-wrap:wrap;
+}
+#chord-bar{
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding-bottom:8px;
+}
+.chord-item{
+position:relative;
+background:#1f1f1f;
+padding:8px 12px;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+color:#ffd166;
+}
+#chord-popup{
+position:absolute;
+top:42px;
+left:0;
+z-index:9999;
+background:#fff;
+color:#111;
+border-radius:12px;
+padding:12px;
+box-shadow:0 10px 24px rgba(0,0,0,.25);
+min-width:140px;
+}
+.popup-inner{text-align:center;}
+
 </style>
 </head>
 <body>
@@ -181,6 +219,14 @@ cursor:pointer
 <div class="header">
 <h1 id="title">MusiMix</h1>
 <div class="meta" id="meta"></div>
+
+<div class="instrument-switch">
+<button onclick="switchInstrument('guitar')">🎸 Guitare</button>
+<button onclick="switchInstrument('piano')">🎹 Piano</button>
+</div>
+
+<div id="chord-bar"></div>
+
 </div>
 <div class="lyrics" id="lyrics"></div>
 </main>
@@ -250,6 +296,9 @@ document.getElementById('lyrics').style.fontSize=fontSize+'rem'
 
 function transpose(v){
 semitoneShift+=v
+window.currentChords = extractChordsFromCho(text)
+renderChordBar(window.currentChords)
+
 renderSong()
 }
 
@@ -284,6 +333,7 @@ tracks[stem]=new Audio(URL.createObjectURL(blob))
 
 if(choFile){
 const txt=await zip.files[choFile].async('string')
+await loadChordDatabase()
 parseChordPro(txt)
 }
 
@@ -362,6 +412,9 @@ parsedSong.push({type:'line',text:line})
 document.getElementById('title').textContent=title||'MusiMix'
 document.getElementById('meta').textContent=
 [artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo].filter(Boolean).join(' • ')
+
+window.currentChords = extractChordsFromCho(text)
+renderChordBar(window.currentChords)
 
 renderSong()
 }
