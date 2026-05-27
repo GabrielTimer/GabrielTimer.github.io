@@ -121,35 +121,35 @@ cursor:pointer
 
 @media(max-width:900px){
 
-.layout{
-grid-template-columns:1fr
+  .layout{
+    grid-template-columns:1fr;
+  }
+
+  /* masque la waveform sur mobile */
+  #waveform{
+    display:none;
+  }
+
+  .sidebar{
+    position:sticky;
+    top:58px;
+    z-index:55;
+    height:auto;
+    max-height:45vh;
+    overflow:auto;
+    border-right:none;
+    border-bottom:1px solid #2a2a2a;
+  }
+
+  #mixer{
+    position:sticky;
+    top:0;
+    z-index:56;
+    background:#0d0d0d;
+  }
+
 }
 
-.sidebar{
-position:sticky;
-top:58px;
-z-index:55;
-height:auto;
-max-height:45vh;
-overflow:auto;
-border-right:none;
-border-bottom:1px solid #2a2a2a;
-}
-
-#mixer{
-position:sticky;
-top:0;
-z-index:56;
-background:#0d0d0d;
-}
-
-#waveform{
-position:sticky;
-top:0;
-z-index:57;
-}
-
-}
 </style>
 </head>
 <body>
