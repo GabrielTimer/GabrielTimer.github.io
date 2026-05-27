@@ -358,36 +358,57 @@ renderSong();
 }
 
 function renderSong(){
+
 const lyrics=document.getElementById('lyrics');
 lyrics.innerHTML='';
 
 parsedSong.forEach(item=>{
 
 if(item.type==='section'){
-lyrics.innerHTML+=`<div class="section">${item.text}</div>`;
+lyrics.innerHTML += `<div class="section">${item.text}</div>`;
 return;
 }
 
 const line=document.createElement('div');
 line.className='line';
 
-const regex=/\[(.*?)\]([^\[]*)/g;
-let m;
+const regex=/(\[.*?\])/g;
+const parts=item.text.split(regex);
 
-while((m=regex.exec(item.text))!==null){
+parts.forEach(part=>{
 
-line.innerHTML+=`
-<span class="segment">
-<span class="chord">${shiftChord(m[1],semitoneShift)}</span>
-<span class="word">${m[2]}</span>
-</span>`;
+if(!part) return;
+
+if(part.startsWith('[') && part.endsWith(']')){
+
+const chord=part.slice(1,-1);
+
+const seg=document.createElement('span');
+seg.className='segment';
+
+seg.innerHTML=
+`<span class="chord">${shiftChord(chord,semitoneShift)}</span>
+<span class="word">&nbsp;</span>`;
+
+line.appendChild(seg);
+
+}else{
+
+const seg=document.createElement('span');
+seg.className='segment';
+
+seg.innerHTML=
+`<span class="chord">&nbsp;</span>
+<span class="word">${part}</span>`;
+
+line.appendChild(seg);
+
 }
 
-if(line.innerHTML===''){
-line.textContent=item.text;
-}
+});
 
 lyrics.appendChild(line);
+
 });
 }
 
