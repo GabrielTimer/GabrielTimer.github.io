@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MusiMix</title>
 
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
 <style>
 :root{
 --bg:#111;
@@ -16,12 +18,11 @@
 }
 
 *{box-sizing:border-box}
-
 body{
 margin:0;
-font-family:Arial,sans-serif;
 background:var(--bg);
-color:var(--text);
+color:white;
+font-family:Arial;
 }
 
 .topbar{
@@ -30,101 +31,10 @@ top:0;
 z-index:50;
 display:flex;
 gap:8px;
-align-items:center;
-padding:12px;
+padding:10px;
 background:#111;
-border-bottom:1px solid var(--line);
+border-bottom:1px solid #333;
 overflow:auto;
-}
-
-.topbar button{
-white-space:nowrap;
-}
-
-.layout{
-display:grid;
-grid-template-columns:280px 1fr;
-min-height:100vh;
-}
-
-.sidebar{
-background:#0f0f0f;
-padding:18px;
-border-right:1px solid var(--line);
-}
-
-.main{
-padding:0;
-}
-
-.header{
-padding:18px 24px;
-border-bottom:1px solid var(--line);
-}
-
-h1{
-margin:0;
-font-size:1.7rem;
-}
-
-.meta{
-margin-top:6px;
-color:var(--muted);
-}
-
-.lyrics{
-padding:30px;
-font-size:1.5rem;
-line-height:1.45;
-}
-
-.line{
-margin-bottom:14px;
-white-space:nowrap;
-}
-
-.segment{
-display:inline-block;
-vertical-align:top;
-white-space:pre;
-}
-
-.chord{
-display:block;
-font-weight:700;
-font-size:.78em;
-color:var(--accent);
-line-height:1;
-margin-bottom:2px;
-}
-
-.word{
-display:block;
-white-space:pre;
-}
-
-.section{
-margin-top:28px;
-margin-bottom:16px;
-font-size:1rem;
-font-weight:700;
-color:#9a9a9a;
-text-transform:uppercase;
-letter-spacing:.08em;
-}
-
-.slider-wrap{
-margin-bottom:26px;
-}
-
-label{
-display:block;
-margin-bottom:8px;
-font-size:.95rem;
-}
-
-input[type=range]{
-width:100%;
 }
 
 button{
@@ -133,25 +43,87 @@ color:white;
 border:none;
 padding:10px 14px;
 border-radius:12px;
-font-size:1rem;
 cursor:pointer;
+}
+
+.layout{
+display:grid;
+grid-template-columns:280px 1fr;
+}
+
+.sidebar{
+position:sticky;
+top:58px;
+height:calc(100vh - 58px);
+overflow:auto;
+padding:20px;
+background:#0e0e0e;
+border-right:1px solid #2a2a2a;
+}
+
+.main{
+min-height:100vh;
+}
+
+.header{
+padding:20px;
+border-bottom:1px solid #2a2a2a;
+}
+
+.meta{color:#aaa}
+
+.lyrics{
+padding:30px;
+font-size:1.5rem;
+line-height:1.45;
+}
+
+.line{margin-bottom:12px}
+.segment{
+display:inline-block;
+vertical-align:top;
+white-space:pre;
+}
+.chord{
+display:block;
+color:#ffd166;
+font-weight:700;
+font-size:.8em;
+}
+.word{
+display:block;
+white-space:pre;
+}
+
+.section{
+margin:30px 0 12px;
+font-weight:700;
+color:#999;
+text-transform:uppercase;
 }
 
 .song-item{
 padding:10px;
-background:#1e1e1e;
+background:#1d1d1d;
 border-radius:10px;
 margin-top:10px;
-font-size:.95rem;
+cursor:pointer;
+}
+
+canvas{
+width:100%;
+height:80px;
+background:#141414;
+border-radius:10px;
+margin-bottom:18px;
 }
 
 @media(max-width:900px){
-.layout{
-grid-template-columns:1fr;
-}
+.layout{grid-template-columns:1fr}
 .sidebar{
-border-right:none;
-border-bottom:1px solid var(--line);
+position:relative;
+height:auto;
+top:0;
 }
 }
 </style>
@@ -159,31 +131,32 @@ border-bottom:1px solid var(--line);
 <body>
 
 <div class="topbar">
-<button onclick="togglePlay()">▶︎ Play / Pause</button>
-<button onclick="toggleScroll()">⇅ AutoScroll</button>
-<button onclick="changeScrollSpeed(-0.2)">🐢</button>
-<button onclick="changeScrollSpeed(0.2)">🐇</button>
+<button onclick="togglePlay()">▶︎ / ⏸</button>
+<button onclick="changeScrollSpeed(-0.3)">🐢</button>
+<button onclick="changeScrollSpeed(0.3)">🐇</button>
 <button onclick="transpose(-1)">♭</button>
 <button onclick="transpose(1)">♯</button>
 <button onclick="changeFont(-0.1)">A−</button>
 <button onclick="changeFont(0.1)">A+</button>
-<button onclick="document.getElementById('bundleInput').click()">➕ Ajouter morceau</button>
-<input id="bundleInput" hidden type="file" multiple accept=".mp3,.cho,.chopro,.txt" onchange="loadBundle(event)">
+<button onclick="document.getElementById('zipInput').click()">➕ Ajouter ZIP</button>
+<input hidden id="zipInput" type="file" accept=".zip" onchange="loadZip(event)">
 </div>
 
 <div class="layout">
 
 <aside class="sidebar">
 
-<div class="slider-wrap">
-<label>🎤 Voix</label>
-<input type="range" min="0" max="1" step="0.01" value="1" oninput="vocals.volume=this.value">
-</div>
+<canvas id="waveform"></canvas>
 
-<div class="slider-wrap">
+<label>🎤 Voix</label>
+<input type="range" min="0" max="1" step="0.01" value="1"
+oninput="vocals.volume=this.value">
+
+<br><br>
+
 <label>🎵 Instrumental</label>
-<input type="range" min="0" max="1" step="0.01" value="1" oninput="instr.volume=this.value">
-</div>
+<input type="range" min="0" max="1" step="0.01" value="1"
+oninput="instr.volume=this.value">
 
 <div id="library"></div>
 
@@ -193,7 +166,7 @@ border-bottom:1px solid var(--line);
 
 <div class="header">
 <h1 id="title">MusiMix</h1>
-<div class="meta" id="meta">Ajoute un morceau</div>
+<div id="meta" class="meta"></div>
 </div>
 
 <div id="lyrics" class="lyrics"></div>
@@ -207,44 +180,62 @@ border-bottom:1px solid var(--line);
 <script>
 const vocals=document.getElementById('vocals');
 const instr=document.getElementById('instr');
-const lyrics=document.getElementById('lyrics');
 
 let parsedSong=[];
-let semitoneShift=0;
-let fontSize=1.5;
-let scrolling=false;
-let scrollTimer=null;
+let library=[];
 let scrollSpeed=1;
+let scrollTimer=null;
+let scrolling=false;
+let fontSize=1.5;
+let semitoneShift=0;
+let currentSong=null;
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 function togglePlay(){
+
 if(vocals.paused){
+
 instr.currentTime=vocals.currentTime;
+
 vocals.play();
 instr.play();
+
+startScroll();
+
 }else{
+
 vocals.pause();
 instr.pause();
+
+stopScroll();
 }
 }
 
-function toggleScroll(){
-scrolling=!scrolling;
-if(scrolling){
-scrollTimer=setInterval(()=>window.scrollBy(0,1),80/scrollSpeed);
-}else{
-clearInterval(scrollTimer);
+function startScroll(){
+stopScroll();
+scrolling=true;
+scrollTimer=setInterval(()=>{
+window.scrollBy(0,1);
+},80/scrollSpeed);
 }
+
+function stopScroll(){
+scrolling=false;
+clearInterval(scrollTimer);
 }
 
 function changeScrollSpeed(v){
-scrollSpeed=Math.max(.4,Math.min(4,scrollSpeed+v));
+scrollSpeed=Math.max(.3,Math.min(4,scrollSpeed+v));
+
+if(scrolling){
+startScroll();
+}
 }
 
 function changeFont(v){
-fontSize=Math.max(.8,Math.min(2.8,fontSize+v));
-lyrics.style.fontSize=fontSize+'rem';
+fontSize=Math.max(.8,Math.min(3,fontSize+v));
+document.getElementById('lyrics').style.fontSize=fontSize+'rem';
 }
 
 function transpose(v){
@@ -252,72 +243,120 @@ semitoneShift+=v;
 renderSong();
 }
 
-function shiftChord(chord,shift){
+function shiftChord(chord,s){
 const m=chord.match(/^([A-G](#|b)?)(.*)$/);
-if(!m) return chord;
+if(!m)return chord;
+
 let i=NOTES.indexOf(m[1].replace('Bb','A#'));
-if(i<0) return chord;
-return NOTES[(i+shift+12)%12]+m[3];
+if(i<0)return chord;
+
+return NOTES[(i+s+12)%12]+m[3];
 }
 
-function loadBundle(e){
-const files=[...e.target.files];
+async function loadZip(e){
 
-const cho=files.find(f=>/\.(cho|chopro|txt)$/i.test(f.name));
-const vocal=files.find(f=>f.name.toLowerCase().includes('vocals'));
-const instrumental=files.find(f=>f.name.toLowerCase().includes('instrumental'));
+const file=e.target.files[0];
+if(!file)return;
 
-if(vocal) vocals.src=URL.createObjectURL(vocal);
-if(instrumental) instr.src=URL.createObjectURL(instrumental);
+const zip=await JSZip.loadAsync(file);
 
-if(cho){
-const r=new FileReader();
-r.onload=(ev)=>parseChordPro(ev.target.result);
-r.readAsText(cho);
+let choFile=null;
+let vocalsFile=null;
+let instrFile=null;
+
+for(const name in zip.files){
+
+if(name.endsWith('.cho')) choFile=name;
+if(name.toLowerCase().includes('vocals')) vocalsFile=name;
+if(name.toLowerCase().includes('instrumental')) instrFile=name;
 }
 
-saveToLibrary(files);
+if(choFile){
+const txt=await zip.files[choFile].async('string');
+parseChordPro(txt);
 }
 
-function saveToLibrary(files){
-let lib=JSON.parse(localStorage.getItem('musimix-library')||'[]');
-lib.push(files.map(f=>f.name));
-localStorage.setItem('musimix-library',JSON.stringify(lib));
+if(vocalsFile){
+const blob=await zip.files[vocalsFile].async('blob');
+vocals.src=URL.createObjectURL(blob);
+}
+
+if(instrFile){
+const blob=await zip.files[instrFile].async('blob');
+instr.src=URL.createObjectURL(blob);
+}
+
+library.push({
+name:file.name,
+zip:file
+});
+
+saveLibrary();
 renderLibrary();
+drawWaveform();
+}
+
+function saveLibrary(){
+localStorage.setItem(
+'musimix-library',
+JSON.stringify(
+library.map(s=>s.name)
+)
+);
 }
 
 function renderLibrary(){
-const lib=JSON.parse(localStorage.getItem('musimix-library')||'[]');
+
 document.getElementById('library').innerHTML=
-lib.map(song=>`<div class="song-item">🎵 ${song[0]}</div>`).join('');
+library.map((song,i)=>
+`<div class="song-item">${song.name}</div>`
+).join('');
 }
 
 function parseChordPro(text){
+
 parsedSong=[];
 
 let title='',artist='',key='',capo='';
-const lines=text.split(/\r?\n/);
 
-for(let line of lines){
+text.split(/\r?\n/).forEach(line=>{
 
-if(line.startsWith('{title:')){title=line.slice(7,-1).trim();continue;}
-if(line.startsWith('{artist:')){artist=line.slice(8,-1).trim();continue;}
-if(line.startsWith('{key:')){key=line.slice(5,-1).trim();continue;}
-if(line.startsWith('{capo:')){capo=line.slice(6,-1).trim();continue;}
+if(line.startsWith('{title:')){
+title=line.slice(7,-1).trim();return;
+}
+
+if(line.startsWith('{artist:')){
+artist=line.slice(8,-1).trim();return;
+}
+
+if(line.startsWith('{key:')){
+key=line.slice(5,-1).trim();return;
+}
+
+if(line.startsWith('{capo:')){
+capo=line.slice(6,-1).trim();return;
+}
 
 if(line.startsWith('{comment:')){
-parsedSong.push({type:'section',text:line.replace('{comment:','').replace('}','').trim()});
-continue;
+parsedSong.push({
+type:'section',
+text:line.replace('{comment:','').replace('}','').trim()
+});
+return;
 }
 
-if(line.startsWith('{')) continue;
+if(line.startsWith('{')) return;
 
-parsedSong.push({type:'line',text:line});
-}
+parsedSong.push({
+type:'line',
+text:line
+});
 
-document.getElementById('title').textContent=title||'MusiMix';
+});
+
+document.getElementById('title').textContent=title;
 document.getElementById('meta').textContent=
-[artist,key&&`Tonalité ${key}`,capo&&`Capodastre ${capo}`]
+[artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo]
 .filter(Boolean)
 .join(' • ');
 
@@ -326,17 +365,14 @@ renderSong();
 
 function renderSong(){
 
+const lyrics=document.getElementById('lyrics');
 lyrics.innerHTML='';
 
 parsedSong.forEach(item=>{
 
 if(item.type==='section'){
-lyrics.innerHTML+=`<div class="section">${item.text}</div>`;
-return;
-}
-
-if(!item.text.trim()){
-lyrics.innerHTML+='<br>';
+lyrics.innerHTML+=
+'<div class="section">'+item.text+'</div>';
 return;
 }
 
@@ -349,29 +385,41 @@ let m;
 while((m=regex.exec(item.text))!==null){
 
 let chord=shiftChord(m[1],semitoneShift);
-let word=m[2]||' ';
 
-let seg=document.createElement('span');
-seg.className='segment';
-
-seg.innerHTML=
+line.innerHTML+=
+'<span class="segment">'+
 '<span class="chord">'+chord+'</span>'+
-'<span class="word">'+word+'</span>';
-
-line.appendChild(seg);
-}
-
-if(line.innerHTML===''){
-line.textContent=item.text;
+'<span class="word">'+m[2]+'</span>'+
+'</span>';
 }
 
 lyrics.appendChild(line);
-
 });
 }
 
-renderLibrary();
-</script>
+function drawWaveform(){
 
+const c=document.getElementById('waveform');
+const ctx=c.getContext('2d');
+
+c.width=800;
+c.height=80;
+
+ctx.clearRect(0,0,c.width,c.height);
+
+ctx.strokeStyle='#4a90e2';
+ctx.lineWidth=1;
+
+ctx.beginPath();
+
+for(let x=0;x<c.width;x+=3){
+let h=Math.random()*60;
+ctx.moveTo(x,40-h/2);
+ctx.lineTo(x,40+h/2);
+}
+
+ctx.stroke();
+}
+</script>
 </body>
 </html>
