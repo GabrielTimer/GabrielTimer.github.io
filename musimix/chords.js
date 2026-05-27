@@ -233,36 +233,223 @@ function renderPianoSVG(chordName) {
 
   const notes = chord.notes || [];
 
-  const keyboard = [
-    "C","C#","D","Eb","E","F",
-    "F#","G","Ab","A","Bb","B"
-  ];
+  const frenchMap = {
+    C:"Do", Db:"Ré♭", D:"Ré", Eb:"Mi♭", E:"Mi",
+    F:"Fa", Gb:"Sol♭", G:"Sol", Ab:"La♭", A:"La",
+    Bb:"Si♭", B:"Si"
+  };
+
+  let subtitle = chordName;
+
+  Object.entries(frenchMap).forEach(([k,v])=>{
+    if (subtitle.startsWith(k)) subtitle = subtitle.replace(k,v);
+  });
+
+  subtitle = subtitle
+    .replace("maj7"," majeur 7")
+    .replace("m7"," mineur 7")
+    .replace("m"," mineur");
+
+  const degreesMap = {
+    0:"1",
+    1:"♭2",
+    2:"2",
+    3:"♭3",
+    4:"3",
+    5:"4",
+    6:"#4",
+    7:"5",
+    8:"#5",
+    9:"6",
+    10:"♭7",
+    11:"7"
+  };
+
+  const chromatic = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+
+  function idx(n){ return chromatic.indexOf(normalizeChordName(n)); }
+  function dist(a,b){ return (idx(b)-idx(a)+12)%12; }
+
+  const degrees = notes.map(n => degreesMap[dist(notes[0], n)] || "");
+
+  const whiteKeys = ["C","D","E","F","G","A","B"];
+  const blackKeys = {
+    C:"Db",
+    D:"Eb",
+    F:"Gb",
+    G:"Ab",
+    A:"Bb"
+  };
+
+  let keysHTML = "";
+
+  for(let o=0;o<2;o++){
+
+    whiteKeys.forEach((n,i)=>{
+      const x = o*294 + i*42;
+      const active = notes.includes(n);
+
+      keysHTML += `
+        <div style="
+          position:absolute;
+          left:${x}px;
+          top:0;
+          width:42px;
+          height:132px;
+          background:${active ? "#2d7cff" : "#fff"};
+          border:1px solid #222;
+          border-radius:0 0 6px 6px;
+          box-sizing:border-box;
+        "></div>
+      `;
+    });
+
+    Object.entries(blackKeys).forEach(([w,b])=>{
+      const i = whiteKeys.indexOf(w);
+      const x = o*294 + i*42 + 29;
+      const active = notes.includes(b);
+
+      keysHTML += `
+        <div style="
+          position:absolute;
+          left:${x}px;
+          top:0;
+          width:26px;
+          height:76px;
+          background:${active ? "#2d7cff" : "#111"};
+          border-radius:0 0 5px 5px;
+          z-index:3;
+        "></div>
+      `;
+    });
+  }
 
   return `
-    <div class="popup-inner">
-      <strong>${chordName}</strong>
+  <div class="popup-inner"
+    style="
+      width:760px;
+      max-width:95vw;
+      background:white;
+      color:#111;
+      border-radius:22px;
+      padding:24px;
+    ">
 
-      <div style="display:flex;gap:2px;margin-top:12px;">
-        ${keyboard.map(n => `
-          <div
-            style="
-              width:24px;
-              height:${n.includes('#') || n.includes('b') ? '55px':'90px'};
-              background:${notes.includes(n) ? '#2d7cff' : 'white'};
-              border:1px solid #222;
-              border-radius:4px;
-            ">
-          </div>
-        `).join("")}
-      </div>
-
-      <div style="margin-top:8px;font-size:13px">
-        ${notes.join(" – ")}
-      </div>
+    <div style="
+      font-size:38px;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:2px;
+    ">
+      ${chordName}
     </div>
+
+    <div style="
+      font-size:18px;
+      text-align:center;
+      color:#666;
+      margin-bottom:18px;
+    ">
+      ${subtitle}
+    </div>
+
+    <div style="
+      display:flex;
+      justify-content:center;
+      gap:70px;
+      font-size:18px;
+      font-weight:600;
+      margin-bottom:8px;
+    ">
+      ${notes.map(n=>`<span>${n}</span>`).join("")}
+    </div>
+
+    <div style="
+      position:relative;
+      width:588px;
+      height:132px;
+      margin:auto;
+    ">
+      ${keysHTML}
+    </div>
+
+    <div style="
+      display:flex;
+      justify-content:space-around;
+      width:588px;
+      margin:10px auto 0;
+      color:#777;
+      font-size:15px;
+    ">
+      <span>DO</span>
+      <span>DO</span>
+      <span>DO</span>
+    </div>
+
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-top:26px;
+      gap:24px;
+    ">
+
+      <svg width="180" height="110" viewBox="0 0 180 110">
+
+        ${[20,35,50,65,80].map(y=>`
+          <line
+            x1="20"
+            y1="${y}"
+            x2="170"
+            y2="${y}"
+            stroke="#666"
+            stroke-width="1"
+          />
+        `).join("")}
+
+        <text
+          x="8"
+          y="70"
+          font-size="46"
+          font-family="serif"
+        >𝄞</text>
+
+        ${notes.map((n,i)=>`
+          <ellipse
+            cx="${95 + i*16}"
+            cy="${62 - i*8}"
+            rx="5.5"
+            ry="4.5"
+            fill="#111"
+          />
+        `).join("")}
+
+      </svg>
+
+      <div style="flex:1">
+
+        <div style="
+          font-size:30px;
+          font-weight:600;
+          margin-bottom:8px;
+        ">
+          ${notes.join(" – ")}
+        </div>
+
+        <div style="
+          font-size:22px;
+          color:#666;
+        ">
+          ${degrees.join(" – ")}
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
   `;
 }
-
 document.addEventListener("click", e => {
   const popup = document.getElementById("chord-popup");
 
