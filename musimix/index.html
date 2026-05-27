@@ -18,11 +18,12 @@
 }
 
 *{box-sizing:border-box}
+
 body{
 margin:0;
-background:var(--bg);
-color:white;
-font-family:Arial;
+background:#111;
+color:#fff;
+font-family:Arial,sans-serif;
 }
 
 .topbar{
@@ -33,7 +34,7 @@ display:flex;
 gap:8px;
 padding:10px;
 background:#111;
-border-bottom:1px solid #333;
+border-bottom:1px solid #2a2a2a;
 overflow:auto;
 }
 
@@ -44,11 +45,12 @@ border:none;
 padding:10px 14px;
 border-radius:12px;
 cursor:pointer;
+white-space:nowrap;
 }
 
 .layout{
 display:grid;
-grid-template-columns:280px 1fr;
+grid-template-columns:300px 1fr;
 }
 
 .sidebar{
@@ -57,7 +59,7 @@ top:58px;
 height:calc(100vh - 58px);
 overflow:auto;
 padding:20px;
-background:#0e0e0e;
+background:#0d0d0d;
 border-right:1px solid #2a2a2a;
 }
 
@@ -70,7 +72,10 @@ padding:20px;
 border-bottom:1px solid #2a2a2a;
 }
 
-.meta{color:#aaa}
+.meta{
+color:#aaa;
+margin-top:4px;
+}
 
 .lyrics{
 padding:30px;
@@ -83,45 +88,80 @@ margin-bottom:12px;
 white-space:normal;
 overflow-wrap:anywhere;
 }
+
+.segment{
+display:inline-block;
+vertical-align:top;
+white-space:pre;
+}
+
 .chord{
 display:block;
-color:#ffd166;
-font-weight:700;
 font-size:.8em;
+font-weight:700;
+color:#ffd166;
+line-height:1;
 }
+
 .word{
 display:block;
 white-space:pre-wrap;
 }
-.section{
-margin:30px 0 12px;
-font-weight:700;
-color:#999;
-text-transform:uppercase;
-}
 
-.song-item{
-padding:10px;
-background:#1d1d1d;
-border-radius:10px;
-margin-top:10px;
-cursor:pointer;
+.section{
+margin:28px 0 14px;
+font-size:1rem;
+font-weight:700;
+color:#9a9a9a;
+text-transform:uppercase;
 }
 
 canvas{
 width:100%;
 height:80px;
-background:#141414;
-border-radius:10px;
+background:#151515;
+border-radius:12px;
+margin-bottom:20px;
+}
+
+.slider-wrap{
+display:flex;
+align-items:center;
+gap:12px;
 margin-bottom:18px;
 }
 
+.slider-wrap label{
+width:110px;
+margin:0;
+display:flex;
+align-items:center;
+font-size:1rem;
+}
+
+.slider-wrap input[type=range]{
+flex:1;
+margin:0;
+accent-color:#20b8d6;
+}
+
+.song-item{
+padding:12px;
+background:#1d1d1d;
+border-radius:10px;
+margin-top:12px;
+font-size:.95rem;
+cursor:pointer;
+}
+
 @media(max-width:900px){
-.layout{grid-template-columns:1fr}
+.layout{
+grid-template-columns:1fr;
+}
 .sidebar{
 position:relative;
-height:auto;
 top:0;
+height:auto;
 }
 }
 </style>
@@ -129,7 +169,7 @@ top:0;
 <body>
 
 <div class="topbar">
-<button onclick="togglePlay()">▶︎ / ⏸</button>
+<button onclick="togglePlay()">▶ / ⏸</button>
 <button onclick="changeScrollSpeed(-0.3)">🐢</button>
 <button onclick="changeScrollSpeed(0.3)">🐇</button>
 <button onclick="transpose(-1)">♭</button>
@@ -146,15 +186,17 @@ top:0;
 
 <canvas id="waveform"></canvas>
 
+<div class="slider-wrap">
 <label>🎤 Voix</label>
 <input type="range" min="0" max="1" step="0.01" value="1"
 oninput="vocals.volume=this.value">
+</div>
 
-<br><br>
-
+<div class="slider-wrap">
 <label>🎵 Instrumental</label>
 <input type="range" min="0" max="1" step="0.01" value="1"
 oninput="instr.volume=this.value">
+</div>
 
 <div id="library"></div>
 
@@ -164,12 +206,13 @@ oninput="instr.volume=this.value">
 
 <div class="header">
 <h1 id="title">MusiMix</h1>
-<div id="meta" class="meta"></div>
+<div class="meta" id="meta"></div>
 </div>
 
-<div id="lyrics" class="lyrics"></div>
+<div class="lyrics" id="lyrics"></div>
 
 </main>
+
 </div>
 
 <audio id="vocals"></audio>
@@ -180,59 +223,46 @@ const vocals=document.getElementById('vocals');
 const instr=document.getElementById('instr');
 
 let parsedSong=[];
-let library=[];
 let scrollSpeed=1;
 let scrollTimer=null;
 let scrolling=false;
 let fontSize=1.5;
 let semitoneShift=0;
-let currentSong=null;
+let library=[];
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 function togglePlay(){
-
 if(vocals.paused){
-
 instr.currentTime=vocals.currentTime;
-
 vocals.play();
 instr.play();
-
 startScroll();
-
 }else{
-
 vocals.pause();
 instr.pause();
-
 stopScroll();
 }
 }
 
 function startScroll(){
 stopScroll();
-scrolling=true;
 scrollTimer=setInterval(()=>{
 window.scrollBy(0,1);
 },80/scrollSpeed);
 }
 
 function stopScroll(){
-scrolling=false;
 clearInterval(scrollTimer);
 }
 
 function changeScrollSpeed(v){
 scrollSpeed=Math.max(.3,Math.min(4,scrollSpeed+v));
-
-if(scrolling){
-startScroll();
-}
+if(!vocals.paused) startScroll();
 }
 
 function changeFont(v){
-fontSize=Math.max(.8,Math.min(3,fontSize+v));
+fontSize=Math.max(.9,Math.min(3,fontSize+v));
 document.getElementById('lyrics').style.fontSize=fontSize+'rem';
 }
 
@@ -244,29 +274,23 @@ renderSong();
 function shiftChord(chord,s){
 const m=chord.match(/^([A-G](#|b)?)(.*)$/);
 if(!m)return chord;
-
 let i=NOTES.indexOf(m[1].replace('Bb','A#'));
 if(i<0)return chord;
-
 return NOTES[(i+s+12)%12]+m[3];
 }
 
 async function loadZip(e){
-
 const file=e.target.files[0];
 if(!file)return;
 
 const zip=await JSZip.loadAsync(file);
 
-let choFile=null;
-let vocalsFile=null;
-let instrFile=null;
+let choFile=null,vocalFile=null,instruFile=null;
 
 for(const name in zip.files){
-
 if(name.endsWith('.cho')) choFile=name;
-if(name.toLowerCase().includes('vocals')) vocalsFile=name;
-if(name.toLowerCase().includes('instrumental')) instrFile=name;
+if(name.toLowerCase().includes('vocals')) vocalFile=name;
+if(name.toLowerCase().includes('instrumental')) instruFile=name;
 }
 
 if(choFile){
@@ -274,66 +298,39 @@ const txt=await zip.files[choFile].async('string');
 parseChordPro(txt);
 }
 
-if(vocalsFile){
-const blob=await zip.files[vocalsFile].async('blob');
-vocals.src=URL.createObjectURL(blob);
+if(vocalFile){
+vocals.src=URL.createObjectURL(
+await zip.files[vocalFile].async('blob')
+);
 }
 
-if(instrFile){
-const blob=await zip.files[instrFile].async('blob');
-instr.src=URL.createObjectURL(blob);
+if(instruFile){
+instr.src=URL.createObjectURL(
+await zip.files[instruFile].async('blob')
+);
 }
 
-library.push({
-name:file.name,
-zip:file
-});
-
-saveLibrary();
+library.push(file.name);
 renderLibrary();
 drawWaveform();
 }
 
-function saveLibrary(){
-localStorage.setItem(
-'musimix-library',
-JSON.stringify(
-library.map(s=>s.name)
-)
-);
-}
-
 function renderLibrary(){
-
 document.getElementById('library').innerHTML=
-library.map((song,i)=>
-`<div class="song-item">${song.name}</div>`
-).join('');
+library.map(n=>`<div class="song-item">${n}</div>`).join('');
 }
 
 function parseChordPro(text){
-
 parsedSong=[];
 
 let title='',artist='',key='',capo='';
 
 text.split(/\r?\n/).forEach(line=>{
 
-if(line.startsWith('{title:')){
-title=line.slice(7,-1).trim();return;
-}
-
-if(line.startsWith('{artist:')){
-artist=line.slice(8,-1).trim();return;
-}
-
-if(line.startsWith('{key:')){
-key=line.slice(5,-1).trim();return;
-}
-
-if(line.startsWith('{capo:')){
-capo=line.slice(6,-1).trim();return;
-}
+if(line.startsWith('{title:')){title=line.slice(7,-1).trim();return;}
+if(line.startsWith('{artist:')){artist=line.slice(8,-1).trim();return;}
+if(line.startsWith('{key:')){key=line.slice(5,-1).trim();return;}
+if(line.startsWith('{capo:')){capo=line.slice(6,-1).trim();return;}
 
 if(line.startsWith('{comment:')){
 parsedSong.push({
@@ -349,10 +346,9 @@ parsedSong.push({
 type:'line',
 text:line
 });
-
 });
 
-document.getElementById('title').textContent=title;
+document.getElementById('title').textContent=title||'MusiMix';
 document.getElementById('meta').textContent=
 [artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo]
 .filter(Boolean)
@@ -362,19 +358,17 @@ renderSong();
 }
 
 function renderSong(){
-
 const lyrics=document.getElementById('lyrics');
 lyrics.innerHTML='';
 
 parsedSong.forEach(item=>{
 
 if(item.type==='section'){
-lyrics.innerHTML+=
-'<div class="section">'+item.text+'</div>';
+lyrics.innerHTML+=`<div class="section">${item.text}</div>`;
 return;
 }
 
-let line=document.createElement('div');
+const line=document.createElement('div');
 line.className='line';
 
 const regex=/\[(.*?)\]([^\[]*)/g;
@@ -382,13 +376,15 @@ let m;
 
 while((m=regex.exec(item.text))!==null){
 
-let chord=shiftChord(m[1],semitoneShift);
+line.innerHTML+=`
+<span class="segment">
+<span class="chord">${shiftChord(m[1],semitoneShift)}</span>
+<span class="word">${m[2]}</span>
+</span>`;
+}
 
-line.innerHTML+=
-'<span class="segment">'+
-'<span class="chord">'+chord+'</span>'+
-'<span class="word">'+m[2]+'</span>'+
-'</span>';
+if(line.innerHTML===''){
+line.textContent=item.text;
 }
 
 lyrics.appendChild(line);
@@ -396,7 +392,6 @@ lyrics.appendChild(line);
 }
 
 function drawWaveform(){
-
 const c=document.getElementById('waveform');
 const ctx=c.getContext('2d');
 
@@ -404,20 +399,17 @@ c.width=800;
 c.height=80;
 
 ctx.clearRect(0,0,c.width,c.height);
+ctx.strokeStyle='#2d7cff';
 
-ctx.strokeStyle='#4a90e2';
-ctx.lineWidth=1;
-
+for(let x=0;x<c.width;x+=4){
+const h=Math.random()*60;
 ctx.beginPath();
-
-for(let x=0;x<c.width;x+=3){
-let h=Math.random()*60;
 ctx.moveTo(x,40-h/2);
 ctx.lineTo(x,40+h/2);
-}
-
 ctx.stroke();
 }
+}
 </script>
+
 </body>
 </html>
