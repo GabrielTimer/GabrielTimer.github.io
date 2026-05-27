@@ -46,7 +46,21 @@ function showChordPopup(chord, target) {
       ? renderGuitarSVG(chord)
       : renderPianoSVG(chord);
 
-  target.appendChild(popup);
+  document.body.appendChild(popup);
+
+  const rect = target.getBoundingClientRect();
+
+  let left = rect.left;
+  let top = rect.bottom + 10;
+
+  const popupWidth = 170;
+
+  if (left + popupWidth > window.innerWidth - 10) {
+    left = window.innerWidth - popupWidth - 10;
+  }
+
+  popup.style.left = left + "px";
+  popup.style.top = top + "px";
 }
 
 function hideChordPopup() {
@@ -69,32 +83,35 @@ function renderGuitarSVG(chordName) {
   frets.forEach((fret, i) => {
     if (fret > 0) {
       dots += `
-      <circle
-        cx="${22 + i * 18}"
-        cy="${35 + fret * 16}"
-        r="6"
-        fill="black"
-      />`;
+        <circle
+          cx="${22 + i * 18}"
+          cy="${35 + fret * 16}"
+          r="6"
+          fill="black"
+        />
+      `;
     }
   });
 
   return `
-  <div class="popup-inner">
-    <strong>${chordName}</strong>
-    <svg width="140" height="150">
-      ${Array.from({length:6}, (_,i)=>`
-        <line x1="${22+i*18}" y1="35"
-              x2="${22+i*18}" y2="115"
-              stroke="black"/>`).join("")}
+    <div class="popup-inner">
+      <strong>${chordName}</strong>
+      <svg width="140" height="150">
+        ${Array.from({length:6}, (_,i)=>`
+          <line x1="${22+i*18}" y1="35"
+                x2="${22+i*18}" y2="115"
+                stroke="black"/>
+        `).join("")}
 
-      ${Array.from({length:6}, (_,i)=>`
-        <line x1="22" y1="${35+i*16}"
-              x2="112" y2="${35+i*16}"
-              stroke="black"/>`).join("")}
+        ${Array.from({length:6}, (_,i)=>`
+          <line x1="22" y1="${35+i*16}"
+                x2="112" y2="${35+i*16}"
+                stroke="black"/>
+        `).join("")}
 
-      ${dots}
-    </svg>
-  </div>
+        ${dots}
+      </svg>
+    </div>
   `;
 }
 
