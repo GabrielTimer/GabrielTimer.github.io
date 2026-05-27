@@ -152,20 +152,25 @@ function renderGuitarSVG(chordName, voicingIndex = 0) {
       return;
     }
 
-    if (typeof fret === "number" && fret > 0) {
-      const relativeFret = fret - baseFret + 1;
+if (typeof fret === "number" && fret > 0) {
+  let relativeFret = fret;
 
-      if (relativeFret >= 1 && relativeFret <= 5) {
-        dots += `
-          <circle
-            cx="${x}"
-            cy="${35 + relativeFret * 16}"
-            r="6"
-            fill="#2d7cff"
-          />
-        `;
-      }
-    }
+  // si accord en position haute
+  if (baseFret > 1) {
+    relativeFret = fret;
+  }
+
+  if (relativeFret >= 1 && relativeFret <= 5) {
+    dots += `
+      <circle
+        cx="${x}"
+        cy="${35 + ((relativeFret - 1) * 16) + 35}"
+        r="6"
+        fill="#2d7cff"
+      />
+    `;
+  }
+}
   });
 
   return `
