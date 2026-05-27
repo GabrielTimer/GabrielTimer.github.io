@@ -328,11 +328,28 @@ function transpose(v){
 }
 
 function shiftChord(chord,s){
-const m=chord.match(/^([A-G](#|b)?)(.*)$/)
-if(!m)return chord
-let i=NOTES.indexOf(m[1].replace('Bb','A#'))
-if(i<0)return chord
-return NOTES[(i+s+12)%12]+m[3]
+
+  const flatMap={
+    'A#':'Bb',
+    'C#':'Db',
+    'D#':'Eb',
+    'F#':'Gb',
+    'G#':'Ab'
+  };
+
+  const m=chord.match(/^([A-G](#|b)?)(.*)$/)
+  if(!m)return chord
+
+  let root=m[1].replace('Bb','A#')
+  let i=NOTES.indexOf(root)
+
+  if(i<0)return chord
+
+  let shifted=NOTES[(i+s+12)%12]
+
+  if(flatMap[shifted]) shifted=flatMap[shifted]
+
+  return shifted+m[3]
 }
 
 async function loadZip(e){
@@ -481,20 +498,32 @@ lyrics.appendChild(line)
 }
 
 function drawWaveform(){
-const c=document.getElementById('waveform')
-const ctx=c.getContext('2d')
-c.width=800
-c.height=80
-ctx.clearRect(0,0,c.width,c.height)
-ctx.strokeStyle='#2d7cff'
 
-for(let x=0;x<c.width;x+=4){
-const h=Math.random()*60
-ctx.beginPath()
-ctx.moveTo(x,40-h/2)
-ctx.lineTo(x,40+h/2)
-ctx.stroke()
-}
+  const c=document.getElementById('waveform')
+  const ctx=c.getContext('2d')
+
+  c.width=800
+  c.height=80
+
+  ctx.clearRect(0,0,c.width,c.height)
+
+  ctx.strokeStyle='#2d7cff'
+  ctx.lineWidth=2
+
+  for(let x=0;x<c.width;x+=3){
+
+    const center=40
+
+    const h=
+      8+
+      Math.sin(x*0.02)*10+
+      Math.random()*18
+
+    ctx.beginPath()
+    ctx.moveTo(x,center-h)
+    ctx.lineTo(x,center+h)
+    ctx.stroke()
+  }
 }
 
 function renderLibrary(){
@@ -507,10 +536,32 @@ function toggleMixerPanel(){
 
   panel.classList.toggle('open');
 
-  btn.textContent = panel.classList.contains('open')
+  const isOpen = panel.classList.contains('open');
+
+  localStorage.setItem('mixerPanelOpen', isOpen ? '1' : '0');
+
+  btn.textContent = isOpen
     ? '▲ Masquer pistes'
     : '▼ Pistes';
 }
+
+window.addEventListener('load',()=>{
+
+  const panel=document.getElementById('mobileMixerPanel');
+  const btn=document.getElementById('toggleMixerBtn');
+
+  const saved=localStorage.getItem('mixerPanelOpen');
+
+  if(saved==='0'){
+    panel.classList.remove('open');
+    btn.textContent='▼ Pistes';
+  }else{
+    panel.classList.add('open');
+    btn.textContent='▲ Masquer pistes';
+  }
+
+});
+
 </script>
 
 </body>
