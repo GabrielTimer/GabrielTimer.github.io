@@ -72,10 +72,15 @@ function switchInstrument(type) {
   renderChordBar(window.currentChords);
 }
 
-function renderGuitarSVG(chordName) {
-  const chord = CHORD_DB[chordName];
-  if (!chord) return `<div class="missing-chord">${chordName}</div>`;
+function renderGuitarSVG(chordName, voicingIndex = 0) {
+  let voicings = CHORD_DB[chordName];
+  if (!voicings) return `<div>${chordName}</div>`;
 
+  if (!Array.isArray(voicings)) {
+    voicings = [voicings];
+  }
+
+  const chord = voicings[voicingIndex];
   const { frets } = chord;
 
   let dots = "";
@@ -86,8 +91,8 @@ function renderGuitarSVG(chordName) {
         <circle
           cx="${22 + i * 18}"
           cy="${35 + fret * 16}"
-          r="6"
-          fill="black"
+          r="5"
+          fill="#2d7cff"
         />
       `;
     }
@@ -95,7 +100,9 @@ function renderGuitarSVG(chordName) {
 
   return `
     <div class="popup-inner">
+
       <strong>${chordName}</strong>
+
       <svg width="140" height="150">
         ${Array.from({length:6}, (_,i)=>`
           <line x1="${22+i*18}" y1="35"
@@ -111,6 +118,26 @@ function renderGuitarSVG(chordName) {
 
         ${dots}
       </svg>
+
+      ${
+        voicings.length > 1
+        ? `
+          <div style="
+            display:flex;
+            justify-content:center;
+            gap:12px;
+            align-items:center;
+            margin-top:8px;
+            font-size:14px;
+          ">
+            <button onclick="changeVoicing('${chordName}',-1)">‹</button>
+            <span>${voicingIndex+1} / ${voicings.length}</span>
+            <button onclick="changeVoicing('${chordName}',1)">›</button>
+          </div>
+        `
+        : ''
+      }
+
     </div>
   `;
 }
