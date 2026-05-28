@@ -304,6 +304,7 @@ background:#242424;
 
 <div class="topbar">
 <button onclick="togglePlay()">▶ / ⏸</button>
+<button onclick="restartFromBeginning()">⏮ Début</button>
 <button onclick="changeScrollSpeed(-0.3)">🐢</button>
 <button onclick="changeScrollSpeed(0.3)">🐇</button>
 <button onclick="transpose(-1)">♭</button>
@@ -403,6 +404,28 @@ if(n.includes('(other)')) return '🎵 Other'
 if(n.includes('instrumental')) return '🎵 Instrumental'
 return null
 }
+
+function restartFromBeginning(){
+
+  const arr=Object.values(tracks);
+  if(!arr.length) return;
+
+  arr.forEach(a=>{
+    a.pause();
+    a.currentTime=0;
+  });
+
+  stopScroll();
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
+  drawStudioTimeline();
+  updateLyricsSync();
+}
+
 
 function togglePlay(){
 const arr=Object.values(tracks)
@@ -779,6 +802,9 @@ if(lines[activeLine]){
       0,
       Math.min(1,progress)
     );
+
+progress =
+  progress * progress * (3 - 2 * progress);
   }
 
   const currentEl=lines[activeLine];
