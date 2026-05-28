@@ -18,7 +18,23 @@
 --accent:#ffd166;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#111;color:#fff;font-family:Arial,sans-serif}
+body{
+  margin:0;
+  background:#111;
+  color:#fff;
+  font-family:Arial,sans-serif;
+
+  overscroll-behavior-y:none;
+}
+
+.lyrics{
+  padding:30px;
+  font-size:1.5rem;
+  line-height:1.45;
+
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:auto;
+}
 .topbar{
 position:sticky;
 top:0;
@@ -1002,20 +1018,15 @@ progress =
 
 if(window.innerWidth <= 900){
 
-  const currentTop =
-    currentEl.getBoundingClientRect().top;
-
   const offset = 140;
 
   window.scrollTo({
-    top:
-      window.scrollY +
-      currentTop -
-      offset,
-    behavior:'smooth'
+    top: targetY - offset,
+    behavior:'auto'
   });
 
-}else{
+}
+else{
 
   window.scrollTo({
     top:
