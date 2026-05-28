@@ -213,6 +213,53 @@ min-width:160px;
 }
 
 .popup-inner{text-align:center;}
+#library-panel{
+margin-top:18px;
+padding-top:14px;
+border-top:1px solid #2a2a2a;
+}
+
+#library-search{
+width:100%;
+padding:10px 12px;
+border-radius:10px;
+border:none;
+background:#1a1a1a;
+color:#fff;
+margin-bottom:12px;
+}
+
+.library-song{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+padding:10px;
+background:#171717;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.library-song-name{
+flex:1;
+cursor:pointer;
+font-size:.92rem;
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.library-actions{
+display:flex;
+gap:6px;
+}
+
+.icon-btn{
+padding:6px 8px;
+font-size:14px;
+border-radius:8px;
+background:#242424;
+}
 
 </style>
 </head>
@@ -239,6 +286,15 @@ min-width:160px;
 <div id="mobileMixerPanel" class="open">
   <canvas id="waveform"></canvas>
   <div id="mixer"></div>
+</div>
+
+<div id="library-panel">
+  <input
+    id="library-search"
+    placeholder="🔍 Rechercher..."
+    oninput="renderLibrary()"
+  >
+  <div id="library-list"></div>
 </div>
 
 </aside>
@@ -268,6 +324,7 @@ let scrollTimer=null
 let fontSize=1.5
 let semitoneShift=0
 let library=[]
+let musicDB=null
 let tracks={}
 let soloTrackName=null
 
@@ -327,6 +384,100 @@ function transpose(v){
   renderSong()
 }
 
+function initLibraryDB(){
+  return new Promise((resolve,reject)=>{
+
+    const request=indexedDB.open('musimix-library',1)
+
+    request.onupgradeneeded=e=>{
+      musicDB=e.target.result
+      musicDB.createObjectStore('songs',{keyPath:'name'})
+    }
+
+    request.onsuccess=e=>{
+      musicDB=e.target.result
+      resolve()
+    }
+
+    request.onerror=reject
+  })
+}
+
+function saveSongToDB(file,favorite=false){
+  return new Promise(resolve=>{
+    const tx=musicDB.transaction('songs','readwrite')
+
+    tx.objectStore('songs').put({
+      name:file.name,
+      file:file,
+      favorite:favorite
+    })
+
+    tx.oncomplete=()=>resolve()
+  })
+}
+
+async function loadZipFile(file){
+
+const zip=await JSZip.loadAsync(file)
+
+tracks={}
+let choFile=null
+
+for(const name in zip.files){
+
+if(name.endsWith('.cho')) choFile=name
+
+if(audioExt(name)){
+const stem=getStemType(name)
+if(stem){
+const blob=await zip.files[name].async('blob')
+tracks[stem]=new Audio(URL.createObjectURL(blob))
+}
+}
+}
+
+if(choFile){
+const txt=await zip.files[choFile].async('string')
+await loadChordDatabase()
+parseChordPro(txt)
+}
+
+renderMixer()
+drawWaveform()
+}
+
+function getSongsFromDB(){
+  return new Promise(resolve=>{
+    const tx=musicDB.transaction('songs','readonly')
+    const req=tx.objectStore('songs').getAll()
+    req.onsuccess=()=>resolve(req.result||[])
+  })
+}
+
+function deleteSong(name){
+  const tx=musicDB.transaction('songs','readwrite')
+  tx.objectStore('songs').delete(name)
+  tx.oncomplete=()=>renderLibrary()
+}
+
+async function toggleFavorite(name){
+  const songs=await getSongsFromDB()
+  const song=songs.find(s=>s.name===name)
+  if(!song)return
+
+  song.favorite=!song.favorite
+
+  await saveSongToDB(song.file,song.favorite)
+  renderLibrary()
+}
+
+async function openSongFromLibrary(name){
+  const songs=await getSongsFromDB()
+  const song=songs.find(s=>s.name===name)
+  if(song) loadZipFile(song.file)
+}
+
 function shiftChord(chord,s){
 
   const flatMap={
@@ -379,7 +530,7 @@ await loadChordDatabase()
 parseChordPro(txt)
 }
 
-library.push(file.name)
+await saveSongToDB(file)
 renderLibrary()
 renderMixer()
 drawWaveform()
@@ -526,8 +677,75 @@ function drawWaveform(){
   }
 }
 
-function renderLibrary(){
-  // volontairement vide : on masque le nom du ZIP
+async function renderLibrary(){
+
+const list=document.getElementById('library-list')
+if(!list)return
+
+let songs=await getSongsFromDB()
+
+const q=document
+.getElementById('library-search')
+.value
+.toLowerCase()
+
+if(q){
+songs=songs.filter(s=>
+s.name.toLowerCase().includes(q)
+)
+}
+
+songs.sort((a,b)=>{
+
+if(a.favorite && !b.favorite) return -1
+if(!a.favorite && b.favorite) return 1
+
+return a.name.localeCompare(
+  b.name,
+  'fr',
+  {sensitivity:'base'}
+)
+
+})
+
+list.innerHTML=''
+
+songs.forEach(song=>{
+
+const row=document.createElement('div')
+row.className='library-song'
+
+row.innerHTML=`
+
+<div
+class="library-song-name"
+onclick="openSongFromLibrary('${song.name.replace(/'/g,"\\'")}')"
+>
+${song.name}
+</div>
+
+<div class="library-actions">
+
+<button
+class="icon-btn"
+onclick="toggleFavorite('${song.name.replace(/'/g,"\\'")}')"
+>
+${song.favorite ? '⭐' : '☆'}
+</button>
+
+<button
+class="icon-btn"
+onclick="deleteSong('${song.name.replace(/'/g,"\\'")}')"
+>
+🗑
+</button>
+
+</div>
+`
+
+list.appendChild(row)
+
+})
 }
 
 function toggleMixerPanel(){
@@ -545,8 +763,10 @@ function toggleMixerPanel(){
     : '▼ Pistes';
 }
 
-window.addEventListener('load',()=>{
+window.addEventListener('load', async ()=>{
 
+await initLibraryDB()
+await renderLibrary()
   const panel=document.getElementById('mobileMixerPanel');
   const btn=document.getElementById('toggleMixerBtn');
 
