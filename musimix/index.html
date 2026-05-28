@@ -411,7 +411,9 @@ if(!arr.length)return
 if(arr[0].paused){
 const t=arr[0].currentTime
 arr.forEach(a=>{a.currentTime=t;a.play()})
-startScroll()
+if(!lyricSyncData.length){
+  startScroll();
+}
 }else{
 arr.forEach(a=>a.pause())
 stopScroll()
@@ -1185,7 +1187,10 @@ function studioSeek(e){
     a.play();
   });
 
-  startScroll();
+if(!lyricSyncData.length){
+    startScroll();
+  }
+
 }
 
 function startStudioAnimation(){
