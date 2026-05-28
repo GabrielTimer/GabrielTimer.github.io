@@ -928,10 +928,11 @@ function loadLyricSync(){
 
 function updateLyricsSync(){
 
-  if(!lyricSyncData.length) return
+  if(!lyricSyncData.length) return;
 
-  const first=Object.values(tracks)[0]
-  if(!first) return
+  stopScroll();
+
+  const first=Object.values(tracks)[0];
 
   const t=first.currentTime
 
@@ -989,11 +990,23 @@ progress =
   const targetY=
     y1 + ((y2-y1)*progress);
 
+const lyrics=document.getElementById('lyrics');
+
+if(window.innerWidth <= 900){
+
+  lyrics.scrollTo({
+    top: targetY - 120,
+    behavior:'smooth'
+  });
+
+}else{
+
   window.scrollTo({
     top: targetY - window.innerHeight*0.35,
     behavior:'auto'
   });
 
+}
   currentEl.classList.add('active-lyric');
 }
 }
