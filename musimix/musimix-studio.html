@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MusiMix Studio</title>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+
+<style>
+body{
+margin:0;
+background:#111;
+color:#fff;
+font-family:Arial,sans-serif;
+}
+
+.topbar{
+display:flex;
+gap:10px;
+padding:12px;
+background:#181818;
+position:sticky;
+top:0;
+z-index:10;
+}
+
+button{
+background:#2a2a2a;
+color:#fff;
+border:none;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer;
+}
+
+#timeline{
+width:100%;
+display:block;
+background:#0d0d0d;
+touch-action:none;
+}
+
+#timeDisplay{
+padding:8px 14px;
+color:#bbb;
+font-size:14px;
+}
+
+#loading{
+padding:12px;
+display:none;
+color:#ffd166;
+}
+
+#trackSelect{
+padding:10px;
+background:#222;
+color:#fff;
+border:none;
+border-radius:10px;
+}
+
+@media(max-width:900px){
+#timeline{
+height:500px;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+
+<button onclick="document.getElementById('zipInput').click()">
+➕ Charger ZIP
+</button>
+
+<input
+hidden
+id="zipInput"
+type="file"
+accept=".zip"
+onchange="loadZip(event)"
+>
+
+<select id="trackSelect" onchange="changeTrack()"></select>
+
+<button onclick="toggleViewMode()">
+☰ Toutes les pistes
+</button>
+
+<button onclick="togglePlay()">▶ / ⏸</button>
+
+</div>
+
+<div id="loading">Analyse des pistes...</div>
+
+<div id="timeDisplay">0:00 / 0:00</div>
+
+<canvas id="timeline"></canvas>
+
+<script>
+
+let tracks={}
+let waveforms={}
+let currentTrack=null
+let showAllTracks=false
+let animationFrame=null
+let isDragging=false
+
+const canvas=document.getElementById('timeline')
+const ctx=canvas.getContext('2d')
+
+const COLORS={
+'🎤 Voix':'#ffd166',
+'🥁 Drums':'#ef476f',
+'🎸 Bass':'#06d6a0',
+'🎸 Guitar':'#118ab2',
+'🎹 Piano':'#9b5de5',
+'🎵 Other':'#999'
+}
+
+function audioExt(name){
+return /\.(mp3|wav|flac)$/i.test(name)
+}
+
+function getStemType(name){
+const n=name.toLowerCase()
+if(n.includes('(vocals)')) return '🎤 Voix'
+if(n.includes('(drums)')) return '🥁 Drums'
+if(n.includes('(bass)')) return '🎸 Bass'
+if(n.includes('(guitar)')) return '🎸 Guitar'
+if(n.includes('(piano)')) return '🎹 Piano'
+if(n.includes('(other)')) return '🎵 Other'
+return null
+}
+
+async function loadZip(e){
+
+const file=e.target.files[0]
+if(!file) return
+
+document.getElementById('loading').style.display='block'
+
+const zip=await JSZip.loadAsync(file)
+
+tracks={}
+waveforms={}
+
+for(const name in zip.files){
+
+if(audioExt(name)){
+
+const stem=getStemType(name)
+if(!stem) continue
+
+const blob=await zip.files[name].async('blob')
+
+const audio=new Audio(URL.createObjectURL(blob))
+
+tracks[stem]=audio
+
+await generateWaveform(blob,stem)
+}
+}
+
+initTrackSelector()
+
+document.getElementById('loading').style.display='none'
+
+drawTimeline()
+startCursor()
+}
+
+async function generateWaveform(blob,stem){
+
+const ac=new AudioContext()
+const arrayBuffer=await blob.arrayBuffer()
+
+const audioBuffer=await ac.decodeAudioData(arrayBuffer)
+
+const raw=audioBuffer.getChannelData(0)
+
+const samples=1000
+const block=Math.floor(raw.length/samples)
+
+const filtered=[]
+
+for(let i=0;i<samples;i++){
+
+let sum=0
+
+for(let j=0;j<block;j++){
+sum+=Math.abs(raw[(i*block)+j]||0)
+}
+
+filtered.push(sum/block)
+}
+
+waveforms[stem]=filtered
+}
+
+function initTrackSelector(){
+
+const select=document.getElementById('trackSelect')
+
+select.innerHTML=''
+
+Object.keys(tracks).forEach(name=>{
+
+const option=document.createElement('option')
+option.value=name
+option.textContent=name
+select.appendChild(option)
+
+})
+
+currentTrack=
+tracks['🎤 Voix']
+? '🎤 Voix'
+: Object.keys(tracks)[0]
+}
+
+function changeTrack(){
+currentTrack=document.getElementById('trackSelect').value
+drawTimeline()
+}
+
+function toggleViewMode(){
+showAllTracks=!showAllTracks
+drawTimeline()
+}
+
+function togglePlay(){
+
+const arr=Object.values(tracks)
+if(!arr.length)return
+
+if(arr[0].paused){
+
+const t=arr[0].currentTime
+arr.forEach(a=>{
+a.currentTime=t
+a.play()
+})
+
+}else{
+arr.forEach(a=>a.pause())
+}
+}
+
+function drawTimeline(){
+
+canvas.width=window.innerWidth
+
+const isMobile=window.innerWidth<900
+const trackHeight=isMobile?100:55
+
+const visibleTracks=showAllTracks
+? Object.keys(waveforms)
+: [currentTrack]
+
+canvas.height=visibleTracks.length*trackHeight
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+visibleTracks.forEach((name,index)=>{
+
+const data=waveforms[name]
+if(!data) return
+
+const y=index*trackHeight
+const mid=y+(trackHeight/2)
+
+ctx.strokeStyle=COLORS[name]||'#888'
+ctx.lineWidth=1
+
+data.forEach((v,i)=>{
+
+const x=(i/data.length)*canvas.width
+const h=v*trackHeight*0.8
+
+ctx.beginPath()
+ctx.moveTo(x,mid-h/2)
+ctx.lineTo(x,mid+h/2)
+ctx.stroke()
+
+})
+
+ctx.fillStyle='#fff'
+ctx.fillText(name,8,y+16)
+
+})
+}
+
+function startCursor(){
+
+cancelAnimationFrame(animationFrame)
+
+function loop(){
+
+drawTimeline()
+
+const first=Object.values(tracks)[0]
+
+if(first){
+
+const x=(first.currentTime/first.duration)*canvas.width
+
+ctx.strokeStyle='#fff'
+ctx.lineWidth=2
+
+ctx.beginPath()
+ctx.moveTo(x,0)
+ctx.lineTo(x,canvas.height)
+ctx.stroke()
+
+document.getElementById('timeDisplay').textContent=
+formatTime(first.currentTime)
++' / '+
+formatTime(first.duration)
+
+}
+
+animationFrame=requestAnimationFrame(loop)
+}
+
+loop()
+}
+
+function seekTo(clientX){
+
+const rect=canvas.getBoundingClientRect()
+
+const x=clientX-rect.left
+const ratio=x/canvas.width
+
+const first=Object.values(tracks)[0]
+if(!first)return
+
+const time=ratio*first.duration
+
+Object.values(tracks).forEach(a=>{
+a.currentTime=time
+a.play()
+})
+}
+
+canvas.addEventListener('click',e=>{
+seekTo(e.clientX)
+})
+
+canvas.addEventListener('pointerdown',()=>{
+isDragging=true
+})
+
+canvas.addEventListener('pointermove',e=>{
+if(isDragging) seekTo(e.clientX)
+})
+
+canvas.addEventListener('pointerup',()=>{
+isDragging=false
+})
+
+function formatTime(sec){
+
+if(!sec) return '0:00'
+
+const m=Math.floor(sec/60)
+const s=Math.floor(sec%60)
+
+return m+':'+String(s).padStart(2,'0')
+}
+
+window.addEventListener('resize',drawTimeline)
+
+</script>
+
+</body>
+</html>
