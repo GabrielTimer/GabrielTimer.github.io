@@ -542,8 +542,18 @@ stopScroll()
 }
 
 function startScroll(){
-stopScroll()
-scrollTimer=setInterval(()=>window.scrollBy(0,1),80/scrollSpeed)
+
+  if(lyricSyncData.length){
+    stopScroll();
+    return;
+  }
+
+  stopScroll();
+
+  scrollTimer=setInterval(
+    ()=>window.scrollBy(0,1),
+    80/scrollSpeed
+  );
 }
 
 function stopScroll(){
@@ -990,19 +1000,26 @@ progress =
   const targetY=
     y1 + ((y2-y1)*progress);
 
-const lyrics=document.getElementById('lyrics');
-
 if(window.innerWidth <= 900){
 
-  lyrics.scrollTo({
-    top: targetY - 120,
+  const currentTop =
+    currentEl.getBoundingClientRect().top;
+
+  const offset = 140;
+
+  window.scrollTo({
+    top:
+      window.scrollY +
+      currentTop -
+      offset,
     behavior:'smooth'
   });
 
 }else{
 
   window.scrollTo({
-    top: targetY - window.innerHeight*0.35,
+    top:
+      targetY - window.innerHeight*0.35,
     behavior:'auto'
   });
 
