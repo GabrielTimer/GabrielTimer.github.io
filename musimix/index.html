@@ -243,6 +243,12 @@ min-width:160px;
   }
 }
 
+.active-lyric{
+background:rgba(255,209,102,.18);
+border-radius:8px;
+transition:.2s;
+}
+
 .popup-inner{text-align:center;}
 #library-panel{
 margin-top:18px;
@@ -305,6 +311,9 @@ background:#242424;
 <button onclick="changeFont(-0.1)">A−</button>
 <button onclick="changeFont(0.1)">A+</button>
 <button onclick="document.getElementById('zipInput').click()">➕ Ajouter ZIP</button>
+<button id="syncBtn" onclick="toggleSyncMode()">
+🎯 Sync Lyrics
+</button>
 <input hidden id="zipInput" type="file" accept=".zip" onchange="loadZip(event)">
 </div>
 
@@ -374,6 +383,8 @@ let studioAnimation=null
 let studioListenersInitialized=false
 let soloTrackName=null
 let currentSongKey=''
+let lyricSyncData=[]
+let syncMode=false
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
@@ -467,6 +478,7 @@ function saveSongToDB(file,favorite=false){
 async function loadZipFile(file){
 
 currentSongKey=file.name
+loadLyricSync()
 
 const zip=await JSZip.loadAsync(file)
 
@@ -580,6 +592,7 @@ function shiftChord(chord,s){
 async function loadZip(e){
 const file=e.target.files[0]
 currentSongKey=file.name
+loadLyricSync()
 if(!file)return
 const zip=await JSZip.loadAsync(file)
 currentSongKey=file.name
@@ -654,6 +667,105 @@ function renameTrack(trackName){
   renderMixer()
   drawStudioTimeline()
   initStudioTimeline()
+}
+
+function toggleSyncMode(){
+
+  syncMode=!syncMode
+
+  document.getElementById('syncBtn').textContent=
+    syncMode
+      ? '🔴 Sync en cours'
+      : '🎯 Sync Lyrics'
+
+  if(syncMode){
+    lyricSyncData=[]
+  }else{
+    saveLyricSync()
+  }
+}
+
+function markCurrentLyric(){
+
+  if(!syncMode) return
+
+  const first=Object.values(tracks)[0]
+  if(!first) return
+
+  const lines=[
+    ...document.querySelectorAll('.lyrics-line')
+  ]
+
+  const nextIndex=lyricSyncData.length
+
+  if(!lines[nextIndex]) return
+
+  lyricSyncData.push({
+    time:first.currentTime,
+    line:nextIndex
+  })
+
+  saveLyricSync()
+}
+
+function saveLyricSync(){
+
+  if(!currentSongKey) return
+
+  localStorage.setItem(
+    'lyricsSync_'+currentSongKey,
+    JSON.stringify(lyricSyncData)
+  )
+}
+
+function loadLyricSync(){
+
+  if(!currentSongKey) return
+
+  lyricSyncData=
+    JSON.parse(
+      localStorage.getItem(
+        'lyricsSync_'+currentSongKey
+      ) || '[]'
+    )
+}
+
+function updateLyricsSync(){
+
+  if(!lyricSyncData.length) return
+
+  const first=Object.values(tracks)[0]
+  if(!first) return
+
+  const t=first.currentTime
+
+  let activeLine=0
+
+  lyricSyncData.forEach(item=>{
+    if(t>=item.time){
+      activeLine=item.line
+    }
+  })
+
+  const lines=[
+    ...document.querySelectorAll('.lyrics-line')
+  ]
+
+  lines.forEach(l=>{
+    l.classList.remove('active-lyric')
+  })
+
+  if(lines[activeLine]){
+
+    lines[activeLine].classList.add(
+      'active-lyric'
+    )
+
+    lines[activeLine].scrollIntoView({
+      behavior:'smooth',
+      block:'center'
+    })
+  }
 }
 
 function renderMixer(){
@@ -745,7 +857,7 @@ return
 }
 
 const line=document.createElement('div')
-line.className='line'
+line.className='line lyrics-line'
 const parts=item.text.split(/(\[.*?\])/g)
 
 parts.forEach(part=>{
@@ -1052,6 +1164,7 @@ function startStudioAnimation(){
   function animate(){
 
     drawStudioTimeline();
+    updateLyricsSync();
 
     studioAnimation=requestAnimationFrame(animate);
   }
@@ -1146,6 +1259,17 @@ function formatTime(sec){
 
   return m+':'+String(s).padStart(2,'0');
 }
+
+document.addEventListener('keydown',e=>{
+
+  if(e.code==='Space' && syncMode){
+
+    e.preventDefault();
+
+    markCurrentLyric();
+  }
+
+});
 
 </script>
 
