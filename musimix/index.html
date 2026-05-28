@@ -41,7 +41,7 @@ white-space:nowrap
 }
 .layout{
 display:grid;
-grid-template-columns:320px 1fr
+grid-template-columns:320px 8px 1fr;
 }
 .sidebar{
 position:sticky;
@@ -115,6 +115,38 @@ border-radius:10px;
 margin-top:12px;
 font-size:.95rem;
 cursor:pointer
+}
+
+#resizeHandle{
+width:8px;
+cursor:col-resize;
+background:#171717;
+border-left:1px solid #2a2a2a;
+border-right:1px solid #2a2a2a;
+position:relative;
+transition:background .15s;
+}
+
+#resizeHandle:hover{
+background:#2a2a2a;
+}
+
+#resizeHandle::after{
+content:'';
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:4px;
+height:44px;
+border-radius:999px;
+background:#3a3a3a;
+}
+
+@media(max-width:900px){
+  #resizeHandle{
+    display:none;
+  }
 }
 
 #studio-panel{
@@ -363,7 +395,7 @@ background:#242424;
 </div>
 
 </aside>
-
+<div id="resizeHandle"></div>
 <main class="main">
 <div class="header">
 <h1 id="title">MusiMix</h1>
@@ -1239,8 +1271,9 @@ function toggleMixerPanel(){
 
 window.addEventListener('load', async ()=>{
 
-await initLibraryDB()
-await renderLibrary()
+  await initLibraryDB();
+  await renderLibrary();
+
   const panel=document.getElementById('mobileMixerPanel');
   const btn=document.getElementById('toggleMixerBtn');
 
@@ -1253,6 +1286,8 @@ await renderLibrary()
     panel.classList.add('open');
     btn.textContent='▲ Masquer pistes';
   }
+
+  initResizableLayout();
 
 });
 
@@ -1510,6 +1545,59 @@ document.addEventListener('keydown',e=>{
   }
 
 });
+
+let isResizing=false;
+
+function initResizableLayout(){
+
+  if(window.innerWidth<900) return;
+
+  const layout=document.querySelector('.layout');
+  const handle=document.getElementById('resizeHandle');
+
+  if(!layout || !handle) return;
+
+  const saved=
+    localStorage.getItem('musimixSidebarWidth');
+
+  if(saved){
+    layout.style.gridTemplateColumns=
+      `${saved}px 8px 1fr`;
+  }
+
+  handle.addEventListener('pointerdown',()=>{
+    isResizing=true;
+    document.body.style.cursor='col-resize';
+  });
+
+  window.addEventListener('pointermove',e=>{
+
+    if(!isResizing) return;
+
+    const min=220;
+    const max=window.innerWidth*0.65;
+
+    let leftWidth=e.clientX;
+
+    leftWidth=Math.max(min,leftWidth);
+    leftWidth=Math.min(max,leftWidth);
+
+    layout.style.gridTemplateColumns=
+      `${leftWidth}px 8px 1fr`;
+
+    localStorage.setItem(
+      'musimixSidebarWidth',
+      leftWidth
+    );
+
+    drawStudioTimeline();
+  });
+
+  window.addEventListener('pointerup',()=>{
+    isResizing=false;
+    document.body.style.cursor='';
+  });
+}
 
 </script>
 
