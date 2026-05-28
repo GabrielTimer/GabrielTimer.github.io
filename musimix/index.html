@@ -263,6 +263,43 @@ min-width:160px;
   display:none;
 }
 
+#toggleHeaderBtn{
+position:absolute;
+top:8px;
+right:12px;
+
+width:32px;
+height:32px;
+
+padding:0;
+
+border-radius:999px;
+
+font-size:16px;
+line-height:1;
+
+background:#1d1d1d;
+color:#fff;
+
+z-index:60;
+}
+
+.header.collapsed{
+padding-top:10px;
+padding-bottom:10px;
+}
+
+.header.collapsed .meta,
+.header.collapsed .instrument-switch,
+.header.collapsed #chord-bar{
+display:none;
+}
+
+.header.collapsed h1{
+font-size:1.2rem;
+margin:0;
+}
+
 @media(max-width:900px){
 
   #toggleMixerBtn{
@@ -409,6 +446,9 @@ background:#242424;
 <div id="resizeHandle"></div>
 <main class="main">
 <div class="header">
+<button id="toggleHeaderBtn" onclick="toggleHeaderPanel()">
+  ▲
+</button>
 <h1 id="title">MusiMix</h1>
 <div class="meta" id="meta"></div>
 
@@ -1300,6 +1340,16 @@ window.addEventListener('load', async ()=>{
 
   initResizableLayout();
 
+const header=document.querySelector('.header');
+const headerBtn=document.getElementById('toggleHeaderBtn');
+
+if(
+  localStorage.getItem('musimixHeaderCollapsed')==='1'
+){
+  header.classList.add('collapsed');
+ headerBtn.textContent='▼';
+}
+
 });
 
 const STUDIO_COLORS={
@@ -1610,6 +1660,26 @@ function initResizableLayout(){
   });
 }
 
+function toggleHeaderPanel(){
+
+  const header=document.querySelector('.header');
+  const btn=document.getElementById('toggleHeaderBtn');
+
+  if(!header) return;
+
+  header.classList.toggle('collapsed');
+
+  const collapsed=
+    header.classList.contains('collapsed');
+
+  btn.textContent=
+    collapsed ? '▼' : '▲';
+
+  localStorage.setItem(
+    'musimixHeaderCollapsed',
+    collapsed ? '1' : '0'
+  );
+}
 </script>
 
 </body>
