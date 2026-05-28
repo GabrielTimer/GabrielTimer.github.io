@@ -65,10 +65,7 @@ margin-bottom:12px;
 }
 
 #waveform{
-position:sticky;
-top:0;
-z-index:41;
-background:#0d0d0d;
+display:none;
 }
 
 .main{min-height:100vh}
@@ -118,6 +115,40 @@ border-radius:10px;
 margin-top:12px;
 font-size:.95rem;
 cursor:pointer
+}
+
+#studio-panel{
+margin-top:12px;
+background:#111;
+border-radius:12px;
+overflow:hidden;
+}
+
+#studio-toolbar{
+display:flex;
+gap:10px;
+align-items:center;
+padding:10px;
+background:#171717;
+border-bottom:1px solid #2a2a2a;
+flex-wrap:wrap;
+}
+
+#studioTrackSelect{
+background:#242424;
+color:#fff;
+border:none;
+padding:8px 12px;
+border-radius:10px;
+}
+
+#studioTimeline{
+width:100%;
+height:180px;
+display:block;
+background:#0d0d0d;
+cursor:pointer;
+touch-action:none;
 }
 
 @media(max-width:900px){
@@ -286,6 +317,15 @@ background:#242424;
 <div id="mobileMixerPanel" class="open">
   <canvas id="waveform"></canvas>
   <div id="mixer"></div>
+<div id="studio-panel">
+  <div id="studio-toolbar">
+    <select id="studioTrackSelect"></select>
+    <button onclick="toggleStudioView()">☰ Toutes les pistes</button>
+    <span id="studioTime">0:00 / 0:00</span>
+  </div>
+
+  <canvas id="studioTimeline"></canvas>
+</div>
 </div>
 
 <div id="library-panel">
@@ -326,6 +366,12 @@ let semitoneShift=0
 let library=[]
 let musicDB=null
 let tracks={}
+let waveformCache={}
+let studioTrack=null
+let studioShowAll=false
+let studioDragging=false
+let studioAnimation=null
+let studioListenersInitialized=false
 let soloTrackName=null
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
@@ -443,6 +489,8 @@ await loadChordDatabase()
 parseChordPro(txt)
 }
 
+await buildStudioWaveforms()
+initStudioTimeline()
 renderMixer()
 drawWaveform()
 }
@@ -553,6 +601,8 @@ await loadChordDatabase()
 parseChordPro(txt)
 }
 
+await buildStudioWaveforms()
+initStudioTimeline()
 await saveSongToDB(file)
 renderLibrary()
 renderMixer()
@@ -804,6 +854,242 @@ await renderLibrary()
   }
 
 });
+
+const STUDIO_COLORS={
+  '🎤 Voix':'#ffd166',
+  '🥁 Drums':'#ef476f',
+  '🎸 Bass':'#06d6a0',
+  '🎸 Guitar':'#118ab2',
+  '🎹 Piano':'#9b5de5',
+  '🎵 Other':'#8d99ae',
+  '🎵 Instrumental':'#8d99ae'
+};
+
+async function buildStudioWaveforms(){
+
+  waveformCache={};
+
+  const audioContext=new (
+    window.AudioContext||
+    window.webkitAudioContext
+  )();
+
+  for(const [name,audio] of Object.entries(tracks)){
+
+    try{
+
+      const response=await fetch(audio.src);
+      const arrayBuffer=await response.arrayBuffer();
+      const decoded=await audioContext.decodeAudioData(arrayBuffer);
+
+      const raw=decoded.getChannelData(0);
+
+      const samples=1200;
+      const block=Math.floor(raw.length/samples);
+
+      const peaks=[];
+
+      for(let i=0;i<samples;i++){
+
+        let sum=0;
+
+        for(let j=0;j<block;j++){
+          sum+=Math.abs(raw[(i*block)+j]||0);
+        }
+
+        peaks.push(sum/block);
+      }
+
+      waveformCache[name]=peaks;
+
+    }catch(err){
+      console.warn('Waveform error:',name,err);
+    }
+  }
+
+  studioTrack=
+    tracks['🎤 Voix']
+    ? '🎤 Voix'
+    : Object.keys(tracks)[0];
+
+}
+
+function initStudioTimeline(){
+
+  const canvas=document.getElementById('studioTimeline');
+  const select=document.getElementById('studioTrackSelect');
+
+  if(!canvas || !select) return;
+
+  select.innerHTML='';
+
+  Object.keys(tracks).forEach(name=>{
+
+    const option=document.createElement('option');
+    option.value=name;
+    option.textContent=name;
+
+    if(name===studioTrack){
+      option.selected=true;
+    }
+
+    select.appendChild(option);
+  });
+
+  select.onchange=e=>{
+    studioTrack=e.target.value;
+    drawStudioTimeline();
+  };
+
+  if(!studioListenersInitialized){
+
+    canvas.addEventListener('click',e=>{
+      studioSeek(e);
+    });
+
+    canvas.addEventListener('pointerdown',()=>{
+      studioDragging=true;
+    });
+
+    canvas.addEventListener('pointermove',e=>{
+      if(studioDragging){
+        studioSeek(e);
+      }
+    });
+
+    window.addEventListener('pointerup',()=>{
+      studioDragging=false;
+    });
+
+    studioListenersInitialized=true;
+  }
+
+  startStudioAnimation();
+}
+
+function toggleStudioView(){
+  studioShowAll=!studioShowAll;
+  drawStudioTimeline();
+}
+
+function studioSeek(e){
+
+  const canvas=document.getElementById('studioTimeline');
+  const rect=canvas.getBoundingClientRect();
+
+  const x=e.clientX-rect.left;
+  const ratio=x/canvas.width;
+
+  const first=Object.values(tracks)[0];
+  if(!first || !first.duration) return;
+
+  const time=ratio*first.duration;
+
+  Object.values(tracks).forEach(a=>{
+    a.currentTime=time;
+    a.play();
+  });
+
+  startScroll();
+}
+
+function startStudioAnimation(){
+
+  cancelAnimationFrame(studioAnimation);
+
+  function animate(){
+
+    drawStudioTimeline();
+
+    studioAnimation=requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+function drawStudioTimeline(){
+
+  const canvas=document.getElementById('studioTimeline');
+  if(!canvas) return;
+
+  const ctx=canvas.getContext('2d');
+
+  const isMobile=window.innerWidth<900;
+
+  const visibleTracks=studioShowAll
+    ? Object.keys(waveformCache)
+    : [studioTrack];
+
+  const trackHeight=isMobile?90:52;
+
+  canvas.width=canvas.clientWidth;
+  canvas.height=Math.max(
+    120,
+    visibleTracks.length*trackHeight
+  );
+
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  visibleTracks.forEach((name,index)=>{
+
+    const data=waveformCache[name];
+    if(!data) return;
+
+    const y=index*trackHeight;
+    const mid=y+trackHeight/2;
+
+    ctx.strokeStyle=
+      STUDIO_COLORS[name] || '#999';
+
+    ctx.lineWidth=1;
+
+    data.forEach((v,i)=>{
+
+      const x=(i/data.length)*canvas.width;
+      const h=v*(trackHeight*0.85);
+
+      ctx.beginPath();
+      ctx.moveTo(x,mid-h/2);
+      ctx.lineTo(x,mid+h/2);
+      ctx.stroke();
+    });
+
+    ctx.fillStyle='#fff';
+    ctx.font='12px Arial';
+    ctx.fillText(name,8,y+14);
+  });
+
+  const first=Object.values(tracks)[0];
+
+  if(first && first.duration){
+
+    const ratio=first.currentTime/first.duration;
+    const x=ratio*canvas.width;
+
+    ctx.strokeStyle='#ffffff';
+    ctx.lineWidth=2;
+
+    ctx.beginPath();
+    ctx.moveTo(x,0);
+    ctx.lineTo(x,canvas.height);
+    ctx.stroke();
+
+    document.getElementById('studioTime').textContent=
+      formatTime(first.currentTime)
+      +' / '+
+      formatTime(first.duration);
+  }
+}
+
+function formatTime(sec){
+
+  if(!sec) return '0:00';
+
+  const m=Math.floor(sec/60);
+  const s=Math.floor(sec%60);
+
+  return m+':'+String(s).padStart(2,'0');
+}
 
 </script>
 
