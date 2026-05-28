@@ -456,9 +456,32 @@ function getSongsFromDB(){
 }
 
 function deleteSong(name){
-  const tx=musicDB.transaction('songs','readwrite')
-  tx.objectStore('songs').delete(name)
-  tx.oncomplete=()=>renderLibrary()
+
+  const tx=musicDB.transaction('songs','readonly')
+
+  const req=tx.objectStore('songs').get(name)
+
+  req.onsuccess=()=>{
+
+    const song=req.result
+    if(!song) return
+
+    if(song.favorite){
+
+      const ok=confirm(
+        `Supprimer "${name}" des favoris ?`
+      )
+
+      if(!ok) return
+    }
+
+    const delTx=musicDB.transaction('songs','readwrite')
+
+    delTx.objectStore('songs').delete(name)
+
+    delTx.oncomplete=()=>renderLibrary()
+
+  }
 }
 
 async function toggleFavorite(name){
