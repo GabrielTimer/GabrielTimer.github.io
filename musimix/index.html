@@ -315,6 +315,9 @@ background:#242424;
 <button id="syncBtn" onclick="toggleSyncMode()">
 🎯 Sync Lyrics
 </button>
+<button onclick="exportLrc()">
+💾 Export LRC
+</button>
 <input hidden id="zipInput" type="file" accept=".zip" onchange="loadZip(event)">
 </div>
 
@@ -509,8 +512,11 @@ const zip=await JSZip.loadAsync(file)
 
 tracks={}
 let choFile=null
+let lrcFile=null
 
 for(const name in zip.files){
+
+if(name.endsWith('.lrc')) lrcFile=name
 
 if(name.endsWith('.cho')) choFile=name
 
@@ -527,6 +533,11 @@ if(choFile){
 const txt=await zip.files[choFile].async('string')
 await loadChordDatabase()
 parseChordPro(txt)
+if(lrcFile){
+  const lrcText=
+    await zip.files[lrcFile].async('string');
+  parseLrc(lrcText);
+}
 }
 
 await buildStudioWaveforms()
@@ -624,8 +635,11 @@ currentSongKey=file.name
 
 tracks={}
 let choFile=null
+let lrcFile=null
 
 for(const name in zip.files){
+
+if(name.endsWith('.lrc')) lrcFile=name
 
 if(name.endsWith('.cho')) choFile=name
 
@@ -642,6 +656,11 @@ if(choFile){
 const txt=await zip.files[choFile].async('string')
 await loadChordDatabase()
 parseChordPro(txt)
+if(lrcFile){
+  const lrcText=
+    await zip.files[lrcFile].async('string');
+  parseLrc(lrcText);
+}
 }
 
 await buildStudioWaveforms()
@@ -825,6 +844,96 @@ progress =
 
   currentEl.classList.add('active-lyric');
 }
+}
+
+function parseLrc(text){
+
+  const lines=text.split(/\r?\n/);
+
+  lyricSyncData=[];
+
+  lines.forEach(line=>{
+
+    const match=line.match(
+      /^\[(\d+):(\d+\.\d+)\](.*)$/
+    );
+
+    if(!match) return;
+
+    const min=parseInt(match[1]);
+    const sec=parseFloat(match[2]);
+
+    const time=(min*60)+sec;
+
+    const lyric=match[3].trim();
+
+    const lyricLines=[
+      ...document.querySelectorAll('.lyrics-line')
+    ];
+
+    const index=lyricLines.findIndex(
+      el=>el.innerText.trim()===lyric
+    );
+
+    if(index>=0){
+      lyricSyncData.push({
+        time,
+        line:index
+      });
+    }
+
+  });
+
+  saveLyricSync();
+}
+
+function exportLrc(){
+
+  if(!lyricSyncData.length){
+    alert('Aucune sync à exporter');
+    return;
+  }
+
+  const lyricLines=[
+    ...document.querySelectorAll('.lyrics-line')
+  ];
+
+  let lrc='';
+
+  lyricSyncData.forEach(item=>{
+
+    const line=
+      lyricLines[item.line]
+      ?.innerText
+      ?.trim();
+
+    if(!line) return;
+
+    const min=Math.floor(item.time/60);
+    const sec=(item.time%60)
+      .toFixed(2)
+      .padStart(5,'0');
+
+    lrc+=`[${
+      String(min).padStart(2,'0')
+    }:${sec}]${line}\n`;
+  });
+
+  const blob=new Blob(
+    [lrc],
+    {type:'text/plain'}
+  );
+
+  const a=document.createElement('a');
+
+  a.href=URL.createObjectURL(blob);
+
+  a.download=
+    currentSongKey
+      .replace('.zip','')
+      +'.lrc';
+
+  a.click();
 }
 
 function renderMixer(){
