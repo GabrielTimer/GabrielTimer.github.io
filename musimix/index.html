@@ -755,17 +755,48 @@ function updateLyricsSync(){
     l.classList.remove('active-lyric')
   })
 
-  if(lines[activeLine]){
+if(lines[activeLine]){
 
-    lines[activeLine].classList.add(
-      'active-lyric'
-    )
+  const current = lyricSyncData.find(
+    x => x.line === activeLine
+  );
 
-    lines[activeLine].scrollIntoView({
-      behavior:'smooth',
-      block:'center'
-    })
+  const next = lyricSyncData.find(
+    x => x.line === activeLine + 1
+  );
+
+  let progress = 0;
+
+  if(current && next){
+
+    progress =
+      (t - current.time) /
+      (next.time - current.time);
+
+    progress=Math.max(
+      0,
+      Math.min(1,progress)
+    );
   }
+
+  const currentEl=lines[activeLine];
+
+  const nextEl=
+    lines[activeLine+1] || currentEl;
+
+  const y1=currentEl.offsetTop;
+  const y2=nextEl.offsetTop;
+
+  const targetY=
+    y1 + ((y2-y1)*progress);
+
+  window.scrollTo({
+    top: targetY - window.innerHeight*0.35,
+    behavior:'auto'
+  });
+
+  currentEl.classList.add('active-lyric');
+}
 }
 
 function renderMixer(){
