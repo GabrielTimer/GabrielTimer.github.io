@@ -312,6 +312,18 @@ background:#242424;
 <button onclick="changeFont(-0.1)">A−</button>
 <button onclick="changeFont(0.1)">A+</button>
 <button onclick="document.getElementById('zipInput').click()">➕ Ajouter ZIP</button>
+<button onclick="document.getElementById('filesInput').click()">
+  📂 Ajouter fichiers
+</button>
+
+<input
+  hidden
+  id="filesInput"
+  type="file"
+  multiple
+  accept=".cho,.lrc,.mp3,.wav,.flac"
+  onchange="loadFiles(event)"
+>
 <button id="syncBtn" onclick="toggleSyncMode()">
 🎯 Sync Lyrics
 </button>
@@ -669,6 +681,63 @@ await saveSongToDB(file)
 renderLibrary()
 renderMixer()
 drawWaveform()
+}
+
+async function loadFiles(e){
+
+  const files=[...e.target.files];
+  if(!files.length) return;
+
+  tracks={};
+
+  let choFile=null;
+  let lrcFile=null;
+
+  currentSongKey=
+    files[0].name.split('.')[0];
+
+  loadLyricSync();
+
+  for(const file of files){
+
+    const name=file.name.toLowerCase();
+
+    if(name.endsWith('.cho')){
+      choFile=file;
+    }
+
+    else if(name.endsWith('.lrc')){
+      lrcFile=file;
+    }
+
+    else if(audioExt(name)){
+
+      const stem=getStemType(name);
+
+      if(stem){
+        tracks[stem]=new Audio(
+          URL.createObjectURL(file)
+        );
+      }
+    }
+  }
+
+  if(choFile){
+    const txt=await choFile.text();
+
+    await loadChordDatabase();
+    parseChordPro(txt);
+  }
+
+  if(lrcFile){
+    const lrcText=await lrcFile.text();
+    parseLrc(lrcText);
+  }
+
+  await buildStudioWaveforms();
+  initStudioTimeline();
+  renderMixer();
+  drawWaveform();
 }
 
 function getTrackCustomName(trackName){
