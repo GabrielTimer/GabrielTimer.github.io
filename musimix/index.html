@@ -373,6 +373,7 @@ let studioDragging=false
 let studioAnimation=null
 let studioListenersInitialized=false
 let soloTrackName=null
+let currentSongKey=''
 
 const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
@@ -464,6 +465,8 @@ function saveSongToDB(file,favorite=false){
 }
 
 async function loadZipFile(file){
+
+currentSongKey=file.name
 
 const zip=await JSZip.loadAsync(file)
 
@@ -576,8 +579,10 @@ function shiftChord(chord,s){
 
 async function loadZip(e){
 const file=e.target.files[0]
+currentSongKey=file.name
 if(!file)return
 const zip=await JSZip.loadAsync(file)
+currentSongKey=file.name
 
 tracks={}
 let choFile=null
@@ -609,6 +614,48 @@ renderMixer()
 drawWaveform()
 }
 
+function getTrackCustomName(trackName){
+
+  if(!currentSongKey) return trackName
+
+  const key=`trackNames_${currentSongKey}`
+
+  const saved=
+    JSON.parse(localStorage.getItem(key)||'{}')
+
+  return saved[trackName] || trackName
+}
+
+function renameTrack(trackName){
+
+  if(!currentSongKey) return
+
+  const current=getTrackCustomName(trackName)
+
+  const newName=prompt(
+    'Renommer la piste :',
+    current
+  )
+
+  if(newName===null) return
+
+  const key=`trackNames_${currentSongKey}`
+
+  const saved=
+    JSON.parse(localStorage.getItem(key)||'{}')
+
+  saved[trackName]=newName.trim() || trackName
+
+  localStorage.setItem(
+    key,
+    JSON.stringify(saved)
+  )
+
+  renderMixer()
+  drawStudioTimeline()
+  initStudioTimeline()
+}
+
 function renderMixer(){
 const mixer=document.getElementById('mixer')
 mixer.innerHTML=''
@@ -619,7 +666,12 @@ const row=document.createElement('div')
 row.className='slider-wrap'
 
 row.innerHTML=`
-<label>${name}</label>
+<label
+  ondblclick="renameTrack('${name}')"
+  title="Double clic pour renommer"
+>
+${getTrackCustomName(name)}
+</label>
 <input type="range" min="0" max="1" step="0.01" value="${audio.volume||1}">
 <button class="track-btn">S</button>
 <button class="track-btn">M</button>
@@ -1056,7 +1108,11 @@ function drawStudioTimeline(){
 
     ctx.fillStyle='#fff';
     ctx.font='12px Arial';
-    ctx.fillText(name,8,y+14);
+    ctx.fillText(
+  getTrackCustomName(name),
+  8,
+  y+14
+);
   });
 
   const first=Object.values(tracks)[0];
