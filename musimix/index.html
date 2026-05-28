@@ -69,7 +69,18 @@ display:none;
 }
 
 .main{min-height:100vh}
-.header{padding:20px;border-bottom:1px solid #2a2a2a}
+.header{
+position:sticky;
+top:58px;
+z-index:45;
+
+padding:20px;
+
+background:rgba(17,17,17,.92);
+backdrop-filter:blur(10px);
+
+border-bottom:1px solid #2a2a2a;
+}
 .meta{color:#aaa;margin-top:4px}
 .lyrics{padding:30px;font-size:1.5rem;line-height:1.45}
 .line{margin-bottom:12px;white-space:normal;overflow-wrap:anywhere}
