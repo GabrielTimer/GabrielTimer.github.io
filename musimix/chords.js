@@ -372,19 +372,24 @@ function renderPianoSVG(chordName) {
       ${keysHTML}
     </div>
 
-    <div style="
-      display:flex;
-      justify-content:space-around;
-      width:588px;
-      margin:10px auto 0;
-      color:#777;
-      font-size:15px;
-    ">
-      <span>DO</span>
-      <span>DO</span>
-      <span>DO</span>
-    </div>
+   <div style="
+  position:relative;
+  width:588px;
+  height:24px;
+  margin:10px auto 0;
+  color:#777;
+  font-size:15px;
+">
 
+  <span style="position:absolute;left:0px;">DO</span>
+
+  <span style="position:absolute;left:294px;">DO</span>
+
+  <span style="position:absolute;left:588px;transform:translateX(-100%);">
+    DO
+  </span>
+
+</div>
     <div style="
       display:flex;
       align-items:center;
