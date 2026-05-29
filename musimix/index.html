@@ -766,6 +766,7 @@ let lrcFile=null
 for(const name in zip.files){
 
 if(name.endsWith('.lrc')) lrcFile=name
+alert('LRC trouvé dans zip : ' + lrcFile);
 
 if(name.endsWith('.cho')) choFile=name
 
@@ -785,6 +786,10 @@ parseChordPro(txt)
 if(lrcFile){
   const lrcText=
     await zip.files[lrcFile].async('string');
+alert(
+  'LRC lu : ' +
+  lrcText.slice(0,120)
+);
   parseLrc(lrcText);
 }
 }
