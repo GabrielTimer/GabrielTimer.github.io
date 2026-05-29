@@ -272,13 +272,13 @@ function renderPianoSVG(chordName) {
   const degrees = notes.map(n => degreesMap[dist(notes[0], n)] || "");
 
   const whiteKeys = ["C","D","E","F","G","A","B"];
-  const blackKeys = {
-    C:"Db",
-    D:"Eb",
-    F:"Gb",
-    G:"Ab",
-    A:"Bb"
-  };
+ const blackKeys = {
+  C:["Db","C#"],
+  D:["Eb","D#"],
+  F:["Gb","F#"],
+  G:["Ab","G#"],
+  A:["Bb","A#"]
+};
 
   let keysHTML = "";
 
@@ -306,7 +306,7 @@ function renderPianoSVG(chordName) {
     Object.entries(blackKeys).forEach(([w,b])=>{
       const i = whiteKeys.indexOf(w);
       const x = o*294 + i*42 + 29;
-      const active = notes.includes(b);
+      const active = b.some(note => notes.includes(note));
 
       keysHTML += `
         <div style="
