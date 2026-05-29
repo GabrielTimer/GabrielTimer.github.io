@@ -1049,7 +1049,7 @@ function parseLrc(text){
   const lines=text.split(/\r?\n/);
 
   lyricSyncData=[];
-
+let lastIndex = -1;
   lines.forEach(line=>{
 
     const match=line.match(
@@ -1089,10 +1089,13 @@ const normalize = s =>
 const target = normalize(lyric);
 
 const index = lyricLines.findIndex(
-  el => normalize(el.innerText).includes(target)
+  (el,i) =>
+    i > lastIndex &&
+    normalize(el.innerText).includes(target)
 );
 
     if(index>=0){
+lastIndex = index;
       lyricSyncData.push({
         time,
         line:index
