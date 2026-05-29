@@ -1776,8 +1776,12 @@ function toggleHeaderPanel(){
 
 async function exportChordPdf(){
 
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF('p','mm','a4');
+  if (!window.jspdf?.jsPDF){
+    alert('jsPDF non chargé');
+    return;
+  }
+
+  const pdf = new window.jspdf.jsPDF('p','mm','a4');
 
   const W = 210;
   const H = 297;
@@ -1786,96 +1790,75 @@ async function exportChordPdf(){
   let y = 24;
 
   const title =
-    document.getElementById('title')?.textContent || '';
+    document.getElementById('title')?.textContent || 'MusiMix';
 
   const meta =
     document.getElementById('meta')?.textContent || '';
 
   const songLines =
     parsedSong.filter(
-      item => item.type==='section' || item.type==='line'
+      item => item.type === 'section' || item.type === 'line'
     );
 
   function pageBreak(space=12){
-    if(y + space > H - 22){
+    if(y + space > H - 20){
       pdf.addPage();
       y = 24;
     }
   }
 
-  /* ---------- PAGE ---------- */
-
+  /* Header */
   pdf.setFillColor(255,255,255);
   pdf.rect(0,0,W,H,'F');
 
-  /* ---------- TITLE ---------- */
-
   pdf.setFont('times','bold');
-  pdf.setFontSize(28);
-  pdf.setTextColor(15,15,15);
-
+  pdf.setFontSize(24);
+  pdf.setTextColor(20);
   pdf.text(title,W/2,y,{align:'center'});
-
-  y += 9;
-
-  pdf.setFont('helvetica','normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(110,110,110);
-
-  pdf.text(meta,W/2,y,{align:'center'});
 
   y += 8;
 
-  pdf.setDrawColor(170);
-  pdf.line(M,y,W-M,y);
+  pdf.setFont('helvetica','normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(110);
+  pdf.text(meta,W/2,y,{align:'center'});
 
+  y += 8;
+  pdf.line(M,y,W-M,y);
   y += 12;
 
-  /* ---------- CONTENT ---------- */
+  /* Song */
+  for(const item of songLines){
 
-for (const item of songLines) {
-
-    if(item.type==='section'){
-
-      pageBreak(14);
-
-      pdf.setFillColor(240,240,240);
-      pdf.roundedRect(
-        M,
-        y-5,
-        28,
-        8,
-        2,
-        2,
-        'F'
-      );
+    if(item.type === 'section'){
+      pageBreak(12);
 
       pdf.setFont('helvetica','bold');
       pdf.setFontSize(10);
-      pdf.setTextColor(70);
+      pdf.setTextColor(90);
 
       pdf.text(
         item.text.toUpperCase(),
-        M+3,
+        M,
         y
       );
 
-      y += 12;
-      return;
+      y += 10;
+      continue;
     }
 
     if(!item.text?.trim()){
       y += 5;
-      return;
+      continue;
     }
 
-    const parts =
-      item.text.split(/(\[.*?\])/g);
+    const parts = item.text.split(/(\[.*?\])/g);
 
     let x = M;
 
-    const chords = [];
-    const lyrics = [];
+    pdf.setFont('helvetica','bold');
+    pdf.setFontSize(11);
+    pdf.setTextColor(30);
 
     parts.forEach(part=>{
 
@@ -1885,196 +1868,83 @@ for (const item of songLines) {
         part.startsWith('[') &&
         part.endsWith(']')
       ){
+        const chord = shiftChord(
+          part.slice(1,-1),
+          semitoneShift
+        );
 
-chords.push({
-  x,
-  text: shiftChord(
-    part.slice(1,-1),
-    semitoneShift
-  )
-});
+        pdf.text(chord,x,y);
+
       }else{
-
-        lyrics.push({
-          x,
-          text: part
-        });
-
-        x += pdf.getTextWidth(part) + 4;
+        x += pdf.getTextWidth(part)+4;
       }
     });
 
-    pageBreak(12);
-
-    /* chords */
-    pdf.setFont('helvetica','bold');
-    pdf.setFontSize(11);
-    pdf.setTextColor(40,40,40);
-
-let lastChordEnd = 0;
-
-chords.forEach(c=>{
-
-  let chordX = Math.max(
-    c.x,
-    lastChordEnd + 4
-  );
-
-  pdf.text(
-    c.text,
-    chordX,
-    y
-  );
-
-  lastChordEnd =
-    chordX +
-    pdf.getTextWidth(c.text);
-});
-
     y += 5;
 
-    /* lyrics */
+    x = M;
+
     pdf.setFont('times','normal');
     pdf.setFontSize(12);
-    pdf.setTextColor(20,20,20);
+    pdf.setTextColor(20);
 
-    lyrics.forEach(w=>{
-      pdf.text(w.text,w.x,y);
+    parts.forEach(part=>{
+
+      if(!part) return;
+
+      if(
+        !part.startsWith('[')
+      ){
+        pdf.text(part,x,y);
+        x += pdf.getTextWidth(part)+4;
+      }
     });
 
     y += 9;
+    pageBreak(10);
   }
 
-/* ---------- CHORD DIAGRAMS PAGE ---------- */
+  /* page accords simple */
+  if(window.currentChords?.length){
 
-if(window.currentChords?.length){
+    pdf.addPage();
 
-  pdf.addPage();
-  y = 24;
+    y = 24;
 
-  pdf.setFont('helvetica','bold');
-  pdf.setFontSize(18);
-  pdf.setTextColor(20);
-
-  pdf.text('Accords', W/2, y, {
-    align:'center'
-  });
-
-  y += 18;
-
-  const boxW = 55;
-  const boxH = 58;
-  const gapX = 8;
-  const cols = 3;
-
-  for(let i=0;i<window.currentChords.length;i++){
-
-    const chord =
-      window.currentChords[i];
-
-    const col =
-      i % cols;
-
-    const row =
-      Math.floor(i / cols);
-
-    const x =
-      M + col * (boxW + gapX);
-
- let yy =
-  y + row * 72;
-
-if(yy > 250){
-
-  pdf.addPage();
-  y = 24;
-  yy = y;
-}
-
-    pdf.setFontSize(12);
-    pdf.setFont(
-      'helvetica',
-      'bold'
-    );
+    pdf.setFont('helvetica','bold');
+    pdf.setFontSize(16);
 
     pdf.text(
-      chord,
-      x + boxW/2,
-      yy,
+      'Accords',
+      W/2,
+      y,
       {align:'center'}
     );
 
-    let svgString =
-      window.currentInstrument === 'piano'
-        ? renderPianoSVG(chord)
-        : renderGuitarSVG(chord);
+    y += 18;
 
-    const svgBlob =
-      new Blob(
-        [svgString],
-        {
-          type:'image/svg+xml;charset=utf-8'
-        }
+    pdf.setFontSize(12);
+    pdf.setTextColor(30);
+
+    const txt =
+      window.currentChords.join('   •   ');
+
+    const split =
+      pdf.splitTextToSize(
+        txt,
+        W - (M*2)
       );
 
-    const url =
-      URL.createObjectURL(svgBlob);
-
-    const img =
-      new Image();
-
-    await new Promise(resolve=>{
-
-      img.onload = ()=>{
-
-        const canvas =
-          document.createElement(
-            'canvas'
-          );
-
-        canvas.width = 240;
-        canvas.height = 180;
-
-        const ctx =
-          canvas.getContext('2d');
-
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(
-          0,0,
-          canvas.width,
-          canvas.height
-        );
-
-        ctx.drawImage(
-          img,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        );
-
-        const png =
-          canvas.toDataURL(
-            'image/png'
-          );
-
-        pdf.addImage(
-          png,
-          'PNG',
-          x,
-          yy + 4,
-          boxW,
-          boxH
-        );
-
-        URL.revokeObjectURL(url);
-
-        resolve();
-      };
-
-      img.src = url;
-    });
+    pdf.text(
+      split,
+      M,
+      y
+    );
   }
+
+  pdf.save(
+    `${title}.pdf`
+  );
 }
   pdf.save(
     `${currentSongKey?.replace('.zip','') || title}.pdf`
