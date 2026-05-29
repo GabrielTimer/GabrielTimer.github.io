@@ -234,6 +234,14 @@ touch-action:none;
   z-index:auto;
   background:#0d0d0d;
 }
+#header-mixer-mobile{
+  display:block;
+  margin-top:12px;
+}
+
+.sidebar #mixer{
+  display:none;
+}
 
 }
 
@@ -269,6 +277,10 @@ border-radius:12px;
 padding:12px;
 box-shadow:0 12px 30px rgba(0,0,0,.28);
 min-width:160px;
+}
+
+#header-mixer-mobile{
+  display:none;
 }
 
 #toggleMixerBtn{
@@ -469,8 +481,9 @@ background:#242424;
 <button onclick="switchInstrument('piano')">🎹 Piano</button>
 </div>
 
-<div id="chord-bar"></div>
+<div id="header-mixer-mobile"></div>
 
+<div id="chord-bar"></div>
 </div>
 <div class="lyrics" id="lyrics"></div>
 </main>
@@ -1202,8 +1215,22 @@ if(audio.muted) muteBtn.classList.add('active')
 
 mixer.appendChild(row)
 })
-}
 
+if(window.innerWidth <= 900){
+
+  const mobileMixer =
+    document.getElementById(
+      'header-mixer-mobile'
+    );
+
+  if(mobileMixer){
+    mobileMixer.innerHTML = '';
+    mobileMixer.appendChild(
+      mixer.cloneNode(true)
+    );
+  }
+}
+}
 
 function parseChordPro(text){
 parsedSong=[]
