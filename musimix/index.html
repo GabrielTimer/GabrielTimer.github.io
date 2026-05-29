@@ -1093,8 +1093,7 @@ const normalize = s =>
 
 const index = lyricLines.findIndex(
   el =>
-    normalize(el.innerText)
-      .includes(normalize(lyric))
+    normalize(el.innerText) === normalize(lyric)
 );
 
     if(index>=0){
