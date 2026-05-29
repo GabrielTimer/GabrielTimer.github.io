@@ -956,6 +956,9 @@ function updateLyricsSync(){
 
   if(!lyricSyncData.length) return;
 
+document.getElementById('studioTime').textContent =
+  'LRC ' + lyricSyncData.length;
+
   const first=Object.values(tracks)[0];
   if(!first) return;
 
@@ -1025,7 +1028,7 @@ if(window.innerWidth <= 900){
 
   window.scrollTo({
     top: targetY - offset,
-    behavior:'auto'
+    behavior:'instant'
   });
 
 }
