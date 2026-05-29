@@ -155,7 +155,6 @@ function renderGuitarSVG(chordName, voicingIndex = 0) {
 if (typeof fret === "number" && fret > 0) {
   let relativeFret = fret;
 
-  // si accord en position haute
   if (baseFret > 1) {
     relativeFret = fret;
   }
@@ -164,7 +163,7 @@ if (typeof fret === "number" && fret > 0) {
     dots += `
       <circle
         cx="${x}"
-        cy="${35 + ((relativeFret - 1) * 16) + 35}"
+        cy="${43 + ((relativeFret - 1) * 16)}"
         r="6"
         fill="#2d7cff"
       />
