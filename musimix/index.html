@@ -1833,7 +1833,7 @@ async function exportChordPdf(){
 
   /* ---------- CONTENT ---------- */
 
-  songLines.forEach(item=>{
+for (const item of songLines) {
 
     if(item.type==='section'){
 
@@ -1886,14 +1886,13 @@ async function exportChordPdf(){
         part.endsWith(']')
       ){
 
-        chords.push({
-          x,
-          text: shiftChord(
-            part.slice(1,-1),
-            semitoneShift
-          )
-        });
-
+chords.push({
+  x,
+  text: shiftChord(
+    part.slice(1,-1),
+    semitoneShift
+  )
+});
       }else{
 
         lyrics.push({
@@ -1944,7 +1943,7 @@ chords.forEach(c=>{
     });
 
     y += 9;
-  });
+  }
 
 /* ---------- CHORD DIAGRAMS PAGE ---------- */
 
