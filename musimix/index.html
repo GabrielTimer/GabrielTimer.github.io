@@ -1901,7 +1901,7 @@ async function exportChordPdf(){
           text: part
         });
 
-        x += pdf.getTextWidth(part) * 0.9;
+        x += pdf.getTextWidth(part) + 4;
       }
     });
 
@@ -1912,9 +1912,25 @@ async function exportChordPdf(){
     pdf.setFontSize(11);
     pdf.setTextColor(40,40,40);
 
-    chords.forEach(c=>{
-      pdf.text(c.text,c.x,y);
-    });
+let lastChordEnd = 0;
+
+chords.forEach(c=>{
+
+  let chordX = Math.max(
+    c.x,
+    lastChordEnd + 4
+  );
+
+  pdf.text(
+    c.text,
+    chordX,
+    y
+  );
+
+  lastChordEnd =
+    chordX +
+    pdf.getTextWidth(c.text);
+});
 
     y += 5;
 
@@ -1930,6 +1946,75 @@ async function exportChordPdf(){
     y += 9;
   });
 
+/* ---------- CHORD DIAGRAMS PAGE ---------- */
+
+if(window.currentChords?.length){
+
+  pdf.addPage();
+
+  y = 24;
+
+  pdf.setFont('helvetica','bold');
+  pdf.setFontSize(16);
+  pdf.setTextColor(20);
+
+  pdf.text(
+    'Accords',
+    W/2,
+    y,
+    {align:'center'}
+  );
+
+  y += 18;
+
+  const chordsPerRow = 3;
+  const boxW = 55;
+  const boxH = 42;
+
+  window.currentChords.forEach((chord,i)=>{
+
+    const col =
+      i % chordsPerRow;
+
+    const row =
+      Math.floor(i / chordsPerRow);
+
+    const x =
+      18 + (col * 58);
+
+    const yy =
+      y + (row * 52);
+
+    pdf.setFontSize(12);
+
+    pdf.text(
+      chord,
+      x + 18,
+      yy
+    );
+
+    pdf.setDrawColor(120);
+
+    pdf.roundedRect(
+      x,
+      yy + 4,
+      boxW,
+      boxH,
+      2,
+      2
+    );
+
+    pdf.setFontSize(9);
+
+    pdf.text(
+      window.currentInstrument === 'piano'
+        ? 'diagramme piano'
+        : 'diagramme guitare',
+      x + 8,
+      yy + 25
+    );
+  });
+}
   pdf.save(
     `${currentSongKey?.replace('.zip','') || title}.pdf`
   );
