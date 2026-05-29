@@ -956,9 +956,12 @@ function updateLyricsSync(){
 
   if(!lyricSyncData.length) return;
 
-  stopScroll();
-
   const first=Object.values(tracks)[0];
+  if(!first) return;
+
+  if(!first.paused){
+    stopScroll();
+  }
 
   const t=first.currentTime
 
