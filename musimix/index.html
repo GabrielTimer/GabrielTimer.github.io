@@ -1074,15 +1074,28 @@ function parseLrc(text){
 
     const time=(min*60)+sec;
 
-    const lyric=match[3].trim();
+const lyric = match[3]
+  .replace(/\u00A0/g,' ')
+  .replace(/\s+/g,' ')
+  .trim();
 
-    const lyricLines=[
-      ...document.querySelectorAll('.lyrics-line')
-    ];
+if(!lyric) return;
 
-    const index=lyricLines.findIndex(
-      el=>el.innerText.trim()===lyric
-    );
+const lyricLines=[
+  ...document.querySelectorAll('.lyrics-line')
+];
+
+const normalize = s =>
+  s
+    .replace(/\u00A0/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+
+const index = lyricLines.findIndex(
+  el =>
+    normalize(el.innerText)
+      .includes(normalize(lyric))
+);
 
     if(index>=0){
       lyricSyncData.push({
