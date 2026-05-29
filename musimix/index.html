@@ -1392,15 +1392,8 @@ window.addEventListener('load', async ()=>{
   const panel=document.getElementById('mobileMixerPanel');
   const btn=document.getElementById('toggleMixerBtn');
 
-  const saved=localStorage.getItem('mixerPanelOpen');
-
-  if(saved==='0'){
-    panel.classList.remove('open');
-    btn.textContent='▼ Pistes';
-  }else{
-    panel.classList.add('open');
-    btn.textContent='▲ Masquer pistes';
-  }
+panel.classList.add('open');
+btn.textContent='▲ Masquer pistes';
 
   initResizableLayout();
 
