@@ -221,16 +221,16 @@ touch-action:none;
     display:none;
   }
 
-  .sidebar{
-    position:sticky;
-    top:58px;
-    z-index:55;
-    height:auto;
-    max-height:45vh;
-    overflow:auto;
-    border-right:none;
-    border-bottom:1px solid #2a2a2a;
-  }
+.sidebar{
+  position:relative;
+  top:auto;
+  z-index:55;
+  height:auto;
+  max-height:none;
+  overflow:visible;
+  border-right:none;
+  border-bottom:1px solid #2a2a2a;
+}
 
   #mixer{
     position:sticky;
@@ -782,10 +782,7 @@ parseChordPro(txt)
 if(lrcFile){
   const lrcText=
     await zip.files[lrcFile].async('string');
-alert(
-  'LRC lu : ' +
-  lrcText.slice(0,120)
-);
+
   parseLrc(lrcText);
 }
 }
