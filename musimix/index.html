@@ -1091,10 +1091,15 @@ const normalize = s =>
     .replace(/\s+/g,' ')
     .trim();
 
-const index = lyricLines.findIndex(
-  el =>
-    normalize(el.innerText) === normalize(lyric)
-);
+const index = lyricLines.findIndex(el => {
+
+  const text = normalize(el.innerText);
+  const target = normalize(lyric);
+
+  if(!target || target.length < 6) return false;
+
+  return text.includes(target);
+});
 
     if(index>=0){
       lyricSyncData.push({
