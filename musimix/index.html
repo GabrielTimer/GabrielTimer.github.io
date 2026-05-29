@@ -638,7 +638,6 @@ let lrcFile=null
 for(const name in zip.files){
 
 if(name.endsWith('.lrc')) lrcFile=name
-alert('LRC trouvé dans zip : ' + lrcFile);
 
 if(name.endsWith('.cho')) choFile=name
 
@@ -658,10 +657,7 @@ parseChordPro(txt)
 if(lrcFile){
   const lrcText=
     await zip.files[lrcFile].async('string');
-alert(
-  'LRC lu : ' +
-  lrcText.slice(0,120)
-);
+
   parseLrc(lrcText);
 }
 }
@@ -766,7 +762,7 @@ let lrcFile=null
 for(const name in zip.files){
 
 if(name.endsWith('.lrc')) lrcFile=name
-alert('LRC trouvé dans zip : ' + lrcFile);
+
 
 if(name.endsWith('.cho')) choFile=name
 
@@ -1091,15 +1087,11 @@ const normalize = s =>
     .replace(/\s+/g,' ')
     .trim();
 
-const index = lyricLines.findIndex(el => {
+const target = normalize(lyric);
 
-  const text = normalize(el.textContent);
-  const target = normalize(lyric);
-
-  if(!target || target.length < 6) return false;
-
-  return text.includes(target);
-});
+const index = lyricLines.findIndex(
+  el => normalize(el.textContent).includes(target)
+);
 
     if(index>=0){
       lyricSyncData.push({
