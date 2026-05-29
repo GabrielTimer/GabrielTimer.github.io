@@ -1068,7 +1068,13 @@ const lyric = match[3]
   .replace(/\s+/g,' ')
   .trim();
 
-if(!lyric) return;
+if(!lyric){
+  lyricSyncData.push({
+    time,
+    line:0
+  });
+  return;
+}
 
 const lyricLines=[
   ...document.querySelectorAll('.lyrics-line')
