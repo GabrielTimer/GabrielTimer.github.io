@@ -1951,70 +1951,132 @@ chords.forEach(c=>{
 if(window.currentChords?.length){
 
   pdf.addPage();
-
   y = 24;
 
   pdf.setFont('helvetica','bold');
-  pdf.setFontSize(16);
+  pdf.setFontSize(18);
   pdf.setTextColor(20);
 
-  pdf.text(
-    'Accords',
-    W/2,
-    y,
-    {align:'center'}
-  );
+  pdf.text('Accords', W/2, y, {
+    align:'center'
+  });
 
   y += 18;
 
-  const chordsPerRow = 3;
   const boxW = 55;
-  const boxH = 42;
+  const boxH = 58;
+  const gapX = 8;
+  const cols = 3;
 
-  window.currentChords.forEach((chord,i)=>{
+  for(let i=0;i<window.currentChords.length;i++){
+
+    const chord =
+      window.currentChords[i];
 
     const col =
-      i % chordsPerRow;
+      i % cols;
 
     const row =
-      Math.floor(i / chordsPerRow);
+      Math.floor(i / cols);
 
     const x =
-      18 + (col * 58);
+      M + col * (boxW + gapX);
 
-    const yy =
-      y + (row * 52);
+ let yy =
+  y + row * 72;
+
+if(yy > 250){
+
+  pdf.addPage();
+  y = 24;
+  yy = y;
+}
 
     pdf.setFontSize(12);
+    pdf.setFont(
+      'helvetica',
+      'bold'
+    );
 
     pdf.text(
       chord,
-      x + 18,
-      yy
+      x + boxW/2,
+      yy,
+      {align:'center'}
     );
 
-    pdf.setDrawColor(120);
-
-    pdf.roundedRect(
-      x,
-      yy + 4,
-      boxW,
-      boxH,
-      2,
-      2
-    );
-
-    pdf.setFontSize(9);
-
-    pdf.text(
+    let svgString =
       window.currentInstrument === 'piano'
-        ? 'diagramme piano'
-        : 'diagramme guitare',
-      x + 8,
-      yy + 25
-    );
-  });
-}
+        ? renderPianoSVG(chord)
+        : renderGuitarSVG(chord);
+
+    const svgBlob =
+      new Blob(
+        [svgString],
+        {
+          type:'image/svg+xml;charset=utf-8'
+        }
+      );
+
+    const url =
+      URL.createObjectURL(svgBlob);
+
+    const img =
+      new Image();
+
+    await new Promise(resolve=>{
+
+      img.onload = ()=>{
+
+        const canvas =
+          document.createElement(
+            'canvas'
+          );
+
+        canvas.width = 240;
+        canvas.height = 180;
+
+        const ctx =
+          canvas.getContext('2d');
+
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(
+          0,0,
+          canvas.width,
+          canvas.height
+        );
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        const png =
+          canvas.toDataURL(
+            'image/png'
+          );
+
+        pdf.addImage(
+          png,
+          'PNG',
+          x,
+          yy + 4,
+          boxW,
+          boxH
+        );
+
+        URL.revokeObjectURL(url);
+
+        resolve();
+      };
+
+      img.src = url;
+    });
+  }
+}}
   pdf.save(
     `${currentSongKey?.replace('.zip','') || title}.pdf`
   );
