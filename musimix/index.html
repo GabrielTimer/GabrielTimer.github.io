@@ -1777,73 +1777,170 @@ function toggleHeaderPanel(){
 async function exportChordPdf(){
 
   const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p','mm','a4');
 
-const song =
-  document.querySelector('.main');
+  const pageW = 210;
+  const pageH = 297;
 
-  if(!song){
-    alert('Aucune chanson chargée');
-    return;
+  const marginX = 18;
+  const marginTop = 22;
+  const lineGap = 10;
+
+  let y = marginTop;
+
+  const title =
+    document.getElementById('title')
+    ?.textContent || 'MusiMix';
+
+  const meta =
+    document.getElementById('meta')
+    ?.textContent || '';
+
+  function newPage(){
+    pdf.addPage();
+    y = marginTop;
   }
 
-  const canvas =
-    await html2canvas(song,{
-      scale:2,
-      backgroundColor:'#ffffff'
+  function ensureSpace(h){
+    if(y + h > pageH - 20){
+      newPage();
+    }
+  }
+
+  /* ---------- HEADER ---------- */
+
+  pdf.setFillColor(255,255,255);
+  pdf.rect(0,0,pageW,pageH,'F');
+
+  pdf.setFont('helvetica','bold');
+  pdf.setFontSize(22);
+  pdf.setTextColor(25,25,25);
+  pdf.text(title,pageW/2,y,{align:'center'});
+
+  y += 8;
+
+  pdf.setFont('helvetica','normal');
+  pdf.setFontSize(10);
+  pdf.setTextColor(110,110,110);
+  pdf.text(meta,pageW/2,y,{align:'center'});
+
+  y += 8;
+
+  pdf.setDrawColor(220,220,220);
+  pdf.line(marginX,y,pageW-marginX,y);
+
+  y += 12;
+
+  /* ---------- SONG ---------- */
+
+  parsedSong.forEach(item=>{
+
+    if(item.type==='section'){
+
+      ensureSpace(16);
+
+      pdf.setFont('helvetica','bold');
+      pdf.setFontSize(11);
+      pdf.setTextColor(120,120,120);
+
+      pdf.text(
+        item.text.toUpperCase(),
+        marginX,
+        y
+      );
+
+      y += 10;
+      return;
+    }
+
+    if(!item.text?.trim()){
+      y += 8;
+      return;
+    }
+
+    const parts =
+      item.text.split(/(\[.*?\])/g);
+
+    let x = marginX;
+
+    let chordRow = [];
+    let lyricRow = [];
+
+    parts.forEach(part=>{
+
+      if(!part) return;
+
+      if(
+        part.startsWith('[') &&
+        part.endsWith(']')
+      ){
+
+        chordRow.push({
+          x,
+          text:
+            shiftChord(
+              part.slice(1,-1),
+              semitoneShift
+            )
+        });
+
+      }else{
+
+        lyricRow.push({
+          x,
+          text:part
+        });
+
+        x +=
+          pdf.getTextWidth(part) + 1;
+      }
     });
 
-  const imgData =
-    canvas.toDataURL('image/png');
+    ensureSpace(14);
 
-  const pdf =
-    new jsPDF('p','mm','a4');
+    /* accords */
+    pdf.setFont('helvetica','bold');
+    pdf.setFontSize(10);
+    pdf.setTextColor(194,146,55);
 
-  const pageWidth =
-    pdf.internal.pageSize.getWidth();
+    chordRow.forEach(c=>{
+      pdf.text(c.text,c.x,y);
+    });
 
-  const pageHeight =
-    pdf.internal.pageSize.getHeight();
+    y += 5;
 
-  const imgWidth = pageWidth;
+    /* paroles */
+    pdf.setFont('times','normal');
+    pdf.setFontSize(11);
+    pdf.setTextColor(30,30,30);
 
-  const imgHeight =
-    canvas.height * imgWidth / canvas.width;
+    lyricRow.forEach(w=>{
+      pdf.text(w.text,w.x,y);
+    });
 
-  let y = 0;
-  let heightLeft = imgHeight;
+    y += lineGap + 2;
+  });
 
-  pdf.addImage(
-    imgData,
-    'PNG',
-    0,
-    y,
-    imgWidth,
-    imgHeight
-  );
+  /* footer page numbers */
+  const total = pdf.getNumberOfPages();
 
-  heightLeft -= pageHeight;
+  for(let i=1;i<=total;i++){
+    pdf.setPage(i);
 
-  while(heightLeft > 0){
+    pdf.setFontSize(9);
+    pdf.setTextColor(140);
 
-    y = heightLeft - imgHeight;
-
-    pdf.addPage();
-
-    pdf.addImage(
-      imgData,
-      'PNG',
-      0,
-      y,
-      imgWidth,
-      imgHeight
+    pdf.text(
+      `${i}/${total}`,
+      pageW/2,
+      pageH-10,
+      {align:'center'}
     );
-
-    heightLeft -= pageHeight;
   }
 
-pdf.save(
-  `${currentSongKey?.replace('.zip','') || 'song'}.pdf`
-);
+  pdf.save(
+    `${currentSongKey?.replace('.zip','') || 'song'}.pdf`
+  );
 }
 </script>
 
