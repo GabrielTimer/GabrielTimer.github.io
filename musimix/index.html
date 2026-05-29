@@ -419,6 +419,9 @@ background:#242424;
 <button onclick="document.getElementById('filesInput').click()">
   📂 Ajouter fichiers
 </button>
+<button onclick="exportChordPdf()">
+  📄 Export PDF
+</button>
 
 <input
   hidden
@@ -1770,7 +1773,82 @@ function toggleHeaderPanel(){
     collapsed ? '1' : '0'
   );
 }
+
+async function exportChordPdf(){
+
+  const { jsPDF } = window.jspdf;
+
+const song =
+  document.querySelector('.main');
+
+  if(!song){
+    alert('Aucune chanson chargée');
+    return;
+  }
+
+  const canvas =
+    await html2canvas(song,{
+      scale:2,
+      backgroundColor:'#ffffff'
+    });
+
+  const imgData =
+    canvas.toDataURL('image/png');
+
+  const pdf =
+    new jsPDF('p','mm','a4');
+
+  const pageWidth =
+    pdf.internal.pageSize.getWidth();
+
+  const pageHeight =
+    pdf.internal.pageSize.getHeight();
+
+  const imgWidth = pageWidth;
+
+  const imgHeight =
+    canvas.height * imgWidth / canvas.width;
+
+  let y = 0;
+  let heightLeft = imgHeight;
+
+  pdf.addImage(
+    imgData,
+    'PNG',
+    0,
+    y,
+    imgWidth,
+    imgHeight
+  );
+
+  heightLeft -= pageHeight;
+
+  while(heightLeft > 0){
+
+    y = heightLeft - imgHeight;
+
+    pdf.addPage();
+
+    pdf.addImage(
+      imgData,
+      'PNG',
+      0,
+      y,
+      imgWidth,
+      imgHeight
+    );
+
+    heightLeft -= pageHeight;
+  }
+
+pdf.save(
+  `${currentSongKey?.replace('.zip','') || 'song'}.pdf`
+);
+}
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 </body>
 </html>
