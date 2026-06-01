@@ -17,7 +17,7 @@ body{
   background:
   radial-gradient(circle at top left,#f8fcff 0%,#eef6fb 60%,#edf4f8 100%);
 
-  min-height:100dvh;
+  min-height:auto;
 
   padding-top:max(12px, env(safe-area-inset-top));
   padding-bottom:max(12px, env(safe-area-inset-bottom));
@@ -34,8 +34,9 @@ body{
 
   margin:auto;
 
-  padding:42px;
-padding-top:28px;
+padding:24px;
+padding-top:20px;
+padding-bottom:20px;
 
   border-radius:38px;
 
@@ -86,7 +87,7 @@ padding-top:28px;
   overflow:hidden;
   border-radius:34px;
   padding:44px 38px;
-  min-height:300px;
+  min-height:240px;
   margin-bottom:30px;
 
   background:
