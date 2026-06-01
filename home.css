@@ -302,3 +302,41 @@ body{
   }
 
 }
+
+/* FIX logo coupé en mode admin */
+
+body.admin-open{
+  overflow:hidden;
+}
+
+/* popup admin en overlay fixe */
+.admin-popup,
+.admin-panel,
+.exercise-popup{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  overflow-y:auto;
+
+  padding:
+    max(20px, env(safe-area-inset-top))
+    16px
+    max(20px, env(safe-area-inset-bottom));
+}
+
+/* sécurité logo */
+.home-logo{
+  position:relative;
+  z-index:2;
+  margin-top:8px;
+}
+
+/* sécurité header */
+.home-card{
+  padding-top:max(28px, env(safe-area-inset-top));
+}
