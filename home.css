@@ -1,178 +1,247 @@
-/* ===== HOME ONLY ===== */
+/* HOME — Gabriel Timer premium */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+  background:
+  radial-gradient(circle at top left,#f8fcff 0%,#eef6fb 60%,#edf4f8 100%);
+}
+
+/* carte principale */
 .home-card{
-max-width:430px;
-width:100%;
-padding:34px 24px 28px;
-border-radius:34px;
-background:rgba(255,255,255,.88);
-backdrop-filter:blur(18px);
-box-shadow:
-0 20px 60px rgba(15,23,42,.08);
-border:none;
+  max-width:920px;
+  width:min(92vw,920px);
+  padding:42px;
+  border-radius:38px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:
+    0 20px 70px rgba(15,23,42,.06);
 }
 
+/* logo */
 .home-logo{
-width:62px;
-display:block;
-margin:0 auto 18px;
+  width:72px;
+  display:block;
+  margin:0 auto 26px;
 }
 
-h2.logo{
-display:none;
-}
-
+/* titre */
 .home-title{
-font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-font-size:48px;
-font-weight:800;
-line-height:1.05;
-letter-spacing:-1px;
-color:#0f172a;
-margin-bottom:8px;
-text-align:left;
+  font-size:72px;
+  font-weight:800;
+  line-height:0.95;
+  letter-spacing:-2px;
+  color:#09142f;
+  margin-bottom:12px;
 }
 
+/* sous titre */
 .home-subtitle{
-font-size:20px;
-color:#64748b;
-margin-bottom:26px;
-text-align:left;
-font-weight:500;
+  font-size:22px;
+  font-weight:500;
+  color:#64748b;
+  margin-bottom:34px;
 }
 
+/* hero */
 .home-banner{
-position:relative;
-overflow:hidden;
-border-radius:30px;
-padding:34px 28px;
-margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+  border-radius:34px;
+  padding:44px 38px;
+  min-height:300px;
+  margin-bottom:30px;
 
-background:
-linear-gradient(
-135deg,
-#eefcff 0%,
-#dcf6fc 40%,
-#bcecf7 100%
-);
+  background:
+  linear-gradient(
+    135deg,
+    #eefcff 0%,
+    #d7f6fc 40%,
+    #b8ecf8 75%,
+    #a3e5f7 100%
+  );
 }
 
+/* vagues */
 .home-banner::before{
-content:'';
-position:absolute;
-right:-10%;
-bottom:-25%;
-width:120%;
-height:70%;
-background:
-radial-gradient(circle,
-rgba(0,196,255,.18),
-transparent 60%);
-pointer-events:none;
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+  radial-gradient(circle at 90% 100%,rgba(255,255,255,.45),transparent 45%);
+}
+
+.home-banner::after{
+  content:'';
+  position:absolute;
+  right:-10%;
+  bottom:-15%;
+  width:80%;
+  height:70%;
+  opacity:.55;
+  border-radius:50%;
+  background:
+  radial-gradient(circle,
+  rgba(255,255,255,.55),
+  transparent 70%);
 }
 
 .home-banner h3{
-font-size:44px;
-line-height:1.04;
-font-weight:800;
-margin:0;
-letter-spacing:-1.2px;
-color:#0f172a;
+  font-size:64px;
+  font-weight:800;
+  line-height:0.98;
+  letter-spacing:-2px;
+  color:#07142f;
+  margin:0;
+  max-width:520px;
 }
 
 .home-banner p{
-margin-top:14px;
-font-size:20px;
-line-height:1.45;
-font-weight:500;
-color:#475569;
+  margin-top:22px;
+  font-size:28px;
+  line-height:1.35;
+  font-weight:500;
+  color:#425466;
+  max-width:420px;
 }
 
+/* cartes menu */
 .home-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:14px;
-margin-top:8px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
 }
 
 .home-box{
-background:white;
-border:none;
-border-radius:26px;
-padding:24px 12px;
-min-height:132px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:14px;
-
-box-shadow:
-0 8px 24px rgba(15,23,42,.05);
-
-cursor:pointer;
+  border:none;
+  background:white;
+  border-radius:28px;
+  min-height:190px;
+  padding:24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.04);
 }
 
 .home-box span{
-font-size:34px;
-line-height:1;
+  font-size:42px;
 }
 
 .home-box strong{
-font-size:16px;
-line-height:1.25;
-font-weight:700;
-color:#0f172a;
-text-align:center;
+  font-size:24px;
+  line-height:1.2;
+  font-weight:700;
+  color:#0f172a;
+  text-align:center;
 }
 
+/* admin */
 .home-admin{
-margin-top:26px;
-width:100%;
-padding:20px;
-border:none;
-border-radius:24px;
-font-size:18px;
-font-weight:700;
-background:white;
-box-shadow:
-0 8px 24px rgba(15,23,42,.05);
+  margin-top:26px;
+  width:100%;
+  border:none;
+  border-radius:26px;
+  padding:24px;
+  background:white;
+  font-size:22px;
+  font-weight:700;
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.04);
 }
 
-@media(max-width:560px){
+
+/* tablette */
+@media(max-width:980px){
 
 .home-card{
-max-width:100%;
-padding:22px;
+  width:min(94vw,640px);
+  padding:28px;
 }
 
 .home-title{
-font-size:38px;
-}
-
-.home-subtitle{
-font-size:18px;
+  font-size:52px;
 }
 
 .home-banner{
-padding:26px 22px;
+  min-height:auto;
+  padding:34px 28px;
 }
 
 .home-banner h3{
-font-size:34px;
+  font-size:48px;
 }
 
 .home-banner p{
-font-size:17px;
+  font-size:22px;
 }
 
 .home-grid{
-grid-template-columns:repeat(2,1fr);
-gap:12px;
+  grid-template-columns:repeat(2,1fr);
 }
 
 .home-box{
-min-height:118px;
+  min-height:150px;
+}
+
+}
+
+/* mobile */
+@media(max-width:560px){
+
+.home-card{
+  width:100%;
+  border-radius:28px;
+  padding:22px;
+}
+
+.home-logo{
+  width:58px;
+}
+
+.home-title{
+  font-size:42px;
+  letter-spacing:-1px;
+}
+
+.home-subtitle{
+  font-size:18px;
+}
+
+.home-banner{
+  border-radius:28px;
+  padding:30px 24px;
+}
+
+.home-banner h3{
+  font-size:34px;
+}
+
+.home-banner p{
+  font-size:18px;
+}
+
+.home-grid{
+  gap:14px;
+}
+
+.home-box{
+  min-height:120px;
+  border-radius:22px;
+}
+
+.home-box strong{
+  font-size:17px;
+}
+
+.home-admin{
+  font-size:18px;
 }
 
 }
