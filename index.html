@@ -6,47 +6,65 @@
 <title>Gabriel Timer</title>
 
 <link rel="stylesheet" href="style.css?v=1">
-<link rel="stylesheet" href="home.css?v=1">
+<link rel="stylesheet" href="home.css?v=2">
 <link rel="manifest" href="manifest.json">
 
 </head>
 
 <body>
 
-<div class="card">
+<div class="card home-card">
 
-<img src="logo.png" class="logo" id="logo">
+  <img src="logo.png" class="home-logo" id="logo">
 
-<div class="hero-title">Bonjour 👋</div>
-<div class="hero-sub">
-Comment allez-vous aujourd’hui ?
-</div>
+  <div class="home-title">
+    Bonjour 👋
+  </div>
 
-<div class="hero-banner">
-<h3>Votre corps,<br>votre priorité.</h3>
-<p>
-Des programmes adaptés
-à vos objectifs.
-</p>
-</div>
+  <div class="home-subtitle">
+    Comment allez-vous aujourd’hui ?
+  </div>
 
-<h2>Gabriel Timer</h2>
+  <div class="home-banner">
+    <h3>Votre corps,<br>votre priorité.</h3>
+    <p>
+      Des programmes adaptés
+      à vos objectifs.
+    </p>
+  </div>
 
-<button class="primary" onclick="goProg()">⭐ Mes programmes</button>
-<button class="secondary" onclick="modeLibre()">⚡ Mode libre</button>
-<button class="patho" onclick="zones()">🩺 Pathologies</button>
-<button class="respir" onclick="respir()">
-🫁 RespiR
-</button>
+  <div class="home-grid">
 
-<button
-id="adminExercisesBtn"
-class="secondary"
-onclick="adminExercises()"
-style="display:none;"
->
-🛠️ Admin Exercises
-</button>
+    <button class="home-box" onclick="goProg()">
+      <span>⭐</span>
+      <strong>Mes programmes</strong>
+    </button>
+
+    <button class="home-box" onclick="modeLibre()">
+      <span>⚡</span>
+      <strong>Mode libre</strong>
+    </button>
+
+    <button class="home-box" onclick="zones()">
+      <span>🩺</span>
+      <strong>Pathologies</strong>
+    </button>
+
+    <button class="home-box respir" onclick="respir()">
+      <span>🫁</span>
+      <strong>RespiR</strong>
+    </button>
+
+  </div>
+
+  <button
+    id="adminExercisesBtn"
+    class="home-admin"
+    onclick="adminExercises()"
+    style="display:none;"
+  >
+    🛠 Admin Exercises
+  </button>
 
 </div>
 
