@@ -1,0 +1,103 @@
+/* ===== HOME ONLY ===== */
+
+body{
+background:
+linear-gradient(135deg,#f8fcff 0%,#edf7fc 100%);
+min-height:100vh;
+padding:24px;
+}
+
+.card{
+max-width:430px;
+width:100%;
+padding:28px;
+border-radius:34px;
+background:rgba(255,255,255,.82);
+backdrop-filter:blur(16px);
+box-shadow:
+0 20px 60px rgba(13,40,80,.08);
+border:none;
+}
+
+.logo{
+width:72px;
+margin:0 auto 18px;
+display:block;
+}
+
+h2{
+display:none;
+}
+
+/* Bonjour */
+.hero-title{
+font-size:42px;
+font-weight:800;
+line-height:1.05;
+margin:8px 0 8px;
+color:#0f172a;
+}
+
+.hero-sub{
+font-size:19px;
+color:#64748b;
+margin-bottom:24px;
+}
+
+/* Bandeau premium */
+.hero-banner{
+border-radius:28px;
+padding:34px;
+margin-bottom:26px;
+background:
+linear-gradient(
+135deg,
+#eefbff 0%,
+#d9f5fb 45%,
+#b8ecf7 100%
+);
+overflow:hidden;
+position:relative;
+}
+
+.hero-banner::after{
+content:'';
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at 80% 30%,
+rgba(255,255,255,.55),
+transparent 50%);
+pointer-events:none;
+}
+
+.hero-banner h3{
+font-size:36px;
+line-height:1.1;
+margin:0;
+font-weight:800;
+}
+
+.hero-banner p{
+margin-top:14px;
+font-size:18px;
+color:#475569;
+}
+
+/* menu */
+button{
+border:none;
+background:white;
+border-radius:26px;
+padding:24px;
+font-size:22px;
+font-weight:700;
+margin-top:14px;
+box-shadow:
+0 10px 30px rgba(15,23,42,.06);
+text-align:left;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
