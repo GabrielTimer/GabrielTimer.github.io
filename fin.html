@@ -2,27 +2,47 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Fin</title>
 
 <style>
+*{
+box-sizing:border-box;
+}
+
+html{
+height:100%;
+}
+
 body{
 margin:0;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+
+min-height:100dvh;
+height:auto;
+
 background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
 color:white;
-font-family:Arial;
+font-family:Arial,sans-serif;
 text-align:center;
-overflow:hidden;
+
+overflow-x:hidden;
+overflow-y:auto;
+
+padding:
+max(16px, env(safe-area-inset-top))
+16px
+max(24px, env(safe-area-inset-bottom));
 }
 
 .container{
 z-index:2;
 padding:20px;
 max-width:350px;
+width:100%;
+margin:auto;
 }
 
 h1{
@@ -82,7 +102,6 @@ button:active{
 transform:scale(0.95);
 }
 
-/* 🔒 bouton bloqué */
 button.disabled{
 opacity:0.4;
 pointer-events:none;
@@ -101,11 +120,12 @@ animation:pulse 1s infinite;
 }
 
 .confetti{
-position:absolute;
+position:fixed;
 width:8px;
 height:8px;
 top:-10px;
 animation:fall linear infinite;
+pointer-events:none;
 }
 
 @keyframes fall{
@@ -114,7 +134,6 @@ transform:translateY(110vh) rotate(360deg);
 }
 }
 
-/* EVA */
 #evaBloc{
 margin-top:25px;
 text-align:center;
@@ -137,6 +156,7 @@ margin-top:10px;
 margin-top:8px;
 font-weight:bold;
 }
+
 @keyframes blinkSoft{
 0%{opacity:1;}
 50%{opacity:0.6;}
@@ -147,7 +167,6 @@ font-weight:bold;
 animation:blinkSoft 2s infinite;
 }
 
-/* animation bouton */
 @keyframes unlockPop{
 0%{transform:scale(0.7);}
 50%{transform:scale(1.15);}
@@ -156,6 +175,59 @@ animation:blinkSoft 2s infinite;
 
 button.unlock{
 animation:unlockPop 0.4s ease;
+}
+
+/* petits téléphones */
+@media (max-height:750px){
+
+.container{
+padding:16px;
+}
+
+h1{
+font-size:30px;
+margin-bottom:8px;
+}
+
+.message{
+font-size:20px;
+}
+
+.small{
+font-size:16px;
+margin-top:8px;
+}
+
+.stats{
+font-size:16px;
+padding:10px;
+margin-top:12px;
+}
+
+#evaBloc{
+margin-top:16px;
+}
+
+#evaImg{
+width:74px;
+height:74px;
+}
+
+button{
+margin-top:16px;
+padding:14px 22px;
+font-size:17px;
+}
+
+}
+
+/* iPad / tablettes */
+@media (min-width:768px){
+
+.container{
+max-width:420px;
+}
+
 }
 </style>
 </head>
@@ -177,37 +249,37 @@ document.querySelectorAll(".confetti").forEach(c=>{
 c.style.transition="opacity 1s";
 c.style.opacity="0";
 });
-}, 3000);
+},3000);
 
 setTimeout(()=>{
 document.querySelectorAll(".confetti").forEach(c=>c.remove());
-}, 4000);
+},4000);
 </script>
 
 <script>
-let messages = [
+let messages=[
 "Excellent travail 💪",
 "Très bonne séance 👏",
 "Continue comme ça 🔥",
 "Objectif atteint 🎯"
 ];
 
-let randomMessage = messages[Math.floor(Math.random()*messages.length)];
+let randomMessage=messages[Math.floor(Math.random()*messages.length)];
 
-let prog = JSON.parse(localStorage.getItem("programme_temp"));
+let prog=JSON.parse(localStorage.getItem("programme_temp"));
 
-let totalTime = 0;
-let exCount = 0;
-let series = 0;
+let totalTime=0;
+let exCount=0;
+let series=0;
 
 if(prog){
-series = prog.series || 1;
-exCount = prog.exercices.length;
+series=prog.series||1;
+exCount=prog.exercices.length;
 
 prog.exercices.forEach(ex=>{
-totalTime += (ex.ex + ex.repos) * ex.reps;
+totalTime+=(ex.ex+ex.repos)*ex.reps;
 });
-totalTime *= series;
+totalTime*=series;
 }
 
 function formatTime(s){
@@ -229,15 +301,10 @@ return m+" min "+(s%60)+" s";
 <p class="small">Avec les félicitations du kiné !</p>
 
 <div id="evaBloc">
-
 <h3>👉 Merci d’indiquer votre ressenti</h3>
-
 <img id="evaImg" src="/images/eva/0.png">
-
 <input type="range" min="0" max="10" value="0" id="evaSlider">
-
 <div id="evaLabel">Très bien</div>
-
 </div>
 
 <button id="btnRetour">🏠 Retour accueil</button>
@@ -245,149 +312,124 @@ return m+" min "+(s%60)+" s";
 </div>
 
 <script>
-document.getElementById("msg").innerText = randomMessage;
+document.getElementById("msg").innerText=randomMessage;
 
-document.getElementById("stats").innerHTML =
-"⏱ "+formatTime(totalTime)+"<br>" +
-"🏋️ "+exCount+" exercices<br>" +
+document.getElementById("stats").innerHTML=
+"⏱ "+formatTime(totalTime)+"<br>"+
+"🏋️ "+exCount+" exercices<br>"+
 "🔁 "+series+" séries";
 
-/* PRELOAD */
-const evaImages = [];
+const evaImages=[];
 for(let i=0;i<6;i++){
-let im = new Image();
-im.src = "/images/eva/"+i+".png";
+let im=new Image();
+im.src="/images/eva/"+i+".png";
 evaImages.push(im);
 }
 
-/* EVA */
-const slider = document.getElementById("evaSlider");
-const img = document.getElementById("evaImg");
-const label = document.getElementById("evaLabel");
-const btn = document.getElementById("btnRetour");
+const slider=document.getElementById("evaSlider");
+const img=document.getElementById("evaImg");
+const label=document.getElementById("evaLabel");
+const btn=document.getElementById("btnRetour");
 
-let evaValue = null;
+let evaValue=null;
 
-/* bouton bloqué au départ */
 btn.classList.add("disabled");
 
 function updateEva(val){
 
-val = parseInt(val);
+val=parseInt(val);
 
-/* IMAGE */
-let step = Math.floor(val / 2);
-if(step < 0) step = 0;
-if(step > 5) step = 5;
-img.src = evaImages[step].src;
+let step=Math.floor(val/2);
+if(step<0)step=0;
+if(step>5)step=5;
 
-/* TEXTE EVA CLINIQUE */
-if(val <= 1) label.innerText="Très bien";
-else if(val <= 3) label.innerText="Bénigne";
-else if(val <= 5) label.innerText="Inconfort modéré";
-else if(val <= 7) label.innerText="Douleur intense";
-else if(val <= 9) label.innerText="Douleur très intense";
+img.src=evaImages[step].src;
+
+if(val<=1)label.innerText="Très bien";
+else if(val<=3)label.innerText="Bénigne";
+else if(val<=5)label.innerText="Inconfort modéré";
+else if(val<=7)label.innerText="Douleur intense";
+else if(val<=9)label.innerText="Douleur très intense";
 else label.innerText="Le plus de douleur possible";
 
-/* + valeur */
-label.innerText += " ("+val+"/10)";
+label.innerText+=" ("+val+"/10)";
 
-/* sauvegarde */
-localStorage.setItem("eva_temp", val);
+localStorage.setItem("eva_temp",val);
 
-/* 🔥 activation bouton + animation UNE FOIS */
-if(evaValue === null){
+if(evaValue===null){
 
 btn.classList.remove("disabled");
 btn.classList.add("unlock");
 
-/* vibration mobile */
 if(navigator.vibrate){
 navigator.vibrate(50);
 }
 
-setTimeout(()=>btn.classList.remove("unlock"), 400);
+setTimeout(()=>btn.classList.remove("unlock"),400);
 }
 
-evaValue = val;
+evaValue=val;
 }
-slider.addEventListener("input", e=>{
+
+slider.addEventListener("input",e=>{
 updateEva(e.target.value);
 });
 
-/* IMPORTANT : pas d'activation automatique */
-/* affichage initial SANS valider */
-img.src = evaImages[0].src;
-label.innerText = "Très bien";
+img.src=evaImages[0].src;
+label.innerText="Très bien";
 
-/* clic bouton sécurisé */
-btn.onclick = () => {
+btn.onclick=()=>{
 
-if(evaValue === null){
-label.innerText = "👉 Merci d’indiquer votre ressenti";
+if(evaValue===null){
+label.innerText="👉 Merci d’indiquer votre ressenti";
 return;
 }
 
 saveAndExit();
 };
-
 </script>
 
 <script>
-
-const VERSION = "1.2";
+const VERSION="1.2";
 
 function saveAndExit(){
-const params =
-new URLSearchParams(
-window.location.search
-);
 
-const patient =
-params.get("patient");
+const params=new URLSearchParams(window.location.search);
 
-let all = localStorage.getItem("programmes");
-all = all ? JSON.parse(all) : [];
-if(!Array.isArray(all)) all = [];
+const patient=params.get("patient");
 
-let eva = parseInt(localStorage.getItem("eva_temp") || 0);
-let prog = JSON.parse(localStorage.getItem("programme_temp") || "{}");
+let all=localStorage.getItem("programmes");
+all=all?JSON.parse(all):[];
+if(!Array.isArray(all))all=[];
 
-let programme = {
-type: "historique",
-patientId:
-patient || "admin",
-nom: prog.nom || "Séance",
-date: new Date().toLocaleString(),
-data: {
+let eva=parseInt(localStorage.getItem("eva_temp")||0);
+let prog=JSON.parse(localStorage.getItem("programme_temp")||"{}");
+
+let programme={
+type:"historique",
+patientId:patient||"admin",
+nom:prog.nom||"Séance",
+date:new Date().toLocaleString(),
+data:{
 ...prog,
-eva: eva
+eva:eva
 }
 };
 
 all.unshift(programme);
 
-let historiques = all.filter(p => p.type === "historique").slice(0,30);
-let autres = all.filter(p => p.type !== "historique");
+let historiques=all.filter(p=>p.type==="historique").slice(0,30);
+let autres=all.filter(p=>p.type!=="historique");
 
-localStorage.setItem("programmes", JSON.stringify([...historiques, ...autres]));
+localStorage.setItem("programmes",JSON.stringify([...historiques,...autres]));
 
 localStorage.removeItem("eva_temp");
 
 if(patient){
-
-window.location =
-"index.html?patient="
-+ patient +
-"&v=" + VERSION;
-
+window.location="index.html?patient="+patient+"&v="+VERSION;
 }else{
-
-window.location =
-"index.html?v=" + VERSION;
-
+window.location="index.html?v="+VERSION;
 }
-
 }
 </script>
 
