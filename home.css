@@ -35,7 +35,7 @@ body{
   margin:auto;
 
   padding:42px;
-padding-top:58px;
+padding-top:28px;
 
   border-radius:38px;
 
@@ -55,7 +55,7 @@ padding-top:58px;
   width:108px;
   height:auto;
   display:block;
-  margin:14px auto 26px;
+  margin:-8px auto 20px;
   object-fit:contain;
   position:relative;
   z-index:2;
