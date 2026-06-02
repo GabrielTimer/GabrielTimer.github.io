@@ -1,7 +1,9 @@
 {
+  "id": "/musimix/",
   "name": "MusiMix",
   "short_name": "MusiMix",
-  "start_url": "./",
+  "start_url": "/musimix/",
+  "scope": "/musimix/",
   "display": "standalone",
   "background_color": "#111111",
   "theme_color": "#111111",
