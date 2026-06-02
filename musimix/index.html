@@ -560,13 +560,34 @@ body{
   color:#fff;
 }
 
-/* fader vertical */
-.slider-wrap input[type=range]{
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  width:22px;
-  height:90px;
-  accent-color:#f6aa1c;
+@media (max-width:900px){
+
+  .slider-wrap input[type=range]{
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    width:22px;
+    height:90px;
+    accent-color:#f6aa1c;
+  }
+
+}
+
+@media (min-width:901px){
+
+  .slider-wrap{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:12px;
+  }
+
+  .slider-wrap input[type=range]{
+    width:140px;
+    height:auto;
+    writing-mode:horizontal-tb;
+    -webkit-appearance:auto;
+  }
+
 }
 
 /* solo mute */
