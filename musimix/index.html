@@ -631,6 +631,15 @@ body{
 }
 
 </style>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#111111">
+
+<link rel="icon" href="icon-192.png">
+
+<link rel="apple-touch-icon" href="icon-192.png">
+
 </head>
 <body>
 
@@ -2193,6 +2202,12 @@ async function exportChordPdf(){
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js");
+}
+</script>
 
 </body>
 </html>
