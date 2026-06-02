@@ -80,12 +80,6 @@ padding-bottom:12px;
 margin-bottom:12px;
 }
 
-#mobileMixerPanel{
-  display:block !important;
-  min-height:500px !important;
-  border:5px solid red !important;
-}
-
 #waveform{
 display:none;
 }
@@ -801,8 +795,11 @@ if(lrcFile){
 }
 }
 
-await buildStudioWaveforms()
-initStudioTimeline()
+if(window.innerWidth > 900){
+  await buildStudioWaveforms()
+  initStudioTimeline()
+}
+
 renderMixer()
 drawWaveform()
 }
@@ -926,11 +923,22 @@ if(lrcFile){
 }
 }
 
-await buildStudioWaveforms()
-initStudioTimeline()
+if(window.innerWidth > 900){
+  await buildStudioWaveforms()
+  initStudioTimeline()
+}
+
 await saveSongToDB(file)
 renderLibrary()
+
 renderMixer()
+
+alert('Pistes détectées : ' + Object.keys(tracks).length)
+
+const mixer=document.getElementById('mixer')
+
+alert('Faders créés : ' + mixer.children.length)
+
 drawWaveform()
 }
 
@@ -985,10 +993,13 @@ async function loadFiles(e){
     parseLrc(lrcText);
   }
 
+if(window.innerWidth > 900){
   await buildStudioWaveforms();
   initStudioTimeline();
-  renderMixer();
-  drawWaveform();
+}
+
+renderMixer();
+drawWaveform();
 }
 
 function getTrackCustomName(trackName){
