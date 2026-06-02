@@ -223,9 +223,29 @@ touch-action:none;
 
 .sidebar{
   position:static;
-  padding:20px;
-  border-right:none;
-  border-bottom:1px solid #2a2a2a;
+  height:auto;
+  min-height:0;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  border:none !important;
+  background:transparent !important;
+
+  overflow:visible;
+}
+
+#mobileMixerPanel{
+  display:none;
+}
+
+#mobileMixerPanel.open{
+  display:block;
+}
+
+.sidebar{
+  padding:8px !important;
+  border-bottom:none !important;
 }
 
 #mixer{
@@ -473,9 +493,10 @@ body{
   align-items:center;
 
   gap:4px;
-}
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.03);
+}
+
 }
 
 /* nom piste */
