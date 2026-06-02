@@ -243,6 +243,10 @@ touch-action:none;
   display:block;
 }
 
+.sidebar{
+  display:block;
+}
+
 }
 
 
@@ -523,6 +527,7 @@ body{
 }
 
 }
+
 </style>
 </head>
 <body>
@@ -933,11 +938,6 @@ renderLibrary()
 
 renderMixer()
 
-alert('Pistes détectées : ' + Object.keys(tracks).length)
-
-const mixer=document.getElementById('mixer')
-
-alert('Faders créés : ' + mixer.children.length)
 
 drawWaveform()
 }
@@ -1568,8 +1568,8 @@ window.addEventListener('load', async ()=>{
   const panel=document.getElementById('mobileMixerPanel');
   const btn=document.getElementById('toggleMixerBtn');
 
-panel.classList.add('open');
-btn.textContent='▲ Masquer pistes';
+panel.classList.remove('open');
+btn.textContent='▼ Pistes';
 
   initResizableLayout();
 
