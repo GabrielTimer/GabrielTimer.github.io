@@ -236,11 +236,31 @@ touch-action:none;
 }
 
 #mobileMixerPanel{
-  display:none;
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:60px;
+
+  max-height:55vh;
+
+  overflow:auto;
+
+  background:#111;
+
+  padding:12px;
+
+  border-top:1px solid #2a2a2a;
+
+  transform:translateY(120%);
+
+  transition:.25s ease;
+
+  z-index:9998;
 }
 
 #mobileMixerPanel.open{
-  display:block;
+  transform:translateY(0);
 }
 
 .sidebar{
@@ -375,11 +395,31 @@ margin:0;
 }
 
 #mobileMixerPanel{
-  display:none;
+  position:fixed;
+
+  left:0;
+  right:0;
+  bottom:60px;
+
+  max-height:55vh;
+
+  overflow:auto;
+
+  background:#111;
+
+  padding:12px;
+
+  border-top:1px solid #2a2a2a;
+
+  transform:translateY(120%);
+
+  transition:.25s ease;
+
+  z-index:9998;
 }
 
 #mobileMixerPanel.open{
-  display:block;
+  transform:translateY(0);
 }
 #library-panel{
   display:none !important;
