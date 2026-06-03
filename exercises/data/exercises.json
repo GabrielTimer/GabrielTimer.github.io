@@ -4015,6 +4015,62 @@
 },
 
 {
+  "id": "EPAULE_08",
+  "nom": "Tirage bras tendus avec élastique",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Renforcement épaules et fixateurs scapulaires",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Se tenir debout face au point d’ancrage",
+    "Garder les bras tendus le long du corps",
+    "Tirer l’élastique vers l’arrière en rapprochant légèrement les omoplates",
+    "Maintenir le tronc droit et les épaules basses",
+    "Revenir lentement à la position de départ"
+  ],
+  "precautions": [
+    "Ne pas hausser les épaules",
+    "Éviter de cambrer le bas du dos",
+    "Garder les coudes tendus pendant le mouvement"
+  ],
+  "tags": [
+    "Epaule",
+    "Élastique",
+    "Tirage",
+    "Scapula",
+    "Renforcement"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/epaule/Tiragebrastendus_elastique.png",
+  "pathologies": [
+    "Tendinopathie de la coiffe des rotateurs",
+    "Conflit sous-acromial",
+    "Instabilité scapulaire",
+    "Rééducation post-opératoire épaule"
+  ],
+  "objectifs": [
+    "Renforcement des fixateurs scapulaires",
+    "Amélioration de la posture",
+    "Stabilité de l'épaule",
+    "Récupération fonctionnelle"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
   "id": "EPAULE_CAPS_01",
 
   "nom": "Glissement mural assisté",
