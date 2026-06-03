@@ -3700,7 +3700,8 @@
   "tags": [
     "Epaule",
     "Coiffe",
-    "Mobilité"
+    "Mobilité",
+    "Capsulite"
   ],
   "timer_config": {
     "mode": "dynamique",
@@ -3712,7 +3713,7 @@
   "ex": 30,
   "repos": 20,
   "reps": 10,
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/Pendulaire.png",
   "pathologies": [
     "Tendinite coiffe des rotateurs"
   ],
@@ -3730,7 +3731,7 @@
   "type": "timer",
   "categorie": "Epaule",
   "objectif": "Activation coiffe",
-  "niveau": 1,
+  "niveau": 2,
   "exercise_mode": "dynamique",
   "duree": "10 répétitions",
   "consignes": [
@@ -3756,7 +3757,7 @@
   "ex": 30,
   "repos": 30,
   "reps": 10,
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/REepaule_elastique.png",
   "pathologies": [
     "Tendinite coiffe des rotateurs"
   ],
@@ -3800,7 +3801,7 @@
   "ex": 30,
   "repos": 30,
   "reps": 10,
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/wallslideflexionepaule.png",
   "pathologies": [
     "Tendinite coiffe des rotateurs"
   ],
@@ -3844,7 +3845,7 @@
   "ex": 30,
   "repos": 40,
   "reps": 10,
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/REisoepaule.png",
   "pathologies": [
     "Tendinite coiffe des rotateurs"
   ],
@@ -3909,7 +3910,7 @@
 
   "reps": 10,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/wallslideflexionepaule.png",
 
   "video": "",
 
@@ -3930,76 +3931,6 @@
   "materiel": [
     "Mur"
   ]
-},
-
-{
-  "id": "EPAULE_CAPS_02",
-
-  "nom": "Pendulaire de Codman",
-
-  "type": "timer",
-
-  "categorie": "Epaule",
-
-  "objectif": "Décoaptation et mobilité douce de l’épaule",
-
-  "niveau": 1,
-
-  "exercise_mode": "dynamique",
-
-  "duree": "2 séries de 30 secondes",
-
-  "consignes": [
-    "Se pencher légèrement en avant",
-    "Laisser le bras détendu",
-    "Faire de petits mouvements circulaires",
-    "Respirer calmement"
-  ],
-
-  "precautions": [
-    "Ne pas contracter l’épaule",
-    "Faire de petits mouvements sans douleur vive"
-  ],
-
-  "tags": [
-    "Epaule",
-    "Capsulite",
-    "Mobilité",
-    "Décompression"
-  ],
-
-  "timer_config": {
-    "mode": "dynamique",
-    "phase_monte": 3,
-    "maintien": 1,
-    "phase_descente": 3,
-    "cycles": 10
-  },
-
-  "ex": 30,
-
-  "repos": 20,
-
-  "reps": 10,
-
-  "image": "/exercises/images/placeholders/default.png",
-
-  "video": "",
-
-  "pathologies": [
-    "Capsulite rétractile de l’épaule"
-  ],
-
-  "objectifs": [
-    "Mobilité",
-    "Diminution douleur"
-  ],
-
-  "zones": [
-    "Epaule"
-  ],
-
-  "materiel": []
 },
 
 {
@@ -4052,7 +3983,7 @@
 
   "reps": 10,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/flexionepaule_baton.png",
 
   "video": "",
 
@@ -4124,7 +4055,7 @@
 
   "reps": 10,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/REepaule_baton.png",
 
   "video": "",
 
@@ -4196,7 +4127,7 @@
 
   "reps": 2,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/autograndissement_mur.png",
 
   "video": "",
 
@@ -4230,7 +4161,7 @@
 
   "objectif": "Renforcement doux des fixateurs scapulaires",
 
-  "niveau": 2,
+  "niveau": 1,
 
   "exercise_mode": "dynamique",
 
@@ -4269,7 +4200,7 @@
 
   "reps": 12,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/tirage_elastique.png",
 
   "video": "",
 
@@ -4303,7 +4234,7 @@
 
   "objectif": "Activation douce de la coiffe des rotateurs",
 
-  "niveau": 2,
+  "niveau": 1,
 
   "exercise_mode": "statique",
 
@@ -4342,7 +4273,7 @@
 
   "reps": 8,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/REisoepaule.png",
 
   "video": "",
 
@@ -4414,7 +4345,7 @@
 
   "reps": 12,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/wallslideflexionepaule.png",
 
   "video": "",
 
@@ -4486,7 +4417,7 @@
 
   "reps": 10,
 
-  "image": "/exercises/images/placeholders/default.png",
+  "image": "/exercises/images/epaule/wallslideflexionepaule_elastique.png",
 
   "video": "",
 
