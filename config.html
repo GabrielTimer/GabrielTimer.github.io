@@ -491,6 +491,15 @@ document.getElementById("sessionName").value =
 document.getElementById("title").innerText =
 "Libre";
 
+if(
+  localStorage.getItem("admin_ok")
+  === "true"
+){
+  document.getElementById(
+    "patientId"
+  ).value = "admin";
+}
+
 render();
 
 });function syncInputs(){
@@ -891,6 +900,26 @@ localStorage.getItem(
 "editCloudId"
 );
 
+const isAdmin =
+localStorage.getItem("admin_ok")
+=== "true";
+
+const patientId =
+document.getElementById(
+"patientId"
+).value.trim();
+
+if(
+patientId.toLowerCase() === "admin"
+&&
+!isAdmin
+){
+alert(
+"Programme admin réservé à l'administrateur"
+);
+return;
+}
+
 let programme = {
 
 id:
@@ -911,10 +940,7 @@ Date.now(),
 
 auteur:"gabriel",
 
-patientId:
-document.getElementById(
-"patientId"
-).value,
+patientId: patientId,
 
 data: build()
 
