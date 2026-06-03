@@ -69,8 +69,14 @@ async function init(){
 const programmes =
 await loadProgramsFromCloud();
 
+console.log(
+"PROGRAMMES CLOUD :",
+programmes
+);
+
 const adminPrograms =
 programmes.filter(
+
 p =>
 String(
 p.patientId || ""
