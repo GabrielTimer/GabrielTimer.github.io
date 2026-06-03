@@ -4783,5 +4783,189 @@
   "objectifs": ["cardio", "endurance"],
   "zones": ["membres inférieurs"],
   "materiel": ["Vélo"]
+},
+
+{
+  "id": "TRONC_01",
+  "nom": "Gainage ventral",
+  "type": "timer",
+  "categorie": "Tronc",
+  "objectif": "Stabilité du tronc",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "duree": "30 secondes",
+  "consignes": [
+    "Prendre appui sur les avant-bras",
+    "Aligner épaules, bassin et chevilles",
+    "Contracter les abdominaux",
+    "Maintenir sans creuser le dos"
+  ],
+  "precautions": [
+    "Ne pas laisser le bassin s'affaisser",
+    "Respirer normalement"
+  ],
+  "tags": [
+    "Gainage",
+    "Abdominaux",
+    "Tronc",
+    "Lombaires"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "maintien": 30,
+    "cycles": 1
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 3,
+  "image": "/exercises/images/tronc/Gainage_Ventral.png",
+  "pathologies": [
+    "Lombalgie",
+    "Instabilité lombaire"
+  ],
+  "objectifs": [
+    "Renforcement du tronc"
+  ],
+  "zones": [
+    "Tronc"
+  ]
+},
+
+{
+  "id": "TRONC_02",
+  "nom": "Gainage latéral gauche",
+  "type": "timer",
+  "categorie": "Tronc",
+  "objectif": "Stabilité latérale",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "duree": "20 secondes",
+  "consignes": [
+    "Prendre appui sur l'avant-bras gauche",
+    "Aligner tête, tronc et jambes",
+    "Soulever le bassin",
+    "Maintenir la position"
+  ],
+  "precautions": [
+    "Éviter de tourner le bassin",
+    "Garder le cou dans l'axe"
+  ],
+  "tags": [
+    "Gainage",
+    "Obliques",
+    "Tronc",
+    "Stabilité"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "maintien": 20,
+    "cycles": 1
+  },
+  "ex": 20,
+  "repos": 20,
+  "reps": 3,
+  "image": "/exercises/images/tronc/Gainage_Lateral_Gauche.png",
+  "pathologies": [
+    "Lombalgie",
+    "Instabilité du bassin"
+  ],
+  "objectifs": [
+    "Renforcement des obliques"
+  ],
+  "zones": [
+    "Tronc"
+  ]
+},
+
+{
+  "id": "TRONC_03",
+  "nom": "Gainage latéral droit",
+  "type": "timer",
+  "categorie": "Tronc",
+  "objectif": "Stabilité latérale",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "duree": "20 secondes",
+  "consignes": [
+    "Prendre appui sur l'avant-bras droit",
+    "Aligner tête, tronc et jambes",
+    "Soulever le bassin",
+    "Maintenir la position"
+  ],
+  "precautions": [
+    "Éviter de tourner le bassin",
+    "Garder le cou dans l'axe"
+  ],
+  "tags": [
+    "Gainage",
+    "Obliques",
+    "Tronc",
+    "Stabilité"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "maintien": 20,
+    "cycles": 1
+  },
+  "ex": 20,
+  "repos": 20,
+  "reps": 3,
+  "image": "/exercises/images/tronc/Gainage_Lateral_Droit.png",
+  "pathologies": [
+    "Lombalgie",
+    "Instabilité du bassin"
+  ],
+  "objectifs": [
+    "Renforcement des obliques"
+  ],
+  "zones": [
+    "Tronc"
+  ]
+},
+
+{
+  "id": "TRONC_04",
+  "nom": "Superman",
+  "type": "timer",
+  "categorie": "Tronc",
+  "objectif": "Renforcement des extenseurs",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "duree": "15 secondes",
+  "consignes": [
+    "S'allonger sur le ventre",
+    "Lever simultanément les bras et les jambes",
+    "Garder la tête dans l'axe",
+    "Maintenir la position"
+  ],
+  "precautions": [
+    "Ne pas forcer en cas de douleur lombaire",
+    "Éviter les mouvements brusques"
+  ],
+  "tags": [
+    "Lombaires",
+    "Gainage",
+    "Dos",
+    "Extenseurs"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "maintien": 15,
+    "cycles": 1
+  },
+  "ex": 15,
+  "repos": 20,
+  "reps": 5,
+  "image": "/exercises/images/tronc/Superman.png",
+  "pathologies": [
+    "Lombalgie chronique",
+    "Faiblesse musculaire du dos"
+  ],
+  "objectifs": [
+    "Renforcement des muscles paravertébraux"
+  ],
+  "zones": [
+    "Tronc"
+  ]
 }
 ]
