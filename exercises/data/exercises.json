@@ -3858,6 +3858,59 @@
 },
 
 {
+  "id": "EPAULE_05",
+  "nom": "Diagonale Kabat avec élastique",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Contrôle scapulo-huméral",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Partir de la hanche opposée",
+    "Tirer l’élastique en diagonale vers le haut",
+    "Terminer bras tendu au-dessus de l’épaule",
+    "Contrôler lentement le retour"
+  ],
+  "precautions": [
+    "Ne pas hausser l’épaule",
+    "Garder le tronc stable",
+    "Éviter les mouvements brusques"
+  ],
+  "tags": [
+    "Epaule",
+    "Kabat",
+    "Élastique",
+    "Scapula"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/epaule/diagonalekabat_elastique.png",
+  "pathologies": [
+    "Tendinopathie de la coiffe des rotateurs",
+    "Conflit sous-acromial",
+    "Instabilité d'épaule"
+  ],
+  "objectifs": [
+    "Contrôle scapulo-huméral",
+    "Coordination fonctionnelle",
+    "Renforcement global de l'épaule"
+  ],
+  "zones": [
+    "Epaule",
+    "Scapula"
+  ]
+},
+
+{
   "id": "EPAULE_CAPS_01",
 
   "nom": "Glissement mural assisté",
