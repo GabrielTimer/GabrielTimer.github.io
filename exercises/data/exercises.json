@@ -4071,6 +4071,63 @@
 },
 
 {
+  "id": "EPAULE_09",
+  "nom": "Rotation interne avec élastique",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Renforcement rotation interne épaule",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Se placer de côté par rapport au point d’ancrage",
+    "Garder le coude collé au corps à 90°",
+    "Ramener la main vers le ventre en tirant sur l’élastique",
+    "Maintenir le poignet dans l’axe de l’avant-bras",
+    "Revenir lentement à la position de départ"
+  ],
+  "precautions": [
+    "Ne pas décoller le coude du corps",
+    "Éviter la rotation du tronc",
+    "Garder l’épaule basse et détendue"
+  ],
+  "tags": [
+    "Epaule",
+    "Élastique",
+    "Rotation interne",
+    "Coiffe des rotateurs",
+    "Renforcement"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/epaule/Rotationinterne_elastique.png",
+  "pathologies": [
+    "Tendinopathie de la coiffe des rotateurs",
+    "Instabilité de l'épaule",
+    "Rééducation post-opératoire épaule",
+    "Conflit sous-acromial"
+  ],
+  "objectifs": [
+    "Renforcement du sous-scapulaire",
+    "Stabilité gléno-humérale",
+    "Amélioration du contrôle moteur",
+    "Récupération fonctionnelle"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+
+{
   "id": "EPAULE_CAPS_01",
 
   "nom": "Glissement mural assisté",
