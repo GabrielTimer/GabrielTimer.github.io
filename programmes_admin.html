@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programmes Cabinet</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+margin:0;
+padding:20px;
+}
+
+h2{
+text-align:center;
+}
+
+.card{
+background:white;
+padding:15px;
+margin:10px auto;
+max-width:400px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+cursor:pointer;
+}
+
+.card:hover{
+transform:scale(1.02);
+}
+
+.small{
+font-size:13px;
+color:#666;
+margin-top:5px;
+}
+
+button{
+display:block;
+margin:20px auto;
+padding:12px 20px;
+border:none;
+border-radius:12px;
+}
+</style>
+</head>
+<body>
+
+<h2>Programmes du cabinet</h2>
+
+<div id="list"></div>
+
+<button onclick="history.back()">⬅ Retour</button>
+
+<script type="module">
+
+import {
+loadProgramsFromCloud
+} from "./exercises/js/cloud.js";
+
+const container =
+document.getElementById("list");
+
+async function init(){
+
+const programmes =
+await loadProgramsFromCloud();
+
+const adminPrograms =
+programmes.filter(
+p =>
+String(
+p.patientId || ""
+)
+.toLowerCase()
+.trim() === "admin"
+);
+
+container.innerHTML = "";
+
+if(adminPrograms.length === 0){
+
+container.innerHTML =
+"<p style='text-align:center'>Aucun programme admin trouvé</p>";
+
+return;
+}
+
+adminPrograms.forEach(programme=>{
+
+const div =
+document.createElement("div");
+
+div.className = "card";
+
+const nbExos =
+programme.data?.exercices?.length || 0;
+
+div.innerHTML = `
+<h3>${programme.nom}</h3>
+<div class="small">
+${nbExos} exercice(s)
+</div>
+`;
+
+div.onclick = ()=>{
+
+localStorage.setItem(
+"edit_programme",
+JSON.stringify({
+nom: programme.nom,
+patientId: programme.patientId,
+series:
+programme.data?.series || 1,
+exercices:
+programme.data?.exercices || []
+})
+);
+
+localStorage.setItem(
+"editCloudId",
+programme.firebaseId
+);
+
+window.location =
+"config.html?v=" +
+Date.now();
+
+};
+
+container.appendChild(div);
+
+});
+
+}
+
+init();
+
+</script>
+
+</body>
+</html>
