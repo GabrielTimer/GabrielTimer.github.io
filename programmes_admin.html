@@ -50,11 +50,43 @@ border-radius:12px;
 
 <h2>Programmes du cabinet</h2>
 
+<button id="newProgramBtn">
+
+➕ Créer un programme
+
+</button>
+
 <div id="list"></div>
 
 <button onclick="history.back()">⬅ Retour</button>
 
 <script type="module">
+
+document
+.getElementById("newProgramBtn")
+.onclick = ()=>{
+
+localStorage.removeItem(
+"editCloudId"
+);
+
+localStorage.removeItem(
+"edit_programme"
+);
+
+localStorage.removeItem(
+"pathologie"
+);
+
+localStorage.removeItem(
+"patho_data"
+);
+
+window.location =
+"config.html?v="
++ Date.now();
+
+};
 
 import {
 loadProgramsFromCloud,
@@ -69,10 +101,6 @@ async function init(){
 const programmes =
 await loadProgramsFromCloud();
 
-console.log(
-"PROGRAMMES CLOUD :",
-programmes
-);
 
 const adminPrograms =
 programmes.filter(
@@ -118,9 +146,8 @@ ${programme.nom}
 
 <span
 class="deleteBtn"
-data-id="${programme.firebaseId}"
 style="
-font-size:22px;
+font-size:20px;
 cursor:pointer;
 padding:5px;
 user-select:none;
@@ -134,6 +161,7 @@ user-select:none;
 ${nbExos} exercice(s)
 </div>
 `;
+
 
 const deleteBtn =
 div.querySelector(".deleteBtn");
