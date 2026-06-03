@@ -3911,6 +3911,110 @@
 },
 
 {
+  "id": "EPAULE_06",
+  "nom": "Antépulsion épaule avec élastique",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Renforcement flexion épaule",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Tenir l’élastique bras tendu devant soi",
+    "Lever le bras à hauteur de l’épaule",
+    "Garder le coude tendu sans verrouiller",
+    "Contrôler lentement le retour"
+  ],
+  "precautions": [
+    "Ne pas hausser l’épaule",
+    "Garder le tronc stable",
+    "Éviter les compensations avec le dos"
+  ],
+  "tags": [
+    "Epaule",
+    "Élastique",
+    "Antépulsion",
+    "Renforcement"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/epaule/antepulsionepaule_epaule.png",
+  "pathologies": [
+    "Tendinopathie de la coiffe des rotateurs",
+    "Conflit sous-acromial",
+    "Rééducation post-opératoire épaule"
+  ],
+  "objectifs": [
+    "Renforcement flexion épaule",
+    "Stabilité scapulaire",
+    "Récupération fonctionnelle"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
+  "id": "EPAULE_07",
+  "nom": "Rétropulsion épaule avec élastique",
+  "type": "timer",
+  "categorie": "Epaule",
+  "objectif": "Renforcement extension épaule",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "duree": "10 répétitions",
+  "consignes": [
+    "Garder le bras tendu devant soi",
+    "Tirer l’élastique vers l’arrière dans l’axe du corps",
+    "Maintenir le buste droit",
+    "Contrôler lentement le retour"
+  ],
+  "precautions": [
+    "Ne pas cambrer le dos",
+    "Ne pas hausser l’épaule",
+    "Garder le mouvement fluide"
+  ],
+  "tags": [
+    "Epaule",
+    "Élastique",
+    "Rétropulsion",
+    "Renforcement"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "ex": 30,
+  "repos": 30,
+  "reps": 10,
+  "image": "/exercises/images/epaule/Retropulsionepaule_elastique.png",
+  "pathologies": [
+    "Tendinopathie de la coiffe des rotateurs",
+    "Conflit sous-acromial",
+    "Rééducation post-opératoire épaule"
+  ],
+  "objectifs": [
+    "Renforcement extension épaule",
+    "Stabilité scapulaire",
+    "Récupération fonctionnelle"
+  ],
+  "zones": [
+    "Epaule"
+  ]
+},
+
+{
   "id": "EPAULE_CAPS_01",
 
   "nom": "Glissement mural assisté",
