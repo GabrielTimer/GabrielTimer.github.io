@@ -209,6 +209,25 @@ const lettres =
 const dossier =
 `Reprise course ${objectif}`;
 
+const exercises =
+await fetch(
+"./exercises/data/exercises.json"
+).then(r => r.json());
+
+const marcheBase =
+structuredClone(
+exercises.find(
+e => e.id === "tapismarche"
+)
+);
+
+const courseBase =
+structuredClone(
+exercises.find(
+e => e.id === "tapiscourse"
+)
+);
+
 let totalCrees = 0;
 
 try{
@@ -256,6 +275,30 @@ Math.round(
 )
 );
 
+const exoMarche =
+structuredClone(
+marcheBase
+);
+
+exoMarche.ex = 300;
+exoMarche.repos = 0;
+exoMarche.reps = 1;
+
+const exoCourse =
+structuredClone(
+courseBase
+);
+
+exoCourse.ex =
+courseMinutes * 60;
+
+exoCourse.repos =
+marcheMinutes * 60;
+
+exoCourse.reps =
+repetitions;
+
+
 const programme = {
 
 id:
@@ -297,46 +340,14 @@ series:1,
 
 exercices:[
 
-{
-id:
-tapis
-? "tapismarche"
-: "marche_exterieure",
+exoMarche,
 
-nom:
-tapis
-? "Tapis marche"
-: "Marche extérieure",
-
-ex:300,
-repos:0,
-reps:1
-},
-
-{
-id:
-tapis
-? "tapiscourse"
-: "course_exterieure",
-
-nom:
-tapis
-? "Tapis course"
-: "Course extérieure",
-
-ex:
-courseMinutes * 60,
-
-repos:
-marcheMinutes * 60,
-
-reps:
-repetitions
-}
+exoCourse
 
 ]
 
 }
+
 
 };
 
