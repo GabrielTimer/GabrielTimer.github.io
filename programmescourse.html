@@ -275,27 +275,20 @@ e => e.id === "course"
 
 
 
-if(sexe === "F"){
-
-if(tapis){
-
 marcheBase.image =
-"/exercises/images/cabinet/tapismarcheF.png";
+sexe === "F"
+? marcheBase.imageF
+: marcheBase.imageH;
 
 courseBase.image =
-"/exercises/images/cabinet/tapiscourseF.png";
+sexe === "F"
+? courseBase.imageF
+: courseBase.imageH;
 
-}else{
-
-marcheBase.image =
-"/exercises/images/cabinet/marcheF.png";
-
-courseBase.image =
-"/exercises/images/cabinet/courseF.png";
-
-}
-
-}
+console.log("marcheBase", marcheBase);
+console.log("courseBase", courseBase);
+console.log("image marche", marcheBase.image);
+console.log("image course", courseBase.image);
 
 
 if(!marcheBase || !courseBase){
