@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Générateur reprise course</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 
@@ -177,6 +178,123 @@ saveProgramToCloud
 }
 from "./exercises/js/cloud.js";
 
+function generatePdf(
+patient,
+objectif,
+niveau,
+pdfData
+){
+
+const {
+jsPDF
+} = window.jspdf;
+
+const doc =
+new jsPDF();
+
+let y = 15;
+
+doc.setFontSize(18);
+doc.text(
+"Programme reprise course",
+10,
+y
+);
+
+y += 10;
+
+doc.setFontSize(12);
+
+doc.text(
+"Patient : " + patient,
+10,
+y
+);
+
+y += 7;
+
+doc.text(
+"Objectif : " + objectif,
+10,
+y
+);
+
+y += 7;
+
+doc.text(
+"Niveau : " + niveau,
+10,
+y
+);
+
+y += 12;
+
+let semaineCourante = 0;
+
+pdfData.forEach(s => {
+
+if(
+s.semaine !== semaineCourante
+){
+
+semaineCourante =
+s.semaine;
+
+doc.setFontSize(14);
+
+doc.text(
+"SEMAINE " +
+semaineCourante,
+10,
+y
+);
+
+y += 8;
+
+doc.setFontSize(11);
+
+}
+
+doc.text(
+
+`□ S${s.semaine}${s.seance} - ${s.duree} min`,
+
+12,
+
+y
+
+);
+
+y += 6;
+
+doc.text(
+
+`Marche 5 min / Course ${s.courseMinutes} min x ${s.repetitions}`,
+
+18,
+
+y
+
+);
+
+y += 8;
+
+if(y > 270){
+
+doc.addPage();
+
+y = 15;
+
+}
+
+});
+
+doc.save(
+`Programme_course_${patient}.pdf`
+);
+
+}
+
 window.generateProgram = async function(){
 
 const patient =
@@ -302,6 +420,8 @@ let totalCrees = 0;
 
 try{
 
+const pdfData = [];
+
 for(
 let semaine = 1;
 semaine <= semaines;
@@ -413,6 +533,22 @@ marcheMinutes
 )
 );
 
+pdfData.push({
+
+semaine,
+
+seance: lettre,
+
+duree: dureeCible,
+
+courseMinutes,
+
+marcheMinutes,
+
+repetitions
+
+});
+
 const exoMarche =
 structuredClone(
 marcheBase
@@ -510,11 +646,17 @@ totalCrees++;
 
 }
 
-alert(
-`${totalCrees} séance(s) créées avec succès`
+generatePdf(
+patient,
+objectif,
+niveau,
+pdfData
 );
 
-history.back();
+alert(
+`${totalCrees} séance(s) créées avec succès.\nPDF téléchargé.`
+);
+
 
 }catch(error){
 
