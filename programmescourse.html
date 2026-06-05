@@ -236,21 +236,48 @@ await fetch(
 "./exercises/data/exercises.json"
 ).then(r => r.json());
 
-const marcheBase =
+let marcheBase;
+let courseBase;
+
+if(tapis){
+
+marcheBase =
 structuredClone(
 exercises.find(
 e => e.id === "tapismarche"
 )
 );
 
-const courseBase =
+courseBase =
 structuredClone(
 exercises.find(
 e => e.id === "tapiscourse"
 )
 );
 
+}else{
+
+marcheBase =
+structuredClone(
+exercises.find(
+e => e.id === "marche"
+)
+);
+
+courseBase =
+structuredClone(
+exercises.find(
+e => e.id === "course"
+)
+);
+
+}
+
+
+
 if(sexe === "F"){
+
+if(tapis){
 
 marcheBase.image =
 "/exercises/images/cabinet/tapismarcheF.png";
@@ -258,7 +285,18 @@ marcheBase.image =
 courseBase.image =
 "/exercises/images/cabinet/tapiscourseF.png";
 
+}else{
+
+marcheBase.image =
+"/exercises/images/cabinet/marcheF.png";
+
+courseBase.image =
+"/exercises/images/cabinet/courseF.png";
+
 }
+
+}
+
 
 if(!marcheBase || !courseBase){
   alert(
