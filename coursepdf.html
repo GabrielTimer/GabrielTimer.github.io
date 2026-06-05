@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Programme reprise course</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+:root{
+--c1:#0FA5C9;
+--c2:#008FB3;
+--c3:#066E87;
+--c4:#EAFBFF;
+}
+
+body{
+margin:0;
+background:#f2f7f9;
+font-family:Segoe UI,sans-serif;
+padding:20px;
+}
+
+#page{
+width:210mm;
+min-height:297mm;
+margin:auto;
+background:white;
+padding:15mm;
+box-sizing:border-box;
+}
+
+.header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:3px solid var(--c1);
+padding-bottom:10px;
+margin-bottom:15px;
+}
+
+.logoBloc{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logoBloc img{
+width:90px;
+}
+
+.cabinet{
+font-size:14px;
+}
+
+.cabinet b{
+display:block;
+font-size:24px;
+color:var(--c2);
+}
+
+.titre{
+text-align:center;
+flex:1;
+}
+
+.titre .small{
+font-size:18px;
+font-weight:700;
+}
+
+.titre .big{
+font-size:48px;
+font-weight:900;
+color:var(--c2);
+}
+
+.infos{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:8px;
+margin-bottom:15px;
+}
+
+.info{
+background:var(--c4);
+border:1px solid #cfeef7;
+padding:10px;
+border-radius:10px;
+}
+
+.infoLabel{
+font-size:12px;
+color:#666;
+}
+
+.infoValue{
+font-weight:700;
+font-size:18px;
+}
+
+.bandeau{
+background:var(--c4);
+border-left:5px solid var(--c1);
+padding:10px;
+margin-bottom:15px;
+border-radius:8px;
+}
+
+.week{
+border:1px solid #d9eef4;
+border-radius:12px;
+margin-bottom:10px;
+overflow:hidden;
+}
+
+.weekTitle{
+background:linear-gradient(
+90deg,
+var(--c3),
+var(--c1)
+);
+color:white;
+padding:8px 12px;
+font-weight:700;
+}
+
+.weekBody{
+padding:8px 12px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:5px 0;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.footer{
+margin-top:20px;
+background:var(--c4);
+padding:10px;
+border-radius:12px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
+font-size:13px;
+text-align:center;
+}
+
+.download{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:var(--c2);
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+@media print{
+.download{
+display:none;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="page">
+
+<div class="header">
+
+<div class="logoBloc">
+
+<img src="logo.png">
+
+<div class="cabinet">
+<b>GABRIEL</b>
+LAVEAU<br>
+Kinésithérapeute
+</div>
+
+</div>
+
+<div class="titre">
+
+<div class="small">
+PROGRAMME PERSONNALISÉ
+</div>
+
+<div class="big">
+REPRISE COURSE
+</div>
+
+</div>
+
+</div>
+
+<div class="infos">
+
+<div class="info">
+<div class="infoLabel">👤 Patient</div>
+<div id="patient" class="infoValue"></div>
+</div>
+
+<div class="info">
+<div class="infoLabel">🎯 Objectif</div>
+<div id="objectif" class="infoValue"></div>
+</div>
+
+<div class="info">
+<div class="infoLabel">📈 Niveau</div>
+<div id="niveau" class="infoValue"></div>
+</div>
+
+<div class="info">
+<div class="infoLabel">📅 Durée</div>
+<div id="semaines" class="infoValue"></div>
+</div>
+
+<div class="info">
+<div class="infoLabel">📆 Date</div>
+<div id="date" class="infoValue"></div>
+</div>
+
+</div>
+
+<div class="bandeau">
+🚶 Échauffement : 5 min &nbsp;&nbsp;
+🔄 Alternance course/marche progressive &nbsp;&nbsp;
+🧘 Récupération : 3 min
+</div>
+
+<div id="weeks"></div>
+
+<div class="footer">
+
+<div>💧 Hydratez-vous</div>
+<div>👟 Échauffez-vous</div>
+<div>❤️ Écoutez votre corps</div>
+<div>😊 Prenez plaisir</div>
+<div>🏆 Chaque pas compte</div>
+
+</div>
+
+</div>
+
+<button class="download" onclick="downloadPdf()">
+📄 Télécharger PDF
+</button>
+
+<script>
+
+const data =
+JSON.parse(
+sessionStorage.getItem(
+"coursePdfData"
+)
+);
+
+document.getElementById("patient").textContent =
+data.patient;
+
+document.getElementById("objectif").textContent =
+data.objectif;
+
+document.getElementById("niveau").textContent =
+data.niveau;
+
+document.getElementById("semaines").textContent =
+data.semaines + " sem.";
+
+document.getElementById("date").textContent =
+new Date().toLocaleDateString("fr-FR");
+
+const weeks =
+document.getElementById("weeks");
+
+for(let w=1;w<=data.semaines;w++){
+
+const seances =
+data.pdfData.filter(
+s => s.semaine === w
+);
+
+const block =
+document.createElement("div");
+
+block.className = "week";
+
+block.innerHTML = `
+<div class="weekTitle">
+🏁 SEMAINE ${w}
+</div>
+<div class="weekBody">
+${seances.map(s=>`
+<div class="row">
+<div><b>S${s.semaine}${s.seance}</b></div>
+<div>${s.duree} min</div>
+<div>${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}</div>
+<div>☐</div>
+</div>
+`).join("")}
+</div>
+`;
+
+weeks.appendChild(block);
+
+}
+
+async function downloadPdf(){
+
+const page =
+document.getElementById("page");
+
+const canvas =
+await html2canvas(page,{
+scale:3
+});
+
+const img =
+canvas.toDataURL("image/png");
+
+const {jsPDF} =
+window.jspdf;
+
+const pdf =
+new jsPDF(
+"p",
+"mm",
+"a4"
+);
+
+pdf.addImage(
+img,
+"PNG",
+0,
+0,
+210,
+297
+);
+
+pdf.save(
+"ProgrammeCourse.pdf"
+);
+
+}
+
+</script>
+
+</body>
+</html>
