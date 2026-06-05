@@ -711,6 +711,31 @@ setTimeout(()=>o.stop(),150);
 
 }
 
+function vibrate(type){
+
+  if(!navigator.vibrate) return;
+
+  switch(type){
+
+    case "course":
+      navigator.vibrate(1000);
+      break;
+
+    case "marche":
+      navigator.vibrate([250,150,250]);
+      break;
+
+    case "fin":
+      navigator.vibrate([
+        500,200,
+        500,200,
+        500
+      ]);
+      break;
+  }
+
+}
+
 function speak(t){
 
 if(!soundOn)return;
@@ -1084,6 +1109,26 @@ totalTimePhase=exo.ex;
 
 beep();
 
+const nom =
+exo.nom.toLowerCase();
+
+if(
+nom.includes("course")
+){
+
+vibrate("course");
+speak("Course");
+
+}
+else if(
+nom.includes("marche")
+){
+
+vibrate("marche");
+speak("Marche");
+
+}
+
 update();
 
 return;
@@ -1158,6 +1203,26 @@ t = exo.ex;
 totalTimePhase = exo.ex;
 
 beep();
+
+const nom =
+exo.nom.toLowerCase();
+
+if(
+nom.includes("course")
+){
+
+vibrate("course");
+speak("Course");
+
+}
+else if(
+nom.includes("marche")
+){
+
+vibrate("marche");
+speak("Marche");
+
+}
 
 /* PAUSE AUTO ENTRE EXOS */
 
