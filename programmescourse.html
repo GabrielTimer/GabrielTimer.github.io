@@ -646,16 +646,19 @@ totalCrees++;
 
 }
 
-generatePdf(
-patient,
-objectif,
-niveau,
-pdfData
+sessionStorage.setItem(
+  "coursePdfData",
+  JSON.stringify({
+    patient,
+    objectif,
+    niveau,
+    semaines,
+    pdfData
+  })
 );
 
-alert(
-`${totalCrees} séance(s) créées avec succès.\nPDF téléchargé.`
-);
+window.location.href =
+"coursepdf.html";
 
 
 }catch(error){
