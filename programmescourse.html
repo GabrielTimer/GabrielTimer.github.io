@@ -81,6 +81,14 @@ background:#e5e7eb;
 <h2>🏃 Générateur reprise course</h2>
 
 <div class="field">
+<label>Patient</label>
+<input
+id="patient"
+value="admin"
+placeholder="Nom du patient">
+</div>
+
+<div class="field">
 <label>Objectif</label>
 <select id="objectif">
 <option>5 km</option>
@@ -140,7 +148,7 @@ Tapis de course disponible
 class="generate"
 onclick="generateProgram()">
 
-➕ Ajouter à ma séance
+🚀 Générer programme
 
 </button>
 
@@ -154,20 +162,136 @@ onclick="history.back()">
 
 </div>
 
-<script>
+<script type="module">
 
-function generateProgram(){
+import {
+saveProgramToCloud
+}
+from "./exercises/js/cloud.js";
+
+window.generateProgram = async function(){
+
+const patient =
+document.getElementById("patient")
+?.value
+?.trim()
+|| "admin";
+
+const objectif =
+document.getElementById("objectif")
+.value;
+
+const semaines =
+parseInt(
+document.getElementById("semaines")
+.value
+) || 8;
+
+const seancesParSemaine =
+Math.max(
+1,
+Math.min(
+5,
+parseInt(
+document.getElementById("seances")
+.value
+) || 3
+)
+);
 
 const tapis =
-document.getElementById(
-"tapis"
-).checked;
+document.getElementById("tapis")
+.checked;
+
+const lettres =
+["A","B","C","D","E"];
+
+const dossier =
+`Reprise course ${objectif}`;
+
+let totalCrees = 0;
+
+try{
+
+for(
+let semaine = 1;
+semaine <= semaines;
+semaine++
+){
+
+for(
+let s = 0;
+s < seancesParSemaine;
+s++
+){
+
+const lettre =
+lettres[s];
+
+const courseMinutes =
+Math.max(
+1,
+Math.round(
+1 +
+(
+(
+(semaine - 1)
+* seancesParSemaine
++ s
+)
+* 1.5
+)
+)
+);
+
+const marcheMinutes = 2;
+
+const repetitions =
+Math.max(
+3,
+Math.round(
+8 - (
+(semaine - 1) * 0.4
+)
+)
+);
 
 const programme = {
 
-nom:"Reprise course",
+id:
+crypto.randomUUID(),
 
-patientId:"admin",
+nom:
+`S${semaine}${lettre}`,
+
+patientId:
+patient,
+
+categorie:
+"course",
+
+dossier:
+dossier,
+
+semaine:
+semaine,
+
+seance:
+lettre,
+
+createdAt:
+Date.now(),
+
+updatedAt:
+Date.now(),
+
+auteur:
+"gabriel",
+
+data:{
+
+nom:
+`S${semaine}${lettre}`,
 
 series:1,
 
@@ -200,25 +324,50 @@ tapis
 ? "Tapis course"
 : "Course extérieure",
 
-ex:60,
-repos:120,
-reps:8
+ex:
+courseMinutes * 60,
+
+repos:
+marcheMinutes * 60,
+
+reps:
+repetitions
 }
 
 ]
 
+}
+
 };
 
-localStorage.setItem(
-"edit_programme",
-JSON.stringify(programme)
+await saveProgramToCloud(
+programme
 );
 
-window.location =
-"config.html?v="
-+ Date.now();
+totalCrees++;
 
 }
+
+}
+
+alert(
+`${totalCrees} séance(s) créées avec succès`
+);
+
+history.back();
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Erreur lors de la génération"
+);
+
+}
+
+};
+
 
 </script>
 
