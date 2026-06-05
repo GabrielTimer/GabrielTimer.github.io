@@ -205,8 +205,11 @@ padding-bottom:20px;
   }
 
   .home-title{
-    font-size:56px;
-  }
+  font-size:clamp(42px,11vw,58px);
+  letter-spacing:-1px;
+
+  white-space: nowrap;
+}
 
   .home-banner{
     min-height:auto;
@@ -254,9 +257,10 @@ padding-bottom:20px;
 }
 
   .home-title{
-    font-size:clamp(42px,11vw,58px);
-    letter-spacing:-1px;
-  }
+  font-size:clamp(42px,11vw,58px);
+  letter-spacing:-1px;
+  white-space: nowrap;
+}
 
   .home-subtitle{
     font-size:18px;
@@ -365,4 +369,11 @@ body{
 
 .home-box{
   min-height:110px !important;
+}
+
+.home-wave{
+  text-align:center;
+  font-size:42px;
+  margin-top:-8px;
+  margin-bottom:12px;
 }
