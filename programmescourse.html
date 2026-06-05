@@ -181,6 +181,16 @@ const objectif =
 document.getElementById("objectif")
 .value;
 
+const niveau =
+document.getElementById("niveau")
+.value;
+
+const tempsActuel =
+parseInt(
+document.getElementById("tempsActuel")
+.value
+) || 10;
+
 const semaines =
 parseInt(
 document.getElementById("semaines")
@@ -228,6 +238,13 @@ e => e.id === "tapiscourse"
 )
 );
 
+if(!marcheBase || !courseBase){
+  alert(
+    "tapismarche ou tapiscourse introuvable dans exercises.json"
+  );
+  return;
+}
+
 let totalCrees = 0;
 
 try{
@@ -247,30 +264,98 @@ s++
 const lettre =
 lettres[s];
 
-const courseMinutes =
-Math.max(
-1,
-Math.round(
-1 +
-(
+const indexSeance =
 (
 (semaine - 1)
 * seancesParSemaine
-+ s
 )
-* 1.5
-)
++ s;
+
+const totalSeances =
+semaines
+* seancesParSemaine;
+
+let dureeDebut;
+let dureeFin;
+
+switch(niveau){
+
+case "Débutant":
+dureeDebut = 20;
+dureeFin = 35;
+break;
+
+case "Reprise":
+dureeDebut = 25;
+dureeFin = 45;
+break;
+
+case "Occasionnel":
+dureeDebut = 35;
+dureeFin = 60;
+break;
+
+case "Régulier":
+dureeDebut = 45;
+dureeFin = 75;
+break;
+
+default:
+dureeDebut = 25;
+dureeFin = 45;
+
+}
+
+const dureeCible =
+Math.round(
+dureeDebut +
+(
+(dureeFin - dureeDebut)
+*
+(indexSeance /
+Math.max(
+1,
+totalSeances - 1
+))
 )
 );
 
-const marcheMinutes = 2;
+let courseMinutes;
+let marcheMinutes;
+
+if(tempsActuel < 5){
+
+courseMinutes = 1;
+marcheMinutes = 2;
+
+}else if(tempsActuel < 10){
+
+courseMinutes = 2;
+marcheMinutes = 2;
+
+}else if(tempsActuel < 20){
+
+courseMinutes = 3;
+marcheMinutes = 2;
+
+}else{
+
+courseMinutes = 5;
+marcheMinutes = 1;
+
+}
+
+const tempsDisponible =
+dureeCible - 8;
 
 const repetitions =
 Math.max(
-3,
+2,
 Math.round(
-8 - (
-(semaine - 1) * 0.4
+tempsDisponible /
+(
+courseMinutes +
+marcheMinutes
 )
 )
 );
@@ -297,6 +382,15 @@ marcheMinutes * 60;
 
 exoCourse.reps =
 repetitions;
+
+const exoRecup =
+structuredClone(
+marcheBase
+);
+
+exoRecup.ex = 180;
+exoRecup.repos = 0;
+exoRecup.reps = 1;
 
 
 const programme = {
@@ -342,7 +436,9 @@ exercices:[
 
 exoMarche,
 
-exoCourse
+exoCourse,
+
+exoRecup
 
 ]
 
