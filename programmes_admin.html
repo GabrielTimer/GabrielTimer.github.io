@@ -56,11 +56,23 @@ border-radius:12px;
 
 </button>
 
+
+<button id="courseProgramBtn">
+
+🏃 Créer programme course
+
+</button>
+
 <div id="list"></div>
 
 <button onclick="history.back()">⬅ Retour</button>
 
 <script type="module">
+
+import {
+loadProgramsFromCloud,
+deleteProgramFromCloud
+} from "./exercises/js/cloud.js";
 
 document
 .getElementById("newProgramBtn")
@@ -92,10 +104,17 @@ window.location =
 
 };
 
-import {
-loadProgramsFromCloud,
-deleteProgramFromCloud
-} from "./exercises/js/cloud.js";
+
+
+document
+.getElementById("courseProgramBtn")
+.onclick = ()=>{
+
+window.location =
+"programmescourse.html?v="
++ Date.now();
+
+};
 
 const container =
 document.getElementById("list");
@@ -126,6 +145,7 @@ container.innerHTML =
 
 return;
 }
+
 
 adminPrograms.forEach(programme=>{
 

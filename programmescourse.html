@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur reprise course</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#f4f4f4;
+margin:0;
+padding:20px;
+}
+
+.card{
+background:white;
+max-width:500px;
+margin:auto;
+padding:20px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2{
+text-align:center;
+margin-top:0;
+}
+
+.field{
+margin-bottom:15px;
+display:flex;
+flex-direction:column;
+}
+
+label{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+select,
+input{
+padding:10px;
+border-radius:10px;
+border:1px solid #ddd;
+}
+
+.checkbox{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:16px;
+cursor:pointer;
+margin-top:10px;
+}
+
+.generate{
+background:#2563eb;
+color:white;
+}
+
+.back{
+background:#e5e7eb;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>🏃 Générateur reprise course</h2>
+
+<div class="field">
+<label>Objectif</label>
+<select id="objectif">
+<option>5 km</option>
+<option selected>10 km</option>
+<option>Semi</option>
+</select>
+</div>
+
+<div class="field">
+<label>Niveau</label>
+<select id="niveau">
+<option>Débutant</option>
+<option selected>Reprise</option>
+<option>Occasionnel</option>
+<option>Régulier</option>
+</select>
+</div>
+
+<div class="field">
+<label>Temps de course continue actuel (min)</label>
+<input
+id="tempsActuel"
+type="number"
+value="10"
+min="0">
+</div>
+
+<div class="field">
+<label>Nombre de semaines</label>
+<input
+id="semaines"
+type="number"
+value="8"
+min="1">
+</div>
+
+<div class="field">
+<label>Séances par semaine</label>
+<input
+id="seances"
+type="number"
+value="3"
+min="1">
+</div>
+
+<div class="checkbox">
+<input
+id="tapis"
+type="checkbox"
+checked>
+<label for="tapis">
+Tapis de course disponible
+</label>
+</div>
+
+<button
+class="generate"
+onclick="generateProgram()">
+
+➕ Ajouter à ma séance
+
+</button>
+
+<button
+class="back"
+onclick="history.back()">
+
+⬅ Retour
+
+</button>
+
+</div>
+
+<script>
+
+function generateProgram(){
+
+const tapis =
+document.getElementById(
+"tapis"
+).checked;
+
+const programme = {
+
+nom:"Reprise course",
+
+patientId:"admin",
+
+series:1,
+
+exercices:[
+
+{
+id:
+tapis
+? "tapismarche"
+: "marche_exterieure",
+
+nom:
+tapis
+? "Tapis marche"
+: "Marche extérieure",
+
+ex:300,
+repos:0,
+reps:1
+},
+
+{
+id:
+tapis
+? "tapiscourse"
+: "course_exterieure",
+
+nom:
+tapis
+? "Tapis course"
+: "Course extérieure",
+
+ex:60,
+repos:120,
+reps:8
+}
+
+]
+
+};
+
+localStorage.setItem(
+"edit_programme",
+JSON.stringify(programme)
+);
+
+window.location =
+"config.html?v="
++ Date.now();
+
+}
+
+</script>
+
+</body>
+</html>
