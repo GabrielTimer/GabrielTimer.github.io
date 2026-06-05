@@ -268,10 +268,26 @@ REPRISE COURSE
 
 const data =
 JSON.parse(
-sessionStorage.getItem(
-"coursePdfData"
-)
+  sessionStorage.getItem(
+    "coursePdfData"
+  )
 );
+
+console.log("coursePdfData =", data);
+
+if(!data){
+  document.body.innerHTML = `
+    <h1 style="padding:40px">
+      Aucune donnée reçue
+    </h1>
+  `;
+  throw new Error(
+    "coursePdfData manquant"
+  );
+}
+
+console.log("coursePdfData =", data);
+
 
 document.getElementById("patient").textContent =
 data.patient;
@@ -290,6 +306,11 @@ new Date().toLocaleDateString("fr-FR");
 
 const weeks =
 document.getElementById("weeks");
+
+console.log(
+  "pdfData =",
+  data.pdfData
+);
 
 for(let w=1;w<=data.semaines;w++){
 
