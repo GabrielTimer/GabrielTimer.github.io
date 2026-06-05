@@ -17,9 +17,9 @@
 
   <img src="logo.png" class="home-logo" id="logo">
 
-  <div class="home-title">
-    Bonjour 👋
-  </div>
+<div class="home-title" id="homeTitle">
+  Bonjour 👋
+</div>
 
   <div class="home-subtitle">
     Comment allez-vous aujourd’hui ?
@@ -76,6 +76,25 @@ window.location.search
 
 const patient =
 params.get("patient");
+
+if(patient){
+
+  const prenom =
+  patient
+  .split("_")[0]
+  .charAt(0)
+  .toUpperCase()
+  +
+  patient
+  .split("_")[0]
+  .slice(1);
+
+  document.getElementById(
+    "homeTitle"
+  ).textContent =
+  `Bonjour ${prenom} 👋`;
+
+}
 
 
 const VERSION = "1.2";
