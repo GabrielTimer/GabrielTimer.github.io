@@ -4899,6 +4899,176 @@
 },
 
 {
+  "id": "CARDIO_01",
+  "nom": "Marche",
+  "type": "timer",
+  "categorie": "Cardio",
+  "objectif": "Réentraînement à l'effort",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "duree": "5 minutes",
+  "consignes": [
+    "Marcher à allure confortable",
+    "Regarder devant soi",
+    "Conserver une posture droite",
+    "Balancer naturellement les bras"
+  ],
+  "precautions": [
+    "Rester sous le seuil douloureux",
+    "Adapter l'allure à sa condition physique"
+  ],
+  "tags": ["Cardio","Marche","Endurance"],
+  "timer_config": {
+    "mode": "statique",
+    "temps": 300
+  },
+  "ex": 300,
+  "repos": 30,
+  "reps": 1,
+  "imageH": "/exercises/images/cabinet/marche.png",
+  "imageF": "/exercises/images/cabinet/marcheF.png",
+  "pathologies": [
+    "Déconditionnement",
+    "Lombalgie",
+    "Rééducation membre inférieur"
+  ],
+  "objectifs": [
+    "Endurance",
+    "Reprise d'activité"
+  ],
+  "zones": [
+    "Corps entier"
+  ]
+},
+
+{
+  "id": "CARDIO_02",
+  "nom": "Course",
+  "type": "timer",
+  "categorie": "Cardio",
+  "objectif": "Travail cardiovasculaire",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "duree": "2 minutes",
+  "consignes": [
+    "Courir à allure modérée",
+    "Regarder devant soi",
+    "Respirer régulièrement",
+    "Conserver une foulée souple"
+  ],
+  "precautions": [
+    "Adapter l'intensité à ses capacités",
+    "Arrêter en cas de douleur"
+  ],
+  "tags": ["Cardio","Course","Running","Endurance"],
+  "timer_config": {
+    "mode": "statique",
+    "temps": 120
+  },
+  "ex": 120,
+  "repos": 60,
+  "reps": 1,
+  "imageH": "/exercises/images/cabinet/course.png",
+  "imageF": "/exercises/images/cabinet/courseF.png",
+  "pathologies": [
+    "Reprise sportive",
+    "Préparation physique"
+  ],
+  "objectifs": [
+    "Cardio",
+    "Endurance"
+  ],
+  "zones": [
+    "Corps entier"
+  ]
+},
+
+{
+  "id": "CARDIO_03",
+  "nom": "Marche sur tapis",
+  "type": "timer",
+  "categorie": "Cardio",
+  "objectif": "Réentraînement à l'effort",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "duree": "5 minutes",
+  "consignes": [
+    "Marcher à allure confortable",
+    "Regarder devant soi",
+    "Se tenir droit",
+    "Utiliser les rampes si nécessaire"
+  ],
+  "precautions": [
+    "Commencer à faible vitesse",
+    "Ne pas se pencher vers l'avant"
+  ],
+  "tags": ["Cardio","Tapis","Marche","Endurance"],
+  "timer_config": {
+    "mode": "statique",
+    "temps": 300
+  },
+  "ex": 300,
+  "repos": 30,
+  "reps": 1,
+  "imageH": "/exercises/images/cabinet/tapismarche.png",
+  "imageF": "/exercises/images/cabinet/tapismarcheF.png",
+  "pathologies": [
+    "Déconditionnement",
+    "Rééducation locomotrice"
+  ],
+  "objectifs": [
+    "Endurance",
+    "Marche"
+  ],
+  "zones": [
+    "Corps entier"
+  ]
+},
+
+{
+  "id": "CARDIO_04",
+  "nom": "Course sur tapis",
+  "type": "timer",
+  "categorie": "Cardio",
+  "objectif": "Travail cardiovasculaire",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "duree": "2 minutes",
+  "consignes": [
+    "Courir à allure adaptée",
+    "Regarder devant soi",
+    "Maintenir une foulée régulière",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Commencer progressivement",
+    "Arrêter en cas de douleur ou d'essoufflement excessif"
+  ],
+  "tags": ["Cardio","Tapis","Course","Running"],
+  "timer_config": {
+    "mode": "statique",
+    "temps": 120
+  },
+  "ex": 120,
+  "repos": 60,
+  "reps": 1,
+  "imageH": "/exercises/images/cabinet/tapiscourse.png",
+  "imageF": "/exercises/images/cabinet/tapiscourseF.png",
+  "pathologies": [
+    "Reprise sportive",
+    "Préparation physique"
+  ],
+  "objectifs": [
+    "Cardio",
+    "Endurance"
+  ],
+  "zones": [
+    "Corps entier"
+  ]
+},
+
+
+{
   "id": "TRONC_01",
   "nom": "Gainage ventral",
   "type": "timer",
