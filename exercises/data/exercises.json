@@ -4899,7 +4899,7 @@
 },
 
 {
-  "id": "CARDIO_01",
+  "id": "marche",
   "nom": "Marche",
   "type": "timer",
   "categorie": "Cardio",
@@ -4942,7 +4942,7 @@
 },
 
 {
-  "id": "CARDIO_02",
+  "id": "course",
   "nom": "Course",
   "type": "timer",
   "categorie": "Cardio",
@@ -4984,7 +4984,7 @@
 },
 
 {
-  "id": "CARDIO_03",
+  "id": "tapismarche",
   "nom": "Marche sur tapis",
   "type": "timer",
   "categorie": "Cardio",
@@ -5026,7 +5026,7 @@
 },
 
 {
-  "id": "CARDIO_04",
+  "id": "tapiscourse",
   "nom": "Course sur tapis",
   "type": "timer",
   "categorie": "Cardio",
