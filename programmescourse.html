@@ -144,6 +144,14 @@ Tapis de course disponible
 </label>
 </div>
 
+<div class="field">
+<label>Sexe</label>
+<select id="sexe">
+<option value="H" selected>👨 Homme</option>
+<option value="F">👩 Femme</option>
+</select>
+</div>
+
 <button
 class="generate"
 onclick="generateProgram()">
@@ -213,6 +221,10 @@ const tapis =
 document.getElementById("tapis")
 .checked;
 
+const sexe =
+document.getElementById("sexe")
+.value;
+
 const lettres =
 ["A","B","C","D","E"];
 
@@ -237,6 +249,16 @@ exercises.find(
 e => e.id === "tapiscourse"
 )
 );
+
+if(sexe === "F"){
+
+marcheBase.image =
+"/exercises/images/cabinet/tapismarcheF.png";
+
+courseBase.image =
+"/exercises/images/cabinet/tapiscourseF.png";
+
+}
 
 if(!marcheBase || !courseBase){
   alert(
