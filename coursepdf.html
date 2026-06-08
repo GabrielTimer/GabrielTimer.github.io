@@ -34,6 +34,9 @@ background:white;
 padding:8mm;
 box-sizing:border-box;
 overflow:hidden;
+
+display:flex;
+flex-direction:column;
 }
 
 .header{
@@ -45,14 +48,10 @@ padding-bottom:10px;
 margin-bottom:8px;
 }
 
-.logoBloc{
-display:flex;
-align-items:center;
-gap:15px;
-}
-
 .logoBloc img{
-width:65px;
+height:75px;
+width:auto;
+object-fit:contain;
 }
 
 .cabinet{
@@ -76,7 +75,7 @@ font-weight:700;
 }
 
 .titre .big{
-font-size:32px;
+font-size:42px;
 font-weight:900;
 color:var(--c2);
 }
@@ -114,9 +113,13 @@ border-radius:8px;
 }
 
 #weeks{
+flex:1;
+
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
+
+align-content:stretch;
+gap:10px;
 margin-bottom:10px;
 }
 
@@ -125,6 +128,9 @@ border:1px solid #d9eef4;
 border-radius:10px;
 overflow:hidden;
 margin:0;
+display:flex;
+flex-direction:column;
+height:100%;
 }
 
 .weekTitle{
@@ -158,12 +164,13 @@ border-bottom:none;
 .footer{
 margin-top:8px;
 background:var(--c4);
-padding:6px;
+font-weight:600;
+padding:10px;
 border-radius:12px;
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:10px;
-font-size:11px;
+font-size:13px;
 text-align:center;
 }
 
