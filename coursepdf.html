@@ -28,11 +28,12 @@ padding:20px;
 
 #page{
 width:210mm;
-min-height:297mm;
+height:297mm;
 margin:auto;
 background:white;
-padding:15mm;
+padding:8mm;
 box-sizing:border-box;
+overflow:hidden;
 }
 
 .header{
@@ -41,7 +42,7 @@ align-items:center;
 justify-content:space-between;
 border-bottom:3px solid var(--c1);
 padding-bottom:10px;
-margin-bottom:15px;
+margin-bottom:8px;
 }
 
 .logoBloc{
@@ -51,7 +52,7 @@ gap:15px;
 }
 
 .logoBloc img{
-width:90px;
+width:65px;
 }
 
 .cabinet{
@@ -75,7 +76,7 @@ font-weight:700;
 }
 
 .titre .big{
-font-size:48px;
+font-size:32px;
 font-weight:900;
 color:var(--c2);
 }
@@ -84,13 +85,13 @@ color:var(--c2);
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:8px;
-margin-bottom:15px;
+margin-bottom:8px;
 }
 
 .info{
 background:var(--c4);
 border:1px solid #cfeef7;
-padding:10px;
+padding:6px;
 border-radius:10px;
 }
 
@@ -101,7 +102,7 @@ color:#666;
 
 .infoValue{
 font-weight:700;
-font-size:18px;
+font-size:14px;
 }
 
 .bandeau{
@@ -112,11 +113,18 @@ margin-bottom:15px;
 border-radius:8px;
 }
 
+#weeks{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-bottom:10px;
+}
+
 .week{
 border:1px solid #d9eef4;
-border-radius:12px;
-margin-bottom:10px;
+border-radius:10px;
 overflow:hidden;
+margin:0;
 }
 
 .weekTitle{
@@ -126,19 +134,21 @@ var(--c3),
 var(--c1)
 );
 color:white;
-padding:8px 12px;
+padding:5px 10px;
 font-weight:700;
+font-size:14px;
 }
 
 .weekBody{
-padding:8px 12px;
+padding:2px 6px;
 }
 
 .row{
 display:flex;
 justify-content:space-between;
-padding:5px 0;
+padding:2px 0;
 border-bottom:1px solid #eee;
+font-size:11px;
 }
 
 .row:last-child{
@@ -146,14 +156,14 @@ border-bottom:none;
 }
 
 .footer{
-margin-top:20px;
+margin-top:8px;
 background:var(--c4);
-padding:10px;
+padding:6px;
 border-radius:12px;
 display:grid;
 grid-template-columns:repeat(5,1fr);
 gap:10px;
-font-size:13px;
+font-size:11px;
 text-align:center;
 }
 
