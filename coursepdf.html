@@ -352,7 +352,13 @@ ${seances.map(s=>`
 <div class="row">
 <div><b>S${s.semaine}${s.seance}</b></div>
 <div>${s.duree} min</div>
-<div>${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}</div>
+<div>
+${
+s.estSortieLongue
+? `🏃 Course continue ${s.dureeContinue} min`
+: `🔄 ${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}`
+}
+</div>
 <div>☐</div>
 </div>
 `).join("")}

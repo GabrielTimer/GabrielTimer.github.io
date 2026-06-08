@@ -533,6 +533,76 @@ marcheMinutes
 )
 );
 
+let semaineDebutSortieLongue;
+
+switch(niveau){
+
+case "Débutant":
+semaineDebutSortieLongue = 4;
+break;
+
+case "Reprise":
+semaineDebutSortieLongue = 3;
+break;
+
+case "Occasionnel":
+semaineDebutSortieLongue = 2;
+break;
+
+case "Régulier":
+semaineDebutSortieLongue = 2;
+break;
+
+default:
+semaineDebutSortieLongue = 3;
+
+}
+
+const estSortieLongue =
+(
+lettre === "C"
+&& semaine >= semaineDebutSortieLongue
+);
+
+let dureeContinueFinale;
+
+switch(objectif){
+
+case "5 km":
+dureeContinueFinale = 30;
+break;
+
+case "10 km":
+dureeContinueFinale = 45;
+break;
+
+case "Semi":
+dureeContinueFinale = 60;
+break;
+
+default:
+dureeContinueFinale = 45;
+
+}
+
+const progressionSortieLongue =
+Math.max(
+1,
+semaines - semaineDebutSortieLongue
+);
+
+const dureeContinue =
+Math.round(
+tempsActuel +
+(
+(semaine - semaineDebutSortieLongue)
+*
+(dureeContinueFinale - tempsActuel)
+/
+progressionSortieLongue
+)
+);
+
 pdfData.push({
 
 semaine,
@@ -545,7 +615,11 @@ courseMinutes,
 
 marcheMinutes,
 
-repetitions
+repetitions,
+
+estSortieLongue,
+
+dureeContinue
 
 });
 
@@ -563,6 +637,17 @@ structuredClone(
 courseBase
 );
 
+if(estSortieLongue){
+
+exoCourse.ex =
+dureeContinue * 60;
+
+exoCourse.repos = 0;
+
+exoCourse.reps = 1;
+
+}else{
+
 exoCourse.ex =
 courseMinutes * 60;
 
@@ -571,6 +656,8 @@ marcheMinutes * 60;
 
 exoCourse.reps =
 repetitions;
+
+}
 
 const exoRecup =
 structuredClone(
