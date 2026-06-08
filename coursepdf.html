@@ -321,8 +321,13 @@ if(!data){
 console.log("coursePdfData =", data);
 
 
+const prenom =
+(data.patient || "")
+.split("_")[0];
+
 document.getElementById("patient").textContent =
-data.patient;
+prenom.charAt(0).toUpperCase() +
+prenom.slice(1);
 
 document.getElementById("objectif").textContent =
 data.objectif;
