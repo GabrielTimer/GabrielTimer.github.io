@@ -153,15 +153,21 @@ padding:2px 6px;
 }
 
 .row{
-display:flex;
-justify-content:space-between;
+display:grid;
+grid-template-columns:55px 70px 1fr 20px;
+align-items:center;
 padding:2px 0;
 border-bottom:1px solid #eee;
 font-size:12px;
+column-gap:8px;
 }
 
 .row:last-child{
 border-bottom:none;
+}
+
+.typeSeance{
+white-space:nowrap;
 }
 
 .footer{
@@ -181,8 +187,8 @@ text-align:center;
 margin-top:8px;
 text-align:center;
 font-style:italic;
-font-size:15px;
-font-weight:500;
+font-size:16px;
+font-weight:600;
 color:#555;
 line-height:1.4;
 }
@@ -374,14 +380,17 @@ block.innerHTML = `
 ${seances.map(s=>`
 <div class="row">
 <div><b>S${s.semaine}${s.seance}</b></div>
+
 <div>${s.duree} min</div>
-<div>
+
+<div class="typeSeance">
 ${
 s.estSortieLongue
 ? `🏃 Course continue ${s.dureeContinue} min`
 : `🔄 ${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}`
 }
 </div>
+
 <div>☐</div>
 </div>
 `).join("")}
