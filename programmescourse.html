@@ -534,7 +534,11 @@ typeSeance =
 typeSeance =
 [
 "endurance",
-"tempo",
+
+(semaine % 2 === 0)
+? "fractionne"
+: "tempo",
+
 "longue"
 ][s];
 
@@ -1096,7 +1100,7 @@ sessionStorage.setItem(
 );
 
 window.location.href =
-"coursepdf.html";
+`coursepdf.html?v=${Date.now()}`;
 
 
 }catch(error){
