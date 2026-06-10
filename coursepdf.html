@@ -277,6 +277,11 @@ REPRISE COURSE
 <div id="date" class="infoValue"></div>
 </div>
 
+<div class="info">
+<div class="infoLabel">📊 Mode</div>
+<div id="mode" class="infoValue"></div>
+</div>
+
 </div>
 
 <div class="bandeau">
@@ -352,6 +357,12 @@ data.semaines + " sem.";
 document.getElementById("date").textContent =
 new Date().toLocaleDateString("fr-FR");
 
+document.getElementById("mode")
+.textContent =
+data.modeAffichage === "temps"
+? "Temps"
+: "Distance";
+
 const weeks =
 document.getElementById("weeks");
 
@@ -385,8 +396,16 @@ ${seances.map(s=>`
 
 <div class="typeSeance">
 ${
-s.estSortieLongue
-? `🏃 Course continue ${s.dureeContinue} min`
+s.typeSeance === "longue"
+? (
+data.modeAffichage === "distance"
+? `🏃 ${s.distanceKm} km (~${s.dureeContinue} min)`
+: `🏃 ${s.dureeContinue} min (~${s.distanceKm} km)`
+)
+
+: s.typeSeance === "endurance"
+? `❤️ Endurance ${Math.round(s.duree*0.8)} min`
+
 : `🔄 ${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}`
 }
 </div>
