@@ -132,6 +132,7 @@ function goProg(){
     "patients.html";
 
     return;
+
   }
 
   if(patient){
@@ -139,12 +140,12 @@ function goProg(){
     window.location =
     "cloud.html?patient=" + patient;
 
-    return;
-  }
+  }else{
 
-  alert(
-    "Accès via lien envoyé par votre kinésithérapeute"
-  );
+    window.location =
+    "cloud.html";
+
+  }
 
 }
 
