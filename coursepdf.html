@@ -280,16 +280,6 @@ class="infoValue"></div>
 <div id="semaines" class="infoValue"></div>
 </div>
 
-<div class="info">
-<div class="infoLabel">📆 Date</div>
-<div id="date" class="infoValue"></div>
-</div>
-
-<div class="info">
-<div class="infoLabel">📊 Mode</div>
-<div id="mode" class="infoValue"></div>
-</div>
-
 
 
 </div>
@@ -368,14 +358,6 @@ data.pathologie || "Aucune";
 document.getElementById("semaines").textContent =
 data.semaines + " sem.";
 
-document.getElementById("date").textContent =
-new Date().toLocaleDateString("fr-FR");
-
-document.getElementById("mode")
-.textContent =
-data.modeAffichage === "temps"
-? "Temps"
-: "Distance";
 
 const weeks =
 document.getElementById("weeks");
