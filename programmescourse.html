@@ -713,11 +713,19 @@ semaineDebutSortieLongue = 3;
 
 }
 
+if(
+typeSeance === "longue"
+&& semaine < semaineDebutSortieLongue
+){
+  typeSeance = "endurance";
+}
+
 const estSortieLongue =
 (
 typeSeance === "longue"
 && semaine >= semaineDebutSortieLongue
 );
+
 let distanceFinale;
 
 switch(objectif){
@@ -836,7 +844,15 @@ Math.max(
 semaines - semaineDebutSortieLongue
 );
 
-let dureeContinue =
+let dureeContinue;
+
+if(semaine < semaineDebutSortieLongue){
+
+dureeContinue = tempsActuel;
+
+}else{
+
+dureeContinue =
 Math.round(
 tempsActuel +
 (
@@ -847,6 +863,8 @@ tempsActuel +
 progressionSortieLongue
 )
 );
+
+}
 
 if(
 objectif === "Semi"
