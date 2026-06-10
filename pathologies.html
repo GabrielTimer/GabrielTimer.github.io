@@ -158,10 +158,11 @@ window.location =
 
 }
 
-if(
-  patientMode ||
-  localStorage.getItem("admin_ok") !== "true"
-){
+const isAdmin =
+localStorage.getItem("admin_ok")
+=== "true";
+
+if(!isAdmin){
 
 const cabinet =
 document.querySelector(
@@ -173,7 +174,6 @@ cabinet.style.display = "none";
 }
 
 }
-
 </script>
 
 </body>
