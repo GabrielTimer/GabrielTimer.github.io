@@ -638,26 +638,55 @@ const estSortieLongue =
 lettre === "C"
 && semaine >= semaineDebutSortieLongue
 );
-
-let dureeContinueFinale;
+let distanceFinale;
 
 switch(objectif){
 
 case "5 km":
 
-dureeContinueFinale =
-niveau === "Débutant"
-? 45
-: 60;
+switch(niveau){
+
+case "Débutant":
+distanceFinale = 6;
+break;
+
+case "Reprise":
+distanceFinale = 7;
+break;
+
+case "Occasionnel":
+distanceFinale = 8;
+break;
+
+case "Régulier":
+distanceFinale = 8;
+break;
+
+}
 
 break;
 
 case "10 km":
 
-dureeContinueFinale =
-niveau === "Débutant"
-? 60
-: 90;
+switch(niveau){
+
+case "Débutant":
+distanceFinale = 10;
+break;
+
+case "Reprise":
+distanceFinale = 10;
+break;
+
+case "Occasionnel":
+distanceFinale = 11;
+break;
+
+case "Régulier":
+distanceFinale = 12;
+break;
+
+}
 
 break;
 
@@ -666,19 +695,19 @@ case "Semi":
 switch(niveau){
 
 case "Débutant":
-dureeContinueFinale = 90;
+distanceFinale = 18;
 break;
 
 case "Reprise":
-dureeContinueFinale = 100;
+distanceFinale = 19;
 break;
 
 case "Occasionnel":
-dureeContinueFinale = 110;
+distanceFinale = 20;
 break;
 
 case "Régulier":
-dureeContinueFinale = 120;
+distanceFinale = 21;
 break;
 
 }
@@ -687,9 +716,15 @@ break;
 
 default:
 
-dureeContinueFinale = 60;
+distanceFinale = 10;
 
 }
+
+const dureeContinueFinale =
+Math.round(
+distanceFinale * allure
+);
+
 
 const progressionSortieLongue =
 Math.max(
