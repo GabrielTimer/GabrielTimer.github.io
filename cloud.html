@@ -68,6 +68,13 @@ background:#1d4ed8;
 🕘 Historique
 </button>
 
+<button
+id="activatePatientBtn"
+onclick="activatePatient()"
+style="display:none;background:#16a34a;">
+🔑 Activer mon accès patient
+</button>
+
 <div id="list"></div>
 
 <script type="module">
@@ -90,11 +97,28 @@ window.location.search
 const isAdmin =
 params.get("admin") === "true";
 
-const currentPatient =
+let currentPatient =
 params.get("patient");
+
+if(!currentPatient){
+
+currentPatient =
+localStorage.getItem(
+"currentPatient"
+);
+
+}
 
 const list =
 document.getElementById("list");
+
+if(!currentPatient){
+
+document.getElementById(
+"activatePatientBtn"
+).style.display = "inline-block";
+
+}
 
 list.innerHTML = "";
 programmes
@@ -218,8 +242,17 @@ new URLSearchParams(
 window.location.search
 );
 
-const patient =
+let patient =
 params.get("patient");
+
+if(!patient){
+
+patient =
+localStorage.getItem(
+"currentPatient"
+);
+
+}
 
 if(patient){
 
@@ -494,6 +527,23 @@ window.location =
 }
 
 }
+
+}
+
+window.activatePatient = function(){
+
+const code = prompt(
+"Entrez votre identifiant patient (ex : Gabriel_Laveau)");
+
+if(!code) return;
+
+localStorage.setItem(
+"currentPatient",
+code.trim()
+);
+
+
+location.reload();
 
 }
 
