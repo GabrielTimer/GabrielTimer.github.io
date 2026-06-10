@@ -78,7 +78,7 @@ font-weight:700;
 }
 
 .titre .big{
-font-size:48px;
+font-size:40px;
 font-weight:900;
 color:var(--c2);
 }
@@ -113,6 +113,46 @@ border-left:5px solid var(--c1);
 padding:10px;
 margin-bottom:15px;
 border-radius:8px;
+}
+#guidePage{
+width:210mm;
+height:297mm;
+margin:20px auto;
+background:white;
+padding:8mm;
+box-sizing:border-box;
+}
+
+.guideGrid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:20px;
+}
+
+.guideCard{
+background:white;
+border:2px solid #d8eef5;
+border-radius:14px;
+padding:14px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.guideCard p{
+margin:6px 0;
+font-size:14px;
+line-height:1.4;
+}
+
+.guideCard h3{
+margin:0 0 10px 0;
+padding-bottom:6px;
+border-bottom:2px solid #e8f6fb;
+}
+
+.guideCard h3{
+margin-top:0;
+color:var(--c2);
 }
 
 #weeks{
@@ -282,6 +322,8 @@ class="infoValue"></div>
 
 
 
+
+
 </div>
 
 <div class="bandeau">
@@ -307,6 +349,156 @@ L'objectif est de terminer chaque séance avec la sensation de pouvoir en faire 
 </div>
 
 </div>
+
+<!-- PAGE 2 -->
+
+<div id="guidePage">
+
+<div class="header">
+
+<div class="logoBloc">
+
+<img src="logo.png">
+
+<div class="cabinet">
+<b>Gabriel</b>
+LAVEAU<br>
+Kinésithérapeute<br>
+1 avenue de la coopération<br>
+86200 Loudun<br>
+05 64 72 40 15
+</div>
+
+</div>
+
+<div class="titre">
+<div class="small">
+PROGRAMME D'ACCOMPAGNEMENT
+</div>
+
+<div class="big">
+GUIDE DU COUREUR
+</div>
+</div>
+
+</div>
+
+<div class="guideGrid">
+
+<div class="guideCard">
+<h3>📊 Échelle RPE</h3>
+
+<p><b>2-3</b> : Très facile</p>
+<p><b>4-5</b> : Confortable</p>
+<p><b>6-7</b> : Soutenu</p>
+<p><b>8</b> : Difficile</p>
+<p><b>9-10</b> : Maximal</p>
+
+<p>L'objectif est de terminer la majorité des séances avec la sensation de pouvoir en faire davantage.</p>
+</div>
+
+<div class="guideCard">
+<h3>🏃 Types de séances</h3>
+
+<p><b>❤️ Endurance</b><br>
+Conversation facile.</p>
+
+<p><b>🔥 Tempo</b><br>
+Allure soutenue mais contrôlée.</p>
+
+<p><b>🔄 Fractionné</b><br>
+Alternance effort et récupération.</p>
+
+<p><b>🏃 Sortie longue</b><br>
+Développe l'endurance générale.</p>
+</div>
+
+<div class="guideCard">
+<h3>🦵 Gestion de la douleur</h3>
+
+<p><b>0-2/10</b> : acceptable.</p>
+<p><b>3-5/10</b> : réduire l'intensité et surveiller.</p>
+<p><b>>5/10</b> : interrompre la séance.</p>
+
+<p>Une douleur persistante plus de 48h doit être signalée à votre kinésithérapeute.</p>
+</div>
+
+<div class="guideCard">
+<h3>😴 Sommeil & récupération</h3>
+
+<p>Objectif : 7 à 9 h de sommeil.</p>
+
+<p>Le sommeil est le principal outil de récupération.</p>
+
+<p>Prévoir au minimum 1 journée de récupération complète par semaine.</p>
+</div>
+
+<div class="guideCard">
+<h3>💧 Hydratation</h3>
+
+<p>Boire régulièrement tout au long de la journée.</p>
+
+<p>Augmenter les apports lors des fortes chaleurs.</p>
+
+<p>Des urines claires sont généralement le signe d'une bonne hydratation.</p>
+</div>
+
+<div class="guideCard">
+<h3>🍽 Nutrition</h3>
+
+<p>✓ Fruits<br>
+✓ Légumes<br>
+✓ Féculents<br>
+✓ Protéines</p>
+
+<p>Après séance : eau + collation riche en protéines.</p>
+</div>
+
+<div class="guideCard">
+<h3>👟 Prévention des blessures</h3>
+
+<p>✓ Progression progressive</p>
+<p>✓ Chaussures adaptées</p>
+<p>✓ Échauffement systématique</p>
+<p>✓ Respect des jours de récupération</p>
+<p>✓ Écoute des signaux du corps</p>
+</div>
+
+<div class="guideCard">
+<h3>📞 Votre kinésithérapeute</h3>
+
+<p><b>Gabriel LAVEAU</b><br>
+Kinésithérapeute</p>
+
+<p>1 avenue de la coopération<br>
+86200 Loudun</p>
+
+<p>☎ 05 64 72 40 15</p>
+</div>
+
+</div>
+
+<div style="
+margin-top:15px;
+padding:10px;
+background:#f7fcfe;
+border-radius:10px;
+text-align:center;
+font-size:13px;
+color:#666;
+">
+Programme généré avec GabrielTimer®
+<br>
+Suivi et accompagnement personnalisé
+</div>
+
+
+<div class="citation">
+Chaque séance est un pas de plus vers votre objectif.
+</div>
+
+</div>
+
 
 <button class="download" onclick="downloadPdf()">
 📄 Télécharger PDF
@@ -431,19 +623,23 @@ data.modeAffichage === "distance"
 weeks.appendChild(block);
 
 }
-
 async function downloadPdf(){
 
-const page =
+const page1 =
 document.getElementById("page");
 
-const canvas =
-await html2canvas(page,{
+const page2 =
+document.getElementById("guidePage");
+
+const canvas1 =
+await html2canvas(page1,{
 scale:3
 });
 
-const img =
-canvas.toDataURL("image/png");
+const canvas2 =
+await html2canvas(page2,{
+scale:3
+});
 
 const {jsPDF} =
 window.jspdf;
@@ -456,7 +652,18 @@ new jsPDF(
 );
 
 pdf.addImage(
-img,
+canvas1.toDataURL("image/png"),
+"PNG",
+0,
+0,
+210,
+297
+);
+
+pdf.addPage();
+
+pdf.addImage(
+canvas2.toDataURL("image/png"),
 "PNG",
 0,
 0,
@@ -469,7 +676,6 @@ pdf.save(
 );
 
 }
-
 </script>
 
 </body>
