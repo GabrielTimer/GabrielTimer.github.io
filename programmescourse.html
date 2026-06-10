@@ -109,6 +109,17 @@ placeholder="Nom du patient">
 </div>
 
 <div class="field">
+<label>Pathologie</label>
+<select id="pathologie">
+<option>Aucune</option>
+<option>Syndrome rotulien</option>
+<option>Tendinopathie achilléenne</option>
+<option>Fasciite plantaire</option>
+<option>Lombalgie</option>
+</select>
+</div>
+
+<div class="field">
 <label>Temps de course continue actuel (min)</label>
 <input
 id="tempsActuel"
@@ -330,6 +341,10 @@ const niveau =
 document.getElementById("niveau")
 .value;
 
+const pathologie =
+document.getElementById("pathologie")
+.value;
+
 const tempsActuel =
 parseInt(
 document.getElementById("tempsActuel")
@@ -483,6 +498,61 @@ s++
 const lettre =
 lettres[s];
 
+let typeSeance;
+
+if(seancesParSemaine === 2){
+
+typeSeance =
+[
+"endurance",
+"longue"
+][s];
+
+}else if(seancesParSemaine === 3){
+
+if(niveau === "Débutant"){
+
+typeSeance =
+[
+"endurance",
+"endurance",
+"longue"
+][s];
+
+}else{
+
+typeSeance =
+[
+"endurance",
+"tempo",
+"longue"
+][s];
+
+}
+
+}else if(seancesParSemaine === 4){
+
+typeSeance =
+[
+"endurance",
+"tempo",
+"longue",
+"fractionne"
+][s];
+
+}else{
+
+typeSeance =
+[
+"endurance",
+"tempo",
+"recuperation",
+"fractionne",
+"longue"
+][s];
+
+}
+
 const indexSeance =
 (
 (semaine - 1)
@@ -525,7 +595,7 @@ dureeFin = 45;
 
 }
 
-const dureeCible =
+let dureeCible =
 Math.round(
 dureeDebut +
 (
@@ -538,6 +608,16 @@ totalSeances - 1
 ))
 )
 );
+
+if(
+semaine > 1
+&& semaine % 4 === 0
+){
+dureeCible =
+Math.round(
+dureeCible * 0.8
+);
+}
 
 let courseMinutes;
 let marcheMinutes;
@@ -635,7 +715,7 @@ semaineDebutSortieLongue = 3;
 
 const estSortieLongue =
 (
-lettre === "C"
+typeSeance === "longue"
 && semaine >= semaineDebutSortieLongue
 );
 let distanceFinale;
@@ -720,10 +800,34 @@ distanceFinale = 10;
 
 }
 
-const dureeContinueFinale =
+let dureeContinueFinale =
 Math.round(
 distanceFinale * allure
 );
+
+switch(pathologie){
+
+case "Syndrome rotulien":
+dureeContinueFinale =
+Math.round(dureeContinueFinale * 0.8);
+break;
+
+case "Tendinopathie achilléenne":
+dureeContinueFinale =
+Math.round(dureeContinueFinale * 0.85);
+break;
+
+case "Fasciite plantaire":
+dureeContinueFinale =
+Math.round(dureeContinueFinale * 0.75);
+break;
+
+case "Lombalgie":
+dureeContinueFinale =
+Math.round(dureeContinueFinale * 0.9);
+break;
+
+}
 
 
 const progressionSortieLongue =
@@ -762,6 +866,22 @@ semaine,
 
 seance: lettre,
 
+rpe:
+
+estSortieLongue
+? "4-5"
+
+: typeSeance === "endurance"
+? "3-4"
+
+: typeSeance === "tempo"
+? "6-7"
+
+: typeSeance === "recuperation"
+? "2-3"
+
+: "7-8",
+
 duree: dureeCible,
 
 courseMinutes,
@@ -783,9 +903,7 @@ allure
 typeSeance:
 estSortieLongue
 ? "longue"
-: lettre === "A"
-? "endurance"
-: "fractionne"
+: typeSeance
 
 });
 
@@ -812,13 +930,30 @@ exoCourse.repos = 0;
 
 exoCourse.reps = 1;
 
-}else if(lettre === "A"){
-
-// Endurance fondamentale
+}else if(typeSeance === "endurance"){
 
 exoCourse.ex =
 Math.round(
 dureeCible * 0.8
+) * 60;
+
+exoCourse.repos = 0;
+exoCourse.reps = 1;
+
+}else if(typeSeance === "tempo"){
+
+exoCourse.ex =
+Math.round(
+dureeCible * 0.4
+) * 60;
+
+exoCourse.repos = 0;
+exoCourse.reps = 1;
+}else if(typeSeance === "recuperation"){
+
+exoCourse.ex =
+Math.round(
+dureeCible * 0.5
 ) * 60;
 
 exoCourse.repos = 0;
@@ -919,6 +1054,7 @@ sessionStorage.setItem(
     patient,
     objectif,
     niveau,
+    pathologie,
     semaines,
     modeAffichage,
     pdfData

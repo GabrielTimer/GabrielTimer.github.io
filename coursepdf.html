@@ -85,7 +85,7 @@ color:var(--c2);
 
 .infos{
 display:grid;
-grid-template-columns:repeat(5,1fr);
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
 gap:8px;
 margin-bottom:8px;
 }
@@ -268,6 +268,14 @@ REPRISE COURSE
 </div>
 
 <div class="info">
+<div class="infoLabel">
+🩺 Pathologie
+</div>
+<div id="pathologie"
+class="infoValue"></div>
+</div>
+
+<div class="info">
 <div class="infoLabel">📅 Durée</div>
 <div id="semaines" class="infoValue"></div>
 </div>
@@ -281,6 +289,8 @@ REPRISE COURSE
 <div class="infoLabel">📊 Mode</div>
 <div id="mode" class="infoValue"></div>
 </div>
+
+
 
 </div>
 
@@ -351,6 +361,10 @@ data.objectif;
 document.getElementById("niveau").textContent =
 data.niveau;
 
+document.getElementById("pathologie")
+.textContent =
+data.pathologie || "Aucune";
+
 document.getElementById("semaines").textContent =
 data.semaines + " sem.";
 
@@ -397,16 +411,32 @@ ${seances.map(s=>`
 <div class="typeSeance">
 ${
 s.typeSeance === "longue"
+
 ? (
 data.modeAffichage === "distance"
-? `🏃 ${s.distanceKm} km (~${s.dureeContinue} min)`
-: `🏃 ${s.dureeContinue} min (~${s.distanceKm} km)`
+? `🏃 ${s.distanceKm} km (~${s.dureeContinue} min)
+(RPE ${s.rpe})`
+: `🏃 ${s.dureeContinue} min (~${s.distanceKm} km)
+(RPE ${s.rpe})`
 )
 
 : s.typeSeance === "endurance"
-? `❤️ Endurance ${Math.round(s.duree*0.8)} min`
 
-: `🔄 ${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}`
+? `❤️ Endurance ${Math.round(s.duree*0.8)} min
+(RPE ${s.rpe})`
+
+: s.typeSeance === "tempo"
+
+? `🔥 Tempo ${Math.round(s.duree*0.4)} min
+(RPE ${s.rpe})`
+
+: s.typeSeance === "recuperation"
+
+? `🧘 Récupération ${Math.round(s.duree*0.5)} min
+(RPE ${s.rpe})`
+
+: `🔄 ${s.courseMinutes}'/${s.marcheMinutes}' × ${s.repetitions}
+(RPE ${s.rpe})`
 }
 </div>
 
