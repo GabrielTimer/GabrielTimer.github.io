@@ -91,7 +91,18 @@ localStorage.getItem(
 
 }
 
-if(patient){
+const isAdmin =
+localStorage.getItem("admin_ok")
+==="true";
+
+if(isAdmin){
+
+  document.getElementById(
+    "homeTitle"
+  ).textContent =
+  "Mode administrateur";
+
+}else if(patient){
 
   const prenom =
   patient
@@ -115,14 +126,19 @@ const VERSION = "1.2";
 
 function goProg(){
 
-  if(patient){
+  if(isAdmin){
+
     window.location =
-    "cloud.html?patient=" + patient;
+    "patients.html";
+
     return;
   }
 
-  if(localStorage.getItem("admin_ok")==="true"){
-    window.location = "patients.html";
+  if(patient){
+
+    window.location =
+    "cloud.html?patient=" + patient;
+
     return;
   }
 
@@ -197,12 +213,7 @@ window.location =
 }
 
 
-if(
-localStorage.getItem("admin_ok")
-==="true"
-&&
-!patient
-){
+if(isAdmin){
 
 document.getElementById(
 "adminExercisesBtn"
