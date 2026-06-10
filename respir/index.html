@@ -57,6 +57,11 @@ body::before{
     pointer-events:none;
 }
 
+.session-active .bottom-home-btn{
+    opacity:0;
+    pointer-events:none;
+}
+
 .mode{
     flex:0 0 auto;
     padding:12px 20px;
@@ -144,7 +149,16 @@ inset 0 1px 1px rgba(255,255,255,0.08);
 }
 
 .mode:hover{
-    transform:translateX(-4px);
+    transform:scale(1.03);
+}
+
+.mode{
+    position:relative;
+    z-index:1;
+}
+
+.mode.active{
+    z-index:20;
 }
 
 .mode.active{
@@ -500,7 +514,7 @@ font-size:1rem;
     }
 
     .app{
-        padding:14px 14px 120px;
+        padding:14px 14px 90px;
         justify-content:flex-start;
     }
 
@@ -532,16 +546,7 @@ font-size:1rem;
 
     /* ===== HOME ===== */
 
-    .home-btn{
 
-        width:56px;
-        height:56px;
-
-        top:12px;
-        left:12px;
-
-        font-size:26px;
-    }
 
     /* ===== CENTRE ===== */
 
@@ -634,48 +639,6 @@ border-radius:26px;
 height:78px;
     }
 
-.home-btn{
-
-position:fixed;
-
-top:22px;
-left:22px;
-
-width:52px;
-height:52px;
-
-border:none;
-border-radius:50%;
-
-background:rgba(255,255,255,0.12);
-
-backdrop-filter:blur(10px);
-
-color:white;
-
-font-size:24px;
-
-cursor:pointer;
-
-z-index:999;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-box-shadow:0 4px 20px rgba(0,0,0,0.25);
-
-transition:.2s;
-
-}
-
-.home-btn:hover{
-
-transform:scale(1.08);
-
-background:rgba(255,255,255,0.18);
-
-}
 /* =========================
    EXERCISE MODE
 ========================= */
@@ -774,6 +737,37 @@ background:rgba(255,255,255,0.18);
     color:white;
 }
 
+.bottom-home-btn{
+
+    position:fixed;
+
+    left:50%;
+    bottom:20px;
+
+    transform:translateX(-50%);
+
+    width:220px;
+    height:54px;
+
+    border:none;
+    border-radius:999px;
+
+    background:rgba(255,255,255,0.10);
+
+    backdrop-filter:blur(12px);
+
+    color:white;
+
+    font-size:1rem;
+    font-weight:600;
+
+    z-index:999;
+
+    box-shadow:
+    0 4px 20px rgba(0,0,0,.25);
+
+}
+
 /* respiration plus basse */
 
 @media(min-width:769px){
@@ -801,53 +795,35 @@ background:rgba(255,255,255,0.18);
     .mode-sidebar{
 
         right:12px;
-
-        top:44%;
-
+        top:31%;
         transform:translateY(-50%);
-
-        gap:10px;
-    }
-
-/* ----- MOBILE ----- */
-
-@media(max-width:768px){
-
-    .mode-sidebar{
-
-        right:12px;
-
-        top:44%;
-
-        transform:translateY(-50%);
-
         gap:10px;
     }
 
     .mode{
 
         width:112px;
-
         padding:10px 12px;
-
         border-radius:20px;
     }
 
     .mode-title{
-
         font-size:.82rem;
     }
 
     .mode-times{
-
         font-size:.72rem;
     }
 
-}</style>
+}
+
+</style>
 </head>
 
 <body>
-<button class="home-btn" onclick="goHome()">⌂</button>
+<button class="bottom-home-btn" onclick="goHome()">
+    ← Retour au menu
+</button>
 
 <div class="app">
 
