@@ -185,9 +185,17 @@ Tapis de course disponible
 
 <button
 class="generate"
+onclick="previewProgram()">
+
+📄 Prévisualiser PDF
+
+</button>
+
+<button
+class="generate"
 onclick="generateProgram()">
 
-🚀 Générer programme
+🚀 Générer et enregistrer ☁️
 
 </button>
 
@@ -325,7 +333,9 @@ doc.save(
 
 }
 
-window.generateProgram = async function(){
+async function buildProgram(
+saveToCloud = true
+){
 
 const patient =
 document.getElementById("patient")
@@ -1059,10 +1069,13 @@ exoRecup
 
 };
 
-await saveProgramToCloud(
-programme
-);
+if(saveToCloud){
 
+  await saveProgramToCloud(
+    programme
+  );
+
+}
 totalCrees++;
 
 }
@@ -1098,6 +1111,19 @@ alert(
 
 };
 
+window.previewProgram =
+async function(){
+
+  await buildProgram(false);
+
+}
+
+window.generateProgram =
+async function(){
+
+  await buildProgram(true);
+
+}
 
 </script>
 
