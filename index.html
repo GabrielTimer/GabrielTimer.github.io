@@ -73,13 +73,23 @@
 </div>
 
 <script>
+
 const params =
 new URLSearchParams(
 window.location.search
 );
 
-const patient =
+let patient =
 params.get("patient");
+
+if(!patient){
+
+patient =
+localStorage.getItem(
+"currentPatient"
+);
+
+}
 
 if(patient){
 
@@ -170,14 +180,6 @@ window.location =
 
 function zones(){
 
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patient =
-params.get("patient");
-
 if(patient){
 
 window.location =
@@ -193,6 +195,7 @@ window.location =
 }
 
 }
+
 
 if(
 localStorage.getItem("admin_ok")
@@ -219,14 +222,6 @@ window.open(
 
 function respir(){
 
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patient =
-params.get("patient");
-
 if(patient){
 
 window.location =
@@ -242,6 +237,7 @@ window.location =
 }
 
 }
+
 </script>
 
 <!-- Service Worker -->
