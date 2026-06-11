@@ -301,6 +301,44 @@ value="demo">
 <label>Nom</label>
 <input id="sessionName" value="Libre">
 </div>
+<div class="field" style="align-items:flex-start;margin-top:10px">
+<label>📅 Type de prescription</label>
+
+<label>
+<input
+type="radio"
+name="prescriptionType"
+value="unique"
+checked>
+Séance unique
+</label>
+
+<label>
+<input
+type="radio"
+name="prescriptionType"
+value="programme">
+Programme
+</label>
+</div>
+
+<div class="field">
+<label>Semaines</label>
+<input
+id="nbSemaines"
+type="number"
+min="1"
+value="4">
+</div>
+
+<div class="field">
+<label>Séances / semaine</label>
+<input
+id="nbSeancesSemaine"
+type="number"
+min="1"
+value="3">
+</div>
 </div>
 
 <button
