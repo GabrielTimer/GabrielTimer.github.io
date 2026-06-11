@@ -464,15 +464,6 @@ e => e.id === "course"
 
 
 
-console.log("marcheBase", marcheBase);
-console.log("courseBase", courseBase);
-
-alert(
-"marcheBase:\n" +
-JSON.stringify(marcheBase,null,2) +
-"\n\ncourseBase:\n" +
-JSON.stringify(courseBase,null,2)
-);
 
 
 if(!marcheBase || !courseBase){
@@ -1069,6 +1060,15 @@ exoRecup
 };
 
 if(saveToCloud){
+
+  console.log(
+    "PROGRAMME ENVOYE",
+    JSON.stringify(programme,null,2)
+  );
+
+  alert(
+    JSON.stringify(programme,null,2)
+  );
 
   await saveProgramToCloud(
     programme
