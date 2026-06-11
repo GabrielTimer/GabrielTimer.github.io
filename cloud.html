@@ -217,6 +217,18 @@ list.innerHTML += `
 séances
 </div>
 
+${
+isAdmin
+? `
+<button
+style="background:#dc2626"
+onclick="deleteProgramme('${seances[0].programmeId}')">
+🗑️ Supprimer le programme
+</button>
+`
+: ""
+}
+
 <div style="
 background:#e5e7eb;
 height:10px;
@@ -242,7 +254,7 @@ cursor:pointer;
 font-weight:bold;
 margin-top:10px;
 ">
-▼ Voir les séances
+Voir les séances
 </summary>
 
 ${seances.map(p=>`
@@ -625,6 +637,39 @@ confirm(
 if(!confirmDelete) return;
 
 await deleteProgramFromCloud(id);
+
+init();
+
+}
+
+window.deleteProgramme =
+async function(programmeId){
+
+const ok = confirm(
+"Êtes-vous sûr de vouloir supprimer ce programme ?\n\nToutes les séances associées seront supprimées définitivement."
+);
+
+if(!ok) return;
+
+const tous =
+await loadProgramsFromCloud();
+
+const aSupprimer =
+tous.filter(
+p => p.programmeId === programmeId
+);
+
+for(const p of aSupprimer){
+
+await deleteProgramFromCloud(
+p.firebaseId
+);
+
+}
+
+alert(
+"Programme supprimé."
+);
 
 init();
 
