@@ -404,6 +404,12 @@ const lettres =
 const dossier =
 `Reprise course ${objectif}`;
 
+const programmeId =
+`${patient}_${Date.now()}`;
+
+const programmeNom =
+`Reprise course ${objectif}`;
+
 const exercises =
 await fetch(
 "./exercises/data/exercises.json"
@@ -1009,6 +1015,9 @@ const programme = {
 
 id:
 crypto.randomUUID(),
+
+programmeId,
+programmeNom,
 
 nom:
 `S${semaine}${lettre}`,
