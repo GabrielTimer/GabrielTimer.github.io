@@ -443,13 +443,9 @@ nom:prog.nom||"Séance",
 date:new Date().toLocaleString(),
 
 categorie:
-prog.categorie
-||
-(
-prog.programmeId
+(/^S\d+[A-Z]$/i.test(prog.nom || ""))
 ? "course"
-: "kine"
-),
+: "kine",
 
 data:{
 ...prog,
