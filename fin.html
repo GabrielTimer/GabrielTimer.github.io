@@ -441,12 +441,21 @@ type:"historique",
 patientId:patient||"admin",
 nom:prog.nom||"Séance",
 date:new Date().toLocaleString(),
+
+categorie:
+prog.categorie
+||
+(
+prog.programmeId
+? "course"
+: "kine"
+),
+
 data:{
 ...prog,
 eva:eva
 }
 };
-
 all.unshift(programme);
 
 let historiques=all.filter(p=>p.type==="historique").slice(0,30);
