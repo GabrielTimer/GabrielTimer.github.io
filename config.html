@@ -196,6 +196,7 @@ display:grid;
 grid-template-columns:1fr 1fr;
 gap:10px;
 margin-bottom:10px;
+align-items:end;
 }
 
 button{
@@ -301,26 +302,51 @@ value="demo">
 <label>Nom</label>
 <input id="sessionName" value="Libre">
 </div>
-<div class="field" style="align-items:flex-start;margin-top:10px">
-<label>📅 Type de prescription</label>
+</div>
+<div style="
+margin:12px 0;
+padding:14px;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+">
 
-<label>
+<div style="
+font-weight:600;
+font-size:15px;
+margin-bottom:12px;
+text-align:center;
+">
+📅 Prescription
+</div>
+
+<div style="
+display:flex;
+justify-content:center;
+gap:25px;
+margin-bottom:15px;
+">
+
+<label style="cursor:pointer">
 <input
 type="radio"
 name="prescriptionType"
 value="unique"
 checked>
-Séance unique
+ Séance unique
 </label>
 
-<label>
+<label style="cursor:pointer">
 <input
 type="radio"
 name="prescriptionType"
 value="programme">
-Programme
+ Programme
 </label>
+
 </div>
+
+<div class="footerGrid">
 
 <div class="field">
 <label>Semaines</label>
@@ -339,6 +365,9 @@ type="number"
 min="1"
 value="3">
 </div>
+
+</div>
+
 </div>
 
 <button
