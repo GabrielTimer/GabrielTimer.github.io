@@ -215,17 +215,23 @@ list.innerHTML += `
 📊 Progression :
 <b>${faites}/${total}</b>
 séances
+(${Math.round(faites*100/total)}%)
 </div>
 
 ${
 isAdmin
 ? `
+<div style="margin:12px 0">
 <button
-style="background:#dc2626"
+style="
+background:#dc2626;
+font-weight:600;
+padding:12px 18px;
+"
 onclick="deleteProgramme('${seances[0].programmeId}')">
 🗑️ Supprimer le programme
 </button>
-`
+</div>`
 : ""
 }
 
@@ -438,6 +444,12 @@ Date.now();
 
 window.validateSession = function(id){
 
+const ok = confirm(
+"Êtes-vous sûr de vouloir valider cette séance ?"
+);
+
+if(!ok) return;
+
 const params =
 new URLSearchParams(
 window.location.search
@@ -459,6 +471,7 @@ window.location =
 + "&v=" + Date.now();
 
 }
+
 window.addFav = function(id){
 
 const prog =
