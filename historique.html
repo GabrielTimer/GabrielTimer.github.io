@@ -185,24 +185,62 @@ grouped[name].push(p);
 
 let container=document.getElementById("list");
 
+const histCourse = hist.filter(
+p => p.categorie === "course"
+);
+
+const histKine = hist.filter(
+p => p.categorie === "kine"
+);
+
 /* DISPLAY */
+renderSection(
+"🏃 Historique Course",
+histCourse
+);
+
+renderSection(
+"🩺 Historique Kiné",
+histKine
+);
+
+function renderSection(titre,data){
+
+if(data.length===0) return;
+
+let h=document.createElement("h3");
+h.innerText=titre;
+h.style.marginTop="25px";
+
+container.appendChild(h);
+
+let grouped={};
+
+data.forEach(p=>{
+let name=p.nom||"Séance";
+if(!grouped[name]) grouped[name]=[];
+grouped[name].push(p);
+});
+
 Object.keys(grouped)
 .sort((a,b)=>{
-let da = new Date(grouped[a][0].date);
-let db = new Date(grouped[b][0].date);
-return db - da;
+let da=new Date(grouped[a][0].date);
+let db=new Date(grouped[b][0].date);
+return db-da;
 })
 .forEach(name=>{
 
-let group = grouped[name];
+let group=grouped[name];
 
-if(group.length >=2){
-renderFolder(name, group);
+if(group.length>=2){
+renderFolder(name,group);
 }else{
-renderCard(group[0], name);
+renderCard(group[0],name);
 }
 
 });
+
+}
 
 /* ---------- CARD ---------- */
 
