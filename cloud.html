@@ -121,6 +121,8 @@ document.getElementById(
 }
 
 list.innerHTML = "";
+
+const programmesFiltres =
 programmes
 .sort((a,b)=>(
 (b.updatedAt || 0)
@@ -162,8 +164,32 @@ const cp =
 
 return pid === cp;
 
-})
-.forEach((p)=>{
+});
+
+const groupes = {};
+
+programmesFiltres.forEach(p=>{
+
+if(
+p.categorie === "course"
+&&
+p.programmeId
+){
+
+if(!groupes[p.programmeId]){
+
+groupes[p.programmeId] = [];
+
+}
+
+groupes[p.programmeId].push(p);
+
+}
+
+});
+
+console.log("GROUPES", groupes);
+programmesFiltres.forEach((p)=>{
 
 console.log(
 "PROGRAMME",
