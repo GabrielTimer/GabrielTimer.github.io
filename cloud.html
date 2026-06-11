@@ -196,11 +196,19 @@ font-weight:bold;
 ">
 
 ${
+p.categorie === "course"
+
+? (
+
 p.terminee
 
 ? `✅ Terminée (EVA ${p.eva ?? "?"}/10)`
 
 : `⭕ Non validée`
+
+)
+
+: ""
 }
 
 </div>
@@ -210,7 +218,12 @@ p.terminee
 </button>
 
 ${
+p.categorie === "course"
+
+? (
+
 !p.terminee
+
 ? `
 <button
 style="background:#16a34a"
@@ -218,12 +231,17 @@ onclick="validateSession('${p.firebaseId}')">
 ✅ Valider
 </button>
 `
+
 : `
 <button
 style="background:#059669">
 ✅ EVA ${p.eva ?? "?"}
 </button>
 `
+
+)
+
+: ""
 }
 
 <button onclick="addFav('${p.firebaseId}')">
