@@ -202,7 +202,7 @@ p.categorie === "course"
 
 p.terminee
 
-? `✅ Terminée (EVA ${p.eva ?? "?"}/10)`
+? `✅ Séance validée``
 
 : `⭕ Non validée`
 
@@ -226,16 +226,16 @@ p.categorie === "course"
 
 ? `
 <button
-style="background:#16a34a"
+style="background:#f59e0b"
 onclick="validateSession('${p.firebaseId}')">
-✅ Valider
+🟠 À valider
 </button>
 `
 
 : `
 <button
-style="background:#059669">
-✅ EVA ${p.eva ?? "?"}
+style="background:#16a34a">
+✅ Validée
 </button>
 `
 
