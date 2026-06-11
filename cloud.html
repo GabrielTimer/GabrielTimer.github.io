@@ -205,6 +205,9 @@ seances[0].programmeNom
 ||
 "Programme course";
 
+const programmeTermine =
+faites === total;
+
 list.innerHTML += `
 
 <div class="card">
@@ -251,6 +254,51 @@ background:#16a34a;
 </div>
 
 </div>
+
+${
+programmeTermine
+? `
+<div style="
+margin:15px 0;
+padding:15px;
+background:#ecfdf5;
+border:2px solid #16a34a;
+border-radius:12px;
+">
+
+<h3 style="margin-top:0">
+🏆 Programme terminé
+</h3>
+
+<p>
+Bravo pour votre régularité !
+</p>
+
+<p>
+Vous avez terminé l'ensemble des séances prévues.
+</p>
+
+<p>
+✅ Séances réalisées : ${faites}/${total}
+</p>
+
+<button
+style="
+background:#16a34a;
+font-weight:600;
+"
+onclick="sendProgrammeReport(
+'${nom}',
+${faites},
+${total}
+)">
+📤 Envoyer mon bilan à mon kinésithérapeute
+</button>
+
+</div>
+`
+: ""
+}
 
 <details>
 
@@ -545,6 +593,32 @@ alert(
 );
 
 }
+
+window.sendProgrammeReport = function(
+programmeNom,
+faites,
+total
+){
+
+const sujet =
+`Programme terminé - ${programmeNom}`;
+
+const message =
+`Bonjour,
+
+Je vous informe avoir terminé mon programme :
+
+${programmeNom}
+
+✅ Séances réalisées : ${faites}/${total}
+
+Cordialement.`;
+
+window.location =
+`mailto:?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+
+}
+
 window.sendMail = function(patient,id){
 
 if(!patient){
