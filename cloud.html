@@ -189,14 +189,122 @@ groupes[p.programmeId].push(p);
 });
 
 console.log("GROUPES", groupes);
-programmesFiltres.forEach((p)=>{
+// ===== DOSSIERS PROGRAMMES COURSE =====
 
-console.log(
-"PROGRAMME",
-p.nom,
-p.programmeId,
-p.programmeNom
-);
+Object.values(groupes).forEach(seances=>{
+
+const total = seances.length;
+
+const faites =
+seances.filter(
+s => s.terminee
+).length;
+
+const nom =
+seances[0].programmeNom
+||
+"Programme course";
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>📁 ${nom}</h3>
+
+<div>
+📊 Progression :
+<b>${faites}/${total}</b>
+séances
+</div>
+
+<div style="
+background:#e5e7eb;
+height:10px;
+border-radius:999px;
+margin:10px 0;
+overflow:hidden;
+">
+
+<div style="
+width:${Math.round(faites*100/total)}%;
+height:100%;
+background:#16a34a;
+">
+</div>
+
+</div>
+
+<details>
+
+<summary
+style="
+cursor:pointer;
+font-weight:bold;
+margin-top:10px;
+">
+▼ Voir les séances
+</summary>
+
+${seances.map(p=>`
+
+<div style="
+margin-top:12px;
+padding:12px;
+border:1px solid #e5e7eb;
+border-radius:10px;
+">
+
+<b>${p.nom}</b><br>
+
+${
+p.terminee
+? "✅ Séance validée"
+: "⭕ Non validée"
+}
+
+<br><br>
+
+<button onclick="launch('${p.firebaseId}')">
+▶ Lancer
+</button>
+
+${
+!p.terminee
+? `
+<button
+style="
+background:#eab308;
+color:#111827;
+"
+onclick="validateSession('${p.firebaseId}')">
+🟠 À valider
+</button>
+`
+: `
+<button
+style="background:#16a34a">
+✅ Validée
+</button>
+`
+}
+
+</div>
+
+`).join("")}
+
+</details>
+
+</div>
+
+`;
+
+});
+
+// ===== PROGRAMMES KINE =====
+
+programmesFiltres
+.filter(p => p.categorie !== "course")
+.forEach((p)=>{
 
 list.innerHTML += `
 
@@ -223,62 +331,9 @@ p.data?.exercices?.length
 }
 </div>
 
-<div style="
-margin-top:8px;
-font-weight:bold;
-">
-
-${
-p.categorie === "course"
-
-? (
-
-p.terminee
-
-? `✅ Séance validée`
-
-: `⭕ Non validée`
-
-)
-
-: ""
-}
-
-</div>
-
 <button onclick="launch('${p.firebaseId}')">
 ▶ Lancer
 </button>
-
-${
-p.categorie === "course"
-
-? (
-
-!p.terminee
-
-? `
-<button
-style="
-background:#eab308;
-color:#111827;
-"
-onclick="validateSession('${p.firebaseId}')">
-🟠 À valider
-</button>
-`
-
-: `
-<button
-style="background:#16a34a">
-✅ Validée
-</button>
-`
-
-)
-
-: ""
-}
 
 <button onclick="addFav('${p.firebaseId}')">
 ⭐ Favori
@@ -298,7 +353,6 @@ isAdmin
 <button onclick="deleteProgram('${p.firebaseId}')">
 🗑️ Supprimer
 </button>
-
 `
 : ""
 }
