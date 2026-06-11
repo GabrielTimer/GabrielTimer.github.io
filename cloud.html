@@ -190,9 +190,41 @@ p.data?.exercices?.length
 }
 </div>
 
+<div style="
+margin-top:8px;
+font-weight:bold;
+">
+
+${
+p.terminee
+
+? `✅ Terminée (EVA ${p.eva ?? "?"}/10)`
+
+: `⭕ Non validée`
+}
+
+</div>
+
 <button onclick="launch('${p.firebaseId}')">
-Lancer
+▶ Lancer
 </button>
+
+${
+!p.terminee
+? `
+<button
+style="background:#16a34a"
+onclick="validateSession('${p.firebaseId}')">
+✅ Valider
+</button>
+`
+: `
+<button
+style="background:#059669">
+✅ EVA ${p.eva ?? "?"}
+</button>
+`
+}
 
 <button onclick="addFav('${p.firebaseId}')">
 ⭐ Favori
@@ -284,6 +316,29 @@ Date.now();
 
 }
 
+window.validateSession = function(id){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+||
+localStorage.getItem(
+"currentPatient"
+)
+||
+"";
+
+window.location =
+"fin.html?validation=1"
++ "&cloud=" + id
++ "&patient=" + patient
++ "&v=" + Date.now();
+
+}
 window.addFav = function(id){
 
 const prog =

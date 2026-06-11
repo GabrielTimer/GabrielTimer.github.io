@@ -314,10 +314,32 @@ return m+" min "+(s%60)+" s";
 <script>
 document.getElementById("msg").innerText=randomMessage;
 
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const validationMode =
+params.get("validation") === "1";
+
+if(validationMode){
+
+document.querySelector("h1").innerText =
+"🎉 Séance enregistrée";
+
+document.getElementById("stats")
+.style.display = "none";
+
+}
+
+if(!validationMode){
+
 document.getElementById("stats").innerHTML=
 "⏱ "+formatTime(totalTime)+"<br>"+
 "🏋️ "+exCount+" exercices<br>"+
 "🔁 "+series+" séries";
+
+}
 
 const evaImages=[];
 for(let i=0;i<6;i++){
@@ -392,11 +414,20 @@ saveAndExit();
 <script>
 const VERSION="1.2";
 
-function saveAndExit(){
+async function saveAndExit(){
 
 const params=new URLSearchParams(window.location.search);
 
+
+const validationMode =
+params.get("validation") === "1";
+
+const cloudId =
+params.get("cloud");
+
 const patient=params.get("patient");
+
+
 
 let all=localStorage.getItem("programmes");
 all=all?JSON.parse(all):[];
@@ -424,6 +455,20 @@ let autres=all.filter(p=>p.type!=="historique");
 localStorage.setItem("programmes",JSON.stringify([...historiques,...autres]));
 
 localStorage.removeItem("eva_temp");
+
+if(validationMode && cloudId){
+
+const module =
+await import(
+"./exercises/js/cloud.js"
+);
+
+await module.validateProgram(
+cloudId,
+eva
+);
+
+}
 
 if(patient){
 window.location="index.html?patient="+patient+"&v="+VERSION;

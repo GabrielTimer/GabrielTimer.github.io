@@ -2,12 +2,13 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
+getFirestore,
+collection,
+addDoc,
 getDocs,
 doc,
-setDoc
+setDoc,
+deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
@@ -33,6 +34,29 @@ const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export async function validateProgram(id,eva){
+
+const programmes =
+await loadProgramsFromCloud();
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog) return;
+
+await setDoc(
+doc(db,"programmes",id),
+{
+...prog,
+terminee:true,
+eva:eva,
+dateValidation:Date.now()
+}
+);
+
+}
 
 
 // TEST CONNEXION
@@ -115,5 +139,27 @@ export async function loadProgramsFromCloud(){
         return [];
 
     }
+
+}
+export async function deleteProgramFromCloud(id){
+
+try{
+
+await deleteDoc(
+doc(db,"programmes",id)
+);
+
+console.log(
+"Programme supprimé :", id
+);
+
+}catch(error){
+
+console.error(
+"Erreur suppression :",
+error
+);
+
+}
 
 }
