@@ -290,8 +290,21 @@ onclick="openGlossaire()">
 
 <input
 id="patientId"
-placeholder="luc"
-value="demo">
+list="patientsList"
+placeholder="Rechercher un patient..."
+autocomplete="off">
+
+<datalist id="patientsList"></datalist>
+
+<div
+id="patientStatus"
+style="
+font-size:12px;
+margin-top:4px;
+color:#64748b;
+">
+</div>
+
 </div>
 <div class="field">
 <label>Séries</label>
@@ -418,7 +431,8 @@ Exercice supprimé
 <script type="module">
 
 import {
-saveProgramToCloud
+saveProgramToCloud,
+loadProgramsFromCloud
 } from "./exercises/js/cloud.js";
 
 /* 🔒 JS STRICTEMENT IDENTIQUE */
@@ -436,6 +450,8 @@ const cloudId =
 params.get("cloud");
 
 window.addEventListener("DOMContentLoaded", ()=>{
+
+loadPatients();
 
 if(
   localStorage.getItem("admin_ok")
@@ -528,6 +544,8 @@ data.patient
 ||
 "";
 
+
+
 render();
 
 return;
@@ -584,9 +602,12 @@ if(
   ).value = "admin";
 }
 
+
 render();
 
-});function syncInputs(){
+});
+
+function syncInputs(){
 for(let i=0;i<exercices.length;i++){
 let input = document.getElementById("nom"+i);
 if(input && input.value.trim() !== ""){
@@ -977,6 +998,88 @@ window.location.href =
 
 }
 
+async function loadPatients(){
+
+try{
+
+const programmes =
+await loadProgramsFromCloud();
+
+const patients =
+[
+...new Set(
+programmes
+.map(p => p.patientId)
+.filter(Boolean)
+)
+]
+.sort();
+
+const list =
+document.getElementById(
+"patientsList"
+);
+
+list.innerHTML = patients
+.map(p =>
+`<option value="${p}">`
+)
+.join("");
+
+const input =
+document.getElementById(
+"patientId"
+);
+
+const status =
+document.getElementById(
+"patientStatus"
+);
+
+input.addEventListener(
+"input",
+()=>{
+
+const exists =
+patients.includes(
+input.value
+);
+
+if(exists){
+
+status.innerHTML =
+"🟢 Patient existant";
+
+status.style.color =
+"#16a34a";
+
+}else if(input.value){
+
+status.innerHTML =
+"🟠 Nouveau patient";
+
+status.style.color =
+"#f97316";
+
+}else{
+
+status.innerHTML = "";
+
+}
+
+});
+
+}catch(e){
+
+console.error(
+"Erreur chargement patients",
+e
+);
+
+}
+
+}
+
 window.saveCloud = async function(){
 
 const editId =
@@ -1135,7 +1238,6 @@ data:{
 
 };
 
-console.log("PROGRAMME ENVOYE", programme);
 
 await saveProgramToCloud(
 programme
