@@ -303,7 +303,9 @@ value="demo">
 <input id="sessionName" value="Libre">
 </div>
 </div>
-<div style="
+<div
+id="prescriptionBlock"
+style="
 margin:12px 0;
 padding:14px;
 background:#f8fafc;
@@ -434,6 +436,21 @@ const cloudId =
 params.get("cloud");
 
 window.addEventListener("DOMContentLoaded", ()=>{
+
+if(
+  localStorage.getItem("admin_ok")
+  !== "true"
+){
+  const bloc =
+  document.getElementById(
+    "prescriptionBlock"
+  );
+
+  if(bloc){
+    bloc.style.display = "none";
+  }
+}
+
 if(cloudId){
 
 localStorage.setItem(
@@ -987,6 +1004,36 @@ alert(
 return;
 }
 
+const typePrescription =
+document.querySelector(
+'input[name="prescriptionType"]:checked'
+)?.value || "unique";
+
+const nomProgramme =
+document.getElementById(
+"sessionName"
+).value;
+
+const semaines =
+parseInt(
+document.getElementById(
+"nbSemaines"
+)?.value || 1
+);
+
+const seancesParSemaine =
+parseInt(
+document.getElementById(
+"nbSeancesSemaine"
+)?.value || 1
+);
+
+/* =========================
+   SÉANCE UNIQUE
+========================= */
+
+if(typePrescription === "unique"){
+
 let programme = {
 
 id:
@@ -994,10 +1041,7 @@ editId
 ||
 crypto.randomUUID(),
 
-nom:
-document.getElementById(
-"sessionName"
-).value,
+nom: nomProgramme,
 
 createdAt:
 Date.now(),
@@ -1033,20 +1077,77 @@ alert(
 
 }
 
+return;
+
 }
 
-if(
-  localStorage.getItem("admin_ok")
-  !== "true"
-){
-  const glossaireBtn =
-  document.getElementById(
-    "glossaireBtn"
-  );
+/* =========================
+   PROGRAMME KINÉ
+========================= */
 
-  if(glossaireBtn){
-    glossaireBtn.style.display = "none";
-  }
+const programmeId =
+crypto.randomUUID();
+
+const lettres =
+["A","B","C","D","E","F","G"];
+
+for(let semaine=1; semaine<=semaines; semaine++){
+
+for(
+let s=0;
+s<seancesParSemaine;
+s++
+){
+
+const lettre =
+lettres[s] || String(s+1);
+
+let programme = {
+
+id:
+crypto.randomUUID(),
+
+nom:
+`S${semaine}${lettre}`,
+
+createdAt:
+Date.now(),
+
+updatedAt:
+Date.now(),
+
+auteur:"gabriel",
+
+patientId: patientId,
+
+programmeId:
+programmeId,
+
+programmeNom:
+nomProgramme,
+
+categorie:
+"kine",
+
+terminee:
+false,
+
+data: build()
+
+};
+
+await saveProgramToCloud(
+programme
+);
+
+}
+
+}
+
+alert(
+`Programme envoyé ☁️ (${semaines * seancesParSemaine} séances)`
+);
+
 }
 
 window.addExo = addExo;
