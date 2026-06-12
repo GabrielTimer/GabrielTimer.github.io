@@ -443,9 +443,9 @@ nom:prog.nom||"Séance",
 date:new Date().toLocaleString(),
 
 categorie:
-(/^S\d+[A-Z]$/i.test(prog.nom || ""))
-? "course"
-: "kine",
+prog.categorie
+||
+"kine",
 
 data:{
 ...prog,
@@ -467,6 +467,10 @@ const module =
 await import(
 "./exercises/js/cloud.js"
 );
+
+console.log("VALIDATION MODE =", validationMode);
+console.log("CLOUD ID =", cloudId);
+console.log("EVA =", eva);
 
 await module.validateProgram(
 cloudId,
