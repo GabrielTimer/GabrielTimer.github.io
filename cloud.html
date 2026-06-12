@@ -248,7 +248,32 @@ list.innerHTML += `
 
 <div class="card">
 
-<h3>📁 ${nom}</h3>
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h3 style="margin:0">
+📁 ${nom}
+</h3>
+
+${
+seances[0].pdfData
+? `
+<button
+style="
+background:#0ea5e9;
+margin:0;
+"
+onclick="openPdf('${seances[0].programmeId}')">
+📄 PDF
+</button>
+`
+: ""
+}
+
+</div>
 
 <div>
 📊 Progression :
@@ -989,6 +1014,70 @@ alert(
 );
 
 init();
+
+}
+
+window.openPdf = async function(programmeId){
+
+const seancesProgramme =
+programmes.filter(
+p => p.programmeId === programmeId
+);
+
+if(!seancesProgramme.length){
+alert("Programme introuvable");
+return;
+}
+
+const p =
+seancesProgramme.reduce(
+(a,b)=>
+(a.pdfData?.length || 0)
+>
+(b.pdfData?.length || 0)
+? a
+: b
+);
+
+if(!p.pdfData){
+alert(
+"Ce programme a été créé avant l'ajout du PDF Cloud."
+);
+return;
+}
+
+sessionStorage.setItem(
+"coursePdfData",
+JSON.stringify({
+
+patient:
+p.patientId,
+
+objectif:
+p.objectif,
+
+niveau:
+p.niveau,
+
+pathologie:
+p.pathologie,
+
+semaines:
+p.semainesProgramme,
+
+modeAffichage:
+p.modeAffichage || "temps",
+
+pdfData:
+p.pdfData
+
+})
+);
+
+window.open(
+"coursepdf.html?v=" + Date.now(),
+"_blank"
+);
 
 }
 
