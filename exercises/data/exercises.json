@@ -5252,3 +5252,1289 @@
   ]
 }
 ]
+
+{
+  "id": "GAINAGE_01",
+  "nom": "Aspiration abdominale (transverse)",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Activation du transverse",
+  "niveau": 1,
+  "exercise_mode": "respiration",
+  "duree": "2 séries de 10 respirations",
+  "consignes": [
+    "Allonger sur le dos, genoux fléchis",
+    "Inspirer calmement par le nez",
+    "Expirer lentement par la bouche",
+    "Rentrer doucement le nombril vers la colonne",
+    "Maintenir la contraction sans bloquer la respiration"
+  ],
+  "precautions": [
+    "Ne pas rentrer le ventre brutalement",
+    "Ne pas bloquer la respiration",
+    "Garder le bassin neutre"
+  ],
+  "tags": [
+    "Gainage",
+    "Transverse",
+    "Lombalgie",
+    "Post-partum"
+  ],
+  "timer_config": {
+    "mode": "respiration",
+    "phase_monte": 4,
+    "maintien": 4,
+    "phase_descente": 6,
+    "cycles": 10
+  },
+  "type_contraction": "statique",
+  "difficulte_percue": 1,
+  "materiel": [],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques",
+    "Plancher pelvien"
+  ],
+  "pathologies": [
+    "Lombalgie",
+    "Post-partum",
+    "Déconditionnement"
+  ],
+  "objectifs": [
+    "Activation du transverse",
+    "Stabilité lombaire"
+  ],
+  "validation_medicale": true
+},
+
+{
+  "id": "GAINAGE_02",
+  "nom": "Dead Bug bras seuls",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité du tronc",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "consignes": [
+    "Allongé sur le dos",
+    "Genoux fléchis à 90°",
+    "Contracter légèrement le transverse",
+    "Lever un bras puis revenir",
+    "Alterner droite et gauche"
+  ],
+  "precautions": [
+    "Garder les lombaires stables",
+    "Ne pas cambrer le dos",
+    "Respirer normalement"
+  ],
+  "tags": [
+    "Gainage",
+    "Transverse",
+    "Lombalgie",
+    "Débutant"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "type_contraction": "dynamique",
+  "difficulte_percue": 2,
+  "muscles_cibles": [
+    "Transverse",
+    "Abdominaux profonds"
+  ],
+  "validation_medicale": true
+},
+
+{
+  "id": "GAINAGE_03",
+  "nom": "Bird Dog bras seuls",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité du tronc et contrôle moteur",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Se placer à quatre pattes",
+    "Contracter légèrement le transverse",
+    "Lever un bras devant soi",
+    "Maintenir le bassin stable",
+    "Revenir lentement puis alterner"
+  ],
+  "precautions": [
+    "Ne pas cambrer le dos",
+    "Ne pas pivoter le bassin"
+  ],
+  "conseil_posture": [
+    "Garder la nuque dans l'axe",
+    "Rentrer légèrement le nombril"
+  ],
+  "erreurs_frequentes": [
+    "Cambrer le dos",
+    "Monter le bras trop haut"
+  ],
+  "version_facile": [
+    "Réduire l'amplitude"
+  ],
+  "version_avancee": [
+    "Ajouter un maintien de 3 secondes"
+  ],
+  "respiration": [
+    "Expirer pendant l'élévation",
+    "Inspirer au retour"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Multifides",
+    "Abdominaux profonds"
+  ],
+  "materiel": [],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore la stabilité lombaire"
+  ],
+  "audio_cues": ["Gainé","Stable"],
+  "coaching_court": ["Contrôle","Lent"],
+  "tags": ["Gainage","Transverse","Lombalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/bird-dog-bras.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Stabilité du tronc"],
+  "zones": ["Abdomen","Lombaires"]
+},
+
+{
+  "id": "GAINAGE_04",
+  "nom": "Pont fessier",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité lombo-pelvienne",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 12 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Fessiers","Lombaires"],
+  "consignes": [
+    "Allongé sur le dos",
+    "Pieds à plat au sol",
+    "Soulever progressivement le bassin",
+    "Aligner épaules bassin genoux",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Ne pas cambrer excessivement"
+  ],
+  "conseil_posture": [
+    "Contracter légèrement le ventre"
+  ],
+  "erreurs_frequentes": [
+    "Monter trop haut",
+    "Pousser avec le dos"
+  ],
+  "version_facile": [
+    "Réduire l'amplitude"
+  ],
+  "version_avancee": [
+    "Maintenir 3 secondes en haut"
+  ],
+  "respiration": [
+    "Expirer à la montée",
+    "Inspirer à la descente"
+  ],
+  "muscles_cibles": [
+    "Grand fessier",
+    "Transverse",
+    "Ischio-jambiers"
+  ],
+  "materiel": [],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore la stabilité du bassin"
+  ],
+  "audio_cues": ["Montez","Contrôlez"],
+  "coaching_court": ["Gainé","Stable"],
+  "tags": ["Gainage","Lombalgie","Fessiers"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 24
+  },
+  "image": "/exercises/images/gainage/pont-fessier.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Stabilité lombo-pelvienne"],
+  "zones": ["Abdomen","Fessiers","Lombaires"]
+},
+
+{
+  "id": "GAINAGE_05",
+  "nom": "Auto-grandissement",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Posture et activation profonde",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "5 répétitions de 10 secondes",
+  "difficulte_percue": 1,
+  "zones_corporelles": ["Dos","Abdomen"],
+  "consignes": [
+    "Grandir la colonne vers le haut",
+    "Relâcher les épaules",
+    "Rentrer légèrement le menton",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Ne pas hausser les épaules"
+  ],
+  "conseil_posture": [
+    "Regarder devant soi"
+  ],
+  "erreurs_frequentes": [
+    "Se cambrer",
+    "Bloquer la respiration"
+  ],
+  "version_facile": [],
+  "version_avancee": [
+    "Maintenir plus longtemps"
+  ],
+  "respiration": [
+    "Respiration calme et régulière"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Muscles posturaux"
+  ],
+  "materiel": [],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore la posture"
+  ],
+  "audio_cues": ["Grandissez"],
+  "coaching_court": ["Posture"],
+  "tags": ["Posture","Gainage"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 10,
+    "phase_descente": 3,
+    "cycles": 5
+  },
+  "image": "/exercises/images/gainage/auto-grandissement.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Posture"],
+  "zones": ["Dos","Abdomen"]
+},
+
+{
+  "id": "GAINAGE_06",
+  "nom": "Respiration diaphragmatique",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Activation diaphragme et transverse",
+  "niveau": 1,
+  "exercise_mode": "respiration",
+  "type_contraction": "statique",
+  "duree": "10 respirations",
+  "difficulte_percue": 1,
+  "zones_corporelles": ["Abdomen","Thorax"],
+  "consignes": [
+    "Inspirer par le nez",
+    "Gonfler doucement le ventre",
+    "Expirer lentement par la bouche",
+    "Relâcher les épaules"
+  ],
+  "precautions": [
+    "Ne pas forcer la respiration"
+  ],
+  "conseil_posture": [
+    "Rester détendu"
+  ],
+  "erreurs_frequentes": [
+    "Respirer uniquement avec le thorax"
+  ],
+  "version_facile": [],
+  "version_avancee": [
+    "Ajouter aspiration abdominale en fin d'expiration"
+  ],
+  "respiration": [
+    "Inspiration nasale",
+    "Expiration buccale lente"
+  ],
+  "muscles_cibles": [
+    "Diaphragme",
+    "Transverse"
+  ],
+  "materiel": [],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore le contrôle respiratoire"
+  ],
+  "audio_cues": ["Inspirez","Soufflez"],
+  "coaching_court": ["Respirez"],
+  "tags": ["Respiration","Gainage"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 4,
+    "maintien": 2,
+    "phase_descente": 6,
+    "cycles": 10
+  },
+  "image": "/exercises/images/gainage/respiration-diaphragmatique.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Respiration"],
+  "zones": ["Abdomen","Thorax"]
+},
+
+{
+  "id": "GAINAGE_07",
+  "nom": "Dead Bug simplifié",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité du tronc",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Allongé sur le dos",
+    "Maintenir le ventre légèrement rentré",
+    "Faire glisser une jambe",
+    "Revenir lentement",
+    "Alterner les côtés"
+  ],
+  "precautions": [
+    "Ne pas décoller les lombaires"
+  ],
+  "conseil_posture": [
+    "Bassin neutre"
+  ],
+  "erreurs_frequentes": [
+    "Cambrer le dos",
+    "Aller trop vite"
+  ],
+  "version_facile": [
+    "Réduire l'amplitude"
+  ],
+  "version_avancee": [
+    "Ajouter le mouvement des bras"
+  ],
+  "respiration": [
+    "Expirer pendant le mouvement",
+    "Inspirer au retour"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Abdominaux profonds"
+  ],
+  "materiel": [],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore le contrôle moteur"
+  ],
+  "audio_cues": ["Contrôlez"],
+  "coaching_court": ["Gainé","Lent"],
+  "tags": ["Gainage","Lombalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/dead-bug-simplifie.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Stabilité du tronc"],
+  "zones": ["Abdomen","Lombaires"]
+},
+
+{
+  "id": "GAINAGE_08",
+  "nom": "Bird Dog jambe seule",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité lombo-pelvienne",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires","Fessiers"],
+  "consignes": [
+    "Position à quatre pattes",
+    "Contracter légèrement le ventre",
+    "Tendre une jambe vers l'arrière",
+    "Maintenir le bassin stable",
+    "Revenir lentement puis alterner"
+  ],
+  "precautions": [
+    "Ne pas cambrer",
+    "Ne pas tourner le bassin"
+  ],
+  "muscles_cibles": ["Transverse","Multifides","Grand fessier"],
+  "tags": ["Gainage","Lombalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/bird-dog-jambe.png"
+},
+
+{
+  "id": "GAINAGE_09",
+  "nom": "Bird Dog simplifié",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Coordination et stabilité",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Position à quatre pattes",
+    "Lever un bras puis revenir",
+    "Lever ensuite une jambe",
+    "Maintenir le tronc stable"
+  ],
+  "precautions": [
+    "Conserver une respiration fluide"
+  ],
+  "muscles_cibles": ["Transverse","Multifides"],
+  "tags": ["Gainage","Contrôle moteur"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/bird-dog-simplifie.png"
+},
+
+{
+  "id": "GAINAGE_10",
+  "nom": "Planche genoux",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Endurance du gainage",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 séries de 20 secondes",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires","Épaules"],
+  "consignes": [
+    "Appui sur les avant-bras",
+    "Genoux au sol",
+    "Aligner épaules bassin genoux",
+    "Rentrer légèrement le nombril"
+  ],
+  "precautions": [
+    "Ne pas laisser tomber le bassin"
+  ],
+  "muscles_cibles": ["Transverse","Grand droit","Obliques"],
+  "tags": ["Planche","Gainage"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 20,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "image": "/exercises/images/gainage/planche-genoux.png"
+},
+
+{
+  "id": "GAINAGE_11",
+  "nom": "Pont fessier avec maintien",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité du bassin",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "statique",
+  "duree": "10 répétitions maintien 5 sec",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Fessiers","Abdomen","Lombaires"],
+  "consignes": [
+    "Monter le bassin",
+    "Maintenir 5 secondes",
+    "Contracter les fessiers",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Éviter l'hyperlordose"
+  ],
+  "muscles_cibles": ["Grand fessier","Transverse"],
+  "tags": ["Gainage","Pont"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 5,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "image": "/exercises/images/gainage/pont-maintien.png"
+},
+
+{
+  "id": "GAINAGE_12",
+  "nom": "Heel Slide contrôlé",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Contrôle du transverse",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Allongé sur le dos",
+    "Contracter légèrement le ventre",
+    "Faire glisser le talon",
+    "Conserver le bassin immobile",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas décoller les lombaires"
+  ],
+  "muscles_cibles": ["Transverse","Abdominaux profonds"],
+  "tags": ["Gainage","Transverse"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/heel-slide.png"
+},
+
+{
+  "id": "GAINAGE_13",
+  "nom": "Dead Bug complet",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Renforcement du gainage profond",
+  "niveau": 3,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 12 répétitions",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Bras tendus vers le plafond",
+    "Hanches et genoux à 90°",
+    "Tendre bras et jambe opposés",
+    "Maintenir le ventre gainé",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas cambrer",
+    "Conserver les lombaires au sol"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Grand droit",
+    "Obliques"
+  ],
+  "tags": [
+    "Gainage",
+    "Dead Bug",
+    "Lombalgie"
+  ],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 2,
+    "cycles": 24
+  },
+  "image": "/exercises/images/gainage/dead-bug-complet.png"
+},
+
+{
+  "id": "GAINAGE_14",
+  "nom": "Bird Dog complet",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité dynamique du tronc",
+  "niveau": 3,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Lombaires","Fessiers"],
+  "consignes": [
+    "Position à quatre pattes",
+    "Tendre simultanément bras et jambe opposés",
+    "Maintenir le bassin stable",
+    "Tenir 2 secondes",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas tourner le bassin",
+    "Ne pas cambrer"
+  ],
+  "muscles_cibles": ["Transverse","Multifides","Grand fessier"],
+  "tags": ["Gainage","Bird Dog"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/bird-dog-complet.png"
+},
+
+{
+  "id": "GAINAGE_15",
+  "nom": "Planche ventrale",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Endurance du gainage",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 séries de 30 secondes",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Lombaires","Épaules"],
+  "consignes": [
+    "Appui sur les avant-bras",
+    "Corps aligné",
+    "Contracter le transverse",
+    "Respirer normalement"
+  ],
+  "precautions": [
+    "Ne pas creuser le dos",
+    "Ne pas relever les fesses"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Grand droit",
+    "Obliques"
+  ],
+  "tags": ["Gainage","Planche"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 30,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "image": "/exercises/images/gainage/planche-ventrale.png"
+},
+
+{
+  "id": "GAINAGE_16",
+  "nom": "Planche latérale genoux",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Renforcement des obliques",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 séries de 20 secondes",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Taille"],
+  "consignes": [
+    "Appui sur l'avant-bras",
+    "Genoux fléchis",
+    "Décoller le bassin",
+    "Maintenir l'alignement"
+  ],
+  "precautions": [
+    "Ne pas laisser tomber le bassin"
+  ],
+  "muscles_cibles": [
+    "Obliques",
+    "Transverse"
+  ],
+  "tags": ["Gainage","Obliques"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 20,
+    "phase_descente": 2,
+    "cycles": 3
+  },
+  "image": "/exercises/images/gainage/planche-laterale-genoux.png"
+},
+
+{
+  "id": "GAINAGE_17",
+  "nom": "Gainage quadrupédie",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Activation profonde du tronc",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 séries de 20 secondes",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Lombaires"],
+  "consignes": [
+    "Position à quatre pattes",
+    "Décoller légèrement les genoux",
+    "Maintenir le dos neutre",
+    "Respirer calmement"
+  ],
+  "precautions": [
+    "Ne pas cambrer",
+    "Ne pas bloquer la respiration"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Multifides",
+    "Abdominaux profonds"
+  ],
+  "tags": ["Gainage","Quadrupédie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 20,
+    "phase_descente": 2,
+    "cycles": 3
+  },
+  "image": "/exercises/images/gainage/gainage-quadrupedie.png"
+},
+
+{
+  "id": "GAINAGE_18",
+  "nom": "Pallof Press",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Anti-rotation du tronc",
+  "niveau": 3,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 12 répétitions",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Taille"],
+  "consignes": [
+    "Se placer de profil à l'élastique",
+    "Pousser les bras devant soi",
+    "Résister à la rotation",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas tourner le tronc"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques"
+  ],
+  "materiel": ["Élastique"],
+  "tags": ["Gainage","Pallof","Anti-rotation"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 2,
+    "cycles": 24
+  },
+  "image": "/exercises/images/gainage/pallof-press.png"
+},
+
+{
+  "id": "GAINAGE_19",
+  "nom": "Pont unipodal",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité lombo-pelvienne avancée",
+  "niveau": 3,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions par côté",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Fessiers","Abdomen","Lombaires"],
+  "consignes": [
+    "Position de pont fessier",
+    "Lever une jambe",
+    "Monter le bassin",
+    "Maintenir l'alignement",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Éviter la rotation du bassin"
+  ],
+  "muscles_cibles": [
+    "Grand fessier",
+    "Transverse",
+    "Ischio-jambiers"
+  ],
+  "tags": ["Gainage","Pont","Fessiers"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 3,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/pont-unipodal.png"
+},
+
+{
+  "id": "GAINAGE_20",
+  "nom": "Planche toucher épaule",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité dynamique du tronc",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 20 répétitions",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Épaules","Lombaires"],
+  "consignes": [
+    "Position de planche bras tendus",
+    "Toucher l'épaule opposée",
+    "Limiter les mouvements du bassin",
+    "Alterner les côtés"
+  ],
+  "precautions": [
+    "Éviter la rotation du bassin"
+  ],
+  "muscles_cibles": ["Transverse","Obliques","Épaules"],
+  "tags": ["Gainage","Planche"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 1,
+    "maintien": 1,
+    "phase_descente": 1,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/planche-toucher-epaule.png"
+},
+
+{
+  "id": "GAINAGE_21",
+  "nom": "Marche gainée",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Gainage fonctionnel",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 45 secondes",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Bassin"],
+  "consignes": [
+    "Marcher lentement",
+    "Maintenir le ventre gainé",
+    "Conserver une posture droite",
+    "Respirer normalement"
+  ],
+  "precautions": [
+    "Ne pas se pencher en avant"
+  ],
+  "muscles_cibles": ["Transverse","Obliques"],
+  "tags": ["Gainage","Marche"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 45,
+    "maintien": 1,
+    "phase_descente": 1,
+    "cycles": 1
+  },
+  "image": "/exercises/images/gainage/marche-gainee.png"
+},
+
+{
+  "id": "GAINAGE_22",
+  "nom": "Farmer Walk unilatéral",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Gainage anti-inclinaison",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 30 secondes par côté",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Lombaires","Épaules"],
+  "consignes": [
+    "Tenir une charge d'un seul côté",
+    "Rester parfaitement droit",
+    "Marcher lentement",
+    "Éviter de s'incliner"
+  ],
+  "precautions": [
+    "Choisir une charge adaptée"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques",
+    "Carré des lombes"
+  ],
+  "materiel": ["Haltère"],
+  "tags": ["Gainage","Farmer Walk"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 30,
+    "maintien": 1,
+    "phase_descente": 1,
+    "cycles": 2
+  },
+  "image": "/exercises/images/gainage/farmer-walk.png"
+},
+
+{
+  "id": "GAINAGE_23",
+  "nom": "Step-Up gainé",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité fonctionnelle",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Fessiers","Membres inférieurs"],
+  "consignes": [
+    "Monter sur une marche",
+    "Maintenir le tronc gainé",
+    "Contrôler la descente",
+    "Alterner les côtés"
+  ],
+  "precautions": [
+    "Conserver le genou aligné"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Grand fessier",
+    "Quadriceps"
+  ],
+  "tags": ["Gainage","Step Up"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/step-up-gaine.png"
+},
+
+{
+  "id": "GAINAGE_24",
+  "nom": "Mountain Climber lent",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Gainage dynamique",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 20 répétitions",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Épaules","Hanches"],
+  "consignes": [
+    "Position de planche bras tendus",
+    "Ramener un genou vers la poitrine",
+    "Conserver le bassin stable",
+    "Alterner les jambes"
+  ],
+  "precautions": [
+    "Ne pas accélérer le mouvement"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques",
+    "Fléchisseurs de hanche"
+  ],
+  "tags": ["Gainage","Mountain Climber"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 1,
+    "maintien": 1,
+    "phase_descente": 1,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/mountain-climber-lent.png"
+},
+
+{
+  "id": "GAINAGE_25",
+  "nom": "Bear Crawl",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Gainage fonctionnel avancé",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 30 secondes",
+  "difficulte_percue": 5,
+  "zones_corporelles": ["Abdomen","Épaules","Hanches","Lombaires"],
+  "consignes": [
+    "Décoller légèrement les genoux",
+    "Avancer bras et jambe opposés",
+    "Maintenir le dos neutre",
+    "Progresser lentement"
+  ],
+  "precautions": [
+    "Ne pas laisser le bassin bouger"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques",
+    "Épaules",
+    "Fessiers"
+  ],
+  "tags": ["Gainage","Bear Crawl","Sport"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 30,
+    "maintien": 1,
+    "phase_descente": 1,
+    "cycles": 2
+  },
+  "image": "/exercises/images/gainage/bear-crawl.png"
+},
+
+{
+  "id": "GAINAGE_26",
+  "nom": "Pont fessier sur Swiss Ball",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Stabilité lombo-pelvienne avancée",
+  "niveau": 3,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 12 répétitions",
+  "difficulte_percue": 3,
+  "zones_corporelles": ["Abdomen","Fessiers","Lombaires"],
+  "consignes": [
+    "Allongé sur le dos",
+    "Talons posés sur le Swiss Ball",
+    "Contracter le ventre",
+    "Monter le bassin jusqu'à l'alignement",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Ne pas cambrer",
+    "Contrôler les oscillations du ballon"
+  ],
+  "conseil_posture": [
+    "Garder le bassin horizontal"
+  ],
+  "erreurs_frequentes": [
+    "Monter trop haut",
+    "Laisser rouler le ballon"
+  ],
+  "version_facile": [
+    "Pont fessier classique au sol"
+  ],
+  "version_avancee": [
+    "Pont unipodal sur Swiss Ball"
+  ],
+  "respiration": [
+    "Expirer à la montée",
+    "Inspirer à la descente"
+  ],
+  "muscles_cibles": [
+    "Grand fessier",
+    "Transverse",
+    "Ischio-jambiers"
+  ],
+  "materiel": ["Swiss Ball"],
+  "contre_indications": [],
+  "benefices": [
+    "Améliore la stabilité du bassin",
+    "Renforce la chaîne postérieure"
+  ],
+  "audio_cues": ["Montez","Contrôlez"],
+  "coaching_court": ["Gainé","Stable"],
+  "tags": ["Gainage","Swiss Ball"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 3,
+    "cycles": 24
+  },
+  "image": "/exercises/images/gainage/pont-fessier-swissball.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Stabilité lombo-pelvienne"],
+  "zones": ["Abdomen","Fessiers","Lombaires"]
+},
+
+{
+  "id": "GAINAGE_27",
+  "nom": "Planche avant-bras sur Swiss Ball",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Renforcement du gainage profond",
+  "niveau": 3,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 séries de 30 secondes",
+  "difficulte_percue": 4,
+  "zones_corporelles": ["Abdomen","Épaules","Lombaires"],
+  "consignes": [
+    "Placer les avant-bras sur le Swiss Ball",
+    "Aligner le corps",
+    "Contracter le transverse",
+    "Maintenir la position"
+  ],
+  "precautions": [
+    "Ne pas laisser tomber le bassin"
+  ],
+  "conseil_posture": [
+    "Nuque dans l'axe"
+  ],
+  "erreurs_frequentes": [
+    "Relever les fesses",
+    "Cambrer le dos"
+  ],
+  "version_facile": [
+    "Planche classique au sol"
+  ],
+  "version_avancee": [
+    "Ajouter de petits mouvements du ballon"
+  ],
+  "respiration": [
+    "Respirer normalement"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Obliques",
+    "Grand droit"
+  ],
+  "materiel": ["Swiss Ball"],
+  "contre_indications": [],
+  "benefices": [
+    "Travail proprioceptif important",
+    "Améliore la stabilité du tronc"
+  ],
+  "audio_cues": ["Tenez","Respirez"],
+  "coaching_court": ["Gainé","Stable"],
+  "tags": ["Gainage","Swiss Ball","Planche"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 30,
+    "phase_descente": 2,
+    "cycles": 3
+  },
+  "image": "/exercises/images/gainage/planche-swissball.png",
+  "pathologies": ["Lombalgie"],
+  "objectifs": ["Gainage profond"],
+  "zones": ["Abdomen","Épaules","Lombaires"]
+},
+
+{
+  "id": "GAINAGE_28",
+  "nom": "Roll-Out Swiss Ball",
+  "type": "timer",
+  "categorie": "Gainage",
+  "objectif": "Contrôle avancé du tronc",
+  "niveau": 4,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 5,
+  "zones_corporelles": ["Abdomen","Épaules","Lombaires"],
+  "consignes": [
+    "À genoux derrière le Swiss Ball",
+    "Poser les avant-bras sur le ballon",
+    "Faire rouler le ballon vers l'avant",
+    "Conserver le dos neutre",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas cambrer",
+    "Limiter l'amplitude si nécessaire"
+  ],
+  "conseil_posture": [
+    "Garder le bassin fixe"
+  ],
+  "erreurs_frequentes": [
+    "Partir trop loin",
+    "Perdre le gainage"
+  ],
+  "version_facile": [
+    "Réduire l'amplitude"
+  ],
+  "version_avancee": [
+    "Position debout"
+  ],
+  "respiration": [
+    "Expirer à l'aller",
+    "Inspirer au retour"
+  ],
+  "muscles_cibles": [
+    "Transverse",
+    "Grand droit",
+    "Obliques"
+  ],
+  "materiel": ["Swiss Ball"],
+  "contre_indications": [],
+  "benefices": [
+    "Excellent exercice anti-extension",
+    "Renforce fortement le gainage profond"
+  ],
+  "audio_cues": ["Contrôlez","Gainé"],
+  "coaching_court": ["Lent","Stable"],
+  "tags": ["Gainage","Swiss Ball","Roll-Out"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 3,
+    "maintien": 1,
+    "phase_descente": 3,
+    "cycles": 20
+  },
+  "image": "/exercises/images/gainage/rollout-swissball.png",
+  "pathologies": ["Préparation sportive"],
+  "objectifs": ["Contrôle avancé du tronc"],
+  "zones": ["Abdomen","Épaules","Lombaires"]
+}
