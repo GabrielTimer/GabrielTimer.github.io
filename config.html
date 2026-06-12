@@ -284,8 +284,46 @@ onclick="openGlossaire()">
 
 <div class="footer">
 
+<!-- Séries -->
+
+<div
+style="
+margin-bottom:15px;
+padding:12px;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:12px;
+text-align:center;
+"
+>
+
+<label
+style="
+display:block;
+font-weight:600;
+margin-bottom:8px;
+"
+>
+🔁 Séries (par exercice)
+</label>
+
+<input
+id="series"
+type="number"
+value="2"
+style="
+width:100px;
+text-align:center;
+">
+
+</div>
+
+<!-- Patient + Nom -->
+
 <div class="footerGrid">
+
 <div class="field">
+
 <label>Patient</label>
 
 <input
@@ -306,15 +344,17 @@ color:#64748b;
 </div>
 
 </div>
-<div class="field">
-<label>Séries</label>
-<input id="series" type="number" value="2">
-</div>
 
 <div class="field">
+
 <label>Nom</label>
-<input id="sessionName" value="Libre">
+
+<input
+id="sessionName"
+value="Libre">
+
 </div>
+
 </div>
 <div
 id="prescriptionBlock"
