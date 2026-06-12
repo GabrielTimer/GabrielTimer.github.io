@@ -1104,37 +1104,33 @@ lettres[s] || String(s+1);
 
 let programme = {
 
-id:
-crypto.randomUUID(),
+id: crypto.randomUUID(),
 
-nom:
-`S${semaine}${lettre}`,
+nom: `S${semaine}${lettre}`,
 
-createdAt:
-Date.now(),
+createdAt: Date.now(),
 
-updatedAt:
-Date.now(),
+updatedAt: Date.now(),
 
 auteur:"gabriel",
 
 patientId: patientId,
 
-programmeId:
-programmeId,
+programmeId: programmeId,
 
-programmeNom:
-nomProgramme,
+programmeNom: nomProgramme,
 
-categorie:
-"kine",
+semaine: semaine,
 
-terminee:
-false,
+ordre: s + 1,
 
-data: {
+categorie:"kine",
+
+terminee:false,
+
+data:{
   ...build(),
-  categorie: "kine"
+  categorie:"kine"
 }
 
 };
