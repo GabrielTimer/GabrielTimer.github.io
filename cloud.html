@@ -194,9 +194,13 @@ Object.values(groupes).forEach(seances=>{
 const total = seances.length;
 
 const faites =
-seances.filter(
-s => s.terminee
-).length;
+seances.filter(s => {
+  console.log(
+    s.nom,
+    s.terminee
+  );
+  return s.terminee;
+}).length;
 
 const nom =
 seances[0].programmeNom
