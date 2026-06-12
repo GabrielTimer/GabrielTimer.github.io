@@ -455,17 +455,24 @@ String(num)
 String(premiereSemaineIncomplete);
 
 let icone = "⚪";
-let couleur = "#64748b";
+let couleur = "#94a3b8";
 
 if(faitesSemaine === totalSemaine){
-icone = "✅";
-couleur = "#16a34a";
+  icone = "✅";
+  couleur = "#16a34a";
+}
+else if(
+  String(num)
+  ===
+  String(premiereSemaineIncomplete)
+){
+  icone = "🟠";
+  couleur = "#f97316";
 }
 else if(faitesSemaine > 0){
-icone = "🟡";
-couleur = "#eab308";
+  icone = "🟡";
+  couleur = "#eab308";
 }
-
 return `
 
 <details ${ouverte ? "open" : ""}>
