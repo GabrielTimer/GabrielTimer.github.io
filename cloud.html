@@ -382,7 +382,7 @@ onclick="sendProgrammeReport(
 ${faites},
 ${total},
 '${evaMoyenne}',
-`${historique}`,
+'${historique.replace(/\n/g,"\\n")}',
 '${seances[0].patientId || ""}'
 )">
 📤 Envoyer mon bilan à mon kinésithérapeute
