@@ -258,6 +258,16 @@ align-items:center;
 📁 ${nom}
 </h3>
 
+
+</div>
+
+<div>
+📊 Progression :
+<b>${faites}/${total}</b>
+séances
+(${Math.round(faites*100/total)}%)
+</div>
+
 ${
 seances[0].pdfData
 ? `
@@ -273,14 +283,6 @@ onclick="openPdf('${seances[0].programmeId}')">
 : ""
 }
 
-</div>
-
-<div>
-📊 Progression :
-<b>${faites}/${total}</b>
-séances
-(${Math.round(faites*100/total)}%)
-</div>
 
 ${
 isAdmin
