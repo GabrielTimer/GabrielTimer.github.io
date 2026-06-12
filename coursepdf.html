@@ -652,8 +652,11 @@ new jsPDF(
 );
 
 pdf.addImage(
-canvas1.toDataURL("image/png"),
-"PNG",
+canvas1.toDataURL(
+"image/jpeg",
+0.85
+),
+"JPEG",
 0,
 0,
 210,
@@ -663,8 +666,11 @@ canvas1.toDataURL("image/png"),
 pdf.addPage();
 
 pdf.addImage(
-canvas2.toDataURL("image/png"),
-"PNG",
+canvas2.toDataURL(
+"image/jpeg",
+0.85
+),
+"JPEG",
 0,
 0,
 210,
