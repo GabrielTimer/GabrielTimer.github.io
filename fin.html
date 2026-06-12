@@ -479,10 +479,25 @@ eva
 
 }
 
-if(patient){
-window.location="index.html?patient="+patient+"&v="+VERSION;
+if(cloudId){
+
+window.location =
+"cloud.html?patient="
++ patient
++ "&v=" + VERSION;
+
+}else if(patient){
+
+window.location =
+"index.html?patient="
++ patient
++ "&v=" + VERSION;
+
 }else{
-window.location="index.html?v="+VERSION;
+
+window.location =
+"index.html?v=" + VERSION;
+
 }
 }
 </script>
