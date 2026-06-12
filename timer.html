@@ -1077,12 +1077,21 @@ serieIndex++;
 
 if(serieIndex>p.series){
 
-if(patient){
+if(patient && cloudId){
+
+window.location =
+"fin.html?validation=1"
++ "&cloud=" + cloudId
++ "&patient=" + patient
++ "&admin=true"
++ "&v=" + VERSION;
+
+}else if(patient){
 
 window.location =
 "fin.html?patient="
-+ patient +
-"&admin=true"
++ patient
++ "&admin=true"
 + "&v=" + VERSION;
 
 }else{
@@ -1192,12 +1201,21 @@ serieIndex++;
 
 if(serieIndex > p.series){
 
-if(patient){
+if(patient && cloudId){
+
+window.location =
+"fin.html?validation=1"
++ "&cloud=" + cloudId
++ "&patient=" + patient
++ "&admin=true"
++ "&v=" + VERSION;
+
+}else if(patient){
 
 window.location =
 "fin.html?patient="
-+ patient +
-"&admin=true"
++ patient
++ "&admin=true"
 + "&v=" + VERSION;
 
 }else{
@@ -1268,12 +1286,21 @@ remainingTime = Math.max(0, remainingTime - 1);
 
 if(remainingTime <= 0){
 
-if(patient){
+if(patient && cloudId){
+
+window.location =
+"fin.html?validation=1"
++ "&cloud=" + cloudId
++ "&patient=" + patient
++ "&admin=true"
++ "&v=" + VERSION;
+
+}else if(patient){
 
 window.location =
 "fin.html?patient="
-+ patient +
-"&admin=true"
++ patient
++ "&admin=true"
 + "&v=" + VERSION;
 
 }else{
@@ -1286,7 +1313,6 @@ window.location =
 return;
 
 }
-
 
 if(t<=0){
 
