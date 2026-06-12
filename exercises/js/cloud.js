@@ -53,6 +53,9 @@ doc(db,"programmes",id),
 terminee:true,
 eva:eva,
 dateValidation:Date.now()
+},
+{
+merge:true
 }
 );
 
