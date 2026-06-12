@@ -207,6 +207,24 @@ seances[0].programmeNom
 ||
 "Programme course";
 
+const evas =
+seances
+.filter(s =>
+  s.terminee &&
+  s.eva != null
+)
+.map(s => Number(s.eva))
+.filter(e => !isNaN(e));
+
+const evaMoyenne =
+evas.length
+? (
+evas.reduce((a,b)=>a+b,0)
+/
+evas.length
+).toFixed(1)
+: "-";
+
 const programmeTermine =
 faites === total;
 
@@ -284,6 +302,10 @@ Vous avez terminé l'ensemble des séances prévues.
 ✅ Séances réalisées : ${faites}/${total}
 </p>
 
+<p>
+🩹 EVA moyenne : ${evaMoyenne}/10
+</p>
+
 <button
 style="
 background:#16a34a;
@@ -292,7 +314,8 @@ font-weight:600;
 onclick="sendProgrammeReport(
 '${nom}',
 ${faites},
-${total}
+${total},
+'${evaMoyenne}'
 )">
 📤 Envoyer mon bilan à mon kinésithérapeute
 </button>
@@ -599,7 +622,8 @@ alert(
 window.sendProgrammeReport = function(
 programmeNom,
 faites,
-total
+total,
+evaMoyenne
 ){
 
 const sujet =
@@ -613,6 +637,7 @@ Je vous informe avoir terminé mon programme :
 ${programmeNom}
 
 ✅ Séances réalisées : ${faites}/${total}
+🩹 EVA moyenne : ${evaMoyenne}/10
 
 Cordialement.`;
 
