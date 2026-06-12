@@ -191,6 +191,15 @@ console.log("GROUPES", groupes);
 
 Object.values(groupes).forEach(seances=>{
 
+console.log(
+"TEST SEMAINES",
+seances.map(s => ({
+  nom: s.nom,
+  semaine: s.semaine,
+  dataSemaine: s.data?.semaine
+}))
+);
+
 const total = seances.length;
 
 const faites =
