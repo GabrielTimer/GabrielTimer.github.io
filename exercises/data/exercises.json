@@ -5250,8 +5250,8 @@
   "zones": [
     "Tronc"
   ]
-}
-]
+},
+
 
 {
   "id": "GAINAGE_01",
@@ -6538,3 +6538,5 @@
   "objectifs": ["Contrôle avancé du tronc"],
   "zones": ["Abdomen","Épaules","Lombaires"]
 }
+
+]
