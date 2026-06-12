@@ -256,6 +256,13 @@ semaines[s.semaine].push(s);
 
 });
 
+const premiereSemaineIncomplete =
+Object.entries(semaines)
+.sort((a,b)=>Number(a[0])-Number(b[0]))
+.find(([_,s]) =>
+s.filter(x => x.terminee).length < s.length
+)?.[0];
+
 list.innerHTML += `
 
 <div class="card">
@@ -442,23 +449,33 @@ seancesSemaine.filter(s=>s.terminee).length;
 const totalSemaine =
 seancesSemaine.length;
 
+const ouverte =
+String(num)
+===
+String(premiereSemaineIncomplete);
+
 let icone = "⚪";
+let couleur = "#64748b";
 
 if(faitesSemaine === totalSemaine){
 icone = "✅";
-}else if(faitesSemaine > 0){
+couleur = "#16a34a";
+}
+else if(faitesSemaine > 0){
 icone = "🟡";
+couleur = "#eab308";
 }
 
 return `
 
-<details>
+<details ${ouverte ? "open" : ""}>
 
 <summary
 style="
 cursor:pointer;
 font-weight:bold;
 margin-top:10px;
+color:${couleur};
 ">
 Semaine ${num}
 ${icone}
