@@ -244,6 +244,18 @@ return `${date} • ${s.nom} • EVA ${s.eva ?? "-"} /10`;
 const programmeTermine =
 faites === total;
 
+const semaines = {};
+
+seances.forEach(s => {
+
+if(!semaines[s.semaine]){
+semaines[s.semaine] = [];
+}
+
+semaines[s.semaine].push(s);
+
+});
+
 list.innerHTML += `
 
 <div class="card">
@@ -420,6 +432,26 @@ ${total},
 : ""
 }
 
+${Object.entries(semaines)
+.sort((a,b)=>Number(a[0])-Number(b[0]))
+.map(([num,seancesSemaine])=>{
+
+const faitesSemaine =
+seancesSemaine.filter(s=>s.terminee).length;
+
+const totalSemaine =
+seancesSemaine.length;
+
+let icone = "⚪";
+
+if(faitesSemaine === totalSemaine){
+icone = "✅";
+}else if(faitesSemaine > 0){
+icone = "🟡";
+}
+
+return `
+
 <details>
 
 <summary
@@ -428,10 +460,12 @@ cursor:pointer;
 font-weight:bold;
 margin-top:10px;
 ">
-Voir les séances
+Semaine ${num}
+${icone}
+(${faitesSemaine}/${totalSemaine})
 </summary>
 
-${seances.map(p=>`
+${seancesSemaine.map(p=>`
 
 <div style="
 margin-top:12px;
@@ -479,6 +513,11 @@ style="background:#16a34a">
 `).join("")}
 
 </details>
+
+`;
+
+}).join("")}
+
 
 </div>
 
