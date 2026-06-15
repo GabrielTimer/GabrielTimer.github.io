@@ -165,6 +165,13 @@ value="3"
 min="1">
 </div>
 
+<div class="field">
+<label>Date de début</label>
+<input
+id="dateDebut"
+type="date">
+</div>
+
 <div class="checkbox">
 <input
 id="tapis"
@@ -390,6 +397,11 @@ document.getElementById("seances")
 )
 );
 
+const dateDebut =
+document.getElementById(
+"dateDebut"
+).value;
+
 const tapis =
 document.getElementById("tapis")
 .checked;
@@ -499,6 +511,28 @@ s++
 
 const lettre =
 lettres[s];
+
+let dateSeance = null;
+
+if(dateDebut){
+
+const dateBase =
+new Date(dateDebut);
+
+const numeroSeance =
+((semaine - 1)
+* seancesParSemaine)
++ s;
+
+dateSeance =
+new Date(dateBase);
+
+dateSeance.setDate(
+dateBase.getDate()
++ (numeroSeance * 2)
+);
+
+}
 
 let typeSeance;
 
@@ -1051,6 +1085,20 @@ Date.now(),
 updatedAt:
 Date.now(),
 
+dateDebut,
+
+datePrevue:
+dateSeance
+? dateSeance.toISOString()
+: null,
+
+datePrevueTexte:
+dateSeance
+? dateSeance.toLocaleDateString(
+"fr-FR"
+)
+: "",
+
 auteur:
 "gabriel",
 
@@ -1135,6 +1183,17 @@ async function(){
   await buildProgram(true);
 
 }
+
+</script>
+
+<script>
+
+document
+.getElementById("dateDebut")
+.value =
+new Date()
+.toISOString()
+.split("T")[0];
 
 </script>
 
