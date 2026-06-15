@@ -124,8 +124,15 @@ padding-bottom:20px;
   transparent 70%);
 }
 
+
+.home-banner *{
+  position:relative;
+  z-index:2;
+}
+
 .home-banner::before,
 .home-banner::after{
+  z-index:1;
   pointer-events:none;
 }
 
