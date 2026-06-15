@@ -29,7 +29,7 @@
     Comment allez-vous aujourd’hui ?
   </div>
 
-  <div class="home-banner">
+  <div class="home-banner" id="todayBanner">
     <h3>Votre corps,<br>votre priorité.</h3>
     <p>
       Des programmes adaptés
@@ -252,14 +252,111 @@ window.location =
 
 </script>
 
+<script>
+
+async function loadTodayBanner(){
+
+if(!patient) return;
+
+if(
+typeof loadProgramsFromCloud
+=== "undefined"
+){
+return;
+}
+
+const programmes =
+await loadProgramsFromCloud();
+
+const aujourdHui = new Date();
+
+const seances =
+programmes
+.filter(p =>
+p.patientId === patient
+&& p.programmeId
+&& !p.terminee
+&& p.datePrevue
+&& new Date(p.datePrevue) <= aujourdHui
+)
+.sort(
+(a,b)=>
+new Date(a.datePrevue)
+-
+new Date(b.datePrevue)
+);
+
+if(!seances.length){
+return;
+}
+
+const prochaine =
+seances[0];
+
+const banner =
+document.getElementById(
+"todayBanner"
+);
+
+banner.innerHTML = `
+
+<h3>
+🦵 Aujourd'hui
+</h3>
+
+<p>
+<b>${prochaine.programmeNom}</b>
+</p>
+
+<p>
+Séance :
+${prochaine.nom}
+</p>
+
+<p>
+📅 ${prochaine.datePrevueTexte}
+</p>
+
+<button
+style="
+margin-top:10px;
+background:#2563eb;
+color:white;
+border:none;
+padding:10px 14px;
+border-radius:10px;
+"
+onclick="
+window.location='cloud.html?patient=${patient}'
+">
+▶ Démarrer
+</button>
+
+`;
+
+}
+
+
+</script>
+
 <!-- Service Worker -->
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js?v=1.2');
 }
 </script>
-<script type="module" src="exercises/js/cloud.js"></script>
+<script type="module">
 
+import {
+loadProgramsFromCloud
+} from "./exercises/js/cloud.js";
+
+window.loadProgramsFromCloud =
+loadProgramsFromCloud;
+
+loadTodayBanner();
+
+</script>
 <script>
 const logo = document.getElementById("logo");
 
