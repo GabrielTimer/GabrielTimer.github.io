@@ -124,6 +124,11 @@ padding-bottom:20px;
   transparent 70%);
 }
 
+.home-banner::before,
+.home-banner::after{
+  pointer-events:none;
+}
+
 .home-banner h3{
   font-size:64px;
   font-weight:800;
