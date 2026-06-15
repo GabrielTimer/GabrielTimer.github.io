@@ -287,11 +287,31 @@ new Date(b.datePrevue)
 );
 
 if(!seances.length){
+
+const banner =
+document.getElementById("todayBanner");
+
+banner.innerHTML = `
+<h3>🎉 Repos aujourd'hui</h3>
+<p>Aucune séance prévue.</p>
+`;
+
 return;
 }
 
-const prochaine =
-seances[0];
+const prochaine = seances[0];
+
+const totalProgramme =
+programmes.filter(
+s => s.programmeId === prochaine.programmeId
+).length;
+
+const faitesProgramme =
+programmes.filter(
+s =>
+s.programmeId === prochaine.programmeId
+&& s.terminee
+).length;
 
 const banner =
 document.getElementById(
@@ -317,6 +337,10 @@ ${prochaine.nom}
 📅 ${prochaine.datePrevueTexte}
 </p>
 
+<p>
+📊 ${faitesProgramme}/${totalProgramme} séances
+</p>
+
 <button
 style="
 margin-top:10px;
@@ -327,7 +351,7 @@ padding:10px 14px;
 border-radius:10px;
 "
 onclick="
-window.location='cloud.html?patient=${patient}'
+window.location='timer.html?cloud=${prochaine.firebaseId}&patient=${patient}'
 ">
 ▶ Démarrer
 </button>
