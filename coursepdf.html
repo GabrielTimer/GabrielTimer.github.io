@@ -312,18 +312,6 @@ class="infoValue"></div>
 <div id="semaines" class="infoValue"></div>
 </div>
 
-<div class="info">
-<div class="infoLabel">🚀 Début</div>
-<div id="dateDebut" class="infoValue"></div>
-</div>
-
-<div class="info">
-<div class="infoLabel">🏁 Fin estimée</div>
-<div id="dateFin" class="infoValue"></div>
-</div>
-
-
-
 
 </div>
 
@@ -543,35 +531,6 @@ data.pathologie || "Aucune";
 document.getElementById("semaines").textContent =
 data.semaines + " sem.";
 
-if(data.dateDebut){
-
-const debut =
-new Date(data.dateDebut);
-
-document.getElementById(
-"dateDebut"
-).textContent =
-debut.toLocaleDateString(
-"fr-FR"
-);
-
-const fin =
-new Date(debut);
-
-fin.setDate(
-fin.getDate()
-+
-(data.semaines * 7)
-);
-
-document.getElementById(
-"dateFin"
-).textContent =
-fin.toLocaleDateString(
-"fr-FR"
-);
-
-}
 
 
 const weeks =
@@ -594,9 +553,45 @@ document.createElement("div");
 
 block.className = "week";
 
+let dateTexte = "";
+
+if(data.dateDebut){
+
+const debutSemaine =
+new Date(data.dateDebut);
+
+debutSemaine.setDate(
+debutSemaine.getDate()
++ ((w-1) * 7)
+);
+
+const finSemaine =
+new Date(debutSemaine);
+
+finSemaine.setDate(
+finSemaine.getDate() + 6
+);
+
+dateTexte =
+`
+<div style="
+font-size:11px;
+font-weight:400;
+opacity:.9;
+margin-top:2px;
+">
+${debutSemaine.toLocaleDateString("fr-FR")}
+ → 
+${finSemaine.toLocaleDateString("fr-FR")}
+</div>
+`;
+
+}
+
 block.innerHTML = `
 <div class="weekTitle">
 🏁 SEMAINE ${w}
+${dateTexte}
 </div>
 <div class="weekBody">
 ${seances.map(s=>`
