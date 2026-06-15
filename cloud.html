@@ -511,6 +511,10 @@ border-radius:10px;
 
 <b>${p.nom}</b><br>
 
+${p.datePrevueTexte
+? `📅 ${p.datePrevueTexte}<br>`
+: ""}
+
 ${
 p.terminee
 ? "✅ Séance validée"
