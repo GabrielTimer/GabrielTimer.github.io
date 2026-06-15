@@ -342,7 +342,19 @@ ${prochaine.nom}
 📊 ${faitesProgramme}/${totalProgramme} séances
 </p>
 
-<button onclick="alert('TEST')">
+<button
+style="
+margin-top:10px;
+background:red;
+color:white;
+border:none;
+padding:20px;
+border-radius:10px;
+position:relative;
+z-index:9999;
+pointer-events:auto;
+"
+onclick="alert('TEST')">
 ▶ Démarrer
 </button>
 `;
@@ -351,6 +363,38 @@ ${prochaine.nom}
 
 
 </script>
+
+window.launchToday = async function(id){
+
+const programmes =
+await loadProgramsFromCloud();
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog){
+alert("Programme introuvable");
+return;
+}
+
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(
+prog.données || prog.data || prog
+)
+);
+
+window.location =
+"timer.html?cloud="
++ id
++ "&patient="
++ patient
++ "&v="
++ Date.now();
+
+}
 
 <!-- Service Worker -->
 <script>
