@@ -301,6 +301,7 @@ return;
 
 const prochaine = seances[0];
 
+
 const totalProgramme =
 programmes.filter(
 s => s.programmeId === prochaine.programmeId
@@ -342,17 +343,7 @@ ${prochaine.nom}
 </p>
 
 <button
-style="
-margin-top:10px;
-background:#2563eb;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:10px;
-"
-onclick="
-window.location='timer.html?cloud=${prochaine.firebaseId}&patient=${patient}'
-">
+onclick="alert('${prochaine.firebaseId}')">
 ▶ Démarrer
 </button>
 
