@@ -354,7 +354,7 @@ position:relative;
 z-index:9999;
 pointer-events:auto;
 "
-onclick="alert('TEST')">
+onclick="launchToday('${prochaine.firebaseId}')">
 ▶ Démarrer
 </button>
 `;
@@ -363,6 +363,8 @@ onclick="alert('TEST')">
 
 
 </script>
+
+<script>
 
 window.launchToday = async function(id){
 
@@ -395,6 +397,8 @@ window.location =
 + Date.now();
 
 }
+
+</script>
 
 <!-- Service Worker -->
 <script>
