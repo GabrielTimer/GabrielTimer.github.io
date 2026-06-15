@@ -49,7 +49,7 @@ margin-bottom:8px;
 }
 
 .logoBloc img{
-height:75px;
+height:130px;
 width:auto;
 object-fit:contain;
 }
@@ -265,14 +265,6 @@ display:none;
 
 <img src="logo.png">
 
-<div class="cabinet">
-<b>Gabriel</b>
-LAVEAU<br>
-Kinésithérapeute<br>
-1 avenue de la coopération<br>
-86200 Loudun<br>
-05 64 72 40 15
-</div>
 
 </div>
 
@@ -320,6 +312,15 @@ class="infoValue"></div>
 <div id="semaines" class="infoValue"></div>
 </div>
 
+<div class="info">
+<div class="infoLabel">🚀 Début</div>
+<div id="dateDebut" class="infoValue"></div>
+</div>
+
+<div class="info">
+<div class="infoLabel">🏁 Fin estimée</div>
+<div id="dateFin" class="infoValue"></div>
+</div>
 
 
 
@@ -360,14 +361,6 @@ L'objectif est de terminer chaque séance avec la sensation de pouvoir en faire 
 
 <img src="logo.png">
 
-<div class="cabinet">
-<b>Gabriel</b>
-LAVEAU<br>
-Kinésithérapeute<br>
-1 avenue de la coopération<br>
-86200 Loudun<br>
-05 64 72 40 15
-</div>
 
 </div>
 
@@ -549,6 +542,36 @@ data.pathologie || "Aucune";
 
 document.getElementById("semaines").textContent =
 data.semaines + " sem.";
+
+if(data.dateDebut){
+
+const debut =
+new Date(data.dateDebut);
+
+document.getElementById(
+"dateDebut"
+).textContent =
+debut.toLocaleDateString(
+"fr-FR"
+);
+
+const fin =
+new Date(debut);
+
+fin.setDate(
+fin.getDate()
++
+(data.semaines * 7)
+);
+
+document.getElementById(
+"dateFin"
+).textContent =
+fin.toLocaleDateString(
+"fr-FR"
+);
+
+}
 
 
 const weeks =
