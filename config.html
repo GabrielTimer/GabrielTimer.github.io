@@ -425,6 +425,13 @@ value="3">
 
 </div>
 
+<div class="field" style="margin-top:12px;">
+<label>Date début</label>
+<input
+id="dateDebut"
+type="date">
+</div>
+
 <button
 type="button"
 class="fav"
@@ -493,6 +500,11 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 loadPatients();
 
+const today = new Date();
+
+document.getElementById("dateDebut").value =
+today.toISOString().split("T")[0];
+
 if(
   localStorage.getItem("admin_ok")
   !== "true"
@@ -509,12 +521,13 @@ if(
 
 if(cloudId){
 
-localStorage.setItem(
-"editCloudId",
-cloudId
-);
+  localStorage.setItem(
+    "editCloudId",
+    cloudId
+  );
 
 }
+
 
 let edit = localStorage.getItem("edit_programme");
 
@@ -1171,6 +1184,11 @@ document.getElementById(
 )?.value || 1
 );
 
+const dateDebut =
+document.getElementById(
+"dateDebut"
+)?.value;
+
 /* =========================
    SÉANCE UNIQUE
 ========================= */
@@ -1245,6 +1263,17 @@ s++
 const lettre =
 lettres[s] || String(s+1);
 
+const dateSeance =
+new Date(dateDebut);
+
+dateSeance.setDate(
+dateSeance.getDate()
++
+((semaine - 1) * 7)
++
+(s * 2)
+);
+
 let programme = {
 
 id: crypto.randomUUID(),
@@ -1269,11 +1298,23 @@ ordre: s + 1,
 
 categorie:"kine",
 
+dateDebut: dateDebut,
+
+datePrevue:
+dateSeance.toISOString(),
+
+datePrevueTexte:
+dateSeance.toLocaleDateString(
+"fr-FR"
+),
+
 terminee:false,
 
 data:{
   ...build(),
   categorie:"kine"
+
+
 }
 
 };
