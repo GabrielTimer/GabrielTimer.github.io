@@ -344,18 +344,40 @@ ${prochaine.nom}
 
 <button
 style="
-margin-top:10px;
-background:red;
-color:white;
+width:100%;
+margin-top:18px;
 border:none;
-padding:20px;
-border-radius:10px;
-position:relative;
-z-index:9999;
-pointer-events:auto;
+border-radius:16px;
+padding:16px 20px;
+cursor:pointer;
+
+background:linear-gradient(
+135deg,
+#2563eb 0%,
+#3b82f6 50%,
+#60a5fa 100%
+);
+
+color:white;
+font-size:18px;
+font-weight:700;
+
+box-shadow:
+0 10px 25px rgba(37,99,235,.30);
+
+transition:all .2s ease;
 "
-onclick="launchToday('${prochaine.firebaseId}')">
-▶ Démarrer
+onclick="launchToday('${prochaine.firebaseId}')"
+onmouseover="
+this.style.transform='translateY(-2px)';
+this.style.boxShadow='0 14px 30px rgba(37,99,235,.40)';
+"
+onmouseout="
+this.style.transform='translateY(0)';
+this.style.boxShadow='0 10px 25px rgba(37,99,235,.30)';
+"
+>
+▶ Commencer ma séance
 </button>
 `;
 
