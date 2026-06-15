@@ -1207,18 +1207,30 @@ window.location.search
 const patient =
 params.get("patient");
 
-if(patient && !params.get("admin")){
+const admin =
+params.get("admin");
+
+if(admin && patient){
+
+window.location =
+"patients.html";
+
+return;
+
+}
+
+if(patient){
 
 window.location =
 "index.html?patient="
 + patient;
 
-}else{
+return;
+
+}
 
 window.location =
 "index.html?admin=true";
-
-}
 
 }
 
