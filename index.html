@@ -276,8 +276,6 @@ programmes
 p.patientId === patient
 && p.programmeId
 && !p.terminee
-&& p.datePrevue
-&& new Date(p.datePrevue) <= aujourdHui
 )
 .sort(
 (a,b)=>
@@ -292,8 +290,8 @@ const banner =
 document.getElementById("todayBanner");
 
 banner.innerHTML = `
-<h3>🎉 Repos aujourd'hui</h3>
-<p>Aucune séance prévue.</p>
+<h3>🏆 Programme terminé</h3>
+<p>Bravo ! Toutes les séances ont été réalisées.</p>
 `;
 
 return;
@@ -322,7 +320,7 @@ document.getElementById(
 banner.innerHTML = `
 
 <h3>
-🦵 Aujourd'hui
+🎯 Prochaine séance
 </h3>
 
 <p>
