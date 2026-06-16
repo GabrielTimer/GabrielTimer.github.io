@@ -1047,12 +1047,17 @@ total,
 evaMoyenne,
 historique,
 patientNom
+
 ){
 
 const nomPatient =
 (patientNom || "")
 .replace(/_/g," ")
 .replace(/\b\w/g, l => l.toUpperCase());
+
+const remarques = prompt(
+"Souhaitez-vous ajouter une remarque pour votre kinésithérapeute ?"
+) || "";
 
 const sujet =
 `Programme terminé - ${programmeNom}`;
@@ -1070,6 +1075,10 @@ ${programmeNom}
 📅 Historique des séances
 
 ${historique}
+
+📝 REMARQUES
+
+${remarques || "Aucune remarque"}
 
 Cordialement,
 
