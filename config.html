@@ -1387,142 +1387,166 @@ return;
    PROGRAMME KINÉ
 ========================= */
 
-const programmeId =
-crypto.randomUUID();
+const programmeId = crypto.randomUUID();
 
 const lettres =
 ["A","B","C","D","E","F","G"];
 
-for(let semaine=1; semaine<=semaines; semaine++){
-
-for(
-let s=0;
-s<seancesParSemaine;
-s++
-){
-
-
-const dateSeance = new Date(dateDebut);
-
-const jourProgramme =
-joursProgramme[s];
-
-const jourCible =
-joursMap[jourProgramme];
-
-const debut =
-new Date(dateDebut);
-
-const jourDepart =
-debut.getDay();
-
-let decalagePremier =
-jourCible - jourDepart;
-
-if(decalagePremier < 0){
-  decalagePremier += 7;
-}
-
-dateSeance.setDate(
-  debut.getDate()
-  + decalagePremier
-  + ((semaine - 1) * 7)
-);
-
-const lundiReference = new Date(dateSeance);
-
-const jour =
-lundiReference.getDay();
-
-const decalageLundi =
-jour === 0
-? -6
-: 1 - jour;
-
-lundiReference.setDate(
-  lundiReference.getDate()
-  + decalageLundi
-);
-
 const debutProgramme =
 new Date(dateDebut);
 
-const lundiDebut =
-new Date(debutProgramme);
+const toutesDates = [];
 
-const jourDebut =
-lundiDebut.getDay();
+for(let semaine=0; semaine<semaines; semaine++){
 
-const decalageDebut =
-jourDebut === 0
-? -6
-: 1 - jourDebut;
+  const lundiSemaine =
+  new Date(debutProgramme);
 
-lundiDebut.setDate(
-  lundiDebut.getDate()
-  + decalageDebut
-);
+  const jourDepart =
+  lundiSemaine.getDay();
 
-const numeroSemaine =
-Math.floor(
-(
-  lundiReference - lundiDebut
-)
-/
-(1000 * 60 * 60 * 24 * 7)
-) + 1;
+  const decalageLundi =
+  jourDepart === 0
+  ? -6
+  : 1 - jourDepart;
 
-let programme = {
+  lundiSemaine.setDate(
+    lundiSemaine.getDate()
+    + decalageLundi
+    + (semaine * 7)
+  );
 
-id: crypto.randomUUID(),
+  joursProgramme.forEach(jourNom=>{
 
-nom: "",
+    const dateSeance =
+    new Date(lundiSemaine);
 
-createdAt: Date.now(),
+    const jourCible =
+    joursMap[jourNom];
 
-updatedAt: Date.now(),
+    const decalage =
+    jourCible - 1;
 
-auteur:"gabriel",
+    dateSeance.setDate(
+      lundiSemaine.getDate()
+      + decalage
+    );
 
-patientId: patientId,
+    if(dateSeance >= debutProgramme){
 
-programmeId: programmeId,
+      toutesDates.push(dateSeance);
 
-programmeNom: nomProgramme,
+    }
 
-joursProgramme: joursProgramme,
-
-semaine: numeroSemaine,
-
-categorie:"kine",
-
-dateDebut: dateDebut,
-
-datePrevue:
-dateSeance.toISOString(),
-
-datePrevueTexte:
-dateSeance.toLocaleDateString(
-"fr-FR"
-),
-
-terminee:false,
-
-data:{
-  ...build(),
-  categorie:"kine"
-
+  });
 
 }
 
-};
-
-
-await saveProgramToCloud(
-programme
+toutesDates.sort(
+(a,b)=>a-b
 );
 
-}
+const groupes = {};
+
+toutesDates.forEach(dateSeance=>{
+
+  const lundi =
+  new Date(dateSeance);
+
+  const jour =
+  lundi.getDay();
+
+  const decalage =
+  jour === 0
+  ? -6
+  : 1 - jour;
+
+  lundi.setDate(
+    lundi.getDate()
+    + decalage
+  );
+
+  const cle =
+  lundi.toISOString().split("T")[0];
+
+  if(!groupes[cle]){
+    groupes[cle] = [];
+  }
+
+  groupes[cle].push(dateSeance);
+
+});
+
+let numeroSemaine = 1;
+
+for(const datesSemaine of Object.values(groupes)){
+
+  datesSemaine.sort(
+    (a,b)=>a-b
+  );
+
+  for(
+    let i=0;
+    i<datesSemaine.length;
+    i++
+  ){
+
+    const dateSeance =
+    datesSemaine[i];
+
+    let programme = {
+
+      id: crypto.randomUUID(),
+
+      nom:
+      `S${numeroSemaine}${lettres[i]}`,
+
+      createdAt: Date.now(),
+
+      updatedAt: Date.now(),
+
+      auteur:"gabriel",
+
+      patientId: patientId,
+
+      programmeId: programmeId,
+
+      programmeNom: nomProgramme,
+
+      joursProgramme: joursProgramme,
+
+      semaine: numeroSemaine,
+
+      ordre: i + 1,
+
+      categorie:"kine",
+
+      dateDebut: dateDebut,
+
+      datePrevue:
+      dateSeance.toISOString(),
+
+      datePrevueTexte:
+      dateSeance.toLocaleDateString(
+        "fr-FR"
+      ),
+
+      terminee:false,
+
+      data:{
+        ...build(),
+        categorie:"kine"
+      }
+
+    };
+
+    await saveProgramToCloud(
+      programme
+    );
+
+  }
+
+  numeroSemaine++;
 
 }
 
