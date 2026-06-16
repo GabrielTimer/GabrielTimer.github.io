@@ -1101,7 +1101,11 @@
       "Abdomen",
       "Périnée",
       "Lombaires"
-    ]
+    ],
+"pathologies": [
+  "Pubalgie",
+  "Post-partum"
+]
   },
   {
     "id": "POSTPARTUM_05",
@@ -1201,7 +1205,11 @@
       "Abdomen",
       "Périnée",
       "Lombaires"
-    ]
+    ],
+"pathologies": [
+  "Pubalgie",
+  "Post-partum"
+]
   },
   {
     "id": "POSTPARTUM_06",
@@ -6874,6 +6882,290 @@
   "pathologies": ["Pubalgie"],
   "objectifs": ["Proprioception"],
   "zones": ["Cheville","Genou","Bassin"]
+},
+
+{
+  "id": "PUBALGIE_01",
+  "nom": "Bird Dog",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Stabilité lombo-pelvienne",
+  "niveau": 2,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 10 répétitions",
+  "difficulte_percue": 2,
+  "consignes": [
+    "Position quadrupédique",
+    "Tendre bras et jambe opposés",
+    "Garder le bassin stable",
+    "Revenir lentement"
+  ],
+  "precautions": [
+    "Ne pas cambrer le dos",
+    "Conserver l'équilibre"
+  ],
+  "muscles_cibles": ["Transverse","Multifides","Fessiers"],
+  "tags": ["Gainage","Core","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 2,
+    "phase_descente": 2,
+    "cycles": 20
+  },
+  "image": "/exercises/images/pubalgie/Bird-dog.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Stabilité lombo-pelvienne"],
+  "zones": ["Abdomen","Bassin","Hanches"]
+},
+
+{
+  "id": "PUBALGIE_02",
+  "nom": "Clamshell",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement des abducteurs de hanche",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "type_contraction": "dynamique",
+  "duree": "2 séries de 15 répétitions",
+  "difficulte_percue": 1,
+  "consignes": [
+    "Garder les pieds collés",
+    "Ouvrir le genou supérieur",
+    "Ne pas tourner le bassin",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Mouvement contrôlé"
+  ],
+  "muscles_cibles": ["Moyen fessier","Petit fessier"],
+  "tags": ["Hanche","Abducteurs","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 1,
+    "phase_descente": 2,
+    "cycles": 30
+  },
+  "image": "/exercises/images/pubalgie/clamshell.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Contrôle hanche"],
+  "zones": ["Hanches"]
+},
+
+{
+  "id": "PUBALGIE_03",
+  "nom": "Gainage ventral",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement du gainage global",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 x 20 secondes",
+  "difficulte_percue": 2,
+  "consignes": [
+    "Aligner épaules, bassin et chevilles",
+    "Contracter les abdominaux",
+    "Respirer normalement"
+  ],
+  "precautions": [
+    "Ne pas creuser le dos"
+  ],
+  "muscles_cibles": ["Transverse","Grand droit","Obliques"],
+  "tags": ["Gainage","Planche","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 20,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "image": "/exercises/images/pubalgie/Gainage_Ventral.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Gainage"],
+  "zones": ["Abdomen","Bassin"]
+},
+
+{
+  "id": "PUBALGIE_04",
+  "nom": "Gainage latéral genoux",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement des obliques et stabilisateurs",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "type_contraction": "statique",
+  "duree": "3 x 20 secondes",
+  "difficulte_percue": 2,
+  "consignes": [
+    "Aligner épaules, bassin et genoux",
+    "Monter le bassin",
+    "Maintenir sans rotation"
+  ],
+  "precautions": [
+    "Ne pas laisser tomber le bassin"
+  ],
+  "muscles_cibles": ["Obliques","Moyen fessier"],
+  "tags": ["Gainage latéral","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 20,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "image": "/exercises/images/pubalgie/gainage-lat-genoux.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Stabilité latérale"],
+  "zones": ["Abdomen","Hanches"]
+},
+
+{
+  "id": "PUBALGIE_05",
+  "nom": "Pont fessier",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement chaîne postérieure",
+  "niveau": 1,
+  "exercise_mode": "dynamique",
+  "type_contraction": "statique",
+  "duree": "10 répétitions maintien 5 secondes",
+  "difficulte_percue": 1,
+  "consignes": [
+    "Monter le bassin",
+    "Contracter les fessiers",
+    "Maintenir 5 secondes",
+    "Redescendre lentement"
+  ],
+  "precautions": [
+    "Éviter l'hyperlordose"
+  ],
+  "muscles_cibles": ["Grand fessier","Ischio-jambiers"],
+  "tags": ["Pont","Fessiers","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 5,
+    "phase_descente": 3,
+    "cycles": 10
+  },
+  "image": "/exercises/images/pubalgie/pont_fessier.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Renforcement fessiers"],
+  "zones": ["Bassin","Fessiers"]
+},
+
+{
+  "id": "PUBALGIE_06",
+  "nom": "Serrage ballon jambes tendues",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement adducteurs",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "type_contraction": "isometrique",
+  "duree": "10 contractions de 5 secondes",
+  "difficulte_percue": 1,
+  "consignes": [
+    "Presser le ballon entre les chevilles",
+    "Maintenir 5 secondes",
+    "Relâcher lentement"
+  ],
+  "precautions": [
+    "Douleur maximale 3/10"
+  ],
+  "muscles_cibles": ["Adducteurs"],
+  "tags": ["Adducteurs","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 1,
+    "maintien": 5,
+    "phase_descente": 2,
+    "cycles": 10
+  },
+  "image": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Renforcement adducteurs"],
+  "zones": ["Adducteurs"]
+},
+
+{
+  "id": "PUBALGIE_07",
+  "nom": "Serrage ballon genoux",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Renforcement adducteurs",
+  "niveau": 1,
+  "exercise_mode": "statique",
+  "type_contraction": "isometrique",
+  "duree": "10 contractions de 5 secondes",
+  "difficulte_percue": 1,
+  "consignes": [
+    "Presser le ballon entre les genoux",
+    "Maintenir 5 secondes",
+    "Respirer normalement"
+  ],
+  "precautions": [
+    "Ne pas provoquer de douleur importante"
+  ],
+  "muscles_cibles": ["Adducteurs"],
+  "tags": ["Adducteurs","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 1,
+    "maintien": 5,
+    "phase_descente": 2,
+    "cycles": 10
+  },
+  "image": "/exercises/images/pubalgie/serrage-ballon-genoux.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Renforcement adducteurs"],
+  "zones": ["Adducteurs"]
+},
+
+{
+  "id": "PUBALGIE_08",
+  "nom": "Équilibre avec balle au mur",
+  "type": "timer",
+  "categorie": "Pubalgie",
+  "objectif": "Contrôle neuromusculaire",
+  "niveau": 2,
+  "exercise_mode": "statique",
+  "type_contraction": "dynamique",
+  "duree": "30 secondes par jambe",
+  "difficulte_percue": 2,
+  "consignes": [
+    "Tenir sur une jambe",
+    "Lancer et rattraper la balle",
+    "Regarder devant soi"
+  ],
+  "precautions": [
+    "Prévoir un appui proche si besoin"
+  ],
+  "muscles_cibles": ["Fessiers","Stabilisateurs du bassin"],
+  "tags": ["Proprioception","Équilibre","Pubalgie"],
+  "validation_medicale": true,
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 3,
+    "maintien": 30,
+    "phase_descente": 3,
+    "cycles": 2
+  },
+  "image": "/exercises/images/pubalgie/equilibre-balle-1.png",
+  "pathologies": ["Pubalgie"],
+  "objectifs": ["Proprioception"],
+  "zones": ["Bassin","Membre inférieur"]
 }
 
 ]
