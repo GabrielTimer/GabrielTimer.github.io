@@ -265,6 +265,28 @@ semaines[s.semaine] = [];
 
 semaines[s.semaine].push(s);
 
+Object.values(semaines)
+.forEach(arr=>{
+
+arr.sort(
+(a,b)=>
+new Date(a.datePrevue)
+-
+new Date(b.datePrevue)
+);
+
+arr.forEach((s,index)=>{
+
+const lettres =
+["A","B","C","D","E","F","G"];
+
+s.nom =
+`S${s.semaine}${lettres[index]}`;
+
+});
+
+});
+
 });
 
 const premiereSemaineIncomplete =

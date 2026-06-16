@@ -1401,8 +1401,7 @@ s<seancesParSemaine;
 s++
 ){
 
-const lettre =
-lettres[s] || String(s+1);
+
 const dateSeance = new Date(dateDebut);
 
 const jourProgramme =
@@ -1430,11 +1429,36 @@ dateSeance.setDate(
   + ((semaine - 1) * 7)
 );
 
+const lundiReference = new Date(dateSeance);
+
+const jour =
+lundiReference.getDay();
+
+const decalageLundi =
+jour === 0
+? -6
+: 1 - jour;
+
+lundiReference.setDate(
+  lundiReference.getDate()
+  + decalageLundi
+);
+
+const numeroSemaine =
+Math.floor(
+(
+lundiReference -
+new Date(dateDebut)
+)
+/
+(1000 * 60 * 60 * 24 * 7)
+) + 1;
+
 let programme = {
 
 id: crypto.randomUUID(),
 
-nom: `S${semaine}${lettre}`,
+nom: "",
 
 createdAt: Date.now(),
 
@@ -1450,9 +1474,7 @@ programmeNom: nomProgramme,
 
 joursProgramme: joursProgramme,
 
-semaine: semaine,
-
-ordre: s + 1,
+semaine: numeroSemaine,
 
 categorie:"kine",
 
