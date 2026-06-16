@@ -1444,11 +1444,29 @@ lundiReference.setDate(
   + decalageLundi
 );
 
+const debutProgramme =
+new Date(dateDebut);
+
+const lundiDebut =
+new Date(debutProgramme);
+
+const jourDebut =
+lundiDebut.getDay();
+
+const decalageDebut =
+jourDebut === 0
+? -6
+: 1 - jourDebut;
+
+lundiDebut.setDate(
+  lundiDebut.getDate()
+  + decalageDebut
+);
+
 const numeroSemaine =
 Math.floor(
 (
-lundiReference -
-new Date(dateDebut)
+  lundiReference - lundiDebut
 )
 /
 (1000 * 60 * 60 * 24 * 7)
