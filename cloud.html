@@ -325,8 +325,8 @@ ${
 isAdmin
 ? `
 <button
-onclick="assignProgramme('${seances[0].programmeId}')">
-👤 Assigner à un patient
+onclick="copyProgramme('${seances[0].programmeId}')">
+📋 Créer une copie patient
 </button>
 `
 : ""
@@ -887,61 +887,31 @@ window.location =
 
 }
 
-window.assignProgramme = async function(programmeId){
-
-const patient = prompt(
-"Nom du patient :"
-);
-
-if(!patient) return;
-
-const nouveauProgrammeId =
-crypto.randomUUID();
+window.copyProgramme = async function(programmeId){
 
 const aCopier =
 programmes.filter(
 p => p.programmeId === programmeId
 );
 
-for(const seance of aCopier){
+if(!aCopier.length){
+alert("Programme introuvable");
+return;
+}
 
 const copie =
 JSON.parse(
-JSON.stringify(seance)
+JSON.stringify(aCopier)
 );
 
-delete copie.firebaseId;
-
-copie.id =
-crypto.randomUUID();
-
-copie.programmeId =
-nouveauProgrammeId;
-
-copie.patientId =
-patient
-.trim()
-.replace(/\s+/g,"_");
-
-copie.updatedAt =
-Date.now();
-
-copie.terminee = false;
-copie.eva = null;
-copie.dateValidation = null;
-
-await saveProgramToCloud(
-copie
+localStorage.setItem(
+"programmeCopie",
+JSON.stringify(copie)
 );
 
-}
-
-alert(
-"Programme attribué à "
-+ patient
-);
-
-init();
+window.location =
+"config.html?copieProgramme=1&v="
++ Date.now();
 
 }
 

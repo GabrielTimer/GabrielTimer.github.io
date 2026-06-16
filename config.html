@@ -644,6 +644,60 @@ return;
 }
 
 /* =========================
+   MODE COPIE PROGRAMME
+========================= */
+
+let copieProgramme =
+localStorage.getItem(
+"programmeCopie"
+);
+
+if(copieProgramme){
+
+let liste =
+JSON.parse(copieProgramme);
+
+let modele =
+liste[0];
+
+if(modele){
+
+let data =
+modele.data
+||
+modele.données
+||
+{};
+
+exercices =
+data.exercices || [];
+
+document.getElementById("series").value =
+data.series || 1;
+
+document.getElementById("sessionName").value =
+(modele.programmeNom || modele.nom)
++ " - copie";
+
+document.getElementById("title").innerText =
+"Copie programme";
+
+document.getElementById("patientId").value =
+"";
+
+render();
+
+localStorage.removeItem(
+"programmeCopie"
+);
+
+return;
+
+}
+
+}
+
+/* =========================
    MODE PATHOLOGIE
 ========================= */
 
