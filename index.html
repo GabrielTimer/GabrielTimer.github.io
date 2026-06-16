@@ -299,6 +299,58 @@ return;
 
 const prochaine = seances[0];
 
+const dateSeance =
+new Date(prochaine.datePrevue);
+
+const aujourdHuiMinuit =
+new Date();
+aujourdHuiMinuit.setHours(0,0,0,0);
+
+dateSeance.setHours(0,0,0,0);
+
+const diffJours =
+Math.round(
+(dateSeance - aujourdHuiMinuit)
+/
+(1000*60*60*24)
+);
+
+let texteDate = "";
+
+if(diffJours === 0){
+
+texteDate = "Aujourd'hui";
+
+}else if(diffJours === 1){
+
+texteDate = "Demain";
+
+}else if(diffJours > 1){
+
+texteDate = `Dans ${diffJours} jours`;
+
+}else{
+
+texteDate = "En retard";
+
+}
+
+const dateLisible =
+new Date(prochaine.datePrevue)
+.toLocaleDateString(
+"fr-FR",
+{
+weekday:"long",
+day:"2-digit",
+month:"2-digit"
+}
+);
+
+const dateAffichee =
+dateLisible.charAt(0).toUpperCase()
++
+dateLisible.slice(1);
+
 
 const totalProgramme =
 programmes.filter(
@@ -333,9 +385,12 @@ ${prochaine.nom}
 </p>
 
 <p>
-📅 ${prochaine.datePrevueTexte}
+📅 ${texteDate}
 </p>
 
+<p>
+🗓️ ${dateAffichee}
+</p>
 <p>
 📊 ${faitesProgramme}/${totalProgramme} séances
 </p>
