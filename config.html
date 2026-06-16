@@ -1294,9 +1294,31 @@ const joursProgramme =
 )
 ].map(cb => cb.value);
 
-joursProgramme.sort(
-(a,b) => joursMap[a] - joursMap[b]
-);
+const dateDebut =
+document.getElementById(
+"dateDebut"
+)?.value;
+
+joursProgramme.sort((a,b)=>{
+
+const debut =
+new Date(dateDebut);
+
+const jourDepart =
+debut.getDay();
+
+let da =
+joursMap[a] - jourDepart;
+
+let db =
+joursMap[b] - jourDepart;
+
+if(da < 0) da += 7;
+if(db < 0) db += 7;
+
+return da - db;
+
+});
 
 if(joursProgramme.length !== seancesParSemaine){
   alert(
@@ -1306,10 +1328,7 @@ if(joursProgramme.length !== seancesParSemaine){
 }
 
 
-const dateDebut =
-document.getElementById(
-"dateDebut"
-)?.value;
+
 
 /* =========================
    SÉANCE UNIQUE
