@@ -576,20 +576,8 @@ document.getElementById(
 "prescriptionArrow"
 );
 
-if(
-localStorage.getItem("admin_ok")
-=== "true"
-){
-
-bloc.style.display = "block";
-arrow.innerHTML = "▼";
-
-}else{
-
 bloc.style.display = "none";
 arrow.innerHTML = "▶";
-
-}
 
 if(cloudId){
 
