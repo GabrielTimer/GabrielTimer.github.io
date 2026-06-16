@@ -1226,6 +1226,16 @@ e
 
 }
 
+const joursMap = {
+  "dimanche": 0,
+  "lundi": 1,
+  "mardi": 2,
+  "mercredi": 3,
+  "jeudi": 4,
+  "vendredi": 5,
+  "samedi": 6
+};
+
 window.saveCloud = async function(){
 
 const editId =
@@ -1283,6 +1293,10 @@ const joursProgramme =
 ".jourProgramme:checked"
 )
 ].map(cb => cb.value);
+
+joursProgramme.sort(
+(a,b) => joursMap[a] - joursMap[b]
+);
 
 if(joursProgramme.length !== seancesParSemaine){
   alert(
@@ -1370,16 +1384,31 @@ s++
 
 const lettre =
 lettres[s] || String(s+1);
+const dateSeance = new Date(dateDebut);
 
-const dateSeance =
+const jourProgramme =
+joursProgramme[s];
+
+const jourCible =
+joursMap[jourProgramme];
+
+const debut =
 new Date(dateDebut);
 
+const jourDepart =
+debut.getDay();
+
+let decalagePremier =
+jourCible - jourDepart;
+
+if(decalagePremier < 0){
+  decalagePremier += 7;
+}
+
 dateSeance.setDate(
-dateSeance.getDate()
-+
-((semaine - 1) * 7)
-+
-(s * 2)
+  debut.getDate()
+  + decalagePremier
+  + ((semaine - 1) * 7)
 );
 
 let programme = {
