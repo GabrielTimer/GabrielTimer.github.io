@@ -422,6 +422,42 @@ value="3">
 </div>
 
 </div>
+<div id="joursProgrammeBlock" style="
+margin-top:15px;
+padding-top:12px;
+border-top:1px solid #e2e8f0;
+">
+
+<label style="
+display:block;
+font-weight:600;
+margin-bottom:10px;
+text-align:center;
+">
+📅 Jours des séances
+</label>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+font-size:14px;
+">
+
+<label><input type="checkbox" class="jourProgramme" value="lundi"> Lundi</label>
+<label><input type="checkbox" class="jourProgramme" value="mardi"> Mardi</label>
+
+<label><input type="checkbox" class="jourProgramme" value="mercredi"> Mercredi</label>
+<label><input type="checkbox" class="jourProgramme" value="jeudi"> Jeudi</label>
+
+<label><input type="checkbox" class="jourProgramme" value="vendredi"> Vendredi</label>
+<label><input type="checkbox" class="jourProgramme" value="samedi"> Samedi</label>
+
+<label><input type="checkbox" class="jourProgramme" value="dimanche"> Dimanche</label>
+
+</div>
+
+</div>
 
 </div>
 
@@ -501,6 +537,8 @@ window.addEventListener("DOMContentLoaded", ()=>{
 loadPatients();
 
 const today = new Date();
+
+initJoursProgramme();
 
 document.getElementById("dateDebut").value =
 today.toISOString().split("T")[0];
@@ -882,6 +920,61 @@ alert("Sauvegardé");
 
 }
 
+function initJoursProgramme(){
+
+const input =
+document.getElementById(
+"nbSeancesSemaine"
+);
+
+if(!input) return;
+
+input.addEventListener(
+"change",
+applyJoursParDefaut
+);
+
+applyJoursParDefaut();
+
+}
+
+function applyJoursParDefaut(){
+
+const nb =
+parseInt(
+document.getElementById(
+"nbSeancesSemaine"
+).value || 1
+);
+
+const map = {
+1:["mercredi"],
+2:["mardi","vendredi"],
+3:["lundi","mercredi","vendredi"],
+4:["lundi","mardi","jeudi","vendredi"],
+5:["lundi","mardi","mercredi","jeudi","vendredi"],
+6:["lundi","mardi","mercredi","jeudi","vendredi","samedi"],
+7:["lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"]
+};
+
+document
+.querySelectorAll(".jourProgramme")
+.forEach(cb=>cb.checked=false);
+
+(map[nb] || [])
+.forEach(jour=>{
+
+const cb =
+document.querySelector(
+`.jourProgramme[value="${jour}"]`
+);
+
+if(cb) cb.checked = true;
+
+});
+
+}
+
 function start(){
 
 let all = JSON.parse(localStorage.getItem("programmes") || "[]");
@@ -1184,6 +1277,21 @@ document.getElementById(
 )?.value || 1
 );
 
+const joursProgramme =
+[
+...document.querySelectorAll(
+".jourProgramme:checked"
+)
+].map(cb => cb.value);
+
+if(joursProgramme.length !== seancesParSemaine){
+  alert(
+    `Veuillez sélectionner ${seancesParSemaine} jour(s)`
+  );
+  return;
+}
+
+
 const dateDebut =
 document.getElementById(
 "dateDebut"
@@ -1291,6 +1399,8 @@ patientId: patientId,
 programmeId: programmeId,
 
 programmeNom: nomProgramme,
+
+joursProgramme: joursProgramme,
 
 semaine: semaine,
 
