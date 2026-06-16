@@ -569,6 +569,26 @@ p.terminee
 </button>
 
 ${
+isAdmin
+? `
+${p.patientId && p.patientId !== "admin" ? `
+<button onclick="sendMail('${p.patientId}','${p.firebaseId}')">
+📧 Envoyer au patient
+</button>
+` : ""}
+
+<button onclick="editProgram('${p.firebaseId}')">
+✏️ Modifier le modèle
+</button>
+
+<button onclick="deleteProgram('${p.firebaseId}')">
+🗑️ Supprimer
+</button>
+`
+: ""
+}
+
+${
 !p.terminee
 ? `
 <button
@@ -773,9 +793,11 @@ isAdmin
 ${
 isAdmin
 ? `
-<button onclick="sendMail('${p.patientId || ""}','${p.firebaseId}')">
-📧 Envoyer par mail
+${p.patientId && p.patientId !== "admin" ? `
+<button onclick="sendMail('${p.patientId}','${p.firebaseId}')">
+📧 Envoyer au patient
 </button>
+` : ""}
 
 <button onclick="editProgram('${p.firebaseId}')">
 ✏️ Modifier le modèle
