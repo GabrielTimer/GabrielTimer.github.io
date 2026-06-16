@@ -297,15 +297,18 @@ text-align:center;
 "
 >
 
-<label
+<div
 style="
-display:block;
-font-weight:600;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
 margin-bottom:8px;
-"
->
-🏋️ Séries
-</label>
+font-weight:600;
+">
+<span>🏋️</span>
+<span>Séries</span>
+</div>
 
 <input
 id="series"
@@ -357,23 +360,42 @@ value="Libre">
 
 </div>
 <div
-id="prescriptionBlock"
 style="
 margin:12px 0;
-padding:14px;
-background:#f8fafc;
 border:1px solid #e2e8f0;
 border-radius:12px;
+overflow:hidden;
 ">
 
-<div style="
+<div
+onclick="togglePrescription()"
+style="
+padding:14px;
+background:#f8fafc;
+cursor:pointer;
+display:flex;
+justify-content:space-between;
+align-items:center;
 font-weight:600;
-font-size:15px;
-margin-bottom:12px;
-text-align:center;
 ">
-📅 Prescription
+
+<span>📅 Prescription + date début</span>
+
+<span id="prescriptionArrow">
+▶
+</span>
+
 </div>
+
+<div
+id="prescriptionBlock"
+style="
+display:none;
+padding:14px;
+background:#f8fafc;
+border-top:1px solid #e2e8f0;
+">
+
 
 <div style="
 display:flex;
@@ -457,16 +479,17 @@ font-size:14px;
 
 </div>
 
-</div>
-
-</div>
+</div> <!-- fin joursProgrammeBlock -->
 
 <div class="field" style="margin-top:12px;">
 <label>Date début</label>
-<input
-id="dateDebut"
-type="date">
+<input id="dateDebut" type="date">
 </div>
+
+</div>
+
+</div>
+
 
 <button
 type="button"
@@ -543,18 +566,29 @@ initJoursProgramme();
 document.getElementById("dateDebut").value =
 today.toISOString().split("T")[0];
 
-if(
-  localStorage.getItem("admin_ok")
-  !== "true"
-){
-  const bloc =
-  document.getElementById(
-    "prescriptionBlock"
-  );
+const bloc =
+document.getElementById(
+"prescriptionBlock"
+);
 
-  if(bloc){
-    bloc.style.display = "none";
-  }
+const arrow =
+document.getElementById(
+"prescriptionArrow"
+);
+
+if(
+localStorage.getItem("admin_ok")
+=== "true"
+){
+
+bloc.style.display = "block";
+arrow.innerHTML = "▼";
+
+}else{
+
+bloc.style.display = "none";
+arrow.innerHTML = "▶";
+
 }
 
 if(cloudId){
@@ -1607,6 +1641,35 @@ for(const datesSemaine of Object.values(groupes)){
 alert(
 `Programme envoyé ☁️ (${semaines * seancesParSemaine} séances)`
 );
+
+}
+
+window.togglePrescription =
+function(){
+
+const bloc =
+document.getElementById(
+"prescriptionBlock"
+);
+
+const arrow =
+document.getElementById(
+"prescriptionArrow"
+);
+
+if(
+bloc.style.display === "none"
+){
+
+bloc.style.display = "block";
+arrow.innerHTML = "▼";
+
+}else{
+
+bloc.style.display = "none";
+arrow.innerHTML = "▶";
+
+}
 
 }
 
