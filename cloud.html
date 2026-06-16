@@ -81,7 +81,8 @@ style="display:none;background:#16a34a;">
 
 import {
 loadProgramsFromCloud,
-deleteProgramFromCloud
+deleteProgramFromCloud,
+saveProgramToCloud
 } from "./exercises/js/cloud.js";
 
 async function init(){
@@ -321,6 +322,17 @@ séances
 </div>
 
 ${
+isAdmin
+? `
+<button
+onclick="assignProgramme('${seances[0].programmeId}')">
+👤 Assigner à un patient
+</button>
+`
+: ""
+}
+
+${
 seances[0].pdfData
 ? `
 <button
@@ -553,7 +565,7 @@ p.terminee
 <br><br>
 
 <button onclick="launch('${p.firebaseId}')">
-▶ Lancer
+▶ Tester
 </button>
 
 ${
@@ -748,9 +760,15 @@ p.data?.exercices?.length
 ▶ Lancer
 </button>
 
-<button onclick="addFav('${p.firebaseId}')">
-⭐ Favori
+${
+isAdmin
+? `
+<button onclick="assignPatient('${p.firebaseId}')">
+👤 Assigner
 </button>
+`
+: ""
+}
 
 ${
 isAdmin
@@ -760,7 +778,7 @@ isAdmin
 </button>
 
 <button onclick="editProgram('${p.firebaseId}')">
-✏️ Modifier
+✏️ Modifier le modèle
 </button>
 
 <button onclick="deleteProgram('${p.firebaseId}')">
@@ -866,6 +884,113 @@ window.location =
 + "&cloud=" + id
 + "&patient=" + patient
 + "&v=" + Date.now();
+
+}
+
+window.assignProgramme = async function(programmeId){
+
+const patient = prompt(
+"Nom du patient :"
+);
+
+if(!patient) return;
+
+const nouveauProgrammeId =
+crypto.randomUUID();
+
+const aCopier =
+programmes.filter(
+p => p.programmeId === programmeId
+);
+
+for(const seance of aCopier){
+
+const copie =
+JSON.parse(
+JSON.stringify(seance)
+);
+
+delete copie.firebaseId;
+
+copie.id =
+crypto.randomUUID();
+
+copie.programmeId =
+nouveauProgrammeId;
+
+copie.patientId =
+patient
+.trim()
+.replace(/\s+/g,"_");
+
+copie.updatedAt =
+Date.now();
+
+copie.terminee = false;
+copie.eva = null;
+copie.dateValidation = null;
+
+await saveProgramToCloud(
+copie
+);
+
+}
+
+alert(
+"Programme attribué à "
++ patient
+);
+
+init();
+
+}
+
+window.assignPatient = async function(id){
+
+const patient = prompt(
+"Nom du patient :"
+);
+
+if(!patient) return;
+
+const prog =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!prog){
+alert("Programme introuvable");
+return;
+}
+
+const copie =
+JSON.parse(
+JSON.stringify(prog)
+);
+
+delete copie.firebaseId;
+
+copie.id =
+crypto.randomUUID();
+
+copie.patientId =
+patient
+.trim()
+.replace(/\s+/g,"_");
+
+copie.updatedAt =
+Date.now();
+
+await saveProgramToCloud(
+copie
+);
+
+alert(
+"Programme attribué à "
++ patient
+);
+
+init();
 
 }
 
