@@ -500,7 +500,14 @@ ${icone}
 (${faitesSemaine}/${totalSemaine})
 </summary>
 
-${seancesSemaine.map(p=>`
+${seancesSemaine
+.sort(
+(a,b)=>
+new Date(a.datePrevue)
+-
+new Date(b.datePrevue)
+)
+.map(p=>`
 
 <div style="
 margin-top:12px;
