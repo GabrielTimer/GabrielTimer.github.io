@@ -757,14 +757,14 @@ p.data?.exercices?.length
 </div>
 
 <button onclick="launch('${p.firebaseId}')">
-▶ Lancer
+▶ Tester
 </button>
 
 ${
 isAdmin
 ? `
-<button onclick="assignPatient('${p.firebaseId}')">
-👤 Assigner
+<button onclick="copySimpleProgram('${p.firebaseId}')">
+📋 Créer une copie patient
 </button>
 `
 : ""
@@ -774,7 +774,7 @@ ${
 isAdmin
 ? `
 <button onclick="sendMail('${p.patientId || ""}','${p.firebaseId}')">
-✉️ Envoyer
+📧 Envoyer par mail
 </button>
 
 <button onclick="editProgram('${p.firebaseId}')">
@@ -915,13 +915,7 @@ window.location =
 
 }
 
-window.assignPatient = async function(id){
-
-const patient = prompt(
-"Nom du patient :"
-);
-
-if(!patient) return;
+window.copySimpleProgram = function(id){
 
 const prog =
 programmes.find(
@@ -933,34 +927,20 @@ alert("Programme introuvable");
 return;
 }
 
-const copie =
-JSON.parse(
-JSON.stringify(prog)
+localStorage.setItem(
+"programme_temp",
+JSON.stringify(
+prog.data || prog.données
+)
 );
 
-delete copie.firebaseId;
-
-copie.id =
-crypto.randomUUID();
-
-copie.patientId =
-patient
-.trim()
-.replace(/\s+/g,"_");
-
-copie.updatedAt =
-Date.now();
-
-await saveProgramToCloud(
-copie
+localStorage.removeItem(
+"editCloudId"
 );
 
-alert(
-"Programme attribué à "
-+ patient
-);
-
-init();
+window.location =
+"config.html?copie=1&v="
++ Date.now();
 
 }
 
