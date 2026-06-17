@@ -809,9 +809,39 @@ let title = e.nom || "Ex "+(i+1);
 exo.innerHTML+=`
 <div class="exoBloc" id="exoBloc${i}">
 <div class="exoHeader">
+
 <span id="arrow${i}" class="arrow" onclick="toggle(${i})">▶</span>
-<span onclick="toggle(${i})" id="title${i}">${title}</span>
-${e.image ? `<img src="${e.image}" style="width:40px;height:40px;object-fit:contain;">` : ""}
+
+<div
+onclick="toggle(${i})"
+id="title${i}"
+style="
+flex:1;
+min-width:0;
+font-size:15px;
+line-height:1.2;
+">
+${title}
+</div>
+
+<div
+style="
+width:50px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-shrink:0;
+">
+${e.image ? `
+<img
+src="${e.image}"
+style="
+width:40px;
+height:40px;
+object-fit:contain;
+">
+` : ""}
+</div>
 
 <div class="actions">
 <button class="actionBtn" onclick="moveUp(${i})">⬆️</button>
