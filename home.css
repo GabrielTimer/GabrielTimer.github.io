@@ -1,5 +1,3 @@
-/* HOME — Gabriel Timer premium */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 *{
@@ -8,6 +6,7 @@
 
 html{
   -webkit-text-size-adjust:100%;
+  height:100%;
 }
 
 body{
@@ -17,28 +16,31 @@ body{
   background:
   radial-gradient(circle at top left,#f8fcff 0%,#eef6fb 60%,#edf4f8 100%);
 
-  min-height:auto;
+  min-height:100dvh;
 
-  padding-top:max(12px, env(safe-area-inset-top));
-  padding-bottom:max(12px, env(safe-area-inset-bottom));
-  padding-left:max(12px, env(safe-area-inset-left));
-  padding-right:max(12px, env(safe-area-inset-right));
+  padding:
+    max(12px,env(safe-area-inset-top))
+    max(12px,env(safe-area-inset-right))
+    max(12px,env(safe-area-inset-bottom))
+    max(12px,env(safe-area-inset-left));
 
   overflow-x:hidden;
+  overflow-y:auto;
+
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
 }
 
-/* carte principale */
+/* =========================
+   CARTE PRINCIPALE
+========================= */
+
 .home-card{
-  max-width:920px;
-  width:min(92vw,920px);
+
+  width:min(100%,900px);
 
   margin:auto;
-
-padding:24px;
-padding-top:20px;
-padding-bottom:20px;
-
-  border-radius:38px;
 
   background:rgba(255,255,255,.82);
 
@@ -47,48 +49,86 @@ padding-bottom:20px;
 
   border:1px solid rgba(255,255,255,.6);
 
+  border-radius:32px;
+
   box-shadow:
     0 20px 70px rgba(15,23,42,.06);
+
+  padding:clamp(18px,3vw,32px);
+
+  display:flex;
+  flex-direction:column;
+
+  gap:12px;
 }
 
-/* logo */
+/* =========================
+   LOGO
+========================= */
+
 .home-logo{
-  width:108px;
+  width:clamp(70px,12vw,110px);
   height:auto;
+
   display:block;
-  margin:-8px auto 20px;
+  margin:0 auto;
+
   object-fit:contain;
-  position:relative;
-  z-index:2;
 }
 
-/* titre */
+/* =========================
+   TITRE
+========================= */
+
 .home-title{
-  font-size:72px;
+
+  text-align:center;
+
+  font-size:clamp(30px,6vw,62px);
+
   font-weight:800;
-  line-height:0.95;
-  letter-spacing:-2px;
+
+  line-height:1.05;
+
+  letter-spacing:-1px;
+
   color:#09142f;
-  margin-bottom:12px;
+
+  overflow-wrap:anywhere;
+
   word-break:break-word;
 }
 
-/* sous titre */
-.home-subtitle{
-  font-size:22px;
-  font-weight:500;
-  color:#64748b;
-  margin-bottom:34px;
+.home-wave{
+  text-align:center;
+  font-size:clamp(28px,5vw,44px);
+  line-height:1;
 }
 
-/* hero */
+.home-subtitle{
+
+  text-align:center;
+
+  font-size:clamp(15px,2.5vw,22px);
+
+  color:#64748b;
+
+  line-height:1.4;
+}
+
+/* =========================
+   BANNIÈRE
+========================= */
+
 .home-banner{
+
   position:relative;
+
   overflow:hidden;
-  border-radius:34px;
-  padding:44px 38px;
-  min-height:240px;
-  margin-bottom:30px;
+
+  border-radius:28px;
+
+  padding:clamp(18px,3vw,34px);
 
   background:
   linear-gradient(
@@ -100,292 +140,219 @@ padding-bottom:20px;
   );
 }
 
-/* vagues */
 .home-banner::before{
   content:'';
   position:absolute;
   inset:0;
+
   background:
-  radial-gradient(circle at 90% 100%,rgba(255,255,255,.45),transparent 45%);
+  radial-gradient(
+    circle at 90% 100%,
+    rgba(255,255,255,.45),
+    transparent 45%
+  );
 }
 
 .home-banner::after{
   content:'';
+
   position:absolute;
+
   right:-10%;
   bottom:-15%;
+
   width:80%;
   height:70%;
-  opacity:.55;
-  border-radius:50%;
-  background:
-  radial-gradient(circle,
-  rgba(255,255,255,.55),
-  transparent 70%);
-}
 
+  opacity:.55;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+    circle,
+    rgba(255,255,255,.55),
+    transparent 70%
+  );
+}
 
 .home-banner *{
   position:relative;
   z-index:2;
 }
 
-.home-banner::before,
-.home-banner::after{
-  z-index:1;
-  pointer-events:none;
-}
-
 .home-banner h3{
-  font-size:64px;
-  font-weight:800;
-  line-height:0.98;
-  letter-spacing:-2px;
-  color:#07142f;
+
   margin:0;
-  max-width:520px;
+
+  color:#07142f;
+
+  font-size:clamp(24px,5vw,52px);
+
+  line-height:1.05;
+
+  font-weight:800;
+
+  letter-spacing:-1px;
 }
 
 .home-banner p{
-  margin-top:22px;
-  font-size:28px;
-  line-height:1.35;
-  font-weight:500;
+
+  margin-top:12px;
+
   color:#425466;
-  max-width:420px;
+
+  font-size:clamp(15px,2.8vw,24px);
+
+  line-height:1.45;
 }
 
-/* cartes menu */
+/* =========================
+   BOUTONS
+========================= */
+
 .home-grid{
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:22px;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:14px;
 }
 
 .home-box{
+
   border:none;
+
   background:white;
-  border-radius:28px;
-  min-height:190px;
-  padding:24px;
+
+  border-radius:24px;
+
+  min-height:120px;
+
+  padding:18px;
 
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  gap:18px;
+
+  gap:10px;
+
+  width:100%;
 
   box-shadow:
     0 10px 30px rgba(15,23,42,.04);
+}
 
-  width:100%;
+.home-box:hover{
+  transform:translateY(-2px);
 }
 
 .home-box span{
-  font-size:42px;
+  font-size:clamp(26px,5vw,42px);
 }
 
 .home-box strong{
-  font-size:24px;
-  line-height:1.2;
-  font-weight:700;
-  color:#0f172a;
+
   text-align:center;
+
+  color:#0f172a;
+
+  font-size:clamp(15px,2vw,22px);
+
+  line-height:1.25;
+
+  font-weight:700;
 }
 
-/* admin */
+/* =========================
+   ADMIN
+========================= */
+
 .home-admin{
-  margin-top:26px;
+
   width:100%;
+
   border:none;
-  border-radius:26px;
-  padding:24px;
+
+  border-radius:22px;
+
+  padding:18px;
+
   background:white;
-  font-size:22px;
+
+  font-size:clamp(16px,2vw,20px);
+
   font-weight:700;
+
   box-shadow:
     0 10px 30px rgba(15,23,42,.04);
 }
 
+/* =========================
+   TABLETTE
+========================= */
 
-/* tablette */
-@media (max-width:980px){
-
-  .home-card{
-    width:min(94vw,680px);
-    padding:30px;
-  }
-
-  .home-title{
-  font-size:clamp(42px,11vw,58px);
-  letter-spacing:-1px;
-
-  white-space: nowrap;
-}
-
-  .home-banner{
-    min-height:auto;
-    padding:36px 30px;
-  }
-
-  .home-banner h3{
-    font-size:46px;
-    max-width:100%;
-  }
-
-  .home-banner p{
-    font-size:22px;
-    max-width:100%;
-  }
+@media (min-width:768px){
 
   .home-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(4,1fr);
   }
 
   .home-box{
-    min-height:160px;
+    min-height:150px;
   }
-
 }
 
+/* =========================
+   TRÈS PETITS ÉCRANS
+========================= */
 
-/* mobile */
-@media (max-width:560px){
-
-  body{
-    padding:8px;
-  }
+@media (max-width:360px){
 
   .home-card{
-    width:100%;
-    border-radius:28px;
-    padding:22px;
-  }
-
-.home-logo{
-  width:84px;
-  height:auto;
-  margin:-10px auto 12px;
-}
-
-  .home-title{
-  font-size:clamp(42px,11vw,58px);
-  letter-spacing:-1px;
-  white-space: nowrap;
-}
-
-  .home-subtitle{
-    font-size:18px;
-    line-height:1.35;
-    margin-bottom:24px;
-  }
-
-  .home-banner{
-  border-radius:28px;
-  padding:20px 18px;
-  min-height:auto;
-}
-
-  .home-banner h3{
-  font-size:clamp(28px,8vw,38px);
-    line-height:1.05;
-    max-width:100%;
-  }
-
-  .home-banner p{
-    font-size:18px;
-    max-width:100%;
-    line-height:1.45;
+    padding:16px;
   }
 
   .home-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+    gap:10px;
   }
 
   .home-box{
-    min-height:120px;
-    border-radius:22px;
-    padding:18px;
+    min-height:105px;
+    padding:12px;
   }
-
-  .home-box span{
-    font-size:34px;
-  }
-
-  .home-box strong{
-    font-size:17px;
-  }
-
-  .home-admin{
-    font-size:18px;
-    padding:18px;
-  }
-
 }
 
-/* FIX logo coupé en mode admin */
+/* =========================
+   POPUPS ADMIN
+========================= */
 
 body.admin-open{
   overflow:hidden;
 }
 
-/* popup admin en overlay fixe */
 .admin-popup,
 .admin-panel,
 .exercise-popup{
+
   position:fixed;
+
   inset:0;
+
   z-index:9999;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   overflow-y:auto;
 
   padding:
-    max(20px, env(safe-area-inset-top))
+    max(20px,env(safe-area-inset-top))
     16px
-    max(20px, env(safe-area-inset-bottom));
-}
-
-/* sécurité logo */
-.home-logo{
-  position:relative;
-  z-index:2;
-}
-
-/* sécurité header */
-.home-card{
-  padding-top:max(28px, env(safe-area-inset-top));
-}
-
-/* FIX hauteur page mobile */
-html,
-body{
-  height:auto !important;
-  min-height:auto !important;
-}
-
-.card.home-card{
-  min-height:auto !important;
-  height:auto !important;
-  padding-top:20px !important;
-  padding-bottom:20px !important;
-}
-
-.home-grid{
-  margin-bottom:0 !important;
-}
-
-.home-box{
-  min-height:110px !important;
-}
-
-.home-wave{
-  text-align:center;
-  font-size:42px;
-  margin-top:-8px;
-  margin-bottom:12px;
+    max(20px,env(safe-area-inset-bottom));
 }
