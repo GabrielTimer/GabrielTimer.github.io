@@ -36,9 +36,13 @@ body{
    CARTE PRINCIPALE
 ========================= */
 
-.home-card{
+.card.home-card{
 
-  width:min(100%,900px);
+  width:min(92vw,900px) !important;
+
+  max-width:900px !important;
+
+  min-width:320px;
 
   margin:auto;
 
