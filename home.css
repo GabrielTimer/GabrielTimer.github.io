@@ -126,7 +126,7 @@ body{
 
 .home-banner{
 
-min-height:clamp(180px,28vh,280px);
+min-height:clamp(160px,24vh,240px);
 
 display:flex;
 flex-direction:column;
