@@ -863,12 +863,13 @@ window.location =
 + id +
 "&patient="
 + patient +
-"&admin=true"
-+ "&v=" + Date.now();
+"&v=" + Date.now();
 
 },80);
 
-}else{
+}
+
+else{
 
 setTimeout(()=>{
 
@@ -1307,8 +1308,7 @@ if(currentPatient){
 
 window.location =
 "mes_programmes.html?patient="
-+ currentPatient +
-"&admin=true";
++ currentPatient;
 
 }else{
 
@@ -1325,8 +1325,7 @@ if(currentPatient){
 
 window.location =
 "historique.html?patient="
-+ currentPatient +
-"&admin=true";
++ currentPatient;
 
 }else{
 
