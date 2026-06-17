@@ -554,7 +554,8 @@ exercices:[{nom:"Ex 1", ex:30, repos:10, reps:3}]
 
 localStorage.setItem("patho_data",JSON.stringify(config));
 localStorage.setItem("pathologie", p.dossier);
-localStorage.setItem("pathologie_nom", p.nom);
+
+
 
 const params =
 new URLSearchParams(
@@ -564,7 +565,12 @@ window.location.search
 const patient =
 params.get("patient");
 
+localStorage.setItem("pathologie_nom", p.nom);
+
+localStorage.removeItem("programme_temp");
+
 if(patient){
+
 
 window.location =
 "config.html?patient="
