@@ -126,6 +126,12 @@ body{
 
 .home-banner{
 
+min-height:clamp(180px,28vh,280px);
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
   position:relative;
 
   overflow:hidden;
