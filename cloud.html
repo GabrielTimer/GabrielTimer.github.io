@@ -100,8 +100,11 @@ window.location.search
 const isAdmin =
 params.get("admin") === "true";
 
+const viewPatient =
+params.get("viewPatient") === "1";
+
 const launchLabel =
-isAdmin
+(isAdmin && !viewPatient)
 ? "🧪 Tester"
 : "🚀 Lancer";
 
@@ -329,7 +332,7 @@ séances
 </div>
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 <button
 onclick="copyProgramme('${seances[0].programmeId}')">
@@ -356,7 +359,7 @@ onclick="openPdf('${seances[0].programmeId}')">
 
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 <div style="margin:12px 0">
 <button
@@ -578,7 +581,7 @@ ${launchLabel}
 
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 <button
 style="background:#0ea5e9;"
@@ -590,7 +593,7 @@ onclick="viewPatient('${p.patientId}')">
 }
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 ${p.patientId && p.patientId !== "admin" ? `
 <button onclick="sendMail('${p.patientId}','${p.firebaseId}')">
@@ -802,7 +805,7 @@ ${launchLabel}
 </button>
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 <button
 style="background:#0ea5e9;"
@@ -814,7 +817,7 @@ onclick="viewPatient('${p.patientId}')">
 }
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 <button onclick="copySimpleProgram('${p.firebaseId}')">
 📋 Créer une copie patient
@@ -824,7 +827,7 @@ isAdmin
 }
 
 ${
-isAdmin
+(isAdmin && !viewPatient)
 ? `
 ${p.patientId && p.patientId !== "admin" ? `
 <button onclick="sendMail('${p.patientId}','${p.firebaseId}')">
@@ -1402,12 +1405,19 @@ return;
 
 }
 
+const viewPatient =
+params.get("viewPatient") === "1";
+
 if(patient){
 
-window.location =
-"index.html?patient="
-+ patient;
+let url =
+"index.html?patient=" + patient;
 
+if(viewPatient){
+  url += "&viewPatient=1";
+}
+
+window.location = url;
 return;
 
 }

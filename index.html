@@ -139,10 +139,16 @@ function goProg(){
 
   if(patient){
 
-    window.location =
+    let url =
     "cloud.html?patient=" + patient;
 
-  }else{
+    if(viewPatient){
+      url += "&viewPatient=1";
+    }
+
+    window.location = url;
+
+}else{
 
     window.location =
     "cloud.html";
@@ -216,7 +222,7 @@ window.location =
 }
 
 
-if(isAdmin){
+if(isAdmin && !viewPatient){
 
 document.getElementById(
 "adminExercisesBtn"
