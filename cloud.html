@@ -98,6 +98,11 @@ window.location.search
 const isAdmin =
 params.get("admin") === "true";
 
+const launchLabel =
+isAdmin
+? "🧪 Tester"
+: "🚀 Lancer";
+
 let currentPatient =
 params.get("patient");
 
@@ -565,7 +570,7 @@ p.terminee
 <br><br>
 
 <button onclick="launch('${p.firebaseId}')">
-▶ Tester
+${launchLabel}
 </button>
 
 ${
@@ -777,7 +782,7 @@ p.data?.exercices?.length
 </div>
 
 <button onclick="launch('${p.firebaseId}')">
-▶ Tester
+${launchLabel}
 </button>
 
 ${
