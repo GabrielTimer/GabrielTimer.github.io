@@ -371,29 +371,44 @@ document.getElementById(
 
 banner.innerHTML = `
 
-<h3>
+<h3 style="margin-bottom:8px;">
 🎯 Prochaine séance
 </h3>
 
-<p>
-<b>${prochaine.programmeNom}</b>
+<p style="
+margin-top:10px;
+margin-bottom:0;
+font-size:20px;
+font-weight:700;
+line-height:1.2;
+">
+${prochaine.programmeNom}
 </p>
 
-<p>
-Séance :
+<div style="
+margin-top:12px;
+font-size:16px;
+font-weight:600;
+color:#334155;
+line-height:1.5;
+">
+
 ${prochaine.nom}
-</p>
+• ${texteDate}
 
-<p>
-📅 ${texteDate}
-</p>
+</div>
 
-<p>
-🗓️ ${dateAffichee}
-</p>
-<p>
+<div style="
+margin-top:10px;
+font-size:17px;
+color:#475569;
+line-height:1.5;
+">
+
+📅 ${dateAffichee}<br>
 📊 ${faitesProgramme}/${totalProgramme} séances
-</p>
+
+</div>
 
 <button
 style="
@@ -412,7 +427,7 @@ background:linear-gradient(
 );
 
 color:white;
-font-size:18px;
+font-size:16px;
 font-weight:700;
 
 box-shadow:
