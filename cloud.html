@@ -573,6 +573,8 @@ p.terminee
 ${launchLabel}
 </button>
 
+
+
 ${
 isAdmin
 ? `
@@ -796,6 +798,18 @@ p.data?.exercices?.length
 <button onclick="launch('${p.firebaseId}')">
 ${launchLabel}
 </button>
+
+${
+isAdmin
+? `
+<button
+style="background:#0ea5e9;"
+onclick="viewPatient('${p.patientId}')">
+👁 Vue patient
+</button>
+`
+: ""
+}
 
 ${
 isAdmin
