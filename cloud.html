@@ -576,6 +576,18 @@ ${launchLabel}
 ${
 isAdmin
 ? `
+<button
+style="background:#0ea5e9;"
+onclick="viewPatient('${p.patientId}')">
+👁 Vue patient
+</button>
+`
+: ""
+}
+
+${
+isAdmin
+? `
 ${p.patientId && p.patientId !== "admin" ? `
 <button onclick="sendMail('${p.patientId}','${p.firebaseId}')">
 📧 Envoyer au patient
@@ -822,6 +834,21 @@ ${p.patientId && p.patientId !== "admin" ? `
 
 
 });
+
+window.viewPatient = function(patient){
+
+if(!patient){
+  alert("Aucun patient associé");
+  return;
+}
+
+window.open(
+  "index.html?patient=" +
+  encodeURIComponent(patient),
+  "_blank"
+);
+
+}
 
 window.launch = function(id){
 
