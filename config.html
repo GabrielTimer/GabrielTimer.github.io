@@ -261,7 +261,52 @@ padding:0;
 <div class="card">
 
 <img src="logo.png" class="logo">
-<h2 id="title">Configurer la séance</h2>
+
+<div style="
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+">
+
+<h2
+id="title"
+style="margin:0;">
+Configurer la séance
+</h2>
+
+<div
+id="adminResetContainer"
+style="
+display:none;
+position:absolute;
+right:0;
+">
+
+<button
+type="button"
+onclick="resetProgramme()"
+style="
+width:auto;
+margin:0;
+padding:6px 10px;
+background:#ef4444;
+color:white;
+border:none;
+border-radius:8px;
+font-size:12px;
+font-weight:600;
+cursor:pointer;
+">
+
+🔄 RAZ
+
+</button>
+
+</div>
+
+</div>
+
 
 <div id="exo"></div>
 <button
@@ -556,6 +601,18 @@ const cloudId =
 params.get("cloud");
 
 window.addEventListener("DOMContentLoaded", ()=>{
+
+const isAdmin =
+localStorage.getItem("admin_ok")
+=== "true";
+
+if(isAdmin){
+
+  document.getElementById(
+    "adminResetContainer"
+  ).style.display = "block";
+
+}
 
 loadPatients();
 
@@ -909,6 +966,44 @@ if(i===exercices.length-1) return;
 syncInputs();
 [exercices[i+1], exercices[i]] = [exercices[i], exercices[i+1]];
 render();
+}
+
+function resetProgramme(){
+
+if(
+!confirm(
+"Effacer le programme chargé et repartir de zéro ?"
+)
+){
+return;
+}
+
+localStorage.removeItem(
+"programme_temp"
+);
+
+localStorage.removeItem(
+"current_programme"
+);
+
+localStorage.removeItem(
+"edit_programme"
+);
+
+localStorage.removeItem(
+"pathologie"
+);
+
+localStorage.removeItem(
+"patho_data"
+);
+
+localStorage.removeItem(
+"pathologie_nom"
+);
+
+location.reload();
+
 }
 
 function duplicateExo(i){
