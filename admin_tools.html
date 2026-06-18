@@ -87,13 +87,13 @@
 <div class="tools-grid">
 
   <button
-    class="tool-card"
-    onclick="location.href='config.html'">
+  class="tool-card"
+  onclick="openProgrammeKine()">
 
-    <span>🏋️</span>
-    <strong>Programme kiné</strong>
+  <span>🏋️</span>
+  <strong>Programme kiné</strong>
 
-  </button>
+</button>
 
   <button
     class="tool-card"
@@ -135,6 +135,33 @@
 </div>
 
 <script>
+
+if(
+localStorage.getItem("admin_ok")
+!== "true"
+){
+  window.location.href =
+  "login.html";
+}
+
+</script>
+
+<script>
+
+function openProgrammeKine(){
+
+  localStorage.removeItem("programme_temp");
+  localStorage.removeItem("current_programme");
+  localStorage.removeItem("edit_programme");
+  localStorage.removeItem("pathologie");
+  localStorage.removeItem("patho_data");
+  localStorage.removeItem("pathologie_nom");
+  localStorage.removeItem("programmeCopie");
+
+  location.href =
+  "config.html?v=" + Date.now();
+
+}
 
 if(
 localStorage.getItem("admin_ok")
