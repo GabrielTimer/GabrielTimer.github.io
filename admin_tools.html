@@ -158,6 +158,13 @@ function openProgrammeKine(){
   localStorage.removeItem("pathologie_nom");
   localStorage.removeItem("programmeCopie");
 
+
+  localStorage.setItem(
+    "forceProgrammeKine",
+    "1"
+  );
+
+
   location.href =
   "config.html?v=" + Date.now();
 

@@ -652,6 +652,50 @@ let pathoData = localStorage.getItem("patho_data");
 let patho = localStorage.getItem("pathologie");
 let pathoNom = localStorage.getItem("pathologie_nom");
 
+if(
+  localStorage.getItem("forceProgrammeKine")
+  === "1"
+){
+
+  localStorage.removeItem(
+    "forceProgrammeKine"
+  );
+
+  localStorage.removeItem(
+    "programme_temp"
+  );
+
+  localStorage.removeItem(
+    "current_programme"
+  );
+
+  localStorage.removeItem(
+    "edit_programme"
+  );
+
+  localStorage.removeItem(
+    "pathologie"
+  );
+
+  localStorage.removeItem(
+    "patho_data"
+  );
+
+  localStorage.removeItem(
+    "pathologie_nom"
+  );
+
+  localStorage.removeItem(
+    "programmeCopie"
+  );
+
+edit = null;
+
+pathoData = null;
+patho = null;
+pathoNom = null;
+}
+
 /* =========================
    MODE ÉDITION PROGRAMME
 ========================= */
