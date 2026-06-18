@@ -91,13 +91,6 @@ border-radius:14px;
 <div class="card" onclick="go('epaule')">💪 Épaule</div>
 <div class="card" onclick="go('dos')">🧍 Dos</div>
 <div class="card" onclick="go('gym_prevention')">🧘 Gym & Prévention</div>
-<div
-class="card cabinetCard"
-onclick="window.location='programmes_admin.html'">
-
-🏥 Programmes
-
-</div>
 
 <button onclick="back()">⬅ Retour</button>
 
@@ -158,22 +151,7 @@ window.location =
 
 }
 
-const isAdmin =
-localStorage.getItem("admin_ok")
-=== "true";
 
-if(!isAdmin){
-
-const cabinet =
-document.querySelector(
-".cabinetCard"
-);
-
-if(cabinet){
-cabinet.style.display = "none";
-}
-
-}
 </script>
 
 </body>
