@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Outils administrateur</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
+
+<style>
+
+.tools-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin-top:20px;
+}
+
+.tool-card{
+
+  border:none;
+  cursor:pointer;
+
+  background:white;
+
+  border-radius:24px;
+
+  min-height:120px;
+
+  padding:20px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  gap:10px;
+
+  box-shadow:
+  0 10px 30px rgba(15,23,42,.04);
+}
+
+.tool-card span{
+  font-size:42px;
+}
+
+.tool-card strong{
+  font-size:18px;
+}
+
+.back-btn{
+
+  margin-top:20px;
+
+  width:100%;
+
+  border:none;
+
+  border-radius:20px;
+
+  padding:16px;
+
+  background:#e2e8f0;
+
+  font-weight:700;
+
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card home-card">
+
+  <div class="home-title">
+    🛠 Outils administrateur
+  </div>
+
+  <div class="home-subtitle">
+    Gestion et création des programmes
+  </div>
+
+  <div class="tools-grid">
+
+    <button
+      class="tool-card"
+      onclick="location.href='config.html'">
+
+      <span>🏋️</span>
+      <strong>Programme kiné</strong>
+
+    </button>
+
+    <button
+      class="tool-card"
+      onclick="location.href='programmescourse.html'">
+
+      <span>🏃</span>
+      <strong>Programme course</strong>
+
+    </button>
+
+    <button
+      class="tool-card"
+      onclick="location.href='admin_exercises.html'">
+
+      <span>📚</span>
+      <strong>Bibliothèque d'exercices</strong>
+
+    </button>
+
+  </div>
+
+  <button
+    class="back-btn"
+    onclick="history.back()">
+
+    ⬅ Retour
+
+  </button>
+
+</div>
+
+<script>
+
+if(
+localStorage.getItem("admin_ok")
+!== "true"
+){
+  window.location.href =
+  "login.html";
+}
+
+</script>
+
+</body>
+</html>

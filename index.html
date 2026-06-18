@@ -62,13 +62,13 @@
   </div>
 
   <button
-    id="adminExercisesBtn"
-    class="home-admin"
-    onclick="adminExercises()"
-    style="display:none;"
-  >
-    🛠 Admin Exercises
-  </button>
+  id="adminToolsBtn"
+  class="home-admin"
+  onclick="adminTools()"
+  style="display:none;"
+>
+  🛠 Outils administrateur
+</button>
 
 </div>
 
@@ -225,18 +225,16 @@ window.location =
 if(isAdmin && !viewPatient){
 
 document.getElementById(
-"adminExercisesBtn"
+"adminToolsBtn"
 ).style.display =
 "inline-block";
 
 }
 
-function adminExercises(){
+function adminTools(){
 
-window.open(
-  "admin_exercises.html?v=" + VERSION,
-  "_blank"
-);
+window.location.href =
+"admin_tools.html?v=" + VERSION;
 
 }
 
