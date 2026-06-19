@@ -1200,9 +1200,22 @@ new URLSearchParams(window.location.search);
 
 if(params.get("fromProgram")){
 
-    setTimeout(()=>{
-        history.back();
-    },1000);
+    breathText.textContent =
+    "Séance terminée";
+
+    startBtn.style.display = "block";
+
+    startBtn.innerText =
+    "✓ Retour à mes programmes";
+
+    startBtn.onclick = ()=>{
+
+        window.location =
+        "../cloud.html?patient="
+        + localStorage.getItem("currentPatient")
+        + "&v=" + Date.now();
+
+    };
 
     return;
 }
