@@ -39,25 +39,35 @@
 
   <div class="home-grid">
 
-    <button class="home-box" onclick="goProg()">
+    <button id="btnProg" class="home-box" onclick="goProg()">
       <span>⭐</span>
       <strong>Mes programmes</strong>
     </button>
 
-    <button class="home-box" onclick="modeLibre()">
+    <button id="btnLibre" class="home-box" onclick="modeLibre()">
       <span>⚡</span>
       <strong>Mode libre</strong>
     </button>
 
-    <button class="home-box" onclick="zones()">
+    <button id="btnPatho" class="home-box" onclick="zones()">
       <span>🩺</span>
       <strong>Pathologies</strong>
     </button>
 
-    <button class="home-box respir" onclick="respir()">
+    <button id="btnRespir" class="home-box respir" onclick="respir()">
       <span>🫁</span>
       <strong>RespiR</strong>
     </button>
+
+<button
+id="btnProgression"
+class="home-box"
+onclick="progression()"
+style="display:none;"
+>
+  <span>📈</span>
+  <strong>Ma progression</strong>
+</button>
 
   </div>
 
@@ -191,6 +201,16 @@ patient
 
 }
 
+if(patient || viewPatient){
+
+  document.getElementById("btnLibre").style.display = "none";
+  document.getElementById("btnPatho").style.display = "none";
+  document.getElementById("btnRespir").style.display = "none";
+
+  document.getElementById("btnProgression").style.display = "flex";
+
+}
+
 function openPatient(patient){
 
 localStorage.setItem(
@@ -235,6 +255,25 @@ function adminTools(){
 
 window.location.href =
 "admin_tools.html?v=" + VERSION;
+
+}
+
+function progression(){
+
+if(patient){
+
+window.location =
+"progression.html?patient="
++ patient +
+"&v=" + Date.now();
+
+}else{
+
+window.location =
+"progression.html?v="
++ Date.now();
+
+}
 
 }
 
