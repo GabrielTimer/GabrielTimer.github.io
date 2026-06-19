@@ -229,7 +229,15 @@ kine
 
 console.table(
 kine
-.filter(p=>p.terminee)
+.filter(p=>p.terminee || p.dateValidation)
+console.table(
+kine.map(p=>({
+nom:p.nom,
+terminee:p.terminee,
+dateValidation:p.dateValidation,
+eva:p.eva
+}))
+);
 .map(p=>({
 nom:p.nom,
 programmeNom:p.programmeNom,
