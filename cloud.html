@@ -884,6 +884,22 @@ prog.données || prog.data
 )
 );
 
+localStorage.setItem(
+"currentCloudId",
+id
+);
+
+localStorage.setItem(
+"currentProgrammeId",
+prog.programmeId || ""
+);
+
+console.log(
+"LANCEMENT",
+id,
+prog.programmeId
+);
+
 const params =
 new URLSearchParams(
 window.location.search
@@ -1138,7 +1154,7 @@ Cordialement,
 ${nomPatient}`;
 
 window.location =
-`mailto:?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+`mailto:kine.laveau@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
 
 }
 
