@@ -312,15 +312,24 @@ Math.round(
 (faites*100)/total
 );
 
-const icone =
-g[0].categorie === "course"
-? "🏃"
-: "🩺";
+let icone = "📋";
+
+if(g[0].categorie === "course"){
+icone = "🏃";
+}
+
+if(g[0].categorie === "kine"){
+icone = "🩺";
+}
+
+const badge =
+pct >= 100
+? " ✅"
+: ` (${pct}%)`;
 
 return `
 <option value="${g[0].programmeId}">
-${icone} ${g[0].programmeNom || g[0].nom}
- (${pct}%)
+${icone} ${g[0].programmeNom || g[0].nom}${badge}
 </option>
 `;
 
@@ -371,6 +380,13 @@ v => !isNaN(v)
 let message =
 `👏 Vous avez réalisé ${faites} séance${faites>1?"s":""}.`;
 
+if(pourcentage >= 100){
+
+message =
+"🏆 Félicitations, programme terminé !";
+
+}
+
 if(evaData.length >= 2){
 
 const debut =
@@ -407,7 +423,7 @@ ${pourcentage}%
 </div>
 
 <div class="programmeNom">
-🩺 ${nom}
+${programme[0].categorie==="course" ? "🏃" : "🩺"} ${nom}
 </div>
 
 <div class="programmeInfo">
