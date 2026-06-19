@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,43 +16,39 @@ padding:20px;
 color:#0f172a;
 }
 
+h1{
+text-align:center;
+margin-bottom:20px;
+}
+
 .card{
 background:white;
 border-radius:24px;
 padding:24px;
-margin-bottom:18px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-h1{
-text-align:center;
-margin-bottom:25px;
+margin:0 auto 20px auto;
+max-width:700px;
+box-shadow:0 10px 30px rgba(15,23,42,.08);
 }
 
 .progressCircle{
-width:180px;
-height:180px;
-margin:auto;
+width:220px;
+height:220px;
+margin:10px auto;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:42px;
+font-size:54px;
 font-weight:800;
-background:conic-gradient(
-#16a34a 0deg,
-#16a34a 270deg,
-#e5e7eb 270deg,
-#e5e7eb 360deg
-);
 position:relative;
+background:#e5e7eb;
 }
 
 .progressCircle::before{
 content:"";
 position:absolute;
-width:135px;
-height:135px;
+width:165px;
+height:165px;
 border-radius:50%;
 background:white;
 }
@@ -61,23 +58,38 @@ position:relative;
 z-index:2;
 }
 
-.subtitle{
-margin-top:18px;
+.programmeNom{
+font-size:26px;
+font-weight:700;
 text-align:center;
-font-size:18px;
-font-weight:600;
+margin-top:10px;
 }
 
-.small{
-margin-top:8px;
+.programmeInfo{
 text-align:center;
+font-size:18px;
 color:#64748b;
+margin-top:8px;
 }
 
-.message{
+.chartContainer{
+height:240px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.messageTitle{
+font-size:22px;
+font-weight:700;
+text-align:center;
+margin-bottom:10px;
+}
+
+.messageText{
 font-size:18px;
 text-align:center;
-font-weight:600;
+color:#475569;
 }
 
 canvas{
@@ -87,6 +99,9 @@ max-width:100%;
 
 button{
 width:100%;
+max-width:700px;
+display:block;
+margin:auto;
 padding:14px;
 border:none;
 border-radius:14px;
@@ -97,6 +112,12 @@ font-weight:600;
 cursor:pointer;
 }
 
+.loader{
+text-align:center;
+padding:40px;
+font-size:18px;
+}
+
 </style>
 </head>
 
@@ -104,20 +125,224 @@ cursor:pointer;
 
 <h1>📈 Ma progression</h1>
 
+<div id="content" class="loader">
+Chargement...
+</div>
+
+<button onclick="goBack()">
+⬅ Retour
+</button>
+
+<script type="module">
+
+import {
+loadProgramsFromCloud
+}
+from "./exercises/js/cloud.js";
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const patient =
+params.get("patient")
+||
+localStorage.getItem("currentPatient")
+||
+"";
+
+const content =
+document.getElementById("content");
+
+function goBack(){
+
+if(patient){
+
+window.location =
+"index.html?patient="
++ patient;
+
+}else{
+
+history.back();
+
+}
+
+}
+
+window.goBack = goBack;
+
+init();
+
+async function init(){
+
+const all =
+await loadProgramsFromCloud();
+
+const kine =
+all.filter(p=>{
+
+const cat =
+(
+p.categorie
+||
+p.data?.categorie
+||
+p.données?.categorie
+||
+""
+).toLowerCase();
+
+const pid =
+(
+p.patientId
+||
+p.data?.patientId
+||
+p.données?.patientId
+||
+""
+).toLowerCase();
+
+return (
+cat === "kine"
+&&
+pid === patient.toLowerCase()
+);
+
+});
+
+if(!kine.length){
+
+content.innerHTML = `
+<div class="card">
+<div class="messageTitle">
+🏆 Aucun programme actif
+</div>
+<div class="messageText">
+Aucun programme de rééducation trouvé.
+</div>
+</div>
+`;
+
+return;
+}
+
+const groupes = {};
+
+kine.forEach(p=>{
+
+if(!p.programmeId) return;
+
+if(!groupes[p.programmeId]){
+groupes[p.programmeId]=[];
+}
+
+groupes[p.programmeId].push(p);
+
+});
+
+const programme =
+Object.values(groupes)
+.find(g =>
+g.some(x => !x.terminee)
+)
+||
+Object.values(groupes)[0];
+
+if(!programme){
+
+content.innerHTML = `
+<div class="card">
+<div class="messageTitle">
+🏆 Aucun programme actif
+</div>
+</div>
+`;
+
+return;
+}
+
+const total =
+programme.length;
+
+const faites =
+programme.filter(
+s => s.terminee
+).length;
+
+const pourcentage =
+Math.round(
+(faites * 100)
+/ total
+);
+
+const nom =
+programme[0].programmeNom
+||
+programme[0].nom
+||
+"Rééducation";
+
+const evaData =
+programme
+.filter(s =>
+s.terminee
+&&
+s.eva != null
+)
+.map(s =>
+Number(s.eva)
+)
+.filter(v =>
+!isNaN(v)
+);
+
+let message =
+`👏 Vous avez réalisé ${faites} séance${faites>1?"s":""}.`;
+
+if(evaData.length >= 2){
+
+const debut =
+evaData[0];
+
+const actuel =
+evaData[evaData.length-1];
+
+const gain =
+debut - actuel;
+
+if(gain > 0){
+
+message =
+`📉 Votre douleur a diminué de ${gain} point${gain>1?"s":""}.`;
+
+}
+
+}
+
+content.innerHTML = `
+
 <div class="card">
 
-<div class="progressCircle">
+<div
+class="progressCircle"
+id="circle"
+>
+
 <div class="progressValue">
-75%
-</div>
-</div>
-
-<div class="subtitle">
-Rééducation en cours
+${pourcentage}%
 </div>
 
-<div class="small">
-9 séances réalisées
+</div>
+
+<div class="programmeNom">
+🩺 ${nom}
+</div>
+
+<div class="programmeInfo">
+${faites} séances réalisées sur ${total}
 </div>
 
 </div>
@@ -128,49 +353,93 @@ Rééducation en cours
 😊 Évolution de la douleur
 </h3>
 
-<canvas id="evaChart" height="120"></canvas>
+<div class="chartContainer">
+<canvas id="evaChart"></canvas>
+</div>
 
 </div>
 
 <div class="card">
 
-<div class="message">
-👏 Vous avez déjà réalisé 9 séances.
+<div class="messageTitle">
+👏 Progression
+</div>
+
+<div class="messageText">
+${message}
 </div>
 
 </div>
 
-<button onclick="history.back()">
-⬅ Retour
-</button>
+`;
 
-<script>
+const circle =
+document.getElementById(
+"circle"
+);
+
+const angle =
+(pourcentage/100)
+*360;
+
+circle.style.background =
+`conic-gradient(
+#16a34a 0deg,
+#16a34a ${angle}deg,
+#e5e7eb ${angle}deg,
+#e5e7eb 360deg
+)`;
+
+drawEva(
+evaData.length
+? evaData
+: [0]
+);
+
+}
+
+function drawEva(data){
 
 const canvas =
-document.getElementById("evaChart");
+document.getElementById(
+"evaChart"
+);
+
+if(!canvas) return;
 
 const ctx =
 canvas.getContext("2d");
 
 const w =
-canvas.width = 300;
+canvas.width = 600;
 
 const h =
-canvas.height = 120;
-
-const evaData =
-[7,6,5,4,3];
+canvas.height = 220;
 
 ctx.clearRect(0,0,w,h);
 
+ctx.strokeStyle="#e2e8f0";
+
+for(let i=0;i<=10;i+=2){
+
+const y =
+h-20-(i/10)*(h-40);
+
+ctx.beginPath();
+ctx.moveTo(30,y);
+ctx.lineTo(w-20,y);
+ctx.stroke();
+
+}
+
 ctx.beginPath();
 
-evaData.forEach((eva,i)=>{
+data.forEach((eva,i)=>{
 
 const x =
-(i/(evaData.length-1))
-*(w-40)
-+20;
+(i/(data.length-1 || 1))
+*(w-80)
++40;
 
 const y =
 h-20-(eva/10)*(h-40);
@@ -187,24 +456,27 @@ ctx.strokeStyle="#16a34a";
 ctx.lineWidth=4;
 ctx.stroke();
 
-evaData.forEach((eva,i)=>{
+data.forEach((eva,i)=>{
 
 const x =
-(i/(evaData.length-1))
-*(w-40)
-+20;
+(i/(data.length-1 || 1))
+*(w-80)
++40;
 
 const y =
 h-20-(eva/10)*(h-40);
 
 ctx.beginPath();
-ctx.arc(x,y,5,0,Math.PI*2);
+ctx.arc(x,y,6,0,Math.PI*2);
 ctx.fillStyle="#16a34a";
 ctx.fill();
 
 });
 
+}
+
 </script>
 
 </body>
 </html>
+```
