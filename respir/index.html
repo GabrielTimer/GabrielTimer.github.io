@@ -1200,24 +1200,9 @@ new URLSearchParams(window.location.search);
 
 if(params.get("fromProgram")){
 
-document.body.classList.remove("session-active");
+if(params.get("fromProgram")){
 
-    breathText.textContent =
-    "Séance terminée";
-
-    startBtn.style.display = "block";
-
-    startBtn.innerText =
-    "✓ Retour à mes programmes";
-
-    startBtn.onclick = ()=>{
-
-        window.location =
-        "../cloud.html?patient="
-        + localStorage.getItem("currentPatient")
-        + "&v=" + Date.now();
-
-    };
+    alert("FIN PROGRAMME DETECTEE");
 
     return;
 }
