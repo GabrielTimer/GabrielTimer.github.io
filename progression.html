@@ -111,6 +111,22 @@ font-weight:600;
 cursor:pointer;
 }
 
+@keyframes pulseMail{
+0%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.06);
+}
+100%{
+transform:scale(1);
+}
+}
+
+.mailButton{
+animation:pulseMail 2s infinite;
+}
+
 .loader{
 text-align:center;
 padding:40px;
@@ -417,10 +433,23 @@ return `${date} • ${s.nom} • EVA ${s.eva ?? "-"} /10`;
 .join("\n");
 
 boutonBilan = `
+
+<p style="
+text-align:center;
+color:#64748b;
+margin-top:15px;
+margin-bottom:10px;
+font-size:14px;
+">
+Votre kinésithérapeute peut consulter votre progression.
+</p>
+
 <button
+class="mailButton"
 style="
 background:#16a34a;
 margin-top:15px;
+font-weight:700;
 "
 onclick="sendProgrammeReport(
 '${nom}',
