@@ -227,6 +227,16 @@ kine.length,
 kine
 );
 
+console.table(
+kine.map(p=>({
+nom:p.nom,
+programmeNom:p.programmeNom,
+terminee:p.terminee,
+eva:p.eva,
+programmeId:p.programmeId
+}))
+);
+
 if(!kine.length){
 
 content.innerHTML = `
@@ -492,5 +502,4 @@ ctx.fill();
 </script>
 
 </body>
-</html>
-```
+
