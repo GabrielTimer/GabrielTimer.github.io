@@ -4,21 +4,207 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ma progression</title>
+
+<style>
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:#f1f5f9;
+padding:20px;
+color:#0f172a;
+}
+
+.card{
+background:white;
+border-radius:24px;
+padding:24px;
+margin-bottom:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:25px;
+}
+
+.progressCircle{
+width:180px;
+height:180px;
+margin:auto;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
+font-weight:800;
+background:conic-gradient(
+#16a34a 0deg,
+#16a34a 270deg,
+#e5e7eb 270deg,
+#e5e7eb 360deg
+);
+position:relative;
+}
+
+.progressCircle::before{
+content:"";
+position:absolute;
+width:135px;
+height:135px;
+border-radius:50%;
+background:white;
+}
+
+.progressValue{
+position:relative;
+z-index:2;
+}
+
+.subtitle{
+margin-top:18px;
+text-align:center;
+font-size:18px;
+font-weight:600;
+}
+
+.small{
+margin-top:8px;
+text-align:center;
+color:#64748b;
+}
+
+.message{
+font-size:18px;
+text-align:center;
+font-weight:600;
+}
+
+canvas{
+width:100%;
+max-width:100%;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+</style>
 </head>
 
-<body style="
-font-family:Arial;
-text-align:center;
-padding:40px;
-">
+<body>
 
 <h1>📈 Ma progression</h1>
 
-<p>🚧 En construction</p>
+<div class="card">
+
+<div class="progressCircle">
+<div class="progressValue">
+75%
+</div>
+</div>
+
+<div class="subtitle">
+Rééducation en cours
+</div>
+
+<div class="small">
+9 séances réalisées
+</div>
+
+</div>
+
+<div class="card">
+
+<h3 style="text-align:center">
+😊 Évolution de la douleur
+</h3>
+
+<canvas id="evaChart" height="120"></canvas>
+
+</div>
+
+<div class="card">
+
+<div class="message">
+👏 Vous avez déjà réalisé 9 séances.
+</div>
+
+</div>
 
 <button onclick="history.back()">
 ⬅ Retour
 </button>
+
+<script>
+
+const canvas =
+document.getElementById("evaChart");
+
+const ctx =
+canvas.getContext("2d");
+
+const w =
+canvas.width = 300;
+
+const h =
+canvas.height = 120;
+
+const evaData =
+[7,6,5,4,3];
+
+ctx.clearRect(0,0,w,h);
+
+ctx.beginPath();
+
+evaData.forEach((eva,i)=>{
+
+const x =
+(i/(evaData.length-1))
+*(w-40)
++20;
+
+const y =
+h-20-(eva/10)*(h-40);
+
+if(i===0){
+ctx.moveTo(x,y);
+}else{
+ctx.lineTo(x,y);
+}
+
+});
+
+ctx.strokeStyle="#16a34a";
+ctx.lineWidth=4;
+ctx.stroke();
+
+evaData.forEach((eva,i)=>{
+
+const x =
+(i/(evaData.length-1))
+*(w-40)
++20;
+
+const y =
+h-20-(eva/10)*(h-40);
+
+ctx.beginPath();
+ctx.arc(x,y,5,0,Math.PI*2);
+ctx.fillStyle="#16a34a";
+ctx.fill();
+
+});
+
+</script>
 
 </body>
 </html>
