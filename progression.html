@@ -521,8 +521,11 @@ if(!canvas) return;
 const ctx =
 canvas.getContext("2d");
 
-const w = canvas.width = 300;
-const h = canvas.height = 120;
+const rect =
+canvas.parentElement.getBoundingClientRect();
+
+const w = canvas.width = Math.floor(rect.width);
+const h = canvas.height = 260;
 
 ctx.clearRect(0,0,w,h);
 
@@ -592,12 +595,12 @@ const y =
 h - 20 - (eva/10)*(h-40);
 
 ctx.beginPath();
-ctx.arc(x,y,4,0,Math.PI*2);
+ctx.arc(x,y,6,0,Math.PI*2);
 ctx.fillStyle="#16a34a";
 ctx.fill();
 
 ctx.fillStyle="#111827";
-ctx.font="11px sans-serif";
+ctx.font="14px sans-serif";
 
 if(seances.length <= 15){
 
