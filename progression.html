@@ -124,6 +124,23 @@ font-size:18px;
 
 <h1>📈 Ma progression</h1>
 
+<div style="
+max-width:700px;
+margin:0 auto 20px auto;
+">
+<select
+id="programmeSelect"
+style="
+width:100%;
+padding:14px;
+border-radius:14px;
+border:1px solid #cbd5e1;
+font-size:16px;
+font-weight:600;
+">
+</select>
+</div>
+
 <div id="content" class="loader">
 Chargement...
 </div>
@@ -238,6 +255,8 @@ firebaseId:p.firebaseId
 }))
 );
 
+
+
 if(!kine.length){
 
 content.innerHTML = `
@@ -268,42 +287,44 @@ groupes[p.programmeId].push(p);
 
 });
 
-const programme =
-Object.values(groupes)
-.sort((a,b)=>{
+const programmes =
+Object.values(groupes);
 
-const dateA =
-Math.max(...a.map(x =>
-x.dateValidation || 0
-));
-
-const dateB =
-Math.max(...b.map(x =>
-x.dateValidation || 0
-));
-
-return dateB - dateA;
-
-})[0];
-
-console.log(
-"PROGRAMME AFFICHÉ =",
-programme[0].programmeNom,
-programme[0].programmeId
+const select =
+document.getElementById(
+"programmeSelect"
 );
 
-if(!programme){
+select.innerHTML =
+programmes.map(g=>{
 
-content.innerHTML = `
-<div class="card">
-<div class="messageTitle">
-🏆 Aucun programme actif
-</div>
-</div>
+const total = g.length;
+
+const faites =
+g.filter(s=>s.terminee).length;
+
+const pct =
+Math.round(
+(faites*100)/total
+);
+
+return `
+<option value="${g[0].programmeId}">
+${g[0].programmeNom || g[0].nom}
+ (${pct}%)
+</option>
 `;
 
-return;
-}
+}).join("");
+
+function renderProgramme(programmeId){
+
+const programme =
+programmes.find(
+g => g[0].programmeId === programmeId
+);
+
+if(!programme) return;
 
 const total =
 programme.length;
@@ -315,8 +336,7 @@ s => s.terminee
 
 const pourcentage =
 Math.round(
-(faites * 100)
-/ total
+(faites*100)/total
 );
 
 const nom =
@@ -328,16 +348,15 @@ programme[0].nom
 
 const evaData =
 programme
-.filter(s =>
-s.terminee
-&&
-s.eva != null
+.filter(
+s => s.terminee
+&& s.eva != null
 )
-.map(s =>
-Number(s.eva)
+.map(
+s => Number(s.eva)
 )
-.filter(v =>
-!isNaN(v)
+.filter(
+v => !isNaN(v)
 );
 
 let message =
@@ -411,7 +430,6 @@ ${message}
 </div>
 
 </div>
-
 `;
 
 const circle =
@@ -420,8 +438,7 @@ document.getElementById(
 );
 
 const angle =
-(pourcentage/100)
-*360;
+(pourcentage/100)*360;
 
 circle.style.background =
 `conic-gradient(
@@ -435,6 +452,18 @@ drawEva(
 evaData.length
 ? evaData
 : [0]
+);
+
+}
+
+select.onchange = () => {
+renderProgramme(
+select.value
+);
+};
+
+renderProgramme(
+programmes[0][0].programmeId
 );
 
 }
