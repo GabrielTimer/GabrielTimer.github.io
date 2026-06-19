@@ -1129,7 +1129,9 @@ if(phase==="prep"){
 if(exo.id === "RESP_APAISER"){
 
 location.href =
-"respir/index.html?mode=calm&duree=" + exo.ex;
+"respir/index.html?mode=calm&duree="
++ exo.ex
++ "&fromProgram=1";
 
 return;
 
@@ -1138,7 +1140,9 @@ return;
 if(exo.id === "RESP_EQUILIBRER"){
 
 location.href =
-"respir/index.html?mode=balance&duree=" + exo.ex;
+"respir/index.html?mode=balance&duree="
++ exo.ex
++ "&fromProgram=1";
 
 return;
 
@@ -1147,8 +1151,9 @@ return;
 if(exo.id === "RESP_DEBUTER"){
 
 location.href =
-"respir/index.html?mode=beginner&duree=" + exo.ex;
-
+"respir/index.html?mode=beginner&duree="
++ exo.ex
++ "&fromProgram=1";
 return;
 
 }
