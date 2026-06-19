@@ -1456,6 +1456,9 @@ const params =
 const mode = params.get("mode");
 const duree = params.get("duree");
 
+const autostart =
+    params.get("autostart");
+
 
 if(mode && modes[mode]){
 
@@ -1521,6 +1524,16 @@ if(exerciseId){
                 exercise.objectif || "";
 
     });
+
+}
+
+if(autostart === "1"){
+
+    setTimeout(()=>{
+
+        startBtn.click();
+
+    },300);
 
 }
 
