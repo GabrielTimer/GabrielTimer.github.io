@@ -7166,6 +7166,28 @@
   "pathologies": ["Pubalgie"],
   "objectifs": ["Proprioception"],
   "zones": ["Bassin","Membre inférieur"]
+},
+
+{
+  "id":"RESP_DEBUTER",
+  "nom":"🌿 Respiration guidée - Débuter",
+  "categorie":"Respiration",
+  "objectif":"Respiration guidée mode Débuter",
+  "image":"images/respiration.png"
+},
+{
+  "id":"RESP_EQUILIBRER",
+  "nom":"🌿 Respiration guidée - Équilibrer",
+  "categorie":"Respiration",
+  "objectif":"Respiration guidée mode Équilibrer",
+  "image":"images/respiration.png"
+},
+{
+  "id":"RESP_APAISER",
+  "nom":"🌿 Respiration guidée - Apaiser",
+  "categorie":"Respiration",
+  "objectif":"Respiration guidée mode Apaiser",
+  "image":"images/respiration.png"
 }
 
 ]
