@@ -228,12 +228,15 @@ kine
 );
 
 console.table(
-kine.map(p=>({
+kine
+.filter(p=>p.terminee)
+.map(p=>({
 nom:p.nom,
 programmeNom:p.programmeNom,
 terminee:p.terminee,
 eva:p.eva,
-programmeId:p.programmeId
+programmeId:p.programmeId,
+firebaseId:p.firebaseId
 }))
 );
 
@@ -269,11 +272,27 @@ groupes[p.programmeId].push(p);
 
 const programme =
 Object.values(groupes)
-.find(g =>
-g.some(x => !x.terminee)
-)
-||
-Object.values(groupes)[0];
+.sort((a,b)=>{
+
+const dateA =
+Math.max(...a.map(x =>
+x.dateValidation || 0
+));
+
+const dateB =
+Math.max(...b.map(x =>
+x.dateValidation || 0
+));
+
+return dateB - dateA;
+
+})[0];
+
+console.log(
+"PROGRAMME AFFICHÉ =",
+programme[0].programmeNom,
+programme[0].programmeId
+);
 
 if(!programme){
 
