@@ -201,7 +201,7 @@ patient
 
 }
 
-if(patient || viewPatient){
+if(!isAdmin || viewPatient){
 
   document.getElementById("btnLibre").style.display = "none";
   document.getElementById("btnPatho").style.display = "none";
