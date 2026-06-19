@@ -36,20 +36,11 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 export async function validateProgram(id,eva){
 
-const programmes =
-await loadProgramsFromCloud();
-
-const prog =
-programmes.find(
-p => p.firebaseId === id
-);
-
-if(!prog) return;
+console.log("VALIDATION ID =", id);
 
 await setDoc(
 doc(db,"programmes",id),
 {
-...prog,
 terminee:true,
 eva:eva,
 dateValidation:Date.now()
@@ -58,6 +49,8 @@ dateValidation:Date.now()
 merge:true
 }
 );
+
+console.log("VALIDATION FIREBASE OK");
 
 }
 
