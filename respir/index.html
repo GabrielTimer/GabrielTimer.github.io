@@ -1195,11 +1195,23 @@ function stopSession(){
 
     breathText.textContent = "Terminé";
 
-    document.body.classList.remove("session-active");
+const params =
+new URLSearchParams(window.location.search);
+
+if(params.get("fromProgram")){
 
     setTimeout(()=>{
-        breathText.textContent = "Prêt";
-    },2500);
+        history.back();
+    },1000);
+
+    return;
+}
+
+document.body.classList.remove("session-active");
+
+setTimeout(()=>{
+    breathText.textContent = "Prêt";
+},2500);
 
 }
 
