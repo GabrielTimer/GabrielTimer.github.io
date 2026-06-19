@@ -461,6 +461,8 @@ localStorage.setItem("programmes",JSON.stringify([...historiques,...autres]));
 
 localStorage.removeItem("eva_temp");
 
+let programmeTermine = false;
+
 if(validationMode && cloudId){
 
 const module =
@@ -474,9 +476,14 @@ console.log("EVA =", eva);
 
 try{
 
+programmeTermine =
 await module.validateProgram(
 cloudId,
 eva
+);
+console.log(
+"PROGRAMME TERMINE =",
+programmeTermine
 );
 
 console.log("✅ VALIDATION TERMINÉE");
@@ -491,10 +498,21 @@ console.error("❌ ERREUR VALIDATION", e);
 
 if(cloudId){
 
+if(programmeTermine){
+
 window.location =
 "progression.html?patient="
 + patient
 + "&v=" + VERSION;
+
+}else{
+
+window.location =
+"index.html?patient="
++ patient
++ "&v=" + VERSION;
+
+}
 
 }else if(patient){
 
