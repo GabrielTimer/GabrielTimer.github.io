@@ -1427,8 +1427,44 @@ document.getElementById("returnBtn")
 const params =
     new URLSearchParams(window.location.search);
 
+const mode = params.get("mode");
+const duree = params.get("duree");
+
+
+if(mode && modes[mode]){
+
+    currentMode = mode;
+
+    document
+      .querySelectorAll(".mode")
+      .forEach(m=>m.classList.remove("active"));
+
+    document
+      .querySelector(`[data-mode="${mode}"]`)
+      ?.classList.add("active");
+
+}
+
+if(duree){
+
+    sessionMinutes =
+      Math.max(1,Math.round(duree/60));
+
+    durationSlider.value =
+      sessionMinutes;
+
+    durationText.textContent =
+      sessionMinutes;
+
+    totalTime.textContent =
+      String(sessionMinutes).padStart(2,"0")
+      + ":00";
+
+}
+
 const exerciseId =
     params.get("exercise");
+
 
 if(exerciseId){
 
