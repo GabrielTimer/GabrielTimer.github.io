@@ -726,6 +726,42 @@ programmes.find(
 p => p.firebaseId === id
 );
 
+const data =
+prog.données || prog.data;
+
+const exos =
+data.exercices || [];
+
+if(
+    exos.length === 1 &&
+    (
+        exos[0].id === "RESP_DEBUTER" ||
+        exos[0].id === "RESP_APAISER" ||
+        exos[0].id === "RESP_EQUILIBRER"
+    )
+){
+
+    let mode = "beginner";
+
+    if(exos[0].id === "RESP_APAISER"){
+        mode = "calm";
+    }
+
+    if(exos[0].id === "RESP_EQUILIBRER"){
+        mode = "balance";
+    }
+
+    window.location =
+    "respir/index.html?mode="
+    + mode
+    + "&duree="
+    + exos[0].ex
+    + "&fromProgram=1"
+    + "&autostart=1";
+
+    return;
+}
+
 localStorage.setItem(
 "programme_temp",
 JSON.stringify(
