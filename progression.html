@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -200,10 +199,6 @@ const cat =
 (
 p.categorie
 ||
-p.data?.categorie
-||
-p.données?.categorie
-||
 ""
 ).toLowerCase();
 
@@ -211,20 +206,26 @@ const pid =
 (
 p.patientId
 ||
-p.data?.patientId
-||
-p.données?.patientId
-||
 ""
 ).toLowerCase();
 
 return (
 cat === "kine"
 &&
-pid === patient.toLowerCase()
+(
+pid.includes(patient.toLowerCase())
+||
+patient.toLowerCase().includes(pid)
+)
 );
 
 });
+
+console.log(
+"PROGRAMMES KINE TROUVÉS =",
+kine.length,
+kine
+);
 
 if(!kine.length){
 
