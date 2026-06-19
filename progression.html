@@ -180,6 +180,19 @@ async function init(){
 const all =
 await loadProgramsFromCloud();
 
+console.log("PATIENT URL =", patient);
+
+console.table(
+all.map(p=>({
+nom:p.nom,
+programmeNom:p.programmeNom,
+patient:p.patient,
+patientId:p.patientId,
+categorie:p.categorie,
+type:p.type
+}))
+);
+
 const kine =
 all.filter(p=>{
 
