@@ -1198,14 +1198,37 @@ function stopSession(){
 const params =
 new URLSearchParams(window.location.search);
 
-alert(window.location.search);
+if(params.get("fromProgram")){
+
+    document.body.classList.remove("session-active");
+
+    breathText.textContent =
+    "Séance terminée";
+
+    startBtn.style.display = "block";
+
+alert("BOUTON");
+
+    startBtn.innerText =
+    "✓ Retour à mes programmes";
+
+    startBtn.onclick = ()=>{
+
+        window.location =
+        "../cloud.html?patient="
+        + localStorage.getItem("currentPatient")
+        + "&v=" + Date.now();
+
+    };
+
+    return;
+}
 
 document.body.classList.remove("session-active");
 
 setTimeout(()=>{
     breathText.textContent = "Prêt";
 },2500);
-
 }
 
 durationSlider.addEventListener("input",()=>{
