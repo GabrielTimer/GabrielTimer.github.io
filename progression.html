@@ -227,7 +227,11 @@ p.patientId
 ).toLowerCase();
 
 return (
+(
 cat === "kine"
+||
+cat === "course"
+)
 &&
 (
 pid.includes(patient.toLowerCase())
@@ -308,9 +312,14 @@ Math.round(
 (faites*100)/total
 );
 
+const icone =
+g[0].categorie === "course"
+? "🏃"
+: "🩺";
+
 return `
 <option value="${g[0].programmeId}">
-${g[0].programmeNom || g[0].nom}
+${icone} ${g[0].programmeNom || g[0].nom}
  (${pct}%)
 </option>
 `;
