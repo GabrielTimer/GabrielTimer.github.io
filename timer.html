@@ -1231,6 +1231,33 @@ return;
 
 exo = p.exercices[exIndex];
 
+if(exo.id === "RESP_APAISER"){
+
+    location.href =
+    "respir/index.html?mode=calm&duree="
+    + exo.ex;
+
+    return;
+}
+
+if(exo.id === "RESP_EQUILIBRER"){
+
+    location.href =
+    "respir/index.html?mode=balance&duree="
+    + exo.ex;
+
+    return;
+}
+
+if(exo.id === "RESP_DEBUTER"){
+
+    location.href =
+    "respir/index.html?mode=beginner&duree="
+    + exo.ex;
+
+    return;
+}
+
 t = exo.ex;
 
 totalTimePhase = exo.ex;
