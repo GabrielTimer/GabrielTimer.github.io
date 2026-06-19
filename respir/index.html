@@ -1198,14 +1198,7 @@ function stopSession(){
 const params =
 new URLSearchParams(window.location.search);
 
-if(params.get("fromProgram")){
-
-if(params.get("fromProgram")){
-
-    alert("FIN PROGRAMME DETECTEE");
-
-    return;
-}
+alert(window.location.search);
 
 document.body.classList.remove("session-active");
 
