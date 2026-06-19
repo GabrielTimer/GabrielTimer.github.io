@@ -52,6 +52,32 @@ merge:true
 
 console.log("VALIDATION FIREBASE OK");
 
+// vérifier si le programme est terminé
+
+const programmes =
+await loadProgramsFromCloud();
+
+const seance =
+programmes.find(
+p => p.firebaseId === id
+);
+
+if(!seance || !seance.programmeId){
+return false;
+}
+
+const programme =
+programmes.filter(
+p => p.programmeId === seance.programmeId
+);
+
+const termine =
+programme.every(
+p => p.terminee === true
+);
+
+return termine;
+
 }
 
 
