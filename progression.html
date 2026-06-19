@@ -387,6 +387,54 @@ message =
 
 }
 
+let boutonBilan = "";
+
+if(pourcentage >= 100){
+
+const evaMoyenne =
+evaData.length
+? (
+evaData.reduce((a,b)=>a+b,0)
+/
+evaData.length
+).toFixed(1)
+: "-";
+
+const historique =
+programme
+.filter(s => s.terminee)
+.map(s => {
+
+const date =
+s.dateValidation
+? new Date(s.dateValidation)
+.toLocaleDateString("fr-FR")
+: "-";
+
+return `${date} • ${s.nom} • EVA ${s.eva ?? "-"} /10`;
+
+})
+.join("\n");
+
+boutonBilan = `
+<button
+style="
+background:#16a34a;
+margin-top:15px;
+"
+onclick="sendProgrammeReport(
+'${nom}',
+${faites},
+${total},
+'${evaMoyenne}',
+'${historique.replace(/\n/g,'\\n')}',
+'${patient}'
+)">
+📤 Envoyer mon bilan à mon kinésithérapeute
+</button>
+`;
+}
+
 if(evaData.length >= 2){
 
 const debut =
@@ -400,12 +448,29 @@ debut - actuel;
 
 if(gain > 0){
 
+if(pourcentage >= 100){
+
+message =
+`🏆 Programme terminé !<br><br>
+📉 Votre douleur a diminué de ${gain} point${gain>1?"s":""}.`;
+
+}else{
+
 message =
 `📉 Votre douleur a diminué de ${gain} point${gain>1?"s":""}.`;
 
 }
 
 }
+
+}
+
+}
+
+const titreGraphique =
+programme[0].categorie === "course"
+? "🏃 Évolution du ressenti"
+: "😊 Évolution de la douleur";
 
 content.innerHTML = `
 
@@ -435,7 +500,7 @@ ${faites} séances réalisées sur ${total}
 <div class="card">
 
 <h3 style="text-align:center">
-😊 Évolution de la douleur
+${titreGraphique}
 </h3>
 
 <div class="chartContainer">
@@ -454,6 +519,7 @@ ${faites} séances réalisées sur ${total}
 ${message}
 </div>
 
+${boutonBilan}
 </div>
 `;
 
@@ -648,6 +714,53 @@ h - 5
 
 }
 
+window.sendProgrammeReport = function(
+programmeNom,
+faites,
+total,
+evaMoyenne,
+historique,
+patientNom
+){
+
+const nomPatient =
+(patient || patientNom || "")
+.replace(/_/g," ")
+.replace(/\b\w/g, l => l.toUpperCase());
+
+const remarques = prompt(
+"Souhaitez-vous ajouter une remarque pour votre kinésithérapeute ?"
+) || "";
+
+const sujet =
+`Programme terminé - ${programmeNom}`;
+
+const message =
+`Bonjour Gabriel,
+
+Je vous informe avoir terminé mon programme :
+
+${programmeNom}
+
+✅ Séances réalisées : ${faites}/${total}
+🩹 EVA moyenne : ${evaMoyenne}/10
+
+📅 Historique des séances
+
+${historique}
+
+📝 REMARQUES
+
+${remarques || "Aucune remarque"}
+
+Cordialement,
+
+${nomPatient}`;
+
+window.location =
+`mailto:kine.laveau@gmail.com?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(message)}`;
+
+}
 
 </script>
 
