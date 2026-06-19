@@ -472,17 +472,27 @@ console.log("VALIDATION MODE =", validationMode);
 console.log("CLOUD ID =", cloudId);
 console.log("EVA =", eva);
 
+try{
+
 await module.validateProgram(
 cloudId,
 eva
 );
+
+console.log("✅ VALIDATION TERMINÉE");
+
+}catch(e){
+
+console.error("❌ ERREUR VALIDATION", e);
+
+}
 
 }
 
 if(cloudId){
 
 window.location =
-"cloud.html?patient="
+"progression.html?patient="
 + patient
 + "&v=" + VERSION;
 
