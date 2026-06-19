@@ -1488,6 +1488,17 @@ localStorage.getItem(
 "editCloudId"
 );
 
+const currentPatient =
+document.getElementById("patientId")
+.value
+.trim()
+.toLowerCase();
+
+const realEditId =
+currentPatient === "admin"
+? editId
+: null;
+
 const isAdmin =
 localStorage.getItem("admin_ok")
 === "true";
@@ -1584,7 +1595,7 @@ if(typePrescription === "unique"){
 let programme = {
 
 id:
-editId
+realEditId
 ||
 crypto.randomUUID(),
 
@@ -1606,7 +1617,7 @@ data: build()
 
 await saveProgramToCloud(programme);
 
-if(editId){
+if(realEditId){
 
 localStorage.removeItem(
 "editCloudId"
