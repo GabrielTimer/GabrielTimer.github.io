@@ -661,6 +661,200 @@
     ],
     "zones": []
   },
+
+[
+  {
+    "id": "CHEVILLE_01",
+    "nom": "Équilibre unipodal avec lancer de balle - Rotation interne",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Proprioception de cheville",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Tenir l'équilibre sur une jambe",
+      "Orienter légèrement le pied vers l'intérieur",
+      "Lancer et rattraper la balle contre le mur",
+      "Garder le regard vers l'avant"
+    ],
+    "precautions": [
+      "Éviter les compensations du tronc",
+      "Utiliser un appui si nécessaire"
+    ],
+    "tags": [
+      "Cheville",
+      "Proprioception",
+      "Équilibre",
+      "Rotation interne"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "temps_effort": 30,
+      "repos": 15,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cheville/appuisballeinterne.png",
+    "type_contraction": "statique",
+    "difficulte_percue": 2,
+    "validation_medicale": true,
+    "pathologies": ["Cheville"],
+    "objectifs": ["Proprioception de cheville"]
+  },
+  {
+    "id": "CHEVILLE_02",
+    "nom": "Équilibre unipodal avec lancer de balle - Position neutre",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Proprioception de cheville",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Tenir l'équilibre sur une jambe",
+      "Maintenir le pied dans l'axe",
+      "Lancer et rattraper la balle contre le mur",
+      "Contrôler la stabilité"
+    ],
+    "precautions": [
+      "Ne pas verrouiller le genou",
+      "Arrêter en cas de douleur"
+    ],
+    "tags": [
+      "Cheville",
+      "Proprioception",
+      "Équilibre",
+      "Neutre"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "temps_effort": 30,
+      "repos": 15,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cheville/appuisballemilieu.png",
+    "type_contraction": "statique",
+    "difficulte_percue": 2,
+    "validation_medicale": true,
+    "pathologies": ["Cheville"],
+    "objectifs": ["Proprioception de cheville"]
+  },
+  {
+    "id": "CHEVILLE_03",
+    "nom": "Équilibre unipodal avec lancer de balle - Rotation externe",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Proprioception de cheville",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Tenir l'équilibre sur une jambe",
+      "Orienter légèrement le pied vers l'extérieur",
+      "Lancer et rattraper la balle contre le mur",
+      "Maintenir le bassin stable"
+    ],
+    "precautions": [
+      "Éviter les mouvements brusques",
+      "Utiliser un support si besoin"
+    ],
+    "tags": [
+      "Cheville",
+      "Proprioception",
+      "Équilibre",
+      "Rotation externe"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "temps_effort": 30,
+      "repos": 15,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cheville/appuisballeexterne.png",
+    "type_contraction": "statique",
+    "difficulte_percue": 2,
+    "validation_medicale": true,
+    "pathologies": ["Cheville"],
+    "objectifs": ["Proprioception de cheville"]
+  },
+  {
+    "id": "CHEVILLE_04",
+    "nom": "Flexion dorsale contre le mur",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Gain de mobilité de cheville",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "duree": "3 séries de 30 secondes",
+    "consignes": [
+      "Placer la jambe à étirer en arrière",
+      "Conserver le talon au sol",
+      "Avancer progressivement le bassin",
+      "Maintenir l'étirement sans rebond"
+    ],
+    "precautions": [
+      "Ne pas décoller le talon",
+      "Respecter une tension confortable"
+    ],
+    "tags": [
+      "Cheville",
+      "Mobilité",
+      "Mollet",
+      "Étirement"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "temps_effort": 30,
+      "repos": 10,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cheville/flexdorsalemur.png",
+    "type_contraction": "étirement",
+    "difficulte_percue": 1,
+    "validation_medicale": true,
+    "pathologies": ["Cheville"],
+    "objectifs": ["Gain de mobilité de cheville"]
+  },
+  {
+    "id": "CHEVILLE_05",
+    "nom": "Montées sur pointes de pieds",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Renforcement du triceps sural",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "3 séries de 15 répétitions",
+    "consignes": [
+      "Monter sur la pointe des pieds",
+      "Marquer un court maintien en haut",
+      "Redescendre lentement",
+      "S'aider du mur pour l'équilibre si besoin"
+    ],
+    "precautions": [
+      "Éviter les mouvements rapides",
+      "Contrôler la descente"
+    ],
+    "tags": [
+      "Cheville",
+      "Mollet",
+      "Renforcement",
+      "Triceps sural"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "phase_monte": 2,
+      "maintien": 1,
+      "phase_descente": 3,
+      "cycles": 15
+    },
+    "image": "/exercises/images/cheville/pointepieds.png",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "validation_medicale": true,
+    "pathologies": ["Cheville"],
+    "objectifs": ["Renforcement du triceps sural"]
+  },
+
   {
     "id": "FUN",
     "nom": "Jouer à Geoguess avec mon Gahaabder!",
