@@ -708,21 +708,29 @@ totalTime.innerText="Durée : "+formatTime(remainingTime);
 
 /* AUDIO */
 
-function beep(){
+function beep(nb = 1){
 
-if(!soundOn)return;
+if(!soundOn) return;
 
-let ctx=new AudioContext();
+const ctx = new AudioContext();
 
-let o=ctx.createOscillator();
+for(let i=0;i<nb;i++){
 
-o.frequency.value=800;
+setTimeout(()=>{
+
+let o = ctx.createOscillator();
+
+o.frequency.value = 800;
 
 o.connect(ctx.destination);
 
 o.start();
 
-setTimeout(()=>o.stop(),150);
+setTimeout(()=>o.stop(),120);
+
+}, i*250);
+
+}
 
 }
 
@@ -1079,25 +1087,34 @@ if(serieIndex>p.series){
 
 if(patient && cloudId){
 
-window.location =
+finSeance(
 "fin.html?validation=1"
 + "&cloud=" + cloudId
 + "&patient=" + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else if(patient){
 
-window.location =
+finSeance(
 "fin.html?patient="
 + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else{
 
-window.location =
-"fin.html?v=" + VERSION;
+finSeance(
+"fin.html?v=" + VERSION
+);
+
+return;
 
 }
 
@@ -1167,7 +1184,7 @@ t=exo.ex;
 
 totalTimePhase=exo.ex;
 
-beep();
+beep(1);
 
 const nom =
 exo.nom.toLowerCase();
@@ -1205,6 +1222,8 @@ totalTimePhase=exo.repos;
 
 speak("repos");
 
+beep(2);
+
 update();
 
 return;
@@ -1239,25 +1258,35 @@ if(serieIndex > p.series){
 
 if(patient && cloudId){
 
-window.location =
+
+finSeance(
 "fin.html?validation=1"
 + "&cloud=" + cloudId
 + "&patient=" + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else if(patient){
 
-window.location =
+finSeance(
 "fin.html?patient="
 + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else{
 
-window.location =
-"fin.html?v=" + VERSION;
+finSeance(
+"fin.html?v=" + VERSION
+);
+
+return;
 
 }
 
@@ -1357,26 +1386,35 @@ if(remainingTime <= 0){
 
 if(patient && cloudId){
 
-window.location =
+
+finSeance(
 "fin.html?validation=1"
 + "&cloud=" + cloudId
 + "&patient=" + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else if(patient){
 
-window.location =
+finSeance(
 "fin.html?patient="
 + patient
 + "&admin=true"
-+ "&v=" + VERSION;
++ "&v=" + VERSION
+);
+
+return;
 
 }else{
 
-window.location =
-"fin.html?v=" + VERSION;
+finSeance(
+"fin.html?v=" + VERSION
+);
 
+return;
 }
 
 return;
@@ -1392,6 +1430,17 @@ next();
 update();
 
 }
+
+}
+
+function finSeance(url){
+
+beep(3);
+vibrate("fin");
+
+setTimeout(()=>{
+window.location = url;
+},900);
 
 }
 
