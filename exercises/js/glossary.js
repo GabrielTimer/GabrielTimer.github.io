@@ -522,51 +522,51 @@ function renderExercises(list){
 
       );
 
-      current.exercices.push({
+current.exercices.push({
 
-        id: exercise.id,
-        nom: exercise.nom,
-        type: "timer",
-        image: exercise.image,
+  id: exercise.id,
+  nom: exercise.nom,
+  type: "timer",
+  image: exercise.image,
 
-youtube: exercise.youtube || "",
-vimeo: exercise.vimeo || "",
+  conseil:
+  (exercise.consignes || [])
+  .join("<br>"),
 
-        conseil:
-        (exercise.consignes || [])
-        .join("<br>"),
+  conseil_posture:
+  exercise.conseil_posture || [],
 
-        conseil_posture:
-        exercise.conseil_posture || [],
+  erreurs_frequentes:
+  exercise.erreurs_frequentes || [],
 
-        erreurs_frequentes:
-        exercise.erreurs_frequentes || [],
+  respiration:
+  exercise.respiration || [],
 
-        respiration:
-        exercise.respiration || [],
+  version_facile:
+  exercise.version_facile || [],
 
-        version_facile:
-        exercise.version_facile || [],
+  version_avancee:
+  exercise.version_avancee || [],
 
-        version_avancee:
-        exercise.version_avancee || [],
+  videos:
+  exercise.videos || [],
 
-        videos:
-        exercise.videos || [],
+  youtube:
+  exercise.youtube || "",
 
-        ex:
-        exercise.timer_config
-        ?.phase_monte || 30,
+  vimeo:
+  exercise.vimeo || "",
 
-        repos:
-        exercise.timer_config
-        ?.phase_descente || 10,
+  ex:
+  exercise.timer_config?.phase_monte || 30,
 
-        reps:
-        exercise.timer_config
-        ?.cycles || 5
+  repos:
+  exercise.timer_config?.phase_descente || 10,
 
-      });
+  reps:
+  exercise.timer_config?.cycles || 5
+
+});
 
       localStorage.setItem(
   "programme_temp",
