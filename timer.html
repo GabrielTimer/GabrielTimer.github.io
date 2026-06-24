@@ -1515,11 +1515,7 @@ document
 
 }
 
-window.addEventListener("load",()=>{
-
-document
-.getElementById("closeVideo")
-.onclick = ()=>{
+function closeVideo(){
 
 document
 .getElementById("videoOverlay")
@@ -1529,9 +1525,7 @@ document
 .getElementById("videoFrame")
 .src = "";
 
-};
-
-});
+}
 
 (async ()=>{
 
@@ -1560,7 +1554,9 @@ background:rgba(0,0,0,.95);
 z-index:10000;
 ">
 
-<button id="closeVideo"
+<button
+id="closeVideo"
+onclick="closeVideo()"
 style="
 position:absolute;
 top:20px;
