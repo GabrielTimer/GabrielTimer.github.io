@@ -57,34 +57,77 @@ function restoreFilters(){
 
 }
 
-fetch('./data/exercises.json?v=' + VERSION)
+Promise.all([
 
-.then(response => response.json())
+  fetch('./data/exercises.json?v=' + VERSION)
+    .then(r => r.json()),
 
-.then(data => {
+  fetch('./data/hep/hep_catalogue.json?v=' + VERSION)
+    .then(r => r.json())
 
-  console.log("EXERCISES LOADED", data);
+])
 
-exercises = data;
+.then(([gabriel, hep]) => {
 
-restoreFilters();
+  const hepConvertis = hep.map(ex => ({
 
-buildFilters();
+    id: ex.id,
 
-setupSearch();
+    nom: ex.nom,
 
-setupReset();
+    categorie: "HEP",
 
-document.getElementById(
-  "searchInput"
-).value = filters.search;
+    niveau: 1,
 
-updateGlossary();
+    objectif: "",
+
+    duree: "",
+
+    image:
+      "/exercises/images/HEP/" +
+      ex.image,
+
+    tags:
+      (ex.tags || "")
+      .split(",")
+      .map(t => t.trim()),
+
+    consignes: [
+      ex.description || ""
+    ],
+
+    source: "hep"
+
+  }));
+
+  exercises = [
+    ...gabriel,
+    ...hepConvertis
+  ];
+
+  console.log(
+    "TOTAL EXERCICES :",
+    exercises.length
+  );
+
+  restoreFilters();
+
+  buildFilters();
+
+  setupSearch();
+
+  setupReset();
+
+  document.getElementById(
+    "searchInput"
+  ).value = filters.search;
+
+  updateGlossary();
+
 })
-
 .catch(error => {
 
-  console.error("ERREUR FETCH JSON", error);
+  console.error(error);
 
 });
 
