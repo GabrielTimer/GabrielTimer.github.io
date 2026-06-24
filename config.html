@@ -1880,6 +1880,13 @@ fetch("exercises/data/hep/NCB1_exercices.json")
     console.error("Erreur HEP :", err);
   });
 
+fetch("exercises/data/hep/hep_catalogue.json")
+  .then(r => r.json())
+  .then(data => {
+      window.hepCatalogue = data;
+      console.log("Catalogue HEP :", data.length);
+  });
+
 </script>
 <script type="module" src="exercises/js/cloud.js"></script>
 </body>
