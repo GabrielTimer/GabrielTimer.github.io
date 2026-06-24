@@ -69,15 +69,19 @@ Promise.all([
 
 .then(([gabriel, hep]) => {
 
-  const hepConvertis = hep.map(ex => ({
+const hepConvertis = hep.map(ex => ({
 
-    id: ex.id,
+  id: ex.id,
 
-    nom: ex.nom,
+  nom: ex.nom,
 
-    categorie: "HEP",
+  youtube: ex.youtube || "",
 
-    niveau: 1,
+  vimeo: ex.vimeo || "",
+
+  categorie: "HEP",
+
+  niveau: 1,
 
     objectif: "",
 
@@ -524,6 +528,9 @@ function renderExercises(list){
         nom: exercise.nom,
         type: "timer",
         image: exercise.image,
+
+youtube: exercise.youtube || "",
+vimeo: exercise.vimeo || "",
 
         conseil:
         (exercise.consignes || [])
