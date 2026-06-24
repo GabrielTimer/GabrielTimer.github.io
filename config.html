@@ -1857,6 +1857,29 @@ function undoDelete(){
   console.log("undoDelete");
 }
 
+fetch("exercises/data/hep/NCB1_exercices.json")
+  .then(r => r.json())
+  .then(data => {
+    console.log("HEP chargé :", data);
+
+    data.forEach(ex => {
+      exercices.push({
+        id: ex.id,
+        nom: ex.nom,
+        image: "exercises/images/HEP/" + ex.image,
+        conseil: ex.description,
+        ex: 30,
+        repos: 15,
+        reps: 10
+      });
+    });
+
+    render();
+  })
+  .catch(err => {
+    console.error("Erreur HEP :", err);
+  });
+
 </script>
 <script type="module" src="exercises/js/cloud.js"></script>
 </body>
