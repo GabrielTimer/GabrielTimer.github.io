@@ -842,7 +842,11 @@ let exo = p.exercices[exIndex];
 
 document.getElementById("overlayImg").src = img.src;
 
-let html = "";
+let html = `
+<div style="font-size:22px;line-height:1.6;">
+${exo.conseil || ""}
+</div>
+`;
 
 const videoUrl =
 exo.youtube ||
@@ -856,7 +860,7 @@ html += `
 
 <a
 href="${videoUrl}"
-target="_blank"
+target="_blank"let html = "";
 style="
 display:inline-block;
 padding:10px 14px;
@@ -940,18 +944,6 @@ ${exo.version_avancee
 
 }
 
-
-if(!html){
-
-html = `
-<div style="font-size:22px;line-height:1.6;">
-
-${exo.conseil || "Aucun conseil disponible"}
-
-</div>
-`;
-
-}
 
 document.getElementById("overlayText").innerHTML =
 html;
