@@ -858,23 +858,24 @@ if(videoUrl){
 html += `
 <h3>🎥 Vidéo</h3>
 
-<a
-href="${videoUrl}"
-target="_blank"let html = "";
+<button
+onclick="openVideo('${videoUrl}')"
 style="
 display:inline-block;
 padding:10px 14px;
 background:#2563eb;
 color:white;
+border:none;
 border-radius:12px;
 text-decoration:none;
 font-weight:600;
 margin-top:10px;
+cursor:pointer;
 ">
 
-▶ Voir la vidéo
+▶ Lire la vidéo
 
-</a>
+</button>
 `;
 
 }
@@ -1460,6 +1461,43 @@ window.location =
 
 }
 
+function openVideo(url){
+
+url = url.replace("http://","https://");
+
+if(url.includes("vimeo.com")){
+
+url = url.replace(
+"https://vimeo.com/",
+"https://player.vimeo.com/video/"
+);
+
+}
+
+document
+.getElementById("videoFrame")
+.src = url;
+
+document
+.getElementById("videoOverlay")
+.style.display = "block";
+
+}
+
+document
+.getElementById("closeVideo")
+.onclick = ()=>{
+
+document
+.getElementById("videoOverlay")
+.style.display = "none";
+
+document
+.getElementById("videoFrame")
+.src = "";
+
+};
+
 (async ()=>{
 
 const ok =
@@ -1477,6 +1515,55 @@ setInterval(loop,1000);
 
 })();
 </script>
+
+<div id="videoOverlay"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.95);
+z-index:10000;
+">
+
+<button id="closeVideo"
+style="
+position:absolute;
+top:20px;
+right:20px;
+width:50px;
+height:50px;
+border-radius:50%;
+font-size:24px;
+">
+✖
+</button>
+
+<div
+style="
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+">
+
+<iframe
+id="videoFrame"
+width="900"
+height="506"
+allowfullscreen
+style="
+max-width:95vw;
+max-height:80vh;
+border:none;
+border-radius:16px;
+background:black;
+">
+</iframe>
+
+</div>
+
+</div>
 
 </body>
 </html>
