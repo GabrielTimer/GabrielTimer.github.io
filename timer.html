@@ -844,13 +844,18 @@ document.getElementById("overlayImg").src = img.src;
 
 let html = "";
 
-if(exo.videos?.length){
+const videoUrl =
+exo.youtube ||
+exo.vimeo ||
+exo.videos?.[0]?.url;
+
+if(videoUrl){
 
 html += `
 <h3>🎥 Vidéo</h3>
 
 <a
-href="${exo.videos[0].url}"
+href="${videoUrl}"
 target="_blank"
 style="
 display:inline-block;
