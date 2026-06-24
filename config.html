@@ -322,6 +322,15 @@ onclick="openGlossaire()">
 
 📚 Bibliothèque exercices
 
+<button
+id="hepBtn"
+class="addBtn"
+onclick="openHEP()">
+
+📚 Bibliothèque HEP
+
+</button>
+
 </button>
 
 </div>
@@ -1841,6 +1850,35 @@ arrow.innerHTML = "▶";
 
 }
 
+window.openHEP = function(){
+
+const mot =
+prompt(
+"Recherche HEP (neck, shoulder, ankle, knee...)"
+);
+
+if(!mot) return;
+
+const resultat =
+window.hepCatalogue.filter(ex =>
+(ex.nom || "")
+.toLowerCase()
+.includes(mot.toLowerCase())
+||
+(ex.tags || "")
+.toLowerCase()
+.includes(mot.toLowerCase())
+);
+
+console.log(resultat);
+
+alert(
+resultat.length +
+" exercice(s) trouvé(s).\nRegarde la console F12."
+);
+
+}
+
 window.addExo = addExo;
 window.toggle = toggle;
 window.moveUp = moveUp;
@@ -1856,29 +1894,6 @@ window.undoDelete = undoDelete;
 function undoDelete(){
   console.log("undoDelete");
 }
-
-fetch("exercises/data/hep/NCB1_exercices.json")
-  .then(r => r.json())
-  .then(data => {
-    console.log("HEP chargé :", data);
-
-    data.forEach(ex => {
-      exercices.push({
-        id: ex.id,
-        nom: ex.nom,
-        image: "exercises/images/HEP/" + ex.image,
-        conseil: ex.description,
-        ex: 30,
-        repos: 15,
-        reps: 10
-      });
-    });
-
-    render();
-  })
-  .catch(err => {
-    console.error("Erreur HEP :", err);
-  });
 
 fetch("exercises/data/hep/hep_catalogue.json")
   .then(r => r.json())
