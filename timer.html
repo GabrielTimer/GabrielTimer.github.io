@@ -1143,6 +1143,13 @@ if(phase==="prep"){
 
 if(exo.id === "RESP_APAISER"){
 
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
+
 location.href =
 "respir/index.html?mode=calm&duree="
 + exo.ex
@@ -1155,6 +1162,13 @@ return;
 
 if(exo.id === "RESP_EQUILIBRER"){
 
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
+
 location.href =
 "respir/index.html?mode=balance&duree="
 + exo.ex
@@ -1166,6 +1180,13 @@ return;
 }
 
 if(exo.id === "RESP_DEBUTER"){
+
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
 
 location.href =
 "respir/index.html?mode=beginner&duree="
@@ -1296,6 +1317,13 @@ exo = p.exercices[exIndex];
 
 if(exo.id === "RESP_APAISER"){
 
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
+
     location.href =
     "respir/index.html?mode=calm&duree="
     + exo.ex
@@ -1307,6 +1335,13 @@ if(exo.id === "RESP_APAISER"){
 
 if(exo.id === "RESP_EQUILIBRER"){
 
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
+
     location.href =
     "respir/index.html?mode=balance&duree="
     + exo.ex
@@ -1317,6 +1352,13 @@ if(exo.id === "RESP_EQUILIBRER"){
 }
 
 if(exo.id === "RESP_DEBUTER"){
+
+sessionStorage.setItem("resumeTimer", JSON.stringify({
+    exIndex,
+    repIndex,
+    serieIndex,
+    remainingTime
+}));
 
     location.href =
     "respir/index.html?mode=beginner&duree="
@@ -1539,6 +1581,41 @@ computeTotal();
 updateTotal();
 
 update();
+
+const resume =
+new URLSearchParams(location.search).get("resume");
+
+if(resume){
+
+    const state =
+    JSON.parse(sessionStorage.getItem("resumeTimer"));
+
+    if(state){
+
+        exIndex = state.exIndex + 1;
+        repIndex = 1;
+        serieIndex = state.serieIndex;
+
+        if(exIndex >= p.exercices.length){
+
+            exIndex = 0;
+            serieIndex++;
+
+        }
+
+        phase = "prep";
+
+        t = PREP_TIME;
+        totalTimePhase = PREP_TIME;
+
+        recomputeRemainingTime();
+        update();
+
+        sessionStorage.removeItem("resumeTimer");
+
+    }
+
+}
 
 setInterval(loop,1000);
 
