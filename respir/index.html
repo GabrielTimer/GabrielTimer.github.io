@@ -1212,12 +1212,10 @@ if(params.get("fromProgram")){
 
     startBtn.onclick = ()=>{
 
-        window.location =
-        "../cloud.html?patient="
-        + localStorage.getItem("currentPatient")
-        + "&v=" + Date.now();
+    window.location =
+    "../timer.html?resume=1";
 
-    };
+};
 
     return;
 }
