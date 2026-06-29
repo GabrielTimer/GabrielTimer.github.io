@@ -100,31 +100,6 @@ Promise.all([
 
 });
 
-  console.log(
-    "TOTAL EXERCICES :",
-    exercises.length
-  );
-
-  restoreFilters();
-
-  buildFilters();
-
-  setupSearch();
-
-  setupReset();
-
-  document.getElementById(
-    "searchInput"
-  ).value = filters.search;
-
-  updateGlossary();
-
-})
-.catch(error => {
-
-  console.error(error);
-
-});
 
 
 function buildFilters(){
