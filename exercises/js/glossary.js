@@ -62,52 +62,43 @@ Promise.all([
   fetch('./data/exercises.json?v=' + VERSION)
     .then(r => r.json()),
 
-  fetch('./data/hep/hep_catalogue.json?v=' + VERSION)
+  fetch('./data/hep_exercises.json?v=' + VERSION)
     .then(r => r.json())
 
 ])
 
 .then(([gabriel, hep]) => {
 
-const hepConvertis = hep.map(ex => ({
-
-  id: ex.id,
-
-  nom: ex.nom,
-
-  youtube: ex.youtube || "",
-
-  vimeo: ex.vimeo || "",
-
-  categorie: "HEP",
-
-  niveau: 1,
-
-    objectif: "",
-
-    duree: "",
-
-    image:
-      "/exercises/images/HEP/" +
-      ex.image,
-
-    tags:
-      (ex.tags || "")
-      .split(",")
-      .map(t => t.trim()),
-
-    consignes: [
-      ex.description || ""
-    ],
-
-    source: "hep"
-
-  }));
-
   exercises = [
     ...gabriel,
-    ...hepConvertis
+    ...hep
   ];
+
+  console.log(
+    "TOTAL EXERCICES :",
+    exercises.length
+  );
+
+  restoreFilters();
+
+  buildFilters();
+
+  setupSearch();
+
+  setupReset();
+
+  document.getElementById(
+    "searchInput"
+  ).value = filters.search;
+
+  updateGlossary();
+
+})
+.catch(error => {
+
+  console.error(error);
+
+});
 
   console.log(
     "TOTAL EXERCICES :",
