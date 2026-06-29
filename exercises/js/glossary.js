@@ -348,12 +348,19 @@ function filterExercises(){
 
   return exercises.filter(ex => {
 
-    if (
-      filters.source !== "all" &&
-      ex.source !== filters.source
-    ){
-      return false;
-    }
+    if (filters.source === "HEP") {
+
+    if (ex.source !== "HEP")
+        return false;
+
+}
+
+if (filters.source === "CABINET") {
+
+    if (ex.source === "HEP")
+        return false;
+
+}
 
     const searchText = [
 
