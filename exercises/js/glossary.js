@@ -4,7 +4,8 @@ const filters = {
   search: '',
   categorie: [],
   niveau: [],
-  tags: []
+  tags: [],
+  source: "all"
 };
 
 let exercises = [];
@@ -81,9 +82,11 @@ Promise.all([
 
   restoreFilters();
 
-  buildFilters();
+buildFilters();
 
-  setupSearch();
+setupSourceButtons();
+
+setupSearch();
 
   setupReset();
 
@@ -344,6 +347,13 @@ function updateGlossary(){
 function filterExercises(){
 
   return exercises.filter(ex => {
+
+    if (
+      filters.source !== "all" &&
+      ex.source !== filters.source
+    ){
+      return false;
+    }
 
     const searchText = [
 
@@ -646,6 +656,30 @@ function updateResultsCount(filtered){
   .textContent =
 
   `${filtered.length} exercices`;
+}
+
+function setupSourceButtons(){
+
+  document
+    .querySelectorAll(".source-btn")
+    .forEach(btn=>{
+
+      btn.onclick=()=>{
+
+        document
+          .querySelectorAll(".source-btn")
+          .forEach(b=>b.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        filters.source = btn.dataset.source;
+
+        updateGlossary();
+
+      };
+
+    });
+
 }
 
 window.addEventListener('scroll', () => {
