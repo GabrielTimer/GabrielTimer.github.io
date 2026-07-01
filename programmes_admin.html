@@ -263,6 +263,12 @@ div.querySelector(".pdfBtn").onclick=(e)=>{
 
     };
 
+console.log("PROGRAMME :", programme);
+
+console.log("PDF DATA :", pdfData);
+
+console.log(JSON.stringify(pdfData, null, 2));
+
     localStorage.setItem(
         "programme_pdf",
         JSON.stringify(pdfData)
