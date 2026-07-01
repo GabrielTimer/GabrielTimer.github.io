@@ -1014,40 +1014,39 @@ render();
 
 function resetProgramme(){
 
-if(
-!confirm(
-"Effacer le programme chargé et repartir de zéro ?"
-)
-){
-return;
-}
+  if(
+    !confirm(
+      "Effacer complètement le programme et repartir de zéro ?"
+    )
+  ){
+    return;
+  }
 
-localStorage.removeItem(
-"programme_temp"
-);
+  // Suppression des données temporaires
+  [
+    "programme_temp",
+    "current_programme",
+    "edit_programme",
+    "programmeCopie",
+    "pathologie",
+    "pathologie_nom",
+    "patho_data",
+    "editCloudId",
+    "return_to_config",
+    "eva_temp"
+  ].forEach(key => localStorage.removeItem(key));
 
-localStorage.removeItem(
-"current_programme"
-);
+  // Réinitialisation de la séance
+  exercices = [];
 
-localStorage.removeItem(
-"edit_programme"
-);
+  document.getElementById("series").value = 3;
+  document.getElementById("sessionName").value = "Libre";
+  document.getElementById("title").innerText = "Configurer la séance";
+  document.getElementById("patientId").value = "";
 
-localStorage.removeItem(
-"pathologie"
-);
+  render();
 
-localStorage.removeItem(
-"patho_data"
-);
-
-localStorage.removeItem(
-"pathologie_nom"
-);
-
-location.reload();
-
+  alert("Programme remis à zéro.");
 }
 
 function duplicateExo(i){
