@@ -22,7 +22,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "679",
@@ -72,7 +73,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "66",
@@ -123,7 +125,8 @@
     "pathologies": [
       "LBP",
       "HNP"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "377",
@@ -164,7 +167,8 @@
       "modele": "qwen2.5:7b",
       "version": "3.0"
     },
-    "pathologies": []
+    "pathologies": [],
+    "source": "HEP"
   },
   {
     "id": "157",
@@ -215,7 +219,8 @@
       "Entorse de cheville",
       "Instabilité chronique de cheville",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "311",
@@ -273,7 +278,8 @@
       "Entorse de cheville",
       "Instabilité chronique de cheville",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "17",
@@ -341,7 +347,8 @@
     },
     "pathologies": [
       "Entorse de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "158",
@@ -394,7 +401,8 @@
       "Entorse de cheville",
       "Instabilité chronique de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "159",
@@ -448,7 +456,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "160",
@@ -500,7 +509,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "161",
@@ -548,7 +558,8 @@
     },
     "pathologies": [
       "Entorse de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "162",
@@ -597,7 +608,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "163",
@@ -648,7 +660,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "164",
@@ -699,7 +712,8 @@
       "Entorse de cheville",
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "165",
@@ -753,7 +767,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "166",
@@ -804,7 +819,8 @@
       "Fasciite plantaire",
       "Entorse de cheville",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "167",
@@ -856,7 +872,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "565",
@@ -918,7 +935,8 @@
     "pathologies": [
       "Instabilité chronique de cheville",
       "Entorse de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "168",
@@ -967,7 +985,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "169",
@@ -1016,7 +1035,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "170",
@@ -1064,7 +1084,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Dépassement tibial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "544",
@@ -1111,7 +1132,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "61",
@@ -1162,7 +1184,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Impingement"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "633",
@@ -1216,7 +1239,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "634",
@@ -1265,7 +1289,8 @@
     },
     "pathologies": [
       "Douleurs aux épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "666",
@@ -1315,7 +1340,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur dorsale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "545",
@@ -1366,7 +1392,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "361",
@@ -1417,7 +1444,8 @@
     "pathologies": [
       "Trouble de l'équilibre",
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "141",
@@ -1483,7 +1511,8 @@
     "pathologies": [
       "Impingement",
       "Bursite"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "396",
@@ -1533,7 +1562,8 @@
     "pathologies": [
       "Tendinopathie du biceps",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "399",
@@ -1581,7 +1611,8 @@
       "Bursite de l'épaule",
       "Impingement de l'épaule",
       "Lésion des rotateurs d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "397",
@@ -1631,7 +1662,8 @@
     "pathologies": [
       "Tendinopathie des biceps",
       "Bursite des omoplates"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "400",
@@ -1693,7 +1725,8 @@
       "Tendinopathie bicipétale",
       "Bursite de l'épaule",
       "Impingement épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "547",
@@ -1738,7 +1771,8 @@
     "pathologies": [
       "Tension à l'elbow",
       "Rigidité des biceps"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "548",
@@ -1786,7 +1820,8 @@
       "Tension dans les biceps",
       "Rigidité des biceps",
       "Rigidité du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "455",
@@ -1853,7 +1888,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "566",
@@ -1906,7 +1942,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "549",
@@ -1955,7 +1992,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "550",
@@ -2005,7 +2043,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "551",
@@ -2054,7 +2093,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "552",
@@ -2103,7 +2143,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "70",
@@ -2155,7 +2196,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "422",
@@ -2234,7 +2276,8 @@
     "pathologies": [
       "Arthrose de la hanche",
       "Douleur post-thérapie hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "423",
@@ -2285,7 +2328,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleurs lombaires"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "446",
@@ -2343,7 +2387,8 @@
       "Tendinopathie du grand fessier",
       "Syndrome du piriforme",
       "Pubalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "447",
@@ -2413,7 +2458,8 @@
     "pathologies": [
       "Douleur à la hanche",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "636",
@@ -2464,7 +2510,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "171",
@@ -2525,7 +2572,8 @@
       "Entorse de cheville",
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "172",
@@ -2578,7 +2626,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "82",
@@ -2628,7 +2677,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "174",
@@ -2711,7 +2761,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "687",
@@ -2760,7 +2811,8 @@
     },
     "pathologies": [
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "424",
@@ -2816,7 +2868,8 @@
       "Lombalgie chronique",
       "Hernie discale",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "175",
@@ -2879,7 +2932,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "176",
@@ -2934,7 +2988,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "567",
@@ -2986,7 +3041,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Coup du lapin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "678",
@@ -3036,7 +3092,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "177",
@@ -3087,7 +3144,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Coup du lapin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "179",
@@ -3137,7 +3195,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "568",
@@ -3188,7 +3247,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "569",
@@ -3244,7 +3304,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Coup du lapin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "180",
@@ -3295,7 +3356,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "444",
@@ -3344,7 +3406,8 @@
       "Douleur thoracique",
       "Dysfonctionnement pectoral",
       "Insuffisance respiratoire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "445",
@@ -3400,7 +3463,8 @@
     "pathologies": [
       "Déconditionnement physique",
       "Douleurs chroniques diffuses"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "518",
@@ -3451,7 +3515,8 @@
       "Douleur au torse",
       "Fibromyalgie",
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "488",
@@ -3504,7 +3569,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Mauvaise posture"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "487",
@@ -3557,7 +3623,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Mal de dos du téléphone"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "681",
@@ -3606,7 +3673,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "682",
@@ -3659,7 +3727,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "680",
@@ -3709,7 +3778,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "137",
@@ -3763,7 +3833,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "472",
@@ -3816,7 +3887,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "267",
@@ -3869,7 +3941,8 @@
     "pathologies": [
       "Tendinopathie du moyen fessier",
       "Bursite de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "268",
@@ -3929,7 +4002,8 @@
       "arthoplastie du genou",
       "bursite",
       "tendinopathie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "570",
@@ -3979,7 +4053,8 @@
     "pathologies": [
       "Tendinopathie du moyen fessier",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "614",
@@ -4043,7 +4118,8 @@
     },
     "pathologies": [
       "Impingement de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "615",
@@ -4107,7 +4183,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "381",
@@ -4163,7 +4240,8 @@
       "TKA",
       "Sprained Ankle",
       "Fracture"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "382",
@@ -4218,7 +4296,8 @@
     "pathologies": [
       "Fracture",
       "HNP"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "476",
@@ -4267,7 +4346,8 @@
     },
     "pathologies": [
       "Douleur thoracique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "571",
@@ -4321,7 +4401,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "9",
@@ -4378,7 +4459,8 @@
       "Hernie discale",
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "415",
@@ -4421,7 +4503,8 @@
     },
     "pathologies": [
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "416",
@@ -4467,7 +4550,8 @@
       "Douleur genou",
       "Douleur hanche",
       "Douleur cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "417",
@@ -4533,7 +4617,8 @@
       "Lésion méniscale",
       "Entorse LLI",
       "Syndrome de l'essuie-glace"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "418",
@@ -4593,7 +4678,8 @@
     },
     "pathologies": [
       "Douleurs aux genoux"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "181",
@@ -4641,7 +4727,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "182",
@@ -4691,7 +4778,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "183",
@@ -4747,7 +4835,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "425",
@@ -4805,7 +4894,8 @@
       "Lombalgie chronique",
       "Hernie discale",
       "Cruralgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "572",
@@ -4856,7 +4946,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "489",
@@ -4913,7 +5004,8 @@
       "Douleur dorsale",
       "Scoliose",
       "Costochonrite"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "683",
@@ -4979,7 +5071,8 @@
     "pathologies": [
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "362",
@@ -5029,7 +5122,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur lombaire chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "699",
@@ -5072,7 +5166,8 @@
     "pathologies": [
       "Douleur nerveuse",
       "Paresthésie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "184",
@@ -5131,7 +5226,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "617",
@@ -5179,7 +5275,8 @@
     },
     "pathologies": [
       "Tendinopathie triceps"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "185",
@@ -5239,7 +5336,8 @@
       "Lombalgie chronique",
       "Hernie discale",
       "Sténose discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "574",
@@ -5290,7 +5388,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Dysfonction cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "553",
@@ -5342,7 +5441,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur au cou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "426",
@@ -5391,7 +5491,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "554",
@@ -5440,7 +5541,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "519",
@@ -5485,7 +5587,8 @@
     },
     "pathologies": [
       "Belle’s Paralyse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "520",
@@ -5530,7 +5633,8 @@
     },
     "pathologies": [
       "Bell’s Palsy"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "453",
@@ -5583,7 +5687,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "620",
@@ -5632,7 +5737,8 @@
       "Tendinite de De Quervain",
       "Arthrite des doigts",
       "Arthrite de la main"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "619",
@@ -5678,7 +5784,8 @@
       "Tendinite de De Quervain",
       "Arthrite de doigt",
       "Arthrite de main"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "618",
@@ -5727,7 +5834,8 @@
       "Tendinite de De Quervain",
       "Fasciite digitale",
       "Arthrite des doigts"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "55",
@@ -5790,7 +5898,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "616",
@@ -5851,7 +5960,8 @@
       "Tendinite de De Quervain",
       "Arthrite du doigt",
       "Arthrite de la main"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "490",
@@ -5901,7 +6011,8 @@
     },
     "pathologies": [
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "186",
@@ -5942,7 +6053,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "637",
@@ -5993,7 +6105,8 @@
     "pathologies": [
       "Entorse de l'orneau",
       "Douleur aux pieds"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "136",
@@ -6061,7 +6174,8 @@
     "pathologies": [
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "135",
@@ -6113,7 +6227,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "521",
@@ -6163,7 +6278,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Dysfonctionnelles de la colonne vertébrale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "491",
@@ -6233,7 +6349,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "363",
@@ -6306,7 +6423,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "376",
@@ -6360,7 +6478,8 @@
       "Arthrose du genou",
       "Syndrome fémoro-patellaire",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "696",
@@ -6411,7 +6530,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "332",
@@ -6470,7 +6590,8 @@
     },
     "pathologies": [
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "270",
@@ -6528,7 +6649,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "187",
@@ -6583,7 +6705,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "312",
@@ -6635,7 +6758,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "464",
@@ -6719,7 +6843,8 @@
     },
     "pathologies": [
       "Douleurs lombaires"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "522",
@@ -6772,7 +6897,8 @@
     },
     "pathologies": [
       "Médial epicondylopathie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "451",
@@ -6853,7 +6979,8 @@
     "pathologies": [
       "Strain des adducteurs",
       "Douleur inguinale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "79",
@@ -6908,7 +7035,8 @@
     "pathologies": [
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "638",
@@ -6964,7 +7092,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "364",
@@ -7022,7 +7151,8 @@
     "pathologies": [
       "PTG",
       "PTH"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "365",
@@ -7073,7 +7203,8 @@
     "pathologies": [
       "HNP",
       "DLC"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "414",
@@ -7127,7 +7258,8 @@
       "Post-opératoire de la hanche",
       "Post-opératoire du genou",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "86",
@@ -7176,7 +7308,8 @@
     },
     "pathologies": [
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "621",
@@ -7233,7 +7366,8 @@
     "pathologies": [
       "Douleur à la hanche",
       "Douleur au genou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "81",
@@ -7283,7 +7417,8 @@
       "Fasciite plantaire",
       "Syndrome du piriforme",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "68",
@@ -7334,7 +7469,8 @@
       "Tendinopathie du hamstring",
       "Lombalgie chronique",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "492",
@@ -7390,7 +7526,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Labral repair"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "555",
@@ -7451,7 +7588,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "189",
@@ -7509,7 +7647,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "493",
@@ -7560,7 +7699,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "190",
@@ -7619,7 +7759,8 @@
     "pathologies": [
       "Tendinopathie d'Achille",
       "Ankles sprain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "366",
@@ -7666,7 +7807,8 @@
     },
     "pathologies": [
       "Entorse de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "367",
@@ -7721,7 +7863,8 @@
       "Tendinopathie du grand fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "74",
@@ -7788,7 +7931,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "191",
@@ -7842,7 +7986,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "75",
@@ -7892,7 +8037,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "80",
@@ -7988,7 +8134,8 @@
       "Arthrose de hanche",
       "Post-opératoire de TKA",
       "Post-opératoire de THA"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "494",
@@ -8041,7 +8188,8 @@
     },
     "pathologies": [
       "Arthrose de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "496",
@@ -8098,7 +8246,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "495",
@@ -8154,7 +8303,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "368",
@@ -8210,7 +8360,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "273",
@@ -8271,7 +8422,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "333",
@@ -8326,7 +8478,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "497",
@@ -8378,7 +8531,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "639",
@@ -8430,7 +8584,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "640",
@@ -8489,7 +8644,8 @@
       "Coxarthrose",
       "Conflit fémoro-acéabulaire",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "499",
@@ -8574,7 +8730,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "501",
@@ -8625,7 +8782,8 @@
     "pathologies": [
       "Douleur au hanche",
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "500",
@@ -8683,7 +8841,8 @@
       "Syndrome du piriforme",
       "Douleur à la hanche liée au gluteus medius",
       "Douleur à la hanche non-spécifiée"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "193",
@@ -8733,7 +8892,8 @@
     "pathologies": [
       "Impingement",
       "Bursite du épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "475",
@@ -8782,7 +8942,8 @@
     },
     "pathologies": [
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "134",
@@ -8834,7 +8995,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Coup du lapin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "133",
@@ -8884,7 +9046,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "131",
@@ -8950,7 +9113,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "132",
@@ -9014,7 +9178,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Disdisplasia dégénérative disque-dénerveuse (DDD)"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "87",
@@ -9069,7 +9234,8 @@
       "Arthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "88",
@@ -9119,7 +9285,8 @@
     "pathologies": [
       "Arthrose",
       "Conflit fémoro-acétabulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "231",
@@ -9183,7 +9350,8 @@
     "pathologies": [
       "Tendinopathie de la coiffe des rotateurs",
       "Impingement de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "383",
@@ -9242,7 +9410,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "234",
@@ -9294,7 +9463,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Arthrose gléno-humérale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "232",
@@ -9343,7 +9513,8 @@
     },
     "pathologies": [
       "Impingement du couple rétropéculaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "478",
@@ -9394,7 +9565,8 @@
       "Bursite épaule",
       "Tendinite épaule",
       "Réparation labrale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "300",
@@ -9443,7 +9615,8 @@
     "pathologies": [
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "76",
@@ -9502,7 +9675,8 @@
     },
     "pathologies": [
       "Syndrome de douleur patellofémorale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "335",
@@ -9551,7 +9725,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "199",
@@ -9602,7 +9777,8 @@
     "pathologies": [
       "Tendinopathie du tendon d'Achille",
       "Syndrome de la bande d'IT"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "275",
@@ -9650,7 +9826,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "274",
@@ -9698,7 +9875,8 @@
     },
     "pathologies": [
       "Syndrome de douleur patellafrémique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "641",
@@ -9742,7 +9920,8 @@
     },
     "pathologies": [
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "642",
@@ -9789,7 +9968,8 @@
     },
     "pathologies": [
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "575",
@@ -9854,7 +10034,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Douleur au genou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "395",
@@ -9912,7 +10093,8 @@
     "pathologies": [
       "Gonarthrose",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "139",
@@ -9962,7 +10144,8 @@
     "pathologies": [
       "Herniation discale",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "336",
@@ -10014,7 +10197,8 @@
     "pathologies": [
       "Douleur lombaire aiguë",
       "Douleur lombaire chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "524",
@@ -10059,7 +10243,8 @@
       "Bell’s Palsy",
       "faiblesse faciale",
       "paralysie faciale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "337",
@@ -10130,7 +10315,8 @@
       "Lombalgie chronique",
       "Hernie discale",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "667",
@@ -10178,7 +10364,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "443",
@@ -10235,7 +10422,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "498",
@@ -10287,7 +10475,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "90",
@@ -10350,7 +10539,8 @@
       "Arthrose",
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "369",
@@ -10401,7 +10591,8 @@
       "Gonarthrose",
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "470",
@@ -10449,7 +10640,8 @@
       "Gonarthrose",
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "576",
@@ -10506,7 +10698,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "602",
@@ -10557,7 +10750,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "643",
@@ -10604,7 +10798,8 @@
     },
     "pathologies": [
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "502",
@@ -10655,7 +10850,8 @@
       "Arthrose",
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "503",
@@ -10723,7 +10919,8 @@
     "pathologies": [
       "Syndrome du piriformis",
       "Sciathique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "428",
@@ -10774,7 +10971,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "556",
@@ -10827,7 +11025,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "577",
@@ -10880,7 +11079,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "668",
@@ -10934,7 +11134,8 @@
     },
     "pathologies": [
       "Douleur aux hanches"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "429",
@@ -10983,7 +11184,8 @@
       "Hernie discale",
       "Cruralgie",
       "Arthrose lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "442",
@@ -11027,7 +11229,8 @@
     },
     "pathologies": [
       "Fibromyalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "644",
@@ -11069,7 +11272,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "338",
@@ -11119,7 +11323,8 @@
     "pathologies": [
       "Névralgie cervico-brachiale",
       "Cervicalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "473",
@@ -11191,7 +11396,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "684",
@@ -11239,7 +11445,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "474",
@@ -11315,7 +11522,8 @@
     "pathologies": [
       "Herniation discale",
       "Sténose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "63",
@@ -11391,7 +11599,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "64",
@@ -11439,7 +11648,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Syndrome de l'outlet thoracique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "65",
@@ -11489,7 +11699,8 @@
     "pathologies": [
       "Syndrome du canal de la hanche thoracique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "67",
@@ -11540,7 +11751,8 @@
     "pathologies": [
       "Sciatalgie",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "62",
@@ -11587,7 +11799,8 @@
     "pathologies": [
       "Syndrome de la voûte thoracique",
       "Neuroleptomalgie ulnaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "525",
@@ -11632,7 +11845,8 @@
     },
     "pathologies": [
       "Belle's pâle"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "601",
@@ -11685,7 +11899,8 @@
     "pathologies": [
       "Douleur hanche",
       "Empêchement de la hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "603",
@@ -11737,7 +11952,8 @@
     },
     "pathologies": [
       "Impingement de la hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "578",
@@ -11791,7 +12007,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "622",
@@ -11837,7 +12054,8 @@
       "Tendinite de De Quervain",
       "Arthrite des doigts",
       "Arthrite de la main"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "101",
@@ -11884,7 +12102,8 @@
       "Lésion méniscale",
       "Tendinopathie rotulienne",
       "Réparation ACL"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "557",
@@ -11933,7 +12152,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Douleur épaule chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "604",
@@ -11986,7 +12206,8 @@
     },
     "pathologies": [
       "Impingement de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "280",
@@ -12040,7 +12261,8 @@
       "Douleur lombaire chronique",
       "Dysfonction SI",
       "Flexeur de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "454",
@@ -12093,7 +12315,8 @@
     "pathologies": [
       "Disfonction du jonction sacréo-iliaque",
       "Douleur lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "607",
@@ -12145,7 +12368,8 @@
     "pathologies": [
       "Douleurs pelviennes",
       "Douleurs lombaires"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "605",
@@ -12214,7 +12438,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "606",
@@ -12275,7 +12500,8 @@
       "Douleur du bassin",
       "Douleur lombaire",
       "Douleur pelvienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "108",
@@ -12324,7 +12550,8 @@
     "pathologies": [
       "Bursite de l'épaule",
       "Impingement"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "484",
@@ -12392,7 +12619,8 @@
       "Engorgement",
       "Lésion bursite du coude",
       "Tendinopathie du tendon du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "110",
@@ -12446,7 +12674,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "479",
@@ -12496,7 +12725,8 @@
     "pathologies": [
       "RTC",
       "Tendinitis de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "109",
@@ -12552,7 +12782,8 @@
     "pathologies": [
       "Entorse tendineuse épaule",
       "Bursite épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "467",
@@ -12609,7 +12840,8 @@
     },
     "pathologies": [
       "Trouble de l'équilibre"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "685",
@@ -12657,7 +12889,8 @@
     },
     "pathologies": [
       "Tendinopathie de fibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "394",
@@ -12707,7 +12940,8 @@
     },
     "pathologies": [
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "283",
@@ -12771,7 +13005,8 @@
       "Tendinopathie du petit rond",
       "Lombalgie chronique",
       "Douleur lombaire persistante"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "284",
@@ -12821,7 +13056,8 @@
     },
     "pathologies": [
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "504",
@@ -12872,7 +13108,8 @@
     "pathologies": [
       "Syndrome du piriformis",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "200",
@@ -12929,7 +13166,8 @@
       "Fibromyalgie",
       "Douleurs chroniques diffuses",
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "579",
@@ -12982,7 +13220,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Dorsalgie aiguë"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "313",
@@ -13037,7 +13276,8 @@
     "pathologies": [
       "DDD",
       "HNP"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "314",
@@ -13091,7 +13331,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "201",
@@ -13140,7 +13381,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "645",
@@ -13189,7 +13431,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "202",
@@ -13256,7 +13499,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "277",
@@ -13313,7 +13557,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "278",
@@ -13362,7 +13607,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "203",
@@ -13419,7 +13665,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "686",
@@ -13482,7 +13729,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "204",
@@ -13532,7 +13780,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sténose discienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "205",
@@ -13583,7 +13832,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "206",
@@ -13631,7 +13881,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "427",
@@ -13683,7 +13934,8 @@
     },
     "pathologies": [
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "580",
@@ -13736,7 +13988,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "286",
@@ -13790,7 +14043,8 @@
     "pathologies": [
       "Tendinopathie du moyen fessier",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "330",
@@ -13838,7 +14092,8 @@
     "how_often": "2-3 fois par jour",
     "pathologies": [
       "Impingement épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "152",
@@ -13891,7 +14146,8 @@
       "Impingement de l'épaule",
       "Bursite de l'épaule",
       "Tendinopathie de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "207",
@@ -13943,7 +14199,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "208",
@@ -13994,7 +14251,8 @@
       "Lombalgie chronique",
       "Sciatique",
       "Cruralgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "209",
@@ -14048,7 +14306,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "340",
@@ -14099,7 +14358,8 @@
     "pathologies": [
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "341",
@@ -14155,7 +14415,8 @@
       "Capsulite rétractile",
       "Instabilité d'épaule",
       "Arthrose gléno-humérale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "342",
@@ -14206,7 +14467,8 @@
     },
     "pathologies": [
       "Impingement de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "343",
@@ -14255,7 +14517,8 @@
     },
     "pathologies": [
       "Impingement du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "344",
@@ -14309,7 +14572,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "345",
@@ -14376,7 +14640,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Capsulite d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "346",
@@ -14429,7 +14694,8 @@
       "impinimentement des épaules",
       "bursite des épaules",
       "tendinite du RTC"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "347",
@@ -14485,7 +14751,8 @@
     },
     "pathologies": [
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "348",
@@ -14542,7 +14809,8 @@
       "Impingement de l'épaule",
       "Bursite de l'épaule",
       "Tendinopathie du tendon de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "339",
@@ -14593,7 +14861,8 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "210",
@@ -14650,7 +14919,8 @@
       "Hernie discale",
       "Sciatique",
       "Cruralgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "211",
@@ -14708,7 +14978,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "153",
@@ -14769,7 +15040,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "155",
@@ -14832,7 +15104,8 @@
     },
     "pathologies": [
       "Impingement de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "154",
@@ -14894,7 +15167,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "514",
@@ -14947,7 +15221,8 @@
     "pathologies": [
       "Impingement",
       "Bursite du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "515",
@@ -15001,7 +15276,8 @@
       "Bursite épaule",
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "516",
@@ -15052,7 +15328,8 @@
     "pathologies": [
       "Bursite épatique",
       "Tendinopathie d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "517",
@@ -15103,7 +15380,8 @@
     "pathologies": [
       "Impingement",
       "Tendinopathie du tendon RTC"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "646",
@@ -15145,7 +15423,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "558",
@@ -15194,7 +15473,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "581",
@@ -15247,7 +15527,8 @@
     "pathologies": [
       "Déconditionnement physique",
       "Douleurs chroniques diffuses"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "582",
@@ -15295,7 +15576,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "583",
@@ -15343,7 +15625,8 @@
     },
     "pathologies": [
       "Douleur lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "85",
@@ -15396,7 +15679,8 @@
       "Réparation d'ACL",
       "Arthroplastie du genou (TKA)",
       "Arthroplastie de la hanche (THR)"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "212",
@@ -15454,7 +15738,8 @@
       "Tendinopathie rotulienne",
       "Lésion méniscale",
       "Syndrome de l'essuie-glace"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "77",
@@ -15502,7 +15787,8 @@
       "Conflit fémoro-acétabulaire",
       "Syndrome du piriforme",
       "Pubalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "78",
@@ -15553,7 +15839,8 @@
     },
     "pathologies": [
       "Douleur lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "430",
@@ -15609,7 +15896,8 @@
       "Lombalgie aiguë",
       "Lombalgie chronique",
       "Arthrite lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "584",
@@ -15660,7 +15948,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "585",
@@ -15714,7 +16003,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "586",
@@ -15764,7 +16054,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "290",
@@ -15821,7 +16112,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "613",
@@ -15876,7 +16168,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur au bassin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "213",
@@ -15940,7 +16233,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "214",
@@ -15998,7 +16292,8 @@
       "Hernie discale",
       "Sciatique",
       "Arthrose lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "215",
@@ -16045,7 +16340,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "608",
@@ -16107,7 +16403,8 @@
     },
     "pathologies": [
       "Douleur à l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "218",
@@ -16158,7 +16455,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "587",
@@ -16212,7 +16510,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "450",
@@ -16262,7 +16561,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "526",
@@ -16312,7 +16612,8 @@
       "Tendinite de De Quervain",
       "Epicondylite latérale",
       "Epicondylite médiale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "529",
@@ -16365,7 +16666,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "528",
@@ -16427,7 +16729,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "220",
@@ -16480,7 +16783,8 @@
       "Lombalgie chronique",
       "Hernie discale",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "219",
@@ -16531,7 +16835,8 @@
     "pathologies": [
       "Herniation discale",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "222",
@@ -16588,7 +16893,8 @@
     },
     "pathologies": [
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "221",
@@ -16661,7 +16967,8 @@
     },
     "pathologies": [
       "Douleur dorsale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "223",
@@ -16711,7 +17018,8 @@
     "pathologies": [
       "Douleur au dos",
       "Impingement des épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "370",
@@ -16761,7 +17069,8 @@
     "pathologies": [
       "Arthrose",
       "Douleur lombaire en basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "371",
@@ -16815,7 +17124,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "22",
@@ -16869,7 +17179,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "315",
@@ -16918,7 +17229,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "318",
@@ -16971,7 +17283,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "316",
@@ -17019,7 +17332,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "319",
@@ -17078,7 +17392,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "317",
@@ -17127,7 +17442,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "320",
@@ -17171,7 +17487,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "527",
@@ -17220,7 +17537,8 @@
     },
     "pathologies": [
       "Douleur dorsale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "623",
@@ -17273,7 +17591,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur au cou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "150",
@@ -17325,7 +17644,8 @@
       "Impingement d'épaule",
       "Bursite d'épaule",
       "Tendinopathie d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "331",
@@ -17392,7 +17712,8 @@
       "Impingement d'épaule",
       "Bursite d'épaule",
       "Tendinopathie d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "441",
@@ -17442,7 +17763,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "559",
@@ -17492,7 +17814,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "560",
@@ -17545,7 +17868,8 @@
     },
     "pathologies": [
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "624",
@@ -17608,7 +17932,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "647",
@@ -17659,7 +17984,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "700",
@@ -17715,7 +18041,8 @@
     "pathologies": [
       "Douleur à la cheville",
       "Gonflement à la cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "648",
@@ -17764,7 +18091,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "530",
@@ -17817,7 +18145,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "665",
@@ -17868,7 +18197,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "LCA"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "531",
@@ -17918,7 +18248,8 @@
     "pathologies": [
       "Tendinopathie rotulienne",
       "Gonarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "188",
@@ -18001,7 +18332,8 @@
       "Entorse de cheville",
       "Tendinopathie d'Achille",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "649",
@@ -18054,7 +18386,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "561",
@@ -18106,7 +18439,8 @@
     },
     "pathologies": [
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "224",
@@ -18159,7 +18493,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "225",
@@ -18222,7 +18557,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "651",
@@ -18276,7 +18612,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "532",
@@ -18353,7 +18690,8 @@
     "pathologies": [
       "Douleur hanche",
       "Douleur genou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "669",
@@ -18408,7 +18746,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "677",
@@ -18456,7 +18795,8 @@
     },
     "pathologies": [
       "Douleur à la hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "99",
@@ -18507,7 +18847,8 @@
       "Lésion méniscale",
       "Tendinopathie rotulienne",
       "Syndrome fémoro-patellaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "100",
@@ -18558,7 +18899,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Gonarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "533",
@@ -18609,7 +18951,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "688",
@@ -18659,7 +19002,8 @@
     "pathologies": [
       "Tendinopathie rotulienne",
       "Syndrome fémoro-patellaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "562",
@@ -18713,7 +19057,8 @@
     "pathologies": [
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "626",
@@ -18762,7 +19107,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "625",
@@ -18837,7 +19183,8 @@
     },
     "pathologies": [
       "Impingement de la hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "652",
@@ -18902,7 +19249,8 @@
     "pathologies": [
       "Tendinopathie du quadriceps",
       "Dysfonctionnement du quadriceps"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "534",
@@ -18956,7 +19304,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "456",
@@ -19007,7 +19356,8 @@
     "pathologies": [
       "Syndrome du piriforme",
       "Tendinopathie du petit péristrophe"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "465",
@@ -19064,7 +19414,8 @@
     },
     "pathologies": [
       "Syndrome du piriformis"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "701",
@@ -19113,7 +19464,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "535",
@@ -19162,7 +19514,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "689",
@@ -19231,7 +19584,8 @@
       "Douleurs thoraciques",
       "Douleurs dorsales",
       "Douleurs aux épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "226",
@@ -19292,7 +19646,8 @@
       "Impinguement de l'épaule",
       "Bursite de l'épaule",
       "Tendinite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "627",
@@ -19348,7 +19703,8 @@
     },
     "pathologies": [
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "628",
@@ -19398,7 +19754,8 @@
       "Douleur de hanche",
       "Impingement de hanche",
       "Renforcement de la hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "690",
@@ -19448,7 +19805,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "227",
@@ -19500,7 +19858,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "676",
@@ -19550,7 +19909,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "228",
@@ -19601,7 +19961,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur dans le haut du dos"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "653",
@@ -19652,7 +20013,8 @@
     },
     "pathologies": [
       "Douleur cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "147",
@@ -19713,7 +20075,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "142",
@@ -19762,7 +20125,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "229",
@@ -19836,7 +20200,8 @@
       "Impingement rotateur d'épaule",
       "Tendinopathie de l'articulation de l'épaule",
       "Bursite de l'articulation de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "398",
@@ -19891,7 +20256,8 @@
       "Lésion méniscale",
       "Entorse LLI",
       "Entorse LLE"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "480",
@@ -19939,7 +20305,8 @@
     },
     "pathologies": [
       "Épicondylalgie d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "106",
@@ -19995,7 +20362,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Impingement du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "125",
@@ -20051,7 +20419,8 @@
     },
     "pathologies": [
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "449",
@@ -20099,7 +20468,8 @@
     },
     "pathologies": [
       "Douleur du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "481",
@@ -20212,7 +20582,8 @@
       "Conflit sous-acromial",
       "Coiffe des rotateurs",
       "Capsulite"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "588",
@@ -20263,7 +20634,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "146",
@@ -20312,7 +20684,8 @@
     },
     "pathologies": [
       "Impingement d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "536",
@@ -20385,7 +20758,8 @@
     },
     "pathologies": [
       "Impingement d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "233",
@@ -20466,7 +20840,8 @@
       "Conflit sous-acromial",
       "Coiffe des rotateurs",
       "Capsulite"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "107",
@@ -20517,7 +20892,8 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "483",
@@ -20572,7 +20948,8 @@
       "Capsulite rétractile",
       "Instabilité d'épaule",
       "Arthrose gléno-humérale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "105",
@@ -20643,7 +21020,8 @@
       "RTC",
       "Bursite du coude",
       "Tendinite du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "112",
@@ -20705,7 +21083,8 @@
     "pathologies": [
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "589",
@@ -20754,7 +21133,8 @@
     },
     "pathologies": [
       "Impingement sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "145",
@@ -20837,7 +21217,8 @@
     "pathologies": [
       "Impingement rotateur-coude",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "144",
@@ -20890,7 +21271,8 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "537",
@@ -20976,7 +21358,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "654",
@@ -21034,7 +21417,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Capsulite rétractile"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "143",
@@ -21093,7 +21477,8 @@
       "Impingement d'épaule",
       "Bursite d'épaule",
       "Tendinite de RTC"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "120",
@@ -21143,7 +21528,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "121",
@@ -21234,7 +21620,8 @@
       "Conflit sous-acromial",
       "Coiffe des rotateurs",
       "Arthrose gléno-humérale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "122",
@@ -21287,7 +21674,8 @@
     },
     "pathologies": [
       "Impingement de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "123",
@@ -21383,7 +21771,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "482",
@@ -21437,7 +21826,8 @@
     "pathologies": [
       "Coiffe des rotateurs",
       "Impingement épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "124",
@@ -21488,7 +21878,8 @@
     "pathologies": [
       "Conflit sous-acromial",
       "Tendinopathie de la coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "471",
@@ -21539,7 +21930,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Impingement d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "421",
@@ -21587,7 +21979,8 @@
     "pathologies": [
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "413",
@@ -21635,7 +22028,8 @@
     "pathologies": [
       "Tendinopathie de la coiffe des rotateurs",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "148",
@@ -21692,7 +22086,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Capsulite rétractile"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "322",
@@ -21746,7 +22141,8 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "463",
@@ -21814,7 +22210,8 @@
     "pathologies": [
       "Douleur de hanche",
       "Douleur de genou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "241",
@@ -21868,7 +22265,8 @@
       "Hernie discale",
       "Sciatique",
       "Arthrose lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "592",
@@ -21922,7 +22320,8 @@
     "pathologies": [
       "Douleur pelvienne",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "372",
@@ -21974,7 +22373,8 @@
     "pathologies": [
       "Trouble de l'équilibre",
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "505",
@@ -22032,7 +22432,8 @@
       "Lésion méniscale",
       "Entorse LLI",
       "Entorse LLE"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "691",
@@ -22083,7 +22484,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Scoliose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "590",
@@ -22134,7 +22536,8 @@
     },
     "pathologies": [
       "Douleur hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "591",
@@ -22183,7 +22586,8 @@
     },
     "pathologies": [
       "Douleur hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "593",
@@ -22234,7 +22638,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sacro-iliaque"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "373",
@@ -22290,7 +22695,8 @@
     },
     "pathologies": [
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "242",
@@ -22341,7 +22747,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "243",
@@ -22394,7 +22801,8 @@
     "pathologies": [
       "Trouble de l'équilibre",
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "698",
@@ -22446,7 +22854,8 @@
     "pathologies": [
       "Trouble de l'équilibre",
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "71",
@@ -22505,7 +22914,8 @@
       "Lombalgie chronique",
       "Douleur lombaire basse",
       "Disc hernié"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "244",
@@ -22578,7 +22988,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "93",
@@ -22637,7 +23048,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Gonarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "462",
@@ -22725,7 +23137,8 @@
     "pathologies": [
       "Trouble de l'équilibre",
       "Prévention des chutes"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "461",
@@ -22773,7 +23186,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "245",
@@ -22844,7 +23258,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "349",
@@ -22896,7 +23311,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Sciatique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "697",
@@ -22951,7 +23367,8 @@
     "pathologies": [
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "692",
@@ -23000,7 +23417,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Gonarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "440",
@@ -23044,7 +23462,8 @@
     "pathologies": [
       "Cicatrices traumatiques",
       "Adhérences tissulaires"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "374",
@@ -23121,7 +23540,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Instabilité chronique de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "246",
@@ -23195,7 +23615,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "609",
@@ -23243,7 +23664,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "635",
@@ -23285,7 +23707,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "460",
@@ -23336,7 +23759,8 @@
     "pathologies": [
       "Arthrose",
       "Syndrome fémoro-patellaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "91",
@@ -23413,7 +23837,8 @@
       "Lésion méniscale",
       "Entorse LLI",
       "Entorse LLE"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "538",
@@ -23473,7 +23898,8 @@
     "pathologies": [
       "LCA",
       "PTG"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "92",
@@ -23527,7 +23953,8 @@
       "Gonarthrose",
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "693",
@@ -23591,7 +24018,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "459",
@@ -23640,7 +24068,8 @@
       "Entorse LLI",
       "Entorse LLE",
       "Syndrome de l'essuie-glace"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "458",
@@ -23690,7 +24119,8 @@
       "Fracture",
       "Chirurgie genou (TKA, TKR)",
       "Chirurgie hanche (THA, THR)"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "457",
@@ -23749,7 +24179,8 @@
       "Lésion méniscale",
       "Entorse LLI",
       "Entorse LLE"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "385",
@@ -23810,7 +24241,8 @@
     "pathologies": [
       "Arthrose",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "384",
@@ -23859,7 +24291,8 @@
       "Conflit fémoro-acéabulaire",
       "Tendinopathie du grand fessier",
       "Pubalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "264",
@@ -23935,7 +24368,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "694",
@@ -23990,7 +24424,8 @@
       "Tendinopathie de la coiffe des rotateurs",
       "Conflit sous-acromial",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "466",
@@ -24044,7 +24479,8 @@
     "pathologies": [
       "Hernie discale",
       "Sténose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "96",
@@ -24099,7 +24535,8 @@
       "Arthrose",
       "Réparation LCA",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "506",
@@ -24153,7 +24590,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "386",
@@ -24223,7 +24661,8 @@
     "pathologies": [
       "Arthrose de la hanche",
       "Pépin du genou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "387",
@@ -24297,7 +24736,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "296",
@@ -24348,7 +24788,8 @@
     },
     "pathologies": [
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "97",
@@ -24399,7 +24840,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "388",
@@ -24456,7 +24898,8 @@
     "pathologies": [
       "Arthrose",
       "TKA"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "389",
@@ -24511,7 +24954,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "297",
@@ -24567,7 +25011,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "507",
@@ -24621,7 +25066,8 @@
     "pathologies": [
       "Douleur lombaire basse",
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "95",
@@ -24675,7 +25121,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "390",
@@ -24759,7 +25206,8 @@
     "pathologies": [
       "ARTHROSE",
       "TKA"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "391",
@@ -24822,7 +25270,8 @@
       "Arthrose",
       "HNP",
       "Douleur lombaire chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "298",
@@ -24885,7 +25334,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "94",
@@ -24940,7 +25390,8 @@
       "Douleur lombaire basse",
       "Arthrose",
       "Post-opératoire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "508",
@@ -25040,7 +25491,8 @@
       "Arthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du grand fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "392",
@@ -25099,7 +25551,8 @@
     "pathologies": [
       "Arthrose",
       "Conflit fémoro-acébatulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "393",
@@ -25155,7 +25608,8 @@
     "pathologies": [
       "Arthrose",
       "Douleur lombaire basse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "299",
@@ -25217,7 +25671,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "539",
@@ -25275,7 +25730,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "439",
@@ -25323,7 +25779,8 @@
     },
     "pathologies": [
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "540",
@@ -25373,7 +25830,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleurs aux épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "350",
@@ -25446,7 +25904,8 @@
       "Capsulite rétractile",
       "Instabilité d'épaule",
       "Arthrose gléno-humérale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "351",
@@ -25502,7 +25961,8 @@
       "Impingement de l'épaule",
       "Bursite de l'épaule",
       "Tendinopathie du tendon d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "113",
@@ -25579,7 +26039,8 @@
       "Conflit sous-acromial",
       "Coiffe des rotateurs",
       "Arthrose de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "114",
@@ -25631,7 +26092,8 @@
     "pathologies": [
       "Impingement d'épaule",
       "Bursite d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "655",
@@ -25682,7 +26144,8 @@
     "pathologies": [
       "Douleur cervicale",
       "Douleur thoracique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "247",
@@ -25736,7 +26199,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "248",
@@ -25786,7 +26250,8 @@
     "pathologies": [
       "Hernie discale",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "249",
@@ -25836,7 +26301,8 @@
     "pathologies": [
       "Syndrome des facettes",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "403",
@@ -25890,7 +26356,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "404",
@@ -25945,7 +26412,8 @@
     "pathologies": [
       "arthrose",
       "réparation de l'ACL"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "485",
@@ -25991,7 +26459,8 @@
       "modele": "qwen2.5:7b",
       "version": "3.0"
     },
-    "pathologies": []
+    "pathologies": [],
+    "source": "HEP"
   },
   {
     "id": "486",
@@ -26040,7 +26509,8 @@
     },
     "pathologies": [
       "Epicondylalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "83",
@@ -26095,7 +26565,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "84",
@@ -26149,7 +26620,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "72",
@@ -26199,7 +26671,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "73",
@@ -26301,7 +26774,8 @@
     "pathologies": [
       "Arthrose",
       "Post-opératoire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "541",
@@ -26352,7 +26826,8 @@
     "pathologies": [
       "Impingement des rotateurs",
       "Douleur au cou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "695",
@@ -26405,7 +26880,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "610",
@@ -26460,7 +26936,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur aux hanches"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "546",
@@ -26510,7 +26987,8 @@
       "BPCO",
       "Asthme",
       "Hyperventilation"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "611",
@@ -26567,7 +27045,8 @@
       "Douleur cervicale",
       "Douleurs hanches",
       "Douleurs épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "594",
@@ -26637,7 +27116,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "595",
@@ -26690,7 +27170,8 @@
     },
     "pathologies": [
       "Douleur hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "612",
@@ -26743,7 +27224,8 @@
     "pathologies": [
       "Douleur à la hanche",
       "Impingement de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "672",
@@ -26796,7 +27278,8 @@
     "pathologies": [
       "Impingement de la hanche",
       "Douleur inguinale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "671",
@@ -26847,7 +27330,8 @@
     "pathologies": [
       "Impingement fémoro-acetabulaire",
       "Douleur de hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "629",
@@ -26899,7 +27383,8 @@
       "Névralgie cervico-brachiale",
       "Arthrose cervicale",
       "Coup du lapin"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "431",
@@ -26957,7 +27442,8 @@
       "Lombalgie chronique",
       "Herniation discale",
       "Spondylolisthésis"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "670",
@@ -27026,7 +27512,8 @@
     },
     "pathologies": [
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "254",
@@ -27084,7 +27571,8 @@
       "Sténose",
       "Spondylarthrite",
       "Spondylolisthèse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "255",
@@ -27138,7 +27626,8 @@
     "pathologies": [
       "Hernie discale",
       "Sténose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "596",
@@ -27200,7 +27689,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "630",
@@ -27249,7 +27739,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleurs lombaires aiguës"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "281",
@@ -27303,7 +27794,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Arthrose lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "265",
@@ -27401,7 +27893,8 @@
       "Arthrose lombaire",
       "Sciatique",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "266",
@@ -27453,7 +27946,8 @@
     "pathologies": [
       "arthrose de genou",
       "ostéopathie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "269",
@@ -27516,7 +28010,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "573",
@@ -27579,7 +28074,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "271",
@@ -27638,7 +28134,8 @@
       "sténose",
       "spondylarthrite",
       "spondylolisthèse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "272",
@@ -27705,7 +28202,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "305",
@@ -27778,7 +28276,8 @@
     "pathologies": [
       "Coiffe des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "304",
@@ -27835,7 +28334,8 @@
     "pathologies": [
       "RTC",
       "bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "276",
@@ -27890,7 +28390,8 @@
       "Syndrome fémoro-patellaire",
       "Tendinopathie rotulienne",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "282",
@@ -27944,7 +28445,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Arthrose lombaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "279",
@@ -28018,7 +28520,8 @@
     "pathologies": [
       "OA",
       "RTG"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "285",
@@ -28081,7 +28584,8 @@
       "Hernie discale",
       "Arthrose lombaire",
       "Canal lombaire étroit"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "287",
@@ -28130,7 +28634,8 @@
       "Hernie discale",
       "Arthrose lombaire",
       "Spondylolisthésis"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "288",
@@ -28183,7 +28688,8 @@
     },
     "pathologies": [
       "Déconditionnement physique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "289",
@@ -28249,7 +28755,8 @@
       "Sténose",
       "Spondylarthrite",
       "Spondylolisthèse"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "352",
@@ -28348,7 +28855,8 @@
       "Spondylarthrite",
       "Lésion discale",
       "Sténose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "292",
@@ -28431,7 +28939,8 @@
     "pathologies": [
       "Douleurs chroniques diffuses",
       "Fibromyalgie"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "702",
@@ -28499,7 +29008,8 @@
       "Capsulite rétractile",
       "Instabilité d'épaule",
       "Tendinopathie du long biceps"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "703",
@@ -28550,7 +29060,8 @@
       "Conflit sous-acromial",
       "Capsulite rétractile",
       "Instabilité d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "293",
@@ -28636,7 +29147,8 @@
     },
     "pathologies": [
       "tendinopathie rotator cuff"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "294",
@@ -28687,7 +29199,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "295",
@@ -28742,7 +29255,8 @@
     "pathologies": [
       "Arthrose",
       "Réparation du ligament croisé antérieur"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "291",
@@ -28800,7 +29314,8 @@
       "OA",
       "réparation d'ACL",
       "hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "301",
@@ -28861,7 +29376,8 @@
       "Tendinopathie du moyen fessier",
       "Pubalgie",
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "302",
@@ -28920,7 +29436,8 @@
       "Coxarthrose",
       "Conflit fémoro-acétabulaire",
       "Tendinopathie du moyen fessier"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "306",
@@ -28977,7 +29494,8 @@
     "pathologies": [
       "impingement de l'épaule",
       "bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "303",
@@ -29026,7 +29544,8 @@
       "Déconditionnement physique",
       "Fibromyalgie",
       "Douleurs chroniques diffuses"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "307",
@@ -29077,7 +29596,8 @@
     "pathologies": [
       "Hernie discale",
       "Spondylolisthésis"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "308",
@@ -29157,7 +29677,8 @@
     },
     "pathologies": [
       "Coxarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "309",
@@ -29223,7 +29744,8 @@
       "Coiffe des rotateurs",
       "Arthrose gléno-humérale",
       "Rotator cuff tear"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "310",
@@ -29273,7 +29795,8 @@
       "Capsulite rétractile",
       "Instabilité d'épaule",
       "Rotateur d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "597",
@@ -29323,7 +29846,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "563",
@@ -29375,7 +29899,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "230",
@@ -29424,7 +29949,8 @@
     },
     "pathologies": [
       "Impingement de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "235",
@@ -29483,7 +30009,8 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "238",
@@ -29555,7 +30082,8 @@
     "pathologies": [
       "Impingement rotateur-coude",
       "Coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "598",
@@ -29614,7 +30142,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "599",
@@ -29666,7 +30195,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur hanche"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "673",
@@ -29716,7 +30246,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Tendinopathie d'Achille"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "23",
@@ -29771,7 +30302,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "324",
@@ -29826,7 +30358,8 @@
       "Prévention des chutes",
       "Vertige",
       "BPPV"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "325",
@@ -29889,7 +30422,8 @@
       "Prévention des chutes",
       "Rééducation vestibulaire",
       "BPPV"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "326",
@@ -29940,7 +30474,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "327",
@@ -29999,7 +30534,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Vertige"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "328",
@@ -30053,7 +30589,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "329",
@@ -30102,7 +30639,8 @@
       "Prévention des chutes",
       "Vertige",
       "BPPV"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "509",
@@ -30180,7 +30718,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "656",
@@ -30228,7 +30767,8 @@
     "pathologies": [
       "Douleur de tête tensionnelle",
       "TMJ, TMD"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "523",
@@ -30277,7 +30817,8 @@
     "pathologies": [
       "Épicondylalgie",
       "Entorse latérale du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "405",
@@ -30332,7 +30873,8 @@
       "Gonarthrose",
       "Lésion méniscale",
       "Syndrome fémoro-patellaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "149",
@@ -30407,7 +30949,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "353",
@@ -30508,7 +31051,8 @@
     "pathologies": [
       "Capsulite des rotateurs",
       "Conflit sous-acromial"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "354",
@@ -30557,7 +31101,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "600",
@@ -30608,7 +31153,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "674",
@@ -30648,7 +31194,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "657",
@@ -30697,7 +31244,8 @@
     "pathologies": [
       "Tendinite de De Quervain",
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "675",
@@ -30744,7 +31292,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "631",
@@ -30790,7 +31339,8 @@
       "Tendinite de De Quervain",
       "Arthrite du doigt",
       "Arthrite de la main"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "54",
@@ -30841,7 +31391,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "510",
@@ -30889,7 +31440,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "355",
@@ -30935,7 +31487,8 @@
     },
     "pathologies": [
       "Douleurs temporo-mandibulaires"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "356",
@@ -30983,7 +31536,8 @@
     "pathologies": [
       "Douleur de mâchoire",
       "Tendinopathie temporomandibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "357",
@@ -31029,7 +31583,8 @@
     },
     "pathologies": [
       "Douleur au cou"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "658",
@@ -31078,7 +31633,8 @@
     "pathologies": [
       "Douleur de tête",
       "Tension de la mâchoire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "659",
@@ -31122,7 +31678,8 @@
     "pathologies": [
       "Douleur de tête",
       "Tension de tête"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "660",
@@ -31174,7 +31731,8 @@
     "pathologies": [
       "Arthrite des orteils",
       "Douleur aux orteils"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "250",
@@ -31225,7 +31783,8 @@
     "pathologies": [
       "Fasciite plantaire",
       "Entorse de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "251",
@@ -31276,7 +31835,8 @@
     },
     "pathologies": [
       "sprain de cheville"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "252",
@@ -31330,7 +31890,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "253",
@@ -31414,7 +31975,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "375",
@@ -31463,7 +32025,8 @@
     },
     "pathologies": [
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "53",
@@ -31535,7 +32098,8 @@
     "pathologies": [
       "Impingement d'épaule",
       "RTC"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "433",
@@ -31590,7 +32154,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "434",
@@ -31644,7 +32209,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "432",
@@ -31725,7 +32291,8 @@
     "pathologies": [
       "Douleurs lombaires aiguës",
       "Douleurs lombaires chroniques"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "402",
@@ -31789,7 +32356,8 @@
     "pathologies": [
       "Biceps tendinopathie",
       "Bursite du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "406",
@@ -31852,7 +32420,8 @@
     "pathologies": [
       "Tendinopathie du biceps",
       "Bursite du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "401",
@@ -31922,7 +32491,8 @@
     "pathologies": [
       "Tendinopathie du biceps",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "662",
@@ -31970,7 +32540,8 @@
     },
     "pathologies": [
       "Douleur des épaules"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "661",
@@ -32018,7 +32589,8 @@
     },
     "pathologies": [
       "Douleur à l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "448",
@@ -32090,7 +32662,8 @@
     "pathologies": [
       "Douleur à l'épaule",
       "Gamme de mouvement réduite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "663",
@@ -32139,7 +32712,8 @@
     },
     "pathologies": [
       "Douleur au coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "468",
@@ -32190,7 +32764,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "469",
@@ -32242,7 +32817,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "511",
@@ -32292,7 +32868,8 @@
     },
     "pathologies": [
       "Syndrome du piriforme"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "256",
@@ -32344,7 +32921,8 @@
     "pathologies": [
       "Lombalgie aiguë",
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "258",
@@ -32415,7 +32993,8 @@
     },
     "pathologies": [
       "Hernie discale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "664",
@@ -32465,7 +33044,8 @@
       "Cervicalgie",
       "Névralgie cervico-brachiale",
       "Arthrose cervicale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "138",
@@ -32516,7 +33096,8 @@
     "pathologies": [
       "Impingement d'épaule",
       "Bursite sous-acromienne"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "435",
@@ -32569,7 +33150,8 @@
     "pathologies": [
       "Lombalgie chronique",
       "Douleur dorsale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "452",
@@ -32619,7 +33201,8 @@
     },
     "pathologies": [
       "Lombalgie chronique"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "358",
@@ -32669,7 +33252,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "359",
@@ -32713,7 +33297,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "360",
@@ -32754,7 +33339,8 @@
       "Trouble de l'équilibre",
       "Prévention des chutes",
       "Rééducation vestibulaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "259",
@@ -32807,7 +33393,8 @@
     },
     "pathologies": [
       "Arthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "436",
@@ -32863,7 +33450,8 @@
     "pathologies": [
       "Tendinopathie rotulienne",
       "Lésion méniscale"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "260",
@@ -32925,7 +33513,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "261",
@@ -32981,7 +33570,8 @@
     "pathologies": [
       "Entorse de cheville",
       "Fasciite plantaire"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "334",
@@ -33034,7 +33624,8 @@
     "pathologies": [
       "OA",
       "TKA"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "477",
@@ -33082,7 +33673,8 @@
     },
     "pathologies": [
       "Gêne de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "56",
@@ -33133,7 +33725,8 @@
       "Tendinite de De Quervain",
       "Rhizarthrose",
       "Doigt à ressaut"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "46",
@@ -33201,7 +33794,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "512",
@@ -33258,7 +33852,8 @@
       "Syndrome du canal carpien",
       "Tendinite de De Quervain",
       "Rhizarthrose"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "437",
@@ -33313,7 +33908,8 @@
     },
     "pathologies": [
       "Douleur à l'ellipithélion"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "542",
@@ -33362,7 +33958,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "57",
@@ -33411,7 +34008,8 @@
     "pathologies": [
       "Impingement du coude",
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "60",
@@ -33464,7 +34062,8 @@
     "pathologies": [
       "Bursite de l'épaule",
       "Tendonite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "632",
@@ -33511,7 +34110,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "513",
@@ -33557,7 +34157,8 @@
     "pathologies": [
       "Tendinite de De Quervain",
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "262",
@@ -33605,7 +34206,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "438",
@@ -33684,7 +34286,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "543",
@@ -33735,7 +34338,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "58",
@@ -33801,7 +34405,8 @@
     "pathologies": [
       "Impingement d'épaule",
       "Bursite d'épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "59",
@@ -33853,7 +34458,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "564",
@@ -33900,7 +34506,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "216",
@@ -33945,7 +34552,8 @@
     },
     "pathologies": [
       "Syndrome du canal carpien"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "217",
@@ -33992,7 +34600,8 @@
     "pathologies": [
       "Syndrome du canal carpien",
       "Tendinite de De Quervain"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "48",
@@ -34045,7 +34654,8 @@
     },
     "pathologies": [
       "Impingement du coude"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "263",
@@ -34096,7 +34706,8 @@
     "pathologies": [
       "conflit sous-acromial",
       "coiffe des rotateurs"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "47",
@@ -34149,7 +34760,8 @@
     "pathologies": [
       "Impingement épaule",
       "Bursite épaule"
-    ]
+    ],
+    "source": "HEP"
   },
   {
     "id": "257",
@@ -34199,6 +34811,7 @@
     "pathologies": [
       "Impingement de l'épaule",
       "Bursite de l'épaule"
-    ]
+    ],
+    "source": "HEP"
   }
 ]
