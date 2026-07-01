@@ -450,7 +450,11 @@ const tagsHTML = tags
       <div class="image-wrapper">
 
         <img
-  src="${exercise.image}"
+  src="${
+    exercise.source === "HEP"
+      ? "images/HEP/" + exercise.image
+      : exercise.image
+  }"
   alt="${exercise.nom}"
   onerror="this.onerror=null;this.src='/exercises/images/placeholders/default.png';"
 >
