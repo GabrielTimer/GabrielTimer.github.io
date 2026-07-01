@@ -368,7 +368,11 @@ if (filters.source === "CABINET") {
 
       ex.objectif,
 
-      ...(ex.tags || [])
+      ...(Array.isArray(ex.tags)
+    ? ex.tags
+    : (typeof ex.tags === "string"
+        ? ex.tags.split(",").map(t => t.trim()).filter(Boolean)
+        : []))
 
     ]
 
@@ -425,14 +429,15 @@ function renderExercises(list){
 
   list.forEach(exercise => {
 
-    const tagsHTML =
-    (exercise.tags || [])
+    const tags = Array.isArray(exercise.tags)
+    ? exercise.tags
+    : (typeof exercise.tags === "string"
+        ? exercise.tags.split(",").map(t => t.trim()).filter(Boolean)
+        : []);
 
-    .map(tag =>
-      `<span>${tag}</span>`
-    )
-
-    .join('');
+const tagsHTML = tags
+    .map(tag => `<span>${tag}</span>`)
+    .join("");
 
     const card =
     document.createElement('div');
