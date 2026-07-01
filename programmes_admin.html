@@ -209,7 +209,13 @@ align-items:center;
 
 <h3>${programme.nom}</h3>
 
+<div>
+
+<span class="pdfBtn">📄</span>
+
 <span class="deleteBtn">🗑️</span>
+
+</div>
 
 </div>
 
@@ -236,6 +242,36 @@ programme.firebaseId
 );
 
 window.location="config.html?v="+Date.now();
+
+};
+
+div.querySelector(".pdfBtn").onclick=(e)=>{
+
+    e.stopPropagation();
+
+    const pdfData={
+
+        ...programme.data,
+
+        nom:programme.nom,
+
+        patient:"",
+
+        pathologie:"",
+
+        niveau:programme.nom.match(/P\d+/)?.[0] || ""
+
+    };
+
+    localStorage.setItem(
+        "programme_pdf",
+        JSON.stringify(pdfData)
+    );
+
+    window.open(
+        "pdf/program_pdf.html",
+        "_blank"
+    );
 
 };
 
@@ -295,7 +331,14 @@ ligne.style.cursor="pointer";
 
 ligne.innerHTML=`
 ▶ ${programme.affichage}
-<span style="float:right;">🗑️</span>
+
+<span style="float:right;display:flex;gap:10px;">
+
+<span class="pdfBtn">📄</span>
+
+<span class="deleteBtn">🗑️</span>
+
+</span>
 `;
 
 ligne.onclick=()=>{
@@ -319,7 +362,37 @@ window.location="config.html?v="+Date.now();
 
 };
 
-ligne.querySelector("span").onclick=async(e)=>{
+ligne.querySelector(".pdfBtn").onclick=(e)=>{
+
+e.stopPropagation();
+
+const pdfData={
+
+...programme.data,
+
+nom:programme.nom,
+
+patient:"",
+
+pathologie:"",
+
+niveau:programme.affichage
+
+};
+
+localStorage.setItem(
+"programme_pdf",
+JSON.stringify(pdfData)
+);
+
+window.open(
+"pdf/program_pdf.html",
+"_blank"
+);
+
+};
+
+ligne.querySelector(".deleteBtn").onclick=async(e)=>{
 
 e.stopPropagation();
 

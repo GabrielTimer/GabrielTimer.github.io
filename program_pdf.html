@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Programme Kiné</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+
+:root{
+--c1:#0FA5C9;
+--c2:#008FB3;
+--c3:#066E87;
+--c4:#EAFBFF;
+--txt:#2d3748;
+}
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+padding:20px;
+background:#eef4f7;
+font-family:Segoe UI,sans-serif;
+}
+
+.download{
+position:fixed;
+right:20px;
+bottom:20px;
+padding:14px 24px;
+border:none;
+border-radius:12px;
+background:var(--c2);
+color:white;
+font-size:18px;
+cursor:pointer;
+z-index:999;
+}
+
+.pdfPage{
+
+width:297mm;
+height:210mm;
+
+background:white;
+
+margin:0 auto 25px auto;
+
+padding:12mm;
+
+overflow:hidden;
+
+display:flex;
+flex-direction:column;
+
+page-break-after:always;
+
+}
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+border-bottom:3px solid var(--c1);
+
+padding-bottom:10px;
+
+margin-bottom:12px;
+
+}
+
+.logo{
+
+height:90px;
+
+}
+
+.title{
+
+flex:1;
+
+text-align:center;
+
+}
+
+.titleSmall{
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+.titleBig{
+
+font-size:36px;
+
+font-weight:900;
+
+color:var(--c2);
+
+}
+
+.patientGrid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:12px;
+
+margin-bottom:15px;
+
+}
+
+.card{
+
+background:var(--c4);
+
+border-radius:12px;
+
+padding:12px;
+
+border:1px solid #cfeef7;
+
+}
+
+.cardLabel{
+
+font-size:13px;
+
+color:#666;
+
+margin-bottom:5px;
+
+}
+
+.cardValue{
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+.section{
+
+background:white;
+
+border-radius:14px;
+
+padding:15px;
+
+margin-bottom:12px;
+
+border:2px solid #dbeef4;
+
+}
+
+.section h2{
+
+margin:0 0 10px 0;
+
+font-size:22px;
+
+color:var(--c2);
+
+}
+
+.section ul{
+
+margin:0;
+
+padding-left:20px;
+
+}
+
+.section li{
+
+margin-bottom:8px;
+
+line-height:1.45;
+
+}
+
+.progress{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:12px;
+
+margin-top:20px;
+
+}
+
+.step{
+
+width:38px;
+
+height:38px;
+
+border-radius:50%;
+
+background:#ddd;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-weight:bold;
+
+}
+
+.step.active{
+
+background:var(--c2);
+
+color:white;
+
+}
+
+.stepLine{
+
+height:5px;
+
+width:55px;
+
+background:#ddd;
+
+}
+
+.stepLine.active{
+
+background:var(--c2);
+
+}
+
+.footer{
+
+margin-top:auto;
+
+text-align:center;
+
+padding-top:15px;
+
+font-size:14px;
+
+color:#666;
+
+border-top:2px solid #e9eef2;
+
+}
+
+.exercisePage{
+
+width:297mm;
+
+height:210mm;
+
+margin:0 auto 25px auto;
+
+padding:10mm;
+
+background:white;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+grid-template-rows:1fr 1fr;
+
+gap:12px;
+
+page-break-after:always;
+
+}
+
+.exerciseCard{
+
+border:2px solid #dceef5;
+
+border-radius:14px;
+
+padding:10px;
+
+display:flex;
+
+flex-direction:column;
+
+overflow:hidden;
+
+}
+
+.exerciseCard img{
+
+width:100%;
+
+height:220px;
+
+object-fit:contain;
+
+background:white;
+
+border-radius:10px;
+
+margin-bottom:10px;
+
+}
+
+.exerciseCard h2{
+
+margin:0;
+
+font-size:22px;
+
+color:var(--c2);
+
+}
+
+.exerciseCard .objectif{
+
+font-size:14px;
+
+font-weight:600;
+
+color:#666;
+
+margin:6px 0;
+
+}
+
+.exerciseCard .description{
+
+font-size:15px;
+
+line-height:1.45;
+
+margin:8px 0;
+
+flex:1;
+
+overflow:hidden;
+
+}
+
+.exerciseInfos{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:6px;
+
+margin-top:8px;
+
+}
+
+.infoBox{
+
+background:#EAFBFF;
+
+padding:8px;
+
+border-radius:8px;
+
+text-align:center;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.qrZone{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-top:10px;
+
+padding-top:8px;
+
+border-top:1px solid #ddd;
+
+}
+
+.qrCode{
+
+width:80px;
+
+height:80px;
+
+background:#fff;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border:1px solid #ddd;
+
+}
+
+.videoText{
+
+font-size:13px;
+
+color:#666;
+
+margin-left:10px;
+
+flex:1;
+
+}
+
+.checkZone{
+
+display:flex;
+
+justify-content:space-around;
+
+margin-top:8px;
+
+font-size:13px;
+
+}
+
+.checkZone div{
+
+padding:3px 6px;
+
+border:1px solid #ddd;
+
+border-radius:6px;
+
+}
+
+@media print{
+
+body{
+
+padding:0;
+
+background:white;
+
+}
+
+.download{
+
+display:none;
+
+}
+
+.pdfPage{
+
+margin:0;
+
+box-shadow:none;
+
+}
+
+.exercisePage{
+
+margin:0;
+
+box-shadow:none;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="pdfContainer">
+
+<!-- PAGE DE GARDE -->
+
+<div class="pdfPage" id="coverPage">
+
+<div class="header">
+
+<img
+class="logo"
+src="logo.png">
+
+<div class="title">
+
+<div class="titleSmall">
+
+PROGRAMME DE RÉÉDUCATION
+
+</div>
+
+<div
+class="titleBig"
+id="programmeTitre">
+
+Programme
+
+</div>
+
+<div
+id="programmeSousTitre"
+style="
+font-size:18px;
+margin-top:6px;
+">
+
+Niveau P1
+
+</div>
+
+</div>
+
+</div>
+
+<div class="patientGrid">
+
+<div class="card">
+<div class="cardLabel">👤 Patient</div>
+<div class="cardValue" id="patient"></div>
+</div>
+
+<div class="card">
+<div class="cardLabel">🩺 Pathologie</div>
+<div class="cardValue" id="pathologie"></div>
+</div>
+
+<div class="card">
+<div class="cardLabel">📅 Date</div>
+<div class="cardValue" id="date"></div>
+</div>
+
+<div class="card">
+<div class="cardLabel">⏱ Durée</div>
+<div class="cardValue" id="duree"></div>
+</div>
+
+<div class="card">
+<div class="cardLabel">🔁 Fréquence</div>
+<div class="cardValue" id="frequence"></div>
+</div>
+
+<div class="card">
+<div class="cardLabel">🎯 Niveau</div>
+<div class="cardValue" id="niveau"></div>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>🎯 Objectifs</h2>
+
+<ul id="objectifs"></ul>
+
+</div>
+
+<div class="section">
+
+<h2>💡 Conseils</h2>
+
+<ul id="conseils"></ul>
+
+</div>
+
+<div class="section">
+
+<h2>⚠ Précautions</h2>
+
+<ul id="precautions"></ul>
+
+</div>
+
+<div class="section">
+
+<h2>🚫 Contre-indications</h2>
+
+<ul id="contreIndications"></ul>
+
+</div>
+
+<div class="section">
+
+<h2>📈 Progression</h2>
+
+<div class="progress">
+
+<div class="step" id="step1">P1</div>
+<div class="stepLine" id="line1"></div>
+
+<div class="step" id="step2">P2</div>
+<div class="stepLine" id="line2"></div>
+
+<div class="step" id="step3">P3</div>
+<div class="stepLine" id="line3"></div>
+
+<div class="step" id="step4">P4</div>
+<div class="stepLine" id="line4"></div>
+
+<div class="step" id="step5">P5</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+GabrielTimer® • Programme personnalisé de rééducation
+
+</div>
+
+</div>
+
+
+
+<!-- LES PAGES D'EXERCICES S'AJOUTERONT ICI -->
+
+<div id="exercisePages"></div>
+
+</div>
+
+
+
+<button
+class="download"
+onclick="downloadPdf()">
+
+📄 Télécharger PDF
+
+</button>
+
+
+
+<script>
+
+const data = JSON.parse(
+
+localStorage.getItem("programme_pdf")
+
+||
+
+localStorage.getItem("programme_temp")
+
+||
+
+sessionStorage.getItem("programme_pdf")
+
+||
+
+"{}"
+
+);
+
+if(!data){
+
+document.body.innerHTML=
+"<h1>Aucun programme reçu.</h1>";
+
+throw new Error("programme_pdf absent");
+
+}
+
+
+
+document.getElementById("programmeTitre").textContent =
+data.nom || "Programme";
+
+document.getElementById("programmeSousTitre").textContent =
+data.sousTitre || "";
+
+document.getElementById("patient").textContent =
+data.patient || "";
+
+document.getElementById("pathologie").textContent =
+data.pathologie || "";
+
+document.getElementById("date").textContent =
+new Date().toLocaleDateString("fr-FR");
+
+document.getElementById("duree").textContent =
+data.duree || "";
+
+document.getElementById("frequence").textContent =
+data.frequence || "";
+
+document.getElementById("niveau").textContent =
+data.niveau || "";
+
+
+
+function fillList(id,array){
+
+const ul=document.getElementById(id);
+
+(array||[]).forEach(txt=>{
+
+const li=document.createElement("li");
+
+li.textContent=txt;
+
+ul.appendChild(li);
+
+});
+
+}
+
+fillList("objectifs",data.objectifs);
+fillList("conseils",data.conseils);
+fillList("precautions",data.precautions);
+fillList("contreIndications",data.contreIndications);
+
+
+
+const niveau =
+parseInt(
+String(data.niveau||"P1")
+.replace("P","")
+)||1;
+
+for(let i=1;i<=niveau;i++){
+
+document
+.getElementById("step"+i)
+.classList.add("active");
+
+if(i<5){
+
+document
+.getElementById("line"+i)
+.classList.add("active");
+
+}
+
+}
+
+
+
+const container =
+document.getElementById("exercisePages");
+
+const EXOS_PAR_PAGE=4;
+
+for(
+let i=0;
+i<data.exercices.length;
+i+=EXOS_PAR_PAGE
+){
+
+const page =
+document.createElement("div");
+
+page.className="exercisePage";
+
+const exos =
+data.exercices.slice(
+i,
+i+EXOS_PAR_PAGE
+);
+
+page.innerHTML =
+exos.map(exo=>`
+
+<div class="exerciseCard">
+
+<img
+src="${
+exo.source==="HEP"
+
+? "../exercises/images/HEP/"+exo.image
+
+: exo.image
+
+}"
+onerror="this.src='../exercises/images/placeholders/default.png'">
+
+<h2>
+
+${
+
+exo.nom_fr
+
+||
+
+exo.nom
+
+}
+
+</h2>
+
+<div class="objectif">
+
+${(exo.objectifs || []).join(" • ")}
+
+</div>
+
+<div class="description">
+
+${
+
+exo.instructions_fr
+
+||
+
+exo.description_fr
+
+||
+
+exo.conseil
+
+||
+
+exo.description
+
+||
+
+""
+
+}
+
+</div>
+
+<div class="exerciseInfos">
+
+<div class="infoBox">
+
+💪
+${exo.series ?? 1}
+ séries
+
+</div>
+
+<div class="infoBox">
+
+🔁
+${exo.reps ?? exo.cycles ?? 10}
+ reps
+
+</div>
+
+<div class="infoBox">
+
+⏱
+${exo.ex ??
+
+exo.phase_monte ??
+
+30}
+ sec
+
+</div>
+
+<div class="infoBox">
+
+😴
+${exo.repos ??
+
+exo.phase_descente ??
+
+15}
+ sec
+
+</div>
+
+</div>
+
+<div class="qrZone">
+
+<div
+
+class="qrCode"
+
+id="qr_${i}_${exo.id}">
+
+</div>
+
+<div class="videoText">
+
+Scanner pour voir
+la vidéo.
+
+</div>
+
+</div>
+
+<div class="checkZone">
+
+<div>☐ Fait</div>
+
+<div>☐ Douleur ≤3/10</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+container.appendChild(page);
+
+page.querySelectorAll(".qrCode")
+
+.forEach((div,index)=>{
+
+const exo = exos[index];
+
+const url =
+
+exo.youtube ||
+
+exo.vimeo ||
+
+"";
+
+if(url){
+
+new QRCode(
+
+div,
+
+{
+
+text:url,
+
+width:70,
+
+height:70
+
+}
+
+);
+
+}
+
+});
+
+}
+
+
+
+async function downloadPdf(){
+
+const pages =
+document.querySelectorAll(
+".pdfPage,.exercisePage"
+);
+
+const {jsPDF}=window.jspdf;
+
+const pdf =
+new jsPDF(
+"l",
+"mm",
+"a4"
+);
+
+let first=true;
+
+for(const page of pages){
+
+const canvas=
+await html2canvas(page,{
+scale:2
+});
+
+if(!first)
+pdf.addPage();
+
+first=false;
+
+pdf.addImage(
+
+canvas.toDataURL("image/jpeg",0.95),
+
+"JPEG",
+
+0,
+
+0,
+
+297,
+
+210
+
+);
+
+}
+
+pdf.save(
+
+(data.nom || "Programme")
+
+.replace(/[\\/:*?"<>|]/g,"")
+
++".pdf"
+
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
