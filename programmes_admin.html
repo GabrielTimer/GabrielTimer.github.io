@@ -136,6 +136,44 @@ p.patientId || ""
 .trim() === "admin"
 );
 
+// ---------- Regroupement automatique ----------
+
+const groupes = {};
+
+adminPrograms.forEach(programme=>{
+
+const nom = programme.nom.trim();
+
+const match = nom.match(/^(.*?)[\s_-]+(P\d+|\d+[A-Za-z]?|\d+)$/i);
+
+if(match){
+
+const dossier = match[1].trim();
+
+const sousNom = match[2].toUpperCase();
+
+if(!groupes[dossier])
+groupes[dossier]=[];
+
+groupes[dossier].push({
+...programme,
+affichage:sousNom
+});
+
+}else{
+
+if(!groupes[nom])
+groupes[nom]=[];
+
+groupes[nom].push({
+...programme,
+affichage:nom
+});
+
+}
+
+});
+
 container.innerHTML = "";
 
 if(adminPrograms.length === 0){
@@ -147,37 +185,31 @@ return;
 }
 
 
-adminPrograms.forEach(programme=>{
+Object.entries(groupes).forEach(([nomDossier,liste])=>{
 
-const div =
-document.createElement("div");
+// Si un seul programme → affichage normal
 
-div.className = "card";
+if(liste.length===1 && liste[0].affichage===nomDossier){
 
-const nbExos =
-programme.data?.exercices?.length || 0;
+const programme=liste[0];
 
-div.innerHTML = `
+const div=document.createElement("div");
+
+div.className="card";
+
+const nbExos=
+programme.data?.exercices?.length||0;
+
+div.innerHTML=`
 <div style="
 display:flex;
 justify-content:space-between;
 align-items:center;
 ">
 
-<h3 style="margin:0;">
-${programme.nom}
-</h3>
+<h3>${programme.nom}</h3>
 
-<span
-class="deleteBtn"
-style="
-font-size:20px;
-cursor:pointer;
-padding:5px;
-user-select:none;
-">
-🗑️
-</span>
+<span class="deleteBtn">🗑️</span>
 
 </div>
 
@@ -186,42 +218,15 @@ ${nbExos} exercice(s)
 </div>
 `;
 
-
-const deleteBtn =
-div.querySelector(".deleteBtn");
-
-deleteBtn.onclick =
-async (e)=>{
-
-e.stopPropagation();
-
-if(
-!confirm(
-"Supprimer définitivement ce programme ?"
-)
-){
-return;
-}
-
-await deleteProgramFromCloud(
-programme.firebaseId
-);
-
-div.remove();
-
-};
-
-div.onclick = ()=>{
+div.onclick=()=>{
 
 localStorage.setItem(
 "edit_programme",
 JSON.stringify({
-nom: programme.nom,
-patientId: programme.patientId,
-series:
-programme.data?.series || 1,
-exercices:
-programme.data?.exercices || []
+nom:programme.nom,
+patientId:programme.patientId,
+series:programme.data?.series||1,
+exercices:programme.data?.exercices||[]
 })
 );
 
@@ -230,16 +235,111 @@ localStorage.setItem(
 programme.firebaseId
 );
 
-window.location =
-"config.html?v=" +
-Date.now();
+window.location="config.html?v="+Date.now();
+
+};
+
+div.querySelector(".deleteBtn").onclick=async(e)=>{
+
+e.stopPropagation();
+
+if(confirm("Supprimer ?")){
+
+await deleteProgramFromCloud(programme.firebaseId);
+
+location.reload();
+
+}
 
 };
 
 container.appendChild(div);
 
+return;
+
+}
+
+
+
+// ---------- DOSSIER ----------
+
+const dossier=document.createElement("div");
+
+dossier.className="card";
+
+dossier.innerHTML = `
+<h3>📁 ${nomDossier}</h3>
+<div class="small">${liste.length} programme(s)</div>
+`;
+
+liste.sort((a,b)=>{
+
+const na=parseInt(a.affichage.replace(/\D/g,""))||0;
+const nb=parseInt(b.affichage.replace(/\D/g,""))||0;
+
+if(na!==nb) return na-nb;
+
+return a.affichage.localeCompare(b.affichage);
+
+}).forEach(programme=>{
+
+const ligne=document.createElement("div");
+
+ligne.style.marginTop="10px";
+
+ligne.style.padding="10px";
+
+ligne.style.borderTop="1px solid #eee";
+
+ligne.style.cursor="pointer";
+
+ligne.innerHTML=`
+▶ ${programme.affichage}
+<span style="float:right;">🗑️</span>
+`;
+
+ligne.onclick=()=>{
+
+localStorage.setItem(
+"edit_programme",
+JSON.stringify({
+nom:programme.nom,
+patientId:programme.patientId,
+series:programme.data?.series||1,
+exercices:programme.data?.exercices||[]
+})
+);
+
+localStorage.setItem(
+"editCloudId",
+programme.firebaseId
+);
+
+window.location="config.html?v="+Date.now();
+
+};
+
+ligne.querySelector("span").onclick=async(e)=>{
+
+e.stopPropagation();
+
+if(confirm("Supprimer ?")){
+
+await deleteProgramFromCloud(programme.firebaseId);
+
+location.reload();
+
+}
+
+};
+
+dossier.appendChild(ligne);
+
 });
 
+container.appendChild(dossier);
+
+});
 }
 
 init();
