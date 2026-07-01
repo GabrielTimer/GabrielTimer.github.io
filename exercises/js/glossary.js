@@ -555,12 +555,10 @@ const tagsHTML = tags
 
       );
 
-current.exercices.push({
-
-  id: exercise.id,
-  nom: exercise.nom,
-  type: "timer",
-  image: exercise.image,
+image:
+  exercise.source === "HEP"
+    ? "exercises/images/HEP/" + exercise.image
+    : exercise.image,
 
   conseil:
   (exercise.consignes || [])
