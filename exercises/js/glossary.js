@@ -555,47 +555,54 @@ const tagsHTML = tags
 
       );
 
-image:
-  exercise.source === "HEP"
-    ? "exercises/images/HEP/" + exercise.image
-    : exercise.image,
+current.exercices.push({
+
+  id: exercise.id,
+
+  nom: exercise.nom,
+
+  type: "timer",
+
+  image:
+    exercise.source === "HEP"
+      ? "exercises/images/HEP/" + exercise.image
+      : exercise.image,
 
   conseil:
-  (exercise.consignes || [])
-  .join("<br>"),
+    (exercise.consignes || []).join("<br>"),
 
   conseil_posture:
-  exercise.conseil_posture || [],
+    exercise.conseil_posture || [],
 
   erreurs_frequentes:
-  exercise.erreurs_frequentes || [],
+    exercise.erreurs_frequentes || [],
 
   respiration:
-  exercise.respiration || [],
+    exercise.respiration || [],
 
   version_facile:
-  exercise.version_facile || [],
+    exercise.version_facile || [],
 
   version_avancee:
-  exercise.version_avancee || [],
+    exercise.version_avancee || [],
 
   videos:
-  exercise.videos || [],
+    exercise.videos || [],
 
   youtube:
-  exercise.youtube || "",
+    exercise.youtube || "",
 
   vimeo:
-  exercise.vimeo || "",
+    exercise.vimeo || "",
 
   ex:
-  exercise.timer_config?.phase_monte || 30,
+    exercise.timer_config?.phase_monte || 30,
 
   repos:
-  exercise.timer_config?.phase_descente || 10,
+    exercise.timer_config?.phase_descente || 10,
 
   reps:
-  exercise.timer_config?.cycles || 5
+    exercise.timer_config?.cycles || 5
 
 });
 
