@@ -3,6 +3,8 @@ const VERSION = Date.now();
 const filters = {
   search: '',
   categorie: [],
+  pathologies: [],
+  objectifs: [],
   niveau: [],
   tags: [],
   source: "all"
@@ -43,6 +45,12 @@ function restoreFilters(){
 
     filters.categorie =
     data.categorie || [];
+
+filters.pathologies =
+data.pathologies || [];
+
+filters.objectifs =
+data.objectifs || [];
 
     filters.niveau =
     data.niveau || [];
@@ -112,20 +120,30 @@ function buildFilters(){
 
   container.innerHTML = '';
 
-  createFilterGroup(
-    'categorie',
-    'Catégories'
-  );
+createFilterGroup(
+  'categorie',
+  'Catégories'
+);
 
-  createFilterGroup(
-    'niveau',
-    'Niveaux'
-  );
+createFilterGroup(
+  'pathologies',
+  'Pathologies'
+);
 
-  createFilterGroup(
-    'tags',
-    'Tags'
-  );
+createFilterGroup(
+  'objectifs',
+  'Objectifs'
+);
+
+createFilterGroup(
+  'niveau',
+  'Niveaux'
+);
+
+createFilterGroup(
+  'tags',
+  'Tags'
+);
 }
 
 function createFilterGroup(field, title){
@@ -312,7 +330,9 @@ function setupReset(){
     filters.search = '';
 
     filters.categorie = [];
-    filters.niveau = [];
+filters.pathologies = [];
+filters.objectifs = [];
+filters.niveau = [];
 filters.tags = [];
 
 sessionStorage.removeItem(
@@ -364,20 +384,23 @@ if (filters.source === "CABINET") {
 
     const searchText = [
 
-      ex.nom,
+  ex.nom,
 
-      ex.objectif,
+  ex.categorie,
 
-      ...(Array.isArray(ex.tags)
-    ? ex.tags
-    : (typeof ex.tags === "string"
-        ? ex.tags.split(",").map(t => t.trim()).filter(Boolean)
-        : []))
+  ...(ex.pathologies || []),
 
-    ]
+  ...(ex.objectifs || []),
 
-    .join(' ')
-    .toLowerCase();
+  ...(Array.isArray(ex.tags)
+      ? ex.tags
+      : (typeof ex.tags === "string"
+          ? ex.tags.split(",").map(t => t.trim()).filter(Boolean)
+          : []))
+
+]
+.join(' ')
+.toLowerCase();
 
     if(
       filters.search &&
@@ -394,6 +417,24 @@ if (filters.source === "CABINET") {
     ){
       return false;
     }
+
+if(
+  filters.pathologies.length &&
+  !filters.pathologies.some(p =>
+    (ex.pathologies || []).includes(p)
+  )
+){
+  return false;
+}
+
+if(
+  filters.objectifs.length &&
+  !filters.objectifs.some(o =>
+    (ex.objectifs || []).includes(o)
+  )
+){
+  return false;
+}
 
     if(
       filters.niveau.length &&
@@ -474,8 +515,8 @@ const tagsHTML = tags
         <h2>${exercise.nom}</h2>
 
         <p class="objective">
-          ${exercise.objectif || ""}
-        </p>
+  ${(exercise.objectifs || []).join(" • ")}
+</p>
 
         <p class="duration">
           ${exercise.duree || ""}
