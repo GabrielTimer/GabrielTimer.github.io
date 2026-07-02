@@ -366,6 +366,8 @@ text-align:center;
 
 <!-- Patient + Nom -->
 
+
+
 <div class="footerGrid">
 
 <div class="field">
@@ -466,6 +468,8 @@ value="programme">
 
 </div>
 
+<div id="programmeOptions">
+
 <div class="footerGrid">
 
 <div class="field">
@@ -529,9 +533,9 @@ font-size:14px;
 <input id="dateDebut" type="date">
 </div>
 
-</div>
+</div> <!-- fin programmeOptions -->
 
-</div>
+</div> <!-- fin prescriptionBlock -->
 
 
 <button
@@ -570,7 +574,7 @@ onclick="home()">
 
 </button>
 
-</div>
+</div> <!-- fin footer -->
 
 <div id="undoBar">
 Exercice supprimé
@@ -618,6 +622,19 @@ const today = new Date();
 
 initJoursProgramme();
 
+
+
+document
+.querySelectorAll('input[name="prescriptionType"]')
+.forEach(r=>{
+
+    r.addEventListener(
+        "change",
+        updatePrescriptionUI
+    );
+
+});
+
 document.getElementById("dateDebut").value =
 today.toISOString().split("T")[0];
 
@@ -633,6 +650,8 @@ document.getElementById(
 
 bloc.style.display = "none";
 arrow.innerHTML = "▶";
+
+updatePrescriptionUI();
 
 if(cloudId){
 
@@ -1579,12 +1598,6 @@ return da - db;
 
 });
 
-if(joursProgramme.length !== seancesParSemaine){
-  alert(
-    `Veuillez sélectionner ${seancesParSemaine} jour(s)`
-  );
-  return;
-}
 
 
 
@@ -1645,6 +1658,11 @@ return;
 /* =========================
    PROGRAMME KINÉ
 ========================= */
+
+if(joursProgramme.length !== seancesParSemaine){
+    alert(`Veuillez sélectionner ${seancesParSemaine} jour(s)`);
+    return;
+}
 
 const programmeId = crypto.randomUUID();
 
@@ -1812,6 +1830,35 @@ for(const datesSemaine of Object.values(groupes)){
 alert(
 `Programme envoyé ☁️ (${semaines * seancesParSemaine} séances)`
 );
+
+}
+
+function updatePrescriptionUI(){
+
+    const programme =
+        document.querySelector(
+            'input[name="prescriptionType"][value="programme"]'
+        ).checked;
+
+    document.getElementById("programmeOptions").style.display =
+        programme ? "block" : "none";
+
+    if(programme){
+
+        // Préremplit les jours selon le nombre de séances
+        applyJoursParDefaut();
+
+    }else{
+
+        // Remet des valeurs propres pour une séance unique
+        document.getElementById("nbSemaines").value = 1;
+        document.getElementById("nbSeancesSemaine").value = 1;
+
+        document
+            .querySelectorAll(".jourProgramme")
+            .forEach(cb => cb.checked = false);
+
+    }
 
 }
 
