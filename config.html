@@ -558,6 +558,15 @@ onclick="saveCloud()">
 
 <button
 type="button"
+class="fav"
+onclick="previewPdf()">
+
+📄 PDF
+
+</button>
+
+<button
+type="button"
 class="start"
 onclick="start()">
 
@@ -1085,41 +1094,49 @@ id: exercices[i].id || "",
 
 type: exercices[i].type || "timer",
 
-nom: exercices[i].nom,
+source: exercices[i].source || "",
+
+nom: exercices[i].nom || "",
+
+nom_fr: exercices[i].nom_fr || "",
 
 image: exercices[i].image || "",
 
+description: exercices[i].description || "",
+
+description_fr: exercices[i].description_fr || "",
+
+instructions_fr: exercices[i].instructions_fr || "",
+
+objectifs: exercices[i].objectifs || [],
+
 conseil: exercices[i].conseil || "",
 
-conseil_posture:
-exercices[i].conseil_posture || [],
+conseil_posture: exercices[i].conseil_posture || [],
 
-erreurs_frequentes:
-exercices[i].erreurs_frequentes || [],
+erreurs_frequentes: exercices[i].erreurs_frequentes || [],
 
-respiration:
-exercices[i].respiration || [],
+respiration: exercices[i].respiration || [],
 
-version_facile:
-exercices[i].version_facile || [],
+version_facile: exercices[i].version_facile || [],
 
-version_avancee:
-exercices[i].version_avancee || [],
+version_avancee: exercices[i].version_avancee || [],
 
-videos:
-exercices[i].videos || [],
+materiel: exercices[i].materiel || [],
 
-youtube:
-exercices[i].youtube || "",
+videos: exercices[i].videos || [],
 
-vimeo:
-exercices[i].vimeo || "",
+youtube: exercices[i].youtube || "",
+
+vimeo: exercices[i].vimeo || "",
+
+series: +document.getElementById("series").value,
+
+reps: +document.getElementById("rep"+i).value,
 
 ex: +document.getElementById("ex"+i).value,
 
-repos: +document.getElementById("repos"+i).value,
-
-reps: +document.getElementById("rep"+i).value
+repos: +document.getElementById("repos"+i).value
 
 });
 
@@ -1127,16 +1144,21 @@ reps: +document.getElementById("rep"+i).value
 
 return {
 
+version:1,
+
 nom: document.getElementById("sessionName").value,
+
+patient: document.getElementById("patientId").value,
 
 series: +document.getElementById("series").value,
 
-exercices: list
+dateCreation: new Date().toISOString(),
+
+exercices:list
 
 };
 
-}
-function addFavori(){
+}function addFavori(){
 
 let all = JSON.parse(localStorage.getItem("programmes") || "[]");
 
@@ -1627,7 +1649,9 @@ auteur:"gabriel",
 
 patientId: patientId,
 
-data: build()
+data: build(),
+
+pdfData: build()
 
 };
 
@@ -1811,9 +1835,14 @@ for(const datesSemaine of Object.values(groupes)){
       terminee:false,
 
       data:{
-        ...build(),
-        categorie:"kine"
-      }
+    ...build(),
+    categorie:"kine"
+},
+
+pdfData:{
+    ...build(),
+    categorie:"kine"
+}
 
     };
 
@@ -1862,6 +1891,21 @@ function updatePrescriptionUI(){
 
 }
 
+window.previewPdf = function(){
+
+    syncInputs();
+
+    localStorage.setItem(
+        "programme_pdf",
+        JSON.stringify(build())
+    );
+
+    window.open(
+        "program_pdf.html",
+        "_blank"
+    );
+
+}
 window.togglePrescription =
 function(){
 
