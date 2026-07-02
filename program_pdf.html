@@ -274,7 +274,6 @@ border-top:2px solid #e9eef2;
 .exercisePage{
 
 width:297mm;
-
 height:210mm;
 
 margin:0 auto 25px auto;
@@ -287,178 +286,100 @@ display:grid;
 
 grid-template-columns:1fr 1fr;
 
-grid-template-rows:1fr 1fr;
+grid-template-rows:1fr;
 
-gap:12px;
+gap:16px;
 
 page-break-after:always;
 
 }
 
 .exerciseCard{
+display:grid;
+grid-template-rows:320px auto auto auto auto;
+gap:10px;
 
 border:2px solid #dceef5;
-
-border-radius:14px;
-
-padding:10px;
-
-display:flex;
-
-flex-direction:column;
-
+border-radius:16px;
+padding:14px;
 overflow:hidden;
-
 }
 
 .exerciseCard img{
-
 width:100%;
-
-height:220px;
-
+height:320px;
 object-fit:contain;
-
 background:white;
-
-border-radius:10px;
-
-margin-bottom:10px;
-
 }
 
 .exerciseCard h2{
-
 margin:0;
-
-font-size:22px;
-
-color:var(--c2);
-
+font-size:24px;
+font-weight:700;
+color:#111827;
 }
 
 .exerciseCard .objectif{
-
-font-size:14px;
-
+font-size:15px;
 font-weight:600;
-
-color:#666;
-
-margin:6px 0;
-
+color:#0f766e;
+min-height:20px;
 }
 
 .exerciseCard .description{
-
 font-size:15px;
-
 line-height:1.45;
-
-margin:8px 0;
-
-flex:1;
-
+height:72px;
 overflow:hidden;
-
+color:#374151;
 }
 
 .exerciseInfos{
-
 display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:6px;
-
-margin-top:8px;
-
+grid-template-columns:repeat(4,1fr);
+gap:8px;
 }
 
 .infoBox{
-
-background:#EAFBFF;
-
+background:#eef9ff;
+border-radius:10px;
 padding:8px;
-
-border-radius:8px;
-
 text-align:center;
-
-font-size:13px;
-
+font-size:14px;
 font-weight:600;
-
 }
 
 .qrZone{
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-margin-top:10px;
-
-padding-top:8px;
-
-border-top:1px solid #ddd;
-
+border-top:1px solid #dbeafe;
+padding-top:10px;
 }
 
 .qrCode{
-
-width:80px;
-
-height:80px;
-
-background:#fff;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-border:1px solid #ddd;
-
+width:75px;
+height:75px;
 }
 
 .videoText{
-
-font-size:13px;
-
-color:#666;
-
-margin-left:10px;
-
 flex:1;
-
+padding-left:10px;
+font-size:13px;
+color:#64748b;
 }
 
 .checkZone{
-
 display:flex;
-
-justify-content:space-around;
-
-margin-top:8px;
-
-font-size:13px;
-
+gap:10px;
 }
 
 .checkZone div{
-
-padding:3px 6px;
-
-border:1px solid #ddd;
-
-border-radius:6px;
-
+border:1px solid #cbd5e1;
+border-radius:8px;
+padding:6px 10px;
+font-size:13px;
 }
-
 @media print{
 
 body{
@@ -767,7 +688,7 @@ document
 const container =
 document.getElementById("exercisePages");
 
-const EXOS_PAR_PAGE=4;
+const EXOS_PAR_PAGE=2;
 
 for(
 let i=0;
