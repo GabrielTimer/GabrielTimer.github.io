@@ -1150,9 +1150,25 @@ nom: document.getElementById("sessionName").value,
 
 patient: document.getElementById("patientId").value,
 
-series: +document.getElementById("series").value,
+date: new Date().toISOString(),
 
-dateCreation: new Date().toISOString(),
+pathologie: "",
+
+niveau: "P1",
+
+duree: "",
+
+frequence: "",
+
+objectifs: [],
+
+conseils: [],
+
+precautions: [],
+
+contreIndications: [],
+
+series:+document.getElementById("series").value,
 
 exercices:list
 
