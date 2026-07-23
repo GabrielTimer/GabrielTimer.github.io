@@ -212,6 +212,16 @@ async function init(){
 const all =
 await loadProgramsFromCloud();
 
+console.table(
+all.filter(p => p.patientId === patient)
+.map(p => ({
+  programmeNom: p.programmeNom,
+  programmeId: p.programmeId,
+  nom: p.nom,
+  firebaseId: p.firebaseId
+}))
+);
+
 console.log("PATIENT URL =", patient);
 
 console.table(
