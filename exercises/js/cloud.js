@@ -163,6 +163,26 @@ export async function loadProgramsFromCloud(){
     }
 
 }
+
+export async function deletePatientSessions(patientId){
+
+    const programmes = await loadProgramsFromCloud();
+
+    const aSupprimer = programmes.filter(p =>
+    p.categorie === "kine" &&
+    p.patientId === patientId &&
+    p.programmeId
+);
+
+    for(const p of aSupprimer){
+
+        await deleteDoc(
+            doc(db,"programmes",p.firebaseId)
+        );
+
+    }
+
+}
 export async function deleteProgramFromCloud(id){
 
 try{
