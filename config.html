@@ -1655,6 +1655,8 @@ crypto.randomUUID(),
 
 nom: nomProgramme,
 
+actif: true,
+
 createdAt:
 Date.now(),
 
@@ -1703,6 +1705,18 @@ if(joursProgramme.length !== seancesParSemaine){
     alert(`Veuillez sélectionner ${seancesParSemaine} jour(s)`);
     return;
 }
+
+// Vérifie si le patient possède déjà un programme actif
+
+const tousProgrammes = await loadProgramsFromCloud();
+
+const programmesActifs = tousProgrammes.filter(p =>
+    p.patientId === patientId &&
+    p.categorie === "kine" &&
+    p.actif !== false
+);
+
+console.log("Programmes actifs :", programmesActifs);
 
 const programmeId = crypto.randomUUID();
 
@@ -1817,6 +1831,8 @@ for(const datesSemaine of Object.values(groupes)){
 
       nom:
       `S${numeroSemaine}${lettres[i]}`,
+
+actif: true,
 
       createdAt: Date.now(),
 
