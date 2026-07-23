@@ -593,9 +593,11 @@ Exercice supprimé
 <script type="module">
 
 import {
+loadProgramsFromCloud,
 saveProgramToCloud,
-loadProgramsFromCloud
-} from "./exercises/js/cloud.js";
+deletePatientSessions
+}
+from "./exercises/js/cloud.js";
 
 /* 🔒 JS STRICTEMENT IDENTIQUE */
 
@@ -1802,6 +1804,9 @@ toutesDates.forEach(dateSeance=>{
 });
 
 let numeroSemaine = 1;
+
+await deletePatientSessions(patientId);
+
 
 for(const datesSemaine of Object.values(groupes)){
 
