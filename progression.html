@@ -282,12 +282,14 @@ kine
 );
 
 console.table(
-kine.map(p=>({
-nom:p.nom,
-programmeNom:p.programmeNom,
-patientId:p.patientId,
-programmeId:p.programmeId,
-firebaseId:p.firebaseId
+all
+.filter(p => p.patientId === patient.toLowerCase())
+.map(p => ({
+    programmeNom: p.programmeNom,
+    nom: p.nom,
+    categorie: p.categorie,
+    patientId: p.patientId,
+    programmeId: p.programmeId
 }))
 );
 
