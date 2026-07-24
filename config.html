@@ -1152,6 +1152,12 @@ nom: document.getElementById("sessionName").value,
 
 patient: document.getElementById("patientId").value,
 
+patientId:
+document.getElementById("patientId")
+.value
+.trim()
+.toLowerCase(),
+
 date: new Date().toISOString(),
 
 pathologie: "",
@@ -1566,9 +1572,10 @@ localStorage.getItem("admin_ok")
 === "true";
 
 const patientId =
-document.getElementById(
-"patientId"
-).value.trim();
+document.getElementById("patientId")
+.value
+.trim()
+.toLowerCase();
 
 if(
 patientId.toLowerCase() === "admin"
