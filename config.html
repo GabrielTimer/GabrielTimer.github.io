@@ -594,8 +594,8 @@ Exercice supprimé
 
 import {
 loadProgramsFromCloud,
-saveProgramToCloud,
-deletePatientSessions
+saveProgramToCloud
+
 }
 from "./exercises/js/cloud.js";
 
@@ -1811,8 +1811,6 @@ toutesDates.forEach(dateSeance=>{
 });
 
 let numeroSemaine = 1;
-
-await deletePatientSessions(patientId);
 
 
 for(const datesSemaine of Object.values(groupes)){
