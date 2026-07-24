@@ -267,9 +267,9 @@ cat === "course"
 )
 &&
 (
-pid.includes(patient.toLowerCase())
-||
-patient.toLowerCase().includes(pid)
+pid !== ""
+&&
+pid === patient.toLowerCase()
 )
 );
 
