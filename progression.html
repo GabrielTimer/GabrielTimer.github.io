@@ -238,6 +238,13 @@ type:p.type
 const kine =
 all.filter(p=>{
 
+const hasExercises =
+(p.données && p.données.exercices)
+||
+(p.data && p.data.exercices);
+
+if(!hasExercises) return false;
+
 const cat =
 (
 p.categorie
@@ -277,15 +284,12 @@ kine
 console.table(
 kine.map(p=>({
 nom:p.nom,
-terminee:p.terminee,
-dateValidation:p.dateValidation,
-eva:p.eva,
+programmeNom:p.programmeNom,
+patientId:p.patientId,
 programmeId:p.programmeId,
 firebaseId:p.firebaseId
 }))
 );
-
-
 
 if(!kine.length){
 
