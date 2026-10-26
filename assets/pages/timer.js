@@ -397,6 +397,7 @@ function openInfo(){
     </div>`;
   const s = openSheet({
     title: e.nom || "Consignes",
+    tall: true,
     body,
     foot: `<button class="btn primary" type="button" data-close>${wasRunning ? "Reprendre" : "Fermer"}</button>`,
     onClose: () => { if(wasRunning) start(); }

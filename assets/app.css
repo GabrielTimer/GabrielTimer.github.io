@@ -401,14 +401,17 @@ button.list-item:hover,a.list-item:hover{ background:var(--surface-2); }
    ========================================================= */
 dialog.sheet{
   padding:0; border:0; color:var(--ink); background:var(--surface);
-  width:min(100%,560px); max-width:100%; max-height:min(92dvh,900px);
+  width:min(100%,560px); max-width:100%;
+  max-height:min(92vh,900px); max-height:min(92dvh,900px);   /* vh : repli pour les anciens iPhone */
   border-radius:var(--r-xl); box-shadow:var(--shadow-2);
   overflow:hidden;
 }
 dialog.sheet[open]{ display:flex; flex-direction:column; animation:sheetIn .22s ease-out; }
 dialog.sheet::backdrop{ background:rgba(8,22,28,.55); backdrop-filter:blur(2px); }
 @media (max-width:640px){
-  dialog.sheet{ margin:auto 0 0; width:100%; border-radius:var(--r-xl) var(--r-xl) 0 0; max-height:94dvh; }
+  dialog.sheet{ margin:auto 0 0; width:100%; border-radius:var(--r-xl) var(--r-xl) 0 0; max-height:94vh; max-height:94dvh; }
+  /* Consignes d'exercice : la feuille prend presque tout l'écran sur téléphone */
+  dialog.sheet.tall{ height:94vh; height:94dvh; }
   dialog.sheet[open]{ animation:sheetUp .25s ease-out; }
 }
 dialog.sheet.wide{ width:min(100%,920px); }
@@ -416,7 +419,10 @@ dialog.sheet.wide{ width:min(100%,920px); }
 @keyframes sheetUp{ from{ transform:translateY(40px); opacity:.4; } }
 .sheet-head{ display:flex; align-items:center; gap:10px; padding:16px 16px 12px 20px; border-bottom:1px solid var(--line); }
 .sheet-head h2{ flex:1; min-width:0; font-size:var(--fs-lg); }
-.sheet-body{ padding:18px 20px; overflow:auto; flex:1; }
+/* flex « auto » + min-height:0 : sur iPhone, « flex:1 » réduisait le corps
+   à une petite bande qui défilait seule */
+.sheet-head,.sheet-foot{ flex:none; }
+.sheet-body{ padding:18px 20px; overflow-y:auto; flex:1 1 auto; min-height:0; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
 .sheet-foot{ display:flex; gap:10px; padding:12px 20px calc(14px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:var(--surface); flex-wrap:wrap; }
 .sheet-foot .btn{ flex:1 1 140px; }
 
@@ -580,7 +586,7 @@ details[open] > .h-sum .chev{ transform:rotate(180deg); }
 .tips ul{ margin:0; padding-left:1.2em; }
 .tips li{ margin:4px 0; }
 .video-frame{ width:100%; aspect-ratio:16/9; border:0; border-radius:var(--r-md); background:#000; }
-.sheet-img{ width:100%; max-height:42dvh; object-fit:contain; background:#fff; border-radius:var(--r-md); border:1px solid var(--line); }
+.sheet-img{ width:100%; max-height:34vh; max-height:34dvh; object-fit:contain; background:#fff; border-radius:var(--r-md); border:1px solid var(--line); }
 
 /* =========================================================
    Bibliothèque d'exercices

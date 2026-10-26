@@ -392,8 +392,8 @@ export function toast(message, { type = "info", action = null, duration = 3600 }
  * contenu : HTML du corps ; foot : HTML des boutons.
  * Renvoie { el, close, body }.
  */
-export function openSheet({ title = "", body = "", foot = "", wide = false, onClose = null } = {}){
-  const dlg = h(`<dialog class="sheet ${wide ? "wide" : ""}" aria-label="${esc(title)}">
+export function openSheet({ title = "", body = "", foot = "", wide = false, tall = false, onClose = null } = {}){
+  const dlg = h(`<dialog class="sheet ${wide ? "wide" : ""} ${tall ? "tall" : ""}" aria-label="${esc(title)}">
     <div class="sheet-head"><h2>${esc(title)}</h2><button class="icon-btn" type="button" data-close aria-label="Fermer">${icon("close")}</button></div>
     <div class="sheet-body"></div>
     ${foot ? `<div class="sheet-foot"></div>` : ""}

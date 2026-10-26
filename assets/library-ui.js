@@ -115,6 +115,7 @@ export function exerciseSheet(e, { onAdd = null, addLabel = "Ajouter" } = {}){
   const s = openSheet({
     title: e.nom,
     wide: true,
+    tall: true,
     body: `
       <div class="exo-detail">
         <div>${exoImageHTML(e.image, e.nom, "sheet-img")}
