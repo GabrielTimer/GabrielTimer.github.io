@@ -1,7 +1,7 @@
 /* Affichage d'un programme (semaines et séances), côté patient et côté kiné */
 
 import {
-  esc, icon, byWeek, fmtDate, fmtShortDate, startOfDay, daysFromToday, evaColor, ressentiLabel,
+  openSheet, toast, esc, icon, byWeek, fmtDate, fmtShortDate, startOfDay, daysFromToday, evaColor, ressentiLabel,
   sessionDuration, fmtDuree, plural, evaTrend, store
 } from "./app.js";
 
@@ -68,12 +68,16 @@ export function programmeHTML(prog, { role = "patient", open = true } = {}){
   const trTxt = tr ? (tr.dir === "down" ? `${icon("trendDown")}Douleur en baisse` : tr.dir === "up" ? `${icon("trendUp")}Douleur en hausse` : `${icon("trendFlat")}Douleur stable`) : "";
   const isCourse = prog.categorie === "course";
 
+  const canMove = !prog.termine && prog.seances.some(x => !x.terminee && x.datePrevue);
+  const daysBtn = canMove ? `<button class="btn sm" type="button" data-pact="jours">${icon("calendar")}${role === "kine" ? "Changer les jours" : "Changer mes jours"}</button>` : "";
   const actions = role === "kine" ? `
+      ${daysBtn}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
       <button class="btn sm" type="button" data-pact="copier">${icon("copy")}Copier pour un patient</button>
       ${!isCourse ? `<button class="btn sm" type="button" data-pact="modele">${icon("layers")}Enregistrer comme modèle</button>` : ""}
       <button class="btn sm danger" type="button" data-pact="supprimer">${icon("trash")}Supprimer</button>`
     : `
+      ${daysBtn}
       ${prog.faites ? `<button class="btn sm" type="button" data-pact="bilan">${icon("mail")}Envoyer mon bilan</button>` : ""}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}Fiche PDF</button>`;
 
@@ -147,4 +151,76 @@ export function openProgrammePdf(prog, patientNom = ""){
 export function openSeancePdf(s, patientNom = ""){
   store.set("programme_pdf", { ...(s.data || {}), nom: s.data?.nom || s.nom || "Séance", patient: patientNom });
   window.open("/program_pdf.html", "_blank");
+}
+
+/* ---------- Changer les jours d'un programme ---------- */
+
+const JOURS = [[1, "L", "Lundi"], [2, "M", "Mardi"], [3, "M", "Mercredi"], [4, "J", "Jeudi"], [5, "V", "Vendredi"], [6, "S", "Samedi"], [0, "D", "Dimanche"]];
+
+/** Nouvelles dates des séances non faites, à partir d'aujourd'hui, sur les jours choisis. */
+export function replanDates(prog, jours){
+  const restantes = prog.seances.filter(s => !s.terminee).slice()
+    .sort((a, b) => (a.semaine || 0) - (b.semaine || 0) || new Date(a.datePrevue || 0) - new Date(b.datePrevue || 0));
+  const today = startOfDay(new Date());
+  const faiteAujourdhui = prog.seances.some(s => s.terminee && s.dateValidation && startOfDay(s.dateValidation).getTime() === today.getTime());
+  const d = new Date(today); d.setHours(12, 0, 0, 0);
+  if(faiteAujourdhui) d.setDate(d.getDate() + 1);
+  const out = [];
+  let guard = 0;
+  while(out.length < restantes.length && guard++ < 800){
+    if(jours.includes(d.getDay())) out.push(new Date(d));
+    d.setDate(d.getDate() + 1);
+  }
+  return restantes.map((s, i) => ({ seance: s, date: out[i] }));
+}
+
+/** Fenêtre de choix des jours. onSave(changes) reçoit la liste à enregistrer. */
+export function changeDaysSheet(prog, { role = "patient", onSave }){
+  const weeks = byWeek(prog.seances.slice());
+  const n = Math.max(1, ...weeks.map(w => w.seances.length));
+  const current = Array.from(new Set(prog.seances.filter(s => !s.terminee && s.datePrevue).map(s => new Date(s.datePrevue).getDay())));
+  let jours = current.length === n ? current : [];
+  const s = openSheet({
+    title: role === "kine" ? "Changer les jours" : "Changer mes jours",
+    body: `
+      <div class="stack" style="--gap:16px">
+        <p>${role === "kine" ? "Choisissez" : "Choisissez les jours qui vous conviennent le mieux :"} <strong>${n} jour${n > 1 ? "s" : ""} par semaine</strong>.</p>
+        <div class="days" id="cd-days">${JOURS.map(([v, l, full]) => `<button type="button" data-day="${v}" aria-pressed="${jours.includes(v)}" aria-label="${full}">${l}</button>`).join("")}</div>
+        <p class="hint" id="cd-hint"></p>
+        <div class="plan-preview" id="cd-prev" style="padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);font-size:var(--fs-sm);color:var(--ink-2)"></div>
+      </div>`,
+    foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="cd-ok">${icon("check")}Enregistrer</button>`
+  });
+  const render = () => {
+    s.el.querySelectorAll("[data-day]").forEach(b => b.setAttribute("aria-pressed", String(jours.includes(+b.dataset.day))));
+    const ok = jours.length === n;
+    s.el.querySelector("#cd-ok").disabled = !ok;
+    const hint = s.el.querySelector("#cd-hint");
+    hint.textContent = ok ? "" : `Sélectionnez ${n} jour${n > 1 ? "s" : ""} (${jours.length} choisi${jours.length > 1 ? "s" : ""}).`;
+    hint.style.color = ok ? "" : "var(--danger)";
+    const prev = s.el.querySelector("#cd-prev");
+    if(!ok){ prev.textContent = "Les séances restantes seront replacées à partir d'aujourd'hui."; return; }
+    const plan = replanDates(prog, jours);
+    const next = plan.slice(0, 3).map(x => fmtDate(x.date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase());
+    prev.innerHTML = `<strong>${plan.length} séance${plan.length > 1 ? "s" : ""} à venir</strong> : ${esc(next.join(", "))}${plan.length > 3 ? "…" : ""}<br>Dernière séance le ${esc(fmtDate(plan[plan.length - 1].date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}.`;
+  };
+  s.el.querySelectorAll("[data-day]").forEach(b => b.onclick = () => {
+    const v = +b.dataset.day;
+    if(jours.includes(v)) jours = jours.filter(x => x !== v);
+    else if(jours.length < n) jours = [...jours, v];
+    else if(n === 1) jours = [v];
+    else { toast(`Retirez d'abord un jour : ${n} jour${n > 1 ? "s" : ""} par semaine.`); return; }
+    render();
+  });
+  s.el.querySelector("#cd-ok").onclick = async () => {
+    const btn = s.el.querySelector("#cd-ok");
+    btn.disabled = true;
+    const noms = JOURS.filter(j => jours.includes(j[0])).map(j => j[2].toLowerCase());
+    const changes = replanDates(prog, jours).map(({ seance, date }) => ({
+      id: seance.id, datePrevue: date.toISOString(), datePrevueTexte: date.toLocaleDateString("fr-FR"), joursProgramme: noms
+    }));
+    try{ await onSave(changes); s.close(); }
+    catch(err){ btn.disabled = false; toast("Enregistrement impossible. Vérifiez votre connexion.", { type:"err" }); }
+  };
+  render();
 }
