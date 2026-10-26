@@ -223,7 +223,10 @@ function nextExerciseIndex(from){
 function skip(){
   const j = nextExerciseIndex(idx);
   if(j === -1){
-    confirmDialog({ title:"Terminer la séance ?", message:"C'était le dernier exercice.", confirm:"Terminer" }).then(ok => { if(ok) finish(); });
+    // Dernier exercice : on termine directement, sans demander de confirmation
+    const st = steps[idx];
+    if(st.kind !== "prep") doneActive += Math.max(0, st.dur - remaining);
+    finish();
     return;
   }
   const st = steps[idx];
