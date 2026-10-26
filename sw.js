@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.1.10";
+const VERSION = "gt-2.1.11";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 

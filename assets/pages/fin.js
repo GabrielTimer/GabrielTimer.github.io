@@ -59,7 +59,7 @@ app.innerHTML = `
   </section>
 
   ${cloud ? `
-  <section class="panel">
+  <section class="panel" id="msg-box" hidden>
     <label class="q-title" for="msg" style="display:block">Un message pour ${esc(prenom(KINE.nom))} ?</label>
     <p class="q-sub">Facultatif : une gêne, une question, un exercice difficile…</p>
     <textarea class="textarea" id="msg" maxlength="1000" placeholder="Votre message"></textarea>
@@ -68,6 +68,16 @@ app.innerHTML = `
   <button class="btn primary big block" type="button" id="save" disabled>${icon("check")}Enregistrer ma séance</button>
   <p class="center small faint" id="save-hint">Indiquez votre douleur pour enregistrer.</p>
 `;
+
+/* Le message au kiné n'est proposé qu'à la dernière séance d'un programme */
+if(cloud){
+  import("../cloud.js").then(C => C.listSeances(cle)).then(seances => {
+    const s = seances.find(x => x.id === sid);
+    if(!s || !s.programmeId) return;
+    const autres = seances.filter(x => x.programmeId === s.programmeId && x.id !== sid);
+    if(autres.every(x => x.terminee === true)) $("#msg-box").hidden = false;
+  }).catch(() => {});
+}
 
 const range = $("#range"), face = $("#face"), val = $("#val"), lab = $("#lab"), save = $("#save");
 const preload = [0,1,2,3,4,5].map(i => { const im = new Image(); im.src = `/images/eva/${i}.png`; return im; });
