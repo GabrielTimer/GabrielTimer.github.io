@@ -303,9 +303,9 @@ display:grid;
 grid-template-rows:
 300px
 auto
-1fr
+minmax(0,1fr)
 auto
-80px;
+auto;
 
 gap:12px;
 
@@ -413,7 +413,7 @@ color:#0f172a;
 
 display:grid;
 
-grid-template-columns:90px 1fr;
+grid-template-columns:100px 1fr;
 
 align-items:center;
 
@@ -426,17 +426,25 @@ border-top:2px solid #e5e7eb;
 }
 
 .qrCode{
-
 width:100px;
-
 height:100px;
-
+padding:5px;
+background:white;
 display:flex;
-
 justify-content:center;
-
 align-items:center;
+line-height:0;
+}
 
+/* qrcodejs ajoute un canvas et une image : on n'en garde qu'un, à la bonne taille */
+.qrCode img{
+display:none !important;
+}
+
+.qrCode canvas{
+width:90px !important;
+height:90px !important;
+display:block !important;
 }
 
 @media print{
