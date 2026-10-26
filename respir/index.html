@@ -249,7 +249,7 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
     <div class="set"><div class="s-l">Expiration</div><div class="step"><button type="button" data-k="exhale" data-d="-1" aria-label="Moins">−</button><output id="o-exhale"></output><button type="button" data-k="exhale" data-d="1" aria-label="Plus">+</button></div></div>
   </div>
   <div class="set"><div class="s-l">Sons<small>en haut et en bas de la colonne</small></div><label class="switch"><input type="checkbox" id="t-bells"><i></i></label></div>
-  <div class="set"><div class="s-l">Fond sonore<small>souffle doux qui suit votre respiration</small></div><label class="switch"><input type="checkbox" id="t-ambient"><i></i></label></div>
+  <div class="set"><div class="s-l">Fond sonore<small>bruit des vagues · enregistrement de Luftrum, licence CC BY</small></div><label class="switch"><input type="checkbox" id="t-ambient"><i></i></label></div>
   <div class="set"><div class="s-l">Voix<small>« inspirez », « expirez » les premières fois</small></div><label class="switch"><input type="checkbox" id="t-voice"><i></i></label></div>
   <div class="set"><div class="s-l">Vibrations</div><label class="switch"><input type="checkbox" id="t-vibe"><i></i></label></div>
   <div class="d-foot"><button class="ok" type="button" id="dlgOk">Valider</button></div>
@@ -326,15 +326,18 @@ if("ResizeObserver" in window) new ResizeObserver(layout).observe(column);
 layout();
 
 /* =========================================================
-   Sons : tes cloches (ding / dong) + fond sonore doux
+   Sons : tes cloches (ding / dong) + vagues en fond sonore
    ========================================================= */
-let ctx = null, buffers = {}, master = null, amb = null;
+let ctx = null, buffers = {}, master = null, amb = null, ambWanted = false;
 function audio(){
   if(!ctx){
     try{
       ctx = new (window.AudioContext || window.webkitAudioContext)();
       master = ctx.createGain(); master.gain.value = 1; master.connect(ctx.destination);
-      ["ding", "dong"].forEach(n => fetch(n + ".wav").then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(buf => { buffers[n] = buf; }).catch(() => {}));
+      [["ding", "ding.wav"], ["dong", "dong.wav"], ["vagues", "vagues.mp3"]].forEach(([n, f]) => fetch(f).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b)).then(buf => {
+        buffers[n] = buf;
+        if(n === "vagues" && ambWanted) startAmbient();
+      }).catch(() => {}));
     }catch(e){ ctx = null; }
   }
   if(ctx && ctx.state === "suspended") ctx.resume();
@@ -354,36 +357,36 @@ function bell(name){
   }
 }
 
-/* Souffle d'océan : bruit filtré dont l'ouverture suit la bille, et une nappe très grave */
+/* Fond sonore : vraies vagues enregistrées (bouclées), qui s'ouvrent un peu
+   à l'inspiration et s'adoucissent à l'expiration.
+   Enregistrement « Waves » de Luftrum (freesound.org/s/48412), édité par
+   Porrumentzio pour l'application Blanket, licence CC BY. */
 function startAmbient(){
-  const a = audio(); if(!a || amb) return;
-  const len = a.sampleRate * 4, buf = a.createBuffer(1, len, a.sampleRate), d = buf.getChannelData(0);
-  let b0 = 0, b1 = 0, b2 = 0;
-  for(let i = 0; i < len; i++){ const w = Math.random() * 2 - 1; b0 = .99765 * b0 + w * .099; b1 = .963 * b1 + w * .2965; b2 = .57 * b2 + w * 1.0527; d[i] = (b0 + b1 + b2 + w * .1848) * .11; }
-  const noise = a.createBufferSource(); noise.buffer = buf; noise.loop = true;
-  const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 380; lp.Q.value = .4;
-  const ng = a.createGain(); ng.gain.value = 0;
-  noise.connect(lp).connect(ng);
-  const pad = a.createGain(); pad.gain.value = 0;
-  const oscs = [110, 164.81, 220.5].map((f, i) => { const o = a.createOscillator(); o.type = "sine"; o.frequency.value = f; const g = a.createGain(); g.gain.value = [.5, .28, .12][i]; o.connect(g).connect(pad); o.start(); return o; });
+  ambWanted = true;
+  const a = audio(); if(!a || amb || !buffers.vagues) return;   // relancé dès que le son est chargé
+  const buf = buffers.vagues;
+  const src = a.createBufferSource(); src.buffer = buf; src.loop = true;
+  src.loopStart = .05; src.loopEnd = buf.duration - .05;          // évite le petit blanc des MP3 à la jointure
+  const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2400; lp.Q.value = .3;
+  const g = a.createGain(); g.gain.value = .55;
   const out = a.createGain(); out.gain.value = 0;
-  ng.connect(out); pad.connect(out); out.connect(master);
-  noise.start();
+  src.connect(lp).connect(g).connect(out).connect(master);
+  src.start(0, Math.random() * (buf.duration - 1));                  // jamais tout à fait la même vague au départ
   out.gain.setTargetAtTime(1, a.currentTime, 1.5);
-  amb = { noise, lp, ng, pad, out, oscs };
+  amb = { src, lp, g, out };
 }
 function stopAmbient(){
+  ambWanted = false;
   if(!amb || !ctx) return;
   const a = amb; amb = null;
   a.out.gain.setTargetAtTime(0, ctx.currentTime, .6);
-  setTimeout(() => { try{ a.noise.stop(); a.oscs.forEach(o => o.stop()); }catch(e){} }, 3000);
+  setTimeout(() => { try{ a.src.stop(); }catch(e){} }, 3000);
 }
 function ambientFollow(p){
   if(!amb || !ctx) return;
   const t = ctx.currentTime;
-  amb.lp.frequency.setTargetAtTime(320 + p * 900, t, .12);
-  amb.ng.gain.setTargetAtTime(.035 + p * .075, t, .12);
-  amb.pad.gain.setTargetAtTime(.010 + p * .008, t, .2);
+  amb.lp.frequency.setTargetAtTime(1600 + p * 4400, t, .25);
+  amb.g.gain.setTargetAtTime(.45 + p * .3, t, .25);
 }
 
 function say(text){

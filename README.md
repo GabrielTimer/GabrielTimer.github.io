@@ -21,3 +21,7 @@ Mise en route de la version 2 : voir [MISE-EN-SERVICE.md](MISE-EN-SERVICE.md).
 | `firestore.rules` | Règles de sécurité à publier dans Firebase |
 | `respir/` | Respiration guidée (inchangée) |
 | `sw.js`, `manifest.json` | Application installable et utilisable hors connexion |
+
+## Crédits sons
+
+- `respir/vagues.mp3` : « Waves » de Luftrum (https://freesound.org/s/48412/), édité par Porrumentzio pour l'application Blanket, licence Creative Commons BY.
