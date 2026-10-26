@@ -163,7 +163,7 @@ body.running.show-tap:not(.controls) .tap-hint{ opacity:1; }
 .end .ghost{ min-height:52px; border-radius:999px; border:1px solid var(--glass-line); color:var(--soft); }
 
 /* ===== Fenêtre réglages ===== */
-dialog{ margin:auto; border:1px solid var(--glass-line); border-radius:28px; padding:22px; width:min(92vw,420px); background:rgba(10,30,36,.96); color:var(--text); }
+dialog{ margin:auto; border:1px solid var(--glass-line); border-radius:28px; padding:22px; width:min(92vw,420px); max-height:calc(100vh - 24px); max-height:calc(100dvh - 24px); overflow-y:auto; overscroll-behavior:contain; background:rgba(10,30,36,.96); color:var(--text); }
 dialog::backdrop{ background:rgba(3,10,13,.6); backdrop-filter:blur(6px); }
 dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:center; }
 .set{ display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--glass-line); }
@@ -173,6 +173,11 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
 .step{ display:flex; align-items:center; gap:4px; }
 .step button{ width:40px; height:40px; border-radius:50%; background:var(--glass); font-size:1.3rem; color:var(--soft); }
 .step output{ min-width:54px; text-align:center; font-variant-numeric:tabular-nums; font-weight:400; }
+.vol{ display:flex; align-items:center; gap:12px; padding:0 0 12px; }
+.vol svg{ width:20px; height:20px; flex:none; color:var(--faint); }
+.vol input[type=range]{ flex:1; min-width:0; height:32px; accent-color:var(--lagoon); background:transparent; }
+.vol output{ min-width:34px; text-align:right; font-variant-numeric:tabular-nums; color:var(--soft); font-size:.95rem; }
+.vol.off{ opacity:.45; }
 .switch{ position:relative; width:52px; height:30px; flex:none; }
 .switch input{ position:absolute; inset:0; opacity:0; z-index:1; cursor:pointer; margin:0; }
 .switch i{ position:absolute; inset:0; border-radius:999px; background:rgba(255,255,255,.14); transition:background .3s; }
@@ -249,7 +254,9 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
     <div class="set"><div class="s-l">Expiration</div><div class="step"><button type="button" data-k="exhale" data-d="-1" aria-label="Moins">−</button><output id="o-exhale"></output><button type="button" data-k="exhale" data-d="1" aria-label="Plus">+</button></div></div>
   </div>
   <div class="set"><div class="s-l">Sons<small>en haut et en bas de la colonne</small></div><label class="switch"><input type="checkbox" id="t-bells"><i></i></label></div>
+  <div class="vol" id="v-bells-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5Z"/><path d="M16.5 9a4 4 0 0 1 0 6"/></svg><input type="range" id="v-bells" min="0" max="100" step="5" aria-label="Volume des sons"><output id="o-bells"></output></div>
   <div class="set"><div class="s-l">Fond sonore<small>bruit des vagues · enregistrement de Luftrum, licence CC BY</small></div><label class="switch"><input type="checkbox" id="t-ambient"><i></i></label></div>
+  <div class="vol" id="v-ambient-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5Z"/><path d="M16.5 9a4 4 0 0 1 0 6"/></svg><input type="range" id="v-ambient" min="0" max="100" step="5" aria-label="Volume du fond sonore"><output id="o-ambient"></output></div>
   <div class="set"><div class="s-l">Voix<small>« inspirez », « expirez » les premières fois</small></div><label class="switch"><input type="checkbox" id="t-voice"><i></i></label></div>
   <div class="set"><div class="s-l">Vibrations</div><label class="switch"><input type="checkbox" id="t-vibe"><i></i></label></div>
   <div class="d-foot"><button class="ok" type="button" id="dlgOk">Valider</button></div>
@@ -275,6 +282,8 @@ Object.assign(MODES.custom, ls.get("custom", {}));
 const pref = {
   bells: ls.get("bells", true),
   ambient: ls.get("ambient", true),
+  bellVol: ls.get("bellVol", 70),     // 0 à 100
+  ambVol: ls.get("ambVol", 75),
   voice: ls.get("voice", false),
   vibe: ls.get("vibe", false)
 };
@@ -343,17 +352,18 @@ function audio(){
   if(ctx && ctx.state === "suspended") ctx.resume();
   return ctx;
 }
+const bellGain = () => 1.73 * Math.pow(pref.bellVol / 100, 2);   // 70 → 0,85 (niveau d'origine), 100 → 1,73
+const ambGain  = () => 1.8  * Math.pow(pref.ambVol / 100, 2);    // 75 → 1 (niveau d'origine), 100 → 1,8
 const fallback = { ding:new Audio("ding.wav"), dong:new Audio("dong.wav") };
-fallback.ding.volume = fallback.dong.volume = .85;
 function bell(name){
-  if(!pref.bells) return;
+  if(!pref.bells || pref.bellVol <= 0) return;
   const a = audio();
   if(a && buffers[name]){
     const src = a.createBufferSource(), g = a.createGain();
-    src.buffer = buffers[name]; g.gain.value = .85;
+    src.buffer = buffers[name]; g.gain.value = bellGain();
     src.connect(g).connect(master); src.start();
   }else{
-    try{ fallback[name].currentTime = 0; fallback[name].play(); }catch(e){}
+    try{ fallback[name].volume = Math.min(1, bellGain()); fallback[name].currentTime = 0; fallback[name].play(); }catch(e){}
   }
 }
 
@@ -369,11 +379,12 @@ function startAmbient(){
   src.loopStart = .05; src.loopEnd = buf.duration - .05;          // évite le petit blanc des MP3 à la jointure
   const lp = a.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 2400; lp.Q.value = .3;
   const g = a.createGain(); g.gain.value = .55;
+  const vol = a.createGain(); vol.gain.value = ambGain();
   const out = a.createGain(); out.gain.value = 0;
-  src.connect(lp).connect(g).connect(out).connect(master);
+  src.connect(lp).connect(g).connect(vol).connect(out).connect(master);
   src.start(0, Math.random() * (buf.duration - 1));                  // jamais tout à fait la même vague au départ
-  out.gain.setTargetAtTime(1, a.currentTime, 1.5);
-  amb = { src, lp, g, out };
+  out.gain.setTargetAtTime(state.startsWith("pause") ? 0 : 1, a.currentTime, 1.5);   // muet si on l'allume pendant une pause
+  amb = { src, lp, g, vol, out };
 }
 function stopAmbient(){
   ambWanted = false;
@@ -507,7 +518,7 @@ function togglePause(){
     pausedAt = performance.now();
     state = "pause" + (state === "prep" ? "-prep" : "");
     setWord("En pause");
-    if(amb && ctx) amb.out.gain.setTargetAtTime(.25, ctx.currentTime, .4);
+    if(amb && ctx) amb.out.gain.setTargetAtTime(0, ctx.currentTime, .3);
     document.body.classList.add("controls"); clearTimeout(hideTimer);
   }else if(state.startsWith("pause")){
     const now = performance.now();
@@ -551,7 +562,7 @@ function showEnd(){
 $("start").onclick = begin;
 $("pause").onclick = e => { e.stopPropagation(); togglePause(); };
 $("stop").onclick = e => { e.stopPropagation(); if(state.startsWith("pause")){ state = "run"; } finish(); };
-$("sound").onclick = e => { e.stopPropagation(); pref.bells = !pref.bells; ls.set("bells", pref.bells); renderSound(); showControls(); };
+$("sound").onclick = e => { e.stopPropagation(); pref.bells = !pref.bells; ls.set("bells", pref.bells); if(pref.bells && pref.bellVol <= 0){ pref.bellVol = 70; ls.set("bellVol", 70); } renderSound(); showControls(); };
 $("stage").addEventListener("click", () => { if(state !== "idle" && state !== "done") showControls(); });
 document.addEventListener("keydown", e => {
   if(e.code === "Space" && state !== "idle" && state !== "done" && !$("dlg").open){ e.preventDefault(); togglePause(); }
@@ -602,6 +613,25 @@ function openSettings(){
       pref[k] = el.checked; ls.set(k, el.checked);
       if(k === "bells") renderSound();
       if(k === "ambient" && state !== "idle" && state !== "done"){ el.checked ? startAmbient() : stopAmbient(); }
+    };
+  });
+  [["bells", "bellVol"], ["ambient", "ambVol"]].forEach(([k, vk]) => {
+    const r = $("v-" + k), o = $("o-" + k), row = $("v-" + k + "-row"), sw = $("t-" + k);
+    const show = () => { r.value = pref[vk]; o.textContent = pref[vk]; row.classList.toggle("off", !pref[k]); };
+    show();
+    r.oninput = () => {
+      pref[vk] = Number(r.value); ls.set(vk, pref[vk]); o.textContent = pref[vk];
+      const on = pref[vk] > 0;
+      if(on !== pref[k]){ sw.checked = on; sw.onchange(); }          // 0 = coupé, plus de 0 = allumé
+      if(k === "ambient" && amb && ctx) amb.vol.gain.setTargetAtTime(ambGain(), ctx.currentTime, .1);
+      row.classList.toggle("off", !pref[k]);
+    };
+    if(k === "bells") r.onchange = () => { audio(); bell("ding"); }; // aperçu du gong au relâchement
+    const swChange = sw.onchange;
+    sw.onchange = () => {
+      swChange();
+      if(pref[k] && pref[vk] <= 0){ pref[vk] = k === "bells" ? 70 : 75; ls.set(vk, pref[vk]); }
+      show();
     };
   });
   d.showModal();
