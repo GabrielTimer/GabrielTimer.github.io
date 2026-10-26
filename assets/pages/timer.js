@@ -139,7 +139,7 @@ function goTo(i, { silent = false, wait = null } = {}){
     if(RESP[st.e.id] && !silent){ toRespir(st); return; }
     const mustWait = wait !== null ? wait : !(pref.auto && running);
     if(mustWait){ running = false; waiting = true; }
-    else { waiting = false; endAt = performance.now() + remaining * 1000; }
+    else { waiting = false; endAt = performance.now() + remaining * 1000; if(!silent) speak("Préparez-vous"); }
   }else{
     waiting = false;
     endAt = performance.now() + remaining * 1000;
@@ -175,7 +175,7 @@ function start(){
     waiting = false;
     const st = steps[idx];
     if(st.kind === "prep" && RESP[st.e.id]){ toRespir(st); return; }
-    if(st.kind === "prep") speak(st.e.nom + ". En position.");
+    if(st.kind === "prep") speak("Préparez-vous");   // le nom de l'exercice est annoncé au début de l'effort
   }
   running = true;
   endAt = performance.now() + remaining * 1000;
