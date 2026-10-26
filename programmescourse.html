@@ -2,353 +2,92 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Générateur reprise course</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reprise de course</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
 <style>
-
-body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-margin:0;
-padding:20px;
-}
-
-.card{
-background:white;
-max-width:500px;
-margin:auto;
-padding:20px;
-border-radius:16px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-}
-
-h2{
-text-align:center;
-margin-top:0;
-}
-
-.field{
-margin-bottom:15px;
-display:flex;
-flex-direction:column;
-}
-
-label{
-font-weight:bold;
-margin-bottom:5px;
-}
-
-select,
-input{
-padding:10px;
-border-radius:10px;
-border:1px solid #ddd;
-}
-
-.checkbox{
-display:flex;
-align-items:center;
-gap:10px;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-font-size:16px;
-cursor:pointer;
-margin-top:10px;
-}
-
-.generate{
-background:#2563eb;
-color:white;
-}
-
-.back{
-background:#e5e7eb;
-}
-
+  .form-grid{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  .form-sec + .form-sec{ margin-top:16px; }
+  .form-sec h2{ font-size:var(--fs-lg); margin-bottom:14px; }
 </style>
 </head>
-
 <body>
+<main class="page" id="app">
+  <div class="page-head"><h1>Reprise de course</h1><p class="lead">Un programme progressif d'alternance course et marche, adapté au niveau et à la pathologie du patient.</p></div>
 
-<div class="card">
+  <section class="panel form-sec">
+    <h2>Patient</h2>
+    <div class="field"><label for="patient">Patient</label>
+      <div class="row"><select class="select" id="patient"><option value="">Aucun (aperçu seulement)</option></select><button class="btn" type="button" id="new-patient"><span class="nowrap">Nouveau</span></button></div>
+    </div>
+  </section>
 
-<h2>🏃 Générateur reprise course</h2>
+  <section class="panel form-sec">
+    <h2>Profil de course</h2>
+    <div class="form-grid">
+      <div class="field"><label for="objectif">Objectif</label><select class="select" id="objectif"><option>5 km</option><option selected>10 km</option><option>Semi</option></select></div>
+      <div class="field"><label for="niveau">Niveau</label><select class="select" id="niveau"><option>Débutant</option><option selected>Reprise</option><option>Occasionnel</option><option>Régulier</option></select></div>
+      <div class="field"><label for="pathologie">Pathologie</label><select class="select" id="pathologie"><option>Aucune</option><option>Syndrome rotulien</option><option>Tendinopathie achilléenne</option><option>Fasciite plantaire</option><option>Lombalgie</option></select></div>
+      <div class="field"><label for="sexe">Illustrations</label><select class="select" id="sexe"><option value="H" selected>Homme</option><option value="F">Femme</option></select></div>
+      <div class="field"><label for="tempsActuel">Course continue actuelle (min)</label><input class="input" id="tempsActuel" type="number" inputmode="numeric" value="10" min="0"></div>
+      <div class="field"><label for="allure">Allure moyenne (min/km)</label><input class="input" id="allure" type="number" inputmode="decimal" step="0.1" value="6" min="3" max="12"></div>
+    </div>
+  </section>
 
-<div class="field">
-<label>Patient</label>
-<input
-id="patient"
-value="admin"
-placeholder="Nom du patient">
-</div>
+  <section class="panel form-sec">
+    <h2>Planning</h2>
+    <div class="form-grid">
+      <div class="field"><label for="semaines">Nombre de semaines</label><input class="input" id="semaines" type="number" inputmode="numeric" value="8" min="1"></div>
+      <div class="field"><label for="seances">Séances par semaine</label><input class="input" id="seances" type="number" inputmode="numeric" value="3" min="1" max="5"></div>
+      <div class="field"><label for="dateDebut">Date de début</label><input class="input" id="dateDebut" type="date"></div>
+      <div class="field"><label for="modeProgramme">Affichage de la fiche</label><select class="select" id="modeProgramme"><option value="auto" selected>Automatique</option><option value="temps">En temps</option><option value="distance">En distance</option></select></div>
+    </div>
+    <label class="check" style="margin-top:12px"><input id="tapis" type="checkbox" checked> Tapis de course disponible</label>
+  </section>
 
-<div class="field">
-<label>Objectif</label>
-<select id="objectif">
-<option>5 km</option>
-<option selected>10 km</option>
-<option>Semi</option>
-</select>
-</div>
-
-<div class="field">
-<label>Niveau</label>
-<select id="niveau">
-<option>Débutant</option>
-<option selected>Reprise</option>
-<option>Occasionnel</option>
-<option>Régulier</option>
-</select>
-</div>
-
-<div class="field">
-<label>Pathologie</label>
-<select id="pathologie">
-<option>Aucune</option>
-<option>Syndrome rotulien</option>
-<option>Tendinopathie achilléenne</option>
-<option>Fasciite plantaire</option>
-<option>Lombalgie</option>
-</select>
-</div>
-
-<div class="field">
-<label>Temps de course continue actuel (min)</label>
-<input
-id="tempsActuel"
-type="number"
-value="10"
-min="0">
-</div>
-
-<div class="field">
-<label>Allure moyenne (min/km)</label>
-<input
-id="allure"
-type="number"
-step="0.1"
-value="6"
-min="3"
-max="12">
-</div>
-
-<div class="field">
-<label>Mode programme</label>
-<select id="modeProgramme">
-<option value="auto" selected>🤖 Auto</option>
-<option value="temps">⏱ Temps</option>
-<option value="distance">📏 Distance</option>
-</select>
-</div>
-<div class="field">
-<label>Nombre de semaines</label>
-<input
-id="semaines"
-type="number"
-value="8"
-min="1">
-</div>
-
-<div class="field">
-<label>Séances par semaine</label>
-<input
-id="seances"
-type="number"
-value="3"
-min="1">
-</div>
-
-<div class="field">
-<label>Date de début</label>
-<input
-id="dateDebut"
-type="date">
-</div>
-
-<div class="checkbox">
-<input
-id="tapis"
-type="checkbox"
-checked>
-<label for="tapis">
-Tapis de course disponible
-</label>
-</div>
-
-<div class="field">
-<label>Sexe</label>
-<select id="sexe">
-<option value="H" selected>👨 Homme</option>
-<option value="F">👩 Femme</option>
-</select>
-</div>
-
-<button
-class="generate"
-onclick="previewProgram()">
-
-📄 Prévisualiser PDF
-
-</button>
-
-<button
-class="generate"
-onclick="generateProgram()">
-
-🚀 Générer et enregistrer ☁️
-
-</button>
-
-<button
-class="back"
-onclick="history.back()">
-
-⬅ Retour
-
-</button>
-
-</div>
+  <div class="btn-row section">
+    <button class="btn" type="button" id="preview">Prévisualiser la fiche</button>
+    <button class="btn primary big" type="button" id="generate">Générer et envoyer au patient</button>
+  </div>
+</main>
 
 <script type="module">
+import { $, icon, mountShell, registerSW, toast } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const C = await import("/assets/cloud.js");
+let patients = [];
+const q = new URLSearchParams(location.search);
 
-import {
-saveProgramToCloud
+async function loadPatients(sel){
+  patients = await C.listPatients().catch(() => []);
+  $("#patient").innerHTML = `<option value="">Aucun (aperçu seulement)</option>` + patients.map(p => `<option value="${p.cle}">${p.nom.replace(/</g, "&lt;")}</option>`).join("");
+  if(sel) $("#patient").value = sel;
 }
-from "./exercises/js/cloud.js";
-
-function generatePdf(
-patient,
-objectif,
-niveau,
-pdfData
-){
-
-const {
-jsPDF
-} = window.jspdf;
-
-const doc =
-new jsPDF();
-
-let y = 15;
-
-doc.setFontSize(18);
-doc.text(
-"Programme reprise course",
-10,
-y
-);
-
-y += 10;
-
-doc.setFontSize(12);
-
-doc.text(
-"Patient : " + patient,
-10,
-y
-);
-
-y += 7;
-
-doc.text(
-"Objectif : " + objectif,
-10,
-y
-);
-
-y += 7;
-
-doc.text(
-"Niveau : " + niveau,
-10,
-y
-);
-
-y += 12;
-
-let semaineCourante = 0;
-
-pdfData.forEach(s => {
-
-if(
-s.semaine !== semaineCourante
-){
-
-semaineCourante =
-s.semaine;
-
-doc.setFontSize(14);
-
-doc.text(
-"SEMAINE " +
-semaineCourante,
-10,
-y
-);
-
-y += 8;
-
-doc.setFontSize(11);
-
-}
-
-doc.text(
-
-`□ S${s.semaine}${s.seance} - ${s.duree} min`,
-
-12,
-
-y
-
-);
-
-y += 6;
-
-doc.text(
-
-`Marche 5 min / Course ${s.courseMinutes} min x ${s.repetitions}`,
-
-18,
-
-y
-
-);
-
-y += 8;
-
-if(y > 270){
-
-doc.addPage();
-
-y = 15;
-
-}
-
-});
-
-doc.save(
-`Programme_course_${patient}.pdf`
-);
-
-}
+await loadPatients(q.get("patient"));
+$("#new-patient").innerHTML = icon("userPlus") + $("#new-patient").innerHTML;
+$("#new-patient").onclick = async () => { const { newPatientSheet } = await import("/assets/kine-ui.js"); const p = await newPatientSheet(); if(p) await loadPatients(p.cle); };
+$("#dateDebut").value = new Date().toISOString().split("T")[0];
+$("#preview").innerHTML = icon("pdf") + $("#preview").innerHTML;
+$("#generate").innerHTML = icon("share") + $("#generate").innerHTML;
 
 async function buildProgram(
 saveToCloud = true
 ){
 
-const patient =
-document.getElementById("patient")
-?.value
-?.trim()
-|| "admin";
+const cle = document.getElementById("patient").value;
+const patientObj = patients.find(p => p.cle === cle) || null;
+if(saveToCloud && !patientObj){ toast("Choisissez un patient pour enregistrer le programme.", { type:"err" }); return; }
+const patient = patientObj ? patientObj.patientId : "apercu";
+const patientNom = patientObj ? patientObj.nom : "";
+const aEnvoyer = [];
 
 const objectif =
 document.getElementById("objectif")
@@ -424,7 +163,7 @@ const programmeNom =
 
 const exercises =
 await fetch(
-"./exercises/data/exercises.json"
+"/exercises/data/exercises.json"
 ).then(r => r.json());
 
 let modeAffichage =
@@ -485,9 +224,7 @@ e => e.id === "course"
 
 
 if(!marcheBase || !courseBase){
-  alert(
-    "tapismarche ou tapiscourse introuvable dans exercises.json"
-  );
+  toast("Exercices de marche ou de course introuvables dans la bibliothèque.", { type:"err" });
   return;
 }
 
@@ -1124,27 +861,21 @@ exoRecup
 
 };
 
-if(saveToCloud){
-
- console.log(
-  "PROGRAMME ENVOYE",
-  JSON.stringify(programme,null,2)
-);
-  await saveProgramToCloud(
-    programme
-  );
-
-}
+if(saveToCloud){ aEnvoyer.push(programme); }
 totalCrees++;
 
 }
 
 }
 
-sessionStorage.setItem(
+if(saveToCloud){
+  await C.saveSeances(cle, aEnvoyer);
+  toast(`${aEnvoyer.length} séances envoyées à ${patientNom}.`, { type:"ok" });
+}
+localStorage.setItem(
   "coursePdfData",
   JSON.stringify({
-    patient,
+    patient: patientNom,
     objectif,
     niveau,
     pathologie,
@@ -1155,48 +886,27 @@ sessionStorage.setItem(
   })
 );
 
-window.location.href =
-`coursepdf.html?v=${Date.now()}`;
+if(saveToCloud){
+  setTimeout(() => { location.href = `/cloud.html?patient=${encodeURIComponent(cle)}`; }, 900);
+  window.open("/coursepdf.html", "_blank");
+}else{
+  window.open("/coursepdf.html", "_blank");
+}
 
 
 }catch(error){
 
 console.error(error);
 
-alert(
-"Erreur lors de la génération"
-);
+toast("Erreur lors de la génération : " + (error.message || error), { type:"err" });
 
 }
 
 };
 
-window.previewProgram =
-async function(){
 
-  await buildProgram(false);
-
-}
-
-window.generateProgram =
-async function(){
-
-  await buildProgram(true);
-
-}
-
+$("#preview").onclick = () => buildProgram(false);
+$("#generate").onclick = async () => { $("#generate").disabled = true; try{ await buildProgram(true); } finally { $("#generate").disabled = false; } };
 </script>
-
-<script>
-
-document
-.getElementById("dateDebut")
-.value =
-new Date()
-.toISOString()
-.split("T")[0];
-
-</script>
-
 </body>
 </html>

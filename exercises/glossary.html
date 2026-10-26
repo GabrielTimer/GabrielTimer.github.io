@@ -1,61 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Glossaire Exercices</title>
-
-  <link rel="stylesheet" href="css/glossary.css?v=999">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bibliothèque d'exercices</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .cart{ position:fixed; z-index:44; right:max(16px,env(safe-area-inset-right)); bottom:calc(var(--nav-h) + 16px + env(safe-area-inset-bottom)); box-shadow:var(--shadow-2); }
+  @media (min-width:960px){ .cart{ bottom:24px; } }
+  .cart .count{ display:inline-grid; place-items:center; min-width:26px; height:26px; padding:0 6px; border-radius:999px; background:var(--soleil); color:var(--on-soleil); font-family:var(--mono); font-size:var(--fs-sm); }
+</style>
 </head>
-
 <body>
+<main class="page wide" id="app">
+  <div class="page-head"><h1>Exercices</h1><p class="lead">Toute la bibliothèque, en français. Touchez un exercice pour voir ses consignes, ou ajoutez-le à la séance en préparation.</p></div>
+  <div id="lib"></div>
+</main>
+<a class="btn primary cart" id="cart" href="/config.html?continue=1" hidden></a>
+<script type="module">
+import { $, icon, store, mountShell, registerSW, toast } from "/assets/app.js";
+import { mountLibrary } from "/assets/library-ui.js";
+import { toProgramExercise } from "/assets/library.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"bibliotheque" });
 
-<h1>Glossaire Exercices</h1>
+const KEY = "gt_config_state";
+const cart = $("#cart");
+const renderCart = () => {
+  const st = store.get(KEY);
+  const n = st?.exercices?.length || 0;
+  cart.hidden = !n;
+  cart.innerHTML = `${icon("edit")}Séance en préparation <span class="count">${n}</span>`;
+};
+renderCart();
 
-<div class="toolbar">
-
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Rechercher un exercice..."
-  >
-
-  <div class="source-selector">
-
-    <button
-      class="source-btn active"
-      data-source="all">
-      Tous
-    </button>
-
-    <button
-      class="source-btn"
-      data-source="CABINET">
-      Cabinet
-    </button>
-
-    <button
-      class="source-btn"
-      data-source="HEP">
-      HEP
-    </button>
-
-  </div>
-
-  <div id="filters"></div>
-
-  <button id="resetFilters">
-    Réinitialiser
-  </button>
-
-</div>
-
-<div id="activeFilters"></div>
-
-<div id="resultsCount"></div>
-
-<div id="exercise-container"></div>
-
-  <script src="js/glossary.js?v=999"></script>
-
+mountLibrary($("#lib"), {
+  layout:"grid",
+  addLabel:"Ajouter à la séance",
+  onAdd: e => {
+    const st = store.get(KEY) || { nom:"", series:1, exercices:[], patient:null, type:"unique", semaines:4, parSemaine:3, jours:[1,3,5], debut:new Date().toISOString().slice(0, 10) };
+    st.exercices = st.exercices || [];
+    st.exercices.push(toProgramExercise(e));
+    store.set(KEY, st);
+    renderCart();
+    toast(`« ${e.nom} » ajouté à la séance.`, { type:"ok", action:{ label:"Voir la séance", run:() => location.href = "/config.html?continue=1" } });
+  }
+});
+</script>
 </body>
 </html>

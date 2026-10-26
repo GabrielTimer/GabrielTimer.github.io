@@ -2,157 +2,85 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zones</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pathologies</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
 <style>
-
-/* BASE */
-body{
-font-family:Arial;
-background:#f4f4f4;
-margin:0;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-padding:20px;
-}
-
-/* TITRE */
-h2{
-font-size:28px;
-margin-bottom:25px;
-}
-
-/* CARD */
-.card{
-width:85%;
-max-width:360px;
-margin:12px auto;
-background:white;
-border-radius:20px;
-padding:20px;
-box-shadow:0 8px 25px rgba(0,0,0,0.12);
-cursor:pointer;
-font-size:20px;
-font-weight:bold;
-transition:transform 0.15s, box-shadow 0.15s;
-}
-
-.card:hover{
-transform:scale(1.04);
-box-shadow:0 12px 30px rgba(0,0,0,0.2);
-}
-
-/* BOUTON */
-button{
-margin-top:25px;
-padding:14px 20px;
-border:none;
-border-radius:12px;
-background:#ccc;
-font-size:16px;
-cursor:pointer;
-transition:transform 0.15s;
-}
-
-button:hover{transform:scale(1.05);}
-
-/* 📱 MOBILE */
-@media (max-width:600px){
-
-h2{font-size:28px;}
-
-.card{
-width:85%;
-max-width:340px;
-font-size:22px;
-padding:22px;
-border-radius:22px;
-}
-
-button{
-font-size:17px;
-padding:14px;
-border-radius:14px;
-}
-
-}
-
+  .pa-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:16px; }
+  .pa-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; }
+  .pa-cover{ aspect-ratio:16/10; background:#fff; border:0; padding:0; cursor:pointer; overflow:hidden; display:block; width:100%; }
+  .pa-cover img{ width:100%; height:100%; object-fit:cover; object-position:top; }
+  .pa-body{ padding:14px 16px 4px; display:flex; flex-direction:column; gap:4px; flex:1; }
+  .pa-body h2{ font-size:var(--fs-lg); }
+  .pa-actions{ display:flex; gap:8px; padding:12px 16px 16px; flex-wrap:wrap; }
+  .pa-actions .btn{ flex:1 1 auto; }
+  .pa-exos{ display:flex; flex-direction:column; gap:10px; }
+  .pa-exo{ display:flex; gap:12px; align-items:center; }
+  .pa-exo img,.pa-exo .ph-img{ width:72px; height:56px; object-fit:contain; background:#fff; border-radius:var(--r-sm); border:1px solid var(--line); flex:none; }
 </style>
 </head>
-
 <body>
+<main class="page wide" id="app"></main>
+<script type="module">
+import { $, $$, esc, icon, store, mountShell, registerSW, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram } from "/assets/app.js";
+import { PATHOLOGIES } from "/assets/pathologies.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"creer" });
 
-<h2>Choisir une zone</h2>
+const zones = [...new Map(PATHOLOGIES.map(p => [p.zone, p.zoneLabel])).entries()];
+let zone = new URLSearchParams(location.search).get("zone") || store.get("gt_zone") || "";
 
-<div class="card" onclick="go('epaule')">💪 Épaule</div>
-<div class="card" onclick="go('dos')">🧍 Dos</div>
-<div class="card" onclick="go('gym_prevention')">🧘 Gym & Prévention</div>
+const useIt = p => {
+  store.set("gt_draft", { nom:p.nom, series:p.series, exercices:p.exercices.map(e => ({ type:"timer", ...e })) });
+  location.href = "/config.html?draft=1";
+};
+const runIt = p => { setRunProgram({ nom:p.nom, series:p.series, exercices:p.exercices }); location.href = "/timer.html"; };
 
-<button onclick="back()">⬅ Retour</button>
-
-<script>
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patientMode =
-params.has("patient");
-
-const VERSION = "1.2";
-
-function go(zone){
-
-localStorage.removeItem("edit_programme");
-
-localStorage.setItem("zone", zone);
-
-const patient =
-params.get("patient");
-
-if(patient){
-
-window.location =
-"liste_pathologies.html?patient="
-+ patient +
-"&v=" + VERSION;
-
-}else{
-
-window.location =
-"liste_pathologies.html?v="+VERSION;
-
+function render(){
+  const list = PATHOLOGIES.filter(p => !zone || p.zone === zone);
+  $("#app").innerHTML = `
+    <div class="page-head"><h1>Pathologies</h1><p class="lead">Des programmes prêts à l'emploi. Choisissez-en un pour l'adapter puis l'envoyer à un patient.</p></div>
+    <div class="chips scroll" style="margin-bottom:18px">
+      <button class="chip" type="button" data-z="" aria-pressed="${!zone}">Toutes</button>
+      ${zones.map(([id, l]) => `<button class="chip" type="button" data-z="${id}" aria-pressed="${zone === id}">${esc(l)}</button>`).join("")}
+    </div>
+    <div class="pa-grid">${list.map(p => `
+      <article class="pa-card">
+        <button class="pa-cover" type="button" data-see="${p.id}" aria-label="Voir ${esc(p.nom)}">${p.cover ? `<img src="${esc(p.cover)}" alt="" loading="lazy">` : exoImageHTML(null)}</button>
+        <div class="pa-body">
+          <span class="small faint" style="font-weight:700">${esc(p.zoneLabel)}</span>
+          <h2>${esc(p.nom)}</h2>
+          <span class="small muted">${plural(p.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(p)))}${p.series > 1 ? `, ${p.series} tours` : ""}</span>
+        </div>
+        <div class="pa-actions">
+          <button class="btn primary" type="button" data-use="${p.id}">${icon("edit")}Utiliser</button>
+          <button class="btn" type="button" data-run="${p.id}" aria-label="Lancer">${icon("play")}</button>
+          ${p.pdf ? `<a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener" aria-label="Fiche PDF">${icon("pdf")}</a>` : ""}
+        </div>
+      </article>`).join("")}</div>`;
+  $$("[data-z]").forEach(b => b.onclick = () => { zone = b.dataset.z; store.set("gt_zone", zone); render(); });
+  const find = id => PATHOLOGIES.find(p => p.id === id);
+  $$("[data-use]").forEach(b => b.onclick = () => useIt(find(b.dataset.use)));
+  $$("[data-run]").forEach(b => b.onclick = () => runIt(find(b.dataset.run)));
+  $$("[data-see]").forEach(b => b.onclick = () => {
+    const p = find(b.dataset.see);
+    const s = openSheet({
+      title:p.nom,
+      body:`<div class="pa-exos">${p.exercices.map((e, i) => `<div class="pa-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${e.conseil ? `<div class="small">${esc(e.conseil)}</div>` : ""}</div></div>`).join("")}</div>`,
+      foot:`${p.pdf ? `<a class="btn" href="${esc(p.pdf)}" target="_blank" rel="noopener">${icon("pdf")}Fiche PDF</a>` : ""}<button class="btn" type="button" id="s-run">${icon("play")}Lancer</button><button class="btn primary" type="button" id="s-use">${icon("edit")}Utiliser</button>`
+    });
+    s.el.querySelector("#s-use").onclick = () => useIt(p);
+    s.el.querySelector("#s-run").onclick = () => runIt(p);
+  });
 }
-}
-
-function back(){
-
-const patient =
-params.get("patient");
-
-if(patient){
-
-window.location =
-"index.html?patient="
-+ patient +
-"&v=" + VERSION;
-
-}else{
-
-window.location =
-"index.html?v="+VERSION;
-
-}
-
-}
-
-
+render();
 </script>
-
 </body>
 </html>

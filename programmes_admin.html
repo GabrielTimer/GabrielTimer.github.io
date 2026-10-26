@@ -2,428 +2,85 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programmes Cabinet</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modèles</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/pages/home.css">
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#f4f4f4;
-margin:0;
-padding:20px;
-}
-
-h2{
-text-align:center;
-}
-
-.card{
-background:white;
-padding:15px;
-margin:10px auto;
-max-width:400px;
-border-radius:16px;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-cursor:pointer;
-}
-
-.card:hover{
-transform:scale(1.02);
-}
-
-.small{
-font-size:13px;
-color:#666;
-margin-top:5px;
-}
-
-button{
-display:block;
-margin:20px auto;
-padding:12px 20px;
-border:none;
-border-radius:12px;
-}
+  .m-group + .m-group{ margin-top:16px; }
+  .m-row{ flex-wrap:wrap; }
+  .m-row .li-main{ flex:1 1 200px; }
+  .m-row .m-act{ display:flex; gap:4px; margin-left:auto; }
 </style>
 </head>
 <body>
-
-<h2>Programmes du cabinet</h2>
-
-<button id="newProgramBtn">
-
-➕ Créer un programme
-
-</button>
-
-
-<button id="courseProgramBtn">
-
-🏃 Créer programme course
-
-</button>
-
-<div id="list"></div>
-
-<button onclick="history.back()">⬅ Retour</button>
-
+<main class="page wide" id="app"></main>
 <script type="module">
+import { $, $$, esc, icon, store, mountShell, registerSW, toast, confirmDialog, loadingHTML, emptyHTML, errorHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
+import { norm } from "/assets/library.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"outils" });
+const C = await import("/assets/cloud.js");
+const app = $("#app");
 
-import {
-loadProgramsFromCloud,
-deleteProgramFromCloud
-} from "./exercises/js/cloud.js";
+app.innerHTML = `
+  <div class="page-head"><h1>Modèles</h1><a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Nouveau modèle</a>
+    <p class="lead">Vos séances types du cabinet. Utilisez-en une comme point de départ pour un patient.</p></div>
+  <label class="input-icon" style="display:block;margin-bottom:16px"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un modèle"></label>
+  <div id="list">${loadingHTML()}</div>
+  <section class="section"><div class="list">
+    <a class="list-item" href="/pathologies.html"><span class="li-ico">${icon("stethoscope")}</span><span class="li-main"><span class="li-title">Programmes par pathologie</span><span class="li-sub">Lombalgie, coiffe, capsulite…</span></span><span class="li-end">${icon("chevron")}</span></a>
+    <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Enregistrées sur cet appareil</span></span><span class="li-end">${icon("chevron")}</span></a>
+  </div></section>`;
 
-document
-.getElementById("newProgramBtn")
-.onclick = ()=>{
+let modeles = [];
+const groupName = nom => { const m = String(nom || "").trim().match(/^(.*?)[\s_-]+(P\d+|\d+[A-Za-z]?)$/i); return m ? m[1].trim() : String(nom || "Sans nom").trim(); };
 
-localStorage.removeItem(
-"editCloudId"
-);
+function render(){
+  const q = norm($("#q").value.trim());
+  const list = modeles.filter(m => !q || norm(m.nom).includes(q));
+  if(!modeles.length){ $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"layers", title:"Aucun modèle", text:"Créez une séance puis choisissez « Enregistrer comme modèle ».", action:`<a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Créer une séance</a>` })}</div>`; return; }
+  if(!list.length){ $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"search", title:"Aucun modèle trouvé" })}</div>`; return; }
+  const groups = new Map();
+  list.forEach(m => { const g = groupName(m.nom); if(!groups.has(g)) groups.set(g, []); groups.get(g).push(m); });
+  $("#list").innerHTML = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0], "fr")).map(([g, items]) => `
+    <section class="m-group">
+      ${items.length > 1 ? `<div class="section-title" style="font-size:var(--fs-md)">${icon("folder", "ic-inline lagon")} ${esc(g)}<span class="badge">${items.length}</span></div>` : ""}
+      <div class="list">${items.sort((a, b) => a.nom.localeCompare(b.nom, "fr", { numeric:true })).map(m => `
+        <div class="list-item m-row">
+          <span class="li-ico">${icon("layers")}</span>
+          <span class="li-main"><span class="li-title">${esc(m.nom)}</span><span class="li-sub">${plural((m.data?.exercices || []).length, "exercice")}, ${esc(fmtDuree(sessionDuration(m.data)))}</span></span>
+          <span class="m-act">
+            <button class="btn sm primary" type="button" data-use="${esc(m.id)}">Utiliser</button>
+            <button class="icon-btn sm" type="button" data-run="${esc(m.id)}" aria-label="Lancer">${icon("play")}</button>
+            <button class="icon-btn sm" type="button" data-edit="${esc(m.id)}" aria-label="Modifier">${icon("edit")}</button>
+            <button class="icon-btn sm" type="button" data-pdf="${esc(m.id)}" aria-label="Fiche PDF">${icon("pdf")}</button>
+            <button class="icon-btn sm danger" type="button" data-del="${esc(m.id)}" aria-label="Supprimer">${icon("trash")}</button>
+          </span>
+        </div>`).join("")}</div>
+    </section>`).join("");
 
-localStorage.removeItem(
-"edit_programme"
-);
-
-localStorage.removeItem(
-"pathologie"
-);
-
-localStorage.removeItem(
-"patho_data"
-);
-
-localStorage.removeItem(
-"programme_temp"
-);
-
-window.location =
-"config.html?v="
-+ Date.now();
-
-};
-
-
-
-document
-.getElementById("courseProgramBtn")
-.onclick = ()=>{
-
-window.location =
-"programmescourse.html?v="
-+ Date.now();
-
-};
-
-const container =
-document.getElementById("list");
-
-async function init(){
-
-const programmes =
-await loadProgramsFromCloud();
-
-
-const adminPrograms =
-programmes.filter(
-
-p =>
-String(
-p.patientId || ""
-)
-.toLowerCase()
-.trim() === "admin"
-);
-
-// ---------- Regroupement automatique ----------
-
-const groupes = {};
-
-adminPrograms.forEach(programme=>{
-
-const nom = programme.nom.trim();
-
-const match = nom.match(/^(.*?)[\s_-]+(P\d+|\d+[A-Za-z]?|\d+)$/i);
-
-if(match){
-
-const dossier = match[1].trim();
-
-const sousNom = match[2].toUpperCase();
-
-if(!groupes[dossier])
-groupes[dossier]=[];
-
-groupes[dossier].push({
-...programme,
-affichage:sousNom
-});
-
-}else{
-
-if(!groupes[nom])
-groupes[nom]=[];
-
-groupes[nom].push({
-...programme,
-affichage:nom
-});
-
+  const find = id => modeles.find(m => m.id === id);
+  $$("[data-use]").forEach(b => b.onclick = () => { const m = find(b.dataset.use); store.set("gt_draft", { nom:m.nom, series:m.data?.series || 1, exercices:m.data?.exercices || [] }); location.href = "/config.html?draft=1"; });
+  $$("[data-run]").forEach(b => b.onclick = () => { const m = find(b.dataset.run); setRunProgram({ ...m.data, nom:m.nom }); location.href = "/timer.html"; });
+  $$("[data-edit]").forEach(b => b.onclick = () => { store.set("gt_edit", { type:"modele", id:b.dataset.edit }); location.href = "/config.html?edit=1"; });
+  $$("[data-pdf]").forEach(b => b.onclick = () => { const m = find(b.dataset.pdf); store.set("programme_pdf", { ...m.data, nom:m.nom, patient:"", niveau:(m.nom.match(/P\d+/) || [""])[0] }); window.open("/program_pdf.html", "_blank"); });
+  $$("[data-del]").forEach(b => b.onclick = async () => {
+    const m = find(b.dataset.del);
+    if(!await confirmDialog({ title:"Supprimer ce modèle ?", message:`« ${m.nom} » sera supprimé. Les programmes déjà envoyés aux patients ne changent pas.`, confirm:"Supprimer", danger:true })) return;
+    await C.deleteModele(m.id); modeles = modeles.filter(x => x.id !== m.id); toast("Modèle supprimé.", { type:"ok" }); render();
+  });
 }
 
-});
-
-container.innerHTML = "";
-
-if(adminPrograms.length === 0){
-
-container.innerHTML =
-"<p style='text-align:center'>Aucun programme admin trouvé</p>";
-
-return;
-}
-
-
-Object.entries(groupes).forEach(([nomDossier,liste])=>{
-
-// Si un seul programme → affichage normal
-
-if(liste.length===1 && liste[0].affichage===nomDossier){
-
-const programme=liste[0];
-
-const div=document.createElement("div");
-
-div.className="card";
-
-const nbExos=
-programme.data?.exercices?.length||0;
-
-div.innerHTML=`
-<div style="
-display:flex;
-justify-content:space-between;
-align-items:center;
-">
-
-<h3>${programme.nom}</h3>
-
-<div>
-
-<span class="pdfBtn">📄</span>
-
-<span class="deleteBtn">🗑️</span>
-
-</div>
-
-</div>
-
-<div class="small">
-${nbExos} exercice(s)
-</div>
-`;
-
-div.onclick=()=>{
-
-localStorage.setItem(
-"edit_programme",
-JSON.stringify({
-nom:programme.nom,
-patientId:programme.patientId,
-series:programme.data?.series||1,
-exercices:programme.data?.exercices||[]
-})
-);
-
-localStorage.setItem(
-"editCloudId",
-programme.firebaseId
-);
-
-window.location="config.html?v="+Date.now();
-
-};
-
-div.querySelector(".pdfBtn").onclick=(e)=>{
-
-    e.stopPropagation();
-
-    const pdfData={
-
-        ...programme.data,
-
-        nom:programme.nom,
-
-        patient:"",
-
-        pathologie:"",
-
-        niveau:programme.nom.match(/P\d+/)?.[0] || ""
-
-    };
-
-console.log("PROGRAMME :", programme);
-
-console.log("PDF DATA :", pdfData);
-
-console.log(JSON.stringify(pdfData, null, 2));
-
-    localStorage.setItem(
-        "programme_pdf",
-        JSON.stringify(pdfData)
-    );
-
-    window.open(
-"program_pdf.html",
-"_blank"
-);
-
-};
-
-div.querySelector(".deleteBtn").onclick=async(e)=>{
-
-e.stopPropagation();
-
-if(confirm("Supprimer ?")){
-
-await deleteProgramFromCloud(programme.firebaseId);
-
-location.reload();
-
-}
-
-};
-
-container.appendChild(div);
-
-return;
-
-}
-
-
-
-// ---------- DOSSIER ----------
-
-const dossier=document.createElement("div");
-
-dossier.className="card";
-
-dossier.innerHTML = `
-<h3>📁 ${nomDossier}</h3>
-<div class="small">${liste.length} programme(s)</div>
-`;
-
-liste.sort((a,b)=>{
-
-const na=parseInt(a.affichage.replace(/\D/g,""))||0;
-const nb=parseInt(b.affichage.replace(/\D/g,""))||0;
-
-if(na!==nb) return na-nb;
-
-return a.affichage.localeCompare(b.affichage);
-
-}).forEach(programme=>{
-
-const ligne=document.createElement("div");
-
-ligne.style.marginTop="10px";
-
-ligne.style.padding="10px";
-
-ligne.style.borderTop="1px solid #eee";
-
-ligne.style.cursor="pointer";
-
-ligne.innerHTML=`
-▶ ${programme.affichage}
-
-<span style="float:right;display:flex;gap:10px;">
-
-<span class="pdfBtn">📄</span>
-
-<span class="deleteBtn">🗑️</span>
-
-</span>
-`;
-
-ligne.onclick=()=>{
-
-localStorage.setItem(
-"edit_programme",
-JSON.stringify({
-nom:programme.nom,
-patientId:programme.patientId,
-series:programme.data?.series||1,
-exercices:programme.data?.exercices||[]
-})
-);
-
-localStorage.setItem(
-"editCloudId",
-programme.firebaseId
-);
-
-window.location="config.html?v="+Date.now();
-
-};
-
-ligne.querySelector(".pdfBtn").onclick=(e)=>{
-
-e.stopPropagation();
-
-const pdfData={
-
-...programme.data,
-
-nom:programme.nom,
-
-patient:"",
-
-pathologie:"",
-
-niveau:programme.affichage
-
-};
-
-localStorage.setItem(
-"programme_pdf",
-JSON.stringify(pdfData)
-);
-
-window.open(
-"program_pdf.html",
-"_blank"
-);
-
-};
-
-ligne.querySelector(".deleteBtn").onclick=async(e)=>{
-
-e.stopPropagation();
-
-if(confirm("Supprimer ?")){
-
-await deleteProgramFromCloud(programme.firebaseId);
-
-location.reload();
-
-}
-
-};
-
-dossier.appendChild(ligne);
-
-});
-
-container.appendChild(dossier);
-
-});
-}
-
-init();
-
+try{ modeles = await C.listModeles(); render(); $("#q").addEventListener("input", debounce(render, 120)); }
+catch(err){ $("#list").innerHTML = errorHTML(err); }
 </script>
-
 </body>
 </html>
