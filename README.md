@@ -1,4 +1,4 @@
-# Gabriel LAVEAU – Kinésithérapie
+# ApiKiné – Gabriel LAVEAU, Kinésithérapie
 
 Application web (installable sur téléphone) de programmes d'exercices sur mesure pour les patients du cabinet.
 

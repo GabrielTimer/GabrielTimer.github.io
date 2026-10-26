@@ -1,6 +1,6 @@
 {
-  "name": "Gabriel LAVEAU – Kinésithérapie",
-  "short_name": "Kiné Laveau",
+  "name": "ApiKiné",
+  "short_name": "ApiKiné",
   "description": "Vos exercices de kinésithérapie, guidés pas à pas.",
   "lang": "fr",
   "start_url": "/index.html",
