@@ -9,7 +9,7 @@ const PAGE = 30;
  * Monte la bibliothèque dans un conteneur.
  * opts : { onAdd(exo), layout:"list"|"grid", addLabel, persistKey }
  */
-export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters" } = {}){
+export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters", countIn = null } = {}){
   const saved = store.get(persistKey, {}) || {};
   const state = { q: saved.q || "", cat: saved.cat || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
 
@@ -53,9 +53,13 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     return searchLibrary(list, state.q);
   };
 
+  const inBadge = e => {
+    const n = countIn ? countIn(e) : 0;
+    return n ? `<span class="in-badge">${icon("check")}Dans la séance${n > 1 ? ` ×${n}` : ""}</span>` : "";
+  };
   const card = e => layout === "grid" ? `
       <article class="lib-card">
-        <button class="lib-card-img" type="button" data-open="${esc(e.source + ":" + e.id)}" aria-label="Voir ${esc(e.nom)}">${exoImageHTML(e.image, "")}</button>
+        <button class="lib-card-img" type="button" data-open="${esc(e.source + ":" + e.id)}" aria-label="Voir ${esc(e.nom)}">${exoImageHTML(e.image, "")}${inBadge(e)}</button>
         <div class="lib-card-body">
           <div class="lib-meta">${esc(e.categorie)}${e.mode ? `, ${esc(e.mode.toLowerCase())}` : ""}</div>
           <h3>${esc(e.nom)}</h3>
@@ -67,7 +71,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <div class="lib-row">
         <button class="lib-row-main" type="button" data-open="${esc(e.source + ":" + e.id)}">
           ${exoImageHTML(e.image, "", "li-thumb")}
-          <span class="li-main"><span class="li-title">${esc(e.nom)}</span><span class="li-sub">${esc(e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
+          <span class="li-main"><span class="li-title">${esc(e.nom)}</span><span class="li-sub">${countIn && countIn(e) ? `<strong style="color:var(--ok)">Dans la séance</strong>, ` : ""}${esc(e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
         </button>
         ${onAdd ? `<button class="icon-btn filled" type="button" data-add="${esc(e.source + ":" + e.id)}" aria-label="${esc(addLabel)} ${esc(e.nom)}">${icon("plus")}</button>` : ""}
       </div>`;
@@ -83,7 +87,13 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     $("[data-more]", root).hidden = list.length <= state.limit;
     $$("[data-add]", res).forEach(b => b.onclick = () => {
       const e = find(b.dataset.add);
-      if(e && onAdd){ onAdd(e); b.classList.add("added"); setTimeout(() => b.classList.remove("added"), 900); }
+      if(e && onAdd){
+        onAdd(e);
+        b.classList.add("added"); setTimeout(() => b.classList.remove("added"), 900);
+        const holder = b.closest(".lib-card");
+        const img = holder?.querySelector(".lib-card-img");
+        if(img){ img.querySelector(".in-badge")?.remove(); img.insertAdjacentHTML("beforeend", inBadge(e)); }
+      }
     });
     $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel }); });
   };
@@ -95,7 +105,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   renderCats();
   renderResults();
-  return { focus: () => $("[data-q]", root).focus() };
+  return { focus: () => $("[data-q]", root).focus(), refresh: renderResults };
 }
 
 /** Fiche détaillée d'un exercice de la bibliothèque. */
