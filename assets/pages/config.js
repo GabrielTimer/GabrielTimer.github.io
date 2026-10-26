@@ -139,7 +139,7 @@ function mountView(){
         </div>
         <section class="panel send" id="send"></section>
       </section>
-      <aside class="panel cfg-lib" aria-label="Bibliothèque d'exercices"><h2>Bibliothèque</h2><div id="lib"></div></aside>
+      <aside class="panel cfg-lib" aria-label="Bibliothèque d'exercices"><div class="lib-head"><h2>Bibliothèque</h2><button class="btn sm" type="button" id="lib-full" title="Agrandir la bibliothèque">${icon("maximize")}Plein écran</button></div><div id="lib"></div></aside>
     </div>`;
 
   $("#nom").addEventListener("input", e => { S.nom = e.target.value; persist(); renderSend(false); });
@@ -147,14 +147,15 @@ function mountView(){
   $("#series").addEventListener("change", e => { e.target.value = S.series; });
   $$("[data-step=series]").forEach(b => b.onclick = () => { S.series = clamp(S.series + Number(b.dataset.d), 1, 20); $("#series").value = S.series; persist(); renderSummary(); });
   $("#add-custom").onclick = () => { addExercise({ nom:`Exercice ${S.exercices.length + 1}`, ex:30, repos:10, reps:10, type:"timer" }); setTimeout(() => { const n = $$(".exo-name"); n[n.length - 1]?.select(); }, 30); };
-  $("#add-lib").onclick = openLibrarySheet;
+  $("#add-lib").onclick = () => openLibrarySheet(false);
+  $("#lib-full")?.addEventListener("click", () => openLibrarySheet(true));
   $("#restart")?.addEventListener("click", async () => {
     if(!await confirmDialog({ title:"Repartir de zéro ?", message:"La séance en cours de préparation sera effacée.", confirm:"Effacer", danger:true })) return;
     store.del(STATE_KEY); location.replace("/config.html?nouveau=1" + (S.patient ? "&patient=" + S.patient : ""));
   });
 
   if(matchMedia("(min-width:1100px)").matches){
-    mountLibrary($("#lib"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter à la séance" });
+    sideLib = mountLibrary($("#lib"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter à la séance", countIn });
   }
   renderExos();
   renderSend();
@@ -238,6 +239,7 @@ function bindExos(){
     const i = +b.dataset.del;
     const [removed] = S.exercices.splice(i, 1);
     persist(); renderExos(); renderSend(false);
+    sideLib?.then(l => l.refresh());
     toast(`« ${removed.nom} » retiré.`, { action:{ label:"Annuler", run:() => { S.exercices.splice(i, 0, removed); persist(); renderExos(); renderSend(false); } } });
   });
   $$("[data-view]", list).forEach(b => b.onclick = () => {
@@ -312,12 +314,27 @@ function startDrag(ev){
 function addExercise(exo){
   S.exercices.push(normExo(exo));
   persist(); renderExos(); renderSend(false);
+  sideLib?.then(l => l.refresh());
   toast(`« ${exo.nom} » ajouté.`, { type:"ok", duration:1800 });
 }
 
-function openLibrarySheet(){
-  const s = openSheet({ title:"Ajouter des exercices", wide:true, body:`<div id="lib-sheet"></div>`, foot:`<button class="btn primary" type="button" data-close>Terminé</button>` });
-  mountLibrary(s.el.querySelector("#lib-sheet"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter" });
+let sideLib = null;
+const countIn = e => S.exercices.filter(x => String(x.id) === String(e.id) && (x.source || "CABINET") === e.source).length;
+
+function openLibrarySheet(full){
+  const head = () => `${plural(S.exercices.length, "exercice")} dans la séance, ${S.exercices.length ? fmtDuree(sessionDuration(build())) : "0 min"}`;
+  const s = openSheet({
+    title: full ? "Bibliothèque d'exercices" : "Ajouter des exercices",
+    wide: true,
+    body: `<div id="lib-sheet"></div>`,
+    foot: `<span class="lib-sum small muted" id="lib-sum">${head()}</span><button class="btn primary" type="button" data-close>${icon("check")}Terminé</button>`,
+    onClose: () => { sideLib?.then(l => l.refresh()); }
+  });
+  s.el.classList.add("full");
+  mountLibrary(s.el.querySelector("#lib-sheet"), {
+    onAdd: e => { addExercise(toProgramExercise(e)); s.el.querySelector("#lib-sum").textContent = head(); },
+    addLabel: "Ajouter", countIn, layout: full ? "grid" : "list"
+  });
 }
 
 /* ---------- Envoi / enregistrement ---------- */

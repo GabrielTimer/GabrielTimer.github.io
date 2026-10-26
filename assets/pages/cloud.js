@@ -5,7 +5,7 @@ import {
   openSheet, loadingHTML, emptyHTML, errorHTML, groupProgrammes, fmtRelDay, fmtShortDate, evaFace, evaColor,
   plural, ressentiLabel, kineHint, byWeek, fmtNum
 } from "../app.js";
-import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf } from "../programmes-view.js";
+import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
 
 const app = $("#app");
 registerSW();
@@ -66,6 +66,17 @@ async function patientView(ctx){
       const prog = data.programmes.find(p => p.id === article.dataset.prog);
       article.querySelectorAll("[data-pact]").forEach(b => b.addEventListener("click", async () => {
         if(b.dataset.pact === "pdf") openProgrammePdf(prog, data.patient.nom);
+        if(b.dataset.pact === "jours"){
+          changeDaysSheet(prog, { role:"patient", onSave: async changes => {
+            if(ctx.apercu){ toast("Aperçu : les jours ne sont pas modifiés."); return; }
+            const C = await import("../cloud.js");
+            await C.replanSeances(ctx.cle, changes);
+            changes.forEach(c => { const x = data.seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
+            Object.assign(data, groupProgrammes(data.seances));
+            toast("Vos jours sont enregistrés. Votre kiné verra le nouveau planning.", { type:"ok" });
+            render();
+          }});
+        }
         if(b.dataset.pact === "bilan"){
           const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Préparer l'e-mail" });
           if(rem !== null) P.bilanMail({ patientNom:data.patient.nom, programme:prog, remarques:rem });
@@ -220,6 +231,14 @@ async function kineView(param){
         const act = b.dataset.pact;
         const first = prog.seances[0];
         if(act === "pdf") openProgrammePdf(prog, patient.nom);
+        if(act === "jours"){
+          changeDaysSheet(prog, { role:"kine", onSave: async changes => {
+            await C.replanSeances(patient.cle, changes);
+            changes.forEach(c => { const x = seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
+            toast("Planning mis à jour.", { type:"ok" });
+            render();
+          }});
+        }
         if(act === "copier"){
           const weeks = byWeek(prog.seances);
           const jours = Array.from(new Set(weeks[0].seances.map(s => s.datePrevue ? new Date(s.datePrevue).getDay() : null).filter(x => x !== null)));

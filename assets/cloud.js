@@ -222,6 +222,15 @@ export async function saveSeances(cle, seances){
   return ops.length;
 }
 
+/** Nouvelles dates pour des séances non faites : [{ id, datePrevue, datePrevueTexte, joursProgramme }]. */
+export async function replanSeances(cle, changes){
+  for(let i = 0; i < changes.length; i += 400){
+    const batch = writeBatch(db);
+    changes.slice(i, i + 400).forEach(({ id, ...patch }) => batch.set(doc(db, "patients", cle, "seances", id), clean({ ...patch, updatedAt: Date.now() }), { merge: true }));
+    await batch.commit();
+  }
+}
+
 export async function deleteSeance(cle, id){
   await deleteDoc(doc(db, "patients", cle, "seances", id));
 }

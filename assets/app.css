@@ -611,3 +611,20 @@ details[open] > .h-sum .chev{ transform:rotate(180deg); }
 .days button{ aspect-ratio:auto; height:48px; }
 .lib-card-img{ position:relative; overflow:hidden; width:100%; }
 .lib-card-img > img,.lib-card-img > .ph-img{ position:absolute; inset:0; }
+
+/* Bibliothèque en plein écran */
+dialog.sheet.full{ width:calc(100vw - 48px); max-width:1500px; height:calc(100dvh - 48px); max-height:none; }
+dialog.sheet.full .sheet-body{ padding-top:14px; }
+dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
+@media (max-width:640px){ dialog.sheet.full{ width:100%; height:96dvh; } }
+.sheet-foot .lib-sum{ flex:1 1 200px; align-self:center; }
+.sheet-foot .lib-sum + .btn{ flex:0 0 auto; }
+@media (min-width:900px){
+  dialog.sheet.full .lib-tools{ flex-direction:row; flex-wrap:wrap; align-items:center; }
+  dialog.sheet.full .lib-tools .input-icon{ flex:1 1 320px; }
+  dialog.sheet.full .lib-tools .chips{ flex-basis:100%; }
+}
+.lib-head{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.lib-head h2{ flex:1; margin:0 !important; }
+.in-badge{ position:absolute; left:8px; top:8px; display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:999px; background:var(--ok); color:#fff; font-size:var(--fs-xs); font-weight:700; }
+.in-badge svg{ width:13px; height:13px; }
