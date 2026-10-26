@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -22,7 +24,7 @@
 body{
 margin:0;
 background:#f2f7f9;
-font-family:Segoe UI,sans-serif;
+font-family:"Atkinson Hyperlegible Next","Segoe UI",sans-serif;
 padding:20px;
 }
 
@@ -263,7 +265,7 @@ display:none;
 
 <div class="logoBloc">
 
-<img src="logo.png">
+<img src="/logo.png">
 
 
 </div>
@@ -347,7 +349,7 @@ L'objectif est de terminer chaque séance avec la sensation de pouvoir en faire 
 
 <div class="logoBloc">
 
-<img src="logo.png">
+<img src="/logo.png">
 
 
 </div>
@@ -468,7 +470,7 @@ text-align:center;
 font-size:13px;
 color:#666;
 ">
-Programme généré avec GabrielTimer®
+Gabriel LAVEAU, masseur-kinésithérapeute
 <br>
 Suivi et accompagnement personnalisé
 </div>
@@ -489,9 +491,9 @@ Chaque séance est un pas de plus vers votre objectif.
 
 const data =
 JSON.parse(
-  sessionStorage.getItem(
-    "coursePdfData"
-  )
+  localStorage.getItem("coursePdfData")
+  || sessionStorage.getItem("coursePdfData")
+  || "null"
 );
 
 console.log("coursePdfData =", data);

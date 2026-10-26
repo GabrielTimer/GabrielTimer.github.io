@@ -2,206 +2,128 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Patients</title>
-
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/pages/home.css">
 <style>
-
-body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#f1f5f9;
-display:flex;
-justify-content:center;
-padding:20px;
-}
-
-.card{
-background:white;
-width:100%;
-max-width:420px;
-border-radius:20px;
-padding:20px;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-h1{
-text-align:center;
-margin-bottom:20px;
-}
-
-button{
-width:100%;
-padding:16px;
-margin:10px 0;
-border:none;
-border-radius:14px;
-font-size:18px;
-font-weight:600;
-cursor:pointer;
-background:#2563eb;
-color:white;
-}
-
-button:hover{
-background:#1d4ed8;
-}
-
-.backBtn{
-
-background:#ddd;
-color:#111;
-
-}
-
-.backBtn:hover{
-
-background:#ccc;
-
-}
-
-
+  .tools{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; }
+  .tools .input-icon{ flex:1 1 260px; }
+  .tools .select{ width:auto; flex:0 0 auto; }
+  .p-row{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:14px; align-items:center; }
+  .p-row .p-prog{ display:none; }
+  .p-row .p-side{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; font-size:var(--fs-sm); color:var(--ink-2); }
+  .p-badges{ display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+  @media (min-width:900px){
+    .p-row{ grid-template-columns:auto minmax(0,1.3fr) minmax(0,1fr) 150px 24px; }
+    .p-row .p-prog{ display:flex; flex-direction:column; gap:6px; font-size:var(--fs-sm); color:var(--ink-2); }
+    .p-head{ display:grid !important; }
+  }
+  .p-head{ display:none; grid-template-columns:auto minmax(0,1.3fr) minmax(0,1fr) 150px 24px; gap:14px; padding:0 16px 8px; font-size:var(--fs-xs); font-weight:700; color:var(--ink-3); }
+  .p-head span:first-child{ width:44px; }
 </style>
 </head>
-
 <body>
-
-<div class="card">
-
-<h1>Mes programmes</h1>
-
-<button class="backBtn" onclick="goBack()">
-🏠 Retour accueil
-</button>
-
-<div id="patientsList"></div>
-
-</div>
-
-<script>
-
-if(
-  localStorage.getItem("admin_ok")
-  !== "true"
-){
-
-  window.location.href =
-  "login.html";
-
-}
-
-const params =
-new URLSearchParams(
-window.location.search
-);
-
-const patient =
-params.get("patient");
-
-const isAdmin =
-params.get("admin") === "true";
-
-/* 🔒 SI MODE PATIENT */
-if(patient && !isAdmin){
-
-window.location =
-"cloud.html?patient="
-+ patient;
-
-}
-
-function openPatient(patient){
-
-localStorage.setItem(
-"currentPatient",
-patient
-);
-
-window.location =
-"cloud.html?patient="
-+ patient +
-"&admin=true";
-
-}
-
-</script>
+<main class="page wide" id="app"></main>
 <script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, loadingHTML, emptyHTML, errorHTML, fmtRelDay, evaColor, debounce, store } from "/assets/app.js";
+import { norm } from "/assets/library.js";
+const { requireKine, summarizeAll } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"patients" });
+const C = await import("/assets/cloud.js");
+const UI = await import("/assets/kine-ui.js");
+const app = $("#app");
 
-import {
-loadProgramsFromCloud
-}
-from "./exercises/js/cloud.js";
+app.innerHTML = `
+  <div class="page-head"><h1>Patients</h1><button class="btn primary" type="button" id="new">${icon("userPlus")}Nouveau patient</button></div>
+  <div class="tools">
+    <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient" autocomplete="off"></label>
+    <select class="select" id="sort" aria-label="Trier">
+      <option value="score">À surveiller d'abord</option>
+      <option value="nom">Par nom</option>
+      <option value="recent">Activité récente</option>
+    </select>
+  </div>
+  <div class="chips scroll" id="filters" role="group" aria-label="Filtrer" style="margin-bottom:16px"></div>
+  <div id="list">${loadingHTML()}</div>`;
 
-async function init(){
+$("#new").onclick = async () => { const p = await UI.newPatientSheet(); if(p){ location.href = `/cloud.html?patient=${p.cle}&acces=1`; } };
 
-const list =
-document.getElementById("patientsList");
-
-const programmes =
-await loadProgramsFromCloud();
-
-const ignored = [
-"demo",
-"test"
+let sums = [];
+const FILTERS = [
+  ["tous", "Tous", () => true],
+  ["alerte", "À surveiller", s => s.alertes.some(a => a.niveau === "danger" || a.niveau === "warn")],
+  ["actif", "Programme en cours", s => !!s.actif],
+  ["sans", "Sans programme", s => !s.programmes.length && !s.seules.length],
+  ["fini", "Programme terminé", s => s.programmes.length && !s.actif]
 ];
+let filter = store.get("gt_pfilter", "tous");
 
-const patients =
-[
-...new Set(
+function initials(n){ return String(n || "?").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join(""); }
 
-programmes
+function render(){
+  const q = norm($("#q").value.trim());
+  const sort = $("#sort").value;
+  $("#filters").innerHTML = FILTERS.map(([id, label, fn]) => `<button class="chip" type="button" data-f="${id}" aria-pressed="${filter === id}">${label}<span class="count">${sums.filter(fn).length}</span></button>`).join("");
+  $$("#filters [data-f]").forEach(b => b.onclick = () => { filter = b.dataset.f; store.set("gt_pfilter", filter); render(); });
 
-.map(p =>
-p.patientId?.trim().toLowerCase()
-)
+  let list = sums.filter(FILTERS.find(f => f[0] === filter)[2]);
+  if(q) list = list.filter(s => norm(`${s.patient.nom} ${s.patient.note || ""} ${s.actif?.nom || ""}`).includes(q));
+  list.sort((a, b) =>
+    sort === "nom" ? a.patient.nom.localeCompare(b.patient.nom, "fr")
+    : sort === "recent" ? (b.derniere?.dateValidation || 0) - (a.derniere?.dateValidation || 0)
+    : (b.score - a.score) || ((b.derniere?.dateValidation || 0) - (a.derniere?.dateValidation || 0)));
 
-.filter(Boolean)
-
-.filter(p =>
-!ignored.includes(p)
-)
-
-)
-]
-
-.sort();
-patients.forEach(patient => {
-
-const btn =
-document.createElement("button");
-
-btn.textContent = patient;
-
-btn.onclick = () => {
-
-localStorage.setItem(
-"currentPatient",
-patient
-);
-
-window.location =
-"cloud.html?patient="
-+ patient +
-"&admin=true";
-
-};
-
-list.appendChild(btn);
-
-});
-
+  if(!sums.length){
+    $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"users", title:"Aucun patient", text:"Créez votre premier patient, ou importez vos anciens programmes.", action:`<div class="btn-row"><a class="btn" href="/admin_tools.html#migration">${icon("upload")}Importer</a></div>` })}</div>`;
+    return;
+  }
+  if(!list.length){
+    $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"search", title:"Aucun résultat", text:"Essayez un autre nom ou un autre filtre." })}</div>`;
+    return;
+  }
+  $("#list").innerHTML = `
+    <div class="p-head"><span></span><span>Patient</span><span>Programme</span><span>Dernière séance</span><span></span></div>
+    <div class="list">${list.map(s => {
+      const p = s.actif;
+      const spine = p ? `<div class="spine thin">${p.seances.map(x => `<i class="${x.terminee ? "done" : ""}"></i>`).join("")}</div>` : "";
+      const badges = s.alertes.filter(a => a.niveau !== "ok" || !s.actif).map(a => `<span class="badge ${a.niveau === "danger" ? "danger" : a.niveau === "warn" ? "warn" : a.niveau === "ok" ? "ok" : "lagon"}">${icon(a.ico)}${esc(a.texte)}</span>`).join("");
+      return `
+      <a class="list-item p-row" href="/cloud.html?patient=${encodeURIComponent(s.patient.cle)}">
+        <span class="avatar">${esc(initials(s.patient.nom))}</span>
+        <span style="min-width:0">
+          <span class="li-title">${esc(s.patient.nom)}</span>
+          <span class="li-sub">${esc(s.patient.note || (p ? p.nom : s.programmes.length ? "Programme terminé" : "Aucun programme"))}</span>
+          ${badges ? `<span class="p-badges">${badges}</span>` : ""}
+        </span>
+        <span class="p-prog">${p ? `<span>${esc(p.nom)}, ${p.faites}/${p.total}</span>${spine}` : `<span class="faint">${s.programmes.length ? "Terminé" : "Aucun programme"}</span>`}</span>
+        <span class="p-side">
+          ${s.lastEva !== null ? `<span class="eva-pill"><i style="background:${evaColor(s.lastEva)}"></i>${s.lastEva}/10</span>` : ""}
+          <span>${s.derniere ? esc(fmtRelDay(s.derniere.dateValidation)) : "Jamais"}</span>
+        </span>
+        <span class="li-end" style="display:none">${icon("chevron")}</span>
+      </a>`;
+    }).join("")}</div>`;
+  if(matchMedia("(min-width:900px)").matches) $$(".p-row .li-end").forEach(x => x.style.display = "flex");
 }
 
-init();
-
-window.goBack = function(){
-
-window.location =
-"index.html?v=1.2";
-
+try{
+  const [patients, seances] = await Promise.all([C.listPatients(), C.listAllSeances()]);
+  sums = summarizeAll(patients, seances);
+  render();
+  $("#q").addEventListener("input", debounce(render, 120));
+  $("#sort").addEventListener("change", render);
+}catch(err){
+  console.error(err);
+  $("#list").innerHTML = errorHTML(err);
 }
-
 </script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+rules_version = '2';
+
+// Règles de sécurité Firestore — Gabriel LAVEAU
+// À copier dans la console Firebase : Firestore Database > Règles > Publier.
+//
+// Principe :
+// - Le kiné (compte e-mail/mot de passe ci-dessous) lit et écrit tout.
+// - Un patient n'accède qu'à son propre dossier, grâce à son code d'accès secret
+//   (le code fait partie du chemin : patients/{code}). Sans le code, impossible de
+//   lister ou de deviner les autres patients.
+// - Un patient ne peut modifier que la validation de ses séances (fait / EVA / ressenti).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isKine() {
+      return request.auth != null
+        && request.auth.token.email in ["kine.laveau@gmail.com"];
+    }
+
+    // Champs qu'un patient a le droit de modifier sur une séance
+    function isValidation() {
+      let d = request.resource.data;
+      return d.diff(resource.data).affectedKeys()
+               .hasOnly(["terminee", "eva", "dateValidation", "ressenti", "commentaire", "dureeReelle"])
+        && d.terminee == true
+        && (!("eva" in d) || (d.eva is int && d.eva >= 0 && d.eva <= 10))
+        && (!("commentaire" in d) || (d.commentaire is string && d.commentaire.size() <= 1000))
+        && (!("ressenti" in d) || (d.ressenti is string && d.ressenti.size() <= 30));
+    }
+
+    match /patients/{cle} {
+      allow get: if true;                 // seulement si on connaît le code exact
+      allow list, create, update, delete: if isKine();
+
+      match /seances/{id} {
+        allow read: if true;              // le chemin contient déjà le code secret
+        allow create, delete: if isKine();
+        allow update: if isKine() || isValidation();
+      }
+    }
+
+    // Coordonnées et note privée : réservées au kiné
+    match /fiches/{cle} {
+      allow read, write: if isKine();
+    }
+
+    // Vue d'ensemble de toutes les séances (tableau de bord du kiné)
+    match /{path=**}/seances/{id} {
+      allow read: if isKine();
+    }
+
+    // Programmes modèles du cabinet
+    match /modeles/{id} {
+      allow read, write: if isKine();
+    }
+
+    // Ancienne collection (avant migration) : réservée au kiné
+    match /programmes/{id} {
+      allow read, write: if isKine();
+    }
+  }
+}

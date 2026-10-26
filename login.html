@@ -1,126 +1,90 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>Connexion Admin</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Espace kiné – Connexion</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
 <style>
-
-body{
-margin:0;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#f4f4f4;
-font-family:Arial;
-}
-
-.card{
-width:320px;
-background:white;
-padding:30px;
-border-radius:24px;
-box-shadow:0 10px 30px rgba(0,0,0,0.12);
-display:flex;
-flex-direction:column;
-gap:16px;
-}
-
-.logo{
-font-size:42px;
-text-align:center;
-}
-
-h1{
-margin:0;
-text-align:center;
-font-size:28px;
-}
-
-input{
-padding:14px;
-border-radius:12px;
-border:1px solid #ddd;
-font-size:16px;
-}
-
-button{
-padding:14px;
-border:none;
-border-radius:14px;
-background:#2563eb;
-color:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.error{
-color:red;
-font-size:14px;
-text-align:center;
-min-height:20px;
-}
-
+  .login{ min-height:100dvh; display:grid; place-items:center; padding:24px var(--gutter); }
+  .login-box{ width:min(100%,420px); display:flex; flex-direction:column; gap:22px; }
+  .login-head{ text-align:center; }
+  .login-head img{ width:72px; height:72px; margin:0 auto 12px; }
+  .login-head p{ color:var(--ink-2); }
+  .pwd{ position:relative; }
+  .pwd .input{ padding-right:52px; }
+  .pwd .icon-btn{ position:absolute; right:2px; top:2px; }
 </style>
-
 </head>
-
 <body>
+<main class="login">
+  <div class="login-box">
+    <div class="login-head">
+      <img src="/logo.png" alt="">
+      <h1>Espace kiné</h1>
+      <p>Connectez-vous pour gérer vos patients et leurs programmes.</p>
+    </div>
+    <form class="panel raised stack" style="--gap:16px" id="form" novalidate>
+      <div class="field"><label for="email">Adresse e-mail</label><input class="input" id="email" type="email" autocomplete="username" inputmode="email" required></div>
+      <div class="field"><label for="pwd">Mot de passe</label>
+        <div class="pwd"><input class="input" id="pwd" type="password" autocomplete="current-password" required><button class="icon-btn" type="button" id="show" aria-label="Afficher le mot de passe"></button></div>
+      </div>
+      <p class="hint" id="msg" role="alert" style="min-height:1.2em"></p>
+      <button class="btn primary big block" type="submit" id="go">Se connecter</button>
+      <button class="btn ghost sm" type="button" id="forgot" style="align-self:center">Mot de passe oublié</button>
+    </form>
+    <a class="btn ghost" href="/index.html">Retour à l'accueil</a>
+  </div>
+</main>
+<script type="module">
+import { $, icon, kineHint, toast } from "/assets/app.js";
+import { ADMIN_EMAILS } from "/assets/config.js";
+const C = await import("/assets/cloud.js");
 
-<div class="card">
+const next = new URLSearchParams(location.search).get("next");
+const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/index.html";
 
-<div class="logo">🔒</div>
+if(await C.currentKine().catch(() => null)){ kineHint.set(true); location.replace(safeNext); }
 
-<h1>Admin</h1>
+$("#email").value = localStorage.getItem("gt_kine_email") || ADMIN_EMAILS[0] || "";
+$("#show").innerHTML = icon("eye");
+$("#show").onclick = () => { const p = $("#pwd"); p.type = p.type === "password" ? "text" : "password"; };
 
-<input
-type="password"
-id="pwd"
-placeholder="Mot de passe"
->
+const msgs = {
+  "auth/invalid-credential":"E-mail ou mot de passe incorrect.",
+  "auth/wrong-password":"E-mail ou mot de passe incorrect.",
+  "auth/user-not-found":"Aucun compte avec cette adresse.",
+  "auth/too-many-requests":"Trop de tentatives. Patientez quelques minutes.",
+  "auth/network-request-failed":"Pas de connexion internet.",
+  "auth/invalid-email":"Adresse e-mail invalide.",
+  "app/not-kine":"Ce compte n'a pas accès à l'espace kiné."
+};
 
-<button onclick="login()">
-Connexion
-</button>
-
-<div class="error" id="error"></div>
-
-</div>
-
-<script>
-
-const PASSWORD = "gab123";
-
-function login(){
-
-const value =
-document.getElementById("pwd")
-.value;
-
-if(value === PASSWORD){
-
-localStorage.setItem("admin_ok", "true");
-
-window.location =
-"patients.html?v=1.2";
-
-}else{
-
-document.getElementById(
-"error"
-).innerText =
-"Mot de passe incorrect";
-
-}
-
-}
-
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = $("#email").value.trim(), pwd = $("#pwd").value;
+  if(!email || !pwd){ $("#msg").textContent = "Renseignez l'e-mail et le mot de passe."; return; }
+  $("#go").disabled = true; $("#msg").textContent = "Connexion…";
+  try{
+    await C.loginKine(email, pwd);
+    localStorage.setItem("gt_kine_email", email);
+    kineHint.set(true);
+    location.replace(safeNext);
+  }catch(err){
+    $("#go").disabled = false;
+    $("#msg").textContent = msgs[err.code] || "Connexion impossible. Réessayez.";
+  }
+});
+$("#forgot").onclick = async () => {
+  const email = $("#email").value.trim();
+  if(!email){ $("#msg").textContent = "Indiquez d'abord votre adresse e-mail."; return; }
+  try{ await C.resetPassword(email); toast("Un e-mail de réinitialisation vous a été envoyé.", { type:"ok" }); }
+  catch(err){ $("#msg").textContent = msgs[err.code] || "Envoi impossible."; }
+};
 </script>
-
 </body>
 </html>

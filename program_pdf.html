@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800;900&display=swap">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <meta charset="UTF-8">
@@ -29,7 +31,7 @@ body{
 margin:0;
 padding:20px;
 background:#eef4f7;
-font-family:Segoe UI,sans-serif;
+font-family:"Atkinson Hyperlegible Next","Segoe UI",sans-serif;
 }
 
 .download{
@@ -487,7 +489,7 @@ box-shadow:none;
 
 <img
 class="logo"
-src="logo.png">
+src="/logo.png">
 
 <div class="title">
 
@@ -612,7 +614,7 @@ Niveau P1
 
 <div class="footer">
 
-GabrielTimer® • Programme personnalisé de rééducation
+Gabriel LAVEAU, masseur-kinésithérapeute. Programme personnalisé de rééducation
 
 </div>
 
@@ -699,6 +701,7 @@ function fillList(id,array){
 
 const ul=document.getElementById(id);
 
+if(!array || !array.length){ const sec = ul.closest(".section"); if(sec) sec.style.display = "none"; return; }
 (array||[]).forEach(txt=>{
 
 const li=document.createElement("li");
@@ -771,14 +774,13 @@ exos.map(exo=>`
 
 <img
 src="${
-exo.source==="HEP"
-
-? "exercises/images/HEP/"+exo.image
-
-: exo.image
+!exo.image ? "/exercises/images/placeholders/default.png"
+: /^(https?:|\/)/.test(exo.image) ? exo.image
+: (exo.source==="HEP" && !exo.image.includes("/")) ? "/exercises/images/HEP/"+exo.image
+: "/"+exo.image
 
 }"
-onerror="this.src='../exercises/images/placeholders/default.png'">
+onerror="this.onerror=null;this.src='/exercises/images/placeholders/default.png'">
 
 <h2>
 
@@ -796,7 +798,12 @@ exo.nom
 
 <div class="description">
 
+${ exo.conseil_kine ? `<p style="font-weight:700">${exo.conseil_kine.replace(/</g,"&lt;")}</p>` : "" }
 ${
+
+(Array.isArray(exo.consignes) && exo.consignes.length ? "<ol style=\"margin:0;padding-left:1.2em\">" + exo.consignes.map(c => "<li>" + String(c).replace(/</g,"&lt;") + "</li>").join("") + "</ol>" : "")
+
+||
 
 exo.instructions_fr
 

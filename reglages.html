@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réglages</title>
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .set-row{ display:flex; align-items:center; gap:14px; padding:14px 16px; border-top:1px solid var(--line); flex-wrap:wrap; }
+  .set-row:first-child{ border-top:0; }
+  .set-row .s-txt{ flex:1 1 200px; min-width:0; }
+  .set-row .s-txt strong{ display:block; }
+  .set-row .s-txt span{ font-size:var(--fs-sm); color:var(--ink-2); }
+  .switch{ position:relative; width:56px; height:32px; flex:none; }
+  .switch input{ position:absolute; inset:0; opacity:0; margin:0; cursor:pointer; z-index:1; }
+  .switch i{ position:absolute; inset:0; border-radius:999px; background:var(--line-strong); transition:background .2s; }
+  .switch i::after{ content:""; position:absolute; top:3px; left:3px; width:26px; height:26px; border-radius:50%; background:#fff; box-shadow:var(--shadow-1); transition:transform .2s; }
+  .switch input:checked + i{ background:var(--lagon); }
+  .switch input:checked + i::after{ transform:translateX(24px); }
+  .switch input:focus-visible + i{ box-shadow:var(--focus); }
+  .install ol{ margin:8px 0 0; padding-left:1.3em; }
+  .install li{ margin:6px 0; }
+</style>
+</head>
+<body>
+<main class="page" id="app"></main>
+<script type="module">
+import { $, esc, icon, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW } from "/assets/app.js";
+import { APP_VERSION } from "/assets/config.js";
+registerSW();
+const ctx = readPatientContext();
+const isKine = kineHint.get() && !ctx.apercu;
+mountShell({ role: isKine ? "kine" : ctx.cle ? "patient" : "none", active:"", back: isKine ? "/admin_tools.html" : "/index.html" });
+
+const theme = store.get("gt_theme", "auto");
+const big = store.get("gt_text") === "large";
+const sound = store.get("gt_sound", 1) !== 0;
+const voice = store.get("gt_voice", 1) !== 0;
+const auto = store.get("gt_autonext", 0) === 1;
+const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+
+const sw = (id, on) => `<label class="switch"><input type="checkbox" id="${id}" ${on ? "checked" : ""}><i></i></label>`;
+
+$("#app").innerHTML = `
+  <div class="page-head"><h1>Réglages</h1></div>
+
+  <div class="section-title">Affichage</div>
+  <div class="panel" style="padding:0">
+    <div class="set-row"><div class="s-txt"><strong>Texte agrandi</strong><span>Pour une lecture plus confortable.</span></div>${sw("big", big)}</div>
+    <div class="set-row"><div class="s-txt"><strong>Thème</strong><span>Clair, sombre ou selon le téléphone.</span></div>
+      <div class="segmented" role="group" aria-label="Thème">
+        ${[["auto","Auto"],["light","Clair"],["dark","Sombre"]].map(([v,l]) => `<button type="button" data-theme="${v}" aria-pressed="${theme === v}">${l}</button>`).join("")}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title section">Pendant la séance</div>
+  <div class="panel" style="padding:0">
+    <div class="set-row"><div class="s-txt"><strong>Sons</strong><span>Bips de début, de fin et décompte.</span></div>${sw("sound", sound)}</div>
+    <div class="set-row"><div class="s-txt"><strong>Annonces vocales</strong><span>Le nom de l'exercice et les repos sont annoncés.</span></div>${sw("voice", voice)}</div>
+    <div class="set-row"><div class="s-txt"><strong>Enchaîner automatiquement</strong><span>Passer à l'exercice suivant sans appuyer sur « Commencer ».</span></div>${sw("auto", auto)}</div>
+  </div>
+
+  ${!standalone ? `
+  <div class="section-title section">Installer l'application</div>
+  <div class="panel install">
+    <p>Ajoutez l'application à votre écran d'accueil pour la retrouver en un geste, comme une application classique.</p>
+    ${ios
+      ? `<ol><li>Touchez le bouton <strong>Partager</strong> ${icon("share", "ic-inline")} en bas de Safari.</li><li>Choisissez <strong>Sur l'écran d'accueil</strong>.</li><li>Touchez <strong>Ajouter</strong>.</li></ol>`
+      : `<button class="btn primary" type="button" id="install" hidden>${icon("download")}Installer</button><ol id="install-steps"><li>Ouvrez le menu du navigateur (les trois points).</li><li>Choisissez <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li></ol>`}
+  </div>` : ""}
+
+  ${ctx.cle && !ctx.apercu ? `
+  <div class="section-title section">Mon accès</div>
+  <div class="panel stack" style="--gap:12px">
+    <p>Code d'accès de cet appareil : <strong class="num">${esc(fmtCode(ctx.cle))}</strong></p>
+    <p class="small muted">Si vous changez de téléphone, utilisez le même lien ou ce code.</p>
+    <div><button class="btn danger" type="button" id="forget">${icon("logout")}Déconnecter cet appareil</button></div>
+  </div>` : ""}
+
+  <p class="center small faint section">${esc(KINE.nom)}, ${esc(KINE.titre)}<br>Version ${esc(APP_VERSION)}</p>`;
+
+$("#big").onchange = e => { store.set("gt_text", e.target.checked ? "large" : "normal"); applyPrefs(); };
+document.querySelectorAll("[data-theme]").forEach(b => b.onclick = () => {
+  store.set("gt_theme", b.dataset.theme); applyPrefs();
+  document.querySelectorAll("[data-theme]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+});
+$("#sound").onchange = e => store.set("gt_sound", e.target.checked ? 1 : 0);
+$("#voice").onchange = e => store.set("gt_voice", e.target.checked ? 1 : 0);
+$("#auto").onchange = e => store.set("gt_autonext", e.target.checked ? 1 : 0);
+$("#forget")?.addEventListener("click", async () => {
+  if(!await confirmDialog({ title:"Déconnecter cet appareil ?", message:"Vous aurez besoin de votre lien ou de votre code pour revenir.", confirm:"Déconnecter", danger:true })) return;
+  forgetPatient(); location.replace("/index.html");
+});
+let deferred;
+addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; const b = $("#install"); if(b){ b.hidden = false; $("#install-steps").hidden = true; } });
+$("#install")?.addEventListener("click", async () => { if(!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; });
+</script>
+</body>
+</html>

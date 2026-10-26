@@ -2,192 +2,79 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Outils administrateur</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="home.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Outils</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/pages/home.css">
 <style>
-
-.tools-grid{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:16px;
-  margin-top:20px;
-}
-
-.tool-card{
-
-  border:none;
-  cursor:pointer;
-
-  background:white;
-
-  border-radius:24px;
-
-  min-height:120px;
-
-  padding:20px;
-
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-
-  gap:10px;
-
-  box-shadow:
-  0 10px 30px rgba(15,23,42,.04);
-}
-
-.tool-card span{
-  font-size:42px;
-}
-
-.tool-card strong{
-  font-size:18px;
-}
-
-.back-btn{
-
-  margin-top:20px;
-
-  width:100%;
-
-  border:none;
-
-  border-radius:20px;
-
-  padding:16px;
-
-  background:#e2e8f0;
-
-  font-weight:700;
-
-  cursor:pointer;
-}
-
+  .log{ font-family:var(--mono); font-size:var(--fs-xs); background:var(--surface-2); border-radius:var(--r-md); padding:12px; max-height:220px; overflow:auto; white-space:pre-wrap; }
 </style>
 </head>
-
 <body>
+<main class="page" id="app"></main>
+<script type="module">
+import { $, esc, icon, mountShell, registerSW, toast, confirmDialog, kineHint } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+const user = await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"" });
+const C = await import("/assets/cloud.js");
 
-<div class="card home-card">
+const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
-  <div class="home-title">
-    🛠 Outils administrateur
+$("#app").innerHTML = `
+  <div class="page-head"><h1>Outils</h1></div>
+  <div class="list">
+    ${link("/programmescourse.html", "run", "Reprise de course", "Générer un programme progressif course et marche")}
+    ${link("/pathologies.html", "stethoscope", "Programmes par pathologie", "Points de départ prêts à adapter")}
+    ${link("/programmes_admin.html", "layers", "Modèles du cabinet", "Vos séances types")}
+    ${link("/mes_programmes.html", "star", "Séances favorites", "Enregistrées sur cet appareil")}
+    ${link("/historique.html", "history", "Historique de cet appareil", "Séances lancées depuis ici")}
+    ${link("/admin_exercises.html", "file", "Gestion des exercices (JSON)", "Préparer de nouveaux exercices pour la bibliothèque")}
+    ${link("/respir/index.html", "wind", "Respiration guidée", "RespiR")}
+    ${link("/reglages.html", "settings", "Réglages", "Thème, sons, taille du texte")}
   </div>
 
-  <div class="home-subtitle">
-    Gestion et création des programmes
-  </div>
+  <section class="section panel" id="migration">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Importer les anciens programmes</h2></div>
+    <p class="muted">Copie les programmes de l'ancienne version dans la nouvelle organisation sécurisée : un dossier par patient, avec son code d'accès personnel. Les anciens programmes ne sont pas effacés. Vous pouvez relancer l'import sans risque de doublon.</p>
+    <div class="row wrap" style="margin-top:14px">
+      <button class="btn primary" type="button" id="mig">${icon("upload")}Lancer l'import</button>
+      <span class="small muted" id="mig-count"></span>
+    </div>
+    <div class="log" id="mig-log" hidden></div>
+  </section>
 
-<div class="tools-grid">
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Compte</h2></div>
+    <p class="muted">Connecté avec <strong>${esc(user.email || "")}</strong>.</p>
+    <div style="margin-top:14px"><button class="btn danger" type="button" id="logout">${icon("logout")}Se déconnecter</button></div>
+  </section>`;
 
-<button
-  class="tool-card"
-  onclick="location.href='programmes_admin.html'">
+C.listLegacy().then(l => { $("#mig-count").textContent = `${l.length} ancien${l.length > 1 ? "s" : ""} document${l.length > 1 ? "s" : ""} trouvé${l.length > 1 ? "s" : ""}.`; }).catch(() => { $("#mig-count").textContent = ""; });
 
-  <span>📋</span>
-  <strong>Programmes</strong>
-
-</button>
-
-  <button
-  class="tool-card"
-  onclick="openProgrammeKine()">
-
-  <span>🏋️</span>
-  <strong>Programme kiné</strong>
-
-</button>
-
-  <button
-    class="tool-card"
-    onclick="location.href='programmescourse.html'">
-
-    <span>🏃</span>
-    <strong>Programme course</strong>
-
-  </button>
-
-  <button
-    class="tool-card"
-    onclick="location.href='admin_exercises.html'">
-
-    <span>📚</span>
-    <strong>Gestion JSON</strong>
-
-  </button>
-
-  <button
-    class="tool-card"
-    onclick="location.href='exercises/glossary.html'">
-
-    <span>📖</span>
-    <strong>Glossaire exercices</strong>
-
-  </button>
-
-</div>
-
-  <button
-    class="back-btn"
-    onclick="history.back()">
-
-    ⬅ Retour
-
-  </button>
-
-</div>
-
-<script>
-
-if(
-localStorage.getItem("admin_ok")
-!== "true"
-){
-  window.location.href =
-  "login.html";
-}
-
+$("#mig").onclick = async () => {
+  if(!await confirmDialog({ title:"Importer les anciens programmes ?", message:"Un dossier sera créé pour chaque patient, avec un nouveau code d'accès. Il faudra ensuite envoyer ce nouveau lien à chaque patient.", confirm:"Importer" })) return;
+  const log = $("#mig-log"); log.hidden = false; log.textContent = "Import en cours…\n";
+  $("#mig").disabled = true;
+  try{
+    const r = await C.migrateLegacy(msg => { log.textContent += msg + "\n"; log.scrollTop = log.scrollHeight; });
+    log.textContent += `\nTerminé : ${r.patients} patient(s) créé(s), ${r.seances} séance(s) et ${r.modeles} modèle(s) importés.`;
+    toast("Import terminé.", { type:"ok", action:{ label:"Voir les patients", run:() => location.href = "/patients.html" } });
+  }catch(err){
+    log.textContent += "\nErreur : " + (err.message || err);
+    toast("L'import n'a pas abouti.", { type:"err" });
+  }finally{ $("#mig").disabled = false; }
+};
+$("#logout").onclick = async () => {
+  await C.logoutKine(); kineHint.set(false); location.replace("/index.html");
+};
+if(location.hash === "#migration") setTimeout(() => $("#migration").scrollIntoView({ behavior:"smooth" }), 200);
 </script>
-
-<script>
-
-function openProgrammeKine(){
-
-  localStorage.removeItem("programme_temp");
-  localStorage.removeItem("current_programme");
-  localStorage.removeItem("edit_programme");
-  localStorage.removeItem("pathologie");
-  localStorage.removeItem("patho_data");
-  localStorage.removeItem("pathologie_nom");
-  localStorage.removeItem("programmeCopie");
-
-
-  localStorage.setItem(
-    "forceProgrammeKine",
-    "1"
-  );
-
-
-  location.href =
-  "config.html?v=" + Date.now();
-
-}
-
-if(
-localStorage.getItem("admin_ok")
-!== "true"
-){
-  window.location.href =
-  "login.html";
-}
-
-</script>
-
 </body>
 </html>
