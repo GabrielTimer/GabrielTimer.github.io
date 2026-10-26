@@ -59,23 +59,27 @@ app.innerHTML = `
   </section>
 
   ${cloud ? `
-  <section class="panel" id="msg-box" hidden>
-    <label class="q-title" for="msg" style="display:block">Un message pour ${esc(prenom(KINE.nom))} ?</label>
-    <p class="q-sub">Facultatif : une gêne, une question, un exercice difficile…</p>
-    <textarea class="textarea" id="msg" maxlength="1000" placeholder="Votre message"></textarea>
+  <section class="panel" id="msg-box">
+    <label class="q-title" for="msg" style="display:block" id="msg-title">Un commentaire sur cette séance ?</label>
+    <p class="q-sub" id="msg-sub">Facultatif : une gêne, un exercice difficile, ce qui s'est passé aujourd'hui… Il sera joint à votre dossier.</p>
+    <textarea class="textarea" id="msg" maxlength="1000" placeholder="Votre commentaire"></textarea>
   </section>` : ""}
 
   <button class="btn primary big block" type="button" id="save" disabled>${icon("check")}Enregistrer ma séance</button>
   <p class="center small faint" id="save-hint">Indiquez votre douleur pour enregistrer.</p>
 `;
 
-/* Le message au kiné n'est proposé qu'à la dernière séance d'un programme */
+/* Commentaire à chaque séance (enregistré dans le dossier, aucun e-mail).
+   À la dernière séance d'un programme, l'encadré devient un message au kiné. */
 if(cloud){
   import("../cloud.js").then(C => C.listSeances(cle)).then(seances => {
     const s = seances.find(x => x.id === sid);
     if(!s || !s.programmeId) return;
     const autres = seances.filter(x => x.programmeId === s.programmeId && x.id !== sid);
-    if(autres.every(x => x.terminee === true)) $("#msg-box").hidden = false;
+    if(!autres.every(x => x.terminee === true)) return;
+    $("#msg-title").textContent = `Un message pour ${prenom(KINE.nom)} ?`;
+    $("#msg-sub").textContent = "C'est la dernière séance du programme : un bilan, une question, ce qui a changé pour vous…";
+    $("#msg").placeholder = "Votre message";
   }).catch(() => {});
 }
 
