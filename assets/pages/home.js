@@ -12,14 +12,21 @@ const app = $("#app");
 registerSW();
 
 /* Accès caché à l'espace kiné : trois appuis rapides sur le logo */
-function secretLogo(el){
-  if(!el) return;
+/* Le logo est un lien vers l'accueil : on bloque toujours la navigation
+   (on y est déjà), sinon chaque appui rechargeait la page et le compteur
+   repartait de zéro. touch-action évite que le double appui zoome. */
+function secretLogo(...els){
   let n = 0, t;
-  el.addEventListener("click", e => {
+  const onTap = e => {
+    e.preventDefault();
     n++;
     clearTimeout(t);
-    t = setTimeout(() => { n = 0; }, 800);
-    if(n >= 3){ e.preventDefault(); location.href = "/login.html"; }
+    t = setTimeout(() => { n = 0; }, 1000);
+    if(n >= 3){ n = 0; location.href = "/login.html"; }
+  };
+  els.filter(Boolean).forEach(el => {
+    el.style.touchAction = "manipulation";
+    el.addEventListener("click", onTap);
   });
 }
 
@@ -98,7 +105,7 @@ function renderWelcome(){
 
 async function renderPatient(ctx){
   mountShell({ role:"patient", active:"accueil", apercu:ctx.apercu });
-  secretLogo(document.querySelector(".topbar .brand img"));
+  secretLogo(...document.querySelectorAll(".brand"));
   const cachedName = store.get("gt_patient_nom", "");
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour${cachedName ? " " + esc(prenom(cachedName)) : ""}</h1></div>
