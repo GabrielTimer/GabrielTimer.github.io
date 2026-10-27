@@ -10,19 +10,36 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/icon-192.png">
 <link rel="stylesheet" href="/assets/app.css">
-<link rel="stylesheet" href="/assets/pages/home.css">
 <style>
-  .m-group + .m-group{ margin-top:16px; }
-  .m-row{ flex-wrap:wrap; }
-  .m-row .li-main{ flex:1 1 200px; }
-  .m-row .m-act{ display:flex; gap:4px; margin-left:auto; }
+  .mo-head{ display:flex; gap:12px; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; }
+  .mo-tools{ display:flex; flex-direction:column; gap:12px; margin:6px 0 16px; }
+  .mo-selects{ display:flex; gap:8px; flex-wrap:wrap; }
+  .mo-selects .select{ flex:1 1 150px; max-width:240px; }
+  .mo-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+  .mo-card{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; }
+  .mo-cover{ aspect-ratio:16/9; background:#fff; border:0; padding:0; cursor:pointer; overflow:hidden; display:block; width:100%; }
+  .mo-cover img{ width:100%; height:100%; object-fit:cover; object-position:top; }
+  .mo-cover .ph-img{ width:100%; height:100%; }
+  .mo-own{ position:absolute; top:10px; left:10px; }
+  .mo-body{ padding:14px 16px 4px; display:flex; flex-direction:column; gap:6px; flex:1; }
+  .mo-body h2{ font-size:var(--fs-lg); }
+  .mo-levels{ display:flex; gap:6px; flex-wrap:wrap; margin-top:2px; }
+  .mo-levels button{ border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px; padding:4px 11px; font:inherit; font-size:var(--fs-sm); font-weight:700; cursor:pointer; }
+  .mo-levels button[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:#fff; }
+  .mo-actions{ display:flex; gap:8px; padding:12px 16px 16px; }
+  .mo-actions .btn.primary{ flex:1; }
+  .mo-exos{ display:flex; flex-direction:column; gap:10px; }
+  .mo-exo{ display:flex; gap:12px; align-items:center; }
+  .mo-exo img,.mo-exo .ph-img{ width:72px; height:56px; object-fit:contain; background:#fff; border-radius:var(--r-sm); border:1px solid var(--line); flex:none; }
+  .mo-more{ margin-top:28px; }
 </style>
 </head>
 <body>
 <main class="page wide" id="app"></main>
 <script type="module">
-import { $, $$, esc, icon, store, mountShell, registerSW, toast, confirmDialog, loadingHTML, emptyHTML, errorHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
+import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
+import { CATEGORIES, NIVEAUX, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel } from "/assets/modeles.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -30,57 +47,179 @@ mountShell({ role:"kine", active:"outils" });
 const C = await import("/assets/cloud.js");
 const app = $("#app");
 
+/* ---------- Filtres (mémorisés, ou imposés par l'adresse) ---------- */
+const KEY = "gt_modeles_filters";
+const F = { q:"", cat:"", zone:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
+if(params.get("cat")) F.cat = params.get("cat");
+if(params.get("zone")){
+  const z = params.get("zone");
+  const b = BUILTIN.find(m => m.raw.zone === z);
+  F.zone = norm(b ? b.zoneLabel : z.replace(/_/g, " "));
+}
+const save = () => store.set(KEY, F);
+
 app.innerHTML = `
-  <div class="page-head"><h1>Modèles</h1><a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Nouveau modèle</a>
-    <p class="lead">Vos séances types du cabinet. Utilisez-en une comme point de départ pour un patient.</p></div>
-  <label class="input-icon" style="display:block;margin-bottom:16px"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un modèle"></label>
+  <div class="page-head mo-head">
+    <div><h1>Modèles</h1><p class="lead">Programmes prêts à l'emploi et vos séances types : pathologies, post-opératoire, prévention… Choisissez un modèle et un niveau, puis adaptez-le pour un patient.</p></div>
+    <a class="btn primary" id="new" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a>
+  </div>
+  <div class="mo-tools">
+    <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
+    <div class="chips scroll" id="cats" role="group" aria-label="Catégorie"></div>
+    <div class="mo-selects">
+      <select class="select" id="zone" aria-label="Zone du corps"></select>
+      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous les niveaux</option>${NIVEAUX.map(n => `<option value="${n.n}">${n.label}</option>`).join("")}</select>
+      <select class="select" id="source" aria-label="Origine"><option value="">Tous les modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option></select>
+    </div>
+  </div>
+  <div class="small muted" id="count" style="margin-bottom:10px"></div>
   <div id="list">${loadingHTML()}</div>
-  <section class="section"><div class="list">
-    <a class="list-item" href="/pathologies.html"><span class="li-ico">${icon("stethoscope")}</span><span class="li-main"><span class="li-title">Programmes par pathologie</span><span class="li-sub">Lombalgie, coiffe, capsulite…</span></span><span class="li-end">${icon("chevron")}</span></a>
+  <section class="mo-more"><div class="list">
     <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Enregistrées sur cet appareil</span></span><span class="li-end">${icon("chevron")}</span></a>
+    <a class="list-item" href="/programmescourse.html"><span class="li-ico">${icon("run")}</span><span class="li-main"><span class="li-title">Reprise de course</span><span class="li-sub">Générateur de programme progressif</span></span><span class="li-end">${icon("chevron")}</span></a>
   </div></section>`;
 
-let modeles = [];
-const groupName = nom => { const m = String(nom || "").trim().match(/^(.*?)[\s_-]+(P\d+|\d+[A-Za-z]?)$/i); return m ? m[1].trim() : String(nom || "Sans nom").trim(); };
+let mine = [];
+const chosen = new Map(); // groupe → id du niveau affiché
+const all = () => [...mine, ...BUILTIN];
 
-function render(){
-  const q = norm($("#q").value.trim());
-  const list = modeles.filter(m => !q || norm(m.nom).includes(q));
-  if(!modeles.length){ $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"layers", title:"Aucun modèle", text:"Créez une séance puis choisissez « Enregistrer comme modèle ».", action:`<a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Créer une séance</a>` })}</div>`; return; }
-  if(!list.length){ $("#list").innerHTML = `<div class="panel">${emptyHTML({ ico:"search", title:"Aucun modèle trouvé" })}</div>`; return; }
-  const groups = new Map();
-  list.forEach(m => { const g = groupName(m.nom); if(!groups.has(g)) groups.set(g, []); groups.get(g).push(m); });
-  $("#list").innerHTML = [...groups.entries()].sort((a, b) => a[0].localeCompare(b[0], "fr")).map(([g, items]) => `
-    <section class="m-group">
-      ${items.length > 1 ? `<div class="section-title" style="font-size:var(--fs-md)">${icon("folder", "ic-inline lagon")} ${esc(g)}<span class="badge">${items.length}</span></div>` : ""}
-      <div class="list">${items.sort((a, b) => a.nom.localeCompare(b.nom, "fr", { numeric:true })).map(m => `
-        <div class="list-item m-row">
-          <span class="li-ico">${icon("layers")}</span>
-          <span class="li-main"><span class="li-title">${esc(m.nom)}</span><span class="li-sub">${plural((m.data?.exercices || []).length, "exercice")}, ${esc(fmtDuree(sessionDuration(m.data)))}</span></span>
-          <span class="m-act">
-            <button class="btn sm primary" type="button" data-use="${esc(m.id)}">Utiliser</button>
-            <button class="icon-btn sm" type="button" data-run="${esc(m.id)}" aria-label="Lancer">${icon("play")}</button>
-            <button class="icon-btn sm" type="button" data-edit="${esc(m.id)}" aria-label="Modifier">${icon("edit")}</button>
-            <button class="icon-btn sm" type="button" data-pdf="${esc(m.id)}" aria-label="Fiche PDF">${icon("pdf")}</button>
-            <button class="icon-btn sm danger" type="button" data-del="${esc(m.id)}" aria-label="Supprimer">${icon("trash")}</button>
-          </span>
-        </div>`).join("")}</div>
-    </section>`).join("");
+/* ---------- Actions ---------- */
+const findM = id => all().find(m => m.id === id);
+const useIt = m => { store.set("gt_draft", asProgram(m)); location.href = "/config.html?draft=1"; };
+const runIt = m => { setRunProgram(asProgram(m)); location.href = "/timer.html"; };
+const editIt = m => { location.href = m.mine ? `/config.html?modele=${encodeURIComponent(m.id)}` : `/config.html?modele=new&from=${encodeURIComponent(m.id)}`; };
+const pdfIt = m => {
+  if(m.pdf){ window.open(m.pdf, "_blank"); return; }
+  store.set("programme_pdf", { ...asProgram(m), patient:"", niveau: m.niveau ? `Niveau ${m.niveau}` : "" });
+  window.open("/program_pdf.html", "_blank");
+};
+const noteOf = e => e.conseil_kine || (e.consignes?.length ? "" : String(e.conseil || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, ""));
 
-  const find = id => modeles.find(m => m.id === id);
-  $$("[data-use]").forEach(b => b.onclick = () => { const m = find(b.dataset.use); store.set("gt_draft", { nom:m.nom, series:m.data?.series || 1, exercices:m.data?.exercices || [] }); location.href = "/config.html?draft=1"; });
-  $$("[data-run]").forEach(b => b.onclick = () => { const m = find(b.dataset.run); setRunProgram({ ...m.data, nom:m.nom }); location.href = "/timer.html"; });
-  $$("[data-edit]").forEach(b => b.onclick = () => { store.set("gt_edit", { type:"modele", id:b.dataset.edit }); location.href = "/config.html?edit=1"; });
-  $$("[data-pdf]").forEach(b => b.onclick = () => { const m = find(b.dataset.pdf); store.set("programme_pdf", { ...m.data, nom:m.nom, patient:"", niveau:(m.nom.match(/P\d+/) || [""])[0] }); window.open("/program_pdf.html", "_blank"); });
-  $$("[data-del]").forEach(b => b.onclick = async () => {
-    const m = find(b.dataset.del);
-    if(!await confirmDialog({ title:"Supprimer ce modèle ?", message:`« ${m.nom} » sera supprimé. Les programmes déjà envoyés aux patients ne changent pas.`, confirm:"Supprimer", danger:true })) return;
-    await C.deleteModele(m.id); modeles = modeles.filter(x => x.id !== m.id); toast("Modèle supprimé.", { type:"ok" }); render();
+function detail(m, group){
+  const levels = group.items.map(x => x.niveau).filter(Boolean);
+  const next = Math.max(0, ...levels, m.niveau || 0) + 1;
+  const s = openSheet({
+    title: m.titre,
+    wide: true,
+    body: `
+      <div class="row wrap" style="--gap:6px;margin-bottom:14px">
+        <span class="badge lagon">${esc(catLabel(m.categorie))}</span>
+        ${m.zoneLabel ? `<span class="badge">${esc(m.zoneLabel)}</span>` : ""}
+        ${m.niveau ? `<span class="badge">Niveau ${m.niveau}</span>` : ""}
+        <span class="badge">${plural(m.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(m)))}${m.series > 1 ? `, ${m.series} tours` : ""}</span>
+        ${m.mine ? `<span class="badge sun">${icon("star")}Mon modèle</span>` : ""}
+      </div>
+      <div class="mo-exos">${m.exercices.map((e, i) => `<div class="mo-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${noteOf(e) ? `<div class="small">${esc(noteOf(e))}</div>` : ""}</div></div>`).join("")}</div>
+      <div class="row wrap" style="--gap:8px;margin-top:18px">
+        <button class="btn sm" type="button" data-a="pdf">${icon("pdf")}Fiche PDF</button>
+        <button class="btn sm" type="button" data-a="edit">${icon(m.mine ? "edit" : "copy")}${m.mine ? "Modifier" : "Copier et adapter"}</button>
+        ${next <= 4 ? `<button class="btn sm" type="button" data-a="level">${icon("plus")}Créer le niveau ${next}</button>` : ""}
+        ${m.mine ? `<button class="btn sm danger" type="button" data-a="del">${icon("trash")}Supprimer</button>` : ""}
+      </div>`,
+    foot: `<button class="btn" type="button" data-a="run">${icon("play")}Lancer</button><button class="btn primary" type="button" data-a="use">${icon("share")}Utiliser pour un patient</button>`
+  });
+  s.el.querySelectorAll("[data-a]").forEach(b => b.onclick = async () => {
+    const a = b.dataset.a;
+    if(a === "use") useIt(m);
+    if(a === "run") runIt(m);
+    if(a === "pdf") pdfIt(m);
+    if(a === "edit") editIt(m);
+    if(a === "level") location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}&niveau=${next}`;
+    if(a === "del"){
+      if(!await confirmDialog({ title:"Supprimer ce modèle ?", message:`« ${m.titre} » sera supprimé. Les programmes déjà envoyés aux patients ne changent pas.`, confirm:"Supprimer", danger:true })) return;
+      await C.deleteModele(m.id);
+      mine = mine.filter(x => x.id !== m.id);
+      s.close(); toast("Modèle supprimé.", { type:"ok" }); render();
+    }
   });
 }
 
-try{ modeles = await C.listModeles(); render(); $("#q").addEventListener("input", debounce(render, 120)); }
-catch(err){ $("#list").innerHTML = errorHTML(err); }
+/* ---------- Affichage ---------- */
+function matches(m){
+  if(F.cat && m.categorie !== F.cat) return false;
+  if(F.zone && m.zoneKey !== F.zone) return false;
+  if(F.niveau && m.niveau !== Number(F.niveau)) return false;
+  if(F.source === "mine" && !m.mine) return false;
+  if(F.source === "builtin" && m.mine) return false;
+  if(F.q){
+    const hay = norm([m.nom, m.titre, catLabel(m.categorie), m.zoneLabel, ...m.exercices.map(e => e.nom)].join(" "));
+    if(!norm(F.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
+  }
+  return true;
+}
+
+function renderFilters(){
+  const counts = {};
+  all().forEach(m => { counts[m.categorie] = (counts[m.categorie] || 0) + 1; });
+  $("#cats").innerHTML = `<button class="chip" type="button" data-c="" aria-pressed="${!F.cat}">Tous<span class="count">${all().length}</span></button>` +
+    CATEGORIES.filter(c => counts[c.id] || c.id === F.cat).map(c => `<button class="chip" type="button" data-c="${c.id}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id] || 0}</span></button>`).join("");
+  $$("[data-c]").forEach(b => b.onclick = () => { F.cat = b.dataset.c; save(); renderFilters(); render(); });
+  const zones = [...new Map(all().filter(m => m.zoneLabel).map(m => [m.zoneKey, m.zoneLabel])).entries()].sort((a, b) => a[1].localeCompare(b[1], "fr"));
+  $("#zone").innerHTML = `<option value="">Toutes les zones</option>` + zones.map(([k, l]) => `<option value="${esc(k)}" ${k === F.zone ? "selected" : ""}>${esc(l)}</option>`).join("");
+  $("#niveau").value = F.niveau;
+  $("#source").value = F.source;
+}
+
+function render(){
+  const visible = all().filter(matches);
+  const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
+  $("#count").textContent = groups.length ? `${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}` : "";
+  if(!groups.length){
+    const filtered = F.q || F.cat || F.zone || F.niveau || F.source;
+    $("#list").innerHTML = `<div class="panel">${emptyHTML(filtered
+      ? { ico:"search", title:"Aucun modèle", text:"Essayez un autre mot ou retirez un filtre.", action:`<button class="btn" type="button" id="reset">Retirer les filtres</button>` }
+      : { ico:"layers", title:"Aucun modèle", text:"Créez votre premier modèle.", action:`<a class="btn primary" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a>` })}</div>`;
+    $("#reset")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
+    return;
+  }
+  $("#list").innerHTML = `<div class="mo-grid">${groups.map(g => {
+    const cur = g.items.find(x => x.id === chosen.get(g.key)) || g.items[0];
+    const showLevels = g.items.length > 1 || g.items[0].niveau;
+    return `
+      <article class="mo-card">
+        ${g.mine ? `<span class="badge sun mo-own">${icon("star")}Mon modèle</span>` : ""}
+        <button class="mo-cover" type="button" data-see="${esc(g.key)}" aria-label="Voir ${esc(cur.titre)}">${coverOf(cur) ? `<img src="${esc(coverOf(cur))}" alt="" loading="lazy">` : exoImageHTML(null)}</button>
+        <div class="mo-body">
+          <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}</span>
+          <h2>${esc(g.nom)}</h2>
+          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${x.niveau ? `Niveau ${x.niveau}` : "Sans niveau"}</button>`).join("")}</div>` : ""}
+          <span class="small muted">${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
+        </div>
+        <div class="mo-actions">
+          <button class="btn primary" type="button" data-use="${esc(cur.id)}">${icon("share")}Utiliser</button>
+          <button class="btn" type="button" data-run="${esc(cur.id)}" aria-label="Lancer" title="Lancer">${icon("play")}</button>
+          <button class="btn" type="button" data-edit="${esc(cur.id)}" aria-label="${cur.mine ? "Modifier" : "Copier et adapter"}" title="${cur.mine ? "Modifier" : "Copier et adapter"}">${icon(cur.mine ? "edit" : "copy")}</button>
+        </div>
+      </article>`;
+  }).join("")}</div>`;
+  const gByKey = new Map(groups.map(g => [g.key, g]));
+  $$("[data-lv]").forEach(b => b.onclick = () => { chosen.set(b.dataset.lv, b.dataset.id); render(); });
+  $$("[data-use]").forEach(b => b.onclick = () => useIt(findM(b.dataset.use)));
+  $$("[data-run]").forEach(b => b.onclick = () => runIt(findM(b.dataset.run)));
+  $$("[data-edit]").forEach(b => b.onclick = () => editIt(findM(b.dataset.edit)));
+  $$("[data-see]").forEach(b => b.onclick = () => {
+    const g = gByKey.get(b.dataset.see);
+    const cur = g.items.find(x => x.id === chosen.get(g.key)) || g.items[0];
+    detail(cur, g);
+  });
+  $("#new").href = `/config.html?modele=new${F.cat ? `&cat=${encodeURIComponent(F.cat)}` : ""}`;
+}
+
+$("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
+$("#zone").onchange = e => { F.zone = e.target.value; save(); render(); };
+$("#niveau").onchange = e => { F.niveau = e.target.value; save(); render(); };
+$("#source").onchange = e => { F.source = e.target.value; save(); render(); };
+
+renderFilters();
+try{
+  mine = (await C.listModeles()).map(r => normModele(r)).filter(m => m.exercices.length);
+  renderFilters();
+  render();
+}catch(err){
+  console.error(err);
+  render();
+  $("#list").insertAdjacentHTML("afterbegin", `<div class="notice warn" style="margin-bottom:12px">${icon("alert")}<span>Vos modèles n'ont pas pu être chargés. Seuls les modèles fournis avec l'application sont affichés.</span></div>`);
+}
 </script>
 </body>
 </html>

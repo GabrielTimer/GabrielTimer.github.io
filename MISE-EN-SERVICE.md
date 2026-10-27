@@ -56,13 +56,15 @@ Dans **Exercices** (ou dans la bibliothèque d'une séance en préparation), le 
 - Le crayon de sa fiche permet de le modifier ou de le supprimer. Les séances qui l'utilisent déjà le gardent.
 - Il utilise la même règle `exercices` que les corrections : rien de plus à publier.
 
-## Créer une pathologie
+## Modèles (pathologies, post-op, prévention…)
 
-Dans **Pathologies**, le bouton **Créer une pathologie** ouvre l'éditeur de séance : nom, exercices de la bibliothèque (y compris les vôtres), réglages, tours, consigne personnelle. En bas, choisissez la zone du corps (existante ou nouvelle) et, si vous voulez, une image pour la carte (sinon celle du premier exercice), puis **Enregistrer la pathologie**.
+« Pathologies » et « Modèles » sont réunis dans une seule page **Modèles** (menu du bas ou de gauche). On y trouve les programmes fournis avec l'application et les vôtres, avec des filtres : recherche, catégorie (pathologies, post-opératoire, prévention, sport et reprise, au cabinet, autres), zone du corps, niveau, et origine (mes modèles ou fournis).
 
-- Elle apparaît dans la liste avec le badge « Créée par vous » ; le crayon permet de la modifier ou de la supprimer.
-- Pour partir d'une pathologie existante : ouvrez-la puis **Copier et adapter**.
-- Elles sont rangées avec vos modèles dans Firebase (même accès réservé au kiné) : rien à changer dans les règles.
+- **Nouveau modèle** ouvre l'éditeur de séance. En bas : catégorie, zone, niveau (1 à 4) et image de la carte, puis **Enregistrer le modèle**.
+- **Plusieurs niveaux** : gardez le même nom et changez le niveau. Les niveaux d'un même modèle sont regroupés sur une seule carte, avec des boutons Niveau 1, Niveau 2… Depuis la fiche d'un modèle, **Créer le niveau suivant** prépare une copie avec le niveau au-dessus.
+- Les programmes fournis avec l'application ne se modifient pas : **Copier et adapter** en fait un modèle à vous.
+- Les anciens modèles (« Lombalgie P1 », « P2 »…) sont regroupés automatiquement par niveau. En les modifiant, vous pouvez leur donner une catégorie et une zone.
+- Rien à changer dans Firebase.
 
 ## Bon à savoir
 

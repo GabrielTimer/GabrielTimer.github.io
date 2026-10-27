@@ -265,40 +265,27 @@ export async function validateSeance(cle, id, { eva = null, ressenti = null, com
 
 /* ---------- Modèles du cabinet ---------- */
 
+/* Format actuel : { type:"modele", nom, categorie, zoneLabel, niveau, cover, series, exercices }.
+   Les anciens modèles ({ nom, data:{ series, exercices } }) et les anciennes
+   « pathologies » restent lisibles : voir normModele() dans modeles.js. */
+
 export async function listModeles(){
   const snap = await getDocs(collection(db, "modeles"));
   return snap.docs.map(d => ({ ...withData(d.data()), id: d.id, firebaseId: d.id }))
-    .filter(m => m.type !== "pathologie")
     .sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr", { numeric: true }));
 }
 
-/* ---------- Pathologies créées par le kiné ----------
-   Rangées avec les modèles (même accès réservé au kiné), avec type: "pathologie".
-   { nom, zone, zoneLabel, cover, series, exercices } */
-
-export async function listPathologies(){
-  const snap = await getDocs(collection(db, "modeles"));
-  return snap.docs.map(d => ({ ...d.data(), id: d.id }))
-    .filter(p => p.type === "pathologie")
-    .sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr", { numeric: true }));
-}
-
-export async function getPathologie(id){
+export async function getModele(id){
   const snap = await getDoc(doc(db, "modeles", id));
-  if(!snap.exists() || snap.data().type !== "pathologie") return null;
-  return { ...snap.data(), id: snap.id };
-}
-
-export async function savePathologie(p){
-  const id = p.id || newId();
-  await setDoc(doc(db, "modeles", id), clean({ ...p, id, type: "pathologie", patientId: "admin", createdAt: p.createdAt || Date.now(), updatedAt: Date.now() }));
-  return id;
+  return snap.exists() ? { ...withData(snap.data()), id: snap.id } : null;
 }
 
 export async function saveModele(modele){
   const id = modele.id || newId();
-  const { firebaseId, ...rest } = modele;
-  await setDoc(doc(db, "modeles", id), clean({ ...rest, id, updatedAt: Date.now() }));
+  const { firebaseId, data, ...rest } = modele;
+  const m = { ...rest };
+  if(!Array.isArray(m.exercices) && data){ m.exercices = data.exercices || []; m.series = m.series || data.series || 1; }
+  await setDoc(doc(db, "modeles", id), clean({ ...m, id, type: "modele", patientId: "admin", createdAt: m.createdAt || Date.now(), updatedAt: Date.now() }));
   return id;
 }
 
@@ -351,7 +338,7 @@ export async function propagateExerciseEdit(before, after){
   });
   modeles.docs.forEach(d => {
     const raw = d.data();
-    if(raw.type === "pathologie"){
+    if(Array.isArray(raw.exercices)){
       const next = touch(raw);
       if(next){ ops.push([d.ref, { ...next, updatedAt: Date.now() }]); nM++; }
       return;

@@ -282,7 +282,7 @@ async function renderKine(user){
       <a class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
       <a class="tile" href="/patients.html"><span class="t-ico">${icon("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
       <a class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
-      <a class="tile" href="/pathologies.html"><span class="t-ico">${icon("stethoscope")}</span><strong>Pathologies</strong><span class="t-sub">Programmes prêts</span></a>
+      <a class="tile" href="/programmes_admin.html"><span class="t-ico">${icon("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
       <a class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
       <a class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
       <a class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>

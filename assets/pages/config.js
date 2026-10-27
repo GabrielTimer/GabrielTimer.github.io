@@ -30,24 +30,34 @@ let S = blank();
 let mode = { kind:"new" };
 let editSeance = null;
 let restored = false;
-let PATHOS_BUILTIN = [];
+let MOD = null;
 
 async function init(){
-  /* Pathologie : création (patho=new, éventuellement from=<id prêt à l'emploi>) ou modification */
-  if(params.get("patho")){
-    const id = params.get("patho");
-    const { PATHOLOGIES } = await import("../pathologies.js");
-    PATHOS_BUILTIN = PATHOLOGIES;
-    let p = null;
-    if(id !== "new"){
-      p = await C.getPathologie(id);
-      if(!p){ toast("Pathologie introuvable.", { type:"err" }); location.replace("/pathologies.html"); return false; }
+  /* Modèle : création (modele=new, éventuellement from=<id> pour copier ou ajouter un niveau)
+     ou modification (modele=<id>). « patho » et l'ancien gt_edit « modele » mènent ici aussi. */
+  const editRef = store.get("gt_edit");
+  const modeleId = params.get("modele") || params.get("patho") || (params.get("edit") && editRef?.type === "modele" ? editRef.id : null);
+  if(modeleId){
+    store.del("gt_edit");
+    MOD = await import("../modeles.js");
+    const load = async id => MOD.BUILTIN.find(x => x.id === id) || (await C.getModele(id).then(r => r && MOD.normModele(r)).catch(() => null));
+    let m = null, copie = false;
+    if(modeleId !== "new"){
+      m = await load(modeleId);
+      if(!m || m.builtin){ copie = !!m; }
+      if(!m){ toast("Modèle introuvable.", { type:"err" }); location.replace("/programmes_admin.html"); return false; }
     }else if(params.get("from")){
-      const src = PATHOLOGIES.find(x => x.id === params.get("from")) || await C.getPathologie(params.get("from")).catch(() => null);
-      if(src) p = { nom: `${src.nom} (copie)`, zone: src.zone, zoneLabel: src.zoneLabel, cover: src.cover || null, series: src.series, exercices: src.exercices, copie: true };
+      m = await load(params.get("from"));
+      copie = true;
     }
-    S = { ...blank(), nom: p?.nom || "", series: p?.series || 1, exercices: (p?.exercices || []).map(e => normExo({ type:"timer", ...e })) };
-    mode = { kind:"edit-patho", patho: { id: p && !p.copie ? p.id : null, zone: p?.zone || "", zoneLabel: p?.zoneLabel || "", cover: p?.cover || null, createdAt: p?.createdAt || null } };
+    const niveau = params.get("niveau") ? Number(params.get("niveau")) : (m?.niveau || null);
+    const keepName = params.get("niveau") || !copie;
+    S = { ...blank(), nom: m ? (keepName ? m.nom : `${m.nom} (copie)`) : "", series: m?.series || 1, exercices: (m?.exercices || []).map(e => normExo({ type:"timer", ...e })) };
+    mode = { kind:"edit-modele", meta: {
+      id: m && !copie ? m.id : null,
+      categorie: m?.categorie || params.get("cat") || "pathologie",
+      zoneLabel: m?.zoneLabel || "", niveau, cover: m?.cover || null, createdAt: m && !copie ? m.createdAt : null
+    } };
     return true;
   }
   const edit = store.get("gt_edit");
@@ -62,11 +72,6 @@ async function init(){
       editSeance.label = (all.find(x => x.id === s.id) || {}).label || s.nom;
       S = { ...blank(), nom: s.data.nom || s.programmeNom || s.nom || "", series: s.data.series || 1, exercices: (s.data.exercices || []).map(normExo), patient: edit.cle };
       mode = { kind:"edit-seance", ref:edit };
-    }else if(edit.type === "modele"){
-      const m = (await C.listModeles()).find(x => x.id === edit.id);
-      if(!m){ toast("Modèle introuvable.", { type:"err" }); location.replace("/programmes_admin.html"); return false; }
-      S = { ...blank(), nom: m.nom || m.data?.nom || "", series: m.data?.series || 1, exercices: (m.data?.exercices || []).map(normExo) };
-      mode = { kind:"edit-modele", ref:edit, modele:m };
     }else if(edit.type === "favori"){
       const d = store.get("gt_draft", {});
       S = { ...blank(), nom: d.nom || "", series: d.series || 1, exercices: (d.exercices || []).map(normExo) };
@@ -128,9 +133,8 @@ async function main(){
 
 function titleText(){
   if(mode.kind === "edit-seance") return `Modifier la séance ${editSeance.label || ""}`;
-  if(mode.kind === "edit-modele") return "Modifier le modèle";
+  if(mode.kind === "edit-modele") return mode.meta.id ? "Modifier le modèle" : "Nouveau modèle";
   if(mode.kind === "edit-favori") return "Modifier la séance favorite";
-  if(mode.kind === "edit-patho") return mode.patho.id ? "Modifier la pathologie" : "Nouvelle pathologie";
   return "Nouvelle séance";
 }
 
@@ -142,7 +146,7 @@ function mountView(){
         ${restored ? `<div class="notice" style="margin-bottom:14px">${icon("history")}<div class="row wrap" style="flex:1"><span style="flex:1 1 220px">Vous reprenez la séance en cours de préparation.</span><button class="btn sm" type="button" id="restart">${icon("plus")}Repartir de zéro</button></div></div>` : ""}
         <div class="panel cfg-head">
           <span class="cfg-mode badge lagon" style="align-self:flex-start">${esc(titleText())}</span>
-          <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-patho" ? "Nom de la pathologie, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
+          <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-modele" ? "Nom du modèle, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
           <div class="cfg-summary">
             <span id="sum-dur">${icon("clock")}</span>
             <span id="sum-n">${icon("dumbbell")}</span>
@@ -404,16 +408,16 @@ function renderSend(full = true){
     bindCommon();
     return;
   }
-  if(mode.kind === "edit-patho"){ renderPathoPanel(box); return; }
-  if(mode.kind === "edit-modele" || mode.kind === "edit-favori"){
+  if(mode.kind === "edit-modele"){ renderModelePanel(box); return; }
+  if(mode.kind === "edit-favori"){
     box.innerHTML = `
       <h2>Enregistrer</h2>
       <div class="send-actions">
-        <button class="btn primary big" type="button" id="save-edit">${icon("check")}Enregistrer ${mode.kind === "edit-modele" ? "le modèle" : "la séance favorite"}</button>
+        <button class="btn primary big" type="button" id="save-edit">${icon("check")}Enregistrer la séance favorite</button>
         <button class="btn" type="button" id="run">${icon("play")}Tester la séance</button>
         <button class="btn" type="button" id="pdf">${icon("pdf")}Fiche PDF</button>
       </div>`;
-    $("#save-edit").onclick = mode.kind === "edit-modele" ? saveEditModele : saveEditFavori;
+    $("#save-edit").onclick = saveEditFavori;
     bindCommon();
     return;
   }
@@ -596,10 +600,25 @@ async function sentSheet(p, count){
 
 async function saveAsModel(){
   if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
-  const nom = await promptDialog({ title:"Enregistrer comme modèle", label:"Nom du modèle", value:S.nom, placeholder:"Ex. Lombalgie P1", confirm:"Enregistrer" });
-  if(!nom) return;
-  await C.saveModele({ nom, patientId:"admin", data:{ ...build(), nom } });
-  toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = "/programmes_admin.html" } });
+  MOD = MOD || await import("../modeles.js");
+  const meta = { categorie:"pathologie", zoneLabel:"", niveau:null };
+  const sh = openSheet({
+    title:"Enregistrer comme modèle",
+    body:`<div class="stack" style="--gap:14px">
+      <div class="field"><label for="m-nom">Nom du modèle</label><input class="input" id="m-nom" value="${esc(splitName(S.nom).base)}" placeholder="Ex. Lombalgie"></div>
+      ${metaFieldsHTML({ ...meta, niveau: splitName(S.nom).niveau })}
+    </div>`,
+    foot:`<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="m-ok">${icon("check")}Enregistrer</button>`
+  });
+  sh.el.querySelector("#m-ok").onclick = async () => {
+    const nom = sh.el.querySelector("#m-nom").value.trim();
+    if(!nom){ sh.el.querySelector("#m-nom").focus(); return; }
+    Object.assign(meta, readMeta(sh.el));
+    const data = build();
+    await C.saveModele({ nom: meta.niveau ? splitName(nom).base : nom, ...meta, series:data.series, exercices:data.exercices });
+    sh.close();
+    toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = "/programmes_admin.html" } });
+  };
 }
 
 function saveAsFav(){
@@ -629,14 +648,6 @@ async function saveEditSeance(){
   }
 }
 
-async function saveEditModele(){
-  const data = build();
-  await C.saveModele({ ...mode.modele, nom:data.nom, data });
-  store.del("gt_edit");
-  toast("Modèle enregistré.", { type:"ok" });
-  setTimeout(() => location.href = "/programmes_admin.html", 600);
-}
-
 function saveEditFavori(){
   const all = localProgs.all();
   const i = mode.ref.index;
@@ -648,24 +659,45 @@ function saveEditFavori(){
   setTimeout(() => location.href = "/mes_programmes.html", 600);
 }
 
-/* ---------- Pathologie : zone, image de couverture, enregistrement ---------- */
+/* ---------- Modèle : catégorie, zone, niveau, image, enregistrement ---------- */
 
-const slug = v => String(v || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+const splitName = nom => MOD ? MOD.splitLevel(nom) : { base: nom, niveau: null };
 
-function renderPathoPanel(box){
-  const P = mode.patho;
-  const zones = [...new Map(PATHOS_BUILTIN.map(p => [p.zone, p.zoneLabel])).values()];
+function metaFieldsHTML(meta){
+  const zones = [...new Set([...MOD.ZONES, ...MOD.BUILTIN.map(m => m.zoneLabel).filter(Boolean)])];
+  return `
+    <div class="field"><label for="m-cat">Catégorie</label>
+      <select class="select" id="m-cat">${MOD.CATEGORIES.map(c => `<option value="${c.id}" ${c.id === meta.categorie ? "selected" : ""}>${esc(c.one)}</option>`).join("")}</select></div>
+    <div class="row wrap ee-nums" style="--gap:10px">
+      <div class="field"><label for="m-zone">Zone du corps</label>
+        <input class="input" id="m-zone" list="m-zones" value="${esc(meta.zoneLabel || "")}" placeholder="Ex. Genou">
+        <datalist id="m-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist></div>
+      <div class="field"><label for="m-niv">Niveau</label>
+        <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.NIVEAUX.map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}</select></div>
+    </div>
+    <span class="hint">Pour proposer plusieurs niveaux d'un même modèle, gardez exactement le même nom et changez seulement le niveau.</span>`;
+}
+
+function readMeta(root){
+  const zone = root.querySelector("#m-zone").value.trim();
+  const known = [...MOD.ZONES, ...MOD.BUILTIN.map(m => m.zoneLabel)].find(z => z && z.toLowerCase() === zone.toLowerCase());
+  return {
+    categorie: root.querySelector("#m-cat").value,
+    zoneLabel: known || zone,
+    niveau: Number(root.querySelector("#m-niv").value) || null
+  };
+}
+
+function renderModelePanel(box){
+  const P = mode.meta;
   const coverHTML = () => {
     const src = P.cover || exerciseImage(S.exercices[0] || {});
-    return `${src ? `<img src="${esc(src)}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top">` : `<div class="ee-img-empty">${icon("upload")}<span>Aucune image</span></div>`}`;
+    return src ? `<img src="${esc(src)}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top">` : `<div class="ee-img-empty">${icon("upload")}<span>Aucune image</span></div>`;
   };
   box.innerHTML = `
-    <h2>Enregistrer la pathologie</h2>
-    <div class="group stack" style="--gap:14px">
-      <div class="field"><label for="p-zone">Zone du corps</label>
-        <input class="input" id="p-zone" list="p-zones" value="${esc(P.zoneLabel)}" placeholder="Ex. Cheville, ou une nouvelle zone">
-        <datalist id="p-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist>
-        <span class="hint">Choisissez une zone existante ou tapez-en une nouvelle.</span></div>
+    <h2>Enregistrer le modèle</h2>
+    <div class="group stack" style="--gap:14px" id="meta">
+      ${metaFieldsHTML(P)}
       <div class="field"><span class="label">Image de la carte</span>
         <div class="ee-img">
           <div class="ee-img-prev" id="p-cover" style="width:160px;height:100px">${coverHTML()}</div>
@@ -677,17 +709,16 @@ function renderPathoPanel(box){
         </div></div>
     </div>
     <div class="send-actions">
-      <button class="btn primary big" type="button" id="save-patho">${icon("check")}Enregistrer la pathologie</button>
+      <button class="btn primary big" type="button" id="save-modele">${icon("check")}Enregistrer le modèle</button>
       <button class="btn" type="button" id="run">${icon("play")}Tester</button>
       <button class="btn" type="button" id="pdf">${icon("pdf")}Fiche PDF</button>
-      ${P.id ? `<button class="btn danger" type="button" id="del-patho">${icon("trash")}Supprimer</button>` : ""}
+      ${P.id ? `<button class="btn danger" type="button" id="del-modele">${icon("trash")}Supprimer</button>` : ""}
     </div>`;
   const refreshCover = () => {
     $("#p-cover").innerHTML = coverHTML();
     $("#p-cover-lbl").textContent = P.cover ? "Changer l'image" : "Choisir une image";
     $("#p-cover-del").hidden = !P.cover;
   };
-  $("#p-zone").addEventListener("input", e => { P.zoneLabel = e.target.value; });
   $("#p-cover-file").onchange = async ev => {
     const file = ev.target.files?.[0]; ev.target.value = "";
     if(!file) return;
@@ -697,29 +728,27 @@ function renderPathoPanel(box){
     refreshCover();
   };
   $("#p-cover-del").onclick = () => { P.cover = null; refreshCover(); };
-  $("#save-patho").onclick = savePatho;
-  $("#del-patho")?.addEventListener("click", deletePatho);
+  $("#save-modele").onclick = saveModeleForm;
+  $("#del-modele")?.addEventListener("click", deleteModeleForm);
   bindCommon();
 }
 
-async function savePatho(){
-  const P = mode.patho;
-  if(!S.nom.trim()){ toast("Donnez un nom à la pathologie.", { type:"err" }); $("#nom").focus(); return; }
+async function saveModeleForm(){
+  const P = mode.meta;
+  if(!S.nom.trim()){ toast("Donnez un nom au modèle.", { type:"err" }); $("#nom").focus(); return; }
   if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
-  const label = (P.zoneLabel || "").trim() || "Autre";
-  const known = PATHOS_BUILTIN.find(p => p.zoneLabel.toLowerCase() === label.toLowerCase());
-  const btn = $("#save-patho");
+  Object.assign(P, readMeta($("#meta")));
+  const btn = $("#save-modele");
   btn.disabled = true;
   try{
     const data = build();
-    const id = await C.savePathologie({
-      id: P.id || undefined, nom: data.nom, series: data.series, exercices: data.exercices,
-      zone: known ? known.zone : (slug(label) || "autre"), zoneLabel: known ? known.zoneLabel : label,
-      cover: P.cover || null, createdAt: P.createdAt || undefined
+    P.id = await C.saveModele({
+      id: P.id || undefined, nom: P.niveau ? splitName(data.nom).base : data.nom,
+      categorie: P.categorie, zoneLabel: P.zoneLabel, niveau: P.niveau,
+      cover: P.cover || null, series: data.series, exercices: data.exercices, createdAt: P.createdAt || undefined
     });
-    P.id = id;
-    toast("Pathologie enregistrée.", { type:"ok" });
-    setTimeout(() => location.href = "/pathologies.html?zone=" + encodeURIComponent(known ? known.zone : (slug(label) || "autre")), 600);
+    toast("Modèle enregistré.", { type:"ok" });
+    setTimeout(() => location.href = `/programmes_admin.html?cat=${encodeURIComponent(P.categorie)}`, 600);
   }catch(err){
     console.error(err);
     btn.disabled = false;
@@ -727,11 +756,11 @@ async function savePatho(){
   }
 }
 
-async function deletePatho(){
-  if(!await confirmDialog({ title:"Supprimer cette pathologie ?", message:"Elle disparaît de la liste. Les séances déjà envoyées aux patients ne sont pas touchées.", confirm:"Supprimer", danger:true })) return;
-  await C.deleteModele(mode.patho.id);
-  toast("Pathologie supprimée.", { type:"ok" });
-  setTimeout(() => location.href = "/pathologies.html", 500);
+async function deleteModeleForm(){
+  if(!await confirmDialog({ title:"Supprimer ce modèle ?", message:"Il disparaît de la liste. Les séances déjà envoyées aux patients ne sont pas touchées.", confirm:"Supprimer", danger:true })) return;
+  await C.deleteModele(mode.meta.id);
+  toast("Modèle supprimé.", { type:"ok" });
+  setTimeout(() => location.href = "/programmes_admin.html", 500);
 }
 
 main();
