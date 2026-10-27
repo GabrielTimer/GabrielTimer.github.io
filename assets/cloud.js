@@ -8,6 +8,7 @@
      modeles/{id}                    → programmes modèles du cabinet
      programmes/{id}                 → ancienne collection (avant migration)
      exercices/{SOURCE_id}           → corrections du kiné sur la bibliothèque
+     bilans/{id}                     → bilans kiné (champ cle = patient), kiné uniquement
    Le « code » est un identifiant secret de 12 caractères : seul le patient
    qui l'a reçu (lien ou QR code) peut lire son dossier.
    ========================================================= */
@@ -15,7 +16,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager, getFirestore,
-  collection, collectionGroup, doc, getDoc, getDocs, setDoc, deleteDoc, writeBatch
+  collection, collectionGroup, doc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, query, where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
   getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail
@@ -160,6 +161,8 @@ export async function updatePatient(cle, patch){
 export async function deletePatient(cle){
   const seances = await listSeances(cle);
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
+  const bilans = await bilanDocs(cle);
+  await batchDelete(bilans.map(d => d.ref)).catch(() => {});
   await deleteDoc(doc(db, "fiches", cle)).catch(() => {});
   await deleteDoc(doc(db, "patients", cle));
 }
@@ -179,6 +182,8 @@ export async function renewAccessCode(cle){
     return [doc(db, "patients", nouveau, "seances", id), { ...rest, cle: nouveau }];
   }));
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
+  const bilans = await bilanDocs(cle);
+  await batchWrite(bilans.map(d => [d.ref, { ...d.data(), cle: nouveau }])).catch(() => {});
   await deleteDoc(doc(db, "fiches", cle)).catch(() => {});
   await deleteDoc(doc(db, "patients", cle));
   return nouveau;
@@ -261,6 +266,45 @@ export async function validateSeance(cle, id, { eva = null, ressenti = null, com
   if(!seance || !seance.programmeId) return { programmeTermine: false };
   const programme = seances.filter(s => s.programmeId === seance.programmeId);
   return { programmeTermine: programme.every(s => s.terminee === true) };
+}
+
+/* ---------- Bilans (réservés au kiné) ----------
+   bilans/{id} : { id, cle, type, date (AAAA-MM-JJ), etat (JSON du formulaire),
+   resume (texte), zones, motif, createdAt, updatedAt }.
+   Collection à part : les patients lisent patients/{code}, jamais celle-ci. */
+
+async function bilanDocs(cle){
+  try{ return (await getDocs(query(collection(db, "bilans"), where("cle", "==", cle)))).docs; }
+  catch(e){ return []; }
+}
+
+function mapBilan(d){
+  const b = { ...d.data(), id: d.id };
+  try{ b.etat = typeof b.etat === "string" ? JSON.parse(b.etat) : (b.etat || null); }catch(e){ b.etat = null; }
+  return b;
+}
+
+export async function listBilans(cle){
+  const snap = await getDocs(query(collection(db, "bilans"), where("cle", "==", cle)));
+  return snap.docs.map(mapBilan)
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.createdAt || 0) - (a.createdAt || 0));
+}
+
+export async function getBilan(id){
+  const snap = await getDoc(doc(db, "bilans", id));
+  return snap.exists() ? mapBilan(snap) : null;
+}
+
+export async function saveBilan(bilan){
+  const id = bilan.id || newId();
+  const now = Date.now();
+  const { etat, ...rest } = bilan;
+  await setDoc(doc(db, "bilans", id), clean({ ...rest, id, etat: JSON.stringify(etat || {}), createdAt: bilan.createdAt || now, updatedAt: now }));
+  return id;
+}
+
+export async function deleteBilan(id){
+  await deleteDoc(doc(db, "bilans", id));
 }
 
 /* ---------- Modèles du cabinet ---------- */
@@ -373,6 +417,7 @@ export async function exportAll(onProgress = () => {}){
     out.collections[name] = snap.docs.map(d => ({ id: d.id, data: d.data() }));
   };
   for(const name of ["patients", "fiches", "modeles", "exercices", "reglages"]) await grab(name);
+  await grab("bilans").catch(() => { out.collections.bilans = []; });
   onProgress("seances");
   const seances = await getDocs(collectionGroup(db, "seances"));
   out.collections.seances = seances.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
@@ -389,7 +434,7 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   const want = name => !only || only.includes(name);
   const ops = [];
   const count = {};
-  ["patients", "fiches", "modeles", "exercices", "reglages"].forEach(name => {
+  ["patients", "fiches", "modeles", "exercices", "reglages", "bilans"].forEach(name => {
     if(!want(name)) return;
     (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
   });

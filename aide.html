@@ -46,6 +46,20 @@
       <p>Lien perdu ou partagé : fiche du patient → <strong>Plus</strong> → <strong>Générer un nouveau code d'accès</strong>. L'ancien lien cesse de fonctionner.</p>
     </div></details>
 
+    <details><summary><span data-ico="stethoscope"></span>Faire un bilan (entrée, suivi, fin de traitement)</summary><div class="body">
+      <ol>
+        <li>Fiche du patient → <strong>Bilan</strong> (ou <strong>Nouveau bilan</strong> dans la rubrique Bilans).</li>
+        <li>Touchez les zones douloureuses sur le schéma, puis l'EVA et le type de douleur. Pour le genou, l'épaule, les lombaires, les cervicales et la cheville, les drapeaux rouges et les tests validés (LR+, LR−, sources) s'affichent : touchez le nom d'un test pour sa technique, « + » ou « − » pour le résultat.</li>
+        <li>Complétez motif, antécédents, examen, mesures (NPRS, PSFS, Oswestry…) et conclusion. <strong>Tout s'enregistre automatiquement</strong> ; <strong>Terminer</strong> ramène à la fiche.</li>
+      </ol>
+      <ul>
+        <li>Un nouveau bilan reprend le motif, les antécédents, la médication et le médecin du précédent, et affiche l'<strong>évolution</strong> des mesures (repérage des changements ≥ MID).</li>
+        <li><strong>PDF</strong> : un document à l'en-tête du cabinet. <strong>Envoyer</strong> : en pièce jointe sur téléphone et tablette, ou par e-mail avec le résumé (le PDF se télécharge pour être joint). <strong>Copier le résumé</strong> : à coller dans Maiia.</li>
+        <li>Les bilans sont <strong>visibles par vous seul</strong> : vos patients n'y ont jamais accès, même avec leur lien.</li>
+        <li>Le contenu clinique (tests, valeurs, sources) se modifie dans <code>bilan-kine/data.js</code>, les fiches de technique dans <code>bilan-kine/guide.js</code>.</li>
+      </ul>
+    </div></details>
+
     <details><summary><span data-ico="edit"></span>Créer une séance ou un programme pour un patient</summary><div class="body">
       <ol>
         <li><strong>Créer</strong> (ou un modèle → <strong>Utiliser</strong>).</li>
@@ -110,12 +124,12 @@
     </div></details>
 
     <details><summary><span data-ico="download"></span>Sauvegarder et restaurer toutes les données</summary><div class="body">
-      <p><a href="/reglages_cabinet.html#backup">Réglages du cabinet → Sauvegarde</a> → <strong>Télécharger une sauvegarde</strong> : un fichier avec patients, séances, modèles, exercices et réglages. Faites-le une fois par mois et gardez le fichier en lieu sûr (il contient des données de santé).</p>
+      <p><a href="/reglages_cabinet.html#backup">Réglages du cabinet → Sauvegarde</a> → <strong>Télécharger une sauvegarde</strong> : un fichier avec patients, séances, bilans, modèles, exercices et réglages. Faites-le une fois par mois et gardez le fichier en lieu sûr (il contient des données de santé).</p>
       <p><strong>Restaurer une sauvegarde…</strong> : choisissez le fichier puis ce qu'il faut restaurer. Rien n'est effacé ; les éléments de la sauvegarde remplacent ceux qui ont le même identifiant.</p>
     </div></details>
 
     <details><summary><span data-ico="key"></span>Réglage unique dans Firebase (message « Firebase refuse l'enregistrement »)</summary><div class="body">
-      <p>Les réglages du cabinet, favoris et éléments masqués demandent une règle dans Firebase, à ajouter une seule fois :</p>
+      <p>Les réglages du cabinet, favoris et éléments masqués, ainsi que les bilans, demandent des règles dans Firebase, à ajouter une seule fois. Le plus simple : remplacez tout le contenu des règles par le fichier <code>firestore.rules</code> du site, puis <strong>Publier</strong>. Sinon :</p>
       <ol>
         <li>Ouvrez la <a href="https://console.firebase.google.com/project/gabrieltimer/firestore/rules" target="_blank" rel="noopener">console Firebase → Firestore Database → Règles</a>.</li>
         <li>Juste avant le bloc <code>match /programmes/{id} {</code> (vers la fin), collez :</li>
@@ -123,6 +137,10 @@
 <pre>    match /reglages/{id} {
       allow read: if true;
       allow write: if isKine();
+    }
+
+    match /bilans/{id} {
+      allow read, write: if isKine();
     }</pre>
       <ol start="3"><li>Cliquez sur <strong>Publier</strong>.</li></ol>
       <p>Le fichier <code>firestore.rules</code> du site contient la version complète à jour.</p>

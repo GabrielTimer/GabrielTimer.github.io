@@ -83,6 +83,15 @@ Dans la bibliothèque : étoile = exercice favori (affiché en premier, filtre �
 
 Tout est expliqué dans la page **Aide** (menu Outils, ou lien « Aide » sur ordinateur).
 
+## Bilans kiné
+
+Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de douleur, drapeaux rouges, tests validés avec leurs données probantes, mesures, conclusion. Tout s'enregistre automatiquement dans Firebase (collection `bilans`), avec PDF, envoi et résumé à coller dans Maiia. La fiche patient liste les bilans (rubrique **Bilans**).
+
+- Les bilans sont dans une collection à part, **lisible uniquement par le compte kiné** : un patient n'y a jamais accès, même avec son lien.
+- **À faire une fois** : ajouter la règle `bilans` de [`firestore.rules`](firestore.rules) dans Firebase (étape 2 ci-dessus), puis **Publier**. Sans cela, la fiche affiche « Les bilans ne sont pas encore activés » et le bilan reste gardé sur l'appareil (le PDF fonctionne quand même).
+- Les bilans suivent le patient s'il change de code d'accès, sont supprimés avec lui, et font partie de la sauvegarde.
+- Contenu clinique : `bilan-kine/data.js` (régions, tests, LR, sources) et `bilan-kine/guide.js` (fiches de technique).
+
 ## Bon à savoir
 
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.

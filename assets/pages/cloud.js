@@ -122,10 +122,35 @@ async function kineView(param){
   const { renderEvaChart } = await import("../chart.js");
   const P = await import("../patient.js");
 
-  let seances = [];
+  let seances = [], bilans = [], bilansErr = null;
   const load = async () => {
-    seances = (await C.listSeances(patient.cle)).filter(s => s.data && Array.isArray(s.data.exercices));
+    const [ss, bb] = await Promise.all([
+      C.listSeances(patient.cle),
+      C.listBilans(patient.cle).catch(err => { bilansErr = err; return []; })
+    ]);
+    seances = ss.filter(s => s.data && Array.isArray(s.data.exercices));
+    bilans = bb;
   };
+  const bilanURL = (id = "") => `/bilan.html?patient=${encodeURIComponent(patient.cle)}${id ? `&id=${encodeURIComponent(id)}` : ""}`;
+  const bilansHTML = () => {
+    if(bilansErr) return `<div class="notice warn">${icon("alert")}<span>Les bilans ne sont pas encore activés dans Firebase : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. Vous pouvez déjà faire un bilan : il sera gardé sur cet appareil.</span></div>`;
+    if(!bilans.length) return `<div class="panel">${emptyHTML({ ico:"stethoscope", title:"Aucun bilan", text:"Faites le bilan d'entrée : schéma de douleur, tests validés, mesures, résumé pour Maiia et PDF.", action:`<a class="btn primary" href="${bilanURL()}">${icon("stethoscope")}Faire le bilan d'entrée</a>` })}</div>`;
+    return `<div class="list">${bilans.map(b => `
+      <div class="list-item">
+        <span class="li-ico">${icon("stethoscope")}</span>
+        <a class="li-main" href="${bilanURL(b.id)}" style="color:inherit;text-decoration:none">
+          <span class="li-title">${esc(BT[b.type] || "Bilan")} · ${esc(fmtISO(b.date))}</span>
+          <span class="li-sub">${esc(b.motif || "")}</span>
+        </a>
+        <span class="li-end">
+          <button class="icon-btn sm" type="button" data-bact="pdf" data-id="${esc(b.id)}" aria-label="Télécharger le PDF" title="PDF">${icon("pdf")}</button>
+          <button class="icon-btn sm" type="button" data-bact="send" data-id="${esc(b.id)}" aria-label="Envoyer" title="Envoyer">${icon("share")}</button>
+          <button class="icon-btn sm danger" type="button" data-bact="del" data-id="${esc(b.id)}" aria-label="Supprimer" title="Supprimer">${icon("trash")}</button>
+        </span>
+      </div>`).join("")}</div>`;
+  };
+  const BT = { initial:"Bilan initial", intermediaire:"Bilan intermédiaire", final:"Bilan de fin de traitement" };
+  const fmtISO = iso => { if(!iso) return ""; const [y, m, d] = String(iso).split("-").map(Number); return new Date(y, (m || 1) - 1, d || 1).toLocaleDateString("fr-FR"); };
 
   const render = () => {
     const sum = K.summarize(patient, seances);
@@ -156,6 +181,7 @@ async function kineView(param){
         ${sum.alertes.length ? `<div class="chips" style="margin-top:14px">${sum.alertes.map(a => `<span class="badge ${a.niveau === "danger" ? "danger" : a.niveau === "warn" ? "warn" : a.niveau === "ok" ? "ok" : "lagon"}">${icon(a.ico)}${esc(a.texte)}</span>`).join("")}</div>` : ""}
         <div class="pt-actions">
           <a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Nouveau programme</a>
+          <a class="btn soft" href="${bilanURL()}">${icon("stethoscope")}Bilan</a>
           <button class="btn" type="button" id="acces">${icon("qr")}Accès patient</button>
           <button class="btn" type="button" id="apercu">${icon("eye")}Vue patient</button>
           <button class="btn" type="button" id="edit">${icon("edit")}Modifier</button>
@@ -185,6 +211,11 @@ async function kineView(param){
         </section>
       </div>
 
+      <section class="section" id="bilans">
+        <div class="section-title">Bilans<span class="badge" style="font-size:var(--fs-xs)">${icon("lock")}visible par vous seul</span><span class="spacer"></span>${bilans.length ? `<a class="btn sm" href="${bilanURL()}">${icon("plus")}Nouveau bilan</a>` : ""}</div>
+        ${bilansHTML()}
+      </section>
+
       <section class="section">
         <div class="section-title">Programmes<span class="spacer"></span><a class="btn sm" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Ajouter</a></div>
         ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme", text:"Créez un premier programme pour ce patient.", action:`<a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Créer un programme</a>` })}</div>` : ""}
@@ -201,6 +232,31 @@ async function kineView(param){
     $("#apercu").onclick = () => window.open(`/index.html?apercu=${patient.cle}`, "_blank");
     $("#edit").onclick = editPatient;
     $("#more").onclick = morePatient;
+
+    $$("[data-bact]").forEach(b => b.addEventListener("click", async () => {
+      const bl = bilans.find(x => x.id === b.dataset.id);
+      if(!bl) return;
+      const act = b.dataset.bact;
+      if(act === "del"){
+        const ok = await confirmDialog({ title:"Supprimer ce bilan ?", message:`Le ${(BT[bl.type] || "bilan").toLowerCase()} du ${fmtISO(bl.date)} sera définitivement supprimé.`, confirm:"Supprimer", danger:true });
+        if(!ok) return;
+        await C.deleteBilan(bl.id);
+        bilans = bilans.filter(x => x.id !== bl.id);
+        toast("Bilan supprimé.", { type:"ok" });
+        render();
+        return;
+      }
+      if(!bl.etat){ toast("Ce bilan est illisible.", { type:"err" }); return; }
+      const B = await import("../bilan-core.js");
+      await B.loadClinic();
+      const prev = B.previousOf(bilans, bl.id, bl.date);
+      const o = prev ? { prev:prev.etat, prevDate:prev.date } : {};
+      if(act === "send"){ B.sendSheet(bl.etat, patient, o); return; }
+      b.disabled = true;
+      try{ await B.downloadPdf(bl.etat, patient, o); }
+      catch(err){ console.error(err); toast("Le PDF n'a pas pu être créé.", { type:"err" }); }
+      finally{ b.disabled = false; }
+    }));
 
     $$("[data-act]").forEach(b => b.addEventListener("click", async () => {
       const s = seances.find(x => x.id === b.dataset.id);

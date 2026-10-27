@@ -61,6 +61,11 @@ service cloud.firestore {
       allow read: if isKine();
     }
 
+    // Bilans kiné : jamais lisibles par les patients
+    match /bilans/{id} {
+      allow read, write: if isKine();
+    }
+
     // Programmes modèles du cabinet
     match /modeles/{id} {
       allow read, write: if isKine();
