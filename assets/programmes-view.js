@@ -4,6 +4,7 @@ import {
   openSheet, toast, esc, icon, byWeek, fmtDate, fmtShortDate, startOfDay, daysFromToday, evaColor, ressentiLabel,
   sessionDuration, fmtDuree, plural, evaTrend, store
 } from "./app.js";
+import { doseShort } from "./evolution.js";
 
 function sessionState(s, next){
   if(s.terminee) return "done";
@@ -27,6 +28,8 @@ function sessionRow(s, { role, next }){
   const eva = s.terminee && s.eva !== undefined && s.eva !== null && s.eva !== ""
     ? `<span class="eva-pill" title="Douleur"><i style="background:${evaColor(s.eva)}"></i>${esc(s.eva)}/10</span>` : "";
   const ress = s.ressenti ? `<span class="badge">${esc(ressentiLabel(s.ressenti))}</span>` : "";
+  const doseEx = (s.data?.exercices || []).find(e => doseShort(e));
+  const dose = doseEx ? `<span class="badge lagon" title="${esc(doseEx.nom || "")}">${icon("dumbbell")}${esc(doseShort(doseEx))}</span>` : "";
 
   let actions = "";
   if(role === "kine"){
@@ -46,7 +49,7 @@ function sessionRow(s, { role, next }){
     <div class="session-row is-${st}">
       <span class="s-state">${stateIco}</span>
       <div class="s-main">
-        <div class="s-title">${esc(s.label || s.nom || "Séance")} ${when} ${eva} ${ress}</div>
+        <div class="s-title">${esc(s.label || s.nom || "Séance")} ${when} ${eva} ${ress} ${dose}</div>
         <div class="s-sub">${esc(sub)}</div>
       </div>
       <div class="s-actions">${actions}</div>

@@ -39,6 +39,7 @@
 <script type="module">
 import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
+import { evolTexte } from "/assets/evolution.js";
 import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 const { requireKine } = await import("/assets/kine.js");
@@ -117,7 +118,7 @@ function detail(m, group){
         <span class="badge">${plural(m.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(m)))}${m.series > 1 ? `, ${m.series} tours` : ""}</span>
         ${m.mine ? `<span class="badge sun">${icon("star")}${m.remplace ? "Ma version" : "Mon modèle"}</span>` : `<span class="badge">Fourni avec l'application</span>`}
       </div>
-      <div class="mo-exos">${m.exercices.map((e, i) => `<div class="mo-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${noteOf(e) ? `<div class="small">${esc(noteOf(e))}</div>` : ""}</div></div>`).join("")}</div>
+      <div class="mo-exos">${m.exercices.map((e, i) => `<div class="mo-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${noteOf(e) ? `<div class="small">${esc(noteOf(e))}</div>` : ""}${evolTexte(e) ? `<div class="small" style="color:var(--lagon-strong);font-weight:700">${icon("trendUp", "ic-inline")} ${esc(evolTexte(e))}</div>` : ""}</div></div>`).join("")}</div>
       <div class="row wrap" style="--gap:8px;margin-top:18px">
         <button class="btn sm" type="button" data-a="pdf">${icon("pdf")}Fiche PDF</button>
         <button class="btn sm" type="button" data-a="edit">${icon("edit")}Modifier</button>

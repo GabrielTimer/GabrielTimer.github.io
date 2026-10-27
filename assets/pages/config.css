@@ -48,6 +48,19 @@
 .exo-params .stepper input{ font-size:var(--fs-md); }
 .exo-foot{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:var(--fs-xs); color:var(--ink-3); }
 .exo-note{ font-size:var(--fs-sm); }
+.exo-evol{ font-size:var(--fs-sm); }
+.exo-evol summary{ cursor:pointer; color:var(--lagon-strong); font-weight:700; display:inline-flex; gap:6px; align-items:center; list-style:none; }
+.exo-evol summary::-webkit-details-marker{ display:none; }
+.exo-evol summary svg{ width:16px; height:16px; }
+.exo-evol summary .badge{ font-size:.7rem; padding:1px 8px; }
+.ev-body{ display:flex; flex-direction:column; gap:10px; margin-top:10px; padding:12px; border-radius:var(--r-md); background:var(--surface-2); }
+.ev-nums{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.ev-nums .field label{ font-size:var(--fs-xs); }
+.ev-nums .stepper{ min-height:42px; }
+.ev-nums .stepper button{ width:34px; }
+.ev-nums .stepper input{ font-size:var(--fs-md); min-width:0; }
+.ev-prev{ color:var(--ink-2); white-space:pre-line; margin:0; }
+@media (max-width:480px){ .ev-nums{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .exo-note summary{ cursor:pointer; color:var(--lagon-strong); font-weight:700; display:inline-flex; gap:6px; align-items:center; list-style:none; }
 .exo-note summary::-webkit-details-marker{ display:none; }
 .exo-note summary svg{ width:16px; height:16px; }

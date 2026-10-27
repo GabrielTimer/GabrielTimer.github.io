@@ -51,6 +51,14 @@
 .t-names{ text-align:center; }
 .t-name{ font-size:clamp(1.35rem,5.6vw,2.1rem); line-height:1.15; text-wrap:balance; }
 .t-sub{ margin-top:4px; color:var(--t-soft); font-weight:700; font-size:var(--fs-md); }
+.t-dose{ margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+.t-dose[hidden]{ display:none; }
+.dose-chip{ display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:999px; background:var(--lagon-soft); color:var(--lagon-strong); font-weight:800; font-size:var(--fs-sm); }
+.dose-chip svg{ width:16px; height:16px; flex:none; }
+.dose-chip.v-moyenne{ background:var(--soleil-soft); color:var(--soleil-strong); }
+.dose-chip.v-rapide{ background:var(--danger-soft); color:var(--danger); }
+.dose-det{ font-weight:600; }
+@media (max-width:420px){ .dose-det{ display:none; } }
 
 .t-control{ display:flex; flex-direction:column; align-items:center; gap:14px; flex:1; justify-content:center; }
 .t-ring{
@@ -112,6 +120,7 @@
   .t-figure{ height:min(58dvh,560px); }
   .t-ring{ width:min(34vw,46dvh,380px); }
   .t-names{ text-align:left; }
+  .t-dose{ justify-content:flex-start; }
 }
 @media (max-height:640px) and (max-aspect-ratio:1/1){
   .t-figure{ height:24dvh; }
@@ -125,6 +134,7 @@
   .t-visual{ flex-direction:row; align-items:center; }
   .t-figure{ height:62dvh; flex:1; }
   .t-names{ text-align:left; flex:0 1 34%; }
+  .t-dose{ justify-content:flex-start; }
   .t-ring{ width:44dvh; }
   .t-spine,.t-foot{ display:none; }
 }
