@@ -2,2212 +2,1420 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>MusiMix</title>
-
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="chords.js"></script>
 
 <style>
 :root{
---bg:#111;
---panel:#181818;
---line:#2a2a2a;
---text:#fff;
---muted:#aaa;
---accent:#ffd166;
+  --bg:#111; --panel:#181818; --panel2:#0d0d0d; --line:#2a2a2a; --text:#fff; --muted:#9f9f9f;
+  --accent:#ffd166; --blue:#20b8d6; --orange:#f6aa1c; --sung:#ffd166;
+  --topbar-h:104px;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:#111;
-  color:#fff;
-  font-family:Arial,sans-serif;
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+body{overscroll-behavior-y:none}
+button{background:#242424;color:#fff;border:none;padding:10px 14px;border-radius:12px;cursor:pointer;white-space:nowrap;font:inherit;font-size:.95rem}
+button:hover{background:#2f2f2f}
+button.active{background:var(--blue);color:#000}
+input,textarea,select{font:inherit}
 
-  overscroll-behavior-y:none;
-}
+/* ── barre du haut : transport + outils ── */
+.topbar{position:sticky;top:0;z-index:60;background:var(--bg);border-bottom:1px solid var(--line)}
+.transport{display:flex;align-items:center;gap:8px;padding:8px 10px 4px}
+#playBtn{min-width:52px;font-size:1.1rem;background:var(--accent);color:#111;font-weight:700}
+.seek{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
+.seek span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.85rem;min-width:38px;text-align:center}
+#seekBar{flex:1;min-width:60px;accent-color:var(--accent)}
+.tools{display:flex;gap:6px;padding:4px 10px 8px;overflow-x:auto;scrollbar-width:none}
+.tools::-webkit-scrollbar{display:none}
+.tools button{padding:8px 11px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-width:34px;padding:0 6px;border-radius:10px;background:#1b1b1b;color:var(--muted);font-size:.85rem;font-variant-numeric:tabular-nums}
+.sep{width:1px;background:var(--line);flex:0 0 1px;margin:4px 2px}
+#loopBtn.armed{background:#5a4a1a}
+.mini-chord{display:none;font-size:1.05rem;font-weight:800;color:var(--accent);background:#1b1b1b;min-width:52px;height:38px;cursor:pointer}
 
-.lyrics{
-  padding:30px;
-  font-size:1.5rem;
-  line-height:1.45;
+/* ── mise en page ── */
+.layout{display:grid;grid-template-columns:320px 8px 1fr}
+.sidebar{position:sticky;top:var(--topbar-h);height:calc(100vh - var(--topbar-h));overflow-y:auto;overflow-x:hidden;padding:20px;background:var(--panel2);border-right:1px solid var(--line);align-self:start}
+#resizeHandle{width:8px;cursor:col-resize;background:#171717;border-left:1px solid var(--line);border-right:1px solid var(--line);position:relative}
+#resizeHandle:hover{background:#2a2a2a}
+#resizeHandle::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:44px;border-radius:999px;background:#3a3a3a}
+.main{min-height:100vh;min-width:0}
 
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:auto;
-}
-.topbar{
-position:sticky;
-top:0;
-z-index:60;
-display:flex;
-gap:8px;
-padding:10px;
-background:#111;
-border-bottom:1px solid #2a2a2a;
-overflow:auto;
-}
-button{
-background:#242424;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:12px;
-cursor:pointer;
-white-space:nowrap
-}
-.layout{
-display:grid;
-grid-template-columns:320px 8px 1fr;
-}
-.sidebar{
-position:sticky;
-top:58px;
-height:calc(100vh - 58px);
-overflow-y:auto;
-overflow-x:hidden;
-padding:20px;
-background:#0d0d0d;
-border-right:1px solid #2a2a2a;
-align-self:start;
-}
+/* ── en-tête morceau ── */
+.header{position:sticky;top:var(--topbar-h);z-index:45;padding:16px 20px;background:rgba(17,17,17,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.header h1{margin:0 44px 0 0;font-size:1.8rem}
+.meta{color:var(--muted);margin-top:4px}
+#toggleHeaderBtn{position:absolute;top:10px;right:12px;width:32px;height:32px;padding:0;border-radius:999px;font-size:16px;line-height:1;background:#1d1d1d}
+.header.collapsed{padding-top:10px;padding-bottom:10px}
+.header.collapsed .meta,.header.collapsed .instrument-switch,.header.collapsed #chord-bar{display:none}
+.header.collapsed h1{font-size:1.2rem}
+.header-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.instrument-switch{display:flex;gap:8px}
+#nowChord{display:none;align-items:baseline;gap:10px;padding:6px 14px;border-radius:14px;background:#1b1b1b;position:relative;overflow:hidden}
+#nowChord.show{display:flex}
+#nowChord .cur{font-size:1.9rem;font-weight:800;color:var(--accent);cursor:pointer}
+#nowChord .nxt{color:var(--muted);font-size:1rem}
+#nowChord .bar{position:absolute;left:0;bottom:0;height:3px;background:var(--accent);opacity:.7;width:0}
+#chord-bar{display:flex;gap:10px;overflow-x:auto;padding:12px 0 4px}
+.chord-item{position:relative;background:#1f1f1f;padding:8px 12px;border-radius:10px;font-weight:700;color:var(--accent)}
+.chord-item.playing{background:var(--accent);color:#111}
 
-#mixer{
-position:sticky;
-top:0;
-z-index:40;
-background:#0d0d0d;
-padding-bottom:12px;
-margin-bottom:12px;
-}
-
-#waveform{
-display:none;
-}
-
-.main{min-height:100vh}
-.header{
-position:sticky;
-top:58px;
-z-index:45;
-
-padding:20px;
-
-background:rgba(17,17,17,.92);
-backdrop-filter:blur(10px);
-
-border-bottom:1px solid #2a2a2a;
-}
-.meta{color:#aaa;margin-top:4px}
-.lyrics{padding:30px;font-size:1.5rem;line-height:1.45}
-.line{margin-bottom:12px;white-space:normal;overflow-wrap:anywhere}
+/* ── paroles ── */
+.lyrics{padding:30px 30px 45vh;font-size:1.5rem;line-height:1.45;overscroll-behavior:contain}
+.line{margin-bottom:12px;white-space:normal;overflow-wrap:anywhere;border-radius:8px;padding:0 6px;margin-left:-6px;transition:background .2s}
+.blank-line{height:.6em}
 .segment{display:inline-block;vertical-align:top;white-space:pre}
-.chord{display:block;font-size:.8em;font-weight:700;color:#ffd166;line-height:1}
+.chord{display:block;font-size:.8em;font-weight:700;color:var(--accent);line-height:1.05;cursor:pointer;min-height:1.05em}
+.chord:not(:empty){padding-right:.4em}
+.chord:empty{cursor:default}
+.chord-active{background:var(--accent);color:#111;border-radius:5px;padding:0 3px;margin:0 -3px}
 .word{display:block;white-space:pre-wrap}
-.section{margin:28px 0 14px;font-size:1rem;font-weight:700;color:#9a9a9a;text-transform:uppercase}
-canvas{
-width:100%;
-height:80px;
-background:#151515;
-border-radius:12px;
-margin-bottom:20px
-}
-.slider-wrap{
-display:flex;
-align-items:center;
-gap:12px;
-margin-bottom:14px
-}
-.slider-wrap label{
-width:72px;
-margin:0;
-font-size:.95rem
-}
-.slider-wrap input[type=range]{
-flex:1;
-accent-color:#20b8d6
-}
-.track-btn{
-padding:4px 8px;
-border-radius:8px;
-font-size:.8rem
-}
-.track-btn.active{
-background:#20b8d6;
-color:#000
-}
-.song-item{
-padding:12px;
-background:#1d1d1d;
-border-radius:10px;
-margin-top:12px;
-font-size:.95rem;
-cursor:pointer
-}
-
-#resizeHandle{
-width:8px;
-cursor:col-resize;
-background:#171717;
-border-left:1px solid #2a2a2a;
-border-right:1px solid #2a2a2a;
-position:relative;
-transition:background .15s;
-}
-
-#resizeHandle:hover{
-background:#2a2a2a;
-}
-
-#resizeHandle::after{
-content:'';
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:4px;
-height:44px;
-border-radius:999px;
-background:#3a3a3a;
-}
-
-@media(max-width:900px){
-  #resizeHandle{
-    display:none;
-  }
-}
-
-#studio-panel{
-margin-top:12px;
-background:#111;
-border-radius:12px;
-overflow:hidden;
-}
-
-#studio-toolbar{
-display:flex;
-gap:10px;
-align-items:center;
-padding:10px;
-background:#171717;
-border-bottom:1px solid #2a2a2a;
-flex-wrap:wrap;
-}
-
-#studioTrackSelect{
-background:#242424;
-color:#fff;
-border:none;
-padding:8px 12px;
-border-radius:10px;
-}
-
-#studioTimeline{
-width:100%;
-height:180px;
-display:block;
-background:#0d0d0d;
-cursor:pointer;
-touch-action:none;
-}
-
-@media(max-width:900px){
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  /* masque la waveform sur mobile */
-  #waveform{
-    display:none;
-  }
-
-.sidebar{
-  position:static;
-  height:auto;
-  min-height:0;
-
-  padding:0 !important;
-  margin:0 !important;
-
-  border:none !important;
-  background:transparent !important;
-
-  overflow:visible;
-}
-
-#mobileMixerPanel{
-  position:fixed;
-
-  left:0;
-  right:0;
-  bottom:60px;
-
-  max-height:55vh;
-
-  overflow:auto;
-
-  background:#111;
-
-  padding:12px;
-
-  border-top:1px solid #2a2a2a;
-
-  transform:translateY(120%);
-
-  transition:.25s ease;
-
-  z-index:9998;
-}
-
-#mobileMixerPanel.open{
-  transform:translateY(0);
-}
-
-.sidebar{
-  padding:8px !important;
-  border-bottom:none !important;
-}
-
-#mixer{
-  position:relative;
-  top:auto;
-  z-index:auto;
-  background:#0d0d0d;
-}
-#header-mixer-mobile{
-  display:block;
-  margin-top:12px;
-}
-
-.sidebar #mixer{
-  display:block;
-}
-
-.sidebar{
-  display:block;
-}
-
-}
-
-
-.instrument-switch{
-display:flex;
-gap:8px;
-margin-top:12px;
-margin-bottom:14px;
-flex-wrap:wrap;
-}
-#chord-bar{
-display:flex;
-gap:12px;
-overflow-x:auto;
-padding-bottom:8px;
-}
-.chord-item{
-position:relative;
-background:#1f1f1f;
-padding:8px 12px;
-border-radius:10px;
-cursor:pointer;
-font-weight:700;
-color:#ffd166;
-}
-#chord-popup{
-position:fixed;
-z-index:99999;
-background:#fff;
-color:#111;
-border-radius:12px;
-padding:12px;
-box-shadow:0 12px 30px rgba(0,0,0,.28);
-min-width:160px;
-}
-
-#header-mixer-mobile{
-  display:none;
-}
-
-#toggleMixerBtn{
-  display:none;
-}
-
-#toggleHeaderBtn{
-position:absolute;
-top:8px;
-right:12px;
-
-width:32px;
-height:32px;
-
-padding:0;
-
-border-radius:999px;
-
-font-size:16px;
-line-height:1;
-
-background:#1d1d1d;
-color:#fff;
-
-z-index:60;
-}
-
-.header.collapsed{
-padding-top:10px;
-padding-bottom:10px;
-}
-
-.header.collapsed .meta,
-.header.collapsed .instrument-switch,
-.header.collapsed #chord-bar{
-display:none;
-}
-
-.header.collapsed h1{
-font-size:1.2rem;
-margin:0;
-}
-
-@media(max-width:900px){
-
-#toggleMixerBtn{
-  display:block;
-
-  position:fixed;
-
-  left:12px;
-  right:12px;
-  bottom:12px;
-
-  z-index:9999;
-
-  background:#1c1c1c;
-  color:#fff;
-  border:none;
-
-  padding:12px;
-
-  border-radius:16px;
-
-  font-size:15px;
-
-  margin:0;
-}
-
-#mobileMixerPanel{
-  position:fixed;
-
-  left:0;
-  right:0;
-  bottom:60px;
-
-  max-height:55vh;
-
-  overflow:auto;
-
-  background:#111;
-
-  padding:12px;
-
-  border-top:1px solid #2a2a2a;
-
-  transform:translateY(120%);
-
-  transition:.25s ease;
-
-  z-index:9998;
-}
-
-#mobileMixerPanel.open{
-  transform:translateY(0);
-}
-#library-panel{
-  display:none !important;
-}
-}
-
-.active-lyric{
-background:rgba(255,209,102,.18);
-border-radius:8px;
-transition:.2s;
-}
-
-.popup-inner{text-align:center;}
-#library-panel{
-margin-top:18px;
-padding-top:14px;
-border-top:1px solid #2a2a2a;
-}
-
-#library-search{
-width:100%;
-padding:10px 12px;
-border-radius:10px;
-border:none;
-background:#1a1a1a;
-color:#fff;
-margin-bottom:12px;
-}
-
-.library-song{
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:8px;
-padding:10px;
-background:#171717;
-border-radius:10px;
-margin-bottom:8px;
-}
-
-.library-song-name{
-flex:1;
-cursor:pointer;
-font-size:.92rem;
-overflow:hidden;
-text-overflow:ellipsis;
-white-space:nowrap;
-}
-
-.library-actions{
-display:flex;
-gap:6px;
-}
-
-.icon-btn{
-padding:6px 8px;
-font-size:14px;
-border-radius:8px;
-background:#242424;
-}
-
-
-@media (max-width: 900px){
-
-body{
-  background:
-    radial-gradient(circle at top,#181818 0%,#090909 70%);
-}
-
-/* header */
-.header{
-  position:sticky;
-  top:0;
-  z-index:80;
-  padding:16px 18px 12px;
-  background:rgba(10,10,10,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:none;
-}
-
-#title{
-  font-size:2rem;
-  font-weight:700;
-}
-
-.meta{
-  font-size:.95rem;
-  color:#9f9f9f;
-}
-
-/* waveform */
-#waveform{
-  display:block !important;
-  width:100%;
-  height:60px;
-  background:linear-gradient(180deg,#1b1b1b,#111);
-  border-radius:20px;
-  margin-bottom:8px;
-}
-
-/* mixer */
-#mixer{
-  display:flex !important;
-  gap:12px;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding:4px 2px 4px;
-  -webkit-overflow-scrolling:touch;
-}
-
-/* piste */
-.slider-wrap{
-  min-width:78px;
-  height:170px;
-
-  border-radius:22px;
-  background:linear-gradient(180deg,#1c1c1c,#131313);
-
-  padding:8px 6px;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  gap:4px;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.03);
-}
-
-}
-
-/* nom piste */
-.slider-wrap label{
-  width:100%;
-  text-align:center;
-  font-size:.95rem;
-  font-weight:600;
-  color:#fff;
-}
-
-@media (max-width:900px){
-
-  .slider-wrap input[type=range]{
-    writing-mode: bt-lr;
-    -webkit-appearance: slider-vertical;
-    width:22px;
-    height:90px;
-    accent-color:#f6aa1c;
-  }
-
-}
-
+.w.sung{color:var(--sung)}
+.line.chord-only .segment{margin-right:.9em}
+.line.chorus{border-left:3px solid #3a3a3a;padding-left:12px}
+.section{margin:28px 0 14px;font-size:1rem;font-weight:700;color:#9a9a9a;text-transform:uppercase;letter-spacing:.04em}
+.section.chorus{color:#c9b06a}
+.active-lyric{background:rgba(255,209,102,.14)}
+.lyrics.syncing .line{cursor:crosshair;outline:1px dashed #333}
+.lyrics.syncing .line.synced{outline-color:#2d7cff}
+.lyrics.can-seek .line.timed{cursor:pointer}
+.empty-state{color:var(--muted);font-size:1.05rem;line-height:1.6;max-width:640px}
+.empty-state b{color:#fff}
+
+/* ── table de mixage ── */
+#mixer{position:sticky;top:0;z-index:40;background:var(--panel2);padding-bottom:12px;margin-bottom:12px}
+.slider-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.slider-wrap label{width:92px;font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:text}
+.slider-wrap input[type=range]{flex:1;min-width:60px;accent-color:var(--blue)}
+.track-btn{width:30px;height:30px;padding:0;border-radius:50%;background:#2a2a2a;font-size:12px;flex:0 0 30px}
+.track-btn.active{background:var(--orange);color:#111}
+.master-row{border-top:1px solid var(--line);padding-top:12px}
+
+/* ── timeline studio ── */
+#studio-panel{margin-top:12px;background:var(--bg);border-radius:12px;overflow:hidden}
+#studio-toolbar{display:flex;gap:10px;align-items:center;padding:10px;background:#171717;border-bottom:1px solid var(--line);flex-wrap:wrap}
+#studioTrackSelect{background:#242424;color:#fff;border:none;padding:8px 12px;border-radius:10px;max-width:150px}
+#studioTimeline{width:100%;height:180px;display:block;background:var(--panel2);cursor:pointer;touch-action:none}
+
+/* ── bibliothèque ── */
+#library-panel{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+#library-search{width:100%;padding:10px 12px;border-radius:10px;border:none;background:#1a1a1a;color:#fff;margin-bottom:12px}
+.library-song{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;background:#171717;border-radius:10px;margin-bottom:8px}
+.library-song.current{outline:1px solid var(--accent)}
+.library-song-name{flex:1;cursor:pointer;font-size:.92rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.library-actions{display:flex;gap:4px}
+.icon-btn{padding:6px 8px;font-size:14px;border-radius:8px;background:#242424}
+
+/* ── popup accords ── */
+#chord-popup{position:fixed;z-index:99999;background:#fff;color:#111;border-radius:14px;padding:14px;box-shadow:0 12px 30px rgba(0,0,0,.35);min-width:170px;max-width:94vw}
+#chord-popup button{background:#eee;color:#111;padding:4px 12px}
+.popup-inner{text-align:center}
+.pop-title{font-size:1.3rem}
+.pop-title.big{font-size:2.2rem;font-weight:800}
+.pop-sub{font-size:.85rem;color:#666;margin:2px 0 6px}
+.pop-missing{color:#999;padding:10px}
+.pop-nav{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:4px}
+.piano-pop{width:min(620px,88vw)}
+.piano-bottom{display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap;justify-content:center;text-align:left}
+.piano-notes{font-size:1.5rem;font-weight:600}
+.piano-degrees{font-size:1.1rem;color:#666}
+
+/* ── éditeur de grille ── */
+dialog{background:#161616;color:#fff;border:1px solid var(--line);border-radius:16px;width:min(900px,96vw);padding:0}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+.dlg-head{display:flex;gap:10px;padding:14px;border-bottom:1px solid var(--line);flex-wrap:wrap;align-items:center}
+.dlg-head input{background:#222;border:none;color:#fff;padding:9px 12px;border-radius:10px;flex:1;min-width:140px}
+#editorText{width:100%;height:55vh;background:#0e0e0e;color:#eee;border:none;padding:14px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.45;resize:vertical}
+.dlg-help{color:var(--muted);font-size:.85rem;padding:0 14px 10px;line-height:1.5}
+.dlg-foot{display:flex;gap:8px;justify-content:flex-end;padding:12px 14px;border-top:1px solid var(--line);flex-wrap:wrap}
+.primary{background:var(--accent);color:#111;font-weight:700}
+.primary:hover{background:#ffdc85}
+
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#262626;color:#fff;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:100000;max-width:90vw;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#loading{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99990;align-items:center;justify-content:center;font-size:1.1rem}
+#loading.show{display:flex}
+#toggleMixerBtn{display:none}
+
+/* ── bureau ── */
 @media (min-width:901px){
-
-  .slider-wrap{
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    gap:12px;
-  }
-
-  .slider-wrap input[type=range]{
-    width:140px;
-    height:auto;
-    writing-mode:horizontal-tb;
-    -webkit-appearance:auto;
-  }
-
+  #waveform-mobile{display:none}
 }
 
-/* solo mute */
-.track-btn{
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:#2a2a2a;
-  color:#fff;
-  font-size:12px;
+/* ── mobile ── */
+@media (max-width:900px){
+  body{background:radial-gradient(circle at top,#181818 0%,#090909 70%)}
+  .layout{grid-template-columns:1fr}
+  #resizeHandle,#studio-panel,#library-panel{display:none}
+  .sidebar{position:static;height:auto;padding:0;border:none;background:transparent;overflow:visible}
+  .header{position:relative;top:auto;padding:12px 16px 8px;background:transparent;backdrop-filter:none;border-bottom:none}
+  .mini-chord.show{display:inline-flex}
+  #durTime{display:none}
+  .header h1{font-size:1.5rem}
+  .tools button{padding:7px 10px}
+  #title{font-size:1.7rem}
+  .lyrics{padding:18px 16px 45vh;font-size:1.6rem}
+  #toggleMixerBtn{display:block;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:9999;background:#1c1c1c;padding:12px;border-radius:16px;font-size:15px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+  #mobileMixerPanel{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));max-height:55vh;overflow:auto;background:#111;padding:12px;border-top:1px solid var(--line);transform:translateY(130%);transition:.25s ease;z-index:9998}
+  #mobileMixerPanel.open{transform:translateY(0)}
+  #mixer{display:flex;gap:12px;overflow-x:auto;position:relative;padding:4px 2px;margin:0}
+  .slider-wrap{min-width:78px;height:224px;border-radius:22px;background:linear-gradient(180deg,#1c1c1c,#131313);padding:8px 6px;flex-direction:column;justify-content:space-between;gap:4px;margin:0}
+  .slider-wrap label{width:100%;text-align:center;font-weight:600;font-size:.85rem}
+  .slider-wrap input[type=range]{writing-mode:vertical-lr;direction:rtl;width:26px;height:95px;flex:0 0 auto;accent-color:var(--orange)}
+  .master-row{border-top:none;padding-top:8px}
+  #chord-popup{left:3vw !important;right:3vw}
 }
-
-.track-btn.active{
-  background:#f6aa1c;
-  color:#111;
-}
-
-/* lyrics */
-.lyrics{
-  padding:18px 18px 110px;
-  font-size:1.85rem;
-  line-height:1.45;
-}
-
-/* cache studio timeline sur mobile */
-#studio-panel{
-  display:none;
-}
-
-/* bouton pistes */
-#toggleMixerBtn{
-  width:100%;
-  border-radius:14px;
-  background:#1d1d1d;
-  color:#fff;
-  font-size:15px;
-  padding:8px;
-  margin-bottom:6px;
-}
-
-}
-
 </style>
-
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color" content="#111111">
-
-<link rel="icon" href="icon-192.png">
-
-<link rel="apple-touch-icon" href="icon-192.png">
-
 </head>
 <body>
 
-<div class="topbar">
-<button onclick="togglePlay()">▶ / ⏸</button>
-<button onclick="restartFromBeginning()">⏮ Début</button>
-<button onclick="changeScrollSpeed(-0.3)">🐢</button>
-<button onclick="changeScrollSpeed(0.3)">🐇</button>
-<button onclick="transpose(-1)">♭</button>
-<button onclick="transpose(1)">♯</button>
-<button onclick="changeFont(-0.1)">A−</button>
-<button onclick="changeFont(0.1)">A+</button>
-<button onclick="document.getElementById('zipInput').click()">➕ Ajouter ZIP</button>
-<button onclick="document.getElementById('filesInput').click()">
-  📂 Ajouter fichiers
-</button>
-<button onclick="exportChordPdf()">
-  📄 Export PDF
-</button>
-
-<input
-  hidden
-  id="filesInput"
-  type="file"
-  multiple
-  accept=".cho,.lrc,.mp3,.wav,.flac"
-  onchange="loadFiles(event)"
->
-<button id="syncBtn" onclick="toggleSyncMode()">
-🎯 Sync Lyrics
-</button>
-<button onclick="exportLrc()">
-💾 Export LRC
-</button>
-<input hidden id="zipInput" type="file" accept=".zip" onchange="loadZip(event)">
+<div class="topbar" id="topbar">
+  <div class="transport">
+    <button id="playBtn" onclick="togglePlay()" title="Lecture / pause (Espace)">▶</button>
+    <button onclick="restartFromBeginning()" title="Début">⏮</button>
+    <div class="seek">
+      <span id="curTime">0:00</span>
+      <input id="seekBar" type="range" min="0" max="1000" step="1" value="0" aria-label="Position">
+      <span id="durTime">0:00</span>
+    </div>
+    <span id="miniChord" class="pill mini-chord" title="Accord joué maintenant"></span>
+    <button id="loopBtn" onclick="toggleLoop()" title="Boucle A-B (touche L)">🔁 A-B</button>
+  </div>
+  <div class="tools">
+    <button onclick="changeScrollSpeed(-0.2)" title="Défilement plus lent">🐢</button>
+    <button onclick="changeScrollSpeed(0.2)" title="Défilement plus rapide">🐇</button>
+    <span class="sep"></span>
+    <button onclick="transpose(-1)" title="Transposer −½ ton">♭</button>
+    <span class="pill" id="transposeLabel" title="Transposition">0</span>
+    <button onclick="transpose(1)" title="Transposer +½ ton">♯</button>
+    <button onclick="changeFont(-0.1)">A−</button>
+    <button onclick="changeFont(0.1)">A+</button>
+    <span class="sep"></span>
+    <button onclick="document.getElementById('zipInput').click()">➕ ZIP</button>
+    <button onclick="document.getElementById('filesInput').click()">📂 Fichiers</button>
+    <button onclick="openEditor()">📝 Grille</button>
+    <button id="syncBtn" onclick="toggleSyncMode()">🎯 Sync</button>
+    <button onclick="exportLrc()">💾 LRC</button>
+    <button onclick="exportChordPdf()">📄 PDF</button>
+    <button onclick="loadDemo()">🎵 Démo</button>
+  </div>
+  <input hidden id="filesInput" type="file" multiple accept=".cho,.chopro,.chordpro,.txt,.lrc,.json,.mp3,.wav,.flac,.m4a,.ogg,.aac,audio/*" onchange="loadFiles(event)">
+  <input hidden id="zipInput" type="file" accept=".zip" onchange="loadZip(event)">
 </div>
 
 <div class="layout">
+  <aside class="sidebar">
+    <button id="toggleMixerBtn" onclick="toggleMixerPanel()">▲ Pistes</button>
+    <div id="mobileMixerPanel">
+      <div id="mixer"></div>
+      <div id="studio-panel">
+        <div id="studio-toolbar">
+          <select id="studioTrackSelect"></select>
+          <button onclick="toggleStudioView()">☰ Toutes les pistes</button>
+          <span id="studioTime" class="pill">0:00 / 0:00</span>
+        </div>
+        <canvas id="studioTimeline"></canvas>
+      </div>
+    </div>
+    <div id="library-panel">
+      <input id="library-search" placeholder="🔍 Rechercher…" oninput="renderLibrary()">
+      <div id="library-list"></div>
+    </div>
+  </aside>
+  <div id="resizeHandle"></div>
+  <main class="main">
+    <div class="header" id="songHeader">
+      <button id="toggleHeaderBtn" onclick="toggleHeaderPanel()">▲</button>
+      <h1 id="title">MusiMix</h1>
+      <div class="meta" id="meta"></div>
+      <div class="header-row">
+        <div class="instrument-switch">
+          <button data-instrument="guitar" onclick="switchInstrument('guitar')">🎸 Guitare</button>
+          <button data-instrument="piano" onclick="switchInstrument('piano')">🎹 Piano</button>
+        </div>
+        <div id="nowChord" title="Accord joué maintenant">
+          <span class="cur" id="nowChordCur"></span><span class="nxt" id="nowChordNext"></span><span class="bar" id="nowChordBar"></span>
+        </div>
+      </div>
+      <div id="chord-bar"></div>
+    </div>
+    <div class="lyrics" id="lyrics"></div>
+  </main>
+</div>
 
-<aside class="sidebar">
-
-<button id="toggleMixerBtn" onclick="toggleMixerPanel()">▼ Pistes</button>
-
-<div id="mobileMixerPanel" class="open">
-  <canvas id="waveform"></canvas>
-  <div id="mixer"></div>
-<div id="studio-panel">
-  <div id="studio-toolbar">
-    <select id="studioTrackSelect"></select>
-    <button onclick="toggleStudioView()">☰ Toutes les pistes</button>
-    <span id="studioTime">0:00 / 0:00</span>
+<dialog id="editor">
+  <div class="dlg-head">
+    <input id="edTitle" placeholder="Titre">
+    <input id="edArtist" placeholder="Artiste">
+    <button onclick="searchLrclib()" title="Chercher les paroles synchronisées sur lrclib.net">🔎 Paroles (LRCLIB)</button>
   </div>
+  <textarea id="editorText" spellcheck="false" placeholder="Colle ici une grille…"></textarea>
+  <div class="dlg-help">
+    Accepte du <b>ChordPro</b> (<code>[Am]paroles</code>) ou une grille <b>accords au-dessus des paroles</b>
+    copiée depuis Cifra Club, Ultimate Guitar, Boiteachansons… : elle est convertie automatiquement
+    (7M → maj7, ° → dim, sections [Intro]/[Refrão]…). Les pistes audio chargées sont conservées.
+  </div>
+  <div class="dlg-foot">
+    <button onclick="convertEditorText()">↻ Convertir en ChordPro</button>
+    <button onclick="document.getElementById('editor').close()">Annuler</button>
+    <button class="primary" onclick="applyEditor()">✔ Appliquer</button>
+  </div>
+</dialog>
 
-  <canvas id="studioTimeline"></canvas>
-</div>
-</div>
-
-<div id="library-panel">
-  <input
-    id="library-search"
-    placeholder="🔍 Rechercher..."
-    oninput="renderLibrary()"
-  >
-  <div id="library-list"></div>
-</div>
-
-</aside>
-<div id="resizeHandle"></div>
-<main class="main">
-<div class="header">
-<button id="toggleHeaderBtn" onclick="toggleHeaderPanel()">
-  ▲
-</button>
-<h1 id="title">MusiMix</h1>
-<div class="meta" id="meta"></div>
-
-<div class="instrument-switch">
-<button onclick="switchInstrument('guitar')">🎸 Guitare</button>
-<button onclick="switchInstrument('piano')">🎹 Piano</button>
-</div>
-
-<div id="header-mixer-mobile"></div>
-
-<div id="chord-bar"></div>
-</div>
-<div class="lyrics" id="lyrics"></div>
-</main>
-
-</div>
+<div id="toast"></div>
+<div id="loading"><span id="loadingText">Chargement…</span></div>
 
 <script>
-let parsedSong=[]
-let scrollSpeed=1
-let scrollTimer=null
-let fontSize=1.5
-let semitoneShift=0
-let library=[]
-let musicDB=null
-let tracks={}
-let waveformCache={}
-let studioTrack=null
-let studioShowAll=false
-let studioDragging=false
-let studioAnimation=null
-let studioListenersInitialized=false
-let soloTrackName=null
-let currentSongKey=''
-let lyricSyncData=[]
-let syncMode=false
+'use strict';
+/* ════════════════════════════════════════════════════════════ état ══ */
+let song = null;              // {meta, items, source}
+let semitoneShift = 0;
+let fontSize = parseFloat(localStorage.getItem('musimixFont')) || 1.5;
+let scrollSpeed = 1;
+let currentSongKey = '';
+let currentBundle = null;     // {name, files:[{name, blob}]}
+let timing = emptyTiming();   // synchro (lignes, mots, accords)
+let syncMode = false, syncNext = 0;
+let pendingLrc = null;
+let studioTrack = null, studioShowAll = false, studioDragging = false, studioCache = null;
+let waveformCache = {};
+let musicDB = null;
+let userScrollUntil = 0, autoScrollY = null, lastFrame = 0;
+let activeLineIdx = -1, activeChordIdx = -1;
 
-const NOTES=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+function emptyTiming(){ return {source:'', sync:[], words:new Map(), lineEnd:new Map(), chordTimes:[], chords:[]}; }
 
-function audioExt(name){
-return /\.(mp3|wav|flac)$/i.test(name)
+/* ════════════════════════════════════════════════════════════ utilitaires ══ */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const isMobile = () => innerWidth <= 900;
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+function fmtTime(sec){ if(!isFinite(sec) || sec < 0) sec = 0; const m = Math.floor(sec/60), s = Math.floor(sec%60); return m+':'+String(s).padStart(2,'0'); }
+function normText(s){ return String(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim(); }
+let toastTimer;
+function toast(msg, ms=2600){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'), ms); }
+function loading(on, text='Chargement…'){ $('loading').classList.toggle('show', on); $('loadingText').textContent = text; }
+function baseName(path){ return String(path).split('/').pop(); }
+function download(blob, name){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000); }
+
+/* ════════════════════════════════════════════════════════════ moteur audio ══
+   Les pistes restent des <audio> (streaming, peu de mémoire, OK sur mobile)
+   mais passent par un GainNode Web Audio : le volume fonctionne aussi sur iPhone
+   (audio.volume y est ignoré) et une correction de dérive garde les pistes calées. */
+const Engine = {
+  ctx:null, master:null, tracks:[], solo:null, playing:false, loopA:null, loopB:null, masterVolume:1,
+  ensureCtx(){
+    if(!this.ctx){
+      try{
+        this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        this.master = this.ctx.createGain();
+        this.master.connect(this.ctx.destination);
+      }catch(e){ console.warn('Web Audio indisponible', e); }
+    }
+    if(this.ctx?.state === 'suspended') this.ctx.resume();
+  },
+  clear(){
+    this.pause();
+    this.tracks.forEach(t=>{
+      try{ t.node?.disconnect(); t.gain?.disconnect(); }catch(e){}
+      t.el.removeAttribute('src'); t.el.load(); URL.revokeObjectURL(t.url);
+    });
+    this.tracks = []; this.solo = null; this.loopA = this.loopB = null;
+  },
+  add(name, blob, file){
+    const url = URL.createObjectURL(blob);
+    const el = new Audio();
+    el.preload = 'auto'; el.src = url; el.playsInline = true;
+    el.addEventListener('loadedmetadata', updateTransport);
+    const tr = {name, el, url, blob, file, volume:1, muted:false};
+    this.tracks.push(tr);
+    return tr;
+  },
+  connect(tr){
+    if(tr.node || !this.ctx) return;
+    try{
+      tr.node = this.ctx.createMediaElementSource(tr.el);
+      tr.gain = this.ctx.createGain();
+      tr.node.connect(tr.gain).connect(this.master);
+      tr.el.volume = 1;                     // le volume passe désormais par le GainNode
+    }catch(e){ console.warn(e); }
+  },
+  applyGains(){
+    this.tracks.forEach(tr=>{
+      const g = (tr.muted || (this.solo && this.solo !== tr.name)) ? 0 : tr.volume;
+      if(tr.gain) tr.gain.gain.setTargetAtTime(g, this.ctx.currentTime, 0.015);
+      else tr.el.volume = clamp(g * this.masterVolume, 0, 1);
+    });
+    if(this.master) this.master.gain.setTargetAtTime(this.masterVolume, this.ctx.currentTime, 0.015);
+  },
+  get clock(){ return this.tracks[0]?.el; },
+  time(){ return this.clock?.currentTime || 0; },
+  duration(){ return Math.max(0, ...this.tracks.map(t=>isFinite(t.el.duration) ? t.el.duration : 0)); },
+  async play(){
+    if(!this.tracks.length) return;
+    this.ensureCtx();
+    this.tracks.forEach(t=>this.connect(t));
+    this.applyGains();
+    const t0 = this.time();
+    this.tracks.forEach(t=>{ if(Math.abs(t.el.currentTime - t0) > 0.02) t.el.currentTime = t0; });
+    await Promise.all(this.tracks.map(t=>t.el.play().catch(e=>console.warn(e))));
+    this.playing = true;
+  },
+  pause(){ this.tracks.forEach(t=>t.el.pause()); this.playing = false; },
+  seek(t){
+    const d = this.duration();
+    t = d ? clamp(t, 0, d) : Math.max(0, t);   // durée pas encore connue : on cale quand même
+    this.tracks.forEach(tr=>{ tr.el.currentTime = t; });
+  },
+  tick(){
+    if(!this.playing || !this.clock) return;
+    const m = this.clock;
+    if(m.ended){ this.pause(); onEnded(); return; }
+    const t = m.currentTime;
+    if(this.loopA != null && this.loopB != null && t >= this.loopB){ this.seek(this.loopA); return; }
+    for(let i=1;i<this.tracks.length;i++){
+      const el = this.tracks[i].el;
+      if(!el.ended && !el.seeking && Math.abs(el.currentTime - t) > 0.06) el.currentTime = t + 0.01;
+    }
+  }
+};
+
+async function togglePlay(){
+  if(!Engine.tracks.length){ toast('Charge d’abord un morceau (ZIP, fichiers ou 🎵 Démo)'); return; }
+  if(Engine.playing){ Engine.pause(); }
+  else{ autoScrollY = scrollY; await Engine.play(); }
+  updateTransport();
 }
-
-function getStemType(name){
-const n=name.toLowerCase()
-if(n.includes('(vocals)')) return '🎤 Voix'
-if(n.includes('(drums)')) return '🥁 Drums'
-if(n.includes('(bass)')) return '🎸 Bass'
-if(n.includes('(guitar)')) return '🎸 Guitar'
-if(n.includes('(piano)')) return '🎹 Piano'
-if(n.includes('(other)')) return '🎵 Other'
-if(n.includes('instrumental')) return '🎵 Instrumental'
-return null
-}
-
+function onEnded(){ updateTransport(); }
 function restartFromBeginning(){
+  Engine.seek(0);
+  scrollTo({top:0, behavior:'smooth'});
+  autoScrollY = 0;
+  updateTransport();
+}
+function seekTo(t, play=false){
+  Engine.seek(t);
+  userScrollUntil = 0; autoScrollY = null;
+  if(play && !Engine.playing) Engine.play().then(updateTransport);
+  updateTransport();
+}
+function updateTransport(){
+  const d = Engine.duration(), t = Engine.time();
+  $('playBtn').textContent = Engine.playing ? '⏸' : '▶';
+  $('curTime').textContent = fmtTime(t);
+  $('durTime').textContent = fmtTime(d);
+  if(!seekDragging) $('seekBar').value = d ? Math.round(t/d*1000) : 0;
+}
+let seekDragging = false;
+$('seekBar').addEventListener('input', e=>{ seekDragging = true; const d=Engine.duration(); $('curTime').textContent = fmtTime(e.target.value/1000*d); });
+$('seekBar').addEventListener('change', e=>{ seekDragging = false; seekTo(e.target.value/1000*Engine.duration()); });
 
-  const arr=Object.values(tracks);
-  if(!arr.length) return;
-
-  arr.forEach(a=>{
-    a.pause();
-    a.currentTime=0;
-  });
-
-  stopScroll();
-
-  window.scrollTo({
-    top:0,
-    behavior:'smooth'
-  });
-
-  drawStudioTimeline();
-  updateLyricsSync();
+function toggleLoop(){
+  const btn = $('loopBtn'), t = Engine.time();
+  if(Engine.loopA == null){ Engine.loopA = t; btn.classList.add('armed'); btn.textContent = '🔁 A ✓ → B ?'; toast('Point A posé à '+fmtTime(t)+'. Appuie encore pour poser B.'); }
+  else if(Engine.loopB == null){
+    if(t <= Engine.loopA + 0.5){ toast('B doit être après A'); return; }
+    Engine.loopB = t; btn.classList.remove('armed'); btn.classList.add('active');
+    btn.textContent = `🔁 ${fmtTime(Engine.loopA)}–${fmtTime(Engine.loopB)}`;
+    seekTo(Engine.loopA);
+  }else{ Engine.loopA = Engine.loopB = null; btn.className=''; btn.textContent = '🔁 A-B'; }
+  studioCache = null;
 }
 
-
-function togglePlay(){
-const arr=Object.values(tracks)
-if(!arr.length)return
-
-if(arr[0].paused){
-const t=arr[0].currentTime
-arr.forEach(a=>{a.currentTime=t;a.play()})
-if(!lyricSyncData.length){
-  startScroll();
+/* ════════════════════════════════════════════════════════════ chargement ══ */
+const AUDIO_RE = /\.(mp3|wav|flac|m4a|ogg|oga|aac|opus)$/i;
+const STEM_RULES = [
+  ['🎵 Instrumental', /(instrumental|no[_ -]?vocals|accompan|karaok|backing[_ -]?track|minus[_ -]?one)/],
+  ['🎤 Chœurs', /(backing[_ -]?voc|ch(oe|œ)ur|choir|harmon)/],
+  ['🎤 Voix', /(vocal|voice|voix|chant|lead|acapella|a cappella)/],
+  ['🥁 Drums', /(drum|batterie|perc)/],
+  ['🎸 Bass', /(bass|basse)/],
+  ['🎸 Guitar', /(guitar|guitare)/],
+  ['🎹 Piano', /(piano|keys|clavier|synth)/],
+  ['🎵 Other', /(other|autre|rest)/],
+];
+const STEM_ORDER = ['🎤 Voix','🎤 Chœurs','🥁 Drums','🎸 Bass','🎸 Guitar','🎹 Piano','🎵 Other','🎵 Instrumental','🎵 Mix'];
+function getStemType(name){
+  const n = baseName(name).toLowerCase();
+  for(const [label, re] of STEM_RULES) if(re.test(n)) return label;
+  return null;
 }
-}else{
-arr.forEach(a=>a.pause())
-stopScroll()
+function isChordProText(text){
+  return /\{\s*\w+\s*[:}]/.test(text) || [...String(text).matchAll(/\[([^\]\s]+)\]/g)].some(m=>isChordToken(m[1]));
 }
-}
-
-function startScroll(){
-
-  if(lyricSyncData.length){
-    stopScroll();
-    return;
-  }
-
-  stopScroll();
-
-  scrollTimer=setInterval(
-    ()=>window.scrollBy(0,1),
-    80/scrollSpeed
-  );
-}
-
-function stopScroll(){
-clearInterval(scrollTimer)
-}
-
-function changeScrollSpeed(v){
-scrollSpeed=Math.max(.3,Math.min(4,scrollSpeed+v))
-if(Object.values(tracks)[0] && !Object.values(tracks)[0].paused) startScroll()
-}
-
-function changeFont(v){
-fontSize=Math.max(.9,Math.min(3,fontSize+v))
-document.getElementById('lyrics').style.fontSize=fontSize+'rem'
-}
-
-function transpose(v){
-  semitoneShift += v
-  renderSong()
-}
-
-function initLibraryDB(){
-  return new Promise((resolve,reject)=>{
-
-    const request=indexedDB.open('musimix-library',1)
-
-    request.onupgradeneeded=e=>{
-      musicDB=e.target.result
-      musicDB.createObjectStore('songs',{keyPath:'name'})
-    }
-
-    request.onsuccess=e=>{
-      musicDB=e.target.result
-      resolve()
-    }
-
-    request.onerror=reject
-  })
-}
-
-function saveSongToDB(file,favorite=false){
-  return new Promise(resolve=>{
-    const tx=musicDB.transaction('songs','readwrite')
-
-    tx.objectStore('songs').put({
-      name:file.name,
-      file:file,
-      favorite:favorite
-    })
-
-    tx.oncomplete=()=>resolve()
-  })
-}
-
-async function loadZipFile(file){
-
-currentSongKey=file.name
-loadLyricSync()
-
-const zip=await JSZip.loadAsync(file)
-
-tracks={}
-let choFile=null
-let lrcFile=null
-
-for(const name in zip.files){
-
-if(name.endsWith('.lrc')) lrcFile=name
-
-if(name.endsWith('.cho')) choFile=name
-
-if(audioExt(name)){
-const stem=getStemType(name)
-if(stem){
-const blob=await zip.files[name].async('blob')
-tracks[stem]=new Audio(URL.createObjectURL(blob))
-}
-}
-}
-
-if(choFile){
-const txt=await zip.files[choFile].async('string')
-await loadChordDatabase()
-parseChordPro(txt)
-if(lrcFile){
-  const lrcText=
-    await zip.files[lrcFile].async('string');
-
-  parseLrc(lrcText);
-}
-}
-
-if(window.innerWidth > 900){
-  await buildStudioWaveforms()
-  initStudioTimeline()
-}
-
-renderMixer()
-drawWaveform()
-}
-
-function getSongsFromDB(){
-  return new Promise(resolve=>{
-    const tx=musicDB.transaction('songs','readonly')
-    const req=tx.objectStore('songs').getAll()
-    req.onsuccess=()=>resolve(req.result||[])
-  })
-}
-
-function deleteSong(name){
-
-  const tx=musicDB.transaction('songs','readonly')
-
-  const req=tx.objectStore('songs').get(name)
-
-  req.onsuccess=()=>{
-
-    const song=req.result
-    if(!song) return
-
-    if(song.favorite){
-
-      const ok=confirm(
-        `Supprimer "${name}" des favoris ?`
-      )
-
-      if(!ok) return
-    }
-
-    const delTx=musicDB.transaction('songs','readwrite')
-
-    delTx.objectStore('songs').delete(name)
-
-    delTx.oncomplete=()=>renderLibrary()
-
-  }
-}
-
-async function toggleFavorite(name){
-  const songs=await getSongsFromDB()
-  const song=songs.find(s=>s.name===name)
-  if(!song)return
-
-  song.favorite=!song.favorite
-
-  await saveSongToDB(song.file,song.favorite)
-  renderLibrary()
-}
-
-async function openSongFromLibrary(name){
-  const songs=await getSongsFromDB()
-  const song=songs.find(s=>s.name===name)
-  if(song) loadZipFile(song.file)
-}
-
-function shiftChord(chord,s){
-
-  const flatMap={
-    'A#':'Bb',
-    'C#':'Db',
-    'D#':'Eb',
-    'F#':'Gb',
-    'G#':'Ab'
-  };
-
-  const m=chord.match(/^([A-G](#|b)?)(.*)$/)
-  if(!m)return chord
-
-  let root=m[1].replace('Bb','A#')
-  let i=NOTES.indexOf(root)
-
-  if(i<0)return chord
-
-  let shifted=NOTES[(i+s+12)%12]
-
-  if(flatMap[shifted]) shifted=flatMap[shifted]
-
-  return shifted+m[3]
+function looksLikeSongText(text){
+  return /\{\s*(title|t|artist|comment|c|soc|start_of_chorus)\s*[:}]/i.test(text) || /\[[A-G][^\]\s]{0,9}\]/.test(text) || text.split('\n').some(l=>isChordLine(l));
 }
 
 async function loadZip(e){
-const file=e.target.files[0]
-currentSongKey=file.name
-loadLyricSync()
-if(!file)return
-const zip=await JSZip.loadAsync(file)
-currentSongKey=file.name
-
-tracks={}
-let choFile=null
-let lrcFile=null
-
-for(const name in zip.files){
-
-if(name.endsWith('.lrc')) lrcFile=name
-
-
-if(name.endsWith('.cho')) choFile=name
-
-if(audioExt(name)){
-const stem=getStemType(name)
-if(stem){
-const blob=await zip.files[name].async('blob')
-tracks[stem]=new Audio(URL.createObjectURL(blob))
+  const file = e.target.files[0]; e.target.value = '';
+  if(file) await openZip(file, true);
 }
+async function openZip(file, save){
+  if(!window.JSZip){ toast('JSZip non chargé (connexion ?)'); return; }
+  loading(true, 'Ouverture du ZIP…');
+  try{
+    const zip = await JSZip.loadAsync(file);
+    const entries = [];
+    for(const [name, f] of Object.entries(zip.files)){
+      if(f.dir || name.includes('__MACOSX') || baseName(name).startsWith('.')) continue;
+      entries.push({name: baseName(name), blob: await f.async('blob')});
+    }
+    await loadEntries(entries, {songKey: file.name, bundleName: file.name.replace(/\.zip$/i,''), save});
+  }catch(err){ console.error(err); toast('ZIP illisible : '+err.message); }
+  loading(false);
 }
-}
-
-if(choFile){
-const txt=await zip.files[choFile].async('string')
-await loadChordDatabase()
-parseChordPro(txt)
-if(lrcFile){
-  const lrcText=
-    await zip.files[lrcFile].async('string');
-
-  parseLrc(lrcText);
-}
-}
-
-if(window.innerWidth > 900){
-  await buildStudioWaveforms()
-  initStudioTimeline()
-}
-
-await saveSongToDB(file)
-renderLibrary()
-
-renderMixer()
-
-
-drawWaveform()
-}
-
 async function loadFiles(e){
-
-  const files=[...e.target.files];
+  const files = [...e.target.files]; e.target.value = '';
   if(!files.length) return;
-
-  tracks={};
-
-  let choFile=null;
-  let lrcFile=null;
-
-  currentSongKey=
-    files[0].name.split('.')[0];
-
-  loadLyricSync();
-
-  for(const file of files){
-
-    const name=file.name.toLowerCase();
-
-    if(name.endsWith('.cho')){
-      choFile=file;
-    }
-
-    else if(name.endsWith('.lrc')){
-      lrcFile=file;
-    }
-
-    else if(audioExt(name)){
-
-      const stem=getStemType(name);
-
-      if(stem){
-        tracks[stem]=new Audio(
-          URL.createObjectURL(file)
-        );
-      }
-    }
-  }
-
-  if(choFile){
-    const txt=await choFile.text();
-
-    await loadChordDatabase();
-    parseChordPro(txt);
-  }
-
-  if(lrcFile){
-    const lrcText=await lrcFile.text();
-    parseLrc(lrcText);
-  }
-
-if(window.innerWidth > 900){
-  await buildStudioWaveforms();
-  initStudioTimeline();
-}
-
-renderMixer();
-drawWaveform();
-}
-
-function getTrackCustomName(trackName){
-
-  if(!currentSongKey) return trackName
-
-  const key=`trackNames_${currentSongKey}`
-
-  const saved=
-    JSON.parse(localStorage.getItem(key)||'{}')
-
-  return saved[trackName] || trackName
-}
-
-function renameTrack(trackName){
-
-  if(!currentSongKey) return
-
-  const current=getTrackCustomName(trackName)
-
-  const newName=prompt(
-    'Renommer la piste :',
-    current
-  )
-
-  if(newName===null) return
-
-  const key=`trackNames_${currentSongKey}`
-
-  const saved=
-    JSON.parse(localStorage.getItem(key)||'{}')
-
-  saved[trackName]=newName.trim() || trackName
-
-  localStorage.setItem(
-    key,
-    JSON.stringify(saved)
-  )
-
-  renderMixer()
-  drawStudioTimeline()
-  initStudioTimeline()
-}
-
-function toggleSyncMode(){
-
-  syncMode=!syncMode
-
-  document.getElementById('syncBtn').textContent=
-    syncMode
-      ? '🔴 Sync en cours'
-      : '🎯 Sync Lyrics'
-
-  if(syncMode){
-    lyricSyncData=[]
-  }else{
-    saveLyricSync()
-  }
-}
-
-function markCurrentLyric(){
-
-  if(!syncMode) return
-
-  const first=Object.values(tracks)[0]
-  if(!first) return
-
-  const lines=[
-    ...document.querySelectorAll('.lyrics-line')
-  ]
-
-  const nextIndex=lyricSyncData.length
-
-  if(!lines[nextIndex]) return
-
-  lyricSyncData.push({
-    time:first.currentTime,
-    line:nextIndex
-  })
-
-  saveLyricSync()
-}
-
-function saveLyricSync(){
-
-  if(!currentSongKey) return
-
-  localStorage.setItem(
-    'lyricsSync_'+currentSongKey,
-    JSON.stringify(lyricSyncData)
-  )
-}
-
-function loadLyricSync(){
-
-  if(!currentSongKey) return
-
-  lyricSyncData=
-    JSON.parse(
-      localStorage.getItem(
-        'lyricsSync_'+currentSongKey
-      ) || '[]'
-    )
-}
-
-function updateLyricsSync(){
-
-  if(!lyricSyncData.length) return;
-
-document.getElementById('studioTime').textContent =
-  'LRC ' + lyricSyncData.length;
-
-  const first=Object.values(tracks)[0];
-  if(!first) return;
-
-  if(!first.paused){
-    stopScroll();
-  }
-
-  const t=first.currentTime
-
-  let activeLine=0
-
-  lyricSyncData.forEach(item=>{
-    if(t>=item.time){
-      activeLine=item.line
-    }
-  })
-
-  const lines=[
-    ...document.querySelectorAll('.lyrics-line')
-  ]
-
-  lines.forEach(l=>{
-    l.classList.remove('active-lyric')
-  })
-
-if(lines[activeLine]){
-
-  const current = lyricSyncData.find(
-    x => x.line === activeLine
-  );
-
-  const next = lyricSyncData.find(
-    x => x.line === activeLine + 1
-  );
-
-  let progress = 0;
-
-  if(current && next){
-
-    progress =
-      (t - current.time) /
-      (next.time - current.time);
-
-    progress=Math.max(
-      0,
-      Math.min(1,progress)
-    );
-
-progress =
-  progress * progress * (3 - 2 * progress);
-  }
-
-  const currentEl=lines[activeLine];
-
-  const nextEl=
-    lines[activeLine+1] || currentEl;
-
-  const y1=currentEl.offsetTop;
-  const y2=nextEl.offsetTop;
-
-  const targetY=
-    y1 + ((y2-y1)*progress);
-
-if(window.innerWidth <= 900){
-
-  const offset = 220;
-
-  window.scrollTo({
-    top: targetY - offset,
-    behavior:'instant'
-  });
-
-}
-else{
-
-  window.scrollTo({
-    top:
-      targetY - window.innerHeight*0.35,
-    behavior:'auto'
-  });
-
-}
-  currentEl.classList.add('active-lyric');
-}
-}
-
-function parseLrc(text){
-
-  const lines=text.split(/\r?\n/);
-
-  lyricSyncData=[];
-let lastIndex = -1;
-  lines.forEach(line=>{
-
-    const match=line.match(
-      /^\[(\d+):(\d+\.\d+)\](.*)$/
-    );
-
-    if(!match) return;
-
-    const min=parseInt(match[1]);
-    const sec=parseFloat(match[2]);
-
-    const time=(min*60)+sec;
-
-const lyric = match[3]
-  .replace(/\u00A0/g,' ')
-  .replace(/\s+/g,' ')
-  .trim();
-
-if(!lyric){
-  lyricSyncData.push({
-    time,
-    line:0
-  });
-  return;
-}
-
-const lyricLines=[
-  ...document.querySelectorAll('.lyrics-line')
-];
-
-const normalize = s =>
-  s
-    .replace(/\u00A0/g,' ')
-    .replace(/\s+/g,' ')
-    .trim();
-
-const target = normalize(lyric);
-
-const index = lyricLines.findIndex(
-  (el,i) =>
-    i > lastIndex &&
-    normalize(el.innerText).includes(target)
-);
-
-    if(index>=0){
-lastIndex = index;
-      lyricSyncData.push({
-        time,
-        line:index
-      });
-    }
-
-  });
-console.log('LRC brut :', lines.length);
-console.log('LRC matché :', lyricSyncData.length);
-alert('LRC chargé : ' + lyricSyncData.length);
-  saveLyricSync();
-}
-
-function exportLrc(){
-
-  if(!lyricSyncData.length){
-    alert('Aucune sync à exporter');
+  // uniquement du texte ? on garde les pistes déjà chargées
+  if(files.every(f=>!AUDIO_RE.test(f.name)) && Engine.tracks.length){
+    await loadEntries(files.map(f=>({name:f.name, blob:f})), {keepAudio:true, songKey:currentSongKey, save:true});
     return;
   }
-
-  const lyricLines=[
-    ...document.querySelectorAll('.lyrics-line')
-  ];
-
-  let lrc='';
-
-  lyricSyncData.forEach(item=>{
-
-    const line=
-      lyricLines[item.line]
-      ?.innerText
-      ?.trim();
-
-    if(!line) return;
-
-    const min=Math.floor(item.time/60);
-    const sec=(item.time%60)
-      .toFixed(2)
-      .padStart(5,'0');
-
-    lrc+=`[${
-      String(min).padStart(2,'0')
-    }:${sec}]${line}\n`;
-  });
-
-  const blob=new Blob(
-    [lrc],
-    {type:'text/plain'}
-  );
-
-  const a=document.createElement('a');
-
-  a.href=URL.createObjectURL(blob);
-
-  a.download=
-    currentSongKey
-      .replace('.zip','')
-      +'.lrc';
-
-  a.click();
+  loading(true);
+  await loadEntries(files.map(f=>({name:f.name, blob:f})), {songKey: files[0].name.split('.')[0], save:true});
+  loading(false);
+}
+async function loadDemo(){
+  loading(true, 'Chargement de la démo…');
+  try{
+    const get = async n => ({name:n, blob: await (await fetch(encodeURIComponent(n))).blob()});
+    const entries = await Promise.all(['vocals.mp3','instrumental.mp3','{title Eu}.txt'].map(get));
+    await loadEntries(entries, {songKey:'demo-eu', bundleName:'Démo – Eu', save:false});
+  }catch(err){ toast('Démo indisponible : '+err.message); }
+  loading(false);
 }
 
-function renderMixer(){
-const mixer=document.getElementById('mixer')
-mixer.innerHTML=''
-
-Object.entries(tracks).forEach(([name,audio])=>{
-
-const row=document.createElement('div')
-row.className='slider-wrap'
-
-row.innerHTML=`
-<label
-  ondblclick="renameTrack('${name}')"
-  title="Double clic pour renommer"
->
-${getTrackCustomName(name)}
-</label>
-<input type="range" min="0" max="1" step="0.01" value="${audio.volume||1}">
-<button class="track-btn">S</button>
-<button class="track-btn">M</button>
-`
-
-const slider=row.querySelector('input')
-slider.oninput=()=>audio.volume=slider.value
-
-const [soloBtn,muteBtn]=row.querySelectorAll('button')
-
-soloBtn.onclick=()=>{
-soloTrackName=(soloTrackName===name)?null:name
-Object.entries(tracks).forEach(([n,a])=>{
-a.muted=soloTrackName ? n!==soloTrackName : false
-})
-renderMixer()
-}
-
-muteBtn.onclick=()=>{
-audio.muted=!audio.muted
-muteBtn.classList.toggle('active',audio.muted)
-}
-
-if(soloTrackName===name) soloBtn.classList.add('active')
-if(audio.muted) muteBtn.classList.add('active')
-
-mixer.appendChild(row)
-})
-
-/*
-if(window.innerWidth <= 900){
-
-  const mobileMixer =
-    document.getElementById(
-      'header-mixer-mobile'
-    );
-
-  if(mobileMixer){
-    mobileMixer.innerHTML = '';
-    mobileMixer.appendChild(
-      mixer.cloneNode(true)
-    );
+async function loadEntries(entries, opts={}){
+  const {songKey='', bundleName='', save=true, keepAudio=false} = opts;
+  hideChordPopup();
+  let choText=null, lrcText=null, songJson=null, txtText=null;
+  const audio = [];
+  for(const e of entries){
+    const n = e.name.toLowerCase();
+    if(AUDIO_RE.test(n)) audio.push(e);
+    else if(/\.(cho|chopro|chordpro|crd|pro)$/.test(n)) choText ??= await e.blob.text();
+    else if(n.endsWith('.lrc')) lrcText ??= await e.blob.text();
+    else if(n.endsWith('.json')){
+      try{ const j = JSON.parse(await e.blob.text()); if(j.lines || j.chords) songJson = j; }catch(err){}
+    }else if(n.endsWith('.txt')){
+      const t = await e.blob.text();
+      if(txtText == null || (looksLikeSongText(t) && !looksLikeSongText(txtText))) txtText = t;
+    }
   }
-}
-*/
+  if(choText == null) choText = txtText;     // .txt : ChordPro, grille ou paroles brutes
+  if(!keepAudio){
+    Engine.clear();
+    if(Engine.loopA==null){ $('loopBtn').className=''; $('loopBtn').textContent='🔁 A-B'; }
+    const used = {};
+    audio.map(e=>({e, label:getStemType(e.name) || (audio.length===1 ? '🎵 Mix' : '🎵 '+e.name.replace(AUDIO_RE,''))}))
+      .sort((a,b)=>(STEM_ORDER.indexOf(a.label)+99)%99 - (STEM_ORDER.indexOf(b.label)+99)%99)
+      .forEach(({e,label})=>{
+        used[label] = (used[label]||0) + 1;
+        Engine.add(used[label] > 1 ? `${label} ${used[label]}` : label, e.blob, e);
+      });
+    currentSongKey = songKey;
+    semitoneShift = 0;
+    waveformCache = {}; studioCache = null;
+  }
+  // texte du morceau
+  if(choText == null && songJson?.lines?.length) choText = songJson.lines.map(l=>l.text).join('\n');
+  if(choText == null && lrcText) choText = parseLrc(lrcText).map(l=>l.text).join('\n');
+  if(choText != null){
+    if(!isChordProText(choText) && choText.split('\n').some(isChordLine)) choText = sheetToChordPro(choText);
+    setSong(choText);
+  }else if(!keepAudio){
+    song = null; renderSong();
+  }
+  if(song && songJson){ song.meta.title ||= songJson.title || ''; song.meta.artist ||= songJson.artist || ''; song.meta.key ||= songJson.key || ''; song.meta.tempo ||= songJson.bpm ? String(Math.round(songJson.bpm)) : ''; renderHeader(); }
+  // synchro : manuelle sauvegardée > song.json > .lrc
+  timing = emptyTiming();
+  if(songJson && song) applySongJson(songJson);
+  else if(lrcText && song) applyLrc(lrcText);
+  const manual = loadManualSync();
+  if(manual.length){ timing.sync = manual; timing.source = 'manuelle'; }
+  markTimedLines();
+  if(timing.source) toast(`Synchro : ${timing.source}`);
+
+  // pack mémorisé (bibliothèque)
+  if(!keepAudio || !currentBundle){
+    currentBundle = {name: bundleName || song?.meta.title || songKey || 'Morceau', files: entries.map(e=>({name:e.name, blob:e.blob}))};
+  }else{
+    for(const e of entries){
+      currentBundle.files = currentBundle.files.filter(f=>f.name !== e.name);
+      currentBundle.files.push({name:e.name, blob:e.blob});
+    }
+  }
+  if(save && musicDB && (Engine.tracks.length || song)) await saveBundle(currentBundle);
+
+  renderMixer();
+  restoreMix();
+  updateTransport();
+  initStudioTimeline();
+  if(!isMobile()) buildPeaks();
+  renderLibrary();
 }
 
+/* ════════════════════════════════════════════════════════════ ChordPro ══ */
 function parseChordPro(text){
-parsedSong=[]
-let title='',artist='',key='',capo=''
-
-text.split(/\r?\n/).forEach(line=>{
-
-if(line.startsWith('{title:')){title=line.slice(7,-1).trim();return}
-if(line.startsWith('{artist:')){artist=line.slice(8,-1).trim();return}
-if(line.startsWith('{key:')){key=line.slice(5,-1).trim();return}
-if(line.startsWith('{capo:')){capo=line.slice(6,-1).trim();return}
-
-if(line.startsWith('{comment:')){
-parsedSong.push({type:'section',text:line.replace('{comment:','').replace('}','').trim()})
-return
+  const meta = {title:'', artist:'', key:'', capo:'', tempo:''};
+  const items = [];
+  let inChorus = false;
+  for(const raw of String(text).replace(/\r/g,'').split('\n')){
+    const line = raw.replace(/\s+$/,'');
+    const d = line.match(/^\s*\{\s*([\w-]+)\s*(?::\s*(.*?))?\s*\}\s*$/);
+    if(d){
+      const k = d[1].toLowerCase(), v = (d[2]||'').trim();
+      if(k==='title'||k==='t') meta.title = v;
+      else if(['artist','a','subtitle','st'].includes(k)) meta.artist ||= v;
+      else if(k==='key') meta.key = v;
+      else if(k==='capo') meta.capo = v;
+      else if(k==='tempo') meta.tempo = v;
+      else if(['comment','c','ci','comment_italic','highlight','cb'].includes(k)) items.push({type:'section', text:v});
+      else if(k==='start_of_chorus'||k==='soc'){ inChorus = true; items.push({type:'section', text:v||'Refrain', chorus:true}); }
+      else if(k==='end_of_chorus'||k==='eoc') inChorus = false;
+      else if((k==='start_of_verse'||k==='sov') && v) items.push({type:'section', text:v});
+      else if(k==='start_of_bridge'||k==='sob') items.push({type:'section', text:v||'Pont'});
+      continue;
+    }
+    if(!line.trim()){ items.push({type:'blank'}); continue; }
+    const parts = [];
+    const re = /\[([^\]]*)\]/g;
+    let last = 0, m, chord = null;
+    while((m = re.exec(line))){
+      const txt = line.slice(last, m.index);
+      if(txt || chord !== null) parts.push({chord, text:txt});
+      chord = m[1].trim();
+      last = re.lastIndex;
+    }
+    parts.push({chord, text:line.slice(last)});
+    const chordOnly = parts.every(p=>!p.text.trim());
+    items.push({type:'line', parts, chorus:inChorus, chordOnly, text:parts.map(p=>p.text).join('').replace(/\s+/g,' ').trim()});
+  }
+  return {meta, items, source:String(text)};
 }
 
-if(line.startsWith('{')) return
-parsedSong.push({type:'line',text:line})
-})
+function setSong(text){
+  song = parseChordPro(text);
+  window.currentChords = extractChordsFromCho(text);
+  renderSong();
+}
 
-document.getElementById('title').textContent=title||'MusiMix'
-document.getElementById('meta').textContent=
-[artist,key&&'Tonalité '+key,capo&&'Capodastre '+capo].filter(Boolean).join(' • ')
+function displayChord(c){
+  if(!semitoneShift) return normalizeChord(c);
+  const k = transposeKey(song?.meta.key, semitoneShift);
+  return transposeChord(c, semitoneShift, song?.meta.key ? keyPrefersFlats(k) ?? false : null);
+}
 
-window.currentChords = extractChordsFromCho(text)
-renderChordBar(window.currentChords)
-
-renderSong()
+function renderHeader(){
+  const m = song?.meta || {};
+  $('title').textContent = m.title || (Engine.tracks.length ? currentBundle?.name : '') || 'MusiMix';
+  document.title = m.title ? `${m.title} – MusiMix` : 'MusiMix';
+  const key = m.key ? (semitoneShift ? `${transposeKey(m.key, semitoneShift)} (orig. ${m.key})` : m.key) : '';
+  $('meta').textContent = [m.artist, key && 'Tonalité '+key, m.capo && 'Capo '+m.capo, m.tempo && m.tempo+' BPM'].filter(Boolean).join(' • ');
+  $('transposeLabel').textContent = semitoneShift > 0 ? '+'+semitoneShift : String(semitoneShift);
+  renderChordBar((window.currentChords||[]).map(displayChord).filter((c,i,a)=>a.indexOf(c)===i));
 }
 
 function renderSong(){
-const lyrics=document.getElementById('lyrics')
-lyrics.innerHTML=''
-
-parsedSong.forEach(item=>{
-
-if(item.type==='section'){
-lyrics.innerHTML+=`<div class="section">${item.text}</div>`
-return
-}
-
-const line=document.createElement('div')
-line.className='line lyrics-line'
-const parts=item.text.split(/(\[.*?\])/g)
-
-parts.forEach(part=>{
-
-if(!part)return
-
-if(part.startsWith('[')&&part.endsWith(']')){
-const chord=part.slice(1,-1)
-
-line.innerHTML+=`
-<span class="segment">
-<span class="chord">${shiftChord(chord,semitoneShift)}</span>
-<span class="word">&nbsp;</span>
-</span>`
-}else{
-line.innerHTML+=`
-<span class="segment">
-<span class="chord">&nbsp;</span>
-<span class="word">${part}</span>
-</span>`
-}
-})
-
-lyrics.appendChild(line)
-})
-}
-
-function drawWaveform(){
-
-  const c=document.getElementById('waveform')
-  const ctx=c.getContext('2d')
-
-  c.width=800
-  c.height=80
-
-  ctx.clearRect(0,0,c.width,c.height)
-
-  ctx.strokeStyle='#2d7cff'
-  ctx.lineWidth=2
-
-  for(let x=0;x<c.width;x+=3){
-
-    const center=40
-
-    const h=
-      8+
-      Math.sin(x*0.02)*10+
-      Math.random()*18
-
-    ctx.beginPath()
-    ctx.moveTo(x,center-h)
-    ctx.lineTo(x,center+h)
-    ctx.stroke()
+  const box = $('lyrics');
+  renderHeader();
+  if(!song){
+    box.innerHTML = `<div class="empty-state">
+      <p><b>Bienvenue dans MusiMix.</b></p>
+      <p>➕ <b>ZIP</b> : un pack préparé (pistes + .cho + .lrc/song.json) — par exemple généré par <code>musimix_prep.py</code>.<br>
+      📂 <b>Fichiers</b> : sélectionne plusieurs fichiers à la fois (pistes audio, .cho, .lrc, song.json).<br>
+      📝 <b>Grille</b> : colle une grille trouvée sur le web, elle est convertie en ChordPro.<br>
+      🎵 <b>Démo</b> : essaie avec un morceau d’exemple.</p>
+      <p>Raccourcis : <b>Espace</b> lecture/pause · <b>← →</b> ±5 s · <b>L</b> boucle A-B · clic sur une ligne synchronisée = y aller.</p></div>`;
+    return;
   }
-}
-
-async function renderLibrary(){
-
-const list=document.getElementById('library-list')
-if(!list)return
-
-let songs=await getSongsFromDB()
-
-const q=document
-.getElementById('library-search')
-.value
-.toLowerCase()
-
-if(q){
-songs=songs.filter(s=>
-s.name.toLowerCase().includes(q)
-)
-}
-
-songs.sort((a,b)=>{
-
-if(a.favorite && !b.favorite) return -1
-if(!a.favorite && b.favorite) return 1
-
-return a.name.localeCompare(
-  b.name,
-  'fr',
-  {sensitivity:'base'}
-)
-
-})
-
-list.innerHTML=''
-
-songs.forEach(song=>{
-
-const row=document.createElement('div')
-row.className='library-song'
-
-row.innerHTML=`
-
-<div
-class="library-song-name"
-onclick="openSongFromLibrary('${song.name.replace(/'/g,"\\'")}')"
->
-${song.name}
-</div>
-
-<div class="library-actions">
-
-<button
-class="icon-btn"
-onclick="toggleFavorite('${song.name.replace(/'/g,"\\'")}')"
->
-${song.favorite ? '⭐' : '☆'}
-</button>
-
-<button
-class="icon-btn"
-onclick="deleteSong('${song.name.replace(/'/g,"\\'")}')"
->
-🗑
-</button>
-
-</div>
-`
-
-list.appendChild(row)
-
-})
-}
-
-function toggleMixerPanel(){
-  const panel = document.getElementById('mobileMixerPanel');
-  const btn = document.getElementById('toggleMixerBtn');
-
-  panel.classList.toggle('open');
-
-  const isOpen = panel.classList.contains('open');
-
-  localStorage.setItem('mixerPanelOpen', isOpen ? '1' : '0');
-
-  btn.textContent = isOpen
-    ? '▲ Masquer pistes'
-    : '▼ Pistes';
-}
-
-window.addEventListener('load', async ()=>{
-
-  await initLibraryDB();
-  await renderLibrary();
-
-  const panel=document.getElementById('mobileMixerPanel');
-  const btn=document.getElementById('toggleMixerBtn');
-
-panel.classList.remove('open');
-btn.textContent='▼ Pistes';
-
-  initResizableLayout();
-
-const header=document.querySelector('.header');
-const headerBtn=document.getElementById('toggleHeaderBtn');
-
-if(
-  localStorage.getItem('musimixHeaderCollapsed')==='1'
-){
-  header.classList.add('collapsed');
- headerBtn.textContent='▼';
-}
-
-});
-
-const STUDIO_COLORS={
-  '🎤 Voix':'#ffd166',
-  '🥁 Drums':'#ef476f',
-  '🎸 Bass':'#06d6a0',
-  '🎸 Guitar':'#118ab2',
-  '🎹 Piano':'#9b5de5',
-  '🎵 Other':'#8d99ae',
-  '🎵 Instrumental':'#8d99ae'
-};
-
-async function buildStudioWaveforms(){
-
-  waveformCache={};
-
-  const audioContext=new (
-    window.AudioContext||
-    window.webkitAudioContext
-  )();
-
-  for(const [name,audio] of Object.entries(tracks)){
-
-    try{
-
-      const response=await fetch(audio.src);
-      const arrayBuffer=await response.arrayBuffer();
-      const decoded=await audioContext.decodeAudioData(arrayBuffer);
-
-      const raw=decoded.getChannelData(0);
-
-      const samples=1200;
-      const block=Math.floor(raw.length/samples);
-
-      const peaks=[];
-
-      for(let i=0;i<samples;i++){
-
-        let sum=0;
-
-        for(let j=0;j<block;j++){
-          sum+=Math.abs(raw[(i*block)+j]||0);
+  const frag = document.createDocumentFragment();
+  let lineIdx = 0, chordIdx = 0;
+  song.items.forEach(item=>{
+    if(item.type === 'section'){
+      const d = document.createElement('div');
+      d.className = 'section' + (item.chorus ? ' chorus' : '');
+      d.textContent = item.text;
+      frag.appendChild(d); return;
+    }
+    if(item.type === 'blank'){ const d=document.createElement('div'); d.className='blank-line'; frag.appendChild(d); return; }
+    const line = document.createElement('div');
+    line.className = 'line lyrics-line' + (item.chorus ? ' chorus' : '') + (item.chordOnly ? ' chord-only' : '');
+    line.dataset.idx = lineIdx;
+    // positions des mots dans la ligne (pour le karaoké)
+    const full = item.parts.map(p=>p.text).join('');
+    const tokens = [...full.matchAll(/\S+/g)].map(m=>({start:m.index, end:m.index+m[0].length}));
+    let offset = 0, html = '';
+    item.parts.forEach(p=>{
+      let chordHtml = '';
+      if(p.chord !== null){
+        chordHtml = `<span class="chord" data-ci="${chordIdx}" data-chord="${esc(p.chord)}">${esc(displayChord(p.chord))}</span>`;
+        chordIdx++;
+      }else chordHtml = '<span class="chord"></span>';
+      let words = '';
+      const pieces = p.text.split(/(\s+)/);
+      pieces.forEach(piece=>{
+        if(!piece) return;
+        if(/^\s+$/.test(piece)) words += esc(piece);
+        else{
+          const wi = tokens.findIndex(t=>offset >= t.start && offset < t.end);
+          words += `<span class="w" data-wi="${wi}">${esc(piece)}</span>`;
         }
+        offset += piece.length;
+      });
+      if(!words.trim()) words = item.chordOnly ? '' : '&nbsp;';
+      html += `<span class="segment">${chordHtml}<span class="word">${words || '&nbsp;'}</span></span>`;
+    });
+    line.innerHTML = html;
+    frag.appendChild(line);
+    lineIdx++;
+  });
+  box.innerHTML = '';
+  box.appendChild(frag);
+  box.style.fontSize = fontSize + 'rem';
+  activeLineIdx = activeChordIdx = -1;
+  markTimedLines();
+}
 
-        peaks.push(sum/block);
-      }
+function transpose(v){
+  semitoneShift = clamp(semitoneShift + v, -11, 11);
+  if(semitoneShift === 0 && v) toast('Tonalité d’origine');
+  renderSong();
+}
+function changeFont(v){
+  fontSize = clamp(fontSize + v, .9, 3.2);
+  $('lyrics').style.fontSize = fontSize + 'rem';
+  localStorage.setItem('musimixFont', fontSize);
+}
+function changeScrollSpeed(v){
+  scrollSpeed = clamp(scrollSpeed + v, .3, 3);
+  toast(timing.sync.length ? 'Le défilement suit la synchro (vitesse ignorée)' : `Vitesse de défilement ×${scrollSpeed.toFixed(1)}`);
+}
 
-      waveformCache[name]=peaks;
-
-    }catch(err){
-      console.warn('Waveform error:',name,err);
+/* ── grille "accords au-dessus des paroles" → ChordPro ── */
+const CHORD_TOKEN = /^[A-G](?:#|b)?(?:maj|min|m|M|dim|aug|sus|add|°|º|ø|\+|-|\d|\(|\)|#|b|\/(?=\d))*(?:\/[A-G](?:#|b)?)?$/;
+const SECTION_RE = /^\s*[\[(]?\s*(intro|introdu[cç][aã]o|verse|couplet|verso|estrofe|pr[eé][- ]?(?:chorus|refr[aã]o|refrain)|chorus|refrain|refr[aã]o|bridge|pont|ponte|solo|outro|final|fin|interlude|instrumental|riff|coda|tag|parte\s*\d+|primeira parte|segunda parte|terceira parte)[^\])\n]*[\])]?\s*:?\s*/i;
+function isChordToken(t){ t = t.replace(/^\|+|\|+$/g,''); return !!t && CHORD_TOKEN.test(t); }
+function isChordLine(line){
+  const toks = line.trim().split(/\s+/).filter(t=>t && !['|','||','-','/','%'].includes(t) && !/^\(?x\d+\)?$|^\d+x$/i.test(t));
+  return toks.length > 0 && toks.every(isChordToken);
+}
+function sheetToChordPro(text, meta={}){
+  const raw = String(text).replace(/\r/g,'').replace(/\t/g,'    ').split('\n');
+  const out = [];
+  if(meta.title) out.push(`{title: ${meta.title}}`);
+  if(meta.artist) out.push(`{artist: ${meta.artist}}`);
+  if(out.length) out.push('');
+  for(let i=0;i<raw.length;i++){
+    let ln = raw[i].replace(/\s+$/,'');
+    if(!ln.trim()){ out.push(''); continue; }
+    if(/^[eBGDAE]\|[-\d|hpbr\/\\~x ]+/.test(ln.trim())) continue;               // tablature
+    const sec = ln.match(SECTION_RE);
+    if(sec && (sec[0].length === ln.length || isChordLine(ln.slice(sec[0].length)))){
+      const label = sec[0].replace(/[\[\]():]/g,'').trim();
+      out.push(`{comment: ${label.charAt(0).toUpperCase()+label.slice(1)}}`);
+      const rest = ln.slice(sec[0].length);
+      if(!rest.trim()) continue;
+      ln = ' '.repeat(sec[0].length) + rest;
     }
+    if(isChordLine(ln)){
+      const chords = [...ln.matchAll(/\S+/g)].filter(m=>isChordToken(m[0])).map(m=>({pos:m.index, c:normalizeChord(m[0].replace(/^\|+|\|+$/g,''))}));
+      const nxt = (raw[i+1] || '').replace(/\s+$/,'');
+      if(nxt.trim() && !isChordLine(nxt) && !SECTION_RE.test(nxt) && !/^[eBGDAE]\|/.test(nxt.trim())){
+        let res = '', last = 0;
+        const inside = [], after = [];
+        chords.forEach(({pos,c})=>{
+          let p = pos; while(p < nxt.length && nxt[p] === ' ') p++;
+          (p < nxt.length ? inside : after).push({p,c});
+        });
+        inside.forEach(({p,c})=>{ res += nxt.slice(last,p) + `[${c}]`; last = p; });
+        res += nxt.slice(last);
+        after.forEach(({c})=>{ res += ` [${c}]`; });
+        out.push(res); i++;
+      }else out.push(chords.map(x=>`[${x.c}]`).join(' '));
+      continue;
+    }
+    out.push(ln);
   }
-
-  studioTrack=
-    tracks['🎤 Voix']
-    ? '🎤 Voix'
-    : Object.keys(tracks)[0];
-
+  return out.join('\n').replace(/\n{3,}/g,'\n\n').trim() + '\n';
 }
 
-function initStudioTimeline(){
+/* ════════════════════════════════════════════════════════════ synchro ══ */
+function lyricLineEls(){ return [...document.querySelectorAll('.lyrics-line')]; }
 
-  const canvas=document.getElementById('studioTimeline');
-  const select=document.getElementById('studioTrackSelect');
-
-  if(!canvas || !select) return;
-
-  select.innerHTML='';
-
-  Object.keys(tracks).forEach(name=>{
-
-    const option=document.createElement('option');
-    option.value=name;
-    option.textContent=name;
-
-    if(name===studioTrack){
-      option.selected=true;
+/** associe des lignes de texte datées aux lignes affichées (ordre conservé, tolérant) */
+function matchLines(entries){
+  const els = lyricLineEls();
+  const all = song.items.filter(i=>i.type==='line');
+  const lines = els.map(el=>all[+el.dataset.idx]);
+  const res = [];
+  let cursor = 0;
+  entries.forEach((en, k)=>{
+    const target = normText(en.text);
+    if(!target) return;
+    for(let j=cursor; j<Math.min(lines.length, cursor+8); j++){
+      if(lines[j].chordOnly) continue;
+      const cand = normText(lines[j].text);
+      if(cand && (cand === target || cand.includes(target) || target.includes(cand))){
+        res.push({entry:en, line:j, k}); cursor = j+1; return;
+      }
     }
-
-    select.appendChild(option);
   });
+  return res;
+}
 
-  select.onchange=e=>{
-    studioTrack=e.target.value;
-    drawStudioTimeline();
-  };
-
-  if(!studioListenersInitialized){
-
-    canvas.addEventListener('click',e=>{
-      studioSeek(e);
-    });
-
-    canvas.addEventListener('pointerdown',()=>{
-      studioDragging=true;
-    });
-
-    canvas.addEventListener('pointermove',e=>{
-      if(studioDragging){
-        studioSeek(e);
+function applySongJson(j){
+  const linesData = (j.lines||[]).map(l=>({text:l.text, time:l.s ?? l.start, end:l.e ?? l.end, words:l.words||[]}));
+  const matched = matchLines(linesData);
+  const songLines = song.items.filter(i=>i.type==='line');
+  matched.forEach(({entry, line})=>{
+    timing.sync.push({time:entry.time, line});
+    timing.lineEnd.set(line, entry.end);
+    // mots : alignement glouton sur les mots affichés
+    const toks = [...songLines[line].parts.map(p=>p.text).join('').matchAll(/\S+/g)].map(m=>normText(m[0]));
+    const times = new Array(toks.length).fill(null);
+    let c = 0;
+    entry.words.forEach(w=>{
+      const n = normText(w.w);
+      for(let k=c;k<Math.min(toks.length,c+4);k++){
+        if(toks[k] === n || (n && toks[k].startsWith(n)) || (toks[k] && n.startsWith(toks[k]))){ times[k] = {s:w.s, e:w.e}; c = k+1; return; }
       }
     });
-
-    window.addEventListener('pointerup',()=>{
-      studioDragging=false;
-    });
-
-    studioListenersInitialized=true;
-  }
-
-  startStudioAnimation();
-}
-
-function toggleStudioView(){
-  studioShowAll=!studioShowAll;
-  drawStudioTimeline();
-}
-
-function studioSeek(e){
-
-  const canvas=document.getElementById('studioTimeline');
-  const rect=canvas.getBoundingClientRect();
-
-  const x=e.clientX-rect.left;
-  const ratio=x/canvas.width;
-
-  const first=Object.values(tracks)[0];
-  if(!first || !first.duration) return;
-
-  const time=ratio*first.duration;
-
-  Object.values(tracks).forEach(a=>{
-    a.currentTime=time;
-    a.play();
+    for(let k=0;k<times.length;k++) if(!times[k]){ const prev = times[k-1]; times[k] = prev ? {s:prev.e, e:prev.e+0.2} : {s:entry.time, e:entry.time+0.2}; }
+    timing.words.set(line, times);
   });
-
-if(!lyricSyncData.length){
-    startScroll();
-  }
-
-}
-
-function startStudioAnimation(){
-
-  cancelAnimationFrame(studioAnimation);
-
-  function animate(){
-
-    drawStudioTimeline();
-    updateLyricsSync();
-
-    studioAnimation=requestAnimationFrame(animate);
-  }
-
-  animate();
-}
-
-function drawStudioTimeline(){
-
-  const canvas=document.getElementById('studioTimeline');
-  if(!canvas) return;
-
-  const ctx=canvas.getContext('2d');
-
-  const isMobile=window.innerWidth<900;
-
-  const visibleTracks=studioShowAll
-    ? Object.keys(waveformCache)
-    : [studioTrack];
-
-  const trackHeight=isMobile?90:52;
-
-  canvas.width=canvas.clientWidth;
-  canvas.height=Math.max(
-    120,
-    visibleTracks.length*trackHeight
-  );
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  visibleTracks.forEach((name,index)=>{
-
-    const data=waveformCache[name];
-    if(!data) return;
-
-    const y=index*trackHeight;
-    const mid=y+trackHeight/2;
-
-    ctx.strokeStyle=
-      STUDIO_COLORS[name] || '#999';
-
-    ctx.lineWidth=1;
-
-    data.forEach((v,i)=>{
-
-      const x=(i/data.length)*canvas.width;
-      const h=v*(trackHeight*0.85);
-
-      ctx.beginPath();
-      ctx.moveTo(x,mid-h/2);
-      ctx.lineTo(x,mid+h/2);
-      ctx.stroke();
+  // accords datés
+  timing.chords = (j.chords||[]).filter(c=>c.name && c.name !== 'N').map(c=>({name:c.name, s:+c.s, e:+c.e}));
+  const spans = [...document.querySelectorAll('.chord[data-ci]')];
+  const names = spans.map(s=>normalizeChord(s.dataset.chord));
+  const jnames = timing.chords.map(c=>normalizeChord(c.name));
+  const same = names.length === jnames.length && names.filter((n,i)=>n===jnames[i]).length >= names.length*0.85;
+  if(same){
+    timing.chordTimes = timing.chords.map(c=>c.s);
+    // les lignes d'accords seuls (intro…) deviennent datées
+    spans.forEach((s,i)=>{
+      const lineEl = s.closest('.lyrics-line');
+      const li = +lineEl.dataset.idx;
+      if(songLines[li].chordOnly && !timing.sync.some(x=>x.line===li) && s === lineEl.querySelector('.chord[data-ci]')) timing.sync.push({time:timing.chordTimes[i], line:li});
     });
+  }else{
+    timing.chordTimes = chordTimesFromWords(spans);
+  }
+  timing.sync.sort((a,b)=>a.time-b.time);
+  timing.source = `song.json (${matched.length} lignes${timing.words.size ? ', mot à mot' : ''}${timing.chords.length ? ', accords' : ''})`;
+}
 
-    ctx.fillStyle='#fff';
-    ctx.font='12px Arial';
-    ctx.fillText(
-  getTrackCustomName(name),
-  8,
-  y+14
-);
+function chordTimesFromWords(spans){
+  return spans.map(s=>{
+    const lineEl = s.closest('.lyrics-line'), li = +lineEl.dataset.idx;
+    const words = timing.words.get(li);
+    if(!words) return null;
+    const firstW = s.parentElement.querySelector('.w');
+    if(firstW && words[+firstW.dataset.wi]) return words[+firstW.dataset.wi].s - 0.05;
+    return timing.lineEnd.get(li) ?? null;
   });
-
-  const first=Object.values(tracks)[0];
-
-  if(first && first.duration){
-
-    const ratio=first.currentTime/first.duration;
-    const x=ratio*canvas.width;
-
-    ctx.strokeStyle='#ffffff';
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-    ctx.moveTo(x,0);
-    ctx.lineTo(x,canvas.height);
-    ctx.stroke();
-
-    document.getElementById('studioTime').textContent=
-      formatTime(first.currentTime)
-      +' / '+
-      formatTime(first.duration);
-  }
 }
 
-function formatTime(sec){
-
-  if(!sec) return '0:00';
-
-  const m=Math.floor(sec/60);
-  const s=Math.floor(sec%60);
-
-  return m+':'+String(s).padStart(2,'0');
+function parseLrc(text){
+  const out = [];
+  String(text).split(/\r?\n/).forEach(line=>{
+    const stamps = [...line.matchAll(/\[(\d+):(\d+(?:[.:]\d+)?)\]/g)];
+    if(!stamps.length) return;
+    const body = line.replace(/\[[^\]]*\]/g,'');
+    const words = [...body.matchAll(/<(\d+):(\d+(?:\.\d+)?)>\s*([^<]*)/g)].map(m=>({s:+m[1]*60 + +m[2], w:m[3].trim()})).filter(w=>w.w);
+    const txt = body.replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+    stamps.forEach(s=>out.push({time:+s[1]*60 + parseFloat(s[2].replace(':','.')), text:txt, words}));
+  });
+  return out.sort((a,b)=>a.time-b.time);
 }
 
-document.addEventListener('keydown',e=>{
+function applyLrc(text){
+  const entries = parseLrc(text).filter(e=>e.text);
+  const matched = matchLines(entries);
+  matched.forEach(({entry, line}, i)=>{
+    timing.sync.push({time:entry.time, line});
+    if(entry.words.length){
+      const next = matched[i+1]?.entry.time ?? entry.time + 4;
+      timing.words.set(line, entry.words.map((w,k)=>({s:w.s, e:entry.words[k+1]?.s ?? next})));
+    }
+  });
+  timing.sync.sort((a,b)=>a.time-b.time);
+  timing.chordTimes = chordTimesFromWords([...document.querySelectorAll('.chord[data-ci]')]);
+  timing.source = `.lrc (${matched.length}/${entries.length} lignes)`;
+}
 
-  if(e.code==='Space' && syncMode){
+function markTimedLines(){
+  const set = new Set(timing.sync.map(s=>s.line));
+  lyricLineEls().forEach(el=>{ el.classList.toggle('timed', set.has(+el.dataset.idx)); el.classList.toggle('synced', syncMode && set.has(+el.dataset.idx)); });
+  $('lyrics').classList.toggle('can-seek', set.size > 0 && !syncMode);
+}
 
-    e.preventDefault();
+/* ── synchro manuelle (tap) ── */
+function syncKey(){ return 'musimixSync2_' + currentSongKey; }
+function loadManualSync(){
+  try{
+    const d = currentSongKey ? JSON.parse(localStorage.getItem(syncKey())||'null') : null;
+    // ignorée si les paroles ont changé depuis (nombre de lignes différent)
+    return d && d.lines === lyricLineEls().length ? d.sync : [];
+  }catch(e){ return []; }
+}
+function saveManualSync(){ if(currentSongKey) localStorage.setItem(syncKey(), JSON.stringify({lines:lyricLineEls().length, sync:timing.sync})); }
 
-    markCurrentLyric();
+function toggleSyncMode(){
+  if(!song){ toast('Charge d’abord des paroles'); return; }
+  syncMode = !syncMode;
+  $('syncBtn').textContent = syncMode ? '🔴 Sync en cours' : '🎯 Sync';
+  $('syncBtn').classList.toggle('active', syncMode);
+  $('lyrics').classList.toggle('syncing', syncMode);
+  if(syncMode){
+    if(timing.sync.length && !confirm('Recommencer la synchro depuis zéro ?\n(Annuler = corriger ligne par ligne : clique sur une ligne pour la caler sur le temps actuel)')){
+      syncNext = timing.sync.length ? Math.max(...timing.sync.map(s=>s.line)) + 1 : 0;
+    }else{ timing.sync = []; timing.words.clear(); timing.chordTimes = []; syncNext = 0; }
+    toast('Lance la lecture puis appuie sur ESPACE au début de chaque ligne (ou clique sur la ligne).', 5000);
+  }else{
+    timing.source = 'manuelle';
+    saveManualSync();
+    toast(`Synchro enregistrée (${timing.sync.length} lignes)`);
   }
-
+  markTimedLines();
+}
+function markLine(lineIdx){
+  const t = Engine.time();
+  timing.sync = timing.sync.filter(s=>s.line !== lineIdx);
+  timing.sync.push({time:t, line:lineIdx});
+  timing.sync.sort((a,b)=>a.time-b.time);
+  syncNext = lineIdx + 1;
+  saveManualSync(); markTimedLines();
+}
+function markCurrentLyric(){
+  const n = lyricLineEls().length;
+  if(syncNext < n) markLine(syncNext);
+}
+$('lyrics').addEventListener('click', e=>{
+  const chordEl = e.target.closest('.chord[data-chord]');
+  if(chordEl && !syncMode){ showChordPopup(chordEl.textContent, chordEl); e.stopPropagation(); return; }
+  const lineEl = e.target.closest('.lyrics-line');
+  if(!lineEl) return;
+  const li = +lineEl.dataset.idx;
+  if(syncMode){ markLine(li); return; }
+  const s = timing.sync.find(x=>x.line === li);
+  if(s){ seekTo(Math.max(0, s.time - 0.4)); }
 });
 
-let isResizing=false;
-
-function initResizableLayout(){
-
-  if(window.innerWidth<900) return;
-
-  const layout=document.querySelector('.layout');
-  const handle=document.getElementById('resizeHandle');
-
-  if(!layout || !handle) return;
-
-  const saved=
-    localStorage.getItem('musimixSidebarWidth');
-
-  if(saved){
-    layout.style.gridTemplateColumns=
-      `${saved}px 8px 1fr`;
-  }
-
-  handle.addEventListener('pointerdown',()=>{
-    isResizing=true;
-    document.body.style.cursor='col-resize';
-  });
-
-  window.addEventListener('pointermove',e=>{
-
-    if(!isResizing) return;
-
-    const min=220;
-    const max=window.innerWidth*0.65;
-
-    let leftWidth=e.clientX;
-
-    leftWidth=Math.max(min,leftWidth);
-    leftWidth=Math.min(max,leftWidth);
-
-    layout.style.gridTemplateColumns=
-      `${leftWidth}px 8px 1fr`;
-
-    localStorage.setItem(
-      'musimixSidebarWidth',
-      leftWidth
-    );
-
+/* ════════════════════════════════════════════════════════════ boucle d'affichage ══ */
+function frame(now){
+  const dt = lastFrame ? (now - lastFrame)/1000 : 0;
+  lastFrame = now;
+  Engine.tick();
+  if(Engine.tracks.length){
+    updateTransport();
+    const t = Engine.time();
+    updateLyricsSync(t, dt);
+    updateChords(t);
     drawStudioTimeline();
-  });
+  }
+  requestAnimationFrame(frame);
+}
 
-  window.addEventListener('pointerup',()=>{
-    isResizing=false;
-    document.body.style.cursor='';
+function followScroll(targetY, smooth){
+  if(performance.now() < userScrollUntil) return;
+  const y = Math.max(0, targetY);
+  if(Math.abs(y - scrollY) > 1) scrollTo({top:y, behavior: smooth ? 'smooth' : 'instant'});
+}
+
+function updateLyricsSync(t, dt){
+  const els = lyricLineEls();
+  const sync = timing.sync;
+  if(!sync.length){
+    // pas de synchro : défilement continu calé sur la durée du morceau
+    if(Engine.playing && song){
+      const d = Engine.duration() || 240;
+      const maxY = document.documentElement.scrollHeight - innerHeight;
+      if(autoScrollY == null || performance.now() < userScrollUntil) autoScrollY = scrollY;
+      autoScrollY += maxY / d * scrollSpeed * dt;
+      followScroll(autoScrollY, false);
+    }
+    return;
+  }
+  let k = -1;
+  for(let i=0;i<sync.length;i++){ if(t >= sync[i].time) k = i; else break; }
+  const cur = sync[k], next = sync[k+1];
+  const li = cur ? cur.line : -1;
+  if(li !== activeLineIdx){
+    els[activeLineIdx]?.classList.remove('active-lyric');
+    els[activeLineIdx]?.querySelectorAll('.w.sung').forEach(w=>w.classList.remove('sung'));
+    els[li]?.classList.add('active-lyric');
+    activeLineIdx = li;
+  }
+  // karaoké mot à mot
+  const words = timing.words.get(li);
+  if(words && els[li]){
+    els[li].querySelectorAll('.w').forEach(w=>{ const tw = words[+w.dataset.wi]; w.classList.toggle('sung', !!tw && t >= tw.s); });
+  }
+  // défilement fluide entre la ligne courante et la suivante
+  if(!Engine.playing && !seekDragging) return;
+  const curEl = els[cur ? cur.line : (sync[0]?.line ?? 0)];
+  if(!curEl) return;
+  let progress = 0;
+  if(cur && next){ progress = clamp((t-cur.time)/(next.time-cur.time), 0, 1); progress = progress*progress*(3-2*progress); }
+  const nextEl = next ? els[next.line] || curEl : curEl;
+  const y1 = curEl.getBoundingClientRect().top + scrollY, y2 = nextEl.getBoundingClientRect().top + scrollY;
+  const top = Math.max($('songHeader').getBoundingClientRect().bottom, $('topbar').getBoundingClientRect().bottom, 0);
+  const anchor = top + (innerHeight - top) * 0.22;
+  followScroll(y1 + (y2-y1)*progress - anchor, false);
+}
+
+function updateChords(t){
+  // accord courant (barre "maintenant")
+  const box = $('nowChord');
+  const list = timing.chords;
+  if(list.length){
+    let k = -1;
+    for(let i=0;i<list.length;i++){ if(t >= list[i].s - 0.05) k = i; else break; }
+    box.classList.add('show');
+    const cur = list[k], nxt = list[k+1];
+    $('nowChordCur').textContent = cur ? displayChord(cur.name) : '–';
+    $('miniChord').textContent = $('nowChordCur').textContent;
+    $('miniChord').classList.toggle('show', isMobile());
+    $('nowChordNext').textContent = nxt ? '→ ' + displayChord(nxt.name) : '';
+    const span = cur && nxt ? (nxt.s - cur.s) : 1;
+    $('nowChordBar').style.width = cur && nxt ? `${clamp((t-cur.s)/span,0,1)*100}%` : '0';
+    document.querySelectorAll('.chord-item').forEach(el=>el.classList.toggle('playing', !!cur && el.dataset.chord === displayChord(cur.name)));
+  }else{ box.classList.remove('show'); $('miniChord').classList.remove('show'); }
+  // accord surligné dans les paroles
+  const times = timing.chordTimes;
+  if(times.length){
+    let k = -1;
+    for(let i=0;i<times.length;i++){ if(times[i] != null && t >= times[i]) k = i; }
+    if(k !== activeChordIdx){
+      document.querySelector('.chord-active')?.classList.remove('chord-active');
+      document.querySelector(`.chord[data-ci="${k}"]`)?.classList.add('chord-active');
+      activeChordIdx = k;
+    }
+  }
+}
+$('miniChord').addEventListener('click', e=>{ e.stopPropagation(); if($('miniChord').textContent !== '–') showChordPopup($('miniChord').textContent, $('miniChord')); });
+$('nowChordCur').addEventListener('click', e=>{ e.stopPropagation(); if($('nowChordCur').textContent !== '–') showChordPopup($('nowChordCur').textContent, $('nowChordCur')); });
+['wheel','touchmove'].forEach(ev=>addEventListener(ev, ()=>{ userScrollUntil = performance.now() + 3000; }, {passive:true}));
+
+/* ════════════════════════════════════════════════════════════ table de mixage ══ */
+function getTrackCustomName(trackName){
+  if(!currentSongKey) return trackName;
+  try{ return JSON.parse(localStorage.getItem('trackNames_'+currentSongKey)||'{}')[trackName] || trackName; }catch(e){ return trackName; }
+}
+function renameTrack(trackName){
+  if(!currentSongKey) return;
+  const newName = prompt('Renommer la piste :', getTrackCustomName(trackName));
+  if(newName === null) return;
+  const key = 'trackNames_'+currentSongKey;
+  const saved = JSON.parse(localStorage.getItem(key)||'{}');
+  saved[trackName] = newName.trim() || trackName;
+  localStorage.setItem(key, JSON.stringify(saved));
+  renderMixer(); initStudioTimeline();
+}
+function saveMix(){
+  if(!currentSongKey) return;
+  const mix = {solo:Engine.solo, master:Engine.masterVolume, tracks:{}};
+  Engine.tracks.forEach(t=>mix.tracks[t.name] = {v:t.volume, m:t.muted});
+  localStorage.setItem('musimixMix_'+currentSongKey, JSON.stringify(mix));
+}
+function restoreMix(){
+  try{
+    const mix = JSON.parse(localStorage.getItem('musimixMix_'+currentSongKey)||'null');
+    if(mix){
+      Engine.solo = mix.solo && Engine.tracks.some(t=>t.name===mix.solo) ? mix.solo : null;
+      Engine.masterVolume = mix.master ?? 1;
+      Engine.tracks.forEach(t=>{ const s = mix.tracks?.[t.name]; if(s){ t.volume = s.v; t.muted = s.m; } });
+    }
+  }catch(e){}
+  Engine.applyGains();
+  renderMixer();
+}
+function renderMixer(){
+  const mixer = $('mixer');
+  mixer.innerHTML = '';
+  if(!Engine.tracks.length){ mixer.innerHTML = '<div class="meta">Aucune piste chargée.</div>'; return; }
+  const rows = [...Engine.tracks, {master:true}];
+  rows.forEach(tr=>{
+    const row = document.createElement('div');
+    row.className = 'slider-wrap' + (tr.master ? ' master-row' : '');
+    const name = tr.master ? '🔊 Général' : getTrackCustomName(tr.name);
+    const val = tr.master ? Engine.masterVolume : tr.volume;
+    row.innerHTML = `<label title="${tr.master ? 'Volume général' : 'Double-clic pour renommer'}">${esc(name)}</label>
+      <input type="range" min="0" max="1.5" step="0.01" value="${val}" aria-label="Volume ${esc(name)}">
+      ${tr.master ? '' : '<button class="track-btn" title="Solo">S</button><button class="track-btn" title="Muet">M</button>'}`;
+    const slider = row.querySelector('input');
+    slider.addEventListener('input', ()=>{
+      if(tr.master) Engine.masterVolume = +slider.value; else tr.volume = +slider.value;
+      Engine.applyGains(); saveMix();
+    });
+    slider.addEventListener('dblclick', ()=>{ slider.value = 1; slider.dispatchEvent(new Event('input')); });
+    if(!tr.master){
+      row.querySelector('label').addEventListener('dblclick', ()=>renameTrack(tr.name));
+      const [soloBtn, muteBtn] = row.querySelectorAll('button');
+      soloBtn.classList.toggle('active', Engine.solo === tr.name);
+      muteBtn.classList.toggle('active', tr.muted);
+      soloBtn.onclick = ()=>{ Engine.solo = Engine.solo === tr.name ? null : tr.name; Engine.applyGains(); saveMix(); renderMixer(); };
+      muteBtn.onclick = ()=>{ tr.muted = !tr.muted; Engine.applyGains(); saveMix(); muteBtn.classList.toggle('active', tr.muted); };
+    }
+    mixer.appendChild(row);
   });
 }
 
-function toggleHeaderPanel(){
+/* ════════════════════════════════════════════════════════════ timeline studio ══ */
+const STUDIO_COLORS = {'🎤 Voix':'#ffd166','🎤 Chœurs':'#f4a261','🥁 Drums':'#ef476f','🎸 Bass':'#06d6a0','🎸 Guitar':'#118ab2','🎹 Piano':'#9b5de5','🎵 Other':'#8d99ae','🎵 Instrumental':'#8d99ae','🎵 Mix':'#2d7cff'};
 
-  const header=document.querySelector('.header');
-  const btn=document.getElementById('toggleHeaderBtn');
+/** forme d'onde légère : décodage à 8 kHz (≈ 20 Mo par piste au lieu de 100+) */
+async function buildPeaks(){
+  const key = currentSongKey;
+  for(const tr of Engine.tracks){
+    if(waveformCache[tr.name]) continue;
+    try{
+      const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+      const oc = new OAC(1, 8000, 8000);
+      const ab = await oc.decodeAudioData(await tr.blob.arrayBuffer());
+      if(key !== currentSongKey) return;
+      const d = ab.getChannelData(0), n = 1600, block = Math.max(1, Math.floor(d.length/n));
+      const peaks = new Float32Array(n);
+      let max = 1e-6;
+      for(let i=0;i<n;i++){ let m=0; for(let j=i*block, e=Math.min(d.length,(i+1)*block); j<e; j+=4){ const v=Math.abs(d[j]); if(v>m) m=v; } peaks[i]=m; if(m>max) max=m; }
+      waveformCache[tr.name] = peaks.map(v=>v/max);
+      studioCache = null;
+    }catch(err){ console.warn('Forme d’onde :', tr.name, err); }
+  }
+}
+function initStudioTimeline(){
+  const select = $('studioTrackSelect');
+  select.innerHTML = '';
+  studioTrack = Engine.tracks.find(t=>t.name==='🎤 Voix')?.name || Engine.tracks[0]?.name || null;
+  Engine.tracks.forEach(t=>{ const o=document.createElement('option'); o.value=t.name; o.textContent=getTrackCustomName(t.name); o.selected = t.name===studioTrack; select.appendChild(o); });
+  select.onchange = e=>{ studioTrack = e.target.value; studioCache = null; };
+  studioCache = null;
+}
+function toggleStudioView(){ studioShowAll = !studioShowAll; studioCache = null; }
+function studioLayout(){
+  const names = studioShowAll ? Engine.tracks.map(t=>t.name) : [studioTrack].filter(Boolean);
+  const laneH = 52, chordLane = timing.chords.length ? 22 : 0;
+  return {names, laneH, chordLane, h: Math.max(110, names.length*laneH) + chordLane};
+}
+function drawStudioTimeline(){
+  const canvas = $('studioTimeline');
+  if(!canvas || isMobile() || !canvas.clientWidth) return;
+  const dpr = devicePixelRatio || 1, L = studioLayout(), W = canvas.clientWidth, d = Engine.duration();
+  canvas.style.height = L.h + 'px';
+  if(!studioCache || studioCache.w !== W || studioCache.h !== L.h || studioCache.semi !== semitoneShift){
+    const off = document.createElement('canvas');
+    off.width = W*dpr; off.height = L.h*dpr;
+    const c = off.getContext('2d'); c.scale(dpr,dpr);
+    const laneH = (L.h - L.chordLane)/Math.max(1,L.names.length);
+    L.names.forEach((name,i)=>{
+      const data = waveformCache[name], y = i*laneH, mid = y + laneH/2;
+      c.fillStyle = STUDIO_COLORS[name] || '#999';
+      if(data){ for(let x=0;x<W;x++){ const v = data[Math.floor(x/W*data.length)]; const h = Math.max(1, v*laneH*0.85); c.fillRect(x, mid-h/2, 1, h); } }
+      else{ c.globalAlpha=.3; c.fillRect(0, mid-1, W, 2); c.globalAlpha=1; }
+      c.fillStyle = '#fff'; c.font = '12px system-ui'; c.fillText(getTrackCustomName(name), 8, y+15);
+    });
+    if(L.chordLane && d){
+      const y0 = L.h - L.chordLane;
+      c.fillStyle = '#151515'; c.fillRect(0, y0, W, L.chordLane);
+      c.font = 'bold 11px system-ui';
+      let lastX = -99;
+      timing.chords.forEach(ch=>{
+        const x = ch.s/d*W;
+        c.fillStyle = '#333'; c.fillRect(x, y0, 1, L.chordLane);
+        if(x - lastX > 28){ c.fillStyle = '#ffd166'; c.fillText(displayChord(ch.name), x+3, y0+15); lastX = x; }
+      });
+    }
+    studioCache = {canvas:off, w:W, h:L.h, semi:semitoneShift};
+  }
+  if(canvas.width !== W*dpr || canvas.height !== L.h*dpr){ canvas.width = W*dpr; canvas.height = L.h*dpr; }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(1,0,0,1,0,0);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(studioCache.canvas, 0, 0);
+  ctx.scale(dpr,dpr);
+  if(d){
+    if(Engine.loopA != null){
+      const a = Engine.loopA/d*W, b = (Engine.loopB ?? Engine.time())/d*W;
+      ctx.fillStyle = 'rgba(255,209,102,.13)'; ctx.fillRect(a, 0, Math.max(2,b-a), L.h);
+    }
+    const x = Engine.time()/d*W;
+    ctx.fillStyle = '#fff'; ctx.fillRect(x-1, 0, 2, L.h);
+    $('studioTime').textContent = fmtTime(Engine.time()) + ' / ' + fmtTime(d);
+  }
+}
+(function initStudioEvents(){
+  const canvas = $('studioTimeline');
+  const seekFromEvent = e=>{ const r = canvas.getBoundingClientRect(); seekTo(clamp((e.clientX-r.left)/r.width,0,1)*Engine.duration()); };
+  canvas.addEventListener('pointerdown', e=>{ studioDragging = true; canvas.setPointerCapture(e.pointerId); seekFromEvent(e); });
+  canvas.addEventListener('pointermove', e=>{ if(studioDragging) seekFromEvent(e); });
+  canvas.addEventListener('pointerup', ()=>{ studioDragging = false; });
+})();
 
-  if(!header) return;
+/* ════════════════════════════════════════════════════════════ bibliothèque ══ */
+function initLibraryDB(){
+  return new Promise(resolve=>{
+    const req = indexedDB.open('musimix-library', 1);
+    req.onupgradeneeded = e=>{ e.target.result.createObjectStore('songs', {keyPath:'name'}); };
+    req.onsuccess = e=>{ musicDB = e.target.result; resolve(); };
+    req.onerror = ()=>{ console.warn('IndexedDB indisponible'); resolve(); };
+  });
+}
+function dbTx(mode, fn){
+  return new Promise((resolve, reject)=>{
+    const tx = musicDB.transaction('songs', mode);
+    const r = fn(tx.objectStore('songs'));
+    tx.oncomplete = ()=>resolve(r?.result);
+    tx.onerror = ()=>reject(tx.error);
+  });
+}
+const getSongsFromDB = ()=> musicDB ? dbTx('readonly', s=>s.getAll()).then(r=>r||[]) : Promise.resolve([]);
+const getSong = name => dbTx('readonly', s=>s.get(name));
+async function saveBundle(bundle){
+  try{
+    const old = await getSong(bundle.name);
+    await dbTx('readwrite', s=>s.put({name:bundle.name, files:bundle.files, songKey:currentSongKey, favorite:old?.favorite||false, updated:Date.now()}));
+  }catch(err){ console.warn(err); toast('Bibliothèque : enregistrement impossible ('+err.message+')'); }
+}
+async function deleteSong(name){
+  const s = await getSong(name);
+  if(!s || !confirm(`Supprimer « ${name} » de la bibliothèque ?`)) return;
+  await dbTx('readwrite', st=>st.delete(name));
+  renderLibrary();
+}
+async function toggleFavorite(name){
+  const s = await getSong(name); if(!s) return;
+  s.favorite = !s.favorite;
+  await dbTx('readwrite', st=>st.put(s));
+  renderLibrary();
+}
+async function openSongFromLibrary(name){
+  const s = await getSong(name); if(!s) return;
+  if(s.file) return openZip(s.file, false);                       // ancien format (ZIP brut)
+  loading(true);
+  await loadEntries(s.files, {songKey:s.songKey || name, bundleName:name, save:false});
+  loading(false);
+}
+async function exportSongZip(name){
+  const s = await getSong(name); if(!s) return;
+  if(s.file) return download(s.file, s.file.name || name+'.zip');
+  const zip = new JSZip();
+  s.files.forEach(f=>zip.file(f.name, f.blob));
+  download(await zip.generateAsync({type:'blob'}), name+'.zip');
+}
+async function renderLibrary(){
+  const list = $('library-list'); if(!list) return;
+  const q = normText($('library-search').value);
+  let songs = (await getSongsFromDB()).filter(s=>!q || normText(s.name).includes(q));
+  songs.sort((a,b)=> (b.favorite - a.favorite) || a.name.localeCompare(b.name, 'fr', {sensitivity:'base'}));
+  list.innerHTML = '';
+  if(!songs.length){ list.innerHTML = '<div class="meta">Les morceaux ouverts sont gardés ici.</div>'; return; }
+  songs.forEach(s=>{
+    const row = document.createElement('div');
+    row.className = 'library-song' + (currentBundle?.name === s.name ? ' current' : '');
+    row.innerHTML = `<div class="library-song-name" title="${esc(s.name)}">${esc(s.name)}</div>
+      <div class="library-actions">
+        <button class="icon-btn" title="Favori">${s.favorite ? '⭐' : '☆'}</button>
+        <button class="icon-btn" title="Télécharger le pack ZIP">⬇</button>
+        <button class="icon-btn" title="Supprimer">🗑</button>
+      </div>`;
+    row.querySelector('.library-song-name').onclick = ()=>openSongFromLibrary(s.name);
+    const [fav, dl, del] = row.querySelectorAll('button');
+    fav.onclick = ()=>toggleFavorite(s.name);
+    dl.onclick = ()=>exportSongZip(s.name);
+    del.onclick = ()=>deleteSong(s.name);
+    list.appendChild(row);
+  });
+}
 
-  header.classList.toggle('collapsed');
+/* ════════════════════════════════════════════════════════════ éditeur de grille ══ */
+function openEditor(){
+  $('edTitle').value = song?.meta.title || '';
+  $('edArtist').value = song?.meta.artist || '';
+  $('editorText').value = song?.source || '';
+  pendingLrc = null;
+  $('editor').showModal();
+}
+function editorChordPro(){
+  let txt = $('editorText').value;
+  const title = $('edTitle').value.trim(), artist = $('edArtist').value.trim();
+  if(!isChordProText(txt)) txt = sheetToChordPro(txt);
+  txt = txt.replace(/^\s*\{\s*(title|t|artist|a)\s*:.*\}\s*\n?/gim, '');
+  const head = [title && `{title: ${title}}`, artist && `{artist: ${artist}}`].filter(Boolean).join('\n');
+  return (head ? head + '\n' : '') + txt.replace(/^\n+/,'');
+}
+function convertEditorText(){ $('editorText').value = editorChordPro(); toast('Converti en ChordPro — vérifie la place des accords'); }
+async function applyEditor(){
+  const cho = editorChordPro();
+  const name = ($('edTitle').value.trim() || 'morceau').replace(/[\\/:*?"<>|]+/g,'_');
+  const entries = [{name: name+'.cho', blob:new Blob([cho], {type:'text/plain'})}];
+  if(pendingLrc) entries.push({name: name+'.lrc', blob:new Blob([pendingLrc], {type:'text/plain'})});
+  $('editor').close();
+  if(Engine.tracks.length){
+    // on remplace l'ancien .cho du pack
+    if(currentBundle) currentBundle.files = currentBundle.files.filter(f=>!/\.(cho|chopro|chordpro)$/i.test(f.name) && !(pendingLrc && /\.lrc$/i.test(f.name)));
+    await loadEntries(entries, {keepAudio:true, songKey:currentSongKey, save:true});
+  }else{
+    await loadEntries(entries, {songKey:name, bundleName:$('edTitle').value.trim() || name, save:true});
+  }
+  pendingLrc = null;
+}
+async function searchLrclib(){
+  const title = $('edTitle').value.trim(), artist = $('edArtist').value.trim();
+  if(!title){ toast('Indique au moins le titre'); return; }
+  try{
+    const r = await fetch(`https://lrclib.net/api/search?track_name=${encodeURIComponent(title)}&artist_name=${encodeURIComponent(artist)}`);
+    const list = await r.json();
+    const hit = list.find(x=>x.syncedLyrics) || list[0];
+    if(!hit){ toast('Rien trouvé sur LRCLIB'); return; }
+    const has = $('editorText').value.trim();
+    if(!has || confirm(`Trouvé : ${hit.artistName} – ${hit.trackName}.\nRemplacer le texte de l’éditeur par ces paroles ?\n(Annuler = garder ton texte et n’utiliser que la synchro)`)){
+      $('editorText').value = hit.plainLyrics || parseLrc(hit.syncedLyrics||'').map(l=>l.text).join('\n');
+    }
+    pendingLrc = hit.syncedLyrics || null;
+    toast(pendingLrc ? 'Paroles synchronisées trouvées ✔ (appliquées avec ✔ Appliquer)' : 'Paroles trouvées (sans synchro)');
+  }catch(err){ toast('LRCLIB injoignable : '+err.message); }
+}
 
-  const collapsed=
-    header.classList.contains('collapsed');
-
-  btn.textContent=
-    collapsed ? '▼' : '▲';
-
-  localStorage.setItem(
-    'musimixHeaderCollapsed',
-    collapsed ? '1' : '0'
-  );
+/* ════════════════════════════════════════════════════════════ exports ══ */
+function exportLrc(){
+  if(!timing.sync.length){ toast('Aucune synchro à exporter'); return; }
+  const lines = song.items.filter(i=>i.type==='line');
+  let lrc = `[ti:${song.meta.title||''}]\n[ar:${song.meta.artist||''}]\n`;
+  timing.sync.forEach(s=>{
+    const l = lines[s.line];
+    if(!l || l.chordOnly) return;
+    const ts = t => `${String(Math.floor(t/60)).padStart(2,'0')}:${(t%60).toFixed(2).padStart(5,'0')}`;
+    const words = timing.words.get(s.line);
+    let body = l.text;
+    if(words){
+      const toks = l.parts.map(p=>p.text).join('').trim().split(/\s+/);
+      body = toks.map((w,k)=>words[k] ? `<${ts(words[k].s)}>${w}` : w).join(' ');
+    }
+    lrc += `[${ts(s.time)}]${body}\n`;
+  });
+  download(new Blob([lrc], {type:'text/plain'}), (song.meta.title || currentSongKey.replace(/\.zip$/i,'') || 'paroles') + '.lrc');
 }
 
 async function exportChordPdf(){
-
-  if (!window.jspdf?.jsPDF){
-    alert('jsPDF non chargé');
-    return;
-  }
-
+  if(!song){ toast('Rien à exporter'); return; }
+  if(!window.jspdf?.jsPDF){ toast('jsPDF non chargé (connexion ?)'); return; }
   const pdf = new window.jspdf.jsPDF('p','mm','a4');
-
-  const W = 210;
-  const H = 297;
-  const M = 20;
-
-  let y = 24;
-
-  const title =
-    document.getElementById('title')?.textContent || 'MusiMix';
-
-  const meta =
-    document.getElementById('meta')?.textContent || '';
-
-  const songLines =
-    parsedSong.filter(
-      item => item.type === 'section' || item.type === 'line'
-    );
-
-  function pageBreak(space=12){
-    if(y + space > H - 20){
-      pdf.addPage();
-      y = 24;
-    }
-  }
-
-  /* Header */
-  pdf.setFillColor(255,255,255);
-  pdf.rect(0,0,W,H,'F');
-
-  pdf.setFont('times','bold');
-  pdf.setFontSize(24);
-  pdf.setTextColor(20);
-  pdf.text(title,W/2,y,{align:'center'});
-
-  y += 8;
-
-  pdf.setFont('helvetica','normal');
-  pdf.setFontSize(10);
-  pdf.setTextColor(110);
-  pdf.text(meta,W/2,y,{align:'center'});
-
-  y += 8;
-  pdf.line(M,y,W-M,y);
-  y += 12;
-
-  /* Song */
-  for(const item of songLines){
-
+  const W = 210, H = 297, M = 18;
+  let y = 22;
+  const title = song.meta.title || 'MusiMix';
+  const pageBreak = need=>{ if(y + need > H - 16){ pdf.addPage(); y = 20; } };
+  pdf.setFont('helvetica','bold'); pdf.setFontSize(22); pdf.setTextColor(20);
+  pdf.text(title, W/2, y, {align:'center'}); y += 7;
+  pdf.setFont('helvetica','normal'); pdf.setFontSize(10); pdf.setTextColor(110);
+  pdf.text($('meta').textContent, W/2, y, {align:'center'}); y += 5;
+  pdf.setDrawColor(200); pdf.line(M, y, W-M, y); y += 9;
+  for(const item of song.items){
+    if(item.type === 'blank'){ y += 3; continue; }
     if(item.type === 'section'){
-      pageBreak(12);
-
-      pdf.setFont('helvetica','bold');
-      pdf.setFontSize(10);
-      pdf.setTextColor(90);
-
-      pdf.text(
-        item.text.toUpperCase(),
-        M,
-        y
-      );
-
-      y += 10;
-      continue;
+      pageBreak(12); pdf.setFont('helvetica','bold'); pdf.setFontSize(9.5); pdf.setTextColor(120);
+      pdf.text(item.text.toUpperCase(), M, y); y += 6; continue;
     }
-
-    if(!item.text?.trim()){
+    const hasChords = item.parts.some(p=>p.chord !== null);
+    pageBreak(hasChords ? 12 : 7);
+    // positions des accords calculées avec la police des paroles
+    pdf.setFont('helvetica','normal'); pdf.setFontSize(12);
+    let x = M, lastEnd = 0;
+    const placed = [];
+    item.parts.forEach(p=>{
+      if(p.chord !== null){
+        const c = displayChord(p.chord);
+        pdf.setFont('helvetica','bold'); pdf.setFontSize(10.5);
+        const cx = Math.max(x, lastEnd + 1.5);
+        placed.push({c, x:cx});
+        lastEnd = cx + pdf.getTextWidth(c);
+        pdf.setFont('helvetica','normal'); pdf.setFontSize(12);
+      }
+      x += pdf.getTextWidth(p.text);
+      if(item.chordOnly) x = lastEnd + 3;
+    });
+    if(hasChords){
+      pdf.setFont('helvetica','bold'); pdf.setFontSize(10.5); pdf.setTextColor(200,120,0);
+      placed.forEach(p=>pdf.text(p.c, p.x, y));
       y += 5;
-      continue;
     }
-
-    const parts = item.text.split(/(\[.*?\])/g);
-
-    let x = M;
-
-    pdf.setFont('helvetica','bold');
-    pdf.setFontSize(11);
-    pdf.setTextColor(30);
-
-    parts.forEach(part=>{
-
-      if(!part) return;
-
-      if(
-        part.startsWith('[') &&
-        part.endsWith(']')
-      ){
-        const chord = shiftChord(
-          part.slice(1,-1),
-          semitoneShift
-        );
-
-        pdf.text(chord,x,y);
-
-      }else{
-        x += pdf.getTextWidth(part)+4;
-      }
-    });
-
-    y += 5;
-
-    x = M;
-
-    pdf.setFont('times','normal');
-    pdf.setFontSize(12);
-    pdf.setTextColor(20);
-
-    parts.forEach(part=>{
-
-      if(!part) return;
-
-      if(
-        !part.startsWith('[')
-      ){
-        pdf.text(part,x,y);
-        x += pdf.getTextWidth(part)+4;
-      }
-    });
-
-    y += 9;
-    pageBreak(10);
+    if(!item.chordOnly){
+      pdf.setFont('helvetica','normal'); pdf.setFontSize(12); pdf.setTextColor(20);
+      pdf.text(item.parts.map(p=>p.text).join(''), M, y);
+      y += 6.5;
+    }else y += 2;
   }
-
-  /* page accords simple */
-  if(window.currentChords?.length){
-
-    pdf.addPage();
-
-    y = 24;
-
-    pdf.setFont('helvetica','bold');
-    pdf.setFontSize(16);
-
-    pdf.text(
-      'Accords',
-      W/2,
-      y,
-      {align:'center'}
-    );
-
-    y += 18;
-
-    pdf.setFontSize(12);
-    pdf.setTextColor(30);
-
-    const txt =
-      window.currentChords.join('   •   ');
-
-    const split =
-      pdf.splitTextToSize(
-        txt,
-        W - (M*2)
-      );
-
-    pdf.text(
-      split,
-      M,
-      y
-    );
-  }
-
-  pdf.save(
-    `${title}.pdf`
-  );
+  pdf.save(`${title}.pdf`);
 }
 
+/* ════════════════════════════════════════════════════════════ mise en page ══ */
+function toggleMixerPanel(){
+  const panel = $('mobileMixerPanel');
+  panel.classList.toggle('open');
+  $('toggleMixerBtn').textContent = panel.classList.contains('open') ? '▼ Masquer les pistes' : '▲ Pistes';
+}
+function toggleHeaderPanel(){
+  const header = $('songHeader');
+  header.classList.toggle('collapsed');
+  const c = header.classList.contains('collapsed');
+  $('toggleHeaderBtn').textContent = c ? '▼' : '▲';
+  localStorage.setItem('musimixHeaderCollapsed', c ? '1' : '0');
+}
+function initResizableLayout(){
+  const layout = document.querySelector('.layout'), handle = $('resizeHandle');
+  const saved = localStorage.getItem('musimixSidebarWidth');
+  if(saved && !isMobile()) layout.style.gridTemplateColumns = `${saved}px 8px 1fr`;
+  let resizing = false;
+  handle.addEventListener('pointerdown', e=>{ resizing = true; handle.setPointerCapture(e.pointerId); document.body.style.cursor='col-resize'; });
+  handle.addEventListener('pointermove', e=>{
+    if(!resizing) return;
+    const w = clamp(e.clientX, 220, innerWidth*0.65);
+    layout.style.gridTemplateColumns = `${w}px 8px 1fr`;
+    localStorage.setItem('musimixSidebarWidth', w);
+    studioCache = null;
+  });
+  handle.addEventListener('pointerup', ()=>{ resizing = false; document.body.style.cursor=''; });
+}
+function updateTopbarHeight(){
+  document.documentElement.style.setProperty('--topbar-h', $('topbar').offsetHeight + 'px');
+}
+addEventListener('resize', ()=>{ updateTopbarHeight(); studioCache = null; });
+
+document.addEventListener('keydown', e=>{
+  if(e.target.closest('input,textarea,select,dialog') || e.metaKey || e.ctrlKey || e.altKey) return;
+  if(e.code === 'Space'){ e.preventDefault(); syncMode ? markCurrentLyric() : togglePlay(); }
+  else if(e.code === 'ArrowRight'){ e.preventDefault(); seekTo(Engine.time()+5); }
+  else if(e.code === 'ArrowLeft'){ e.preventDefault(); seekTo(Engine.time()-5); }
+  else if(e.key === 'l' || e.key === 'L') toggleLoop();
+  else if(e.key === 'Escape') hideChordPopup();
+});
+
+addEventListener('load', async ()=>{
+  updateTopbarHeight();
+  switchInstrument(window.currentInstrument);
+  if(localStorage.getItem('musimixHeaderCollapsed') === '1'){ $('songHeader').classList.add('collapsed'); $('toggleHeaderBtn').textContent = '▼'; }
+  initResizableLayout();
+  renderSong();
+  renderMixer();
+  loadChordDatabase();
+  await initLibraryDB();
+  renderLibrary();
+  requestAnimationFrame(frame);
+});
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
 <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js");
-}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./service-worker.js');
 </script>
-
 </body>
 </html>
