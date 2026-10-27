@@ -47,6 +47,15 @@ Dans la fiche d'un exercice (bibliothèque, ou bouton « Voir » d'un exercice d
 - Si la case « Corriger aussi les séances déjà envoyées » est cochée, la correction est reportée dans les séances pas encore faites de vos patients et dans vos modèles. Ce que vous avez personnalisé pour un patient (nom changé, réglages) n'est pas touché.
 - **À faire une fois** : ces corrections demandent la règle `exercices` ajoutée dans [`firestore.rules`](firestore.rules). Recopiez le fichier dans Firebase (étape 2 ci-dessus) puis **Publier**. Sans cela, le formulaire affiche « Firebase refuse l'enregistrement ».
 
+## Créer un exercice
+
+Dans **Exercices** (ou dans la bibliothèque d'une séance en préparation), le bouton **Créer un exercice** ouvre une fiche à remplir : titre, image, consignes, position, réglage proposé (répétitions, effort, repos, niveau), zone du corps, type, mots-clés, indications, matériel, muscles, lien vidéo, conseils et variantes.
+
+- L'exercice apparaît aussitôt dans la bibliothèque, avec le badge « Mes exercices » (filtre « Mes exercices » dans la liste des sources). Les mots-clés servent à le retrouver dans la recherche.
+- L'image est réduite automatiquement (environ 100 Ko au maximum) et enregistrée avec l'exercice dans Firebase.
+- Le crayon de sa fiche permet de le modifier ou de le supprimer. Les séances qui l'utilisent déjà le gardent.
+- Il utilise la même règle `exercices` que les corrections : rien de plus à publier.
+
 ## Bon à savoir
 
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.

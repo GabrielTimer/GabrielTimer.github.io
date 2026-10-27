@@ -150,7 +150,9 @@ function fromHep(x){
 /** Champs modifiables depuis le site. */
 export const EDITABLE = [
   "nom", "consignes", "position", "description", "conseil_posture", "erreurs_frequentes",
-  "precautions", "version_facile", "version_avancee", "materiel", "niveau", "youtube", "ex", "repos", "reps"
+  "precautions", "contreIndications", "version_facile", "version_avancee", "materiel", "niveau",
+  "categorie", "mode", "tags", "pathologies", "muscles", "image", "youtube", "vimeo", "videos",
+  "ex", "repos", "reps"
 ];
 
 /** Correspondance bibliothèque → exercice enregistré dans une séance (réglages ex/repos/reps exclus :
@@ -158,8 +160,53 @@ export const EDITABLE = [
 const TO_SESSION = {
   nom:"nom", consignes:"consignes", position:"position", description:"description_fr",
   conseil_posture:"conseil_posture", erreurs_frequentes:"erreurs_frequentes", precautions:"precautions",
-  version_facile:"version_facile", version_avancee:"version_avancee", materiel:"materiel", youtube:"youtube"
+  version_facile:"version_facile", version_avancee:"version_avancee", materiel:"materiel", youtube:"youtube",
+  vimeo:"vimeo", videos:"videos", image:"image"
 };
+
+/** Source des exercices créés depuis le site. */
+export const PERSO = "PERSO";
+
+/** Exercice créé par le kiné (enregistré dans Firebase). */
+export function fromCustom(id, f = {}){
+  const list = v => Array.isArray(v) ? v : toList(v);
+  const e = {
+    id, source: PERSO, cree: true,
+    nom: f.nom || "Nouvel exercice",
+    categorie: f.categorie || "Autre",
+    niveau: Number(f.niveau) || 1,
+    mode: f.mode || "",
+    image: f.image || null,
+    consignes: list(f.consignes), description: f.description || "", descriptionHtml: "",
+    position: f.position || "",
+    precautions: list(f.precautions), contreIndications: list(f.contreIndications),
+    objectifs: list(f.objectifs), pathologies: list(f.pathologies), materiel: list(f.materiel),
+    muscles: list(f.muscles), tags: list(f.tags),
+    conseil_posture: list(f.conseil_posture), erreurs_frequentes: list(f.erreurs_frequentes), respiration: list(f.respiration),
+    version_facile: list(f.version_facile), version_avancee: list(f.version_avancee),
+    videos: Array.isArray(f.videos) ? f.videos : [], youtube: f.youtube || "", vimeo: f.vimeo || "",
+    ex: Number(f.ex) || 30, repos: Number(f.repos ?? 10) || 0, reps: Number(f.reps) || 10,
+    createdAt: f.createdAt || null,
+    raw: f
+  };
+  indexSearch(e);
+  return e;
+}
+
+/** Ajoute (ou remplace) un exercice dans la bibliothèque déjà chargée. */
+export async function addToLibrary(e){
+  const list = await loadLibrary();
+  const i = list.findIndex(x => x.source === e.source && String(x.id) === String(e.id));
+  if(i >= 0) list[i] = e; else list.unshift(e);
+  return list;
+}
+
+export async function removeFromLibrary(e){
+  const list = await loadLibrary();
+  const i = list.indexOf(e);
+  if(i >= 0) list.splice(i, 1);
+  return list;
+}
 
 export const exerciseKey = e => `${e.source || "CABINET"}_${e.id}`;
 
@@ -173,7 +220,7 @@ function snapshot(e){
 }
 
 function indexSearch(e){
-  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.mode, ...e.pathologies, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
+  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.mode, e.source === "PERSO" ? "mes exercices perso" : "", ...e.pathologies, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
 }
 
 /** Applique une correction (ou la retire si fields est null) à un exercice de la bibliothèque. */
@@ -210,15 +257,23 @@ let cache = null;
 
 export function loadLibrary(){
   if(cache) return cache;
-  const edits = import("./cloud.js").then(C => C.listExerciseEdits()).catch(() => ({}));
+  const edits = import("./cloud.js").then(C => C.listExerciseEdits()).catch(() => []);
   cache = Promise.all([
     fetch("/exercises/data/exercises.json").then(r => r.json()).catch(() => []),
     fetch("/exercises/data/hep_exercises.json").then(r => r.json()).catch(() => []),
     edits
-  ]).then(([cab, hep, ed]) => {
-    const list = [...cab.map(fromCabinet), ...hep.map(fromHep)];
+  ]).then(([cab, hep, docs]) => {
+    const fixes = {};
+    const created = [];
+    (docs || []).forEach(d => {
+      if(d.cree) created.push(fromCustom(d.id, d.fields));
+      else if(d.fields) fixes[d.key] = d.fields;
+    });
+    created.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    const list = [...created, ...cab.map(fromCabinet), ...hep.map(fromHep)];
     list.forEach(e => {
-      const fix = ed[exerciseKey(e)];
+      if(e.cree) return;
+      const fix = fixes[exerciseKey(e)];
       if(fix) applyEdit(e, fix);
       else indexSearch(e);
     });

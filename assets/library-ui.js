@@ -16,9 +16,12 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   root.innerHTML = `
     <div class="lib">
       <div class="lib-tools">
-        <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
+        <div class="lib-search-row">
+          <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
+          <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
+        </div>
         <div class="row wrap" style="--gap:8px">
-          <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option></select>
+          <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="PERSO">Mes exercices</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option></select>
           <select class="select sm-select" data-niveau aria-label="Niveau"><option value="">Tous niveaux</option><option value="1">Niveau 1</option><option value="2">Niveau 2</option><option value="3">Niveau 3</option><option value="4">Niveau 4 et +</option></select>
         </div>
         <div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div>
@@ -32,9 +35,20 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   $("[data-niveau]", root).value = state.niveau;
 
   const all = await loadLibrary();
-  const counts = {};
-  all.forEach(e => { counts[e.categorie] = (counts[e.categorie] || 0) + 1; });
-  const cats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([c]) => c);
+  let counts = {}, cats = [];
+  const countCats = () => {
+    counts = {};
+    all.forEach(e => { counts[e.categorie] = (counts[e.categorie] || 0) + 1; });
+    cats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([c]) => c);
+  };
+  countCats();
+  /* Après création, correction ou suppression d'un exercice */
+  const changed = (e, info = {}) => {
+    countCats(); renderCats(); renderResults();
+    if(info.created){
+      exerciseSheet(e, { onAdd, addLabel, onEdited: changed });
+    }
+  };
 
   const save = () => store.set(persistKey, { q: state.q, cat: state.cat, source: state.source, niveau: state.niveau });
 
@@ -95,13 +109,17 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         if(img){ img.querySelector(".in-badge")?.remove(); img.insertAdjacentHTML("beforeend", inBadge(e)); }
       }
     });
-    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: renderResults }); });
+    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: changed }); });
   };
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); }, 140));
   $("[data-source]", root).onchange = ev => { state.source = ev.target.value; state.limit = PAGE; save(); renderResults(); };
   $("[data-niveau]", root).onchange = ev => { state.niveau = ev.target.value; state.limit = PAGE; save(); renderResults(); };
   $("[data-more]", root).onclick = () => { state.limit += PAGE; renderResults(); };
+  $("[data-create]", root).onclick = async () => {
+    const { openExerciseEditor } = await import("./exercise-editor.js");
+    openExerciseEditor(null, { onSaved: changed });
+  };
 
   renderCats();
   renderResults();
@@ -124,8 +142,9 @@ export function exerciseSheet(e, opts = {}){
             <span class="badge lagon">${esc(e.categorie)}</span><span class="badge">Niveau ${e.niveau}</span>
             ${e.mode ? `<span class="badge">${esc(e.mode)}</span>` : ""}
             ${e.materiel.map(m => `<span class="badge">${esc(m)}</span>`).join("")}
-            <span class="badge">${e.source === "HEP" ? "Base HEP" : "Cabinet"}</span>
+            <span class="badge">${e.source === "HEP" ? "Base HEP" : e.source === "PERSO" ? "Mes exercices" : "Cabinet"}</span>
             ${e.modifie ? `<span class="badge sun">${icon("edit")}Corrigé</span>` : ""}
+            ${e.tags?.length && e.source === "PERSO" ? e.tags.map(t => `<span class="badge">#${esc(t)}</span>`).join("") : ""}
           </div>
           ${vid ? (vid.src ? `<div style="margin-top:12px"><button class="btn soft block" type="button" data-vid>${icon("play")}Voir la vidéo</button><div data-vslot></div></div>` : `<a class="btn soft block" style="margin-top:12px" href="${esc(vid.url)}" target="_blank" rel="noopener">${icon("video")}${esc(vid.title || "Voir la vidéo")}</a>`) : ""}
         </div>
@@ -172,7 +191,7 @@ async function addEditButton(s, e, opts){
     openExerciseEditor(lib, {
       onSaved: (x, info) => {
         opts.onEdited?.(x, info);
-        if(lib === e) exerciseSheet(x, opts);
+        if(lib === e && !info?.deleted) exerciseSheet(x, opts);
       }
     });
   };

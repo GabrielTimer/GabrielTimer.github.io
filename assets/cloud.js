@@ -284,16 +284,19 @@ export async function deleteModele(id){
 
 /* ---------- Corrections de la bibliothèque d'exercices ---------- */
 
-/** Toutes les corrections : { "CABINET_GENOU_01": { nom, consignes, … } }. */
+/** Corrections et exercices créés : [{ key, source, id, cree, fields }]. */
 export async function listExerciseEdits(){
   const snap = await getDocs(collection(db, "exercices"));
-  const out = {};
-  snap.docs.forEach(d => { const f = d.data().fields; if(f) out[d.id] = f; });
-  return out;
+  return snap.docs.map(d => ({ key: d.id, ...d.data() })).filter(d => d.fields);
 }
 
 export async function saveExerciseEdit(key, { source, id, fields }){
   await setDoc(doc(db, "exercices", key), clean({ source, id: String(id), fields, updatedAt: Date.now() }));
+}
+
+/** Nouvel exercice (ou mise à jour d'un exercice créé). La clé est PERSO_{id}. */
+export async function saveCustomExercise(id, fields){
+  await setDoc(doc(db, "exercices", `PERSO_${id}`), clean({ source: "PERSO", id: String(id), cree: true, fields, updatedAt: Date.now() }));
 }
 
 export async function deleteExerciseEdit(key){

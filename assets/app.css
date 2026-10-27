@@ -639,3 +639,17 @@ dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minm
 .ee-open{ opacity:.5; }
 .ee-open:hover,.ee-open:focus-visible{ opacity:1; }
 .ee-nums > .field{ flex:1 1 110px; }
+
+/* Formulaire de création / correction d'exercice */
+.ee-img{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+.ee-img-prev{ width:140px; height:110px; flex:none; border-radius:var(--r-md); border:1px solid var(--line); overflow:hidden; display:grid; place-items:center; background:var(--surface-2); }
+.ee-img-prev img,.ee-img-prev .ph-img{ width:100%; height:100%; object-fit:contain; }
+.ee-img-empty{ display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--ink-3); font-size:var(--fs-xs); }
+.ee-img-empty svg{ width:24px; height:24px; }
+.ee-file{ cursor:pointer; }
+.ee-link{ background:none; border:0; padding:0; color:var(--lagon-strong); text-decoration:underline; cursor:pointer; font:inherit; }
+.lib-create{ flex:none; }
+.lib-search-row{ display:flex; gap:10px; align-items:center; }
+.lib-search-row > .input-icon{ flex:1; min-width:0; }
+.lib-create .lbl-short{ display:none; }
+@media (max-width:520px){ .lib-create .lbl{ display:none; } .lib-create .lbl-short{ display:inline; } .lib-create{ padding:0 14px; } }
