@@ -56,6 +56,14 @@ Dans **Exercices** (ou dans la bibliothèque d'une séance en préparation), le 
 - Le crayon de sa fiche permet de le modifier ou de le supprimer. Les séances qui l'utilisent déjà le gardent.
 - Il utilise la même règle `exercices` que les corrections : rien de plus à publier.
 
+## Créer une pathologie
+
+Dans **Pathologies**, le bouton **Créer une pathologie** ouvre l'éditeur de séance : nom, exercices de la bibliothèque (y compris les vôtres), réglages, tours, consigne personnelle. En bas, choisissez la zone du corps (existante ou nouvelle) et, si vous voulez, une image pour la carte (sinon celle du premier exercice), puis **Enregistrer la pathologie**.
+
+- Elle apparaît dans la liste avec le badge « Créée par vous » ; le crayon permet de la modifier ou de la supprimer.
+- Pour partir d'une pathologie existante : ouvrez-la puis **Copier et adapter**.
+- Elles sont rangées avec vos modèles dans Firebase (même accès réservé au kiné) : rien à changer dans les règles.
+
 ## Bon à savoir
 
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.

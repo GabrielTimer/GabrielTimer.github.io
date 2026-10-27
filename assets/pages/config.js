@@ -30,8 +30,26 @@ let S = blank();
 let mode = { kind:"new" };
 let editSeance = null;
 let restored = false;
+let PATHOS_BUILTIN = [];
 
 async function init(){
+  /* Pathologie : création (patho=new, éventuellement from=<id prêt à l'emploi>) ou modification */
+  if(params.get("patho")){
+    const id = params.get("patho");
+    const { PATHOLOGIES } = await import("../pathologies.js");
+    PATHOS_BUILTIN = PATHOLOGIES;
+    let p = null;
+    if(id !== "new"){
+      p = await C.getPathologie(id);
+      if(!p){ toast("Pathologie introuvable.", { type:"err" }); location.replace("/pathologies.html"); return false; }
+    }else if(params.get("from")){
+      const src = PATHOLOGIES.find(x => x.id === params.get("from")) || await C.getPathologie(params.get("from")).catch(() => null);
+      if(src) p = { nom: `${src.nom} (copie)`, zone: src.zone, zoneLabel: src.zoneLabel, cover: src.cover || null, series: src.series, exercices: src.exercices, copie: true };
+    }
+    S = { ...blank(), nom: p?.nom || "", series: p?.series || 1, exercices: (p?.exercices || []).map(e => normExo({ type:"timer", ...e })) };
+    mode = { kind:"edit-patho", patho: { id: p && !p.copie ? p.id : null, zone: p?.zone || "", zoneLabel: p?.zoneLabel || "", cover: p?.cover || null, createdAt: p?.createdAt || null } };
+    return true;
+  }
   const edit = store.get("gt_edit");
   if(params.get("edit") && edit){
     if(edit.type === "seance"){
@@ -112,6 +130,7 @@ function titleText(){
   if(mode.kind === "edit-seance") return `Modifier la séance ${editSeance.label || ""}`;
   if(mode.kind === "edit-modele") return "Modifier le modèle";
   if(mode.kind === "edit-favori") return "Modifier la séance favorite";
+  if(mode.kind === "edit-patho") return mode.patho.id ? "Modifier la pathologie" : "Nouvelle pathologie";
   return "Nouvelle séance";
 }
 
@@ -123,7 +142,7 @@ function mountView(){
         ${restored ? `<div class="notice" style="margin-bottom:14px">${icon("history")}<div class="row wrap" style="flex:1"><span style="flex:1 1 220px">Vous reprenez la séance en cours de préparation.</span><button class="btn sm" type="button" id="restart">${icon("plus")}Repartir de zéro</button></div></div>` : ""}
         <div class="panel cfg-head">
           <span class="cfg-mode badge lagon" style="align-self:flex-start">${esc(titleText())}</span>
-          <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="Nom de la séance, ex. Lombalgie phase 1" aria-label="Nom de la séance" maxlength="80">
+          <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-patho" ? "Nom de la pathologie, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
           <div class="cfg-summary">
             <span id="sum-dur">${icon("clock")}</span>
             <span id="sum-n">${icon("dumbbell")}</span>
@@ -385,6 +404,7 @@ function renderSend(full = true){
     bindCommon();
     return;
   }
+  if(mode.kind === "edit-patho"){ renderPathoPanel(box); return; }
   if(mode.kind === "edit-modele" || mode.kind === "edit-favori"){
     box.innerHTML = `
       <h2>Enregistrer</h2>
@@ -626,6 +646,92 @@ function saveEditFavori(){
   store.del("gt_edit");
   toast("Séance favorite enregistrée.", { type:"ok" });
   setTimeout(() => location.href = "/mes_programmes.html", 600);
+}
+
+/* ---------- Pathologie : zone, image de couverture, enregistrement ---------- */
+
+const slug = v => String(v || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+
+function renderPathoPanel(box){
+  const P = mode.patho;
+  const zones = [...new Map(PATHOS_BUILTIN.map(p => [p.zone, p.zoneLabel])).values()];
+  const coverHTML = () => {
+    const src = P.cover || exerciseImage(S.exercices[0] || {});
+    return `${src ? `<img src="${esc(src)}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:top">` : `<div class="ee-img-empty">${icon("upload")}<span>Aucune image</span></div>`}`;
+  };
+  box.innerHTML = `
+    <h2>Enregistrer la pathologie</h2>
+    <div class="group stack" style="--gap:14px">
+      <div class="field"><label for="p-zone">Zone du corps</label>
+        <input class="input" id="p-zone" list="p-zones" value="${esc(P.zoneLabel)}" placeholder="Ex. Cheville, ou une nouvelle zone">
+        <datalist id="p-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist>
+        <span class="hint">Choisissez une zone existante ou tapez-en une nouvelle.</span></div>
+      <div class="field"><span class="label">Image de la carte</span>
+        <div class="ee-img">
+          <div class="ee-img-prev" id="p-cover" style="width:160px;height:100px">${coverHTML()}</div>
+          <div class="stack" style="--gap:8px">
+            <label class="btn soft sm ee-file">${icon("upload")}<span id="p-cover-lbl">${P.cover ? "Changer l'image" : "Choisir une image"}</span><input type="file" id="p-cover-file" accept="image/*" hidden></label>
+            <button class="btn ghost sm" type="button" id="p-cover-del" ${P.cover ? "" : "hidden"}>${icon("trash")}Retirer</button>
+            <span class="hint">Facultatif : sinon, l'image du premier exercice.</span>
+          </div>
+        </div></div>
+    </div>
+    <div class="send-actions">
+      <button class="btn primary big" type="button" id="save-patho">${icon("check")}Enregistrer la pathologie</button>
+      <button class="btn" type="button" id="run">${icon("play")}Tester</button>
+      <button class="btn" type="button" id="pdf">${icon("pdf")}Fiche PDF</button>
+      ${P.id ? `<button class="btn danger" type="button" id="del-patho">${icon("trash")}Supprimer</button>` : ""}
+    </div>`;
+  const refreshCover = () => {
+    $("#p-cover").innerHTML = coverHTML();
+    $("#p-cover-lbl").textContent = P.cover ? "Changer l'image" : "Choisir une image";
+    $("#p-cover-del").hidden = !P.cover;
+  };
+  $("#p-zone").addEventListener("input", e => { P.zoneLabel = e.target.value; });
+  $("#p-cover-file").onchange = async ev => {
+    const file = ev.target.files?.[0]; ev.target.value = "";
+    if(!file) return;
+    $("#p-cover-lbl").textContent = "Préparation…";
+    try{ const { compressImage } = await import("../exercise-editor.js"); P.cover = await compressImage(file); }
+    catch(e){ toast("Cette image n'a pas pu être lue.", { type:"err" }); }
+    refreshCover();
+  };
+  $("#p-cover-del").onclick = () => { P.cover = null; refreshCover(); };
+  $("#save-patho").onclick = savePatho;
+  $("#del-patho")?.addEventListener("click", deletePatho);
+  bindCommon();
+}
+
+async function savePatho(){
+  const P = mode.patho;
+  if(!S.nom.trim()){ toast("Donnez un nom à la pathologie.", { type:"err" }); $("#nom").focus(); return; }
+  if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
+  const label = (P.zoneLabel || "").trim() || "Autre";
+  const known = PATHOS_BUILTIN.find(p => p.zoneLabel.toLowerCase() === label.toLowerCase());
+  const btn = $("#save-patho");
+  btn.disabled = true;
+  try{
+    const data = build();
+    const id = await C.savePathologie({
+      id: P.id || undefined, nom: data.nom, series: data.series, exercices: data.exercices,
+      zone: known ? known.zone : (slug(label) || "autre"), zoneLabel: known ? known.zoneLabel : label,
+      cover: P.cover || null, createdAt: P.createdAt || undefined
+    });
+    P.id = id;
+    toast("Pathologie enregistrée.", { type:"ok" });
+    setTimeout(() => location.href = "/pathologies.html?zone=" + encodeURIComponent(known ? known.zone : (slug(label) || "autre")), 600);
+  }catch(err){
+    console.error(err);
+    btn.disabled = false;
+    toast("Enregistrement impossible : " + (err.message || err), { type:"err" });
+  }
+}
+
+async function deletePatho(){
+  if(!await confirmDialog({ title:"Supprimer cette pathologie ?", message:"Elle disparaît de la liste. Les séances déjà envoyées aux patients ne sont pas touchées.", confirm:"Supprimer", danger:true })) return;
+  await C.deleteModele(mode.patho.id);
+  toast("Pathologie supprimée.", { type:"ok" });
+  setTimeout(() => location.href = "/pathologies.html", 500);
 }
 
 main();
