@@ -41,7 +41,8 @@
   </div>
 </main>
 <script type="module">
-import { $, icon, kineHint, toast } from "/assets/app.js";
+import { $, icon, kineHint, toast, logoSrc } from "/assets/app.js";
+document.querySelectorAll('img[src="/logo.png"]').forEach(i => i.src = logoSrc());
 import { ADMIN_EMAILS } from "/assets/config.js";
 const C = await import("/assets/cloud.js");
 

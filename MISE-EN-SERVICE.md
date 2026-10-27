@@ -66,6 +66,23 @@ Dans **Exercices** (ou dans la bibliothèque d'une séance en préparation), le 
 - Les anciens modèles (« Lombalgie P1 », « P2 »…) sont regroupés automatiquement par niveau. En les modifiant, vous pouvez leur donner une catégorie et une zone.
 - Rien à changer dans Firebase.
 
+## Réglages du cabinet, favoris, éléments masqués, sauvegarde
+
+**Outils → Réglages du cabinet** regroupe tout ce qui se modifiait auparavant dans le code : nom, profession, logo, coordonnées, message d'accès envoyé aux patients, annonce affichée chez les patients, messages de fin de séance, bas de page des PDF, réglage par défaut des nouveaux exercices, seuils d'alerte, catégories de modèles, noms des niveaux, zones, éléments masqués, et la **sauvegarde / restauration** complète des données.
+
+Dans la bibliothèque : étoile = exercice favori (affiché en premier, filtre « ★ Mes favoris ») ; « Masquer cet exercice » en bas de sa fiche (filtre « Exercices masqués » pour le réafficher). Dans Modèles : les modèles fournis peuvent être modifiés (votre version prend leur place), dupliqués ou masqués.
+
+**À faire une fois** : ajouter la règle `reglages` dans Firebase (Firestore Database → Règles), juste avant le bloc `match /programmes/{id}`, puis Publier :
+
+```
+    match /reglages/{id} {
+      allow read: if true;
+      allow write: if isKine();
+    }
+```
+
+Tout est expliqué dans la page **Aide** (menu Outils, ou lien « Aide » sur ordinateur).
+
 ## Bon à savoir
 
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.

@@ -71,6 +71,12 @@ service cloud.firestore {
       allow read, write: if isKine();
     }
 
+    // Réglages du cabinet (nom, annonce, listes…) : lus par tous, modifiés par le kiné
+    match /reglages/{id} {
+      allow read: if true;
+      allow write: if isKine();
+    }
+
     // Ancienne collection (avant migration) : réservée au kiné
     match /programmes/{id} {
       allow read, write: if isKine();

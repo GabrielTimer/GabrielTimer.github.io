@@ -3,7 +3,7 @@
    ========================================================= */
 
 import { currentKine } from "./cloud.js";
-import { groupProgrammes, startOfDay, evaTrend, kineHint } from "./app.js";
+import { groupProgrammes, startOfDay, evaTrend, kineHint, settings } from "./app.js";
 
 /** À appeler en haut de chaque page réservée au kiné. */
 export async function requireKine(){
@@ -33,19 +33,20 @@ export function summarize(patient, seances){
   const joursSans = derniere ? Math.floor((Date.now() - derniere.dateValidation) / DAY) : null;
   const commentaires = valides.filter(s => s.commentaire).slice(-5).reverse();
 
+  const A = settings.alertes;
   const alertes = [];
-  if(lastEva !== null && lastEva >= 7 && derniere && Date.now() - derniere.dateValidation < 14 * DAY){
+  if(lastEva !== null && lastEva >= A.douleur && derniere && Date.now() - derniere.dateValidation < 14 * DAY){
     alertes.push({ niveau:"danger", ico:"alert", texte:`Douleur forte : ${lastEva}/10` });
   }
-  if(trend && trend.delta >= 2){
+  if(trend && trend.delta >= A.hausse){
     alertes.push({ niveau:"warn", ico:"trendUp", texte:"Douleur en hausse" });
   }
   if(derniere && derniere.ressenti === "trop_dur" && Date.now() - derniere.dateValidation < 14 * DAY){
     alertes.push({ niveau:"warn", ico:"flag", texte:"Séance jugée trop dure" });
   }
-  if(retard >= 2){
+  if(retard >= A.retard){
     alertes.push({ niveau:"warn", ico:"clock", texte:`${retard} séances en retard` });
-  }else if(actif && joursSans !== null && joursSans >= 10 && retard >= 1){
+  }else if(actif && joursSans !== null && joursSans >= A.joursSans && retard >= 1){
     alertes.push({ niveau:"warn", ico:"clock", texte:`Pas de séance depuis ${joursSans} jours` });
   }
   const recentComment = commentaires.find(s => Date.now() - s.dateValidation < 7 * DAY);

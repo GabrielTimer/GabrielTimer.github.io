@@ -351,6 +351,68 @@ export async function propagateExerciseEdit(before, after){
   return { seances: nS, modeles: nM };
 }
 
+/* ---------- Réglages du cabinet (reglages/cabinet, lisibles par tous) ---------- */
+
+export async function getReglages(){
+  const snap = await getDoc(doc(db, "reglages", "cabinet"));
+  return snap.exists() ? snap.data() : null;
+}
+
+export async function saveReglages(data){
+  await setDoc(doc(db, "reglages", "cabinet"), clean({ ...data, updatedAt: Date.now() }));
+}
+
+/* ---------- Sauvegarde complète et restauration (kiné) ---------- */
+
+/** Toutes les données du cabinet, dans un seul objet à enregistrer en fichier. */
+export async function exportAll(onProgress = () => {}){
+  const out = { format: "gabrieltimer-sauvegarde", version: 1, date: new Date().toISOString(), collections: {} };
+  const grab = async name => {
+    onProgress(name);
+    const snap = await getDocs(collection(db, name));
+    out.collections[name] = snap.docs.map(d => ({ id: d.id, data: d.data() }));
+  };
+  for(const name of ["patients", "fiches", "modeles", "exercices", "reglages"]) await grab(name);
+  onProgress("seances");
+  const seances = await getDocs(collectionGroup(db, "seances"));
+  out.collections.seances = seances.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
+  return out;
+}
+
+/**
+ * Restaure une sauvegarde. Les documents de la sauvegarde remplacent ceux qui
+ * portent le même identifiant ; rien n'est effacé.
+ * only : liste des parties à restaurer (par défaut toutes).
+ */
+export async function importAll(backup, { only = null, onProgress = () => {} } = {}){
+  if(!backup || backup.format !== "gabrieltimer-sauvegarde" || !backup.collections) throw new Error("Ce fichier n'est pas une sauvegarde de l'application.");
+  const want = name => !only || only.includes(name);
+  const ops = [];
+  const count = {};
+  ["patients", "fiches", "modeles", "exercices", "reglages"].forEach(name => {
+    if(!want(name)) return;
+    (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
+  });
+  if(want("seances")){
+    (backup.collections.seances || []).forEach(d => {
+      if(!d.cle) return;
+      ops.push([doc(db, "patients", d.cle, "seances", d.id), d.data]);
+      count.seances = (count.seances || 0) + 1;
+    });
+  }
+  /* Lots de 300 documents au plus, et environ 4 Mo au plus (les images comptent) */
+  let batch = writeBatch(db), n = 0, size = 0, done = 0;
+  for(const [ref, data] of ops){
+    const c = clean(data);
+    const sz = JSON.stringify(c).length;
+    if(n && (n >= 300 || size + sz > 4e6)){ await batch.commit(); batch = writeBatch(db); n = 0; size = 0; onProgress(done, ops.length); }
+    batch.set(ref, c); n++; size += sz; done++;
+  }
+  if(n) await batch.commit();
+  onProgress(ops.length, ops.length);
+  return count;
+}
+
 /* ---------- Écritures groupées ---------- */
 
 async function batchWrite(ops){

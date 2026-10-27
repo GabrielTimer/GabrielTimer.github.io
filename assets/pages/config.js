@@ -5,7 +5,7 @@
 import {
   $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, promptDialog, openSheet,
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
-  emptyHTML, byWeek
+  emptyHTML, byWeek, settings
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise } from "../library.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
@@ -42,21 +42,26 @@ async function init(){
     MOD = await import("../modeles.js");
     const load = async id => MOD.BUILTIN.find(x => x.id === id) || (await C.getModele(id).then(r => r && MOD.normModele(r)).catch(() => null));
     let m = null, copie = false;
+    let remplace = null;
     if(modeleId !== "new"){
       m = await load(modeleId);
-      if(!m || m.builtin){ copie = !!m; }
+      if(m && m.builtin){
+        /* Modèle fourni : « remplace=1 » le modifie (votre version prend sa place), sinon copie */
+        if(params.get("remplace")) remplace = m.id; else copie = true;
+      }
       if(!m){ toast("Modèle introuvable.", { type:"err" }); location.replace("/programmes_admin.html"); return false; }
     }else if(params.get("from")){
       m = await load(params.get("from"));
       copie = true;
     }
     const niveau = params.get("niveau") ? Number(params.get("niveau")) : (m?.niveau || null);
-    const keepName = params.get("niveau") || !copie;
+    const keepName = params.get("niveau") || !copie || remplace;
     S = { ...blank(), nom: m ? (keepName ? m.nom : `${m.nom} (copie)`) : "", series: m?.series || 1, exercices: (m?.exercices || []).map(e => normExo({ type:"timer", ...e })) };
     mode = { kind:"edit-modele", meta: {
-      id: m && !copie ? m.id : null,
+      id: m && !copie && !remplace ? m.id : null,
+      remplace: remplace || (!copie ? m?.remplace : null) || null,
       categorie: m?.categorie || params.get("cat") || "pathologie",
-      zoneLabel: m?.zoneLabel || "", niveau, cover: m?.cover || null, createdAt: m && !copie ? m.createdAt : null
+      zoneLabel: m?.zoneLabel || "", niveau, cover: m?.cover || null, createdAt: m && !copie && !remplace ? m.createdAt : null
     } };
     return true;
   }
@@ -133,7 +138,7 @@ async function main(){
 
 function titleText(){
   if(mode.kind === "edit-seance") return `Modifier la séance ${editSeance.label || ""}`;
-  if(mode.kind === "edit-modele") return mode.meta.id ? "Modifier le modèle" : "Nouveau modèle";
+  if(mode.kind === "edit-modele") return mode.meta.id || mode.meta.remplace ? "Modifier le modèle" : "Nouveau modèle";
   if(mode.kind === "edit-favori") return "Modifier la séance favorite";
   return "Nouvelle séance";
 }
@@ -169,7 +174,7 @@ function mountView(){
   $("#series").addEventListener("input", e => { S.series = clamp(+e.target.value, 1, 20); persist(); renderSummary(); });
   $("#series").addEventListener("change", e => { e.target.value = S.series; });
   $$("[data-step=series]").forEach(b => b.onclick = () => { S.series = clamp(S.series + Number(b.dataset.d), 1, 20); $("#series").value = S.series; persist(); renderSummary(); });
-  $("#add-custom").onclick = () => { addExercise({ nom:`Exercice ${S.exercices.length + 1}`, ex:30, repos:10, reps:10, type:"timer" }); setTimeout(() => { const n = $$(".exo-name"); n[n.length - 1]?.select(); }, 30); };
+  $("#add-custom").onclick = () => { addExercise({ nom:`Exercice ${S.exercices.length + 1}`, ex:settings.exercice.ex, repos:settings.exercice.repos, reps:settings.exercice.reps, type:"timer" }); setTimeout(() => { const n = $$(".exo-name"); n[n.length - 1]?.select(); }, 30); };
   $("#add-lib").onclick = () => openLibrarySheet(false);
   $("#lib-full")?.addEventListener("click", () => openLibrarySheet(true));
   $("#restart")?.addEventListener("click", async () => {
@@ -664,23 +669,23 @@ function saveEditFavori(){
 const splitName = nom => MOD ? MOD.splitLevel(nom) : { base: nom, niveau: null };
 
 function metaFieldsHTML(meta){
-  const zones = [...new Set([...MOD.ZONES, ...MOD.BUILTIN.map(m => m.zoneLabel).filter(Boolean)])];
+  const zones = [...new Set([...MOD.zones(), ...MOD.BUILTIN.map(m => m.zoneLabel).filter(Boolean)])];
   return `
     <div class="field"><label for="m-cat">Catégorie</label>
-      <select class="select" id="m-cat">${MOD.CATEGORIES.map(c => `<option value="${c.id}" ${c.id === meta.categorie ? "selected" : ""}>${esc(c.one)}</option>`).join("")}</select></div>
+      <select class="select" id="m-cat">${MOD.categories().map(c => `<option value="${c.id}" ${c.id === meta.categorie ? "selected" : ""}>${esc(c.one)}</option>`).join("")}</select></div>
     <div class="row wrap ee-nums" style="--gap:10px">
       <div class="field"><label for="m-zone">Zone du corps</label>
         <input class="input" id="m-zone" list="m-zones" value="${esc(meta.zoneLabel || "")}" placeholder="Ex. Genou">
         <datalist id="m-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist></div>
       <div class="field"><label for="m-niv">Niveau</label>
-        <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.NIVEAUX.map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}</select></div>
+        <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.niveaux().map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}</select></div>
     </div>
     <span class="hint">Pour proposer plusieurs niveaux d'un même modèle, gardez exactement le même nom et changez seulement le niveau.</span>`;
 }
 
 function readMeta(root){
   const zone = root.querySelector("#m-zone").value.trim();
-  const known = [...MOD.ZONES, ...MOD.BUILTIN.map(m => m.zoneLabel)].find(z => z && z.toLowerCase() === zone.toLowerCase());
+  const known = [...MOD.zones(), ...MOD.BUILTIN.map(m => m.zoneLabel)].find(z => z && z.toLowerCase() === zone.toLowerCase());
   return {
     categorie: root.querySelector("#m-cat").value,
     zoneLabel: known || zone,
@@ -745,7 +750,8 @@ async function saveModeleForm(){
     P.id = await C.saveModele({
       id: P.id || undefined, nom: P.niveau ? splitName(data.nom).base : data.nom,
       categorie: P.categorie, zoneLabel: P.zoneLabel, niveau: P.niveau,
-      cover: P.cover || null, series: data.series, exercices: data.exercices, createdAt: P.createdAt || undefined
+      cover: P.cover || null, series: data.series, exercices: data.exercices, createdAt: P.createdAt || undefined,
+      remplace: P.remplace || undefined
     });
     toast("Modèle enregistré.", { type:"ok" });
     setTimeout(() => location.href = `/programmes_admin.html?cat=${encodeURIComponent(P.categorie)}`, 600);

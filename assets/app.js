@@ -4,8 +4,9 @@
 
 import { icon } from "./icons.js";
 import { KINE, SITE_URL } from "./config.js";
+import { settings, logoSrc } from "./settings.js";
 
-export { icon, KINE, SITE_URL };
+export { icon, KINE, SITE_URL, settings, logoSrc };
 
 /* ---------- DOM ---------- */
 
@@ -482,8 +483,8 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   const main = $("main") || h(`<main class="page"></main>`);
   const shell = h(`<div class="shell"></div>`);
   const brand = `<a class="brand" href="/index.html" aria-label="Accueil">
-      <img src="/logo.png" alt="" width="34" height="34">
-      <span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">Kinésithérapie</span></span>
+      <img src="${esc(logoSrc())}" alt="" width="34" height="34">
+      <span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span>
     </a>`;
 
   const left = back
@@ -508,12 +509,13 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     const foot = role === "kine"
       ? `<div class="nav-foot">
           <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${icon("wrench")}</span><span>Outils</span></a>
+          <a class="nav-link" href="/aide.html"><span class="nav-ico">${icon("info")}</span><span>Aide</span></a>
         </div>`
       : `<div class="nav-foot">
           <a class="nav-link" href="/reglages.html"><span class="nav-ico">${icon("settings")}</span><span>Réglages</span></a>
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
-      <a class="nav-brand brand" href="/index.html"><img src="/logo.png" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">Kinésithérapie</span></span></a>
+      <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
       ${items.map(it => `<a class="nav-link" href="${it.href}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);

@@ -2,7 +2,7 @@
 
 import {
   $, $$, esc, icon, params, getRunProgram, fmtDuree, plural, EVA_LABELS, evaFace, RESSENTIS,
-  localProgs, toast, vibrate, session, KINE, prenom, store
+  localProgs, toast, vibrate, session, KINE, prenom, store, settings
 } from "../app.js";
 
 const app = $("#app");
@@ -13,7 +13,7 @@ const apercu = params.get("apercu") === "1";
 const from = params.get("from");
 const duree = Number(params.get("duree")) || 0;
 const cloud = !!(cle && sid);
-const messages = ["Excellent travail.", "Très belle séance.", "Chaque séance compte.", "Bravo pour votre régularité."];
+const messages = settings.messages.encouragements?.length ? settings.messages.encouragements : ["Excellent travail."];
 
 let eva = null;
 let ressenti = null;

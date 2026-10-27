@@ -3,7 +3,7 @@
    Titre, consignes, image, vidéo, mots-clés, réglage proposé…
    ========================================================= */
 
-import { esc, icon, openSheet, toast, confirmDialog, exoImageHTML } from "./app.js";
+import { esc, icon, openSheet, toast, confirmDialog, exoImageHTML, settings } from "./app.js";
 import { applyEdit, exerciseKey, EDITABLE, fromCustom, addToLibrary, removeFromLibrary, loadLibrary, youtubeId, PERSO } from "./library.js";
 
 const lines = v => String(v || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
@@ -81,7 +81,7 @@ const plural = (n, w) => `${n} ${w}${n > 1 ? "s" : ""}`;
 export async function openExerciseEditor(e, { onSaved = () => {} } = {}){
   const creating = !e;
   const custom = creating || e.source === PERSO;
-  const base = e || Object.assign(fromCustom("", { consignes: [], ex: 30, repos: 10, reps: 10, niveau: 1 }), { nom: "", categorie: "" });
+  const base = e || Object.assign(fromCustom("", { consignes: [], ex: settings.exercice.ex, repos: settings.exercice.repos, reps: settings.exercice.reps, niveau: 1 }), { nom: "", categorie: "" });
 
   const all = await loadLibrary().catch(() => []);
   const cats = Array.from(new Set(all.map(x => x.categorie).filter(Boolean))).sort((a, b) => a.localeCompare(b, "fr"));

@@ -5,25 +5,17 @@
 
 import { PATHOLOGIES } from "./pathologies.js";
 import { norm } from "./library.js";
+import { settings } from "./settings.js";
 
-export const CATEGORIES = [
-  { id:"pathologie", label:"Pathologies", one:"Pathologie", ico:"stethoscope" },
-  { id:"postop", label:"Post-opératoire", one:"Post-opératoire", ico:"heart" },
-  { id:"prevention", label:"Prévention", one:"Prévention", ico:"checkCircle" },
-  { id:"sport", label:"Sport et reprise", one:"Sport et reprise", ico:"run" },
-  { id:"cabinet", label:"Au cabinet", one:"Au cabinet", ico:"dumbbell" },
-  { id:"autre", label:"Autres", one:"Autre", ico:"layers" }
-];
-export const catLabel = id => (CATEGORIES.find(c => c.id === id) || CATEGORIES[CATEGORIES.length - 1]).one;
-
-export const NIVEAUX = [
-  { n:1, label:"Niveau 1", sub:"débutant, phase initiale" },
-  { n:2, label:"Niveau 2", sub:"intermédiaire" },
-  { n:3, label:"Niveau 3", sub:"avancé" },
-  { n:4, label:"Niveau 4", sub:"expert, retour au sport" }
-];
-
-export const ZONES = ["Épaule", "Coude", "Poignet et main", "Cervicales", "Dos", "Hanche", "Genou", "Cheville et pied", "Tronc", "Corps entier", "Respiratoire"];
+/* Listes modifiables dans Outils → Réglages du cabinet */
+export const categories = () => settings.listes.categories;
+export const niveaux = () => settings.listes.niveaux;
+export const zones = () => settings.listes.zones;
+export const catLabel = id => {
+  const list = categories();
+  return (list.find(c => c.id === id) || list.find(c => c.id === "autre") || { one: "Autre" }).one || id;
+};
+export const niveauLabel = n => (niveaux().find(x => x.n === Number(n)) || {}).label || `Niveau ${n}`;
 
 /** « Lombalgie P2 », « Épaule 1 », « Genou niveau 3 » → { base, niveau } */
 export function splitLevel(nom){
@@ -49,19 +41,24 @@ export function normModele(raw, { builtin = false } = {}){
   const meta = builtin ? (BUILTIN_META[raw.id] || {}) : {};
   const niveau = Number(raw.niveau) || parsed.niveau || null;
   const base = raw.niveau ? String(raw.nom || "").trim() || parsed.base : parsed.base;
-  const categorie = meta.categorie || raw.categorie || (raw.type === "pathologie" || builtin ? "pathologie" : "autre");
+  let categorie = meta.categorie || raw.categorie || (raw.type === "pathologie" || builtin ? "pathologie" : "autre");
+  if(!categories().some(c => c.id === categorie)) categorie = "autre";
   const zoneLabel = meta.zoneLabel || raw.zoneLabel || "";
   return {
     id: raw.id, raw, builtin, mine: !builtin,
     nom: base, niveau, categorie, zoneLabel, zoneKey: norm(zoneLabel),
     cover: raw.cover || null, pdf: raw.pdf || null,
     series, exercices,
-    titre: niveau ? `${base}, niveau ${niveau}` : base,
+    titre: niveau ? `${base}, ${niveauLabel(niveau).toLowerCase()}` : base,
+    remplace: raw.remplace || null,
     createdAt: raw.createdAt || null
   };
 }
 
 export const BUILTIN = PATHOLOGIES.map(p => normModele(p, { builtin:true }));
+
+/** Modèles fournis : masqués par le kiné, ou remplacés par sa propre version. */
+export const isBuiltinHidden = id => settings.masques.modeles.includes(id);
 
 export const coverOf = m => m.cover || m.exercices?.[0]?.image || null;
 
@@ -69,8 +66,9 @@ export const coverOf = m => m.cover || m.exercices?.[0]?.image || null;
 export function groupModeles(list){
   const groups = new Map();
   list.forEach(m => {
-    const k = `${m.mine ? "m" : "b"}|${m.categorie}|${norm(m.nom)}`;
-    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:m.mine, items:[] });
+    const k = `${m.categorie}|${norm(m.nom)}`;
+    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:false, items:[] });
+    if(m.mine) groups.get(k).mine = true;
     groups.get(k).items.push(m);
   });
   const out = [...groups.values()];

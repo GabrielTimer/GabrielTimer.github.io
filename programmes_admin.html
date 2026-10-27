@@ -39,7 +39,8 @@
 <script type="module">
 import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
-import { CATEGORIES, NIVEAUX, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel } from "/assets/modeles.js";
+import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
+import { toggleInList } from "/assets/settings.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -68,8 +69,8 @@ app.innerHTML = `
     <div class="chips scroll" id="cats" role="group" aria-label="Catégorie"></div>
     <div class="mo-selects">
       <select class="select" id="zone" aria-label="Zone du corps"></select>
-      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous les niveaux</option>${NIVEAUX.map(n => `<option value="${n.n}">${n.label}</option>`).join("")}</select>
-      <select class="select" id="source" aria-label="Origine"><option value="">Tous les modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option></select>
+      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous les niveaux</option>${niveaux().map(n => `<option value="${n.n}">${esc(n.label)}</option>`).join("")}</select>
+      <select class="select" id="source" aria-label="Origine"><option value="">Tous les modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option><option value="masques">Modèles fournis masqués</option></select>
     </div>
   </div>
   <div class="small muted" id="count" style="margin-bottom:10px"></div>
@@ -81,13 +82,20 @@ app.innerHTML = `
 
 let mine = [];
 const chosen = new Map(); // groupe → id du niveau affiché
-const all = () => [...mine, ...BUILTIN];
+/* Les modèles fournis masqués, ou remplacés par votre version, ne s'affichent pas
+   (sauf avec le filtre « Modèles fournis masqués »). */
+const all = () => {
+  const replaced = new Set(mine.map(m => m.remplace).filter(Boolean));
+  const builtins = BUILTIN.filter(b => !replaced.has(b.id) && (F.source === "masques" ? isBuiltinHidden(b.id) : !isBuiltinHidden(b.id)));
+  return F.source === "masques" ? builtins : [...mine, ...builtins];
+};
 
 /* ---------- Actions ---------- */
 const findM = id => all().find(m => m.id === id);
 const useIt = m => { store.set("gt_draft", asProgram(m)); location.href = "/config.html?draft=1"; };
 const runIt = m => { setRunProgram(asProgram(m)); location.href = "/timer.html"; };
-const editIt = m => { location.href = m.mine ? `/config.html?modele=${encodeURIComponent(m.id)}` : `/config.html?modele=new&from=${encodeURIComponent(m.id)}`; };
+const editIt = m => { location.href = m.mine ? `/config.html?modele=${encodeURIComponent(m.id)}` : `/config.html?modele=${encodeURIComponent(m.id)}&remplace=1`; };
+const copyIt = m => { location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}`; };
 const pdfIt = m => {
   if(m.pdf){ window.open(m.pdf, "_blank"); return; }
   store.set("programme_pdf", { ...asProgram(m), patient:"", niveau: m.niveau ? `Niveau ${m.niveau}` : "" });
@@ -105,16 +113,18 @@ function detail(m, group){
       <div class="row wrap" style="--gap:6px;margin-bottom:14px">
         <span class="badge lagon">${esc(catLabel(m.categorie))}</span>
         ${m.zoneLabel ? `<span class="badge">${esc(m.zoneLabel)}</span>` : ""}
-        ${m.niveau ? `<span class="badge">Niveau ${m.niveau}</span>` : ""}
+        ${m.niveau ? `<span class="badge">${esc(niveauLabel(m.niveau))}</span>` : ""}
         <span class="badge">${plural(m.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(m)))}${m.series > 1 ? `, ${m.series} tours` : ""}</span>
-        ${m.mine ? `<span class="badge sun">${icon("star")}Mon modèle</span>` : ""}
+        ${m.mine ? `<span class="badge sun">${icon("star")}${m.remplace ? "Ma version" : "Mon modèle"}</span>` : `<span class="badge">Fourni avec l'application</span>`}
       </div>
       <div class="mo-exos">${m.exercices.map((e, i) => `<div class="mo-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${noteOf(e) ? `<div class="small">${esc(noteOf(e))}</div>` : ""}</div></div>`).join("")}</div>
       <div class="row wrap" style="--gap:8px;margin-top:18px">
         <button class="btn sm" type="button" data-a="pdf">${icon("pdf")}Fiche PDF</button>
-        <button class="btn sm" type="button" data-a="edit">${icon(m.mine ? "edit" : "copy")}${m.mine ? "Modifier" : "Copier et adapter"}</button>
-        ${next <= 4 ? `<button class="btn sm" type="button" data-a="level">${icon("plus")}Créer le niveau ${next}</button>` : ""}
-        ${m.mine ? `<button class="btn sm danger" type="button" data-a="del">${icon("trash")}Supprimer</button>` : ""}
+        <button class="btn sm" type="button" data-a="edit">${icon("edit")}Modifier</button>
+        <button class="btn sm" type="button" data-a="copy">${icon("copy")}Dupliquer</button>
+        ${next <= niveaux().length ? `<button class="btn sm" type="button" data-a="level">${icon("plus")}Créer : ${esc(niveauLabel(next).toLowerCase())}</button>` : ""}
+        ${m.builtin ? `<button class="btn sm" type="button" data-a="hide">${icon(isBuiltinHidden(m.id) ? "eye" : "close")}${isBuiltinHidden(m.id) ? "Réafficher" : "Masquer"}</button>` : ""}
+        ${m.mine ? `<button class="btn sm danger" type="button" data-a="del">${icon(m.remplace ? "history" : "trash")}${m.remplace ? "Revenir à la version d'origine" : "Supprimer"}</button>` : ""}
       </div>`,
     foot: `<button class="btn" type="button" data-a="run">${icon("play")}Lancer</button><button class="btn primary" type="button" data-a="use">${icon("share")}Utiliser pour un patient</button>`
   });
@@ -124,9 +134,20 @@ function detail(m, group){
     if(a === "run") runIt(m);
     if(a === "pdf") pdfIt(m);
     if(a === "edit") editIt(m);
+    if(a === "copy") copyIt(m);
+    if(a === "hide"){
+      const hide = !isBuiltinHidden(m.id);
+      try{
+        await toggleInList("masques.modeles", m.id, hide);
+        s.close(); render();
+        toast(hide ? `« ${m.titre} » est masqué. Filtre « Modèles fournis masqués » pour le retrouver.` : `« ${m.titre} » est de nouveau visible.`, { type:"ok", duration:5000 });
+      }catch(err){ console.error(err); toast("Enregistrement impossible. Vérifiez la règle « reglages » dans Firebase (voir Aide).", { type:"err", duration:7000 }); }
+    }
     if(a === "level") location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}&niveau=${next}`;
     if(a === "del"){
-      if(!await confirmDialog({ title:"Supprimer ce modèle ?", message:`« ${m.titre} » sera supprimé. Les programmes déjà envoyés aux patients ne changent pas.`, confirm:"Supprimer", danger:true })) return;
+      if(!await confirmDialog(m.remplace
+        ? { title:"Revenir à la version d'origine ?", message:"Votre version est supprimée et le modèle fourni avec l'application réapparaît.", confirm:"Revenir à l'original" }
+        : { title:"Supprimer ce modèle ?", message:`« ${m.titre} » sera supprimé. Les programmes déjà envoyés aux patients ne changent pas.`, confirm:"Supprimer", danger:true })) return;
       await C.deleteModele(m.id);
       mine = mine.filter(x => x.id !== m.id);
       s.close(); toast("Modèle supprimé.", { type:"ok" }); render();
@@ -152,7 +173,7 @@ function renderFilters(){
   const counts = {};
   all().forEach(m => { counts[m.categorie] = (counts[m.categorie] || 0) + 1; });
   $("#cats").innerHTML = `<button class="chip" type="button" data-c="" aria-pressed="${!F.cat}">Tous<span class="count">${all().length}</span></button>` +
-    CATEGORIES.filter(c => counts[c.id] || c.id === F.cat).map(c => `<button class="chip" type="button" data-c="${c.id}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id] || 0}</span></button>`).join("");
+    categories().filter(c => counts[c.id] || c.id === F.cat).map(c => `<button class="chip" type="button" data-c="${c.id}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id] || 0}</span></button>`).join("");
   $$("[data-c]").forEach(b => b.onclick = () => { F.cat = b.dataset.c; save(); renderFilters(); render(); });
   const zones = [...new Map(all().filter(m => m.zoneLabel).map(m => [m.zoneKey, m.zoneLabel])).entries()].sort((a, b) => a[1].localeCompare(b[1], "fr"));
   $("#zone").innerHTML = `<option value="">Toutes les zones</option>` + zones.map(([k, l]) => `<option value="${esc(k)}" ${k === F.zone ? "selected" : ""}>${esc(l)}</option>`).join("");
@@ -177,18 +198,18 @@ function render(){
     const showLevels = g.items.length > 1 || g.items[0].niveau;
     return `
       <article class="mo-card">
-        ${g.mine ? `<span class="badge sun mo-own">${icon("star")}Mon modèle</span>` : ""}
+        ${cur.mine ? `<span class="badge sun mo-own">${icon("star")}${cur.remplace ? "Ma version" : "Mon modèle"}</span>` : ""}
         <button class="mo-cover" type="button" data-see="${esc(g.key)}" aria-label="Voir ${esc(cur.titre)}">${coverOf(cur) ? `<img src="${esc(coverOf(cur))}" alt="" loading="lazy">` : exoImageHTML(null)}</button>
         <div class="mo-body">
           <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}</span>
           <h2>${esc(g.nom)}</h2>
-          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${x.niveau ? `Niveau ${x.niveau}` : "Sans niveau"}</button>`).join("")}</div>` : ""}
+          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${x.niveau ? esc(niveauLabel(x.niveau)) : "Sans niveau"}</button>`).join("")}</div>` : ""}
           <span class="small muted">${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
         </div>
         <div class="mo-actions">
           <button class="btn primary" type="button" data-use="${esc(cur.id)}">${icon("share")}Utiliser</button>
           <button class="btn" type="button" data-run="${esc(cur.id)}" aria-label="Lancer" title="Lancer">${icon("play")}</button>
-          <button class="btn" type="button" data-edit="${esc(cur.id)}" aria-label="${cur.mine ? "Modifier" : "Copier et adapter"}" title="${cur.mine ? "Modifier" : "Copier et adapter"}">${icon(cur.mine ? "edit" : "copy")}</button>
+          <button class="btn" type="button" data-edit="${esc(cur.id)}" aria-label="Modifier" title="Modifier">${icon("edit")}</button>
         </div>
       </article>`;
   }).join("")}</div>`;
@@ -208,7 +229,7 @@ function render(){
 $("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
 $("#zone").onchange = e => { F.zone = e.target.value; save(); render(); };
 $("#niveau").onchange = e => { F.niveau = e.target.value; save(); render(); };
-$("#source").onchange = e => { F.source = e.target.value; save(); render(); };
+$("#source").onchange = e => { F.source = e.target.value; save(); renderFilters(); render(); };
 
 renderFilters();
 try{

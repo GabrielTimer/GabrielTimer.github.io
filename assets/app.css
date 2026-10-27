@@ -653,3 +653,13 @@ dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minm
 .lib-search-row > .input-icon{ flex:1; min-width:0; }
 .lib-create .lbl-short{ display:none; }
 @media (max-width:520px){ .lib-create .lbl{ display:none; } .lib-create .lbl-short{ display:inline; } .lib-create{ padding:0 14px; } }
+
+.notice.annonce{ background:var(--soleil-soft); }
+.notice.annonce svg{ color:var(--soleil-strong); }
+
+/* Exercices favoris */
+.ee-star.on{ opacity:1; color:var(--soleil-strong); }
+.fav-badge{ position:absolute; top:8px; right:8px; width:28px; height:28px; border-radius:999px; display:grid; place-items:center; background:var(--soleil); color:var(--on-soleil); box-shadow:var(--shadow-1); }
+.fav-badge svg{ width:16px; height:16px; }
+.fav-inline svg{ width:15px; height:15px; color:var(--soleil-strong); vertical-align:-2px; margin-right:4px; }
+.lib-card-img{ position:relative; }

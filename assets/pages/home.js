@@ -4,8 +4,9 @@ import {
   $, esc, icon, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
   fmtDate, fmtRelDay, fmtDuree, prenom, sessionDuration, startOfDay, daysFromToday, evaFace, evaColor,
   plural, loadingHTML, emptyHTML, errorHTML, exoImageHTML, normCode, fmtCode, KINE, byWeek, evaTrend,
-  ressentiLabel, forgetPatient
+  ressentiLabel, forgetPatient, logoSrc
 } from "../app.js";
+import { currentAnnonce, loadSettings } from "../settings.js";
 import { exerciseImage } from "../library.js";
 
 const app = $("#app");
@@ -55,7 +56,7 @@ function renderWelcome(){
   app.classList.add("no-nav");
   app.innerHTML = `
     <section class="welcome">
-      <img class="welcome-logo" src="/logo.png" alt="" id="logo">
+      <img class="welcome-logo" src="${esc(logoSrc())}" alt="" id="logo">
       <div class="welcome-head">
         <h1>${esc(KINE.nom)}</h1>
         <p>${esc(KINE.titre)}</p>
@@ -102,6 +103,14 @@ function renderWelcome(){
 /* =========================================================
    Accueil patient
    ========================================================= */
+
+/* Annonce du cabinet (Outils → Réglages du cabinet), affichée en haut de l'accueil patient */
+function showAnnonce(){
+  const box = document.getElementById("annonce");
+  if(!box) return;
+  const a = currentAnnonce();
+  box.innerHTML = a ? `<div class="notice annonce" style="margin-bottom:16px">${icon("bell")}<span>${esc(a.texte).replace(/\n/g, "<br>")}</span></div>` : "";
+}
 
 async function renderPatient(ctx){
   mountShell({ role:"patient", active:"accueil", apercu:ctx.apercu });
@@ -230,6 +239,7 @@ async function renderPatient(ctx){
 
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(patient.nom))}</h1></div>
+    <div id="annonce"></div>
     ${hero}
     ${seances.some(s => s.datePrevue) ? `
     <section class="section">
@@ -250,6 +260,8 @@ async function renderPatient(ctx){
         <a class="list-item" href="mailto:${esc(KINE.email)}?subject=${encodeURIComponent("Question sur mes exercices")}"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">${esc(KINE.nom)}</span></span><span class="li-end">${icon("chevron")}</span></a>
       </div>
     </section>`;
+  showAnnonce();
+  loadSettings({ force:true }).then(showAnnonce);
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
   $("#bilan")?.addEventListener("click", async () => {
@@ -286,6 +298,7 @@ async function renderKine(user){
       <a class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
       <a class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
       <a class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
+      <a class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>

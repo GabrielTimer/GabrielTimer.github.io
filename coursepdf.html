@@ -450,13 +450,13 @@ Développe l'endurance générale.</p>
 <div class="guideCard">
 <h3>📞 Votre kinésithérapeute</h3>
 
-<p><b>Gabriel LAVEAU</b><br>
-Kinésithérapeute</p>
+<p><b data-kine-nom>Gabriel LAVEAU</b><br>
+<span data-kine-titre>Kinésithérapeute</span></p>
 
-<p>1 avenue de la coopération<br>
+<p data-kine-adresse>1 avenue de la coopération<br>
 86200 Loudun</p>
 
-<p>☎ 05 64 72 40 15</p>
+<p data-kine-tel>☎ 05 64 72 40 15</p>
 </div>
 
 </div>
@@ -470,7 +470,7 @@ text-align:center;
 font-size:13px;
 color:#666;
 ">
-Gabriel LAVEAU, masseur-kinésithérapeute
+<span data-kine-sign="">Gabriel LAVEAU, masseur-kinésithérapeute</span>
 <br>
 Suivi et accompagnement personnalisé
 </div>
@@ -487,6 +487,21 @@ Chaque séance est un pas de plus vers votre objectif.
 📄 Télécharger PDF
 </button>
 
+<script>
+/* Réglages du cabinet (Outils → Réglages du cabinet), gardés sur l'appareil */
+(function(){
+  var s = {}; try{ s = JSON.parse(localStorage.getItem("gt_settings") || "{}") || {}; }catch(e){}
+  var c = s.cabinet || {}, m = s.messages || {};
+  var esc = function(v){ return String(v == null ? "" : v).replace(/[&<>"]/g, function(x){ return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[x]; }); };
+  if(c.logo) document.querySelectorAll('img[src="/logo.png"]').forEach(function(i){ i.src = c.logo; });
+  var nom = c.nom || "Gabriel LAVEAU", titre = c.titre || "Masseur-kinésithérapeute";
+  document.querySelectorAll("[data-kine-sign]").forEach(function(el){ el.innerHTML = esc(nom) + ", " + esc(titre.toLowerCase()) + (el.dataset.kineSign ? ". " + esc(m.piedPdf || el.dataset.kineSign) : ""); });
+  document.querySelectorAll("[data-kine-nom]").forEach(function(el){ el.textContent = nom; });
+  document.querySelectorAll("[data-kine-titre]").forEach(function(el){ el.textContent = titre; });
+  if(c.adresse) document.querySelectorAll("[data-kine-adresse]").forEach(function(el){ el.innerHTML = esc(c.adresse).replace(/\n/g, "<br>"); });
+  if(c.telephone) document.querySelectorAll("[data-kine-tel]").forEach(function(el){ el.textContent = "☎ " + c.telephone; });
+})();
+</script>
 <script>
 
 const data =

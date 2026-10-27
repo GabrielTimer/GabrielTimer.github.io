@@ -1,7 +1,8 @@
 /* Composant « bibliothèque d'exercices » : recherche, filtres, fiche détaillée */
 
-import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree } from "./app.js";
-import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary } from "./library.js";
+import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
+import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
+import { isHidden, isFavorite, toggleInList } from "./settings.js";
 
 const PAGE = 30;
 
@@ -21,7 +22,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="row wrap" style="--gap:8px">
-          <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="PERSO">Mes exercices</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option></select>
+          <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="FAV">★ Mes favoris</option><option value="PERSO">Mes exercices</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option><option value="HIDDEN">Exercices masqués</option></select>
           <select class="select sm-select" data-niveau aria-label="Niveau"><option value="">Tous niveaux</option><option value="1">Niveau 1</option><option value="2">Niveau 2</option><option value="3">Niveau 3</option><option value="4">Niveau 4 et +</option></select>
         </div>
         <div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div>
@@ -60,11 +61,15 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   };
 
   const filtered = () => {
-    let list = all;
-    if(state.source) list = list.filter(e => e.source === state.source);
+    let list = state.source === "HIDDEN" ? all.filter(e => isHidden(exerciseKey(e))) : all.filter(e => !isHidden(exerciseKey(e)));
+    if(state.source === "FAV") list = list.filter(e => isFavorite(exerciseKey(e)));
+    else if(state.source && state.source !== "HIDDEN") list = list.filter(e => e.source === state.source);
     if(state.cat) list = list.filter(e => e.categorie === state.cat);
     if(state.niveau) list = list.filter(e => state.niveau === "4" ? e.niveau >= 4 : e.niveau === Number(state.niveau));
-    return searchLibrary(list, state.q);
+    list = searchLibrary(list, state.q);
+    /* Favoris en tête quand on ne cherche rien de précis */
+    if(!state.q) list = [...list.filter(e => isFavorite(exerciseKey(e))), ...list.filter(e => !isFavorite(exerciseKey(e)))];
+    return list;
   };
 
   const inBadge = e => {
@@ -73,7 +78,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   };
   const card = e => layout === "grid" ? `
       <article class="lib-card">
-        <button class="lib-card-img" type="button" data-open="${esc(e.source + ":" + e.id)}" aria-label="Voir ${esc(e.nom)}">${exoImageHTML(e.image, "")}${inBadge(e)}</button>
+        <button class="lib-card-img" type="button" data-open="${esc(e.source + ":" + e.id)}" aria-label="Voir ${esc(e.nom)}">${exoImageHTML(e.image, "")}${inBadge(e)}${isFavorite(exerciseKey(e)) ? `<span class="fav-badge" title="Favori">${icon("starFill")}</span>` : ""}</button>
         <div class="lib-card-body">
           <div class="lib-meta">${esc(e.categorie)}${e.mode ? `, ${esc(e.mode.toLowerCase())}` : ""}</div>
           <h3>${esc(e.nom)}</h3>
@@ -85,7 +90,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <div class="lib-row">
         <button class="lib-row-main" type="button" data-open="${esc(e.source + ":" + e.id)}">
           ${exoImageHTML(e.image, "", "li-thumb")}
-          <span class="li-main"><span class="li-title">${esc(e.nom)}</span><span class="li-sub">${countIn && countIn(e) ? `<strong style="color:var(--ok)">Dans la séance</strong>, ` : ""}${esc(e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
+          <span class="li-main"><span class="li-title">${isFavorite(exerciseKey(e)) ? `<span class="fav-inline">${icon("starFill")}</span>` : ""}${esc(e.nom)}</span><span class="li-sub">${countIn && countIn(e) ? `<strong style="color:var(--ok)">Dans la séance</strong>, ` : ""}${esc(e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
         </button>
         ${onAdd ? `<button class="icon-btn filled" type="button" data-add="${esc(e.source + ":" + e.id)}" aria-label="${esc(addLabel)} ${esc(e.nom)}">${icon("plus")}</button>` : ""}
       </div>`;
@@ -109,7 +114,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         if(img){ img.querySelector(".in-badge")?.remove(); img.insertAdjacentHTML("beforeend", inBadge(e)); }
       }
     });
-    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: changed }); });
+    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: changed, onTagged: renderResults }); });
   };
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); }, 140));
@@ -162,6 +167,7 @@ export function exerciseSheet(e, opts = {}){
           ${e.pathologies.length ? `<h3>${icon("stethoscope")}Indications</h3><p class="small muted">${esc(e.pathologies.slice(0, 12).join(", "))}</p>` : ""}
           ${e.muscles.length ? `<h3>${icon("body")}Muscles</h3><p class="small muted">${esc(e.muscles.join(", "))}</p>` : ""}
           <p class="small faint" style="margin-top:14px">Réglage proposé : ${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</p>
+          ${e.search !== undefined ? `<p class="small faint" style="margin-top:6px"><button class="ee-link" type="button" data-hide>${isHidden(exerciseKey(e)) ? "Réafficher cet exercice dans la bibliothèque" : "Masquer cet exercice de la bibliothèque"}</button></p>` : ""}
         </div>
       </div>`,
     foot: onAdd ? `<button class="btn" type="button" data-close>Fermer</button><button class="btn primary" type="button" data-addone>${icon("plus")}${esc(addLabel)}</button>` : `<button class="btn primary" type="button" data-close>Fermer</button>`
@@ -185,6 +191,33 @@ async function addEditButton(s, e, opts){
   b.setAttribute("aria-label", "Modifier l'exercice");
   b.innerHTML = icon("edit");
   s.el.querySelector(".sheet-head [data-close]").before(b);
+
+  /* Étoile : exercice favori */
+  const key = exerciseKey(lib);
+  const star = document.createElement("button");
+  star.type = "button";
+  star.className = "icon-btn sm ee-open ee-star";
+  const paintStar = () => {
+    const on = isFavorite(key);
+    star.innerHTML = icon(on ? "starFill" : "star");
+    star.classList.toggle("on", on);
+    star.title = on ? "Retirer des favoris" : "Ajouter aux favoris";
+    star.setAttribute("aria-label", star.title);
+    star.setAttribute("aria-pressed", String(on));
+  };
+  paintStar();
+  b.before(star);
+  const saved = fn => fn.catch(err => { console.error(err); toast("Enregistrement impossible. Vérifiez la règle « reglages » dans Firebase (voir Aide).", { type:"err", duration:7000 }); });
+  star.onclick = () => saved(toggleInList("favoris.exercices", key, !isFavorite(key)).then(() => { paintStar(); opts.onTagged?.(); }));
+
+  /* Lien « Masquer de la bibliothèque » */
+  const hide = s.el.querySelector("[data-hide]");
+  if(hide) hide.onclick = () => saved(toggleInList("masques.exercices", key, !isHidden(key)).then(() => {
+    const now = isHidden(key);
+    toast(now ? `« ${lib.nom} » est masqué. Filtre « Exercices masqués » pour le retrouver.` : `« ${lib.nom} » est de nouveau visible.`, { type:"ok", duration:5000 });
+    s.close(); opts.onTagged?.();
+  }));
+
   b.onclick = async () => {
     const { openExerciseEditor } = await import("./exercise-editor.js");
     s.close();

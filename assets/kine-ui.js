@@ -2,7 +2,8 @@
    Fenêtres partagées de l'espace kiné
    ========================================================= */
 
-import { openSheet, esc, icon, toast, accessLink, fmtCode, KINE, prenom } from "./app.js";
+import { openSheet, esc, icon, toast, accessLink, fmtCode, KINE, prenom, settings, logoSrc } from "./app.js";
+import { fillTemplate } from "./settings.js";
 import { createPatient, listPatients } from "./cloud.js";
 import { qrSVG } from "./qr.js";
 
@@ -60,18 +61,12 @@ export function newPatientSheet(){
   });
 }
 
-/** Message d'invitation envoyé au patient. */
+/** Message d'invitation envoyé au patient (modifiable dans Outils → Réglages du cabinet). */
 export function invitationText(patient){
-  return `Bonjour ${prenom(patient.nom)},
-
-Voici votre accès personnel à vos exercices de kinésithérapie :
-${accessLink(patient.cle)}
-
-Ouvrez ce lien sur votre téléphone, puis ajoutez l'application à votre écran d'accueil pour la retrouver facilement.
-Ce lien est personnel : ne le partagez pas.
-
-${KINE.nom}
-${KINE.titre}`;
+  return fillTemplate(settings.messages.invitation, {
+    prenom: prenom(patient.nom), nom: patient.nom, lien: accessLink(patient.cle),
+    code: fmtCode(patient.cle), kine: KINE.nom, titre: KINE.titre, telephone: settings.cabinet.telephone || ""
+  });
 }
 
 /** Fenêtre d'accès patient : lien, QR code, envoi. */
@@ -123,7 +118,7 @@ export function printAccessCard(patient){
     <div class="card">
       <div class="qr">${qrSVG(link, { size:150 })}</div>
       <div class="txt">
-        <div class="brand"><img src="${location.origin}/logo.png" alt=""><div><b>${esc(KINE.nom)}</b><br><span>${esc(KINE.titre)}</span></div></div>
+        <div class="brand"><img src="${/^data:/.test(logoSrc()) ? logoSrc() : location.origin + logoSrc()}" alt=""><div><b>${esc(KINE.nom)}</b><br><span>${esc(KINE.titre)}</span></div></div>
         <p class="who">${esc(patient.nom)}</p>
         <p>Scannez ce code avec l'appareil photo de votre téléphone pour retrouver vos exercices.</p>
         <p class="code">Code : <b>${esc(fmtCode(patient.cle))}</b></p>

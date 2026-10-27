@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Réglages du cabinet</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .rc{ display:flex; flex-direction:column; gap:18px; padding-bottom:110px; }
+  .rc .panel h2{ font-size:var(--fs-lg); display:flex; align-items:center; gap:10px; }
+  .rc .panel h2 svg{ width:22px; height:22px; color:var(--lagon); }
+  .rc .panel > p.muted{ margin:4px 0 14px; }
+  .rc-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; }
+  .rc-row{ display:flex; gap:8px; align-items:center; }
+  .rc-row .input{ flex:1; min-width:0; }
+  .rc-list{ display:flex; flex-direction:column; gap:8px; }
+  .rc-logo{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
+  .rc-logo .prev{ width:84px; height:84px; border-radius:var(--r-md); border:1px solid var(--line); background:#fff; display:grid; place-items:center; overflow:hidden; }
+  .rc-logo .prev img{ width:100%; height:100%; object-fit:contain; }
+  .rc-vars{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .rc-vars button{ border:1px dashed var(--line-strong, var(--line)); background:var(--surface-2); border-radius:8px; padding:3px 8px; font:inherit; font-size:var(--fs-xs); cursor:pointer; color:var(--ink-2); font-family:var(--mono); }
+  .rc-preview{ white-space:pre-wrap; background:var(--surface-2); border-radius:var(--r-sm); padding:12px 14px; font-size:var(--fs-sm); color:var(--ink-2); }
+  .rc-switch{ display:flex; gap:10px; align-items:center; font-weight:700; }
+  .rc-switch input{ width:20px; height:20px; }
+  .rc-save{ position:fixed; z-index:45; left:0; right:0; bottom:calc(var(--nav-h) + env(safe-area-inset-bottom)); padding:12px 16px; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(8px); border-top:1px solid var(--line); display:flex; justify-content:center; gap:10px; align-items:center; }
+  @media (min-width:960px){ .rc-save{ bottom:0; left:var(--side-w); } }
+  .rc-save .btn{ min-width:240px; }
+  .rc-save .state{ font-size:var(--fs-sm); color:var(--ink-3); }
+  @media (max-width:600px){ .rc-save .state{ display:none; } .rc-save .btn{ flex:1; min-width:0; } }
+  .rc-rule{ font-family:var(--mono); font-size:var(--fs-xs); background:var(--surface-2); padding:10px 12px; border-radius:var(--r-sm); white-space:pre; overflow:auto; }
+</style>
+</head>
+<body>
+<main class="page" id="app"></main>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, openSheet, accessLink, prenom } from "/assets/app.js";
+import { settings, DEFAULTS, saveSettings, loadSettings, fillTemplate, logoSrc } from "/assets/settings.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html", title:"Réglages du cabinet" });
+const C = await import("/assets/cloud.js");
+const app = $("#app");
+
+await loadSettings({ force:true });
+const R = structuredClone(settings);   // brouillon en cours de modification
+let dirty = false;
+let logo = R.cabinet.logo || null;
+
+const RULE = `    match /reglages/{id} {
+      allow read: if true;
+      allow write: if isKine();
+    }`;
+
+const slug = v => String(v || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+const field = (id, label, value, { type = "text", ph = "", hint = "", attrs = "" } = {}) => `
+  <div class="field"><label for="${id}">${esc(label)}</label><input class="input" id="${id}" type="${type}" value="${esc(value ?? "")}" placeholder="${esc(ph)}" ${attrs}>${hint ? `<span class="hint">${esc(hint)}</span>` : ""}</div>`;
+const area = (id, label, value, { rows = 4, hint = "", ph = "" } = {}) => `
+  <div class="field"><label for="${id}">${esc(label)}</label><textarea class="textarea" id="${id}" rows="${rows}" placeholder="${esc(ph)}">${esc(value ?? "")}</textarea>${hint ? `<span class="hint">${esc(hint)}</span>` : ""}</div>`;
+const num = (id, label, value, min, max, hint = "") => field(id, label, value, { type:"number", hint, attrs:`min="${min}" max="${max}" inputmode="numeric"` });
+
+function render(){
+  const A = R.messages.annonce;
+  app.innerHTML = `
+  <div class="page-head"><h1>Réglages du cabinet</h1><p class="lead">Tout ce qui se modifie sans toucher au code. Les changements s'appliquent sur tous vos appareils et chez vos patients.</p></div>
+  <div id="rule-warn"></div>
+  <div class="rc">
+
+    <section class="panel">
+      <h2>${icon("user")}Le cabinet</h2>
+      <p class="muted">Affiché dans l'application, sur l'écran d'accueil des patients et sur les fiches PDF.</p>
+      <div class="rc-logo" style="margin-bottom:14px">
+        <div class="prev" id="logo-prev"></div>
+        <div class="stack" style="--gap:8px">
+          <label class="btn soft sm ee-file">${icon("upload")}<span>Changer le logo</span><input type="file" id="logo-file" accept="image/*" hidden></label>
+          <button class="btn ghost sm" type="button" id="logo-del">${icon("history")}Logo d'origine</button>
+        </div>
+      </div>
+      <div class="rc-grid">
+        ${field("c-nom", "Nom", R.cabinet.nom)}
+        ${field("c-titre", "Profession", R.cabinet.titre, { ph:"Masseur-kinésithérapeute" })}
+        ${field("c-sous", "Sous le nom (menu)", R.cabinet.sousTitre, { ph:"Kinésithérapie" })}
+        ${field("c-email", "E-mail de contact", R.cabinet.email, { type:"email", hint:"Les patients vous écrivent à cette adresse." })}
+        ${field("c-tel", "Téléphone", R.cabinet.telephone, { type:"tel" })}
+        ${area("c-adr", "Adresse", R.cabinet.adresse, { rows:2 })}
+      </div>
+      <p class="hint" style="margin-top:10px">L'adresse e-mail de <strong>connexion</strong> à l'espace kiné ne change pas ici : elle est liée à votre compte Firebase.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("bell")}Annonce aux patients</h2>
+      <p class="muted">Un bandeau en haut de l'accueil de tous vos patients. Par exemple : « Le cabinet sera fermé du 23 au 31 décembre. »</p>
+      <label class="rc-switch" style="margin-bottom:12px"><input type="checkbox" id="a-on" ${A.active ? "checked" : ""}>Afficher l'annonce</label>
+      ${area("a-txt", "Texte de l'annonce", A.texte, { rows:3 })}
+      <div class="rc-grid" style="margin-top:12px">
+        ${field("a-deb", "À partir du (facultatif)", A.debut, { type:"date" })}
+        ${field("a-fin", "Jusqu'au (facultatif)", A.fin, { type:"date", hint:"Elle disparaît d'elle-même après cette date." })}
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("message")}Message d'accès envoyé au patient</h2>
+      <p class="muted">Texte envoyé avec le lien personnel (SMS, WhatsApp, e-mail). Touchez une étiquette pour l'insérer.</p>
+      ${area("m-inv", "Message", R.messages.invitation, { rows:9 })}
+      <div class="rc-vars">${["prenom", "nom", "lien", "code", "kine", "titre", "telephone"].map(v => `<button type="button" data-var="${v}">{${v}}</button>`).join("")}</div>
+      <div class="label" style="margin:14px 0 6px">Aperçu</div>
+      <div class="rc-preview" id="m-prev"></div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("checkCircle")}Fin de séance et fiches PDF</h2>
+      ${area("m-enc", "Messages d'encouragement", (R.messages.encouragements || []).join("\n"), { rows:5, hint:"Un par ligne. L'un d'eux s'affiche au hasard à la fin de chaque séance." })}
+      <div style="margin-top:12px">${field("m-pdf", "Bas de page des fiches PDF", R.messages.piedPdf)}</div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("dumbbell")}Nouveaux exercices</h2>
+      <p class="muted">Réglage proposé pour un exercice personnalisé ou un exercice créé dans la bibliothèque.</p>
+      <div class="rc-grid">
+        ${num("e-reps", "Répétitions", R.exercice.reps, 1, 200)}
+        ${num("e-ex", "Effort (secondes)", R.exercice.ex, 1, 7200)}
+        ${num("e-repos", "Repos (secondes)", R.exercice.repos, 0, 7200)}
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("alert")}Alertes du tableau de bord</h2>
+      <p class="muted">Quand un patient doit apparaître dans « À surveiller ».</p>
+      <div class="rc-grid">
+        ${num("al-douleur", "Douleur forte à partir de (sur 10)", R.alertes.douleur, 1, 10)}
+        ${num("al-hausse", "Hausse de douleur d'au moins (points)", R.alertes.hausse, 1, 10)}
+        ${num("al-retard", "Séances en retard à partir de", R.alertes.retard, 1, 30)}
+        ${num("al-jours", "Pas de séance depuis (jours)", R.alertes.joursSans, 1, 90)}
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("layers")}Catégories de modèles</h2>
+      <p class="muted">Les filtres de la page Modèles. « Autres » ne peut pas être supprimée : les modèles d'une catégorie supprimée y sont rangés.</p>
+      <div class="rc-list" id="cats"></div>
+      <button class="btn sm" type="button" id="cat-add" style="margin-top:10px">${icon("plus")}Ajouter une catégorie</button>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("target")}Niveaux</h2>
+      <p class="muted">Nom de chaque niveau d'un modèle. Par exemple « Phase 1 » plutôt que « Niveau 1 ».</p>
+      <div class="rc-list" id="nivs"></div>
+      <div class="row" style="--gap:8px;margin-top:10px">
+        <button class="btn sm" type="button" id="niv-add">${icon("plus")}Ajouter un niveau</button>
+        <button class="btn sm ghost" type="button" id="niv-del">${icon("minus")}Retirer le dernier</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("body")}Zones du corps</h2>
+      ${area("z-list", "Zones proposées", R.listes.zones.join("\n"), { rows:7, hint:"Une par ligne. Proposées dans les modèles ; vous pouvez toujours en taper une autre." })}
+    </section>
+
+    <section class="panel">
+      <h2>${icon("eye")}Éléments masqués</h2>
+      <p class="muted">Exercices et modèles fournis que vous avez masqués. Ils ne sont pas supprimés.</p>
+      <div class="stack" style="--gap:10px" id="masks"></div>
+    </section>
+
+    <section class="panel" id="backup">
+      <h2>${icon("download")}Sauvegarde</h2>
+      <p class="muted">Un fichier avec toutes vos données : patients, séances, modèles, exercices créés et corrigés, réglages. Gardez-le en lieu sûr (il contient des données de santé). Il permet de tout restaurer si besoin.</p>
+      <div class="row wrap" style="--gap:10px">
+        <button class="btn primary" type="button" id="bk-dl">${icon("download")}Télécharger une sauvegarde</button>
+        <label class="btn ee-file">${icon("upload")}<span>Restaurer une sauvegarde…</span><input type="file" id="bk-up" accept="application/json,.json" hidden></label>
+      </div>
+      <p class="hint" style="margin-top:10px" id="bk-last"></p>
+    </section>
+
+    <p class="center small faint"><button class="ee-link" type="button" id="reset-all">Remettre tous les réglages par défaut</button></p>
+  </div>
+  <div class="rc-save"><span class="state" id="state"></span><button class="btn primary big" type="button" id="save">${icon("check")}Enregistrer les réglages</button></div>`;
+
+  renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
+  const last = localStorage.getItem("gt_last_backup");
+  $("#bk-last").textContent = last ? `Dernière sauvegarde depuis cet appareil : ${new Date(Number(last)).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}.` : "Conseil : faites une sauvegarde une fois par mois.";
+
+  app.addEventListener("input", e => { if(!e.target.closest("#backup")) setDirty(true); preview(); });
+  app.addEventListener("change", e => { if(e.target.matches("input[type=checkbox], input[type=date]")) setDirty(true); });
+  $$("[data-var]").forEach(b => b.onclick = () => {
+    const t = $("#m-inv"), v = `{${b.dataset.var}}`;
+    const i = t.selectionStart ?? t.value.length;
+    t.value = t.value.slice(0, i) + v + t.value.slice(t.selectionEnd ?? i);
+    t.focus(); t.selectionStart = t.selectionEnd = i + v.length;
+    preview(); setDirty(true);
+  });
+  $("#logo-file").onchange = async ev => {
+    const f = ev.target.files?.[0]; ev.target.value = "";
+    if(!f) return;
+    try{ const { compressImage } = await import("/assets/exercise-editor.js"); logo = await compressImage(f); renderLogo(); setDirty(true); }
+    catch(e){ toast("Cette image n'a pas pu être lue.", { type:"err" }); }
+  };
+  $("#logo-del").onclick = () => { logo = null; renderLogo(); setDirty(true); };
+  $("#cat-add").onclick = () => { readLists(); R.listes.categories.splice(R.listes.categories.length - 1, 0, { id:"", label:"", one:"" }); renderCats(); setDirty(true); $$("#cats input").at(-2)?.focus(); };
+  $("#niv-add").onclick = () => { readLists(); const n = R.listes.niveaux.length + 1; R.listes.niveaux.push({ n, label:`Niveau ${n}`, sub:"" }); renderNivs(); setDirty(true); };
+  $("#niv-del").onclick = () => { readLists(); if(R.listes.niveaux.length > 1){ R.listes.niveaux.pop(); renderNivs(); setDirty(true); } };
+  $("#save").onclick = save;
+  $("#bk-dl").onclick = downloadBackup;
+  $("#bk-up").onchange = restoreBackup;
+  $("#reset-all").onclick = async () => {
+    if(!await confirmDialog({ title:"Tout remettre par défaut ?", message:"Les réglages reviennent à ceux d'origine (vos exercices masqués et favoris sont conservés). Pensez à enregistrer ensuite.", confirm:"Remettre par défaut" })) return;
+    const keep = { masques: R.masques, favoris: R.favoris };
+    Object.assign(R, structuredClone(DEFAULTS), keep);
+    logo = null; render(); setDirty(true);
+  };
+}
+
+function setDirty(v){
+  dirty = v;
+  $("#state").textContent = v ? "Modifications non enregistrées" : "";
+  $("#save").disabled = !v;
+}
+addEventListener("beforeunload", e => { if(dirty){ e.preventDefault(); e.returnValue = ""; } });
+
+function renderLogo(){ $("#logo-prev").innerHTML = `<img src="${esc(logo || "/logo.png")}" alt="Logo">`; }
+
+function preview(){
+  $("#m-prev").textContent = fillTemplate($("#m-inv").value, {
+    prenom:"Marie", nom:"Marie Dupont", lien: accessLink("ABCD2345EFGH"), code:"ABCD-2345-EFGH",
+    kine: $("#c-nom")?.value || R.cabinet.nom, titre: $("#c-titre")?.value || R.cabinet.titre, telephone: $("#c-tel")?.value || ""
+  });
+}
+
+function renderCats(){
+  $("#cats").innerHTML = R.listes.categories.map((c, i) => `
+    <div class="rc-row">
+      <input class="input" data-cat="${i}" value="${esc(c.label)}" placeholder="Nom de la catégorie" aria-label="Catégorie ${i + 1}">
+      ${c.id === "autre" ? `<span class="badge" title="Toujours présente">fixe</span>` : `<button class="icon-btn sm danger" type="button" data-cat-del="${i}" aria-label="Supprimer">${icon("trash")}</button>`}
+    </div>`).join("");
+  $$("[data-cat-del]").forEach(b => b.onclick = () => { readLists(); R.listes.categories.splice(+b.dataset.catDel, 1); renderCats(); setDirty(true); });
+}
+
+function renderNivs(){
+  $("#nivs").innerHTML = R.listes.niveaux.map((n, i) => `
+    <div class="rc-row">
+      <span class="badge lagon" style="min-width:34px;justify-content:center">${n.n}</span>
+      <input class="input" data-niv="${i}" value="${esc(n.label)}" placeholder="Niveau ${n.n}" aria-label="Nom du niveau ${n.n}">
+      <input class="input" data-nivsub="${i}" value="${esc(n.sub || "")}" placeholder="Précision (facultatif)" aria-label="Précision du niveau ${n.n}">
+    </div>`).join("");
+}
+
+function renderMasks(){
+  const ne = R.masques.exercices.length, nm = R.masques.modeles.length;
+  $("#masks").innerHTML = `
+    <div class="rc-row"><span style="flex:1">${ne ? `${ne} exercice${ne > 1 ? "s" : ""} masqué${ne > 1 ? "s" : ""}` : "Aucun exercice masqué"}</span>${ne ? `<a class="btn sm" href="/exercises/glossary.html">Voir</a><button class="btn sm" type="button" data-unmask="exercices">Tout réafficher</button>` : ""}</div>
+    <div class="rc-row"><span style="flex:1">${nm ? `${nm} modèle${nm > 1 ? "s" : ""} fourni${nm > 1 ? "s" : ""} masqué${nm > 1 ? "s" : ""}` : "Aucun modèle masqué"}</span>${nm ? `<button class="btn sm" type="button" data-unmask="modeles">Tout réafficher</button>` : ""}</div>`;
+  $$("[data-unmask]").forEach(b => b.onclick = async () => {
+    try{ await saveSettings({ masques:{ [b.dataset.unmask]: [] } }); R.masques[b.dataset.unmask] = []; renderMasks(); toast("C'est de nouveau visible.", { type:"ok" }); }
+    catch(err){ failed(err); }
+  });
+}
+
+function readLists(){
+  $$("[data-cat]").forEach(inp => {
+    const c = R.listes.categories[+inp.dataset.cat];
+    const v = inp.value.trim();
+    c.label = v; c.one = v;
+    if(!c.id) c.id = slug(v);
+  });
+  $$("[data-niv]").forEach(inp => { R.listes.niveaux[+inp.dataset.niv].label = inp.value.trim() || `Niveau ${+inp.dataset.niv + 1}`; });
+  $$("[data-nivsub]").forEach(inp => { R.listes.niveaux[+inp.dataset.nivsub].sub = inp.value.trim(); });
+}
+
+const val = id => $("#" + id).value;
+const int = (id, min, max, d) => { const n = Math.round(Number(val(id))); return Number.isFinite(n) && val(id) !== "" ? Math.max(min, Math.min(max, n)) : d; };
+
+function failed(err){
+  console.error(err);
+  if(err?.code === "permission-denied"){
+    $("#rule-warn").innerHTML = `<div class="notice danger" style="margin-bottom:16px">${icon("alert")}<div class="stack" style="--gap:8px"><strong>Firebase refuse l'enregistrement.</strong><span>Ajoutez une seule fois cette règle dans Firebase (Firestore Database → Règles), juste avant le bloc <code>match /programmes/{id}</code>, puis Publier. Le détail est dans l'Aide.</span><div class="rc-rule">${esc(RULE)}</div></div></div>`;
+    scrollTo({ top:0, behavior:"smooth" });
+    toast("Enregistrement refusé par Firebase : voir l'encadré en haut de la page.", { type:"err", duration:7000 });
+  }else toast("Enregistrement impossible : " + (err.message || err), { type:"err", duration:6000 });
+}
+
+async function save(){
+  readLists();
+  const cats = R.listes.categories.filter(c => c.id && c.label);
+  if(!cats.some(c => c.id === "autre")) cats.push({ id:"autre", label:"Autres", one:"Autre" });
+  const ids = new Set(); cats.forEach(c => { while(ids.has(c.id)) c.id += "_"; ids.add(c.id); });
+  const patch = {
+    cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), logo: logo || "" },
+    messages: {
+      invitation: val("m-inv").trim() || DEFAULTS.messages.invitation,
+      encouragements: val("m-enc").split("\n").map(s => s.trim()).filter(Boolean),
+      piedPdf: val("m-pdf").trim(),
+      annonce: { active: $("#a-on").checked, texte: val("a-txt").trim(), debut: val("a-deb"), fin: val("a-fin") }
+    },
+    exercice: { reps: int("e-reps", 1, 200, 10), ex: int("e-ex", 1, 7200, 30), repos: int("e-repos", 0, 7200, 10) },
+    alertes: { douleur: int("al-douleur", 1, 10, 7), hausse: int("al-hausse", 1, 10, 2), retard: int("al-retard", 1, 30, 2), joursSans: int("al-jours", 1, 90, 10) },
+    listes: { categories: cats, niveaux: R.listes.niveaux.map((n, i) => ({ ...n, n: i + 1 })), zones: val("z-list").split("\n").map(s => s.trim()).filter(Boolean) }
+  };
+  if(!patch.messages.encouragements.length) patch.messages.encouragements = DEFAULTS.messages.encouragements;
+  const btn = $("#save");
+  btn.disabled = true; btn.innerHTML = `<span class="spinner" style="width:18px;height:18px"></span>Enregistrement…`;
+  try{
+    await saveSettings(patch);
+    $("#rule-warn").innerHTML = "";
+    Object.assign(R, structuredClone(settings));
+    setDirty(false);
+    toast("Réglages enregistrés.", { type:"ok" });
+    renderCats();
+  }catch(err){ failed(err); setDirty(true); }
+  btn.innerHTML = `${icon("check")}Enregistrer les réglages`;
+}
+
+/* ---------- Sauvegarde / restauration ---------- */
+async function downloadBackup(){
+  const b = $("#bk-dl");
+  b.disabled = true;
+  try{
+    const data = await C.exportAll(step => { b.innerHTML = `<span class="spinner" style="width:18px;height:18px"></span>${esc(step)}…`; });
+    const blob = new Blob([JSON.stringify(data)], { type:"application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `sauvegarde-kine-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    localStorage.setItem("gt_last_backup", String(Date.now()));
+    const n = Object.fromEntries(Object.entries(data.collections).map(([k, v]) => [k, v.length]));
+    toast(`Sauvegarde téléchargée : ${n.patients || 0} patients, ${n.seances || 0} séances, ${n.modeles || 0} modèles.`, { type:"ok", duration:6000 });
+    $("#bk-last").textContent = `Dernière sauvegarde depuis cet appareil : aujourd'hui.`;
+  }catch(err){ failed(err); }
+  b.disabled = false; b.innerHTML = `${icon("download")}Télécharger une sauvegarde`;
+}
+
+async function restoreBackup(ev){
+  const f = ev.target.files?.[0]; ev.target.value = "";
+  if(!f) return;
+  let data;
+  try{ data = JSON.parse(await f.text()); }catch(e){ toast("Ce fichier n'est pas lisible.", { type:"err" }); return; }
+  if(data?.format !== "gabrieltimer-sauvegarde"){ toast("Ce fichier n'est pas une sauvegarde de l'application.", { type:"err" }); return; }
+  const parts = [
+    ["patients", "Patients et leurs coordonnées", ["patients", "fiches"]],
+    ["seances", "Séances des patients", ["seances"]],
+    ["modeles", "Modèles", ["modeles"]],
+    ["exercices", "Exercices créés et corrections", ["exercices"]],
+    ["reglages", "Réglages du cabinet", ["reglages"]]
+  ];
+  const count = k => (data.collections[k] || []).length;
+  const s = openSheet({
+    title:"Restaurer une sauvegarde",
+    body:`<div class="stack" style="--gap:12px">
+      <p>Sauvegarde du <strong>${esc(new Date(data.date).toLocaleString("fr-FR", { dateStyle:"long", timeStyle:"short" }))}</strong>. Choisissez ce qu'il faut restaurer :</p>
+      ${parts.map(([id, label, cols]) => `<label class="check"><input type="checkbox" data-part="${id}" checked> ${esc(label)} <span class="faint">(${cols.reduce((a, c) => a + count(c), 0)})</span></label>`).join("")}
+      <p class="small muted">Les éléments de la sauvegarde remplacent ceux qui existent déjà avec le même identifiant. Rien n'est effacé : ce qui a été créé depuis la sauvegarde est conservé.</p>
+      <p class="small" id="rs-prog"></p>
+    </div>`,
+    foot:`<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="rs-go">${icon("upload")}Restaurer</button>`
+  });
+  s.el.querySelector("#rs-go").onclick = async () => {
+    const only = [];
+    s.el.querySelectorAll("[data-part]:checked").forEach(c => parts.find(p => p[0] === c.dataset.part)[2].forEach(x => only.push(x)));
+    if(!only.length) return;
+    const go = s.el.querySelector("#rs-go"); go.disabled = true;
+    try{
+      const res = await C.importAll(data, { only, onProgress: (d, t) => { s.el.querySelector("#rs-prog").textContent = `Restauration… ${d} / ${t}`; } });
+      s.close();
+      toast(`Restauration terminée (${Object.values(res).reduce((a, b) => a + b, 0)} éléments).`, { type:"ok", duration:6000 });
+      if(only.includes("reglages")){ await loadSettings({ force:true }); Object.assign(R, structuredClone(settings)); logo = R.cabinet.logo || null; render(); }
+    }catch(err){ go.disabled = false; s.close(); failed(err); }
+  };
+}
+
+render();
+</script>
+</body>
+</html>
