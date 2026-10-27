@@ -23,6 +23,11 @@ const fiche = `/cloud.html?patient=${encodeURIComponent(cle)}`;
 /* ---------- Chargement ---------- */
 
 let patient = null, list = [], rulesErr = null, K;
+if(typeof C.listBilans !== "function"){
+  mountShell({ role:"kine", active:"patients", back:fiche });
+  app.innerHTML = `<div class="notice warn">${icon("alert")}<div class="stack" style="--gap:8px"><span>Une mise à jour de l'application vient d'être publiée et votre navigateur garde encore l'ancienne version d'un fichier.</span><div><button class="btn sm" type="button" onclick="location.reload(true)">Recharger la page</button></div></div></div>`;
+  throw new Error("version");
+}
 try{
   [patient, K] = await Promise.all([C.getPatient(cle, { fiche:true }), B.loadClinic()]);
   list = await C.listBilans(cle).catch(err => { rulesErr = err; return []; });

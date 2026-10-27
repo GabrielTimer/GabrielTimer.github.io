@@ -124,15 +124,23 @@ async function kineView(param){
 
   let seances = [], bilans = [], bilansErr = null;
   const load = async () => {
+    /* Les bilans ne doivent jamais empêcher l'affichage de la fiche
+       (règle Firebase pas encore publiée, ancienne version en cache…) */
+    const loadBilans = async () => {
+      if(typeof C.listBilans !== "function") throw Object.assign(new Error("version"), { code:"app/update" });
+      return C.listBilans(patient.cle);
+    };
     const [ss, bb] = await Promise.all([
       C.listSeances(patient.cle),
-      C.listBilans(patient.cle).catch(err => { bilansErr = err; return []; })
+      loadBilans().catch(err => { console.warn("Bilans :", err); bilansErr = err; return []; })
     ]);
     seances = ss.filter(s => s.data && Array.isArray(s.data.exercices));
     bilans = bb;
   };
   const bilanURL = (id = "") => `/bilan.html?patient=${encodeURIComponent(patient.cle)}${id ? `&id=${encodeURIComponent(id)}` : ""}`;
   const bilansHTML = () => {
+    if(bilansErr && bilansErr.code === "app/update") return `<div class="notice warn">${icon("alert")}<span>Une mise à jour de l'application vient d'être publiée : rechargez la page (Ctrl+Maj+R sur ordinateur) pour afficher les bilans.</span></div>`;
+    if(bilansErr && !/permission|insufficient/i.test(String(bilansErr.code || "") + String(bilansErr.message || ""))) return `<div class="notice warn">${icon("alert")}<span>Les bilans n'ont pas pu être chargés. Réessayez dans un instant.</span></div>`;
     if(bilansErr) return `<div class="notice warn">${icon("alert")}<span>Les bilans ne sont pas encore activés dans Firebase : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. Vous pouvez déjà faire un bilan : il sera gardé sur cet appareil.</span></div>`;
     if(!bilans.length) return `<div class="panel">${emptyHTML({ ico:"stethoscope", title:"Aucun bilan", text:"Faites le bilan d'entrée : schéma de douleur, tests validés, mesures, résumé pour Maiia et PDF.", action:`<a class="btn primary" href="${bilanURL()}">${icon("stethoscope")}Faire le bilan d'entrée</a>` })}</div>`;
     return `<div class="list">${bilans.map(b => `
