@@ -13,7 +13,10 @@ export const ADMIN_EMAILS = ["kine.laveau@gmail.com"];
 /* Adresse publique du site (utilisée pour les liens et QR codes envoyés aux patients) */
 export const SITE_URL = "https://gabrieltimer.github.io";
 
-export const APP_VERSION = "2.4.0";
+/* Nom de l'application */
+export const APP_NAME = "ApiKiné";
+
+export const APP_VERSION = "2.4.1";
 
 export const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAauNHfzBWdVyYH120Cj3ur7gPt7fYQvIw",

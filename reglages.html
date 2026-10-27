@@ -31,7 +31,7 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, esc, icon, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW } from "/assets/app.js";
+import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW } from "/assets/app.js";
 import { APP_VERSION } from "/assets/config.js";
 registerSW();
 const ctx = readPatientContext();
@@ -85,7 +85,7 @@ $("#app").innerHTML = `
     <div><button class="btn danger" type="button" id="forget">${icon("logout")}Déconnecter cet appareil</button></div>
   </div>` : ""}
 
-  <p class="center small faint section">${esc(KINE.nom)}, ${esc(KINE.titre)}<br>Version ${esc(APP_VERSION)}</p>`;
+  <footer class="app-foot section">${appMarkHTML("lg")}<span>Version ${esc(APP_VERSION)}</span><span>${esc(KINE.nom)}, ${esc(KINE.titre)}</span></footer>`;
 
 $("#big").onchange = e => { store.set("gt_text", e.target.checked ? "large" : "normal"); applyPrefs(); };
 document.querySelectorAll("[data-theme]").forEach(b => b.onclick = () => {
