@@ -7635,6 +7635,85 @@
     },
     "vitesse": false
   }
+},
+{
+  "id": "COUDE_04",
+  "nom": "Étirement des fléchisseurs du poignet",
+  "type": "timer",
+  "categorie": "coude",
+  "objectif": "Souplesse",
+  "niveau": 1,
+  "exercise_mode": "étirement",
+  "duree": "5 × 15 secondes",
+  "description": "Étire les muscles qui plient le poignet et les doigts, souvent en cause dans l'épitrochléite (épicondylite médiale, « golfer's elbow »).",
+  "consignes": [
+    "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu, paume vers l'avant.",
+    "Relevez le poignet, doigts vers le haut.",
+    "Avec l'autre main, ramenez doucement la paume et les doigts vers vous.",
+    "Tenez 15 secondes en sentant l'étirement sous l'avant-bras, puis relâchez."
+  ],
+  "precautions": [
+    "Étirement doux : une tension est normale, pas une douleur vive.",
+    "Ne verrouillez pas le coude en hyperextension.",
+    "Arrêtez en cas de fourmillements dans les doigts."
+  ],
+  "contre_indications": [],
+  "conseil_posture": [
+    "Épaules relâchées, dos droit.",
+    "Bras à hauteur d'épaule, sans hausser l'épaule."
+  ],
+  "erreurs_frequentes": [
+    "Plier le coude en tirant sur la main.",
+    "Tirer par à-coups."
+  ],
+  "respiration": [
+    "Respirez lentement pendant le maintien."
+  ],
+  "version_facile": [
+    "Coude légèrement plié, ou bras plus bas."
+  ],
+  "version_avancee": [
+    "Mains à plat sur une table, doigts vers vous, coudes tendus : reculez doucement le buste."
+  ],
+  "tags": [
+    "Coude",
+    "Épitrochléite",
+    "Épicondylite médiale",
+    "Golfer's elbow",
+    "Étirement",
+    "Avant-bras"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 15,
+    "phase_descente": 2,
+    "cycles": 5
+  },
+  "ex": 15,
+  "repos": 10,
+  "reps": 5,
+  "image": "/exercises/images/coude/COUDE_04.webp",
+  "muscles_cibles": [
+    "Fléchisseurs du poignet et des doigts",
+    "Rond pronateur"
+  ],
+  "materiel": [
+    "Aucun"
+  ],
+  "pathologies": [
+    "Épitrochléite (épicondylite médiale, golfer's elbow)",
+    "Tendinopathie des épitrochléens"
+  ],
+  "objectifs": [
+    "Souplesse"
+  ],
+  "zones": [
+    "Coude"
+  ],
+  "benefices": [
+    "À faire aussi avant une activité sportive ou professionnelle sollicitante."
+  ]
 }
 
 ]
