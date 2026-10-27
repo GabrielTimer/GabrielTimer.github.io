@@ -100,6 +100,7 @@ function fromCabinet(x){
     ex: Number(x.ex) || Number(tc.maintien) || 30,
     repos: Number(x.repos) || 10,
     reps: Number(x.reps) || Number(tc.cycles) || 10,
+    evol: x.evol || null,
     raw: x
   };
 }
@@ -323,6 +324,7 @@ export function toProgramExercise(e, overrides = {}){
     youtube: e.youtube,
     vimeo: e.vimeo,
     ex: e.ex, repos: e.repos, reps: e.reps,
+    ...(e.evol ? { evol: JSON.parse(JSON.stringify(e.evol)) } : {}),
     ...overrides
   };
 }

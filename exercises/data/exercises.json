@@ -7381,6 +7381,260 @@
   "categorie":"Respiration",
   "objectif":"Respiration guidée mode Apaiser",
   "image":"images/respiration.png"
+},
+{
+  "id": "COUDE_01",
+  "nom": "Étirement des extenseurs du poignet",
+  "type": "timer",
+  "categorie": "coude",
+  "objectif": "Souplesse",
+  "niveau": 1,
+  "exercise_mode": "étirement",
+  "duree": "5 × 15 secondes",
+  "description": "Étire les muscles qui relèvent le poignet et les doigts, souvent en cause dans l'épicondylite latérale (« tennis elbow »).",
+  "consignes": [
+    "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.",
+    "Pliez le poignet vers le bas, paume tournée vers vous.",
+    "Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.",
+    "Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez."
+  ],
+  "precautions": [
+    "Étirement doux : une tension est normale, pas une douleur vive.",
+    "Ne verrouillez pas le coude en hyperextension."
+  ],
+  "contre_indications": [],
+  "conseil_posture": [
+    "Épaules relâchées, dos droit.",
+    "Bras à hauteur d'épaule, sans hausser l'épaule."
+  ],
+  "erreurs_frequentes": [
+    "Plier le coude en tirant sur la main.",
+    "Tirer par à-coups."
+  ],
+  "respiration": [
+    "Respirez lentement pendant le maintien."
+  ],
+  "version_facile": [
+    "Coude légèrement plié, ou bras plus bas."
+  ],
+  "version_avancee": [
+    "Fermez le poing avant de plier le poignet.",
+    "Ajoutez une légère inclinaison du poignet côté petit doigt."
+  ],
+  "tags": [
+    "Coude",
+    "Épicondylite",
+    "Tennis elbow",
+    "Étirement",
+    "Avant-bras"
+  ],
+  "timer_config": {
+    "mode": "statique",
+    "phase_monte": 2,
+    "maintien": 15,
+    "phase_descente": 2,
+    "cycles": 5
+  },
+  "ex": 15,
+  "repos": 10,
+  "reps": 5,
+  "image": "/exercises/images/coude/COUDE_01.webp",
+  "muscles_cibles": [
+    "Extenseurs du poignet et des doigts",
+    "Court extenseur radial du carpe"
+  ],
+  "materiel": [
+    "Aucun"
+  ],
+  "pathologies": [
+    "Épicondylite latérale (tennis elbow)",
+    "Tendinopathie des épicondyliens"
+  ],
+  "objectifs": [
+    "Souplesse"
+  ],
+  "zones": [
+    "Coude"
+  ],
+  "benefices": [
+    "À faire aussi avant une activité sportive ou professionnelle sollicitante."
+  ]
+},
+{
+  "id": "COUDE_02",
+  "nom": "Renforcement excentrique des extenseurs du poignet",
+  "type": "timer",
+  "categorie": "coude",
+  "objectif": "Renforcement",
+  "niveau": 2,
+  "exercise_mode": "renforcement",
+  "duree": "3 séries de 10",
+  "description": "Renforcement en freinage (excentrique) des muscles qui relèvent le poignet, pour l'épicondylite latérale (« tennis elbow »). Commencez avec une petite bouteille d'eau de 500 g.",
+  "consignes": [
+    "Assis, avant-bras posé sur la table, paume vers le bas, le poignet dépassant du bord.",
+    "Tenez le poids (bouteille d'eau ou haltère), poignet relevé.",
+    "Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.",
+    "Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.",
+    "Faites 10 descentes par série."
+  ],
+  "precautions": [
+    "Ne laissez pas tomber le poignet : la descente doit être contrôlée.",
+    "Ne contractez pas pour remonter : c'est l'autre main qui remonte le poids.",
+    "Une douleur modérée (jusqu'à 3 ou 4 sur 10) qui disparaît le lendemain est acceptable."
+  ],
+  "contre_indications": [],
+  "conseil_posture": [
+    "Avant-bras bien à plat sur la table, coude près du corps.",
+    "Épaules relâchées."
+  ],
+  "erreurs_frequentes": [
+    "Soulever l'avant-bras de la table.",
+    "Remonter le poids avec le poignet qui travaille."
+  ],
+  "respiration": [
+    "Expirez pendant la descente."
+  ],
+  "version_facile": [
+    "Sans poids, ou avec une bouteille moins remplie."
+  ],
+  "version_avancee": [
+    "Coude plus tendu, avant-bras toujours posé."
+  ],
+  "tags": [
+    "Coude",
+    "Épicondylite",
+    "Tennis elbow",
+    "Excentrique",
+    "Avant-bras",
+    "Tendinopathie"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 0,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "ex": 60,
+  "repos": 45,
+  "reps": 3,
+  "image": "/exercises/images/coude/COUDE_02.webp",
+  "muscles_cibles": [
+    "Extenseurs du poignet et des doigts",
+    "Court extenseur radial du carpe"
+  ],
+  "materiel": [
+    "Bouteille d'eau ou haltère (0,5 à 2 kg)",
+    "Table"
+  ],
+  "pathologies": [
+    "Épicondylite latérale (tennis elbow)",
+    "Tendinopathie des épicondyliens"
+  ],
+  "objectifs": [
+    "Renforcement"
+  ],
+  "zones": [
+    "Coude"
+  ],
+  "evol": {
+    "charge": {
+      "depart": 0.5,
+      "pas": 0.5,
+      "max": 2,
+      "unite": "kg"
+    },
+    "vitesse": true
+  }
+},
+{
+  "id": "COUDE_03",
+  "nom": "Renforcement en pronation et supination",
+  "type": "timer",
+  "categorie": "coude",
+  "objectif": "Renforcement",
+  "niveau": 2,
+  "exercise_mode": "renforcement",
+  "duree": "3 séries de 10",
+  "description": "Renforcement des muscles qui tournent l'avant-bras, pour l'épicondylite latérale (« tennis elbow »). Commencez avec une petite bouteille d'eau de 500 g, puis 1 kg, puis 2 kg.",
+  "consignes": [
+    "Assis, avant-bras posé sur la table, coude plié à 90°.",
+    "Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
+    "Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.",
+    "Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.",
+    "Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès."
+  ],
+  "precautions": [
+    "Mouvement lent et contrôlé, sans à-coup.",
+    "Ne contractez pas l'épaule : seul l'avant-bras tourne.",
+    "Une douleur modérée (jusqu'à 3 ou 4 sur 10) qui disparaît le lendemain est acceptable."
+  ],
+  "contre_indications": [],
+  "conseil_posture": [
+    "Avant-bras bien posé sur la table.",
+    "Dos droit, épaules relâchées."
+  ],
+  "erreurs_frequentes": [
+    "Décoller le coude ou l'avant-bras de la table.",
+    "Compenser avec l'épaule."
+  ],
+  "respiration": [
+    "Respirez calmement, sans bloquer."
+  ],
+  "version_facile": [
+    "Tenez le poids plus près de son centre, ou sans poids."
+  ],
+  "version_avancee": [
+    "Tenez le poids par une extrémité (bras de levier plus long).",
+    "Coude plus tendu."
+  ],
+  "tags": [
+    "Coude",
+    "Épicondylite",
+    "Tennis elbow",
+    "Pronation",
+    "Supination",
+    "Avant-bras"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 0,
+    "phase_descente": 2,
+    "cycles": 3
+  },
+  "ex": 60,
+  "repos": 45,
+  "reps": 3,
+  "image": "/exercises/images/coude/COUDE_03.webp",
+  "muscles_cibles": [
+    "Supinateur",
+    "Rond pronateur",
+    "Extenseurs du poignet"
+  ],
+  "materiel": [
+    "Bouteille d'eau ou haltère (0,5 à 2 kg)",
+    "Table"
+  ],
+  "pathologies": [
+    "Épicondylite latérale (tennis elbow)",
+    "Tendinopathie des épicondyliens"
+  ],
+  "objectifs": [
+    "Renforcement"
+  ],
+  "zones": [
+    "Coude"
+  ],
+  "evol": {
+    "charge": {
+      "depart": 0.5,
+      "pas": 0.5,
+      "max": 2,
+      "unite": "kg"
+    },
+    "vitesse": false
+  }
 }
 
 ]
