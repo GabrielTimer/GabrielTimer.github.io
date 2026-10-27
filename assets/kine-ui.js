@@ -120,7 +120,7 @@ export function printAccessCard(patient){
       <div class="txt">
         <div class="brand"><img src="${/^data:/.test(logoSrc()) ? logoSrc() : location.origin + logoSrc()}" alt=""><div><b>${esc(KINE.nom)}</b><br><span>${esc(KINE.titre)}</span></div></div>
         <p class="who">${esc(patient.nom)}</p>
-        <p>Scannez ce code avec l'appareil photo de votre téléphone pour retrouver vos exercices.</p>
+        <p>Scannez ce code avec l'appareil photo de votre téléphone pour retrouver vos exercices dans l'application ApiKiné.</p>
         <p class="code">Code : <b>${esc(fmtCode(patient.cle))}</b></p>
       </div>
     </div>`;

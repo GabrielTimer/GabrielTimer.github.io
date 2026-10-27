@@ -153,7 +153,7 @@ $("#doc").innerHTML = `
   <h2>Conclusion</h2>
   <div class="concl" contenteditable="true" data-ph="Touchez ici pour écrire votre conclusion et vos propositions (poursuite, arrêt, avis spécialisé…)." spellcheck="true"></div>
 
-  <div class="sign"><span class="muted">Données recueillies par l'application de suivi du cabinet.</span><span>${esc(KINE.nom)}</span></div>`;
+  <div class="sign"><span class="muted">Données recueillies avec l'application ApiKiné.</span><span>${esc(KINE.nom)}</span></div>`;
 
 const sync = () => {
   $("#sec-com").classList.toggle("opt-hidden", !$("#o-com").checked || !comments.length);

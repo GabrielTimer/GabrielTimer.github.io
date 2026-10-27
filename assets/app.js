@@ -7,6 +7,13 @@ import { KINE, SITE_URL } from "./config.js";
 import { settings, logoSrc } from "./settings.js";
 
 export { icon, KINE, SITE_URL, settings, logoSrc };
+export { APP_NAME } from "./config.js";
+import { APP_NAME as _APP } from "./config.js";
+
+/** Signature discrète de l'application : logo + nom. */
+export function appMarkHTML(extra = ""){
+  return `<span class="app-mark ${extra}"><img src="/icon-192.png" alt="" width="18" height="18"><span>${_APP}</span></span>`;
+}
 
 /* ---------- DOM ---------- */
 
@@ -480,6 +487,7 @@ const NAV = {
  */
 export function mountShell({ role = "none", active = "", title = "", back = null, actions = "", apercu = false } = {}){
   const body = document.body;
+  if(!document.title.includes(_APP)) document.title = document.title ? `${document.title} – ${_APP}` : _APP;
   const main = $("main") || h(`<main class="page"></main>`);
   const shell = h(`<div class="shell"></div>`);
   const brand = `<a class="brand" href="/index.html" aria-label="Accueil">
@@ -510,9 +518,11 @@ export function mountShell({ role = "none", active = "", title = "", back = null
       ? `<div class="nav-foot">
           <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${icon("wrench")}</span><span>Outils</span></a>
           <a class="nav-link" href="/aide.html"><span class="nav-ico">${icon("info")}</span><span>Aide</span></a>
+          <div class="nav-app">${appMarkHTML()}</div>
         </div>`
       : `<div class="nav-foot">
           <a class="nav-link" href="/reglages.html"><span class="nav-ico">${icon("settings")}</span><span>Réglages</span></a>
+          <div class="nav-app">${appMarkHTML()}</div>
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>

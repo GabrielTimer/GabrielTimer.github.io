@@ -1,7 +1,7 @@
 /* Accueil : patient, kiné ou première visite */
 
 import {
-  $, esc, icon, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
+  $, esc, icon, appMarkHTML, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
   fmtDate, fmtRelDay, fmtDuree, prenom, sessionDuration, startOfDay, daysFromToday, evaFace, evaColor,
   plural, loadingHTML, emptyHTML, errorHTML, exoImageHTML, normCode, fmtCode, KINE, byWeek, evaTrend,
   ressentiLabel, forgetPatient, logoSrc
@@ -73,6 +73,7 @@ function renderWelcome(){
         </form>
       </div>
       <p class="center small faint">Vos données restent privées : seul votre kiné et vous y avez accès.</p>
+      <footer class="app-foot" style="margin-top:4px">${appMarkHTML("lg")}<span>L'application de suivi de votre kiné</span></footer>
     </section>`;
   secretLogo($("#logo"));
 
@@ -260,7 +261,8 @@ async function renderPatient(ctx){
         ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
         <a class="list-item" href="mailto:${esc(KINE.email)}?subject=${encodeURIComponent("Question sur mes exercices")}"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">${esc(KINE.nom)}</span></span><span class="li-end">${icon("chevron")}</span></a>
       </div>
-    </section>`;
+    </section>
+    <footer class="app-foot">${appMarkHTML()}</footer>`;
   showAnnonce();
   loadSettings({ force:true }).then(showAnnonce);
   homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
@@ -305,7 +307,8 @@ async function renderKine(user){
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>
       <section><div class="section-title">Activité récente</div><div id="activity">${loadingHTML()}</div></section>
-    </div>`;
+    </div>
+    <footer class="app-foot">${appMarkHTML()}</footer>`;
 
   const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
