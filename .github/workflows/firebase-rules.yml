@@ -1,0 +1,31 @@
+# Publie automatiquement firestore.rules dans Firebase
+# à chaque modification du fichier sur la branche main.
+# Nécessite le secret FIREBASE_SERVICE_ACCOUNT (clé de compte de service, format JSON).
+name: Publier les règles Firebase
+
+on:
+  push:
+    branches: [main]
+    paths: [firestore.rules]
+  workflow_dispatch:
+
+concurrency:
+  group: firebase-rules
+  cancel-in-progress: false
+
+jobs:
+  regles:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Installer firebase-admin
+        run: npm install --no-save --no-audit --no-fund firebase-admin@12
+      - name: Publier firestore.rules
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: node .github/scripts/publish-rules.mjs
