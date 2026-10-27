@@ -634,3 +634,8 @@ dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minm
 .lib-head h2{ flex:1; margin:0 !important; }
 .in-badge{ position:absolute; left:8px; top:8px; display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:999px; background:var(--ok); color:#fff; font-size:var(--fs-xs); font-weight:700; }
 .in-badge svg{ width:13px; height:13px; }
+
+/* Crayon « Modifier l'exercice » (discret) */
+.ee-open{ opacity:.5; }
+.ee-open:hover,.ee-open:focus-visible{ opacity:1; }
+.ee-nums > .field{ flex:1 1 110px; }

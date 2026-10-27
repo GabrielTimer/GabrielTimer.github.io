@@ -1,7 +1,7 @@
 /* Composant « bibliothèque d'exercices » : recherche, filtres, fiche détaillée */
 
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree } from "./app.js";
-import { loadLibrary, searchLibrary, videoEmbed, norm } from "./library.js";
+import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary } from "./library.js";
 
 const PAGE = 30;
 
@@ -95,7 +95,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         if(img){ img.querySelector(".in-badge")?.remove(); img.insertAdjacentHTML("beforeend", inBadge(e)); }
       }
     });
-    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel }); });
+    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: renderResults }); });
   };
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); }, 140));
@@ -109,7 +109,8 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 }
 
 /** Fiche détaillée d'un exercice de la bibliothèque. */
-export function exerciseSheet(e, { onAdd = null, addLabel = "Ajouter" } = {}){
+export function exerciseSheet(e, opts = {}){
+  const { onAdd = null, addLabel = "Ajouter", onEdited = null } = opts;
   const vid = videoEmbed(e);
   const li = (title, ico, items) => items && items.length ? `<h3>${icon(ico)}${esc(title)}</h3><ul>${items.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : "";
   const s = openSheet({
@@ -124,6 +125,7 @@ export function exerciseSheet(e, { onAdd = null, addLabel = "Ajouter" } = {}){
             ${e.mode ? `<span class="badge">${esc(e.mode)}</span>` : ""}
             ${e.materiel.map(m => `<span class="badge">${esc(m)}</span>`).join("")}
             <span class="badge">${e.source === "HEP" ? "Base HEP" : "Cabinet"}</span>
+            ${e.modifie ? `<span class="badge sun">${icon("edit")}Corrigé</span>` : ""}
           </div>
           ${vid ? (vid.src ? `<div style="margin-top:12px"><button class="btn soft block" type="button" data-vid>${icon("play")}Voir la vidéo</button><div data-vslot></div></div>` : `<a class="btn soft block" style="margin-top:12px" href="${esc(vid.url)}" target="_blank" rel="noopener">${icon("video")}${esc(vid.title || "Voir la vidéo")}</a>`) : ""}
         </div>
@@ -149,5 +151,29 @@ export function exerciseSheet(e, { onAdd = null, addLabel = "Ajouter" } = {}){
   if(v) v.onclick = () => { s.el.querySelector("[data-vslot]").innerHTML = `<iframe class="video-frame" style="margin-top:10px" src="${esc(vid.src)}" allow="autoplay; fullscreen" allowfullscreen title="Vidéo"></iframe>`; v.remove(); };
   const a = s.el.querySelector("[data-addone]");
   if(a) a.onclick = () => { onAdd(e); s.close(); };
+  addEditButton(s, e, opts);
   return s;
+}
+
+/* Petit crayon dans l'en-tête de la fiche : corriger l'exercice de la bibliothèque. */
+async function addEditButton(s, e, opts){
+  const lib = e.search !== undefined ? e : await findInLibrary(e).catch(() => null);
+  if(!lib || !s.el.isConnected) return;
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "icon-btn sm ee-open";
+  b.title = "Modifier l'exercice";
+  b.setAttribute("aria-label", "Modifier l'exercice");
+  b.innerHTML = icon("edit");
+  s.el.querySelector(".sheet-head [data-close]").before(b);
+  b.onclick = async () => {
+    const { openExerciseEditor } = await import("./exercise-editor.js");
+    s.close();
+    openExerciseEditor(lib, {
+      onSaved: (x, info) => {
+        opts.onEdited?.(x, info);
+        if(lib === e) exerciseSheet(x, opts);
+      }
+    });
+  };
 }

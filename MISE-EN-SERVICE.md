@@ -39,6 +39,14 @@ Dans **Patients**, ouvrez chaque fiche, puis **Accès patient** : envoyez le lie
 
 Pensez à compléter la fiche de chaque patient importé (nom complet, téléphone) avec **Modifier**.
 
+## Corriger un exercice de la bibliothèque
+
+Dans la fiche d'un exercice (bibliothèque, ou bouton « Voir » d'un exercice dans une séance), le petit crayon en haut à droite permet de corriger le titre, les consignes, la position, les conseils, le matériel, la vidéo et le réglage proposé (répétitions, effort, repos, niveau).
+
+- Les corrections sont enregistrées dans Firebase (collection `exercices`) : les fichiers d'exercices du site ne sont pas modifiés et vous pouvez toujours revenir à la version d'origine.
+- Si la case « Corriger aussi les séances déjà envoyées » est cochée, la correction est reportée dans les séances pas encore faites de vos patients et dans vos modèles. Ce que vous avez personnalisé pour un patient (nom changé, réglages) n'est pas touché.
+- **À faire une fois** : ces corrections demandent la règle `exercices` ajoutée dans [`firestore.rules`](firestore.rules). Recopiez le fichier dans Firebase (étape 2 ci-dessus) puis **Publier**. Sans cela, le formulaire affiche « Firebase refuse l'enregistrement ».
+
 ## Bon à savoir
 
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.

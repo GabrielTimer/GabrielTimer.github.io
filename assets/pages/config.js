@@ -7,7 +7,7 @@ import {
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
   emptyHTML, byWeek
 } from "../app.js";
-import { exerciseImage, toProgramExercise } from "../library.js";
+import { exerciseImage, toProgramExercise, updateSessionExercise } from "../library.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
 
 const { requireKine } = await import("../kine.js");
@@ -251,6 +251,14 @@ function bindExos(){
       contreIndications: [], materiel: e.materiel || [], pathologies: [], muscles: [],
       conseil_posture: e.conseil_posture || [], erreurs_frequentes: e.erreurs_frequentes || [], version_facile: e.version_facile || [], version_avancee: e.version_avancee || [],
       videos: e.videos || [], youtube: e.youtube, vimeo: e.vimeo
+    }, {
+      // Correction de la bibliothèque : on la reporte aussi sur la séance en cours d'édition
+      onEdited: (x, { before, after }) => {
+        let n = 0;
+        S.exercices.forEach(y => { if(updateSessionExercise(y, before, after)) n++; });
+        if(n){ persist(); renderExos(); }
+        sideLib?.then(l => l.refresh());
+      }
     });
   });
   $$(".grip", list).forEach(g => g.addEventListener("pointerdown", startDrag));

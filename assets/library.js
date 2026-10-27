@@ -142,21 +142,96 @@ function fromHep(x){
   };
 }
 
+/* ---------- Corrections du kiné ----------
+   Les fichiers JSON ne changent pas : les corrections faites depuis le site
+   sont enregistrées dans Firebase (collection « exercices ») et appliquées
+   par-dessus au chargement de la bibliothèque. */
+
+/** Champs modifiables depuis le site. */
+export const EDITABLE = [
+  "nom", "consignes", "position", "description", "conseil_posture", "erreurs_frequentes",
+  "precautions", "version_facile", "version_avancee", "materiel", "niveau", "youtube", "ex", "repos", "reps"
+];
+
+/** Correspondance bibliothèque → exercice enregistré dans une séance (réglages ex/repos/reps exclus :
+    ils sont choisis pour chaque patient). */
+const TO_SESSION = {
+  nom:"nom", consignes:"consignes", position:"position", description:"description_fr",
+  conseil_posture:"conseil_posture", erreurs_frequentes:"erreurs_frequentes", precautions:"precautions",
+  version_facile:"version_facile", version_avancee:"version_avancee", materiel:"materiel", youtube:"youtube"
+};
+
+export const exerciseKey = e => `${e.source || "CABINET"}_${e.id}`;
+
+const same = (a, b) => JSON.stringify(a ?? "") === JSON.stringify(b ?? "");
+const isEmpty = v => v === undefined || v === null || v === "" || (Array.isArray(v) && !v.length);
+
+function snapshot(e){
+  const o = {};
+  EDITABLE.forEach(f => { o[f] = Array.isArray(e[f]) ? [...e[f]] : e[f]; });
+  return o;
+}
+
+function indexSearch(e){
+  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.mode, ...e.pathologies, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
+}
+
+/** Applique une correction (ou la retire si fields est null) à un exercice de la bibliothèque. */
+export function applyEdit(e, fields){
+  if(!e.original) e.original = snapshot(e);
+  Object.assign(e, e.original);
+  if(fields) EDITABLE.forEach(f => { if(f in fields) e[f] = fields[f]; });
+  e.modifie = !!fields;
+  indexSearch(e);
+  return e;
+}
+
+/**
+ * Reporte une correction sur un exercice déjà placé dans une séance.
+ * Un champ n'est remplacé que s'il n'avait pas été personnalisé dans la séance
+ * (sa valeur est encore celle de l'ancienne version de la bibliothèque).
+ * Renvoie true si l'exercice a changé.
+ */
+export function updateSessionExercise(x, before, after){
+  if(String(x.id) !== String(after.id) || (x.source || "CABINET") !== (after.source || "CABINET")) return false;
+  let changed = false;
+  Object.entries(TO_SESSION).forEach(([f, sf]) => {
+    if(same(before[f], after[f])) return;
+    const current = f === "consignes" ? exerciseSteps(x) : x[sf];
+    if(!same(current, before[f]) && !(isEmpty(current) && isEmpty(before[f]))) return;
+    x[sf] = Array.isArray(after[f]) ? [...after[f]] : after[f];
+    if(f === "consignes") x.conseil = after.consignes.join("<br>");
+    changed = true;
+  });
+  return changed;
+}
+
 let cache = null;
 
 export function loadLibrary(){
   if(cache) return cache;
+  const edits = import("./cloud.js").then(C => C.listExerciseEdits()).catch(() => ({}));
   cache = Promise.all([
     fetch("/exercises/data/exercises.json").then(r => r.json()).catch(() => []),
-    fetch("/exercises/data/hep_exercises.json").then(r => r.json()).catch(() => [])
-  ]).then(([cab, hep]) => {
+    fetch("/exercises/data/hep_exercises.json").then(r => r.json()).catch(() => []),
+    edits
+  ]).then(([cab, hep, ed]) => {
     const list = [...cab.map(fromCabinet), ...hep.map(fromHep)];
     list.forEach(e => {
-      e.search = norm([e.nom, e.nomOriginal, e.categorie, e.mode, ...e.pathologies, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
+      const fix = ed[exerciseKey(e)];
+      if(fix) applyEdit(e, fix);
+      else indexSearch(e);
     });
     return list;
   });
   return cache;
+}
+
+/** Retrouve l'exercice de la bibliothèque qui correspond à un exercice de séance. */
+export async function findInLibrary(x){
+  if(!x || x.id === undefined || x.id === null || x.id === "") return null;
+  const list = await loadLibrary();
+  return list.find(e => e.source === (x.source || "CABINET") && String(e.id) === String(x.id)) || null;
 }
 
 /** Recherche plein texte tolérante (accents, ordre des mots). */

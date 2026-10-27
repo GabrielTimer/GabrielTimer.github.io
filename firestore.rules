@@ -66,6 +66,11 @@ service cloud.firestore {
       allow read, write: if isKine();
     }
 
+    // Corrections du kiné sur la bibliothèque d'exercices
+    match /exercices/{id} {
+      allow read, write: if isKine();
+    }
+
     // Ancienne collection (avant migration) : réservée au kiné
     match /programmes/{id} {
       allow read, write: if isKine();

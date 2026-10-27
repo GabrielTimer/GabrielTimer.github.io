@@ -7,6 +7,7 @@
      patients/{code}/seances/{id}    → séances prescrites à ce patient
      modeles/{id}                    → programmes modèles du cabinet
      programmes/{id}                 → ancienne collection (avant migration)
+     exercices/{SOURCE_id}           → corrections du kiné sur la bibliothèque
    Le « code » est un identifiant secret de 12 caractères : seul le patient
    qui l'a reçu (lien ou QR code) peut lire son dossier.
    ========================================================= */
@@ -21,6 +22,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import { FIREBASE_CONFIG, ADMIN_EMAILS } from "./config.js";
+import { updateSessionExercise } from "./library.js";
 
 const app = initializeApp(FIREBASE_CONFIG);
 
@@ -278,6 +280,56 @@ export async function saveModele(modele){
 
 export async function deleteModele(id){
   await deleteDoc(doc(db, "modeles", id));
+}
+
+/* ---------- Corrections de la bibliothèque d'exercices ---------- */
+
+/** Toutes les corrections : { "CABINET_GENOU_01": { nom, consignes, … } }. */
+export async function listExerciseEdits(){
+  const snap = await getDocs(collection(db, "exercices"));
+  const out = {};
+  snap.docs.forEach(d => { const f = d.data().fields; if(f) out[d.id] = f; });
+  return out;
+}
+
+export async function saveExerciseEdit(key, { source, id, fields }){
+  await setDoc(doc(db, "exercices", key), clean({ source, id: String(id), fields, updatedAt: Date.now() }));
+}
+
+export async function deleteExerciseEdit(key){
+  await deleteDoc(doc(db, "exercices", key));
+}
+
+/**
+ * Reporte une correction dans les séances pas encore faites de tous les patients
+ * et dans les modèles. Renvoie { seances, modeles } : le nombre de documents mis à jour.
+ */
+export async function propagateExerciseEdit(before, after){
+  const touch = data => {
+    if(!data || !Array.isArray(data.exercices)) return null;
+    const exercices = data.exercices.map(x => ({ ...x }));
+    let changed = false;
+    exercices.forEach(x => { if(updateSessionExercise(x, before, after)) changed = true; });
+    return changed ? { ...data, exercices } : null;
+  };
+  const ops = [];
+  const [seances, modeles] = await Promise.all([getDocs(collectionGroup(db, "seances")), getDocs(collection(db, "modeles"))]);
+  let nS = 0, nM = 0;
+  seances.docs.forEach(d => {
+    const raw = d.data();
+    if(raw.terminee === true) return;
+    const key = raw.data ? "data" : (raw["données"] ? "données" : null);
+    const next = key && touch(raw[key]);
+    if(next){ ops.push([d.ref, { ...raw, [key]: next, updatedAt: Date.now() }]); nS++; }
+  });
+  modeles.docs.forEach(d => {
+    const raw = d.data();
+    const key = raw.data ? "data" : (raw["données"] ? "données" : null);
+    const next = key && touch(raw[key]);
+    if(next){ ops.push([d.ref, { ...raw, [key]: next, updatedAt: Date.now() }]); nM++; }
+  });
+  await batchWrite(ops);
+  return { seances: nS, modeles: nM };
 }
 
 /* ---------- Écritures groupées ---------- */
