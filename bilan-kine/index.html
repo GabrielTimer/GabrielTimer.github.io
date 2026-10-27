@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Bilan d’entrée kiné</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F6F5;--card:#fff;--ink:#14282B;--mut:#56696B;--line:#D3DDDC;--acc:#0F5257;--on:#fff;--chip:#E5EDEC;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A1C;--card:#15272A;--ink:#E8F0EF;--mut:#9BB1B3;--line:#2B4144;--acc:#5FC4C0;--on:#0D1A1C;--chip:#1E3538}}
+:root[data-theme="dark"]{--bg:#0D1A1C;--card:#15272A;--ink:#E8F0EF;--mut:#9BB1B3;--line:#2B4144;--acc:#5FC4C0;--on:#0D1A1C;--chip:#1E3538}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.4 "Atkinson Hyperlegible",system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}
+h1{font-size:22px;margin:0}h2{font-size:18px;margin:0 0 10px}
+main{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:20px;padding:20px;max-width:1300px;margin:0 auto}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.sticky{position:sticky;top:12px}
+button,input,textarea{font:inherit;color:inherit}
+button{border:0;cursor:pointer;min-height:44px}
+.seg{display:flex;gap:6px;margin-bottom:8px}
+.seg button,.btn{padding:8px 16px;border-radius:10px;background:var(--chip)}
+.seg button[aria-pressed=true],.btn.p{background:var(--acc);color:var(--on);font-weight:700}
+svg{width:100%;max-height:62vh;display:block;touch-action:manipulation}
+.z{stroke:var(--line);stroke-width:1.5;cursor:pointer}.z.sel{stroke:var(--ink);stroke-width:3.5}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.chip{padding:8px 14px;border-radius:99px;background:var(--chip);border:1px solid transparent}
+.chip[aria-pressed=true]{background:var(--acc);color:var(--on);font-weight:700}
+input,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
+textarea{resize:vertical;min-height:48px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+label{font-size:14px;color:var(--mut);display:block;margin-bottom:3px}
+.eva{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;margin:8px 0}
+.eva button{padding:0;border-radius:8px;background:var(--chip);font-weight:700}
+.eva button[aria-pressed=true]{outline:3px solid var(--ink)}
+.hint{color:var(--mut);margin:0}
+#sum{min-height:230px;font-size:15px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#toast{color:var(--acc);font-weight:700}
+.chip.t1{background:#1F7A52;color:#fff}.chip.t-1{background:#C8283C;color:#fff}.chip.rf{border-color:#C8283C}
+.alert{color:#C8283C;font-weight:700;margin:0 0 10px}.hy{margin:8px 0}.hy i{display:block;height:8px;border-radius:4px;background:var(--acc);margin-top:3px}
+.tr{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:6px 0}.tr .hint{font-size:14px;flex:1 1 230px}details{margin-top:10px;font-size:14px;color:var(--mut)}
+.info{min-height:36px;min-width:36px;padding:0;border-radius:50%;background:var(--chip);font-weight:700}#tip{position:absolute;z-index:50;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:15px;line-height:1.4}#tip p{margin:6px 0}#tip img{max-width:100%;border-radius:8px}#tip a{color:var(--acc);font-weight:700}
+.back{color:var(--acc);font-weight:700;text-decoration:none;font-size:15px}
+</style></head><body>
+<header><div><a class="back" href="/admin_tools.html">← Outils</a><h1>Bilan d’entrée</h1></div><div class="row"><span id="toast"></span><button class="btn" id="new">Nouveau bilan</button></div></header>
+<main>
+<div class="col"><div class="card sticky">
+<h2>Où avez-vous mal ?</h2>
+<div class="seg"><button data-v="face" aria-pressed="true">Face</button><button data-v="dos" aria-pressed="false">Dos</button></div>
+<svg id="body" viewBox="0 0 200 414" role="img" aria-label="Schéma corporel"></svg>
+<div id="zp"></div>
+</div></div>
+<div class="col">
+<div class="card"><h2>Patient</h2><div class="grid" id="ident"></div><p class="hint">Les noms ne sont jamais enregistrés dans l’historique : seul le code l’est.</p></div>
+<div class="card"><h2>Mesures (scores validés)</h2><div class="grid" id="mes"></div></div>
+<div class="card"><h2>Historique du patient</h2><div class="row"><button class="btn p" data-h="save">Enregistrer ce bilan</button><button class="btn" data-h="exp">Exporter</button><button class="btn" data-h="imp">Importer</button></div><div id="hist"></div><div id="cmpout"></div><input type="file" id="file" accept="application/json" hidden></div>
+<div id="cl" class="col"></div><div id="secs" class="col"></div>
+<div class="card"><h2>Résumé à coller dans Maiia</h2><textarea id="sum" readonly></textarea>
+<div class="row" style="margin-top:10px"><button class="btn p" id="copy">Copier le résumé</button></div></div>
+</div></main>
+<div id="tip" hidden role="dialog"></div>
+<script src="data.js"></script>
+<script src="guide.js"></script>
+<script>
+let S={f:{},c:{},pain:{},sel:null,view:"face"};
+try{const j=localStorage.getItem("gt_bilan_v1");if(j)S=JSON.parse(j)}catch(e){}
+const $=s=>document.querySelector(s);
+const save=()=>{try{localStorage.setItem("gt_bilan_v1",JSON.stringify(S))}catch(e){}};
+const col=v=>v<1?null:v<4?"#F2C14E":v<7?"#EE8434":"#C8283C";
+function zones(v){const d=Z[v],o=[];d.mid.forEach(z=>o.push([z[0],...z.slice(1)]));
+d.side.forEach(z=>{o.push([z[0]+" "+d.L,...z.slice(1)]);o.push([z[0]+" "+R[d.L],200-z[1]-z[3],...z.slice(2)])});return o}
+function drawBody(){$("#body").innerHTML=zones(S.view).map(([n,x,y,w,h,r])=>{const p=S.pain[n],c=p&&col(p.eva);
+return `<rect class="z${S.sel===n?" sel":""}" data-n="${n}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" style="fill:${c||"var(--chip)"}"><title>${n}</title></rect>`}).join("")}
+function drawPanel(){const n=S.sel,p=S.pain[n],el=$("#zp");
+if(!p){const k=Object.keys(S.pain).length;el.innerHTML=`<p class="hint">${k?k+" zone(s) notée(s). Touchez une zone pour l’ajouter ou la modifier.":"Touchez une zone douloureuse sur le schéma."}</p>`;return}
+el.innerHTML=`<h2>${n} <span style="font-weight:400">· EVA ${p.eva}/10</span></h2><div class="eva">${[...Array(11).keys()].map(i=>`<button data-e="${i}" aria-pressed="${p.eva===i}" style="${col(i)?"background:"+col(i)+";color:#14282B":""}">${i}</button>`).join("")}</div>
+<div class="chips">${TYPES.map(t=>`<button class="chip" data-t="${t}" aria-pressed="${p.types.includes(t)}">${t}</button>`).join("")}</div>
+<button class="btn" data-rm="1">Retirer cette zone</button>`}
+function summary(){const f=S.f,L=[];const ln=(t,k)=>{const a=[...(S.c[k]||[])],x=(f[k]||"").trim();if(x)a.push(x);if(a.length)L.push(t+" : "+a.join(", "))};
+L.push("BILAN D’ENTRÉE — "+new Date().toLocaleDateString("fr-FR"));
+const id=[(f.prenom||"")+" "+(f.nom||"").toUpperCase()].join("").trim();
+L.push("Patient : "+[id,f.naiss&&"né(e) le "+f.naiss,f.prof].filter(Boolean).join(" · "));
+ln("Pathologie / motif","patho");ln("Antécédents","atcd");ln("Médication","medic");
+const pz=Object.entries(S.pain).map(([n,p])=>n+" EVA "+p.eva+(p.types.length?" ("+p.types.join(", ").toLowerCase()+")":""));
+if(pz.length)L.push("Douleur : "+pz.join(" ; "));
+ln("Observation","obs");{const d=(S.c.dn4||[]).length;if(d)L.push("DN4 : "+d+"/10"+(d>=4?" (douleur neuropathique probable, seuil ≥ 4)":" (seuil ≥ 4 non atteint)"))}Object.keys(S.pain).filter(MAP).forEach(n=>{const a=ana(n),rf=a.c.s.filter(x=>a.r.RF.includes(x));if(rf.length)L.push("Drapeaux rouges ("+n+") : "+rf.join(", "));const ts=Object.entries(a.c.t).filter(x=>x[1]&&a.r.T.some(t=>t[0]===x[0])).map(x=>{const t=a.r.T.find(t=>t[0]===x[0]);return x[0]+(x[1]>0?" + (LR+ "+f1(t[2])+")":" − (LR− "+f1(t[3])+")")});if(ts.length)L.push("Tests ("+n+") : "+ts.join(", "));const k=cl(a);if(k)L.push("Cluster ("+n+") : "+k)});{const m=MES.filter(([k])=>S.f[k]).map(([k,l])=>l+" "+S.f[k]);if(m.length)L.push("Mesures : "+m.join(" · "))}ln("Objectifs","obj");ln("Traitement prévu","plan");ln("Programme retenu","prog");
+$("#sum").value=L.join("\n")}
+const MAP=n=>{const b=n.replace(/ [DG]$/,"");const m=MAPPING.find(([re])=>re.test(b));return m?m[1]:null};
+function ana(n){const r=REG[MAP(n)];S.cl=S.cl||{};const c=S.cl[n]=S.cl[n]||{s:[],t:{}};return{r,c}}
+const f1=x=>x==null?"–":String(x).replace(".",",");
+const use=(p,m)=>p!=null&&p>=5?"aide à confirmer":m!=null&&m<=0.2?"aide à exclure":"apport limité";
+function cl(a){const k=a.r.CL;if(!k)return"";const p=k.items.filter(x=>a.c.t[x]===1).length;if(!p)return"";const u=[...k.rules].reverse().find(x=>p>=x[0]);return p+"/"+k.items.length+" positifs"+(u?" → LR+ "+f1(u[1]):" (seuil de 3 non atteint)")}
+function clin(){const z=Object.keys(S.pain).filter(MAP),pc=S.c.prog||[];
+$("#cl").innerHTML=z.length?z.map(n=>{const{r,c}=ana(n),rf=r.RF.filter(x=>c.s.includes(x)),k=cl({r,c}),srcs=[...new Set(r.T.map(t=>t[4]).concat(r.src||[]))],
+ch=x=>`<button class="chip rf" data-z="${n}" data-sg="${x}" aria-pressed="${c.s.includes(x)}">${x}</button>`;
+return `<div class="card"><h2>Analyse · ${n}</h2><p class="hint">Drapeaux rouges, à rechercher en premier</p><div class="chips">${r.RF.map(ch).join("")}</div>
+${rf.length?`<p class="alert">${r.RFm}</p>`:""}
+${r.T.length?`<p class="hint">Tests : un appui = positif, deux = négatif. Valeurs de la littérature, sources en bas de carte.</p>${r.T.map(([t,h,p,m,s,i])=>`<div class="tr"><button class="chip t${c.t[t]||0}" data-z="${n}" data-ts="${t}">${t}${c.t[t]>0?" +":c.t[t]<0?" −":""}</button><button class="info" data-info="${t}" aria-label="Explication du test">ⓘ</button><span class="hint">${h.map(x=>r.H[x]).join(", ")} · LR+ ${f1(p)} · LR− ${f1(m)} · <b>${use(p,m)}</b>${i?" · "+i:""} [${srcs.indexOf(s)+1}]</span></div>`).join("")}`:""}
+${k?`<p class="hy"><b>Cluster ${r.CL.n} :</b> ${k}<br><i>${r.CL.w}</i></p>`:""}
+${r.G?`<p class="hint">Repères de prise en charge, touche pour retenir</p><div class="chips">${r.G.map(x=>`<button class="chip" data-k="prog" data-c="${x}" aria-pressed="${pc.includes(x)}">${x}</button>`).join("")}</div>`:""}
+<p class="hint">Mesures recommandées : ${r.Q.map(q=>PROM[q]).join(" · ")}</p>${r.note?`<p class="hint"><i>${r.note}</i></p>`:""}
+<details><summary>Sources</summary><ol>${srcs.map(s=>`<li>${SRC[s]}</li>`).join("")}</ol></details></div>`}).join(""):'<div class="card"><p class="hint">Touche une zone (genou, épaule, lombaires, cervicales, cheville/pied) pour afficher drapeaux rouges, tests validés et données probantes.</p></div>'}
+function all(){hideTip();drawBody();drawPanel();clin();summary();save()}
+// construction
+$("#ident").innerHTML=ID.map(([k,l])=>`<div><label for="${k}">${l}</label><input id="${k}" value="${(S.f[k]||"").replace(/"/g,"&quot;")}"></div>`).join("");
+$("#secs").innerHTML=SEC.map(([k,t,ch])=>`<div class="card"><h2>${t}</h2><div class="chips">${ch.map(c=>`<button class="chip" data-k="${k}" data-c="${c}" aria-pressed="${(S.c[k]||[]).includes(c)}">${c}</button>`).join("")}</div><textarea id="${k}" placeholder="Précisions…">${S.f[k]||""}</textarea></div>`).join("");
+document.addEventListener("input",e=>{if(e.target.id&&e.target.tagName!="BUTTON"&&e.target.id!="sum"){S.f[e.target.id]=e.target.value;summary();save();if(e.target.id==="code")histUI()}});
+document.addEventListener("click",e=>{const b=e.target.closest("button,rect");if(!b)return;const d=b.dataset;
+if(d.v){S.view=d.v;S.sel=null;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===S.view));all()}
+else if(d.n){if(!S.pain[d.n])S.pain[d.n]={eva:5,types:[]};S.sel=d.n;all()}
+else if(d.e!==undefined){S.pain[S.sel].eva=+d.e;all()}
+else if(d.t){const a=S.pain[S.sel].types,i=a.indexOf(d.t);i<0?a.push(d.t):a.splice(i,1);all()}
+else if(d.rm){delete S.pain[S.sel];S.sel=null;all()}
+else if(d.k){const a=S.c[d.k]=S.c[d.k]||[],i=a.indexOf(d.c);i<0?a.push(d.c):a.splice(i,1);b.setAttribute("aria-pressed",i<0);summary();save()}
+else if(d.sg){const a=S.cl[d.z].s,i=a.indexOf(d.sg);i<0?a.push(d.sg):a.splice(i,1);all()}
+else if(d.ts){const t=S.cl[d.z].t;t[d.ts]=t[d.ts]===1?-1:t[d.ts]===-1?0:1;all()}
+else if(d.sh){S.cl[d.z].sh=1;all()}
+else if(d.info!==undefined){if(canHover)showTip(b);else if(tb===b&&!tip.hidden)hideTip();else showTip(b)}
+else if(d.h){H(d.h,+d.i)}
+else if(b.id==="new"){if(confirm("Effacer ce bilan et en commencer un nouveau ?")){S={f:{},c:{},pain:{},sel:null,view:"face"};try{localStorage.removeItem("gt_bilan_v1")}catch(x){}location.reload()}}
+else if(b.id==="copy"){const t=$("#sum");const ok=()=>{$("#toast").textContent="Copié";setTimeout(()=>$("#toast").textContent="",2000)};
+const fb=()=>{t.removeAttribute("readonly");t.select();try{document.execCommand("copy");ok()}catch(x){}t.setAttribute("readonly","")};
+navigator.clipboard?navigator.clipboard.writeText(t.value).then(ok,fb):fb()}});
+document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===S.view));
+
+$("#mes").innerHTML=MES.map(([k,l])=>`<div><label for="${k}">${l}</label><input id="${k}" inputmode="decimal" value="${(S.f[k]||"").replace(/"/g,"&quot;")}"></div>`).join("");
+const HK="gt_bilan_hist_v1",hget=()=>{try{return JSON.parse(localStorage.getItem(HK))||{}}catch(e){return{}}},hset=x=>{try{localStorage.setItem(HK,JSON.stringify(x))}catch(e){}};
+const hcode=()=>(S.f.code||"").trim().toUpperCase(),fd=d=>new Date(d).toLocaleDateString("fr-FR");
+function histUI(){const c=hcode(),L=c?(hget()[c]||[]):[];
+$("#hist").innerHTML=c?(L.length?L.map((b,i)=>`<div class="row" style="margin-top:8px"><b>${fd(b.d)}</b><button class="btn" data-h="load" data-i="${i}">Charger</button><button class="btn" data-h="cmp" data-i="${i}">Comparer à l’actuel</button><button class="btn" data-h="del" data-i="${i}">Supprimer</button></div>`).join(""):'<p class="hint">Aucun bilan enregistré pour ce code.</p>'):'<p class="hint">Saisis un code patient pour utiliser l’historique.</p>'}
+function cmpR(a,b){const R=[];MES.forEach(([k,l,mid,dir])=>{const x=parseFloat(a.f[k]),y=parseFloat(b.f[k]);if(isNaN(x)||isNaN(y))return;const dd=Math.round((y-x)*10)/10;R.push(l+" : "+x+" → "+y+" ("+(dd>0?"+":"")+dd+")"+(mid&&Math.abs(dd)>=mid?(dd*dir>0?" — amélioration ≥ MID":" — aggravation ≥ MID"):""))});
+Object.keys({...a.pain,...b.pain}).forEach(n=>{const x=a.pain[n]&&a.pain[n].eva,y=b.pain[n]&&b.pain[n].eva;R.push("EVA "+n+" : "+(x==null?"–":x)+" → "+(y==null?"–":y))});return R}
+function H(a,i){const c=hcode(),h=hget();
+if(a==="imp")return $("#file").click();
+if(!c){$("#toast").textContent="Code patient requis";return}
+const L=h[c]=h[c]||[];
+if(a==="save"){const s=JSON.parse(JSON.stringify(S));["nom","prenom","naiss"].forEach(k=>delete s.f[k]);L.push({d:new Date().toISOString(),s});hset(h);histUI();$("#toast").textContent="Bilan enregistré";setTimeout(()=>$("#toast").textContent="",2000)}
+else if(a==="load"){if(confirm("Remplacer le bilan en cours par celui du "+fd(L[i].d)+" ?")){S=JSON.parse(JSON.stringify(L[i].s));S.f.code=c;save();location.reload()}}
+else if(a==="del"){if(confirm("Supprimer ce bilan de l’historique ?")){L.splice(i,1);hset(h);histUI();$("#cmpout").innerHTML=""}}
+else if(a==="cmp"){const R=cmpR(L[i].s,S);$("#cmpout").innerHTML='<div class="card" style="margin-top:10px"><h2>Évolution depuis le '+fd(L[i].d)+'</h2>'+(R.length?R.map(x=>"<p class=\"hy\">"+x+"</p>").join(""):'<p class="hint">Rien à comparer (renseigner mesures ou EVA).</p>')+'<p class="hint">MID : valeurs de la littérature, variables selon population et méthode.</p></div>'}
+else if(a==="exp"){const t=new Blob([JSON.stringify({code:c,bilans:L})],{type:"application/json"}),u=URL.createObjectURL(t),l=document.createElement("a");l.href=u;l.download="bilan-"+c+".json";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}}
+document.addEventListener("change",e=>{if(e.target.id!=="file"||!e.target.files[0])return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.code||!Array.isArray(j.bilans))throw 0;const h=hget(),cur=h[j.code]||[];j.bilans.forEach(b=>{if(b&&b.d&&b.s&&!cur.some(x=>x.d===b.d))cur.push(b)});cur.sort((a,b)=>a.d<b.d?-1:1);h[j.code]=cur;hset(h);S.f.code=j.code;save();location.reload()}catch(x){$("#toast").textContent="Fichier invalide"}};r.readAsText(e.target.files[0])});
+
+const tip=$("#tip"),canHover=matchMedia("(hover:hover)").matches;let tb=null;
+function showTip(b){const n=b.dataset.info,g=(typeof GUIDE!=="undefined"&&GUIDE[n])||{},v=g.v||"https://www.youtube.com/results?search_query="+encodeURIComponent(n+" test kinésithérapie");
+tip.innerHTML=`<b>${n}</b>${g.t?`<p><u>Technique</u> : ${g.t}</p>`:"<p>Description à compléter dans guide.js.</p>"}${g.p?`<p><u>Positif si</u> : ${g.p}</p>`:""}${g.i?`<img src="${g.i}" alt="${n}">`:""}<p><a href="${v}" target="_blank" rel="noopener">${g.v?"Voir la vidéo":"Chercher une vidéo (YouTube)"}</a>${g.r?` · <a href="${g.r}" target="_blank" rel="noopener">Fiche de référence</a>`:""}</p>`;
+tip.hidden=false;tb=b;const r=b.getBoundingClientRect(),w=Math.min(340,innerWidth-16);tip.style.width=w+"px";tip.style.left=Math.max(8,Math.min(r.left,innerWidth-w-8))+scrollX+"px";tip.style.top=r.bottom+scrollY+"px"}
+function hideTip(){if(!tip)return;tip.hidden=true;tb=null}
+document.addEventListener("mouseover",e=>{if(!canHover)return;const b=e.target.closest("[data-info]");if(b)showTip(b)});
+document.addEventListener("mouseout",e=>{if(!canHover||tip.hidden)return;const to=e.relatedTarget;if(to&&(tip.contains(to)||(tb&&tb.contains(to))))return;if(e.target.closest("[data-info],#tip"))hideTip()});
+document.addEventListener("click",e=>{if(!e.target.closest("#tip,[data-info]"))hideTip()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")hideTip()});
+all();histUI();
+</script></body></html>
