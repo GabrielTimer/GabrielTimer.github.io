@@ -16,7 +16,7 @@ export const SITE_URL = "https://gabrieltimer.github.io";
 /* Nom de l'application */
 export const APP_NAME = "ApiKiné";
 
-export const APP_VERSION = "2.6.1";
+export const APP_VERSION = "2.6.2";
 
 export const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAauNHfzBWdVyYH120Cj3ur7gPt7fYQvIw",
