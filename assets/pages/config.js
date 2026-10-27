@@ -9,6 +9,7 @@ import {
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise } from "../library.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
+import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 
 const { requireKine } = await import("../kine.js");
 await requireKine();
@@ -113,7 +114,12 @@ function persist(){
 }
 
 function build(){
-  const exos = S.exercices.map(e => ({ ...e, series: S.series }));
+  const exos = S.exercices.map(e => {
+    const x = { ...e, series: S.series };
+    const ev = normEvol(e.evol);
+    if(ev) x.evol = ev; else delete x.evol;
+    return x;
+  });
   return {
     version: 2,
     nom: S.nom.trim() || "Séance",
@@ -231,6 +237,7 @@ function renderExos(){
           ${stepper(i, "reps", "Répétitions", 1, 1)}
         </div>
         <div class="exo-foot"><span data-total="${i}">${exoTotal(e)}</span></div>
+        ${evolHTML(e, i)}
         <details class="exo-note" ${e.conseil_kine ? "open" : ""}><summary>${icon("message")}Consigne personnelle pour le patient</summary>
           <textarea class="textarea" data-note="${i}" maxlength="400" placeholder="Ex. Ne pas dépasser 3/10 de douleur, côté droit uniquement">${esc(e.conseil_kine || "")}</textarea>
         </details>
@@ -239,6 +246,75 @@ function renderExos(){
   bindExos();
   renderSummary();
 }
+
+/* ---------- Évolution : charge par semaine, vitesse dans la semaine ---------- */
+
+function evolHTML(e, i){
+  const ev = e.evol || null;
+  const c = ev?.charge || null;
+  const on = !!(c || ev?.vitesse);
+  const num = (k, v, step, label, ph = "") => `<div class="field"><label for="ev-${k}-${i}">${label}</label>
+    <div class="stepper"><button type="button" data-ev="${k}" data-i="${i}" data-d="${-step}" aria-label="Diminuer">${icon("minus")}</button><input id="ev-${k}-${i}" type="text" inputmode="decimal" value="${v === null || v === undefined ? "" : esc(fmtKg(v))}" placeholder="${ph}" data-evf="${k}" data-i="${i}"><button type="button" data-ev="${k}" data-i="${i}" data-d="${step}" aria-label="Augmenter">${icon("plus")}</button></div></div>`;
+  return `<details class="exo-evol" data-evol="${i}" ${on ? "open" : ""}>
+    <summary>${icon("trendUp")}Évolution : charge et vitesse${on ? ` <span class="badge lagon">activée</span>` : ""}</summary>
+    <div class="ev-body">
+      <label class="check"><input type="checkbox" data-evc="charge" data-i="${i}" ${c ? "checked" : ""}> La charge augmente chaque semaine</label>
+      ${c ? `<div class="ev-nums">
+        ${num("depart", c.depart, 0.5, `Départ (${esc(c.unite || "kg")})`)}
+        ${num("pas", c.pas, 0.5, "En plus chaque semaine")}
+        ${num("max", c.max, 0.5, "Maximum (facultatif)", "aucun")}
+      </div>` : ""}
+      <label class="check"><input type="checkbox" data-evc="vitesse" data-i="${i}" ${ev?.vitesse ? "checked" : ""}> La vitesse augmente au fil de la semaine (lente, puis moyenne, puis rapide)</label>
+      <p class="ev-prev small" data-evprev="${i}">${esc(evolPreviewText(e))}</p>
+    </div>
+  </details>`;
+}
+
+function evolPreviewText(e){
+  const ev = normEvol(e.evol);
+  if(!ev) return "Utile par exemple pour le renforcement excentrique d'un tendon : la charge monte chaque semaine, la vitesse monte d'une séance à l'autre dans la semaine.";
+  if(S.type === "programme") return evolPreview(e, { semaines:S.semaines, parSemaine:S.parSemaine });
+  return evolTexte(e) + (mode.kind === "new" ? " Pour une séance unique : charge de départ, vitesse lente." : "");
+}
+
+function refreshEvolPreviews(){
+  $$("[data-evprev]").forEach(p => { const e = S.exercices[+p.dataset.evprev]; if(e) p.textContent = evolPreviewText(e); });
+}
+
+function bindEvol(list){
+  $$("[data-evc]", list).forEach(cb => cb.addEventListener("change", () => {
+    const e = S.exercices[+cb.dataset.i];
+    const ev = e.evol ? { ...e.evol } : { charge:null, vitesse:false };
+    if(cb.dataset.evc === "charge") ev.charge = cb.checked ? (ev.charge || defaultEvol().charge) : null;
+    else ev.vitesse = cb.checked;
+    e.evol = ev.charge || ev.vitesse ? ev : null;
+    persist(); renderExos();
+    $(`[data-evol="${cb.dataset.i}"]`)?.setAttribute("open", "");
+  }));
+  const setEv = (i, k, v, rewrite) => {
+    const e = S.exercices[i];
+    if(!e.evol?.charge) return;
+    const raw = String(v ?? "").trim().replace(",", ".");
+    let n = raw === "" ? null : Number(raw);
+    if(n !== null && !Number.isFinite(n)) return;
+    if(n !== null) n = Math.max(0, Math.min(500, Math.round(n * 100) / 100));
+    if(k !== "max" && n === null) n = 0;
+    e.evol.charge[k] = n;
+    if(rewrite){ const inp = $(`#ev-${k}-${i}`); if(inp) inp.value = n === null ? "" : fmtKg(n); }
+    persist(); refreshEvolPreviews();
+  };
+  $$("[data-evf]", list).forEach(inp => {
+    inp.addEventListener("input", () => setEv(+inp.dataset.i, inp.dataset.evf, inp.value, false));
+    inp.addEventListener("change", () => { const c = S.exercices[+inp.dataset.i].evol?.charge; const v = c?.[inp.dataset.evf]; inp.value = v === null || v === undefined ? "" : fmtKg(v); });
+  });
+  $$("[data-ev]", list).forEach(b => b.onclick = () => {
+    const i = +b.dataset.i, k = b.dataset.ev, c = S.exercices[i].evol?.charge;
+    if(!c) return;
+    const cur = c[k] === null || c[k] === undefined ? (k === "max" ? Math.max(c.depart, chargeMaxGuess(c)) : 0) : c[k];
+    setEv(i, k, Math.max(0, cur + Number(b.dataset.d)), true);
+  });
+}
+const chargeMaxGuess = c => c.depart + c.pas * Math.max(0, S.semaines - 1);
 
 function exoTotal(e){
   return `${e.reps} × ${fmtDuree(e.ex)}${e.repos ? ` avec ${fmtDuree(e.repos)} de repos` : ""}, soit ${fmtDuree(e.reps * e.ex + Math.max(0, e.reps - 1) * e.repos)}`;
@@ -290,6 +366,7 @@ function bindExos(){
     });
   });
   $$(".grip", list).forEach(g => g.addEventListener("pointerdown", startDrag));
+  bindEvol(list);
 }
 
 function setField(i, f, v, rerenderInput){
@@ -482,14 +559,14 @@ function renderSend(full = true){
     S.type = b.dataset.type; persist();
     $$("[data-type]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
     $("#plan").hidden = S.type !== "programme";
-    updatePlanPreview(); updatePrimary();
+    updatePlanPreview(); updatePrimary(); refreshEvolPreviews();
   });
   const setPlan = (k, v) => {
     const lim = k === "semaines" ? [1, 52] : [1, 7];
     S[k] = clamp(v, lim[0], lim[1]);
     $("#" + k).value = S[k];
     if(k === "parSemaine"){ S.jours = [...(DEFAULT_JOURS[S.parSemaine] || [])]; $$("[data-day]").forEach(b => b.setAttribute("aria-pressed", String(S.jours.includes(+b.dataset.day)))); }
-    persist(); updatePlanPreview(); updatePrimary();
+    persist(); updatePlanPreview(); updatePrimary(); refreshEvolPreviews();
   };
   $$("[data-pstep]").forEach(b => b.onclick = () => setPlan(b.dataset.pstep, S[b.dataset.pstep] + Number(b.dataset.d)));
   ["semaines", "parSemaine"].forEach(k => $("#" + k).addEventListener("change", e => setPlan(k, e.target.value)));
@@ -564,7 +641,7 @@ async function send(){
   try{
     let count = 1;
     if(S.type === "unique"){
-      await C.saveSeance(p.cle, { nom:data.nom, actif:true, createdAt:now, auteur:"gabriel", patientId:p.patientId, categorie:"kine", data });
+      await C.saveSeance(p.cle, { nom:data.nom, actif:true, createdAt:now, auteur:"gabriel", patientId:p.patientId, categorie:"kine", data: applyEvol(data) });
     }else{
       const dates = planDates();
       const programmeId = C.newId();
@@ -583,6 +660,9 @@ async function send(){
           data:{ ...data, categorie:"kine" }
         };
       });
+      /* Charge selon la semaine, vitesse selon le rang de la séance dans sa semaine.
+         Une semaine incomplète (début ou fin) commence quand même en lent. */
+      seances.forEach(x => { x.data = applyEvol(x.data, { semaine:x.semaine, ordre:x.ordre, nb:S.parSemaine }); });
       count = await C.saveSeances(p.cle, seances);
     }
     if((S.conseils || []).length){
@@ -684,7 +764,11 @@ async function saveEditSeance(){
     if($("#apply-all")?.checked) targets.push(...editSeance.siblings.filter(x => x.id !== editSeance.id && !x.terminee));
     for(const s of targets){
       const { siblings, label, firebaseId, ...rest } = s;
-      await C.saveSeance(mode.ref.cle, { ...rest, programmeNom: rest.programmeNom ? (targets.length > 1 ? data.nom : rest.programmeNom) : rest.programmeNom, data:{ ...data, categorie: s.data?.categorie || "kine" } });
+      const perWk = {};
+      editSeance.siblings.forEach(x => { perWk[x.semaine || 1] = (perWk[x.semaine || 1] || 0) + 1; });
+      const nb = Math.max(1, ...Object.values(perWk));
+      const d = applyEvol(data, { semaine:s.semaine || 1, ordre:s.ordre || 1, nb });
+      await C.saveSeance(mode.ref.cle, { ...rest, programmeNom: rest.programmeNom ? (targets.length > 1 ? data.nom : rest.programmeNom) : rest.programmeNom, data:{ ...d, categorie: s.data?.categorie || "kine" } });
     }
     store.del("gt_edit");
     toast(targets.length > 1 ? `${targets.length} séances mises à jour.` : "Séance mise à jour.", { type:"ok" });

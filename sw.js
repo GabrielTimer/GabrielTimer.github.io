@@ -1,12 +1,12 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.5.0";
+const VERSION = "gt-2.6.0";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
 const PRECACHE = [
   "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/progression.html", "/suivi.html", "/conseils.html",
-  "/assets/suivi.js", "/assets/messages.js", "/assets/questionnaires.js", "/assets/conseils-data.js",
+  "/assets/suivi.js", "/assets/messages.js", "/assets/evolution.js", "/assets/questionnaires.js", "/assets/conseils-data.js",
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js",

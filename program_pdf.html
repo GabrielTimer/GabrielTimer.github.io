@@ -665,6 +665,22 @@ onclick="downloadPdf()">
 </script>
 <script>
 
+/* Progression charge / vitesse (voir assets/evolution.js) */
+function evolTexte(exo){
+  var ev = exo && exo.evol;
+  if(!ev || (!ev.charge && !ev.vitesse)) return "";
+  var f = function(n){ return (Math.round(Number(n) * 100) / 100).toLocaleString("fr-FR"); };
+  var out = [];
+  if(ev.charge){
+    var c = ev.charge, u = c.unite || "kg";
+    out.push(Number(c.pas)
+      ? "Charge : " + f(c.depart) + " " + u + " la première semaine, puis + " + f(c.pas) + " " + u + " chaque semaine" + (c.max !== null && c.max !== undefined ? " (jusqu'à " + f(c.max) + " " + u + ")" : "") + "."
+      : "Charge : " + f(c.depart) + " " + u + ".");
+  }
+  if(ev.vitesse) out.push("Vitesse : lente en début de semaine (descente en 3 s), puis moyenne (2 s), puis rapide (1 s). On repart en lent la semaine suivante.");
+  return out.join(" ");
+}
+
 const data = JSON.parse(
 
 localStorage.getItem("programme_pdf")
@@ -822,6 +838,7 @@ exo.nom
 <div class="description">
 
 ${ exo.conseil_kine ? `<p style="font-weight:700">${exo.conseil_kine.replace(/</g,"&lt;")}</p>` : "" }
+${ evolTexte(exo) ? `<p style="font-weight:700;color:#0E6E80">${evolTexte(exo).replace(/</g,"&lt;")}</p>` : "" }
 ${
 
 (Array.isArray(exo.consignes) && exo.consignes.length ? "<ol style=\"margin:0;padding-left:1.2em\">" + exo.consignes.map(c => "<li>" + String(c).replace(/</g,"&lt;") + "</li>").join("") + "</ol>" : "")

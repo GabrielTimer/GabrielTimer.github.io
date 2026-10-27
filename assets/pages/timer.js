@@ -7,6 +7,7 @@ import {
   openSheet, confirmDialog, exoImageHTML, safeRich, vibrate, plural
 } from "../app.js";
 import { exerciseImage, exerciseSteps, videoEmbed } from "../library.js";
+import { doseOf, doseParole } from "../evolution.js";
 
 const PREP = 5;                       // secondes pour se mettre en position
 const RESP = { RESP_DEBUTER:"beginner", RESP_APAISER:"calm", RESP_EQUILIBRER:"balance" };
@@ -156,7 +157,7 @@ function announce(st){
     if(nom.includes("course")) vibrate(800);
     else if(nom.includes("marche")) vibrate([250, 150, 250]);
     else vibrate(120);
-    if(st.r === 1) speak(st.e.nom);
+    if(st.r === 1){ const dp = st.s === 1 ? doseParole(st.e) : ""; speak(dp ? `${st.e.nom}. ${dp}` : st.e.nom); }
     else if(nom.includes("course")) speak("Course");
     else if(nom.includes("marche")) speak("Marche");
   }else if(st.kind === "rest"){
@@ -275,7 +276,7 @@ function finish(){
 /* ---------- Affichage ---------- */
 
 const el = {
-  body:document.body, count:$("#count"), spine:$("#spine"), figure:$("#figure"), name:$("#name"), sub:$("#sub"),
+  body:document.body, count:$("#count"), spine:$("#spine"), figure:$("#figure"), name:$("#name"), sub:$("#sub"), dose:$("#dose"),
   ring:$("#ring"), arc:$("#arc"), phase:$("#phase"), time:$("#time"), hint:$("#hint"), next:$("#next"),
   play:$("#play"), prev:$("#prev"), skip:$("#skip"), info:$("#info"), sound:$("#sound"),
   totalbar:$("#totalbar"), totaltxt:$("#totaltxt")
@@ -303,6 +304,12 @@ function render(full){
     el.figure.innerHTML = exoImageHTML(exerciseImage(e), e.nom) + `<button class="zoom" type="button" aria-label="Voir les consignes">${icon("maximize")}</button>`;
     el.figure.querySelector(".zoom").onclick = openInfo;
     el.name.textContent = e.nom || "Exercice";
+    const d = doseOf(e);
+    el.dose.hidden = !d;
+    el.dose.innerHTML = d ? [
+      d.chargeTxt ? `<span class="dose-chip">${icon("dumbbell")}${esc(d.chargeTxt)}</span>` : "",
+      d.vitesse ? `<span class="dose-chip v-${d.vitesse.id}">${icon("clock")}Vitesse ${esc(d.vitesse.label.toLowerCase())}<span class="dose-det">, ${esc(d.vitesse.detail)}</span></span>` : ""
+    ].join("") : "";
   }
 
   let sub = "";
@@ -386,6 +393,7 @@ function openInfo(){
     ${exoImageHTML(exerciseImage(e), e.nom, "sheet-img")}
     <div class="tips">
       ${e.conseil_kine ? `<div class="notice" style="margin-top:14px">${icon("message")}<span><strong>Votre kiné :</strong> ${esc(e.conseil_kine)}</span></div>` : ""}
+      ${(() => { const d = doseOf(e); return d ? `<div class="notice" style="margin-top:14px">${icon("dumbbell")}<span><strong>Aujourd'hui :</strong> ${[d.chargeTxt ? `charge ${esc(d.chargeTxt)}` : "", d.vitesse ? `vitesse ${esc(d.vitesse.label.toLowerCase())} (${esc(d.vitesse.detail)})` : ""].filter(Boolean).join(", ")}.</span></div>` : ""; })()}
       ${e.position ? `<h3>${icon("body")}Position de départ</h3><p>${esc(e.position)}</p>` : ""}
       ${stepsList.length ? `<h3>${icon("list")}Comment faire</h3><ol class="steps">${stepsList.map(t => `<li><span>${esc(t)}</span></li>`).join("")}</ol>` : ""}
       ${e.description_fr && !stepsList.length ? `<div class="rich">${safeRich(e.description_fr)}</div>` : ""}
