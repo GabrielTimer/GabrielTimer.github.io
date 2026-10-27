@@ -7556,7 +7556,7 @@
   "niveau": 2,
   "exercise_mode": "renforcement",
   "duree": "3 séries de 10",
-  "description": "Renforcement des muscles qui tournent l'avant-bras, pour l'épicondylite latérale (« tennis elbow »). Commencez avec une petite bouteille d'eau de 500 g, puis 1 kg, puis 2 kg.",
+  "description": "Renforcement des muscles qui tournent l'avant-bras, pour l'épicondylite latérale (« tennis elbow ») ou l'épitrochléite (« golfer's elbow »). Commencez avec une petite bouteille d'eau de 500 g, puis 1 kg, puis 2 kg.",
   "consignes": [
     "Assis, avant-bras posé sur la table, coude plié à 90°.",
     "Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
@@ -7594,6 +7594,7 @@
     "Tennis elbow",
     "Pronation",
     "Supination",
+    "Épitrochléite",
     "Avant-bras"
   ],
   "timer_config": {
@@ -7618,7 +7619,8 @@
   ],
   "pathologies": [
     "Épicondylite latérale (tennis elbow)",
-    "Tendinopathie des épicondyliens"
+    "Tendinopathie des épicondyliens",
+    "Épitrochléite (épicondylite médiale, golfer's elbow)"
   ],
   "objectifs": [
     "Renforcement"
@@ -7714,6 +7716,95 @@
   "benefices": [
     "À faire aussi avant une activité sportive ou professionnelle sollicitante."
   ]
+},
+{
+  "id": "COUDE_05",
+  "nom": "Renforcement excentrique des fléchisseurs du poignet",
+  "type": "timer",
+  "categorie": "coude",
+  "objectif": "Renforcement",
+  "niveau": 2,
+  "exercise_mode": "renforcement",
+  "duree": "3 séries de 10",
+  "description": "Renforcement en freinage (excentrique) des muscles qui plient le poignet, pour l'épitrochléite (épicondylite médiale, « golfer's elbow »). Commencez avec une petite bouteille d'eau de 500 g.",
+  "consignes": [
+    "Assis, avant-bras posé sur la table, paume vers le haut, le poignet dépassant du bord.",
+    "Tenez le poids (bouteille d'eau ou haltère), poignet plié vers vous.",
+    "Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.",
+    "Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.",
+    "Faites 10 descentes par série."
+  ],
+  "precautions": [
+    "Ne laissez pas tomber le poignet : la descente doit être contrôlée.",
+    "Ne contractez pas pour remonter : c'est l'autre main qui remonte le poids.",
+    "Une douleur modérée (jusqu'à 3 ou 4 sur 10) qui disparaît le lendemain est acceptable."
+  ],
+  "contre_indications": [],
+  "conseil_posture": [
+    "Avant-bras bien à plat sur la table, coude près du corps.",
+    "Épaules relâchées."
+  ],
+  "erreurs_frequentes": [
+    "Soulever l'avant-bras de la table.",
+    "Remonter le poids avec le poignet qui travaille."
+  ],
+  "respiration": [
+    "Expirez pendant la descente."
+  ],
+  "version_facile": [
+    "Sans poids, ou avec une bouteille moins remplie."
+  ],
+  "version_avancee": [
+    "Coude plus tendu, avant-bras toujours posé."
+  ],
+  "tags": [
+    "Coude",
+    "Épitrochléite",
+    "Épicondylite médiale",
+    "Golfer's elbow",
+    "Excentrique",
+    "Avant-bras",
+    "Tendinopathie"
+  ],
+  "timer_config": {
+    "mode": "dynamique",
+    "phase_monte": 2,
+    "maintien": 0,
+    "phase_descente": 3,
+    "cycles": 3
+  },
+  "ex": 60,
+  "repos": 45,
+  "reps": 3,
+  "image": "/exercises/images/coude/COUDE_05.webp",
+  "muscles_cibles": [
+    "Fléchisseurs du poignet et des doigts",
+    "Fléchisseur radial du carpe",
+    "Rond pronateur"
+  ],
+  "materiel": [
+    "Bouteille d'eau ou haltère (0,5 à 2 kg)",
+    "Table"
+  ],
+  "pathologies": [
+    "Épitrochléite (épicondylite médiale, golfer's elbow)",
+    "Tendinopathie des épitrochléens"
+  ],
+  "objectifs": [
+    "Renforcement"
+  ],
+  "zones": [
+    "Coude"
+  ],
+  "evol": {
+    "charge": {
+      "depart": 0.5,
+      "pas": 0.5,
+      "max": 2,
+      "unite": "kg"
+    },
+    "vitesse": true
+  }
 }
 
 ]
