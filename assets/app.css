@@ -711,3 +711,11 @@ a.chip{ text-decoration:none; }
 .inbox-badge[hidden]{ display:none; }
 .inbox-badge.inline{ position:static; margin-left:auto; box-shadow:none; }
 @media (min-width:960px){ .has-nav .inbox-btn{ display:none; } }
+
+/* Bibliothèque : zones du corps sur plusieurs lignes en plein écran,
+   badges des cartes qui ne débordent plus */
+.chips.scroll{ -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent); }
+@media (min-width:641px){
+  dialog.sheet.full .lib-tools .chips.scroll{ flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none; }
+}
+.lib-card .badge{ max-width:100%; white-space:normal; text-align:left; line-height:1.25; height:auto; min-height:22px; }
