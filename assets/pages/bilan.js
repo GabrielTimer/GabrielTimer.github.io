@@ -14,6 +14,9 @@ const { requireKine } = await import("../kine.js");
 await requireKine();
 const C = await import("../cloud.js");
 const B = await import("../bilan-core.js");
+const BC = await import("../bodychart.js");
+const NF = await import("../nerfs-ui.js");
+{ const st = document.createElement("style"); st.textContent = BC.BODY_CSS + NF.NERFS_CSS; document.head.append(st); }
 
 const cle = params.get("patient");
 let id = params.get("id") || null;
@@ -115,7 +118,7 @@ function render(){
             <button type="button" data-view="face" aria-pressed="${ui.view === "face"}">Face</button>
             <button type="button" data-view="dos" aria-pressed="${ui.view === "dos"}">Dos</button>
           </div>
-          <svg class="body-svg" id="body" viewBox="0 0 200 414" role="img" aria-label="Schéma corporel : touchez une zone douloureuse"></svg>
+          <svg class="body-svg" id="body" viewBox="0 0 200 430" role="img" aria-label="Schéma corporel : touchez une zone douloureuse"></svg>
           <div id="zone"></div>
         </section>
       </aside>
@@ -152,6 +155,12 @@ function render(){
         </section>
 
         <section class="panel">
+          <div class="panel-head"><h2>Examen neurologique</h2><span class="badge">racines · nerfs · moteur</span></div>
+          <p class="hint" style="margin-bottom:10px">Touchez un territoire pour voir le nerf ou la racine, puis notez vos constats (sensibilité, force, réflexe). Ils s'ajoutent au résumé et au PDF.</p>
+          <div id="neuro"></div>
+        </section>
+
+        <section class="panel">
           <div class="panel-head"><h2>Mesures</h2><span class="badge">scores validés</span><span class="spacer"></span><button class="btn sm" type="button" id="a-scores">${icon("download")}Reprendre les réponses du patient</button></div>
           <div class="mes-grid">${K.MES.map(([k, l]) => `<div class="field"><label for="f-${k}">${esc(l)}</label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
           <div id="evo"></div>
@@ -178,6 +187,8 @@ function render(){
         <div id="danger"></div>
       </div>
     </div>`;
+  S.neuro = S.neuro || {};
+  NF.mountNerfs($("#neuro"), { state:S.neuro, onChange:() => { changed(); } });
   drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawDN4(); drawEvo(); drawResume(); drawDanger();
   setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
 }
@@ -190,12 +201,8 @@ function drawNotes(){
 }
 
 function drawBody(){
-  const d = K.Z[ui.view];
-  $("#body").innerHTML = B.zones(ui.view).map(([n, x, y, w, h, r]) => {
-    const p = S.pain[n];
-    return `<rect class="${ui.sel === n ? "sel" : ""}" data-zone="${esc(n)}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" style="${p ? `fill:${evaColor(p.eva)}` : ""}"><title>${esc(n)}${p ? ` : EVA ${p.eva}` : ""}</title></rect>`;
-  }).join("") + `<text x="4" y="20">${d.L}</text><text x="186" y="20">${K.R[d.L]}</text>`;
-  $$(".segmented [data-view]").forEach(b => b.setAttribute("aria-pressed", b.dataset.view === ui.view));
+  $("#body").innerHTML = BC.bodySVG({ Z:K.Z, R:K.R, view:ui.view, pain:S.pain, sel:ui.sel, color:evaColor });
+  $$(".segmented [data-view]").forEach(b => { if(!b.closest("#neuro")) b.setAttribute("aria-pressed", b.dataset.view === ui.view); });
 }
 
 function drawZone(){
@@ -360,7 +367,8 @@ function pickZone(n){
 }
 
 app.addEventListener("click", async e => {
-  const b = e.target.closest("button, rect");
+  if(e.target.closest("#neuro")) return;
+  const b = e.target.closest("button, [data-zone]");
   if(!b) return;
   const d = b.dataset;
 
