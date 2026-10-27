@@ -105,3 +105,11 @@
 .eva-pill{ display:inline-flex; align-items:center; gap:6px; font-weight:700; font-family:var(--mono); }
 .eva-pill i{ width:12px; height:12px; border-radius:50%; display:inline-block; }
 .quote{ margin-top:6px; padding:8px 12px; border-left:3px solid var(--lagon); background:var(--surface-2); border-radius:0 var(--r-sm) var(--r-sm) 0; font-size:var(--fs-sm); color:var(--ink-2); }
+
+/* Bandeau des messages non lus (accueil kiné) */
+.inbox-banner{ display:flex; align-items:center; gap:14px; margin:0 0 18px; padding:14px 16px; border-radius:var(--r-lg); background:var(--lagon-soft); border:1px solid color-mix(in srgb,var(--lagon) 35%,transparent); color:var(--ink); text-decoration:none; }
+.inbox-banner:hover{ border-color:var(--lagon); }
+.inbox-banner .t-ico{ width:42px; height:42px; border-radius:12px; display:grid; place-items:center; background:var(--lagon); color:#fff; flex:none; }
+.inbox-banner .t-ico svg{ width:22px; height:22px; }
+.inbox-banner .li-main{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+.inbox-banner .small{ color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }

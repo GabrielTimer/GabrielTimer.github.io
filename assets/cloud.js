@@ -158,7 +158,18 @@ export async function updatePatient(cle, patch){
   if(Object.keys(priv).length) await setDoc(doc(db, "fiches", cle), clean({ ...priv, updatedAt: now }), { merge: true });
 }
 
+/* Sous-collections rattachées au code : suivis et messages (patients/), notes (fiches/) */
+const SUBS = [["patients", "suivis"], ["patients", "messages"], ["fiches", "notes"]];
+async function subDocs(root, cle, name){
+  const snap = await getDocs(collection(db, root, cle, name)).catch(() => ({ docs: [] }));
+  return snap.docs;
+}
+
 export async function deletePatient(cle){
+  for(const [root, name] of SUBS){
+    const docs = await subDocs(root, cle, name);
+    await batchDelete(docs.map(d => d.ref)).catch(() => {});
+  }
   const seances = await listSeances(cle);
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
   const bilans = await bilanDocs(cle);
@@ -184,6 +195,14 @@ export async function renewAccessCode(cle){
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
   const bilans = await bilanDocs(cle);
   await batchWrite(bilans.map(d => [d.ref, { ...d.data(), cle: nouveau }])).catch(() => {});
+  for(const [root, name] of SUBS){
+    const docs = await subDocs(root, cle, name);
+    if(!docs.length) continue;
+    try{
+      await batchWrite(docs.map(d => [doc(db, root, nouveau, name, d.id), d.data()]));
+      await batchDelete(docs.map(d => d.ref));
+    }catch(e){ /* on garde l'original plutôt que de perdre des données */ }
+  }
   await deleteDoc(doc(db, "fiches", cle)).catch(() => {});
   await deleteDoc(doc(db, "patients", cle));
   return nouveau;
@@ -431,6 +450,38 @@ export async function deleteSuivi(cle, id){
   await deleteDoc(doc(db, "patients", cle, "suivis", id));
 }
 
+/* ---------- Messages du patient (copie dans ApiKiné) ----------
+   patients/{code}/messages/{id} : { type:"message"|"bilan", sujet, texte, date, lu } */
+
+export async function addMessage(cle, { type = "message", sujet = "", texte = "" }){
+  const id = newId();
+  await setDoc(doc(db, "patients", cle, "messages", id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false }));
+  return id;
+}
+
+export async function listMessages(cle){
+  const snap = await getDocs(collection(db, "patients", cle, "messages"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle })).sort((a, b) => (b.date || 0) - (a.date || 0));
+}
+
+export async function listAllMessages(){
+  const snap = await getDocs(collectionGroup(db, "messages"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id })).sort((a, b) => (b.date || 0) - (a.date || 0));
+}
+
+export async function setMessageLu(cle, id, lu = true){
+  await setDoc(doc(db, "patients", cle, "messages", id), { lu }, { merge: true });
+}
+
+export async function deleteMessage(cle, id){
+  await deleteDoc(doc(db, "patients", cle, "messages", id));
+}
+
+/** Commentaire laissé en fin de séance : marqué comme lu par le kiné. */
+export async function setCommentaireLu(cle, seanceId, lu = true){
+  await setDoc(doc(db, "patients", cle, "seances", seanceId), { commentaireLu: lu }, { merge: true });
+}
+
 /* ---------- Questionnaires (définitions, lisibles par les patients) ---------- */
 
 export async function listQuestionnaires(){
@@ -504,6 +555,9 @@ export async function exportAll(onProgress = () => {}){
   onProgress("suivis");
   const suivis = await getDocs(collectionGroup(db, "suivis")).catch(() => ({ docs: [] }));
   out.collections.suivis = suivis.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
+  onProgress("messages");
+  const messages = await getDocs(collectionGroup(db, "messages")).catch(() => ({ docs: [] }));
+  out.collections.messages = messages.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
   onProgress("notes");
   const notes = await getDocs(collectionGroup(db, "notes")).catch(() => ({ docs: [] }));
   out.collections.notes = notes.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
@@ -539,6 +593,13 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
       if(!d.cle) return;
       ops.push([doc(db, "patients", d.cle, "suivis", d.id), d.data]);
       count.suivis = (count.suivis || 0) + 1;
+    });
+  }
+  if(want("messages")){
+    (backup.collections.messages || []).forEach(d => {
+      if(!d.cle) return;
+      ops.push([doc(db, "patients", d.cle, "messages", d.id), d.data]);
+      count.messages = (count.messages || 0) + 1;
     });
   }
   if(want("notes")){

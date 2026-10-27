@@ -98,6 +98,12 @@ Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de doul
 - **Aperçu patient** : le bouton **Vue patient** ouvre l'application telle que votre patient la voit. Rien n'est enregistré dans son dossier quand vous testez une séance depuis l'aperçu.
 - **Mot de passe oublié** : lien sous le formulaire de connexion.
 
+## Version 2.5 : messages des patients
+
+Les messages que les patients vous envoient depuis l'application (« Écrire à mon kiné », bilans de programme, commentaires de séance) sont gardés dans l'application, page **Messages**, avec une pastille pour les non lus. L'e-mail continue d'arriver comme avant.
+
+Cette version demande de **republier les règles** : copiez tout le contenu de [`firestore.rules`](firestore.rules) dans Firebase (Firestore Database, onglet Règles), puis **Publier**. Sans cela, seuls les commentaires de séance s'affichent dans Messages.
+
 ## Version 2.4 : suivi du patient
 
 Cette version ajoute les objectifs du patient, les questionnaires, les notes de séance, les fiches conseils, le compte rendu pour le médecin et les statistiques. Elle demande de **republier les règles** : copiez tout le contenu de [`firestore.rules`](firestore.rules) dans Firebase (Firestore Database, onglet Règles), puis **Publier**.

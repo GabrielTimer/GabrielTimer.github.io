@@ -27,6 +27,9 @@
   @media (min-width:1000px){ .cols{ grid-template-columns:1.4fr 1fr; align-items:start; } }
   .msg-list{ display:flex; flex-direction:column; gap:12px; }
   .msg-list .m-meta{ font-size:var(--fs-xs); color:var(--ink-3); font-weight:700; }
+  .msg-list .is-new .quote{ border-left-color:var(--danger); background:var(--danger-soft, var(--surface-2)); }
+  .msg-list .m-meta .badge{ font-size:.68rem; padding:1px 7px; vertical-align:1px; }
+  .quote.pre{ white-space:pre-wrap; max-height:14em; overflow:auto; }
   .menu{ position:relative; }
 </style>
 </head>
