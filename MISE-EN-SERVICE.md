@@ -98,6 +98,10 @@ Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de doul
 - **Aperçu patient** : le bouton **Vue patient** ouvre l'application telle que votre patient la voit. Rien n'est enregistré dans son dossier quand vous testez une séance depuis l'aperçu.
 - **Mot de passe oublié** : lien sous le formulaire de connexion.
 
+## Publication automatique des règles Firebase
+
+Le fichier `firestore.rules` est publié automatiquement dans Firebase à chaque modification sur la branche `main` (onglet **Actions** de GitHub, « Publier les règles Firebase »). Il faut pour cela le secret GitHub `FIREBASE_SERVICE_ACCOUNT` (Settings → Secrets and variables → Actions), qui contient la clé de compte de service téléchargée dans Firebase (Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). En cas de clé perdue ou compromise : supprimez-la dans Google Cloud (IAM → Comptes de service → Clés), puis générez-en une nouvelle et remplacez le secret.
+
 ## Version 2.5 : messages des patients
 
 Les messages que les patients vous envoient depuis l'application (« Écrire à mon kiné », bilans de programme, commentaires de séance) sont gardés dans l'application, page **Messages**, avec une pastille pour les non lus. L'e-mail continue d'arriver comme avant.
