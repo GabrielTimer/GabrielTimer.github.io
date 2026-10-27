@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compte rendu de rééducation</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  body{ background:var(--bg); }
+  .tools{ position:sticky; top:0; z-index:5; display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:12px var(--gutter); background:var(--surface); border-bottom:1px solid var(--line); }
+  .tools .spacer{ flex:1; }
+  .sheet-a4{ width:min(100% - 24px, 210mm); margin:20px auto 60px; background:#fff; color:#14303A; padding:16mm 15mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:10.5pt; line-height:1.5; }
+  .sheet-a4 h1{ font-size:17pt; margin:0; color:#0B6E80; }
+  .sheet-a4 h2{ font-size:11.5pt; margin:18px 0 8px; padding-bottom:4px; border-bottom:1.5px solid #138FA6; color:#0B6E80; letter-spacing:.01em; }
+  .hd{ display:flex; gap:14px; align-items:flex-start; justify-content:space-between; border-bottom:2.5px solid #138FA6; padding-bottom:12px; margin-bottom:14px; }
+  .hd .who{ display:flex; gap:12px; align-items:center; }
+  .hd img{ width:46px; height:46px; object-fit:contain; }
+  .hd .coord{ text-align:right; font-size:9pt; color:#47616B; white-space:pre-line; }
+  .meta{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:6px; }
+  .meta div{ background:#EEF6F7; border-radius:6px; padding:6px 10px; }
+  .meta b{ display:block; font-size:8.5pt; color:#6F878F; font-weight:600; }
+  table{ width:100%; border-collapse:collapse; font-size:9.8pt; }
+  th{ text-align:left; font-size:8.5pt; color:#6F878F; font-weight:700; border-bottom:1px solid #C9D9DD; padding:4px 6px; }
+  td{ border-bottom:1px solid #E3EDEF; padding:5px 6px; vertical-align:top; }
+  td.n{ font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .good{ color:#23885A; font-weight:700; } .bad{ color:#C93A3A; font-weight:700; }
+  .chart svg{ width:100%; height:auto; }
+  .quote{ border-left:3px solid #138FA6; padding:3px 10px; margin:6px 0; color:#47616B; background:none; }
+  .concl{ min-height:70px; border:1px dashed #9FB6BC; border-radius:6px; padding:8px 10px; white-space:pre-wrap; }
+  .concl:empty::before{ content:attr(data-ph); color:#9FB6BC; }
+  .sign{ margin-top:22px; display:flex; justify-content:space-between; font-size:9.5pt; }
+  .muted{ color:#6F878F; }
+  .opt-hidden{ display:none; }
+  @media print{
+    @page{ size:A4; margin:12mm; }
+    body{ background:#fff; }
+    .tools{ display:none; }
+    .sheet-a4{ width:auto; margin:0; padding:0; box-shadow:none; border-radius:0; }
+    .concl{ border:0; padding:0; }
+    .concl:empty{ display:none; }
+    h2{ break-after:avoid; }
+    table, .chart{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a class="btn sm ghost" id="back" href="/patients.html">Retour</a>
+  <label class="check"><input type="checkbox" id="o-com" checked> Commentaires du patient</label>
+  <label class="check"><input type="checkbox" id="o-notes"> Notes de séance</label>
+  <span class="spacer"></span>
+  <button class="btn primary" type="button" id="print">Imprimer ou enregistrer en PDF</button>
+</div>
+<div class="sheet-a4" id="doc"><div class="loading"><div class="spinner"></div><span>Préparation du compte rendu…</span></div></div>
+<script type="module">
+import { $, esc, icon, params, settings, logoSrc, KINE, fmtShortDate, fmtDate, groupProgrammes, byWeek, evaTrend, ressentiLabel, fmtNum } from "/assets/app.js";
+import { fmtScore } from "/assets/questionnaires.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+const C = await import("/assets/cloud.js");
+const P = await import("/assets/patient.js");
+const cle = params.get("patient");
+$("#back").href = `/cloud.html?patient=${encodeURIComponent(cle)}`;
+$("#back").innerHTML = icon("back") + "Retour à la fiche";
+$("#print").innerHTML = icon("print") + $("#print").textContent;
+
+const [patient, seancesAll, suivis, questionnaires, notes] = await Promise.all([
+  C.getPatient(cle, { fiche:true }), C.listSeances(cle),
+  C.listSuivis(cle).catch(() => []), C.listQuestionnaires().catch(() => []), C.listNotes(cle).catch(() => [])
+]);
+if(!patient){ $("#doc").innerHTML = "<p>Patient introuvable.</p>"; throw new Error("patient"); }
+document.title = `Compte rendu – ${patient.nom}`;
+const seances = seancesAll.filter(s => s.data && Array.isArray(s.data.exercices));
+const { programmes } = groupProgrammes(seances);
+programmes.forEach(p => byWeek(p.seances));
+const valides = seances.filter(s => s.terminee && s.dateValidation).sort((a, b) => a.dateValidation - b.dateValidation);
+const evaPts = valides.filter(s => s.eva !== null && s.eva !== undefined && s.eva !== "");
+const evas = evaPts.map(s => Number(s.eva));
+const tr = evaTrend(evas);
+const first = valides[0]?.dateValidation || patient.createdAt, last = valides[valides.length - 1]?.dateValidation || Date.now();
+
+/* Courbe de douleur en SVG statique (imprimable) */
+function evaSVG(){
+  if(evaPts.length < 2) return "";
+  const W = 640, H = 170, pl = 28, pr = 10, pt = 10, pb = 24;
+  const x = i => pl + i * (W - pl - pr) / (evaPts.length - 1), y = v => pt + (10 - v) / 10 * (H - pt - pb);
+  let g = "";
+  for(let v = 0; v <= 10; v += 2) g += `<line x1="${pl}" x2="${W - pr}" y1="${y(v)}" y2="${y(v)}" stroke="#E3EDEF"/><text x="${pl - 6}" y="${y(v) + 3.5}" font-size="9" text-anchor="end" fill="#6F878F">${v}</text>`;
+  const d = evaPts.map((s, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(Number(s.eva)).toFixed(1)}`).join(" ");
+  const step = Math.ceil(evaPts.length / 10);
+  const lab = evaPts.map((s, i) => i % step === 0 || i === evaPts.length - 1 ? `<text x="${x(i)}" y="${H - 6}" font-size="9" text-anchor="${i === 0 ? "start" : i === evaPts.length - 1 ? "end" : "middle"}" fill="#6F878F">${esc(fmtShortDate(s.dateValidation))}</text>` : "").join("");
+  return `<div class="chart"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Évolution de la douleur">${g}<path d="${d}" fill="none" stroke="#138FA6" stroke-width="2.2" stroke-linejoin="round"/>${evaPts.map((s, i) => `<circle cx="${x(i)}" cy="${y(Number(s.eva))}" r="3" fill="#138FA6"/>`).join("")}${lab}</svg></div>`;
+}
+
+const goals = patient.objectifs || [];
+const objS = suivis.filter(s => s.type === "objectifs");
+const qS = suivis.filter(s => s.type === "questionnaire" && s.score !== undefined && s.score !== null);
+const qIds = [...new Set(qS.map(s => s.qid))];
+const comments = valides.filter(s => s.commentaire);
+const cab = settings.cabinet || {};
+const coord = [cab.adresse, cab.telephone, cab.email || KINE.email].filter(Boolean).join("\n");
+const evol = (a, b, sens) => { const dlt = Math.round((b - a) * 10) / 10; if(!dlt) return `<span class="muted">stable</span>`; const good = sens === "haut" ? dlt > 0 : dlt < 0; return `<span class="${good ? "good" : "bad"}">${dlt > 0 ? "+" : ""}${fmtNum(dlt)}</span>`; };
+
+$("#doc").innerHTML = `
+  <div class="hd">
+    <div class="who"><img src="${esc(logoSrc())}" alt=""><div><strong style="font-size:12pt">${esc(KINE.nom)}</strong><br><span class="muted">${esc(KINE.titre)}</span></div></div>
+    <div class="coord">${esc(coord)}</div>
+  </div>
+  <h1>Compte rendu de rééducation</h1>
+  <p class="muted" style="margin:2px 0 12px">Établi le ${esc(fmtDate(new Date(), { day:"numeric", month:"long", year:"numeric" }))}</p>
+  <div class="meta">
+    <div><b>Patient</b>${esc(patient.nom)}</div>
+    <div><b>Période de suivi</b>${esc(fmtShortDate(first))} au ${esc(fmtShortDate(last))}</div>
+    <div><b>Séances à domicile réalisées</b>${valides.length}</div>
+  </div>
+
+  <h2>Programme d'exercices à domicile</h2>
+  ${programmes.length ? `<table><thead><tr><th>Programme</th><th>Période</th><th>Séances faites</th><th>Assiduité</th></tr></thead><tbody>${programmes.map(p => {
+    const reg = P.regularity(p.seances);
+    return `<tr><td>${esc(p.nom)}</td><td class="n">${p.debut ? `${esc(fmtShortDate(p.debut))} – ${esc(fmtShortDate(p.fin || p.debut))}` : "–"}</td><td class="n">${p.faites} / ${p.total}</td><td class="n">${reg === null ? "–" : reg + " %"}</td></tr>`;
+  }).join("")}</tbody></table>
+  <p class="muted" style="font-size:9pt;margin-top:4px">Assiduité : séances réalisées parmi celles prévues jusqu'à ce jour.</p>` : `<p class="muted">Pas de programme planifié.</p>`}
+
+  <h2>Douleur après les séances (échelle numérique 0–10)</h2>
+  ${evas.length ? `<p>${tr ? `Douleur moyenne en début de suivi : <strong>${fmtNum(tr.debut)}/10</strong>, en fin de période : <strong>${fmtNum(tr.fin)}/10</strong> (${evol(tr.debut, tr.fin, "bas")} point${Math.abs(tr.delta) >= 2 ? "s" : ""}).` : `Douleur relevée : ${evas[0]}/10.`} ${evas.length} mesure${evas.length > 1 ? "s" : ""}, minimum ${Math.min(...evas)}/10, maximum ${Math.max(...evas)}/10.</p>${evaSVG()}` : `<p class="muted">Pas de mesure de douleur enregistrée.</p>`}
+
+  ${goals.length ? `<h2>Objectifs fonctionnels du patient (0 = impossible, 10 = comme avant)</h2>
+  <table><thead><tr><th>Objectif</th><th>Départ</th><th>Actuel</th><th>Évolution</th></tr></thead><tbody>${goals.map(g => {
+    const v = objS.map(s => s.notes?.[g.id]).filter(x => x !== undefined);
+    return `<tr><td>${esc(g.texte)}</td><td class="n">${v.length ? v[0] + "/10" : "–"}</td><td class="n">${v.length ? v[v.length - 1] + "/10" : "–"}</td><td class="n">${v.length > 1 ? evol(v[0], v[v.length - 1], "haut") : "–"}</td></tr>`;
+  }).join("")}</tbody></table>` : ""}
+
+  ${qIds.length ? `<h2>Questionnaires validés</h2>
+  <table><thead><tr><th>Questionnaire</th><th>Premier score</th><th>Dernier score</th><th>Évolution</th></tr></thead><tbody>${qIds.map(id => {
+    const q = questionnaires.find(x => x.id === id) || { nom: qS.find(s => s.qid === id).nom };
+    const r = qS.filter(s => s.qid === id);
+    const a = r[0], b = r[r.length - 1];
+    return `<tr><td>${esc(q.nom)}${q.interpretation ? `<br><span class="muted" style="font-size:8.5pt">${esc(q.interpretation)}</span>` : ""}</td><td class="n">${esc(fmtScore(a.score, q))}<br><span class="muted">${esc(fmtShortDate(a.date))}</span></td><td class="n">${r.length > 1 ? `${esc(fmtScore(b.score, q))}<br><span class="muted">${esc(fmtShortDate(b.date))}</span>` : "–"}</td><td class="n">${r.length > 1 ? evol(a.score, b.score, q.sens === "haut" ? "haut" : "bas") : "–"}</td></tr>`;
+  }).join("")}</tbody></table>` : ""}
+
+  <div id="sec-com" ${comments.length ? "" : 'class="opt-hidden"'}>
+    <h2>Commentaires du patient</h2>
+    ${comments.slice(-8).map(s => `<div class="quote">« ${esc(s.commentaire)} »<br><span class="muted" style="font-size:8.5pt">${esc(fmtShortDate(s.dateValidation))}${s.ressenti ? `, séance ${esc(ressentiLabel(s.ressenti).toLowerCase())}` : ""}</span></div>`).join("")}
+  </div>
+
+  <div id="sec-notes" class="opt-hidden">
+    <h2>Notes de séance</h2>
+    ${notes.length ? `<table><tbody>${notes.slice().reverse().map(n => `<tr><td class="n" style="width:80px">${esc(fmtShortDate(n.date))}</td><td>${esc(n.texte).replace(/\n/g, "<br>")}</td></tr>`).join("")}</tbody></table>` : `<p class="muted">Aucune note.</p>`}
+  </div>
+
+  <h2>Conclusion</h2>
+  <div class="concl" contenteditable="true" data-ph="Touchez ici pour écrire votre conclusion et vos propositions (poursuite, arrêt, avis spécialisé…)." spellcheck="true"></div>
+
+  <div class="sign"><span class="muted">Données recueillies par l'application de suivi du cabinet.</span><span>${esc(KINE.nom)}</span></div>`;
+
+const sync = () => {
+  $("#sec-com").classList.toggle("opt-hidden", !$("#o-com").checked || !comments.length);
+  $("#sec-notes").classList.toggle("opt-hidden", !$("#o-notes").checked);
+};
+$("#o-com").onchange = sync; $("#o-notes").onchange = sync; sync();
+$("#print").onclick = () => print();
+</script>
+</body>
+</html>

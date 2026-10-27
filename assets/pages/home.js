@@ -241,6 +241,7 @@ async function renderPatient(ctx){
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(patient.nom))}</h1></div>
     <div id="annonce"></div>
     ${hero}
+    <div id="sv-home"></div>
     ${seances.some(s => s.datePrevue) ? `
     <section class="section">
       <div class="section-title">Cette semaine</div>
@@ -262,6 +263,7 @@ async function renderPatient(ctx){
     </section>`;
   showAnnonce();
   loadSettings({ force:true }).then(showAnnonce);
+  homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
   $("#bilan")?.addEventListener("click", async () => {
@@ -359,3 +361,28 @@ function initials(nom){
 }
 
 main();
+
+/* ---------- À faire, encouragements et fiches conseils (accueil patient) ---------- */
+async function homeSuivi(ctx, patient, seances, actif){
+  const box = document.getElementById("sv-home");
+  if(!box) return;
+  const S = await import("../suivi.js");
+  const { CONSEILS_FOURNIS } = await import("../conseils-data.js");
+  const C = await import("../cloud.js");
+  const needQ = (patient.questionnaires || []).length > 0;
+  const [suivis, questionnaires, perso] = await Promise.all([
+    (patient.objectifs || []).length || needQ ? C.listSuivis(ctx.cle).catch(() => []) : [],
+    needQ ? C.listQuestionnaires().catch(() => []) : [],
+    (patient.conseils || []).length ? C.listConseils().catch(() => []) : []
+  ]);
+  const todo = S.todoList(patient, suivis, questionnaires);
+  const streak = S.streakMessage(S.weekStreak(actif ? actif.seances : seances));
+  const resolve = id => perso.find(c => c.remplace === id) || perso.find(c => c.id === id) || CONSEILS_FOURNIS.find(c => c.id === id);
+  const fiches = (patient.conseils || []).map(id => ({ id, c: resolve(id) })).filter(x => x.c);
+  box.innerHTML = `
+    ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}
+    ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
+      <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
+    ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
+      <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
+}

@@ -97,3 +97,9 @@ Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de doul
 - **Code d'accès perdu ou partagé** : dans la fiche du patient, **Plus** puis **Générer un nouveau code d'accès**. L'ancien lien cesse de fonctionner.
 - **Aperçu patient** : le bouton **Vue patient** ouvre l'application telle que votre patient la voit. Rien n'est enregistré dans son dossier quand vous testez une séance depuis l'aperçu.
 - **Mot de passe oublié** : lien sous le formulaire de connexion.
+
+## Version 2.4 : suivi du patient
+
+Cette version ajoute les objectifs du patient, les questionnaires, les notes de séance, les fiches conseils, le compte rendu pour le médecin et les statistiques. Elle demande de **republier les règles** : copiez tout le contenu de [`firestore.rules`](firestore.rules) dans Firebase (Firestore Database, onglet Règles), puis **Publier**.
+
+Pour les questionnaires, partez des modèles (Outils, Questionnaires) et collez les textes de vos versions officielles : voir la page Aide.

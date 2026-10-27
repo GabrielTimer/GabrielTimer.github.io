@@ -9,7 +9,8 @@ rules_version = '2';
 //   (le code fait partie du chemin : patients/{code}). Sans le code, impossible de
 //   lister ou de deviner les autres patients.
 // - Un patient ne peut modifier que la validation de ses séances (fait / EVA / ressenti)
-//   et les jours de ses séances à venir.
+//   et les jours de ses séances à venir. Il peut ajouter ses réponses aux objectifs
+//   et questionnaires, sans pouvoir les modifier ensuite.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -49,11 +50,49 @@ service cloud.firestore {
         allow create, delete: if isKine();
         allow update: if isKine() || isValidation() || isReplanning();
       }
+
+      // Objectifs notés et questionnaires remplis par le patient
+      match /suivis/{id} {
+        allow read: if true;              // le chemin contient déjà le code secret
+        allow create: if isKine() || isSuivi();
+        allow update, delete: if isKine();
+      }
     }
 
-    // Coordonnées et note privée : réservées au kiné
+    // Une réponse de patient : type connu, taille raisonnable
+    function isSuivi() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(["type", "date", "notes", "qid", "nom", "reponses", "score", "unite", "sousScores"])
+        && d.type in ["objectifs", "questionnaire"]
+        && d.date is int
+        && (!("reponses" in d) || (d.reponses is list && d.reponses.size() <= 120))
+        && (!("score" in d) || d.score is number);
+    }
+
+    // Coordonnées, note privée et notes de séance : réservées au kiné
     match /fiches/{cle} {
       allow read, write: if isKine();
+      match /notes/{id} {
+        allow read, write: if isKine();
+      }
+    }
+
+    // Vue d'ensemble des suivis et des notes (statistiques, sauvegarde)
+    match /{path=**}/suivis/{id} {
+      allow read: if isKine();
+    }
+    match /{path=**}/notes/{id} {
+      allow read: if isKine();
+    }
+
+    // Questionnaires et fiches conseils : lus par les patients, écrits par le kiné
+    match /questionnaires/{id} {
+      allow read: if true;
+      allow write: if isKine();
+    }
+    match /conseils/{id} {
+      allow read: if true;
+      allow write: if isKine();
     }
 
     // Vue d'ensemble de toutes les séances (tableau de bord du kiné)

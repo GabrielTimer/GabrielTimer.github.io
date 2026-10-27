@@ -406,6 +406,87 @@ export async function saveReglages(data){
   await setDoc(doc(db, "reglages", "cabinet"), clean({ ...data, updatedAt: Date.now() }));
 }
 
+/* ---------- Suivi du patient : objectifs, questionnaires ----------
+   patients/{code}/suivis/{id} : réponses du patient (il peut en ajouter, pas les modifier)
+   { type:"objectifs", notes:{ idObjectif: 0-10 }, date }
+   { type:"questionnaire", qid, nom, reponses:[…], score, unite, date } */
+
+export async function listSuivis(cle){
+  const snap = await getDocs(collection(db, "patients", cle, "suivis"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle })).sort((a, b) => (a.date || 0) - (b.date || 0));
+}
+
+export async function listAllSuivis(){
+  const snap = await getDocs(collectionGroup(db, "suivis"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id }));
+}
+
+export async function addSuivi(cle, suivi){
+  const id = newId();
+  await setDoc(doc(db, "patients", cle, "suivis", id), clean({ ...suivi, date: Date.now() }));
+  return id;
+}
+
+export async function deleteSuivi(cle, id){
+  await deleteDoc(doc(db, "patients", cle, "suivis", id));
+}
+
+/* ---------- Questionnaires (définitions, lisibles par les patients) ---------- */
+
+export async function listQuestionnaires(){
+  const snap = await getDocs(collection(db, "questionnaires"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id })).sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr"));
+}
+
+export async function getQuestionnaire(id){
+  const snap = await getDoc(doc(db, "questionnaires", id));
+  return snap.exists() ? { ...snap.data(), id: snap.id } : null;
+}
+
+export async function saveQuestionnaire(q){
+  const id = q.id || newId();
+  await setDoc(doc(db, "questionnaires", id), clean({ ...q, id, updatedAt: Date.now() }));
+  return id;
+}
+
+export async function deleteQuestionnaire(id){
+  await deleteDoc(doc(db, "questionnaires", id));
+}
+
+/* ---------- Fiches conseils personnelles (lisibles par les patients) ---------- */
+
+export async function listConseils(){
+  const snap = await getDocs(collection(db, "conseils"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id }));
+}
+
+export async function saveConseil(c){
+  const id = c.id || newId();
+  await setDoc(doc(db, "conseils", id), clean({ ...c, id, perso: true, updatedAt: Date.now() }));
+  return id;
+}
+
+export async function deleteConseil(id){
+  await deleteDoc(doc(db, "conseils", id));
+}
+
+/* ---------- Notes de séance privées (kiné uniquement) ---------- */
+
+export async function listNotes(cle){
+  const snap = await getDocs(collection(db, "fiches", cle, "notes"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id })).sort((a, b) => (b.date || 0) - (a.date || 0));
+}
+
+export async function saveNote(cle, note){
+  const id = note.id || newId();
+  await setDoc(doc(db, "fiches", cle, "notes", id), clean({ ...note, id, updatedAt: Date.now(), date: note.date || Date.now() }));
+  return id;
+}
+
+export async function deleteNote(cle, id){
+  await deleteDoc(doc(db, "fiches", cle, "notes", id));
+}
+
 /* ---------- Sauvegarde complète et restauration (kiné) ---------- */
 
 /** Toutes les données du cabinet, dans un seul objet à enregistrer en fichier. */
@@ -418,6 +499,14 @@ export async function exportAll(onProgress = () => {}){
   };
   for(const name of ["patients", "fiches", "modeles", "exercices", "reglages"]) await grab(name);
   await grab("bilans").catch(() => { out.collections.bilans = []; });
+  await grab("questionnaires").catch(() => { out.collections.questionnaires = []; });
+  await grab("conseils").catch(() => { out.collections.conseils = []; });
+  onProgress("suivis");
+  const suivis = await getDocs(collectionGroup(db, "suivis")).catch(() => ({ docs: [] }));
+  out.collections.suivis = suivis.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
+  onProgress("notes");
+  const notes = await getDocs(collectionGroup(db, "notes")).catch(() => ({ docs: [] }));
+  out.collections.notes = notes.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
   onProgress("seances");
   const seances = await getDocs(collectionGroup(db, "seances"));
   out.collections.seances = seances.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
@@ -434,7 +523,7 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   const want = name => !only || only.includes(name);
   const ops = [];
   const count = {};
-  ["patients", "fiches", "modeles", "exercices", "reglages", "bilans"].forEach(name => {
+  ["patients", "fiches", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils"].forEach(name => {
     if(!want(name)) return;
     (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
   });
@@ -443,6 +532,20 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
       if(!d.cle) return;
       ops.push([doc(db, "patients", d.cle, "seances", d.id), d.data]);
       count.seances = (count.seances || 0) + 1;
+    });
+  }
+  if(want("suivis")){
+    (backup.collections.suivis || []).forEach(d => {
+      if(!d.cle) return;
+      ops.push([doc(db, "patients", d.cle, "suivis", d.id), d.data]);
+      count.suivis = (count.suivis || 0) + 1;
+    });
+  }
+  if(want("notes")){
+    (backup.collections.notes || []).forEach(d => {
+      if(!d.cle) return;
+      ops.push([doc(db, "fiches", d.cle, "notes", d.id), d.data]);
+      count.notes = (count.notes || 0) + 1;
     });
   }
   /* Lots de 300 documents au plus, et environ 4 Mo au plus (les images comptent) */

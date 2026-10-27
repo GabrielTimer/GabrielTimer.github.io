@@ -122,7 +122,7 @@ async function kineView(param){
   const { renderEvaChart } = await import("../chart.js");
   const P = await import("../patient.js");
 
-  let seances = [], bilans = [], bilansErr = null;
+  let seances = [], bilans = [], bilansErr = null, suiviBox = null;
   const load = async () => {
     /* Les bilans ne doivent jamais empêcher l'affichage de la fiche
        (règle Firebase pas encore publiée, ancienne version en cache…) */
@@ -219,6 +219,11 @@ async function kineView(param){
         </section>
       </div>
 
+      <section class="section">
+        <div class="section-title">Suivi<span class="spacer"></span><a class="btn sm" href="/compte-rendu.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("file")}Compte rendu médecin</a></div>
+        <div id="suivi-slot"></div>
+      </section>
+
       <section class="section" id="bilans">
         <div class="section-title">Bilans<span class="badge" style="font-size:var(--fs-xs)">${icon("lock")}visible par vous seul</span><span class="spacer"></span>${bilans.length ? `<a class="btn sm" href="${bilanURL()}">${icon("plus")}Nouveau bilan</a>` : ""}</div>
         ${bilansHTML()}
@@ -232,6 +237,11 @@ async function kineView(param){
       </section>`;
 
     renderEvaChart($("#chart"), points);
+    if(!suiviBox){
+      suiviBox = document.createElement("div");
+      import("../suivi.js").then(m => m.mountKineSuivi(suiviBox, patient, C)).catch(e => { console.warn(e); suiviBox.innerHTML = ""; });
+    }
+    $("#suivi-slot").replaceWith(suiviBox);
     bind(sum);
   };
 

@@ -459,6 +459,10 @@ function renderSend(full = true){
         <div class="plan-preview" id="plan-preview" style="margin-top:12px"></div>
       </div>
     </div>
+    <div class="group" id="cs-group">
+      <div class="row wrap" style="--gap:10px"><span class="label" style="flex:1">Fiches conseils à joindre <span class="faint">(facultatif)</span></span><button class="btn sm" type="button" id="cs-pick">${icon("book")}Choisir</button></div>
+      <div class="chips" id="cs-chosen"></div>
+    </div>
     <div class="send-actions">
       <button class="btn primary big" type="button" id="send-btn"></button>
       <button class="btn" type="button" id="run">${icon("play")}Lancer maintenant</button>
@@ -499,6 +503,8 @@ function renderSend(full = true){
   $("#send-btn").onclick = send;
   $("#as-model").onclick = saveAsModel;
   $("#as-fav").onclick = saveAsFav;
+  $("#cs-pick").onclick = pickConseils;
+  renderConseils();
   $("#clear").onclick = async () => {
     if(!await confirmDialog({ title:"Tout effacer ?", message:"Les exercices et réglages de cette séance seront effacés.", confirm:"Tout effacer", danger:true })) return;
     store.del(STATE_KEY); S = { ...blank(), patient:S.patient }; mountView();
@@ -579,6 +585,11 @@ async function send(){
       });
       count = await C.saveSeances(p.cle, seances);
     }
+    if((S.conseils || []).length){
+      const merged = [...new Set([...(p.conseils || []), ...S.conseils])];
+      await C.updatePatient(p.cle, { conseils: merged }).catch(e => console.warn("Conseils :", e));
+      p.conseils = merged;
+    }
     store.del(STATE_KEY);
     sentSheet(p, count);
   }catch(err){
@@ -587,6 +598,37 @@ async function send(){
   }finally{
     updatePrimary();
   }
+}
+
+/* ---------- Fiches conseils jointes à l'envoi ---------- */
+let conseilsCache = null;
+async function allConseils(){
+  if(conseilsCache) return conseilsCache;
+  const { mergeConseils } = await import("../conseils-data.js");
+  const perso = await C.listConseils().catch(() => []);
+  conseilsCache = mergeConseils(perso).map(c => ({ ...c, key: c.remplace || c.id }));
+  return conseilsCache;
+}
+async function renderConseils(){
+  const box = $("#cs-chosen");
+  if(!box) return;
+  const list = await allConseils();
+  const chosen = (S.conseils || []).map(k => list.find(c => c.key === k)).filter(Boolean);
+  box.innerHTML = chosen.map(c => `<span class="chip on">${icon(c.ico || "book")}${esc(c.titre)}</span>`).join("");
+}
+async function pickConseils(){
+  const list = await allConseils();
+  const chosen = new Set(S.conseils || []);
+  const s = openSheet({
+    title:"Fiches conseils à joindre",
+    body:`<p class="small muted" style="margin-bottom:10px">Le patient les retrouvera sur son accueil, avec ce programme.</p><div class="stack" style="--gap:6px">${list.map(c => `
+      <label class="check" style="align-items:flex-start;padding:6px 0"><input type="checkbox" value="${esc(c.key)}" ${chosen.has(c.key) ? "checked" : ""}><span><strong>${esc(c.titre)}</strong><br><span class="small muted">${esc(c.resume || "")}</span></span></label>`).join("")}</div>`,
+    foot:`<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="cp-ok">${icon("check")}Valider</button>`
+  });
+  s.el.querySelector("#cp-ok").onclick = () => {
+    S.conseils = [...s.el.querySelectorAll("input:checked")].map(i => i.value);
+    persist(); renderConseils(); s.close();
+  };
 }
 
 async function sentSheet(p, count){
