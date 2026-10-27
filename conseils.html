@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiches conseils</title>
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .cs-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+  .cs-card{ display:flex; flex-direction:column; gap:10px; padding:18px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); color:inherit; text-decoration:none; }
+  a.cs-card:hover{ border-color:var(--lagon); }
+  .cs-card .li-ico{ width:44px; height:44px; }
+  .cs-card h2{ font-size:var(--fs-lg); }
+  .cs-card p{ color:var(--ink-2); font-size:var(--fs-sm); }
+  .cs-card .cs-act{ display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; }
+  .article{ max-width:68ch; margin:0 auto; }
+  .article .a-ico{ width:56px; height:56px; border-radius:16px; display:grid; place-items:center; background:var(--lagon-soft); color:var(--lagon-strong); margin-bottom:14px; }
+  .article .a-ico svg{ width:28px; height:28px; }
+  .article h1{ font-size:clamp(1.7rem,5vw,2.3rem); margin-bottom:8px; }
+  .article .lead{ color:var(--ink-2); font-size:var(--fs-lg); margin-bottom:22px; line-height:1.45; }
+  .article .body{ font-size:1.08rem; line-height:1.7; }
+  .article .body p{ margin:0 0 14px; }
+  .article .body h2{ font-size:var(--fs-lg); margin:26px 0 10px; color:var(--lagon-strong); }
+  .article .body ul{ margin:0 0 14px; padding-left:1.3em; }
+  .article .body li{ margin:6px 0; }
+  .article .sign{ margin-top:26px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-3); font-size:var(--fs-sm); }
+  .ed-help{ font-size:var(--fs-xs); color:var(--ink-3); }
+  @media print{ .article .a-ico{ display:none; } .article .body{ font-size:12pt; } }
+</style>
+</head>
+<body>
+<main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, params, store, readPatientContext, kineHint, mountShell, registerSW, emptyHTML, errorHTML, openSheet, toast, confirmDialog, KINE } from "/assets/app.js";
+import { CONSEILS_FOURNIS, conseilHTML, mergeConseils } from "/assets/conseils-data.js";
+registerSW();
+const app = $("#app");
+const ctx = readPatientContext();
+const C = await import("/assets/cloud.js");
+
+let isKine = false;
+if(!ctx.apercu && kineHint.get()){ isKine = !!(await C.currentKine().catch(() => null)); }
+
+let perso = [];
+try{ perso = await C.listConseils(); }catch(e){ perso = []; }
+
+/** Résout un identifiant attaché à un patient vers la fiche à afficher. */
+const resolve = id => perso.find(c => c.remplace === id && !c.masque) || perso.find(c => c.id === id && !c.masque) || CONSEILS_FOURNIS.find(c => c.id === id) || null;
+
+function article(c, back){
+  return `<article class="article">
+    <div class="a-ico">${icon(c.ico || "book")}</div>
+    <h1>${esc(c.titre)}</h1>
+    ${c.resume ? `<p class="lead">${esc(c.resume)}</p>` : ""}
+    <div class="body">${conseilHTML(c.texte)}</div>
+    <p class="sign">${esc(KINE.nom)}, ${esc(KINE.titre)}. Ces conseils sont généraux : suivez en priorité les indications de votre kiné.</p>
+    <div class="btn-row no-print" style="margin-top:18px"><a class="btn" href="${back}">${icon("back")}Toutes les fiches</a><button class="btn ghost" type="button" onclick="print()">${icon("print")}Imprimer</button></div>
+  </article>`;
+}
+
+/* ---------- Patient ---------- */
+async function patientView(){
+  mountShell({ role:"patient", active:"", back:"/index.html", apercu:ctx.apercu });
+  let p;
+  try{ p = await C.getPatient(ctx.cle); }catch(err){ app.innerHTML = errorHTML(err); return; }
+  if(!p){ location.replace("/index.html"); return; }
+  const mine = (p.conseils || []).map(resolve).filter(Boolean);
+  const id = params.get("id");
+  if(id){
+    const c = resolve(id);
+    app.innerHTML = c ? article(c, "/conseils.html") : `<div class="panel">${emptyHTML({ ico:"book", title:"Fiche introuvable" })}</div>`;
+    return;
+  }
+  app.innerHTML = `
+    <div class="page-head"><h1>Conseils de votre kiné</h1><p class="lead">Des fiches courtes à lire tranquillement, choisies pour vous.</p></div>
+    ${mine.length ? `<div class="cs-grid">${mine.map(c => `
+      <a class="cs-card" href="/conseils.html?id=${encodeURIComponent(p.conseils.find(x => resolve(x) === c))}">
+        <span class="li-ico">${icon(c.ico || "book")}</span><h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
+      </a>`).join("")}</div>` : `<div class="panel">${emptyHTML({ ico:"book", title:"Pas encore de fiche", text:"Votre kiné pourra vous en proposer selon vos besoins." })}</div>`}`;
+}
+
+/* ---------- Kiné ---------- */
+async function kineView(){
+  mountShell({ role:"kine", active:"" , back:"/admin_tools.html" });
+  app.classList.add("wide");
+  const id = params.get("id");
+  if(id){
+    const c = resolve(id) || perso.find(x => x.id === id);
+    app.innerHTML = c ? article(c, "/conseils.html") : `<div class="panel">${emptyHTML({ ico:"book", title:"Fiche introuvable" })}</div>`;
+    return;
+  }
+  const render = () => {
+    const all = mergeConseils(perso);
+    app.innerHTML = `
+      <div class="page-head"><h1>Fiches conseils</h1><button class="btn primary" type="button" id="new">${icon("plus")}Nouvelle fiche</button>
+        <p class="lead">Joignez-les à un patient depuis sa fiche ou lors de l'envoi d'un programme. Il les retrouve sur son accueil.</p></div>
+      <div class="cs-grid">${all.map(c => `
+        <div class="cs-card">
+          <span class="li-ico">${icon(c.ico || "book")}</span>
+          <h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
+          <div class="row wrap" style="--gap:6px">${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
+          <div class="cs-act">
+            <a class="btn sm" href="/conseils.html?id=${encodeURIComponent(c.id)}">${icon("eye")}Lire</a>
+            <button class="btn sm" type="button" data-edit="${esc(c.id)}">${icon("edit")}Modifier</button>
+            ${!c.fourni ? `<button class="icon-btn sm danger" type="button" data-del="${esc(c.id)}" aria-label="Supprimer">${icon("trash")}</button>` : ""}
+          </div>
+        </div>`).join("")}</div>`;
+    $("#new").onclick = () => editor(null);
+    $$("[data-edit]").forEach(b => b.onclick = () => editor(all.find(c => c.id === b.dataset.edit)));
+    $$("[data-del]").forEach(b => b.onclick = async () => {
+      const c = perso.find(x => x.id === b.dataset.del);
+      const ok = await confirmDialog({ title:"Supprimer cette fiche ?", message: c.remplace ? "La version d'origine sera de nouveau affichée aux patients." : "Les patients qui l'avaient ne la verront plus.", confirm:"Supprimer", danger:true });
+      if(!ok) return;
+      await C.deleteConseil(c.id); perso = perso.filter(x => x.id !== c.id); toast("Fiche supprimée.", { type:"ok" }); render();
+    });
+  };
+  const ICONS = ["book","body","info","settings","moon","sun","run","wind","calendar","heart","target","dumbbell"];
+  const editor = (c) => {
+    const base = c || { titre:"", resume:"", texte:"", ico:"book" };
+    let ico = base.ico || "book";
+    const s = openSheet({
+      title: c ? "Modifier la fiche" : "Nouvelle fiche",
+      wide: true,
+      body: `<form id="ed" class="stack" style="--gap:14px">
+        ${c?.fourni ? `<div class="notice">${icon("info")}<span>Vous modifiez une fiche fournie : votre version la remplacera pour tous vos patients. Vous pourrez revenir à l'originale en supprimant votre version.</span></div>` : ""}
+        <div class="field"><label for="ed-t">Titre</label><input class="input" id="ed-t" value="${esc(base.titre)}" required maxlength="80"></div>
+        <div class="field"><label for="ed-r">Résumé (une phrase)</label><input class="input" id="ed-r" value="${esc(base.resume || "")}" maxlength="160"></div>
+        <div class="field"><span class="label">Icône</span><div class="chips" id="ed-i">${ICONS.map(i => `<button class="chip" type="button" data-i="${i}" aria-pressed="${i === ico}" aria-label="${i}">${icon(i)}</button>`).join("")}</div></div>
+        <div class="field"><label for="ed-x">Texte</label><textarea class="textarea" id="ed-x" style="min-height:300px">${esc(base.texte || "")}</textarea>
+          <span class="ed-help">Écrivez simplement. Une ligne qui commence par « ## » devient un intertitre, une ligne qui commence par « - » devient un élément de liste. Laissez une ligne vide entre deux paragraphes.</span></div>
+      </form>`,
+      foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="ed">${icon("check")}Enregistrer</button>`
+    });
+    s.el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { ico = b.dataset.i; s.el.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); });
+    s.el.querySelector("#ed").addEventListener("submit", async e => {
+      e.preventDefault();
+      const titre = s.el.querySelector("#ed-t").value.trim();
+      if(!titre){ s.el.querySelector("#ed-t").focus(); return; }
+      const fiche = { titre, resume:s.el.querySelector("#ed-r").value.trim(), texte:s.el.querySelector("#ed-x").value, ico };
+      if(c && !c.fourni) fiche.id = c.id;
+      if(c?.remplace) fiche.remplace = c.remplace;
+      if(c?.fourni) fiche.remplace = c.id;
+      try{
+        const id = await C.saveConseil(fiche);
+        perso = perso.filter(x => x.id !== id).concat({ ...fiche, id, perso:true });
+        toast("Fiche enregistrée.", { type:"ok" }); s.close(); render();
+      }catch(err){ toast("Enregistrement impossible. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
+    });
+  };
+  render();
+}
+
+if(isKine) kineView();
+else if(ctx.cle) patientView();
+else location.replace("/index.html");
+</script>
+</body>
+</html>

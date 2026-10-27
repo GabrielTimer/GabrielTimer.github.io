@@ -152,7 +152,7 @@ function render(){
         </section>
 
         <section class="panel">
-          <div class="panel-head"><h2>Mesures</h2><span class="badge">scores validés</span></div>
+          <div class="panel-head"><h2>Mesures</h2><span class="badge">scores validés</span><span class="spacer"></span><button class="btn sm" type="button" id="a-scores">${icon("download")}Reprendre les réponses du patient</button></div>
           <div class="mes-grid">${K.MES.map(([k, l]) => `<div class="field"><label for="f-${k}">${esc(l)}</label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
           <div id="evo"></div>
         </section>
@@ -427,6 +427,28 @@ app.addEventListener("click", async e => {
       setTimeout(() => location.replace(fiche), 500);
     }catch(err){ console.error(err); toast("La suppression n'a pas abouti.", { type:"err" }); }
   }
+});
+
+/* Reprendre les derniers scores remplis par le patient dans l'application */
+app.addEventListener("click", async e => {
+  if(!e.target.closest("#a-scores")) return;
+  try{
+    const [suivis, qs] = await Promise.all([C.listSuivis(cle), C.listQuestionnaires()]);
+    const set = {};
+    qs.filter(q => q.bilan).forEach(q => {
+      const last = suivis.filter(x => x.type === "questionnaire" && x.qid === q.id && typeof x.score === "number").pop();
+      if(last) set[q.bilan] = { v: Math.round(last.score * 10) / 10, src: `${q.nom} du ${new Date(last.date).toLocaleDateString("fr-FR")}` };
+    });
+    const obj = suivis.filter(x => x.type === "objectifs").pop();
+    if(obj && obj.notes){
+      const v = Object.values(obj.notes).map(Number).filter(n => !Number.isNaN(n));
+      if(v.length) set.m_psfs = { v: Math.round(v.reduce((a, b) => a + b, 0) / v.length * 10) / 10, src: `objectifs du ${new Date(obj.date).toLocaleDateString("fr-FR")}` };
+    }
+    const keys = Object.keys(set).filter(k => document.getElementById("f-" + k));
+    if(!keys.length){ toast("Le patient n'a pas encore rempli de questionnaire relié au bilan, ni noté ses objectifs."); return; }
+    keys.forEach(k => { const el = document.getElementById("f-" + k); el.value = String(set[k].v).replace(".", ","); el.dispatchEvent(new Event("input", { bubbles:true })); });
+    toast(`Repris : ${keys.map(k => set[k].src).join(", ")}.`, { type:"ok", duration:6000 });
+  }catch(err){ console.warn(err); toast("Les réponses du patient n'ont pas pu être chargées.", { type:"err" }); }
 });
 
 app.addEventListener("input", e => {

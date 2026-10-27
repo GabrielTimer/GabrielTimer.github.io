@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Questionnaires</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .q-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px; }
+  .q-card{ display:flex; flex-direction:column; gap:8px; padding:18px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); }
+  .q-card h2{ font-size:var(--fs-lg); }
+  .q-card .q-meta{ color:var(--ink-2); font-size:var(--fs-sm); }
+  .q-card .q-act{ display:flex; gap:6px; flex-wrap:wrap; margin-top:auto; padding-top:6px; }
+  .ed-grid{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+  .q-text{ font-family:var(--mono); font-size:var(--fs-sm); min-height:360px; line-height:1.55; }
+  .preview{ max-height:360px; overflow:auto; border:1px solid var(--line); border-radius:var(--r-md); padding:12px 14px; background:var(--surface-2); font-size:var(--fs-sm); }
+  .preview ol{ padding-left:1.3em; margin:0; }
+  .preview li{ margin:8px 0; }
+  .preview .opts{ color:var(--ink-2); font-size:var(--fs-xs); }
+  .preview .sec{ font-weight:800; margin:12px 0 4px; color:var(--lagon-strong); }
+  .ed-cols{ display:grid; gap:16px; }
+  @media (min-width:980px){ .ed-cols{ grid-template-columns:1.1fr .9fr; } }
+</style>
+</head>
+<body>
+<main class="page wide" id="app"><div class="loading"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, emptyHTML, errorHTML, openSheet, toast, confirmDialog, debounce } from "/assets/app.js";
+import { MODELES, SCORINGS, parseQuestions, hasPlaceholders, unitOf, PLACEHOLDER } from "/assets/questionnaires.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const C = await import("/assets/cloud.js");
+const app = $("#app");
+let list = [];
+
+const BILAN = [["", "Aucun"], ["m_odi", "Oswestry (%)"], ["m_ndi", "NDI (%)"], ["m_qdash", "QuickDASH (%)"], ["m_lefs", "LEFS (/80)"]];
+
+function render(){
+  const used = new Set(list.map(q => q.cle).filter(Boolean));
+  app.innerHTML = `
+    <div class="page-head"><h1>Questionnaires</h1><button class="btn primary" type="button" id="new">${icon("plus")}Nouveau questionnaire</button>
+      <p class="lead">Le patient les remplit dans l'application, question par question. Le score est calculé automatiquement et son évolution apparaît dans sa fiche.</p></div>
+    <div class="notice" style="margin-bottom:18px">${icon("info")}<span>Les questionnaires validés sont protégés et leur formulation doit être exactement celle de la version française officielle. Partez d'un modèle : le nombre de questions et la règle de calcul sont déjà en place, il vous reste à coller les textes depuis votre version officielle, une seule fois.</span></div>
+    <div class="section-title">Mes questionnaires</div>
+    ${list.length ? `<div class="q-grid">${list.map(q => {
+      const n = (q.items || []).length, ph = hasPlaceholders(q.items || []);
+      return `<div class="q-card">
+        <h2>${esc(q.nom)}</h2>
+        <span class="q-meta">${n} question${n > 1 ? "s" : ""}, score ${esc(unitOf(q) || "brut")}${q.zone ? `, ${esc(q.zone.toLowerCase())}` : ""}</span>
+        ${ph ? `<span class="badge warn">${icon("alert")}Textes à compléter</span>` : `<span class="badge ok">${icon("check")}Prêt</span>`}
+        <div class="q-act">
+          <button class="btn sm" type="button" data-edit="${esc(q.id)}">${icon("edit")}Modifier</button>
+          <button class="btn sm" type="button" data-try="${esc(q.id)}">${icon("eye")}Essayer</button>
+          <button class="icon-btn sm danger" type="button" data-del="${esc(q.id)}" aria-label="Supprimer">${icon("trash")}</button>
+        </div>
+      </div>`; }).join("")}</div>` : `<div class="panel">${emptyHTML({ ico:"list", title:"Aucun questionnaire", text:"Créez-en un à partir d'un modèle ci-dessous." })}</div>`}
+    <div class="section-title section">Partir d'un modèle</div>
+    <div class="q-grid">${MODELES.map(m => `
+      <div class="q-card">
+        <h2>${esc(m.nom)}</h2>
+        <span class="q-meta">${esc(m.zone)}, ${parseQuestions(m.texte, m.debut).length} questions</span>
+        <span class="small muted">${esc(m.interpretation)}</span>
+        <div class="q-act"><button class="btn sm ${used.has(m.cle) ? "" : "soft"}" type="button" data-model="${m.cle}">${icon("plus")}${used.has(m.cle) ? "Créer une autre version" : "Utiliser ce modèle"}</button></div>
+      </div>`).join("")}</div>`;
+  $("#new").onclick = () => editor({ nom:"", scoring:"somme", debut:0, sens:"bas", texte:"@options Pas du tout | Un peu | Beaucoup\n? Première question\n? Deuxième question\n" });
+  $$("[data-model]").forEach(b => b.onclick = () => { const m = MODELES.find(x => x.cle === b.dataset.model); const { cle, ...rest } = m; editor({ ...rest, cle }); });
+  $$("[data-edit]").forEach(b => b.onclick = () => editor(list.find(q => q.id === b.dataset.edit)));
+  $$("[data-try]").forEach(b => b.onclick = () => window.open(`/suivi.html?q=${encodeURIComponent(b.dataset.try)}&essai=1`, "_blank"));
+  $$("[data-del]").forEach(b => b.onclick = async () => {
+    const q = list.find(x => x.id === b.dataset.del);
+    if(!await confirmDialog({ title:"Supprimer ce questionnaire ?", message:`« ${q.nom} » ne sera plus proposé aux patients. Les réponses déjà enregistrées sont conservées.`, confirm:"Supprimer", danger:true })) return;
+    await C.deleteQuestionnaire(q.id); list = list.filter(x => x.id !== q.id); toast("Questionnaire supprimé.", { type:"ok" }); render();
+  });
+}
+
+function editor(q){
+  const s = openSheet({
+    title: q.id ? "Modifier le questionnaire" : "Nouveau questionnaire",
+    wide: true,
+    body: `<form id="qf" class="stack" style="--gap:16px">
+      <div class="ed-grid">
+        <div class="field"><label for="q-nom">Nom</label><input class="input" id="q-nom" value="${esc(q.nom || "")}" required maxlength="80"></div>
+        <div class="field"><label for="q-zone">Zone</label><input class="input" id="q-zone" value="${esc(q.zone || "")}" maxlength="40" placeholder="Ex. Lombalgie"></div>
+        <div class="field"><label for="q-sc">Calcul du score</label><select class="select" id="q-sc">${Object.entries(SCORINGS).map(([k, v]) => `<option value="${k}" ${k === q.scoring ? "selected" : ""}>${esc(v.label)}</option>`).join("")}</select></div>
+        <div class="field"><label for="q-sens">Un meilleur état, c'est un score…</label><select class="select" id="q-sens"><option value="bas" ${q.sens !== "haut" ? "selected" : ""}>Plus bas</option><option value="haut" ${q.sens === "haut" ? "selected" : ""}>Plus haut</option></select></div>
+        <div class="field"><label for="q-deb">Valeur de la première réponse</label><input class="input" id="q-deb" type="number" value="${Number(q.debut || 0)}"><span class="hint">Les réponses suivantes valent +1, sauf valeur imposée avec « = ».</span></div>
+        <div class="field"><label for="q-u">Unité affichée</label><input class="input" id="q-u" value="${esc(q.unite || "")}" placeholder="Auto" maxlength="8"></div>
+        <div class="field"><label for="q-min">Réponses minimum pour calculer</label><input class="input" id="q-min" type="number" min="0" value="${Number(q.minRep || 0)}"></div>
+        <div class="field"><label for="q-b">Reprendre dans le bilan</label><select class="select" id="q-b">${BILAN.map(([k, l]) => `<option value="${k}" ${k === (q.bilan || "") ? "selected" : ""}>${esc(l)}</option>`).join("")}</select></div>
+      </div>
+      <div class="field"><label for="q-cons">Consigne pour le patient</label><input class="input" id="q-cons" value="${esc(q.consigne || "")}" maxlength="300"></div>
+      <div class="field"><label for="q-int">Interprétation (pour vous)</label><input class="input" id="q-int" value="${esc(q.interpretation || "")}" maxlength="400"></div>
+      ${q.aideKine ? `<div class="notice warn">${icon("alert")}<span>${esc(q.aideKine)}</span></div>` : ""}
+      <div class="ed-cols">
+        <div class="field"><label for="q-t">Questions et réponses</label>
+          <textarea class="textarea q-text" id="q-t" spellcheck="false">${esc(q.texte || "")}</textarea>
+          <span class="hint">« ? » devant une question, « - » devant une réponse. « @options A | B | C » donne les mêmes réponses aux questions suivantes. « # Nom » commence une section (sous-scores). Remplacez tous les textes « ${PLACEHOLDER} » par ceux de votre version officielle.</span></div>
+        <div class="field"><span class="label">Aperçu</span><div class="preview" id="q-prev"></div></div>
+      </div>
+    </form>`,
+    foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="qf">${icon("check")}Enregistrer</button>`
+  });
+  s.el.classList.add("full");
+  const el = id => s.el.querySelector(id);
+  const preview = () => {
+    const items = parseQuestions(el("#q-t").value, Number(el("#q-deb").value) || 0);
+    let sec = "";
+    el("#q-prev").innerHTML = items.length ? `<p class="small" style="margin-bottom:6px"><strong>${items.length} question${items.length > 1 ? "s" : ""}</strong>${hasPlaceholders(items) ? ` <span class="badge warn">textes à compléter</span>` : ""}</p><ol>${items.map(it => {
+      const h = (it.section || "") !== sec ? (sec = it.section || "", sec ? `</ol><div class="sec">${esc(sec)}</div><ol start="${items.indexOf(it) + 1}">` : "") : "";
+      return `${h}<li>${esc(it.texte)}<div class="opts">${it.options.map(o => `${esc(o.texte)} <b>(${o.valeur})</b>`).join(" · ") || `<span style="color:var(--danger)">aucune réponse</span>`}</div></li>`;
+    }).join("")}</ol>` : `<p class="muted">Aucune question pour l'instant.</p>`;
+  };
+  el("#q-t").addEventListener("input", debounce(preview, 200));
+  el("#q-deb").addEventListener("input", preview);
+  preview();
+  el("#qf").addEventListener("submit", async e => {
+    e.preventDefault();
+    const items = parseQuestions(el("#q-t").value, Number(el("#q-deb").value) || 0);
+    if(!el("#q-nom").value.trim()){ el("#q-nom").focus(); return; }
+    if(!items.length || items.some(it => !it.options.length)){ toast("Chaque question doit avoir des réponses.", { type:"err" }); return; }
+    if(hasPlaceholders(items) && !await confirmDialog({ title:"Textes à compléter", message:"Certaines questions ou réponses contiennent encore « à remplacer ». Enregistrer quand même ? Pensez à les compléter avant de le proposer à un patient.", confirm:"Enregistrer" })) return;
+    const data = {
+      ...(q.id ? { id:q.id } : {}), cle:q.cle || null,
+      nom: el("#q-nom").value.trim(), zone: el("#q-zone").value.trim(),
+      scoring: el("#q-sc").value, sens: el("#q-sens").value, debut: Number(el("#q-deb").value) || 0,
+      unite: el("#q-u").value.trim() || (q.max ? q.unite : ""), minRep: Number(el("#q-min").value) || 0, bilan: el("#q-b").value || null,
+      consigne: el("#q-cons").value.trim(), interpretation: el("#q-int").value.trim(), aideKine: q.aideKine || null,
+      texte: el("#q-t").value, items
+    };
+    try{
+      const id = await C.saveQuestionnaire(data);
+      list = list.filter(x => x.id !== id).concat({ ...data, id });
+      toast("Questionnaire enregistré.", { type:"ok" }); s.close(); render();
+    }catch(err){ toast("Enregistrement impossible. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
+  });
+}
+
+try{ list = await C.listQuestionnaires(); render(); }
+catch(err){ app.innerHTML = errorHTML(err); }
+</script>
+</body>
+</html>

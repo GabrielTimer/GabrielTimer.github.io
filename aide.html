@@ -123,13 +123,42 @@
       <p><a href="/reglages_cabinet.html">Réglages du cabinet</a> → « Annonce aux patients » : cochez « Afficher l'annonce », écrivez le texte, et si vous voulez une date de début et de fin. Le bandeau apparaît en haut de leur accueil et disparaît tout seul après la date de fin.</p>
     </div></details>
 
+    <details><summary><span data-ico="target"></span>Objectifs du patient, notes de séance et fiches conseils</summary><div class="body">
+      <p>Dans la fiche du patient, rubrique <strong>Suivi</strong> :</p>
+      <ul>
+        <li><strong>Objectifs</strong> : 1 à 3 activités importantes pour le patient (« Porter mon petit-fils »). Il les note de 0 (impossible) à 10 (comme avant) depuis son accueil, toutes les deux semaines par défaut. La moyenne correspond au score PSFS du bilan.</li>
+        <li><strong>Notes de séance</strong> : datées, visibles par vous seul.</li>
+        <li><strong>Fiches conseils</strong> : touchez <strong>Choisir</strong>. Le patient les retrouve sur son accueil. Vous pouvez aussi les joindre lors de l'envoi d'un programme. Pour modifier les fiches ou en écrire : <a href="/conseils.html">Outils → Fiches conseils</a>.</li>
+      </ul>
+    </div></details>
+
+    <details><summary><span data-ico="list"></span>Questionnaires validés (Oswestry, QuickDASH, KOOS…)</summary><div class="body">
+      <ol>
+        <li><a href="/questionnaires.html">Outils → Questionnaires</a> → <strong>Utiliser ce modèle</strong>. Le nombre de questions et la règle de calcul sont déjà en place.</li>
+        <li>Remplacez chaque « à remplacer » par le texte de votre version française officielle (les textes sont protégés, ils ne peuvent pas être fournis avec l'application). L'aperçu à droite se met à jour.</li>
+        <li><strong>Essayer</strong> pour le remplir vous-même sans rien enregistrer.</li>
+        <li>Fiche du patient → Suivi → Questionnaires → <strong>Proposer</strong>, avec une fréquence. Le patient le voit sur son accueil quand c'est le moment.</li>
+      </ol>
+      <ul>
+        <li>Les scores et leur évolution s'affichent dans la fiche. Dans un bilan, <strong>Reprendre les réponses du patient</strong> remplit Oswestry, NDI, QuickDASH, LEFS et PSFS.</li>
+        <li>Au cabinet, depuis le détail d'un questionnaire : <strong>Remplir avec le patient, ici</strong>.</li>
+      </ul>
+    </div></details>
+
+    <details><summary><span data-ico="file"></span>Compte rendu pour le médecin et statistiques</summary><div class="body">
+      <ul>
+        <li>Fiche du patient → Suivi → <strong>Compte rendu médecin</strong> : assiduité, courbe de douleur, objectifs, scores, commentaires. Écrivez votre conclusion directement sur la page, cochez ou non les notes de séance, puis <strong>Imprimer ou enregistrer en PDF</strong>.</li>
+        <li><a href="/stats.html">Outils → Statistiques du cabinet</a> : programmes en cours, assiduité moyenne, séances par semaine, programmes les plus prescrits, évolution moyenne de la douleur et des questionnaires.</li>
+      </ul>
+    </div></details>
+
     <details><summary><span data-ico="download"></span>Sauvegarder et restaurer toutes les données</summary><div class="body">
-      <p><a href="/reglages_cabinet.html#backup">Réglages du cabinet → Sauvegarde</a> → <strong>Télécharger une sauvegarde</strong> : un fichier avec patients, séances, bilans, modèles, exercices et réglages. Faites-le une fois par mois et gardez le fichier en lieu sûr (il contient des données de santé).</p>
+      <p><a href="/reglages_cabinet.html#backup">Réglages du cabinet → Sauvegarde</a> → <strong>Télécharger une sauvegarde</strong> : un fichier avec patients, séances, bilans, modèles, exercices, réglages, questionnaires, réponses des patients, notes de séance et fiches conseils. Faites-le une fois par mois et gardez le fichier en lieu sûr (il contient des données de santé).</p>
       <p><strong>Restaurer une sauvegarde…</strong> : choisissez le fichier puis ce qu'il faut restaurer. Rien n'est effacé ; les éléments de la sauvegarde remplacent ceux qui ont le même identifiant.</p>
     </div></details>
 
     <details><summary><span data-ico="key"></span>Réglage unique dans Firebase (message « Firebase refuse l'enregistrement »)</summary><div class="body">
-      <p>Les réglages du cabinet, favoris et éléments masqués, ainsi que les bilans, demandent des règles dans Firebase, à ajouter une seule fois. Le plus simple : remplacez tout le contenu des règles par le fichier <code>firestore.rules</code> du site, puis <strong>Publier</strong>. Sinon :</p>
+      <p>Les réglages du cabinet, favoris et éléments masqués, les bilans, ainsi que le suivi (objectifs, questionnaires, notes, fiches conseils), demandent des règles dans Firebase, à ajouter une seule fois. Le plus simple : remplacez tout le contenu des règles par le fichier <code>firestore.rules</code> du site, puis <strong>Publier</strong>. Sinon :</p>
       <ol>
         <li>Ouvrez la <a href="https://console.firebase.google.com/project/gabrieltimer/firestore/rules" target="_blank" rel="noopener">console Firebase → Firestore Database → Règles</a>.</li>
         <li>Juste avant le bloc <code>match /programmes/{id} {</code> (vers la fin), collez :</li>
