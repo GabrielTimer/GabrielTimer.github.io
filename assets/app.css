@@ -57,6 +57,7 @@
 
   --nav-h:68px;
   --side-w:248px;
+  --bc-skin:#F3E7DC; --bc-grid:rgba(120,90,70,.2); --bc-hover:rgba(19,143,166,.18); --bc-mark:#A0806A; --bc-hair:#6B5446; --bc-line:#8C6E5C;
   --top-h:60px;
   --gutter:16px;
   --maxw:760px;
@@ -72,6 +73,7 @@
     --soleil:#F6B23A; --soleil-strong:#F6C46B; --soleil-soft:#3A2B0B;
     --ok:#4CC28A; --ok-soft:#123628; --warn:#E8B94C; --warn-soft:#3A2E0E;
     --danger:#F0736C; --danger-soft:#3E1A19;
+    --bc-skin:#3A3230; --bc-grid:rgba(255,235,220,.16); --bc-hover:rgba(56,179,201,.25); --bc-mark:#B49A88; --bc-hair:#1E1715; --bc-line:#C9AE9C;
     --shadow-1:0 1px 2px rgba(0,0,0,.3); --shadow-2:0 10px 30px rgba(0,0,0,.45);
     color-scheme:dark;
   }
@@ -86,6 +88,7 @@
   --danger:#F0736C; --danger-soft:#3E1A19;
   --shadow-1:0 1px 2px rgba(0,0,0,.3); --shadow-2:0 10px 30px rgba(0,0,0,.45);
   color-scheme:dark;
+  --bc-skin:#3A3230; --bc-grid:rgba(255,235,220,.16); --bc-hover:rgba(56,179,201,.25); --bc-mark:#B49A88; --bc-hair:#1E1715; --bc-line:#C9AE9C;
 }
 
 /* Taille de texte agrandie (réglage patient) */
@@ -719,3 +722,6 @@ a.chip{ text-decoration:none; }
   dialog.sheet.full .lib-tools .chips.scroll{ flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none; }
 }
 .lib-card .badge{ max-width:100%; white-space:normal; text-align:left; line-height:1.25; height:auto; min-height:22px; }
+
+.link-btn{ background:none; border:0; padding:0; font:inherit; color:var(--lagon-strong); font-weight:800; cursor:pointer; text-align:left; }
+.link-btn:hover{ text-decoration:underline; }

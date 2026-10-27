@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atlas des nerfs</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  @media (min-width:1000px){
+    .atlas .nf{ display:grid; grid-template-columns:minmax(320px,440px) minmax(0,1fr); gap:20px; align-items:start; }
+    .atlas .nf-bar{ grid-column:1 / -1; }
+    .atlas .nf-map{ grid-row:2 / span 3; position:sticky; top:12px; }
+    .atlas .nf-tabs-wrap,.atlas .nf > .nf-note{ grid-column:1 / -1; }
+  }
+</style>
+</head>
+<body>
+<main class="page wide" id="app"><div class="loading"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, mountShell, registerSW } from "/assets/app.js";
+import { mountNerfs, NERFS_CSS } from "/assets/nerfs-ui.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const st = document.createElement("style"); st.textContent = NERFS_CSS; document.head.append(st);
+const app = $("#app");
+app.innerHTML = `<div class="page-head"><h1>Atlas des nerfs</h1><p class="lead">Dermatomes, territoires des nerfs périphériques, racines, muscles et réflexes. Le même outil se trouve dans le bilan, où vous pouvez noter vos constats.</p></div><section class="panel atlas"><div id="nf"></div></section>`;
+mountNerfs($("#nf"));
+</script>
+</body>
+</html>

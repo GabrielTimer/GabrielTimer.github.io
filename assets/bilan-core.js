@@ -7,6 +7,7 @@
    ========================================================= */
 
 import { esc, icon, toast, openSheet, KINE, settings, logoSrc } from "./app.js";
+import { neuroSummary } from "./nerfs-data.js";
 
 /* ---------- Chargement du contenu clinique ---------- */
 
@@ -162,6 +163,9 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
     ["Observation", joinSec(S, "obs")],
     ["DN4", d4 ? `${d4}/10 ${d4 >= 4 ? "(douleur neuropathique probable, seuil ≥ 4)" : "(seuil ≥ 4 non atteint)"}` + (S.c.dn4.length ? " : " + S.c.dn4.join(", ").toLowerCase() : "") : ""]
   ]);
+
+  const neuro = neuroSummary(S.neuro || {});
+  if(neuro.length) add("Examen neurologique", neuro.map(l => { const i = l.indexOf(" : "); return [l.slice(0, i), l.slice(i + 3)]; }));
 
   Object.keys(S.pain || {}).filter(regionOf).forEach(n => {
     const r = K.REG[regionOf(n)], c = zoneRead(S, n);
