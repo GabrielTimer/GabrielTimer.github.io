@@ -78,8 +78,8 @@ async function patientView(ctx){
           }});
         }
         if(b.dataset.pact === "bilan"){
-          const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Préparer l'e-mail" });
-          if(rem !== null) P.bilanMail({ patientNom:data.patient.nom, programme:prog, remarques:rem });
+          const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Envoyer" });
+          if(rem !== null) P.bilanMail({ cle: ctx.apercu ? null : ctx.cle, patientNom:data.patient.nom, programme:prog, remarques:rem });
         }
       }));
     });
@@ -122,7 +122,8 @@ async function kineView(param){
   const { renderEvaChart } = await import("../chart.js");
   const P = await import("../patient.js");
 
-  let seances = [], bilans = [], bilansErr = null, suiviBox = null;
+  let seances = [], bilans = [], bilansErr = null, suiviBox = null, messages = [];
+  const M = await import("../messages.js");
   const load = async () => {
     /* Les bilans ne doivent jamais empêcher l'affichage de la fiche
        (règle Firebase pas encore publiée, ancienne version en cache…) */
@@ -130,12 +131,14 @@ async function kineView(param){
       if(typeof C.listBilans !== "function") throw Object.assign(new Error("version"), { code:"app/update" });
       return C.listBilans(patient.cle);
     };
-    const [ss, bb] = await Promise.all([
+    const [ss, bb, mm] = await Promise.all([
       C.listSeances(patient.cle),
-      loadBilans().catch(err => { console.warn("Bilans :", err); bilansErr = err; return []; })
+      loadBilans().catch(err => { console.warn("Bilans :", err); bilansErr = err; return []; }),
+      (typeof C.listMessages === "function" ? C.listMessages(patient.cle) : Promise.resolve([])).catch(err => { console.warn("Messages :", err); return []; })
     ]);
     seances = ss.filter(s => s.data && Array.isArray(s.data.exercices));
     bilans = bb;
+    messages = mm;
   };
   const bilanURL = (id = "") => `/bilan.html?patient=${encodeURIComponent(patient.cle)}${id ? `&id=${encodeURIComponent(id)}` : ""}`;
   const bilansHTML = () => {
@@ -210,12 +213,26 @@ async function kineView(param){
           <div id="chart"></div>
         </section>
         <section class="panel">
-          <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Messages et ressentis</h2></div>
-          ${sum.commentaires.length || valides.some(s => s.ressenti) ? `<div class="msg-list">${valides.slice().reverse().filter(s => s.commentaire || s.ressenti).slice(0, 8).map(s => `
-            <div>
-              <div class="m-meta">${esc(fmtShortDate(s.dateValidation))}, ${esc(s.label || s.nom || "séance")}${s.ressenti ? ` : ${esc(ressentiLabel(s.ressenti).toLowerCase())}` : ""}${s.eva !== undefined && s.eva !== null ? `, douleur ${esc(s.eva)}/10` : ""}</div>
-              ${s.commentaire ? `<div class="quote">${esc(s.commentaire)}</div>` : ""}
-            </div>`).join("")}</div>` : `<p class="muted small">Le patient n'a pas encore laissé de message.</p>`}
+          ${(() => {
+            const box = M.buildInbox({ patients:[patient], messages, seances });
+            const nonLus = box.filter(i => !i.lu);
+            const feed = [
+              ...messages.map(m => ({ date:m.date || 0, msg:m, lu: !!m.lu })),
+              ...valides.filter(s => s.commentaire || s.ressenti).map(s => ({ date:s.dateValidation, s, lu: !box.some(i => i.kind === "commentaire" && i.id === s.id && !i.lu) }))
+            ].sort((a, b) => b.date - a.date).slice(0, 8);
+            return `<div class="panel-head" style="flex-wrap:wrap"><h2 style="font-size:var(--fs-lg)">Messages et ressentis</h2>
+              <a class="btn sm ghost" href="/messages.html?patient=${encodeURIComponent(patient.cle)}">Tout voir</a>
+              ${nonLus.length ? `<div class="row wrap" style="--gap:8px;width:100%"><span class="badge danger">${nonLus.length} non lu${nonLus.length > 1 ? "s" : ""}</span><button class="btn sm" type="button" id="msg-lu">${icon("check")}Marquer comme lu</button></div>` : ""}</div>
+            ${feed.length ? `<div class="msg-list">${feed.map(f => f.msg ? `
+              <div class="${f.lu ? "" : "is-new"}">
+                <div class="m-meta">${icon(M.TYPE_ICON[f.msg.type] || "mail", "ic-inline")} ${esc(fmtShortDate(f.msg.date))}, ${esc(M.TYPE_LABEL[f.msg.type] || "Message")}${f.msg.sujet ? ` : ${esc(f.msg.sujet)}` : ""}${f.lu ? "" : ` <span class="badge danger">Nouveau</span>`}</div>
+                <div class="quote pre">${esc(f.msg.texte)}</div>
+              </div>` : `
+              <div class="${f.lu ? "" : "is-new"}">
+                <div class="m-meta">${esc(fmtShortDate(f.s.dateValidation))}, ${esc(f.s.label || f.s.nom || "séance")}${f.s.ressenti ? ` : ${esc(ressentiLabel(f.s.ressenti).toLowerCase())}` : ""}${f.s.eva !== undefined && f.s.eva !== null ? `, douleur ${esc(f.s.eva)}/10` : ""}${f.lu ? "" : ` <span class="badge danger">Nouveau</span>`}</div>
+                ${f.s.commentaire ? `<div class="quote">${esc(f.s.commentaire)}</div>` : ""}
+              </div>`).join("")}</div>` : `<p class="muted small">Le patient n'a pas encore laissé de message.</p>`}`;
+          })()}
         </section>
       </div>
 
@@ -249,6 +266,19 @@ async function kineView(param){
     $("#acces").onclick = () => UI.accessSheet(patient);
     $("#apercu").onclick = () => window.open(`/index.html?apercu=${patient.cle}`, "_blank");
     $("#edit").onclick = editPatient;
+    $("#msg-lu")?.addEventListener("click", async e => {
+      e.currentTarget.disabled = true;
+      const box = M.buildInbox({ patients:[patient], messages, seances }).filter(i => !i.lu);
+      try{
+        await Promise.all(box.map(i => M.setRead(C, i, true)));
+        box.forEach(i => {
+          if(i.kind === "message"){ const m = messages.find(x => x.id === i.id); if(m) m.lu = true; }
+          else{ const x = seances.find(y => y.id === i.id); if(x) x.commentaireLu = true; }
+        });
+        M.refreshUnread({ force:true });
+        render();
+      }catch(err){ toast("Impossible pour le moment. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); e.currentTarget.disabled = false; }
+    });
     $("#more").onclick = morePatient;
 
     $$("[data-bact]").forEach(b => b.addEventListener("click", async () => {

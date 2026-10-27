@@ -259,7 +259,7 @@ async function renderPatient(ctx){
         <a class="list-item" href="/progression.html"><span class="li-ico">${icon("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
         <a class="list-item" href="/respir/index.html"><span class="li-ico">${icon("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
         ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
-        <a class="list-item" href="mailto:${esc(KINE.email)}?subject=${encodeURIComponent("Question sur mes exercices")}"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">${esc(KINE.nom)}</span></span><span class="li-end">${icon("chevron")}</span></a>
+        <button class="list-item" type="button" id="ecrire"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
       </div>
     </section>
     <footer class="app-foot">${appMarkHTML()}</footer>`;
@@ -268,11 +268,12 @@ async function renderPatient(ctx){
   homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
+  $("#ecrire")?.addEventListener("click", () => P.writeToKine({ cle: ctx.cle, apercu: ctx.apercu, patientNom: patient.nom }));
   $("#bilan")?.addEventListener("click", async () => {
     const { promptDialog } = await import("../app.js");
-    const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Préparer l'e-mail" });
+    const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Envoyer" });
     if(rem === null) return;
-    P.bilanMail({ patientNom: patient.nom, programme: programmes[0], remarques: rem });
+    P.bilanMail({ cle: ctx.apercu ? null : ctx.cle, patientNom: patient.nom, programme: programmes[0], remarques: rem });
   });
   app.querySelectorAll("[data-seule]").forEach(b => b.addEventListener("click", () => {
     const s = seules.find(x => x.id === b.dataset.seule);
@@ -293,6 +294,7 @@ async function renderKine(user){
   app.classList.add("wide");
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(KINE.nom))}</h1></div>
+    <div id="inbox-banner"></div>
     <div class="tiles">
       <button class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
       <a class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
@@ -319,8 +321,20 @@ async function renderKine(user){
   try{
     const C = await import("../cloud.js");
     const K = await import("../kine.js");
-    const [patients, seances] = await Promise.all([C.listPatients(), C.listAllSeances()]);
+    const M = await import("../messages.js");
+    const [patients, seances, messages] = await Promise.all([C.listPatients(), C.listAllSeances(), C.listAllMessages().catch(() => [])]);
     const sums = K.summarizeAll(patients, seances);
+    const inbox = M.buildInbox({ patients, messages, seances });
+    const unread = inbox.filter(i => !i.lu);
+    M.setUnreadCache(unread.length);
+    if(unread.length){
+      const who = [...new Set(unread.map(i => i.patient.nom))];
+      $("#inbox-banner").innerHTML = `<a class="inbox-banner" href="/messages.html">
+        <span class="t-ico">${icon("inbox")}</span>
+        <span class="li-main"><strong>${unread.length} message${unread.length > 1 ? "s" : ""} non lu${unread.length > 1 ? "s" : ""}</strong>
+        <span class="small">De ${esc(who.slice(0, 3).join(", "))}${who.length > 3 ? ` et ${who.length - 3} autre${who.length > 4 ? "s" : ""}` : ""}</span></span>
+        <span class="btn sm primary">Lire</span></a>`;
+    }
     const watch = sums.filter(s => s.alertes.some(a => a.niveau === "danger" || a.niveau === "warn")).sort((a, b) => b.score - a.score).slice(0, 8);
 
     if(!patients.length){

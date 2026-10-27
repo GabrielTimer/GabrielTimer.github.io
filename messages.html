@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Messages des patients</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/pages/home.css">
+<style>
+  .mb-tools{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
+  .mb-tools .input-icon{ flex:1 1 220px; max-width:360px; }
+  .mb-tools .input{ padding-left:44px; }
+  .mb-list{ display:flex; flex-direction:column; gap:10px; }
+  .mb-item{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 14px; padding:16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); }
+  .mb-item.unread{ border-color:color-mix(in srgb,var(--lagon) 55%,var(--line)); box-shadow:inset 4px 0 0 var(--lagon); }
+  .mb-item .avatar{ grid-row:span 3; }
+  .mb-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; }
+  .mb-head .who{ font-weight:800; color:inherit; text-decoration:none; }
+  .mb-head .who:hover{ text-decoration:underline; }
+  .mb-head .when{ color:var(--ink-3); font-size:var(--fs-sm); margin-left:auto; white-space:nowrap; }
+  .mb-sub{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:var(--fs-sm); color:var(--ink-2); }
+  .mb-sub strong{ color:var(--ink); }
+  .mb-text{ white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.55; color:var(--ink); padding:10px 12px; background:var(--surface-2); border-radius:var(--r-sm); }
+  .mb-text.clamp{ max-height:9.5em; overflow:hidden; -webkit-mask-image:linear-gradient(#000 70%,transparent); mask-image:linear-gradient(#000 70%,transparent); }
+  .mb-more{ background:none; border:0; padding:0; color:var(--lagon-strong); font:inherit; font-weight:700; font-size:var(--fs-sm); cursor:pointer; justify-self:start; }
+  .mb-act{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+  .mb-unread-dot{ width:9px; height:9px; border-radius:50%; background:var(--lagon); display:inline-block; }
+  @media (max-width:560px){
+    .mb-item{ grid-template-columns:minmax(0,1fr); }
+    .mb-item .avatar{ display:none; }
+    .mb-head .when{ margin-left:0; width:100%; }
+  }
+</style>
+</head>
+<body>
+<main class="page wide" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement des messages…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, params, mountShell, registerSW, errorHTML, emptyHTML, toast, confirmDialog, fmtShortDate, fmtRelDay, ressentiLabel, KINE } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"messages", back:"/index.html" });
+const C = await import("/assets/cloud.js");
+const M = await import("/assets/messages.js");
+const app = $("#app");
+
+let items = [], patients = [], rulesMissing = false;
+try{ ({ items, patients, rulesMissing } = await M.loadInbox(C)); }
+catch(err){ app.innerHTML = errorHTML(err); throw err; }
+
+const onlyPatient = params.get("patient");
+const state = {
+  vue: items.some(i => !i.lu) && !onlyPatient ? "nonlus" : "tous",
+  type: "tous",
+  q: ""
+};
+const open = new Set();
+
+const initials = n => String(n || "?").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
+const when = d => {
+  const rel = fmtRelDay(d);
+  const h = new Date(d).toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
+  return /jours/.test(rel) ? `${fmtShortDate(d)}, ${h}` : `${rel}, ${h}`;
+};
+const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+function visible(){
+  const q = norm(state.q);
+  return items.filter(i =>
+    (!onlyPatient || i.cle === onlyPatient) &&
+    (state.vue === "tous" || !i.lu) &&
+    (state.type === "tous" || i.type === state.type) &&
+    (!q || norm(`${i.patient.nom} ${i.sujet} ${i.texte}`).includes(q))
+  );
+}
+
+function replyLinks(i){
+  const p = i.patient;
+  const out = [];
+  const sujet = i.kind === "message" && i.sujet ? `Re: ${i.sujet}` : "Votre message";
+  if(p.email) out.push(`<a class="btn sm" href="mailto:${esc(p.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(`Bonjour,\n\n\n\n${KINE.nom}`)}">${icon("reply")}Répondre par e-mail</a>`);
+  if(p.telephone) out.push(`<a class="btn sm" href="sms:${esc(String(p.telephone).replace(/[^\d+]/g, ""))}">${icon("message")}SMS</a>`);
+  return out.join("");
+}
+
+function itemHTML(i){
+  const long = i.texte.length > 420 || i.texte.split("\n").length > 7;
+  const meta = i.kind === "commentaire"
+    ? [i.ressenti ? `séance ${esc(ressentiLabel(i.ressenti).toLowerCase())}` : "", i.eva !== undefined && i.eva !== null && i.eva !== "" ? `douleur ${esc(i.eva)}/10` : ""].filter(Boolean).join(", ")
+    : "";
+  return `<article class="mb-item ${i.lu ? "" : "unread"}" data-key="${esc(i.key)}">
+    <span class="avatar">${esc(initials(i.patient.nom))}</span>
+    <div class="mb-head">
+      ${i.lu ? "" : `<span class="mb-unread-dot" title="Non lu"></span>`}
+      <a class="who" href="/cloud.html?patient=${encodeURIComponent(i.cle)}">${esc(i.patient.nom || "Patient")}</a>
+      <span class="badge ${i.type === "bilan" ? "lagon" : ""}">${icon(M.TYPE_ICON[i.type] || "mail")}${esc(M.TYPE_LABEL[i.type] || "Message")}</span>
+      <span class="when">${esc(when(i.date))}</span>
+    </div>
+    <div class="mb-sub">${i.sujet ? `<strong>${esc(i.sujet)}</strong>` : ""}${meta ? `<span>${i.sujet ? "· " : ""}${meta}</span>` : ""}</div>
+    <div class="stack" style="--gap:6px;min-width:0">
+      <div class="mb-text ${long && !open.has(i.key) ? "clamp" : ""}">${esc(i.texte)}</div>
+      ${long ? `<button class="mb-more" type="button" data-more>${open.has(i.key) ? "Réduire" : "Lire la suite"}</button>` : ""}
+      <div class="mb-act">
+        <button class="btn sm ${i.lu ? "ghost" : "primary"}" type="button" data-lu>${icon(i.lu ? "circle" : "check")}${i.lu ? "Marquer non lu" : "Marquer comme lu"}</button>
+        ${replyLinks(i)}
+        <a class="btn sm ghost" href="/cloud.html?patient=${encodeURIComponent(i.cle)}">${icon("user")}Fiche</a>
+        ${i.kind === "message" ? `<button class="icon-btn sm danger" type="button" data-del aria-label="Supprimer ce message">${icon("trash")}</button>` : ""}
+      </div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const scope = onlyPatient ? items.filter(i => i.cle === onlyPatient) : items;
+  const nonLus = scope.filter(i => !i.lu).length;
+  const counts = { tous: scope.length, message: 0, bilan: 0, commentaire: 0 };
+  scope.forEach(i => counts[i.type] = (counts[i.type] || 0) + 1);
+  const list = visible();
+  const who = onlyPatient ? patients.find(p => p.cle === onlyPatient) : null;
+  app.innerHTML = `
+    <div class="page-head">
+      <h1>${who ? `Messages de ${esc(who.nom)}` : "Messages des patients"}</h1>
+      ${nonLus ? `<button class="btn" type="button" id="all-read">${icon("check")}Tout marquer comme lu</button>` : ""}
+      <p class="lead">${nonLus ? `${nonLus} message${nonLus > 1 ? "s" : ""} non lu${nonLus > 1 ? "s" : ""}.` : "Vous êtes à jour."} Les e-mails envoyés depuis l'application, les bilans de programme et les commentaires de fin de séance arrivent ici.</p>
+      ${who ? `<p><a href="/messages.html">${icon("back", "ic-inline")} Tous les patients</a></p>` : ""}
+    </div>
+    ${rulesMissing ? `<div class="notice warn" style="margin-bottom:16px">${icon("alert")}<span>Les messages ne sont pas encore activés dans Firebase : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. En attendant, seuls les commentaires de séance s'affichent.</span></div>` : ""}
+    <div class="mb-tools">
+      <div class="chips" role="group" aria-label="Affichage">
+        <button class="chip" type="button" data-vue="nonlus" aria-pressed="${state.vue === "nonlus"}">Non lus <span class="count">${nonLus}</span></button>
+        <button class="chip" type="button" data-vue="tous" aria-pressed="${state.vue === "tous"}">Tous <span class="count">${counts.tous}</span></button>
+      </div>
+      <div class="chips" role="group" aria-label="Type">
+        ${[["tous", "Tout type"], ["message", "Messages"], ["bilan", "Bilans"], ["commentaire", "Commentaires"]].map(([k, l]) => `<button class="chip" type="button" data-type="${k}" aria-pressed="${state.type === k}">${l}${k !== "tous" ? ` <span class="count">${counts[k] || 0}</span>` : ""}</button>`).join("")}
+      </div>
+      <label class="input-icon">${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient, un mot…" value="${esc(state.q)}" aria-label="Rechercher"></label>
+    </div>
+    ${list.length ? `<div class="mb-list">${list.map(itemHTML).join("")}</div>` : `<div class="panel">${emptyHTML(
+      state.vue === "nonlus" && !state.q && state.type === "tous"
+        ? { ico:"checkCircle", title:"Aucun message non lu", text:"Tous les messages ont été lus.", action:`<button class="btn" type="button" data-vue="tous">Voir tous les messages</button>` }
+        : { ico:"inbox", title:"Aucun message", text: state.q || state.type !== "tous" ? "Rien ne correspond à ces filtres." : "Quand un patient vous écrira depuis l'application, son message apparaîtra ici." }
+    )}</div>`}`;
+  bind();
+}
+
+function bind(){
+  $$("[data-vue]").forEach(b => b.onclick = () => { state.vue = b.dataset.vue; render(); });
+  $$("[data-type]").forEach(b => b.onclick = () => { state.type = b.dataset.type; render(); });
+  const q = $("#q");
+  if(q) q.oninput = () => {
+    state.q = q.value; const pos = q.selectionStart;
+    render(); const n = $("#q"); n.focus(); try{ n.setSelectionRange(pos, pos); }catch(e){}
+  };
+  $("#all-read")?.addEventListener("click", async e => {
+    const scope = items.filter(i => !i.lu && (!onlyPatient || i.cle === onlyPatient));
+    e.currentTarget.disabled = true;
+    const res = await Promise.allSettled(scope.map(i => M.setRead(C, i, true)));
+    if(res.some(r => r.status === "rejected")) toast("Certains messages n'ont pas pu être marqués. Réessayez.", { type:"err" });
+    else toast("Tout est marqué comme lu.", { type:"ok" });
+    M.setUnreadCache(items.filter(i => !i.lu).length);
+    render();
+  });
+  $$(".mb-item").forEach(el => {
+    const i = items.find(x => x.key === el.dataset.key);
+    el.querySelector("[data-more]")?.addEventListener("click", () => { open.has(i.key) ? open.delete(i.key) : open.add(i.key); render(); });
+    el.querySelector("[data-lu]").onclick = async () => {
+      try{ await M.setRead(C, i, !i.lu); M.setUnreadCache(items.filter(x => !x.lu).length); render(); }
+      catch(err){ toast("Impossible pour le moment. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
+    };
+    el.querySelector("[data-del]")?.addEventListener("click", async () => {
+      const ok = await confirmDialog({ title:"Supprimer ce message ?", message:"Il sera retiré de l'application. L'e-mail éventuellement reçu n'est pas touché.", confirm:"Supprimer", danger:true });
+      if(!ok) return;
+      try{ await C.deleteMessage(i.cle, i.id); items = items.filter(x => x !== i); M.setUnreadCache(items.filter(x => !x.lu).length); toast("Message supprimé.", { type:"ok" }); render(); }
+      catch(err){ toast("Suppression impossible.", { type:"err" }); }
+    });
+  });
+}
+
+render();
+</script>
+</body>
+</html>

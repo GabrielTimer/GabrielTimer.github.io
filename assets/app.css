@@ -699,3 +699,15 @@ a.chip{ text-decoration:none; }
 .nav-app{ padding:12px 12px 2px; }
 .app-foot{ display:flex; flex-direction:column; align-items:center; gap:4px; margin:36px 0 8px; color:var(--ink-3); font-size:var(--fs-xs); text-align:center; }
 @media print{ .app-foot,.nav-app{ display:none; } }
+
+/* ---------- Pastille des messages non lus (kiné) ---------- */
+.inbox-btn{ position:relative; }
+.inbox-badge{
+  position:absolute; top:2px; right:2px;
+  min-width:18px; height:18px; padding:0 5px; border-radius:999px;
+  background:var(--danger); color:#fff; font-size:.7rem; font-weight:800; line-height:18px; text-align:center;
+  box-shadow:0 0 0 2px var(--surface);
+}
+.inbox-badge[hidden]{ display:none; }
+.inbox-badge.inline{ position:static; margin-left:auto; box-shadow:none; }
+@media (min-width:960px){ .has-nav .inbox-btn{ display:none; } }

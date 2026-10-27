@@ -500,7 +500,10 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     : (title ? `<div class="topbar-title">${esc(title)}</div>` : brand);
 
   const themeBtn = `<button class="icon-btn" type="button" data-theme-toggle aria-label="Changer de thème">${icon(isDark() ? "sun" : "moon")}</button>`;
-  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${themeBtn}</div></header>`);
+  const inboxBtn = role === "kine" && !apercu
+    ? `<a class="icon-btn inbox-btn" href="/messages.html" data-inbox-link aria-label="Messages des patients" title="Messages des patients">${icon("inbox")}<span class="inbox-badge" data-inbox-badge hidden></span></a>`
+    : "";
+  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${inboxBtn}${themeBtn}</div></header>`);
 
   if(apercu){
     body.prepend(h(`<div class="apercu-band">${icon("eye")}<span>Aperçu : vous voyez l'application comme votre patient</span><button type="button" data-leave-apercu>Quitter</button></div>`));
@@ -516,6 +519,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     body.classList.add("has-nav");
     const foot = role === "kine"
       ? `<div class="nav-foot">
+          <a class="nav-link" href="/messages.html" ${active === "messages" ? 'aria-current="page"' : ""}><span class="nav-ico">${icon("inbox")}</span><span>Messages</span><span class="inbox-badge inline" data-inbox-badge hidden></span></a>
           <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${icon("wrench")}</span><span>Outils</span></a>
           <a class="nav-link" href="/aide.html"><span class="nav-ico">${icon("info")}</span><span>Aide</span></a>
           <div class="nav-app">${appMarkHTML()}</div>
@@ -532,6 +536,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     body.appendChild(nav);
   }else{
     main.classList.add("no-nav");
+  }
+  if(role === "kine" && !apercu){
+    import("./messages.js").then(m => m.refreshUnread()).catch(() => {});
   }
 
   topbar.querySelector("[data-theme-toggle]").onclick = e => {

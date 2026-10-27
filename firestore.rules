@@ -10,7 +10,7 @@ rules_version = '2';
 //   lister ou de deviner les autres patients.
 // - Un patient ne peut modifier que la validation de ses séances (fait / EVA / ressenti)
 //   et les jours de ses séances à venir. Il peut ajouter ses réponses aux objectifs
-//   et questionnaires, sans pouvoir les modifier ensuite.
+//   et questionnaires, et écrire des messages à son kiné, sans pouvoir les modifier ensuite.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -51,12 +51,30 @@ service cloud.firestore {
         allow update: if isKine() || isValidation() || isReplanning();
       }
 
+      // Messages du patient au kiné (copie dans ApiKiné)
+      match /messages/{id} {
+        allow read: if true;              // le chemin contient déjà le code secret
+        allow create: if isKine() || isMessage();
+        allow update, delete: if isKine();
+      }
+
       // Objectifs notés et questionnaires remplis par le patient
       match /suivis/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
         allow create: if isKine() || isSuivi();
         allow update, delete: if isKine();
       }
+    }
+
+    // Un message de patient : texte de taille raisonnable, non lu
+    function isMessage() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(["type", "sujet", "texte", "date", "lu"])
+        && d.type in ["message", "bilan"]
+        && d.texte is string && d.texte.size() > 0 && d.texte.size() <= 5000
+        && (!("sujet" in d) || (d.sujet is string && d.sujet.size() <= 200))
+        && d.date is int
+        && d.lu == false;
     }
 
     // Une réponse de patient : type connu, taille raisonnable
@@ -82,6 +100,9 @@ service cloud.firestore {
       allow read: if isKine();
     }
     match /{path=**}/notes/{id} {
+      allow read: if isKine();
+    }
+    match /{path=**}/messages/{id} {
       allow read: if isKine();
     }
 

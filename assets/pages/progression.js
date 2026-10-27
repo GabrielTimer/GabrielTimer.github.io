@@ -112,8 +112,8 @@ function render(){
   requestAnimationFrame(() => setTimeout(() => { const a = $("#arc"); if(a) a.style.strokeDashoffset = R * (1 - p.pct / 100); }, 60));
   $("#sel")?.addEventListener("change", e => { current = progs.find(x => x.id === e.target.value); render(); });
   $("#bilan").onclick = async () => {
-    const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Préparer l'e-mail" });
-    if(rem !== null) P.bilanMail({ patientNom:data.patient.nom, programme:p, remarques:rem });
+    const rem = await promptDialog({ title:"Envoyer mon bilan", label:"Un mot pour votre kiné ? (facultatif)", multiline:true, confirm:"Envoyer" });
+    if(rem !== null) P.bilanMail({ cle: ctx.apercu ? null : ctx.cle, patientNom:data.patient.nom, programme:p, remarques:rem });
   };
 }
 render();
