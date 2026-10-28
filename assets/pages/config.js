@@ -669,6 +669,18 @@ function renderSend(full = true){
 }
 
 function bindCommon(){
+  /* Impression rapide sur une page A4 */
+  const pdfBtn = $("#pdf");
+  if(pdfBtn && !$("#print1")) pdfBtn.insertAdjacentHTML("afterend", `<button class="btn" type="button" id="print1">${icon("print")}Imprimer (1 page)</button>`);
+  $("#print1")?.addEventListener("click", () => {
+    if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
+    const p = patients.find(x => x.cle === S.patient);
+    store.set("programme_print", {
+      ...build(), patient: p ? p.nom : "",
+      frequence: S.type === "programme" && mode.kind === "new" ? `${S.parSemaine} séance${S.parSemaine > 1 ? "s" : ""} par semaine, pendant ${S.semaines} semaine${S.semaines > 1 ? "s" : ""}` : ""
+    });
+    window.open("/impression.html", "_blank");
+  });
   $("#run").onclick = () => {
     if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
     setRunProgram(build());

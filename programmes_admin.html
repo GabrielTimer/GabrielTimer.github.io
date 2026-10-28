@@ -142,6 +142,7 @@ function detail(m, group){
       <div class="mo-exos">${m.exercices.map((e, i) => `<div class="mo-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div>${noteOf(e) ? `<div class="small">${esc(noteOf(e))}</div>` : ""}${evolTexte(e) ? `<div class="small" style="color:var(--lagon-strong);font-weight:700">${icon("trendUp", "ic-inline")} ${esc(evolTexte(e))}</div>` : ""}</div></div>`).join("")}</div>
       <div class="row wrap" style="--gap:8px;margin-top:18px">
         <button class="btn sm" type="button" data-a="pdf">${icon("pdf")}Fiche PDF</button>
+        <button class="btn sm" type="button" data-a="print">${icon("print")}Imprimer (1 page)</button>
         <button class="btn sm" type="button" data-a="edit">${icon("edit")}Modifier</button>
         <button class="btn sm" type="button" data-a="copy">${icon("copy")}Dupliquer</button>
         ${next <= niveaux().length ? `<button class="btn sm" type="button" data-a="level">${icon("plus")}Créer : ${esc(niveauLabel(next).toLowerCase())}</button>` : ""}
@@ -155,6 +156,7 @@ function detail(m, group){
     if(a === "use") useIt(m);
     if(a === "run") runIt(m);
     if(a === "pdf") pdfIt(m);
+    if(a === "print"){ store.set("programme_print", { ...asProgram(m), patient:"" }); window.open("/impression.html", "_blank"); }
     if(a === "edit") editIt(m);
     if(a === "copy") copyIt(m);
     if(a === "hide"){

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impression de la séance</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icon-192.png">
+<style>
+  @page{ size:A4; margin:10mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; background:#e9eef0; color:#13262c; font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; }
+  .bar{ position:sticky; top:0; display:flex; gap:10px; justify-content:center; align-items:center; padding:10px 16px; background:#fff; border-bottom:1px solid #d6e0e3; z-index:2; flex-wrap:wrap; }
+  .bar button{ font:inherit; font-weight:700; padding:10px 18px; border-radius:10px; border:1px solid #c9d6da; background:#fff; cursor:pointer; }
+  .bar button.primary{ background:#14889b; border-color:#14889b; color:#fff; }
+  .bar label{ font-size:14px; display:flex; gap:6px; align-items:center; }
+  .sheet{ width:190mm; min-height:277mm; margin:16px auto; background:#fff; padding:0; box-shadow:0 4px 18px rgba(0,0,0,.12); }
+  .inner{ padding:8mm; transform-origin:top left; }
+  header{ display:flex; gap:14px; align-items:center; border-bottom:2px solid #14889b; padding-bottom:8px; margin-bottom:10px; }
+  header img{ width:46px; height:46px; object-fit:contain; }
+  header .t{ flex:1; min-width:0; }
+  header h1{ font-size:20px; margin:0; }
+  header .sub{ font-size:12px; color:#4a6168; margin-top:2px; }
+  header .kine{ text-align:right; font-size:11px; color:#4a6168; line-height:1.35; }
+  .meta{ display:flex; gap:14px; flex-wrap:wrap; font-size:12px; margin-bottom:10px; color:#30474e; }
+  .meta b{ color:#13262c; }
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .ex{ display:flex; gap:10px; border:1px solid #d6e0e3; border-radius:8px; padding:7px; break-inside:avoid; }
+  .ex img{ width:88px; height:70px; object-fit:contain; flex:none; background:#fff; border-radius:6px; border:1px solid #eef2f3; }
+  .ex .ph{ width:88px; height:70px; flex:none; border-radius:6px; background:#f1f5f6; }
+  .ex .b{ min-width:0; flex:1; }
+  .ex h2{ font-size:13px; margin:0 0 3px; line-height:1.2; }
+  .ex h2 .n{ color:#14889b; margin-right:4px; }
+  .dose{ display:inline-block; font-size:11px; font-weight:700; background:#e6f4f6; color:#0e6b7a; border-radius:5px; padding:1px 6px; margin-bottom:3px; }
+  .ex ol{ margin:0; padding-left:15px; font-size:10.5px; line-height:1.3; color:#30474e; }
+  .ex .note{ margin-top:3px; font-size:10.5px; background:#fff6dc; border-radius:5px; padding:2px 6px; }
+  footer{ margin-top:10px; padding-top:6px; border-top:1px solid #d6e0e3; display:flex; justify-content:space-between; gap:10px; font-size:10.5px; color:#4a6168; }
+  .eva{ display:flex; gap:4px; align-items:center; }
+  .eva span{ display:inline-block; width:15px; height:15px; border:1px solid #9fb3b9; border-radius:3px; font-size:8px; text-align:center; line-height:13px; }
+  .empty{ padding:40px; text-align:center; }
+  @media print{
+    html,body{ background:#fff; }
+    .bar{ display:none; }
+    .sheet{ width:auto; min-height:0; margin:0; box-shadow:none; }
+    .inner{ padding:0; }
+  }
+  @media (max-width:760px){ .sheet{ width:auto; margin:8px; } .grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <button class="primary" type="button" id="print">🖨️ Imprimer</button>
+  <label><input type="checkbox" id="steps" checked> Consignes</label>
+  <label><input type="checkbox" id="eva" checked> Suivi de la douleur</label>
+  <button type="button" onclick="history.length > 1 ? history.back() : window.close()">Fermer</button>
+</div>
+<div class="sheet"><div class="inner" id="page"></div></div>
+<script type="module">
+import { esc, store, KINE, logoSrc, fmtDuree, sessionDuration } from "/assets/app.js";
+import { exerciseImage, exerciseSteps } from "/assets/library.js";
+import { settings } from "/assets/settings.js";
+
+const prog = store.get("programme_print", null);
+const page = document.getElementById("page");
+const opts = { steps: true, eva: true };
+
+function render(){
+  if(!prog || !Array.isArray(prog.exercices) || !prog.exercices.length){
+    page.innerHTML = `<div class="empty">Aucune séance à imprimer. Revenez à la séance et utilisez « Imprimer ».</div>`;
+    return;
+  }
+  const exos = prog.exercices;
+  const tours = Number(prog.series) || 1;
+  const steps = e => exerciseSteps(e).slice(0, 4);
+  page.innerHTML = `
+    <header>
+      <img src="${esc(logoSrc())}" alt="">
+      <div class="t"><h1>${esc(prog.nom || "Séance")}</h1><div class="sub">${prog.patient ? `Pour ${esc(prog.patient)} · ` : ""}${new Date().toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}</div></div>
+      <div class="kine"><b>${esc(KINE.nom)}</b><br>${esc(KINE.titre)}${settings.cabinet.telephone ? `<br>${esc(settings.cabinet.telephone)}` : ""}</div>
+    </header>
+    <div class="meta">
+      <span><b>${exos.length}</b> exercice${exos.length > 1 ? "s" : ""}</span>
+      ${tours > 1 ? `<span><b>${tours}</b> tours</span>` : ""}
+      <span>Durée : <b>${esc(fmtDuree(sessionDuration(prog)))}</b></span>
+      ${prog.frequence ? `<span>${esc(prog.frequence)}</span>` : ""}
+      ${prog.duree ? `<span>${esc(prog.duree)}</span>` : ""}
+    </div>
+    <div class="grid">${exos.map((e, i) => {
+      const img = exerciseImage(e);
+      return `<div class="ex">
+        ${img ? `<img src="${esc(img)}" alt="">` : `<div class="ph"></div>`}
+        <div class="b">
+          <h2><span class="n">${i + 1}.</span>${esc(e.nom)}</h2>
+          <span class="dose">${Number(e.reps) || 1} × ${esc(fmtDuree(Number(e.ex) || 0))}${Number(e.repos) ? `, repos ${esc(fmtDuree(Number(e.repos)))}` : ""}</span>
+          ${opts.steps && steps(e).length ? `<ol>${steps(e).map(t => `<li>${esc(t)}</li>`).join("")}</ol>` : ""}
+          ${e.conseil_kine ? `<div class="note">${esc(e.conseil_kine)}</div>` : ""}
+        </div>
+      </div>`;
+    }).join("")}</div>
+    <footer>
+      <span>${esc(settings.messages.piedPdf || "")}</span>
+      ${opts.eva ? `<span class="eva">Douleur après la séance : ${Array.from({ length: 11 }, (_, n) => `<span>${n}</span>`).join("")}</span>` : ""}
+    </footer>`;
+  fit();
+}
+
+/* Tout tient sur une page A4 : on réduit si besoin */
+function fit(){
+  page.style.transform = ""; page.style.width = "";
+  const max = 277 * 3.7795 - 2;            // hauteur utile A4 en px (marges 10 mm)
+  const h = page.scrollHeight;
+  if(h > max){
+    const k = Math.max(0.55, max / h);
+    page.style.transform = `scale(${k})`;
+    page.style.width = `${100 / k}%`;
+    page.parentElement.style.height = `${max + 2}px`;
+    page.parentElement.style.overflow = "hidden";
+  }else{
+    page.parentElement.style.height = ""; page.parentElement.style.overflow = "";
+  }
+}
+
+document.getElementById("print").onclick = () => window.print();
+document.getElementById("steps").onchange = e => { opts.steps = e.target.checked; render(); };
+document.getElementById("eva").onchange = e => { opts.eva = e.target.checked; render(); };
+render();
+Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))).then(fit);
+</script>
+</body>
+</html>
