@@ -163,6 +163,22 @@ async function kineView(param){
   const BT = { initial:"Bilan initial", intermediaire:"Bilan intermédiaire", final:"Bilan de fin de traitement" };
   const fmtISO = iso => { if(!iso) return ""; const [y, m, d] = String(iso).split("-").map(Number); return new Date(y, (m || 1) - 1, d || 1).toLocaleDateString("fr-FR"); };
 
+  /* Rappels de séance activés par le patient sur son téléphone */
+  let rappels = null;
+  const showRappels = async () => {
+    if(!rappels) rappels = Promise.all([import("../cloud.js"), import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js")])
+      .then(([C, F]) => F.getDocs(F.collection(C.db, "patients", patient.cle, "rappels")))
+      .then(snap => snap.docs.map(d => d.data()).filter(r => r.actif))
+      .catch(() => []);
+    const list = await rappels;
+    const el = $("#pt-rappel");
+    if(!el) return;
+    el.hidden = false;
+    el.innerHTML = list.length
+      ? `${icon("bell")}Rappels activés à ${[...new Set(list.map(r => `${r.heure} h`))].join(", ")}${list.length > 1 ? ` (${list.length} appareils)` : ""}`
+      : `<span class="muted">${icon("bell")}Rappels non activés</span>`;
+  };
+
   const render = () => {
     const sum = K.summarize(patient, seances);
     const { programmes, seules } = sum;
@@ -186,6 +202,7 @@ async function kineView(param){
               ${patient.telephone ? `<a href="tel:${esc(patient.telephone)}">${icon("phone")}${esc(patient.telephone)}</a>` : ""}
               ${patient.email ? `<a href="mailto:${esc(patient.email)}">${icon("mail")}${esc(patient.email)}</a>` : ""}
               ${patient.note ? `<span>${icon("info")}${esc(patient.note)}</span>` : ""}
+              <span id="pt-rappel" hidden></span>
             </div>
           </div>
         </div>
@@ -254,6 +271,7 @@ async function kineView(param){
       </section>`;
 
     renderEvaChart($("#chart"), points);
+    showRappels();
     if(!suiviBox){
       suiviBox = document.createElement("div");
       import("../suivi.js").then(m => m.mountKineSuivi(suiviBox, patient, C)).catch(e => { console.warn(e); suiviBox.innerHTML = ""; });
