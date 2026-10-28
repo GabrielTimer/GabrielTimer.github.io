@@ -453,6 +453,13 @@ let sideMods = false;
 
 /* ---------- Partir d'un modèle ---------- */
 
+/* Après l'enregistrement d'un modèle : la liste de droite le montre tout de suite */
+async function refreshSideModels(){
+  const { loadModeles } = await import("../modeles-ui.js");
+  await loadModeles({ force:true });
+  if(sideMods){ sideMods = false; mountSideModels(); }
+}
+
 async function mountSideModels(){
   if(sideMods) return;
   sideMods = true;
@@ -812,9 +819,20 @@ async function saveAsModel(){
     if(!nom){ sh.el.querySelector("#m-nom").focus(); return; }
     Object.assign(meta, readMeta(sh.el));
     const data = build();
-    await C.saveModele({ nom: meta.niveau ? splitName(nom).base : nom, ...meta, series:data.series, exercices:data.exercices });
-    sh.close();
-    toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = "/programmes_admin.html" } });
+    const ok = sh.el.querySelector("#m-ok");
+    ok.disabled = true;
+    try{
+      const id = await C.saveModele({ nom: meta.niveau ? splitName(nom).base : nom, ...meta, series:data.series, exercices:data.exercices });
+      sh.close();
+      refreshSideModels();
+      toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = `/programmes_admin.html?nouveau=${encodeURIComponent(id)}` } });
+    }catch(err){
+      console.error(err);
+      ok.disabled = false;
+      toast(err?.code === "permission-denied"
+        ? "Firebase refuse l'enregistrement : reconnectez-vous à l'espace kiné, puis réessayez."
+        : "Le modèle n'a pas pu être enregistré : " + (err.message || err), { type:"err", duration:8000 });
+    }
   };
 }
 
@@ -950,7 +968,7 @@ async function saveModeleForm(){
       remplace: P.remplace || undefined
     });
     toast("Modèle enregistré.", { type:"ok" });
-    setTimeout(() => location.href = `/programmes_admin.html?cat=${encodeURIComponent(P.categorie)}`, 600);
+    setTimeout(() => location.href = `/programmes_admin.html?nouveau=${encodeURIComponent(P.id)}`, 600);
   }catch(err){
     console.error(err);
     btn.disabled = false;

@@ -53,6 +53,9 @@ const app = $("#app");
 const KEY = "gt_modeles_filters";
 const F = { q:"", cat:"", zone:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
 if(params.get("cat")) F.cat = params.get("cat");
+/* Retour après l'enregistrement d'un modèle : tous les filtres sont retirés pour qu'il soit visible */
+const nouveau = params.get("nouveau");
+if(nouveau) Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" });
 if(params.get("zone")){
   const z = params.get("zone");
   const b = BUILTIN.find(m => m.raw.zone === z);
@@ -185,7 +188,10 @@ function renderFilters(){
 function render(){
   const visible = all().filter(matches);
   const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
-  $("#count").textContent = groups.length ? `${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}` : "";
+  const filtres = F.q || F.cat || F.zone || F.niveau || F.source;
+  $("#count").innerHTML = (groups.length ? esc(`${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}`) : "")
+    + (filtres ? ` <button class="ee-link" type="button" id="clear-f">Filtres actifs : tout afficher</button>` : "");
+  $("#clear-f")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
   if(!groups.length){
     const filtered = F.q || F.cat || F.zone || F.niveau || F.source;
     $("#list").innerHTML = `<div class="panel">${emptyHTML(filtered
@@ -235,8 +241,20 @@ $("#source").onchange = e => { F.source = e.target.value; save(); renderFilters(
 renderFilters();
 try{
   mine = (await C.listModeles()).map(r => normModele(r)).filter(m => m.exercices.length);
+  if(nouveau) save();
+  $("#q").value = F.q;
   renderFilters();
   render();
+  /* Met en évidence le modèle qu'on vient d'enregistrer */
+  const m = nouveau && mine.find(x => x.id === nouveau);
+  if(m){
+    const g = groupModeles(all().filter(matches)).find(g => g.items.includes(m));
+    if(g){ chosen.set(g.key, m.id); render(); }
+    const card = document.querySelector(`[data-use="${CSS.escape(m.id)}"]`)?.closest(".mo-card");
+    if(card){ card.scrollIntoView({ block:"center" }); card.style.outline = "3px solid var(--soleil)"; setTimeout(() => card.style.outline = "", 4000); }
+  }else if(nouveau){
+    toast("Le modèle vient d'être enregistré mais n'apparaît pas encore. Rechargez la page dans quelques secondes.", { type:"err", duration:8000 });
+  }
 }catch(err){
   console.error(err);
   render();
