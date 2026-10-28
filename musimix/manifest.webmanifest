@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "MusiMix",
+  "short_name": "MusiMix",
+  "description": "Paroles synchronisées, accords guitare et piano, mixage des pistes.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f9f3ed",
+  "theme_color": "#f9f3ed",
+  "categories": ["music", "education"],
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "file_handlers": [
+    { "action": "./", "accept": { "application/zip": [".zip"], "audio/*": [".mp3", ".wav", ".flac", ".m4a", ".ogg"], "text/plain": [".cho", ".chopro", ".lrc"] } }
+  ]
+}
