@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MusiMix (ancienne adresse)</title>
+<meta name="description" content="Joue tes morceaux : paroles synchronisées, accords guitare et piano, volume de chaque instrument.">
+<meta name="theme-color" content="#f9f3ed">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MusiMix">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="preload" href="assets/fonts/Atkinson.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="css/app.css">
+<script>
+  // thème appliqué avant l'affichage (évite le flash)
+  try { const t = JSON.parse(localStorage.getItem('musimix-theme') || 'null'); if (t && t !== 'auto') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</head>
+<body>
+<div id="app" aria-live="polite"></div>
+<noscript>MusiMix a besoin de JavaScript.</noscript>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
