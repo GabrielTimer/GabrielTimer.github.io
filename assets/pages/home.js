@@ -241,6 +241,9 @@ async function renderPatient(ctx){
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(patient.nom))}</h1></div>
     <div id="annonce"></div>
+    ${futures && !ctx.apercu && !store.get("gt_rappel_vu", 0) && !(store.get("gt_rappel", null) || {}).actif && "serviceWorker" in navigator ? `
+    <div class="notice" id="rp-invite" style="margin-bottom:16px;align-items:center;flex-wrap:wrap">${icon("bell")}<span style="flex:1 1 180px">Recevoir un rappel sur ce téléphone le jour de vos séances ?</span>
+      <span style="display:flex;gap:8px"><a class="btn sm primary" href="/reglages.html#rappels">Activer</a><button class="btn sm" type="button" id="rp-later">Non merci</button></span></div>` : ""}
     ${hero}
     <div id="sv-home"></div>
     ${seances.some(s => s.datePrevue) ? `
@@ -268,6 +271,7 @@ async function renderPatient(ctx){
   homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
+  $("#rp-later")?.addEventListener("click", () => { store.set("gt_rappel_vu", 1); $("#rp-invite")?.remove(); });
   $("#ecrire")?.addEventListener("click", () => P.writeToKine({ cle: ctx.cle, apercu: ctx.apercu, patientNom: patient.nom }));
   $("#bilan")?.addEventListener("click", async () => {
     const { promptDialog } = await import("../app.js");

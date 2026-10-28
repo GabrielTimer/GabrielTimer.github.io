@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.8.3";
+const VERSION = "gt-2.9.0";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -10,7 +10,7 @@ const PRECACHE = [
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js",
-  "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/chart.js", "/assets/programmes-view.js",
+  "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/rappels.js", "/assets/chart.js", "/assets/programmes-view.js",
   "/assets/pages/home.css", "/assets/pages/home.js", "/assets/pages/cloud.js", "/assets/pages/timer.css",
   "/assets/pages/timer.js", "/assets/pages/fin.js", "/assets/pages/progression.js", "/assets/pages/local.js",
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"
@@ -31,6 +31,28 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("message", event => {
   if(event.data === "skipWaiting") self.skipWaiting();
+});
+
+/* Rappels de séance : notification envoyée par le cabinet (voir assets/rappels.js) */
+self.addEventListener("push", event => {
+  let d = {};
+  try{ d = event.data ? event.data.json() : {}; }catch(e){ d = { body: event.data ? event.data.text() : "" }; }
+  event.waitUntil(self.registration.showNotification(d.title || "Votre séance du jour", {
+    body: d.body || "Votre séance d'exercices vous attend.",
+    icon: "/icon-192.png", badge: "/icon-192.png",
+    tag: d.tag || "seance", renotify: false,
+    data: { url: d.url || "/index.html" }
+  }));
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  const url = new URL(event.notification.data?.url || "/index.html", self.location.origin).href;
+  event.waitUntil(self.clients.matchAll({ type:"window", includeUncontrolled:true }).then(list => {
+    const win = list.find(c => c.url.startsWith(self.location.origin));
+    if(win){ return win.focus().then(w => (w || win).navigate ? (w || win).navigate(url).catch(() => null) : null); }
+    return self.clients.openWindow(url);
+  }));
 });
 
 const isImmutableCdn = url =>

@@ -58,6 +58,12 @@ service cloud.firestore {
         allow update, delete: if isKine();
       }
 
+      // Rappels de séance : abonnement aux notifications du téléphone du patient
+      match /rappels/{id} {
+        allow read, delete: if true;      // le chemin contient déjà le code secret
+        allow create, update: if isKine() || isRappel();
+      }
+
       // Objectifs notés et questionnaires remplis par le patient
       match /suivis/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
@@ -75,6 +81,18 @@ service cloud.firestore {
         && (!("sujet" in d) || (d.sujet is string && d.sujet.size() <= 200))
         && d.date is int
         && d.lu == false;
+    }
+
+    // Un abonnement aux rappels : adresse de notification et heure choisie
+    function isRappel() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(["endpoint", "p256dh", "auth", "heure", "actif", "createdAt", "tz", "dernierEnvoi"])
+        && d.endpoint is string && d.endpoint.size() <= 1000 && d.endpoint.matches("https://.*")
+        && d.p256dh is string && d.p256dh.size() <= 200
+        && d.auth is string && d.auth.size() <= 100
+        && d.heure is int && d.heure >= 6 && d.heure <= 22
+        && d.actif is bool
+        && (!("tz" in d) || (d.tz is string && d.tz.size() <= 60));
     }
 
     // Une réponse de patient : type connu, taille raisonnable
@@ -103,6 +121,9 @@ service cloud.firestore {
       allow read: if isKine();
     }
     match /{path=**}/messages/{id} {
+      allow read: if isKine();
+    }
+    match /{path=**}/rappels/{id} {
       allow read: if isKine();
     }
 

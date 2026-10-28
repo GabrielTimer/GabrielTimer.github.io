@@ -31,7 +31,7 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW } from "/assets/app.js";
+import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW, toast } from "/assets/app.js";
 import { APP_VERSION } from "/assets/config.js";
 registerSW();
 const ctx = readPatientContext();
@@ -68,6 +68,10 @@ $("#app").innerHTML = `
     <div class="set-row"><div class="s-txt"><strong>Enchaîner automatiquement</strong><span>Passer à l'exercice suivant sans appuyer sur « Commencer ».</span></div>${sw("auto", auto)}</div>
   </div>
 
+  ${ctx.cle && !ctx.apercu ? `
+  <div class="section-title section" id="rappels">Rappels de séance</div>
+  <div class="panel" style="padding:0" id="rappels-box"></div>` : ""}
+
   ${!standalone ? `
   <div class="section-title section">Installer l'application</div>
   <div class="panel install">
@@ -99,6 +103,48 @@ $("#forget")?.addEventListener("click", async () => {
   if(!await confirmDialog({ title:"Déconnecter cet appareil ?", message:"Vous aurez besoin de votre lien ou de votre code pour revenir.", confirm:"Déconnecter", danger:true })) return;
   forgetPatient(); location.replace("/index.html");
 });
+/* ---------- Rappels de séance ---------- */
+async function rappelsUI(){
+  const box = $("#rappels-box");
+  if(!box) return;
+  const R = await import("/assets/rappels.js");
+  const sup = R.rappelSupport();
+  const st = R.rappelState(ctx.cle) || { heure:18, actif:false };
+  if(!sup.ok){
+    box.innerHTML = `<div class="set-row"><div class="s-txt"><strong>Recevoir un rappel</strong><span>${sup.raison === "ios-ecran"
+      ? "Sur iPhone, ajoutez d'abord l'application à l'écran d'accueil (voir « Installer l'application » ci-dessous), puis ouvrez-la depuis son icône pour activer les rappels."
+      : "Ce navigateur ne permet pas les notifications. Vous pouvez ajouter vos séances à votre agenda depuis l'accueil."}</span></div></div>`;
+    return;
+  }
+  box.innerHTML = `
+    <div class="set-row"><div class="s-txt"><strong>Me rappeler mes séances</strong><span>Une notification le jour de chaque séance prévue, si elle n'est pas encore faite.</span></div>${sw("rp-on", st.actif)}</div>
+    <div class="set-row"><div class="s-txt"><strong>Heure du rappel</strong><span>Choisissez un moment où vous êtes disponible.</span></div>
+      <select class="select" id="rp-h" style="width:auto" aria-label="Heure du rappel">${R.HEURES.map(h => `<option value="${h}" ${h === st.heure ? "selected" : ""}>${h} h</option>`).join("")}</select></div>
+    <div class="set-row" id="rp-test-row" ${st.actif ? "" : "hidden"}><div class="s-txt"><span id="rp-msg">Rappels activés à ${st.heure} h.</span></div><button class="btn sm" type="button" id="rp-test">${icon("bell")}Essayer</button></div>`;
+  const on = $("#rp-on"), h = $("#rp-h"), row = $("#rp-test-row");
+  const apply = async () => {
+    on.disabled = h.disabled = true;
+    try{
+      if(on.checked){
+        const s = await R.activerRappels(ctx.cle, Number(h.value));
+        row.hidden = false; $("#rp-msg").textContent = `Rappels activés à ${s.heure} h.`;
+        toast("Rappels activés.", { type:"ok" });
+      }else{
+        await R.desactiverRappels(ctx.cle);
+        row.hidden = true; toast("Rappels désactivés.");
+      }
+    }catch(e){
+      on.checked = false; row.hidden = true;
+      toast(e.message || "Impossible d'activer les rappels.", { type:"err", duration:7000 });
+    }finally{ on.disabled = h.disabled = false; }
+  };
+  on.onchange = apply;
+  h.onchange = () => { if(on.checked) apply(); };
+  $("#rp-test").onclick = () => R.essaiRappel().catch(() => toast("Notification impossible sur ce téléphone.", { type:"err" }));
+  if(location.hash === "#rappels") setTimeout(() => scrollTo({ top: $("#rappels").getBoundingClientRect().top + scrollY - 90 }), 60);
+}
+rappelsUI();
+
 let deferred;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; const b = $("#install"); if(b){ b.hidden = false; $("#install-steps").hidden = true; } });
 $("#install")?.addEventListener("click", async () => { if(!deferred) return; deferred.prompt(); await deferred.userChoice; deferred = null; });

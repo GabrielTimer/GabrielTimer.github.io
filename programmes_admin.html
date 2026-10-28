@@ -15,6 +15,10 @@
   .mo-tools{ display:flex; flex-direction:column; gap:12px; margin:6px 0 16px; }
   .mo-selects{ display:flex; gap:8px; flex-wrap:wrap; }
   .mo-selects .select{ flex:1 1 150px; max-width:240px; }
+  @media (max-width:560px){
+    .mo-selects .select{ max-width:none; flex:1 1 calc(50% - 4px); min-width:0; }
+    .mo-selects #patho{ flex-basis:100%; }
+  }
   .mo-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
   .mo-card{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; }
   .mo-cover{ aspect-ratio:16/9; background:#fff; border:0; padding:0; cursor:pointer; overflow:hidden; display:block; width:100%; }
@@ -91,8 +95,8 @@ app.innerHTML = `
     <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" id="zones" role="group" aria-label="Zone du corps"></div></div>
     <div class="mo-selects">
       <select class="select" id="patho" aria-label="Pathologie"></select>
-      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous les niveaux</option>${niveaux().map(n => `<option value="${n.n}">${esc(n.label)}</option>`).join("")}</select>
-      <select class="select" id="source" aria-label="Origine"><option value="">Tous les modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option><option value="masques">Modèles fournis masqués</option></select>
+      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous niveaux</option>${niveaux().map(n => `<option value="${n.n}">${esc(n.label)}</option>`).join("")}</select>
+      <select class="select" id="source" aria-label="Origine"><option value="">Tous modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option><option value="masques">Modèles fournis masqués</option></select>
     </div>
   </div>
   <div class="small muted" id="count" style="margin-bottom:10px"></div>

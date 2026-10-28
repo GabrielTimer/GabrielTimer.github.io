@@ -1,0 +1,46 @@
+# Rappels de séance : chaque heure, envoie une notification aux patients
+# qui ont une séance prévue aujourd'hui (voir .github/scripts/rappels.mjs).
+# Utilise le même secret que la publication des règles : FIREBASE_SERVICE_ACCOUNT.
+name: Rappels de séance
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/scripts/rappels.mjs, .github/workflows/rappels.yml]
+
+concurrency:
+  group: rappels
+  cancel-in-progress: false
+
+jobs:
+  envoi:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les outils
+        run: npm install --no-save --no-audit --no-fund firebase-admin@12 web-push@3
+      - name: Envoyer les rappels
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SEULEMENT_CLES: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: node .github/scripts/rappels.mjs
+      # GitHub met en pause les tâches planifiées après 60 jours sans modification
+      # du site : un petit enregistrement vide tous les 45 jours les garde actives.
+      - name: Garder les rappels actifs
+        if: github.event_name == 'schedule'
+        run: |
+          last=$(git log -1 --format=%ct)
+          if [ $(( ($(date +%s) - last) / 86400 )) -ge 45 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Maintien des rappels automatiques"
+            git push
+          fi
