@@ -725,3 +725,19 @@ a.chip{ text-decoration:none; }
 
 .link-btn{ background:none; border:0; padding:0; font:inherit; color:var(--lagon-strong); font-weight:800; cursor:pointer; text-align:left; }
 .link-btn:hover{ text-decoration:underline; }
+
+/* Modèles (page Modèles et choix d'un modèle dans l'éditeur de séance) */
+.mo-levels{ display:flex; gap:6px; flex-wrap:wrap; margin-top:2px; }
+.mo-levels button{ border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px; padding:4px 11px; font:inherit; font-size:var(--fs-sm); font-weight:700; cursor:pointer; }
+.mo-levels button[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:#fff; }
+.mo-exos{ display:flex; flex-direction:column; gap:10px; }
+.mo-exo{ display:flex; gap:12px; align-items:center; }
+.mo-exo img,.mo-exo .ph-img{ width:72px; height:56px; object-fit:contain; background:#fff; border-radius:var(--r-sm); border:1px solid var(--line); flex:none; }
+.mp-row{ display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px; padding:6px 4px 8px 0; border-radius:var(--r-md); }
+.mp-row:hover{ background:var(--surface-2); }
+.mp-row .lib-row-main{ flex:1 1 0; }
+.mp-levels{ flex-basis:100%; padding-left:70px; margin-top:0; }
+.mp-levels button{ padding:2px 9px; font-size:var(--fs-xs); }
+.cfg-tabs{ display:flex; margin-bottom:14px; }
+.cfg-tabs button{ flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+.cfg-tabs svg{ width:18px; height:18px; }

@@ -169,11 +169,19 @@ function mountView(){
         <div class="exo-list" id="exos"></div>
         <div class="add-row">
           <button class="btn only-mobile" type="button" id="add-lib">${icon("book")}Ajouter depuis la bibliothèque</button>
+          ${mode.kind !== "edit-seance" ? `<button class="btn only-mobile" type="button" id="add-mod">${icon("layers")}Partir d'un modèle</button>` : ""}
           <button class="btn" type="button" id="add-custom">${icon("plus")}Exercice personnalisé</button>
         </div>
         <section class="panel send" id="send"></section>
       </section>
-      <aside class="panel cfg-lib" aria-label="Bibliothèque d'exercices"><div class="lib-head"><h2>Bibliothèque</h2><button class="btn sm" type="button" id="lib-full" title="Agrandir la bibliothèque">${icon("maximize")}Plein écran</button></div><div id="lib"></div></aside>
+      <aside class="panel cfg-lib" aria-label="Bibliothèque d'exercices et modèles">
+        <div class="segmented block cfg-tabs" role="tablist" aria-label="Ajouter depuis">
+          <button type="button" role="tab" data-tab="exos" aria-pressed="${sideTab === "exos"}">${icon("book")}Exercices</button>
+          <button type="button" role="tab" data-tab="modeles" aria-pressed="${sideTab === "modeles"}">${icon("layers")}Modèles</button>
+        </div>
+        <div data-pane="exos" ${sideTab === "exos" ? "" : "hidden"}><div class="lib-head"><h2>Bibliothèque</h2><button class="btn sm" type="button" id="lib-full" title="Agrandir la bibliothèque">${icon("maximize")}Plein écran</button></div><div id="lib"></div></div>
+        <div data-pane="modeles" ${sideTab === "modeles" ? "" : "hidden"}><div class="lib-head"><h2>Modèles</h2><a class="btn sm" href="/programmes_admin.html" title="Gérer les modèles">${icon("settings")}Gérer</a></div><div id="mods"></div></div>
+      </aside>
     </div>`;
 
   $("#nom").addEventListener("input", e => { S.nom = e.target.value; persist(); renderSend(false); });
@@ -182,6 +190,13 @@ function mountView(){
   $$("[data-step=series]").forEach(b => b.onclick = () => { S.series = clamp(S.series + Number(b.dataset.d), 1, 20); $("#series").value = S.series; persist(); renderSummary(); });
   $("#add-custom").onclick = () => { addExercise({ nom:`Exercice ${S.exercices.length + 1}`, ex:settings.exercice.ex, repos:settings.exercice.repos, reps:settings.exercice.reps, type:"timer" }); setTimeout(() => { const n = $$(".exo-name"); n[n.length - 1]?.select(); }, 30); };
   $("#add-lib").onclick = () => openLibrarySheet(false);
+  $("#add-mod")?.addEventListener("click", openModelSheet);
+  $$("[data-tab]").forEach(b => b.onclick = () => {
+    sideTab = b.dataset.tab; store.set("gt_cfg_tab", sideTab);
+    $$("[data-tab]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    $$("[data-pane]").forEach(p => p.hidden = p.dataset.pane !== sideTab);
+    if(sideTab === "modeles") mountSideModels();
+  });
   $("#lib-full")?.addEventListener("click", () => openLibrarySheet(true));
   $("#restart")?.addEventListener("click", async () => {
     if(!await confirmDialog({ title:"Repartir de zéro ?", message:"La séance en cours de préparation sera effacée.", confirm:"Effacer", danger:true })) return;
@@ -190,6 +205,7 @@ function mountView(){
 
   if(matchMedia("(min-width:1100px)").matches){
     sideLib = mountLibrary($("#lib"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter à la séance", countIn });
+    if(sideTab === "modeles") mountSideModels();
   }
   renderExos();
   renderSend();
@@ -432,6 +448,60 @@ function addExercise(exo){
 }
 
 let sideLib = null;
+let sideTab = store.get("gt_cfg_tab", "exos") === "modeles" ? "modeles" : "exos";
+let sideMods = false;
+
+/* ---------- Partir d'un modèle ---------- */
+
+async function mountSideModels(){
+  if(sideMods) return;
+  sideMods = true;
+  const { mountModelPicker } = await import("../modeles-ui.js");
+  mountModelPicker($("#mods"), { onPick: applyModele });
+}
+
+async function openModelSheet(){
+  const s = openSheet({ title:"Partir d'un modèle", wide:true, body:`<div id="mods-sheet"></div>`, foot:`<a class="btn" href="/programmes_admin.html">${icon("settings")}Gérer les modèles</a><button class="btn primary" type="button" data-close>Fermer</button>` });
+  s.el.classList.add("full");
+  const { mountModelPicker } = await import("../modeles-ui.js");
+  mountModelPicker(s.el.querySelector("#mods-sheet"), { onPick: m => { s.close(); applyModele(m); } });
+}
+
+/** Utilise un modèle : remplace la séance (si elle est vide ou si le kiné le choisit) ou ajoute ses exercices à la suite. */
+async function applyModele(m){
+  if(!m) return;
+  const { asProgram } = await import("../modeles.js");
+  const prog = asProgram(m);
+  const exos = prog.exercices.map(e => normExo(e));
+  let how = "remplacer";
+  if(S.exercices.length){
+    how = await new Promise(resolve => {
+      let done = false;
+      const s = openSheet({
+        title:`Utiliser « ${m.titre} »`,
+        body:`<p class="muted">La séance contient déjà ${plural(S.exercices.length, "exercice")}. Que voulez-vous faire ?</p>`,
+        foot:`<button class="btn" type="button" data-h="ajouter">${icon("plus")}Ajouter ses ${plural(exos.length, "exercice")} à la suite</button><button class="btn primary" type="button" data-h="remplacer">${icon("swap")}Remplacer la séance</button>`,
+        onClose: () => { if(!done) resolve(null); }
+      });
+      s.el.querySelectorAll("[data-h]").forEach(b => b.onclick = () => { done = true; resolve(b.dataset.h); s.close(); });
+    });
+    if(!how) return;
+  }
+  if(how === "remplacer"){
+    S.exercices = exos;
+    S.series = prog.series || 1;
+    S.nom = prog.nom;
+    $("#nom").value = S.nom;
+    $("#series").value = S.series;
+  }else{
+    S.exercices.push(...exos);
+    if(!S.nom.trim()){ S.nom = prog.nom; $("#nom").value = S.nom; }
+  }
+  persist(); renderExos(); renderSend(false);
+  sideLib?.then(l => l.refresh());
+  toast(how === "remplacer" ? `Modèle « ${m.titre} » chargé : adaptez-le puis envoyez-le.` : `${plural(exos.length, "exercice")} ajouté${exos.length > 1 ? "s" : ""}.`, { type:"ok" });
+  if(!matchMedia("(min-width:1100px)").matches) $("#exos")?.scrollIntoView({ behavior:"smooth", block:"start" });
+}
 const countIn = e => S.exercices.filter(x => String(x.id) === String(e.id) && (x.source || "CABINET") === e.source).length;
 
 function openLibrarySheet(full){
