@@ -1,0 +1,19 @@
+name: Nettoyage ponctuel des modèles
+on:
+  push:
+    branches: [main]
+    paths: [.github/scripts/nettoyage-modeles.mjs]
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund firebase-admin@12
+      - env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: node .github/scripts/nettoyage-modeles.mjs
