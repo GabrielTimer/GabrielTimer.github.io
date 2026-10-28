@@ -1,0 +1,4291 @@
+{
+ "_info": "Nettoyage de la base HEP : titres en français correct, consignes réécrites quand la traduction d'origine était inutilisable, exercices masqués. Appliqué au chargement de la bibliothèque ; supprimer ce fichier rétablit la version d'origine.",
+ "titres": {
+  "156": "Étirement du tendon d'Achille",
+  "679": "Étirement du tendon d'Achille contre le mur",
+  "66": "Étirement actif-assisté des ischio-jambiers",
+  "157": "Cheville dans 4 directions",
+  "311": "Cheville dans 4 directions avec élastique",
+  "17": "Alphabet avec la cheville",
+  "158": "Cercles de cheville",
+  "159": "Flexion dorsale de cheville",
+  "160": "Flexion dorsale de cheville avec élastique",
+  "161": "Éversion de cheville",
+  "162": "Éversion de cheville avec élastique",
+  "163": "Inversion de cheville",
+  "164": "Inversion de cheville avec élastique",
+  "165": "Flexion plantaire de cheville",
+  "166": "Flexion plantaire de cheville avec élastique",
+  "167": "Pompage de cheville",
+  "565": "Essuie-glace de cheville",
+  "168": "Étirement du tibial antérieur à genoux",
+  "169": "Étirement du tibial antérieur, orteils en arrière",
+  "170": "Étirement du tibial antérieur avec rouleau",
+  "544": "Renforcement de la voûte plantaire",
+  "61": "Étirement des bras en prière",
+  "633": "Étirement des bras, mains jointes",
+  "634": "Inclinaisons latérales, bras au-dessus de la tête",
+  "666": "Bras levés avec rotation du tronc",
+  "545": "Extension du dos, mains derrière le dos",
+  "361": "Marche arrière dans l'eau",
+  "141": "Étreinte (bear hug) avec élastique",
+  "396": "Flexion des coudes (biceps) avec élastique, assis",
+  "399": "Flexion des coudes (biceps) avec élastique, debout",
+  "397": "Flexion des coudes (biceps) avec haltère, assis",
+  "400": "Flexion des coudes (biceps) avec haltère, debout",
+  "547": "Étirement du biceps contre une chaise",
+  "548": "Étirement du biceps contre une chaise ou un encadrement de porte",
+  "455": "Crunch vélo",
+  "566": "Bird dog sur disque d'équilibre",
+  "549": "Exercice de respiration 1",
+  "550": "Exercice de respiration 2",
+  "551": "Exercice de respiration 3",
+  "552": "Exercice de respiration 4",
+  "70": "Pont fessier",
+  "422": "Pont fessier avec élastique",
+  "423": "Pont fessier avec ballon entre les genoux",
+  "446": "Étirement des adducteurs en papillon",
+  "447": "Étirement des adducteurs, allongé",
+  "636": "Massage du mollet",
+  "171": "Montées sur pointes sur une marche",
+  "172": "Montées sur pointes sur une marche, sur une jambe",
+  "82": "Étirement du mollet, assis jambes tendues",
+  "174": "Étirement du mollet debout (étirement du coureur)",
+  "687": "Massage de la cicatrice (canal carpien)",
+  "424": "Dos rond, dos creux (chat-vache)",
+  "175": "Dos rond (étirement du chat)",
+  "176": "Extension cervicale",
+  "567": "Extension cervicale à quatre pattes",
+  "678": "Extension cervicale avec une serviette",
+  "177": "Flexion cervicale",
+  "179": "Rotation cervicale",
+  "568": "Rotation cervicale sur rouleau de mousse",
+  "569": "Inclinaison cervicale, allongé sur le côté",
+  "180": "Inclinaison cervicale",
+  "444": "Ouverture de la poitrine sur rouleau de mousse",
+  "445": "Étirement des pectoraux, mains derrière le dos",
+  "518": "Ouverture de la poitrine avec rotation du tronc",
+  "488": "Rentrée du menton, allongé",
+  "487": "Rentrée du menton avec extension",
+  "681": "Rentrée du menton avec flexion cervicale",
+  "682": "Rentrée du menton, serrage des omoplates et haussement d'épaules",
+  "680": "Rentrée du menton avec serrage des omoplates",
+  "137": "Rentrée du menton, assis",
+  "472": "Rentrée du menton avec élastique",
+  "267": "Clamshell (ouverture du genou), allongé sur le côté",
+  "268": "Clamshell avec élastique, allongé sur le côté",
+  "570": "Clamshell, pieds décollés",
+  "614": "Clamshell avec ballon",
+  "615": "Clamshell avec poids",
+  "381": "Montée d'escaliers",
+  "382": "Montée d'escaliers avec une canne",
+  "476": "Ouverture latérale du thorax",
+  "571": "Posture du cadavre (relaxation allongée)",
+  "9": "Dos rond, dos creux à quatre pattes",
+  "415": "Béquilles : les bases",
+  "416": "Béquilles : sans appui sur la jambe",
+  "417": "Marche avec une seule canne ou béquille",
+  "418": "Béquilles : appui partiel",
+  "181": "Enroulement abdominal (curl-up), phase 1",
+  "182": "Enroulement abdominal (curl-up), phase 2",
+  "183": "Enroulement abdominal (curl-up), phase 3",
+  "425": "Dead bug",
+  "572": "Dead bug, jambes levées",
+  "489": "Respiration profonde avec mouvements des bras",
+  "683": "Étirement en squat profond",
+  "362": "Pédalage en eau profonde (aquatique)",
+  "699": "Désensibilisation de la cicatrice",
+  "184": "Enroulement abdominal en diagonale",
+  "617": "Dips au sol (triceps)",
+  "185": "Genoux à la poitrine",
+  "574": "Genoux à la poitrine avec rentrée du menton",
+  "553": "Rowing latéral avec élastique",
+  "426": "Chien tête en bas",
+  "554": "Bercement en boule (étirement lombaire)",
+  "519": "Froncement des sourcils",
+  "520": "Élévation des sourcils",
+  "453": "Étirement en 4 (FABER), allongé",
+  "620": "Pianotage doigts et pouce",
+  "619": "Étirement des doigts en extension",
+  "618": "Massage des doigts",
+  "55": "Renforcement des doigts avec élastique",
+  "616": "Étirement des doigts (signe scout)",
+  "490": "Étirement des lombricaux de la main",
+  "186": "Étirement des doigts",
+  "637": "Flexion du gros orteil avec élastique",
+  "136": "Mobilisation de la première côte avec une balle",
+  "135": "Mobilisation de la première côte avec une sangle",
+  "521": "Auto-massage au rouleau en diagonale",
+  "491": "Auto-massage du mollet au rouleau",
+  "363": "Marche avant dans l'eau",
+  "376": "Marche avant avec haltères dans l'eau",
+  "696": "Se relever du sol (chenille ou chien tête en bas)",
+  "332": "Se relever du sol",
+  "270": "Étirement du fessier en 4",
+  "187": "Contraction des fessiers",
+  "312": "Ramassage d'objet sur une jambe (golfeur)",
+  "464": "Ramassage d'objet sur une jambe avec poids (golfeur)",
+  "522": "Torsion excentrique avec barre souple (golf elbow)",
+  "451": "Étirement des adducteurs à genoux",
+  "79": "Flexion du genou (ischio-jambiers), sur le ventre",
+  "638": "Talons-fesses",
+  "364": "Marche talons-fesses dans l'eau",
+  "365": "Flexion du genou (ischio-jambiers) dans l'eau",
+  "414": "Flexion du genou (ischio-jambiers), debout",
+  "86": "Contraction des ischio-jambiers",
+  "621": "Étirement des ischio-jambiers, assis jambes tendues",
+  "81": "Étirement des ischio-jambiers, assis, une jambe surélevée",
+  "68": "Étirement des ischio-jambiers avec une sangle, allongé",
+  "492": "Étirement de la main",
+  "555": "Montées sur pointes puis sur talons",
+  "189": "Montées sur pointes, debout",
+  "493": "Glissement du talon avec élastique",
+  "190": "Glissement du talon",
+  "366": "Marche sur les talons dans l'eau",
+  "367": "Abduction et adduction de hanche dans l'eau",
+  "74": "Abduction de hanche, allongé sur le côté",
+  "191": "Abduction de hanche avec élastique, allongé genoux fléchis",
+  "75": "Adduction de hanche, allongé sur le côté",
+  "80": "Extension de hanche, allongé sur le ventre",
+  "494": "Rotation externe de hanche, sur le ventre",
+  "496": "Rotation externe de hanche, assis",
+  "495": "Rotation externe de hanche avec élastique, assis",
+  "368": "Flexion et extension de hanche dans l'eau",
+  "273": "Étirement du psoas en fente",
+  "333": "Étirement du psoas au bord du lit",
+  "497": "Étirement du psoas avec coussin",
+  "639": "Élévation du bassin d'un côté, au sol",
+  "640": "Élévation du bassin d'un côté, sur une marche",
+  "499": "Rotation interne de hanche, sur le ventre",
+  "501": "Rotation interne de hanche, assis",
+  "500": "Rotation interne de hanche avec élastique, assis",
+  "193": "Étirement du triceps et de l'épaule, bras derrière la tête",
+  "475": "Isométrique du biceps",
+  "134": "Isométrique cervical en extension",
+  "133": "Isométrique cervical en flexion",
+  "131": "Isométrique cervical en rotation",
+  "132": "Isométrique cervical en inclinaison",
+  "87": "Abduction isométrique de hanche, allongé genoux fléchis",
+  "88": "Adduction isométrique de hanche, allongé genoux fléchis",
+  "231": "Isométrique d'épaule en extension",
+  "383": "Isométrique d'épaule en rotation externe",
+  "234": "Isométrique d'épaule en flexion",
+  "232": "Isométrique d'épaule en rotation interne",
+  "478": "Isométrique du triceps",
+  "300": "Étirement de la bandelette ilio-tibiale, debout",
+  "76": "Étirement de la bandelette ilio-tibiale, allongé sur le côté",
+  "335": "Étirement de la bandelette ilio-tibiale au bord du lit",
+  "199": "Étirement de la bandelette ilio-tibiale avec une sangle, allongé",
+  "275": "Étirement de la bandelette ilio-tibiale en inclinaison",
+  "274": "Auto-massage de la bandelette ilio-tibiale au rouleau",
+  "641": "Course sur place",
+  "642": "Jumping jack",
+  "575": "Extension du genou sur un rouleau",
+  "395": "Montée latérale sur une marche",
+  "139": "Étirement de l'élévateur de la scapula",
+  "336": "Soulever une charge lourde",
+  "524": "Sourire lèvres fermées",
+  "337": "Sortir du lit en bloc (roulé-boulé)",
+  "667": "Extension du genou assis avec élastique",
+  "443": "Étirement lombaire, allongé",
+  "498": "Étirement du psoas en fente avec rétroversion du bassin",
+  "90": "Fentes",
+  "369": "Marche genoux levés dans l'eau",
+  "470": "Marche sur place",
+  "576": "Étirement du haut du dos sur rouleau de mousse",
+  "602": "Posture de l'enfant adaptée avec coussin",
+  "643": "Jumping jack adapté",
+  "502": "Fente adaptée",
+  "503": "Étirement du pigeon adapté",
+  "428": "Planche adaptée (sur les genoux)",
+  "556": "Pompe adaptée avec protraction (push-up plus)",
+  "577": "Pompe adaptée (sur les genoux)",
+  "668": "Planche latérale adaptée avec descente de hanche",
+  "429": "Planche latérale adaptée",
+  "442": "Auto-massage avec un bâton",
+  "644": "Cercles de tête",
+  "338": "Étirement en rotation du cou avec serviette",
+  "473": "Rotation du cou avec élastique",
+  "684": "Rotation du cou et rotation thoracique opposée",
+  "474": "Inclinaison du cou avec élastique",
+  "63": "Glissement neural, de base",
+  "64": "Glissement neural du nerf médian",
+  "65": "Glissement neural du nerf radial",
+  "67": "Glissement neural du nerf sciatique",
+  "62": "Glissement neural du nerf ulnaire",
+  "525": "Dilatation des narines",
+  "601": "Exercice de l'obturateur interne 1",
+  "603": "Exercice de l'obturateur interne 2",
+  "578": "Ouverture du livre",
+  "622": "Massage de la paume",
+  "101": "Mobilisation de la rotule",
+  "557": "Étirement des pectoraux dans un encadrement de porte",
+  "604": "Horloge pelvienne",
+  "280": "Technique d'énergie musculaire du bassin, jambe gauche levée",
+  "454": "Technique d'énergie musculaire du bassin, jambe droite levée",
+  "607": "Bascule du bassin avec ballon entre les genoux",
+  "605": "Bascule du bassin avec ballon et contraction des fléchisseurs de hanche",
+  "606": "Bascule du bassin avec ballon, hanches et genoux à 90°",
+  "108": "Pendulaire d'épaule en cercles",
+  "484": "Pendulaire d'épaule en cercles avec poids",
+  "110": "Pendulaire d'épaule avant-arrière",
+  "479": "Pendulaire d'épaule avant-arrière avec poids",
+  "109": "Pendulaire d'épaule latéral",
+  "467": "Pendulaire d'épaule latéral avec poids",
+  "685": "Étirement des fibulaires",
+  "394": "Étirement du piriforme en 4",
+  "283": "Étirement du piriforme en pigeon",
+  "284": "Étirement du piriforme, genou vers l'épaule opposée",
+  "504": "Étirement du piriforme, assis",
+  "200": "Planche ventrale",
+  "579": "Planche avec touchers d'épaule",
+  "313": "Planche avec flexion du genou",
+  "314": "Planche avec élévation de jambe",
+  "201": "Massage du fascia plantaire",
+  "645": "Massage de la voûte plantaire avec une balle, assis",
+  "202": "Massage du fascia plantaire au rouleau",
+  "277": "Diagonale PNF du membre inférieur D1",
+  "278": "Diagonale PNF du membre inférieur D2",
+  "203": "Étirement de la capsule postérieure de l'épaule",
+  "686": "Étirement du tibial postérieur",
+  "204": "Posture de l'enfant (étirement en prière)",
+  "205": "Posture de l'enfant avec inclinaisons latérales",
+  "206": "Élévation des bras, sur le ventre",
+  "427": "Flexion du genou avec poids, sur le ventre",
+  "580": "Extension de hanche genou fléchi, sur le ventre",
+  "286": "Étirement du quadriceps et du psoas, sur le ventre",
+  "330": "Élévations des bras en I, T, W, Y sur le ventre",
+  "152": "Élévation des bras en I, sur le ventre",
+  "207": "Extension lombaire sur les bras (McKenzie)",
+  "208": "Appui sur les coudes, sur le ventre (sphinx)",
+  "209": "Élévation bras et jambe du même côté, sur le ventre",
+  "340": "Abduction d'épaule, sur le ventre",
+  "341": "Abduction d'épaule avec poids, sur le ventre",
+  "342": "Extension d'épaule, sur le ventre",
+  "343": "Extension d'épaule avec poids, sur le ventre",
+  "344": "Rotation externe d'épaule, sur le ventre",
+  "345": "Rotation externe d'épaule avec poids, sur le ventre",
+  "346": "Flexion d'épaule, sur le ventre",
+  "347": "Flexion d'épaule avec poids, sur le ventre",
+  "348": "Rotation interne d'épaule, sur le ventre",
+  "339": "Rotation interne d'épaule avec poids, sur le ventre",
+  "210": "Superman sur le ventre",
+  "211": "Nageur sur le ventre",
+  "153": "Élévation des bras en T, sur le ventre",
+  "155": "Élévation des bras en W, sur le ventre",
+  "154": "Élévation des bras en Y, sur le ventre",
+  "514": "Abduction d'épaule avec poulie",
+  "515": "Rotation externe d'épaule avec poulie",
+  "516": "Flexion d'épaule avec poulie",
+  "517": "Rotation interne d'épaule avec poulie",
+  "646": "Respiration lèvres pincées",
+  "558": "Pompe avec protraction des omoplates (push-up plus)",
+  "581": "Pompe",
+  "582": "Étirement du carré des lombes, allongé genoux fléchis",
+  "583": "Étirement du carré des lombes, allongé sur le côté",
+  "85": "Contraction isométrique du quadriceps",
+  "212": "Étirement du quadriceps en fente",
+  "77": "Étirement du quadriceps, sur le ventre",
+  "78": "Étirement du quadriceps, allongé sur le côté",
+  "430": "Étirement du carré des lombes, assis",
+  "584": "Élévation du bras à quatre pattes",
+  "585": "Ouverture de hanche à quatre pattes (fire hydrant)",
+  "586": "Extension de hanche sur disque d'équilibre, à quatre pattes",
+  "290": "Extension de hanche genou fléchi, à quatre pattes",
+  "613": "Bascules latérales du bassin à quatre pattes",
+  "213": "Extension de jambe à quatre pattes",
+  "214": "Ouverture thoracique à quatre pattes",
+  "215": "Élévation bras et jambe du même côté, à quatre pattes",
+  "608": "Pompe triceps à quatre pattes",
+  "218": "Allonger, enrouler, soulever (reach roll lift)",
+  "587": "Pont fessier contre résistance",
+  "450": "Rotation externe contre résistance à 90/90",
+  "526": "Flexion de barre souple",
+  "529": "Stabilisation rythmique avec barre souple 1",
+  "528": "Stabilisation rythmique avec barre souple 2",
+  "220": "Vélo inversé (gainage)",
+  "219": "Battements de jambes tendues, allongé (gainage)",
+  "222": "Étirement des rhomboïdes avec l'avant-bras",
+  "221": "Étirement des rhomboïdes, assis jambes tendues",
+  "223": "Étirement des rhomboïdes à quatre pattes",
+  "370": "Battements de jambes dans l'eau",
+  "371": "Marche jambes tendues dans l'eau",
+  "22": "Équilibre pieds joints (Romberg)",
+  "315": "Équilibre pieds joints, yeux fermés",
+  "318": "Équilibre pieds joints, tête gauche-droite",
+  "316": "Équilibre pieds joints, tête gauche-droite, yeux fermés",
+  "319": "Équilibre pieds joints, tête haut-bas",
+  "317": "Équilibre pieds joints, tête haut-bas, yeux fermés",
+  "320": "Équilibre pieds joints sur surface instable",
+  "527": "Rowing vers le haut avec élastique",
+  "623": "Rowing assis avec élastique",
+  "150": "Rowing à quatre pattes",
+  "331": "Rowing à quatre pattes avec poids",
+  "441": "Étirement des scalènes",
+  "559": "Glissement neural du nerf sciatique avec extension de jambe",
+  "560": "Glissement neural du nerf sciatique, jambe surélevée",
+  "624": "Étirement pour scoliose, allongé sur le côté",
+  "647": "Pompage de cheville, assis",
+  "700": "Essuie-glace de cheville, assis",
+  "648": "Étirement du mollet avec une sangle, assis",
+  "530": "Dos rond, dos creux, assis",
+  "665": "Contraction des ischio-jambiers, assis",
+  "531": "Étirement des ischio-jambiers, assis",
+  "188": "Montées sur talons et pointes, assis",
+  "649": "Glissement du talon avec tapotements, assis",
+  "561": "Abduction de hanche avec élastique, assis",
+  "224": "Extension de hanche avec élastique, assis",
+  "225": "Flexion de hanche, assis",
+  "651": "Flexion de hanche avec lest, assis",
+  "532": "Flexion de hanche avec élastique, assis",
+  "669": "Abduction isométrique de hanche, assis",
+  "677": "Adduction isométrique de hanche, assis (ballon entre les genoux)",
+  "99": "Extension du genou, assis",
+  "100": "Étirement du genou en extension, talon surélevé, assis",
+  "533": "Étirement genou-poitrine, assis",
+  "688": "Traction du genou, assis",
+  "562": "Ouverture des genoux avec élastique, assis (clamshell assis)",
+  "626": "Ouverture de la jambe vers l'extérieur, assis",
+  "625": "Ouverture de la jambe avec élastique, assis",
+  "652": "Extension du genou avec lest, assis",
+  "534": "Bascule du bassin, assis",
+  "456": "Étirement du piriforme en 4, assis",
+  "465": "Étirement du piriforme, genou vers l'épaule opposée, assis",
+  "701": "Étirement du tibial postérieur, assis",
+  "535": "Étirement du carré des lombes, assis",
+  "689": "Étirement des rhomboïdes, assis",
+  "226": "Rowing avec élastique, assis",
+  "627": "Ouverture d'un genou avec élastique, assis",
+  "628": "Ouverture d'une jambe vers l'extérieur, assis",
+  "690": "Étirement du soléaire, assis",
+  "227": "Extension thoracique, assis",
+  "676": "Enroulement du tronc sur une chaise",
+  "228": "Rotation du tronc, assis",
+  "653": "Élévation des bras en T, assis",
+  "147": "Poussée du dentelé antérieur, allongé sur le dos",
+  "142": "Poussée du dentelé antérieur avec élastique",
+  "229": "Poussée du dentelé antérieur avec poids",
+  "398": "Extension du genou sur un rouleau (arc court)",
+  "480": "Élévation du bras dans le plan de l'omoplate, pouce vers le haut",
+  "106": "Abduction d'épaule avec bâton (passive ou aidée)",
+  "125": "Cercles d'épaule",
+  "449": "Cercles du bras sur le côté",
+  "481": "Extension d'épaule active",
+  "588": "Rotation externe d'épaule, allongé sur le côté",
+  "146": "Rotation externe d'épaule avec poids, allongé sur le côté",
+  "536": "Rotation externe d'épaule avec élastique, debout",
+  "233": "Rotation externe d'épaule avec élastique, coudes au corps",
+  "107": "Rotation externe d'épaule avec bâton (passive ou aidée)",
+  "483": "Flexion d'épaule active",
+  "105": "Flexion d'épaule avec bâton (passive ou aidée)",
+  "112": "Abduction horizontale des épaules avec élastique",
+  "589": "Rotation interne d'épaule, allongé sur le côté",
+  "145": "Rotation interne d'épaule avec poids, allongé sur le côté",
+  "144": "Étirement en rotation interne de l'épaule (sleeper stretch)",
+  "537": "Rotation interne d'épaule avec élastique, debout",
+  "654": "Étirement en rotation interne de l'épaule avec un bâton",
+  "143": "Étirement en rotation interne de l'épaule avec une serviette",
+  "120": "Diagonale PNF de l'épaule D1",
+  "121": "Diagonale PNF de l'épaule D1 contre résistance",
+  "122": "Diagonale PNF de l'épaule D2",
+  "123": "Diagonale PNF de l'épaule D2 contre résistance",
+  "482": "Élévation latérale active de l'épaule",
+  "124": "Haussements d'épaules",
+  "471": "Haussements d'épaules avec haltères",
+  "421": "Anges des épaules (snow angels)",
+  "413": "Serrage des omoplates",
+  "148": "Stabilisation de l'épaule à quatre pattes",
+  "322": "Flexion d'épaule passive avec bâton, allongé",
+  "463": "Étirement en fente latérale",
+  "241": "Planche latérale",
+  "592": "Planche latérale avec descente de hanche",
+  "372": "Pas chassés dans l'eau",
+  "505": "Pas chassés avec élastique",
+  "691": "Inclinaison latérale avec poids",
+  "590": "Cercles de hanche, allongé sur le côté",
+  "591": "Ruade de la jambe, allongé sur le côté",
+  "593": "Tapotements du pied, allongé sur le côté",
+  "373": "Squats latéraux dans l'eau",
+  "242": "Genou à la poitrine",
+  "243": "Équilibre sur une jambe",
+  "698": "Équilibre sur une jambe avec atteintes",
+  "71": "Pont fessier sur une jambe",
+  "244": "Montées sur pointes sur une jambe",
+  "93": "Squat sur une jambe",
+  "462": "Équilibre sur une jambe avec rotation du tronc",
+  "461": "Équilibre sur une jambe avec rotation et poids",
+  "245": "Relevés des orteils sur une jambe",
+  "349": "Passage assis-debout",
+  "697": "Marche en fente sur la pointe des pieds",
+  "692": "Fentes sur la pointe des pieds",
+  "440": "Mobilisation des adhérences cicatricielles",
+  "374": "Marche jambes tendues (soldat) dans l'eau",
+  "246": "Étirement du mollet",
+  "609": "Étirement du soléaire avec une sangle",
+  "635": "Respiration carrée",
+  "460": "Squat avec élévation de jambe",
+  "91": "Squats",
+  "538": "Squat devant une chaise avec élastique",
+  "92": "Squat sur une chaise (assis-debout)",
+  "693": "Squat avec montée sur pointes",
+  "459": "Escaliers avec béquilles, sans appui",
+  "458": "Escaliers avec béquilles, appui partiel",
+  "457": "Escaliers avec une canne ou béquille",
+  "385": "Hanche dans 4 directions avec élastique, appui sur une chaise",
+  "384": "Flexion de hanche contre résistance, appui sur une chaise",
+  "264": "Hanche dans 4 directions avec élastique, debout",
+  "694": "Étreinte (bear hug) debout",
+  "466": "Étirement des ischio-jambiers, debout",
+  "96": "Abduction de hanche, debout",
+  "506": "Abduction et adduction de hanche, debout",
+  "386": "Abduction de hanche contre résistance, appui sur une chaise",
+  "387": "Abduction de hanche, appui sur une chaise",
+  "296": "Abduction de hanche avec élastique, debout",
+  "97": "Adduction de hanche, debout",
+  "388": "Adduction de hanche contre résistance, appui sur une chaise",
+  "389": "Adduction de hanche, appui sur une chaise",
+  "297": "Adduction de hanche avec élastique, debout",
+  "507": "Cercles de hanche, debout",
+  "95": "Extension de hanche, debout",
+  "390": "Extension de hanche contre résistance, appui sur une chaise",
+  "391": "Extension de hanche, appui sur une chaise",
+  "298": "Extension de hanche avec élastique, debout",
+  "94": "Flexion de hanche, debout",
+  "508": "Flexion et extension de hanche, debout",
+  "392": "Flexion de hanche contre résistance, appui sur une chaise",
+  "393": "Flexion de hanche, appui sur une chaise",
+  "299": "Flexion de hanche avec élastique, debout",
+  "539": "Étirement de la bandelette ilio-tibiale, bras levé",
+  "439": "Étirement du quadriceps, debout",
+  "540": "Rowing avec élastique, debout",
+  "350": "Abduction d'épaule avec élastique, debout",
+  "351": "Extension d'épaule avec élastique, debout",
+  "113": "Flexion d'épaule avec élastique, debout",
+  "114": "Élévation du bras dans le plan de l'omoplate avec élastique, debout",
+  "655": "Élévation des bras en T, debout",
+  "247": "Inclinaison latérale du tronc, debout",
+  "248": "Extension du tronc, debout",
+  "249": "Rotation du tronc, debout",
+  "403": "Descente de marche (step down)",
+  "404": "Montée de marche (step up)",
+  "485": "Massage transverse du coude (golf elbow)",
+  "486": "Massage transverse du coude (tennis elbow)",
+  "83": "Élévation de la jambe tendue, phase 2",
+  "84": "Élévation de la jambe tendue, phase 3",
+  "72": "Élévation de la jambe tendue, allongé",
+  "73": "Élévation de la jambe tendue en rotation externe",
+  "541": "Étirement de l'infra-épineux avec un bâton",
+  "695": "Étirement en squat sumo",
+  "610": "Bascule du bassin, allongé",
+  "546": "Respiration abdominale, allongé",
+  "611": "Étirement global, allongé",
+  "594": "Abduction de hanche, allongé sur le dos",
+  "595": "Flexion et extension de hanche avec élastique, allongé",
+  "612": "Bascules latérales du bassin, allongé",
+  "672": "Ouverture des jambes, allongé",
+  "671": "Ouverture des jambes avec élastique, allongé",
+  "629": "Flexion cervicale, allongé",
+  "431": "Bascule du bassin, allongé sur le dos",
+  "670": "Flexion d'épaule avec bâton, allongé",
+  "254": "Rotation du tronc, allongé",
+  "255": "Étirement en rotation du tronc, allongé",
+  "596": "Rotation du tronc, allongé pieds écartés",
+  "630": "Rotation du tronc avec ouverture du bras opposé, allongé",
+  "281": "Bascule du bassin sur swiss ball (avant-arrière)",
+  "265": "Pont sur swiss ball",
+  "266": "Pont sur swiss ball avec enroulement",
+  "269": "Crunch sur swiss ball",
+  "573": "Dead bug avec swiss ball",
+  "271": "Cercles de bassin sur swiss ball",
+  "272": "Flexion de hanche sur swiss ball",
+  "305": "Élévations des bras en I, T, W, Y sur swiss ball",
+  "304": "Élévation des bras en I sur swiss ball",
+  "276": "Extension du genou sur swiss ball",
+  "282": "Bascules latérales du bassin sur swiss ball",
+  "279": "Élévation bras et jambe opposés sur swiss ball",
+  "285": "Planche sur swiss ball (en prière)",
+  "287": "Bonne posture assise sur swiss ball",
+  "288": "Planche en pompe sur swiss ball",
+  "289": "Élévation du bras à quatre pattes sur swiss ball",
+  "352": "Roll-out sur swiss ball",
+  "292": "Élévation bras et jambe du même côté sur swiss ball",
+  "702": "Élévation latérale du bras, assis sur swiss ball",
+  "703": "Flexion d'épaule, assis sur swiss ball",
+  "293": "Roll-out d'épaule sur swiss ball",
+  "294": "Planche latérale sur swiss ball",
+  "295": "Pont sur une jambe sur swiss ball",
+  "291": "Pont sur une jambe sur swiss ball avec enroulement",
+  "301": "Pont sur swiss ball, position table",
+  "302": "Flexion de hanche sur swiss ball, position table",
+  "306": "Élévation des bras en T sur swiss ball",
+  "303": "Élévation d'un bras, assis sur swiss ball",
+  "307": "Flexion du bras et de la hanche opposée sur swiss ball",
+  "308": "Flexion du bras et de la hanche du même côté sur swiss ball",
+  "309": "Élévation des bras en W sur swiss ball",
+  "310": "Élévation des bras en Y sur swiss ball",
+  "597": "Étirement du dos sur swiss ball",
+  "563": "Étirement du dos et des abdominaux sur swiss ball",
+  "230": "Glissement sur table : élévation du bras",
+  "235": "Glissement sur table : flexion d'épaule",
+  "238": "Glissement sur table : élévation dans le plan de l'omoplate",
+  "598": "Étirement des ischio-jambiers à genoux",
+  "599": "Planche latérale à genoux avec élévation de jambe",
+  "673": "Étirement des orteils, assis sur les talons",
+  "23": "Équilibre pieds en ligne (tandem)",
+  "324": "Équilibre pieds en ligne, yeux fermés",
+  "325": "Équilibre pieds en ligne, tête gauche-droite",
+  "326": "Équilibre pieds en ligne, tête gauche-droite, yeux fermés",
+  "327": "Équilibre pieds en ligne, tête haut-bas",
+  "328": "Équilibre pieds en ligne, tête haut-bas, yeux fermés",
+  "329": "Équilibre pieds en ligne sur surface instable",
+  "509": "Marche funambule (tandem)",
+  "656": "Massage des tempes",
+  "523": "Torsion excentrique avec barre souple (tennis elbow)",
+  "405": "Extension terminale du genou avec élastique",
+  "149": "Rotation thoracique à quatre pattes",
+  "353": "Étirement en rotation thoracique",
+  "354": "Étirement en inclinaison thoracique",
+  "600": "Enfiler l'aiguille (rotation thoracique)",
+  "674": "Abduction du pouce",
+  "657": "Étirement du pouce en extension",
+  "675": "Flexion du pouce",
+  "631": "Opposition du pouce",
+  "54": "Mobilité du pouce",
+  "510": "Étirement du pouce",
+  "355": "Exercice pour la mâchoire (ATM) 1",
+  "356": "Exercice pour la mâchoire (ATM) 2",
+  "357": "Exercice pour la mâchoire (ATM) 3",
+  "658": "Exercice pour la mâchoire (ATM) 4",
+  "659": "Massage de la mâchoire (ATM)",
+  "660": "Renforcement des fléchisseurs des orteils avec élastique",
+  "250": "Ramassage d'objets avec les orteils",
+  "251": "Relevés des orteils",
+  "252": "Étirement des orteils avec une serviette",
+  "253": "Froisser une serviette avec les orteils",
+  "375": "Marche sur la pointe des pieds dans l'eau",
+  "53": "Serrage d'une serviette",
+  "433": "Torsion de serviette en extension du poignet",
+  "434": "Torsion de serviette en flexion du poignet",
+  "432": "Activation du transverse de l'abdomen",
+  "402": "Extension du coude (triceps) avec élastique, debout",
+  "406": "Extension du coude (triceps) avec poids, à quatre pattes",
+  "401": "Extension du coude (triceps) avec poids, penché en avant",
+  "662": "Extension du coude (triceps) au-dessus de la tête",
+  "661": "Extension du coude (triceps) au-dessus de la tête avec élastique",
+  "448": "Étirement du triceps",
+  "663": "Étirement du triceps avec une sangle",
+  "468": "Auto-massage des points de tension du cou avec une balle",
+  "469": "Auto-massage des points de tension du cou au rouleau",
+  "511": "Rotation du tronc, assis jambes tendues",
+  "256": "Stabilité du tronc avec élévation bras et jambe",
+  "258": "Extension du haut du dos",
+  "664": "Étirement du trapèze supérieur, épaule opposée abaissée",
+  "138": "Étirement du trapèze supérieur",
+  "435": "Chien tête en haut",
+  "452": "Relevé en V, genoux fléchis",
+  "358": "Exercices de Brandt-Daroff (vertiges)",
+  "359": "Mouvements des yeux (vertiges)",
+  "360": "Stabilisation du regard (vertiges)",
+  "259": "Squat avec activation du vaste médial",
+  "436": "Squat avec ballon entre les genoux (vaste médial)",
+  "260": "Marche sur les talons",
+  "261": "Marche sur la pointe des pieds",
+  "334": "Marche avec une canne",
+  "477": "Glissement des bras au mur (wall slide)",
+  "56": "Serrage d'une balle (main et poignet)",
+  "46": "Flexion et extension du poignet, coude fléchi",
+  "512": "Renforcement en extension du poignet avec enrouleur de poids",
+  "437": "Extension du poignet avec élastique",
+  "542": "Extension du poignet avec barre souple",
+  "57": "Extension du poignet avec poids",
+  "60": "Étirement des extenseurs du poignet, coude tendu",
+  "632": "Flexion et extension du poignet, coude tendu",
+  "513": "Renforcement en flexion du poignet avec enrouleur de poids",
+  "262": "Flexion du poignet, coude fléchi",
+  "438": "Flexion du poignet avec élastique",
+  "543": "Flexion du poignet avec barre souple",
+  "58": "Flexion du poignet avec poids",
+  "59": "Étirement des fléchisseurs du poignet, coude tendu",
+  "564": "Inclinaisons radiale et ulnaire du poignet contre la pesanteur",
+  "216": "Inclinaison radiale du poignet avec élastique",
+  "217": "Inclinaison radiale du poignet avec poids",
+  "48": "Pronation et supination avec poids",
+  "263": "Pronation et supination",
+  "47": "Inclinaisons radiale et ulnaire du poignet, coude fléchi",
+  "257": "Inclinaison ulnaire du poignet avec élastique"
+ },
+ "consignes": {
+  "156": [
+   "Tenez-vous à une rampe ou un mur pour l'équilibre.",
+   "Placez l'avant du pied à étirer sur le bord de la marche, talon dans le vide.",
+   "Laissez descendre le talon jusqu'à sentir l'étirement dans le mollet.",
+   "Maintenez 30 secondes."
+  ],
+  "679": [
+   "Posez les orteils contre le mur, talon au sol.",
+   "Avancez doucement le genou vers le mur en gardant le talon au sol.",
+   "Arrêtez quand vous sentez l'étirement derrière la cheville. Maintenez 30 secondes."
+  ],
+  "66": [
+   "Ramenez la cuisse à étirer vers vous, hanche à 90°.",
+   "Tenez l'arrière de la cuisse avec les mains.",
+   "Tendez le genou vers le plafond jusqu'à sentir l'étirement derrière la cuisse.",
+   "Maintenez, puis relâchez."
+  ],
+  "157": [
+   "Talon libre grâce au rouleau sous la cheville.",
+   "Tirez la pointe du pied vers vous, puis poussez-la vers le bas.",
+   "Tournez ensuite la plante du pied vers l'extérieur, puis vers l'intérieur.",
+   "Seule la cheville bouge, la jambe reste immobile."
+  ],
+  "311": [
+   "Faites successivement, contre l'élastique : pied vers le bas, pied vers vous, plante vers l'intérieur, plante vers l'extérieur.",
+   "Gardez la jambe tendue et immobile.",
+   "Contrôlez le retour à chaque répétition."
+  ],
+  "17": [
+   "Gardez la jambe immobile.",
+   "Tracez les lettres de l'alphabet avec le gros orteil, en bougeant uniquement la cheville.",
+   "Faites des lettres aussi grandes que possible sans douleur."
+  ],
+  "158": [
+   "Talon libre grâce au rouleau.",
+   "Faites de grands cercles avec le pied, en bougeant uniquement la cheville.",
+   "Changez de sens après quelques tours."
+  ],
+  "159": [
+   "Gardez la jambe tendue.",
+   "Tirez doucement la pointe du pied vers vous, puis relâchez."
+  ],
+  "160": [
+   "Placez l'élastique sur le dessus du pied et fixez-le à un point solide devant vous.",
+   "Gardez la jambe tendue et tirez la pointe du pied vers vous.",
+   "Revenez lentement en contrôlant l'élastique."
+  ],
+  "161": [
+   "Gardez la jambe immobile.",
+   "Tournez la plante du pied vers l'extérieur, puis revenez au centre.",
+   "Seule la cheville bouge."
+  ],
+  "162": [
+   "Passez l'élastique autour de l'avant du pied et fixez-le à l'intérieur (autour de l'autre pied par exemple).",
+   "Gardez la jambe tendue.",
+   "Tournez la plante du pied vers l'extérieur contre l'élastique, puis revenez lentement."
+  ],
+  "163": [
+   "Gardez la jambe immobile.",
+   "Tournez la plante du pied vers l'intérieur, puis revenez au centre.",
+   "Seule la cheville bouge."
+  ],
+  "164": [
+   "Croisez la cheville à travailler par-dessus l'autre.",
+   "Passez l'élastique autour de l'avant du pied et fixez l'autre bout autour du pied opposé.",
+   "Tournez la plante du pied vers l'intérieur contre l'élastique, en bougeant uniquement la cheville.",
+   "Revenez lentement."
+  ],
+  "165": [
+   "Gardez la jambe tendue.",
+   "Poussez la pointe du pied vers le bas comme sur une pédale, puis remontez."
+  ],
+  "166": [
+   "Tenez les deux extrémités de l'élastique dans les mains.",
+   "Poussez la pointe du pied vers le bas comme sur une pédale.",
+   "Remontez lentement en contrôlant l'élastique."
+  ],
+  "167": [
+   "Tirez la pointe des pieds vers vous, puis poussez-la vers le bas.",
+   "Enchaînez les mouvements à un rythme régulier, seule la cheville bouge."
+  ],
+  "565": [
+   "Gardez la jambe immobile.",
+   "Faites pivoter le pied vers l'extérieur, puis vers l'intérieur, comme un essuie-glace.",
+   "Le mouvement vient uniquement de la cheville."
+  ],
+  "168": [
+   "Asseyez-vous sur les talons, le dessus des pieds à plat sur le sol.",
+   "Placez les mains au sol derrière vous.",
+   "Soulevez doucement les genoux jusqu'à sentir l'étirement sur le devant de la jambe et de la cheville.",
+   "Maintenez."
+  ],
+  "169": [
+   "Placez le pied à étirer derrière vous, dessus des orteils posé au sol.",
+   "Avancez doucement le genou en gardant le pied en pointe.",
+   "Arrêtez quand vous sentez l'étirement sur le devant de la cheville. Maintenez."
+  ],
+  "170": [
+   "Placez le rouleau sous le tibia, juste sous le genou.",
+   "Faites rouler doucement la jambe sur le rouleau jusqu'à la cheville, puis revenez.",
+   "Insistez sur les zones tendues."
+  ],
+  "544": [
+   "Gardez les orteils et le talon en contact avec le sol.",
+   "Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "61": [
+   "Joignez les paumes devant la poitrine, coudes écartés.",
+   "Gardez les paumes collées et descendez doucement les mains jusqu'à sentir l'étirement dans les poignets et les avant-bras.",
+   "Maintenez."
+  ],
+  "633": [
+   "Croisez les doigts devant vous, paumes tournées vers l'extérieur.",
+   "Levez les bras vers le plafond aussi haut que possible sans douleur.",
+   "Maintenez, puis relâchez."
+  ],
+  "634": [
+   "Levez les bras au-dessus de la tête.",
+   "Penchez le tronc d'un côté jusqu'à sentir l'étirement sur le flanc opposé.",
+   "Revenez au centre, puis penchez-vous de l'autre côté."
+  ],
+  "666": [
+   "Levez les bras au-dessus de la tête.",
+   "Tournez le tronc d'un côté en redescendant les bras.",
+   "Revenez au centre et alternez les côtés."
+  ],
+  "545": [
+   "Placez les mains dans le bas du dos, sur la zone douloureuse.",
+   "Penchez-vous doucement vers l'arrière en poussant le bassin vers l'avant avec les mains.",
+   "Revenez, puis recommencez."
+  ],
+  "361": [
+   "Marchez à reculons.",
+   "Posez d'abord la pointe du pied, puis déroulez jusqu'au talon.",
+   "Faites des pas normaux, ni trop grands ni trop petits."
+  ],
+  "141": [
+   "Tenez une extrémité de l'élastique dans chaque main, pouces vers le haut.",
+   "Coudes légèrement pliés, poussez les bras vers l'avant et vers l'intérieur, comme pour serrer quelqu'un dans vos bras.",
+   "Revenez lentement en contrôlant l'élastique.",
+   "Restez sous 3/10 de douleur."
+  ],
+  "396": [
+   "Bloquez l'élastique sous le pied.",
+   "Tenez-le paume vers le haut, coude le long du corps.",
+   "Pliez le coude en tirant sur l'élastique, sans bouger l'épaule.",
+   "Redescendez lentement."
+  ],
+  "399": [
+   "Debout, bloquez l'élastique sous le pied.",
+   "Tenez l'élastique, paume vers le haut, coude tendu le long du corps.",
+   "Pliez le coude en tirant sur l'élastique, sans bouger l'épaule.",
+   "Redescendez lentement en contrôlant."
+  ],
+  "397": [
+   "Tenez l'haltère paume vers le haut, coude le long du corps.",
+   "Pliez le coude pour monter l'haltère vers l'épaule.",
+   "Redescendez lentement."
+  ],
+  "400": [
+   "Tenez l'haltère paume vers le haut, coude le long du corps.",
+   "Pliez le coude pour monter l'haltère, sans bouger l'épaule.",
+   "Redescendez lentement."
+  ],
+  "547": [
+   "Attrapez le bord de la chaise ou de la table derrière vous, bras tendu.",
+   "Avancez ou fléchissez doucement les jambes jusqu'à sentir l'étirement à l'avant du bras.",
+   "Maintenez."
+  ],
+  "548": [
+   "Posez la main à hauteur d'épaule sur l'encadrement, bras tendu derrière vous, pouce vers le bas.",
+   "Tournez doucement le tronc vers l'opposé jusqu'à sentir l'étirement à l'avant du bras.",
+   "Maintenez."
+  ],
+  "455": [
+   "Mains derrière la tête, jambes relevées, genoux à 90°.",
+   "Pédalez avec les jambes.",
+   "En même temps, amenez le coude vers le genou opposé, en alternant."
+  ],
+  "566": [
+   "Dos plat, une main posée sur le disque.",
+   "Tendez la jambe opposée vers l'arrière et le bras libre vers l'avant.",
+   "Maintenez 1 à 2 secondes sans bouger le bassin, puis revenez.",
+   "Changez de côté."
+  ],
+  "549": [
+   "Inspirez par le nez pendant 2 secondes.",
+   "Soufflez lentement, lèvres pincées, pendant 4 secondes."
+  ],
+  "550": [
+   "Inspirez par le nez pendant 2 secondes en ouvrant les bras sur les côtés.",
+   "Soufflez lèvres pincées en ramenant les bras et en tournant légèrement le tronc."
+  ],
+  "551": [
+   "Inspirez par le nez pendant 2 secondes.",
+   "Soufflez lèvres pincées en faisant des cercles avec les coudes."
+  ],
+  "552": [
+   "Inspirez profondément, puis soufflez lentement lèvres pincées.",
+   "En fin d'expiration, rentrez le ventre et maintenez quelques secondes.",
+   "Relâchez et respirez normalement."
+  ],
+  "70": [
+   "Bras le long du corps.",
+   "Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+   "Redescendez doucement."
+  ],
+  "422": [
+   "Placez l'élastique juste au-dessus des genoux.",
+   "Écartez légèrement les genoux contre l'élastique.",
+   "Gardez cette tension et soulevez le bassin.",
+   "Redescendez doucement."
+  ],
+  "423": [
+   "Placez un ballon ou un coussin entre les genoux.",
+   "Serrez le ballon.",
+   "Gardez la pression et soulevez le bassin.",
+   "Redescendez lentement."
+  ],
+  "446": [
+   "Laissez les genoux s'ouvrir sur les côtés.",
+   "Dos droit, appuyez doucement sur les genoux avec les coudes jusqu'à sentir l'étirement à l'intérieur des cuisses.",
+   "Pour étirer davantage, rapprochez les talons du bassin."
+  ],
+  "447": [
+   "Laissez les genoux s'ouvrir doucement sur les côtés.",
+   "Relâchez et respirez calmement.",
+   "Pour étirer davantage, posez les mains sur les cuisses."
+  ],
+  "636": [
+   "Croisez la jambe pour atteindre le mollet.",
+   "Massez le mollet de haut en bas, avec une pression confortable."
+  ],
+  "171": [
+   "Placez l'avant des pieds sur le bord de la marche, talons dans le vide.",
+   "Gardez le corps droit.",
+   "Montez sur la pointe des pieds le plus haut possible.",
+   "Redescendez lentement les talons aussi bas que possible."
+  ],
+  "172": [
+   "Placez l'avant du pied sur le bord de la marche, l'autre pied décollé.",
+   "Gardez le corps droit.",
+   "Montez sur la pointe du pied le plus haut possible.",
+   "Redescendez lentement le talon sous le niveau de la marche."
+  ],
+  "82": [
+   "Vous pouvez plier la jambe qui ne travaille pas.",
+   "Passez une sangle ou une serviette autour de l'avant du pied.",
+   "Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.",
+   "Maintenez."
+  ],
+  "174": [
+   "Mains contre le mur.",
+   "Jambe arrière tendue, talon bien au sol.",
+   "Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.",
+   "Maintenez 30 secondes."
+  ],
+  "687": [
+   "Avec le pouce de l'autre main, massez la cicatrice.",
+   "Faites des cercles, puis des mouvements de haut en bas et de gauche à droite.",
+   "Pression légère au début, plus ferme avec le temps."
+  ],
+  "424": [
+   "Arrondissez le dos vers le plafond en rentrant la tête.",
+   "Creusez ensuite le dos en relevant doucement la tête.",
+   "Alternez lentement."
+  ],
+  "175": [
+   "Rentrez le menton vers la poitrine.",
+   "Arrondissez le dos vers le plafond comme un chat.",
+   "Maintenez 10 à 15 secondes, puis relâchez."
+  ],
+  "176": [
+   "Regardez progressivement vers le plafond en basculant la tête en arrière.",
+   "Revenez lentement en position neutre, sans à-coups."
+  ],
+  "567": [
+   "Regardez le sol, cou dans le prolongement du dos.",
+   "Relevez doucement la tête pour regarder devant vous.",
+   "Revenez lentement."
+  ],
+  "678": [
+   "Tenez les deux extrémités de la serviette devant vous.",
+   "Tirez légèrement vers l'avant et basculez doucement la tête en arrière autour de la serviette.",
+   "Maintenez 5 à 10 secondes, puis revenez."
+  ],
+  "177": [
+   "Amenez lentement le menton vers la poitrine.",
+   "Revenez en position neutre."
+  ],
+  "179": [
+   "Tournez lentement la tête pour regarder par-dessus l'épaule.",
+   "Revenez au centre, puis tournez de l'autre côté."
+  ],
+  "568": [
+   "Tournez doucement la tête d'un côté et maintenez 1 à 2 secondes.",
+   "Revenez au centre, puis tournez de l'autre côté."
+  ],
+  "569": [
+   "Soulevez doucement la tête pour approcher l'oreille du haut de l'épaule.",
+   "Redescendez lentement."
+  ],
+  "180": [
+   "Penchez doucement la tête pour approcher l'oreille de l'épaule, sans monter l'épaule.",
+   "Maintenez 1 à 2 secondes.",
+   "Revenez, puis penchez de l'autre côté."
+  ],
+  "444": [
+   "Tête et bassin posés sur le rouleau.",
+   "Ouvrez les bras sur les côtés, coudes pliés, paumes vers le plafond.",
+   "Laissez les bras descendre vers le sol pour ouvrir la poitrine.",
+   "Respirez calmement."
+  ],
+  "445": [
+   "Croisez les doigts derrière le dos.",
+   "Tendez les bras et tirez-les vers l'arrière en ouvrant la poitrine, jusqu'à sentir l'étirement à l'avant des épaules.",
+   "Maintenez."
+  ],
+  "518": [
+   "Bras tendus devant vous, paumes jointes.",
+   "Ouvrez le bras du dessus vers l'arrière en tournant le tronc, le regard suit la main.",
+   "Gardez les genoux l'un sur l'autre.",
+   "Respirez profondément, puis revenez."
+  ],
+  "488": [
+   "Rentrez le menton comme pour faire un double menton, en appuyant la nuque sur la serviette.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "487": [
+   "Rentrez le menton en reculant la tête, sans la baisser.",
+   "Gardez le menton rentré et basculez doucement la tête en arrière pour regarder vers le haut.",
+   "Revenez lentement."
+  ],
+  "681": [
+   "Rentrez le menton en reculant la tête.",
+   "Gardez le menton rentré et enroulez doucement la tête vers la poitrine.",
+   "Revenez lentement."
+  ],
+  "682": [
+   "Coudes au corps, écartez légèrement les mains pour tendre l'élastique.",
+   "Rentrez le menton.",
+   "Serrez les omoplates vers l'arrière, puis haussez les épaules vers les oreilles.",
+   "Relâchez lentement."
+  ],
+  "680": [
+   "Rentrez le menton en reculant la tête.",
+   "Gardez cette position et serrez les omoplates vers l'arrière, épaules basses.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "137": [
+   "Posez un doigt sur le menton.",
+   "Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "472": [
+   "Tenez les extrémités de l'élastique devant vous.",
+   "Reculez la tête en rentrant le menton contre la résistance de l'élastique.",
+   "Revenez lentement."
+  ],
+  "267": [
+   "Hanches l'une au-dessus de l'autre, pieds joints.",
+   "Écartez le genou du dessus vers le plafond, sans faire basculer le bassin en arrière.",
+   "Redescendez lentement."
+  ],
+  "268": [
+   "Hanches l'une au-dessus de l'autre, pieds joints.",
+   "Écartez le genou du dessus contre l'élastique, sans faire basculer le bassin.",
+   "Redescendez lentement."
+  ],
+  "570": [
+   "Hanches l'une au-dessus de l'autre.",
+   "Décollez les deux pieds du sol en les gardant joints.",
+   "Écartez le genou du dessus sans faire basculer le bassin.",
+   "Redescendez lentement, pieds toujours décollés."
+  ],
+  "614": [
+   "Hanches l'une au-dessus de l'autre.",
+   "Serrez le ballon entre les chevilles.",
+   "Écartez le genou du dessus sans faire basculer le bassin.",
+   "Redescendez lentement."
+  ],
+  "615": [
+   "Posez un poids juste au-dessus du genou du dessus.",
+   "Pieds joints, hanches l'une au-dessus de l'autre.",
+   "Écartez le genou du dessus sans faire basculer le bassin.",
+   "Redescendez lentement."
+  ],
+  "381": [
+   "Pour monter : posez d'abord la bonne jambe sur la marche, puis ramenez l'autre à côté.",
+   "Pour descendre : posez d'abord la jambe opérée ou douloureuse sur la marche du dessous, puis ramenez l'autre.",
+   "Moyen mnémotechnique : « les bons montent au paradis, les mauvais descendent en enfer »."
+  ],
+  "382": [
+   "Pour monter : posez d'abord la bonne jambe sur la marche, puis montez la canne et l'autre jambe ensemble.",
+   "Pour descendre : posez d'abord la canne et la jambe douloureuse sur la marche du dessous, puis la bonne jambe.",
+   "Tenez la rampe si possible."
+  ],
+  "476": [
+   "Posez une main sur chaque mur, à hauteur d'épaule.",
+   "Un pied en avant.",
+   "Penchez-vous vers l'angle jusqu'à sentir l'étirement dans la poitrine.",
+   "Changez la hauteur des mains pour étirer différentes zones."
+  ],
+  "571": [
+   "Bras le long du corps, paumes vers le plafond.",
+   "Allongez la nuque et relâchez la mâchoire.",
+   "Relâchez tout le corps et respirez calmement pendant 1 à 2 minutes."
+  ],
+  "9": [
+   "Regardez le sol, tête dans l'alignement.",
+   "Creusez doucement le dos en relevant la tête.",
+   "Arrondissez ensuite le dos en rentrant la tête.",
+   "Alternez lentement."
+  ],
+  "415": [
+   "Réglez la hauteur : il doit rester 2 à 3 doigts entre le haut de la béquille et l'aisselle.",
+   "Réglez les poignées pour avoir les coudes légèrement pliés (environ 20°).",
+   "Appuyez-vous sur les mains, jamais sur les aisselles.",
+   "Placez les béquilles légèrement écartées pour être stable."
+  ],
+  "416": [
+   "Avancez les deux béquilles devant vous.",
+   "Appuyez-vous sur les mains et avancez la bonne jambe entre les béquilles.",
+   "La jambe opérée reste décollée du sol.",
+   "Recommencez."
+  ],
+  "417": [
+   "Tenez-vous droit, la canne du côté opposé à la jambe blessée.",
+   "Avancez la canne en même temps que la jambe blessée.",
+   "Faites ensuite le pas avec la bonne jambe, sans trop vous appuyer sur la canne."
+  ],
+  "418": [
+   "Avancez les deux béquilles.",
+   "Avancez la jambe opérée entre les béquilles, en ne posant que la partie du poids autorisée par votre chirurgien.",
+   "Répartissez le reste du poids sur les mains.",
+   "Avancez ensuite la bonne jambe."
+  ],
+  "181": [
+   "Rentrez le menton.",
+   "Décollez doucement la tête et le haut des omoplates du sol.",
+   "Redescendez lentement."
+  ],
+  "182": [
+   "Rentrez le menton, cou dans l'alignement.",
+   "Enroulez le haut du dos pour décoller les omoplates, environ 30°.",
+   "Redescendez lentement."
+  ],
+  "183": [
+   "Gardez le cou détendu, sans tirer sur la tête avec les mains.",
+   "Enroulez le haut du dos vers les genoux.",
+   "Redescendez lentement."
+  ],
+  "425": [
+   "Plaquez le bas du dos au sol.",
+   "Tendez lentement un bras derrière la tête et la jambe opposée vers l'avant.",
+   "Gardez le dos plaqué tout au long du mouvement.",
+   "Revenez et changez de côté."
+  ],
+  "572": [
+   "Gardez le bas du dos plaqué au sol.",
+   "Tendez une jambe vers l'avant en amenant le bras opposé derrière la tête.",
+   "Revenez et changez de côté."
+  ],
+  "489": [
+   "Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.",
+   "Soufflez lentement par la bouche en redescendant les bras."
+  ],
+  "683": [
+   "Pieds écartés largeur d'épaules.",
+   "Descendez dans un squat profond en gardant les talons au sol.",
+   "Maintenez en respirant, puis remontez doucement."
+  ],
+  "362": [
+   "Corps vertical, sans pencher en avant ou en arrière.",
+   "Pédalez avec les jambes comme sur un vélo.",
+   "Gardez un rythme régulier."
+  ],
+  "699": [
+   "Frottez doucement la cicatrice (bien cicatrisée) ou la zone sensible avec différentes textures.",
+   "Commencez par les plus douces (coton, tissu) puis passez à des textures plus rugueuses (serviette, ongles).",
+   "Arrêtez si la sensation devient désagréable."
+  ],
+  "184": [
+   "Rentrez le menton.",
+   "Enroulez le haut du dos en tendant les mains vers l'extérieur d'un genou.",
+   "Redescendez lentement, puis faites l'autre côté."
+  ],
+  "617": [
+   "Doigts orientés vers les pieds.",
+   "Tendez les bras pour décoller les fesses du sol.",
+   "Pliez les coudes pour redescendre lentement, sans toucher le sol."
+  ],
+  "185": [
+   "Ramenez les genoux vers la poitrine.",
+   "Tenez-les derrière les cuisses et tirez doucement.",
+   "Maintenez l'étirement en respirant calmement."
+  ],
+  "574": [
+   "Ramenez les genoux vers la poitrine en les tenant.",
+   "Rentrez légèrement le menton, nuque allongée sur le sol.",
+   "Maintenez en respirant calmement."
+  ],
+  "553": [
+   "Tenez l'élastique, coude au corps, pouce vers le haut.",
+   "Tirez le coude vers l'arrière en serrant l'omoplate.",
+   "Revenez lentement."
+  ],
+  "426": [
+   "Rentrez les orteils et tendez les jambes en poussant les fesses vers le plafond.",
+   "Poussez avec les mains, dos long, talons vers le sol.",
+   "Maintenez 30 secondes."
+  ],
+  "554": [
+   "Ramenez les genoux vers la poitrine et tenez-les.",
+   "Bercez-vous doucement d'avant en arrière, puis de gauche à droite.",
+   "Maintenez 10 à 20 secondes."
+  ],
+  "519": [
+   "Froncez les sourcils comme si vous étiez contrarié.",
+   "Aidez le côté faible avec un doigt si besoin.",
+   "Relâchez."
+  ],
+  "520": [
+   "Levez les sourcils comme si vous étiez surpris.",
+   "Aidez le côté faible avec un doigt si besoin.",
+   "Relâchez."
+  ],
+  "453": [
+   "Pliez la jambe à étirer et posez la cheville juste au-dessus du genou opposé (forme d'un 4).",
+   "Laissez le genou plié descendre vers le sol.",
+   "Maintenez l'étirement."
+  ],
+  "620": [
+   "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+   "Rouvrez bien la main entre chaque touche."
+  ],
+  "619": [
+   "Avec l'autre main, ramenez doucement les doigts vers l'arrière.",
+   "Arrêtez à un étirement confortable et maintenez."
+  ],
+  "618": [
+   "Massez chaque doigt de l'extrémité vers la paume.",
+   "Pression douce et confortable."
+  ],
+  "55": [
+   "Placez l'élastique autour de l'extrémité des doigts et du pouce.",
+   "Écartez les doigts contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "616": [
+   "Avec le pouce, maintenez le petit doigt plié contre la paume.",
+   "Gardez les trois autres doigts tendus (signe scout).",
+   "Maintenez l'étirement."
+  ],
+  "490": [
+   "Avec l'autre main, écartez doucement deux doigts l'un de l'autre.",
+   "Maintenez, puis passez aux doigts suivants."
+  ],
+  "186": [
+   "Pliez les doigts au niveau des articulations du milieu, en gardant les jointures de la main droites, puis redressez.",
+   "Pliez ensuite les dernières phalanges, puis redressez.",
+   "Aidez-vous de l'autre main pour bloquer les autres articulations si besoin."
+  ],
+  "637": [
+   "Tenez l'élastique tendu.",
+   "Pliez le gros orteil vers le bas contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "136": [
+   "Placez la balle au creux entre la base du cou et le haut de l'épaule, contre un mur.",
+   "Inclinez légèrement la tête de ce côté et inspirez profondément.",
+   "Appuyez sur la balle en soufflant.",
+   "Relâchez."
+  ],
+  "135": [
+   "Tenez la sangle derrière vous avec la main du même côté et devant vous avec l'autre main (comme une ceinture de sécurité).",
+   "Inclinez légèrement la tête vers ce côté et inspirez profondément.",
+   "Tirez la sangle vers le bas en soufflant.",
+   "Relâchez."
+  ],
+  "521": [
+   "Croisez les bras sur la poitrine.",
+   "Décollez les fesses du sol.",
+   "Roulez doucement de haut en bas sur la zone tendue."
+  ],
+  "491": [
+   "Mains au sol derrière vous.",
+   "Décollez les fesses et faites rouler le mollet d'avant en arrière sur le rouleau.",
+   "Croisez l'autre jambe dessus pour augmenter la pression."
+  ],
+  "363": [
+   "Marchez vers l'avant.",
+   "Attaquez par le talon et déroulez jusqu'aux orteils.",
+   "Faites des pas normaux."
+  ],
+  "376": [
+   "Marchez vers l'avant en déroulant le pied du talon aux orteils.",
+   "Bras tendus, balancez-les avec les haltères : bras opposé à la jambe qui avance."
+  ],
+  "696": [
+   "Rentrez les orteils et tendez les jambes en poussant les fesses vers le haut (chien tête en bas).",
+   "Marchez les mains vers les pieds.",
+   "Déroulez le dos pour vous redresser debout."
+  ],
+  "332": [
+   "Tournez-vous sur le côté pour vous mettre à quatre pattes.",
+   "Avancez la bonne jambe et posez le pied au sol (un genou à terre).",
+   "Posez les mains sur le genou avant et poussez pour vous redresser.",
+   "Ramenez l'autre jambe pour vous mettre debout."
+  ],
+  "270": [
+   "Posez la cheville de la jambe à étirer sur le genou opposé (forme d'un 4).",
+   "Dos droit, penchez-vous doucement vers l'avant jusqu'à sentir l'étirement dans la fesse.",
+   "Maintenez 30 secondes."
+  ],
+  "187": [
+   "Serrez fort les fessiers.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "312": [
+   "Dos droit.",
+   "Penchez-vous vers l'avant depuis les hanches en tendant la jambe libre vers l'arrière (comme un golfeur qui ramasse sa balle).",
+   "Allez toucher le sol ou un objet bas avec la main.",
+   "Maintenez 1 à 2 secondes et revenez lentement."
+  ],
+  "464": [
+   "Dos droit.",
+   "Penchez-vous vers l'avant depuis la hanche en tendant la jambe libre vers l'arrière.",
+   "Descendez le poids vers le sol, bassin bien de face.",
+   "Remontez lentement."
+  ],
+  "522": [
+   "Tenez la barre verticalement avec la main du côté à travailler, poignet plié vers vous.",
+   "Attrapez l'autre extrémité avec l'autre main et tordez la barre.",
+   "Tendez les bras devant vous en gardant la torsion.",
+   "Laissez lentement la barre se détordre avec la main du côté travaillé."
+  ],
+  "451": [
+   "Tendez sur le côté la jambe à étirer, pied à plat.",
+   "Déplacez doucement le bassin vers l'autre côté jusqu'à sentir l'étirement à l'intérieur de la cuisse.",
+   "Maintenez 30 secondes."
+  ],
+  "79": [
+   "Pliez le genou pour amener le talon vers la fesse.",
+   "Redescendez lentement."
+  ],
+  "638": [
+   "Pliez le genou pour amener le talon vers la fesse.",
+   "Reposez le pied et alternez avec l'autre jambe."
+  ],
+  "364": [
+   "Marchez en gardant le tronc droit.",
+   "À chaque pas, amenez le talon vers la fesse.",
+   "Reposez le pied et continuez."
+  ],
+  "365": [
+   "Tronc droit, sans creuser le dos.",
+   "Pliez le genou pour amener le talon vers la fesse, cuisse immobile.",
+   "Redescendez lentement."
+  ],
+  "414": [
+   "Tronc droit, cuisse immobile.",
+   "Pliez le genou pour amener le talon vers la fesse.",
+   "Redescendez lentement."
+  ],
+  "86": [
+   "Enfoncez le talon dans le sol ou le lit, comme pour le tirer vers vous.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "621": [
+   "Dos droit.",
+   "Penchez-vous en avant depuis les hanches, sans arrondir le dos, jusqu'à sentir l'étirement derrière les cuisses.",
+   "Maintenez."
+  ],
+  "81": [
+   "Gardez le dos droit et la jambe tendue.",
+   "Tirez la pointe du pied vers vous.",
+   "Penchez-vous en avant depuis les hanches jusqu'à sentir l'étirement derrière la cuisse.",
+   "Maintenez."
+  ],
+  "68": [
+   "Pliez l'autre jambe, pied à plat, pour protéger le dos.",
+   "Montez la jambe tendue en tirant doucement sur la sangle.",
+   "Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes."
+  ],
+  "492": [
+   "Ouvrez la main en écartant et tendant bien les doigts.",
+   "Fermez ensuite le poing.",
+   "Maintenez chaque position 3 à 5 secondes."
+  ],
+  "555": [
+   "Montez sur la pointe des pieds.",
+   "Redescendez, puis basculez sur les talons en relevant l'avant des pieds.",
+   "Alternez sans pousser les fesses en arrière."
+  ],
+  "189": [
+   "Pieds écartés largeur d'épaules.",
+   "Montez sur la pointe des pieds le plus haut possible.",
+   "Redescendez lentement."
+  ],
+  "493": [
+   "Pliez le genou en faisant glisser le talon vers la fesse.",
+   "Aidez-vous de l'élastique pour aller un peu plus loin, sans douleur.",
+   "Revenez lentement jambe tendue."
+  ],
+  "190": [
+   "Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.",
+   "Maintenez 1 à 2 secondes.",
+   "Revenez lentement jambe tendue."
+  ],
+  "366": [
+   "Montez sur les talons, pointe des pieds relevée.",
+   "Marchez sur les talons, corps droit ou légèrement penché en avant."
+  ],
+  "367": [
+   "Tronc droit et immobile, genou tendu, pied vers l'avant.",
+   "Écartez la jambe sur le côté.",
+   "Ramenez-la en la croisant devant l'autre jambe.",
+   "Alternez lentement."
+  ],
+  "74": [
+   "Pliez la jambe du dessous pour être stable.",
+   "Gardez le corps aligné et le bassin bien de profil.",
+   "Tirez la pointe du pied vers vous, genou tendu.",
+   "Montez la jambe d'environ 30 cm en menant avec le talon, puis redescendez lentement."
+  ],
+  "191": [
+   "Pieds à plat au sol.",
+   "Écartez les deux genoux contre l'élastique.",
+   "Ramenez-les lentement."
+  ],
+  "75": [
+   "Pliez la jambe du dessus et posez le pied devant ou derrière l'autre jambe.",
+   "Tirez la pointe du pied vers vous, genou tendu.",
+   "Montez la jambe du dessous de 10 à 15 cm, puis redescendez lentement."
+  ],
+  "80": [
+   "Tirez la pointe du pied vers vous, genou tendu.",
+   "Serrez la fesse et montez la jambe d'environ 10 cm, sans creuser le dos.",
+   "Redescendez lentement."
+  ],
+  "494": [
+   "Laissez le pied tomber vers l'intérieur, au-dessus de l'autre jambe, sans décoller le bassin.",
+   "Arrêtez quand vous sentez une tension dans la hanche, puis revenez."
+  ],
+  "496": [
+   "Genou immobile, amenez le pied vers l'intérieur, devant l'autre jambe.",
+   "Maintenez 1 à 2 secondes.",
+   "Revenez lentement."
+  ],
+  "495": [
+   "Genou immobile, amenez le pied vers l'intérieur contre l'élastique.",
+   "Revenez lentement en contrôlant."
+  ],
+  "368": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied relevée.",
+   "Lancez la jambe vers l'avant sans vous pencher en arrière.",
+   "Ramenez-la vers l'arrière sans vous pencher en avant ni creuser le dos."
+  ],
+  "273": [
+   "Mettez un coussin sous le genou au sol si besoin.",
+   "Le pied avant est à plat, genou à 90°.",
+   "Dos droit, rentrez le bassin (basculez le coccyx vers l'avant).",
+   "Avancez doucement le bassin jusqu'à sentir l'étirement à l'avant de la hanche arrière.",
+   "Maintenez 30 secondes."
+  ],
+  "333": [
+   "Ramenez le genou opposé vers la poitrine et tenez-le.",
+   "Laissez la jambe à étirer pendre au bord du lit.",
+   "Restez prudent pour ne pas glisser.",
+   "Maintenez 30 secondes quand vous sentez l'étirement à l'avant de la hanche."
+  ],
+  "497": [
+   "Ramenez un genou vers la poitrine et tenez-le.",
+   "Laissez l'autre cuisse descendre vers le sol en serrant la fesse.",
+   "Maintenez l'étirement à l'avant de la hanche."
+  ],
+  "639": [
+   "Genou d'appui tendu.",
+   "Montez la hanche du côté libre, puis laissez-la redescendre lentement.",
+   "Le mouvement vient de la hanche d'appui."
+  ],
+  "640": [
+   "L'autre pied dans le vide, tenez-vous à une rampe.",
+   "Genou d'appui tendu, laissez descendre le bassin du côté libre.",
+   "Remontez le bassin en contractant la hanche d'appui."
+  ],
+  "499": [
+   "Laissez le pied partir vers l'extérieur, sans décoller le bassin.",
+   "Arrêtez quand vous sentez une tension dans la hanche, puis revenez."
+  ],
+  "501": [
+   "Genou immobile, écartez le pied vers l'extérieur.",
+   "Revenez lentement."
+  ],
+  "500": [
+   "Genou immobile, écartez le pied vers l'extérieur contre l'élastique.",
+   "Revenez lentement en contrôlant."
+  ],
+  "193": [
+   "Levez le bras à étirer, puis pliez le coude pour amener la main dans le dos.",
+   "Avec l'autre main, poussez doucement le coude vers l'arrière.",
+   "Maintenez quand vous sentez l'étirement à l'arrière du bras."
+  ],
+  "475": [
+   "Coude plié à 90°, collé au corps, paume vers le haut.",
+   "Posez l'autre main sur le poignet.",
+   "Essayez de plier le coude contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "134": [
+   "Posez une main derrière la tête.",
+   "Poussez la tête en arrière contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "133": [
+   "Posez la main sur le front.",
+   "Poussez la tête vers l'avant contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "131": [
+   "Posez la main sur le côté de la tête, à hauteur de la tempe.",
+   "Essayez de tourner la tête vers la main, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis faites l'autre côté."
+  ],
+  "132": [
+   "Posez la main sur le côté de la tête, au-dessus de l'oreille.",
+   "Essayez de pencher la tête vers la main, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis faites l'autre côté."
+  ],
+  "87": [
+   "Serrez une sangle ou une ceinture juste au-dessus des genoux.",
+   "Poussez les genoux vers l'extérieur contre la sangle, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "88": [
+   "Pieds à plat.",
+   "Serrez le coussin ou le ballon entre les genoux.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "231": [
+   "Coude plié à 90°, collé au corps.",
+   "Poussez le coude vers l'arrière contre le dossier ou le mur, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "383": [
+   "Coude plié à 90°, collé au corps, pouce vers le haut.",
+   "Posez l'autre main sur l'extérieur du poignet.",
+   "Poussez le poignet vers l'extérieur contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "234": [
+   "Coude plié à 90°, collé au corps, poing fermé.",
+   "Posez l'autre main sur le poing.",
+   "Poussez vers l'avant et le haut contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "232": [
+   "Coude plié à 90°, collé au corps, pouce vers le haut.",
+   "Posez l'autre main sur l'intérieur du poignet.",
+   "Poussez le poignet vers le ventre contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "478": [
+   "Coude plié à 90°, collé au corps.",
+   "Posez l'autre main sous le poignet.",
+   "Poussez vers le bas, comme pour tendre le coude, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "300": [
+   "Croisez la jambe à étirer derrière l'autre.",
+   "Penchez le tronc vers le côté opposé, en poussant la hanche vers l'extérieur.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la cuisse."
+  ],
+  "76": [
+   "Tirez la pointe du pied vers vous, genou tendu.",
+   "Montez légèrement la jambe, amenez-la derrière vous.",
+   "Laissez-la descendre doucement vers le sol jusqu'à sentir l'étirement sur l'extérieur de la cuisse."
+  ],
+  "335": [
+   "Genou tendu, hanches bien de profil.",
+   "Amenez la jambe derrière vous et laissez-la descendre au bord du lit.",
+   "Restez prudent pour ne pas tomber.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la cuisse."
+  ],
+  "199": [
+   "Montez la jambe tendue en tenant la sangle.",
+   "Amenez-la doucement en travers du corps, vers le côté opposé.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la cuisse."
+  ],
+  "275": [
+   "Croisez la jambe à étirer derrière l'autre.",
+   "Poussez la hanche vers le mur.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la cuisse."
+  ],
+  "274": [
+   "Appuyez-vous sur l'avant-bras et l'autre pied.",
+   "Faites rouler l'extérieur de la cuisse sur le rouleau, de la hanche au genou.",
+   "Insistez sur les zones tendues, sans douleur forte."
+  ],
+  "641": [
+   "Courez sur place en montant les genoux.",
+   "Gardez un rythme régulier."
+  ],
+  "642": [
+   "Sautez en écartant les jambes et en levant les bras au-dessus de la tête.",
+   "Sautez de nouveau pour revenir pieds joints, bras le long du corps.",
+   "Enchaînez."
+  ],
+  "575": [
+   "Laissez le genou se relâcher et descendre vers le sol avec son propre poids.",
+   "Restez 1 à 2 minutes."
+  ],
+  "395": [
+   "La jambe à travailler du côté de la marche.",
+   "Montez latéralement sur la marche, puis redescendez en contrôlant."
+  ],
+  "139": [
+   "Tournez la tête vers l'aisselle opposée (regardez vers le bas, en diagonale).",
+   "Posez la main sur l'arrière de la tête et tirez doucement vers le bas.",
+   "Maintenez quand vous sentez l'étirement à l'arrière du cou, côté opposé."
+  ],
+  "336": [
+   "Pieds écartés largeur de bassin, au plus près de la charge.",
+   "Pliez les genoux et les hanches en gardant le dos droit.",
+   "Prenez la charge près du corps.",
+   "Poussez sur les jambes pour vous relever, sans tourner le dos."
+  ],
+  "524": [
+   "Souriez largement en montrant les dents.",
+   "Aidez le côté faible en tirant le coin de la lèvre vers le haut et l'extérieur avec un doigt si besoin.",
+   "Relâchez."
+  ],
+  "337": [
+   "Pliez les genoux.",
+   "Tournez-vous sur le côté en bloc, épaules et bassin ensemble, sans vous tordre.",
+   "Posez la main du dessus sur le lit devant vous.",
+   "Laissez descendre les jambes hors du lit en poussant sur les bras pour vous asseoir."
+  ],
+  "667": [
+   "Fixez l'autre extrémité de l'élastique au pied de la chaise.",
+   "Tendez le genou contre l'élastique.",
+   "Redescendez lentement."
+  ],
+  "443": [
+   "Pliez le genou du côté à étirer, l'autre jambe tendue.",
+   "Avec la main opposée, amenez doucement le genou plié en travers du corps, vers le sol.",
+   "Gardez les épaules au sol.",
+   "Maintenez quand vous sentez l'étirement dans le bas du dos et la fesse."
+  ],
+  "498": [
+   "Le genou au sol est du côté à étirer.",
+   "Rentrez le bassin (basculez le coccyx vers l'avant).",
+   "Avancez doucement le bassin jusqu'à sentir l'étirement à l'avant de la hanche.",
+   "Maintenez."
+  ],
+  "90": [
+   "Dos droit, genou avant au-dessus de la cheville.",
+   "Descendez le genou arrière vers le sol.",
+   "Remontez lentement en poussant sur le pied avant."
+  ],
+  "369": [
+   "Marchez en montant chaque genou à environ 90°.",
+   "Alternez les jambes à un rythme régulier."
+  ],
+  "470": [
+   "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+   "Alternez les jambes comme si vous marchiez sur place."
+  ],
+  "576": [
+   "Croisez les bras sur la poitrine ou soutenez la tête avec les mains.",
+   "Laissez le haut du dos s'étendre en arrière sur le rouleau.",
+   "Déplacez le rouleau de quelques centimètres pour étirer une autre zone."
+  ],
+  "602": [
+   "Asseyez-vous sur les talons, genoux écartés.",
+   "Penchez-vous en avant et posez le front et les bras sur le coussin.",
+   "Relâchez et respirez calmement."
+  ],
+  "643": [
+   "Écartez une jambe sur le côté en montant les bras.",
+   "Revenez en ramenant le pied et en baissant les bras.",
+   "Alternez les jambes, sans sauter."
+  ],
+  "502": [
+   "Un pied devant, un pied derrière, pointes vers l'avant.",
+   "Dos droit, genou avant au-dessus de la cheville.",
+   "Descendez le genou arrière vers le coussin, sans le poser.",
+   "Remontez doucement."
+  ],
+  "503": [
+   "Pliez une jambe devant vous, l'autre tendue ou pliée vers l'arrière.",
+   "Dos droit, penchez-vous doucement vers l'avant jusqu'à sentir l'étirement dans la fesse de la jambe avant.",
+   "Restez sous 3/10 de douleur."
+  ],
+  "428": [
+   "Posez les avant-bras au sol, coudes sous les épaules.",
+   "Reculez les genoux pour aligner dos et cuisses.",
+   "Serrez les fessiers et le ventre, dos plat.",
+   "Maintenez en respirant."
+  ],
+  "556": [
+   "Bras tendus, laissez descendre la poitrine entre les omoplates.",
+   "Poussez ensuite fort dans le sol pour arrondir le haut du dos et écarter les omoplates.",
+   "Revenez lentement."
+  ],
+  "577": [
+   "Avancez les mains pour que le corps forme une ligne des genoux aux épaules.",
+   "Pliez les coudes pour descendre la poitrine vers le sol, dos droit.",
+   "Remontez en poussant sur les mains."
+  ],
+  "668": [
+   "Coude sous l'épaule, genoux pliés.",
+   "Montez le bassin pour aligner épaules, hanches et genoux.",
+   "Descendez doucement le bassin vers le sol, puis remontez."
+  ],
+  "429": [
+   "Coude sous l'épaule.",
+   "Montez le bassin pour aligner épaules, hanches et genoux.",
+   "Serrez les fessiers et maintenez 15 à 30 secondes."
+  ],
+  "442": [
+   "Utilisez un bâton de massage ou un rouleau à pâtisserie.",
+   "Roulez le long du muscle avec une pression ferme mais supportable.",
+   "Continuez 2 à 3 minutes."
+  ],
+  "644": [
+   "Faites lentement de grands cercles avec la tête.",
+   "Changez de sens après quelques tours.",
+   "Restez dans une amplitude sans douleur."
+  ],
+  "338": [
+   "Croisez la serviette devant vous et tenez une extrémité dans chaque main.",
+   "Tirez doucement la serviette vers le bas pour soutenir le cou.",
+   "Tournez lentement la tête d'un côté, puis de l'autre."
+  ],
+  "473": [
+   "Tenez les extrémités de l'élastique sur le côté.",
+   "Tournez lentement la tête vers le côté opposé contre l'élastique.",
+   "Revenez, puis faites l'autre côté."
+  ],
+  "684": [
+   "Tournez la tête d'un côté en tournant le tronc de l'autre côté.",
+   "Revenez au centre et inversez."
+  ],
+  "474": [
+   "Tenez l'élastique du côté opposé à l'inclinaison.",
+   "Penchez doucement la tête vers l'épaule contre l'élastique.",
+   "Revenez, puis faites l'autre côté."
+  ],
+  "63": [
+   "Écartez le bras sur le côté à hauteur d'épaule, coude plié à 90°, paume vers la tête.",
+   "Tendez le coude et le poignet tout en inclinant la tête vers ce bras.",
+   "Revenez en pliant le coude et en inclinant la tête de l'autre côté.",
+   "Mouvements doux, sans provoquer de fourmillements durables."
+  ],
+  "64": [
+   "Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.",
+   "Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.",
+   "Revenez en baissant le poignet et en inclinant la tête vers le bras.",
+   "Mouvements doux, sans provoquer de fourmillements durables."
+  ],
+  "65": [
+   "Bras le long du corps, légèrement en arrière, paume vers l'arrière.",
+   "Fermez le poing et pliez le poignet vers le bas.",
+   "Inclinez la tête de l'autre côté.",
+   "Revenez, puis recommencez doucement."
+  ],
+  "67": [
+   "Tenez l'arrière d'une cuisse, hanche à 90°.",
+   "Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.",
+   "Pliez de nouveau le genou en relâchant le pied.",
+   "Mouvements doux, sans provoquer de douleur ni de fourmillements durables."
+  ],
+  "62": [
+   "Formez un rond avec le pouce et l'index (signe OK).",
+   "Écartez le bras sur le côté, coude plié.",
+   "Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.",
+   "Revenez doucement, sans provoquer de fourmillements durables."
+  ],
+  "525": [
+   "Écartez les narines le plus possible.",
+   "Aidez le côté faible avec un doigt si besoin.",
+   "Relâchez."
+  ],
+  "601": [
+   "Serrez le ballon entre les genoux.",
+   "En même temps, poussez les pieds vers l'extérieur sans les faire bouger.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "603": [
+   "Pieds vers le plafond.",
+   "Écartez les pieds l'un de l'autre contre l'élastique, genoux serrés.",
+   "Revenez lentement."
+  ],
+  "578": [
+   "Bras tendus devant vous, mains jointes.",
+   "Ouvrez le bras du dessus vers l'arrière comme un livre, en suivant la main du regard.",
+   "Gardez les genoux joints.",
+   "Revenez lentement."
+  ],
+  "622": [
+   "Avec le pouce de l'autre main, faites de petits cercles dans la paume.",
+   "Pression légère, en couvrant toute la paume."
+  ],
+  "101": [
+   "Cuisse bien relâchée.",
+   "Avec les doigts, poussez doucement la rotule vers le haut et vers le bas, puis vers la gauche et vers la droite."
+  ],
+  "557": [
+   "Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.",
+   "Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.",
+   "Maintenez."
+  ],
+  "604": [
+   "Imaginez une horloge sur le ventre : 12 h au nombril, 6 h au pubis.",
+   "Basculez doucement le bassin vers 12 h, puis vers 6 h.",
+   "Puis vers 3 h et 9 h, et enfin faites le tour du cadran."
+  ],
+  "280": [
+   "Ramenez le genou gauche vers la poitrine (hanche à 90°) et posez la main dessus.",
+   "Poussez le genou gauche contre la main et, en même temps, la jambe droite contre la serviette.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "454": [
+   "Ramenez le genou droit vers la poitrine (hanche à 90°) et posez la main dessus.",
+   "Poussez le genou droit contre la main et, en même temps, la jambe gauche contre la serviette.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "607": [
+   "Plaquez le bas du dos au sol en basculant le bassin.",
+   "Serrez le ballon en même temps.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "605": [
+   "Plaquez le bas du dos au sol et serrez le ballon.",
+   "Montez les genoux pour avoir hanches et genoux à 90°.",
+   "Posez les mains sur les cuisses et poussez les cuisses contre les mains sans bouger.",
+   "Maintenez, puis relâchez."
+  ],
+  "606": [
+   "Plaquez le bas du dos au sol en basculant le bassin.",
+   "Serrez le ballon entre les genoux en gardant cette position.",
+   "Maintenez, puis relâchez."
+  ],
+  "108": [
+   "Laissez pendre le bras douloureux, complètement détendu.",
+   "Faites de petits cercles avec le corps pour que le bras tourne tout seul.",
+   "Le bras ne travaille pas : c'est le corps qui le met en mouvement."
+  ],
+  "484": [
+   "Laissez pendre le bras avec le poids, complètement détendu.",
+   "Faites de petits cercles avec le corps pour que le bras tourne tout seul."
+  ],
+  "110": [
+   "Laissez pendre le bras douloureux, détendu.",
+   "Balancez le corps d'avant en arrière pour que le bras se balance tout seul."
+  ],
+  "479": [
+   "Laissez pendre le bras avec le poids, détendu.",
+   "Balancez le corps d'avant en arrière pour que le bras se balance tout seul."
+  ],
+  "109": [
+   "Laissez pendre le bras douloureux, détendu.",
+   "Balancez le corps de gauche à droite pour que le bras se balance tout seul."
+  ],
+  "467": [
+   "Laissez pendre le bras avec le poids, détendu.",
+   "Balancez le corps de gauche à droite pour que le bras se balance tout seul."
+  ],
+  "685": [
+   "Avec la main, tirez doucement la plante du pied vers l'intérieur et vers le bas.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la cheville."
+  ],
+  "394": [
+   "Posez la cheville de la jambe à étirer sur le genou opposé (forme d'un 4).",
+   "Attrapez l'arrière de la cuisse de la jambe d'appui.",
+   "Ramenez-la doucement vers la poitrine jusqu'à sentir l'étirement dans la fesse.",
+   "Maintenez."
+  ],
+  "283": [
+   "Le genou avant est plié sur le côté, pied vers l'autre hanche.",
+   "Gardez le bassin droit.",
+   "Penchez-vous en avant sur les avant-bras jusqu'à sentir l'étirement dans la fesse.",
+   "Maintenez 30 secondes."
+  ],
+  "284": [
+   "Posez la cheville de la jambe à étirer sur le genou opposé.",
+   "Avec la main opposée, tirez le genou vers l'épaule opposée.",
+   "Maintenez quand vous sentez l'étirement dans la fesse."
+  ],
+  "504": [
+   "Pliez une jambe et posez le pied à l'extérieur du genou opposé.",
+   "Tournez le tronc vers la jambe pliée et poussez le genou avec le coude opposé.",
+   "Maintenez 30 secondes quand vous sentez l'étirement dans la fesse."
+  ],
+  "200": [
+   "Coudes sous les épaules.",
+   "Décollez le corps en appui sur les avant-bras et les orteils.",
+   "Dos droit, bassin aligné, serrez les fessiers et le ventre.",
+   "Respirez normalement et maintenez 10 à 15 secondes."
+  ],
+  "579": [
+   "Corps aligné des épaules aux talons.",
+   "Touchez l'épaule opposée avec une main, puis l'autre, en alternant.",
+   "Gardez le bassin immobile."
+  ],
+  "313": [
+   "Dos droit, fessiers serrés.",
+   "Amenez un genou vers le coude du même côté.",
+   "Revenez et alternez."
+  ],
+  "314": [
+   "Dos droit, fessiers serrés.",
+   "Décollez une jambe tendue de quelques centimètres sans bouger le bassin.",
+   "Reposez et alternez."
+  ],
+  "201": [
+   "Placez les pouces sous la voûte plantaire.",
+   "Massez en écartant les pouces dans des directions opposées.",
+   "Descendez vers le talon puis remontez vers les orteils.",
+   "Utilisez une crème si besoin."
+  ],
+  "645": [
+   "Faites rouler la balle sous la voûte plantaire, du talon aux orteils.",
+   "Appuyez plus ou moins selon la sensation."
+  ],
+  "202": [
+   "Faites rouler le pied d'avant en arrière, du talon aux orteils.",
+   "Continuez 1 à 2 minutes."
+  ],
+  "277": [
+   "Départ : jambe écartée et tournée vers l'extérieur, pied relevé vers l'extérieur.",
+   "Amenez la jambe en diagonale vers l'avant et en travers du corps, en tournant le pied vers l'intérieur et en le pointant.",
+   "Revenez lentement en suivant la même diagonale."
+  ],
+  "278": [
+   "Départ : jambe en avant et croisée devant l'autre, pied relevé vers l'intérieur.",
+   "Amenez la jambe en diagonale vers l'arrière et vers l'extérieur, en tournant le pied vers l'extérieur et en le pointant.",
+   "Revenez lentement en suivant la même diagonale."
+  ],
+  "203": [
+   "Amenez le bras tendu à l'horizontale devant vous, en travers de la poitrine.",
+   "Avec l'autre main, poussez doucement le coude vers la poitrine.",
+   "Maintenez quand vous sentez l'étirement à l'arrière de l'épaule."
+  ],
+  "686": [
+   "Placez le pied à étirer derrière vous, talon au sol, pointe vers l'avant.",
+   "Pliez légèrement le genou arrière et tournez-le vers l'intérieur.",
+   "Maintenez 30 secondes quand vous sentez l'étirement à l'intérieur de la cheville."
+  ],
+  "204": [
+   "Penchez-vous en avant, bras tendus devant vous au sol.",
+   "Posez le front au sol ou sur un coussin.",
+   "Relâchez et maintenez 30 secondes en respirant calmement."
+  ],
+  "205": [
+   "Penchez-vous en avant, bras tendus au sol.",
+   "Faites glisser les deux mains d'un côté jusqu'à sentir l'étirement sur le flanc opposé.",
+   "Maintenez, revenez au centre, puis faites l'autre côté."
+  ],
+  "206": [
+   "Front posé ou nuque dans l'alignement.",
+   "Décollez doucement un bras tendu du sol.",
+   "Reposez-le lentement, puis faites l'autre bras."
+  ],
+  "427": [
+   "Pliez le genou pour amener le talon vers la fesse.",
+   "Redescendez lentement."
+  ],
+  "580": [
+   "Serrez la fesse et montez le genou plié vers le plafond, sans décoller ni tourner le bassin.",
+   "Redescendez lentement."
+  ],
+  "286": [
+   "Pliez les genoux et attrapez les chevilles avec les mains.",
+   "Tirez doucement les pieds vers le haut, en laissant les cuisses se décoller si possible.",
+   "Maintenez 30 secondes quand vous sentez l'étirement à l'avant des cuisses et des hanches."
+  ],
+  "330": [
+   "Faites les 4 positions, en décollant à chaque fois les bras du sol, pouces vers le haut, omoplates serrées :",
+   "I : bras tendus devant vous, le long des oreilles.",
+   "T : bras tendus sur les côtés, à hauteur d'épaule.",
+   "W : coudes pliés le long du corps, mains à hauteur d'épaule.",
+   "Y : bras tendus en diagonale vers l'avant.",
+   "Maintenez 1 à 2 secondes chaque fois."
+  ],
+  "152": [
+   "Bras tendus devant vous, le long des oreilles, pouces vers le haut (position I).",
+   "Décollez les bras du sol en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "207": [
+   "Bassin bien posé au sol.",
+   "Tendez les bras pour soulever le haut du corps, en laissant le dos se creuser.",
+   "Relâchez les fessiers et le dos, maintenez 1 à 2 secondes.",
+   "Redescendez lentement."
+  ],
+  "208": [
+   "Coudes sous les épaules, bassin au sol.",
+   "Relâchez le dos et laissez-le se creuser doucement.",
+   "Maintenez en respirant calmement."
+  ],
+  "209": [
+   "Décollez doucement un bras et la jambe du même côté.",
+   "Redescendez lentement.",
+   "Faites ensuite l'autre côté."
+  ],
+  "340": [
+   "Bras tendu, pouce vers l'avant.",
+   "Montez le bras sur le côté jusqu'à l'horizontale en serrant l'omoplate.",
+   "Redescendez lentement."
+  ],
+  "341": [
+   "Bras tendu.",
+   "Montez le bras sur le côté jusqu'à l'horizontale en serrant l'omoplate.",
+   "Redescendez lentement."
+  ],
+  "342": [
+   "Bras tendu.",
+   "Montez le bras vers l'arrière, le long du corps, jusqu'au niveau du lit.",
+   "Redescendez lentement."
+  ],
+  "343": [
+   "Bras tendu.",
+   "Montez le bras vers l'arrière, le long du corps, jusqu'au niveau du lit.",
+   "Redescendez lentement."
+  ],
+  "344": [
+   "Coude plié à 90°, posé sur le lit.",
+   "Faites tourner l'avant-bras vers l'avant pour monter la main vers la tête.",
+   "Revenez lentement."
+  ],
+  "345": [
+   "Coude plié à 90°, posé sur le lit.",
+   "Faites tourner l'avant-bras vers l'avant pour monter la main vers la tête.",
+   "Revenez lentement."
+  ],
+  "346": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras vers l'avant jusqu'au niveau du lit.",
+   "Redescendez lentement."
+  ],
+  "347": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras vers l'avant jusqu'au niveau du lit.",
+   "Redescendez lentement."
+  ],
+  "348": [
+   "Coude plié à 90°, posé sur le lit.",
+   "Faites tourner l'avant-bras vers l'arrière pour monter la main vers la hanche.",
+   "Revenez lentement."
+  ],
+  "339": [
+   "Coude plié à 90°, posé sur le lit.",
+   "Faites tourner l'avant-bras vers l'arrière pour monter la main vers la hanche.",
+   "Revenez lentement."
+  ],
+  "210": [
+   "Décollez en même temps les deux bras et les deux jambes du sol.",
+   "Regard vers le sol, cou dans l'alignement.",
+   "Redescendez lentement."
+  ],
+  "211": [
+   "Décollez un bras et la jambe opposée.",
+   "Redescendez lentement et alternez, comme en nageant."
+  ],
+  "153": [
+   "Bras tendus sur les côtés à hauteur d'épaule, pouces vers le haut (position T).",
+   "Décollez les bras du sol en serrant les omoplates.",
+   "Maintenez 1 à 2 secondes, puis redescendez lentement."
+  ],
+  "155": [
+   "Coudes pliés le long du corps, mains à hauteur d'épaule, paumes vers le sol (position W).",
+   "Décollez bras et coudes du sol en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "154": [
+   "Allongez-vous sur le ventre, bras tendus en avant en forme de Y, pouces vers le haut.",
+   "Gardez les bras tendus et décollez-les du sol en serrant les omoplates.",
+   "Maintenez 1 à 2 secondes, puis redescendez lentement."
+  ],
+  "514": [
+   "Tenez une poignée dans chaque main, bras le long du corps.",
+   "Tirez avec le bras valide pour monter le bras douloureux sur le côté, sans le contracter.",
+   "Montez jusqu'à un étirement confortable, puis redescendez."
+  ],
+  "515": [
+   "Coude du côté douloureux plié à 90°, collé au corps.",
+   "Tirez avec le bras valide pour faire tourner l'avant-bras douloureux vers l'extérieur.",
+   "Allez jusqu'à un étirement confortable, puis revenez."
+  ],
+  "516": [
+   "Tenez une poignée dans chaque main, devant vous.",
+   "Tirez avec le bras valide pour monter le bras douloureux vers l'avant, sans le contracter.",
+   "Montez jusqu'à un étirement confortable, puis redescendez."
+  ],
+  "517": [
+   "Passez la main du côté douloureux dans le dos et tenez la poignée.",
+   "Tirez avec le bras valide pour faire remonter la main dans le dos.",
+   "Allez jusqu'à un étirement confortable, puis relâchez."
+  ],
+  "646": [
+   "Inspirez par le nez en gonflant le ventre pendant 4 secondes.",
+   "Soufflez lentement par la bouche, lèvres pincées, en comptant jusqu'à 8."
+  ],
+  "558": [
+   "Mains un peu plus écartées que les épaules.",
+   "Faites une pompe.",
+   "En haut, poussez encore dans le sol pour arrondir le haut du dos et écarter les omoplates.",
+   "Revenez et recommencez."
+  ],
+  "581": [
+   "Corps bien droit des épaules aux talons.",
+   "Pliez les coudes pour descendre la poitrine vers le sol.",
+   "Remontez en poussant sur les mains, sans creuser le dos."
+  ],
+  "582": [
+   "Croisez la jambe opposée au côté à étirer par-dessus l'autre.",
+   "Laissez les deux genoux tomber du côté de la jambe du dessus.",
+   "La jambe du dessus appuie pour étirer le flanc et le bas du dos. Maintenez."
+  ],
+  "583": [
+   "Laissez la jambe du dessus tomber derrière vous, au bord du lit si possible.",
+   "Levez le bras du dessus au-dessus de la tête.",
+   "Maintenez quand vous sentez l'étirement sur le flanc."
+  ],
+  "85": [
+   "Tirez la pointe du pied vers vous.",
+   "Écrasez la serviette avec l'arrière du genou en contractant la cuisse.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "212": [
+   "Le genou au sol est du côté à étirer.",
+   "Dos droit, avancez doucement le bassin.",
+   "Pour étirer davantage, attrapez le pied arrière et ramenez-le vers la fesse.",
+   "Maintenez 30 secondes."
+  ],
+  "77": [
+   "Tenez la sangle au-dessus de l'épaule.",
+   "Tirez doucement le talon vers la fesse jusqu'à sentir l'étirement à l'avant de la cuisse.",
+   "Maintenez."
+  ],
+  "78": [
+   "Pliez le genou du dessus et attrapez la cheville (ou utilisez une sangle).",
+   "Tirez doucement le talon vers la fesse, genoux alignés.",
+   "Maintenez quand vous sentez l'étirement à l'avant de la cuisse."
+  ],
+  "430": [
+   "Levez le bras du côté à étirer au-dessus de la tête.",
+   "Penchez le tronc vers le côté opposé, en glissant l'autre main vers le sol.",
+   "Maintenez quand vous sentez l'étirement sur le flanc."
+  ],
+  "584": [
+   "Épaules au-dessus des mains, genoux écartés largeur de hanches.",
+   "Tendez un bras devant vous sans déplacer le poids du corps.",
+   "Revenez et alternez."
+  ],
+  "585": [
+   "Dos plat, poids bien réparti.",
+   "Écartez un genou plié sur le côté, sans pencher le tronc.",
+   "Maintenez 1 à 2 secondes, revenez, puis alternez."
+  ],
+  "586": [
+   "Gardez le dos plat.",
+   "Tendez l'autre jambe vers l'arrière sans pencher sur le côté.",
+   "Revenez lentement."
+  ],
+  "290": [
+   "Dos droit, bassin stable.",
+   "Gardez le genou plié et montez le pied vers le plafond en serrant la fesse.",
+   "Redescendez lentement, puis alternez."
+  ],
+  "613": [
+   "Corps bien aligné.",
+   "Déplacez le bassin sur le côté et tournez la tête pour le regarder (comme un chien qui remue la queue).",
+   "Alternez les côtés."
+  ],
+  "213": [
+   "Dos droit, bassin stable.",
+   "Tendez une jambe vers l'arrière, genou tendu, à hauteur du dos.",
+   "Revenez lentement, puis alternez."
+  ],
+  "214": [
+   "Dos droit, bassin stable.",
+   "Tendez un bras vers l'avant et la jambe opposée vers l'arrière.",
+   "Revenez lentement, puis alternez."
+  ],
+  "215": [
+   "Dos droit, bassin stable.",
+   "Tendez un bras vers l'avant et la jambe du même côté vers l'arrière.",
+   "Revenez lentement, puis alternez."
+  ],
+  "608": [
+   "Pliez les coudes vers l'arrière, le long du corps, pour descendre le tronc vers le sol.",
+   "Tendez les bras pour remonter."
+  ],
+  "218": [
+   "Faites glisser une main vers l'avant le plus loin possible, paume vers le sol.",
+   "Retournez la main, pouce vers le haut.",
+   "Décollez le bras du sol.",
+   "Reposez-le lentement et alternez."
+  ],
+  "587": [
+   "Fixez l'élastique au sol de chaque côté (ou tenez-le avec les mains au sol).",
+   "Soulevez le bassin contre l'élastique.",
+   "Redescendez lentement."
+  ],
+  "450": [
+   "Bras écarté à hauteur d'épaule, coude plié à 90°.",
+   "Faites tourner l'avant-bras vers le haut et l'arrière contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "526": [
+   "Pliez la barre vers le bas avec les deux poignets jusqu'à sentir la tension.",
+   "Revenez lentement."
+  ],
+  "529": [
+   "Gardez le bras immobile.",
+   "Faites osciller la barre par de petits mouvements rapides du poignet."
+  ],
+  "528": [
+   "Gardez le bras immobile.",
+   "Faites osciller la barre par de petits mouvements rapides du poignet."
+  ],
+  "220": [
+   "Plaquez le bas du dos au sol.",
+   "Pédalez lentement avec les jambes, comme sur un vélo.",
+   "Gardez le dos plaqué et le ventre serré tout au long."
+  ],
+  "219": [
+   "Plaquez le bas du dos au sol en serrant le ventre.",
+   "Décollez les deux jambes de quelques centimètres.",
+   "Faites de petits battements de jambes en gardant le dos plaqué."
+  ],
+  "222": [
+   "Amenez le bras à étirer en travers de la poitrine.",
+   "Avec l'autre main, poussez le coude vers l'épaule opposée.",
+   "Laissez l'omoplate s'écarter et maintenez l'étirement entre les omoplates."
+  ],
+  "221": [
+   "Tendez les bras devant vous.",
+   "Arrondissez le haut du dos et rentrez la tête en poussant les mains loin devant.",
+   "Maintenez quand vous sentez l'étirement entre les omoplates."
+  ],
+  "223": [
+   "Croisez les poignets au sol.",
+   "Arrondissez le haut du dos et rentrez la tête, comme un chat.",
+   "Maintenez 30 secondes quand vous sentez l'étirement entre les omoplates."
+  ],
+  "370": [
+   "Montez le genou à 90°.",
+   "Tendez la jambe vers l'avant, puis redescendez-la.",
+   "Alternez les jambes."
+  ],
+  "371": [
+   "En marchant, montez le genou à 90°.",
+   "Tendez la jambe vers l'avant, puis posez le pied.",
+   "Alternez à chaque pas, tronc droit."
+  ],
+  "22": [
+   "Tenez-vous droit, pieds joints, bras le long du corps.",
+   "Ne vous tenez au support qu'en cas de besoin.",
+   "Maintenez 10 à 15 secondes."
+  ],
+  "315": [
+   "Trouvez votre équilibre, pieds joints.",
+   "Fermez les yeux et gardez la position.",
+   "Ne vous tenez au support qu'en cas de besoin."
+  ],
+  "318": [
+   "Trouvez votre équilibre, pieds joints.",
+   "Tournez lentement la tête de gauche à droite, en gardant le corps stable."
+  ],
+  "316": [
+   "Trouvez votre équilibre, pieds joints.",
+   "Fermez les yeux.",
+   "Tournez lentement la tête de gauche à droite."
+  ],
+  "319": [
+   "Trouvez votre équilibre, pieds joints.",
+   "Levez puis baissez lentement la tête, en gardant le corps stable."
+  ],
+  "317": [
+   "Trouvez votre équilibre, pieds joints.",
+   "Fermez les yeux.",
+   "Levez puis baissez lentement la tête."
+  ],
+  "320": [
+   "Montez pieds joints sur une surface instable (coussin, mousse).",
+   "Trouvez votre équilibre et gardez la position."
+  ],
+  "527": [
+   "Tenez l'élastique, pouces vers le haut.",
+   "Tirez les coudes vers le bas et l'arrière, le long du corps, épaules basses.",
+   "Revenez lentement."
+  ],
+  "623": [
+   "Tenez une extrémité dans chaque main, pouces vers le haut.",
+   "Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.",
+   "Revenez lentement."
+  ],
+  "150": [
+   "Gardez le dos plat.",
+   "Tirez un coude vers le plafond, le long du corps, en serrant l'omoplate.",
+   "Redescendez lentement, puis alternez."
+  ],
+  "331": [
+   "Gardez le dos plat.",
+   "Tirez le coude vers le plafond, le long du corps, en serrant l'omoplate.",
+   "Redescendez lentement."
+  ],
+  "441": [
+   "Posez la main opposée sur la clavicule du côté à étirer pour la maintenir basse.",
+   "Inclinez la tête de l'autre côté et tournez-la légèrement vers le haut.",
+   "Maintenez quand vous sentez l'étirement sur le côté et l'avant du cou."
+  ],
+  "559": [
+   "Tendez le genou en relevant la tête pour regarder vers le haut.",
+   "Pliez le genou en baissant la tête.",
+   "Alternez doucement, sans provoquer de douleur ni de fourmillements durables."
+  ],
+  "560": [
+   "Dos droit.",
+   "Tirez la pointe du pied vers vous en relevant la tête.",
+   "Relâchez le pied en baissant la tête.",
+   "Alternez doucement, sans provoquer de douleur ni de fourmillements durables."
+  ],
+  "624": [
+   "Placez un rouleau ou une serviette roulée sous le flanc, entre la hanche et les côtes.",
+   "Tendez le bras du dessus au-dessus de la tête et la jambe du dessus vers le bas.",
+   "Maintenez quand vous sentez l'étirement sur le flanc."
+  ],
+  "647": [
+   "Poussez la pointe du pied vers le bas.",
+   "Tirez-la ensuite vers vous.",
+   "Seule la cheville bouge."
+  ],
+  "700": [
+   "Faites pivoter le pied vers l'extérieur puis vers l'intérieur, comme un essuie-glace.",
+   "Seule la cheville bouge."
+  ],
+  "648": [
+   "Genou tendu.",
+   "Tirez doucement la sangle pour ramener la pointe du pied vers vous.",
+   "Maintenez quand vous sentez l'étirement dans le mollet."
+  ],
+  "530": [
+   "Arrondissez le dos en rentrant la tête et en basculant le bassin vers l'arrière.",
+   "Creusez ensuite le dos en basculant le bassin vers l'avant et en regardant vers le haut.",
+   "Alternez lentement."
+  ],
+  "665": [
+   "Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "531": [
+   "Dos et genou droits.",
+   "Penchez-vous en avant depuis les hanches jusqu'à sentir l'étirement derrière la cuisse.",
+   "Maintenez."
+  ],
+  "188": [
+   "Relevez les orteils en gardant les talons au sol.",
+   "Reposez, puis montez les talons en gardant les orteils au sol.",
+   "Alternez."
+  ],
+  "649": [
+   "Faites glisser le pied vers l'arrière, sous la chaise, pour plier le genou au maximum.",
+   "Revenez en avant.",
+   "Recommencez en allant un peu plus loin à chaque fois, sans douleur."
+  ],
+  "561": [
+   "Pieds au sol.",
+   "Écartez les genoux contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "224": [
+   "Départ : genou plié, cuisse levée vers la poitrine.",
+   "Poussez le pied vers le bas et l'avant en tendant la jambe contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "225": [
+   "Montez le genou vers le plafond sans vous pencher en arrière.",
+   "Redescendez lentement."
+  ],
+  "651": [
+   "Dos droit.",
+   "Montez le genou vers le plafond.",
+   "Redescendez lentement."
+  ],
+  "532": [
+   "Dos droit.",
+   "Montez un genou vers le plafond contre l'élastique.",
+   "Redescendez lentement, puis alternez."
+  ],
+  "669": [
+   "Poussez les genoux vers l'extérieur contre la sangle, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "677": [
+   "Serrez le ballon entre les genoux.",
+   "Maintenez 3 à 5 secondes, puis relâchez."
+  ],
+  "99": [
+   "Tirez la pointe du pied vers vous.",
+   "Tendez complètement le genou.",
+   "Redescendez lentement."
+  ],
+  "100": [
+   "Laissez le genou se tendre avec son propre poids.",
+   "Pour plus d'étirement, posez un poids léger (sac de riz) juste au-dessus du genou.",
+   "Restez détendu 1 à 2 minutes."
+  ],
+  "533": [
+   "Attrapez un genou avec les mains et ramenez-le vers la poitrine.",
+   "Tenez sous le genou si le genou est douloureux.",
+   "Maintenez, puis changez de côté."
+  ],
+  "688": [
+   "Laissez la jambe pendre, cuisse détendue.",
+   "Balancez doucement la jambe d'avant en arrière, sans forcer."
+  ],
+  "562": [
+   "Gardez un genou immobile.",
+   "Écartez l'autre genou vers l'extérieur contre l'élastique.",
+   "Revenez lentement, puis alternez."
+  ],
+  "626": [
+   "Gardez les pieds joints.",
+   "Écartez les deux genoux vers l'extérieur.",
+   "Revenez lentement."
+  ],
+  "625": [
+   "Gardez les pieds joints.",
+   "Écartez les deux genoux contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "652": [
+   "Dos droit.",
+   "Tendez complètement le genou.",
+   "Redescendez lentement."
+  ],
+  "534": [
+   "Basculez le bassin vers l'avant en creusant le bas du dos.",
+   "Basculez-le vers l'arrière en arrondissant le bas du dos.",
+   "Alternez lentement."
+  ],
+  "456": [
+   "Posez la cheville de la jambe à étirer sur le genou opposé.",
+   "Dos droit, penchez-vous en avant jusqu'à sentir l'étirement dans la fesse.",
+   "Maintenez."
+  ],
+  "465": [
+   "Croisez la jambe à étirer par-dessus l'autre.",
+   "Avec la main opposée, tirez le genou vers l'épaule opposée.",
+   "Maintenez 30 secondes quand vous sentez l'étirement dans la fesse."
+  ],
+  "701": [
+   "Reculez légèrement le pied, orteils au sol.",
+   "Basculez le pied vers l'intérieur et appuyez doucement.",
+   "Maintenez quand vous sentez l'étirement à l'intérieur de la cheville."
+  ],
+  "535": [
+   "Tenez le dossier avec la main du côté non étiré.",
+   "Levez l'autre bras au-dessus de la tête.",
+   "Penchez-vous sur le côté opposé, vers la main qui tient le dossier.",
+   "Maintenez quand vous sentez l'étirement sur le flanc."
+  ],
+  "689": [
+   "Tendez les bras devant vous.",
+   "Arrondissez le haut du dos et rentrez la tête.",
+   "Maintenez 30 secondes quand vous sentez l'étirement entre les omoplates."
+  ],
+  "226": [
+   "Une extrémité dans chaque main, dos droit.",
+   "Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.",
+   "Revenez lentement."
+  ],
+  "627": [
+   "Pieds joints.",
+   "Écartez un genou vers l'extérieur contre l'élastique.",
+   "Revenez, puis alternez."
+  ],
+  "628": [
+   "Gardez les pieds joints.",
+   "Écartez un genou vers l'extérieur.",
+   "Revenez, puis alternez."
+  ],
+  "690": [
+   "Reculez le pied sous la chaise, talon au sol.",
+   "Penchez-vous en avant pour avancer le genou jusqu'à sentir l'étirement dans le bas du mollet.",
+   "Maintenez."
+  ],
+  "227": [
+   "Mains derrière la tête.",
+   "Penchez-vous en arrière par-dessus le dossier, en regardant vers le plafond.",
+   "Maintenez 10 à 15 secondes."
+  ],
+  "676": [
+   "Laissez tomber les bras entre les jambes.",
+   "Enroulez lentement le dos vers le sol, vertèbre par vertèbre.",
+   "Remontez lentement en déroulant."
+  ],
+  "228": [
+   "Tournez le haut du corps d'un côté en gardant le bassin immobile.",
+   "Aidez-vous du dossier pour aller un peu plus loin.",
+   "Maintenez 10 à 15 secondes, puis changez de côté."
+  ],
+  "653": [
+   "Bras tendus devant vous, mains jointes.",
+   "Ouvrez les bras sur les côtés à hauteur d'épaule, en serrant les omoplates (position T).",
+   "Revenez lentement."
+  ],
+  "147": [
+   "Gardez le coude tendu.",
+   "Poussez la main vers le plafond en décollant l'omoplate du sol.",
+   "Redescendez lentement l'épaule."
+  ],
+  "142": [
+   "Tenez une extrémité dans chaque main, devant vous.",
+   "Bras tendus, poussez les mains vers l'avant en avançant les épaules.",
+   "Revenez lentement."
+  ],
+  "229": [
+   "Gardez le coude tendu.",
+   "Poussez la main vers le plafond en décollant l'omoplate du sol.",
+   "Redescendez lentement l'épaule."
+  ],
+  "398": [
+   "Tirez la pointe du pied vers vous.",
+   "Décollez le talon en tendant complètement le genou.",
+   "Redescendez lentement."
+  ],
+  "480": [
+   "Debout, bras le long du corps, pouce vers le haut.",
+   "Levez le bras tendu vers l'avant et le côté (à 30° du plan du corps) jusqu'à l'horizontale.",
+   "Redescendez lentement en contrôlant."
+  ],
+  "106": [
+   "Le bras douloureux est détendu.",
+   "Avec le bras valide, poussez le bâton pour écarter le bras douloureux sur le côté.",
+   "Montez jusqu'à un étirement confortable, puis redescendez."
+  ],
+  "125": [
+   "Faites de grands cercles avec les épaules : vers l'avant, en haut, vers l'arrière, en bas.",
+   "Changez ensuite de sens."
+  ],
+  "449": [
+   "Pouces vers le haut, faites de petits cercles vers l'arrière.",
+   "Pouces vers le bas, faites de petits cercles vers l'avant."
+  ],
+  "481": [
+   "Bras tendu, paume vers le corps.",
+   "Amenez le bras vers l'arrière d'environ 30 à 40°.",
+   "Revenez lentement."
+  ],
+  "588": [
+   "Coude plié à 90°, collé au corps, main devant le ventre.",
+   "Faites tourner l'avant-bras vers le haut, coude toujours collé.",
+   "Redescendez lentement."
+  ],
+  "146": [
+   "Coude plié à 90°, collé au corps (une serviette entre le coude et le corps aide).",
+   "Faites tourner l'avant-bras vers le haut jusqu'à l'horizontale.",
+   "Redescendez lentement."
+  ],
+  "536": [
+   "Coude plié à 90°, collé au corps, pouce vers le haut.",
+   "Départ : main devant le ventre.",
+   "Faites tourner l'avant-bras vers l'extérieur contre l'élastique, coude toujours collé.",
+   "Revenez lentement."
+  ],
+  "233": [
+   "Debout, tenez l'élastique devant vous, pouces vers le haut.",
+   "Coudes pliés à 90° et collés au corps.",
+   "Écartez les mains vers l'extérieur en gardant les coudes au corps et les poignets droits.",
+   "Revenez lentement."
+  ],
+  "107": [
+   "Coude du côté douloureux plié à 90°, collé au corps, main détendue sur le bâton.",
+   "Avec l'autre main, poussez le bâton pour faire tourner l'avant-bras douloureux vers l'extérieur.",
+   "Allez jusqu'à un étirement confortable, puis revenez."
+  ],
+  "483": [
+   "Bras tendu, pouce vers l'avant.",
+   "Levez le bras devant vous jusqu'à l'horizontale (ou plus haut si possible sans douleur).",
+   "Redescendez lentement."
+  ],
+  "105": [
+   "Le bras douloureux reste détendu.",
+   "Avec le bras valide, montez le bâton vers l'avant et le haut.",
+   "Allez jusqu'à un étirement confortable, puis redescendez doucement."
+  ],
+  "112": [
+   "Pouces vers le haut, bras à hauteur d'épaule.",
+   "Écartez les bras sur les côtés en serrant les omoplates.",
+   "Revenez lentement."
+  ],
+  "589": [
+   "Coude plié à 90°, main vers le plafond.",
+   "Faites tourner l'avant-bras pour amener la main vers le ventre.",
+   "Revenez lentement."
+  ],
+  "145": [
+   "Coude plié à 90°, collé au corps, main au sol.",
+   "Faites tourner l'avant-bras pour amener la main vers le ventre.",
+   "Revenez lentement."
+  ],
+  "144": [
+   "Bras devant vous, épaule et coude à 90°, avant-bras vers le plafond.",
+   "Avec l'autre main, poussez doucement le poignet vers le sol (vers les pieds).",
+   "Maintenez quand vous sentez l'étirement à l'arrière de l'épaule."
+  ],
+  "537": [
+   "Coude plié à 90°, collé au corps, pouce vers le haut.",
+   "Départ : avant-bras tourné vers l'extérieur.",
+   "Ramenez la main vers le ventre contre l'élastique, coude toujours collé.",
+   "Revenez lentement."
+  ],
+  "654": [
+   "Debout, tenez un bâton derrière le dos : la main du côté non étiré en haut, derrière la tête, l'autre main en bas, dans le dos.",
+   "Tirez doucement le bâton vers le haut avec la main du haut.",
+   "Arrêtez quand vous sentez l'étirement à l'avant de l'épaule du bas. Maintenez 20 à 30 secondes."
+  ],
+  "143": [
+   "La main du côté non étiré tient la serviette derrière la tête.",
+   "La main du côté à étirer attrape le bas de la serviette dans le dos.",
+   "Tirez doucement la serviette vers le haut.",
+   "Maintenez 10 à 15 secondes."
+  ],
+  "120": [
+   "Départ : bras tendu en haut et sur le côté, main ouverte.",
+   "Ramenez le bras en diagonale vers la hanche opposée en fermant le poing, comme pour boucler une ceinture de sécurité.",
+   "Revenez lentement en suivant la même diagonale."
+  ],
+  "121": [
+   "Départ : bras en haut et sur le côté, tenant l'élastique fixé en hauteur.",
+   "Tirez en diagonale vers la hanche opposée en fermant le poing.",
+   "Revenez lentement en contrôlant."
+  ],
+  "122": [
+   "Départ : poing fermé près de la hanche opposée, paume vers le corps, comme pour dégainer une épée.",
+   "Montez le bras en diagonale vers le haut et l'extérieur en ouvrant la main, paume vers l'avant.",
+   "Revenez lentement en suivant la même diagonale."
+  ],
+  "123": [
+   "Départ : main près de la hanche opposée, paume vers le corps, comme pour dégainer une épée.",
+   "Montez le bras en diagonale vers le haut et l'extérieur contre l'élastique, en ouvrant la main.",
+   "Revenez lentement en contrôlant."
+  ],
+  "482": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras entre l'avant et le côté jusqu'à hauteur d'épaule.",
+   "Redescendez lentement."
+  ],
+  "124": [
+   "Montez les épaules vers les oreilles sans bouger la tête.",
+   "Maintenez 1 à 2 secondes.",
+   "Redescendez lentement."
+  ],
+  "471": [
+   "Montez les épaules vers les oreilles sans bouger la tête.",
+   "Redescendez lentement."
+  ],
+  "421": [
+   "Plaquez le bas du dos au sol.",
+   "Bras sur les côtés, coudes pliés, dos des mains au sol.",
+   "Faites glisser les bras vers le haut en gardant coudes et mains au sol, aussi loin que possible.",
+   "Redescendez lentement."
+  ],
+  "413": [
+   "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "148": [
+   "Gardez les épaules stables.",
+   "Levez une main pour toucher l'autre main, puis reposez-la.",
+   "Alternez."
+  ],
+  "322": [
+   "Le bras douloureux reste détendu.",
+   "Avec le bras valide, montez le bâton au-dessus de la tête.",
+   "Allez jusqu'à un étirement confortable, puis revenez doucement."
+  ],
+  "463": [
+   "Mains sur les hanches si besoin.",
+   "Pliez un genou en déplaçant le poids du corps de ce côté, l'autre jambe tendue.",
+   "Maintenez quand vous sentez l'étirement à l'intérieur de la cuisse tendue."
+  ],
+  "241": [
+   "Coude sous l'épaule, jambes tendues.",
+   "Décollez le bassin pour aligner épaules, hanches et pieds.",
+   "Maintenez."
+  ],
+  "592": [
+   "Coude sous l'épaule, corps aligné.",
+   "Laissez descendre le bassin vers le sol, puis remontez-le.",
+   "Gardez le corps de profil."
+  ],
+  "372": [
+   "Faites des pas chassés sur le côté.",
+   "Hanches et pieds restent tournés vers l'avant.",
+   "Pas ni trop grands ni trop petits."
+  ],
+  "505": [
+   "Fléchissez légèrement les genoux (mini-squat).",
+   "Faites des pas sur le côté en gardant l'élastique tendu.",
+   "Hanches et pieds restent tournés vers l'avant."
+  ],
+  "691": [
+   "Penchez-vous sur le côté du poids, sans tourner ni pencher en avant.",
+   "Remontez en contractant le flanc opposé."
+  ],
+  "590": [
+   "Bassin bien de profil.",
+   "Levez légèrement la jambe tendue et faites de petits cercles.",
+   "Changez de sens."
+  ],
+  "591": [
+   "Ramenez le genou du dessus vers la poitrine.",
+   "Poussez la jambe vers l'arrière en la tendant, comme une ruade.",
+   "Revenez lentement."
+  ],
+  "593": [
+   "Bassin bien de profil.",
+   "Allez toucher le sol devant vous avec le pied, puis derrière vous.",
+   "Alternez sans bouger le bassin."
+  ],
+  "373": [
+   "Faites un pas sur le côté en descendant en squat, fesses en arrière, poitrine haute.",
+   "Remontez en ramenant l'autre pied.",
+   "Hanches et pieds restent tournés vers l'avant."
+  ],
+  "242": [
+   "Ramenez un genou vers la poitrine en le tenant sous la cuisse.",
+   "Tirez doucement jusqu'à sentir l'étirement dans le bas du dos et la fesse.",
+   "Maintenez 30 secondes, puis changez de côté."
+  ],
+  "243": [
+   "Levez un pied et tenez en équilibre sur l'autre jambe.",
+   "Ne vous tenez au support qu'en cas de besoin."
+  ],
+  "698": [
+   "Tenez en équilibre sur une jambe.",
+   "Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+   "Changez de direction ou éloignez la chaise pour augmenter la difficulté."
+  ],
+  "71": [
+   "Décollez un pied et tendez la jambe.",
+   "Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+   "Redescendez lentement."
+  ],
+  "244": [
+   "Montez sur la pointe du pied.",
+   "Redescendez lentement.",
+   "Tenez-vous au support si besoin."
+  ],
+  "93": [
+   "L'autre pied décollé devant vous.",
+   "Pliez le genou d'appui en reculant les fesses, comme pour vous asseoir.",
+   "Genou dans l'axe du pied, sans rentrer vers l'intérieur.",
+   "Remontez en poussant sur le pied."
+  ],
+  "462": [
+   "Tournez le haut du corps d'un côté puis de l'autre.",
+   "Gardez le bassin face à l'avant."
+  ],
+  "461": [
+   "Tournez le haut du corps d'un côté puis de l'autre.",
+   "Gardez le bassin face à l'avant."
+  ],
+  "245": [
+   "Relevez la pointe du pied d'appui, en équilibre sur le talon.",
+   "Redescendez lentement.",
+   "Restez sous 3/10 de douleur."
+  ],
+  "349": [
+   "Reculez légèrement les pieds sous la chaise.",
+   "Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+   "Poussez sur les jambes pour vous lever.",
+   "Rasseyez-vous lentement en contrôlant."
+  ],
+  "697": [
+   "Restez sur la pointe des pieds.",
+   "Marchez en faisant des fentes, genou arrière vers le sol, talons toujours décollés."
+  ],
+  "692": [
+   "Talons décollés.",
+   "Descendez le genou arrière vers le sol en gardant les talons en l'air.",
+   "Remontez lentement."
+  ],
+  "440": [
+   "Posez les doigts sur la peau à côté de la cicatrice.",
+   "Faites glisser la peau sur les tissus du dessous : de haut en bas, de gauche à droite, puis en petits cercles.",
+   "Ne frottez pas la surface : c'est la peau qui bouge."
+  ],
+  "374": [
+   "Tronc droit.",
+   "Avancez en lançant chaque jambe tendue vers l'avant, comme un soldat.",
+   "Posez doucement le pied et alternez."
+  ],
+  "246": [
+   "Pied à étirer derrière, talon au sol, pointe vers l'avant.",
+   "Fléchissez le genou avant en avançant le bassin.",
+   "Maintenez quand vous sentez l'étirement dans le mollet arrière."
+  ],
+  "609": [
+   "Pliez légèrement le genou.",
+   "Tirez la sangle pour ramener la pointe du pied vers vous.",
+   "Maintenez quand vous sentez l'étirement dans le bas du mollet."
+  ],
+  "635": [
+   "Inspirez en comptant jusqu'à 4.",
+   "Bloquez en comptant jusqu'à 4.",
+   "Soufflez en comptant jusqu'à 4.",
+   "Bloquez en comptant jusqu'à 4, puis recommencez.",
+   "Imaginez que vous suivez les côtés d'un carré."
+  ],
+  "460": [
+   "Descendez en squat, fesses en arrière, genoux dans l'axe des pieds.",
+   "En remontant, montez un genou vers l'avant.",
+   "Alternez les jambes."
+  ],
+  "91": [
+   "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+   "Genoux dans l'axe des pieds.",
+   "Remontez en poussant sur les talons."
+  ],
+  "538": [
+   "Gardez les genoux écartés contre l'élastique.",
+   "Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+   "Remontez."
+  ],
+  "92": [
+   "Pieds écartés largeur d'épaules.",
+   "Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+   "Remontez sans vous asseoir complètement."
+  ],
+  "693": [
+   "Descendez en squat, poids bien réparti.",
+   "En remontant, finissez sur la pointe des pieds.",
+   "Redescendez les talons et recommencez."
+  ],
+  "459": [
+   "Pour monter : poussez sur les béquilles et montez la bonne jambe, puis montez les béquilles.",
+   "Pour descendre : posez d'abord les béquilles sur la marche du dessous, puis descendez la bonne jambe.",
+   "Tenez la rampe d'une main si possible."
+  ],
+  "458": [
+   "Pour monter : montez la bonne jambe d'abord, puis la jambe opérée et les béquilles ensemble.",
+   "Pour descendre : descendez d'abord les béquilles et la jambe opérée, puis la bonne jambe."
+  ],
+  "457": [
+   "Pour monter : montez la bonne jambe d'abord, puis la jambe douloureuse et la canne ensemble.",
+   "Pour descendre : descendez d'abord la canne et la jambe douloureuse, puis la bonne jambe."
+  ],
+  "385": [
+   "Faites successivement contre l'élastique : jambe en avant, en arrière, sur le côté, puis vers l'intérieur.",
+   "Genou tendu, tronc droit et immobile.",
+   "Revenez lentement à chaque fois."
+  ],
+  "384": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Avancez la jambe, puis revenez lentement."
+  ],
+  "264": [
+   "Faites successivement contre l'élastique : jambe en avant, en arrière, sur le côté, puis vers l'intérieur.",
+   "Tronc droit, bassin stable, genou tendu.",
+   "Revenez lentement à chaque fois."
+  ],
+  "694": [
+   "Tenez une extrémité dans chaque main, pouces vers le haut.",
+   "Coudes légèrement pliés, poussez les bras vers l'avant et l'intérieur comme pour serrer quelqu'un dans vos bras.",
+   "Revenez lentement."
+  ],
+  "466": [
+   "Jambe avant tendue, pointe du pied vers vous.",
+   "Dos droit, bassin face à l'avant.",
+   "Penchez-vous en avant depuis les hanches jusqu'à sentir l'étirement derrière la cuisse.",
+   "Maintenez."
+  ],
+  "96": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Écartez la jambe sur le côté en menant avec le talon.",
+   "Revenez lentement."
+  ],
+  "506": [
+   "Tronc droit et immobile, genou tendu.",
+   "Écartez la jambe sur le côté.",
+   "Ramenez-la en la croisant devant l'autre jambe.",
+   "Alternez lentement."
+  ],
+  "386": [
+   "Tenez-vous à la chaise.",
+   "Genou tendu, dos droit.",
+   "Écartez la jambe sur le côté contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "387": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Écartez la jambe sur le côté en menant avec le talon.",
+   "Revenez lentement."
+  ],
+  "296": [
+   "Tenez-vous si besoin.",
+   "Dos droit, genou tendu.",
+   "Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.",
+   "Revenez lentement."
+  ],
+  "97": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Croisez la jambe devant l'autre.",
+   "Revenez lentement."
+  ],
+  "388": [
+   "Tenez-vous à la chaise.",
+   "Genou tendu, épaules droites.",
+   "Ramenez la jambe vers l'intérieur, devant l'autre, contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "389": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Croisez la jambe devant l'autre.",
+   "Revenez lentement."
+  ],
+  "297": [
+   "Debout, fixez l'élastique à un point bas sur le côté et passez-le autour de la cheville la plus proche du point d'attache.",
+   "Gardez le dos droit et la jambe tendue.",
+   "Ramenez la jambe vers l'intérieur, devant l'autre jambe, contre la résistance de l'élastique.",
+   "Revenez lentement."
+  ],
+  "507": [
+   "Tronc droit.",
+   "Levez une jambe tendue devant vous.",
+   "Faites de petits cercles dans un sens, puis dans l'autre, sans bouger le tronc."
+  ],
+  "95": [
+   "Tronc droit.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Amenez la jambe vers l'arrière, sans creuser le dos.",
+   "Revenez lentement."
+  ],
+  "390": [
+   "Tenez-vous à la chaise.",
+   "Genou tendu, dos droit.",
+   "Amenez la jambe vers l'arrière contre l'élastique, sans creuser le dos.",
+   "Revenez lentement."
+  ],
+  "391": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Amenez la jambe vers l'arrière, sans creuser le dos.",
+   "Revenez lentement."
+  ],
+  "298": [
+   "Tenez-vous si besoin.",
+   "Genou tendu, dos droit.",
+   "Amenez la jambe vers l'arrière contre l'élastique, maintenez 1 à 2 secondes.",
+   "Revenez lentement."
+  ],
+  "94": [
+   "Tronc droit.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Levez la jambe vers l'avant, sans vous pencher en arrière.",
+   "Redescendez lentement."
+  ],
+  "508": [
+   "Tronc droit et immobile, genou tendu.",
+   "Balancez lentement la jambe vers l'avant, puis vers l'arrière.",
+   "Pointe du pied vers l'avant tout le long."
+  ],
+  "392": [
+   "Genou tendu, dos droit.",
+   "Avancez la jambe contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "393": [
+   "Tronc droit et immobile.",
+   "Genou tendu, pointe du pied vers vous.",
+   "Avancez la jambe, puis revenez lentement."
+  ],
+  "299": [
+   "Tenez-vous si besoin.",
+   "Genou tendu, dos droit.",
+   "Avancez la jambe contre l'élastique, maintenez 1 à 2 secondes.",
+   "Revenez lentement."
+  ],
+  "539": [
+   "Croisez la jambe à étirer derrière l'autre.",
+   "Levez le bras du côté à étirer au-dessus de la tête.",
+   "Poussez la hanche vers le mur en penchant le tronc de l'autre côté.",
+   "Maintenez quand vous sentez l'étirement sur l'extérieur de la hanche."
+  ],
+  "439": [
+   "Pliez le genou et attrapez la cheville derrière vous.",
+   "Ramenez doucement le talon vers la fesse, genoux côte à côte.",
+   "Maintenez 30 secondes."
+  ],
+  "540": [
+   "Un pied légèrement devant l'autre, dos droit.",
+   "Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+   "Revenez lentement."
+  ],
+  "350": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras sur le côté jusqu'à l'horizontale.",
+   "Redescendez lentement."
+  ],
+  "351": [
+   "Bras tendu, pouce vers l'avant.",
+   "Amenez le bras vers l'arrière, le long du corps, à environ 40°.",
+   "Revenez lentement."
+  ],
+  "113": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras vers l'avant jusqu'à l'horizontale.",
+   "Redescendez lentement."
+  ],
+  "114": [
+   "Bras tendu, pouce vers le haut.",
+   "Montez le bras entre l'avant et le côté (plan de l'omoplate) jusqu'à l'horizontale.",
+   "Redescendez lentement."
+  ],
+  "655": [
+   "Ouvrez les bras sur les côtés à hauteur d'épaule (position T) en serrant les omoplates.",
+   "Revenez lentement."
+  ],
+  "247": [
+   "Levez le bras du côté à étirer au-dessus de la tête.",
+   "Penchez-vous sur le côté opposé.",
+   "Maintenez quand vous sentez l'étirement sur le flanc."
+  ],
+  "248": [
+   "Posez les mains dans le bas du dos.",
+   "Penchez-vous doucement en arrière en poussant le bassin vers l'avant.",
+   "Revenez lentement."
+  ],
+  "249": [
+   "Coudes pliés devant vous, mains l'une contre l'autre.",
+   "Tournez le haut du corps d'un côté, bassin immobile.",
+   "Revenez et faites l'autre côté."
+  ],
+  "403": [
+   "La jambe à travailler reste sur la marche.",
+   "Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.",
+   "Remontez en poussant sur la jambe d'appui."
+  ],
+  "404": [
+   "Posez le pied de la jambe à travailler sur la marche.",
+   "Montez en poussant sur ce pied.",
+   "Redescendez lentement en contrôlant."
+  ],
+  "485": [
+   "Avec les doigts de l'autre main, massez la zone douloureuse à l'intérieur du coude.",
+   "Faites glisser la peau sur les tissus du dessous, en travers du tendon.",
+   "Pression ferme mais supportable, 2 à 3 minutes."
+  ],
+  "486": [
+   "Avec les doigts de l'autre main, massez la zone douloureuse à l'extérieur du coude.",
+   "Faites glisser la peau sur les tissus du dessous, en travers du tendon.",
+   "Pression ferme mais supportable, 2 à 3 minutes."
+  ],
+  "83": [
+   "Pliez la jambe qui ne travaille pas.",
+   "Tendez l'autre jambe, pointe du pied vers vous.",
+   "Montez la jambe tendue jusqu'à la hauteur de l'autre genou.",
+   "Redescendez lentement."
+  ],
+  "84": [
+   "Pliez la jambe qui ne travaille pas.",
+   "Tendez l'autre jambe, pointe du pied vers vous.",
+   "Montez la jambe tendue aussi haut que possible sans douleur.",
+   "Redescendez lentement."
+  ],
+  "72": [
+   "Pliez une jambe, pied à plat.",
+   "Tendez l'autre jambe, pointe du pied vers vous, cuisse contractée.",
+   "Montez la jambe tendue jusqu'à la hauteur de l'autre genou.",
+   "Redescendez lentement."
+  ],
+  "73": [
+   "Pliez une jambe, pied à plat.",
+   "Tendez l'autre jambe et tournez-la vers l'extérieur, pointe du pied vers vous.",
+   "Montez la jambe tendue jusqu'à la hauteur de l'autre genou.",
+   "Redescendez lentement."
+  ],
+  "541": [
+   "Coude du côté à étirer plié à 90°, collé au corps, main sur le bas du bâton.",
+   "L'autre main tient le haut du bâton.",
+   "Poussez le bas du bâton vers l'avant et l'intérieur pour tourner le bras vers le ventre.",
+   "Maintenez quand vous sentez l'étirement à l'arrière de l'épaule."
+  ],
+  "695": [
+   "Descendez en squat profond.",
+   "Posez les coudes à l'intérieur des genoux et poussez-les doucement vers l'extérieur.",
+   "Maintenez quand vous sentez l'étirement à l'intérieur des cuisses."
+  ],
+  "610": [
+   "Creusez le bas du dos en basculant le bassin vers l'avant.",
+   "Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.",
+   "Alternez lentement."
+  ],
+  "546": [
+   "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+   "Soufflez lentement par la bouche en laissant le ventre redescendre."
+  ],
+  "611": [
+   "Tendez les bras au-dessus de la tête.",
+   "Étirez-vous en poussant les mains et les pieds dans des directions opposées.",
+   "Maintenez 30 secondes en respirant calmement."
+  ],
+  "594": [
+   "Pointe des pieds vers le plafond.",
+   "Faites glisser une jambe sur le côté, puis ramenez-la.",
+   "Alternez les jambes."
+  ],
+  "595": [
+   "Ramenez un genou vers la poitrine pendant que l'autre jambe pousse vers l'avant contre l'élastique.",
+   "Alternez, comme un pédalage lent."
+  ],
+  "612": [
+   "Remontez une hanche vers l'épaule du même côté, sans plier le genou.",
+   "Alternez les côtés."
+  ],
+  "672": [
+   "Laissez tomber un genou vers l'extérieur, pied au sol.",
+   "Revenez et alternez."
+  ],
+  "671": [
+   "Gardez un genou immobile.",
+   "Écartez l'autre genou vers l'extérieur contre l'élastique.",
+   "Revenez et alternez."
+  ],
+  "629": [
+   "Rentrez le menton.",
+   "Décollez légèrement la tête en amenant le menton vers la poitrine.",
+   "Redescendez lentement."
+  ],
+  "431": [
+   "Basculez le bassin vers l'arrière pour plaquer le bas du dos au sol.",
+   "Imaginez écraser une main glissée sous le bas du dos.",
+   "Maintenez quelques secondes, puis relâchez."
+  ],
+  "670": [
+   "Tenez le bâton devant vous, bras tendus.",
+   "Montez le bâton au-dessus de la tête, le bras valide aidant le bras douloureux.",
+   "Allez jusqu'à un étirement confortable, puis revenez."
+  ],
+  "254": [
+   "Gardez les épaules au sol.",
+   "Laissez tomber les genoux d'un côté, aussi loin que confortable.",
+   "Revenez et allez de l'autre côté."
+  ],
+  "255": [
+   "Gardez les épaules au sol.",
+   "Laissez tomber les genoux d'un côté et maintenez l'étirement.",
+   "Revenez et faites l'autre côté."
+  ],
+  "596": [
+   "Laissez tomber les deux genoux d'un côté, doucement.",
+   "Revenez et allez de l'autre côté."
+  ],
+  "630": [
+   "Laissez tomber les genoux d'un côté pendant que les bras partent de l'autre côté.",
+   "Revenez et inversez."
+  ],
+  "281": [
+   "Dos droit.",
+   "Faites rouler le ballon vers l'avant en basculant le bassin, puis vers l'arrière.",
+   "Seul le bassin bouge."
+  ],
+  "265": [
+   "Bras le long du corps.",
+   "Soulevez le bassin en poussant sur le ballon, jusqu'à aligner épaules, hanches et talons.",
+   "Redescendez lentement."
+  ],
+  "266": [
+   "Soulevez le bassin.",
+   "Pliez les genoux en ramenant le ballon vers les fesses avec les talons.",
+   "Retendez les jambes en repoussant le ballon, bassin toujours décollé."
+  ],
+  "269": [
+   "Avancez les pieds pour que le ballon soit sous le bas du dos.",
+   "Mains sur la poitrine ou derrière la tête.",
+   "Enroulez le haut du corps vers l'avant, puis redescendez lentement."
+  ],
+  "573": [
+   "Hanches et genoux à 90°, le ballon coincé entre mains et genoux.",
+   "Tendez un bras derrière la tête et la jambe opposée vers l'avant.",
+   "Revenez et alternez, dos plaqué au sol."
+  ],
+  "271": [
+   "Dos droit.",
+   "Faites des cercles avec le bassin, comme avec un hula-hoop.",
+   "Changez de sens."
+  ],
+  "272": [
+   "Dos droit.",
+   "Décollez un pied de quelques centimètres en montant le genou.",
+   "Reposez lentement et alternez."
+  ],
+  "305": [
+   "Faites les 4 positions de bras, pouces vers le haut, omoplates serrées, épaules basses :",
+   "I : bras tendus devant vous.",
+   "T : bras sur les côtés.",
+   "W : coudes pliés le long du corps.",
+   "Y : bras en diagonale vers l'avant.",
+   "Contrôlez la descente à chaque fois."
+  ],
+  "304": [
+   "Bras tendus devant vous, pouces vers le haut (position I).",
+   "Levez les bras en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "276": [
+   "Dos droit.",
+   "Tendez lentement un genou.",
+   "Redescendez et alternez."
+  ],
+  "282": [
+   "Dos droit.",
+   "Faites rouler le ballon de gauche à droite en remontant une hanche puis l'autre.",
+   "Seul le bassin bouge."
+  ],
+  "279": [
+   "Levez un bras et la jambe opposée.",
+   "Revenez lentement et alternez."
+  ],
+  "285": [
+   "Avancez le ballon avec les avant-bras jusqu'à ce que le corps soit aligné des genoux aux épaules.",
+   "Serrez les fessiers et le ventre.",
+   "Maintenez 5 à 10 secondes, puis revenez."
+  ],
+  "287": [
+   "Pieds à plat, hanches et genoux à 90°.",
+   "Dos droit, tête dans l'alignement.",
+   "Gardez cette posture en respirant calmement."
+  ],
+  "288": [
+   "Dos droit, ventre serré.",
+   "Tendez un bras puis l'autre pour passer en appui sur les mains.",
+   "Redescendez sur un avant-bras puis l'autre, et alternez."
+  ],
+  "289": [
+   "Levez lentement un bras devant vous.",
+   "Revenez et alternez."
+  ],
+  "352": [
+   "Faites rouler le ballon vers l'avant en allongeant le corps, dos droit.",
+   "Revenez lentement en ramenant le ballon."
+  ],
+  "292": [
+   "Levez un bras et la jambe du même côté.",
+   "Revenez lentement et alternez."
+  ],
+  "702": [
+   "Montez les bras sur les côtés jusqu'au-dessus de la tête.",
+   "Redescendez lentement."
+  ],
+  "703": [
+   "Montez les bras vers l'avant jusqu'au-dessus de la tête.",
+   "Redescendez lentement."
+  ],
+  "293": [
+   "Faites rouler le ballon vers l'avant en poussant les fesses vers les talons.",
+   "Maintenez quand vous sentez l'étirement sous les bras.",
+   "Revenez lentement."
+  ],
+  "294": [
+   "À genoux, le swiss ball à côté de vous.",
+   "Posez l'avant-bras et le coude sur le ballon.",
+   "Écartez les genoux du ballon jusqu'à ce que le corps forme une ligne droite, hanches alignées.",
+   "Maintenez 20 à 30 secondes, puis revenez."
+  ],
+  "295": [
+   "Poussez sur le ballon pour soulever le bassin jusqu'à aligner épaules et pied.",
+   "Redescendez lentement."
+  ],
+  "291": [
+   "Soulevez le bassin.",
+   "Ramenez le ballon vers vous en pliant le genou, avec le talon.",
+   "Repoussez-le en tendant la jambe, bassin toujours décollé."
+  ],
+  "301": [
+   "Avancez les pieds jusqu'à avoir les épaules et la tête posées sur le ballon, en position de table (bassin aligné).",
+   "Laissez descendre le bassin vers le sol.",
+   "Remontez en serrant les fessiers."
+  ],
+  "302": [
+   "Bassin aligné avec les genoux et les épaules.",
+   "Levez lentement un genou sans laisser tomber le bassin.",
+   "Reposez et alternez."
+  ],
+  "306": [
+   "Bras sur les côtés, pouces vers le haut (position T).",
+   "Levez les bras en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "303": [
+   "Dos droit.",
+   "Levez un bras tendu vers l'avant et le haut.",
+   "Redescendez lentement et alternez."
+  ],
+  "307": [
+   "Montez un genou vers le plafond et, en même temps, levez le bras opposé.",
+   "Redescendez lentement et alternez."
+  ],
+  "308": [
+   "Montez un genou vers le plafond et, en même temps, levez le bras du même côté.",
+   "Redescendez lentement et alternez."
+  ],
+  "309": [
+   "Coudes pliés le long du corps, mains à hauteur d'épaule (position W).",
+   "Levez les bras en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "310": [
+   "Bras tendus en diagonale vers l'avant, pouces vers le haut (position Y).",
+   "Levez les bras en serrant les omoplates.",
+   "Redescendez lentement."
+  ],
+  "597": [
+   "Asseyez-vous sur le swiss ball puis avancez les pieds en roulant vers l'arrière jusqu'à avoir le dos à plat sur le ballon.",
+   "Laissez les bras aller au-dessus de la tête pour étirer le dos et le ventre.",
+   "Respirez calmement pendant l'étirement."
+  ],
+  "563": [
+   "Avancez les pieds en roulant vers l'arrière jusqu'à avoir le dos posé sur le ballon.",
+   "Pour étirer davantage, tendez les bras au-dessus de la tête.",
+   "Maintenez en respirant calmement."
+  ],
+  "230": [
+   "Une serviette sous la main aide à glisser.",
+   "Faites glisser le bras sur le côté, loin du corps, en penchant le tronc.",
+   "Revenez lentement."
+  ],
+  "235": [
+   "Une serviette sous la main aide à glisser.",
+   "Faites glisser le bras vers l'avant en penchant le tronc.",
+   "Revenez lentement."
+  ],
+  "238": [
+   "Une serviette sous la main aide à glisser.",
+   "Faites glisser le bras dans cette diagonale en penchant le tronc, jusqu'à un étirement confortable.",
+   "Revenez lentement."
+  ],
+  "598": [
+   "Pointe du pied vers vous, dos droit.",
+   "Penchez-vous en avant depuis les hanches jusqu'à sentir l'étirement derrière la cuisse.",
+   "Maintenez."
+  ],
+  "599": [
+   "Tendez la jambe extérieure sur le côté.",
+   "Montez le bassin pour aligner le corps.",
+   "Levez la jambe tendue puis reposez-la doucement."
+  ],
+  "673": [
+   "Asseyez-vous doucement vers les talons.",
+   "Maintenez quand vous sentez l'étirement sous les orteils et la plante du pied."
+  ],
+  "23": [
+   "Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.",
+   "Tenez l'équilibre 10 à 15 secondes.",
+   "Changez de pied devant."
+  ],
+  "324": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Fermez les yeux et tenez l'équilibre.",
+   "Changez de pied devant."
+  ],
+  "325": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Tournez lentement la tête de gauche à droite.",
+   "Changez de pied devant."
+  ],
+  "326": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Fermez les yeux et tournez lentement la tête de gauche à droite.",
+   "Changez de pied devant."
+  ],
+  "327": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Levez puis baissez lentement la tête.",
+   "Changez de pied devant."
+  ],
+  "328": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Fermez les yeux et levez puis baissez lentement la tête.",
+   "Changez de pied devant."
+  ],
+  "329": [
+   "Placez un pied juste devant l'autre, comme sur une ligne.",
+   "Tenez l'équilibre.",
+   "Changez de pied devant."
+  ],
+  "509": [
+   "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+   "Regardez droit devant vous, pas vos pieds."
+  ],
+  "656": [
+   "Posez deux ou trois doigts sur les tempes.",
+   "Faites de petits cercles avec une pression légère.",
+   "Respirez calmement."
+  ],
+  "523": [
+   "Tenez le bas de la barre avec la main du côté à travailler, poignet relevé.",
+   "Attrapez le haut de la barre avec l'autre main, paume vers l'avant, et tordez-la.",
+   "Tendez les bras devant vous en gardant la torsion.",
+   "Laissez lentement la barre se détordre en abaissant le poignet du côté travaillé."
+  ],
+  "405": [
+   "Pliez légèrement le genou, pied au sol.",
+   "Tendez complètement le genou contre l'élastique en serrant la cuisse.",
+   "Revenez lentement."
+  ],
+  "149": [
+   "Tournez le tronc pour monter le coude vers le plafond.",
+   "Suivez le coude du regard.",
+   "Redescendez le coude vers l'autre bras, puis recommencez."
+  ],
+  "353": [
+   "Penchez légèrement le tronc vers l'avant.",
+   "Tournez le haut du corps d'un côté puis de l'autre, bassin immobile."
+  ],
+  "354": [
+   "Penchez le tronc sur le côté, puis de l'autre côté.",
+   "Les coudes montent et descendent comme une balance."
+  ],
+  "600": [
+   "Épaules au-dessus des mains, genoux écartés largeur de hanches.",
+   "Glissez un bras sous le corps, entre la main et le genou opposés, en tournant le tronc.",
+   "Posez l'épaule au sol si possible et maintenez.",
+   "Revenez et faites l'autre côté."
+  ],
+  "674": [
+   "Éloignez le pouce de la paume vers le plafond.",
+   "Revenez lentement."
+  ],
+  "657": [
+   "Avec l'autre main, écartez doucement le pouce vers l'arrière.",
+   "Maintenez quand vous sentez l'étirement."
+  ],
+  "675": [
+   "Pliez le pouce pour amener son extrémité vers la base du petit doigt.",
+   "Revenez lentement."
+  ],
+  "631": [
+   "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+   "Revenez lentement."
+  ],
+  "54": [
+   "Ouvrez bien la main en tendant les doigts.",
+   "Touchez avec le pouce l'extrémité de chaque doigt, un par un."
+  ],
+  "510": [
+   "Repliez le pouce dans la paume et fermez le poing par-dessus.",
+   "Inclinez doucement le poignet vers le petit doigt.",
+   "Maintenez quand vous sentez l'étirement à la base du pouce."
+  ],
+  "355": [
+   "Posez la paume sur le côté de la mâchoire.",
+   "Poussez la mâchoire contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes, puis faites l'autre côté."
+  ],
+  "356": [
+   "Posez deux doigts sur les dents du bas.",
+   "Essayez de fermer la bouche contre les doigts, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "357": [
+   "Posez la main sur le menton.",
+   "Poussez le menton vers l'avant contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "658": [
+   "Posez la paume sous le menton.",
+   "Essayez d'ouvrir la bouche contre la main, sans bouger.",
+   "Maintenez 3 à 5 secondes."
+  ],
+  "659": [
+   "Posez les doigts sur les muscles de la mâchoire, devant les oreilles.",
+   "Massez par petits cercles avec une pression douce."
+  ],
+  "660": [
+   "Tenez l'élastique tendu.",
+   "Pliez les orteils vers le bas contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "250": [
+   "Attrapez un objet avec les orteils.",
+   "Déplacez-le pour le déposer dans un autre tas ou un bol."
+  ],
+  "251": [
+   "Relevez les orteils et l'avant des pieds en restant sur les talons.",
+   "Ne penchez pas le corps en arrière et ne reculez pas les fesses.",
+   "Reposez lentement."
+  ],
+  "252": [
+   "Posez les orteils sur la serviette.",
+   "Tirez la serviette vers le haut pour relever les orteils.",
+   "Maintenez 30 secondes quand vous sentez l'étirement sous le pied."
+  ],
+  "253": [
+   "Talon au sol.",
+   "Froissez la serviette vers vous avec les orteils.",
+   "Étalez-la de nouveau et recommencez."
+  ],
+  "375": [
+   "Montez sur la pointe des pieds, corps droit.",
+   "Avancez en marchant sur la pointe des pieds."
+  ],
+  "53": [
+   "Tenez une serviette roulée dans la main.",
+   "Serrez fort, puis relâchez."
+  ],
+  "433": [
+   "Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.",
+   "Changez de sens."
+  ],
+  "434": [
+   "Tordez la serviette comme pour l'essorer, les poignets s'enroulant vers le bas.",
+   "Changez de sens."
+  ],
+  "432": [
+   "Posez deux doigts à l'intérieur des os du bassin, à l'avant.",
+   "Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.",
+   "Maintenez en respirant normalement, puis relâchez."
+  ],
+  "402": [
+   "Coude plié, collé au corps, bras le long du tronc.",
+   "Tendez le coude vers l'arrière contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "406": [
+   "Coude plié, bras le long du corps.",
+   "Tendez le coude vers l'arrière, sans bouger l'épaule.",
+   "Revenez lentement."
+  ],
+  "401": [
+   "Coude plié, bras collé au corps.",
+   "Tendez le coude vers l'arrière, sans bouger l'épaule.",
+   "Revenez lentement."
+  ],
+  "662": [
+   "Pliez les coudes pour descendre le poids derrière la tête.",
+   "Tendez les coudes pour remonter.",
+   "Gardez les coudes près de la tête."
+  ],
+  "661": [
+   "Coude du haut plié, près de la tête.",
+   "Tendez le coude vers le plafond contre l'élastique.",
+   "Revenez lentement."
+  ],
+  "448": [
+   "Levez le bras et pliez le coude pour amener la main derrière la tête.",
+   "Avec l'autre main, poussez doucement le coude vers l'arrière.",
+   "Maintenez quand vous sentez l'étirement à l'arrière du bras."
+  ],
+  "663": [
+   "Coude plié, main derrière la tête, tenez la sangle.",
+   "Attrapez le bas de la sangle dans le dos avec l'autre main.",
+   "Tirez doucement vers le bas.",
+   "Maintenez quand vous sentez l'étirement à l'arrière du bras."
+  ],
+  "468": [
+   "Laissez le poids de la tête appuyer sur la balle.",
+   "Maintenez 30 secondes, puis déplacez légèrement la balle."
+  ],
+  "469": [
+   "Laissez le poids de la tête appuyer sur la zone tendue.",
+   "Tournez doucement la tête pour masser."
+  ],
+  "511": [
+   "Pliez la jambe du côté à étirer et posez le pied à l'extérieur de l'autre genou.",
+   "Tournez le tronc vers la jambe pliée.",
+   "Poussez le genou avec le coude opposé pour étirer davantage. Maintenez."
+  ],
+  "256": [
+   "Plaquez le bas du dos au sol en serrant le ventre.",
+   "Ramenez un genou vers vous tout en montant le bras opposé derrière la tête.",
+   "Revenez lentement et alternez."
+  ],
+  "258": [
+   "Bassin au sol, regard vers le sol.",
+   "Décollez le haut du buste.",
+   "Redescendez lentement."
+  ],
+  "664": [
+   "Posez l'autre main sur la tête.",
+   "Inclinez doucement la tête vers l'épaule opposée.",
+   "Maintenez 30 secondes quand vous sentez l'étirement sur le côté du cou."
+  ],
+  "138": [
+   "Glissez la main du côté à étirer sous la cuisse ou derrière le dos.",
+   "Avec l'autre main, inclinez doucement la tête de l'autre côté.",
+   "Maintenez 30 secondes quand vous sentez l'étirement sur le côté du cou."
+  ],
+  "435": [
+   "Dessus des pieds au sol.",
+   "Tendez les bras pour soulever le buste, en laissant le dos se creuser.",
+   "Maintenez 30 secondes en respirant."
+  ],
+  "452": [
+   "Dos droit, penchez-vous légèrement en arrière.",
+   "Décollez les pieds du sol et tenez en équilibre sur les fesses.",
+   "Maintenez en respirant."
+  ],
+  "358": [
+   "Tournez la tête de 45° vers la gauche.",
+   "Allongez-vous rapidement sur le côté droit, tête toujours tournée. Restez 30 secondes ou jusqu'à ce que le vertige passe.",
+   "Rasseyez-vous et attendez 30 secondes.",
+   "Faites l'inverse : tête tournée à droite, allongez-vous sur le côté gauche.",
+   "À faire avec l'accord de votre kiné, une personne à côté de vous les premières fois."
+  ],
+  "359": [
+   "Sans bouger la tête, regardez à gauche puis à droite.",
+   "Puis en haut et en bas.",
+   "Puis en diagonale.",
+   "Commencez lentement, puis accélérez progressivement."
+  ],
+  "360": [
+   "Fixez le doigt du regard.",
+   "Tournez la tête de gauche à droite en gardant les yeux sur le doigt.",
+   "Puis de haut en bas.",
+   "Commencez lentement, puis accélérez progressivement."
+  ],
+  "259": [
+   "Descendez en reculant les fesses, comme pour vous asseoir.",
+   "Genoux dans l'axe des pieds.",
+   "Remontez en serrant l'intérieur des cuisses."
+  ],
+  "436": [
+   "Serrez le ballon.",
+   "Descendez en squat en reculant les fesses, genoux dans l'axe des pieds.",
+   "Remontez en gardant la pression sur le ballon."
+  ],
+  "260": [
+   "Relevez les orteils et marchez sur les talons.",
+   "Ne reculez pas les fesses."
+  ],
+  "261": [
+   "Montez sur la pointe des pieds.",
+   "Marchez sur la pointe des pieds, talons bien hauts."
+  ],
+  "334": [
+   "Réglez la canne à hauteur du poignet, coude légèrement plié.",
+   "Avancez la canne en même temps que la jambe douloureuse.",
+   "Faites ensuite le pas avec la bonne jambe."
+  ],
+  "477": [
+   "Une serviette sous la main aide à glisser.",
+   "Faites glisser la main vers le haut, aussi loin que possible sans douleur.",
+   "Redescendez lentement."
+  ],
+  "56": [
+   "Serrez la balle.",
+   "Relâchez lentement."
+  ],
+  "46": [
+   "Fermez le poing, paume vers le bas.",
+   "Relevez le poignet, puis abaissez-le."
+  ],
+  "512": [
+   "Enroulez la corde en tournant le bâton, poignets vers vous, pour faire monter le poids.",
+   "Déroulez lentement pour le faire redescendre."
+  ],
+  "437": [
+   "Avant-bras sur la cuisse, paume vers le bas.",
+   "Relevez le poignet contre l'élastique.",
+   "Redescendez lentement."
+  ],
+  "542": [
+   "Tordez la barre en relevant le poignet travaillé vers vous.",
+   "Revenez lentement."
+  ],
+  "57": [
+   "Paume vers le bas.",
+   "Relevez le poignet.",
+   "Redescendez lentement."
+  ],
+  "60": [
+   "Fermez le poing, paume vers le bas.",
+   "Pliez le poignet vers le bas.",
+   "Avec l'autre main, accentuez doucement.",
+   "Maintenez quand vous sentez l'étirement sur le dessus de l'avant-bras."
+  ],
+  "632": [
+   "Relevez le poignet, puis abaissez-le, coude tendu."
+  ],
+  "513": [
+   "Enroulez la corde en tournant le bâton, poignets vers le bas, pour faire monter le poids.",
+   "Déroulez lentement pour le faire redescendre."
+  ],
+  "262": [
+   "Fermez le poing.",
+   "Montez le poing vers le plafond en pliant le poignet.",
+   "Redescendez lentement."
+  ],
+  "438": [
+   "Avant-bras sur la cuisse, paume vers le haut.",
+   "Pliez le poignet vers le haut contre l'élastique.",
+   "Redescendez lentement."
+  ],
+  "543": [
+   "Tordez la barre en pliant le poignet travaillé vers l'avant.",
+   "Revenez lentement."
+  ],
+  "58": [
+   "Paume vers le haut.",
+   "Pliez le poignet vers le haut.",
+   "Redescendez lentement."
+  ],
+  "59": [
+   "Avec l'autre main, ramenez doucement les doigts vers le bas.",
+   "Maintenez quand vous sentez l'étirement sous l'avant-bras."
+  ],
+  "564": [
+   "Poing fermé.",
+   "Relevez le poing vers le plafond en inclinant le poignet côté pouce.",
+   "Redescendez lentement."
+  ],
+  "216": [
+   "Avant-bras sur la cuisse, sur la tranche, pouce vers le haut.",
+   "Inclinez le poignet vers le haut, côté pouce, contre l'élastique.",
+   "Redescendez lentement."
+  ],
+  "217": [
+   "Pouce vers le haut, main dans le vide.",
+   "Inclinez le poignet vers le haut, côté pouce.",
+   "Redescendez lentement."
+  ],
+  "48": [
+   "Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.",
+   "Le coude reste immobile."
+  ],
+  "263": [
+   "Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.",
+   "Le coude reste immobile."
+  ],
+  "47": [
+   "Poing fermé.",
+   "Inclinez le poignet vers le pouce, puis vers le petit doigt."
+  ],
+  "257": [
+   "Tendez légèrement l'élastique.",
+   "Inclinez le poignet travaillé côté petit doigt, en l'éloignant de l'autre main.",
+   "Revenez lentement."
+  ]
+ },
+ "positions": {
+  "156": "Debout sur une marche",
+  "679": "Debout face à un mur",
+  "66": "Allongé sur le dos, genoux pliés",
+  "157": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+  "311": "Assis, jambe tendue, élastique autour du pied",
+  "17": "Assis ou allongé, jambe tendue, une serviette sous la cheville",
+  "158": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+  "159": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+  "160": "Assis, jambe tendue, élastique fixé devant le pied",
+  "161": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+  "162": "Assis, jambe tendue, élastique autour de l'avant du pied",
+  "163": "Assis ou allongé, jambe tendue, une serviette sous la cheville",
+  "164": "Assis, jambes croisées au niveau des chevilles, élastique autour du pied",
+  "165": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+  "166": "Assis, jambe tendue, élastique autour de l'avant du pied",
+  "167": "Assis ou allongé, jambes tendues",
+  "565": "Assis ou allongé, talon posé sur le lit ou le canapé",
+  "168": "À genoux, assis sur les talons, dessus des pieds au sol",
+  "169": "Debout",
+  "170": "À quatre pattes, un rouleau sous le devant de la jambe",
+  "544": "Assis ou debout, pied nu au sol",
+  "61": "Assis ou debout",
+  "633": "Assis ou debout",
+  "634": "Debout, bras au-dessus de la tête",
+  "666": "Assis ou debout, dos droit",
+  "545": "Debout ou assis",
+  "361": "Dans la piscine, de l'eau à la taille ou plus",
+  "141": "Assis ou debout, élastique passé dans le dos à hauteur des épaules",
+  "396": "Assis sur une chaise, élastique sous le pied",
+  "399": "Debout, élastique sous le pied",
+  "397": "Assis sur une chaise, haltère en main",
+  "400": "Debout, haltère en main",
+  "547": "Debout, dos à une chaise ou une table",
+  "548": "Debout à côté d'un encadrement de porte",
+  "455": "Allongé sur le dos",
+  "566": "À quatre pattes, une main sur un disque d'équilibre",
+  "549": "Assis ou allongé",
+  "550": "Assis ou debout",
+  "551": "Assis ou debout, mains sur les épaules, coudes écartés",
+  "552": "Assis ou allongé confortablement",
+  "70": "Allongé sur le dos, genoux pliés, pieds à plat",
+  "422": "Allongé sur le dos, genoux pliés, élastique autour des cuisses",
+  "423": "Allongé sur le dos, genoux pliés, ballon entre les genoux",
+  "446": "Assis, plantes des pieds l'une contre l'autre",
+  "447": "Allongé sur le dos, genoux pliés, plantes des pieds jointes",
+  "636": "Assis confortablement",
+  "171": "Debout sur une marche, en vous tenant",
+  "172": "Debout sur une marche, sur une jambe, en vous tenant",
+  "82": "Assis, jambes tendues devant vous",
+  "174": "Debout face à un mur, un pied devant l'autre",
+  "687": "Assis, main posée devant vous paume vers le haut",
+  "424": "À quatre pattes",
+  "175": "À quatre pattes",
+  "176": "Assis ou debout, épaules relâchées",
+  "567": "À quatre pattes, mains sous les épaules",
+  "678": "Assis, une serviette derrière la nuque",
+  "177": "Assis ou debout, épaules relâchées",
+  "179": "Assis ou debout, épaules relâchées",
+  "568": "Allongé sur le dos, un rouleau sous la nuque",
+  "569": "Allongé sur le côté, tête sans oreiller",
+  "180": "Assis ou debout, épaules relâchées",
+  "444": "Allongé sur un rouleau placé dans la longueur de la colonne",
+  "445": "Debout",
+  "518": "Allongé sur le côté, genoux pliés",
+  "488": "Allongé sur le dos, une serviette roulée sous la nuque",
+  "487": "Assis ou debout",
+  "681": "Assis ou debout",
+  "682": "Assis ou debout, élastique tenu entre les mains devant vous",
+  "680": "Assis ou debout",
+  "137": "Assis sur une chaise, dos droit",
+  "472": "Assis, élastique passé derrière la tête",
+  "267": "Allongé sur le côté, genoux pliés",
+  "268": "Allongé sur le côté, genoux pliés, élastique au-dessus des genoux",
+  "570": "Allongé sur le côté, genoux pliés, pieds décollés du sol",
+  "614": "Allongé sur le côté, genoux pliés, un ballon entre les chevilles",
+  "615": "Allongé sur le côté, genoux pliés, un poids sur la cuisse",
+  "381": "Debout au pied d'un escalier, en tenant la rampe",
+  "382": "Debout au pied d'un escalier, canne du côté de la bonne jambe",
+  "476": "Debout face à un angle de mur",
+  "571": "Allongé sur le dos, jambes légèrement écartées",
+  "9": "À quatre pattes",
+  "415": "Debout avec deux béquilles",
+  "416": "Debout avec deux béquilles, sans poser la jambe opérée",
+  "417": "Debout, canne du côté opposé à la jambe blessée",
+  "418": "Debout avec deux béquilles, appui partiel autorisé",
+  "181": "Allongé sur le dos, genoux pliés, bras croisés sur la poitrine",
+  "182": "Allongé sur le dos, genoux pliés, bras croisés sur la poitrine",
+  "183": "Allongé sur le dos, genoux pliés, mains derrière la tête",
+  "425": "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux à 90°",
+  "572": "Allongé sur le dos, bras vers le plafond, hanches et genoux à 90°",
+  "489": "Assis ou debout, bras le long du corps",
+  "683": "Debout, en vous tenant à une chaise solide",
+  "362": "Dans l'eau profonde, avec une ceinture de flottaison ou une frite",
+  "699": "Assis, zone de la cicatrice accessible",
+  "184": "Allongé sur le dos, genoux pliés, bras tendus devant vous",
+  "617": "Assis au sol, jambes tendues, mains au sol derrière le bassin",
+  "185": "Allongé sur le dos, genoux pliés",
+  "574": "Allongé sur le dos",
+  "553": "Debout, élastique fixé sur le côté à hauteur de taille",
+  "426": "À quatre pattes",
+  "554": "Allongé sur le dos",
+  "519": "Assis devant un miroir, visage détendu",
+  "520": "Assis devant un miroir, visage détendu",
+  "453": "Allongé sur le dos, jambes tendues",
+  "620": "Main ouverte, doigts écartés",
+  "619": "Main posée devant vous, paume vers le bas",
+  "618": "Main détendue, doigts tendus",
+  "55": "Coude posé sur une table, élastique autour des doigts",
+  "616": "Main levée, paume vers l'avant",
+  "490": "Main devant vous, doigts tendus",
+  "186": "Coude posé sur une table",
+  "637": "Assis, élastique autour du gros orteil",
+  "136": "Assis, une balle de tennis entre le cou et l'épaule",
+  "135": "Assis, une sangle posée au creux entre le cou et l'épaule",
+  "521": "Allongé sur un rouleau placé en diagonale sous le dos",
+  "491": "Assis au sol, rouleau sous le mollet",
+  "363": "Dans la piscine, de l'eau à la taille ou plus",
+  "376": "Dans la piscine, haltères aquatiques en main",
+  "696": "À quatre pattes au sol",
+  "332": "Assis au sol, genoux pliés",
+  "270": "Assis par terre ou sur le lit, genoux pliés",
+  "187": "Allongé sur le dos ou sur le ventre",
+  "312": "Debout sur une jambe, appui sur une canne ou un manche",
+  "464": "Debout sur une jambe, un poids dans la main opposée",
+  "522": "Assis, barre souple (type Flexbar) tenue devant vous",
+  "451": "À genoux",
+  "79": "Allongé sur le ventre, jambes tendues",
+  "638": "Debout, en vous tenant si besoin",
+  "364": "Dans la piscine, de l'eau à la taille ou plus",
+  "365": "Debout dans la piscine, en vous tenant au bord",
+  "414": "Debout, mains sur un meuble stable",
+  "86": "Assis ou allongé, la jambe à travailler pliée",
+  "621": "Assis, jambes tendues devant vous",
+  "81": "Assis au sol ou sur le lit, une jambe tendue, l'autre pliée",
+  "68": "Allongé sur le dos, une sangle autour du pied",
+  "492": "Main devant vous",
+  "555": "Debout, pieds écartés largeur d'épaules, en vous tenant si besoin",
+  "189": "Debout, mains sur une chaise ou un comptoir",
+  "493": "Allongé sur le dos, élastique ou sangle autour du pied",
+  "190": "Allongé sur le dos, jambes tendues",
+  "366": "Dans la piscine",
+  "367": "Debout dans la piscine, en vous tenant au bord",
+  "74": "Allongé sur le côté, jambe à travailler au-dessus",
+  "191": "Allongé sur le dos, genoux pliés, élastique au-dessus des genoux",
+  "75": "Allongé sur le côté, jambe à travailler en dessous",
+  "80": "Allongé sur le ventre",
+  "494": "Allongé sur le ventre, genou plié à 90°",
+  "496": "Assis sur une chaise, dos droit, hanches et genoux à 90°",
+  "495": "Assis sur une chaise, dos droit, élastique autour des chevilles",
+  "368": "Debout dans la piscine, en vous tenant au bord",
+  "273": "À genoux, en position de fente (un genou au sol)",
+  "333": "Allongé sur le dos, au bord du lit",
+  "497": "Allongé sur le dos, un coussin sous les fesses",
+  "639": "Debout sur la jambe à travailler, l'autre pied légèrement décollé",
+  "640": "Debout de profil sur une marche, sur la jambe à travailler",
+  "499": "Allongé sur le ventre, genou plié à 90°",
+  "501": "Assis sur une chaise, dos droit, hanches et genoux à 90°",
+  "500": "Assis sur une chaise, dos droit, élastique autour des pieds",
+  "193": "Debout ou assis",
+  "475": "Assis sur une chaise",
+  "134": "Assis ou debout, épaules relâchées",
+  "133": "Assis ou debout, épaules relâchées",
+  "131": "Assis ou debout, épaules relâchées",
+  "132": "Assis ou debout, épaules relâchées",
+  "87": "Allongé sur le dos, genoux pliés, sangle autour des cuisses",
+  "88": "Allongé sur le dos, genoux pliés, coussin entre les genoux",
+  "231": "Assis dos contre le dossier d'une chaise, ou debout dos à un mur",
+  "383": "Assis ou debout",
+  "234": "Assis ou debout",
+  "232": "Assis ou debout",
+  "478": "Assis sur une chaise",
+  "300": "Debout",
+  "76": "Allongé sur le côté, jambe à étirer au-dessus",
+  "335": "Allongé sur le côté au bord du lit, jambe à étirer au-dessus",
+  "199": "Allongé sur le dos, une sangle autour du pied",
+  "275": "Debout de profil contre un mur, côté à étirer près du mur",
+  "274": "Allongé sur le côté, rouleau sous l'extérieur de la cuisse",
+  "641": "Debout",
+  "642": "Debout, pieds joints, bras le long du corps",
+  "575": "Assis au sol ou sur le lit, talon posé sur un rouleau",
+  "395": "Debout de profil à côté d'une marche",
+  "139": "Assis ou debout",
+  "336": "Debout face à la charge",
+  "524": "Assis devant un miroir, visage détendu",
+  "337": "Allongé sur le dos dans le lit",
+  "667": "Assis sur une chaise, élastique autour de la cheville",
+  "443": "Allongé sur le dos",
+  "498": "En fente, genou arrière au sol sur un coussin",
+  "90": "Debout, un pied devant l'autre (grand pas)",
+  "369": "Dans la piscine",
+  "470": "Debout, en vous tenant si besoin",
+  "576": "Allongé sur le dos, rouleau en travers sous le haut du dos",
+  "602": "À genoux, un coussin devant vous",
+  "643": "Debout",
+  "502": "Debout, un coussin au sol sous le genou arrière",
+  "503": "Assis au sol ou sur le lit",
+  "428": "À quatre pattes",
+  "556": "À quatre pattes, mains sous les épaules",
+  "577": "À quatre pattes",
+  "668": "Allongé sur le côté, appui sur l'avant-bras et les genoux",
+  "429": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+  "442": "Assis ou allongé",
+  "644": "Assis ou debout, épaules relâchées",
+  "338": "Assis ou debout, une serviette autour du cou",
+  "473": "Assis ou debout, élastique autour de la tête",
+  "684": "Assis ou debout, bras croisés sur la poitrine",
+  "474": "Assis ou debout, élastique autour de la tête",
+  "63": "Assis ou debout",
+  "64": "Assis ou debout",
+  "65": "Assis ou debout",
+  "67": "Allongé sur le dos, genoux pliés",
+  "62": "Assis ou debout",
+  "525": "Assis devant un miroir, visage détendu",
+  "601": "Allongé sur le dos, genoux pliés, ballon entre les genoux",
+  "603": "Allongé sur le ventre, genoux pliés à 90°, élastique autour des chevilles",
+  "578": "Allongé sur le côté, genoux pliés l'un sur l'autre",
+  "622": "Main posée devant vous, paume vers le haut",
+  "101": "Assis, jambe tendue et détendue",
+  "557": "Debout dans un encadrement de porte",
+  "604": "Allongé sur le dos, genoux pliés, soutenus par un coussin",
+  "280": "Allongé sur le dos, jambe droite tendue sur une serviette roulée",
+  "454": "Allongé sur le dos, jambe gauche tendue sur une serviette roulée",
+  "607": "Allongé sur le dos, genoux pliés, ballon entre les genoux",
+  "605": "Allongé sur le dos, genoux pliés, ballon entre les genoux",
+  "606": "Allongé sur le dos, hanches et genoux à 90°, ballon entre les genoux",
+  "108": "Debout, penché en avant, main valide appuyée sur une table",
+  "484": "Debout, penché en avant, main valide sur une table, un petit poids dans l'autre",
+  "110": "Debout, penché en avant, main valide appuyée sur une table",
+  "479": "Debout, penché en avant, main valide sur une table, un petit poids dans l'autre",
+  "109": "Debout, penché en avant, main valide appuyée sur une table",
+  "467": "Debout, penché en avant, main valide sur une table, un petit poids dans l'autre",
+  "685": "Assis, cheville croisée sur le genou opposé",
+  "394": "Allongé sur le dos, genoux pliés",
+  "283": "Au sol, une jambe pliée devant, l'autre tendue derrière",
+  "284": "Allongé sur le dos, genoux pliés",
+  "504": "Assis au sol, jambes tendues",
+  "200": "Allongé sur le ventre, en appui sur les avant-bras",
+  "579": "En planche, bras tendus",
+  "313": "En planche sur les avant-bras",
+  "314": "En planche sur les avant-bras",
+  "201": "Assis, pied posé sur la cuisse opposée",
+  "645": "Assis, une balle sous le pied",
+  "202": "Assis sur une chaise, pied sur un rouleau ou une bouteille d'eau congelée",
+  "277": "Debout, en vous tenant à un appui",
+  "278": "Debout, en vous tenant à un appui",
+  "203": "Assis ou debout",
+  "686": "Debout, en vous tenant à une chaise",
+  "204": "À genoux, assis sur les talons",
+  "205": "À genoux, assis sur les talons",
+  "206": "Allongé sur le ventre, bras tendus devant vous",
+  "427": "Allongé sur le ventre, lests aux chevilles",
+  "580": "Allongé sur le ventre, un genou plié à 90°",
+  "286": "Allongé sur le ventre",
+  "330": "Allongé sur le ventre, front sur une serviette",
+  "152": "Allongé sur le ventre, front sur une serviette",
+  "207": "Allongé sur le ventre, mains au sol sous les épaules",
+  "208": "Allongé sur le ventre, en appui sur les avant-bras",
+  "209": "Allongé sur le ventre, bras tendus devant vous",
+  "340": "Allongé sur le ventre au bord du lit, bras pendant dans le vide",
+  "341": "Allongé sur le ventre au bord du lit, bras pendant, un petit poids en main",
+  "342": "Allongé sur le ventre au bord du lit, bras pendant dans le vide",
+  "343": "Allongé sur le ventre au bord du lit, bras pendant, un petit poids en main",
+  "344": "Allongé sur le ventre, bras sur le lit à 90° du corps, avant-bras pendant dans le vide",
+  "345": "Allongé sur le ventre, bras sur le lit à 90° du corps, avant-bras pendant, petit poids en main",
+  "346": "Allongé sur le ventre au bord du lit, bras pendant dans le vide",
+  "347": "Allongé sur le ventre au bord du lit, bras pendant, un petit poids en main",
+  "348": "Allongé sur le ventre, bras sur le lit à 90° du corps, avant-bras pendant dans le vide",
+  "339": "Allongé sur le ventre, bras sur le lit à 90° du corps, avant-bras pendant, petit poids en main",
+  "210": "Allongé sur le ventre, bras tendus devant vous",
+  "211": "Allongé sur le ventre, bras tendus devant vous",
+  "153": "Allongé sur le ventre, front sur une serviette",
+  "155": "Allongé sur le ventre, front sur une serviette",
+  "154": "Allongé sur le ventre",
+  "514": "Assis ou debout, poulie fixée en haut d'une porte",
+  "515": "Assis ou debout, poulie fixée sur la porte, légèrement derrière vous",
+  "516": "Assis ou debout, poulie fixée en haut d'une porte",
+  "517": "Assis ou debout, poulie fixée en haut d'une porte",
+  "646": "Assis ou debout, détendu",
+  "558": "En position de pompe, sur les genoux ou les pieds",
+  "581": "En position de pompe, mains et orteils au sol",
+  "582": "Allongé sur le dos, genoux pliés",
+  "583": "Allongé sur le côté, côté à étirer vers le haut",
+  "85": "Assis ou allongé, jambe tendue, serviette roulée sous le genou",
+  "212": "À genoux en fente, coussin sous le genou arrière",
+  "77": "Allongé sur le ventre, une sangle autour de la cheville",
+  "78": "Allongé sur le côté, jambe à étirer au-dessus",
+  "430": "Assis en tailleur ou sur une chaise",
+  "584": "À quatre pattes",
+  "585": "À quatre pattes",
+  "586": "À quatre pattes, un disque d'équilibre sous un genou",
+  "290": "À quatre pattes",
+  "613": "À quatre pattes",
+  "213": "À quatre pattes",
+  "214": "À quatre pattes",
+  "215": "À quatre pattes",
+  "608": "À quatre pattes, mains sous les épaules",
+  "218": "À genoux, assis sur les talons, bras tendus devant vous au sol",
+  "587": "Allongé sur le dos, genoux pliés, élastique tendu sur le bassin",
+  "450": "Debout, élastique fixé devant vous à hauteur d'épaule",
+  "526": "Assis ou debout, barre souple tenue à deux mains devant vous",
+  "529": "Assis ou debout, barre souple tenue verticalement d'une main",
+  "528": "Assis ou debout, barre souple tenue verticalement d'une main, bras tendu",
+  "220": "Allongé sur le dos, hanches et genoux pliés à 90°",
+  "219": "Allongé sur le dos, jambes tendues",
+  "222": "Assis ou debout",
+  "221": "Assis, jambes tendues, mains jointes devant vous",
+  "223": "À quatre pattes",
+  "370": "Dans la piscine, en vous tenant au bord si besoin",
+  "371": "Dans la piscine",
+  "22": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "315": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "318": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "316": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "319": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "317": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+  "320": "Debout, à côté d'un mur ou d'une chaise",
+  "527": "Debout, élastique fixé en hauteur (au-dessus des épaules)",
+  "623": "Assis sur une chaise, élastique passé autour des pieds",
+  "150": "À quatre pattes",
+  "331": "À quatre pattes, un poids ou une bouteille d'eau dans une main",
+  "441": "Assis ou debout",
+  "559": "Assis sur une chaise, dos droit",
+  "560": "Assis, jambe tendue posée sur une chaise devant vous",
+  "624": "Allongé sur le côté, du côté de la convexité de la courbure",
+  "647": "Assis, pied décollé du sol",
+  "700": "Assis, pied décollé du sol",
+  "648": "Assis, jambe tendue, sangle autour de l'avant du pied",
+  "530": "Assis sur une chaise, mains sur les genoux",
+  "665": "Assis sur une chaise, talon posé au sol devant vous",
+  "531": "Assis sur une chaise, talon posé sur un tabouret devant vous",
+  "188": "Assis sur une chaise, pieds à plat",
+  "649": "Assis sur une chaise, pied devant vous",
+  "561": "Assis sur une chaise, élastique au-dessus des genoux",
+  "224": "Assis sur une chaise, élastique sous le pied, une extrémité dans chaque main",
+  "225": "Assis sur une chaise, dos droit, pieds à plat",
+  "651": "Assis sur une chaise, lest à la cheville",
+  "532": "Assis sur une chaise, élastique autour des pieds",
+  "669": "Assis sur une chaise, sangle autour des cuisses au-dessus des genoux",
+  "677": "Assis sur une chaise, ballon ou coussin entre les genoux",
+  "99": "Assis sur une chaise, dos droit",
+  "100": "Assis, talon posé sur une chaise ou un tabouret devant vous, genou dans le vide",
+  "533": "Assis sur une chaise, pieds au sol",
+  "688": "Assis sur une chaise haute ou une table, jambes dans le vide, lest à la cheville",
+  "562": "Assis sur une chaise, élastique au-dessus des genoux",
+  "626": "Assis sur une chaise, genoux et pieds joints",
+  "625": "Assis sur une chaise, élastique au-dessus des genoux",
+  "652": "Assis sur une chaise, lest à la cheville",
+  "534": "Assis sur une chaise, une serviette roulée sous les fesses",
+  "456": "Assis sur une chaise",
+  "465": "Assis sur une chaise",
+  "701": "Assis sur une chaise",
+  "535": "Assis sur une chaise",
+  "689": "Assis, mains jointes devant vous",
+  "226": "Assis au sol ou sur une chaise, élastique autour des pieds",
+  "627": "Assis sur une chaise, élastique au-dessus des genoux",
+  "628": "Assis sur une chaise, genoux et pieds joints",
+  "690": "Assis sur une chaise",
+  "227": "Assis sur une chaise à dossier bas",
+  "676": "Assis sur une chaise",
+  "228": "Assis sur une chaise, dos droit",
+  "653": "Assis, dos droit",
+  "147": "Allongé sur le dos, bras tendu vers le plafond",
+  "142": "Debout, élastique passé dans le dos sous les épaules",
+  "229": "Allongé sur le dos, bras tendu vers le plafond, un poids en main",
+  "398": "Allongé sur le dos, un rouleau ou une serviette roulée sous le genou",
+  "480": "Debout",
+  "106": "Debout, un bâton tenu à deux mains",
+  "125": "Assis ou debout, bras le long du corps",
+  "449": "Debout, bras écartés à hauteur d'épaule",
+  "481": "Debout, bras le long du corps",
+  "588": "Allongé sur le côté, épaule à travailler vers le haut",
+  "146": "Allongé sur le côté, épaule à travailler vers le haut, un poids en main",
+  "536": "Debout, élastique fixé sur le côté à hauteur de coude, du côté opposé au bras travaillé",
+  "233": "Debout, coudes au corps",
+  "107": "Debout ou allongé, un bâton tenu à deux mains",
+  "483": "Debout, bras le long du corps",
+  "105": "Debout, un bâton tenu à deux mains devant vous",
+  "112": "Debout, élastique tenu à deux mains devant vous, bras tendus",
+  "589": "Allongé sur le côté douloureux, épaule légèrement avancée",
+  "145": "Allongé sur le côté de l'épaule travaillée, un poids en main",
+  "144": "Allongé sur le côté de l'épaule à étirer",
+  "537": "Debout, élastique fixé sur le côté à hauteur de coude, du côté du bras travaillé",
+  "654": "Debout",
+  "143": "Debout, une serviette dans le dos",
+  "120": "Debout",
+  "121": "Debout, élastique fixé en hauteur, du même côté",
+  "122": "Debout",
+  "123": "Debout, élastique fixé en bas, du même côté",
+  "482": "Debout, bras le long du corps",
+  "124": "Debout, bras le long du corps",
+  "471": "Debout, un haltère dans chaque main",
+  "421": "Allongé sur le dos, genoux pliés",
+  "413": "Assis ou debout, bras détendus",
+  "148": "À quatre pattes, dos plat",
+  "322": "Allongé sur le dos, un bâton tenu à deux mains",
+  "463": "Debout, pieds largement écartés",
+  "241": "Allongé sur le côté, en appui sur l'avant-bras",
+  "592": "En planche latérale, en appui sur l'avant-bras",
+  "372": "Dans la piscine",
+  "505": "Debout, élastique au-dessus des genoux",
+  "691": "Debout, un poids dans une main",
+  "590": "Allongé sur le côté, jambe à travailler au-dessus",
+  "591": "Allongé sur le côté, jambe à travailler au-dessus",
+  "593": "Allongé sur le côté, jambe à travailler au-dessus et tendue",
+  "373": "Dans la piscine",
+  "242": "Allongé sur le dos, genoux pliés",
+  "243": "Debout, à côté d'un mur ou d'une chaise",
+  "698": "Debout sur une jambe, une chaise devant vous",
+  "71": "Allongé sur le dos, genoux pliés",
+  "244": "Debout sur une jambe, à côté d'un support",
+  "93": "Debout sur une jambe, à côté d'un support",
+  "462": "Debout sur une jambe, mains jointes devant vous",
+  "461": "Debout sur une jambe, un poids tenu à deux mains devant vous",
+  "245": "Debout sur une jambe, à côté d'un support",
+  "349": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+  "697": "Debout, sur la pointe des pieds",
+  "692": "Debout, un pied devant l'autre, sur la pointe des pieds",
+  "440": "Assis ou allongé, cicatrice bien fermée",
+  "374": "Dans la piscine",
+  "246": "Debout, mains sur un meuble, un pied devant l'autre",
+  "609": "Assis, jambe tendue, sangle autour de l'avant du pied",
+  "635": "Assis confortablement",
+  "460": "Debout, pieds écartés largeur d'épaules",
+  "91": "Debout, pieds écartés largeur de hanches",
+  "538": "Debout devant une chaise, élastique au-dessus des genoux",
+  "92": "Debout devant une chaise",
+  "693": "Debout, pieds écartés largeur d'épaules",
+  "459": "Au pied de l'escalier, deux béquilles, sans appui sur la jambe opérée",
+  "458": "Au pied de l'escalier, deux béquilles, appui partiel",
+  "457": "Au pied de l'escalier, canne du côté de la bonne jambe",
+  "385": "Debout, une main sur une chaise, élastique à la cheville",
+  "384": "Debout, mains sur une chaise, élastique ou lest à la cheville",
+  "264": "Debout, élastique à la cheville, fixé à un point bas",
+  "694": "Debout, élastique passé dans le dos à hauteur des aisselles",
+  "466": "Debout, talon posé sur une marche ou un tabouret devant vous",
+  "96": "Debout, en vous tenant si besoin",
+  "506": "Debout, en vous tenant si besoin",
+  "386": "Debout face à une chaise, élastique à la cheville fixé du côté opposé",
+  "387": "Debout face à une chaise, mains sur le dossier",
+  "296": "Debout, élastique autour des deux chevilles",
+  "97": "Debout, en vous tenant si besoin",
+  "388": "Debout à côté d'une chaise, élastique à la cheville fixé du même côté",
+  "389": "Debout à côté d'une chaise, une main sur le dossier",
+  "297": "Debout, élastique à la cheville",
+  "507": "Debout, en vous tenant si besoin",
+  "95": "Debout, en vous tenant si besoin",
+  "390": "Debout face à une chaise, élastique à la cheville fixé devant vous",
+  "391": "Debout face à une chaise, mains sur le dossier",
+  "298": "Debout, élastique à la cheville fixé devant vous",
+  "94": "Debout, en vous tenant si besoin",
+  "508": "Debout, en vous tenant si besoin",
+  "392": "Debout, une main sur une chaise, élastique à la cheville fixé derrière vous",
+  "393": "Debout à côté d'une chaise, une main sur le dossier",
+  "299": "Debout, élastique à la cheville fixé derrière vous",
+  "539": "Debout de profil à côté d'un mur, côté à étirer près du mur",
+  "439": "Debout, une main sur une chaise ou un comptoir",
+  "540": "Debout, élastique fixé devant vous à hauteur de taille",
+  "350": "Debout, élastique bloqué sous le pied du côté travaillé",
+  "351": "Debout, élastique fixé devant vous",
+  "113": "Debout, élastique bloqué sous le pied du côté travaillé",
+  "114": "Debout, élastique bloqué sous le pied du côté travaillé",
+  "655": "Debout, bras tendus devant vous, mains jointes",
+  "247": "Debout, pieds écartés largeur d'épaules",
+  "248": "Debout, pieds écartés largeur d'épaules",
+  "249": "Debout, pieds écartés largeur d'épaules",
+  "403": "Debout sur une marche, en vous tenant",
+  "404": "Debout devant une marche, en vous tenant si besoin",
+  "485": "Assis, coude plié à 90° posé sur une table",
+  "486": "Assis, coude plié à 90° posé sur une table",
+  "83": "Allongé sur le dos, en appui sur les coudes",
+  "84": "Assis, jambes tendues, en appui sur les mains derrière vous",
+  "72": "Allongé sur le dos",
+  "73": "Allongé sur le dos",
+  "541": "Debout, un bâton tenu verticalement",
+  "695": "Debout, pieds écartés plus que les épaules, pointes vers l'extérieur",
+  "610": "Allongé sur le dos, genoux pliés",
+  "546": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+  "611": "Allongé sur le dos, jambes tendues",
+  "594": "Allongé sur le dos, jambes tendues",
+  "595": "Allongé sur le dos, élastique autour des pieds",
+  "612": "Allongé sur le dos, jambes tendues",
+  "672": "Allongé sur le dos, genoux pliés, pieds joints",
+  "671": "Allongé sur le dos, genoux pliés, élastique au-dessus des genoux",
+  "629": "Allongé sur le dos, sans oreiller",
+  "431": "Allongé sur le dos, genoux pliés",
+  "670": "Allongé sur le dos, genoux pliés, bâton tenu à deux mains",
+  "254": "Allongé sur le dos, genoux pliés, pieds joints",
+  "255": "Allongé sur le dos, genoux pliés, pieds joints",
+  "596": "Allongé sur le dos, genoux pliés, pieds largement écartés",
+  "630": "Allongé sur le dos, genoux pliés, bras tendus vers le plafond mains jointes",
+  "281": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "265": "Allongé sur le dos, mollets posés sur le swiss ball",
+  "266": "Allongé sur le dos, talons posés sur le swiss ball, jambes tendues",
+  "269": "Assis sur le swiss ball",
+  "573": "Allongé sur le dos, swiss ball tenu entre les mains et les genoux",
+  "271": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "272": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "305": "Allongé sur le ventre sur le swiss ball, pieds au sol",
+  "304": "Allongé sur le ventre sur le swiss ball, pieds au sol",
+  "276": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "282": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "279": "Allongé sur le ventre sur le swiss ball, mains et pieds au sol",
+  "285": "À genoux devant le swiss ball, avant-bras posés dessus, mains jointes",
+  "287": "Assis sur le swiss ball",
+  "288": "En planche, avant-bras sur le swiss ball",
+  "289": "À quatre pattes, ventre posé sur le swiss ball",
+  "352": "À genoux devant le swiss ball, avant-bras posés dessus",
+  "292": "Allongé sur le ventre sur le swiss ball, mains et pieds au sol",
+  "702": "Assis sur le swiss ball, bras le long du corps, pouces vers le haut",
+  "703": "Assis sur le swiss ball, bras devant vous, pouces vers le haut",
+  "293": "À genoux, mains posées sur le swiss ball devant vous, pouces vers le haut",
+  "294": "À genoux, à côté du swiss ball",
+  "295": "Allongé sur le dos, un pied posé sur le swiss ball, l'autre jambe en l'air",
+  "291": "Allongé sur le dos, un talon posé sur le swiss ball, l'autre jambe en l'air",
+  "301": "Assis sur le swiss ball",
+  "302": "En position de table sur le swiss ball, épaules posées dessus",
+  "306": "Allongé sur le ventre sur le swiss ball, pieds au sol",
+  "303": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "307": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "308": "Assis sur le swiss ball, hanches et genoux à 90°",
+  "309": "Allongé sur le ventre sur le swiss ball, pieds au sol",
+  "310": "Allongé sur le ventre sur le swiss ball, pieds au sol",
+  "597": "Assis sur le swiss ball",
+  "563": "Assis sur le swiss ball",
+  "230": "Assis de profil à une table, bras posé dessus, pouce vers le haut",
+  "235": "Assis face à une table, bras posé dessus, pouce vers le haut",
+  "238": "Assis à une table, bras posé à 45° devant vous, pouce vers le haut",
+  "598": "À genoux, une jambe tendue devant vous, talon au sol",
+  "599": "À genoux, appui sur une main sur le côté",
+  "673": "À genoux, orteils retournés sous les pieds",
+  "23": "Debout, à côté d'un support",
+  "324": "Debout, à côté d'un support",
+  "325": "Debout, à côté d'un support",
+  "326": "Debout, à côté d'un support",
+  "327": "Debout, à côté d'un support",
+  "328": "Debout, à côté d'un support",
+  "329": "Debout sur un coussin, à côté d'un support",
+  "509": "Debout, près d'un mur",
+  "656": "Assis ou allongé confortablement",
+  "523": "Assis, barre souple (type Flexbar) tenue verticalement devant vous",
+  "405": "Debout, élastique fixé devant vous, passé derrière le genou",
+  "149": "À quatre pattes, une main derrière la nuque",
+  "353": "Assis ou debout, mains derrière la nuque",
+  "354": "Assis ou debout, mains derrière la nuque",
+  "600": "À quatre pattes",
+  "674": "Main posée sur une table, paume vers le haut",
+  "657": "Main ouverte, paume vers le haut",
+  "675": "Main ouverte",
+  "631": "Main ouverte, doigts tendus",
+  "54": "Main détendue",
+  "510": "Assis ou debout, bras tendu devant vous",
+  "355": "Assis, dents légèrement desserrées",
+  "356": "Assis, bouche légèrement ouverte",
+  "357": "Assis, dents légèrement desserrées",
+  "658": "Assis, dents légèrement desserrées",
+  "659": "Assis, bouche légèrement ouverte",
+  "660": "Assis, élastique passé sous les orteils",
+  "250": "Assis sur une chaise, petits objets au sol (billes, élastiques)",
+  "251": "Debout, dos près d'un mur, pieds écartés largeur d'épaules",
+  "252": "Assis sur une chaise, une serviette sous l'avant du pied",
+  "253": "Assis sur une chaise, une serviette à plat sous le pied",
+  "375": "Dans la piscine",
+  "53": "Assis, avant-bras posé sur une table ou sur les cuisses",
+  "433": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
+  "434": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
+  "432": "Allongé sur le dos, genoux pliés",
+  "402": "Debout, penché en avant, élastique bloqué sous le pied",
+  "406": "À quatre pattes, un poids dans la main",
+  "401": "Debout, penché en avant, un poids dans la main",
+  "662": "Assis ou debout, un poids tenu à deux mains au-dessus de la tête",
+  "661": "Debout, élastique tenu d'une main au-dessus de la tête, de l'autre dans le dos",
+  "448": "Assis ou debout",
+  "663": "Debout, une sangle tenue au-dessus de la tête",
+  "468": "Allongé sur le dos, une balle sous la zone tendue",
+  "469": "Allongé sur le dos, un rouleau sous la nuque",
+  "511": "Assis au sol, jambes tendues",
+  "256": "Allongé sur le dos, genoux pliés",
+  "258": "Allongé sur le ventre, un coussin sous la poitrine, mains dans le dos",
+  "664": "Assis, une main sous la cuisse ou le bord de la chaise du côté à étirer",
+  "138": "Assis sur une chaise",
+  "435": "Allongé sur le ventre, mains au sol sous les épaules",
+  "452": "Assis au sol, genoux pliés, bras tendus devant vous",
+  "358": "Assis au milieu d'un lit",
+  "359": "Assis, tête immobile",
+  "360": "Assis ou debout, un doigt tendu devant vous",
+  "259": "Debout, pieds écartés largeur d'épaules, pointes tournées vers l'extérieur",
+  "436": "Debout, un ballon entre les genoux",
+  "260": "Debout, pieds écartés largeur d'épaules",
+  "261": "Debout, corps droit",
+  "334": "Debout, canne dans la main opposée à la jambe douloureuse",
+  "477": "Debout face à un mur, main posée dessus, pouce vers le haut",
+  "56": "Assis ou debout, une balle souple dans la main",
+  "46": "Avant-bras posé sur une table, main dans le vide, coude plié",
+  "512": "Debout, bras tendus devant vous, bâton avec une corde et un poids",
+  "437": "Assis sur une chaise, élastique bloqué sous le pied",
+  "542": "Assis, barre souple tenue à deux mains devant vous",
+  "57": "Avant-bras posé sur une table, main dans le vide, un poids dans la main",
+  "60": "Debout ou assis, bras tendu devant vous",
+  "632": "Debout ou assis, bras tendu devant vous, poing fermé",
+  "513": "Debout, bras tendus devant vous, bâton avec une corde et un poids",
+  "262": "Avant-bras posé sur une table, main dans le vide, paume vers le haut",
+  "438": "Assis sur une chaise, élastique bloqué sous le pied",
+  "543": "Assis, barre souple tenue à deux mains devant vous",
+  "58": "Avant-bras posé sur une table, main dans le vide, un poids dans la main",
+  "59": "Debout ou assis, bras tendu devant vous, paume vers le haut",
+  "564": "Avant-bras posé sur une table, sur la tranche, pouce vers le haut",
+  "216": "Assis sur une chaise, élastique bloqué sous le pied",
+  "217": "Avant-bras posé sur une table, sur la tranche, un poids dans la main",
+  "48": "Assis, coude plié à 90° collé au corps, un marteau tenu par le manche",
+  "263": "Assis ou debout, coude plié à 90° collé au corps",
+  "47": "Avant-bras posé sur une table, main dans le vide, paume vers le bas",
+  "257": "Assis, élastique tenu entre les deux mains"
+ },
+ "masques": [
+  "HEP_377"
+ ]
+}

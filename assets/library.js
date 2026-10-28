@@ -5,6 +5,7 @@
    ========================================================= */
 
 import { classer } from "./classement.js";
+import { masquesFixes } from "./settings.js";
 
 const CAT_LABELS = {
   hanche:"Hanche", epaule:"Épaule", Epaule:"Épaule", dos:"Dos", cheville_pied:"Cheville et pied",
@@ -63,6 +64,39 @@ export function videoEmbed(ex){
   return null;
 }
 
+/* ---------- Nettoyage des traductions de la base HEP ----------
+   Corrige les erreurs de traduction automatique les plus fréquentes. */
+const GLOSSAIRE = [
+  [/\b(une|la|cette|votre) (tapisserie|bandouill?[ei]e?r?e?|bandoulière|ruban|bande)( de)? r[ée]sist(ance|ante|ive|if)\b/gi, "$1 bande élastique"],
+  [/\b(un|le|ce|votre) (bandage|ruban|band)( de)? r[ée]sist(ance|ant|if|ive)\b/gi, "$1 élastique"],
+  [/\b(tapisserie|bandouill?[ei]e?r?e?|bande|band|bandage|ruban)( de)? r[ée]sist(ance|ante|ant|ive|if)s?\b/gi, "élastique"],
+  [/\b(du|au) bandage\b/gi, "$1 élastique"], [/\b(le|un) bandage\b/gi, "$1 élastique"], [/\bla bande\b(?! élastique)/gi, "l'élastique"],
+  [/\b(le |un |du |au )?(balluchon|ballon suisse|ballon瑞球|ballon瑞安|ball swiss|ballue suisse|ballonde suisse)/gi, (m, a) => `${a || ""}swiss ball`],
+  [/[瑞球安]/g, ""],
+  [/\ben position (quadrup[èe]de|quadrup[ée]dienne|de quadrup[ée]die)\b/gi, "à quatre pattes"], [/\ben quadrup[ée]die\b/gi, "à quatre pattes"],
+  [/\bLiez-vous\b/g, "Allongez-vous"], [/\bliez-vous\b/g, "allongez-vous"], [/\bflattement\b/gi, "à plat"],
+  [/\b(de|sur) la couche\b/gi, "$1 le lit"], [/\bou de la couche\b/gi, "ou du lit"],
+  [/\bprono\b/gi, "sur le ventre"], [/\bPla[çc]ez\b/g, "Placez"], [/\bsoul[èe]vez\b/g, "soulevez"],
+  [/\bhamstrings?\b/gi, "ischio-jambiers"], [/\bponte\b/gi, "pont"], [/\bstrap\b/gi, "sangle"]
+];
+export function nettoyerTexte(s){
+  let t = String(s ?? "");
+  for(const [re, by] of GLOSSAIRE) t = t.replace(re, by);
+  return t.replace(/\s{2,}/g, " ").trim();
+}
+const DOSAGE = /^(r[ée]p[ée]titions?|repetitions?|reps|s[ée]ries|sets)\s*:/i;
+
+/** Consignes d'origine (texte ou liste) → étapes propres, sans les lignes de dosage HEP. */
+function etapes(v){
+  const brut = Array.isArray(v) ? v.map(String) : String(v || "").split(/\n+/);
+  return brut.flatMap(l => sentences(l))
+    .map(l => l.replace(/^\s*(\d+[.)]|[-•])\s*/, "").trim())
+    .filter(l => l && !DOSAGE.test(l))
+    .map(nettoyerTexte);
+}
+
+let NETTOYAGE = { titres:{}, consignes:{}, positions:{}, masques:[] };
+
 function sentences(text){
   return String(text || "")
     .split(/(?<=[.!?])\s+(?=[A-ZÀ-Ý])/)
@@ -108,22 +142,23 @@ function fromCabinet(x){
 }
 
 function fromHep(x){
+  const N = NETTOYAGE, id = String(x.id);
   const instructions = x.instructions_fr || "";
   const categorie = CAT_LABELS[x.categorie] || cap(x.categorie) || "Autre";
   const pathos = [...toList(x.pathologies_principales), ...toList(x.pathologies), ...toList(x.pathologies_secondaires)];
   return {
     id: String(x.id),
     source: "HEP",
-    nom: x.nom_fr || x.nom,
-    nomOriginal: x.nom,
+    nom: N.titres[id] || x.nom_fr || x.nom,
+    nomOriginal: [x.nom, N.titres[id] ? x.nom_fr : ""].filter(Boolean).join(" "),
     categorie,
     niveau: Number(x.difficulte) || 2,
     mode: MODES[x.exercise_mode] || cap(x.exercise_mode),
     image: imgPath(x.image, true),
-    consignes: sentences(instructions),
-    description: x.description_fr && !/<[a-z]/i.test(x.description_fr) ? x.description_fr : "",
-    descriptionHtml: /<[a-z]/i.test(x.description_fr || "") ? x.description_fr : "",
-    position: x.position_depart || "",
+    consignes: N.consignes[id] || etapes(instructions),
+    description: x.description_fr && !/<[a-z]/i.test(x.description_fr) ? nettoyerTexte(x.description_fr) : "",
+    descriptionHtml: /<[a-z]/i.test(x.description_fr || "") ? nettoyerTexte(x.description_fr) : "",
+    position: N.positions[id] || nettoyerTexte(x.position_depart || ""),
     precautions: toList(x.precautions).length > 1 ? toList(x.precautions) : (x.precautions ? [x.precautions] : []),
     contreIndications: x.contre_indications ? [String(x.contre_indications)] : [],
     objectifs: toList(x.objectifs).map(cap),
@@ -265,8 +300,9 @@ export function loadLibrary(){
   cache = Promise.all([
     fetch("/exercises/data/exercises.json").then(r => r.json()).catch(() => []),
     fetch("/exercises/data/hep_exercises.json").then(r => r.json()).catch(() => []),
+    fetch("/exercises/data/hep_nettoyage.json").then(r => r.json()).then(n => { NETTOYAGE = { ...NETTOYAGE, ...n }; (n.masques || []).forEach(k => masquesFixes.add(k)); }).catch(() => {}),
     edits
-  ]).then(([cab, hep, docs]) => {
+  ]).then(([cab, hep, _nettoyage, docs]) => {
     const fixes = {};
     const created = [];
     (docs || []).forEach(d => {

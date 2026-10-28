@@ -2,7 +2,7 @@
 
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
-import { isHidden, isFavorite, toggleInList } from "./settings.js";
+import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, PATHOLOGIES, classer } from "./classement.js";
 
 const PAGE = 30;
@@ -252,7 +252,7 @@ async function addEditButton(s, e, opts){
 
   /* Lien « Masquer de la bibliothèque » */
   const hide = s.el.querySelector("[data-hide]");
-  if(hide) hide.onclick = () => saved(toggleInList("masques.exercices", key, !isHidden(key)).then(() => {
+  if(hide) hide.onclick = () => saved(setHidden(key, !isHidden(key)).then(() => {
     const now = isHidden(key);
     toast(now ? `« ${lib.nom} » est masqué. Filtre « Exercices masqués » pour le retrouver.` : `« ${lib.nom} » est de nouveau visible.`, { type:"ok", duration:5000 });
     s.close(); opts.onTagged?.();

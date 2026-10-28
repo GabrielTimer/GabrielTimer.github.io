@@ -5185,7 +5185,7 @@
 },
 
 {
-  "id": "tapismarche",
+  "id": "cardio_tapismarche",
   "nom": "Marche sur tapis",
   "type": "timer",
   "categorie": "Cardio",
@@ -5227,7 +5227,7 @@
 },
 
 {
-  "id": "tapiscourse",
+  "id": "cardio_tapiscourse",
   "nom": "Course sur tapis",
   "type": "timer",
   "categorie": "Cardio",
@@ -7078,7 +7078,7 @@
 },
 
 {
-  "id": "PUBALGIE_01",
+  "id": "PUBALGIE_B01",
   "nom": "Bird Dog",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7115,7 +7115,7 @@
 },
 
 {
-  "id": "PUBALGIE_02",
+  "id": "PUBALGIE_B02",
   "nom": "Clamshell",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7151,7 +7151,7 @@
 },
 
 {
-  "id": "PUBALGIE_03",
+  "id": "PUBALGIE_B03",
   "nom": "Gainage ventral",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7186,7 +7186,7 @@
 },
 
 {
-  "id": "PUBALGIE_04",
+  "id": "PUBALGIE_B04",
   "nom": "Gainage latéral genoux",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7221,7 +7221,7 @@
 },
 
 {
-  "id": "PUBALGIE_05",
+  "id": "PUBALGIE_B05",
   "nom": "Pont fessier",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7257,7 +7257,7 @@
 },
 
 {
-  "id": "PUBALGIE_06",
+  "id": "PUBALGIE_B06",
   "nom": "Serrage ballon jambes tendues",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7292,7 +7292,7 @@
 },
 
 {
-  "id": "PUBALGIE_07",
+  "id": "PUBALGIE_B07",
   "nom": "Serrage ballon genoux",
   "type": "timer",
   "categorie": "Pubalgie",
@@ -7327,7 +7327,7 @@
 },
 
 {
-  "id": "PUBALGIE_08",
+  "id": "PUBALGIE_B08",
   "nom": "Équilibre avec balle au mur",
   "type": "timer",
   "categorie": "Pubalgie",

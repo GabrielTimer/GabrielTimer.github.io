@@ -47,7 +47,7 @@ export const DEFAULTS = {
       { n:4, label:"Niveau 4", sub:"expert, retour au sport" }
     ]
   },
-  masques: { exercices: [], modeles: [] },
+  masques: { exercices: [], modeles: [], reaffiches: [] },
   favoris: { exercices: [] }
 };
 
@@ -131,8 +131,18 @@ export function currentAnnonce(){
   return a;
 }
 
-/* ---------- Exercices masqués et favoris ---------- */
-export const isHidden = key => settings.masques.exercices.includes(key);
+/* ---------- Exercices masqués et favoris ----------
+   masquesFixes : exercices masqués d'office par le nettoyage de la bibliothèque
+   (faux exercices), que le kiné peut réafficher (liste « reaffiches »). */
+export const masquesFixes = new Set();
+export const isHidden = key => (settings.masques.exercices.includes(key) || masquesFixes.has(key)) && !(settings.masques.reaffiches || []).includes(key);
+
+/** Masque ou réaffiche un exercice de la bibliothèque. */
+export async function setHidden(key, on){
+  const ex = new Set(settings.masques.exercices), re = new Set(settings.masques.reaffiches || []);
+  if(on){ ex.add(key); re.delete(key); } else { ex.delete(key); if(masquesFixes.has(key)) re.add(key); }
+  return saveSettings({ masques: { exercices: [...ex], reaffiches: [...re] } });
+}
 export const isFavorite = key => settings.favoris.exercices.includes(key);
 
 export async function toggleInList(path, key, on){
