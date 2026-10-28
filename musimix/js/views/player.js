@@ -29,6 +29,7 @@ export class PlayerView {
     this.song = song;
     this.ctx = ctx;
     const prefs = await this.app.prefs();
+    this.prefsSnap = prefs;
     this.instrument = prefs.instrument || 'guitar';
     this.mode = prefs.viewMode || 'lyrics';
     this.fontSize = prefs.fontSize || null;
@@ -96,6 +97,7 @@ export class PlayerView {
         <div class="countdown" hidden></div>
       </div>
       <aside class="rail" aria-label="Accords et mixage">
+        <div class="rail-resizer" role="separator" aria-orientation="vertical" aria-label="Largeur du panneau" tabindex="0" title="Glisser pour agrandir · double-clic : taille normale"></div>
         <div class="rail-sec" data-r="chords-sec">
           <h3><span>Accord</span>
             <span class="seg" role="tablist" aria-label="Instrument">
@@ -157,7 +159,10 @@ export class PlayerView {
     this.setMode(this.mode, false);
     this.setInstrument(this.instrument, false);
     if (this.fontSize) this.el.style.setProperty('--lyrics-size', this.fontSize + 'px');
+    this.railWidth = this.prefsSnap?.railWidth || null;
+    if (this.railWidth) this.el.style.setProperty('--rail-w', this.railWidth + 'px');
     this.bind();
+    this.bindResizer();
   }
 
   get display() {
@@ -892,6 +897,33 @@ export class PlayerView {
     });
     el.querySelector('.scrim').addEventListener('click', () => this.closeSheets());
     window.addEventListener('resize', this._onResize = debounce(() => { this.updateStrips(); this.renderLanes(); }, 150));
+  }
+
+  /** Poignée pour élargir / réduire le panneau de droite (accords + mixage). */
+  bindResizer() {
+    const h = this.el.querySelector('.rail-resizer');
+    if (!h) return;
+    const apply = (px, save) => {
+      if (px == null) { this.el.style.removeProperty('--rail-w'); this.railWidth = null; }
+      else {
+        px = Math.round(Math.max(280, Math.min(px, Math.min(760, window.innerWidth * 0.62))));
+        this.el.style.setProperty('--rail-w', px + 'px');
+        this.railWidth = px;
+      }
+      this.updateStrips();
+      if (save) { this.app.setPref('railWidth', this.railWidth); this.renderLanes(); this._diagKey = null; this.frame(true); }
+    };
+    drag(h, {
+      onStart: () => h.classList.add('on'),
+      onMove: (e) => apply(window.innerWidth - e.clientX, false),
+      onEnd: () => { h.classList.remove('on'); apply(this.railWidth, true); },
+    });
+    h.addEventListener('dblclick', () => apply(null, true));
+    h.addEventListener('keydown', (e) => {
+      const cur = this.el.querySelector('.rail').getBoundingClientRect().width;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); apply(cur + 30, true); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); apply(cur - 30, true); }
+    });
   }
 
   showScrub(t) {

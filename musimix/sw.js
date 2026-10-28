@@ -1,6 +1,6 @@
 // MusiMix — service worker : l'appli fonctionne hors ligne une fois ouverte.
 // Les morceaux sont stockés dans l'appareil (IndexedDB), pas dans ce cache.
-const VERSION = 'musimix-4.0.0';
+const VERSION = 'musimix-4.0.1';
 const SHELL = [
   './',
   'assets/fonts/Atkinson.ttf',
