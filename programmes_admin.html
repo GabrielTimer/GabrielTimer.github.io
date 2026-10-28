@@ -42,6 +42,7 @@ import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
 import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
+import { ZONES, PATHOLOGIES as PATHOS } from "/assets/classement.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -53,15 +54,29 @@ const app = $("#app");
 /* Libellé du bouton de niveau (avec le numéro de copie s'il y a plusieurs versions au même niveau) */
 const levelButton = m => `${m.niveau ? niveauLabel(m.niveau) : "Sans niveau"}${m.doublon ? ` (${m.doublon})` : ""}`;
 const KEY = "gt_modeles_filters";
-const F = { q:"", cat:"", zone:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
+const F = { q:"", cat:"", zone:"", patho:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
+/* Zone du corps et pathologie d'un modèle, déduites de sa zone et de son nom */
+const ZN = ZONES.map(z => [z, norm(z)]);
+const zoneOf = m => {
+  const k = norm(m.zoneLabel);
+  if(!k) return "";
+  const exact = ZN.find(([, n]) => n === k) || ZN.find(([, n]) => k.includes(n) || n.includes(k));
+  if(exact) return exact[0];
+  if(/cheville|pied/.test(k)) return "Cheville et pied";
+  if(/poignet|main/.test(k)) return "Poignet et main";
+  if(/cou|cervic/.test(k)) return "Cervicales";
+  if(/lomb|rachis/.test(k)) return "Dos";
+  return m.zoneLabel;
+};
+const pathosOf = m => { const t = norm([m.nom, m.titre].join(" ")); return PATHOS.filter(p => p.re.test(t)).map(p => p.nom); };
 if(params.get("cat")) F.cat = params.get("cat");
 /* Retour après l'enregistrement d'un modèle : tous les filtres sont retirés pour qu'il soit visible */
 const nouveau = params.get("nouveau");
-if(nouveau) Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" });
+if(nouveau) Object.assign(F, { q:"", cat:"", zone:"", patho:"", niveau:"", source:"" });
 if(params.get("zone")){
   const z = params.get("zone");
   const b = BUILTIN.find(m => m.raw.zone === z);
-  F.zone = norm(b ? b.zoneLabel : z.replace(/_/g, " "));
+  F.zone = b ? zoneOf(b) : (ZONES.find(x => norm(x) === norm(z.replace(/_/g, " "))) || "");
 }
 const save = () => store.set(KEY, F);
 
@@ -73,8 +88,9 @@ app.innerHTML = `
   <div class="mo-tools">
     <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
     <div class="chips scroll" id="cats" role="group" aria-label="Catégorie"></div>
+    <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" id="zones" role="group" aria-label="Zone du corps"></div></div>
     <div class="mo-selects">
-      <select class="select" id="zone" aria-label="Zone du corps"></select>
+      <select class="select" id="patho" aria-label="Pathologie"></select>
       <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous les niveaux</option>${niveaux().map(n => `<option value="${n.n}">${esc(n.label)}</option>`).join("")}</select>
       <select class="select" id="source" aria-label="Origine"><option value="">Tous les modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option><option value="masques">Modèles fournis masqués</option></select>
     </div>
@@ -164,7 +180,8 @@ function detail(m, group){
 /* ---------- Affichage ---------- */
 function matches(m){
   if(F.cat && m.categorie !== F.cat) return false;
-  if(F.zone && m.zoneKey !== F.zone) return false;
+  if(F.zone && zoneOf(m) !== F.zone) return false;
+  if(F.patho && !pathosOf(m).includes(F.patho)) return false;
   if(F.niveau && m.niveau !== Number(F.niveau)) return false;
   if(F.source === "mine" && !m.mine) return false;
   if(F.source === "builtin" && m.mine) return false;
@@ -181,8 +198,23 @@ function renderFilters(){
   $("#cats").innerHTML = `<button class="chip" type="button" data-c="" aria-pressed="${!F.cat}">Tous<span class="count">${all().length}</span></button>` +
     categories().filter(c => counts[c.id] || c.id === F.cat).map(c => `<button class="chip" type="button" data-c="${c.id}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id] || 0}</span></button>`).join("");
   $$("[data-c]").forEach(b => b.onclick = () => { F.cat = b.dataset.c; save(); renderFilters(); render(); });
-  const zones = [...new Map(all().filter(m => m.zoneLabel).map(m => [m.zoneKey, m.zoneLabel])).entries()].sort((a, b) => a[1].localeCompare(b[1], "fr"));
-  $("#zone").innerHTML = `<option value="">Toutes les zones</option>` + zones.map(([k, l]) => `<option value="${esc(k)}" ${k === F.zone ? "selected" : ""}>${esc(l)}</option>`).join("");
+  /* Zones : celles des modèles de la catégorie choisie */
+  const base = all().filter(m => !F.cat || m.categorie === F.cat);
+  const zc = {};
+  base.forEach(m => { const z = zoneOf(m); if(z) zc[z] = (zc[z] || 0) + 1; });
+  const zlist = [...ZONES.filter(z => zc[z]), ...Object.keys(zc).filter(z => !ZONES.includes(z)).sort()];
+  if(F.zone && !zc[F.zone]) F.zone = "";
+  $("#zones").innerHTML = `<button class="chip" type="button" data-z="" aria-pressed="${!F.zone}">Toutes zones</button>` +
+    zlist.map(z => `<button class="chip" type="button" data-z="${esc(z)}" aria-pressed="${F.zone === z}">${esc(z)}<span class="count">${zc[z]}</span></button>`).join("");
+  $$("[data-z]").forEach(b => b.onclick = () => { F.zone = b.dataset.z; save(); renderFilters(); render(); });
+  /* Pathologies : seulement celles de la catégorie et de la zone choisies */
+  const pc = {};
+  base.filter(m => !F.zone || zoneOf(m) === F.zone).forEach(m => pathosOf(m).forEach(p => pc[p] = (pc[p] || 0) + 1));
+  if(F.patho && !pc[F.patho]) F.patho = "";
+  const plist = PATHOS.filter(p => pc[p.nom]);
+  $("#patho").innerHTML = `<option value="">${plist.length ? "Toutes pathologies" : "Aucune pathologie"}</option>` + plist.map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("");
+  $("#patho").value = F.patho;
+  $("#patho").classList.toggle("on", !!F.patho);
   $("#niveau").value = F.niveau;
   $("#source").value = F.source;
 }
@@ -190,16 +222,16 @@ function renderFilters(){
 function render(){
   const visible = all().filter(matches);
   const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
-  const filtres = F.q || F.cat || F.zone || F.niveau || F.source;
+  const filtres = F.q || F.cat || F.zone || F.patho || F.niveau || F.source;
   $("#count").innerHTML = (groups.length ? esc(`${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}`) : "")
     + (filtres ? ` <button class="ee-link" type="button" id="clear-f">Filtres actifs : tout afficher</button>` : "");
-  $("#clear-f")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
+  $("#clear-f")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", patho:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
   if(!groups.length){
-    const filtered = F.q || F.cat || F.zone || F.niveau || F.source;
+    const filtered = F.q || F.cat || F.zone || F.patho || F.niveau || F.source;
     $("#list").innerHTML = `<div class="panel">${emptyHTML(filtered
       ? { ico:"search", title:"Aucun modèle", text:"Essayez un autre mot ou retirez un filtre.", action:`<button class="btn" type="button" id="reset">Retirer les filtres</button>` }
       : { ico:"layers", title:"Aucun modèle", text:"Créez votre premier modèle.", action:`<a class="btn primary" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a>` })}</div>`;
-    $("#reset")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
+    $("#reset")?.addEventListener("click", () => { Object.assign(F, { q:"", cat:"", zone:"", patho:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
     return;
   }
   $("#list").innerHTML = `<div class="mo-grid">${groups.map(g => {
@@ -236,7 +268,7 @@ function render(){
 }
 
 $("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
-$("#zone").onchange = e => { F.zone = e.target.value; save(); render(); };
+$("#patho").onchange = e => { F.patho = e.target.value; e.target.classList.toggle("on", !!F.patho); save(); render(); };
 $("#niveau").onchange = e => { F.niveau = e.target.value; save(); render(); };
 $("#source").onchange = e => { F.source = e.target.value; save(); renderFilters(); render(); };
 

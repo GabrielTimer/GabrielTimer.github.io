@@ -5,6 +5,7 @@
 
 import { $, $$, esc, icon, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
 import { norm } from "./library.js";
+import { ZONES } from "./classement.js";
 import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
 
 let cache = null;
@@ -31,13 +32,15 @@ const KEY = "gt_cfg_modeles";
  * onPick(modele) : le kiné a choisi un modèle (et un niveau).
  */
 export async function mountModelPicker(root, { onPick } = {}){
-  const F = { q:"", cat:"", ...(store.get(KEY, {}) || {}) };
+  const F = { q:"", cat:"", zone:"", ...(store.get(KEY, {}) || {}) };
+  const zoneOf = m => { const k = norm(m.zoneLabel); return ZONES.find(z => norm(z) === k) || ZONES.find(z => k && (k.includes(norm(z)) || norm(z).includes(k))) || ""; };
   const chosen = new Map();
   root.innerHTML = `
     <div class="lib mp">
       <div class="lib-tools">
         <label class="input-icon"><span class="sr-only">Rechercher un modèle</span>${icon("search")}<input class="input" type="search" data-q placeholder="Lombalgie, LCA, épaule…" autocomplete="off" value="${esc(F.q)}"></label>
         <div class="chips scroll" data-cats role="group" aria-label="Catégorie"></div>
+        <select class="select sm-select" data-zone aria-label="Zone du corps"></select>
       </div>
       <div class="lib-count small muted" data-count></div>
       <div data-results><div class="loading"><div class="spinner"></div><span>Chargement des modèles…</span></div></div>
@@ -52,10 +55,16 @@ export async function mountModelPicker(root, { onPick } = {}){
     $("[data-cats]", root).innerHTML = `<button class="chip" type="button" data-c="" aria-pressed="${!F.cat}">Tous</button>` +
       categories().filter(c => counts[c.id]).map(c => `<button class="chip" type="button" data-c="${esc(c.id)}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id]}</span></button>`).join("");
     $$("[data-c]", root).forEach(b => b.onclick = () => { F.cat = b.dataset.c; save(); renderCats(); render(); });
+    const zc = {};
+    all.filter(m => !F.cat || m.categorie === F.cat).forEach(m => { const z = zoneOf(m); if(z) zc[z] = (zc[z] || 0) + 1; });
+    if(F.zone && !zc[F.zone]) F.zone = "";
+    $("[data-zone]", root).innerHTML = `<option value="">Toutes les zones</option>` + ZONES.filter(z => zc[z]).map(z => `<option value="${esc(z)}">${esc(z)} (${zc[z]})</option>`).join("");
+    $("[data-zone]", root).value = F.zone;
   };
 
   const matches = m => {
     if(F.cat && m.categorie !== F.cat) return false;
+    if(F.zone && zoneOf(m) !== F.zone) return false;
     if(!F.q) return true;
     const hay = norm([m.nom, m.titre, catLabel(m.categorie), m.zoneLabel, ...m.exercices.map(e => e.nom)].join(" "));
     return norm(F.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w));
@@ -102,6 +111,7 @@ export async function mountModelPicker(root, { onPick } = {}){
     s.el.querySelector("[data-use]").onclick = () => { s.close(); onPick?.(m); };
   };
 
+  $("[data-zone]", root).onchange = e => { F.zone = e.target.value; save(); render(); };
   $("[data-q]", root).addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
   renderCats();
   render();
