@@ -10,6 +10,7 @@ import { LibraryView, SetlistsView, askName } from './views/library.js';
 import { PlayerView } from './views/player.js';
 import { EditorView } from './views/editor.js';
 import { printDialog } from './print.js';
+import { zoomDialog } from './zoom.js';
 
 class App extends EventTarget {
   constructor() {
@@ -125,13 +126,14 @@ class App extends EventTarget {
   }
 
   async importDialog() {
-    const files = await pickFiles({ accept: 'audio/*,.mp3,.wav,.flac,.m4a,.ogg,.opus,.zip,.cho,.chopro,.txt,.lrc,.json', multiple: true });
+    const files = await pickFiles({ accept: 'audio/*,.mp3,.wav,.flac,.m4a,.ogg,.opus,.zip,.cho,.chopro,.txt,.lrc,.json,.mid,.midi,.kar', multiple: true });
     if (files.length) this.handleFiles(files);
   }
 
   async handleFiles(files) {
     try {
-      const { songs, audioOnly, extras } = await importFiles(files);
+      let lastMsg = 0;
+      const { songs, audioOnly, extras } = await importFiles(files, (m) => { if (Date.now() - lastMsg > 400) { lastMsg = Date.now(); toast(m, 4000); } });
       if (songs.length) {
         toast(songs.length === 1 ? `Ajouté : ${songs[0].title}` : `${songs.length} morceaux ajoutés`);
         if (songs.length === 1 && !audioOnly.length) { this.go(`#/play/${songs[0].id}`); return; }
@@ -268,6 +270,8 @@ class App extends EventTarget {
   // ─────────────────────────────────────────────────────── divers ──
 
   async printSong(song, opts) { printDialog(this, [song], opts); }
+
+  zoomExport(song) { zoomDialog(this, song); }
 
   async printSetlist(sl) {
     const songs = (await Promise.all(sl.songs.map((id) => db.getSong(id)))).filter(Boolean);

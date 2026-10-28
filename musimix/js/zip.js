@@ -106,21 +106,28 @@ export async function writeZip(files) {
   const dosTime = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
   const dosDate = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
   for (const f of files) {
-    const data = typeof f.data === 'string' ? enc.encode(f.data) : f.data instanceof Uint8Array ? f.data : new Uint8Array(await f.data.arrayBuffer());
+    let data, size, crc;
+    if (f.data instanceof Blob) {
+      // gros fichiers : CRC calculé par tranches, le Blob reste tel quel (pas de copie en mémoire)
+      data = f.data; size = f.data.size; crc = 0;
+      for (let o = 0; o < size; o += 8 << 20) crc = crc32(new Uint8Array(await f.data.slice(o, o + (8 << 20)).arrayBuffer()), crc);
+    } else {
+      data = typeof f.data === 'string' ? enc.encode(f.data) : f.data;
+      size = data.length; crc = crc32(data);
+    }
     const name = enc.encode(f.name);
-    const crc = crc32(data);
     const lh = new DataView(new ArrayBuffer(30));
     lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x800, true); lh.setUint16(8, 0, true);
     lh.setUint16(10, dosTime, true); lh.setUint16(12, dosDate, true); lh.setUint32(14, crc, true);
-    lh.setUint32(18, data.length, true); lh.setUint32(22, data.length, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
     parts.push(lh.buffer, name, data);
     const ch = new DataView(new ArrayBuffer(46));
     ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x800, true); ch.setUint16(10, 0, true);
     ch.setUint16(12, dosTime, true); ch.setUint16(14, dosDate, true); ch.setUint32(16, crc, true);
-    ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true); ch.setUint16(28, name.length, true);
+    ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true);
     ch.setUint32(42, offset, true);
     central.push(ch.buffer, name);
-    offset += 30 + name.length + data.length;
+    offset += 30 + name.length + size;
   }
   const cdSize = central.reduce((s, p) => s + (p.byteLength ?? p.length), 0);
   const end = new DataView(new ArrayBuffer(22));

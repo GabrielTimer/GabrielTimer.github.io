@@ -566,3 +566,63 @@ function lastChorusContinues(doc, li) {
   }
   return false;
 }
+
+/**
+ * Place des accords datés (détection audio ou MIDI) dans des paroles datées :
+ * accords au-dessus des mots, et lignes d'accords seuls dans les passages instrumentaux.
+ */
+export function placeChords(lines, chords, beat = 0.5) {
+  const timed = lines.filter((l) => l.type === 'lyric' && l.words?.length && l.s != null);
+  if (!timed.length) {
+    const out = [...lines];
+    if (chords.length) {
+      out.push({ type: 'section', label: 'Accords', kind: 'instrumental', chords: [] });
+      for (let k = 0; k < chords.length; k += 4) out.push({ type: 'chords', text: '', chords: chords.slice(k, k + 4).map((c, i) => ({ pos: i, name: c.name, t: c.s })) });
+    }
+    return out;
+  }
+  const out = [];
+  let ci = 0;
+  let lastName = null;
+  const gap = (t0, t1, label) => {
+    const grp = [];
+    while (ci < chords.length && chords[ci].s < t1 - 0.25) { if (chords[ci].s >= t0 - 0.05) grp.push(chords[ci]); ci++; }
+    if (!grp.length || (grp.length === 1 && grp[0].name === lastName)) return;
+    if (t1 - t0 < Math.max(3 * beat, 2.5) && out.length && out[out.length - 1].type === 'lyric') {
+      const l = out[out.length - 1];
+      grp.forEach((c, k) => l.chords.push({ pos: l.text.length + 1 + k, name: c.name, t: c.s }));
+      lastName = grp[grp.length - 1].name;
+      return;
+    }
+    if (label) out.push({ type: 'section', label, kind: label === 'Intro' ? 'intro' : 'outro', chords: [] });
+    for (let k = 0; k < grp.length; k += 4) out.push({ type: 'chords', text: '', chords: grp.slice(k, k + 4).map((c, i) => ({ pos: i, name: c.name, t: c.s })) });
+    lastName = grp[grp.length - 1].name;
+  };
+  let lastEnd = 0;
+  let first = true;
+  for (const l of lines) {
+    if (l.type !== 'lyric' || !l.words?.length || l.s == null) { out.push(l); continue; }
+    gap(lastEnd, l.s - 0.25, first ? 'Intro' : null);
+    first = false;
+    const toks = tokenize(l.text);
+    const nl = { ...l, chords: [] };
+    const cur = [...chords].reverse().find((c) => c.s <= l.s + 0.25);
+    if (cur && cur.name !== lastName) nl.chords.push({ pos: 0, name: cur.name, t: Math.max(cur.s, l.s - 0.25) });
+    while (ci < chords.length && chords[ci].s < l.s + 0.25) ci++;
+    const end = l.e ?? l.words[l.words.length - 1].e;
+    while (ci < chords.length && chords[ci].s < end) {
+      const c = chords[ci++];
+      let k = 0, best = Infinity;
+      l.words.forEach((w, i) => { const dd = Math.abs(w.s - c.s); if (dd < best) { best = dd; k = i; } });
+      const pos = toks[k]?.start ?? 0;
+      nl.chords = nl.chords.filter((x) => x.pos !== pos);
+      if (!nl.chords.length || nl.chords[nl.chords.length - 1].name !== c.name) nl.chords.push({ pos, name: c.name, t: c.s });
+    }
+    nl.chords.sort((a, b) => a.pos - b.pos);
+    if (nl.chords.length) lastName = nl.chords[nl.chords.length - 1].name;
+    out.push(nl);
+    lastEnd = end;
+  }
+  gap(lastEnd, 1e9, 'Fin');
+  return out;
+}

@@ -2,7 +2,10 @@
 
 import { db, uid } from './db.js';
 import { readZip, writeZip } from './zip.js';
-import { parseSheet, parseLRC, attachTimings, docFromSongJson, docToSongJson, toChordPro, toLRC, fillLineEnds } from './sheet.js';
+import { parseSheet, parseLRC, attachTimings, docFromSongJson, docToSongJson, toChordPro, toLRC, fillLineEnds, placeChords } from './sheet.js';
+import { parseMidi, familyOf, karaokeLines, chordsFromNotes, keyNameOf } from './midi.js';
+import { renderFamily, SYNTH_RATE } from './synth.js';
+import { encodeWav } from './wav.js';
 
 export const STEM_KINDS = {
   vocals: { label: 'Voix', color: 'var(--c-voice)', order: 0 },
@@ -17,6 +20,7 @@ export const STEM_KINDS = {
 };
 
 const AUDIO_EXT = /\.(mp3|wav|flac|m4a|aac|ogg|oga|opus|webm|aif|aiff|mp4)$/i;
+const MIDI_EXT = /\.(mid|midi|kar|rmi)$/i;
 const SHEET_EXT = /\.(cho|chopro|chordpro|crd|pro|txt)$/i;
 
 export function stemKind(filename) {
@@ -128,9 +132,12 @@ function applySongJson(song, json, choText) {
  * Crée un morceau à partir de fichiers déposés (pistes, ZIP, partition, LRC, song.json).
  * Retourne { songs: [...], audioOnly: [fichiers audio non reconnus comme pistes] }.
  */
-export async function importFiles(fileList) {
+export async function importFiles(fileList, onProgress) {
   const files = [...fileList];
   const songs = [];
+  for (const m of files.filter((f) => MIDI_EXT.test(f.name))) songs.push(await importMidi(m, onProgress));
+  files.splice(0, files.length, ...files.filter((f) => !MIDI_EXT.test(f.name)));
+  if (!files.length) return { songs, audioOnly: [] };
   const zips = files.filter((f) => /\.zip$/i.test(f.name));
   for (const z of zips) songs.push(await importPack(z));
   const rest = files.filter((f) => !/\.zip$/i.test(f.name));
@@ -275,4 +282,66 @@ export async function lrclibSearch({ title, artist, duration }) {
     if (r.ok) for (const x of await r.json()) if (!results.some((y) => y.id === x.id)) results.push(x);
   } catch { /* */ }
   return results.filter((r) => r.syncedLyrics || r.plainLyrics).slice(0, 12);
+}
+
+/**
+ * Fichier MIDI (.mid, .kar) → morceau : une piste audio par famille d'instruments
+ * (synthétisée ici), paroles karaoké synchronisées, accords et tempo tirés des notes.
+ */
+export async function importMidi(file, onProgress = () => {}) {
+  onProgress('Lecture du fichier MIDI…', 0.02);
+  const mid = parseMidi(await file.arrayBuffer());
+  if (!mid.tracks.length) throw new Error('Ce fichier MIDI ne contient pas de notes.');
+  const lyricTracks = new Set(mid.lyrics.map((x) => x.track));
+  const families = new Map();
+  for (const t of mid.tracks) families.set(t, familyOf(t, lyricTracks));
+  // s'il n'y a pas de piste « mélodie » mais des paroles : la piste aiguë la plus monophonique
+  if (![...families.values()].includes('vocals') && (mid.lyrics.length || mid.texts.length > 20)) {
+    const cand = mid.tracks.filter((t) => families.get(t) !== 'drums' && families.get(t) !== 'bass')
+      .map((t) => ({ t, mono: monophony(t.notes), pitch: t.notes.reduce((a, n) => a + n.pitch, 0) / t.notes.length }))
+      .sort((a, b) => (b.mono + b.pitch / 100) - (a.mono + a.pitch / 100))[0];
+    if (cand && cand.mono > 0.8) families.set(cand.t, 'vocals');
+  }
+  const groups = {};
+  for (const t of mid.tracks) (groups[families.get(t)] ||= []).push(...t.notes);
+  const order = ['vocals', 'drums', 'bass', 'guitar', 'piano', 'other'];
+  const kinds = order.filter((k) => groups[k]?.length);
+  const rendered = [];
+  for (let i = 0; i < kinds.length; i++) {
+    const k = kinds[i];
+    onProgress(`Synthèse : ${STEM_KINDS[k].label.toLowerCase()}…`, 0.05 + 0.8 * (i / kinds.length));
+    rendered.push([k, await renderFamily(groups[k], k, mid.duration)]);
+  }
+  // même gain pour toutes les pistes (garde l'équilibre du fichier)
+  let peak = 0;
+  for (const [, d] of rendered) for (let i = 0; i < d.length; i += 7) peak = Math.max(peak, Math.abs(d[i]));
+  const gain = peak > 0 ? 0.89 / peak : 1;
+  const song = newSong({ source: 'midi' });
+  Object.assign(song, guessTitleArtist(file.name));
+  song.duration = mid.duration + 1;
+  song.bpm = mid.bpm;
+  song.beats = mid.beats;
+  song.downbeats = mid.downbeats;
+  onProgress('Paroles et accords…', 0.9);
+  for (const [k, d] of rendered) {
+    for (let i = 0; i < d.length; i++) d[i] *= gain;
+    const label = k === 'vocals' ? 'Mélodie' : STEM_KINDS[k].label;
+    await addStem(song, encodeWav([d], SYNTH_RATE, 16), `${label}.wav`, k);
+    song.stems[song.stems.length - 1].label = label;
+  }
+  song.detectedChords = chordsFromNotes(mid, families);
+  song.key = keyNameOf(mid, families);
+  const lines = karaokeLines(mid);
+  song.doc = { meta: {}, lines: lines.length ? placeChords(lines, song.detectedChords, 60 / (mid.bpm || 120)) : placeChords([], song.detectedChords) };
+  song.analysis = { notes: `Importé depuis un fichier MIDI (${mid.tracks.length} pistes)${lines.length ? ' · paroles karaoké' : ''} · accords lus dans les notes` };
+  finalize(song);
+  await db.putSong(song);
+  onProgress('Prêt', 1);
+  return song;
+}
+
+function monophony(notes) {
+  let overl = 0;
+  for (let i = 1; i < notes.length; i++) if (notes[i].t < notes[i - 1].t + notes[i - 1].d - 0.05) overl++;
+  return 1 - overl / Math.max(1, notes.length);
 }

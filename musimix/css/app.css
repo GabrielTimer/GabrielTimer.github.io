@@ -175,7 +175,7 @@ input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 
 .faders i:nth-child(3)::after { top: 60%; background: var(--cyan); }
 
 .dropping::after {
-  content: 'Dépose ici : audio, pistes, pack ZIP ou grille'; position: fixed; inset: 12px; z-index: 100; display: grid; place-items: center;
+  content: 'Dépose ici : audio, MIDI, pistes, pack ZIP ou grille'; position: fixed; inset: 12px; z-index: 100; display: grid; place-items: center;
   border: 3px dashed var(--ink-3); border-radius: var(--radius-l); background: color-mix(in srgb, var(--bg) 86%, transparent);
   font: 500 28px var(--font-display); color: var(--ink); pointer-events: none;
 }

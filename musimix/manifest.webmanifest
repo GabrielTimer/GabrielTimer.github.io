@@ -17,6 +17,6 @@
     { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "file_handlers": [
-    { "action": "./", "accept": { "application/zip": [".zip"], "audio/*": [".mp3", ".wav", ".flac", ".m4a", ".ogg"], "text/plain": [".cho", ".chopro", ".lrc"] } }
+    { "action": "./", "accept": { "application/zip": [".zip"], "audio/*": [".mp3", ".wav", ".flac", ".m4a", ".ogg"], "text/plain": [".cho", ".chopro", ".lrc"], "audio/midi": [".mid", ".midi", ".kar"] } }
   ]
 }

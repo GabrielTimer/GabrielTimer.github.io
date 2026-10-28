@@ -66,7 +66,7 @@ export class LibraryView {
       c.innerHTML = `<div class="empty">
         <span class="faders" aria-hidden="true"><i></i><i></i><i></i></span>
         <h2>Ajoute ton premier morceau</h2>
-        <p>Glisse un fichier audio ici. Le Studio sépare la voix et les instruments, synchronise les paroles et trouve les accords.</p>
+        <p>Glisse un fichier audio ou MIDI ici. Le Studio sépare la voix et les instruments, synchronise les paroles et trouve les accords.</p>
         <div class="row"><button class="btn primary" data-act="import">${icon('upload')} Choisir un fichier</button><button class="btn" data-act="demo">Essayer la démo</button></div>
       </div>`;
       return;
@@ -153,6 +153,7 @@ export class LibraryView {
       { icon: 'edit', label: 'Paroles et accords', action: () => this.app.go(`#/edit/${id}`) },
       { icon: 'pdf', label: 'Exporter en PDF', action: () => this.app.printSong(s) },
       { icon: 'download', label: 'Télécharger le pack (ZIP)', action: async () => { toast('Préparation du pack…'); const { blob, name } = await exportPack(s); download(blob, name); } },
+      { icon: 'mix', label: 'Exporter pour Zoom R20', action: () => this.app.zoomExport(s) },
       { icon: 'list', label: 'Ajouter à une setlist', action: () => this.app.addToSetlist(s) },
       '-',
       { icon: 'trash', label: 'Supprimer', danger: true, action: async () => {
