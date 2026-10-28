@@ -4,6 +4,7 @@
    ========================================================= */
 
 import { PATHOLOGIES } from "./pathologies.js";
+import { MODELES_BASE } from "./modeles-base.js";
 import { norm } from "./library.js";
 import { settings } from "./settings.js";
 
@@ -57,7 +58,7 @@ export function normModele(raw, { builtin = false } = {}){
   };
 }
 
-export const BUILTIN = PATHOLOGIES.map(p => normModele(p, { builtin:true }));
+export const BUILTIN = [...MODELES_BASE, ...PATHOLOGIES].map(p => normModele(p, { builtin:true }));
 
 /** Modèles fournis : masqués par le kiné, ou remplacés par sa propre version. */
 export const isBuiltinHidden = id => settings.masques.modeles.includes(id);
