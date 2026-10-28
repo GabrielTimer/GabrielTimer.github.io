@@ -40,7 +40,7 @@
 import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
-import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, levelButton, isBuiltinHidden } from "/assets/modeles.js";
+import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
@@ -50,6 +50,8 @@ const C = await import("/assets/cloud.js");
 const app = $("#app");
 
 /* ---------- Filtres (mémorisés, ou imposés par l'adresse) ---------- */
+/* Libellé du bouton de niveau (avec le numéro de copie s'il y a plusieurs versions au même niveau) */
+const levelButton = m => `${m.niveau ? niveauLabel(m.niveau) : "Sans niveau"}${m.doublon ? ` (${m.doublon})` : ""}`;
 const KEY = "gt_modeles_filters";
 const F = { q:"", cat:"", zone:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
 if(params.get("cat")) F.cat = params.get("cat");

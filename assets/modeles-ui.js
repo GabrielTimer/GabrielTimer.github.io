@@ -5,7 +5,7 @@
 
 import { $, $$, esc, icon, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
 import { norm } from "./library.js";
-import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, levelButton, isBuiltinHidden } from "./modeles.js";
+import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
 
 let cache = null;
 /** Tous les modèles visibles : les vôtres + ceux fournis (sauf masqués ou remplacés). */
@@ -22,6 +22,8 @@ export function loadModeles({ force = false } = {}){
   return cache;
 }
 
+/* Libellé du bouton de niveau (avec le numéro de copie s'il y a plusieurs versions au même niveau) */
+const levelButton = m => `${m.niveau ? niveauLabel(m.niveau) : "Sans niveau"}${m.doublon ? ` (${m.doublon})` : ""}`;
 const KEY = "gt_cfg_modeles";
 
 /**
