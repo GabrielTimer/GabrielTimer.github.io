@@ -741,3 +741,10 @@ a.chip{ text-decoration:none; }
 .cfg-tabs{ display:flex; margin-bottom:14px; }
 .cfg-tabs button{ flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
 .cfg-tabs svg{ width:18px; height:18px; }
+
+/* Zones du corps et catégories : toutes visibles, sur plusieurs lignes
+   (sauf dans le panneau étroit à droite de l'éditeur de séance, qui défile) */
+@media (min-width:641px){
+  .lib-tools .chips.scroll, .mo-tools .chips.scroll{ flex-wrap:wrap; overflow:visible; margin:0; padding:0; -webkit-mask-image:none; mask-image:none; }
+  .cfg-lib .lib-tools .chips.scroll{ flex-wrap:nowrap; overflow-x:auto; -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent); }
+}
