@@ -7,7 +7,7 @@ import {
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
   emptyHTML, byWeek, settings
 } from "../app.js";
-import { exerciseImage, toProgramExercise, updateSessionExercise } from "../library.js";
+import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
 import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 
@@ -822,10 +822,32 @@ async function saveAsModel(){
     const ok = sh.el.querySelector("#m-ok");
     ok.disabled = true;
     try{
-      const id = await C.saveModele({ nom: meta.niveau ? splitName(nom).base : nom, ...meta, series:data.series, exercices:data.exercices });
+      const finalNom = meta.niveau ? splitName(nom).base : nom;
+      /* Même nom, même catégorie, même niveau : remplacer l'existant plutôt que créer un doublon ? */
+      let existing = null;
+      try{
+        existing = (await C.listModeles()).map(r => MOD.normModele(r))
+          .find(m => m.mine && !m.remplace && m.categorie === meta.categorie && (m.niveau || null) === (meta.niveau || null) && norm(m.nom) === norm(finalNom)) || null;
+      }catch(e){}
+      let replaceId = null;
+      if(existing){
+        const choice = await new Promise(resolve => {
+          let done = false;
+          const q = openSheet({
+            title:"Ce modèle existe déjà",
+            body:`<p class="muted">Vous avez déjà un modèle « ${esc(existing.titre)} ». Voulez-vous le remplacer par cette séance, ou garder les deux ?</p>`,
+            foot:`<button class="btn" type="button" data-c="both">Garder les deux</button><button class="btn primary" type="button" data-c="replace">${icon("swap")}Remplacer l'existant</button>`,
+            onClose: () => { if(!done) resolve(null); }
+          });
+          q.el.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { done = true; resolve(b.dataset.c); q.close(); });
+        });
+        if(!choice){ ok.disabled = false; return; }
+        if(choice === "replace") replaceId = existing.id;
+      }
+      const id = await C.saveModele({ id: replaceId || undefined, createdAt: replaceId ? existing.createdAt || undefined : undefined, nom: finalNom, ...meta, series:data.series, exercices:data.exercices });
       sh.close();
       refreshSideModels();
-      toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = `/programmes_admin.html?nouveau=${encodeURIComponent(id)}` } });
+      toast(replaceId ? "Modèle mis à jour." : "Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = `/programmes_admin.html?nouveau=${encodeURIComponent(id)}` } });
     }catch(err){
       console.error(err);
       ok.disabled = false;

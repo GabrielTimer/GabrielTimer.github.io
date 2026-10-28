@@ -5,7 +5,7 @@
 
 import { $, $$, esc, icon, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
 import { norm } from "./library.js";
-import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
+import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, levelButton, isBuiltinHidden } from "./modeles.js";
 
 let cache = null;
 /** Tous les modèles visibles : les vôtres + ceux fournis (sauf masqués ou remplacés). */
@@ -78,7 +78,7 @@ export async function mountModelPicker(root, { onPick } = {}){
               <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}</span></span>
           </button>
           <button class="icon-btn filled" type="button" data-pick="${esc(cur.id)}" aria-label="Utiliser ${esc(cur.titre)}" title="Utiliser ce modèle">${icon("plus")}</button>
-          ${levels ? `<div class="mo-levels mp-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${x.niveau ? esc(niveauLabel(x.niveau)) : "Sans niveau"}</button>`).join("")}</div>` : ""}
+          ${levels ? `<div class="mo-levels mp-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${esc(levelButton(x))}</button>`).join("")}</div>` : ""}
         </div>`;
     }).join("");
     const byKey = new Map(groups.map(g => [g.key, g]));

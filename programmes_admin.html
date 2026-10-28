@@ -40,7 +40,7 @@
 import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
-import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
+import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, levelButton, isBuiltinHidden } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
@@ -210,7 +210,7 @@ function render(){
         <div class="mo-body">
           <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}</span>
           <h2>${esc(g.nom)}</h2>
-          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${x.niveau ? esc(niveauLabel(x.niveau)) : "Sans niveau"}</button>`).join("")}</div>` : ""}
+          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${esc(levelButton(x))}</button>`).join("")}</div>` : ""}
           <span class="small muted">${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
         </div>
         <div class="mo-actions">

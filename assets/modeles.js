@@ -16,6 +16,8 @@ export const catLabel = id => {
   return (list.find(c => c.id === id) || list.find(c => c.id === "autre") || { one: "Autre" }).one || id;
 };
 export const niveauLabel = n => (niveaux().find(x => x.n === Number(n)) || {}).label || `Niveau ${n}`;
+/** Libellé du bouton de niveau d'un modèle (avec le numéro de copie s'il y a des doublons). */
+export const levelButton = m => `${m.niveau ? niveauLabel(m.niveau) : "Sans niveau"}${m.doublon ? ` (${m.doublon})` : ""}`;
 
 /** « Lombalgie P2 », « Épaule 1 », « Genou niveau 3 » → { base, niveau } */
 export function splitLevel(nom){
@@ -66,14 +68,17 @@ export const coverOf = m => m.cover || m.exercices?.[0]?.image || null;
 export function groupModeles(list){
   const groups = new Map();
   list.forEach(m => {
-    const k = `${m.categorie}|${norm(m.nom)}`;
-    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:false, items:[] });
-    if(m.mine) groups.get(k).mine = true;
+    /* Vos modèles et ceux fournis avec l'application ne sont jamais mélangés sur une même carte */
+    const k = `${m.mine ? "m" : "b"}|${m.categorie}|${norm(m.nom)}`;
+    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:m.mine, items:[] });
     groups.get(k).items.push(m);
   });
   const out = [...groups.values()];
   out.forEach(g => {
-    g.items.sort((a, b) => (a.niveau || 0) - (b.niveau || 0));
+    g.items.sort((a, b) => ((a.niveau || 0) - (b.niveau || 0)) || ((b.createdAt || 0) - (a.createdAt || 0)));
+    /* Plusieurs versions au même niveau : « Niveau 1 », « Niveau 1 (2) »… */
+    const seen = {};
+    g.items.forEach(x => { const k = x.niveau || 0; seen[k] = (seen[k] || 0) + 1; x.doublon = seen[k] > 1 ? seen[k] : 0; });
     g.zoneLabel = g.items.find(x => x.zoneLabel)?.zoneLabel || "";
   });
   return out;
