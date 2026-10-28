@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.7.0.5";
+const VERSION = "gt-2.7.0.6";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -10,7 +10,7 @@ const PRECACHE = [
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js",
-  "/assets/patient.js", "/assets/library.js", "/assets/settings.js", "/assets/chart.js", "/assets/programmes-view.js",
+  "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/chart.js", "/assets/programmes-view.js",
   "/assets/pages/home.css", "/assets/pages/home.js", "/assets/pages/cloud.js", "/assets/pages/timer.css",
   "/assets/pages/timer.js", "/assets/pages/fin.js", "/assets/pages/progression.js", "/assets/pages/local.js",
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"

@@ -3,6 +3,7 @@
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList } from "./settings.js";
+import { ZONES, TYPES, PATHOLOGIES, classer } from "./classement.js";
 
 const PAGE = 30;
 
@@ -12,7 +13,7 @@ const PAGE = 30;
  */
 export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters", countIn = null } = {}){
   const saved = store.get(persistKey, {}) || {};
-  const state = { q: saved.q || "", cat: saved.cat || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
+  const state = { q: saved.q || "", cat: ZONES.includes(saved.cat) ? saved.cat : "", patho: saved.patho || "", type: saved.type || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
 
   root.innerHTML = `
     <div class="lib">
@@ -23,9 +24,11 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         </div>
         <div class="row wrap" style="--gap:8px">
           <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="FAV">★ Mes favoris</option><option value="PERSO">Mes exercices</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option><option value="HIDDEN">Exercices masqués</option></select>
+          <select class="select sm-select" data-patho aria-label="Pathologie"></select>
+          <select class="select sm-select" data-type aria-label="Type d'exercice"></select>
           <select class="select sm-select" data-niveau aria-label="Niveau"><option value="">Tous niveaux</option><option value="1">Niveau 1</option><option value="2">Niveau 2</option><option value="3">Niveau 3</option><option value="4">Niveau 4 et +</option></select>
         </div>
-        <div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div>
+        <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div></div>
       </div>
       <div class="lib-count small muted" data-count></div>
       <div class="lib-results ${layout === "grid" ? "grid" : ""}" data-results><div class="loading"><div class="spinner"></div><span>Chargement des exercices…</span></div></div>
@@ -36,12 +39,45 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   $("[data-niveau]", root).value = state.niveau;
 
   const all = await loadLibrary();
+  all.forEach(e => { if(!("zone" in e)) classer(e); });
   let counts = {}, cats = [];
   const countCats = () => {
+    all.forEach(e => classer(e));
     counts = {};
-    all.forEach(e => { counts[e.categorie] = (counts[e.categorie] || 0) + 1; });
-    cats = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([c]) => c);
+    all.forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
+    cats = ZONES.filter(z => counts[z]);
+    renderSelects();
   };
+  /* Listes Pathologie et Type : seulement ce qui existe, avec le nombre d'exercices */
+  /* Les pathologies proposées dépendent de la zone choisie ; les types, de la zone et de la pathologie */
+  function renderSelects(){
+    const visibles = all.filter(e => !isHidden(exerciseKey(e)));
+    const dansZone = state.cat ? visibles.filter(e => e.zone === state.cat) : visibles;
+    const pc = {}, tc = {};
+    dansZone.forEach(e => e.pathos.forEach(p => pc[p] = (pc[p] || 0) + 1));
+    /* Dans une zone : seulement ses pathologies (et les pathologies générales qui la concernent vraiment) */
+    const propres = p => !state.cat || p.zone === state.cat || (!p.zone && pc[p.nom] >= 3);
+    if(state.patho && !(pc[state.patho] && propres(PATHOLOGIES.find(p => p.nom === state.patho) || {}))) state.patho = "";
+    (state.patho ? dansZone.filter(e => e.pathos.includes(state.patho)) : dansZone).forEach(e => e.types.forEach(t => tc[t] = (tc[t] || 0) + 1));
+    if(state.type && !tc[state.type]) state.type = "";
+    const dispo = PATHOLOGIES.filter(p => pc[p.nom] && propres(p));
+    if(state.cat){
+      $("[data-patho]", root).innerHTML = `<option value="">${dispo.length ? `Pathologies : ${esc(state.cat.toLowerCase())}` : "Aucune pathologie"}</option>` +
+        dispo.sort((a, b) => (!!b.zone - !!a.zone) || pc[b.nom] - pc[a.nom]).map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("");
+    }else{
+      const byZone = new Map();
+      dispo.forEach(p => { const z = p.zone || "Général"; if(!byZone.has(z)) byZone.set(z, []); byZone.get(z).push(p); });
+      const order = [...ZONES, "Général"];
+      $("[data-patho]", root).innerHTML = `<option value="">Toutes pathologies</option>` +
+        [...byZone.entries()].sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0])).map(([z, list]) =>
+          `<optgroup label="${esc(z)}">${list.map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("")}</optgroup>`).join("");
+    }
+    $("[data-type]", root).innerHTML = `<option value="">Tous types</option>` + TYPES.filter(t => tc[t]).map(t => `<option value="${esc(t)}">${esc(t)} (${tc[t]})</option>`).join("");
+    $("[data-patho]", root).value = state.patho;
+    $("[data-type]", root).value = state.type;
+    $("[data-patho]", root).classList.toggle("on", !!state.patho);
+    $("[data-type]", root).classList.toggle("on", !!state.type);
+  }
   countCats();
   /* Après création, correction ou suppression d'un exercice */
   const changed = (e, info = {}) => {
@@ -51,20 +87,22 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     }
   };
 
-  const save = () => store.set(persistKey, { q: state.q, cat: state.cat, source: state.source, niveau: state.niveau });
+  const save = () => store.set(persistKey, { q: state.q, cat: state.cat, patho: state.patho, type: state.type, source: state.source, niveau: state.niveau });
 
   const renderCats = () => {
     $("[data-cats]", root).innerHTML =
-      `<button class="chip" type="button" data-cat="" aria-pressed="${!state.cat}">Toutes</button>` +
+      `<button class="chip" type="button" data-cat="" aria-pressed="${!state.cat}">Toutes zones</button>` +
       cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(c)}<span class="count">${counts[c]}</span></button>`).join("");
-    $$("[data-cat]", root).forEach(b => b.onclick = () => { state.cat = b.dataset.cat; state.limit = PAGE; save(); renderCats(); renderResults(); });
+    $$("[data-cat]", root).forEach(b => b.onclick = () => { state.cat = b.dataset.cat; state.limit = PAGE; renderSelects(); save(); renderCats(); renderResults(); });
   };
 
   const filtered = () => {
     let list = state.source === "HIDDEN" ? all.filter(e => isHidden(exerciseKey(e))) : all.filter(e => !isHidden(exerciseKey(e)));
     if(state.source === "FAV") list = list.filter(e => isFavorite(exerciseKey(e)));
     else if(state.source && state.source !== "HIDDEN") list = list.filter(e => e.source === state.source);
-    if(state.cat) list = list.filter(e => e.categorie === state.cat);
+    if(state.cat) list = list.filter(e => e.zone === state.cat);
+    if(state.patho) list = list.filter(e => e.pathos.includes(state.patho));
+    if(state.type) list = list.filter(e => e.types.includes(state.type));
     if(state.niveau) list = list.filter(e => state.niveau === "4" ? e.niveau >= 4 : e.niveau === Number(state.niveau));
     list = searchLibrary(list, state.q);
     /* Favoris en tête quand on ne cherche rien de précis */
@@ -80,7 +118,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <article class="lib-card">
         <button class="lib-card-img" type="button" data-open="${esc(e.source + ":" + e.id)}" aria-label="Voir ${esc(e.nom)}">${exoImageHTML(e.image, "")}${inBadge(e)}${isFavorite(exerciseKey(e)) ? `<span class="fav-badge" title="Favori">${icon("starFill")}</span>` : ""}</button>
         <div class="lib-card-body">
-          <div class="lib-meta">${esc(e.categorie)}${e.mode ? `, ${esc(e.mode.toLowerCase())}` : ""}</div>
+          <div class="lib-meta">${esc(e.zone || e.categorie)}${e.mode ? `, ${esc(e.mode.toLowerCase())}` : ""}</div>
           <h3>${esc(e.nom)}</h3>
           <div class="row wrap" style="--gap:6px">${e.materiel.slice(0, 2).map(m => `<span class="badge">${esc(m)}</span>`).join("")}<span class="badge lagon">Niveau ${e.niveau}</span></div>
         </div>
@@ -90,7 +128,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <div class="lib-row">
         <button class="lib-row-main" type="button" data-open="${esc(e.source + ":" + e.id)}">
           ${exoImageHTML(e.image, "", "li-thumb")}
-          <span class="li-main"><span class="li-title">${isFavorite(exerciseKey(e)) ? `<span class="fav-inline">${icon("starFill")}</span>` : ""}${esc(e.nom)}</span><span class="li-sub">${countIn && countIn(e) ? `<strong style="color:var(--ok)">Dans la séance</strong>, ` : ""}${esc(e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
+          <span class="li-main"><span class="li-title">${isFavorite(exerciseKey(e)) ? `<span class="fav-inline">${icon("starFill")}</span>` : ""}${esc(e.nom)}</span><span class="li-sub">${countIn && countIn(e) ? `<strong style="color:var(--ok)">Dans la séance</strong>, ` : ""}${esc(e.zone || e.categorie)}, niveau ${e.niveau}${e.materiel[0] ? `, ${esc(e.materiel[0].toLowerCase())}` : ""}</span></span>
         </button>
         ${onAdd ? `<button class="icon-btn filled" type="button" data-add="${esc(e.source + ":" + e.id)}" aria-label="${esc(addLabel)} ${esc(e.nom)}">${icon("plus")}</button>` : ""}
       </div>`;
@@ -119,6 +157,8 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); }, 140));
   $("[data-source]", root).onchange = ev => { state.source = ev.target.value; state.limit = PAGE; save(); renderResults(); };
+  $("[data-patho]", root).onchange = ev => { state.patho = ev.target.value; state.limit = PAGE; renderSelects(); save(); renderResults(); };
+  $("[data-type]", root).onchange = ev => { state.type = ev.target.value; state.limit = PAGE; ev.target.classList.toggle("on", !!state.type); save(); renderResults(); };
   $("[data-niveau]", root).onchange = ev => { state.niveau = ev.target.value; state.limit = PAGE; save(); renderResults(); };
   $("[data-more]", root).onclick = () => { state.limit += PAGE; renderResults(); };
   $("[data-create]", root).onclick = async () => {

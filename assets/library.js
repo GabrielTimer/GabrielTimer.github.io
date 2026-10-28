@@ -4,6 +4,8 @@
    dans un format unique, en français.
    ========================================================= */
 
+import { classer } from "./classement.js";
+
 const CAT_LABELS = {
   hanche:"Hanche", epaule:"Épaule", Epaule:"Épaule", dos:"Dos", cheville_pied:"Cheville et pied",
   genou:"Genou", Genou:"Genou", corps_entier:"Corps entier", poignet_main:"Poignet et main",
@@ -221,7 +223,8 @@ function snapshot(e){
 }
 
 function indexSearch(e){
-  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.mode, e.source === "PERSO" ? "mes exercices perso" : "", ...e.pathologies, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
+  classer(e);
+  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.zone, e.mode, ...e.types, e.source === "PERSO" ? "mes exercices perso" : "", ...e.pathologies, ...e.pathos, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
 }
 
 /** Applique une correction (ou la retire si fields est null) à un exercice de la bibliothèque. */
