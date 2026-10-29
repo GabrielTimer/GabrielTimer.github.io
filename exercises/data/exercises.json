@@ -1856,7 +1856,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/dead-bug-complet.png",
+    "image": "/exercises/images/post-partum/dead-bug-complet.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -1949,7 +1949,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pont-fessier-1jambe.png",
+    "image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2042,7 +2042,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pallof-press.png",
+    "image": "/exercises/images/post-partum/pallof-press.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2135,7 +2135,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bird-dog-complet.png",
+    "image": "/exercises/images/post-partum/bird-dog-complet.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2228,7 +2228,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/squat-partiel.png",
+    "image": "/exercises/images/post-partum/squat-partiel.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2321,7 +2321,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/side-plank-genoux.png",
+    "image": "/exercises/images/post-partum/side-plank-genoux.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2414,7 +2414,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/farmer-carry.png",
+    "image": "/exercises/images/post-partum/farmer-carry.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2507,7 +2507,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/step-up-bas.png",
+    "image": "/exercises/images/post-partum/step-up-bas.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2600,7 +2600,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bear-hover.png",
+    "image": "/exercises/images/post-partum/bear-hover.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2693,7 +2693,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/dead-bug-elastique.png",
+    "image": "/exercises/images/post-partum/dead-bug-elastique.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2786,7 +2786,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/side-plank-jambes.png",
+    "image": "/exercises/images/post-partum/side-plank-jambes.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2879,7 +2879,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/squat-tempo.png",
+    "image": "/exercises/images/post-partum/squat-tempo.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -2972,7 +2972,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bird-dog-pause.png",
+    "image": "/exercises/images/post-partum/bird-dog-complet.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -3472,7 +3472,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/mobilite-flexion-extension.webp",
     "video": "",
     "description": "Mobilisation douce de la cheville en flexion et extension.",
     "consignes": [
@@ -3509,7 +3509,7 @@
     "materiel": [
       "Chaise/Fauteuil"
     ],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/cercles-cheville.webp",
     "video": "",
     "description": "Cercles contrôlés de la cheville en position assise.",
     "consignes": [
@@ -3544,7 +3544,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/equilibre-bipodal.webp",
     "video": "",
     "description": "Travail d’équilibre debout pieds écartés.",
     "consignes": [
@@ -3580,7 +3580,7 @@
       "Mollets"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/demi-pointes.webp",
     "video": "",
     "description": "Montée contrôlée sur les pointes de pieds.",
     "consignes": [
@@ -3615,7 +3615,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/equilibre-unipodal.webp",
     "video": "",
     "description": "Maintien de l’équilibre sur une jambe.",
     "consignes": [
@@ -3650,7 +3650,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
     "video": "",
     "description": "Travail d’équilibre dynamique avec mouvements des bras.",
     "consignes": [
@@ -3688,7 +3688,7 @@
     "materiel": [
       "Élastique"
     ],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/marche-laterale-elastique.webp",
     "video": "",
     "description": "Déplacements latéraux avec résistance élastique.",
     "consignes": [
@@ -3723,7 +3723,7 @@
       "Cheville"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/sauts-sur-place.webp",
     "video": "",
     "description": "Petits sauts contrôlés sur place.",
     "consignes": [
@@ -3760,7 +3760,7 @@
     "materiel": [
       "Coussin"
     ],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/equilibre-coussin.webp",
     "video": "",
     "description": "Travail proprioceptif sur surface instable.",
     "consignes": [
@@ -3795,7 +3795,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
     "video": "",
     "description": "Petits sauts latéraux sur une jambe.",
     "consignes": [
@@ -3831,7 +3831,7 @@
       "Membres inférieurs"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/course-changements-direction.webp",
     "video": "",
     "description": "Course légère avec changements de direction progressifs.",
     "consignes": [
@@ -3866,7 +3866,7 @@
       "Cheville droite"
     ],
     "materiel": [],
-    "image": "/images/placeholders/cheville.webp",
+    "image": "/exercises/images/cheville/receptions-unipodales.webp",
     "video": "",
     "description": "Travail de réception contrôlée sur une jambe.",
     "consignes": [
@@ -5945,7 +5945,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/bird-dog-simplifie.png"
+  "image": "/exercises/images/post-partum/bird-dog-bras.png"
 },
 
 {
@@ -6092,7 +6092,7 @@
     "phase_descente": 2,
     "cycles": 24
   },
-  "image": "/exercises/images/gainage/dead-bug-complet.png"
+  "image": "/exercises/images/post-partum/dead-bug-complet.webp"
 },
 
 {
@@ -6128,7 +6128,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/bird-dog-complet.png"
+  "image": "/exercises/images/post-partum/bird-dog-complet.webp"
 },
 
 {
@@ -6204,7 +6204,7 @@
     "phase_descente": 2,
     "cycles": 3
   },
-  "image": "/exercises/images/gainage/planche-laterale-genoux.png"
+  "image": "/exercises/images/post-partum/side-plank-genoux.webp"
 },
 
 {
@@ -6281,7 +6281,7 @@
     "phase_descente": 2,
     "cycles": 24
   },
-  "image": "/exercises/images/gainage/pallof-press.png"
+  "image": "/exercises/images/post-partum/pallof-press.webp"
 },
 
 {
@@ -6320,7 +6320,7 @@
     "phase_descente": 3,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/pont-unipodal.png"
+  "image": "/exercises/images/post-partum/pont-fessier-1jambe.webp"
 },
 
 {
@@ -6465,7 +6465,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/step-up-gaine.png"
+  "image": "/exercises/images/post-partum/step-up-bas.webp"
 },
 
 {
@@ -7077,7 +7077,7 @@
   "zones_corporelles": ["Cheville","Genou","Bassin"],
   "muscles_cibles": ["Moyen fessier","Stabilisateurs de cheville"],
   "materiel": [],
-  "image": "/exercises/images/pubalgie/equilibre-unipodal.png",
+  "image": "/exercises/images/cheville/equilibre-unipodal.webp",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Proprioception"],
   "zones": ["Cheville","Genou","Bassin"]
