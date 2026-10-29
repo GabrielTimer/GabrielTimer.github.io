@@ -7843,7 +7843,7 @@
       "maintien": 6,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/genou/quadriceps-statique.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -7914,7 +7914,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/genou/elevation-jambe-tendue.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -7984,7 +7984,7 @@
       "maintien": 3,
       "cycles": 15
     },
-    "image": null,
+    "image": "/exercises/images/genou/extension-terminale-elastique.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8054,7 +8054,7 @@
       "maintien": 5,
       "cycles": 15
     },
-    "image": null,
+    "image": "/exercises/images/genou/flexion-genou-assis.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8124,7 +8124,7 @@
       "maintien": 4,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/genou/descente-marche.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 3,
     "zones_corporelles": [],
@@ -8195,7 +8195,7 @@
       "maintien": 30,
       "cycles": 5
     },
-    "image": null,
+    "image": "/exercises/images/genou/squat-espagnol.webp",
     "type_contraction": "statique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -8264,7 +8264,7 @@
       "maintien": 30,
       "cycles": 4
     },
-    "image": null,
+    "image": "/exercises/images/genou/chaise-mur.webp",
     "type_contraction": "statique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
