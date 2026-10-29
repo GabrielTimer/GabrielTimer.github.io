@@ -169,12 +169,19 @@ function render(){
 
     <section class="panel" id="backup">
       <h2>${icon("download")}Sauvegarde</h2>
-      <p class="muted">Un fichier avec toutes vos données : patients, séances, modèles, exercices créés et corrigés, réglages. Gardez-le en lieu sûr (il contient des données de santé). Il permet de tout restaurer si besoin.</p>
+      <p class="muted"><strong>Tout sauvegarder</strong> télécharge deux fichiers à garder ensemble sur votre ordinateur ou une clé USB :</p>
+      <ul class="muted small" style="margin:6px 0 12px;padding-left:20px">
+        <li><strong>vos données</strong> (fichier .json) : patients, séances, bilans, modèles, exercices créés et corrigés, réglages, messages ;</li>
+        <li><strong>le site lui-même</strong> (fichier .zip, environ 150 Mo) : toutes les pages, le code et les illustrations des exercices.</li>
+      </ul>
       <div class="row wrap" style="--gap:10px">
-        <button class="btn primary" type="button" id="bk-dl">${icon("download")}Télécharger une sauvegarde</button>
+        <button class="btn primary" type="button" id="bk-all">${icon("download")}Tout sauvegarder</button>
+        <button class="btn" type="button" id="bk-dl">${icon("download")}Données seulement</button>
+        <button class="btn" type="button" id="bk-site">${icon("folder")}Site seulement</button>
         <label class="btn ee-file">${icon("upload")}<span>Restaurer une sauvegarde…</span><input type="file" id="bk-up" accept="application/json,.json" hidden></label>
       </div>
-      <p class="hint" style="margin-top:10px" id="bk-last"></p>
+      <p class="hint" style="margin-top:10px">Pour enregistrer directement sur une clé USB, réglez votre navigateur pour qu'il demande où enregistrer chaque téléchargement (Paramètres → Téléchargements), puis choisissez la clé. Le fichier de données contient des données de santé : gardez-le en lieu sûr.</p>
+      <p class="hint" style="margin-top:6px" id="bk-last"></p>
     </section>
 
     <p class="center small faint"><button class="ee-link" type="button" id="reset-all">Remettre tous les réglages par défaut</button></p>
@@ -205,7 +212,9 @@ function render(){
   $("#niv-add").onclick = () => { readLists(); const n = R.listes.niveaux.length + 1; R.listes.niveaux.push({ n, label:`Niveau ${n}`, sub:"" }); renderNivs(); setDirty(true); };
   $("#niv-del").onclick = () => { readLists(); if(R.listes.niveaux.length > 1){ R.listes.niveaux.pop(); renderNivs(); setDirty(true); } };
   $("#save").onclick = save;
-  $("#bk-dl").onclick = downloadBackup;
+  $("#bk-dl").onclick = () => downloadBackup();
+  $("#bk-site").onclick = downloadSite;
+  $("#bk-all").onclick = async () => { if(await downloadBackup()) setTimeout(downloadSite, 1200); };
   $("#bk-up").onchange = restoreBackup;
   $("#reset-all").onclick = async () => {
     if(!await confirmDialog({ title:"Tout remettre par défaut ?", message:"Les réglages reviennent à ceux d'origine (vos exercices masqués et favoris sont conservés). Pensez à enregistrer ensuite.", confirm:"Remettre par défaut" })) return;
@@ -318,6 +327,7 @@ async function save(){
 async function downloadBackup(){
   const b = $("#bk-dl");
   b.disabled = true;
+  let ok = false;
   try{
     const data = await C.exportAll(step => { b.innerHTML = `<span class="spinner" style="width:18px;height:18px"></span>${esc(step)}…`; });
     const blob = new Blob([JSON.stringify(data)], { type:"application/json" });
@@ -330,8 +340,20 @@ async function downloadBackup(){
     const n = Object.fromEntries(Object.entries(data.collections).map(([k, v]) => [k, v.length]));
     toast(`Sauvegarde téléchargée : ${n.patients || 0} patients, ${n.seances || 0} séances, ${n.modeles || 0} modèles.`, { type:"ok", duration:6000 });
     $("#bk-last").textContent = `Dernière sauvegarde depuis cet appareil : aujourd'hui.`;
+    ok = true;
   }catch(err){ failed(err); }
-  b.disabled = false; b.innerHTML = `${icon("download")}Télécharger une sauvegarde`;
+  b.disabled = false; b.innerHTML = `${icon("download")}Données seulement`;
+  return ok;
+}
+
+/* Copie complète du site (pages, code, illustrations) : archive .zip fournie par GitHub */
+const SITE_ZIP = "https://github.com/GabrielTimer/GabrielTimer.github.io/archive/refs/heads/main.zip";
+function downloadSite(){
+  const a = document.createElement("a");
+  a.href = SITE_ZIP; a.rel = "noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  localStorage.setItem("gt_last_site_backup", String(Date.now()));
+  toast("Téléchargement du site lancé (environ 150 Mo, cela peut prendre une minute).", { type:"ok", duration:6000 });
 }
 
 async function restoreBackup(ev){
