@@ -9105,7 +9105,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/cervicales/rentrer-menton.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9173,7 +9173,7 @@
       "maintien": 10,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/cervicales/flexion-profonde-cou.webp",
     "type_contraction": "statique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -9245,7 +9245,7 @@
       "maintien": 30,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/cervicales/etirement-trapeze.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9314,7 +9314,7 @@
       "maintien": 6,
       "cycles": 5
     },
-    "image": null,
+    "image": "/exercises/images/cervicales/isometrique-cou.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9380,7 +9380,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/cervicales/rotation-tete.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9450,7 +9450,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/epaule/y-ventre.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -9520,7 +9520,7 @@
       "maintien": 3,
       "cycles": 12
     },
-    "image": null,
+    "image": "/exercises/images/epaule/pompe-scapulaire-mur.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9591,7 +9591,7 @@
       "maintien": 30,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/epaule/etirement-posterieur.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9659,7 +9659,7 @@
       "maintien": 3,
       "cycles": 12
     },
-    "image": null,
+    "image": "/exercises/images/epaule/rotation-externe-couche.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -9732,7 +9732,7 @@
       "maintien": 4,
       "cycles": 15
     },
-    "image": null,
+    "image": "/exercises/images/cheville/excentrique-achille.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -9801,7 +9801,7 @@
       "maintien": 3,
       "cycles": 15
     },
-    "image": null,
+    "image": "/exercises/images/cheville/eversion-elastique.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9868,7 +9868,7 @@
       "maintien": 5,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/cheville/pied-court.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -9937,7 +9937,7 @@
       "maintien": 30,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/cheville/etirement-mollet.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -10007,7 +10007,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/main/glissements-tendineux.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -10073,7 +10073,7 @@
       "maintien": 5,
       "cycles": 12
     },
-    "image": null,
+    "image": "/exercises/images/main/serrer-balle.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
