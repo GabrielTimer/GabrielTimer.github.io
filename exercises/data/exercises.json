@@ -5101,6 +5101,7 @@
 
 {
   "id": "marche",
+  "image": "/exercises/images/cabinet/marche.png",
   "nom": "Marche",
   "type": "timer",
   "categorie": "Cardio",
@@ -5144,6 +5145,7 @@
 
 {
   "id": "course",
+  "image": "/exercises/images/cabinet/course.png",
   "nom": "Course",
   "type": "timer",
   "categorie": "Cardio",
@@ -5186,6 +5188,7 @@
 
 {
   "id": "cardio_tapismarche",
+  "image": "/exercises/images/cabinet/tapismarche.png",
   "nom": "Marche sur tapis",
   "type": "timer",
   "categorie": "Cardio",
@@ -5228,6 +5231,7 @@
 
 {
   "id": "cardio_tapiscourse",
+  "image": "/exercises/images/cabinet/tapiscourse.png",
   "nom": "Course sur tapis",
   "type": "timer",
   "categorie": "Cardio",
@@ -5456,6 +5460,7 @@
 
 {
   "id": "GAINAGE_01",
+  "image": "/exercises/images/post-partum/respiration-transverse.png",
   "nom": "Aspiration abdominale (transverse)",
   "type": "timer",
   "categorie": "Gainage",
@@ -5510,6 +5515,7 @@
 
 {
   "id": "GAINAGE_02",
+  "image": "/exercises/images/post-partum/dead-bug-bras.png",
   "nom": "Dead Bug bras seuls",
   "type": "timer",
   "categorie": "Gainage",
@@ -5613,7 +5619,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/bird-dog-bras.png",
+  "image": "/exercises/images/post-partum/bird-dog-bras.png",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Stabilité du tronc"],
   "zones": ["Abdomen","Lombaires"]
@@ -5679,7 +5685,7 @@
     "phase_descente": 3,
     "cycles": 24
   },
-  "image": "/exercises/images/gainage/pont-fessier.png",
+  "image": "/exercises/images/post-partum/pont-fessier.png",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Stabilité lombo-pelvienne"],
   "zones": ["Abdomen","Fessiers","Lombaires"]
@@ -5801,7 +5807,7 @@
     "phase_descente": 6,
     "cycles": 10
   },
-  "image": "/exercises/images/gainage/respiration-diaphragmatique.png",
+  "image": "/exercises/images/post-partum/respiration-transverse.png",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Respiration"],
   "zones": ["Abdomen","Thorax"]
@@ -5866,7 +5872,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/dead-bug-simplifie.png",
+  "image": "/exercises/images/post-partum/dead-bug.png",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Stabilité du tronc"],
   "zones": ["Abdomen","Lombaires"]
@@ -6007,7 +6013,7 @@
     "phase_descente": 3,
     "cycles": 10
   },
-  "image": "/exercises/images/gainage/pont-maintien.png"
+  "image": "/exercises/images/post-partum/pont-fessier.png"
 },
 
 {
@@ -6042,7 +6048,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/heel-slide.png"
+  "image": "/exercises/images/post-partum/heel-slide.png"
 },
 
 {
@@ -6161,7 +6167,7 @@
     "phase_descente": 3,
     "cycles": 3
   },
-  "image": "/exercises/images/gainage/planche-ventrale.png"
+  "image": "/exercises/images/tronc/Gainage_Ventral.png"
 },
 
 {
@@ -6237,7 +6243,7 @@
     "phase_descente": 2,
     "cycles": 3
   },
-  "image": "/exercises/images/gainage/gainage-quadrupedie.png"
+  "image": "/exercises/images/post-partum/gainage-quadrupedie.png"
 },
 
 {
@@ -6382,7 +6388,7 @@
     "phase_descente": 1,
     "cycles": 1
   },
-  "image": "/exercises/images/gainage/marche-gainee.png"
+  "image": "/exercises/images/post-partum/marche-gainee.png"
 },
 
 {
@@ -6864,7 +6870,7 @@
     "phase_descente": 3,
     "cycles": 5
   },
-  "image": "/exercises/images/pubalgie/serrage-ballon-jambes-tendues.png",
+  "image": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Renforcement adducteurs"],
   "zones": ["Adducteurs","Bassin"]
@@ -6928,7 +6934,7 @@
     "phase_descente": 2,
     "cycles": 36
   },
-  "image": "/exercises/images/pubalgie/pont-fessier.png",
+  "image": "/exercises/images/pubalgie/pont_fessier.png",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Stabilité du bassin"],
   "zones": ["Fessiers","Lombaires"]
@@ -6991,7 +6997,7 @@
     "phase_descente": 2,
     "cycles": 3
   },
-  "image": "/exercises/images/pubalgie/gainage-ventral.png",
+  "image": "/exercises/images/pubalgie/Gainage_Ventral.png",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Stabilité du tronc"],
   "zones": ["Abdomen","Lombaires"]
@@ -7011,7 +7017,7 @@
   "zones_corporelles": ["Obliques","Bassin"],
   "muscles_cibles": ["Obliques","Moyen fessier"],
   "materiel": ["Tapis"],
-  "image": "/exercises/images/pubalgie/gainage-lateral-genoux.png",
+  "image": "/exercises/images/pubalgie/gainage-lat-genoux.png",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Contrôle latéral du bassin"],
   "zones": ["Obliques","Bassin"]
@@ -7051,7 +7057,7 @@
   "zones_corporelles": ["Abdomen","Lombaires","Bassin"],
   "muscles_cibles": ["Transverse","Multifides"],
   "materiel": ["Tapis"],
-  "image": "/exercises/images/pubalgie/bird-dog.png",
+  "image": "/exercises/images/pubalgie/Bird-dog.png",
   "pathologies": ["Pubalgie"],
   "objectifs": ["Contrôle moteur"],
   "zones": ["Abdomen","Lombaires","Bassin"]
@@ -7366,21 +7372,21 @@
   "nom":"🌿 Respiration guidée - Débuter",
   "categorie":"Respiration",
   "objectif":"Respiration guidée mode Débuter",
-  "image":"images/respiration.png"
+  "image":"/exercises/images/post-partum/respiration-transverse.png"
 },
 {
   "id":"RESP_EQUILIBRER",
   "nom":"🌿 Respiration guidée - Équilibrer",
   "categorie":"Respiration",
   "objectif":"Respiration guidée mode Équilibrer",
-  "image":"images/respiration.png"
+  "image":"/exercises/images/post-partum/respiration-transverse.png"
 },
 {
   "id":"RESP_APAISER",
   "nom":"🌿 Respiration guidée - Apaiser",
   "categorie":"Respiration",
   "objectif":"Respiration guidée mode Apaiser",
-  "image":"images/respiration.png"
+  "image":"/exercises/images/post-partum/respiration-transverse.png"
 },
 {
   "id": "COUDE_01",
