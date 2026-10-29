@@ -266,7 +266,12 @@ function indexSearch(e){
 export function applyEdit(e, fields){
   if(!e.original) e.original = snapshot(e);
   Object.assign(e, e.original);
-  if(fields) EDITABLE.forEach(f => { if(f in fields) e[f] = fields[f]; });
+  if(fields) EDITABLE.forEach(f => {
+    if(!(f in fields)) return;
+    // Une modification enregistrée avant l'ajout d'une illustration ne doit pas l'effacer.
+    if(f === "image" && !fields.image && e.original.image) return;
+    e[f] = fields[f];
+  });
   e.modifie = !!fields;
   indexSearch(e);
   return e;
