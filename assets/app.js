@@ -590,6 +590,7 @@ export function exoImageHTML(src, alt = "", cls = "", style = ""){
 
 /* ---------- Enregistrement du service worker ---------- */
 
+let demandeMaj = false;
 export function registerSW(){
   if(!("serviceWorker" in navigator)) return;
   if(location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
@@ -599,13 +600,15 @@ export function registerSW(){
       if(!w) return;
       w.addEventListener("statechange", () => {
         if(w.state === "installed" && navigator.serviceWorker.controller){
-          toast("Une nouvelle version est disponible.", { action:{ label:"Mettre à jour", run:() => { w.postMessage("skipWaiting"); } } });
+          toast("Une nouvelle version est disponible.", { action:{ label:"Mettre à jour", run:() => { demandeMaj = true; w.postMessage("skipWaiting"); } } });
         }
       });
     });
   }).catch(() => {});
+  // Pas de rechargement automatique (une séance en cours ne doit pas être interrompue) :
+  // seulement si la personne a demandé la mise à jour.
   let reloaded = false;
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if(reloaded) return; reloaded = true; location.reload();
+    if(reloaded || !demandeMaj) return; reloaded = true; location.reload();
   });
 }

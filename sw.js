@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.9.3";
+const VERSION = "gt-2.9.4";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -19,6 +19,7 @@ const PRECACHE = [
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(SHELL).then(cache => Promise.all(PRECACHE.map(url => cache.add(url).catch(() => null))))
+      .then(() => self.skipWaiting()) // la nouvelle version prend la main tout de suite
   );
 });
 

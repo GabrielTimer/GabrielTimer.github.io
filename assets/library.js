@@ -298,14 +298,16 @@ export function updateSessionExercise(x, before, after){
 }
 
 let cache = null;
+// Toujours vérifier auprès du site qu'une version plus récente de la liste n'existe pas.
+const FRAIS = { cache:"no-cache" };
 
 export function loadLibrary(){
   if(cache) return cache;
   const edits = import("./cloud.js").then(C => C.listExerciseEdits()).catch(() => []);
   cache = Promise.all([
-    fetch("/exercises/data/exercises.json").then(r => r.json()).catch(() => []),
-    fetch("/exercises/data/hep_exercises.json").then(r => r.json()).catch(() => []),
-    fetch("/exercises/data/hep_nettoyage.json").then(r => r.json()).then(n => { NETTOYAGE = { ...NETTOYAGE, ...n }; (n.masques || []).forEach(k => masquesFixes.add(k)); }).catch(() => {}),
+    fetch("/exercises/data/exercises.json", FRAIS).then(r => r.json()).catch(() => []),
+    fetch("/exercises/data/hep_exercises.json", FRAIS).then(r => r.json()).catch(() => []),
+    fetch("/exercises/data/hep_nettoyage.json", FRAIS).then(r => r.json()).then(n => { NETTOYAGE = { ...NETTOYAGE, ...n }; (n.masques || []).forEach(k => masquesFixes.add(k)); }).catch(() => {}),
     edits
   ]).then(([cab, hep, _nettoyage, docs]) => {
     const fixes = {};
