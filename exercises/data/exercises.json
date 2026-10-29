@@ -8334,7 +8334,7 @@
       "maintien": 3,
       "cycles": 12
     },
-    "image": null,
+    "image": "/exercises/images/hanche/abduction-couche.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8405,7 +8405,7 @@
       "maintien": 3,
       "cycles": 12
     },
-    "image": null,
+    "image": "/exercises/images/hanche/hip-thrust.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 3,
     "zones_corporelles": [],
@@ -8477,7 +8477,7 @@
       "maintien": 30,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/hanche/etirement-psoas.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8548,7 +8548,7 @@
       "maintien": 30,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/hanche/etirement-piriforme.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8619,7 +8619,7 @@
       "maintien": 20,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/hanche/copenhague-genou.webp",
     "type_contraction": "statique",
     "difficulte_percue": 3,
     "zones_corporelles": [],
@@ -8688,7 +8688,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/dos/chat-vache.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8758,7 +8758,7 @@
       "maintien": 2,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/dos/extension-ventre.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8826,7 +8826,7 @@
       "maintien": 20,
       "cycles": 3
     },
-    "image": null,
+    "image": "/exercises/images/dos/genoux-poitrine.webp",
     "type_contraction": "statique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8896,7 +8896,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/dos/rotation-lombaire.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 1,
     "zones_corporelles": [],
@@ -8965,7 +8965,7 @@
       "maintien": 2,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/dos/glissement-sciatique.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
@@ -9034,7 +9034,7 @@
       "maintien": 3,
       "cycles": 10
     },
-    "image": null,
+    "image": "/exercises/images/dos/charniere-baton.webp",
     "type_contraction": "dynamique",
     "difficulte_percue": 2,
     "zones_corporelles": [],
