@@ -18,5 +18,35 @@
   "defaut": "/exercises/images/fauteuil/FAUT_POST_04.png",
   "f": "/exercises/images/fauteuil/FAUT_POST_04-f.webp",
   "h": "/exercises/images/fauteuil/FAUT_POST_04.png"
+ },
+ "/exercises/images/genou/equilibre-balle-1.png": {
+  "defaut": "/exercises/images/genou/equilibre-balle-1.png",
+  "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
+  "h": "/exercises/images/genou/equilibre-balle-1.png"
+ },
+ "/exercises/images/genou/equilibre-balle-2.png": {
+  "defaut": "/exercises/images/genou/equilibre-balle-2.png",
+  "f": "/exercises/images/genou/equilibre-balle-2-f.webp",
+  "h": "/exercises/images/genou/equilibre-balle-2.png"
+ },
+ "/exercises/images/genou/squat-anti-valgus.png": {
+  "defaut": "/exercises/images/genou/squat-anti-valgus.png",
+  "f": "/exercises/images/genou/squat-anti-valgus-f.webp",
+  "h": "/exercises/images/genou/squat-anti-valgus.png"
+ },
+ "/exercises/images/genou/squat-anti-varus.png": {
+  "defaut": "/exercises/images/genou/squat-anti-varus.png",
+  "f": "/exercises/images/genou/squat-anti-varus-f.webp",
+  "h": "/exercises/images/genou/squat-anti-varus.png"
+ },
+ "/exercises/images/genou/squat-elastique.png": {
+  "defaut": "/exercises/images/genou/squat-elastique.png",
+  "f": "/exercises/images/genou/squat-elastique-f.webp",
+  "h": "/exercises/images/genou/squat-elastique.png"
+ },
+ "/exercises/images/genou/squat-lat-elastique.png": {
+  "defaut": "/exercises/images/genou/squat-lat-elastique.png",
+  "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
+  "h": "/exercises/images/genou/squat-lat-elastique.png"
  }
 }
