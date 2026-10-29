@@ -6,6 +6,7 @@
 
 import { classer } from "./classement.js";
 import { masquesFixes } from "./settings.js";
+import { variante } from "./variantes.js";
 
 const CAT_LABELS = {
   hanche:"Hanche", epaule:"Épaule", Epaule:"Épaule", dos:"Dos", cheville_pied:"Cheville et pied",
@@ -381,7 +382,7 @@ export function exerciseImage(exo){
   if(!src) return null;
   if(/^https?:|^data:/.test(src)) return src;
   if(exo.source === "HEP" && !src.includes("/")) return "/exercises/images/HEP/" + src;
-  return src.startsWith("/") ? src : "/" + src.replace(/^\.\.\//, "");
+  return variante(src.startsWith("/") ? src : "/" + src.replace(/^\.\.\//, ""));
 }
 
 /** Consignes d'un exercice enregistré (ancien ou nouveau format) sous forme de liste. */

@@ -3,6 +3,7 @@
    ========================================================= */
 
 import { icon } from "./icons.js";
+import { variante } from "./variantes.js";
 import { KINE, SITE_URL } from "./config.js";
 import { settings, logoSrc } from "./settings.js";
 
@@ -583,6 +584,7 @@ export function errorHTML(err, retry = true){
 /* ---------- Image d'exercice avec repli ---------- */
 
 export function exoImageHTML(src, alt = "", cls = "", style = ""){
+  src = variante(src);
   const ph = `<div class='ph-img ${cls}' style='${style}'>${icon("body").replace(/"/g, "'")}</div>`;
   if(!src) return `<div class="ph-img ${cls}" style="${style}">${icon("body")}</div>`;
   return `<img class="exo-img ${cls}" style="${style}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async" onerror="this.outerHTML=&quot;${ph}&quot;">`;

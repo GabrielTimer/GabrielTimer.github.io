@@ -33,6 +33,7 @@
 <script type="module">
 import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW, toast } from "/assets/app.js";
 import { APP_VERSION } from "/assets/config.js";
+import { choixIllustrations, setChoixIllustrations } from "/assets/variantes.js";
 registerSW();
 const ctx = readPatientContext();
 const isKine = kineHint.get() && !ctx.apercu;
@@ -57,6 +58,11 @@ $("#app").innerHTML = `
     <div class="set-row"><div class="s-txt"><strong>Thème</strong><span>Clair, sombre ou selon le téléphone.</span></div>
       <div class="segmented" role="group" aria-label="Thème">
         ${[["auto","Auto"],["light","Clair"],["dark","Sombre"]].map(([v,l]) => `<button type="button" data-theme="${v}" aria-pressed="${theme === v}">${l}</button>`).join("")}
+      </div>
+    </div>
+    <div class="set-row"><div class="s-txt"><strong>Illustrations des exercices</strong><span>Montrer les exercices réalisés par une femme ou par un homme.</span></div>
+      <div class="segmented" role="group" aria-label="Illustrations des exercices">
+        ${[["auto","Auto"],["f","Femme"],["h","Homme"]].map(([v,l]) => `<button type="button" data-illus="${v}" aria-pressed="${choixIllustrations() === v}">${l}</button>`).join("")}
       </div>
     </div>
   </div>
@@ -95,6 +101,11 @@ $("#big").onchange = e => { store.set("gt_text", e.target.checked ? "large" : "n
 document.querySelectorAll("[data-theme]").forEach(b => b.onclick = () => {
   store.set("gt_theme", b.dataset.theme); applyPrefs();
   document.querySelectorAll("[data-theme]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+});
+document.querySelectorAll("[data-illus]").forEach(b => b.onclick = () => {
+  setChoixIllustrations(b.dataset.illus);
+  document.querySelectorAll("[data-illus]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  toast("Les illustrations suivront ce choix.", { type:"ok" });
 });
 $("#sound").onchange = e => store.set("gt_sound", e.target.checked ? 1 : 0);
 $("#voice").onchange = e => store.set("gt_voice", e.target.checked ? 1 : 0);
