@@ -3065,7 +3065,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/fente-arriere.png",
+    "image": "/exercises/images/post-partum/fente-arriere.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -3158,7 +3158,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/bear-crawl.png",
+    "image": "/exercises/images/post-partum/bear-crawl.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -3251,7 +3251,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/carry-asymetrique.png",
+    "image": "/exercises/images/post-partum/carry-asymetrique.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -3344,7 +3344,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/mountain-climber-lent.png",
+    "image": "/exercises/images/post-partum/mountain-climber-lent.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -3437,7 +3437,7 @@
       "phase_descente": 4,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/step-up-dynamique.png",
+    "image": "/exercises/images/post-partum/step-up-dynamique.webp",
     "pathologies": [
       "Post-partum"
     ],
@@ -5746,7 +5746,7 @@
     "phase_descente": 3,
     "cycles": 5
   },
-  "image": "/exercises/images/gainage/auto-grandissement.png",
+  "image": "/exercises/images/gainage/auto-grandissement.webp",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Posture"],
   "zones": ["Dos","Abdomen"]
@@ -5911,7 +5911,7 @@
     "phase_descente": 2,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/bird-dog-jambe.png"
+  "image": "/exercises/images/gainage/bird-dog-jambe.webp"
 },
 
 {
@@ -5979,7 +5979,7 @@
     "phase_descente": 3,
     "cycles": 3
   },
-  "image": "/exercises/images/gainage/planche-genoux.png"
+  "image": "/exercises/images/gainage/planche-genoux.webp"
 },
 
 {
@@ -6354,7 +6354,7 @@
     "phase_descente": 1,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/planche-toucher-epaule.png"
+  "image": "/exercises/images/gainage/planche-toucher-epaule.webp"
 },
 
 {
@@ -6427,7 +6427,7 @@
     "phase_descente": 1,
     "cycles": 2
   },
-  "image": "/exercises/images/gainage/farmer-walk.png"
+  "image": "/exercises/images/post-partum/carry-asymetrique.webp"
 },
 
 {
@@ -6503,7 +6503,7 @@
     "phase_descente": 1,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/mountain-climber-lent.png"
+  "image": "/exercises/images/post-partum/mountain-climber-lent.webp"
 },
 
 {
@@ -6542,7 +6542,7 @@
     "phase_descente": 1,
     "cycles": 2
   },
-  "image": "/exercises/images/gainage/bear-crawl.png"
+  "image": "/exercises/images/post-partum/bear-crawl.webp"
 },
 
 {
@@ -6607,7 +6607,7 @@
     "phase_descente": 3,
     "cycles": 24
   },
-  "image": "/exercises/images/gainage/pont-fessier-swissball.png",
+  "image": "/exercises/images/gainage/pont-fessier-swissball.webp",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Stabilité lombo-pelvienne"],
   "zones": ["Abdomen","Fessiers","Lombaires"]
@@ -6672,7 +6672,7 @@
     "phase_descente": 2,
     "cycles": 3
   },
-  "image": "/exercises/images/gainage/planche-swissball.png",
+  "image": "/exercises/images/gainage/planche-swissball.webp",
   "pathologies": ["Lombalgie"],
   "objectifs": ["Gainage profond"],
   "zones": ["Abdomen","Épaules","Lombaires"]
@@ -6740,7 +6740,7 @@
     "phase_descente": 3,
     "cycles": 20
   },
-  "image": "/exercises/images/gainage/rollout-swissball.png",
+  "image": "/exercises/images/gainage/rollout-swissball.webp",
   "pathologies": ["Préparation sportive"],
   "objectifs": ["Contrôle avancé du tronc"],
   "zones": ["Abdomen","Épaules","Lombaires"]
