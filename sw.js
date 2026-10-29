@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.9.1";
+const VERSION = "gt-2.9.2";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -94,11 +94,11 @@ self.addEventListener("fetch", event => {
   }
   if(url.pathname.startsWith("/musimix/")) return;
 
-  if(request.mode === "navigate" || url.pathname.startsWith("/assets/") || url.pathname.endsWith(".html") || url.pathname === "/manifest.json"){
+  if(request.mode === "navigate" || url.pathname.startsWith("/assets/") || url.pathname.startsWith("/exercises/data/") || url.pathname.endsWith(".html") || url.pathname === "/manifest.json"){
     event.respondWith(networkFirst(request, SHELL));
     return;
   }
-  if(/\.(png|jpe?g|webp|gif|svg|wav|mp3|pdf)$/i.test(url.pathname) || url.pathname.startsWith("/exercises/data/")){
+  if(/\.(png|jpe?g|webp|gif|svg|wav|mp3|pdf)$/i.test(url.pathname)){
     event.respondWith(staleWhileRevalidate(request, MEDIA));
   }
 });
