@@ -1,4 +1,29 @@
 {
+ "/exercises/images/cheville/appuisballeexterne.png": {
+  "defaut": "/exercises/images/cheville/appuisballeexterne.png",
+  "f": "/exercises/images/cheville/appuisballeexterne-f.webp",
+  "h": "/exercises/images/cheville/appuisballeexterne.png"
+ },
+ "/exercises/images/cheville/appuisballeinterne.png": {
+  "defaut": "/exercises/images/cheville/appuisballeinterne.png",
+  "f": "/exercises/images/cheville/appuisballeinterne-f.webp",
+  "h": "/exercises/images/cheville/appuisballeinterne.png"
+ },
+ "/exercises/images/cheville/appuisballemilieu.png": {
+  "defaut": "/exercises/images/cheville/appuisballemilieu.png",
+  "f": "/exercises/images/cheville/appuisballemilieu-f.webp",
+  "h": "/exercises/images/cheville/appuisballemilieu.png"
+ },
+ "/exercises/images/cheville/flexdorsalemur.png": {
+  "defaut": "/exercises/images/cheville/flexdorsalemur.png",
+  "f": "/exercises/images/cheville/flexdorsalemur-f.webp",
+  "h": "/exercises/images/cheville/flexdorsalemur.png"
+ },
+ "/exercises/images/cheville/pointepieds.png": {
+  "defaut": "/exercises/images/cheville/pointepieds.png",
+  "f": "/exercises/images/cheville/pointepieds-f.webp",
+  "h": "/exercises/images/cheville/pointepieds.png"
+ },
  "/exercises/images/fauteuil/FAUT_POST_01.png": {
   "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
   "f": "/exercises/images/fauteuil/FAUT_POST_01-f.webp",
@@ -48,5 +73,50 @@
   "defaut": "/exercises/images/genou/squat-lat-elastique.png",
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
+ },
+ "/exercises/images/post-partum/bird-dog-bras.png": {
+  "defaut": "/exercises/images/post-partum/bird-dog-bras.png",
+  "f": "/exercises/images/post-partum/bird-dog-bras.png",
+  "h": "/exercises/images/post-partum/bird-dog-bras-h.webp"
+ },
+ "/exercises/images/post-partum/clamshell.png": {
+  "defaut": "/exercises/images/post-partum/clamshell.png",
+  "f": "/exercises/images/post-partum/clamshell.png",
+  "h": "/exercises/images/post-partum/clamshell-h.webp"
+ },
+ "/exercises/images/post-partum/dead-bug-bras.png": {
+  "defaut": "/exercises/images/post-partum/dead-bug-bras.png",
+  "f": "/exercises/images/post-partum/dead-bug-bras.png",
+  "h": "/exercises/images/post-partum/dead-bug-bras-h.webp"
+ },
+ "/exercises/images/post-partum/gainage-quadrupedie.png": {
+  "defaut": "/exercises/images/post-partum/gainage-quadrupedie.png",
+  "f": "/exercises/images/post-partum/gainage-quadrupedie.png",
+  "h": "/exercises/images/post-partum/gainage-quadrupedie-h.webp"
+ },
+ "/exercises/images/post-partum/heel-slide.png": {
+  "defaut": "/exercises/images/post-partum/heel-slide.png",
+  "f": "/exercises/images/post-partum/heel-slide.png",
+  "h": "/exercises/images/post-partum/heel-slide-h.webp"
+ },
+ "/exercises/images/post-partum/marche-gainee.png": {
+  "defaut": "/exercises/images/post-partum/marche-gainee.png",
+  "f": "/exercises/images/post-partum/marche-gainee.png",
+  "h": "/exercises/images/post-partum/marche-gainee-h.webp"
+ },
+ "/exercises/images/post-partum/pont-fessier.png": {
+  "defaut": "/exercises/images/post-partum/pont-fessier.png",
+  "f": "/exercises/images/post-partum/pont-fessier.png",
+  "h": "/exercises/images/post-partum/pont-fessier-h.webp"
+ },
+ "/exercises/images/post-partum/respiration-transverse.png": {
+  "defaut": "/exercises/images/post-partum/respiration-transverse.png",
+  "f": "/exercises/images/post-partum/respiration-transverse.png",
+  "h": "/exercises/images/post-partum/respiration-transverse-h.webp"
+ },
+ "/exercises/images/post-partum/sit-to-stand.png": {
+  "defaut": "/exercises/images/post-partum/sit-to-stand.png",
+  "f": "/exercises/images/post-partum/sit-to-stand.png",
+  "h": "/exercises/images/post-partum/sit-to-stand-h.webp"
  }
 }
