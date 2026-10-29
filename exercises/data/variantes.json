@@ -74,10 +74,20 @@
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
  },
+ "/exercises/images/post-partum/bear-hover.webp": {
+  "defaut": "/exercises/images/post-partum/bear-hover.webp",
+  "f": "/exercises/images/post-partum/bear-hover.webp",
+  "h": "/exercises/images/post-partum/bear-hover-h.webp"
+ },
  "/exercises/images/post-partum/bird-dog-bras.png": {
   "defaut": "/exercises/images/post-partum/bird-dog-bras.png",
   "f": "/exercises/images/post-partum/bird-dog-bras.png",
   "h": "/exercises/images/post-partum/bird-dog-bras-h.webp"
+ },
+ "/exercises/images/post-partum/bird-dog-complet.webp": {
+  "defaut": "/exercises/images/post-partum/bird-dog-complet.webp",
+  "f": "/exercises/images/post-partum/bird-dog-complet.webp",
+  "h": "/exercises/images/post-partum/bird-dog-complet-h.webp"
  },
  "/exercises/images/post-partum/clamshell.png": {
   "defaut": "/exercises/images/post-partum/clamshell.png",
@@ -88,6 +98,21 @@
   "defaut": "/exercises/images/post-partum/dead-bug-bras.png",
   "f": "/exercises/images/post-partum/dead-bug-bras.png",
   "h": "/exercises/images/post-partum/dead-bug-bras-h.webp"
+ },
+ "/exercises/images/post-partum/dead-bug-complet.webp": {
+  "defaut": "/exercises/images/post-partum/dead-bug-complet.webp",
+  "f": "/exercises/images/post-partum/dead-bug-complet.webp",
+  "h": "/exercises/images/post-partum/dead-bug-complet-h.webp"
+ },
+ "/exercises/images/post-partum/dead-bug-elastique.webp": {
+  "defaut": "/exercises/images/post-partum/dead-bug-elastique.webp",
+  "f": "/exercises/images/post-partum/dead-bug-elastique.webp",
+  "h": "/exercises/images/post-partum/dead-bug-elastique-h.webp"
+ },
+ "/exercises/images/post-partum/farmer-carry.webp": {
+  "defaut": "/exercises/images/post-partum/farmer-carry.webp",
+  "f": "/exercises/images/post-partum/farmer-carry.webp",
+  "h": "/exercises/images/post-partum/farmer-carry-h.webp"
  },
  "/exercises/images/post-partum/gainage-quadrupedie.png": {
   "defaut": "/exercises/images/post-partum/gainage-quadrupedie.png",
@@ -104,6 +129,16 @@
   "f": "/exercises/images/post-partum/marche-gainee.png",
   "h": "/exercises/images/post-partum/marche-gainee-h.webp"
  },
+ "/exercises/images/post-partum/pallof-press.webp": {
+  "defaut": "/exercises/images/post-partum/pallof-press.webp",
+  "f": "/exercises/images/post-partum/pallof-press.webp",
+  "h": "/exercises/images/post-partum/pallof-press-h.webp"
+ },
+ "/exercises/images/post-partum/pont-fessier-1jambe.webp": {
+  "defaut": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+  "f": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+  "h": "/exercises/images/post-partum/pont-fessier-1jambe-h.webp"
+ },
  "/exercises/images/post-partum/pont-fessier.png": {
   "defaut": "/exercises/images/post-partum/pont-fessier.png",
   "f": "/exercises/images/post-partum/pont-fessier.png",
@@ -114,9 +149,34 @@
   "f": "/exercises/images/post-partum/respiration-transverse.png",
   "h": "/exercises/images/post-partum/respiration-transverse-h.webp"
  },
+ "/exercises/images/post-partum/side-plank-genoux.webp": {
+  "defaut": "/exercises/images/post-partum/side-plank-genoux.webp",
+  "f": "/exercises/images/post-partum/side-plank-genoux.webp",
+  "h": "/exercises/images/post-partum/side-plank-genoux-h.webp"
+ },
+ "/exercises/images/post-partum/side-plank-jambes.webp": {
+  "defaut": "/exercises/images/post-partum/side-plank-jambes.webp",
+  "f": "/exercises/images/post-partum/side-plank-jambes.webp",
+  "h": "/exercises/images/post-partum/side-plank-jambes-h.webp"
+ },
  "/exercises/images/post-partum/sit-to-stand.png": {
   "defaut": "/exercises/images/post-partum/sit-to-stand.png",
   "f": "/exercises/images/post-partum/sit-to-stand.png",
   "h": "/exercises/images/post-partum/sit-to-stand-h.webp"
+ },
+ "/exercises/images/post-partum/squat-partiel.webp": {
+  "defaut": "/exercises/images/post-partum/squat-partiel.webp",
+  "f": "/exercises/images/post-partum/squat-partiel.webp",
+  "h": "/exercises/images/post-partum/squat-partiel-h.webp"
+ },
+ "/exercises/images/post-partum/squat-tempo.webp": {
+  "defaut": "/exercises/images/post-partum/squat-tempo.webp",
+  "f": "/exercises/images/post-partum/squat-tempo.webp",
+  "h": "/exercises/images/post-partum/squat-tempo-h.webp"
+ },
+ "/exercises/images/post-partum/step-up-bas.webp": {
+  "defaut": "/exercises/images/post-partum/step-up-bas.webp",
+  "f": "/exercises/images/post-partum/step-up-bas.webp",
+  "h": "/exercises/images/post-partum/step-up-bas-h.webp"
  }
 }
