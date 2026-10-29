@@ -1,1 +1,22 @@
-{}
+{
+ "/exercises/images/fauteuil/FAUT_POST_01.png": {
+  "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
+  "f": "/exercises/images/fauteuil/FAUT_POST_01-f.webp",
+  "h": "/exercises/images/fauteuil/FAUT_POST_01.png"
+ },
+ "/exercises/images/fauteuil/FAUT_POST_02.png": {
+  "defaut": "/exercises/images/fauteuil/FAUT_POST_02.png",
+  "f": "/exercises/images/fauteuil/FAUT_POST_02-f.webp",
+  "h": "/exercises/images/fauteuil/FAUT_POST_02.png"
+ },
+ "/exercises/images/fauteuil/FAUT_POST_03.png": {
+  "defaut": "/exercises/images/fauteuil/FAUT_POST_03.png",
+  "f": "/exercises/images/fauteuil/FAUT_POST_03-f.webp",
+  "h": "/exercises/images/fauteuil/FAUT_POST_03.png"
+ },
+ "/exercises/images/fauteuil/FAUT_POST_04.png": {
+  "defaut": "/exercises/images/fauteuil/FAUT_POST_04.png",
+  "f": "/exercises/images/fauteuil/FAUT_POST_04-f.webp",
+  "h": "/exercises/images/fauteuil/FAUT_POST_04.png"
+ }
+}
