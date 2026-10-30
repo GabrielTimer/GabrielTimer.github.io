@@ -414,6 +414,16 @@
   "f": "/exercises/images/post-partum/step-up-dynamique.webp",
   "h": "/exercises/images/post-partum/step-up-dynamique-h.webp"
  },
+ "/exercises/images/pubalgie/pont_fessier.png": {
+  "defaut": "/exercises/images/pubalgie/pont_fessier.png",
+  "f": "/exercises/images/pubalgie/pont_fessier-f.webp",
+  "h": "/exercises/images/pubalgie/pont_fessier.png"
+ },
+ "/exercises/images/pubalgie/serrage-ballon_jambestendues.png": {
+  "defaut": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
+  "f": "/exercises/images/pubalgie/serrage-ballon_jambestendues-f.webp",
+  "h": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png"
+ },
  "/exercises/images/tronc/Gainage_Lateral_Droit.png": {
   "defaut": "/exercises/images/tronc/Gainage_Lateral_Droit.png",
   "f": "/exercises/images/tronc/Gainage_Lateral_Droit-f.webp",
