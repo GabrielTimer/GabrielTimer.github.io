@@ -39,10 +39,20 @@
   "f": "/exercises/images/cervicales/flexion-profonde-cou.webp",
   "h": "/exercises/images/cervicales/flexion-profonde-cou-h.webp"
  },
+ "/exercises/images/cervicales/isometrique-cou.webp": {
+  "defaut": "/exercises/images/cervicales/isometrique-cou.webp",
+  "f": "/exercises/images/cervicales/isometrique-cou-f.webp",
+  "h": "/exercises/images/cervicales/isometrique-cou.webp"
+ },
  "/exercises/images/cervicales/rentrer-menton.webp": {
   "defaut": "/exercises/images/cervicales/rentrer-menton.webp",
   "f": "/exercises/images/cervicales/rentrer-menton-f.webp",
   "h": "/exercises/images/cervicales/rentrer-menton.webp"
+ },
+ "/exercises/images/cervicales/rotation-tete.webp": {
+  "defaut": "/exercises/images/cervicales/rotation-tete.webp",
+  "f": "/exercises/images/cervicales/rotation-tete-f.webp",
+  "h": "/exercises/images/cervicales/rotation-tete.webp"
  },
  "/exercises/images/cheville/appuisballeexterne.png": {
   "defaut": "/exercises/images/cheville/appuisballeexterne.png",
