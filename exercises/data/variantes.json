@@ -224,6 +224,16 @@
   "f": "/exercises/images/gainage/bird-dog-jambe.webp",
   "h": "/exercises/images/gainage/bird-dog-jambe-h.webp"
  },
+ "/exercises/images/gainage/planche-genoux.webp": {
+  "defaut": "/exercises/images/gainage/planche-genoux.webp",
+  "f": "/exercises/images/gainage/planche-genoux.webp",
+  "h": "/exercises/images/gainage/planche-genoux-h.webp"
+ },
+ "/exercises/images/gainage/planche-toucher-epaule.webp": {
+  "defaut": "/exercises/images/gainage/planche-toucher-epaule.webp",
+  "f": "/exercises/images/gainage/planche-toucher-epaule.webp",
+  "h": "/exercises/images/gainage/planche-toucher-epaule-h.webp"
+ },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
   "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
