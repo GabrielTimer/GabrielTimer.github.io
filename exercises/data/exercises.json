@@ -10828,5 +10828,189 @@
       "Cuisse",
       "Fessiers"
     ]
+  },
+  {
+    "id": "HANCHE_09",
+    "nom": "Étirement des adducteurs en papillon",
+    "type": "timer",
+    "categorie": "Hanche",
+    "objectif": "Assouplir l'intérieur des cuisses",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Assis au sol, dos droit, plantes des pieds collées l'une contre l'autre",
+      "Rapprocher les talons du bassin selon votre souplesse",
+      "Tenir les chevilles et laisser les genoux descendre vers le sol",
+      "Pour accentuer, pousser doucement les genoux avec les coudes"
+    ],
+    "precautions": [
+      "Ne jamais forcer sur les genoux",
+      "Arrêter si douleur dans l'aine"
+    ],
+    "tags": [
+      "Hanche",
+      "Adducteurs"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/hanche/papillon-adducteurs.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Hanche",
+      "Aine"
+    ],
+    "conseil_posture": [
+      "Dos droit, se grandir",
+      "Épaules relâchées"
+    ],
+    "erreurs_frequentes": [
+      "Arrondir le dos",
+      "Faire des rebonds avec les genoux"
+    ],
+    "version_facile": [
+      "S'asseoir sur un coussin",
+      "Talons plus loin du bassin"
+    ],
+    "version_avancee": [
+      "Pencher le buste en avant, dos droit"
+    ],
+    "respiration": [
+      "Respirer lentement",
+      "Relâcher les cuisses à l'expiration"
+    ],
+    "muscles_cibles": [
+      "Adducteurs"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Douleur aiguë de l'aine non évaluée",
+      "Prothèse de hanche récente"
+    ],
+    "benefices": [
+      "Assouplit l'aine",
+      "Améliore l'ouverture de la hanche"
+    ],
+    "audio_cues": [
+      "Relâchez les genoux",
+      "Dos droit"
+    ],
+    "coaching_court": [
+      "Doux",
+      "Grandi"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Pubalgie (phase calme)",
+      "Raideur de hanche",
+      "Douleur de l'aine"
+    ],
+    "objectifs": [
+      "Assouplir l'intérieur des cuisses"
+    ],
+    "zones": [
+      "Hanche",
+      "Aine"
+    ]
+  },
+  {
+    "id": "LOMB_08",
+    "nom": "Extension du dos debout",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Mobiliser le bas du dos en extension",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 10,
+    "repos": 2,
+    "consignes": [
+      "Debout, pieds écartés largeur de bassin",
+      "Placer les mains dans le bas du dos, doigts vers le bas",
+      "Pencher doucement le buste en arrière en poussant le bassin vers l'avant avec les mains",
+      "Tenir 2 secondes puis revenir droit"
+    ],
+    "precautions": [
+      "Mouvement progressif et sans à-coups",
+      "Arrêter si la douleur descend dans la jambe"
+    ],
+    "tags": [
+      "Dos",
+      "Érecteurs du rachis",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 10
+    },
+    "image": "/exercises/images/dos/extension-debout.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Lombaires"
+    ],
+    "conseil_posture": [
+      "Genoux tendus mais pas verrouillés",
+      "Regard vers l'avant, ne pas lancer la tête en arrière"
+    ],
+    "erreurs_frequentes": [
+      "Plier les genoux",
+      "Partir en arrière avec la tête",
+      "Aller trop loin d'un coup"
+    ],
+    "version_facile": [
+      "Petite amplitude"
+    ],
+    "version_avancee": [
+      "Augmenter progressivement l'amplitude",
+      "Tenir 5 secondes"
+    ],
+    "respiration": [
+      "Expirer en partant en arrière",
+      "Inspirer en revenant"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Fessiers"
+    ],
+    "materiel": [],
+    "contre_indications": [
+      "Canal lombaire étroit",
+      "Spondylolisthésis douloureux"
+    ],
+    "benefices": [
+      "Soulage après une longue position assise",
+      "Entretient la mobilité du bas du dos"
+    ],
+    "audio_cues": [
+      "Bassin en avant",
+      "Revenez droit"
+    ],
+    "coaching_court": [
+      "Progressif",
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Lombalgie de posture assise prolongée"
+    ],
+    "objectifs": [
+      "Mobiliser le bas du dos en extension"
+    ],
+    "zones": [
+      "Lombaires"
+    ]
   }
 ]
