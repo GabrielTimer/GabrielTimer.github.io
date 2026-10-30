@@ -414,6 +414,21 @@
   "f": "/exercises/images/post-partum/step-up-dynamique.webp",
   "h": "/exercises/images/post-partum/step-up-dynamique-h.webp"
  },
+ "/exercises/images/pubalgie/Gainage_Ventral.png": {
+  "defaut": "/exercises/images/pubalgie/Gainage_Ventral.png",
+  "f": "/exercises/images/pubalgie/Gainage_Ventral-f.webp",
+  "h": "/exercises/images/pubalgie/Gainage_Ventral.png"
+ },
+ "/exercises/images/pubalgie/clamshell.png": {
+  "defaut": "/exercises/images/pubalgie/clamshell.png",
+  "f": "/exercises/images/pubalgie/clamshell-f.webp",
+  "h": "/exercises/images/pubalgie/clamshell.png"
+ },
+ "/exercises/images/pubalgie/gainage-lat-genoux.png": {
+  "defaut": "/exercises/images/pubalgie/gainage-lat-genoux.png",
+  "f": "/exercises/images/pubalgie/gainage-lat-genoux-f.webp",
+  "h": "/exercises/images/pubalgie/gainage-lat-genoux.png"
+ },
  "/exercises/images/pubalgie/pont_fessier.png": {
   "defaut": "/exercises/images/pubalgie/pont_fessier.png",
   "f": "/exercises/images/pubalgie/pont_fessier-f.webp",
