@@ -104,6 +104,11 @@
   "f": "/exercises/images/epaule/Retropulsionepaule_elastique-f.webp",
   "h": "/exercises/images/epaule/Retropulsionepaule_elastique.png"
  },
+ "/exercises/images/epaule/Rotationinterne_elastique.png": {
+  "defaut": "/exercises/images/epaule/Rotationinterne_elastique.png",
+  "f": "/exercises/images/epaule/Rotationinterne_elastique-f.webp",
+  "h": "/exercises/images/epaule/Rotationinterne_elastique.png"
+ },
  "/exercises/images/epaule/Tiragebrastendus_elastique.png": {
   "defaut": "/exercises/images/epaule/Tiragebrastendus_elastique.png",
   "f": "/exercises/images/epaule/Tiragebrastendus_elastique-f.webp",
@@ -118,6 +123,11 @@
   "defaut": "/exercises/images/epaule/diagonalekabat_elastique.png",
   "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
   "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
+ },
+ "/exercises/images/epaule/flexionepaule_baton.png": {
+  "defaut": "/exercises/images/epaule/flexionepaule_baton.png",
+  "f": "/exercises/images/epaule/flexionepaule_baton-f.webp",
+  "h": "/exercises/images/epaule/flexionepaule_baton.png"
  },
  "/exercises/images/epaule/wallslideflexionepaule.png": {
   "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
