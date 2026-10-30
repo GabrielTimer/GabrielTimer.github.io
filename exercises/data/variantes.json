@@ -19,10 +19,25 @@
   "f": "/exercises/images/cheville/cercles-cheville-f.webp",
   "h": "/exercises/images/cheville/cercles-cheville.webp"
  },
+ "/exercises/images/cheville/demi-pointes.webp": {
+  "defaut": "/exercises/images/cheville/demi-pointes.webp",
+  "f": "/exercises/images/cheville/demi-pointes-f.webp",
+  "h": "/exercises/images/cheville/demi-pointes.webp"
+ },
  "/exercises/images/cheville/equilibre-bipodal.webp": {
   "defaut": "/exercises/images/cheville/equilibre-bipodal.webp",
   "f": "/exercises/images/cheville/equilibre-bipodal-f.webp",
   "h": "/exercises/images/cheville/equilibre-bipodal.webp"
+ },
+ "/exercises/images/cheville/equilibre-unipodal-bras.webp": {
+  "defaut": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
+  "f": "/exercises/images/cheville/equilibre-unipodal-bras-f.webp",
+  "h": "/exercises/images/cheville/equilibre-unipodal-bras.webp"
+ },
+ "/exercises/images/cheville/equilibre-unipodal.webp": {
+  "defaut": "/exercises/images/cheville/equilibre-unipodal.webp",
+  "f": "/exercises/images/cheville/equilibre-unipodal-f.webp",
+  "h": "/exercises/images/cheville/equilibre-unipodal.webp"
  },
  "/exercises/images/cheville/flexdorsalemur.png": {
   "defaut": "/exercises/images/cheville/flexdorsalemur.png",
