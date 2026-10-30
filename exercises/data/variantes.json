@@ -4,6 +4,11 @@
   "f": "/exercises/images/cabinet/huber-f.webp",
   "h": "/exercises/images/cabinet/huber.png"
  },
+ "/exercises/images/cabinet/marche.png": {
+  "defaut": "/exercises/images/cabinet/marche.png",
+  "f": "/exercises/images/cabinet/marche-f.webp",
+  "h": "/exercises/images/cabinet/marche.png"
+ },
  "/exercises/images/cabinet/rameur.png": {
   "defaut": "/exercises/images/cabinet/rameur.png",
   "f": "/exercises/images/cabinet/rameur-f.webp",
@@ -18,6 +23,11 @@
   "defaut": "/exercises/images/cabinet/tapismarche.png",
   "f": "/exercises/images/cabinet/tapismarche-f.webp",
   "h": "/exercises/images/cabinet/tapismarche.png"
+ },
+ "/exercises/images/cabinet/velo.png": {
+  "defaut": "/exercises/images/cabinet/velo.png",
+  "f": "/exercises/images/cabinet/velo-f.webp",
+  "h": "/exercises/images/cabinet/velo.png"
  },
  "/exercises/images/cheville/appuisballeexterne.png": {
   "defaut": "/exercises/images/cheville/appuisballeexterne.png",
