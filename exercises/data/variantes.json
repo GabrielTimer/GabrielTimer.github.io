@@ -89,6 +89,11 @@
   "f": "/exercises/images/epaule/Pendulaire-f.webp",
   "h": "/exercises/images/epaule/Pendulaire.png"
  },
+ "/exercises/images/epaule/REepaule_baton.png": {
+  "defaut": "/exercises/images/epaule/REepaule_baton.png",
+  "f": "/exercises/images/epaule/REepaule_baton-f.webp",
+  "h": "/exercises/images/epaule/REepaule_baton.png"
+ },
  "/exercises/images/epaule/REepaule_elastique.png": {
   "defaut": "/exercises/images/epaule/REepaule_elastique.png",
   "f": "/exercises/images/epaule/REepaule_elastique-f.webp",
@@ -118,6 +123,11 @@
   "defaut": "/exercises/images/epaule/antepulsionepaule_epaule.png",
   "f": "/exercises/images/epaule/antepulsionepaule_epaule-f.webp",
   "h": "/exercises/images/epaule/antepulsionepaule_epaule.png"
+ },
+ "/exercises/images/epaule/autograndissement_mur.png": {
+  "defaut": "/exercises/images/epaule/autograndissement_mur.png",
+  "f": "/exercises/images/epaule/autograndissement_mur-f.webp",
+  "h": "/exercises/images/epaule/autograndissement_mur.png"
  },
  "/exercises/images/epaule/diagonalekabat_elastique.png": {
   "defaut": "/exercises/images/epaule/diagonalekabat_elastique.png",
