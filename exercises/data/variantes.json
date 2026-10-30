@@ -269,6 +269,11 @@
   "f": "/exercises/images/gainage/rollout-swissball.webp",
   "h": "/exercises/images/gainage/rollout-swissball-h.webp"
  },
+ "/exercises/images/genou/elevation-jambe-tendue.webp": {
+  "defaut": "/exercises/images/genou/elevation-jambe-tendue.webp",
+  "f": "/exercises/images/genou/elevation-jambe-tendue-f.webp",
+  "h": "/exercises/images/genou/elevation-jambe-tendue.webp"
+ },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
   "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
@@ -278,6 +283,11 @@
   "defaut": "/exercises/images/genou/equilibre-balle-2.png",
   "f": "/exercises/images/genou/equilibre-balle-2-f.webp",
   "h": "/exercises/images/genou/equilibre-balle-2.png"
+ },
+ "/exercises/images/genou/quadriceps-statique.webp": {
+  "defaut": "/exercises/images/genou/quadriceps-statique.webp",
+  "f": "/exercises/images/genou/quadriceps-statique-f.webp",
+  "h": "/exercises/images/genou/quadriceps-statique.webp"
  },
  "/exercises/images/genou/squat-anti-valgus.png": {
   "defaut": "/exercises/images/genou/squat-anti-valgus.png",
