@@ -149,6 +149,16 @@
   "f": "/exercises/images/dos/extension-ventre-f.webp",
   "h": "/exercises/images/dos/extension-ventre.webp"
  },
+ "/exercises/images/dos/genoux-poitrine.webp": {
+  "defaut": "/exercises/images/dos/genoux-poitrine.webp",
+  "f": "/exercises/images/dos/genoux-poitrine.webp",
+  "h": "/exercises/images/dos/genoux-poitrine-h.webp"
+ },
+ "/exercises/images/dos/rotation-lombaire.webp": {
+  "defaut": "/exercises/images/dos/rotation-lombaire.webp",
+  "f": "/exercises/images/dos/rotation-lombaire.webp",
+  "h": "/exercises/images/dos/rotation-lombaire-h.webp"
+ },
  "/exercises/images/epaule/Pendulaire.png": {
   "defaut": "/exercises/images/epaule/Pendulaire.png",
   "f": "/exercises/images/epaule/Pendulaire-f.webp",
