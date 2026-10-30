@@ -239,6 +239,11 @@
   "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
   "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
  },
+ "/exercises/images/epaule/etirement-posterieur.webp": {
+  "defaut": "/exercises/images/epaule/etirement-posterieur.webp",
+  "f": "/exercises/images/epaule/etirement-posterieur-f.webp",
+  "h": "/exercises/images/epaule/etirement-posterieur.webp"
+ },
  "/exercises/images/epaule/flexionepaule_baton.png": {
   "defaut": "/exercises/images/epaule/flexionepaule_baton.png",
   "f": "/exercises/images/epaule/flexionepaule_baton-f.webp",
@@ -248,6 +253,11 @@
   "defaut": "/exercises/images/epaule/pompe-scapulaire-mur.webp",
   "f": "/exercises/images/epaule/pompe-scapulaire-mur-f.webp",
   "h": "/exercises/images/epaule/pompe-scapulaire-mur.webp"
+ },
+ "/exercises/images/epaule/rotation-externe-couche.webp": {
+  "defaut": "/exercises/images/epaule/rotation-externe-couche.webp",
+  "f": "/exercises/images/epaule/rotation-externe-couche.webp",
+  "h": "/exercises/images/epaule/rotation-externe-couche-h.webp"
  },
  "/exercises/images/epaule/tirage_elastique.png": {
   "defaut": "/exercises/images/epaule/tirage_elastique.png",
