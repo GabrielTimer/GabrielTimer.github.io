@@ -29,6 +29,11 @@
   "f": "/exercises/images/cheville/equilibre-bipodal-f.webp",
   "h": "/exercises/images/cheville/equilibre-bipodal.webp"
  },
+ "/exercises/images/cheville/equilibre-coussin.webp": {
+  "defaut": "/exercises/images/cheville/equilibre-coussin.webp",
+  "f": "/exercises/images/cheville/equilibre-coussin-f.webp",
+  "h": "/exercises/images/cheville/equilibre-coussin.webp"
+ },
  "/exercises/images/cheville/equilibre-unipodal-bras.webp": {
   "defaut": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
   "f": "/exercises/images/cheville/equilibre-unipodal-bras-f.webp",
@@ -58,6 +63,11 @@
   "defaut": "/exercises/images/cheville/pointepieds.png",
   "f": "/exercises/images/cheville/pointepieds-f.webp",
   "h": "/exercises/images/cheville/pointepieds.png"
+ },
+ "/exercises/images/cheville/sauts-lateraux-unipodaux.webp": {
+  "defaut": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
+  "f": "/exercises/images/cheville/sauts-lateraux-unipodaux-f.webp",
+  "h": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp"
  },
  "/exercises/images/cheville/sauts-sur-place.webp": {
   "defaut": "/exercises/images/cheville/sauts-sur-place.webp",
