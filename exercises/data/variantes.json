@@ -244,6 +244,11 @@
   "f": "/exercises/images/epaule/flexionepaule_baton-f.webp",
   "h": "/exercises/images/epaule/flexionepaule_baton.png"
  },
+ "/exercises/images/epaule/pompe-scapulaire-mur.webp": {
+  "defaut": "/exercises/images/epaule/pompe-scapulaire-mur.webp",
+  "f": "/exercises/images/epaule/pompe-scapulaire-mur-f.webp",
+  "h": "/exercises/images/epaule/pompe-scapulaire-mur.webp"
+ },
  "/exercises/images/epaule/tirage_elastique.png": {
   "defaut": "/exercises/images/epaule/tirage_elastique.png",
   "f": "/exercises/images/epaule/tirage_elastique-f.webp",
@@ -258,6 +263,11 @@
   "defaut": "/exercises/images/epaule/wallslideflexionepaule_elastique.png",
   "f": "/exercises/images/epaule/wallslideflexionepaule_elastique-f.webp",
   "h": "/exercises/images/epaule/wallslideflexionepaule_elastique.png"
+ },
+ "/exercises/images/epaule/y-ventre.webp": {
+  "defaut": "/exercises/images/epaule/y-ventre.webp",
+  "f": "/exercises/images/epaule/y-ventre.webp",
+  "h": "/exercises/images/epaule/y-ventre-h.webp"
  },
  "/exercises/images/fauteuil/FAUT_POST_01.png": {
   "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
