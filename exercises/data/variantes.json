@@ -214,6 +214,11 @@
   "f": "/exercises/images/fauteuil/FAUT_POST_05-f.webp",
   "h": "/exercises/images/fauteuil/FAUT_POST_05.png"
  },
+ "/exercises/images/gainage/auto-grandissement.webp": {
+  "defaut": "/exercises/images/gainage/auto-grandissement.webp",
+  "f": "/exercises/images/gainage/auto-grandissement.webp",
+  "h": "/exercises/images/gainage/auto-grandissement-h.webp"
+ },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
   "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
@@ -388,5 +393,10 @@
   "defaut": "/exercises/images/tronc/Gainage_Ventral.png",
   "f": "/exercises/images/tronc/Gainage_Ventral-f.webp",
   "h": "/exercises/images/tronc/Gainage_Ventral.png"
+ },
+ "/exercises/images/tronc/Superman.png": {
+  "defaut": "/exercises/images/tronc/Superman.png",
+  "f": "/exercises/images/tronc/Superman-f.webp",
+  "h": "/exercises/images/tronc/Superman.png"
  }
 }
