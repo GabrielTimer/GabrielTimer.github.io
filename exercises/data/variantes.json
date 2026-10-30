@@ -139,6 +139,16 @@
   "f": "/exercises/images/coude/COUDE_05-f.webp",
   "h": "/exercises/images/coude/COUDE_05.webp"
  },
+ "/exercises/images/dos/chat-vache.webp": {
+  "defaut": "/exercises/images/dos/chat-vache.webp",
+  "f": "/exercises/images/dos/chat-vache.webp",
+  "h": "/exercises/images/dos/chat-vache-h.webp"
+ },
+ "/exercises/images/dos/extension-ventre.webp": {
+  "defaut": "/exercises/images/dos/extension-ventre.webp",
+  "f": "/exercises/images/dos/extension-ventre-f.webp",
+  "h": "/exercises/images/dos/extension-ventre.webp"
+ },
  "/exercises/images/epaule/Pendulaire.png": {
   "defaut": "/exercises/images/epaule/Pendulaire.png",
   "f": "/exercises/images/epaule/Pendulaire-f.webp",
