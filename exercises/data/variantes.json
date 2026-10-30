@@ -269,6 +269,11 @@
   "f": "/exercises/images/gainage/rollout-swissball.webp",
   "h": "/exercises/images/gainage/rollout-swissball-h.webp"
  },
+ "/exercises/images/genou/chaise-mur.webp": {
+  "defaut": "/exercises/images/genou/chaise-mur.webp",
+  "f": "/exercises/images/genou/chaise-mur-f.webp",
+  "h": "/exercises/images/genou/chaise-mur.webp"
+ },
  "/exercises/images/genou/descente-marche.webp": {
   "defaut": "/exercises/images/genou/descente-marche.webp",
   "f": "/exercises/images/genou/descente-marche-f.webp",
@@ -328,6 +333,11 @@
   "defaut": "/exercises/images/genou/squat-lat-elastique.png",
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
+ },
+ "/exercises/images/hanche/abduction-couche.webp": {
+  "defaut": "/exercises/images/hanche/abduction-couche.webp",
+  "f": "/exercises/images/hanche/abduction-couche.webp",
+  "h": "/exercises/images/hanche/abduction-couche-h.webp"
  },
  "/exercises/images/post-partum/bear-crawl.webp": {
   "defaut": "/exercises/images/post-partum/bear-crawl.webp",
