@@ -44,6 +44,11 @@
   "f": "/exercises/images/fauteuil/FAUT_POST_04-f.webp",
   "h": "/exercises/images/fauteuil/FAUT_POST_04.png"
  },
+ "/exercises/images/fauteuil/FAUT_POST_05.png": {
+  "defaut": "/exercises/images/fauteuil/FAUT_POST_05.png",
+  "f": "/exercises/images/fauteuil/FAUT_POST_05-f.webp",
+  "h": "/exercises/images/fauteuil/FAUT_POST_05.png"
+ },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
   "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
@@ -73,6 +78,11 @@
   "defaut": "/exercises/images/genou/squat-lat-elastique.png",
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
+ },
+ "/exercises/images/post-partum/bear-crawl.webp": {
+  "defaut": "/exercises/images/post-partum/bear-crawl.webp",
+  "f": "/exercises/images/post-partum/bear-crawl.webp",
+  "h": "/exercises/images/post-partum/bear-crawl-h.webp"
  },
  "/exercises/images/post-partum/bear-hover.webp": {
   "defaut": "/exercises/images/post-partum/bear-hover.webp",
@@ -113,6 +123,11 @@
   "defaut": "/exercises/images/post-partum/farmer-carry.webp",
   "f": "/exercises/images/post-partum/farmer-carry.webp",
   "h": "/exercises/images/post-partum/farmer-carry-h.webp"
+ },
+ "/exercises/images/post-partum/fente-arriere.webp": {
+  "defaut": "/exercises/images/post-partum/fente-arriere.webp",
+  "f": "/exercises/images/post-partum/fente-arriere.webp",
+  "h": "/exercises/images/post-partum/fente-arriere-h.webp"
  },
  "/exercises/images/post-partum/gainage-quadrupedie.png": {
   "defaut": "/exercises/images/post-partum/gainage-quadrupedie.png",
