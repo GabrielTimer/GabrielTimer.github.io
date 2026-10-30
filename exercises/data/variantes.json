@@ -139,6 +139,11 @@
   "f": "/exercises/images/coude/COUDE_05-f.webp",
   "h": "/exercises/images/coude/COUDE_05.webp"
  },
+ "/exercises/images/dos/charniere-baton.webp": {
+  "defaut": "/exercises/images/dos/charniere-baton.webp",
+  "f": "/exercises/images/dos/charniere-baton-f.webp",
+  "h": "/exercises/images/dos/charniere-baton.webp"
+ },
  "/exercises/images/dos/chat-vache.webp": {
   "defaut": "/exercises/images/dos/chat-vache.webp",
   "f": "/exercises/images/dos/chat-vache.webp",
@@ -153,6 +158,11 @@
   "defaut": "/exercises/images/dos/genoux-poitrine.webp",
   "f": "/exercises/images/dos/genoux-poitrine.webp",
   "h": "/exercises/images/dos/genoux-poitrine-h.webp"
+ },
+ "/exercises/images/dos/glissement-sciatique.webp": {
+  "defaut": "/exercises/images/dos/glissement-sciatique.webp",
+  "f": "/exercises/images/dos/glissement-sciatique-f.webp",
+  "h": "/exercises/images/dos/glissement-sciatique.webp"
  },
  "/exercises/images/dos/rotation-lombaire.webp": {
   "defaut": "/exercises/images/dos/rotation-lombaire.webp",
