@@ -99,6 +99,16 @@
   "f": "/exercises/images/epaule/REisoepaule-f.webp",
   "h": "/exercises/images/epaule/REisoepaule.png"
  },
+ "/exercises/images/epaule/Retropulsionepaule_elastique.png": {
+  "defaut": "/exercises/images/epaule/Retropulsionepaule_elastique.png",
+  "f": "/exercises/images/epaule/Retropulsionepaule_elastique-f.webp",
+  "h": "/exercises/images/epaule/Retropulsionepaule_elastique.png"
+ },
+ "/exercises/images/epaule/Tiragebrastendus_elastique.png": {
+  "defaut": "/exercises/images/epaule/Tiragebrastendus_elastique.png",
+  "f": "/exercises/images/epaule/Tiragebrastendus_elastique-f.webp",
+  "h": "/exercises/images/epaule/Tiragebrastendus_elastique.png"
+ },
  "/exercises/images/epaule/antepulsionepaule_epaule.png": {
   "defaut": "/exercises/images/epaule/antepulsionepaule_epaule.png",
   "f": "/exercises/images/epaule/antepulsionepaule_epaule-f.webp",
