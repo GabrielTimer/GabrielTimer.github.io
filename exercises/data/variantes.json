@@ -99,6 +99,16 @@
   "f": "/exercises/images/epaule/REisoepaule-f.webp",
   "h": "/exercises/images/epaule/REisoepaule.png"
  },
+ "/exercises/images/epaule/antepulsionepaule_epaule.png": {
+  "defaut": "/exercises/images/epaule/antepulsionepaule_epaule.png",
+  "f": "/exercises/images/epaule/antepulsionepaule_epaule-f.webp",
+  "h": "/exercises/images/epaule/antepulsionepaule_epaule.png"
+ },
+ "/exercises/images/epaule/diagonalekabat_elastique.png": {
+  "defaut": "/exercises/images/epaule/diagonalekabat_elastique.png",
+  "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
+  "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
+ },
  "/exercises/images/epaule/wallslideflexionepaule.png": {
   "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
   "f": "/exercises/images/epaule/wallslideflexionepaule-f.webp",
