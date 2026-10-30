@@ -374,6 +374,16 @@
   "f": "/exercises/images/post-partum/step-up-dynamique.webp",
   "h": "/exercises/images/post-partum/step-up-dynamique-h.webp"
  },
+ "/exercises/images/tronc/Gainage_Lateral_Droit.png": {
+  "defaut": "/exercises/images/tronc/Gainage_Lateral_Droit.png",
+  "f": "/exercises/images/tronc/Gainage_Lateral_Droit-f.webp",
+  "h": "/exercises/images/tronc/Gainage_Lateral_Droit.png"
+ },
+ "/exercises/images/tronc/Gainage_Lateral_Gauche.png": {
+  "defaut": "/exercises/images/tronc/Gainage_Lateral_Gauche.png",
+  "f": "/exercises/images/tronc/Gainage_Lateral_Gauche-f.webp",
+  "h": "/exercises/images/tronc/Gainage_Lateral_Gauche.png"
+ },
  "/exercises/images/tronc/Gainage_Ventral.png": {
   "defaut": "/exercises/images/tronc/Gainage_Ventral.png",
   "f": "/exercises/images/tronc/Gainage_Ventral-f.webp",
