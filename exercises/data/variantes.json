@@ -14,10 +14,25 @@
   "f": "/exercises/images/cheville/appuisballemilieu-f.webp",
   "h": "/exercises/images/cheville/appuisballemilieu.png"
  },
+ "/exercises/images/cheville/cercles-cheville.webp": {
+  "defaut": "/exercises/images/cheville/cercles-cheville.webp",
+  "f": "/exercises/images/cheville/cercles-cheville-f.webp",
+  "h": "/exercises/images/cheville/cercles-cheville.webp"
+ },
+ "/exercises/images/cheville/equilibre-bipodal.webp": {
+  "defaut": "/exercises/images/cheville/equilibre-bipodal.webp",
+  "f": "/exercises/images/cheville/equilibre-bipodal-f.webp",
+  "h": "/exercises/images/cheville/equilibre-bipodal.webp"
+ },
  "/exercises/images/cheville/flexdorsalemur.png": {
   "defaut": "/exercises/images/cheville/flexdorsalemur.png",
   "f": "/exercises/images/cheville/flexdorsalemur-f.webp",
   "h": "/exercises/images/cheville/flexdorsalemur.png"
+ },
+ "/exercises/images/cheville/mobilite-flexion-extension.webp": {
+  "defaut": "/exercises/images/cheville/mobilite-flexion-extension.webp",
+  "f": "/exercises/images/cheville/mobilite-flexion-extension-f.webp",
+  "h": "/exercises/images/cheville/mobilite-flexion-extension.webp"
  },
  "/exercises/images/cheville/pointepieds.png": {
   "defaut": "/exercises/images/cheville/pointepieds.png",
