@@ -104,6 +104,16 @@
   "f": "/exercises/images/cheville/equilibre-unipodal-f.webp",
   "h": "/exercises/images/cheville/equilibre-unipodal.webp"
  },
+ "/exercises/images/cheville/eversion-elastique.webp": {
+  "defaut": "/exercises/images/cheville/eversion-elastique.webp",
+  "f": "/exercises/images/cheville/eversion-elastique-f.webp",
+  "h": "/exercises/images/cheville/eversion-elastique.webp"
+ },
+ "/exercises/images/cheville/excentrique-achille.webp": {
+  "defaut": "/exercises/images/cheville/excentrique-achille.webp",
+  "f": "/exercises/images/cheville/excentrique-achille-f.webp",
+  "h": "/exercises/images/cheville/excentrique-achille.webp"
+ },
  "/exercises/images/cheville/flexdorsalemur.png": {
   "defaut": "/exercises/images/cheville/flexdorsalemur.png",
   "f": "/exercises/images/cheville/flexdorsalemur-f.webp",
