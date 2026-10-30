@@ -229,10 +229,25 @@
   "f": "/exercises/images/gainage/planche-genoux.webp",
   "h": "/exercises/images/gainage/planche-genoux-h.webp"
  },
+ "/exercises/images/gainage/planche-swissball.webp": {
+  "defaut": "/exercises/images/gainage/planche-swissball.webp",
+  "f": "/exercises/images/gainage/planche-swissball.webp",
+  "h": "/exercises/images/gainage/planche-swissball-h.webp"
+ },
  "/exercises/images/gainage/planche-toucher-epaule.webp": {
   "defaut": "/exercises/images/gainage/planche-toucher-epaule.webp",
   "f": "/exercises/images/gainage/planche-toucher-epaule.webp",
   "h": "/exercises/images/gainage/planche-toucher-epaule-h.webp"
+ },
+ "/exercises/images/gainage/pont-fessier-swissball.webp": {
+  "defaut": "/exercises/images/gainage/pont-fessier-swissball.webp",
+  "f": "/exercises/images/gainage/pont-fessier-swissball.webp",
+  "h": "/exercises/images/gainage/pont-fessier-swissball-h.webp"
+ },
+ "/exercises/images/gainage/rollout-swissball.webp": {
+  "defaut": "/exercises/images/gainage/rollout-swissball.webp",
+  "f": "/exercises/images/gainage/rollout-swissball.webp",
+  "h": "/exercises/images/gainage/rollout-swissball-h.webp"
  },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
