@@ -19,6 +19,11 @@
   "f": "/exercises/images/cheville/cercles-cheville-f.webp",
   "h": "/exercises/images/cheville/cercles-cheville.webp"
  },
+ "/exercises/images/cheville/course-changements-direction.webp": {
+  "defaut": "/exercises/images/cheville/course-changements-direction.webp",
+  "f": "/exercises/images/cheville/course-changements-direction-f.webp",
+  "h": "/exercises/images/cheville/course-changements-direction.webp"
+ },
  "/exercises/images/cheville/demi-pointes.webp": {
   "defaut": "/exercises/images/cheville/demi-pointes.webp",
   "f": "/exercises/images/cheville/demi-pointes-f.webp",
@@ -63,6 +68,11 @@
   "defaut": "/exercises/images/cheville/pointepieds.png",
   "f": "/exercises/images/cheville/pointepieds-f.webp",
   "h": "/exercises/images/cheville/pointepieds.png"
+ },
+ "/exercises/images/cheville/receptions-unipodales.webp": {
+  "defaut": "/exercises/images/cheville/receptions-unipodales.webp",
+  "f": "/exercises/images/cheville/receptions-unipodales-f.webp",
+  "h": "/exercises/images/cheville/receptions-unipodales.webp"
  },
  "/exercises/images/cheville/sauts-lateraux-unipodaux.webp": {
   "defaut": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
