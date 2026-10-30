@@ -104,6 +104,11 @@
   "f": "/exercises/images/cheville/equilibre-unipodal-f.webp",
   "h": "/exercises/images/cheville/equilibre-unipodal.webp"
  },
+ "/exercises/images/cheville/etirement-mollet.webp": {
+  "defaut": "/exercises/images/cheville/etirement-mollet.webp",
+  "f": "/exercises/images/cheville/etirement-mollet-f.webp",
+  "h": "/exercises/images/cheville/etirement-mollet.webp"
+ },
  "/exercises/images/cheville/eversion-elastique.webp": {
   "defaut": "/exercises/images/cheville/eversion-elastique.webp",
   "f": "/exercises/images/cheville/eversion-elastique-f.webp",
@@ -438,6 +443,11 @@
   "defaut": "/exercises/images/hanche/hip-thrust.webp",
   "f": "/exercises/images/hanche/hip-thrust.webp",
   "h": "/exercises/images/hanche/hip-thrust-h.webp"
+ },
+ "/exercises/images/main/serrer-balle.webp": {
+  "defaut": "/exercises/images/main/serrer-balle.webp",
+  "f": "/exercises/images/main/serrer-balle-f.webp",
+  "h": "/exercises/images/main/serrer-balle.webp"
  },
  "/exercises/images/post-partum/bear-crawl.webp": {
   "defaut": "/exercises/images/post-partum/bear-crawl.webp",
