@@ -139,10 +139,20 @@
   "f": "/exercises/images/epaule/flexionepaule_baton-f.webp",
   "h": "/exercises/images/epaule/flexionepaule_baton.png"
  },
+ "/exercises/images/epaule/tirage_elastique.png": {
+  "defaut": "/exercises/images/epaule/tirage_elastique.png",
+  "f": "/exercises/images/epaule/tirage_elastique-f.webp",
+  "h": "/exercises/images/epaule/tirage_elastique.png"
+ },
  "/exercises/images/epaule/wallslideflexionepaule.png": {
   "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
   "f": "/exercises/images/epaule/wallslideflexionepaule-f.webp",
   "h": "/exercises/images/epaule/wallslideflexionepaule.png"
+ },
+ "/exercises/images/epaule/wallslideflexionepaule_elastique.png": {
+  "defaut": "/exercises/images/epaule/wallslideflexionepaule_elastique.png",
+  "f": "/exercises/images/epaule/wallslideflexionepaule_elastique-f.webp",
+  "h": "/exercises/images/epaule/wallslideflexionepaule_elastique.png"
  },
  "/exercises/images/fauteuil/FAUT_POST_01.png": {
   "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
