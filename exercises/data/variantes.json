@@ -119,6 +119,16 @@
   "f": "/exercises/images/cheville/sauts-sur-place-f.webp",
   "h": "/exercises/images/cheville/sauts-sur-place.webp"
  },
+ "/exercises/images/coude/COUDE_02.webp": {
+  "defaut": "/exercises/images/coude/COUDE_02.webp",
+  "f": "/exercises/images/coude/COUDE_02-f.webp",
+  "h": "/exercises/images/coude/COUDE_02.webp"
+ },
+ "/exercises/images/coude/COUDE_03.webp": {
+  "defaut": "/exercises/images/coude/COUDE_03.webp",
+  "f": "/exercises/images/coude/COUDE_03-f.webp",
+  "h": "/exercises/images/coude/COUDE_03.webp"
+ },
  "/exercises/images/epaule/Pendulaire.png": {
   "defaut": "/exercises/images/epaule/Pendulaire.png",
   "f": "/exercises/images/epaule/Pendulaire-f.webp",
