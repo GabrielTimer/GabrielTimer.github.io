@@ -99,6 +99,11 @@
   "f": "/exercises/images/post-partum/bird-dog-complet.webp",
   "h": "/exercises/images/post-partum/bird-dog-complet-h.webp"
  },
+ "/exercises/images/post-partum/carry-asymetrique.webp": {
+  "defaut": "/exercises/images/post-partum/carry-asymetrique.webp",
+  "f": "/exercises/images/post-partum/carry-asymetrique.webp",
+  "h": "/exercises/images/post-partum/carry-asymetrique-h.webp"
+ },
  "/exercises/images/post-partum/clamshell.png": {
   "defaut": "/exercises/images/post-partum/clamshell.png",
   "f": "/exercises/images/post-partum/clamshell.png",
@@ -143,6 +148,11 @@
   "defaut": "/exercises/images/post-partum/marche-gainee.png",
   "f": "/exercises/images/post-partum/marche-gainee.png",
   "h": "/exercises/images/post-partum/marche-gainee-h.webp"
+ },
+ "/exercises/images/post-partum/mountain-climber-lent.webp": {
+  "defaut": "/exercises/images/post-partum/mountain-climber-lent.webp",
+  "f": "/exercises/images/post-partum/mountain-climber-lent.webp",
+  "h": "/exercises/images/post-partum/mountain-climber-lent-h.webp"
  },
  "/exercises/images/post-partum/pallof-press.webp": {
   "defaut": "/exercises/images/post-partum/pallof-press.webp",
@@ -193,5 +203,10 @@
   "defaut": "/exercises/images/post-partum/step-up-bas.webp",
   "f": "/exercises/images/post-partum/step-up-bas.webp",
   "h": "/exercises/images/post-partum/step-up-bas-h.webp"
+ },
+ "/exercises/images/post-partum/step-up-dynamique.webp": {
+  "defaut": "/exercises/images/post-partum/step-up-dynamique.webp",
+  "f": "/exercises/images/post-partum/step-up-dynamique.webp",
+  "h": "/exercises/images/post-partum/step-up-dynamique-h.webp"
  }
 }
