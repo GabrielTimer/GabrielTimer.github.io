@@ -339,6 +339,16 @@
   "f": "/exercises/images/hanche/abduction-couche.webp",
   "h": "/exercises/images/hanche/abduction-couche-h.webp"
  },
+ "/exercises/images/hanche/etirement-psoas.webp": {
+  "defaut": "/exercises/images/hanche/etirement-psoas.webp",
+  "f": "/exercises/images/hanche/etirement-psoas-f.webp",
+  "h": "/exercises/images/hanche/etirement-psoas.webp"
+ },
+ "/exercises/images/hanche/hip-thrust.webp": {
+  "defaut": "/exercises/images/hanche/hip-thrust.webp",
+  "f": "/exercises/images/hanche/hip-thrust.webp",
+  "h": "/exercises/images/hanche/hip-thrust-h.webp"
+ },
  "/exercises/images/post-partum/bear-crawl.webp": {
   "defaut": "/exercises/images/post-partum/bear-crawl.webp",
   "f": "/exercises/images/post-partum/bear-crawl.webp",
