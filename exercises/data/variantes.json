@@ -9,6 +9,16 @@
   "f": "/exercises/images/cabinet/rameur-f.webp",
   "h": "/exercises/images/cabinet/rameur.png"
  },
+ "/exercises/images/cabinet/tapiscourse.png": {
+  "defaut": "/exercises/images/cabinet/tapiscourse.png",
+  "f": "/exercises/images/cabinet/tapiscourse-f.webp",
+  "h": "/exercises/images/cabinet/tapiscourse.png"
+ },
+ "/exercises/images/cabinet/tapismarche.png": {
+  "defaut": "/exercises/images/cabinet/tapismarche.png",
+  "f": "/exercises/images/cabinet/tapismarche-f.webp",
+  "h": "/exercises/images/cabinet/tapismarche.png"
+ },
  "/exercises/images/cheville/appuisballeexterne.png": {
   "defaut": "/exercises/images/cheville/appuisballeexterne.png",
   "f": "/exercises/images/cheville/appuisballeexterne-f.webp",
