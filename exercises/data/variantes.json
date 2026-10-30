@@ -129,6 +129,16 @@
   "f": "/exercises/images/coude/COUDE_03-f.webp",
   "h": "/exercises/images/coude/COUDE_03.webp"
  },
+ "/exercises/images/coude/COUDE_04.webp": {
+  "defaut": "/exercises/images/coude/COUDE_04.webp",
+  "f": "/exercises/images/coude/COUDE_04-f.webp",
+  "h": "/exercises/images/coude/COUDE_04.webp"
+ },
+ "/exercises/images/coude/COUDE_05.webp": {
+  "defaut": "/exercises/images/coude/COUDE_05.webp",
+  "f": "/exercises/images/coude/COUDE_05-f.webp",
+  "h": "/exercises/images/coude/COUDE_05.webp"
+ },
  "/exercises/images/epaule/Pendulaire.png": {
   "defaut": "/exercises/images/epaule/Pendulaire.png",
   "f": "/exercises/images/epaule/Pendulaire-f.webp",
