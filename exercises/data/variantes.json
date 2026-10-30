@@ -339,6 +339,16 @@
   "f": "/exercises/images/hanche/abduction-couche.webp",
   "h": "/exercises/images/hanche/abduction-couche-h.webp"
  },
+ "/exercises/images/hanche/copenhague-genou.webp": {
+  "defaut": "/exercises/images/hanche/copenhague-genou.webp",
+  "f": "/exercises/images/hanche/copenhague-genou-f.webp",
+  "h": "/exercises/images/hanche/copenhague-genou.webp"
+ },
+ "/exercises/images/hanche/etirement-piriforme.webp": {
+  "defaut": "/exercises/images/hanche/etirement-piriforme.webp",
+  "f": "/exercises/images/hanche/etirement-piriforme.webp",
+  "h": "/exercises/images/hanche/etirement-piriforme-h.webp"
+ },
  "/exercises/images/hanche/etirement-psoas.webp": {
   "defaut": "/exercises/images/hanche/etirement-psoas.webp",
   "f": "/exercises/images/hanche/etirement-psoas-f.webp",
