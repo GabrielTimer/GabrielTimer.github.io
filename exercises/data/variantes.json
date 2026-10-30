@@ -154,6 +154,11 @@
   "f": "/exercises/images/cheville/sauts-sur-place-f.webp",
   "h": "/exercises/images/cheville/sauts-sur-place.webp"
  },
+ "/exercises/images/coude/COUDE_01.webp": {
+  "defaut": "/exercises/images/coude/COUDE_01.webp",
+  "f": "/exercises/images/coude/COUDE_01-f.webp",
+  "h": "/exercises/images/coude/COUDE_01.webp"
+ },
  "/exercises/images/coude/COUDE_02.webp": {
   "defaut": "/exercises/images/coude/COUDE_02.webp",
   "f": "/exercises/images/coude/COUDE_02-f.webp",
@@ -613,6 +618,11 @@
   "defaut": "/exercises/images/pubalgie/pont_fessier.png",
   "f": "/exercises/images/pubalgie/pont_fessier-f.webp",
   "h": "/exercises/images/pubalgie/pont_fessier.png"
+ },
+ "/exercises/images/pubalgie/serrage-ballon-genoux.png": {
+  "defaut": "/exercises/images/pubalgie/serrage-ballon-genoux.png",
+  "f": "/exercises/images/pubalgie/serrage-ballon-genoux-f.webp",
+  "h": "/exercises/images/pubalgie/serrage-ballon-genoux.png"
  },
  "/exercises/images/pubalgie/serrage-ballon_jambestendues.png": {
   "defaut": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
