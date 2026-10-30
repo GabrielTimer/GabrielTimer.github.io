@@ -44,6 +44,11 @@
   "f": "/exercises/images/cheville/flexdorsalemur-f.webp",
   "h": "/exercises/images/cheville/flexdorsalemur.png"
  },
+ "/exercises/images/cheville/marche-laterale-elastique.webp": {
+  "defaut": "/exercises/images/cheville/marche-laterale-elastique.webp",
+  "f": "/exercises/images/cheville/marche-laterale-elastique-f.webp",
+  "h": "/exercises/images/cheville/marche-laterale-elastique.webp"
+ },
  "/exercises/images/cheville/mobilite-flexion-extension.webp": {
   "defaut": "/exercises/images/cheville/mobilite-flexion-extension.webp",
   "f": "/exercises/images/cheville/mobilite-flexion-extension-f.webp",
@@ -53,6 +58,11 @@
   "defaut": "/exercises/images/cheville/pointepieds.png",
   "f": "/exercises/images/cheville/pointepieds-f.webp",
   "h": "/exercises/images/cheville/pointepieds.png"
+ },
+ "/exercises/images/cheville/sauts-sur-place.webp": {
+  "defaut": "/exercises/images/cheville/sauts-sur-place.webp",
+  "f": "/exercises/images/cheville/sauts-sur-place-f.webp",
+  "h": "/exercises/images/cheville/sauts-sur-place.webp"
  },
  "/exercises/images/fauteuil/FAUT_POST_01.png": {
   "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
