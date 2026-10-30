@@ -34,6 +34,16 @@
   "f": "/exercises/images/cabinet/velo-f.webp",
   "h": "/exercises/images/cabinet/velo.png"
  },
+ "/exercises/images/cervicales/flexion-profonde-cou.webp": {
+  "defaut": "/exercises/images/cervicales/flexion-profonde-cou.webp",
+  "f": "/exercises/images/cervicales/flexion-profonde-cou.webp",
+  "h": "/exercises/images/cervicales/flexion-profonde-cou-h.webp"
+ },
+ "/exercises/images/cervicales/rentrer-menton.webp": {
+  "defaut": "/exercises/images/cervicales/rentrer-menton.webp",
+  "f": "/exercises/images/cervicales/rentrer-menton-f.webp",
+  "h": "/exercises/images/cervicales/rentrer-menton.webp"
+ },
  "/exercises/images/cheville/appuisballeexterne.png": {
   "defaut": "/exercises/images/cheville/appuisballeexterne.png",
   "f": "/exercises/images/cheville/appuisballeexterne-f.webp",
