@@ -219,6 +219,11 @@
   "f": "/exercises/images/gainage/auto-grandissement.webp",
   "h": "/exercises/images/gainage/auto-grandissement-h.webp"
  },
+ "/exercises/images/gainage/bird-dog-jambe.webp": {
+  "defaut": "/exercises/images/gainage/bird-dog-jambe.webp",
+  "f": "/exercises/images/gainage/bird-dog-jambe.webp",
+  "h": "/exercises/images/gainage/bird-dog-jambe-h.webp"
+ },
  "/exercises/images/genou/equilibre-balle-1.png": {
   "defaut": "/exercises/images/genou/equilibre-balle-1.png",
   "f": "/exercises/images/genou/equilibre-balle-1-f.webp",
@@ -293,6 +298,11 @@
   "defaut": "/exercises/images/post-partum/dead-bug-elastique.webp",
   "f": "/exercises/images/post-partum/dead-bug-elastique.webp",
   "h": "/exercises/images/post-partum/dead-bug-elastique-h.webp"
+ },
+ "/exercises/images/post-partum/dead-bug.png": {
+  "defaut": "/exercises/images/post-partum/dead-bug.png",
+  "f": "/exercises/images/post-partum/dead-bug.png",
+  "h": "/exercises/images/post-partum/dead-bug-h.webp"
  },
  "/exercises/images/post-partum/farmer-carry.webp": {
   "defaut": "/exercises/images/post-partum/farmer-carry.webp",
