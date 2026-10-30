@@ -84,6 +84,16 @@
   "f": "/exercises/images/cheville/sauts-sur-place-f.webp",
   "h": "/exercises/images/cheville/sauts-sur-place.webp"
  },
+ "/exercises/images/epaule/Pendulaire.png": {
+  "defaut": "/exercises/images/epaule/Pendulaire.png",
+  "f": "/exercises/images/epaule/Pendulaire-f.webp",
+  "h": "/exercises/images/epaule/Pendulaire.png"
+ },
+ "/exercises/images/epaule/REepaule_elastique.png": {
+  "defaut": "/exercises/images/epaule/REepaule_elastique.png",
+  "f": "/exercises/images/epaule/REepaule_elastique-f.webp",
+  "h": "/exercises/images/epaule/REepaule_elastique.png"
+ },
  "/exercises/images/fauteuil/FAUT_POST_01.png": {
   "defaut": "/exercises/images/fauteuil/FAUT_POST_01.png",
   "f": "/exercises/images/fauteuil/FAUT_POST_01-f.webp",
