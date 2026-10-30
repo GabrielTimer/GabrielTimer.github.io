@@ -269,6 +269,11 @@
   "f": "/exercises/images/gainage/rollout-swissball.webp",
   "h": "/exercises/images/gainage/rollout-swissball-h.webp"
  },
+ "/exercises/images/genou/descente-marche.webp": {
+  "defaut": "/exercises/images/genou/descente-marche.webp",
+  "f": "/exercises/images/genou/descente-marche-f.webp",
+  "h": "/exercises/images/genou/descente-marche.webp"
+ },
  "/exercises/images/genou/elevation-jambe-tendue.webp": {
   "defaut": "/exercises/images/genou/elevation-jambe-tendue.webp",
   "f": "/exercises/images/genou/elevation-jambe-tendue-f.webp",
@@ -313,6 +318,11 @@
   "defaut": "/exercises/images/genou/squat-elastique.png",
   "f": "/exercises/images/genou/squat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-elastique.png"
+ },
+ "/exercises/images/genou/squat-espagnol.webp": {
+  "defaut": "/exercises/images/genou/squat-espagnol.webp",
+  "f": "/exercises/images/genou/squat-espagnol-f.webp",
+  "h": "/exercises/images/genou/squat-espagnol.webp"
  },
  "/exercises/images/genou/squat-lat-elastique.png": {
   "defaut": "/exercises/images/genou/squat-lat-elastique.png",
