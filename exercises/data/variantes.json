@@ -1,4 +1,14 @@
 {
+ "/exercises/images/cabinet/huber.png": {
+  "defaut": "/exercises/images/cabinet/huber.png",
+  "f": "/exercises/images/cabinet/huber-f.webp",
+  "h": "/exercises/images/cabinet/huber.png"
+ },
+ "/exercises/images/cabinet/rameur.png": {
+  "defaut": "/exercises/images/cabinet/rameur.png",
+  "f": "/exercises/images/cabinet/rameur-f.webp",
+  "h": "/exercises/images/cabinet/rameur.png"
+ },
  "/exercises/images/cheville/appuisballeexterne.png": {
   "defaut": "/exercises/images/cheville/appuisballeexterne.png",
   "f": "/exercises/images/cheville/appuisballeexterne-f.webp",
