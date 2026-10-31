@@ -11012,5 +11012,100 @@
     "zones": [
       "Lombaires"
     ]
+  },
+  {
+    "id": "LOMB_09",
+    "nom": "Bascule du bassin allongé",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Prendre conscience et mobiliser le bassin",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 3 s, repos 2 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 2,
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat écartés largeur de bassin",
+      "Plaquer doucement le bas du dos au sol en basculant le pubis vers le nombril",
+      "Puis creuser légèrement le bas du dos dans l'autre sens",
+      "Alterner lentement les deux positions"
+    ],
+    "precautions": [
+      "Rester dans une zone confortable",
+      "Le mouvement vient du bassin, pas des fesses qui décollent"
+    ],
+    "tags": [
+      "Dos",
+      "Transverse",
+      "Grand droit de l'abdomen"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/dos/bascule-bassin.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Lombaires",
+      "Bassin",
+      "Abdomen"
+    ],
+    "conseil_posture": [
+      "Épaules et tête posées",
+      "Pieds bien à plat"
+    ],
+    "erreurs_frequentes": [
+      "Décoller les fesses du sol",
+      "Bloquer la respiration",
+      "Contracter les épaules"
+    ],
+    "version_facile": [
+      "Petite amplitude"
+    ],
+    "version_avancee": [
+      "Tenir 5 s le dos plaqué en rentrant le ventre"
+    ],
+    "respiration": [
+      "Expirer en plaquant le dos",
+      "Inspirer en creusant"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Grand droit de l'abdomen",
+      "Érecteurs du rachis"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [],
+    "benefices": [
+      "Détend le bas du dos",
+      "Améliore le contrôle du bassin"
+    ],
+    "audio_cues": [
+      "Plaquez le dos",
+      "Creusez doucement"
+    ],
+    "coaching_court": [
+      "Lent",
+      "Fluide"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Post-partum",
+      "Raideur lombaire"
+    ],
+    "objectifs": [
+      "Prendre conscience et mobiliser le bassin"
+    ],
+    "zones": [
+      "Lombaires",
+      "Bassin",
+      "Abdomen"
+    ]
   }
 ]
