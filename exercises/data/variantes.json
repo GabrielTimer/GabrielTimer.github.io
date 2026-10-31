@@ -464,6 +464,11 @@
   "f": "/exercises/images/genou/extension-terminale-elastique-f.webp",
   "h": "/exercises/images/genou/extension-terminale-elastique.webp"
  },
+ "/exercises/images/genou/fente-bulgare.webp": {
+  "defaut": "/exercises/images/genou/fente-bulgare.webp",
+  "f": "/exercises/images/genou/fente-bulgare-f.webp",
+  "h": "/exercises/images/genou/fente-bulgare.webp"
+ },
  "/exercises/images/genou/flexion-debout.webp": {
   "defaut": "/exercises/images/genou/flexion-debout.webp",
   "f": "/exercises/images/genou/flexion-debout.webp",
@@ -473,6 +478,11 @@
   "defaut": "/exercises/images/genou/flexion-genou-assis.webp",
   "f": "/exercises/images/genou/flexion-genou-assis-f.webp",
   "h": "/exercises/images/genou/flexion-genou-assis.webp"
+ },
+ "/exercises/images/genou/pont-ischio-chaise.webp": {
+  "defaut": "/exercises/images/genou/pont-ischio-chaise.webp",
+  "f": "/exercises/images/genou/pont-ischio-chaise.webp",
+  "h": "/exercises/images/genou/pont-ischio-chaise-h.webp"
  },
  "/exercises/images/genou/quadriceps-statique.webp": {
   "defaut": "/exercises/images/genou/quadriceps-statique.webp",
