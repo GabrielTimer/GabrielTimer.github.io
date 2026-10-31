@@ -8,7 +8,7 @@ import {
   emptyHTML, byWeek, settings
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
-import { illustrationsActives, choisirIllustrations } from "../variantes.js";
+import { illustrationsActives, choisirIllustrations, aVariantes, variantesPretes } from "../variantes.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
 import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 
@@ -610,7 +610,7 @@ function renderSend(full = true){
         </div>
       </div>
     </div>
-    <div class="group">
+    <div class="group" id="illus-group" hidden>
       <div class="field"><span class="label">Exercices montrés par</span>
         <div class="segmented block" role="group" aria-label="Exercices montrés par">
           <button type="button" data-illus-envoi="f">une femme</button>
@@ -741,7 +741,14 @@ function updatePlanPreview(){
   box.innerHTML = `<strong>${plural(dates.length, "séance")}</strong>, du ${esc(fmtDate(dates[0], { weekday:"long", day:"numeric", month:"long" }).toLowerCase())} au ${esc(fmtDate(dates[dates.length - 1], { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}.`;
 }
 
+function majIllusVisible(){
+  const g = $("#illus-group");
+  if(g) g.hidden = !S.exercices.some(e => aVariantes(exerciseImage(e)));
+}
+variantesPretes.then(majIllusVisible);
+
 function updatePrimary(){
+  majIllusVisible();
   const b = $("#send-btn");
   if(!b) return;
   const p = patients.find(x => x.cle === S.patient);

@@ -70,6 +70,12 @@ function choisir(v){
 }
 export { choisir as choisirIllustrations };
 
+/** Vrai si l'image existe en version femme et en version homme. */
+export function aVariantes(src){
+  if(!src || typeof src !== "string") return false;
+  return !!entreePour(src.replace(/^https?:\/\/[^/]+/, ""));
+}
+
 /** Renvoie l'illustration à afficher pour une image d'exercice. */
 export function variante(src){
   if(!src || typeof src !== "string") return src;
