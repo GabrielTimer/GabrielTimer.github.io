@@ -874,6 +874,11 @@
   "f": "/exercises/images/tronc/Superman-f.webp",
   "h": "/exercises/images/tronc/Superman.png"
  },
+ "/images/epaule_1/cover.png": {
+  "defaut": "/exercises/images/epaule/tirage_elastique.png",
+  "f": "/exercises/images/epaule/tirage_elastique-f.webp",
+  "h": "/exercises/images/epaule/tirage_elastique.png"
+ },
  "/images/epaule_1/ex1.png": {
   "defaut": "/exercises/images/epaule/tirage_elastique.png",
   "f": "/exercises/images/epaule/tirage_elastique-f.webp",
@@ -894,6 +899,11 @@
   "f": "/exercises/images/epaule/REepaule_elastique-f.webp",
   "h": "/exercises/images/epaule/REepaule_elastique.png"
  },
+ "/images/epaule_2/cover.png": {
+  "defaut": "/exercises/images/epaule/Retropulsionepaule_elastique.png",
+  "f": "/exercises/images/epaule/Retropulsionepaule_elastique-f.webp",
+  "h": "/exercises/images/epaule/Retropulsionepaule_elastique.png"
+ },
  "/images/epaule_2/ex1.png": {
   "defaut": "/exercises/images/epaule/Retropulsionepaule_elastique.png",
   "f": "/exercises/images/epaule/Retropulsionepaule_elastique-f.webp",
@@ -908,6 +918,11 @@
   "defaut": "/exercises/images/epaule/diagonalekabat_elastique.png",
   "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
   "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
+ },
+ "/images/gainage_1/cover.png": {
+  "defaut": "/exercises/images/tronc/Gainage_Ventral.png",
+  "f": "/exercises/images/tronc/Gainage_Ventral-f.webp",
+  "h": "/exercises/images/tronc/Gainage_Ventral.png"
  },
  "/images/gainage_1/ex1.png": {
   "defaut": "/exercises/images/tronc/Gainage_Ventral.png",
