@@ -169,6 +169,11 @@
   "f": "/exercises/images/cheville/mobilite-flexion-extension-f.webp",
   "h": "/exercises/images/cheville/mobilite-flexion-extension.webp"
  },
+ "/exercises/images/cheville/pointe-unipodale-marche.webp": {
+  "defaut": "/exercises/images/cheville/pointe-unipodale-marche.webp",
+  "f": "/exercises/images/cheville/pointe-unipodale-marche.webp",
+  "h": "/exercises/images/cheville/pointe-unipodale-marche-h.webp"
+ },
  "/exercises/images/cheville/pointepieds.png": {
   "defaut": "/exercises/images/cheville/pointepieds.png",
   "f": "/exercises/images/cheville/pointepieds-f.webp",
@@ -404,6 +409,11 @@
   "f": "/exercises/images/epaule/tirage_elastique-f.webp",
   "h": "/exercises/images/epaule/tirage_elastique.png"
  },
+ "/exercises/images/epaule/transfert-appui-quatre-pattes.webp": {
+  "defaut": "/exercises/images/epaule/transfert-appui-quatre-pattes.webp",
+  "f": "/exercises/images/epaule/transfert-appui-quatre-pattes.webp",
+  "h": "/exercises/images/epaule/transfert-appui-quatre-pattes-h.webp"
+ },
  "/exercises/images/epaule/wallslideflexionepaule.png": {
   "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
   "f": "/exercises/images/epaule/wallslideflexionepaule-f.webp",
@@ -509,6 +519,11 @@
   "f": "/exercises/images/genou/etirement-quadriceps.webp",
   "h": "/exercises/images/genou/etirement-quadriceps-h.webp"
  },
+ "/exercises/images/genou/extension-isometrique-assis.webp": {
+  "defaut": "/exercises/images/genou/extension-isometrique-assis.webp",
+  "f": "/exercises/images/genou/extension-isometrique-assis.webp",
+  "h": "/exercises/images/genou/extension-isometrique-assis-h.webp"
+ },
  "/exercises/images/genou/extension-terminale-elastique.webp": {
   "defaut": "/exercises/images/genou/extension-terminale-elastique.webp",
   "f": "/exercises/images/genou/extension-terminale-elastique-f.webp",
@@ -564,6 +579,11 @@
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
  },
+ "/exercises/images/genou/squat-plan-incline.webp": {
+  "defaut": "/exercises/images/genou/squat-plan-incline.webp",
+  "f": "/exercises/images/genou/squat-plan-incline-f.webp",
+  "h": "/exercises/images/genou/squat-plan-incline.webp"
+ },
  "/exercises/images/genou/step-up-lateral.webp": {
   "defaut": "/exercises/images/genou/step-up-lateral.webp",
   "f": "/exercises/images/genou/step-up-lateral-f.webp",
@@ -578,6 +598,11 @@
   "defaut": "/exercises/images/hanche/abduction-debout-elastique.webp",
   "f": "/exercises/images/hanche/abduction-debout-elastique-f.webp",
   "h": "/exercises/images/hanche/abduction-debout-elastique.webp"
+ },
+ "/exercises/images/hanche/assis-debout-chaise.webp": {
+  "defaut": "/exercises/images/hanche/assis-debout-chaise.webp",
+  "f": "/exercises/images/hanche/assis-debout-chaise-f.webp",
+  "h": "/exercises/images/hanche/assis-debout-chaise.webp"
  },
  "/exercises/images/hanche/copenhague-genou.webp": {
   "defaut": "/exercises/images/hanche/copenhague-genou.webp",
