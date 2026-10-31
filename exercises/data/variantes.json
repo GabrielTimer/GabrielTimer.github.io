@@ -189,6 +189,11 @@
   "f": "/exercises/images/dos/chat-vache.webp",
   "h": "/exercises/images/dos/chat-vache-h.webp"
  },
+ "/exercises/images/dos/extension-debout.webp": {
+  "defaut": "/exercises/images/dos/extension-debout.webp",
+  "f": "/exercises/images/dos/extension-debout-f.webp",
+  "h": "/exercises/images/dos/extension-debout.webp"
+ },
  "/exercises/images/dos/extension-ventre.webp": {
   "defaut": "/exercises/images/dos/extension-ventre.webp",
   "f": "/exercises/images/dos/extension-ventre-f.webp",
@@ -429,6 +434,11 @@
   "f": "/exercises/images/hanche/abduction-couche.webp",
   "h": "/exercises/images/hanche/abduction-couche-h.webp"
  },
+ "/exercises/images/hanche/abduction-debout-elastique.webp": {
+  "defaut": "/exercises/images/hanche/abduction-debout-elastique.webp",
+  "f": "/exercises/images/hanche/abduction-debout-elastique-f.webp",
+  "h": "/exercises/images/hanche/abduction-debout-elastique.webp"
+ },
  "/exercises/images/hanche/copenhague-genou.webp": {
   "defaut": "/exercises/images/hanche/copenhague-genou.webp",
   "f": "/exercises/images/hanche/copenhague-genou-f.webp",
@@ -444,10 +454,25 @@
   "f": "/exercises/images/hanche/etirement-psoas-f.webp",
   "h": "/exercises/images/hanche/etirement-psoas.webp"
  },
+ "/exercises/images/hanche/fente-avant.webp": {
+  "defaut": "/exercises/images/hanche/fente-avant.webp",
+  "f": "/exercises/images/hanche/fente-avant.webp",
+  "h": "/exercises/images/hanche/fente-avant-h.webp"
+ },
  "/exercises/images/hanche/hip-thrust.webp": {
   "defaut": "/exercises/images/hanche/hip-thrust.webp",
   "f": "/exercises/images/hanche/hip-thrust.webp",
   "h": "/exercises/images/hanche/hip-thrust-h.webp"
+ },
+ "/exercises/images/hanche/ischio-sangle.webp": {
+  "defaut": "/exercises/images/hanche/ischio-sangle.webp",
+  "f": "/exercises/images/hanche/ischio-sangle.webp",
+  "h": "/exercises/images/hanche/ischio-sangle-h.webp"
+ },
+ "/exercises/images/hanche/papillon-adducteurs.webp": {
+  "defaut": "/exercises/images/hanche/papillon-adducteurs.webp",
+  "f": "/exercises/images/hanche/papillon-adducteurs-f.webp",
+  "h": "/exercises/images/hanche/papillon-adducteurs.webp"
  },
  "/exercises/images/main/serrer-balle.webp": {
   "defaut": "/exercises/images/main/serrer-balle.webp",
