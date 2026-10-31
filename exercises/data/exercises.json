@@ -11572,5 +11572,188 @@
       "Haut du dos",
       "Épaules"
     ]
+  },
+  {
+    "id": "CERV_08",
+    "nom": "Inclinaisons latérales de la tête",
+    "type": "timer",
+    "categorie": "Cervicales",
+    "objectif": "Entretenir la mobilité du cou",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "8 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 8,
+    "repos": 2,
+    "consignes": [
+      "Assis droit, regard à l'horizontale, épaules relâchées",
+      "Pencher lentement l'oreille vers l'épaule sans tourner la tête",
+      "Revenir au centre puis pencher de l'autre côté",
+      "Alterner calmement"
+    ],
+    "precautions": [
+      "Mouvement lent, sans à-coups",
+      "Arrêter si vertiges"
+    ],
+    "tags": [
+      "Cervicales",
+      "Scalènes",
+      "Trapèze supérieur"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 8
+    },
+    "image": "/exercises/images/cervicales/inclinaison-tete.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cou"
+    ],
+    "conseil_posture": [
+      "Les épaules ne montent pas vers l'oreille",
+      "Nez vers l'avant tout le long"
+    ],
+    "erreurs_frequentes": [
+      "Monter l'épaule vers l'oreille",
+      "Tourner le visage",
+      "Aller trop vite"
+    ],
+    "version_facile": [
+      "Petite amplitude"
+    ],
+    "version_avancee": [
+      "Tenir 5 s de chaque côté"
+    ],
+    "respiration": [
+      "Expirer en penchant",
+      "Inspirer en revenant au centre"
+    ],
+    "muscles_cibles": [
+      "Scalènes",
+      "Trapèze supérieur",
+      "Sterno-cléido-mastoïdien"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Vertiges non évalués"
+    ],
+    "benefices": [
+      "Assouplit le cou",
+      "Réduit les raideurs"
+    ],
+    "audio_cues": [
+      "Oreille vers l'épaule",
+      "Revenez au centre"
+    ],
+    "coaching_court": [
+      "Lent",
+      "Relâché"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Cervicalgie",
+      "Raideur cervicale",
+      "Arthrose cervicale"
+    ],
+    "objectifs": [
+      "Entretenir la mobilité du cou"
+    ],
+    "zones": [
+      "Cou"
+    ]
+  },
+  {
+    "id": "EPAULE_14",
+    "nom": "Rotation interne à la serviette dans le dos",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Gagner en rotation interne de l'épaule",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "5 × 20 s, repos 5 s",
+    "ex": 20,
+    "reps": 5,
+    "repos": 5,
+    "consignes": [
+      "Debout, tenir une serviette d'une main au-dessus de l'épaule, l'autre main attrape le bas de la serviette dans le dos",
+      "Avec la main du haut, tirer doucement la serviette vers le haut",
+      "La main du bas remonte le long du dos jusqu'à une légère tension",
+      "Tenir puis redescendre lentement"
+    ],
+    "precautions": [
+      "Tension supportable, jamais de douleur vive",
+      "Progresser au fil des jours"
+    ],
+    "tags": [
+      "Epaule",
+      "Capsule postérieure de l'épaule",
+      "Infra-épineux"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 20,
+      "cycles": 5
+    },
+    "image": "/exercises/images/epaule/serviette-dos.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Épaule"
+    ],
+    "conseil_posture": [
+      "Buste droit, ne pas se pencher",
+      "Épaules relâchées"
+    ],
+    "erreurs_frequentes": [
+      "Tirer d'un coup",
+      "Se pencher en avant pour compenser"
+    ],
+    "version_facile": [
+      "Tenir la serviette plus bas"
+    ],
+    "version_avancee": [
+      "Tenir plus longtemps"
+    ],
+    "respiration": [
+      "Respirer calmement pendant la tension"
+    ],
+    "muscles_cibles": [
+      "Capsule postérieure de l'épaule",
+      "Infra-épineux"
+    ],
+    "materiel": [
+      "Serviette"
+    ],
+    "contre_indications": [
+      "Fracture récente de l'épaule",
+      "Rééducation post-opératoire sans accord"
+    ],
+    "benefices": [
+      "Aide à passer la main dans le dos (s'habiller, se laver)"
+    ],
+    "audio_cues": [
+      "Tirez doucement",
+      "Relâchez l'épaule"
+    ],
+    "coaching_court": [
+      "Progressif",
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Capsulite rétractile",
+      "Raideur d'épaule",
+      "Après chirurgie de l'épaule (sur accord)"
+    ],
+    "objectifs": [
+      "Gagner en rotation interne de l'épaule"
+    ],
+    "zones": [
+      "Épaule"
+    ]
   }
 ]
