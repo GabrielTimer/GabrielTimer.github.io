@@ -139,6 +139,11 @@
   "f": "/exercises/images/cheville/flexdorsalemur-f.webp",
   "h": "/exercises/images/cheville/flexdorsalemur.png"
  },
+ "/exercises/images/cheville/inversion-elastique.webp": {
+  "defaut": "/exercises/images/cheville/inversion-elastique.webp",
+  "f": "/exercises/images/cheville/inversion-elastique-f.webp",
+  "h": "/exercises/images/cheville/inversion-elastique.webp"
+ },
  "/exercises/images/cheville/marche-laterale-elastique.webp": {
   "defaut": "/exercises/images/cheville/marche-laterale-elastique.webp",
   "f": "/exercises/images/cheville/marche-laterale-elastique-f.webp",
@@ -439,10 +444,20 @@
   "f": "/exercises/images/genou/equilibre-balle-2-f.webp",
   "h": "/exercises/images/genou/equilibre-balle-2.png"
  },
+ "/exercises/images/genou/etirement-quadriceps.webp": {
+  "defaut": "/exercises/images/genou/etirement-quadriceps.webp",
+  "f": "/exercises/images/genou/etirement-quadriceps.webp",
+  "h": "/exercises/images/genou/etirement-quadriceps-h.webp"
+ },
  "/exercises/images/genou/extension-terminale-elastique.webp": {
   "defaut": "/exercises/images/genou/extension-terminale-elastique.webp",
   "f": "/exercises/images/genou/extension-terminale-elastique-f.webp",
   "h": "/exercises/images/genou/extension-terminale-elastique.webp"
+ },
+ "/exercises/images/genou/flexion-debout.webp": {
+  "defaut": "/exercises/images/genou/flexion-debout.webp",
+  "f": "/exercises/images/genou/flexion-debout.webp",
+  "h": "/exercises/images/genou/flexion-debout-h.webp"
  },
  "/exercises/images/genou/flexion-genou-assis.webp": {
   "defaut": "/exercises/images/genou/flexion-genou-assis.webp",
@@ -478,6 +493,11 @@
   "defaut": "/exercises/images/genou/squat-lat-elastique.png",
   "f": "/exercises/images/genou/squat-lat-elastique-f.webp",
   "h": "/exercises/images/genou/squat-lat-elastique.png"
+ },
+ "/exercises/images/genou/step-up-lateral.webp": {
+  "defaut": "/exercises/images/genou/step-up-lateral.webp",
+  "f": "/exercises/images/genou/step-up-lateral-f.webp",
+  "h": "/exercises/images/genou/step-up-lateral.webp"
  },
  "/exercises/images/hanche/abduction-couche.webp": {
   "defaut": "/exercises/images/hanche/abduction-couche.webp",
