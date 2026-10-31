@@ -12413,5 +12413,283 @@
     "zones": [
       "Pied"
     ]
+  },
+  {
+    "id": "COUDE_06",
+    "nom": "Déviation radiale avec un marteau",
+    "type": "timer",
+    "categorie": "coude",
+    "objectif": "Renforcer les muscles du poignet côté pouce",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Assis, avant-bras posé sur une table, pouce vers le haut, poignet dépassant du bord",
+      "Tenir un marteau par le manche",
+      "Lever la tête du marteau vers le plafond en pliant le poignet côté pouce",
+      "Redescendre lentement"
+    ],
+    "precautions": [
+      "Tenir le manche plus près de la tête pour alléger",
+      "Arrêter si douleur au coude"
+    ],
+    "tags": [
+      "coude",
+      "Long et court extenseurs radiaux du carpe",
+      "Fléchisseur radial du carpe"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/coude/deviation-radiale-marteau.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Poignet",
+      "Avant-bras"
+    ],
+    "conseil_posture": [
+      "Avant-bras immobile sur la table",
+      "Épaule relâchée"
+    ],
+    "erreurs_frequentes": [
+      "Bouger l'avant-bras",
+      "Redescendre trop vite"
+    ],
+    "version_facile": [
+      "Tenir le marteau près de la tête"
+    ],
+    "version_avancee": [
+      "Tenir le manche plus bas",
+      "Descente en 3 secondes"
+    ],
+    "respiration": [
+      "Expirer en levant",
+      "Inspirer en redescendant"
+    ],
+    "muscles_cibles": [
+      "Long et court extenseurs radiaux du carpe",
+      "Fléchisseur radial du carpe"
+    ],
+    "materiel": [
+      "Marteau ou petit haltère",
+      "Table"
+    ],
+    "contre_indications": [
+      "Douleur aiguë du poignet"
+    ],
+    "benefices": [
+      "Renforce le poignet",
+      "Améliore la prise en main"
+    ],
+    "audio_cues": [
+      "Levez la tête du marteau",
+      "Avant-bras immobile"
+    ],
+    "coaching_court": [
+      "Lent",
+      "Précis"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Épicondylite latérale (tennis elbow)",
+      "Ténosynovite de De Quervain (phase calme)",
+      "Après fracture du poignet"
+    ],
+    "objectifs": [
+      "Renforcer les muscles du poignet côté pouce"
+    ],
+    "zones": [
+      "Poignet",
+      "Avant-bras"
+    ]
+  },
+  {
+    "id": "MAIN_03",
+    "nom": "Écartement des doigts à l'élastique",
+    "type": "timer",
+    "categorie": "Poignet et main",
+    "objectif": "Renforcer les muscles extenseurs des doigts",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "15 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 15,
+    "repos": 2,
+    "consignes": [
+      "Placer un élastique autour des cinq doigts réunis, au niveau des ongles",
+      "Ouvrir les doigts en écartant au maximum contre l'élastique",
+      "Tenir 2 secondes",
+      "Refermer lentement"
+    ],
+    "precautions": [
+      "Élastique pas trop serré",
+      "Arrêter si douleur articulaire"
+    ],
+    "tags": [
+      "Poignet et main",
+      "Extenseurs des doigts",
+      "Interosseux dorsaux"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 15
+    },
+    "image": "/exercises/images/main/ecartement-doigts.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Main",
+      "Doigts"
+    ],
+    "conseil_posture": [
+      "Poignet dans l'axe de l'avant-bras",
+      "Épaule relâchée"
+    ],
+    "erreurs_frequentes": [
+      "Plier le poignet",
+      "Aller trop vite"
+    ],
+    "version_facile": [
+      "Élastique plus souple"
+    ],
+    "version_avancee": [
+      "Doubler l'élastique"
+    ],
+    "respiration": [
+      "Respirer normalement"
+    ],
+    "muscles_cibles": [
+      "Extenseurs des doigts",
+      "Interosseux dorsaux"
+    ],
+    "materiel": [
+      "Élastique à doigts (ou élastique de bureau)"
+    ],
+    "contre_indications": [
+      "Poussée inflammatoire des doigts"
+    ],
+    "benefices": [
+      "Équilibre force de serrage et d'ouverture",
+      "Entretient la souplesse des doigts"
+    ],
+    "audio_cues": [
+      "Ouvrez grand",
+      "Refermez lentement"
+    ],
+    "coaching_court": [
+      "Précis",
+      "Lent"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Arthrose des doigts",
+      "Raideur de la main",
+      "Épicondylite latérale",
+      "Après fracture du poignet"
+    ],
+    "objectifs": [
+      "Renforcer les muscles extenseurs des doigts"
+    ],
+    "zones": [
+      "Main",
+      "Doigts"
+    ]
+  },
+  {
+    "id": "MAIN_04",
+    "nom": "Opposition du pouce",
+    "type": "timer",
+    "categorie": "Poignet et main",
+    "objectif": "Mobiliser le pouce et les doigts",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 10,
+    "repos": 2,
+    "consignes": [
+      "Main ouverte, paume vers soi",
+      "Toucher le bout de l'index avec le bout du pouce en formant un O",
+      "Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire",
+      "Refaire le chemin dans l'autre sens"
+    ],
+    "precautions": [
+      "Mouvement sans douleur",
+      "Pas de pression forte entre les doigts"
+    ],
+    "tags": [
+      "Poignet et main",
+      "Opposant du pouce",
+      "Court abducteur du pouce"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 10
+    },
+    "image": "/exercises/images/main/opposition-pouce.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Main",
+      "Pouce"
+    ],
+    "conseil_posture": [
+      "Poignet détendu",
+      "Épaule relâchée"
+    ],
+    "erreurs_frequentes": [
+      "Écraser les doigts au lieu de faire un O",
+      "Bouger le poignet"
+    ],
+    "version_facile": [
+      "S'arrêter à l'annulaire"
+    ],
+    "version_avancee": [
+      "Glisser le pouce jusqu'à la base de l'auriculaire"
+    ],
+    "respiration": [
+      "Respirer normalement"
+    ],
+    "muscles_cibles": [
+      "Opposant du pouce",
+      "Court abducteur du pouce"
+    ],
+    "materiel": [],
+    "contre_indications": [
+      "Poussée inflammatoire du pouce"
+    ],
+    "benefices": [
+      "Améliore la précision de la pince",
+      "Entretient la mobilité du pouce"
+    ],
+    "audio_cues": [
+      "Formez un O",
+      "Ouvrez"
+    ],
+    "coaching_court": [
+      "Précis",
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Rhizarthrose",
+      "Raideur de la main",
+      "Canal carpien (après chirurgie)"
+    ],
+    "objectifs": [
+      "Mobiliser le pouce et les doigts"
+    ],
+    "zones": [
+      "Main",
+      "Pouce"
+    ]
   }
 ]
