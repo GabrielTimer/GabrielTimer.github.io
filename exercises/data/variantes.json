@@ -59,6 +59,11 @@
   "f": "/exercises/images/cervicales/isometrique-cou-f.webp",
   "h": "/exercises/images/cervicales/isometrique-cou.webp"
  },
+ "/exercises/images/cervicales/ouverture-machoire.webp": {
+  "defaut": "/exercises/images/cervicales/ouverture-machoire.webp",
+  "f": "/exercises/images/cervicales/ouverture-machoire.webp",
+  "h": "/exercises/images/cervicales/ouverture-machoire-h.webp"
+ },
  "/exercises/images/cervicales/rapprochement-omoplates.webp": {
   "defaut": "/exercises/images/cervicales/rapprochement-omoplates.webp",
   "f": "/exercises/images/cervicales/rapprochement-omoplates.webp",
@@ -153,6 +158,11 @@
   "defaut": "/exercises/images/cheville/marche-laterale-elastique.webp",
   "f": "/exercises/images/cheville/marche-laterale-elastique-f.webp",
   "h": "/exercises/images/cheville/marche-laterale-elastique.webp"
+ },
+ "/exercises/images/cheville/marche-talon-pointe.webp": {
+  "defaut": "/exercises/images/cheville/marche-talon-pointe.webp",
+  "f": "/exercises/images/cheville/marche-talon-pointe-f.webp",
+  "h": "/exercises/images/cheville/marche-talon-pointe.webp"
  },
  "/exercises/images/cheville/mobilite-flexion-extension.webp": {
   "defaut": "/exercises/images/cheville/mobilite-flexion-extension.webp",
@@ -573,6 +583,11 @@
   "defaut": "/exercises/images/hanche/copenhague-genou.webp",
   "f": "/exercises/images/hanche/copenhague-genou-f.webp",
   "h": "/exercises/images/hanche/copenhague-genou.webp"
+ },
+ "/exercises/images/hanche/etirement-bandelette.webp": {
+  "defaut": "/exercises/images/hanche/etirement-bandelette.webp",
+  "f": "/exercises/images/hanche/etirement-bandelette.webp",
+  "h": "/exercises/images/hanche/etirement-bandelette-h.webp"
  },
  "/exercises/images/hanche/etirement-piriforme.webp": {
   "defaut": "/exercises/images/hanche/etirement-piriforme.webp",
