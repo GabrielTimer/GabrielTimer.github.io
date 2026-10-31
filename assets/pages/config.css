@@ -66,7 +66,7 @@
 .exo-note summary svg{ width:16px; height:16px; }
 .exo-note .textarea{ margin-top:8px; min-height:70px; font-size:var(--fs-sm); }
 @media (max-width:560px){
-  .exo{ grid-template-columns:auto 52px minmax(0,1fr); gap:10px; padding:10px; }
+  .exo{ grid-template-columns:26px 52px minmax(0,1fr); gap:10px; padding:10px; }
   .exo .thumb{ width:52px; height:52px; }
   .exo .grip{ height:52px; width:26px; }
   .exo-params{ grid-column:1 / -1; }
@@ -91,3 +91,14 @@
 
 .cfg-lib h2{ font-size:var(--fs-lg); margin-bottom:12px; }
 .cfg-empty{ border:2px dashed var(--line-strong); border-radius:var(--r-lg); padding:28px 18px; text-align:center; color:var(--ink-2); display:flex; flex-direction:column; gap:10px; align-items:center; }
+
+/* Téléphone : les trois réglages tiennent sur une ligne sans couper les chiffres
+   (boutons − / + plus étroits, chiffres un peu plus petits si l'écran est étroit). */
+.exo-params .stepper input,.ev-nums .stepper input{ padding:0; letter-spacing:-.02em; }
+@media (max-width:520px){
+  .exo-params{ gap:6px; }
+  .exo-params .field label{ font-size:min(var(--fs-xs), 3.6vw); white-space:nowrap; }
+  .exo-params .stepper button,.ev-nums .stepper button{ width:26px; }
+  .exo-params .stepper button svg,.ev-nums .stepper button svg{ width:14px; height:14px; }
+  .exo-params .stepper input,.ev-nums .stepper input{ font-size:min(var(--fs-md), 4.4vw); }
+}
