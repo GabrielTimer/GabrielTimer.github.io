@@ -139,3 +139,16 @@
   .t-spine,.t-foot{ display:none; }
 }
 
+
+/* Téléphone en portrait : tout tient dans l'écran, même avec un texte agrandi.
+   L'image prend la place qui reste au lieu d'une hauteur fixe. */
+@media (max-aspect-ratio:1/1){
+  .t-wrap{ height:100dvh; min-height:0; overflow:hidden; }
+  .t-main{ min-height:0; gap:10px; }
+  .t-visual{ flex:1 1 auto; min-height:0; gap:8px; }
+  .t-figure{ height:auto; flex:1 1 0; min-height:96px; max-height:380px; }
+  .t-figure img,.t-figure .ph-img{ position:absolute; inset:0; }
+  .t-control{ flex:none; gap:10px; }
+  .t-ring{ width:min(64vw,28dvh,320px); }
+  .t-foot{ flex:none; }
+}
