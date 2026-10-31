@@ -8,7 +8,11 @@ import {
   emptyHTML, byWeek, settings
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
-import { illustrationsActives, choisirIllustrations, aVariantes, variantesPretes } from "../variantes.js";
+import * as V from "../variantes.js";
+const illustrationsActives = () => V.illustrationsActives ? V.illustrationsActives() : "h";
+const choisirIllustrations = v => { try{ V.choisirIllustrations?.(v); }catch(e){} };
+const aVariantes = src => { try{ return V.aVariantes ? V.aVariantes(src) : false; }catch(e){ return false; } };
+const variantesPretes = V.variantesPretes || Promise.resolve();
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
 import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 

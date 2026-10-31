@@ -8,7 +8,7 @@ import {
 } from "../app.js";
 import { currentAnnonce, loadSettings } from "../settings.js";
 import { exerciseImage } from "../library.js";
-import { setContextePatient } from "../variantes.js";
+import * as V from "../variantes.js";
 
 const app = $("#app");
 registerSW();
@@ -139,7 +139,7 @@ async function renderPatient(ctx){
   const { patient, seances, programmes, seules } = data;
   const P = await import("../patient.js");
   const next = P.nextSession(programmes);
-  setContextePatient(ctx.cle, patient.genre, (next?.seance || programmes.find(p => !p.termine)?.seances?.[0] || seules?.[0])?.data, patient.genreMaj);
+  try{ V.setContextePatient?.(ctx.cle, patient.genre, (next?.seance || programmes.find(p => !p.termine)?.seances?.[0] || seules?.[0])?.data, patient.genreMaj); }catch(e){ console.warn("Illustrations :", e); }
   const actif = programmes.find(p => !p.termine) || null;
   const today = startOfDay(new Date());
   const doneToday = seances.filter(s => s.terminee && s.dateValidation && startOfDay(s.dateValidation).getTime() === today.getTime());

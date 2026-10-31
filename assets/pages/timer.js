@@ -7,7 +7,7 @@ import {
   openSheet, confirmDialog, exoImageHTML, safeRich, vibrate, plural
 } from "../app.js";
 import { exerciseImage, exerciseSteps, videoEmbed } from "../library.js";
-import { setContexteSeance } from "../variantes.js";
+import * as V from "../variantes.js";
 import { doseOf, doseParole } from "../evolution.js";
 
 const PREP = 5;                       // secondes pour se mettre en position
@@ -36,7 +36,7 @@ if(!prog || !Array.isArray(prog.exercices) || !prog.exercices.length){
   throw new Error("Aucune séance");
 }
 
-setContexteSeance(ctx.cle, prog);
+try{ V.setContexteSeance?.(ctx.cle, prog); }catch(e){ console.warn("Illustrations :", e); }
 
 const exos = prog.exercices.map(e => ({
   ...e,

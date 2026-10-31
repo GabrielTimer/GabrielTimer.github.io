@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.9.6";
+const VERSION = "gt-2.9.7";
 const SHELL = `${VERSION}-shell`;
 const MEDIA = `${VERSION}-media`;
 
@@ -63,7 +63,9 @@ const isImmutableCdn = url =>
 async function networkFirst(request, cacheName){
   const cache = await caches.open(cacheName);
   try{
-    const response = await fetch(request);
+    // « no-cache » : toujours revérifier auprès du serveur, pour ne jamais mélanger
+    // un fichier à jour avec un autre resté dans le cache du navigateur.
+    const response = await fetch(request, request.mode === "navigate" ? undefined : { cache:"no-cache" });
     if(response && response.ok) cache.put(request, response.clone());
     return response;
   }catch(err){
