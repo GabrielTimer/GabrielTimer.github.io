@@ -679,6 +679,76 @@
   "f": "/exercises/images/main/serrer-balle-f.webp",
   "h": "/exercises/images/main/serrer-balle.webp"
  },
+ "/exercises/images/pathologies/canal_lombaire_etroit/ex2.png": {
+  "defaut": "/exercises/images/dos/posture-enfant.webp",
+  "f": "/exercises/images/dos/posture-enfant-f.webp",
+  "h": "/exercises/images/dos/posture-enfant.webp"
+ },
+ "/exercises/images/pathologies/canal_lombaire_etroit/ex3.png": {
+  "defaut": "/exercises/images/dos/genoux-poitrine.webp",
+  "f": "/exercises/images/dos/genoux-poitrine.webp",
+  "h": "/exercises/images/dos/genoux-poitrine-h.webp"
+ },
+ "/exercises/images/pathologies/canal_lombaire_etroit/ex4.png": {
+  "defaut": "/exercises/images/dos/rotation-lombaire.webp",
+  "f": "/exercises/images/dos/rotation-lombaire.webp",
+  "h": "/exercises/images/dos/rotation-lombaire-h.webp"
+ },
+ "/exercises/images/pathologies/canal_lombaire_etroit/ex5.png": {
+  "defaut": "/exercises/images/dos/chat-vache.webp",
+  "f": "/exercises/images/dos/chat-vache.webp",
+  "h": "/exercises/images/dos/chat-vache-h.webp"
+ },
+ "/exercises/images/pathologies/canal_lombaire_etroit/ex6.png": {
+  "defaut": "/exercises/images/post-partum/pont-fessier.png",
+  "f": "/exercises/images/post-partum/pont-fessier.png",
+  "h": "/exercises/images/post-partum/pont-fessier-h.webp"
+ },
+ "/exercises/images/pathologies/capsulite/ex5.png": {
+  "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
+  "f": "/exercises/images/epaule/wallslideflexionepaule-f.webp",
+  "h": "/exercises/images/epaule/wallslideflexionepaule.png"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex1.png": {
+  "defaut": "/exercises/images/dos/posture-enfant.webp",
+  "f": "/exercises/images/dos/posture-enfant-f.webp",
+  "h": "/exercises/images/dos/posture-enfant.webp"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex2.png": {
+  "defaut": "/exercises/images/dos/chat-vache.webp",
+  "f": "/exercises/images/dos/chat-vache.webp",
+  "h": "/exercises/images/dos/chat-vache-h.webp"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex3.png": {
+  "defaut": "/exercises/images/post-partum/pont-fessier.png",
+  "f": "/exercises/images/post-partum/pont-fessier.png",
+  "h": "/exercises/images/post-partum/pont-fessier-h.webp"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex4.png": {
+  "defaut": "/exercises/images/dos/genoux-poitrine.webp",
+  "f": "/exercises/images/dos/genoux-poitrine.webp",
+  "h": "/exercises/images/dos/genoux-poitrine-h.webp"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex5.png": {
+  "defaut": "/exercises/images/hanche/ischio-sangle.webp",
+  "f": "/exercises/images/hanche/ischio-sangle.webp",
+  "h": "/exercises/images/hanche/ischio-sangle-h.webp"
+ },
+ "/exercises/images/pathologies/lombalgie_1/ex7.png": {
+  "defaut": "/exercises/images/hanche/etirement-piriforme.webp",
+  "f": "/exercises/images/hanche/etirement-piriforme.webp",
+  "h": "/exercises/images/hanche/etirement-piriforme-h.webp"
+ },
+ "/exercises/images/pathologies/lumbago/ex1.png": {
+  "defaut": "/exercises/images/hanche/etirement-psoas.webp",
+  "f": "/exercises/images/hanche/etirement-psoas-f.webp",
+  "h": "/exercises/images/hanche/etirement-psoas.webp"
+ },
+ "/exercises/images/pathologies/lumbago/ex3.png": {
+  "defaut": "/exercises/images/hanche/etirement-piriforme.webp",
+  "f": "/exercises/images/hanche/etirement-piriforme.webp",
+  "h": "/exercises/images/hanche/etirement-piriforme-h.webp"
+ },
  "/exercises/images/post-partum/bear-crawl.webp": {
   "defaut": "/exercises/images/post-partum/bear-crawl.webp",
   "f": "/exercises/images/post-partum/bear-crawl.webp",
