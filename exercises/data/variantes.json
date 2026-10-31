@@ -34,15 +34,30 @@
   "f": "/exercises/images/cabinet/velo-f.webp",
   "h": "/exercises/images/cabinet/velo.png"
  },
+ "/exercises/images/cervicales/etirement-elevateur.webp": {
+  "defaut": "/exercises/images/cervicales/etirement-elevateur.webp",
+  "f": "/exercises/images/cervicales/etirement-elevateur-f.webp",
+  "h": "/exercises/images/cervicales/etirement-elevateur.webp"
+ },
  "/exercises/images/cervicales/flexion-profonde-cou.webp": {
   "defaut": "/exercises/images/cervicales/flexion-profonde-cou.webp",
   "f": "/exercises/images/cervicales/flexion-profonde-cou.webp",
   "h": "/exercises/images/cervicales/flexion-profonde-cou-h.webp"
  },
+ "/exercises/images/cervicales/inclinaison-tete.webp": {
+  "defaut": "/exercises/images/cervicales/inclinaison-tete.webp",
+  "f": "/exercises/images/cervicales/inclinaison-tete.webp",
+  "h": "/exercises/images/cervicales/inclinaison-tete-h.webp"
+ },
  "/exercises/images/cervicales/isometrique-cou.webp": {
   "defaut": "/exercises/images/cervicales/isometrique-cou.webp",
   "f": "/exercises/images/cervicales/isometrique-cou-f.webp",
   "h": "/exercises/images/cervicales/isometrique-cou.webp"
+ },
+ "/exercises/images/cervicales/rapprochement-omoplates.webp": {
+  "defaut": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+  "f": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+  "h": "/exercises/images/cervicales/rapprochement-omoplates-h.webp"
  },
  "/exercises/images/cervicales/rentrer-menton.webp": {
   "defaut": "/exercises/images/cervicales/rentrer-menton.webp",
