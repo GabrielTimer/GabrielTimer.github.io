@@ -39,6 +39,11 @@
   "f": "/exercises/images/cervicales/etirement-elevateur-f.webp",
   "h": "/exercises/images/cervicales/etirement-elevateur.webp"
  },
+ "/exercises/images/cervicales/etirement-scalenes.webp": {
+  "defaut": "/exercises/images/cervicales/etirement-scalenes.webp",
+  "f": "/exercises/images/cervicales/etirement-scalenes-f.webp",
+  "h": "/exercises/images/cervicales/etirement-scalenes.webp"
+ },
  "/exercises/images/cervicales/flexion-profonde-cou.webp": {
   "defaut": "/exercises/images/cervicales/flexion-profonde-cou.webp",
   "f": "/exercises/images/cervicales/flexion-profonde-cou.webp",
@@ -249,6 +254,11 @@
   "f": "/exercises/images/dos/extension-debout-f.webp",
   "h": "/exercises/images/dos/extension-debout.webp"
  },
+ "/exercises/images/dos/extension-thoracique-rouleau.webp": {
+  "defaut": "/exercises/images/dos/extension-thoracique-rouleau.webp",
+  "f": "/exercises/images/dos/extension-thoracique-rouleau.webp",
+  "h": "/exercises/images/dos/extension-thoracique-rouleau-h.webp"
+ },
  "/exercises/images/dos/extension-ventre.webp": {
   "defaut": "/exercises/images/dos/extension-ventre.webp",
   "f": "/exercises/images/dos/extension-ventre-f.webp",
@@ -268,6 +278,11 @@
   "defaut": "/exercises/images/dos/ouverture-livre.webp",
   "f": "/exercises/images/dos/ouverture-livre.webp",
   "h": "/exercises/images/dos/ouverture-livre-h.webp"
+ },
+ "/exercises/images/dos/posture-enfant.webp": {
+  "defaut": "/exercises/images/dos/posture-enfant.webp",
+  "f": "/exercises/images/dos/posture-enfant-f.webp",
+  "h": "/exercises/images/dos/posture-enfant.webp"
  },
  "/exercises/images/dos/rotation-lombaire.webp": {
   "defaut": "/exercises/images/dos/rotation-lombaire.webp",
