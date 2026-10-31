@@ -1,4 +1,44 @@
 {
+ "/exercises/images/bureau/allonger-colonne.webp": {
+  "defaut": "/exercises/images/bureau/allonger-colonne.webp",
+  "f": "/exercises/images/bureau/allonger-colonne.webp",
+  "h": "/exercises/images/bureau/allonger-colonne-h.webp"
+ },
+ "/exercises/images/bureau/etirement-haut-dos.webp": {
+  "defaut": "/exercises/images/bureau/etirement-haut-dos.webp",
+  "f": "/exercises/images/bureau/etirement-haut-dos.webp",
+  "h": "/exercises/images/bureau/etirement-haut-dos.webp"
+ },
+ "/exercises/images/bureau/etirement-lateral.webp": {
+  "defaut": "/exercises/images/bureau/etirement-lateral.webp",
+  "f": "/exercises/images/bureau/etirement-lateral.webp",
+  "h": "/exercises/images/bureau/etirement-lateral.webp"
+ },
+ "/exercises/images/bureau/etirement-nuque.webp": {
+  "defaut": "/exercises/images/bureau/etirement-nuque.webp",
+  "f": "/exercises/images/bureau/etirement-nuque.webp",
+  "h": "/exercises/images/bureau/etirement-nuque.webp"
+ },
+ "/exercises/images/bureau/etirement-poignets.webp": {
+  "defaut": "/exercises/images/bureau/etirement-poignets.webp",
+  "f": "/exercises/images/bureau/etirement-poignets.webp",
+  "h": "/exercises/images/bureau/etirement-poignets.webp"
+ },
+ "/exercises/images/bureau/relacher-epaules.webp": {
+  "defaut": "/exercises/images/bureau/relacher-epaules.webp",
+  "f": "/exercises/images/bureau/relacher-epaules.webp",
+  "h": "/exercises/images/bureau/relacher-epaules.webp"
+ },
+ "/exercises/images/bureau/soulager-lombaires.webp": {
+  "defaut": "/exercises/images/bureau/soulager-lombaires.webp",
+  "f": "/exercises/images/bureau/soulager-lombaires.webp",
+  "h": "/exercises/images/bureau/soulager-lombaires.webp"
+ },
+ "/exercises/images/bureau/torsion-assise.webp": {
+  "defaut": "/exercises/images/bureau/torsion-assise.webp",
+  "f": "/exercises/images/bureau/torsion-assise.webp",
+  "h": "/exercises/images/bureau/torsion-assise.webp"
+ },
  "/exercises/images/cabinet/course.png": {
   "defaut": "/exercises/images/cabinet/course.png",
   "f": "/exercises/images/cabinet/course-f.webp",
@@ -988,6 +1028,51 @@
   "defaut": "/exercises/images/epaule/diagonalekabat_elastique.png",
   "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
   "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
+ },
+ "/images/etirements_bureau/cover.png": {
+  "defaut": "/exercises/images/bureau/allonger-colonne.webp",
+  "f": "/exercises/images/bureau/allonger-colonne.webp",
+  "h": "/exercises/images/bureau/allonger-colonne-h.webp"
+ },
+ "/images/etirements_bureau/ex1.png": {
+  "defaut": "/exercises/images/bureau/allonger-colonne.webp",
+  "f": "/exercises/images/bureau/allonger-colonne.webp",
+  "h": "/exercises/images/bureau/allonger-colonne-h.webp"
+ },
+ "/images/etirements_bureau/ex2.png": {
+  "defaut": "/exercises/images/bureau/relacher-epaules.webp",
+  "f": "/exercises/images/bureau/relacher-epaules.webp",
+  "h": "/exercises/images/bureau/relacher-epaules.webp"
+ },
+ "/images/etirements_bureau/ex3.png": {
+  "defaut": "/exercises/images/bureau/etirement-lateral.webp",
+  "f": "/exercises/images/bureau/etirement-lateral.webp",
+  "h": "/exercises/images/bureau/etirement-lateral.webp"
+ },
+ "/images/etirements_bureau/ex4.png": {
+  "defaut": "/exercises/images/bureau/etirement-nuque.webp",
+  "f": "/exercises/images/bureau/etirement-nuque.webp",
+  "h": "/exercises/images/bureau/etirement-nuque.webp"
+ },
+ "/images/etirements_bureau/ex5.png": {
+  "defaut": "/exercises/images/bureau/etirement-haut-dos.webp",
+  "f": "/exercises/images/bureau/etirement-haut-dos.webp",
+  "h": "/exercises/images/bureau/etirement-haut-dos.webp"
+ },
+ "/images/etirements_bureau/ex6.png": {
+  "defaut": "/exercises/images/bureau/soulager-lombaires.webp",
+  "f": "/exercises/images/bureau/soulager-lombaires.webp",
+  "h": "/exercises/images/bureau/soulager-lombaires.webp"
+ },
+ "/images/etirements_bureau/ex7.png": {
+  "defaut": "/exercises/images/bureau/torsion-assise.webp",
+  "f": "/exercises/images/bureau/torsion-assise.webp",
+  "h": "/exercises/images/bureau/torsion-assise.webp"
+ },
+ "/images/etirements_bureau/ex8.png": {
+  "defaut": "/exercises/images/bureau/etirement-poignets.webp",
+  "f": "/exercises/images/bureau/etirement-poignets.webp",
+  "h": "/exercises/images/bureau/etirement-poignets.webp"
  },
  "/images/gainage_1/cover.png": {
   "defaut": "/exercises/images/tronc/Gainage_Ventral.png",
