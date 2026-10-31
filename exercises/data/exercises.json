@@ -14309,5 +14309,484 @@
       "Cheville",
       "Jambe"
     ]
+  },
+  {
+    "id": "GENOU_19",
+    "nom": "Squat sur plan incliné",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcer le tendon rotulien et le quadriceps",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Debout sur une planche inclinée, talons plus hauts que les orteils, pieds écartés largeur de hanches",
+      "Bras tendus devant soi pour l'équilibre, dos droit",
+      "Fléchir les genoux lentement en 3 secondes jusqu'à environ 60°, genoux dans l'axe des pieds",
+      "Remonter en 2 secondes"
+    ],
+    "precautions": [
+      "Douleur tolérée jusqu'à 3/10, qui disparaît le lendemain",
+      "Ne pas descendre plus bas que 60° au début"
+    ],
+    "tags": [
+      "Genou",
+      "Quadriceps",
+      "Tendon rotulien"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/genou/squat-plan-incline.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Genou",
+      "Cuisse"
+    ],
+    "conseil_posture": [
+      "Genoux au-dessus des orteils, sans rentrer vers l'intérieur",
+      "Buste droit"
+    ],
+    "erreurs_frequentes": [
+      "Laisser les genoux rentrer vers l'intérieur",
+      "Descendre trop vite",
+      "Se pencher en avant"
+    ],
+    "version_facile": [
+      "Sans planche, amplitude réduite"
+    ],
+    "version_avancee": [
+      "Sur une seule jambe",
+      "Tenir des haltères"
+    ],
+    "respiration": [
+      "Inspirer en descendant",
+      "Expirer en remontant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Tendon rotulien"
+    ],
+    "materiel": [
+      "Planche inclinée ou cale sous les talons"
+    ],
+    "contre_indications": [
+      "Douleur aiguë du genou supérieure à 5/10",
+      "Suites de chirurgie sans accord médical"
+    ],
+    "benefices": [
+      "Renforce le tendon rotulien de façon progressive",
+      "Diminue la douleur à l'avant du genou"
+    ],
+    "audio_cues": [
+      "Descendez lentement",
+      "Genoux dans l'axe",
+      "Remontez"
+    ],
+    "coaching_court": [
+      "Lent"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Tendinopathie rotulienne",
+      "Syndrome fémoro-patellaire",
+      "Reprise sportive du genou"
+    ],
+    "objectifs": [
+      "Renforcer le tendon rotulien et le quadriceps"
+    ],
+    "zones": [
+      "Genou",
+      "Cuisse"
+    ]
+  },
+  {
+    "id": "GENOU_20",
+    "nom": "Extension isométrique du genou assis",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Calmer la douleur du tendon rotulien par la contraction statique",
+    "niveau": 1,
+    "exercise_mode": "isometrique",
+    "duree": "5 × 45 s, repos 60 s",
+    "ex": 45,
+    "reps": 5,
+    "repos": 60,
+    "consignes": [
+      "Assis au bord d'une chaise, un élastique autour de la cheville attaché au pied arrière de la chaise",
+      "Jambe à demi tendue, genou légèrement plié, pied décollé du sol",
+      "Pousser la jambe vers l'avant contre l'élastique sans bouger, comme pour tendre le genou",
+      "Tenir 45 secondes, puis relâcher 1 minute"
+    ],
+    "precautions": [
+      "Contraction forte mais sans augmenter la douleur",
+      "Arrêter si la douleur augmente pendant la tenue"
+    ],
+    "tags": [
+      "Genou",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 45,
+      "cycles": 5
+    },
+    "image": "/exercises/images/genou/extension-isometrique-assis.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Genou",
+      "Cuisse"
+    ],
+    "conseil_posture": [
+      "Dos droit",
+      "Cuisse à plat sur la chaise"
+    ],
+    "erreurs_frequentes": [
+      "Bouger la jambe",
+      "Bloquer la respiration",
+      "Se pencher en arrière"
+    ],
+    "version_facile": [
+      "Tenir 30 secondes"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant"
+    ],
+    "respiration": [
+      "Respirer normalement pendant la tenue"
+    ],
+    "muscles_cibles": [
+      "Quadriceps"
+    ],
+    "materiel": [
+      "Chaise",
+      "Élastique"
+    ],
+    "contre_indications": [
+      "Douleur aiguë qui augmente pendant l'exercice"
+    ],
+    "benefices": [
+      "Diminue la douleur du tendon rotulien",
+      "Entretient la force du quadriceps"
+    ],
+    "audio_cues": [
+      "Poussez",
+      "Ne bougez pas",
+      "Respirez"
+    ],
+    "coaching_court": [
+      "Tenez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Tendinopathie rotulienne",
+      "Gonarthrose",
+      "Syndrome fémoro-patellaire"
+    ],
+    "objectifs": [
+      "Calmer la douleur du tendon rotulien par la contraction statique"
+    ],
+    "zones": [
+      "Genou",
+      "Cuisse"
+    ]
+  },
+  {
+    "id": "EPAULE_19",
+    "nom": "Transfert d'appui à quatre pattes",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Stabiliser l'épaule en appui sur les mains",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 10,
+    "repos": 2,
+    "consignes": [
+      "À quatre pattes, mains sous les épaules, genoux sous les hanches",
+      "Repousser légèrement le sol pour écarter les omoplates",
+      "Déplacer lentement le poids du corps vers l'avant, l'arrière et les côtés",
+      "Garder le dos plat et les coudes tendus sans les verrouiller"
+    ],
+    "precautions": [
+      "Mouvements de petite amplitude",
+      "Arrêter en cas de sensation d'épaule qui se déboîte"
+    ],
+    "tags": [
+      "Epaule",
+      "Dentelé antérieur",
+      "Coiffe des rotateurs"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 10
+    },
+    "image": "/exercises/images/epaule/transfert-appui-quatre-pattes.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Épaule",
+      "Omoplate"
+    ],
+    "conseil_posture": [
+      "Dos plat",
+      "Tête dans l'alignement du dos"
+    ],
+    "erreurs_frequentes": [
+      "Laisser les omoplates se creuser",
+      "Cambrer le dos",
+      "Plier les coudes"
+    ],
+    "version_facile": [
+      "Debout, mains contre un mur"
+    ],
+    "version_avancee": [
+      "Lever un genou du sol",
+      "Sur un coussin instable"
+    ],
+    "respiration": [
+      "Respiration régulière"
+    ],
+    "muscles_cibles": [
+      "Dentelé antérieur",
+      "Coiffe des rotateurs"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Luxation récente non stabilisée",
+      "Douleur aiguë au poignet"
+    ],
+    "benefices": [
+      "Améliore la stabilité de l'épaule en appui",
+      "Prépare au gainage et aux pompes"
+    ],
+    "audio_cues": [
+      "Repoussez le sol",
+      "Dos plat",
+      "Doucement"
+    ],
+    "coaching_court": [
+      "Stable"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Instabilité d'épaule",
+      "Tendinopathie de la coiffe",
+      "Reprise après luxation d'épaule"
+    ],
+    "objectifs": [
+      "Stabiliser l'épaule en appui sur les mains"
+    ],
+    "zones": [
+      "Épaule",
+      "Omoplate"
+    ]
+  },
+  {
+    "id": "HANCHE_12",
+    "nom": "Assis-debout d'une chaise",
+    "type": "timer",
+    "categorie": "Hanche",
+    "objectif": "Renforcer les jambes pour se lever facilement",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux",
+      "Croiser les bras sur la poitrine",
+      "Se pencher en avant puis se lever sans s'aider des mains",
+      "Se rasseoir lentement en contrôlant la descente"
+    ],
+    "precautions": [
+      "Chaise stable contre un mur",
+      "Utiliser les mains si besoin au début"
+    ],
+    "tags": [
+      "Hanche",
+      "Quadriceps",
+      "Grand fessier"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/hanche/assis-debout-chaise.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Hanche",
+      "Cuisse"
+    ],
+    "conseil_posture": [
+      "Genoux dans l'axe des pieds",
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Se laisser tomber sur la chaise",
+      "Genoux qui rentrent vers l'intérieur",
+      "Pieds trop en avant"
+    ],
+    "version_facile": [
+      "Avec l'aide des mains sur les accoudoirs",
+      "Chaise plus haute"
+    ],
+    "version_avancee": [
+      "Chaise plus basse",
+      "Tenir un poids contre la poitrine"
+    ],
+    "respiration": [
+      "Expirer en se levant",
+      "Inspirer en se rasseyant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Grand fessier"
+    ],
+    "materiel": [
+      "Chaise stable"
+    ],
+    "contre_indications": [
+      "Vertiges au lever non évalués"
+    ],
+    "benefices": [
+      "Facilite les levers au quotidien",
+      "Réduit le risque de chute"
+    ],
+    "audio_cues": [
+      "Penchez-vous",
+      "Levez-vous",
+      "Rasseyez-vous lentement"
+    ],
+    "coaching_court": [
+      "Debout, assis"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Arthrose de hanche",
+      "Gonarthrose",
+      "Prévention des chutes",
+      "Prothèse de hanche",
+      "Prothèse de genou"
+    ],
+    "objectifs": [
+      "Renforcer les jambes pour se lever facilement"
+    ],
+    "zones": [
+      "Hanche",
+      "Cuisse"
+    ]
+  },
+  {
+    "id": "CHEVILLE_13",
+    "nom": "Montée sur pointe unipodale sur une marche",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Renforcer le mollet et le tendon d'Achille sur une jambe",
+    "niveau": 3,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Debout sur une jambe, l'avant du pied sur le bord d'une marche, une main sur la rampe",
+      "Monter sur la pointe du pied le plus haut possible en 2 secondes",
+      "Redescendre lentement en 3 secondes, le talon passant un peu sous le niveau de la marche",
+      "L'autre jambe reste pliée en arrière"
+    ],
+    "precautions": [
+      "Douleur tolérée jusqu'à 3/10",
+      "Toujours garder un appui de la main"
+    ],
+    "tags": [
+      "Cheville",
+      "Triceps sural",
+      "Tendon d'Achille"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/cheville/pointe-unipodale-marche.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Mollet",
+      "Cheville"
+    ],
+    "conseil_posture": [
+      "Corps droit",
+      "Genou de la jambe d'appui tendu sans le verrouiller"
+    ],
+    "erreurs_frequentes": [
+      "Monter trop vite",
+      "Pencher le corps en avant",
+      "Rouler la cheville vers l'extérieur"
+    ],
+    "version_facile": [
+      "Sur les deux pieds",
+      "Au sol, sans marche"
+    ],
+    "version_avancee": [
+      "Tenir un haltère",
+      "Genou fléchi pour cibler le soléaire"
+    ],
+    "respiration": [
+      "Expirer en montant",
+      "Inspirer en descendant"
+    ],
+    "muscles_cibles": [
+      "Triceps sural",
+      "Tendon d'Achille"
+    ],
+    "materiel": [
+      "Marche d'escalier",
+      "Appui (rampe ou mur)"
+    ],
+    "contre_indications": [
+      "Rupture récente du tendon d'Achille",
+      "Douleur aiguë au talon"
+    ],
+    "benefices": [
+      "Renforce le tendon d'Achille",
+      "Prépare la reprise de la course"
+    ],
+    "audio_cues": [
+      "Montez haut",
+      "Descendez lentement",
+      "Gardez l'appui"
+    ],
+    "coaching_court": [
+      "Une jambe"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Tendinopathie d'Achille",
+      "Reprise après entorse de cheville",
+      "Reprise de la course"
+    ],
+    "objectifs": [
+      "Renforcer le mollet et le tendon d'Achille sur une jambe"
+    ],
+    "zones": [
+      "Mollet",
+      "Cheville"
+    ]
   }
 ]
