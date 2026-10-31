@@ -12228,5 +12228,190 @@
       "Cuisse arrière",
       "Genou"
     ]
+  },
+  {
+    "id": "CHEVILLE_10",
+    "nom": "Inversion de la cheville à l'élastique",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Renforcer le tibial postérieur",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Assis au sol jambes tendues, l'élastique passé autour de l'avant du pied et tenu sur le côté extérieur",
+      "Tourner la plante du pied vers l'intérieur contre l'élastique",
+      "Tenir 1 seconde",
+      "Revenir lentement"
+    ],
+    "precautions": [
+      "Le mouvement vient de la cheville, pas de la jambe qui tourne",
+      "Arrêter si douleur vive"
+    ],
+    "tags": [
+      "Cheville",
+      "Tibial postérieur",
+      "Tibial antérieur"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/cheville/inversion-elastique.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Cheville",
+      "Pied"
+    ],
+    "conseil_posture": [
+      "Jambe immobile",
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Tourner toute la jambe",
+      "Revenir trop vite"
+    ],
+    "version_facile": [
+      "Élastique souple",
+      "Sans élastique"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant",
+      "Tenir 3 s"
+    ],
+    "respiration": [
+      "Expirer en tournant le pied",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Tibial postérieur",
+      "Tibial antérieur"
+    ],
+    "materiel": [
+      "Élastique"
+    ],
+    "contre_indications": [
+      "Entorse récente non évaluée"
+    ],
+    "benefices": [
+      "Soutient la voûte plantaire",
+      "Stabilise la cheville"
+    ],
+    "audio_cues": [
+      "Plante vers l'intérieur",
+      "Jambe immobile"
+    ],
+    "coaching_court": [
+      "Contrôlé",
+      "Précis"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Pied plat",
+      "Tendinopathie du tibial postérieur",
+      "Après entorse de cheville"
+    ],
+    "objectifs": [
+      "Renforcer le tibial postérieur"
+    ],
+    "zones": [
+      "Cheville",
+      "Pied"
+    ]
+  },
+  {
+    "id": "CHEVILLE_11",
+    "nom": "Ramassage de serviette avec les orteils",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Renforcer les muscles du pied",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Assis sur une chaise, pied à plat sur une serviette posée au sol",
+      "Le talon reste au sol",
+      "Froisser la serviette en la ramenant vers soi avec les orteils",
+      "Étaler à nouveau la serviette et recommencer"
+    ],
+    "precautions": [
+      "Arrêter en cas de crampe",
+      "Pied nu"
+    ],
+    "tags": [
+      "Cheville",
+      "Muscles intrinsèques du pied",
+      "Fléchisseurs des orteils"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/cheville/serviette-orteils.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Pied"
+    ],
+    "conseil_posture": [
+      "Talon fixe au sol",
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Soulever le talon",
+      "Utiliser toute la jambe"
+    ],
+    "version_facile": [
+      "Serviette plus fine"
+    ],
+    "version_avancee": [
+      "Poser un petit poids au bout de la serviette"
+    ],
+    "respiration": [
+      "Respirer normalement"
+    ],
+    "muscles_cibles": [
+      "Muscles intrinsèques du pied",
+      "Fléchisseurs des orteils"
+    ],
+    "materiel": [
+      "Serviette",
+      "Chaise"
+    ],
+    "contre_indications": [],
+    "benefices": [
+      "Renforce la voûte plantaire",
+      "Améliore l'équilibre"
+    ],
+    "audio_cues": [
+      "Griffez la serviette",
+      "Talon au sol"
+    ],
+    "coaching_court": [
+      "Précis",
+      "Pied actif"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Pied plat",
+      "Fasciite plantaire",
+      "Hallux valgus",
+      "Après entorse de cheville"
+    ],
+    "objectifs": [
+      "Renforcer les muscles du pied"
+    ],
+    "zones": [
+      "Pied"
+    ]
   }
 ]
