@@ -234,6 +234,11 @@
   "f": "/exercises/images/dos/chat-vache.webp",
   "h": "/exercises/images/dos/chat-vache-h.webp"
  },
+ "/exercises/images/dos/curl-up-mcgill.webp": {
+  "defaut": "/exercises/images/dos/curl-up-mcgill.webp",
+  "f": "/exercises/images/dos/curl-up-mcgill.webp",
+  "h": "/exercises/images/dos/curl-up-mcgill-h.webp"
+ },
  "/exercises/images/dos/etirement-lateral.webp": {
   "defaut": "/exercises/images/dos/etirement-lateral.webp",
   "f": "/exercises/images/dos/etirement-lateral.webp",
@@ -599,10 +604,20 @@
   "f": "/exercises/images/main/flexion-extension-poignet-f.webp",
   "h": "/exercises/images/main/flexion-extension-poignet.webp"
  },
+ "/exercises/images/main/glissement-nerf-median.webp": {
+  "defaut": "/exercises/images/main/glissement-nerf-median.webp",
+  "f": "/exercises/images/main/glissement-nerf-median-f.webp",
+  "h": "/exercises/images/main/glissement-nerf-median.webp"
+ },
  "/exercises/images/main/opposition-pouce.webp": {
   "defaut": "/exercises/images/main/opposition-pouce.webp",
   "f": "/exercises/images/main/opposition-pouce-f.webp",
   "h": "/exercises/images/main/opposition-pouce.webp"
+ },
+ "/exercises/images/main/pince-pate.webp": {
+  "defaut": "/exercises/images/main/pince-pate.webp",
+  "f": "/exercises/images/main/pince-pate.webp",
+  "h": "/exercises/images/main/pince-pate-h.webp"
  },
  "/exercises/images/main/serrer-balle.webp": {
   "defaut": "/exercises/images/main/serrer-balle.webp",
