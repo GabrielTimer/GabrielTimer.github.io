@@ -145,7 +145,7 @@ export async function createPatient({ nom, telephone = "", email = "", note = ""
   const cle = newAccessCode();
   const now = Date.now();
   const pub = { nom: String(nom).trim(), patientId: slugPatient(nom), createdAt: now, updatedAt: now };
-  if(genre === "h" || genre === "f") pub.genre = genre;
+  if(genre === "h" || genre === "f"){ pub.genre = genre; pub.genreMaj = now; }
   const priv = { telephone, email, note, legacyId: legacyId || null, updatedAt: now };
   await setDoc(doc(db, "patients", cle), clean(pub));
   await setDoc(doc(db, "fiches", cle), clean(priv));

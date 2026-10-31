@@ -49,6 +49,23 @@ export function setContexteIllustrations(data){
   appliquer();
 }
 
+/* Côté patient : le genre renseigné sur sa fiche par le kiné prime (il est aussi mis à jour
+ * à chaque envoi). Retenu sur l'appareil pour la page de séance, qui ne charge pas la fiche. */
+const CLE_PATIENT = "gt_illus_patient";
+export function setContextePatient(cle, genre, data, genreMaj = ""){
+  if(genre === "h" || genre === "f"){
+    const ref = `patient:${cle}:${genre}:${genreMaj || ""}`;
+    try{ localStorage.setItem(CLE_PATIENT, JSON.stringify({ cle, genre, ref })); }catch(e){}
+    setContexteIllustrations({ illus: genre, illusRef: ref });
+  }else setContexteIllustrations(data);
+}
+/** Pour la séance : le genre du patient s'il est connu sur l'appareil, sinon celui du programme. */
+export function setContexteSeance(cle, data){
+  const m = cle ? lire(CLE_PATIENT, null) : null;
+  if(m && m.cle === cle) setContexteIllustrations({ illus: m.genre, illusRef: m.ref || `patient:${cle}:${m.genre}:` });
+  else setContexteIllustrations(data);
+}
+
 /** "h" ou "f" : la version à montrer maintenant (toujours la même pour tous les exercices). */
 export function illustrationsActives(){
   if(contexte){

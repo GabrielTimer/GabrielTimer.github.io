@@ -6,7 +6,7 @@ import {
   plural, ressentiLabel, kineHint, byWeek, fmtNum
 } from "../app.js";
 import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
-import { setContexteIllustrations } from "../variantes.js";
+import { setContextePatient } from "../variantes.js";
 
 const app = $("#app");
 registerSW();
@@ -37,7 +37,7 @@ async function patientView(ctx){
 
   const render = () => {
     const { programmes, seules } = data;
-    setContexteIllustrations((programmes.find(p => !p.termine)?.seances?.[0] || programmes[0]?.seances?.[0] || seules?.[0])?.data);
+    setContextePatient(ctx.cle, data.patient?.genre, (programmes.find(p => !p.termine)?.seances?.[0] || programmes[0]?.seances?.[0] || seules?.[0])?.data, data.patient?.genreMaj);
     app.innerHTML = `
       <div class="page-head"><h1>Mes programmes</h1><p class="lead">Vos séances semaine par semaine. Touchez « Commencer » pour lancer la suivante.</p></div>
       ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme pour l'instant", text:"Votre kiné ne vous a pas encore envoyé d'exercices." })}</div>` : ""}
@@ -400,8 +400,19 @@ async function kineView(param){
           <div class="field"><label for="ep-mail">E-mail</label><input class="input" id="ep-mail" type="email" value="${esc(patient.email || "")}"></div>
         </div>
         <div class="field"><label for="ep-note">Note</label><input class="input" id="ep-note" value="${esc(patient.note || "")}"></div>
+        <div class="field"><span class="label">Exercices montrés par</span>
+          <div class="segmented block" role="group" aria-label="Exercices montrés par">
+            <button type="button" data-genre="f" aria-pressed="${patient.genre === "f"}">une femme</button>
+            <button type="button" data-genre="h" aria-pressed="${patient.genre === "h"}">un homme</button>
+          </div>
+          <span class="hint">S'applique à tous ses exercices, y compris les programmes déjà envoyés. Le patient peut changer s'il le souhaite.</span></div>
       </form>`,
       foot:`<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="ep">Enregistrer</button>`
+    });
+    let genre = patient.genre === "h" || patient.genre === "f" ? patient.genre : null;
+    s.el.querySelectorAll("[data-genre]").forEach(b => b.onclick = () => {
+      genre = b.dataset.genre;
+      s.el.querySelectorAll("[data-genre]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
     });
     s.el.querySelector("#ep").addEventListener("submit", async e => {
       e.preventDefault();
@@ -411,6 +422,7 @@ async function kineView(param){
         email: s.el.querySelector("#ep-mail").value.trim(),
         note: s.el.querySelector("#ep-note").value.trim()
       };
+      if(genre && genre !== patient.genre){ patch.genre = genre; patch.genreMaj = Date.now(); }
       await C.updatePatient(patient.cle, patch);
       Object.assign(patient, patch);
       s.close();

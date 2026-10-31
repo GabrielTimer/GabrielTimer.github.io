@@ -766,8 +766,8 @@ async function send(){
   const data = build();
   const now = Date.now();
   data.illusRef = String(now);
-  if(p.genre !== data.illus){
-    C.updatePatient(p.cle, { genre: data.illus }).then(() => { p.genre = data.illus; }).catch(e => console.warn("Genre :", e));
+  {
+    C.updatePatient(p.cle, { genre: data.illus, genreMaj: now }).then(() => { p.genre = data.illus; p.genreMaj = now; }).catch(e => console.warn("Genre :", e));
   }
   try{
     let count = 1;
