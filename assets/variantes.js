@@ -37,50 +37,58 @@ export function setChoixIllustrations(v){
   try{ localStorage.setItem(CLE_CHOIX, JSON.stringify(v === "h" || v === "f" ? v : "auto")); }catch(e){}
 }
 
-/* Choix porté par le programme envoyé par le kiné ({ illus:"h"|"f", ref }).
- * Le patient peut le changer : son choix est retenu pour ce programme (CLE_PROG). */
-const CLE_PROG = "gt_illus_prog";
-let contexte = null;
+/* Côté patient : le kiné choisit (fiche du patient ou envoi du programme), le patient peut
+ * changer dans ses Réglages. Le choix le plus récent l'emporte : un nouveau choix du kiné
+ * repasse au-dessus de celui du patient. */
+const CLE_CHOIX_PATIENT = "gt_illus_choix_patient";   // { v:"h"|"f", at:ms }
+const CLE_PATIENT = "gt_illus_patient";               // { cle, genre, at } dernier patient vu sur l'appareil
+let contexte = null;                                  // { illus, at }
+let modePatient = false;
+
+function choixPatient(){
+  const c = lire(CLE_CHOIX_PATIENT, null);
+  return c && (c.v === "h" || c.v === "f") ? c : null;
+}
 
 /** À appeler quand une séance / un programme s'affiche (data = séance.data). */
 export function setContexteIllustrations(data){
   const illus = data?.illus;
-  contexte = illus === "h" || illus === "f" ? { illus, ref: String(data.illusRef || data.nom || "") } : null;
+  contexte = illus === "h" || illus === "f" ? { illus, at: Number(data.illusAt || data.illusRef) || 0 } : null;
   appliquer();
 }
 
-/* Côté patient : le genre renseigné sur sa fiche par le kiné prime (il est aussi mis à jour
- * à chaque envoi). Retenu sur l'appareil pour la page de séance, qui ne charge pas la fiche. */
-const CLE_PATIENT = "gt_illus_patient";
-export function setContextePatient(cle, genre, data, genreMaj = ""){
+/** Pages du patient : le genre de sa fiche prime, sinon celui du programme. */
+export function setContextePatient(cle, genre, data, genreMaj = 0){
+  modePatient = true;
   if(genre === "h" || genre === "f"){
-    const ref = `patient:${cle}:${genre}:${genreMaj || ""}`;
-    try{ localStorage.setItem(CLE_PATIENT, JSON.stringify({ cle, genre, ref })); }catch(e){}
-    setContexteIllustrations({ illus: genre, illusRef: ref });
+    const at = Number(genreMaj) || 0;
+    try{ localStorage.setItem(CLE_PATIENT, JSON.stringify({ cle, genre, at })); }catch(e){}
+    setContexteIllustrations({ illus: genre, illusAt: at });
   }else setContexteIllustrations(data);
 }
-/** Pour la séance : le genre du patient s'il est connu sur l'appareil, sinon celui du programme. */
+/** Séance et Réglages : le genre du patient s'il est connu sur l'appareil, sinon celui du programme. */
 export function setContexteSeance(cle, data){
+  if(cle) modePatient = true;
   const m = cle ? lire(CLE_PATIENT, null) : null;
-  if(m && m.cle === cle) setContexteIllustrations({ illus: m.genre, illusRef: m.ref || `patient:${cle}:${m.genre}:` });
+  if(m && m.cle === cle) setContexteIllustrations({ illus: m.genre, illusAt: m.at });
   else setContexteIllustrations(data);
 }
 
 /** "h" ou "f" : la version à montrer maintenant (toujours la même pour tous les exercices). */
 export function illustrationsActives(){
   if(contexte){
-    const choixPatient = (lire(CLE_PROG, {}) || {})[contexte.ref];
-    return choixPatient === "h" || choixPatient === "f" ? choixPatient : contexte.illus;
+    const c = choixPatient();
+    return c && c.at >= contexte.at ? c.v : contexte.illus;
   }
+  if(modePatient){ const c = choixPatient(); if(c) return c.v; }
   const c = choixIllustrations();
   return c === "f" ? "f" : "h";
 }
 
 function choisir(v){
-  if(contexte){
-    const m = lire(CLE_PROG, {}) || {};
-    m[contexte.ref] = v;
-    try{ localStorage.setItem(CLE_PROG, JSON.stringify(m)); }catch(e){}
+  if(v !== "h" && v !== "f") return;
+  if(modePatient || contexte){
+    try{ localStorage.setItem(CLE_CHOIX_PATIENT, JSON.stringify({ v, at: Date.now() })); }catch(e){}
   }
   setChoixIllustrations(v);
   appliquer();
@@ -178,7 +186,7 @@ function surveiller(){
   let attente = null;
   const verifier = () => {
     attente = null;
-    const present = imagesAvecVariantes().length > 0;
+    const present = !modePatient && imagesAvecVariantes().length > 0;
     if(present){ creerBouton(); bouton.hidden = false; }
     else if(bouton) bouton.hidden = true;
   };
@@ -187,7 +195,7 @@ function surveiller(){
   variantesPretes.then(planifier);
   planifier();
   // Choix modifié dans un autre onglet (ou dans les Réglages).
-  window.addEventListener("storage", e => { if(e.key === CLE_CHOIX || e.key === CLE_PROG) appliquer(); });
+  window.addEventListener("storage", e => { if(e.key === CLE_CHOIX || e.key === CLE_CHOIX_PATIENT) appliquer(); });
 }
 
 if(typeof document !== "undefined" && !/\/(impression|program_pdf|coursepdf)\.html$/.test(location.pathname)){
