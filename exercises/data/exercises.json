@@ -11107,5 +11107,281 @@
       "Bassin",
       "Abdomen"
     ]
+  },
+  {
+    "id": "LOMB_10",
+    "nom": "Étirement latéral du tronc debout",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Assouplir le flanc et le carré des lombes",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 20 s, repos 5 s",
+    "ex": 20,
+    "reps": 3,
+    "repos": 5,
+    "consignes": [
+      "Debout, pieds écartés largeur de bassin",
+      "Lever un bras au-dessus de la tête, l'autre main le long de la cuisse",
+      "S'incliner du côté opposé au bras levé, comme pour toucher le mur d'en face",
+      "Tenir puis changer de côté"
+    ],
+    "precautions": [
+      "Ne pas se pencher en avant ou en arrière",
+      "Arrêter si douleur vive"
+    ],
+    "tags": [
+      "Dos",
+      "Carré des lombes",
+      "Obliques"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 20,
+      "cycles": 3
+    },
+    "image": "/exercises/images/dos/etirement-lateral.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Flancs",
+      "Lombaires"
+    ],
+    "conseil_posture": [
+      "Bassin fixe, poids sur les deux pieds",
+      "Allonger le bras vers le haut avant de s'incliner"
+    ],
+    "erreurs_frequentes": [
+      "Tourner le buste",
+      "Plier les genoux",
+      "S'écraser au lieu de s'allonger"
+    ],
+    "version_facile": [
+      "Main sur la tête au lieu du bras tendu"
+    ],
+    "version_avancee": [
+      "Croiser la jambe du côté étiré derrière l'autre"
+    ],
+    "respiration": [
+      "Respirer dans le flanc étiré"
+    ],
+    "muscles_cibles": [
+      "Carré des lombes",
+      "Obliques",
+      "Grand dorsal"
+    ],
+    "materiel": [],
+    "contre_indications": [],
+    "benefices": [
+      "Assouplit le côté du tronc",
+      "Libère le bas du dos"
+    ],
+    "audio_cues": [
+      "Allongez-vous",
+      "Inclinez"
+    ],
+    "coaching_court": [
+      "Long",
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Raideur du tronc"
+    ],
+    "objectifs": [
+      "Assouplir le flanc et le carré des lombes"
+    ],
+    "zones": [
+      "Flancs",
+      "Lombaires"
+    ]
+  },
+  {
+    "id": "LOMB_11",
+    "nom": "Rotation thoracique à quatre pattes",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Mobiliser le haut du dos en rotation",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "8 × 3 s, repos 2 s",
+    "ex": 3,
+    "reps": 8,
+    "repos": 2,
+    "consignes": [
+      "À quatre pattes, mains sous les épaules, genoux sous les hanches",
+      "Poser une main derrière la tête",
+      "Tourner le buste pour amener le coude vers le plafond en suivant du regard",
+      "Revenir en amenant le coude vers le bras d'appui, puis changer de côté"
+    ],
+    "precautions": [
+      "Le bassin ne bouge pas",
+      "Mouvement lent et contrôlé"
+    ],
+    "tags": [
+      "Dos",
+      "Muscles rotateurs du tronc",
+      "Rhomboïdes"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 8
+    },
+    "image": "/exercises/images/dos/rotation-quadrupedie.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Dos (thoracique)"
+    ],
+    "conseil_posture": [
+      "Dos plat au départ",
+      "Bras d'appui tendu, épaule stable"
+    ],
+    "erreurs_frequentes": [
+      "Tourner le bassin en même temps",
+      "Aller trop vite",
+      "Creuser le bas du dos"
+    ],
+    "version_facile": [
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Tenir 3 s en haut",
+      "Assis sur les talons pour bloquer les lombaires"
+    ],
+    "respiration": [
+      "Expirer en ouvrant vers le plafond",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Muscles rotateurs du tronc",
+      "Rhomboïdes"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Douleur de poignet empêchant l'appui"
+    ],
+    "benefices": [
+      "Assouplit le haut du dos",
+      "Améliore la posture"
+    ],
+    "audio_cues": [
+      "Ouvrez",
+      "Suivez le coude du regard"
+    ],
+    "coaching_court": [
+      "Bassin fixe",
+      "Lent"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Dorsalgie",
+      "Raideur thoracique",
+      "Douleur d'épaule d'origine posturale"
+    ],
+    "objectifs": [
+      "Mobiliser le haut du dos en rotation"
+    ],
+    "zones": [
+      "Dos (thoracique)"
+    ]
+  },
+  {
+    "id": "LOMB_12",
+    "nom": "Ouverture thoracique couché sur le côté",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Gagner en rotation du haut du dos",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "8 × 3 s, repos 2 s",
+    "ex": 3,
+    "reps": 8,
+    "repos": 2,
+    "consignes": [
+      "Allongé sur le côté, tête sur un coussin, hanches et genoux pliés à 90°, bras tendus devant soi l'un sur l'autre",
+      "Ouvrir le bras du dessus vers l'arrière en suivant la main du regard",
+      "Laisser le buste tourner, les genoux restent collés",
+      "Revenir lentement fermer le livre"
+    ],
+    "precautions": [
+      "Les genoux ne se décollent pas",
+      "Rester sans douleur à l'épaule"
+    ],
+    "tags": [
+      "Dos",
+      "Pectoraux",
+      "Muscles rotateurs du tronc"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 8
+    },
+    "image": "/exercises/images/dos/ouverture-livre.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Dos (thoracique)",
+      "Poitrine"
+    ],
+    "conseil_posture": [
+      "Tête posée sur le coussin",
+      "Bras ouvert sans forcer vers le sol"
+    ],
+    "erreurs_frequentes": [
+      "Décoller les genoux",
+      "Forcer l'épaule vers le sol"
+    ],
+    "version_facile": [
+      "Ouvrir à mi-amplitude"
+    ],
+    "version_avancee": [
+      "Tenir 5 s ouvert en respirant"
+    ],
+    "respiration": [
+      "Expirer en ouvrant",
+      "Inspirer en revenant"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Muscles rotateurs du tronc"
+    ],
+    "materiel": [
+      "Tapis",
+      "Coussin"
+    ],
+    "contre_indications": [
+      "Épaule instable ou luxation récente"
+    ],
+    "benefices": [
+      "Assouplit le haut du dos et la poitrine",
+      "Détend les épaules"
+    ],
+    "audio_cues": [
+      "Ouvrez le livre",
+      "Genoux collés"
+    ],
+    "coaching_court": [
+      "Lent",
+      "Ouvert"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Dorsalgie",
+      "Raideur thoracique",
+      "Cervicalgie"
+    ],
+    "objectifs": [
+      "Gagner en rotation du haut du dos"
+    ],
+    "zones": [
+      "Dos (thoracique)",
+      "Poitrine"
+    ]
   }
 ]
