@@ -12037,5 +12037,196 @@
     "zones": [
       "Cuisse avant"
     ]
+  },
+  {
+    "id": "GENOU_15",
+    "nom": "Montée de marche latérale",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcer le quadriceps et le moyen fessier",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Debout à côté d'une marche, de profil",
+      "Poser le pied proche sur la marche",
+      "Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+      "Redescendre lentement en contrôlant le genou"
+    ],
+    "precautions": [
+      "Le genou reste au-dessus du pied (ne rentre pas vers l'intérieur)",
+      "Marche basse au début"
+    ],
+    "tags": [
+      "Genou",
+      "Quadriceps",
+      "Moyen fessier"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/genou/step-up-lateral.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Genou",
+      "Hanche"
+    ],
+    "conseil_posture": [
+      "Buste droit",
+      "Bassin horizontal"
+    ],
+    "erreurs_frequentes": [
+      "Pousser avec le pied resté au sol",
+      "Genou qui part vers l'intérieur",
+      "Redescendre en se laissant tomber"
+    ],
+    "version_facile": [
+      "Marche plus basse",
+      "Tenir une rampe"
+    ],
+    "version_avancee": [
+      "Marche plus haute",
+      "Tenir des haltères",
+      "Descente en 3 secondes"
+    ],
+    "respiration": [
+      "Expirer en montant",
+      "Inspirer en redescendant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Moyen fessier",
+      "Grand fessier"
+    ],
+    "materiel": [
+      "Marche ou step"
+    ],
+    "contre_indications": [
+      "Douleur aiguë du genou"
+    ],
+    "benefices": [
+      "Facilite la montée des escaliers",
+      "Stabilise le genou"
+    ],
+    "audio_cues": [
+      "Poussez sur le pied du haut",
+      "Genou aligné"
+    ],
+    "coaching_court": [
+      "Contrôlé",
+      "Aligné"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Syndrome fémoro-patellaire",
+      "Après ligamentoplastie (phase de renforcement)",
+      "Arthrose du genou"
+    ],
+    "objectifs": [
+      "Renforcer le quadriceps et le moyen fessier"
+    ],
+    "zones": [
+      "Genou",
+      "Hanche"
+    ]
+  },
+  {
+    "id": "GENOU_16",
+    "nom": "Flexion de genou debout",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcer les ischio-jambiers et gagner en flexion",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Debout face à une chaise, mains sur le dossier",
+      "Plier un genou pour amener le talon vers la fesse",
+      "Garder les deux genoux côte à côte",
+      "Redescendre lentement le pied au sol"
+    ],
+    "precautions": [
+      "Ne pas cambrer le dos",
+      "Amplitude selon tolérance"
+    ],
+    "tags": [
+      "Genou",
+      "Ischio-jambiers",
+      "Mollet"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/genou/flexion-debout.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cuisse arrière",
+      "Genou"
+    ],
+    "conseil_posture": [
+      "Bassin fixe",
+      "Jambe d'appui légèrement fléchie"
+    ],
+    "erreurs_frequentes": [
+      "Avancer le genou",
+      "Lancer le pied",
+      "Cambrer"
+    ],
+    "version_facile": [
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Lest à la cheville",
+      "Élastique fixé à la cheville"
+    ],
+    "respiration": [
+      "Expirer en pliant",
+      "Inspirer en redescendant"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers",
+      "Mollet"
+    ],
+    "materiel": [
+      "Appui (chaise ou mur)"
+    ],
+    "contre_indications": [],
+    "benefices": [
+      "Aide à retrouver la flexion du genou",
+      "Renforce l'arrière de la cuisse"
+    ],
+    "audio_cues": [
+      "Talon vers la fesse",
+      "Genoux côte à côte"
+    ],
+    "coaching_court": [
+      "Lent",
+      "Contrôlé"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Après ligamentoplastie",
+      "Prothèse de genou",
+      "Raideur du genou"
+    ],
+    "objectifs": [
+      "Renforcer les ischio-jambiers et gagner en flexion"
+    ],
+    "zones": [
+      "Cuisse arrière",
+      "Genou"
+    ]
   }
 ]
