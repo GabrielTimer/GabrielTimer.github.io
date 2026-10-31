@@ -179,6 +179,11 @@
   "f": "/exercises/images/coude/COUDE_05-f.webp",
   "h": "/exercises/images/coude/COUDE_05.webp"
  },
+ "/exercises/images/dos/bascule-bassin.webp": {
+  "defaut": "/exercises/images/dos/bascule-bassin.webp",
+  "f": "/exercises/images/dos/bascule-bassin.webp",
+  "h": "/exercises/images/dos/bascule-bassin-h.webp"
+ },
  "/exercises/images/dos/charniere-baton.webp": {
   "defaut": "/exercises/images/dos/charniere-baton.webp",
   "f": "/exercises/images/dos/charniere-baton-f.webp",
@@ -188,6 +193,11 @@
   "defaut": "/exercises/images/dos/chat-vache.webp",
   "f": "/exercises/images/dos/chat-vache.webp",
   "h": "/exercises/images/dos/chat-vache-h.webp"
+ },
+ "/exercises/images/dos/etirement-lateral.webp": {
+  "defaut": "/exercises/images/dos/etirement-lateral.webp",
+  "f": "/exercises/images/dos/etirement-lateral.webp",
+  "h": "/exercises/images/dos/etirement-lateral-h.webp"
  },
  "/exercises/images/dos/extension-debout.webp": {
   "defaut": "/exercises/images/dos/extension-debout.webp",
@@ -209,10 +219,20 @@
   "f": "/exercises/images/dos/glissement-sciatique-f.webp",
   "h": "/exercises/images/dos/glissement-sciatique.webp"
  },
+ "/exercises/images/dos/ouverture-livre.webp": {
+  "defaut": "/exercises/images/dos/ouverture-livre.webp",
+  "f": "/exercises/images/dos/ouverture-livre.webp",
+  "h": "/exercises/images/dos/ouverture-livre-h.webp"
+ },
  "/exercises/images/dos/rotation-lombaire.webp": {
   "defaut": "/exercises/images/dos/rotation-lombaire.webp",
   "f": "/exercises/images/dos/rotation-lombaire.webp",
   "h": "/exercises/images/dos/rotation-lombaire-h.webp"
+ },
+ "/exercises/images/dos/rotation-quadrupedie.webp": {
+  "defaut": "/exercises/images/dos/rotation-quadrupedie.webp",
+  "f": "/exercises/images/dos/rotation-quadrupedie-f.webp",
+  "h": "/exercises/images/dos/rotation-quadrupedie.webp"
  },
  "/exercises/images/epaule/Pendulaire.png": {
   "defaut": "/exercises/images/epaule/Pendulaire.png",
