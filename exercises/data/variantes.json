@@ -534,6 +534,11 @@
   "f": "/exercises/images/hanche/etirement-psoas-f.webp",
   "h": "/exercises/images/hanche/etirement-psoas.webp"
  },
+ "/exercises/images/hanche/extension-debout-elastique.webp": {
+  "defaut": "/exercises/images/hanche/extension-debout-elastique.webp",
+  "f": "/exercises/images/hanche/extension-debout-elastique-f.webp",
+  "h": "/exercises/images/hanche/extension-debout-elastique.webp"
+ },
  "/exercises/images/hanche/fente-avant.webp": {
   "defaut": "/exercises/images/hanche/fente-avant.webp",
   "f": "/exercises/images/hanche/fente-avant.webp",
