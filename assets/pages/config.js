@@ -8,6 +8,7 @@ import {
   emptyHTML, byWeek, settings
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
+import { illustrationsActives, choisirIllustrations } from "../variantes.js";
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
 import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 
@@ -127,8 +128,19 @@ function build(){
     date: new Date().toISOString(),
     categorie: "kine",
     objectifs: [], conseils: [], precautions: [], contreIndications: [],
-    exercices: exos
+    exercices: exos,
+    illus: S.illus === "h" || S.illus === "f" ? S.illus : illustrationsActives()
   };
+}
+
+/* Genre des illustrations : celui du patient choisi, modifiable avant l'envoi. */
+function genreDuPatient(){
+  const p = patients.find(x => x.cle === S.patient);
+  return p && (p.genre === "h" || p.genre === "f") ? p.genre : null;
+}
+function majIllus(){
+  const v = S.illus === "h" || S.illus === "f" ? S.illus : illustrationsActives();
+  $$("[data-illus-envoi]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.illusEnvoi === v)));
 }
 
 /* ---------- Rendu ---------- */
@@ -598,6 +610,14 @@ function renderSend(full = true){
         </div>
       </div>
     </div>
+    <div class="group">
+      <div class="field"><span class="label">Exercices montrés par</span>
+        <div class="segmented block" role="group" aria-label="Exercices montrés par">
+          <button type="button" data-illus-envoi="f">une femme</button>
+          <button type="button" data-illus-envoi="h">un homme</button>
+        </div>
+        <span class="hint">Pour tous les exercices de l'envoi. Le patient pourra changer d'un appui.</span></div>
+    </div>
     <div class="group" id="plan-group">
       <div class="segmented block" role="group" aria-label="Type d'envoi">
         <button type="button" data-type="unique" aria-pressed="${S.type === "unique"}">Séance unique</button>
@@ -626,11 +646,22 @@ function renderSend(full = true){
       <button class="btn ghost" type="button" id="clear">${icon("trash")}Tout effacer</button>
     </div>`;
 
-  $("#patient").onchange = e => { S.patient = e.target.value || null; persist(); updatePrimary(); };
+  $("#patient").onchange = e => {
+    S.patient = e.target.value || null;
+    const g = genreDuPatient();
+    if(g){ S.illus = g; choisirIllustrations(g); }
+    persist(); updatePrimary(); majIllus();
+  };
+  if(!S.illus){ const g = genreDuPatient(); if(g){ S.illus = g; choisirIllustrations(g); } }
+  $$("[data-illus-envoi]").forEach(b => b.onclick = () => {
+    S.illus = b.dataset.illusEnvoi; persist();
+    choisirIllustrations(S.illus); majIllus();
+  });
+  majIllus();
   $("#new-patient").onclick = async () => {
     const { newPatientSheet } = await import("../kine-ui.js");
     const np = await newPatientSheet();
-    if(np){ patients.push(np); patients.sort((a, b) => a.nom.localeCompare(b.nom, "fr")); S.patient = np.cle; persist(); box.dataset.ready = ""; renderSend(); }
+    if(np){ patients.push(np); patients.sort((a, b) => a.nom.localeCompare(b.nom, "fr")); S.patient = np.cle; if(np.genre){ S.illus = np.genre; choisirIllustrations(np.genre); } persist(); box.dataset.ready = ""; renderSend(); }
   };
   $$("[data-type]").forEach(b => b.onclick = () => {
     S.type = b.dataset.type; persist();
@@ -727,6 +758,10 @@ async function send(){
   btn.disabled = true; btn.innerHTML = `<span class="spinner" style="border-top-color:currentColor"></span>Envoi…`;
   const data = build();
   const now = Date.now();
+  data.illusRef = String(now);
+  if(p.genre !== data.illus){
+    C.updatePatient(p.cle, { genre: data.illus }).then(() => { p.genre = data.illus; }).catch(e => console.warn("Genre :", e));
+  }
   try{
     let count = 1;
     if(S.type === "unique"){

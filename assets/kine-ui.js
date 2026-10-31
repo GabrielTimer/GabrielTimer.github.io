@@ -16,6 +16,12 @@ export function newPatientSheet(){
       body: `
         <form class="stack" id="np-form" style="--gap:16px" novalidate>
           <div class="field"><label for="np-nom">Prénom et nom</label><input class="input" id="np-nom" autocomplete="off" required placeholder="Ex. Marie Dupont"></div>
+          <div class="field"><span class="label">Illustrations des exercices</span>
+            <div class="segmented block" role="group" aria-label="Genre" id="np-genre">
+              <button type="button" data-genre="f" aria-pressed="false">Femme</button>
+              <button type="button" data-genre="h" aria-pressed="true">Homme</button>
+            </div>
+            <span class="hint">Les exercices envoyés à ce patient seront tous montrés par une femme ou par un homme. Il pourra changer s'il le souhaite.</span></div>
           <div class="grid-2">
             <div class="field"><label for="np-tel">Téléphone <span class="faint">(facultatif)</span></label><input class="input" id="np-tel" type="tel" inputmode="tel" autocomplete="off"></div>
             <div class="field"><label for="np-mail">E-mail <span class="faint">(facultatif)</span></label><input class="input" id="np-mail" type="email" inputmode="email" autocomplete="off"></div>
@@ -27,6 +33,11 @@ export function newPatientSheet(){
       onClose: () => { if(!done) resolve(null); }
     });
     const nom = s.el.querySelector("#np-nom");
+    let genre = "h";
+    s.el.querySelectorAll("[data-genre]").forEach(b => b.onclick = () => {
+      genre = b.dataset.genre;
+      s.el.querySelectorAll("[data-genre]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    });
     const dup = s.el.querySelector("#np-dup");
     let existing = [];
     listPatients().then(list => { existing = list; }).catch(() => {});
@@ -46,7 +57,8 @@ export function newPatientSheet(){
           nom: nom.value.trim(),
           telephone: s.el.querySelector("#np-tel").value.trim(),
           email: s.el.querySelector("#np-mail").value.trim(),
-          note: s.el.querySelector("#np-note").value.trim()
+          note: s.el.querySelector("#np-note").value.trim(),
+          genre
         });
         done = true;
         toast(`${p.nom} est ajouté.`, { type:"ok" });

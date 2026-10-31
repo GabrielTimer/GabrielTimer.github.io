@@ -6,6 +6,7 @@ import {
   plural, ressentiLabel, kineHint, byWeek, fmtNum
 } from "../app.js";
 import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
+import { setContexteIllustrations } from "../variantes.js";
 
 const app = $("#app");
 registerSW();
@@ -36,6 +37,7 @@ async function patientView(ctx){
 
   const render = () => {
     const { programmes, seules } = data;
+    setContexteIllustrations((programmes.find(p => !p.termine)?.seances?.[0] || programmes[0]?.seances?.[0] || seules?.[0])?.data);
     app.innerHTML = `
       <div class="page-head"><h1>Mes programmes</h1><p class="lead">Vos séances semaine par semaine. Touchez « Commencer » pour lancer la suivante.</p></div>
       ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme pour l'instant", text:"Votre kiné ne vous a pas encore envoyé d'exercices." })}</div>` : ""}

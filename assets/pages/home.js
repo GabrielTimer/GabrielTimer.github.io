@@ -8,6 +8,7 @@ import {
 } from "../app.js";
 import { currentAnnonce, loadSettings } from "../settings.js";
 import { exerciseImage } from "../library.js";
+import { setContexteIllustrations } from "../variantes.js";
 
 const app = $("#app");
 registerSW();
@@ -138,6 +139,7 @@ async function renderPatient(ctx){
   const { patient, seances, programmes, seules } = data;
   const P = await import("../patient.js");
   const next = P.nextSession(programmes);
+  setContexteIllustrations((next?.seance || programmes.find(p => !p.termine)?.seances?.[0] || seules?.[0])?.data);
   const actif = programmes.find(p => !p.termine) || null;
   const today = startOfDay(new Date());
   const doneToday = seances.filter(s => s.terminee && s.dateValidation && startOfDay(s.dateValidation).getTime() === today.getTime());

@@ -37,14 +37,46 @@ export function setChoixIllustrations(v){
   try{ localStorage.setItem(CLE_CHOIX, JSON.stringify(v === "h" || v === "f" ? v : "auto")); }catch(e){}
 }
 
+/* Choix porté par le programme envoyé par le kiné ({ illus:"h"|"f", ref }).
+ * Le patient peut le changer : son choix est retenu pour ce programme (CLE_PROG). */
+const CLE_PROG = "gt_illus_prog";
+let contexte = null;
+
+/** À appeler quand une séance / un programme s'affiche (data = séance.data). */
+export function setContexteIllustrations(data){
+  const illus = data?.illus;
+  contexte = illus === "h" || illus === "f" ? { illus, ref: String(data.illusRef || data.nom || "") } : null;
+  appliquer();
+}
+
+/** "h" ou "f" : la version à montrer maintenant (toujours la même pour tous les exercices). */
+export function illustrationsActives(){
+  if(contexte){
+    const choixPatient = (lire(CLE_PROG, {}) || {})[contexte.ref];
+    return choixPatient === "h" || choixPatient === "f" ? choixPatient : contexte.illus;
+  }
+  const c = choixIllustrations();
+  return c === "f" ? "f" : "h";
+}
+
+function choisir(v){
+  if(contexte){
+    const m = lire(CLE_PROG, {}) || {};
+    m[contexte.ref] = v;
+    try{ localStorage.setItem(CLE_PROG, JSON.stringify(m)); }catch(e){}
+  }
+  setChoixIllustrations(v);
+  appliquer();
+}
+export { choisir as choisirIllustrations };
+
 /** Renvoie l'illustration à afficher pour une image d'exercice. */
 export function variante(src){
   if(!src || typeof src !== "string") return src;
   const cle = src.replace(/^https?:\/\/[^/]+/, "");
   const m = carte[cle];
   if(!m) return src;
-  const c = choixIllustrations();
-  return (c !== "auto" && m[c]) || m.defaut || src;
+  return m[illustrationsActives()] || m.defaut || src;
 }
 
 /* ---------- Bouton « Femme / Homme » affiché dès qu'une illustration a deux versions ----------
@@ -68,14 +100,16 @@ function cheminImg(img){
 }
 
 function imagesAvecVariantes(){
+  if(typeof document === "undefined") return [];
   return [...document.querySelectorAll("img")].filter(img => entreePour(cheminImg(img)));
 }
 
 function appliquer(){
-  const c = choixIllustrations();
+  if(typeof document === "undefined") return;
+  const c = illustrationsActives();
   for(const img of imagesAvecVariantes()){
     const m = entreePour(cheminImg(img));
-    const cible = (c !== "auto" && m[c]) || m.defaut;
+    const cible = m[c] || m.defaut;
     if(cible && cheminImg(img) !== cible) img.src = cible;
   }
   majBouton();
@@ -84,7 +118,7 @@ function appliquer(){
 let bouton = null;
 function majBouton(){
   if(!bouton) return;
-  const c = choixIllustrations();
+  const c = illustrationsActives();
   bouton.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.illus === c)));
 }
 
@@ -111,8 +145,7 @@ function creerBouton(){
   bouton.addEventListener("click", e => {
     const b = e.target.closest("button[data-illus]");
     if(!b) return;
-    setChoixIllustrations(b.dataset.illus);
-    appliquer();
+    choisir(b.dataset.illus);
   });
   document.body.appendChild(bouton);
   majBouton();
@@ -131,7 +164,7 @@ function surveiller(){
   variantesPretes.then(planifier);
   planifier();
   // Choix modifié dans un autre onglet (ou dans les Réglages).
-  window.addEventListener("storage", e => { if(e.key === CLE_CHOIX) appliquer(); });
+  window.addEventListener("storage", e => { if(e.key === CLE_CHOIX || e.key === CLE_PROG) appliquer(); });
 }
 
 if(typeof document !== "undefined" && !/\/(impression|program_pdf|coursepdf)\.html$/.test(location.pathname)){

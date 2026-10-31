@@ -7,6 +7,7 @@ import {
   openSheet, confirmDialog, exoImageHTML, safeRich, vibrate, plural
 } from "../app.js";
 import { exerciseImage, exerciseSteps, videoEmbed } from "../library.js";
+import { setContexteIllustrations } from "../variantes.js";
 import { doseOf, doseParole } from "../evolution.js";
 
 const PREP = 5;                       // secondes pour se mettre en position
@@ -34,6 +35,8 @@ if(!prog || !Array.isArray(prog.exercices) || !prog.exercices.length){
   location.replace("/index.html");
   throw new Error("Aucune séance");
 }
+
+setContexteIllustrations(prog);
 
 const exos = prog.exercices.map(e => ({
   ...e,
