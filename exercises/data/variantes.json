@@ -209,6 +209,16 @@
   "f": "/exercises/images/coude/deviation-radiale-marteau-f.webp",
   "h": "/exercises/images/coude/deviation-radiale-marteau.webp"
  },
+ "/exercises/images/coude/extension-coude-elastique.webp": {
+  "defaut": "/exercises/images/coude/extension-coude-elastique.webp",
+  "f": "/exercises/images/coude/extension-coude-elastique.webp",
+  "h": "/exercises/images/coude/extension-coude-elastique-h.webp"
+ },
+ "/exercises/images/coude/flexion-coude-haltere.webp": {
+  "defaut": "/exercises/images/coude/flexion-coude-haltere.webp",
+  "f": "/exercises/images/coude/flexion-coude-haltere-f.webp",
+  "h": "/exercises/images/coude/flexion-coude-haltere.webp"
+ },
  "/exercises/images/dos/bascule-bassin.webp": {
   "defaut": "/exercises/images/dos/bascule-bassin.webp",
   "f": "/exercises/images/dos/bascule-bassin.webp",
@@ -339,10 +349,20 @@
   "f": "/exercises/images/epaule/pompe-scapulaire-mur-f.webp",
   "h": "/exercises/images/epaule/pompe-scapulaire-mur.webp"
  },
+ "/exercises/images/epaule/rotation-externe-90.webp": {
+  "defaut": "/exercises/images/epaule/rotation-externe-90.webp",
+  "f": "/exercises/images/epaule/rotation-externe-90.webp",
+  "h": "/exercises/images/epaule/rotation-externe-90-h.webp"
+ },
  "/exercises/images/epaule/rotation-externe-couche.webp": {
   "defaut": "/exercises/images/epaule/rotation-externe-couche.webp",
   "f": "/exercises/images/epaule/rotation-externe-couche.webp",
   "h": "/exercises/images/epaule/rotation-externe-couche-h.webp"
+ },
+ "/exercises/images/epaule/rowing-haltere.webp": {
+  "defaut": "/exercises/images/epaule/rowing-haltere.webp",
+  "f": "/exercises/images/epaule/rowing-haltere-f.webp",
+  "h": "/exercises/images/epaule/rowing-haltere.webp"
  },
  "/exercises/images/epaule/serviette-dos.webp": {
   "defaut": "/exercises/images/epaule/serviette-dos.webp",
@@ -573,6 +593,11 @@
   "defaut": "/exercises/images/main/ecartement-doigts.webp",
   "f": "/exercises/images/main/ecartement-doigts.webp",
   "h": "/exercises/images/main/ecartement-doigts-h.webp"
+ },
+ "/exercises/images/main/flexion-extension-poignet.webp": {
+  "defaut": "/exercises/images/main/flexion-extension-poignet.webp",
+  "f": "/exercises/images/main/flexion-extension-poignet-f.webp",
+  "h": "/exercises/images/main/flexion-extension-poignet.webp"
  },
  "/exercises/images/main/opposition-pouce.webp": {
   "defaut": "/exercises/images/main/opposition-pouce.webp",
