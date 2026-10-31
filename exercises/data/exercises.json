@@ -11755,5 +11755,287 @@
     "zones": [
       "Épaule"
     ]
+  },
+  {
+    "id": "EPAULE_15",
+    "nom": "Écarté arrière à l'élastique",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Renforcer l'arrière des épaules et le haut du dos",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Debout, bras tendus devant soi à hauteur des épaules, un élastique tenu à deux mains",
+      "Écarter les bras sur les côtés en serrant les omoplates",
+      "Arrêter quand l'élastique touche la poitrine",
+      "Revenir lentement en contrôlant l'élastique"
+    ],
+    "precautions": [
+      "Épaules basses pendant tout le mouvement",
+      "Choisir un élastique qui permet 12 répétitions propres"
+    ],
+    "tags": [
+      "Epaule",
+      "Deltoïde postérieur",
+      "Rhomboïdes"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/epaule/ecarte-arriere-elastique.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Épaules",
+      "Haut du dos"
+    ],
+    "conseil_posture": [
+      "Se grandir, menton rentré",
+      "Coudes presque tendus"
+    ],
+    "erreurs_frequentes": [
+      "Hausser les épaules",
+      "Cambrer le bas du dos",
+      "Laisser l'élastique revenir vite"
+    ],
+    "version_facile": [
+      "Élastique plus souple",
+      "Mains plus écartées au départ"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant",
+      "Tenir 2 s bras écartés"
+    ],
+    "respiration": [
+      "Expirer en écartant",
+      "Inspirer en revenant"
+    ],
+    "muscles_cibles": [
+      "Deltoïde postérieur",
+      "Rhomboïdes",
+      "Trapèze moyen"
+    ],
+    "materiel": [
+      "Élastique"
+    ],
+    "contre_indications": [
+      "Épaule douloureuse au repos"
+    ],
+    "benefices": [
+      "Améliore la posture",
+      "Protège l'épaule"
+    ],
+    "audio_cues": [
+      "Écartez",
+      "Serrez les omoplates",
+      "Contrôlez"
+    ],
+    "coaching_court": [
+      "Ouvert",
+      "Contrôlé"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Posture enroulée",
+      "Conflit sous-acromial",
+      "Cervicalgie",
+      "Dorsalgie"
+    ],
+    "objectifs": [
+      "Renforcer l'arrière des épaules et le haut du dos"
+    ],
+    "zones": [
+      "Épaules",
+      "Haut du dos"
+    ]
+  },
+  {
+    "id": "EPAULE_16",
+    "nom": "Étirement des pectoraux dans l'encadrement de porte",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Ouvrir l'avant des épaules",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Debout dans l'encadrement d'une porte, bras tendu à hauteur d'épaule, paume posée à plat sur le montant (variante : avant-bras posé, coude plié à 90°)",
+      "Faire un petit pas en avant avec la jambe du même côté",
+      "Tourner légèrement le buste à l'opposé jusqu'à sentir l'étirement dans la poitrine",
+      "Tenir puis changer de côté"
+    ],
+    "precautions": [
+      "Pas de douleur à l'avant de l'épaule",
+      "Arrêter si fourmillements dans la main"
+    ],
+    "tags": [
+      "Epaule",
+      "Grand pectoral",
+      "Petit pectoral"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/epaule/etirement-pectoraux-porte.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Poitrine",
+      "Épaule"
+    ],
+    "conseil_posture": [
+      "Ventre légèrement rentré, ne pas cambrer",
+      "Épaule basse"
+    ],
+    "erreurs_frequentes": [
+      "Coude trop haut",
+      "Cambrer le dos",
+      "Pousser la tête en avant"
+    ],
+    "version_facile": [
+      "Coude plus bas"
+    ],
+    "version_avancee": [
+      "Tenir 45 secondes"
+    ],
+    "respiration": [
+      "Respirer lentement"
+    ],
+    "muscles_cibles": [
+      "Grand pectoral",
+      "Petit pectoral"
+    ],
+    "materiel": [
+      "Encadrement de porte"
+    ],
+    "contre_indications": [
+      "Épaule instable ou luxation récente"
+    ],
+    "benefices": [
+      "Ouvre la poitrine",
+      "Améliore la posture"
+    ],
+    "audio_cues": [
+      "Avancez doucement",
+      "Épaule basse"
+    ],
+    "coaching_court": [
+      "Ouvert",
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Posture enroulée",
+      "Cervicalgie",
+      "Conflit sous-acromial"
+    ],
+    "objectifs": [
+      "Ouvrir l'avant des épaules"
+    ],
+    "zones": [
+      "Poitrine",
+      "Épaule"
+    ]
+  },
+  {
+    "id": "GENOU_14",
+    "nom": "Étirement du quadriceps debout",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Assouplir l'avant de la cuisse",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Debout, une main en appui sur un mur ou une chaise",
+      "Plier un genou et attraper la cheville avec la main du même côté",
+      "Rapprocher le talon de la fesse, genoux côte à côte",
+      "Rentrer légèrement le bassin pour sentir l'étirement à l'avant de la cuisse"
+    ],
+    "precautions": [
+      "Ne pas forcer sur le genou",
+      "Arrêter si douleur dans le genou"
+    ],
+    "tags": [
+      "Genou",
+      "Quadriceps",
+      "Droit fémoral"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/genou/etirement-quadriceps.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cuisse avant"
+    ],
+    "conseil_posture": [
+      "Bassin rentré, ne pas cambrer",
+      "Genoux alignés"
+    ],
+    "erreurs_frequentes": [
+      "Écarter le genou sur le côté",
+      "Cambrer le dos",
+      "Tirer trop fort sur la cheville"
+    ],
+    "version_facile": [
+      "Utiliser une sangle si la main n'atteint pas la cheville"
+    ],
+    "version_avancee": [
+      "Sans appui"
+    ],
+    "respiration": [
+      "Respirer calmement"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Droit fémoral"
+    ],
+    "materiel": [
+      "Appui (chaise ou mur)"
+    ],
+    "contre_indications": [
+      "Prothèse de genou récente avec flexion limitée"
+    ],
+    "benefices": [
+      "Soulage les tensions à l'avant du genou"
+    ],
+    "audio_cues": [
+      "Bassin rentré",
+      "Genoux côte à côte"
+    ],
+    "coaching_court": [
+      "Doux",
+      "Aligné"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Syndrome fémoro-patellaire",
+      "Tendinopathie rotulienne",
+      "Raideur du genou"
+    ],
+    "objectifs": [
+      "Assouplir l'avant de la cuisse"
+    ],
+    "zones": [
+      "Cuisse avant"
+    ]
   }
 ]
