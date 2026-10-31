@@ -12691,5 +12691,1623 @@
       "Main",
       "Pouce"
     ]
+  },
+  {
+    "id": "HANCHE_10",
+    "nom": "Extension de hanche debout à l'élastique",
+    "type": "timer",
+    "categorie": "Hanche",
+    "objectif": "Renforcer le grand fessier en charge",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Debout face à une chaise, les deux mains posées sur le dossier, élastique autour des deux chevilles",
+      "Se grandir, ventre légèrement rentré, genou d'appui légèrement fléchi",
+      "Tendre la jambe vers l'arrière en 2 secondes sans cambrer le dos",
+      "Revenir lentement en 2 secondes sans relâcher l'élastique"
+    ],
+    "precautions": [
+      "Petite amplitude : le mouvement vient de la hanche, pas du bas du dos",
+      "Arrêter en cas de douleur lombaire"
+    ],
+    "tags": [
+      "Hanche",
+      "Grand fessier",
+      "Ischio-jambiers"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/hanche/extension-debout-elastique.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Hanche",
+      "Fessiers"
+    ],
+    "conseil_posture": [
+      "Bassin face à la chaise, ne pas le tourner",
+      "Buste droit, légèrement penché vers l'avant au maximum"
+    ],
+    "erreurs_frequentes": [
+      "Cambrer le bas du dos pour monter plus haut",
+      "Plier le genou de la jambe qui travaille",
+      "Tourner le bassin"
+    ],
+    "version_facile": [
+      "Sans élastique",
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant",
+      "Tenir 3 s en position haute"
+    ],
+    "respiration": [
+      "Expirer en tendant la jambe en arrière",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Grand fessier",
+      "Ischio-jambiers"
+    ],
+    "materiel": [
+      "Élastique",
+      "Appui (chaise ou mur)"
+    ],
+    "contre_indications": [
+      "Douleur lombaire aiguë",
+      "Prothèse de hanche récente sans accord du chirurgien"
+    ],
+    "benefices": [
+      "Améliore la poussée à la marche et à la montée d'escaliers",
+      "Soulage le bas du dos en renforçant les fessiers"
+    ],
+    "audio_cues": [
+      "Poussez en arrière",
+      "Dos immobile",
+      "Revenez lentement"
+    ],
+    "coaching_court": [
+      "Fessier",
+      "Dos fixe"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Arthrose de hanche",
+      "Syndrome fémoro-patellaire",
+      "Reprise après entorse de genou"
+    ],
+    "objectifs": [
+      "Renforcer le grand fessier en charge"
+    ],
+    "zones": [
+      "Hanche",
+      "Fessiers"
+    ]
+  },
+  {
+    "id": "HANCHE_11",
+    "nom": "Étirement de la bandelette ilio-tibiale debout",
+    "type": "timer",
+    "categorie": "Hanche",
+    "objectif": "Assouplir le côté de la hanche et de la cuisse",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Debout, côté à étirer près d'un mur, une main posée dessus",
+      "Croiser la jambe à étirer derrière l'autre",
+      "Pousser doucement la hanche vers le mur jusqu'à sentir l'étirement sur le côté de la hanche et de la cuisse",
+      "Tenir 30 secondes en respirant, puis changer de côté"
+    ],
+    "precautions": [
+      "Étirement doux, sans douleur",
+      "Garder l'équilibre en s'appuyant au mur"
+    ],
+    "tags": [
+      "Hanche",
+      "Tenseur du fascia lata",
+      "Moyen fessier"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/hanche/etirement-bandelette.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Hanche",
+      "Cuisse latérale"
+    ],
+    "conseil_posture": [
+      "Buste droit ou légèrement penché vers le côté opposé",
+      "Les deux pieds bien à plat"
+    ],
+    "erreurs_frequentes": [
+      "Tourner le bassin",
+      "Plier le genou de la jambe étirée",
+      "Forcer en à-coups"
+    ],
+    "version_facile": [
+      "Moins croiser les jambes",
+      "Pousser moins loin la hanche"
+    ],
+    "version_avancee": [
+      "Lever le bras opposé au-dessus de la tête et s'incliner"
+    ],
+    "respiration": [
+      "Respiration lente et calme",
+      "Relâcher un peu plus à chaque expiration"
+    ],
+    "muscles_cibles": [
+      "Tenseur du fascia lata",
+      "Moyen fessier"
+    ],
+    "materiel": [
+      "Mur ou appui"
+    ],
+    "contre_indications": [
+      "Prothèse de hanche récente (croisement de jambes déconseillé)"
+    ],
+    "benefices": [
+      "Soulage les tensions sur le côté du genou et de la hanche"
+    ],
+    "audio_cues": [
+      "Croisez",
+      "Poussez la hanche",
+      "Respirez"
+    ],
+    "coaching_court": [
+      "Hanche vers le mur"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Syndrome de la bandelette ilio-tibiale",
+      "Tendinopathie du moyen fessier",
+      "Douleur latérale de hanche"
+    ],
+    "objectifs": [
+      "Assouplir le côté de la hanche et de la cuisse"
+    ],
+    "zones": [
+      "Hanche",
+      "Cuisse latérale"
+    ]
+  },
+  {
+    "id": "GENOU_17",
+    "nom": "Fente bulgare",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcer le quadriceps et le fessier sur une jambe",
+    "niveau": 3,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Dos à une chaise, poser le dessus du pied arrière sur l'assise",
+      "Pied avant assez loin devant pour que le genou reste au-dessus de la cheville",
+      "Descendre en 2 secondes en pliant le genou avant jusqu'à environ 90°",
+      "Remonter en poussant dans le talon avant"
+    ],
+    "precautions": [
+      "Exercice exigeant : à réserver aux phases avancées de rééducation",
+      "Arrêter en cas de douleur vive du genou"
+    ],
+    "tags": [
+      "Genou",
+      "Quadriceps",
+      "Grand fessier"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/genou/fente-bulgare.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Genou",
+      "Cuisse avant",
+      "Fessiers"
+    ],
+    "conseil_posture": [
+      "Buste droit, légèrement penché vers l'avant",
+      "Genou avant aligné avec le deuxième orteil"
+    ],
+    "erreurs_frequentes": [
+      "Laisser le genou avant partir vers l'intérieur",
+      "Pied avant trop près de la chaise",
+      "Descendre trop vite"
+    ],
+    "version_facile": [
+      "Descendre moins bas",
+      "Se tenir à un mur"
+    ],
+    "version_avancee": [
+      "Tenir des haltères",
+      "Tempo lent 3 s en descente"
+    ],
+    "respiration": [
+      "Inspirer en descendant",
+      "Expirer en remontant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Grand fessier"
+    ],
+    "materiel": [
+      "Chaise ou banc"
+    ],
+    "contre_indications": [
+      "Douleur aiguë du genou",
+      "Phase précoce après chirurgie du genou"
+    ],
+    "benefices": [
+      "Renforce chaque jambe séparément",
+      "Améliore la stabilité du genou et du bassin"
+    ],
+    "audio_cues": [
+      "Descendez",
+      "Genou dans l'axe",
+      "Poussez dans le talon"
+    ],
+    "coaching_court": [
+      "Genou aligné",
+      "Contrôle"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Reprise sportive après entorse ou ligamentoplastie",
+      "Syndrome fémoro-patellaire (phase calme)",
+      "Instabilité du genou"
+    ],
+    "objectifs": [
+      "Renforcer le quadriceps et le fessier sur une jambe"
+    ],
+    "zones": [
+      "Genou",
+      "Cuisse avant",
+      "Fessiers"
+    ]
+  },
+  {
+    "id": "GENOU_18",
+    "nom": "Pont ischio-jambiers talons sur une chaise",
+    "type": "timer",
+    "categorie": "Genou",
+    "objectif": "Renforcer les ischio-jambiers et les fessiers",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Allongé sur le dos, talons posés sur l'assise d'une chaise, genoux légèrement fléchis",
+      "Bras le long du corps, paumes au sol",
+      "Monter le bassin en poussant dans les talons jusqu'à aligner épaules, hanches et genoux",
+      "Redescendre lentement en 2 secondes"
+    ],
+    "precautions": [
+      "Arrêter en cas de crampe ou de douleur derrière la cuisse",
+      "Ne pas cambrer le bas du dos en position haute"
+    ],
+    "tags": [
+      "Genou",
+      "Ischio-jambiers",
+      "Grand fessier"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/genou/pont-ischio-chaise.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Cuisse arrière",
+      "Fessiers"
+    ],
+    "conseil_posture": [
+      "Poids sur les épaules, pas sur la nuque",
+      "Bassin bien horizontal"
+    ],
+    "erreurs_frequentes": [
+      "Pousser avec les bras",
+      "Cambrer le dos",
+      "Redescendre en se laissant tomber"
+    ],
+    "version_facile": [
+      "Genoux plus fléchis",
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Sur une seule jambe",
+      "Tenir 5 s en haut"
+    ],
+    "respiration": [
+      "Expirer en montant",
+      "Inspirer en descendant"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers",
+      "Grand fessier"
+    ],
+    "materiel": [
+      "Chaise",
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Lésion récente des ischio-jambiers"
+    ],
+    "benefices": [
+      "Protège le genou en renforçant l'arrière de la cuisse",
+      "Prépare la reprise de la course"
+    ],
+    "audio_cues": [
+      "Poussez dans les talons",
+      "Montez",
+      "Descendez lentement"
+    ],
+    "coaching_court": [
+      "Talons",
+      "Bassin haut"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Reprise après lésion des ischio-jambiers",
+      "Ligamentoplastie du genou (phase de renforcement)",
+      "Lombalgie"
+    ],
+    "objectifs": [
+      "Renforcer les ischio-jambiers et les fessiers"
+    ],
+    "zones": [
+      "Cuisse arrière",
+      "Fessiers"
+    ]
+  },
+  {
+    "id": "EPAULE_17",
+    "nom": "Rowing un bras avec haltère",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Renforcer le haut du dos et les stabilisateurs de l'omoplate",
+    "niveau": 2,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+      "L'haltère dans la main libre, bras tendu vers le sol",
+      "Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+      "Redescendre lentement en 2 secondes"
+    ],
+    "precautions": [
+      "Charge légère au début",
+      "Arrêter en cas de douleur à l'avant de l'épaule"
+    ],
+    "tags": [
+      "Epaule",
+      "Rhomboïdes",
+      "Grand dorsal"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/epaule/rowing-haltere.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Épaule",
+      "Haut du dos"
+    ],
+    "conseil_posture": [
+      "Dos plat, nuque dans le prolongement",
+      "Coude près du corps"
+    ],
+    "erreurs_frequentes": [
+      "Tourner le buste pour tirer",
+      "Hausser l'épaule vers l'oreille",
+      "Arrondir le dos"
+    ],
+    "version_facile": [
+      "Sans charge ou avec une bouteille d'eau",
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Haltère plus lourd",
+      "Tenir 2 s en haut"
+    ],
+    "respiration": [
+      "Expirer en tirant",
+      "Inspirer en redescendant"
+    ],
+    "muscles_cibles": [
+      "Rhomboïdes",
+      "Grand dorsal",
+      "Trapèze moyen"
+    ],
+    "materiel": [
+      "Haltère léger",
+      "Chaise ou banc"
+    ],
+    "contre_indications": [
+      "Douleur aiguë d'épaule non évaluée"
+    ],
+    "benefices": [
+      "Améliore la posture et la position de l'épaule",
+      "Équilibre le travail des pectoraux"
+    ],
+    "audio_cues": [
+      "Tirez le coude",
+      "Serrez l'omoplate",
+      "Redescendez"
+    ],
+    "coaching_court": [
+      "Coude au plafond",
+      "Dos plat"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Conflit sous-acromial",
+      "Dyskinésie scapulaire",
+      "Cervicalgie posturale",
+      "Tendinopathie de la coiffe (phase de renforcement)"
+    ],
+    "objectifs": [
+      "Renforcer le haut du dos et les stabilisateurs de l'omoplate"
+    ],
+    "zones": [
+      "Épaule",
+      "Haut du dos"
+    ]
+  },
+  {
+    "id": "EPAULE_18",
+    "nom": "Rotation externe à 90° à l'élastique",
+    "type": "timer",
+    "categorie": "Epaule",
+    "objectif": "Renforcer les rotateurs externes bras levé",
+    "niveau": 3,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Face à l'ancrage, bras écarté à hauteur d'épaule, coude plié à 90°, avant-bras vers l'avant",
+      "Tenir l'élastique, coude immobile à hauteur d'épaule",
+      "Pivoter l'avant-bras vers le haut jusqu'à la verticale en 2 secondes",
+      "Revenir lentement en 2 secondes"
+    ],
+    "precautions": [
+      "Exercice avancé : seulement si l'épaule est indolore bras levé",
+      "Arrêter en cas d'appréhension ou de douleur"
+    ],
+    "tags": [
+      "Epaule",
+      "Infra-épineux",
+      "Petit rond"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/epaule/rotation-externe-90.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Épaule"
+    ],
+    "conseil_posture": [
+      "Coude à hauteur d'épaule, ne pas le laisser descendre",
+      "Omoplate basse, sans hausser l'épaule"
+    ],
+    "erreurs_frequentes": [
+      "Laisser descendre le coude",
+      "Cambrer le dos",
+      "Aller trop vite au retour"
+    ],
+    "version_facile": [
+      "Coude plus bas (45°)",
+      "Élastique plus léger"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant",
+      "Tenir 3 s en haut"
+    ],
+    "respiration": [
+      "Expirer en pivotant vers le haut",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Infra-épineux",
+      "Petit rond"
+    ],
+    "materiel": [
+      "Élastique",
+      "Point d'ancrage (porte)"
+    ],
+    "contre_indications": [
+      "Luxation d'épaule récente",
+      "Douleur aiguë d'épaule"
+    ],
+    "benefices": [
+      "Stabilise l'épaule dans les gestes au-dessus de la tête",
+      "Prépare la reprise des sports de lancer"
+    ],
+    "audio_cues": [
+      "Coude fixe",
+      "Pivotez vers le haut",
+      "Revenez lentement"
+    ],
+    "coaching_court": [
+      "Coude haut",
+      "Lent"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Instabilité d'épaule",
+      "Reprise des sports de lancer",
+      "Tendinopathie de la coiffe (phase avancée)"
+    ],
+    "objectifs": [
+      "Renforcer les rotateurs externes bras levé"
+    ],
+    "zones": [
+      "Épaule"
+    ]
+  },
+  {
+    "id": "COUDE_07",
+    "nom": "Flexion du coude avec haltère",
+    "type": "timer",
+    "categorie": "coude",
+    "objectif": "Renforcer les fléchisseurs du coude",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Assis, dos droit, bras le long du corps, haltère dans la main paume vers l'avant",
+      "Coude collé au corps",
+      "Plier le coude en 2 secondes pour monter l'haltère vers l'épaule",
+      "Redescendre lentement en 3 secondes jusqu'au bras tendu"
+    ],
+    "precautions": [
+      "Charge légère, augmenter progressivement",
+      "Arrêter en cas de douleur au pli du coude"
+    ],
+    "tags": [
+      "coude",
+      "Biceps",
+      "Brachial"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/coude/flexion-coude-haltere.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Coude",
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Coude immobile contre le corps",
+      "Épaules basses, dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Balancer le buste",
+      "Avancer le coude",
+      "Laisser retomber l'haltère"
+    ],
+    "version_facile": [
+      "Sans charge",
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Haltère plus lourd",
+      "Descente en 4 s"
+    ],
+    "respiration": [
+      "Expirer en montant",
+      "Inspirer en descendant"
+    ],
+    "muscles_cibles": [
+      "Biceps",
+      "Brachial"
+    ],
+    "materiel": [
+      "Haltère léger",
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Fracture non consolidée",
+      "Douleur aiguë du coude"
+    ],
+    "benefices": [
+      "Récupère la force pour porter et soulever",
+      "Améliore l'amplitude du coude"
+    ],
+    "audio_cues": [
+      "Montez",
+      "Coude collé",
+      "Descendez lentement"
+    ],
+    "coaching_court": [
+      "Coude fixe",
+      "Lent"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Raideur du coude après fracture ou immobilisation",
+      "Tendinopathie du biceps (phase de renforcement)",
+      "Épicondylite (phase de renforcement)"
+    ],
+    "objectifs": [
+      "Renforcer les fléchisseurs du coude"
+    ],
+    "zones": [
+      "Coude",
+      "Bras"
+    ]
+  },
+  {
+    "id": "COUDE_08",
+    "nom": "Extension du coude à l'élastique",
+    "type": "timer",
+    "categorie": "coude",
+    "objectif": "Renforcer le triceps",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Debout face à une porte, élastique ancré en hauteur, coude plié à 90° collé au corps",
+      "Tenir l'élastique, poignet droit",
+      "Tendre le coude vers le bas en 2 secondes",
+      "Revenir lentement en 2 secondes jusqu'à 90°"
+    ],
+    "precautions": [
+      "Arrêter en cas de douleur derrière le coude",
+      "Élastique adapté pour garder le contrôle"
+    ],
+    "tags": [
+      "coude",
+      "Triceps"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/coude/extension-coude-elastique.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Coude",
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Coude immobile contre le corps",
+      "Épaules basses, buste droit"
+    ],
+    "erreurs_frequentes": [
+      "Décoller le coude du corps",
+      "Se pencher sur l'élastique",
+      "Relâcher brusquement"
+    ],
+    "version_facile": [
+      "Élastique plus léger",
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant",
+      "Tenir 2 s bras tendu"
+    ],
+    "respiration": [
+      "Expirer en tendant le bras",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Triceps"
+    ],
+    "materiel": [
+      "Élastique",
+      "Point d'ancrage (porte)"
+    ],
+    "contre_indications": [
+      "Fracture non consolidée"
+    ],
+    "benefices": [
+      "Retrouve la force pour pousser et se relever d'une chaise"
+    ],
+    "audio_cues": [
+      "Poussez vers le bas",
+      "Coude collé",
+      "Revenez lentement"
+    ],
+    "coaching_court": [
+      "Coude fixe",
+      "Tendez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Raideur du coude après fracture ou immobilisation",
+      "Rééducation de l'épaule",
+      "Faiblesse du triceps"
+    ],
+    "objectifs": [
+      "Renforcer le triceps"
+    ],
+    "zones": [
+      "Coude",
+      "Bras"
+    ]
+  },
+  {
+    "id": "MAIN_05",
+    "nom": "Flexion-extension du poignet",
+    "type": "timer",
+    "categorie": "Poignet et main",
+    "objectif": "Récupérer la mobilité du poignet",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "15 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 15,
+    "repos": 2,
+    "consignes": [
+      "Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol",
+      "Laisser tomber la main vers le bas lentement",
+      "Remonter la main vers le haut le plus loin possible sans douleur",
+      "Enchaîner lentement, avant-bras immobile"
+    ],
+    "precautions": [
+      "Mouvement doux, sans forcer",
+      "Arrêter en cas de douleur vive"
+    ],
+    "tags": [
+      "Poignet et main",
+      "Fléchisseurs du poignet",
+      "Extenseurs du poignet"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 15
+    },
+    "image": "/exercises/images/main/flexion-extension-poignet.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Poignet"
+    ],
+    "conseil_posture": [
+      "Avant-bras bien à plat sur la table",
+      "Doigts relâchés"
+    ],
+    "erreurs_frequentes": [
+      "Soulever l'avant-bras",
+      "Aller trop vite",
+      "Serrer le poing"
+    ],
+    "version_facile": [
+      "Plus petite amplitude"
+    ],
+    "version_avancee": [
+      "Tenir une bouteille d'eau légère"
+    ],
+    "respiration": [
+      "Respiration calme et régulière"
+    ],
+    "muscles_cibles": [
+      "Fléchisseurs du poignet",
+      "Extenseurs du poignet"
+    ],
+    "materiel": [
+      "Table"
+    ],
+    "contre_indications": [
+      "Fracture non consolidée"
+    ],
+    "benefices": [
+      "Assouplit le poignet après immobilisation",
+      "Prépare les gestes du quotidien"
+    ],
+    "audio_cues": [
+      "Descendez",
+      "Montez",
+      "Avant-bras immobile"
+    ],
+    "coaching_court": [
+      "Doux",
+      "Grande amplitude"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Raideur après fracture du poignet",
+      "Syndrome du canal carpien",
+      "Arthrose du poignet"
+    ],
+    "objectifs": [
+      "Récupérer la mobilité du poignet"
+    ],
+    "zones": [
+      "Poignet"
+    ]
+  },
+  {
+    "id": "MAIN_06",
+    "nom": "Pince pouce-doigts avec pâte",
+    "type": "timer",
+    "categorie": "Poignet et main",
+    "objectif": "Renforcer la pince fine des doigts",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index",
+      "Pincer la pâte en 2 secondes",
+      "Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire",
+      "Garder le pouce bien arrondi"
+    ],
+    "precautions": [
+      "Pâte souple au début",
+      "Arrêter en cas de douleur à la base du pouce"
+    ],
+    "tags": [
+      "Poignet et main",
+      "Muscles du pouce",
+      "Fléchisseurs des doigts"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/main/pince-pate.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Main",
+      "Pouce"
+    ],
+    "conseil_posture": [
+      "Pouce arrondi en forme de « O »",
+      "Poignet droit"
+    ],
+    "erreurs_frequentes": [
+      "Écraser le pouce à plat",
+      "Plier le poignet",
+      "Serrer trop fort"
+    ],
+    "version_facile": [
+      "Pâte plus souple"
+    ],
+    "version_avancee": [
+      "Pâte plus ferme",
+      "Tenir 3 s le pincement"
+    ],
+    "respiration": [
+      "Respiration calme"
+    ],
+    "muscles_cibles": [
+      "Muscles du pouce",
+      "Fléchisseurs des doigts"
+    ],
+    "materiel": [
+      "Pâte de rééducation (ou pâte à modeler)"
+    ],
+    "contre_indications": [
+      "Plaie ou cicatrice récente de la main"
+    ],
+    "benefices": [
+      "Facilite les gestes fins : boutons, clés, écriture"
+    ],
+    "audio_cues": [
+      "Pincez",
+      "Pouce rond",
+      "Relâchez"
+    ],
+    "coaching_court": [
+      "Pince ronde"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Arthrose du pouce (rhizarthrose)",
+      "Raideur des doigts après fracture",
+      "Faiblesse de préhension"
+    ],
+    "objectifs": [
+      "Renforcer la pince fine des doigts"
+    ],
+    "zones": [
+      "Main",
+      "Pouce"
+    ]
+  },
+  {
+    "id": "MAIN_07",
+    "nom": "Glissement du nerf médian",
+    "type": "timer",
+    "categorie": "Poignet et main",
+    "objectif": "Faire glisser le nerf médian sans le tirer",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Debout ou assis, bras écarté sur le côté à hauteur d'épaule, coude plié, paume vers le plafond",
+      "Tendre lentement le coude en ouvrant la main, poignet en extension, paume vers le plafond",
+      "Incliner en même temps la tête vers l'épaule opposée",
+      "Revenir à la position de départ, sans tenir la position"
+    ],
+    "precautions": [
+      "Mouvement de va-et-vient, jamais de tension maintenue",
+      "Arrêter si les fourmillements augmentent"
+    ],
+    "tags": [
+      "Poignet et main",
+      "Nerf médian",
+      "Fléchisseurs des doigts"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/main/glissement-nerf-median.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Poignet",
+      "Main",
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Épaule basse",
+      "Mouvement fluide et lent"
+    ],
+    "erreurs_frequentes": [
+      "Tenir l'étirement au bout",
+      "Hausser l'épaule",
+      "Aller trop loin"
+    ],
+    "version_facile": [
+      "Sans inclinaison de la tête",
+      "Coude moins tendu"
+    ],
+    "version_avancee": [
+      "Ajouter une rotation de l'avant-bras paume vers le haut"
+    ],
+    "respiration": [
+      "Respiration calme"
+    ],
+    "muscles_cibles": [
+      "Nerf médian",
+      "Fléchisseurs des doigts"
+    ],
+    "materiel": [],
+    "contre_indications": [
+      "Perte de force ou de sensibilité qui s'aggrave : avis médical"
+    ],
+    "benefices": [
+      "Réduit les fourmillements nocturnes",
+      "Améliore la mobilité du nerf"
+    ],
+    "audio_cues": [
+      "Tendez doucement",
+      "Revenez",
+      "Sans forcer"
+    ],
+    "coaching_court": [
+      "Va-et-vient"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Syndrome du canal carpien",
+      "Fourmillements des doigts",
+      "Raideur après chirurgie du canal carpien"
+    ],
+    "objectifs": [
+      "Faire glisser le nerf médian sans le tirer"
+    ],
+    "zones": [
+      "Poignet",
+      "Main",
+      "Bras"
+    ]
+  },
+  {
+    "id": "LOMB_13",
+    "nom": "Curl-up de McGill",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Renforcer les abdominaux sans fléchir le bas du dos",
+    "niveau": 1,
+    "exercise_mode": "isometrique",
+    "duree": "6 × 8 s, repos 5 s",
+    "ex": 8,
+    "reps": 6,
+    "repos": 5,
+    "consignes": [
+      "Allongé sur le dos, une jambe pliée, l'autre tendue",
+      "Glisser les mains sous le creux du bas du dos",
+      "Décoller légèrement la tête et les épaules du sol, nuque immobile",
+      "Tenir 8 secondes, puis reposer doucement"
+    ],
+    "precautions": [
+      "Ne pas tirer sur la nuque",
+      "Arrêter en cas de douleur lombaire"
+    ],
+    "tags": [
+      "Dos",
+      "Grand droit de l'abdomen",
+      "Obliques"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 8,
+      "cycles": 6
+    },
+    "image": "/exercises/images/dos/curl-up-mcgill.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Abdomen",
+      "Bas du dos"
+    ],
+    "conseil_posture": [
+      "Garder le creux naturel du dos sur les mains",
+      "Menton neutre, regard vers le plafond"
+    ],
+    "erreurs_frequentes": [
+      "Enrouler le dos comme un abdominal classique",
+      "Rentrer le menton vers la poitrine",
+      "Bloquer la respiration"
+    ],
+    "version_facile": [
+      "Seulement contracter sans décoller la tête"
+    ],
+    "version_avancee": [
+      "Lever les coudes du sol",
+      "Tenir 10 s"
+    ],
+    "respiration": [
+      "Respirer normalement pendant le maintien"
+    ],
+    "muscles_cibles": [
+      "Grand droit de l'abdomen",
+      "Obliques"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Douleur aiguë irradiant dans la jambe"
+    ],
+    "benefices": [
+      "Renforce le tronc en protégeant les disques lombaires"
+    ],
+    "audio_cues": [
+      "Décollez légèrement",
+      "Nuque fixe",
+      "Respirez"
+    ],
+    "coaching_court": [
+      "Petit décollement"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Hernie discale (phase de renforcement)",
+      "Instabilité lombaire"
+    ],
+    "objectifs": [
+      "Renforcer les abdominaux sans fléchir le bas du dos"
+    ],
+    "zones": [
+      "Abdomen",
+      "Bas du dos"
+    ]
+  },
+  {
+    "id": "LOMB_14",
+    "nom": "Posture de l'enfant",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Détendre et étirer le bas du dos",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "À genoux sur un tapis, gros orteils joints, genoux écartés",
+      "Asseoir les fesses vers les talons",
+      "Allonger les bras devant soi, front posé au sol",
+      "Respirer lentement dans le dos pendant 30 secondes"
+    ],
+    "precautions": [
+      "Placer un coussin sous les fesses si les genoux tirent",
+      "Éviter en cas de douleur de genou"
+    ],
+    "tags": [
+      "Dos",
+      "Muscles paravertébraux",
+      "Grand dorsal"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/dos/posture-enfant.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Bas du dos",
+      "Épaules"
+    ],
+    "conseil_posture": [
+      "Épaules relâchées",
+      "Nuque détendue, front au sol"
+    ],
+    "erreurs_frequentes": [
+      "Forcer pour toucher les talons",
+      "Crisper les épaules"
+    ],
+    "version_facile": [
+      "Coussin sous les fesses ou sous le front"
+    ],
+    "version_avancee": [
+      "Marcher les mains d'un côté pour étirer le flanc"
+    ],
+    "respiration": [
+      "Inspirer en gonflant le dos",
+      "Expirer en se relâchant"
+    ],
+    "muscles_cibles": [
+      "Muscles paravertébraux",
+      "Grand dorsal"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Prothèse de genou récente",
+      "Douleur aiguë de genou"
+    ],
+    "benefices": [
+      "Soulage les tensions lombaires",
+      "Aide à se détendre"
+    ],
+    "audio_cues": [
+      "Fesses vers les talons",
+      "Bras longs",
+      "Respirez dans le dos"
+    ],
+    "coaching_court": [
+      "Relâchez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Lombalgie",
+      "Raideur du dos",
+      "Tension musculaire lombaire"
+    ],
+    "objectifs": [
+      "Détendre et étirer le bas du dos"
+    ],
+    "zones": [
+      "Bas du dos",
+      "Épaules"
+    ]
+  },
+  {
+    "id": "LOMB_15",
+    "nom": "Extension thoracique sur rouleau",
+    "type": "timer",
+    "categorie": "Dos",
+    "objectif": "Redonner de la mobilité au haut du dos",
+    "niveau": 2,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 3,
+    "consignes": [
+      "Allongé sur le dos, rouleau sous le haut du dos (sous les omoplates), genoux pliés, pieds au sol",
+      "Mains croisées derrière la tête, coudes vers l'avant",
+      "Laisser le haut du dos s'étendre en arrière au-dessus du rouleau en 2 secondes",
+      "Revenir, puis déplacer le rouleau un peu plus haut"
+    ],
+    "precautions": [
+      "Ne pas placer le rouleau sous le bas du dos",
+      "Arrêter en cas de douleur vive"
+    ],
+    "tags": [
+      "Dos",
+      "Muscles paravertébraux thoraciques"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/dos/extension-thoracique-rouleau.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Haut du dos"
+    ],
+    "conseil_posture": [
+      "Fesses au sol",
+      "Nuque soutenue par les mains"
+    ],
+    "erreurs_frequentes": [
+      "Cambrer le bas du dos",
+      "Laisser la tête partir en arrière",
+      "Soulever les fesses"
+    ],
+    "version_facile": [
+      "Plus petite amplitude",
+      "Rouleau plus mou"
+    ],
+    "version_avancee": [
+      "Bras tendus au-dessus de la tête"
+    ],
+    "respiration": [
+      "Expirer en s'étendant en arrière",
+      "Inspirer au retour"
+    ],
+    "muscles_cibles": [
+      "Muscles paravertébraux thoraciques"
+    ],
+    "materiel": [
+      "Rouleau de massage",
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Ostéoporose sévère",
+      "Fracture vertébrale"
+    ],
+    "benefices": [
+      "Améliore la posture",
+      "Facilite l'élévation des bras"
+    ],
+    "audio_cues": [
+      "Ouvrez le haut du dos",
+      "Fesses au sol",
+      "Revenez"
+    ],
+    "coaching_court": [
+      "Haut du dos"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Dos voûté",
+      "Cervicalgie",
+      "Conflit sous-acromial",
+      "Raideur thoracique"
+    ],
+    "objectifs": [
+      "Redonner de la mobilité au haut du dos"
+    ],
+    "zones": [
+      "Haut du dos"
+    ]
+  },
+  {
+    "id": "CERV_09",
+    "nom": "Étirement des scalènes",
+    "type": "timer",
+    "categorie": "Cervicales",
+    "objectif": "Assouplir l'avant et le côté du cou",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Assis, dos droit, une main posée à plat sous la clavicule du côté à étirer",
+      "Rentrer légèrement le menton",
+      "Incliner la tête du côté opposé puis tourner légèrement le regard vers le plafond",
+      "Tenir 30 secondes en respirant, puis changer de côté"
+    ],
+    "precautions": [
+      "Étirement doux et progressif",
+      "Arrêter en cas de vertige ou de fourmillements dans le bras"
+    ],
+    "tags": [
+      "Cervicales",
+      "Scalènes",
+      "Sterno-cléido-mastoïdien"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cervicales/etirement-scalenes.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cou"
+    ],
+    "conseil_posture": [
+      "Épaules basses",
+      "Dos droit contre le dossier"
+    ],
+    "erreurs_frequentes": [
+      "Pencher la tête trop loin en arrière",
+      "Hausser l'épaule",
+      "Forcer avec la main"
+    ],
+    "version_facile": [
+      "Sans rotation de la tête"
+    ],
+    "version_avancee": [
+      "Tenir le bord de la chaise avec la main du côté étiré"
+    ],
+    "respiration": [
+      "Respiration lente",
+      "Relâcher à l'expiration"
+    ],
+    "muscles_cibles": [
+      "Scalènes",
+      "Sterno-cléido-mastoïdien"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Vertiges ou troubles neurologiques non évalués"
+    ],
+    "benefices": [
+      "Soulage les tensions du cou et du haut des épaules"
+    ],
+    "audio_cues": [
+      "Penchez",
+      "Regard en haut",
+      "Respirez"
+    ],
+    "coaching_court": [
+      "Doux"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Cervicalgie",
+      "Tensions cervicales",
+      "Syndrome du défilé thoraco-brachial"
+    ],
+    "objectifs": [
+      "Assouplir l'avant et le côté du cou"
+    ],
+    "zones": [
+      "Cou"
+    ]
+  },
+  {
+    "id": "CERV_10",
+    "nom": "Ouverture contrôlée de la mâchoire",
+    "type": "timer",
+    "categorie": "Cervicales",
+    "objectif": "Retrouver une ouverture de bouche droite et sans claquement",
+    "niveau": 1,
+    "exercise_mode": "mobilite",
+    "duree": "10 × 2 s, repos 2 s",
+    "ex": 2,
+    "reps": 10,
+    "repos": 2,
+    "consignes": [
+      "Assis face à un miroir, dos droit",
+      "Placer la pointe de la langue sur le palais, derrière les dents du haut",
+      "Ouvrir lentement la bouche en gardant la langue au palais, sans dévier la mâchoire",
+      "Refermer lentement"
+    ],
+    "precautions": [
+      "Ouverture limitée, sans douleur ni claquement",
+      "Arrêter en cas de blocage"
+    ],
+    "tags": [
+      "Cervicales",
+      "Muscles masticateurs"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 2,
+      "cycles": 10
+    },
+    "image": "/exercises/images/cervicales/ouverture-machoire.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Mâchoire"
+    ],
+    "conseil_posture": [
+      "Langue collée au palais pendant tout le mouvement",
+      "Tête droite"
+    ],
+    "erreurs_frequentes": [
+      "Décoller la langue du palais",
+      "Laisser la mâchoire partir sur le côté",
+      "Ouvrir trop grand"
+    ],
+    "version_facile": [
+      "Ouvrir moins grand"
+    ],
+    "version_avancee": [
+      "Ajouter une légère résistance du doigt sous le menton"
+    ],
+    "respiration": [
+      "Respirer par le nez"
+    ],
+    "muscles_cibles": [
+      "Muscles masticateurs"
+    ],
+    "materiel": [
+      "Miroir"
+    ],
+    "contre_indications": [
+      "Luxation récente de la mâchoire"
+    ],
+    "benefices": [
+      "Réduit les claquements et les douleurs de mâchoire"
+    ],
+    "audio_cues": [
+      "Langue au palais",
+      "Ouvrez lentement",
+      "Bien droit"
+    ],
+    "coaching_court": [
+      "Lent et droit"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Dysfonction de l'articulation temporo-mandibulaire",
+      "Claquement de mâchoire",
+      "Bruxisme"
+    ],
+    "objectifs": [
+      "Retrouver une ouverture de bouche droite et sans claquement"
+    ],
+    "zones": [
+      "Mâchoire"
+    ]
+  },
+  {
+    "id": "CHEVILLE_12",
+    "nom": "Marche talon-pointe",
+    "type": "timer",
+    "categorie": "Cheville",
+    "objectif": "Améliorer l'équilibre dynamique",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 30 s, repos 15 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 15,
+    "consignes": [
+      "Debout, près d'un mur ou d'un plan de travail par sécurité",
+      "Poser un pied devant l'autre, talon contre la pointe du pied arrière",
+      "Avancer ainsi lentement sur une ligne droite pendant 30 secondes",
+      "Regard devant soi, bras écartés pour l'équilibre"
+    ],
+    "precautions": [
+      "Rester près d'un appui",
+      "Arrêter en cas de vertige"
+    ],
+    "tags": [
+      "Cheville",
+      "Muscles stabilisateurs de la cheville",
+      "Mollet"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cheville/marche-talon-pointe.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Cheville",
+      "Jambe"
+    ],
+    "conseil_posture": [
+      "Buste droit",
+      "Regard à l'horizon, pas sur les pieds"
+    ],
+    "erreurs_frequentes": [
+      "Regarder ses pieds",
+      "Écarter les pieds",
+      "Aller trop vite"
+    ],
+    "version_facile": [
+      "Pieds légèrement décalés",
+      "Une main sur le mur"
+    ],
+    "version_avancee": [
+      "Reculer talon-pointe",
+      "Fermer les yeux quelques pas (avec un appui proche)"
+    ],
+    "respiration": [
+      "Respiration calme"
+    ],
+    "muscles_cibles": [
+      "Muscles stabilisateurs de la cheville",
+      "Mollet"
+    ],
+    "materiel": [
+      "Couloir ou ligne au sol"
+    ],
+    "contre_indications": [
+      "Vertiges non évalués",
+      "Risque de chute élevé sans surveillance"
+    ],
+    "benefices": [
+      "Améliore l'équilibre à la marche",
+      "Réduit le risque de chute"
+    ],
+    "audio_cues": [
+      "Talon contre pointe",
+      "Regard devant",
+      "Lentement"
+    ],
+    "coaching_court": [
+      "Ligne droite"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Instabilité de cheville",
+      "Prévention des chutes",
+      "Troubles de l'équilibre"
+    ],
+    "objectifs": [
+      "Améliorer l'équilibre dynamique"
+    ],
+    "zones": [
+      "Cheville",
+      "Jambe"
+    ]
   }
 ]
