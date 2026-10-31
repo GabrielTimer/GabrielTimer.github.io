@@ -299,6 +299,16 @@
   "f": "/exercises/images/epaule/diagonalekabat_elastique-f.webp",
   "h": "/exercises/images/epaule/diagonalekabat_elastique.png"
  },
+ "/exercises/images/epaule/ecarte-arriere-elastique.webp": {
+  "defaut": "/exercises/images/epaule/ecarte-arriere-elastique.webp",
+  "f": "/exercises/images/epaule/ecarte-arriere-elastique.webp",
+  "h": "/exercises/images/epaule/ecarte-arriere-elastique-h.webp"
+ },
+ "/exercises/images/epaule/etirement-pectoraux-porte.webp": {
+  "defaut": "/exercises/images/epaule/etirement-pectoraux-porte.webp",
+  "f": "/exercises/images/epaule/etirement-pectoraux-porte-f.webp",
+  "h": "/exercises/images/epaule/etirement-pectoraux-porte.webp"
+ },
  "/exercises/images/epaule/etirement-posterieur.webp": {
   "defaut": "/exercises/images/epaule/etirement-posterieur.webp",
   "f": "/exercises/images/epaule/etirement-posterieur-f.webp",
@@ -318,6 +328,11 @@
   "defaut": "/exercises/images/epaule/rotation-externe-couche.webp",
   "f": "/exercises/images/epaule/rotation-externe-couche.webp",
   "h": "/exercises/images/epaule/rotation-externe-couche-h.webp"
+ },
+ "/exercises/images/epaule/serviette-dos.webp": {
+  "defaut": "/exercises/images/epaule/serviette-dos.webp",
+  "f": "/exercises/images/epaule/serviette-dos-f.webp",
+  "h": "/exercises/images/epaule/serviette-dos.webp"
  },
  "/exercises/images/epaule/tirage_elastique.png": {
   "defaut": "/exercises/images/epaule/tirage_elastique.png",
