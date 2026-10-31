@@ -744,11 +744,6 @@
   "f": "/exercises/images/post-partum/pont-fessier.png",
   "h": "/exercises/images/post-partum/pont-fessier-h.webp"
  },
- "/exercises/images/pathologies/capsulite/ex5.png": {
-  "defaut": "/exercises/images/epaule/wallslideflexionepaule.png",
-  "f": "/exercises/images/epaule/wallslideflexionepaule-f.webp",
-  "h": "/exercises/images/epaule/wallslideflexionepaule.png"
- },
  "/exercises/images/pathologies/lombalgie_1/ex1.png": {
   "defaut": "/exercises/images/dos/posture-enfant.webp",
   "f": "/exercises/images/dos/posture-enfant-f.webp",

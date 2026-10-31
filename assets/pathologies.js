@@ -131,35 +131,35 @@ export const PATHOLOGIES = [
   "series": 2,
   "exercices": [
    {
-    "nom": "Pendulaire",
+    "nom": "Élévation du bras allongé",
     "ex": 30,
     "repos": 10,
     "reps": 3,
     "image": "/exercises/images/pathologies/capsulite/ex1.png"
    },
    {
-    "nom": "Flexion assistée",
+    "nom": "Glissement de la main sur la table",
     "ex": 30,
     "repos": 10,
     "reps": 3,
     "image": "/exercises/images/pathologies/capsulite/ex2.png"
    },
    {
-    "nom": "Abduction assistée",
+    "nom": "Étirement bras levés, mains sur une barre",
     "ex": 30,
     "repos": 10,
     "reps": 3,
     "image": "/exercises/images/pathologies/capsulite/ex3.png"
    },
    {
-    "nom": "Rotation externe coude au corps",
+    "nom": "Étirement en flexion, accroupi main au mur",
     "ex": 30,
     "repos": 10,
     "reps": 3,
     "image": "/exercises/images/pathologies/capsulite/ex4.png"
    },
    {
-    "nom": "Montée murale",
+    "nom": "Rotation externe contre un montant de porte",
     "ex": 30,
     "repos": 10,
     "reps": 3,
@@ -244,42 +244,42 @@ export const PATHOLOGIES = [
   "series": 2,
   "exercices": [
    {
-    "nom": "Extension lombaire allongé (McKenzie)",
+    "nom": "Genoux à la poitrine",
     "ex": 30,
     "repos": 10,
     "reps": 5,
     "image": "/exercises/images/pathologies/hernie_discale/ex1.png"
    },
    {
-    "nom": "Extension debout",
+    "nom": "Étirement des ischio-jambiers allongé",
     "ex": 20,
     "repos": 10,
     "reps": 5,
     "image": "/exercises/images/pathologies/hernie_discale/ex2.png"
    },
    {
-    "nom": "Gainage abdominal",
+    "nom": "Étirement du psoas au bord du lit",
     "ex": 20,
     "repos": 10,
     "reps": 5,
     "image": "/exercises/images/pathologies/hernie_discale/ex3.png"
    },
    {
-    "nom": "Pont fessier",
+    "nom": "Étirement du piriforme allongé",
     "ex": 20,
     "repos": 10,
     "reps": 5,
     "image": "/exercises/images/pathologies/hernie_discale/ex4.png"
    },
    {
-    "nom": "Étirement ischio-jambiers",
+    "nom": "Position de repos jambes sur une chaise",
     "ex": 30,
     "repos": 10,
     "reps": 3,
     "image": "/exercises/images/pathologies/hernie_discale/ex5.png"
    },
    {
-    "nom": "Mobilisation lombaire douce",
+    "nom": "Extension lombaire allongé (McKenzie)",
     "ex": 20,
     "repos": 10,
     "reps": 5,
