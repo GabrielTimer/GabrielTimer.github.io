@@ -11383,5 +11383,194 @@
       "Dos (thoracique)",
       "Poitrine"
     ]
+  },
+  {
+    "id": "CERV_06",
+    "nom": "Étirement de l'élévateur de la scapula",
+    "type": "timer",
+    "categorie": "Cervicales",
+    "objectif": "Détendre l'arrière et le côté du cou",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 10 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 10,
+    "consignes": [
+      "Assis droit, tenir l'assise de la chaise d'une main pour garder l'épaule basse",
+      "Tourner la tête de 45° du côté opposé puis regarder vers l'aisselle",
+      "Poser l'autre main sur l'arrière de la tête et l'accompagner doucement vers le bas",
+      "Tenir en respirant, puis changer de côté"
+    ],
+    "precautions": [
+      "Pression très légère de la main",
+      "Arrêter si vertiges ou fourmillements dans le bras"
+    ],
+    "tags": [
+      "Cervicales",
+      "Élévateur de la scapula",
+      "Trapèze supérieur"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/cervicales/etirement-elevateur.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cou",
+      "Haut du dos"
+    ],
+    "conseil_posture": [
+      "Dos droit",
+      "Épaule du côté étiré bien basse"
+    ],
+    "erreurs_frequentes": [
+      "Tirer fort sur la tête",
+      "Hausser l'épaule étirée",
+      "Arrondir le dos"
+    ],
+    "version_facile": [
+      "Sans la main sur la tête"
+    ],
+    "version_avancee": [
+      "Tenir 45 secondes"
+    ],
+    "respiration": [
+      "Respirer lentement",
+      "Relâcher l'épaule à l'expiration"
+    ],
+    "muscles_cibles": [
+      "Élévateur de la scapula",
+      "Trapèze supérieur"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Vertiges d'origine cervicale non évalués",
+      "Névralgie cervico-brachiale aiguë"
+    ],
+    "benefices": [
+      "Soulage les tensions du cou",
+      "Diminue les raideurs en fin de journée"
+    ],
+    "audio_cues": [
+      "Regardez l'aisselle",
+      "Épaule basse"
+    ],
+    "coaching_court": [
+      "Doux",
+      "Relâché"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Cervicalgie",
+      "Torticolis (phase calme)",
+      "Tensions cervicales"
+    ],
+    "objectifs": [
+      "Détendre l'arrière et le côté du cou"
+    ],
+    "zones": [
+      "Cou",
+      "Haut du dos"
+    ]
+  },
+  {
+    "id": "CERV_07",
+    "nom": "Rapprochement des omoplates assis",
+    "type": "timer",
+    "categorie": "Cervicales",
+    "objectif": "Renforcer les muscles posturaux entre les omoplates",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "12 × 3 s, repos 3 s",
+    "ex": 3,
+    "reps": 12,
+    "repos": 3,
+    "consignes": [
+      "Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°",
+      "Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière",
+      "Tenir 3 secondes",
+      "Relâcher lentement"
+    ],
+    "precautions": [
+      "Ne pas hausser les épaules",
+      "Ne pas creuser le bas du dos"
+    ],
+    "tags": [
+      "Cervicales",
+      "Rhomboïdes",
+      "Trapèze moyen et inférieur"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 12
+    },
+    "image": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Haut du dos",
+      "Épaules"
+    ],
+    "conseil_posture": [
+      "Menton légèrement rentré",
+      "Se grandir"
+    ],
+    "erreurs_frequentes": [
+      "Monter les épaules vers les oreilles",
+      "Pousser la tête en avant",
+      "Cambrer"
+    ],
+    "version_facile": [
+      "Contraction plus courte"
+    ],
+    "version_avancee": [
+      "Avec un élastique tenu devant soi",
+      "Tenir 6 secondes"
+    ],
+    "respiration": [
+      "Expirer en serrant",
+      "Inspirer en relâchant"
+    ],
+    "muscles_cibles": [
+      "Rhomboïdes",
+      "Trapèze moyen et inférieur"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [],
+    "benefices": [
+      "Améliore la posture",
+      "Diminue la tension du cou"
+    ],
+    "audio_cues": [
+      "Serrez les omoplates",
+      "Épaules basses"
+    ],
+    "coaching_court": [
+      "Grandi",
+      "Ouvert"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Cervicalgie",
+      "Dorsalgie",
+      "Posture enroulée",
+      "Travail sur écran"
+    ],
+    "objectifs": [
+      "Renforcer les muscles posturaux entre les omoplates"
+    ],
+    "zones": [
+      "Haut du dos",
+      "Épaules"
+    ]
   }
 ]
