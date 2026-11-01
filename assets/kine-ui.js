@@ -106,7 +106,9 @@ export function accessSheet(patient){
           <a class="btn" href="mailto:${esc(patient.email || "")}?subject=${encodeURIComponent("Vos exercices de kinésithérapie")}&body=${encodeURIComponent(text)}">${icon("mail")}E-mail</a>
           <a class="btn" target="_blank" rel="noopener" href="https://wa.me/${esc(tel.replace(/^0/, "33").replace(/^\+/, ""))}?text=${encodeURIComponent(text)}">${icon("message")}WhatsApp</a>
           ${navigator.share ? `<button class="btn" type="button" id="acc-share">${icon("share")}Partager</button>` : ""}
+          <button class="btn" type="button" id="acc-copy-msg">${icon("copy")}Copier le message</button>
         </div>
+        <p class="hint">Accents abîmés dans l'e-mail (ex. Yahoo Mail) ? Utilisez « Partager » ou « Copier le message » puis collez-le dans votre messagerie.</p>
         <p class="hint">Ce lien donne accès au dossier du patient. Si vous pensez qu'il a circulé, générez un nouveau code depuis la fiche patient.</p>
       </div>`,
     foot: `<button class="btn" type="button" id="acc-print">${icon("print")}Imprimer une carte</button><button class="btn primary" type="button" data-close>Terminé</button>`
@@ -114,6 +116,10 @@ export function accessSheet(patient){
   s.el.querySelector("#acc-copy").onclick = async () => {
     try{ await navigator.clipboard.writeText(link); toast("Lien copié.", { type:"ok" }); }
     catch(e){ s.el.querySelector("#acc-link").select(); document.execCommand("copy"); toast("Lien copié.", { type:"ok" }); }
+  };
+  s.el.querySelector("#acc-copy-msg").onclick = async () => {
+    try{ await navigator.clipboard.writeText(text); toast("Message copié.", { type:"ok" }); }
+    catch(e){ toast("Copie impossible sur cet appareil.", { type:"err" }); }
   };
   const share = s.el.querySelector("#acc-share");
   if(share) share.onclick = () => navigator.share({ title:"Vos exercices de kinésithérapie", text }).catch(() => {});
