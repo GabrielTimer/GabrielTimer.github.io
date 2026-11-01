@@ -9,6 +9,7 @@ import {
 import { currentAnnonce, loadSettings } from "../settings.js";
 import { exerciseImage } from "../library.js";
 import * as V from "../variantes.js";
+import * as Installer from "../installer.js";
 
 const app = $("#app");
 registerSW();
@@ -71,6 +72,7 @@ function renderWelcome(){
           <input class="input code-input" id="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" maxlength="14" inputmode="text">
           <p class="hint" id="code-msg" role="alert"></p>
           <button class="btn primary big block" type="submit">${icon("key")}Valider mon code</button>
+          <button class="btn block" type="button" id="code-paste" hidden>${icon("copy")}Coller mon lien ou mon code</button>
         </form>
       </div>
       <p class="center small faint">Vos données restent privées : seul votre kiné et vous y avez accès.</p>
@@ -79,6 +81,16 @@ function renderWelcome(){
   secretLogo($("#logo"));
 
   const input = $("#code"), msg = $("#code-msg");
+  /* Application installée (surtout iPhone) : le lien a été copié avant l'installation. */
+  if("clipboard" in navigator && navigator.clipboard.readText){
+    const bp = $("#code-paste"); bp.hidden = false;
+    bp.onclick = async () => {
+      const c = await Installer.lireCodeCopie();
+      if(!c){ msg.textContent = "Aucun code trouvé. Copiez le lien reçu de votre kiné, puis réessayez."; return; }
+      input.value = fmtCode(c);
+      $("#code-form").requestSubmit();
+    };
+  }
   input.addEventListener("input", () => {
     const c = normCode(input.value);
     input.value = fmtCode(c);
@@ -242,6 +254,7 @@ async function renderPatient(ctx){
 
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(patient.nom))}</h1></div>
+    <div id="inst-slot"></div>
     <div id="annonce"></div>
     ${futures && !ctx.apercu && !store.get("gt_rappel_vu", 0) && !(store.get("gt_rappel", null) || {}).actif && "serviceWorker" in navigator ? `
     <div class="notice" id="rp-invite" style="margin-bottom:16px;align-items:center;flex-wrap:wrap">${icon("bell")}<span style="flex:1 1 180px">Recevoir un rappel sur ce téléphone le jour de vos séances ?</span>
@@ -274,6 +287,7 @@ async function renderPatient(ctx){
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
   $("#rp-later")?.addEventListener("click", () => { store.set("gt_rappel_vu", 1); $("#rp-invite")?.remove(); });
+  if(!ctx.apercu){ try{ Installer.proposerInstallation(ctx.cle, $("#inst-slot")); }catch(e){ console.warn("Installation :", e); } }
   $("#ecrire")?.addEventListener("click", () => P.writeToKine({ cle: ctx.cle, apercu: ctx.apercu, patientNom: patient.nom }));
   $("#bilan")?.addEventListener("click", async () => {
     const { promptDialog } = await import("../app.js");

@@ -23,7 +23,7 @@ export const DEFAULTS = {
     logo: null
   },
   messages: {
-    invitation: "Bonjour {prenom},\n\nVoici votre accès personnel à vos exercices de kinésithérapie :\n{lien}\n\nOuvrez ce lien sur votre téléphone, puis ajoutez l'application à votre écran d'accueil pour la retrouver facilement.\nCe lien est personnel : ne le partagez pas.\n\n{kine}\n{titre}",
+    invitation: "Bonjour {prenom},\n\nVoici votre accès personnel à vos exercices de kinésithérapie :\n{lien}\n\nOuvrez ce lien sur votre téléphone : l'application vous guide pour l'installer sur votre écran d'accueil (iPhone : ouvrez-le dans Safari).\nCe lien est personnel : ne le partagez pas.\n\n{kine}\n{titre}",
     encouragements: ["Excellent travail.", "Très belle séance.", "Chaque séance compte.", "Bravo pour votre régularité."],
     piedPdf: "Programme personnalisé de rééducation",
     annonce: { active: false, texte: "", debut: "", fin: "" }
