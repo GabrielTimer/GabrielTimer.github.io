@@ -592,25 +592,29 @@ export function exoImageHTML(src, alt = "", cls = "", style = ""){
 
 /* ---------- Enregistrement du service worker ---------- */
 
-let demandeMaj = false;
+/* Mise à jour automatique, sans bouton : le service worker prend la main tout seul
+   (skipWaiting dans sw.js) et la page se recharge d'elle-même au bon moment :
+   - tout de suite si la page vient de s'ouvrir (rien n'a encore été saisi) ;
+   - sinon, la prochaine fois que l'appli revient au premier plan.
+   Jamais pendant une séance (timer) : la page suivante sera de toute façon à jour. */
+const ouvertureSW = Date.now();
 export function registerSW(){
   if(!("serviceWorker" in navigator)) return;
   if(location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
   navigator.serviceWorker.register("/sw.js").then(reg => {
-    reg.addEventListener("updatefound", () => {
-      const w = reg.installing;
-      if(!w) return;
-      w.addEventListener("statechange", () => {
-        if(w.state === "installed" && navigator.serviceWorker.controller){
-          toast("Une nouvelle version est disponible.", { action:{ label:"Mettre à jour", run:() => { demandeMaj = true; w.postMessage("skipWaiting"); } } });
-        }
-      });
+    // Appli laissée ouverte longtemps : on revérifie à chaque retour au premier plan.
+    document.addEventListener("visibilitychange", () => {
+      if(document.visibilityState === "visible") reg.update().catch(() => {});
     });
   }).catch(() => {});
-  // Pas de rechargement automatique (une séance en cours ne doit pas être interrompue) :
-  // seulement si la personne a demandé la mise à jour.
-  let reloaded = false;
+  const enSeance = () => /\/timer(\.html)?$/.test(location.pathname);
+  let reloaded = false, enAttente = false;
+  const recharger = () => { if(reloaded || enSeance()) return; reloaded = true; location.reload(); };
   navigator.serviceWorker.addEventListener("controllerchange", () => {
-    if(reloaded || !demandeMaj) return; reloaded = true; location.reload();
+    if(Date.now() - ouvertureSW < 5000) return recharger();
+    enAttente = true;
+  });
+  document.addEventListener("visibilitychange", () => {
+    if(enAttente && document.visibilityState === "visible") recharger();
   });
 }
