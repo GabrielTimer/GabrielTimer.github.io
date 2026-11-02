@@ -719,6 +719,66 @@
   "f": "/exercises/images/main/serrer-balle-f.webp",
   "h": "/exercises/images/main/serrer-balle.webp"
  },
+ "/exercises/images/neuro/couche-assis-lit.webp": {
+  "defaut": "/exercises/images/neuro/couche-assis-lit.webp",
+  "f": "/exercises/images/neuro/couche-assis-lit.webp",
+  "h": "/exercises/images/neuro/couche-assis-lit-h.webp"
+ },
+ "/exercises/images/neuro/demi-tour.webp": {
+  "defaut": "/exercises/images/neuro/demi-tour.webp",
+  "f": "/exercises/images/neuro/demi-tour.webp",
+  "h": "/exercises/images/neuro/demi-tour-h.webp"
+ },
+ "/exercises/images/neuro/doigt-nez.webp": {
+  "defaut": "/exercises/images/neuro/doigt-nez.webp",
+  "f": "/exercises/images/neuro/doigt-nez.webp",
+  "h": "/exercises/images/neuro/doigt-nez-h.webp"
+ },
+ "/exercises/images/neuro/equilibre-assis.webp": {
+  "defaut": "/exercises/images/neuro/equilibre-assis.webp",
+  "f": "/exercises/images/neuro/equilibre-assis.webp",
+  "h": "/exercises/images/neuro/equilibre-assis-h.webp"
+ },
+ "/exercises/images/neuro/glissement-table.webp": {
+  "defaut": "/exercises/images/neuro/glissement-table.webp",
+  "f": "/exercises/images/neuro/glissement-table.webp",
+  "h": "/exercises/images/neuro/glissement-table-h.webp"
+ },
+ "/exercises/images/neuro/marche-double-tache.webp": {
+  "defaut": "/exercises/images/neuro/marche-double-tache.webp",
+  "f": "/exercises/images/neuro/marche-double-tache-f.webp",
+  "h": "/exercises/images/neuro/marche-double-tache.webp"
+ },
+ "/exercises/images/neuro/marche-grands-pas.webp": {
+  "defaut": "/exercises/images/neuro/marche-grands-pas.webp",
+  "f": "/exercises/images/neuro/marche-grands-pas.webp",
+  "h": "/exercises/images/neuro/marche-grands-pas-h.webp"
+ },
+ "/exercises/images/neuro/mouvements-amples.webp": {
+  "defaut": "/exercises/images/neuro/mouvements-amples.webp",
+  "f": "/exercises/images/neuro/mouvements-amples-f.webp",
+  "h": "/exercises/images/neuro/mouvements-amples.webp"
+ },
+ "/exercises/images/neuro/retournement-lit.webp": {
+  "defaut": "/exercises/images/neuro/retournement-lit.webp",
+  "f": "/exercises/images/neuro/retournement-lit-f.webp",
+  "h": "/exercises/images/neuro/retournement-lit.webp"
+ },
+ "/exercises/images/neuro/saisir-objets.webp": {
+  "defaut": "/exercises/images/neuro/saisir-objets.webp",
+  "f": "/exercises/images/neuro/saisir-objets-f.webp",
+  "h": "/exercises/images/neuro/saisir-objets.webp"
+ },
+ "/exercises/images/neuro/tapotement-pieds.webp": {
+  "defaut": "/exercises/images/neuro/tapotement-pieds.webp",
+  "f": "/exercises/images/neuro/tapotement-pieds-f.webp",
+  "h": "/exercises/images/neuro/tapotement-pieds.webp"
+ },
+ "/exercises/images/neuro/transfert-lit-fauteuil.webp": {
+  "defaut": "/exercises/images/neuro/transfert-lit-fauteuil.webp",
+  "f": "/exercises/images/neuro/transfert-lit-fauteuil-f.webp",
+  "h": "/exercises/images/neuro/transfert-lit-fauteuil.webp"
+ },
  "/exercises/images/pathologies/canal_lombaire_etroit/ex2.png": {
   "defaut": "/exercises/images/dos/posture-enfant.webp",
   "f": "/exercises/images/dos/posture-enfant-f.webp",
