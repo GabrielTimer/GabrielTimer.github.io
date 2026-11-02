@@ -564,3 +564,15 @@ export const VERDICT_TXT = {
   mieux: "amélioration cliniquement significative", moins: "aggravation cliniquement significative",
   stable: "écart inférieur au seuil cliniquement significatif", "mieux?": "amélioration", "moins?": "aggravation"
 };
+
+/** À quoi sert chaque questionnaire (une phrase courte, affichée au kiné). */
+export const BUT = {
+  ODI: "Lombalgie : incapacité dans la vie quotidienne",
+  NDI: "Cervicalgie : incapacité dans la vie quotidienne",
+  QDASH: "Épaule, coude, main : incapacité du membre supérieur",
+  EIFEL: "Lombalgie : retentissement sur les activités du jour",
+  KOOS: "Genou : symptômes, douleur, fonction, sport, qualité de vie",
+  LEFS: "Hanche, genou, cheville : fonction du membre inférieur",
+  STARTBACK: "Lombalgie : risque de passage à la chronicité"
+};
+export const butOf = q => q.but || BUT[String(q.cle || "").toUpperCase()] || q.zone || "";

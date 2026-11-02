@@ -4,7 +4,7 @@
    ========================================================= */
 
 import { esc, icon, openSheet, toast, confirmDialog, promptDialog, fmtShortDate, fmtDate, startOfDay, plural } from "./app.js";
-import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions } from "./questionnaires.js";
+import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions, butOf } from "./questionnaires.js";
 import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
 
 const DAY = 864e5;
@@ -240,12 +240,13 @@ export async function mountKineSuivi(box, patient, C){
       const s = openSheet({
         title: "Proposer un questionnaire",
         body: `<form id="qa" class="stack" style="--gap:14px">
-          <div class="field"><label for="qa-q">Questionnaire</label><select class="select" id="qa-q">${questionnaires.map(q => `<option value="${esc(q.id)}">${esc(q.nom)}</option>`).join("")}</select></div>
+          <div class="field"><label for="qa-q">Questionnaire</label><select class="select" id="qa-q">${questionnaires.map(q => `<option value="${esc(q.id)}">${esc(q.nom)}${butOf(q) ? " — " + esc(butOf(q)) : ""}</option>`).join("")}</select><span class="hint" id="qa-but">${esc(butOf(questionnaires[0] || {}))}</span></div>
           <div class="field"><label for="qa-j">Fréquence</label><select class="select" id="qa-j"><option value="0">Une seule fois</option><option value="14">Toutes les 2 semaines</option><option value="21">Toutes les 3 semaines</option><option value="28" selected>Toutes les 4 semaines</option><option value="42">Toutes les 6 semaines</option></select></div>
           <p class="small muted">Le patient le voit sur son accueil quand c'est le moment de le remplir.</p>
         </form>`,
         foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="qa">${icon("check")}Proposer</button>`
       });
+      s.el.querySelector("#qa-q").addEventListener("change", e => { s.el.querySelector("#qa-but").textContent = butOf(questionnaires.find(x => x.id === e.target.value) || {}); });
       s.el.querySelector("#qa").addEventListener("submit", async e => {
         e.preventDefault();
         const qid = s.el.querySelector("#qa-q").value, jours = Number(s.el.querySelector("#qa-j").value);
