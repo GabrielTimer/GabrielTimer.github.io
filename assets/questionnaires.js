@@ -311,9 +311,26 @@ export const MODELES = [
   },
   {
     cle: "QDASH", nom: "QuickDASH", zone: "Membre supérieur", scoring: "quickdash", debut: 1, sens: "bas", bilan: "m_qdash", minRep: 10,
-    consigne: "Évaluez votre capacité à réaliser les activités suivantes au cours de la semaine passée.",
+    consigne: "Ce questionnaire va nous aider à apprécier votre état de santé général et vos problèmes musculo-articulaires en particulier. Veuillez évaluer vos possibilités d’effectuer les activités suivantes au cours des 7 derniers jours. Il n’y a pas de réponses justes ou fausses : si vous hésitez, donnez la réponse qui vous semble la plus adaptée.",
     interpretation: "0 = aucune incapacité, 100 = incapacité maximale. Score non calculable s'il manque plus d'une réponse.",
-    texte: sharedQs(11, ["Réponse 1 : texte " + PLACEHOLDER, "Réponse 2 : texte " + PLACEHOLDER, "Réponse 3 : texte " + PLACEHOLDER, "Réponse 4 : texte " + PLACEHOLDER, "Réponse 5 : texte " + PLACEHOLDER])
+    aideKine: "Textes du QuickDASH en français déjà intégrés (version Réseau Prévention Main Île-de-France fournie par le cabinet).",
+    texte: `@options Aucune difficulté = 1 | Difficulté légère = 2 | Difficulté moyenne = 3 | Difficulté importante = 4 | Impossible = 5
+? Dévisser un couvercle serré ou neuf
+? Effectuer des tâches ménagères lourdes (nettoyage des sols ou des murs)
+? Porter des sacs de provisions ou une mallette
+? Se laver le dos
+? Couper la nourriture avec un couteau
+? Activités de loisir nécessitant une certaines force ou avec des chocs au niveau de l’épaule, du bras ou de la main (bricolage, tennis, golf etc.)
+@options Pas du tout = 1 | Légèrement = 2 | Moyennement = 3 | Beaucoup = 4 | Extrêmement = 5
+? Pendant les 7 derniers jours, à quel point votre épaule, votre bras ou votre main vous a-t-elle géné dans vos relations avec votre famille, vos amis ou vos voisins
+@options Pas du tout limité = 1 | Légèrement limité = 2 | Moyennement limité = 3 | Très limité = 4 | Incapable = 5
+? Avez-vous été limité dans votre travail ou une de vos activités quotidiennes habituelles en raison de problèmes à votre épaule, votre bras ou votre main ?
+@options Aucune = 1 | Légère = 2 | Moyenne = 3 | Importante = 4 | Extrême = 5
+? Veuillez évaluer la sévérité des symptômes suivants durant les 7 derniers jours : douleur de l’épaule, du bras ou de la main
+? Picotements ou fourmillements douloureux de l’épaule, du bras, ou de la main
+@options Pas du tout perturbé = 1 | Un peu perturbé = 2 | Moyennement perturbé = 3 | Très perturbé = 4 | Tellement perturbé que je ne peux pas dormir = 5
+? Pendant les 7 derniers jours, votre sommeil a-t-il été perturbé par une douleur de votre épaule, de votre bras ou de votre main ?
+`
   },
   {
     cle: "STARTBACK", nom: "STarT Back (risque de chronicité)", zone: "Lombalgie", scoring: "startback", debut: 0, sens: "bas", minRep: 9, unite: "/9",
