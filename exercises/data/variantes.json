@@ -719,6 +719,11 @@
   "f": "/exercises/images/main/serrer-balle-f.webp",
   "h": "/exercises/images/main/serrer-balle.webp"
  },
+ "/exercises/images/neuro/appui-bras-assis.webp": {
+  "defaut": "/exercises/images/neuro/appui-bras-assis.webp",
+  "f": "/exercises/images/neuro/appui-bras-assis.webp",
+  "h": "/exercises/images/neuro/appui-bras-assis-h.webp"
+ },
  "/exercises/images/neuro/couche-assis-lit.webp": {
   "defaut": "/exercises/images/neuro/couche-assis-lit.webp",
   "f": "/exercises/images/neuro/couche-assis-lit.webp",
@@ -734,10 +739,20 @@
   "f": "/exercises/images/neuro/doigt-nez.webp",
   "h": "/exercises/images/neuro/doigt-nez-h.webp"
  },
+ "/exercises/images/neuro/elevation-bras-mains-jointes.webp": {
+  "defaut": "/exercises/images/neuro/elevation-bras-mains-jointes.webp",
+  "f": "/exercises/images/neuro/elevation-bras-mains-jointes-f.webp",
+  "h": "/exercises/images/neuro/elevation-bras-mains-jointes.webp"
+ },
  "/exercises/images/neuro/equilibre-assis.webp": {
   "defaut": "/exercises/images/neuro/equilibre-assis.webp",
   "f": "/exercises/images/neuro/equilibre-assis.webp",
   "h": "/exercises/images/neuro/equilibre-assis-h.webp"
+ },
+ "/exercises/images/neuro/etirement-mollet-sangle.webp": {
+  "defaut": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+  "f": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+  "h": "/exercises/images/neuro/etirement-mollet-sangle-h.webp"
  },
  "/exercises/images/neuro/glissement-table.webp": {
   "defaut": "/exercises/images/neuro/glissement-table.webp",
@@ -759,15 +774,35 @@
   "f": "/exercises/images/neuro/mouvements-amples-f.webp",
   "h": "/exercises/images/neuro/mouvements-amples.webp"
  },
+ "/exercises/images/neuro/redressement-dos-mur.webp": {
+  "defaut": "/exercises/images/neuro/redressement-dos-mur.webp",
+  "f": "/exercises/images/neuro/redressement-dos-mur-f.webp",
+  "h": "/exercises/images/neuro/redressement-dos-mur.webp"
+ },
+ "/exercises/images/neuro/releveurs-elastique.webp": {
+  "defaut": "/exercises/images/neuro/releveurs-elastique.webp",
+  "f": "/exercises/images/neuro/releveurs-elastique-f.webp",
+  "h": "/exercises/images/neuro/releveurs-elastique.webp"
+ },
  "/exercises/images/neuro/retournement-lit.webp": {
   "defaut": "/exercises/images/neuro/retournement-lit.webp",
   "f": "/exercises/images/neuro/retournement-lit-f.webp",
   "h": "/exercises/images/neuro/retournement-lit.webp"
  },
+ "/exercises/images/neuro/rotation-tronc-assis.webp": {
+  "defaut": "/exercises/images/neuro/rotation-tronc-assis.webp",
+  "f": "/exercises/images/neuro/rotation-tronc-assis.webp",
+  "h": "/exercises/images/neuro/rotation-tronc-assis-h.webp"
+ },
  "/exercises/images/neuro/saisir-objets.webp": {
   "defaut": "/exercises/images/neuro/saisir-objets.webp",
   "f": "/exercises/images/neuro/saisir-objets-f.webp",
   "h": "/exercises/images/neuro/saisir-objets.webp"
+ },
+ "/exercises/images/neuro/se-relever-sol.webp": {
+  "defaut": "/exercises/images/neuro/se-relever-sol.webp",
+  "f": "/exercises/images/neuro/se-relever-sol.webp",
+  "h": "/exercises/images/neuro/se-relever-sol-h.webp"
  },
  "/exercises/images/neuro/tapotement-pieds.webp": {
   "defaut": "/exercises/images/neuro/tapotement-pieds.webp",
@@ -778,6 +813,11 @@
   "defaut": "/exercises/images/neuro/transfert-lit-fauteuil.webp",
   "f": "/exercises/images/neuro/transfert-lit-fauteuil-f.webp",
   "h": "/exercises/images/neuro/transfert-lit-fauteuil.webp"
+ },
+ "/exercises/images/neuro/transfert-poids-debout.webp": {
+  "defaut": "/exercises/images/neuro/transfert-poids-debout.webp",
+  "f": "/exercises/images/neuro/transfert-poids-debout-f.webp",
+  "h": "/exercises/images/neuro/transfert-poids-debout.webp"
  },
  "/exercises/images/pathologies/canal_lombaire_etroit/ex2.png": {
   "defaut": "/exercises/images/dos/posture-enfant.webp",
