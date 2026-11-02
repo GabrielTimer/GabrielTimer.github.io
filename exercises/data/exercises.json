@@ -14788,5 +14788,1035 @@
       "Mollet",
       "Cheville"
     ]
+  },
+  {
+    "id": "NEURO_01",
+    "nom": "Retournement dans le lit",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Se tourner seul sur le côté dans le lit",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "5 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 5,
+    "repos": 20,
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat",
+      "Tendre les bras joints vers le plafond",
+      "Tourner la tête puis lancer les bras et les genoux du côté où l'on se tourne",
+      "Revenir sur le dos et recommencer de l'autre côté"
+    ],
+    "precautions": [
+      "Lit stable, barrières si besoin",
+      "Se faire aider au début"
+    ],
+    "tags": [
+      "Neurologie",
+      "Abdominaux obliques",
+      "Épaule"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 5
+    },
+    "image": "/exercises/images/neuro/retournement-lit.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Tronc"
+    ],
+    "conseil_posture": [
+      "Mouvement en un seul bloc"
+    ],
+    "erreurs_frequentes": [
+      "Tirer sur le bord du lit seulement avec un bras"
+    ],
+    "version_facile": [
+      "Avec l'aide d'une personne"
+    ],
+    "version_avancee": [
+      "Sans élan des bras"
+    ],
+    "respiration": [
+      "Expirer en se tournant"
+    ],
+    "muscles_cibles": [
+      "Abdominaux obliques",
+      "Épaule"
+    ],
+    "materiel": [
+      "Lit"
+    ],
+    "contre_indications": [
+      "Douleur d'épaule importante"
+    ],
+    "benefices": [
+      "Plus d'autonomie au lit"
+    ],
+    "audio_cues": [
+      "Regardez",
+      "Lancez",
+      "Tournez"
+    ],
+    "coaching_court": [
+      "Tout ensemble"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Perte d'autonomie"
+    ],
+    "objectifs": [
+      "Se tourner seul sur le côté dans le lit"
+    ],
+    "zones": [
+      "Tronc"
+    ]
+  },
+  {
+    "id": "NEURO_02",
+    "nom": "Passage couché-assis au bord du lit",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "S'asseoir seule au bord du lit",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "5 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 5,
+    "repos": 20,
+    "consignes": [
+      "Couchée sur le côté au bord du lit, genoux pliés",
+      "Laisser descendre les jambes hors du lit",
+      "Pousser sur le coude puis sur la main pour redresser le buste",
+      "S'asseoir, pieds à plat au sol, et rester quelques secondes"
+    ],
+    "precautions": [
+      "Lit bas et stable",
+      "Rester assise avant de se lever"
+    ],
+    "tags": [
+      "Neurologie",
+      "Abdominaux",
+      "Bras"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 5
+    },
+    "image": "/exercises/images/neuro/couche-assis-lit.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Tronc"
+    ],
+    "conseil_posture": [
+      "Pieds bien à plat au sol en fin de mouvement"
+    ],
+    "erreurs_frequentes": [
+      "Se redresser d'un coup sans les bras"
+    ],
+    "version_facile": [
+      "Avec aide pour les jambes"
+    ],
+    "version_avancee": [
+      "Sans s'appuyer sur le coude"
+    ],
+    "respiration": [
+      "Expirer en se redressant"
+    ],
+    "muscles_cibles": [
+      "Abdominaux",
+      "Bras"
+    ],
+    "materiel": [
+      "Lit"
+    ],
+    "contre_indications": [
+      "Vertiges au lever"
+    ],
+    "benefices": [
+      "Lever plus facile et plus sûr"
+    ],
+    "audio_cues": [
+      "Jambes dehors",
+      "Poussez",
+      "Assise"
+    ],
+    "coaching_court": [
+      "Coude, main, assise"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Perte d'autonomie"
+    ],
+    "objectifs": [
+      "S'asseoir seule au bord du lit"
+    ],
+    "zones": [
+      "Tronc"
+    ]
+  },
+  {
+    "id": "NEURO_03",
+    "nom": "Transfert lit-fauteuil",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Passer seul du lit au fauteuil en sécurité",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "5 × 3 s, repos 30 s",
+    "ex": 3,
+    "reps": 5,
+    "repos": 30,
+    "consignes": [
+      "Assis au bord du lit, fauteuil placé à côté, en angle",
+      "Avancer les fesses, pieds en arrière des genoux",
+      "Prendre appui sur l'accoudoir le plus éloigné, se pencher en avant et se lever à moitié",
+      "Pivoter sur les pieds et s'asseoir lentement dans le fauteuil"
+    ],
+    "precautions": [
+      "Freins du fauteuil serrés",
+      "Personne à côté au début"
+    ],
+    "tags": [
+      "Neurologie",
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 5
+    },
+    "image": "/exercises/images/neuro/transfert-lit-fauteuil.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Jambes",
+      "Tronc"
+    ],
+    "conseil_posture": [
+      "Buste penché en avant pour se lever"
+    ],
+    "erreurs_frequentes": [
+      "Se lever trop droit",
+      "Pivoter sans regarder le fauteuil"
+    ],
+    "version_facile": [
+      "Avec aide"
+    ],
+    "version_avancee": [
+      "Sans les mains"
+    ],
+    "respiration": [
+      "Expirer en se levant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "materiel": [
+      "Lit",
+      "Fauteuil à accoudoirs"
+    ],
+    "contre_indications": [
+      "Instabilité importante sans aide"
+    ],
+    "benefices": [
+      "Autonomie dans les transferts"
+    ],
+    "audio_cues": [
+      "Penchez-vous",
+      "Pivotez",
+      "Asseyez-vous doucement"
+    ],
+    "coaching_court": [
+      "Penché, pivot"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Prévention des chutes"
+    ],
+    "objectifs": [
+      "Passer seul du lit au fauteuil en sécurité"
+    ],
+    "zones": [
+      "Jambes",
+      "Tronc"
+    ]
+  },
+  {
+    "id": "NEURO_04",
+    "nom": "Marche à grands pas",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Allonger le pas et balancer les bras",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 60 s, repos 30 s",
+    "ex": 60,
+    "reps": 3,
+    "repos": 30,
+    "consignes": [
+      "Marcher dans un couloir en faisant de grands pas",
+      "Poser le talon en premier",
+      "Balancer largement les bras",
+      "Compter les pas à voix haute pour garder le rythme"
+    ],
+    "precautions": [
+      "Couloir dégagé",
+      "Appui proche"
+    ],
+    "tags": [
+      "Neurologie",
+      "Fléchisseurs de hanche",
+      "Mollets"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 60,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/marche-grands-pas.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Jambes"
+    ],
+    "conseil_posture": [
+      "Buste droit, regard devant"
+    ],
+    "erreurs_frequentes": [
+      "Petits pas traînants",
+      "Regarder ses pieds"
+    ],
+    "version_facile": [
+      "Repères au sol pour guider le pas"
+    ],
+    "version_avancee": [
+      "Avec un métronome"
+    ],
+    "respiration": [
+      "Respiration libre"
+    ],
+    "muscles_cibles": [
+      "Fléchisseurs de hanche",
+      "Mollets"
+    ],
+    "materiel": [
+      "Couloir",
+      "Repères au sol"
+    ],
+    "contre_indications": [
+      "Chutes répétées sans surveillance"
+    ],
+    "benefices": [
+      "Marche plus ample et plus sûre"
+    ],
+    "audio_cues": [
+      "Grand pas",
+      "Talon",
+      "Bras"
+    ],
+    "coaching_court": [
+      "Grand"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson",
+      "AVC / hémiplégie"
+    ],
+    "objectifs": [
+      "Allonger le pas et balancer les bras"
+    ],
+    "zones": [
+      "Jambes"
+    ]
+  },
+  {
+    "id": "NEURO_05",
+    "nom": "Mouvements amples debout",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Retrouver des gestes amples et rapides",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 20,
+    "consignes": [
+      "Debout, pieds écartés",
+      "Ouvrir grand les bras sur les côtés en faisant un grand pas sur le côté",
+      "Revenir en refermant les bras",
+      "Faire le mouvement grand et énergique"
+    ],
+    "precautions": [
+      "Près d'un mur ou d'une chaise"
+    ],
+    "tags": [
+      "Neurologie",
+      "Épaules",
+      "Tronc"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/mouvements-amples.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Corps entier"
+    ],
+    "conseil_posture": [
+      "Doigts écartés, bras tendus"
+    ],
+    "erreurs_frequentes": [
+      "Mouvements petits et lents"
+    ],
+    "version_facile": [
+      "Assis"
+    ],
+    "version_avancee": [
+      "Plus rapide"
+    ],
+    "respiration": [
+      "Expirer en ouvrant"
+    ],
+    "muscles_cibles": [
+      "Épaules",
+      "Tronc"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "contre_indications": [
+      "Troubles de l'équilibre sévères"
+    ],
+    "benefices": [
+      "Gestes plus amples au quotidien"
+    ],
+    "audio_cues": [
+      "Grand",
+      "Fort",
+      "Ouvrez"
+    ],
+    "coaching_court": [
+      "Grand !"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson"
+    ],
+    "objectifs": [
+      "Retrouver des gestes amples et rapides"
+    ],
+    "zones": [
+      "Corps entier"
+    ]
+  },
+  {
+    "id": "NEURO_06",
+    "nom": "Doigt-nez",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Améliorer la précision du geste",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 15 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 15,
+    "consignes": [
+      "Assise, dos droit",
+      "Tendre le bras sur le côté",
+      "Venir toucher le bout de son nez avec l'index, lentement",
+      "Retendre le bras et recommencer, puis de l'autre côté"
+    ],
+    "precautions": [
+      "Sans forcer"
+    ],
+    "tags": [
+      "Neurologie",
+      "Épaule",
+      "Coude"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/doigt-nez.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Aller trop vite"
+    ],
+    "version_facile": [
+      "Yeux ouverts"
+    ],
+    "version_avancee": [
+      "Yeux fermés"
+    ],
+    "respiration": [
+      "Respiration calme"
+    ],
+    "muscles_cibles": [
+      "Épaule",
+      "Coude"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Aucune"
+    ],
+    "benefices": [
+      "Gestes plus précis"
+    ],
+    "audio_cues": [
+      "Lentement",
+      "Précis"
+    ],
+    "coaching_court": [
+      "Le nez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques"
+    ],
+    "objectifs": [
+      "Améliorer la précision du geste"
+    ],
+    "zones": [
+      "Bras"
+    ]
+  },
+  {
+    "id": "NEURO_07",
+    "nom": "Tapotement des pieds assis",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Coordination et rythme des jambes",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 30 s, repos 20 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 20,
+    "consignes": [
+      "Assis, pieds à plat",
+      "Taper alternativement la pointe du pied droit puis du gauche au sol",
+      "Garder un rythme régulier",
+      "Accélérer progressivement"
+    ],
+    "precautions": [
+      "Chaise stable"
+    ],
+    "tags": [
+      "Neurologie",
+      "Releveurs du pied",
+      "Mollets"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/tapotement-pieds.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Jambes"
+    ],
+    "conseil_posture": [
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Décoller le talon"
+    ],
+    "version_facile": [
+      "Plus lent"
+    ],
+    "version_avancee": [
+      "Talon puis pointe"
+    ],
+    "respiration": [
+      "Respiration libre"
+    ],
+    "muscles_cibles": [
+      "Releveurs du pied",
+      "Mollets"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Aucune"
+    ],
+    "benefices": [
+      "Marche plus fluide"
+    ],
+    "audio_cues": [
+      "Tap, tap",
+      "Régulier"
+    ],
+    "coaching_court": [
+      "Rythme"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques"
+    ],
+    "objectifs": [
+      "Coordination et rythme des jambes"
+    ],
+    "zones": [
+      "Jambes"
+    ]
+  },
+  {
+    "id": "NEURO_08",
+    "nom": "Glissement de l'avant-bras sur la table",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Mobiliser l'épaule et le coude du bras atteint",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 20,
+    "consignes": [
+      "Assise face à une table, avant-bras posé sur une serviette",
+      "Faire glisser la main vers l'avant en tendant le bras",
+      "Revenir lentement",
+      "Aider avec l'autre main si besoin"
+    ],
+    "precautions": [
+      "Sans douleur à l'épaule"
+    ],
+    "tags": [
+      "Neurologie",
+      "Deltoïde",
+      "Triceps"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/glissement-table.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Épaule",
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Dos droit, épaules basses"
+    ],
+    "erreurs_frequentes": [
+      "Hausser l'épaule"
+    ],
+    "version_facile": [
+      "Mains jointes"
+    ],
+    "version_avancee": [
+      "Dessiner des cercles"
+    ],
+    "respiration": [
+      "Expirer en allant loin"
+    ],
+    "muscles_cibles": [
+      "Deltoïde",
+      "Triceps"
+    ],
+    "materiel": [
+      "Table",
+      "Serviette"
+    ],
+    "contre_indications": [
+      "Épaule douloureuse"
+    ],
+    "benefices": [
+      "Bras plus mobile"
+    ],
+    "audio_cues": [
+      "Glissez",
+      "Loin"
+    ],
+    "coaching_court": [
+      "Loin"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie"
+    ],
+    "objectifs": [
+      "Mobiliser l'épaule et le coude du bras atteint"
+    ],
+    "zones": [
+      "Épaule",
+      "Bras"
+    ]
+  },
+  {
+    "id": "NEURO_09",
+    "nom": "Saisir et déplacer des objets",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Améliorer la préhension",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 60 s, repos 20 s",
+    "ex": 60,
+    "reps": 3,
+    "repos": 20,
+    "consignes": [
+      "Assis à table, des objets devant soi (gobelet, balle, pinces)",
+      "Saisir un objet",
+      "Le déplacer de l'autre côté et le lâcher",
+      "Varier la taille des objets"
+    ],
+    "precautions": [
+      "Objets incassables"
+    ],
+    "tags": [
+      "Neurologie",
+      "Fléchisseurs des doigts"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 60,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/saisir-objets.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Main"
+    ],
+    "conseil_posture": [
+      "Dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Compenser avec l'épaule"
+    ],
+    "version_facile": [
+      "Gros objets"
+    ],
+    "version_avancee": [
+      "Petits objets, pince fine"
+    ],
+    "respiration": [
+      "Respiration libre"
+    ],
+    "muscles_cibles": [
+      "Fléchisseurs des doigts"
+    ],
+    "materiel": [
+      "Table",
+      "Petits objets"
+    ],
+    "contre_indications": [
+      "Aucune"
+    ],
+    "benefices": [
+      "Gestes du quotidien plus faciles"
+    ],
+    "audio_cues": [
+      "Prenez",
+      "Posez"
+    ],
+    "coaching_court": [
+      "Pince"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Maladie de Parkinson"
+    ],
+    "objectifs": [
+      "Améliorer la préhension"
+    ],
+    "zones": [
+      "Main"
+    ]
+  },
+  {
+    "id": "NEURO_10",
+    "nom": "Demi-tour en plusieurs pas",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Tourner sans perdre l'équilibre",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "6 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 6,
+    "repos": 20,
+    "consignes": [
+      "Debout près d'un appui",
+      "Faire demi-tour en plusieurs petits pas en dessinant un arc",
+      "Ne pas pivoter sur un seul pied",
+      "Tourner dans les deux sens"
+    ],
+    "precautions": [
+      "Appui à portée de main"
+    ],
+    "tags": [
+      "Neurologie",
+      "Muscles stabilisateurs"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 6
+    },
+    "image": "/exercises/images/neuro/demi-tour.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Jambes"
+    ],
+    "conseil_posture": [
+      "Regard dans la direction du virage"
+    ],
+    "erreurs_frequentes": [
+      "Pivoter sur un pied",
+      "Croiser les jambes"
+    ],
+    "version_facile": [
+      "Avec appui"
+    ],
+    "version_avancee": [
+      "Plus vite"
+    ],
+    "respiration": [
+      "Respiration libre"
+    ],
+    "muscles_cibles": [
+      "Muscles stabilisateurs"
+    ],
+    "materiel": [
+      "Chaise pour appui"
+    ],
+    "contre_indications": [
+      "Chutes fréquentes sans surveillance"
+    ],
+    "benefices": [
+      "Moins de risque de chute en tournant"
+    ],
+    "audio_cues": [
+      "Petits pas",
+      "Arc"
+    ],
+    "coaching_court": [
+      "Arc"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson",
+      "Prévention des chutes"
+    ],
+    "objectifs": [
+      "Tourner sans perdre l'équilibre"
+    ],
+    "zones": [
+      "Jambes"
+    ]
+  },
+  {
+    "id": "NEURO_11",
+    "nom": "Marche en double tâche",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Marcher en faisant une autre tâche",
+    "niveau": 2,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 60 s, repos 30 s",
+    "ex": 60,
+    "reps": 3,
+    "repos": 30,
+    "consignes": [
+      "Marcher normalement dans un couloir",
+      "En même temps, porter un plateau avec un verre",
+      "Ou compter à rebours de 3 en 3",
+      "Garder un pas régulier"
+    ],
+    "precautions": [
+      "Couloir dégagé"
+    ],
+    "tags": [
+      "Neurologie",
+      "Jambes"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 60,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/marche-double-tache.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 2,
+    "zones_corporelles": [
+      "Corps entier"
+    ],
+    "conseil_posture": [
+      "Regard devant"
+    ],
+    "erreurs_frequentes": [
+      "S'arrêter pour réfléchir"
+    ],
+    "version_facile": [
+      "Tâche simple"
+    ],
+    "version_avancee": [
+      "Tâche plus difficile"
+    ],
+    "respiration": [
+      "Respiration libre"
+    ],
+    "muscles_cibles": [
+      "Jambes"
+    ],
+    "materiel": [
+      "Plateau ou verre"
+    ],
+    "contre_indications": [
+      "Troubles de l'équilibre sévères"
+    ],
+    "benefices": [
+      "Marche plus sûre au quotidien"
+    ],
+    "audio_cues": [
+      "Marchez",
+      "Comptez"
+    ],
+    "coaching_court": [
+      "Deux à la fois"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Prévention des chutes"
+    ],
+    "objectifs": [
+      "Marcher en faisant une autre tâche"
+    ],
+    "zones": [
+      "Corps entier"
+    ]
+  },
+  {
+    "id": "NEURO_12",
+    "nom": "Équilibre assis, bras tendus",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Stabiliser le tronc assis",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "8 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 8,
+    "repos": 20,
+    "consignes": [
+      "Assise au milieu de la chaise, sans dossier",
+      "Tendre un bras pour aller chercher loin devant puis sur le côté",
+      "Revenir au centre",
+      "Alterner les bras"
+    ],
+    "precautions": [
+      "Personne à côté au début"
+    ],
+    "tags": [
+      "Neurologie",
+      "Abdominaux",
+      "Muscles du dos"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 8
+    },
+    "image": "/exercises/images/neuro/equilibre-assis.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Tronc"
+    ],
+    "conseil_posture": [
+      "Pieds à plat, dos droit au retour"
+    ],
+    "erreurs_frequentes": [
+      "S'appuyer au dossier"
+    ],
+    "version_facile": [
+      "Petite distance"
+    ],
+    "version_avancee": [
+      "Aller plus loin, yeux fermés"
+    ],
+    "respiration": [
+      "Expirer en allant loin"
+    ],
+    "muscles_cibles": [
+      "Abdominaux",
+      "Muscles du dos"
+    ],
+    "materiel": [
+      "Chaise sans accoudoirs"
+    ],
+    "contre_indications": [
+      "Aucune"
+    ],
+    "benefices": [
+      "Meilleur équilibre assis"
+    ],
+    "audio_cues": [
+      "Loin",
+      "Revenez"
+    ],
+    "coaching_court": [
+      "Atteindre"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques"
+    ],
+    "objectifs": [
+      "Stabiliser le tronc assis"
+    ],
+    "zones": [
+      "Tronc"
+    ]
   }
 ]
