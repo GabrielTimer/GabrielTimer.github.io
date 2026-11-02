@@ -356,9 +356,35 @@ export const MODELES = [
   },
   {
     cle: "EIFEL", nom: "EIFEL (Roland-Morris)", zone: "Lombalgie", scoring: "somme", debut: 0, sens: "bas", max: 24, unite: "/24",
-    consigne: "Cochez « Oui » pour chaque phrase qui vous décrit aujourd'hui.",
-    interpretation: "Score de 0 à 24 : plus il est élevé, plus l'incapacité est importante.",
-    texte: sharedQs(24, ["Non = 0", "Oui = 1"])
+    consigne: "Ces phrases exposent certaines difficultés à effectuer une activité physique quotidienne en rapport avec votre douleur lombaire. Lorsqu’une phrase correspond à une difficulté qui vous affecte aujourd’hui, répondez « Oui ». Dans le cas contraire, répondez « Non ».",
+    interpretation: "Score de 0 à 24 : plus il est élevé, plus l'incapacité est importante (24 = incapacité totale). Changement cliniquement significatif : au moins 2 à 3 points. Version française validée (Coste et al., 1993).",
+    aideKine: "Textes de l’EIFEL (version française du Roland-Morris) déjà intégrés.",
+    texte: `@options Non = 0 | Oui = 1
+? 1. Je reste pratiquement tout le temps à la maison à cause de mon dos
+? 2. Je change souvent de position pour soulager mon dos
+? 3. Je marche plus lentement que d’habitude à cause de mon dos
+? 4. A cause de mon dos, je n’effectue aucune des tâches que j’ai l’habitude de faire à la maison
+? 5. A cause de mon dos, je m’aide de la rampe pour monter les escaliers
+? 6. A cause de mon dos, je m’allonge plus souvent pour me reposer
+? 7. A cause de mon dos, je suis obligé(e) de prendre un appui pour sortir d’un fauteuil
+? 8. A cause de mon dos, j’essaie d’obtenir que d’autres fassent des choses à ma place
+? 9. A cause de mon dos, je m’habille plus lentement que d’habitude
+? 10. Je ne reste debout que de courts moments à cause de mon dos
+? 11. A cause de mon dos, j’essaie de ne pas me baisser ni de m’agenouiller
+? 12. A cause de mon dos, j’ai du mal à me lever d’une chaise
+? 13. J’ai mal au dos la plupart du temps
+? 14. A cause de mon dos, j’ai des difficultés à me retourner dans mon lit
+? 15. J’ai moins d’appétit à cause de mon mal de dos
+? 16. A cause de mon dos, j’ai du mal à mettre mes chaussettes (ou bas collants)
+? 17. Je ne peux marcher que sur de courtes distances à cause de mon mal de dos
+? 18. Je dors moins à cause de mon mal de dos
+? 19. A cause de mon dos, quelqu’un m’aide pour m’habiller
+? 20. A cause de mon dos, je reste assis(e) la plus grande partie de la journée
+? 21. A cause de mon dos, j’évite de faire de gros travaux à la maison
+? 22. A cause de mon mal de dos, je suis plus irritable que d’habitude et de mauvaise humeur avec les gens
+? 23. A cause de mon dos, je monte les escaliers plus lentement que d’habitude
+? 24. A cause de mon dos, je reste au lit la plupart du temps
+`
   },
   {
     cle: "KOOS", nom: "KOOS (genou)", zone: "Genou", scoring: "koos", debut: 0, sens: "haut",
