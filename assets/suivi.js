@@ -4,7 +4,7 @@
    ========================================================= */
 
 import { esc, icon, openSheet, toast, confirmDialog, promptDialog, fmtShortDate, fmtDate, startOfDay, plural } from "./app.js";
-import { fmtScore, isDue, unitOf } from "./questionnaires.js";
+import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions } from "./questionnaires.js";
 import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
 
 const DAY = 864e5;
@@ -146,7 +146,7 @@ export async function mountKineSuivi(box, patient, C){
             const lo = q.scoring === "somme" && q.items ? 0 : 0;
             const hi = unitOf(q) === "/24" ? 24 : unitOf(q) === "/80" ? 80 : 100;
             return `<div class="sv-row">
-              <div class="sv-main"><strong>${esc(q.nom)}</strong><span class="small muted">${res.length ? `${plural(res.length, "réponse")}, la dernière le ${esc(fmtShortDate(last.date))}` : "En attente de réponse"}${a ? (a.jours ? `, tous les ${a.jours} jours` : ", une fois") : ", plus proposé"}</span></div>
+              <div class="sv-main"><strong>${esc(q.nom)}</strong><span class="small muted">${res.length ? `${plural(res.length, "réponse")}, la dernière le ${esc(fmtShortDate(last.date))}` : "En attente de réponse"}${a ? (a.jours ? `, tous les ${a.jours} jours` : ", une fois") : ", plus proposé"}</span>${res.length > 1 ? avantApresLigne(q, res[0], last) : ""}</div>
               ${(() => { const sc = res.map(r => r.score).filter(v => typeof v === "number"); const pad = Math.max(2, (hi - lo) * .08); return sparkHTML(sc, { min:Math.max(lo, Math.min(...sc) - pad), max:Math.min(hi, Math.max(...sc) + pad), better:q.sens === "haut" ? "haut" : "bas" }); })()}
               <span class="sv-val num">${last ? esc(fmtScore(last.score, q)) : "–"}</span>
               <button class="icon-btn sm" type="button" data-s="q-detail" data-id="${esc(id)}" aria-label="Détail">${icon("chevron")}</button>
@@ -261,6 +261,11 @@ export async function mountKineSuivi(box, patient, C){
         title: q.nom,
         body: `<div class="stack" style="--gap:14px">
           ${q.interpretation ? `<p class="small muted">${esc(q.interpretation)}</p>` : ""}
+          ${res.length > 1 ? `<div class="panel" style="padding:14px"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center"><strong>Avant / après</strong><span class="spacer"></span>
+            <select class="select" id="aa-a" aria-label="Avant" style="width:auto">${res.map((r, k) => `<option value="${k}" ${k === res.length - 1 ? "selected" : ""}>${esc(fmtShortDate(r.date))}</option>`).join("")}</select>
+            <span>→</span>
+            <select class="select" id="aa-b" aria-label="Après" style="width:auto">${res.map((r, k) => `<option value="${k}" ${k === 0 ? "selected" : ""}>${esc(fmtShortDate(r.date))}</option>`).join("")}</select></div>
+            <div id="aa-out" style="margin-top:12px"></div></div>` : ""}
           ${res.length ? `<table class="tbl"><thead><tr><th>Date</th><th>Score</th>${res.some(r => r.sousScores) ? "<th>Détail</th>" : ""}</tr></thead><tbody>${res.map((r, k) => {
             const prev = res[k + 1];
             const delta = prev && r.score !== undefined && prev.score !== undefined ? Math.round((r.score - prev.score) * 10) / 10 : null;
@@ -270,6 +275,14 @@ export async function mountKineSuivi(box, patient, C){
         </div>`,
         foot: `${a ? `<button class="btn danger" type="button" id="qd-stop">Ne plus proposer</button>` : ""}<button class="btn primary" type="button" data-close>Fermer</button>`
       });
+      const aaDraw = () => {
+        const out = s.el.querySelector("#aa-out"); if(!out) return;
+        const A = res[+s.el.querySelector("#aa-a").value], Bq = res[+s.el.querySelector("#aa-b").value];
+        out.innerHTML = avantApresDetail(q, A, Bq);
+      };
+      s.el.querySelector("#aa-a")?.addEventListener("change", aaDraw);
+      s.el.querySelector("#aa-b")?.addEventListener("change", aaDraw);
+      aaDraw();
       s.el.querySelector("#qd-stop")?.addEventListener("click", async () => {
         await savePatient({ questionnaires: (patient.questionnaires || []).filter(x => x.qid !== id) }); s.close(); toast("Le questionnaire n'est plus proposé.", { type:"ok" });
       });
@@ -300,4 +313,31 @@ export async function mountKineSuivi(box, patient, C){
 
   render();
   return { suivis: () => suivis };
+}
+
+
+/* ---------- Questionnaires : avant / après ---------- */
+
+const VCLS = { mieux:"ok", "mieux?":"ok", moins:"danger", "moins?":"danger", stable:"" };
+const fx = v => v === null || v === undefined ? "–" : String(v).replace(".", ",");
+const qItems = q => q.items || (q.texte ? parseQuestions(q.texte, q.debut || 0) : []);
+
+/** Une ligne courte pour la liste : « Début 42 % → maintenant 18 % (−24) ». */
+function avantApresLigne(q, a, b){
+  const c = comparer({ ...q, items: qItems(q) }, a, b);
+  if(c.d === null) return "";
+  return `<span class="small" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px">Début ${esc(fmtScore(a.score, q))} → ${esc(fmtScore(b.score, q))} <span class="badge ${VCLS[c.verdict] || ""}">${c.d > 0 ? "+" : ""}${fx(c.d)}</span>${c.verdict === "mieux" ? `<span class="small" style="color:var(--ok)">significatif</span>` : c.verdict === "moins" ? `<span class="small" style="color:var(--danger)">aggravation</span>` : ""}</span>`;
+}
+
+/** Détail de la comparaison entre deux réponses. */
+function avantApresDetail(q, a, b){
+  if(a === b) return `<p class="small muted">Choisissez deux dates différentes.</p>`;
+  const c = comparer({ ...q, items: qItems(q) }, a, b);
+  const head = c.d === null ? `<p class="small muted">Score non calculable pour l'une des deux dates.</p>`
+    : `<div class="row" style="gap:10px;align-items:baseline;flex-wrap:wrap"><span class="num" style="font-size:var(--fs-xl);font-weight:800">${esc(fmtScore(a.score, q))} → ${esc(fmtScore(b.score, q))}</span><span class="badge ${VCLS[c.verdict] || ""}">${c.d > 0 ? "+" : ""}${fx(c.d)}</span></div>
+      <p class="small" style="margin-top:4px">${esc(VERDICT_TXT[c.verdict] || "")}${c.mcid !== null ? ` <span class="faint">(seuil ≈ ${fx(c.mcid)} pts)</span>` : ""}</p>`;
+  const sous = c.sous.length ? `<table class="tbl" style="margin-top:10px"><thead><tr><th>Section</th><th>Avant</th><th>Après</th><th>Écart</th></tr></thead><tbody>${c.sous.map(x => `<tr><td>${esc(x.nom)}</td><td class="num">${esc(fx(x.a))}</td><td class="num">${esc(fx(x.b))}</td><td class="num">${x.d === null ? "" : `<span class="badge ${VCLS[x.v] || ""}">${x.d > 0 ? "+" : ""}${fx(x.d)}</span>`}</td></tr>`).join("")}</tbody></table>` : "";
+  const top = c.items.slice(0, 6);
+  const items = top.length ? `<div class="sub" style="margin:14px 0 6px;font-weight:800">Ce qui a le plus changé</div><ul class="small" style="margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px">${top.map(i => `<li><span style="color:var(${i.mieux ? "--ok" : "--danger"});font-weight:700">${i.mieux ? "▲ mieux" : "▼ moins bien"}</span> · ${esc(i.texte)}<br><span class="muted">${esc(i.a)} → ${esc(i.b)}</span></li>`).join("")}</ul>${c.items.length > top.length ? `<p class="small muted" style="margin-top:6px">${c.items.length - top.length} autre(s) réponse(s) modifiée(s).</p>` : ""}` : (c.d !== null ? `<p class="small muted" style="margin-top:10px">Aucune réponse n'a changé entre ces deux dates.</p>` : "");
+  return head + sous + items;
 }

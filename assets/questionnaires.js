@@ -518,3 +518,49 @@ export function isDue(lastDate, jours){
   if(!jours) return false;
   return Date.now() - lastDate >= jours * 864e5 - 6 * 3600e3;
 }
+
+/* ---------- Comparaison avant / après ---------- */
+
+/** Écart cliniquement important (MCID) par questionnaire, dans l'unité du score. */
+export const MCID = { ODI:10, NDI:7.5, QDASH:8, EIFEL:3, LEFS:9, KOOS:8 };
+const mcidOf = q => q.mcid ?? MCID[q.cle] ?? MCID[String(q.cle || "").toUpperCase()] ?? null;
+
+/** Lecture d'un écart : "mieux", "moins", "stable" (écart < MCID) ou null (pas de seuil connu). */
+export function verdictEcart(q, d, mcid = mcidOf(q)){
+  if(d === null || d === undefined || isNaN(d)) return null;
+  const bon = q.sens === "haut" ? d > 0 : d < 0;
+  if(mcid === null) return d === 0 ? "stable" : (bon ? "mieux?" : "moins?");
+  if(Math.abs(d) < mcid) return "stable";
+  return bon ? "mieux" : "moins";
+}
+
+/**
+ * Compare deux réponses (a = avant, b = après) d'un même questionnaire.
+ * Renvoie l'écart global, les sections et les questions qui ont le plus changé.
+ */
+export function comparer(q, a, b){
+  const r1 = n => Math.round(n * 10) / 10;
+  const d = typeof a?.score === "number" && typeof b?.score === "number" ? r1(b.score - a.score) : null;
+  const mcid = mcidOf(q);
+  const sous = [];
+  const sa = a?.sousScores || {}, sb = b?.sousScores || {};
+  [...new Set([...Object.keys(sa), ...Object.keys(sb)])].forEach(k => {
+    const x = sa[k], y = sb[k];
+    const num = typeof x === "number" && typeof y === "number";
+    sous.push({ nom:k, a:x ?? null, b:y ?? null, d: num ? r1(y - x) : null, v: num ? verdictEcart({ sens: q.scoring === "koos" ? "haut" : q.sens }, r1(y - x), q.scoring === "koos" ? mcid : null) : null });
+  });
+  // Questions : pour toutes les échelles, une valeur plus basse = moins de gêne, sauf LEFS / scores « plus haut est mieux » non KOOS.
+  const basMieux = q.scoring === "koos" || q.sens !== "haut";
+  const items = (q.items || []).map((it, i) => {
+    const x = a?.reponses?.[i], y = b?.reponses?.[i];
+    if(x === null || x === undefined || y === null || y === undefined || x === y) return null;
+    const lib = v => (it.options.find(o => o.valeur === v) || {}).texte || String(v);
+    return { texte: it.texte, a: lib(x), b: lib(y), ecart: Math.abs(y - x), mieux: basMieux ? y < x : y > x };
+  }).filter(Boolean).sort((u, v) => v.ecart - u.ecart);
+  return { d, mcid, verdict: verdictEcart(q, d, mcid), sous, items };
+}
+
+export const VERDICT_TXT = {
+  mieux: "amélioration cliniquement significative", moins: "aggravation cliniquement significative",
+  stable: "écart inférieur au seuil cliniquement significatif", "mieux?": "amélioration", "moins?": "aggravation"
+};

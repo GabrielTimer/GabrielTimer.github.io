@@ -4,7 +4,7 @@
 
 import {
   $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, openSheet,
-  errorHTML, emptyHTML, debounce, evaColor
+  errorHTML, emptyHTML, debounce, evaColor, evaFace
 } from "../app.js";
 
 const app = $("#app");
@@ -162,6 +162,7 @@ function render(){
 
         <section class="panel">
           <div class="panel-head"><h2>Mesures</h2><span class="badge">scores validés</span><span class="spacer"></span><button class="btn sm" type="button" id="a-scores">${icon("download")}Reprendre les réponses du patient</button></div>
+          <div class="field" style="margin-bottom:14px"><label>Douleur globale (EVA / NPRS)</label>${smileysHTML("nprs", S.f.m_nprs === undefined || S.f.m_nprs === "" ? null : +S.f.m_nprs)}<span class="hint">Touchez un visage (0, 2, 4, 6, 8 ou 10) ou saisissez la valeur exacte dans « NPRS » ci-dessous.</span></div>
           <div class="mes-grid">${K.MES.map(([k, l]) => `<div class="field"><label for="f-${k}">${esc(l)}</label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
           <div id="evo"></div>
         </section>
@@ -220,7 +221,8 @@ function drawZone(){
     return;
   }
   el.innerHTML = `<div class="zone-box">
-      <h3>${esc(n)}<span class="spacer"></span><span class="badge" style="background:${evaColor(p.eva)};color:#fff">EVA ${p.eva}/10</span></h3>
+      <h3>${esc(n)}<span class="spacer"></span><img class="eva-now" src="${evaFace(p.eva)}" alt=""><span class="badge" style="background:${evaColor(p.eva)};color:#fff">EVA ${p.eva}/10</span></h3>
+      ${smileysHTML("eva", p.eva)}
       <div class="eva-pick" role="group" aria-label="Intensité de la douleur">${[...Array(11).keys()].map(i => `<button type="button" data-eva="${i}" style="--c:${evaColor(i)}" aria-pressed="${p.eva === i}">${i}</button>`).join("")}</div>
       <div class="chips">${K.TYPES.map(t => `<button class="chip" type="button" data-ptype="${esc(t)}" aria-pressed="${(p.types || []).includes(t)}">${esc(t)}</button>`).join("")}</div>
       <button class="btn ghost sm" type="button" data-rmzone style="margin-top:10px">${icon("trash")}Retirer cette zone</button>
@@ -385,6 +387,11 @@ app.addEventListener("click", async e => {
     return;
   }
   if(d.pick){ pickZone(d.pick); return; }
+  if(d.nprs !== undefined){
+    S.f.m_nprs = d.nprs; const inp = $("#f-m_nprs"); if(inp) inp.value = d.nprs;
+    $$("[data-nprs]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    drawEvo(); changed(); return;
+  }
   if(d.eva !== undefined && ui.sel){ S.pain[ui.sel].eva = +d.eva; drawBody(); drawZone(); drawEvo(); changed(); return; }
   if(d.ptype && ui.sel){
     const a = S.pain[ui.sel].types = S.pain[ui.sel].types || [], i = a.indexOf(d.ptype);
@@ -470,7 +477,8 @@ app.addEventListener("input", e => {
   if(!k) return;
   if(k === "type"){ S.type = el.value; $("#h-title").textContent = B.typeLabel(S.type); }
   else if(k === "date"){ S.date = el.value || B.todayISO(); drawEvo(); }
-  else{ S.f[k] = el.value; if(K.MES.some(m => m[0] === k) || (K.TF || []).some(m => m[0] === k)) drawEvo(); }
+  else{ S.f[k] = el.value; if(K.MES.some(m => m[0] === k) || (K.TF || []).some(m => m[0] === k)) drawEvo();
+    if(k === "m_nprs"){ const v = parseFloat(String(el.value).replace(",", ".")); const c = isNaN(v) ? null : Math.min(10, Math.round(v / 2) * 2); $$("[data-nprs]").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.nprs === c))); } }
   changed();
 });
 
@@ -512,3 +520,11 @@ function testSheet(n){
 
 render();
 if(restored) queueSave();
+
+
+/* ---------- Échelle de smileys (images de l'application) ---------- */
+function smileysHTML(kind, val){
+  const steps = [0, 2, 4, 6, 8, 10];
+  const cur = val === null || val === undefined || isNaN(val) ? null : Math.min(10, Math.round(val / 2) * 2);
+  return `<div class="eva-faces" role="group" aria-label="Échelle visuelle de douleur">${steps.map(v => `<button type="button" data-${kind}="${v}" aria-pressed="${cur === v}" aria-label="Douleur ${v} sur 10" style="--c:${evaColor(v)}"><img src="${evaFace(v)}" alt=""><span>${v}</span></button>`).join("")}</div>`;
+}
