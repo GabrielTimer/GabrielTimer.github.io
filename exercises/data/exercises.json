@@ -15818,5 +15818,699 @@
     "zones": [
       "Tronc"
     ]
+  },
+  {
+    "id": "NEURO_13",
+    "nom": "Releveurs du pied à l'élastique assis",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Renforcer les releveurs du pied pour ne plus accrocher la pointe",
+    "niveau": 1,
+    "exercise_mode": "renforcement",
+    "duree": "10 × 3 s, repos 30 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 30,
+    "consignes": [
+      "Assis, jambe tendue devant soi, talon posé au sol",
+      "Élastique autour de l'avant-pied, l'autre extrémité tenue par une personne ou attachée à un pied de table devant",
+      "Remonter la pointe du pied vers soi contre l'élastique",
+      "Revenir lentement"
+    ],
+    "precautions": [
+      "Élastique bien fixé",
+      "Sans crampe"
+    ],
+    "tags": [
+      "Neurologie",
+      "Jambier antérieur",
+      "Releveurs des orteils"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/releveurs-elastique.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cheville et pied"
+    ],
+    "conseil_posture": [
+      "Talon reste au sol"
+    ],
+    "erreurs_frequentes": [
+      "Bouger toute la jambe"
+    ],
+    "version_facile": [
+      "Sans élastique"
+    ],
+    "version_avancee": [
+      "Élastique plus résistant"
+    ],
+    "respiration": [
+      "Expirer en remontant la pointe"
+    ],
+    "muscles_cibles": [
+      "Jambier antérieur",
+      "Releveurs des orteils"
+    ],
+    "materiel": [
+      "Chaise",
+      "Élastique"
+    ],
+    "contre_indications": [
+      "Douleur de cheville"
+    ],
+    "benefices": [
+      "Pied qui accroche moins à la marche"
+    ],
+    "audio_cues": [
+      "Pointe vers vous",
+      "Lentement"
+    ],
+    "coaching_court": [
+      "Pointe !"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth"
+    ],
+    "objectifs": [
+      "Renforcer les releveurs du pied pour ne plus accrocher la pointe"
+    ],
+    "zones": [
+      "Cheville et pied"
+    ]
+  },
+  {
+    "id": "NEURO_14",
+    "nom": "Étirement du mollet à la sangle",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Garder la souplesse de la cheville",
+    "niveau": 1,
+    "exercise_mode": "etirement",
+    "duree": "3 × 30 s, repos 20 s",
+    "ex": 30,
+    "reps": 3,
+    "repos": 20,
+    "consignes": [
+      "Assise au sol ou sur un lit, jambe tendue devant soi",
+      "Passer une sangle sous l'avant-pied",
+      "Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+      "Tenir 30 secondes en respirant"
+    ],
+    "precautions": [
+      "Étirement doux, jamais douloureux"
+    ],
+    "tags": [
+      "Neurologie",
+      "Mollets",
+      "Ischio-jambiers"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 30,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Cheville et pied"
+    ],
+    "conseil_posture": [
+      "Genou tendu, dos droit"
+    ],
+    "erreurs_frequentes": [
+      "Tirer par à-coups"
+    ],
+    "version_facile": [
+      "Genou légèrement plié"
+    ],
+    "version_avancee": [
+      "Pencher le buste en avant"
+    ],
+    "respiration": [
+      "Respirer lentement pendant l'étirement"
+    ],
+    "muscles_cibles": [
+      "Mollets",
+      "Ischio-jambiers"
+    ],
+    "materiel": [
+      "Sangle ou serviette"
+    ],
+    "contre_indications": [
+      "Douleur vive au mollet"
+    ],
+    "benefices": [
+      "Cheville plus souple, marche plus facile"
+    ],
+    "audio_cues": [
+      "Tirez doucement",
+      "Respirez"
+    ],
+    "coaching_court": [
+      "Tenez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth",
+      "Maladie de Parkinson"
+    ],
+    "objectifs": [
+      "Garder la souplesse de la cheville"
+    ],
+    "zones": [
+      "Cheville et pied"
+    ]
+  },
+  {
+    "id": "NEURO_15",
+    "nom": "Élévation des bras mains jointes allongé",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Entretenir la mobilité de l'épaule atteinte",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 20,
+    "consignes": [
+      "Allongé sur le dos, genoux pliés",
+      "Croiser les doigts des deux mains, la main valide aide l'autre",
+      "Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
+      "Redescendre lentement"
+    ],
+    "precautions": [
+      "Rester sous le seuil de douleur",
+      "Épaule soutenue"
+    ],
+    "tags": [
+      "Neurologie",
+      "Deltoïde",
+      "Grand dentelé"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/elevation-bras-mains-jointes.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Épaule"
+    ],
+    "conseil_posture": [
+      "Coudes tendus, bas du dos posé"
+    ],
+    "erreurs_frequentes": [
+      "Monter trop vite"
+    ],
+    "version_facile": [
+      "Monter seulement jusqu'au plafond"
+    ],
+    "version_avancee": [
+      "Tenir 3 secondes en haut"
+    ],
+    "respiration": [
+      "Inspirer en montant, expirer en descendant"
+    ],
+    "muscles_cibles": [
+      "Deltoïde",
+      "Grand dentelé"
+    ],
+    "materiel": [
+      "Lit ou tapis"
+    ],
+    "contre_indications": [
+      "Épaule douloureuse ou luxée"
+    ],
+    "benefices": [
+      "Épaule plus mobile, moins de raideur"
+    ],
+    "audio_cues": [
+      "Montez",
+      "Doucement"
+    ],
+    "coaching_court": [
+      "Mains jointes"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques"
+    ],
+    "objectifs": [
+      "Entretenir la mobilité de l'épaule atteinte"
+    ],
+    "zones": [
+      "Épaule"
+    ]
+  },
+  {
+    "id": "NEURO_16",
+    "nom": "Appui sur le bras atteint assis",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Remettre du poids sur le bras atteint",
+    "niveau": 1,
+    "exercise_mode": "isometrique",
+    "duree": "6 × 10 s, repos 20 s",
+    "ex": 10,
+    "reps": 6,
+    "repos": 20,
+    "consignes": [
+      "Assise au bord du lit, pieds à plat",
+      "Poser la main à plat sur le lit, à côté de la hanche, doigts écartés, coude tendu",
+      "Pencher doucement le buste vers ce côté pour mettre du poids sur le bras",
+      "Tenir 10 secondes puis revenir au centre"
+    ],
+    "precautions": [
+      "Coude tendu mais pas bloqué",
+      "Personne à côté au début"
+    ],
+    "tags": [
+      "Neurologie",
+      "Triceps",
+      "Muscles de l'épaule"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 10,
+      "cycles": 6
+    },
+    "image": "/exercises/images/neuro/appui-bras-assis.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Épaule",
+      "Bras"
+    ],
+    "conseil_posture": [
+      "Main bien à plat, épaule basse"
+    ],
+    "erreurs_frequentes": [
+      "Laisser l'épaule monter vers l'oreille"
+    ],
+    "version_facile": [
+      "Moins pencher"
+    ],
+    "version_avancee": [
+      "Tenir plus longtemps"
+    ],
+    "respiration": [
+      "Respirer normalement"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Muscles de l'épaule"
+    ],
+    "materiel": [
+      "Lit ou chaise sans accoudoirs"
+    ],
+    "contre_indications": [
+      "Épaule douloureuse"
+    ],
+    "benefices": [
+      "Bras plus présent, meilleur équilibre assis"
+    ],
+    "audio_cues": [
+      "Appuyez",
+      "Tenez"
+    ],
+    "coaching_court": [
+      "Poids sur la main"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie"
+    ],
+    "objectifs": [
+      "Remettre du poids sur le bras atteint"
+    ],
+    "zones": [
+      "Épaule",
+      "Bras"
+    ]
+  },
+  {
+    "id": "NEURO_17",
+    "nom": "Transfert de poids debout",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Mettre du poids sur la jambe atteinte",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 20,
+    "consignes": [
+      "Debout derrière une chaise, mains sur le dossier, pieds écartés largeur du bassin",
+      "Déplacer lentement le poids du corps sur la jambe atteinte",
+      "Tenir 3 secondes, bassin droit",
+      "Revenir au centre puis de l'autre côté"
+    ],
+    "precautions": [
+      "Chaise stable",
+      "Personne à côté au début"
+    ],
+    "tags": [
+      "Neurologie",
+      "Moyen fessier",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/transfert-poids-debout.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Hanche",
+      "Genou"
+    ],
+    "conseil_posture": [
+      "Bassin horizontal, genou souple"
+    ],
+    "erreurs_frequentes": [
+      "Se pencher sur le côté avec le buste"
+    ],
+    "version_facile": [
+      "Petit transfert"
+    ],
+    "version_avancee": [
+      "Lever l'autre pied"
+    ],
+    "respiration": [
+      "Respirer normalement"
+    ],
+    "muscles_cibles": [
+      "Moyen fessier",
+      "Quadriceps"
+    ],
+    "materiel": [
+      "Chaise ou plan de travail"
+    ],
+    "contre_indications": [
+      "Instabilité sévère sans aide"
+    ],
+    "benefices": [
+      "Appui plus sûr à la marche"
+    ],
+    "audio_cues": [
+      "Sur la jambe",
+      "Tenez"
+    ],
+    "coaching_court": [
+      "Poids à droite, à gauche"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Prévention des chutes"
+    ],
+    "objectifs": [
+      "Mettre du poids sur la jambe atteinte"
+    ],
+    "zones": [
+      "Hanche",
+      "Genou"
+    ]
+  },
+  {
+    "id": "NEURO_18",
+    "nom": "Rotation du tronc assis",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Assouplir le tronc et faciliter les retournements",
+    "niveau": 1,
+    "exercise_mode": "dynamique",
+    "duree": "10 × 3 s, repos 20 s",
+    "ex": 3,
+    "reps": 10,
+    "repos": 20,
+    "consignes": [
+      "Assise au milieu de la chaise, pieds à plat",
+      "Croiser les bras sur la poitrine",
+      "Tourner lentement les épaules et la tête d'un côté, le bassin reste face à l'avant",
+      "Revenir au centre puis tourner de l'autre côté"
+    ],
+    "precautions": [
+      "Sans douleur au dos"
+    ],
+    "tags": [
+      "Neurologie",
+      "Obliques",
+      "Muscles du dos"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 10
+    },
+    "image": "/exercises/images/neuro/rotation-tronc-assis.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Tronc",
+      "Dos"
+    ],
+    "conseil_posture": [
+      "Dos droit, grandir le buste"
+    ],
+    "erreurs_frequentes": [
+      "Bouger le bassin"
+    ],
+    "version_facile": [
+      "Petite amplitude"
+    ],
+    "version_avancee": [
+      "Regarder loin derrière soi"
+    ],
+    "respiration": [
+      "Expirer en tournant"
+    ],
+    "muscles_cibles": [
+      "Obliques",
+      "Muscles du dos"
+    ],
+    "materiel": [
+      "Chaise"
+    ],
+    "contre_indications": [
+      "Douleur lombaire aiguë"
+    ],
+    "benefices": [
+      "Tronc plus souple, retournements plus faciles"
+    ],
+    "audio_cues": [
+      "Tournez",
+      "Regardez"
+    ],
+    "coaching_court": [
+      "Tournez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie"
+    ],
+    "objectifs": [
+      "Assouplir le tronc et faciliter les retournements"
+    ],
+    "zones": [
+      "Tronc",
+      "Dos"
+    ]
+  },
+  {
+    "id": "NEURO_19",
+    "nom": "Redressement dos au mur",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Lutter contre le dos voûté",
+    "niveau": 1,
+    "exercise_mode": "isometrique",
+    "duree": "5 × 10 s, repos 20 s",
+    "ex": 10,
+    "reps": 5,
+    "repos": 20,
+    "consignes": [
+      "Debout dos au mur, talons à quelques centimètres du mur",
+      "Coller les fesses, les omoplates puis l'arrière de la tête au mur",
+      "Se grandir le plus possible, menton légèrement rentré",
+      "Tenir 10 secondes en respirant"
+    ],
+    "precautions": [
+      "Sans forcer sur la nuque"
+    ],
+    "tags": [
+      "Neurologie",
+      "Muscles du dos",
+      "Muscles du cou"
+    ],
+    "timer_config": {
+      "mode": "statique",
+      "maintien": 10,
+      "cycles": 5
+    },
+    "image": "/exercises/images/neuro/redressement-dos-mur.webp",
+    "type_contraction": "statique",
+    "difficulte_percue": 1,
+    "zones_corporelles": [
+      "Dos",
+      "Cervicales"
+    ],
+    "conseil_posture": [
+      "Regard horizontal"
+    ],
+    "erreurs_frequentes": [
+      "Lever le menton",
+      "Creuser le bas du dos"
+    ],
+    "version_facile": [
+      "Coussin derrière la tête"
+    ],
+    "version_avancee": [
+      "Bras le long du mur au-dessus de la tête"
+    ],
+    "respiration": [
+      "Respirer calmement"
+    ],
+    "muscles_cibles": [
+      "Muscles du dos",
+      "Muscles du cou"
+    ],
+    "materiel": [
+      "Mur"
+    ],
+    "contre_indications": [
+      "Aucune"
+    ],
+    "benefices": [
+      "Posture plus droite"
+    ],
+    "audio_cues": [
+      "Grandissez-vous",
+      "Tête au mur"
+    ],
+    "coaching_court": [
+      "Grand"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson"
+    ],
+    "objectifs": [
+      "Lutter contre le dos voûté"
+    ],
+    "zones": [
+      "Dos",
+      "Cervicales"
+    ]
+  },
+  {
+    "id": "NEURO_20",
+    "nom": "Se relever du sol",
+    "type": "timer",
+    "categorie": "Neurologie",
+    "objectif": "Savoir se relever seule après une chute",
+    "niveau": 3,
+    "exercise_mode": "dynamique",
+    "duree": "3 × 3 s, repos 60 s",
+    "ex": 3,
+    "reps": 3,
+    "repos": 60,
+    "consignes": [
+      "À genoux face à une chaise stable, mains posées sur l'assise",
+      "Avancer un pied à plat devant soi, genou plié (un genou au sol)",
+      "Pousser sur les mains et sur la jambe avant pour se lever",
+      "Se tourner et s'asseoir sur la chaise"
+    ],
+    "precautions": [
+      "Chaise contre un mur",
+      "Apprendre d'abord avec le kiné"
+    ],
+    "tags": [
+      "Neurologie",
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "mode": "dynamique",
+      "maintien": 3,
+      "cycles": 3
+    },
+    "image": "/exercises/images/neuro/se-relever-sol.webp",
+    "type_contraction": "dynamique",
+    "difficulte_percue": 3,
+    "zones_corporelles": [
+      "Corps entier"
+    ],
+    "conseil_posture": [
+      "Pied avant bien à plat"
+    ],
+    "erreurs_frequentes": [
+      "Se relever d'un coup sans appui"
+    ],
+    "version_facile": [
+      "Avec aide"
+    ],
+    "version_avancee": [
+      "Sans les mains"
+    ],
+    "respiration": [
+      "Expirer en poussant"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers",
+      "Bras"
+    ],
+    "materiel": [
+      "Chaise stable",
+      "Tapis"
+    ],
+    "contre_indications": [
+      "Douleur de genou importante"
+    ],
+    "benefices": [
+      "Plus de confiance, moins de peur de tomber"
+    ],
+    "audio_cues": [
+      "Un pied devant",
+      "Poussez"
+    ],
+    "coaching_court": [
+      "Pied, poussez"
+    ],
+    "validation_medicale": false,
+    "pathologies": [
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Prévention des chutes"
+    ],
+    "objectifs": [
+      "Savoir se relever seule après une chute"
+    ],
+    "zones": [
+      "Corps entier"
+    ]
   }
 ]
