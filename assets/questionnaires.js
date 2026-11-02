@@ -435,9 +435,31 @@ export const MODELES = [
   },
   {
     cle: "LEFS", nom: "LEFS (membre inférieur)", zone: "Membre inférieur", scoring: "somme", debut: 0, sens: "haut", max: 80, unite: "/80", bilan: "m_lefs",
-    consigne: "Indiquez votre niveau de difficulté aujourd'hui pour chaque activité.",
-    interpretation: "Score de 0 à 80 : plus il est élevé, meilleure est la fonction. Changement cliniquement significatif : environ 9 points.",
-    texte: sharedQs(20, ["Réponse 0 : texte " + PLACEHOLDER, "Réponse 1 : texte " + PLACEHOLDER, "Réponse 2 : texte " + PLACEHOLDER, "Réponse 3 : texte " + PLACEHOLDER, "Réponse 4 : texte " + PLACEHOLDER])
+    consigne: "Nous sommes intéressés à savoir si vous avez de la difficulté à réaliser les activités énumérées ci-dessous en rapport avec votre problème au(x) membre(s) inférieur(s) pour lequel vous consultez actuellement. Veuillez fournir une réponse pour chacune des activités. Aujourd’hui, avez-vous ou auriez-vous de la difficulté à :",
+    interpretation: "Score de 0 à 80 : plus il est élevé, meilleure est la fonction. Changement cliniquement significatif : environ 9 points. Version canadienne-française ÉFMI (René et al.).",
+    aideKine: "Textes de l’Échelle fonctionnelle des membres inférieurs (ÉFMI, version française du LEFS) déjà intégrés.",
+    texte: `@options Extrêmement difficile ou incapable de réaliser l’activité = 0 | Beaucoup de difficulté = 1 | Difficulté modérée = 2 | Un peu de difficulté = 3 | Aucune difficulté = 4
+? Faire vos activités habituelles au travail, à la maison ou à l’école.
+? Participer à vos passe-temps, vos loisirs ou vos activités sportives habituelles.
+? Entrer ou sortir de la baignoire.
+? Marcher d’une pièce à l’autre à la maison.
+? Mettre vos souliers ou vos bas.
+? Vous accroupir.
+? Soulever un objet du plancher, par exemple un sac d’épicerie.
+? Effectuer des activités légères autour de la maison, par exemple laver le comptoir.
+? Effectuer des activités lourdes autour de la maison, par exemple passer l’aspirateur.
+? Entrer ou sortir de la voiture.
+? Marcher une distance de deux coins de rue.
+? Marcher une distance d’un mille (1.6 km).
+? Monter ou descendre 10 marches (environ un étage).
+? Vous tenir debout pendant 1 heure.
+? Rester assis pendant 1 heure.
+? Courir sur un terrain plat.
+? Courir sur un terrain inégal.
+? Changer brusquement de direction lors d’une course rapide.
+? Sautiller.
+? Vous retourner dans le lit.
+`
   }
 ];
 
