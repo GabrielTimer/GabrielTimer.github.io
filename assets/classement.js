@@ -14,7 +14,7 @@ export const ZONES = ["Cervicales", "Épaule", "Coude", "Poignet et main", "Dos"
 const CAT_VERS_ZONE = {
   "gainage": "Tronc", "post-partum": "Tronc", "pubalgie": "Hanche", "adducteurs": "Hanche", "fessiers": "Hanche",
   "lombalgie": "Dos", "cheville": "Cheville et pied", "pied": "Cheville et pied", "main": "Poignet et main", "poignet": "Poignet et main",
-  "cou": "Cervicales", "nuque": "Cervicales", "rachis": "Dos", "abdominaux": "Tronc", "perinee": "Tronc", "perinee ": "Tronc"
+  "cou": "Cervicales", "nuque": "Cervicales", "rachis": "Dos", "abdominaux": "Tronc", "perinee": "Tronc", "perinee ": "Tronc", "neurologie": "Corps entier"
 };
 const CAT_VERS_TYPE = {
   "gainage": "Gainage", "equilibre": "Équilibre et proprioception", "proprioception": "Équilibre et proprioception",
@@ -72,6 +72,11 @@ export const PATHOLOGIES = [
   ["Paralysie faciale", "", /paralysie faciale|faiblesse faciale|bell/],
   ["Arthrose (générale)", "", /arthrose|\boa\b|osteoarthr/],
   ["Prévention des chutes / équilibre", "", /chute|trouble de l'equilibre|equilibre|senior/],
+  ["AVC / hémiplégie", "", /\bavc\b|hemipleg|accident vasculaire/],
+  ["Maladie de Parkinson", "", /parkinson/],
+  ["Sclérose en plaques", "", /sclerose en plaques|\bsep\b/],
+  ["SLA (maladie de Charcot)", "", /\bsla\b|sclerose laterale|maladie de charcot/],
+  ["Charcot-Marie-Tooth", "", /charcot-?marie|\bcmt\b/],
   ["Vertiges / vestibulaire", "", /vertig|vestibul|\bbppv\b|\bvppb\b/],
   ["Respiratoire (BPCO, asthme…)", "", /respirat|bpco|asthme|hyperventil|dyspnee|thoraci/],
   ["Post-opératoire", "", /post-?op|chirurgi|reparation/],
