@@ -65,7 +65,7 @@ function render(){
     <div class="q-grid">${MODELES.map(m => `
       <div class="q-card">
         <h2>${esc(m.nom)}</h2>
-        <span class="q-meta">${esc(m.zone)}, ${parseQuestions(m.texte, m.debut).length} questions</span>
+        <span class="q-meta">${esc(m.zone)}, ${parseQuestions(m.texte, m.debut).length} questions${hasPlaceholders(parseQuestions(m.texte, m.debut)) ? "" : ` <span class="badge ok">textes officiels inclus</span>`}</span>
         <span class="small muted">${esc(m.interpretation)}</span>
         <div class="q-act"><button class="btn sm ${used.has(m.cle) ? "" : "soft"}" type="button" data-model="${m.cle}">${icon("plus")}${used.has(m.cle) ? "Créer une autre version" : "Utiliser ce modèle"}</button></div>
       </div>`).join("")}</div>`;

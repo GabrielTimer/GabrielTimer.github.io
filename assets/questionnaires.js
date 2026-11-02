@@ -88,7 +88,7 @@ export function parseQuestions(texte, debut = 0){
       return;
     }
     if(l.startsWith("?")){
-      cur = { texte: l.slice(1).trim(), options: [], section };
+      cur = { texte: l.slice(1).trim(), options: [], section, _shared: shared };
       items.push(cur);
       return;
     }
@@ -96,7 +96,8 @@ export function parseQuestions(texte, debut = 0){
       cur.options.push(opt(l.replace(/^[-•]\s*/, ""), cur.options.length));
     }
   });
-  items.forEach(it => { if(!it.options.length && shared) it.options = shared.map(o => ({ ...o })); });
+  // Chaque question prend les réponses communes déclarées juste avant elle (« @options »).
+  items.forEach(it => { const sh = it._shared || shared; delete it._shared; if(!it.options.length && sh) it.options = sh.map(o => ({ ...o })); });
   return items;
 }
 
@@ -167,11 +168,76 @@ export const MODELES = [
   },
   {
     cle: "KOOS", nom: "KOOS (genou)", zone: "Genou", scoring: "koos", debut: 0, sens: "haut",
-    consigne: "Répondez en pensant à votre genou au cours de la semaine passée.",
-    interpretation: "Un score par section, de 0 (problèmes extrêmes) à 100 (aucun problème).",
-    aideKine: "Attention : dans la version officielle, deux questions de la section Symptômes ont une cotation inversée. Indiquez leurs valeurs avec « = » (par exemple « - Toujours = 0 »).",
-    texte: sharedQs(42, ["Réponse 0 : texte " + PLACEHOLDER, "Réponse 1 : texte " + PLACEHOLDER, "Réponse 2 : texte " + PLACEHOLDER, "Réponse 3 : texte " + PLACEHOLDER, "Réponse 4 : texte " + PLACEHOLDER],
-      [["Symptômes", 7], ["Douleur", 9], ["Vie quotidienne", 17], ["Sport et loisirs", 5], ["Qualité de vie", 4]])
+    consigne: "Ce questionnaire vous demande votre opinion sur votre genou. Il nous permettra de mieux connaître ce que vous ressentez et ce que vous êtes capable de faire dans votre activité de tous les jours. Répondez à chaque question en pensant aux huit derniers jours. En cas de doute, choisissez la réponse qui vous semble la plus adaptée à votre cas.",
+    interpretation: "Un score par section, de 0 (problèmes extrêmes) à 100 (aucun problème). Version française LK 1.0 (J.-F. Maillefert, CHU Dijon).",
+    aideKine: "Textes de la version française officielle KOOS LK 1.0 déjà intégrés. Les questions S4 et S5 sont cotées à l'envers (« Toujours » = 0), comme dans la version officielle.",
+    texte: `# Symptômes
+? S1. Est-ce que votre genou gonfle ?
+- Jamais = 0
+- Rarement = 1
+- Parfois = 2
+- Souvent = 3
+- Tout le temps = 4
+@options Jamais | Rarement | Parfois | Souvent | Toujours
+? S2. Ressentez-vous des ou entendez-vous des craquements ou n’importe quel autre type de bruit en bougeant le genou ?
+? S3. Est-ce que votre genou accroche ou se bloque en bougeant ?
+@options Toujours = 0 | Souvent = 1 | Parfois = 2 | Rarement = 3 | Jamais = 4
+? S4. Pouvez-vous étendre votre genou complètement ?
+? S5. Pouvez-vous plier votre genou complètement ?
+@options Absente | Légère | Modérée | Forte | Extrême
+? S6. Raideur (sensation d’avoir du mal à bouger le genou) : le matin au réveil, la raideur de votre genou est :
+? S7. Après être resté(e) assis(e), couché(e), ou au repos pendant la journée, la raideur de votre genou est :
+
+# Douleur
+@options Jamais | Une fois par mois | Une fois par semaine | Tous les jours | Tout le temps
+? P1. Avez-vous souvent mal au genou ?
+@options Absente | Légère | Modérée | Forte | Extrême
+? P2. Au cours des huit derniers jours, quelle a été l’importance de votre douleur du genou en tournant, pivotant sur votre jambe ?
+? P3. … en étendant complètement le genou
+? P4. … en pliant complètement le genou
+? P5. … en marchant sur un terrain plat
+? P6. … en montant ou en descendant les escaliers
+? P7. … au lit la nuit
+? P8. … en restant assis(e) ou couché(e)
+? P9. … en restant debout
+
+# Vie quotidienne
+@options Absente | Légère | Modérée | Forte | Extrême
+? A1. Au cours des huit derniers jours, quelle a été votre difficulté pour descendre les escaliers ?
+? A2. … monter les escaliers
+? A3. … vous relever d’une position assise
+? A4. … rester debout
+? A5. … vous pencher en avant pour ramasser un objet
+? A6. … marcher sur un terrain plat
+? A7. … monter ou descendre de voiture
+? A8. … faire vos courses
+? A9. … mettre vos chaussettes ou vos collants
+? A10. … sortir du lit
+? A11. … enlever vos chaussettes ou vos collants
+? A12. … vous retourner ou garder le genou dans la même position en étant couché(e)
+? A13. … entrer ou sortir d’une baignoire
+? A14. … rester assis(e)
+? A15. … vous asseoir ou vous relever des toilettes
+? A16. … faire de gros travaux ménagers (déplacer des objets lourds, récurer les sols,…)
+? A17. … faire des petits travaux ménagers (faire la cuisine, faire la poussière,…)
+
+# Sport et loisirs
+@options Absente | Légère | Modérée | Forte | Extrême
+? SP1. Au cours des huit derniers jours, quelle a été votre difficulté pour rester accroupi(e) ?
+? SP2. … courir
+? SP3. … sauter
+? SP4. … tourner, pivoter sur votre jambe
+? SP5. … rester à genoux
+
+# Qualité de vie
+@options Jamais | Une fois par mois | Une fois par semaine | Tous les jours | Tout le temps
+? Q1. Pensez-vous souvent à votre problème de genou ?
+@options Pas du tout | Un peu | Modérément | Beaucoup | Totalement
+? Q2. Avez-vous modifié votre façon de vivre pour éviter les activités qui pourraient aggraver votre problème de genou ?
+? Q3. Est-ce qu’un manque de confiance dans votre genou vous gêne ?
+@options Pas du tout | Un peu | Modérément | Beaucoup | Extrêmement
+? Q4. Finalement, êtes-vous gêné(e) par votre genou ?
+`
   },
   {
     cle: "LEFS", nom: "LEFS (membre inférieur)", zone: "Membre inférieur", scoring: "somme", debut: 0, sens: "haut", max: 80, unite: "/80", bilan: "m_lefs",
