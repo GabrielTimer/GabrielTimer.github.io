@@ -166,6 +166,12 @@ function render(){
           <div id="evo"></div>
         </section>
 
+        ${(K.TF || []).length ? `<section class="panel">
+          <div class="panel-head"><h2>Tests fonctionnels</h2><span class="badge">protocole · normes · vidéo</span></div>
+          <p class="hint" style="margin-bottom:10px">Remplissez seulement les tests réalisés. Touchez le nom d'un test pour voir le protocole, les normes et la vidéo de démonstration. L'évolution s'affiche avec les mesures.</p>
+          <div class="mes-grid">${K.TF.map(([k, nom, u]) => `<div class="field"><label for="f-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
+        </section>` : ""}
+
         <section class="panel">
           <div class="panel-head"><h2>Conclusion et projet</h2></div>
           <div class="sec">
@@ -464,7 +470,7 @@ app.addEventListener("input", e => {
   if(!k) return;
   if(k === "type"){ S.type = el.value; $("#h-title").textContent = B.typeLabel(S.type); }
   else if(k === "date"){ S.date = el.value || B.todayISO(); drawEvo(); }
-  else{ S.f[k] = el.value; if(K.MES.some(m => m[0] === k)) drawEvo(); }
+  else{ S.f[k] = el.value; if(K.MES.some(m => m[0] === k) || (K.TF || []).some(m => m[0] === k)) drawEvo(); }
   changed();
 });
 
@@ -472,6 +478,22 @@ const back = document.querySelector(".topbar [data-back]");
 if(back) back.addEventListener("click", e => { e.preventDefault(); leave(fiche); });
 
 /* ---------- Fiche d'un test ---------- */
+
+function tfSheet(n){
+  const g = (K.GUIDE_TF || {})[n] || {};
+  const video = g.v || "https://www.youtube.com/results?search_query=" + encodeURIComponent(n + " test");
+  openSheet({
+    title:n,
+    body:`<div class="g-sheet">
+      ${g.t ? `<p><strong>Protocole</strong><br>${esc(g.t)}</p>` : ""}
+      ${g.n ? `<p><strong>Normes et seuils</strong><br>${esc(g.n)}</p>` : ""}
+      ${g.src ? `<p class="hint">Références : ${esc(g.src)}</p>` : ""}
+      <p class="hint">Valeurs de la littérature, à interpréter selon la population et le protocole utilisé.</p>
+    </div>`,
+    foot:`<a class="btn" href="${esc(video)}" target="_blank" rel="noopener">${icon("video")}Voir la vidéo</a><button class="btn primary" type="button" data-close>Fermer</button>`
+  });
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-tf]"); if(b){ e.preventDefault(); tfSheet(b.dataset.tf); } });
 
 function testSheet(n){
   const g = K.GUIDE[n] || {};

@@ -27,7 +27,10 @@ export async function loadClinic(){
   if(K) return K;
   await loadScript("/bilan-kine/data.js");
   await loadScript("/bilan-kine/guide.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {} }")();
+  await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {} }")();
+  // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
+  K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
   return K;
 }
@@ -113,7 +116,7 @@ export const regionSources = r => [...new Set(r.T.map(t => t[4]).concat(r.src ||
 export function compare(prev, cur){
   const out = [];
   if(!prev || !cur) return out;
-  K.MES.forEach(([k, l, mid, dir]) => {
+  K.MES.concat(K.TFM || []).forEach(([k, l, mid, dir]) => {
     const x = parseFloat(String(prev.f?.[k] ?? "").replace(",", ".")), y = parseFloat(String(cur.f?.[k] ?? "").replace(",", "."));
     if(isNaN(x) || isNaN(y)) return;
     const d = Math.round((y - x) * 10) / 10;
@@ -181,6 +184,8 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
 
   const mes = K.MES.filter(([k]) => String(f[k] ?? "").trim() !== "").map(([k, l]) => [l, String(f[k])]);
   if(mes.length) add("Mesures", mes);
+  const tf = (K.TFM || []).filter(([k]) => String(f[k] ?? "").trim() !== "").map(([k, l]) => [l, String(f[k])]);
+  if(tf.length) add("Tests fonctionnels", tf);
 
   if(prev){
     const ev = compare(prev, S);
