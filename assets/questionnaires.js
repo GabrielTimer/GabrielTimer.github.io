@@ -42,6 +42,19 @@ export const SCORINGS = {
       return v.length ? v.reduce((a, b) => a + b, 0) : null;
     }
   },
+  startback: {
+    label: "STarT Back : score total (9 items) et sous-score psychosocial (items 5 à 9) → risque faible, moyen ou élevé",
+    unite: "/9",
+    calc(items, rep){
+      const v = rep.filter(x => x !== null && x !== undefined);
+      return v.length === items.length ? v.reduce((a, b) => a + b, 0) : null;
+    },
+    sous(items, rep){
+      if(rep.filter(x => x !== null && x !== undefined).length !== items.length) return null;
+      const total = rep.reduce((a, b) => a + b, 0), psy = rep.slice(4, 9).reduce((a, b) => a + b, 0);
+      return { "Psychosocial (5–9)": psy, "Risque": total <= 3 ? "faible" : psy <= 3 ? "moyen" : "élevé" };
+    }
+  },
   koos: {
     label: "KOOS : 100 − (moyenne de la section × 25), par section",
     unite: "/100",
@@ -161,6 +174,28 @@ export const MODELES = [
     texte: sharedQs(11, ["Réponse 1 : texte " + PLACEHOLDER, "Réponse 2 : texte " + PLACEHOLDER, "Réponse 3 : texte " + PLACEHOLDER, "Réponse 4 : texte " + PLACEHOLDER, "Réponse 5 : texte " + PLACEHOLDER])
   },
   {
+    cle: "STARTBACK", nom: "STarT Back (risque de chronicité)", zone: "Lombalgie", scoring: "startback", debut: 0, sens: "bas", minRep: 9, unite: "/9",
+    consigne: "Cochez la case en fonction de votre accord ou désaccord aux affirmations suivantes en vous référant à ces 2 dernières semaines.",
+    interpretation: "Total ≤ 3 : risque faible. Total ≥ 4 et sous-score psychosocial (items 5 à 9) ≤ 3 : risque moyen. Sous-score ≥ 4 : risque élevé. Version française validée (Bruyère et al., 2012).",
+    aideKine: "Textes de la version française officielle (Keele STarT Back Screening Tool – Fr) déjà intégrés. Le sous-score psychosocial et la catégorie de risque sont calculés automatiquement.",
+    texte: `@options Pas d’accord = 0 | D’accord = 1
+? 1. À un moment donné, au cours des 2 dernières semaines, mon mal de dos s’est propagé dans mon/mes membre(s) inférieur(s).
+? 2. À un moment donné, au cours des 2 dernières semaines, j’ai eu mal à l’épaule ou au cou.
+? 3. Je n’ai parcouru à pied que de courtes distances à cause de mon mal de dos.
+? 4. Au cours des 2 dernières semaines, je me suis habillé(e) plus lentement que d’habitude à cause de mon mal de dos.
+? 5. Il n’est pas vraiment prudent pour une personne dans mon état d’être actif sur le plan physique.
+? 6. J’ai souvent été préoccupé(e) par mon mal de dos.
+? 7. Je considère que mon mal de dos est épouvantable et j’ai l’impression que cela ne s’améliorera jamais.
+? 8. De manière générale, je n’ai pas apprécié toutes les choses comme j’en avais l’habitude à cause de mon mal de dos.
+? 9. Globalement, à quel point votre mal de dos vous a-t-il gêné(e) au cours des 2 dernières semaines ?
+- Pas du tout = 0
+- Un peu = 0
+- Modérément = 0
+- Beaucoup = 1
+- Extrêmement = 1
+`
+  },
+  {
     cle: "EIFEL", nom: "EIFEL (Roland-Morris)", zone: "Lombalgie", scoring: "somme", debut: 0, sens: "bas", max: 24, unite: "/24",
     consigne: "Cochez « Oui » pour chaque phrase qui vous décrit aujourd'hui.",
     interpretation: "Score de 0 à 24 : plus il est élevé, plus l'incapacité est importante.",
@@ -260,7 +295,7 @@ export function computeScore(q, reponses){
   if(q.minRep && answered < q.minRep) return { score:null, sousScores:null };
   const sc = SCORINGS[q.scoring] || SCORINGS.somme;
   const score = sc.calc(items, reponses);
-  const sousScores = q.scoring === "koos" ? sousScoresKoos(items, reponses) : null;
+  const sousScores = q.scoring === "koos" ? sousScoresKoos(items, reponses) : (sc.sous ? sc.sous(items, reponses) : null);
   return { score, sousScores };
 }
 
