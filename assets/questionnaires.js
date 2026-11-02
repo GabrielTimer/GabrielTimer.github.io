@@ -157,9 +157,80 @@ const sharedQs = (n, opts, sections = null) => {
 export const MODELES = [
   {
     cle: "ODI", nom: "Oswestry (ODI)", zone: "Lombalgie", scoring: "pct", debut: 0, sens: "bas", bilan: "m_odi",
-    consigne: "Pour chaque rubrique, cochez la phrase qui décrit le mieux votre situation aujourd'hui.",
-    interpretation: "0–20 % : incapacité minime ; 21–40 % : modérée ; 41–60 % : sévère ; > 60 % : très sévère. Changement cliniquement significatif : environ 10 points.",
-    texte: qs(["intensité de la douleur", "soins personnels", "soulever des charges", "marcher", "position assise", "position debout", "sommeil", "vie sexuelle", "vie sociale", "déplacements"], 6)
+    consigne: "Ce questionnaire est conçu pour nous informer de l’effet de votre problème de dos (ou de jambe) dans votre vie de tous les jours. Pour chaque section, choisissez la seule réponse qui vous décrit le mieux aujourd’hui. Si deux réponses semblent correspondre, choisissez celle qui décrit le plus précisément votre problème.",
+    interpretation: "0–20 % : incapacité minime ; 21–40 % : modérée ; 41–60 % : sévère ; > 60 % : très sévère. Changement cliniquement significatif : environ 10 points. Une section sans réponse (ex. vie sexuelle) est exclue du calcul.",
+    aideKine: "Textes de l’échelle d’incapacité d’Oswestry en français déjà intégrés (version fournie par le cabinet). La section « Vie sexuelle » peut être passée par le patient.",
+    texte: `? Intensité de la douleur
+- Je n’ai pas de douleur en ce moment. = 0
+- La douleur est très légère en ce moment. = 1
+- La douleur est modérée en ce moment. = 2
+- La douleur est assez forte en ce moment. = 3
+- La douleur est très forte en ce moment. = 4
+- La douleur est la pire qu’on puisse imaginer en ce moment. = 5
+? Soins personnels (se laver, s’habiller, etc)
+- Je peux faire mes soins personnels sans augmenter la douleur. = 0
+- Je peux faire mes soins personnels mais cela augmente la douleur. = 1
+- C’est douloureux de faire mes soins personnels et je les fais lentement et avec précaution. = 2
+- J’ai besoin d’un peu d’aide mais je peux faire la plupart de mes soins personnels. = 3
+- J’ai besoin d’aide tous les jours pour la plupart de mes soins personnels. = 4
+- Je ne m’habille pas, je me lave avec difficulté et je reste au lit. = 5
+? Soulever des objets
+- Je peux soulever des objets lourds sans augmenter la douleur. = 0
+- Je peux soulever des objets lourds mais cela augmente la douleur. = 1
+- La douleur m’empêche de soulever des objets lourds à partir du sol mais je peux les soulever s’ils sont bien placés, par exemple sur une table. = 2
+- La douleur m’empêche de soulever des objets lourds mais je peux soulever des objets légers ou moyens s’ils sont bien placés. = 3
+- Je peux seulement soulever des objets très légers. = 4
+- Je ne peux rien soulever ni transporter. = 5
+? Marcher
+- La douleur ne m’empêche pas de marcher peu importe la distance. = 0
+- La douleur m’empêche de marcher plus d’un mille (1,5 kilomètres). = 1
+- La douleur m’empêche de marcher plus d’un demi-mille (0,75 kilomètre). = 2
+- La douleur m’empêche de marcher plus de 100 verges (100 mètres). = 3
+- Je peux marcher seulement à l’aide d’une canne ou de béquilles. = 4
+- Je suis au lit la plupart du temps et je dois ramper pour aller aux toilettes. = 5
+? S’asseoir
+- Je peux m’asseoir sur n’importe quel fauteuil aussi longtemps que je le veux. = 0
+- Je peux m’asseoir sur mon fauteuil préféré aussi longtemps que je le veux. = 1
+- La douleur m’empêche de m’asseoir plus d’une heure. = 2
+- La douleur m’empêche de m’asseoir plus d’une demi-heure. = 3
+- La douleur m’empêche de m’asseoir plus de 10 minutes. = 4
+- La douleur m’empêche complètement de m’asseoir. = 5
+? Se tenir debout
+- Je peux me tenir debout aussi longtemps que je le veux sans augmenter la douleur. = 0
+- Je peux me tenir debout aussi longtemps que je le veux mais cela augmente la douleur. = 1
+- La douleur m’empêche de me tenir debout plus d’une heure. = 2
+- La douleur m’empêche de me tenir debout plus d’une demi-heure. = 3
+- La douleur m’empêche de me tenir debout plus de 10 minutes. = 4
+- La douleur m’empêche complètement de me tenir debout. = 5
+? Dormir
+- Mon sommeil n’est jamais perturbé par la douleur. = 0
+- Mon sommeil est parfois perturbé par la douleur. = 1
+- À cause de la douleur, j’ai moins de 6 heures de sommeil. = 2
+- À cause de la douleur, j’ai moins de 4 heures de sommeil. = 3
+- À cause de la douleur, j’ai moins de 2 heures de sommeil. = 4
+- La douleur m’empêche complètement de dormir. = 5
+? Vie sexuelle (si s’applique)
+- Ma vie sexuelle est normale et elle ne cause pas d’augmentation de la douleur. = 0
+- Ma vie sexuelle est normale mais elle cause une certaine augmentation de la douleur. = 1
+- Ma vie sexuelle est presque normale mais elle est très douloureuse. = 2
+- Ma vie sexuelle est très limitée par la douleur. = 3
+- Ma vie sexuelle est presqu’absente à cause de la douleur. = 4
+- La douleur empêche toute vie sexuelle. = 5
+? Vie sociale
+- Ma vie sociale est normale et ne me cause pas d’augmentation de la douleur. = 0
+- Ma vie sociale est normale mais elle augmente le niveau de la douleur. = 1
+- La douleur n’a pas d’effet important sur ma vie sociale à part de limiter mes activités les plus vigoureuses, par exemple le sport, etc. = 2
+- La douleur a limité ma vie sociale et je ne sors plus autant qu’avant. = 3
+- La douleur a limité ma vie sociale à mon domicile. = 4
+- Je n’ai pas de vie sociale à cause de la douleur. = 5
+? Se déplacer
+- Je peux me déplacer n’importe où sans douleur. = 0
+- Je peux me déplacer n’importe où mais cela augmente la douleur. = 1
+- La douleur est forte mais je peux me déplacer plus de deux heures. = 2
+- La douleur me limite à des déplacements de moins d’une heure. = 3
+- La douleur me limite à de courts déplacements nécessaires de moins de 30 minutes. = 4
+- La douleur m’empêche de me déplacer sauf pour recevoir des traitements. = 5
+`
   },
   {
     cle: "NDI", nom: "Neck Disability Index (NDI)", zone: "Cervicalgie", scoring: "pct", debut: 0, sens: "bas", bilan: "m_ndi",
