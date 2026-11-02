@@ -234,9 +234,80 @@ export const MODELES = [
   },
   {
     cle: "NDI", nom: "Neck Disability Index (NDI)", zone: "Cervicalgie", scoring: "pct", debut: 0, sens: "bas", bilan: "m_ndi",
-    consigne: "Pour chaque rubrique, cochez la phrase qui décrit le mieux votre situation aujourd'hui.",
-    interpretation: "0–8 % : pas d'incapacité ; 10–28 % : légère ; 30–48 % : modérée ; 50–68 % : sévère ; > 70 % : complète.",
-    texte: qs(["intensité de la douleur", "soins personnels", "soulever des charges", "lecture", "maux de tête", "concentration", "travail", "conduite", "sommeil", "loisirs"], 6)
+    consigne: "Ce questionnaire est conçu pour nous informer de l’effet de vos douleurs cervicales dans votre vie de tous les jours. Répondez à chacune des sections en choisissant la seule réponse qui vous décrit le mieux à ce moment-même.",
+    interpretation: "0–8 % : pas d'incapacité ; 10–28 % : légère ; 30–48 % : modérée ; 50–68 % : sévère ; > 70 % : complète. Changement cliniquement significatif : environ 10 points.",
+    aideKine: "Textes de l’échelle d’incapacité cervicale (NDI) en français déjà intégrés (version fournie par le cabinet).",
+    texte: `? Intensité des douleurs cervicales
+- Je n’ai pas de douleur en ce moment. = 0
+- La douleur est très légère en ce moment. = 1
+- La douleur est modérée en ce moment. = 2
+- La douleur est assez forte en ce moment. = 3
+- La douleur est très forte en ce moment. = 4
+- La douleur est la pire qu’on puisse imaginer en ce moment. = 5
+? Soins personnels (ex. se laver, s’habiller)
+- Je peux faire mes soins personnels sans augmenter la douleur. = 0
+- Je peux faire mes soins personnels, mais cela augmente la douleur. = 1
+- C’est douloureux de faire mes soins personnels et je les fais lentement et avec précaution. = 2
+- J’ai besoin d’un peu d’aide, mais je peux faire la plupart de mes soins personnels. = 3
+- J’ai besoin d’aide tous les jours pour la plupart de mes soins personnels. = 4
+- Je ne m’habille pas, je me lave avec difficulté et je reste au lit. = 5
+? Soulever des charges
+- Je peux soulever des objets lourds sans augmenter la douleur. = 0
+- Je peux soulever des objets lourds mais cela augmente la douleur. = 1
+- La douleur m’empêche de soulever des objets lourds à partir du sol, mais je peux les soulever s’ils sont bien placés (ex. sur une table). = 2
+- La douleur m’empêche de soulever des objets lourds, mais je peux soulever des objets légers ou moyens s’ils sont bien placés (ex. sur une table). = 3
+- Je peux seulement soulever des objets très légers. = 4
+- Je ne peux rien soulever, ni transporter. = 5
+? Lecture
+- Je peux lire autant que je le veux, sans douleurs cervicales. = 0
+- Je peux lire autant que je le veux, avec de légères douleurs cervicales. = 1
+- Je peux lire autant que je le veux, avec des douleurs cervicales modérées. = 2
+- Je ne peux pas lire autant que je le veux, à cause de douleurs cervicales modérées. = 3
+- Je peux à peine lire, à cause de mes douleurs cervicales intenses. = 4
+- Je ne peux aucunement lire, à cause de mes douleurs cervicales. = 5
+? Maux de tête
+- Je n’ai aucun maux de tête. = 0
+- J’ai des maux de tête légers et peu fréquents. = 1
+- J’ai des maux de tête modérés et peu fréquents. = 2
+- J’ai des maux de tête modérés et fréquents. = 3
+- J’ai des maux de tête intenses et fréquents. = 4
+- J’ai presque tout le temps des maux de tête. = 5
+? Concentration
+- Je peux me concentrer complètement sans difficulté, quand je le veux. = 0
+- Je peux me concentrer complètement avec de légères difficultés, quand je le veux. = 1
+- Il m’est relativement difficile de me concentrer, quand je le veux. = 2
+- J’ai beaucoup de difficultés à me concentrer, quand je le veux. = 3
+- J’ai d’énormes difficultés à me concentrer, quand je le veux. = 4
+- Je n’arrive aucunement à me concentrer. = 5
+? Travail (professionnel ou personnel)
+- Je peux travailler autant que je le veux. = 0
+- Je ne peux faire que mon travail courant, mais rien de plus. = 1
+- Je peux faire la plus grande partie de mon travail courant, mais rien de plus. = 2
+- Je ne peux pas faire mon travail courant. = 3
+- Je peux à peine travailler. = 4
+- Je ne peux aucunement travailler. = 5
+? Conduite
+- Je peux conduire ma voiture sans aucune douleur. = 0
+- Je peux conduire ma voiture autant que je le veux, avec de légères douleurs. = 1
+- Je peux conduire ma voiture autant que je le veux, avec des douleurs modérées. = 2
+- Je ne peux pas conduire ma voiture autant que je le veux, en raison des douleurs modérées. = 3
+- Je ne peux à peine conduire en raison des douleurs intenses. = 4
+- Je ne conduit aucunement, à cause des douleurs. = 5
+? Sommeil (avec ou sans prise médicamenteuse)
+- Mon sommeil n’est pas perturbé. = 0
+- Mon sommeil est à peine perturbé, moins de 1 heure sans dormir. = 1
+- Mon sommeil est un peu perturbé, 1-2 heures sans dormir. = 2
+- Mon sommeil est modérément perturbé, 2-3 heures sans dormir. = 3
+- Mon sommeil est très perturbé, 3-5 heures sans dormir. = 4
+- Mon sommeil est complètement perturbé, 5-7 heures sans dormir. = 5
+? Loisirs (cuisine, sport, activités manuelles)
+- Je peux participer à toutes mes activités de loisirs sans aucune douleur. = 0
+- Je peux participer à toutes mes activités de loisirs, avec quelques douleurs. = 1
+- Je peux participer à la plupart de mes activités habituelles de loisirs, mais pas à toutes, à cause de la douleur. = 2
+- Je participe qu’à quelques unes de mes activités de loisirs habituelles, à cause de mes douleur. = 3
+- Je peux à peine participer à des activités de loisirs, à cause de mes douleurs. = 4
+- Je ne peux pas participer à aucune activité de loisir, à cause de mes douleurs. = 5
+`
   },
   {
     cle: "QDASH", nom: "QuickDASH", zone: "Membre supérieur", scoring: "quickdash", debut: 1, sens: "bas", bilan: "m_qdash", minRep: 10,
