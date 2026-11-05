@@ -39,7 +39,9 @@ const TF_TAGS = {
 const SPEC_HYP = {
   LCA:["Traumatologie", "Sport", "Orthopédie"], MEN:["Traumatologie", "Sport"], SFP:["Rhumatologie", "Sport"], OA:["Rhumatologie"],
   RCD:["Rhumatologie"], TF:["Rhumatologie", "Orthopédie"], SSC:["Rhumatologie", "Orthopédie"], SA:["Rhumatologie"], INS:["Traumatologie", "Sport"],
-  RAD:["Rhumatologie"], STE:["Rhumatologie", "Gériatrie et chutes"], CEF:["Rhumatologie"], ATFL:["Traumatologie", "Sport"], ACH:["Rhumatologie", "Sport"]
+  RAD:["Rhumatologie"], STE:["Rhumatologie", "Gériatrie et chutes"], CEF:["Rhumatologie"], ATFL:["Traumatologie", "Sport"], ACH:["Rhumatologie", "Sport"],
+  CFA:["Orthopédie", "Sport"], GTPS:["Rhumatologie"], EPI:["Rhumatologie", "Sport"], EPT:["Rhumatologie", "Sport"],
+  CC:["Rhumatologie", "Orthopédie"], DQ:["Rhumatologie"], RHZ:["Rhumatologie"], VPPB:["Vestibulaire"], HYPO:["Vestibulaire"]
 };
 
 /** Tests fonctionnels recommandés pour un bilan : motifs cochés + zones douloureuses. Renvoie un Set d'id. */

@@ -26,7 +26,7 @@ dos:{mid:[["Occiput",80,8,40,48,20],["Cervicales",91,58,18,22,7],["Dorsales",68,
 side:[["Épaule",44,80,24,28,12],["Bras",40,110,22,52,9],["Avant-bras",36,164,20,50,9],["Main",32,216,20,32,9],["Fessier",64,182,35,36,12],["Cuisse post.",64,220,35,68,12],["Creux poplité",66,290,31,28,12],["Mollet",67,320,28,66,10],["Talon/pied",62,388,34,22,9]],L:"G"}};
 const R={D:"G",G:"D"};
 // Nom de zone du schéma -> clé de région dans REG
-const MAPPING=[[/^(Genou|Creux)/,"genou"],[/^Épaule/,"epaule"],[/^Lombaires$/,"lombes"],[/^(Cervicales|Cou)/,"cerv"],[/^(Pied|Talon)/,"chev"]];
+const MAPPING=[[/^(Genou|Creux)/,"genou"],[/^Épaule/,"epaule"],[/^Lombaires$/,"lombes"],[/^(Cervicales|Cou)/,"cerv"],[/^(Pied|Talon)/,"chev"],[/^(Hanche|Fessier)/,"hanche"],[/^Avant-bras/,"coude"],[/^Main/,"main"]];
 // ===== DONNÉES PROBANTES — test : [nom, hypothèses, LR+, LR−, source, précision] =====
 // LR calculés depuis Se/Sp poolées quand l’étude ne les donne pas : LR+ = Se/(1−Sp) ; LR− = (1−Se)/Sp
 const SRC={
@@ -51,6 +51,8 @@ blanpied:"Blanpied PR et al. Neck Pain: Revision 2017. J Orthop Sports Phys Ther
 ifompt:"Rushton A et al. IFOMPT International Cervical Framework (vascular pathologies of the neck), 2020",
 bachmann:"Bachmann LM et al. BMJ 2003;326:417 — règles d’Ottawa cheville : Se poolée 97,6 %, LR− 0,08",
 ankle:"Revue systématique de 14 études (6 302 observations) sur les tests cliniques des entorses de cheville, PMC9109591 ; Beynon A et al. Chiropr Man Ther 2022;30:58 ; Baltes TPA et al. Knee Surg Sports Traumatol Arthrosc 2024;32(3)",
+altman:"Altman R et al. Arthritis Rheum 1991;34(5):505-14 — critères cliniques ACR de la coxarthrose (douleur de hanche + rotation interne < 15° + flexion ≤ 115°) : Se 86 %, Sp 75 %",
+ajout:"Tests ajoutés le 5 nov. 2026 : technique et vidéo seulement, valeurs diagnostiques à intégrer après vérification dans la littérature",
 reiman:"Reiman M et al. J Athl Train 2014;49(6):820-9 — méta-analyse, tendon d’Achille",
 dn4:"Bouhassira D et al. Pain 2005;114:29-36 — DN4 (validation française) : seuil ≥ 4/10, Se 82,9 %, Sp 89,9 %",
 abbott:"Abbott JH, Schmitt J. J Orthop Sports Phys Ther 2014 — MID PSFS, NPRS, ODI, NDI",
@@ -96,4 +98,27 @@ RF:["Incapacité de faire 4 pas (immédiat et à l’examen)","Douleur osseuse :
 RFm:"Règle d’Ottawa cheville positive : radiographie à envisager (Se ≈ 98 %, LR− 0,08).",
 T:[["Tiroir antérieur de la cheville",["ATFL"],4.1,0.53,"ankle","Se 54 % · Sp 87 % ; plus performant à ≈ 5 jours qu’en aigu"],["Palpation du tendon d’Achille",["ACH"],3.2,0.48,"reiman","Se 64 % · Sp 81 %"],["Royal London Hospital test",["ACH"],3.8,null,"reiman",""],["Arc sign",["ACH"],null,null,"reiman","Sp 88 %"]],
 Q:["PSFS","NPRS","LEFS"],src:["bachmann"],
-note:"Les tests de cheville ne doivent pas être utilisés seuls mais avec l’histoire. Recommandations à consulter : CPG JOSPT Achille (2018) et entorses latérales (2021), contenu non intégré."}};
+note:"Les tests de cheville ne doivent pas être utilisés seuls mais avec l’histoire. Recommandations à consulter : CPG JOSPT Achille (2018) et entorses latérales (2021), contenu non intégré."},
+hanche:{n:"Hanche",H:{CFA:"Conflit fémoro-acétabulaire / labrum",GTPS:"Douleur du grand trochanter (tendinopathie glutéale)",OA:"Coxarthrose"},
+RF:["Traumatisme ou chute avec impossibilité d’appui","Douleur nocturne, fièvre ou altération de l’état général","ATCD de cancer","Corticothérapie prolongée (ostéonécrose)"],RFm:"Signe d’alerte : avis médical ou imagerie à envisager.",
+T:[["FADIR",["CFA"],null,null,"ajout","test sensible, peu spécifique : surtout utile s’il est négatif"],["FABER (Patrick)",["CFA"],null,null,"ajout","douleur de l’aine : hanche ; douleur fessière : sacro-iliaque"],
+["Appui unipodal 30 secondes",["GTPS"],null,null,"ajout","douleur latérale de hanche dans les 30 s"],["Palpation du grand trochanter",["GTPS"],null,null,"ajout",""],["FADER-R (dérotation externe contrariée)",["GTPS"],null,null,"ajout",""],
+["Critères cliniques ACR de coxarthrose",["OA"],3.4,0.19,"altman","Se 86 % · Sp 75 %"]],
+Q:["PSFS","NPRS","LEFS"],src:["altman","ajout"],
+note:"Hanche : valeurs diagnostiques des tests d’examen non intégrées (sauf critères ACR). À croiser avec l’histoire, l’âge et la localisation de la douleur."},
+coude:{n:"Coude",H:{EPI:"Épicondylalgie latérale (tennis elbow)",EPT:"Épicondylalgie médiale (golf elbow)"},
+RF:["Traumatisme avec déformation ou impotence","Fourmillements ou faiblesse de la main (atteinte nerveuse)","Gonflement chaud de l’articulation"],RFm:"Signe d’alerte : avis médical à envisager.",
+T:[["Cozen",["EPI"],null,null,"ajout",""],["Mill",["EPI"],null,null,"ajout",""],["Maudsley",["EPI"],null,null,"ajout",""],["Flexion du poignet contrariée",["EPT"],null,null,"ajout",""]],
+Q:["PSFS","NPRS","QDASH"],src:["ajout"],
+note:"Coude : tests de provocation, valeurs diagnostiques non intégrées. La douleur à la palpation de l’épicondyle et à la préhension (force de préhension sans douleur) aide au suivi."},
+main:{n:"Poignet et main",H:{CC:"Syndrome du canal carpien",DQ:"Ténosynovite de De Quervain",RHZ:"Rhizarthrose"},
+RF:["Traumatisme : douleur de la tabatière anatomique (fracture du scaphoïde)","Déficit moteur de la main ou fonte de l’éminence thénar","Gonflement chaud, rougeur"],RFm:"Signe d’alerte : avis médical ou imagerie à envisager.",
+T:[["Phalen",["CC"],null,null,"ajout",""],["Tinel au poignet",["CC"],null,null,"ajout",""],["Compression carpienne (Durkan)",["CC"],null,null,"ajout",""],
+["Finkelstein",["DQ"],null,null,"ajout",""],["Eichhoff",["DQ"],null,null,"ajout","plus provocant que Finkelstein : faux positifs possibles"],["Grind test du pouce",["RHZ"],null,null,"ajout",""]],
+Q:["PSFS","NPRS","QDASH"],src:["ajout"],
+note:"Canal carpien : les tests cliniques isolés sont peu fiables ; l’histoire (fourmillements nocturnes dans le territoire du médian) et le diagramme de la main comptent davantage."},
+vertiges:{n:"Vertiges",H:{VPPB:"VPPB (vertige positionnel paroxystique bénin)",HYPO:"Hypofonction vestibulaire unilatérale"},
+RF:["Vertige brutal avec céphalée, troubles de la parole, de la vue ou de la marche (AVC à éliminer)","Surdité brutale","Signes neurologiques associés"],RFm:"Urgence possible : orientation médicale immédiate.",
+T:[["Dix-Hallpike",["VPPB"],null,null,"ajout","canal postérieur"],["Roll test (couché, tête tournée)",["VPPB"],null,null,"ajout","canal horizontal"],["Head impulse test",["HYPO"],null,null,"ajout","saccade de rattrapage du côté atteint"]],
+Q:["PSFS"],src:["ajout"],
+note:"Vertiges : région sans zone sur le schéma corporel ; tests consultables dans la page Tests."}};

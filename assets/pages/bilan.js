@@ -241,7 +241,7 @@ function analysisHTML(n){
     return `<div class="test-row">
       <div class="t-main">
         <button class="t-name" type="button" data-info="${esc(t)}">${esc(t)}${icon("info")}</button>
-        <div class="t-meta"><span>${esc(h.map(x => r.H[x]).join(", "))}</span><span class="num">LR+ ${B.f1(p)}</span><span class="num">LR− ${B.f1(m)}</span><span class="badge ${v === "confirm" ? "ok" : v === "exclure" ? "lagon" : ""}">${B.VERDICT[v]}</span>${i ? `<span class="faint">${esc(i)}</span>` : ""}<span class="faint">[${srcs.indexOf(s) + 1}]</span></div>
+        <div class="t-meta"><span>${esc(h.map(x => r.H[x]).join(", "))}</span>${p == null && m == null ? `<span class="badge">valeurs non intégrées</span>` : `<span class="num">LR+ ${B.f1(p)}</span><span class="num">LR− ${B.f1(m)}</span><span class="badge ${v === "confirm" ? "ok" : v === "exclure" ? "lagon" : ""}">${B.VERDICT[v]}</span>`}${i ? `<span class="faint">${esc(i)}</span>` : ""}<span class="faint">[${srcs.indexOf(s) + 1}]</span></div>
       </div>
       <div class="segmented t-seg" role="group" aria-label="Résultat : ${esc(t)}">${[[0, "·", "Non fait"], [1, "+", "Positif"], [-1, "−", "Négatif"]].map(([val, l, a]) => `<button type="button" data-tz="${esc(n)}" data-tn="${esc(t)}" data-v="${val}" aria-pressed="${cur === val}" aria-label="${a}" title="${a}">${l}</button>`).join("")}</div>
     </div>`;
