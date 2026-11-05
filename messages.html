@@ -14,28 +14,52 @@
 <link rel="stylesheet" href="/assets/app.css">
 <link rel="stylesheet" href="/assets/pages/home.css">
 <style>
-  .mb-tools{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
-  .mb-tools .input-icon{ flex:1 1 220px; max-width:360px; }
-  .mb-tools .input{ padding-left:44px; }
-  .mb-list{ display:flex; flex-direction:column; gap:10px; }
-  .mb-item{ display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 14px; padding:16px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); }
-  .mb-item.unread{ border-color:color-mix(in srgb,var(--lagon) 55%,var(--line)); box-shadow:inset 4px 0 0 var(--lagon); }
-  .mb-item .avatar{ grid-row:span 3; }
-  .mb-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 10px; }
-  .mb-head .who{ font-weight:800; color:inherit; text-decoration:none; }
-  .mb-head .who:hover{ text-decoration:underline; }
-  .mb-head .when{ color:var(--ink-3); font-size:var(--fs-sm); margin-left:auto; white-space:nowrap; }
-  .mb-sub{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-size:var(--fs-sm); color:var(--ink-2); }
-  .mb-sub strong{ color:var(--ink); }
-  .mb-text{ white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.55; color:var(--ink); padding:10px 12px; background:var(--surface-2); border-radius:var(--r-sm); }
-  .mb-text.clamp{ max-height:9.5em; overflow:hidden; -webkit-mask-image:linear-gradient(#000 70%,transparent); mask-image:linear-gradient(#000 70%,transparent); }
-  .mb-more{ background:none; border:0; padding:0; color:var(--lagon-strong); font:inherit; font-weight:700; font-size:var(--fs-sm); cursor:pointer; justify-self:start; }
-  .mb-act{ display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
-  .mb-unread-dot{ width:9px; height:9px; border-radius:50%; background:var(--lagon); display:inline-block; }
-  @media (max-width:560px){
-    .mb-item{ grid-template-columns:minmax(0,1fr); }
-    .mb-item .avatar{ display:none; }
-    .mb-head .when{ margin-left:0; width:100%; }
+  .mx{ display:grid; grid-template-columns:minmax(260px,340px) minmax(0,1fr); gap:16px; align-items:start; }
+  .mx-pane{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; height:calc(100dvh - var(--top-h) - 150px); min-height:420px; }
+  .mx-tools{ padding:12px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:10px; }
+  .mx-tools .input{ padding-left:44px; }
+  .mx-list{ overflow:auto; flex:1; }
+  .mx-conv{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:2px 12px; align-items:center; width:100%; padding:12px 14px; border:0; border-bottom:1px solid var(--line); background:none; text-align:left; font:inherit; color:inherit; cursor:pointer; }
+  .mx-conv:hover{ background:var(--surface-2); }
+  .mx-conv[aria-current="true"]{ background:color-mix(in srgb,var(--lagon) 12%,var(--surface)); }
+  .mx-conv .avatar{ grid-row:span 2; }
+  .mx-conv .nm{ font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mx-conv.unread .nm{ font-weight:900; }
+  .mx-conv .dt{ font-size:var(--fs-sm); color:var(--ink-3); white-space:nowrap; }
+  .mx-conv .pv{ font-size:var(--fs-sm); color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .mx-conv.unread .pv{ color:var(--ink); font-weight:600; }
+  .mx-n{ min-width:20px; height:20px; padding:0 6px; border-radius:10px; background:var(--lagon); color:#fff; font-size:12px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; justify-self:end; }
+  .mx-th-head{ display:flex; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .mx-th-head h2{ font-size:1.05rem; margin:0; flex:1; min-width:0; }
+  .mx-th-head h2 a{ color:inherit; text-decoration:none; }
+  .mx-back{ display:none; }
+  .mx-thread{ flex:1; overflow:auto; padding:16px 14px; display:flex; flex-direction:column; gap:10px; background:var(--surface-2); }
+  .mx-day{ align-self:center; font-size:12px; color:var(--ink-3); background:var(--surface); padding:2px 10px; border-radius:10px; margin:6px 0; }
+  .mx-b{ max-width:min(78%,560px); padding:10px 12px; border-radius:16px; background:var(--surface); border:1px solid var(--line); position:relative; }
+  .mx-b.moi{ align-self:flex-end; background:color-mix(in srgb,var(--lagon) 16%,var(--surface)); border-color:color-mix(in srgb,var(--lagon) 35%,var(--line)); border-bottom-right-radius:4px; }
+  .mx-b.lui{ align-self:flex-start; border-bottom-left-radius:4px; }
+  .mx-b.unread{ box-shadow:0 0 0 2px color-mix(in srgb,var(--lagon) 55%,transparent); }
+  .mx-b .tag{ display:flex; gap:6px; align-items:center; font-size:12px; color:var(--ink-2); margin-bottom:4px; font-weight:700; }
+  .mx-b .tx{ white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.5; }
+  .mx-b .ft{ display:flex; gap:8px; align-items:center; justify-content:flex-end; font-size:11px; color:var(--ink-3); margin-top:4px; }
+  .mx-b .ft button{ background:none; border:0; padding:0; color:var(--ink-3); cursor:pointer; display:inline-flex; }
+  .mx-b .ft button:hover{ color:var(--danger, #c33); }
+  .mx-comp{ display:flex; gap:8px; padding:10px; border-top:1px solid var(--line); align-items:flex-end; }
+  .mx-comp textarea{ flex:1; resize:none; min-height:44px; max-height:160px; }
+  .mx-empty{ margin:auto; text-align:center; color:var(--ink-3); padding:24px; }
+  @media (max-width:760px){
+    .mx{ grid-template-columns:minmax(0,1fr); }
+    .mx-pane{ height:calc(100dvh - var(--top-h) - 120px); }
+    .mx.has-thread .mx-side{ display:none; }
+    .mx:not(.has-thread) .mx-main{ display:none; }
+    .mx-back{ display:inline-flex; }
+    .mx-b{ max-width:88%; }
+    .mx-th-head{ flex-wrap:nowrap; gap:6px; padding:8px 10px; }
+    .mx-th-head .avatar{ display:none; }
+    .mx-th-head h2{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .mx-th-head [data-nonlu] .lbl{ display:none; }
+    body:has(.mx.has-thread) .page-head{ display:none; }
+    .mx.has-thread .mx-pane{ height:calc(100dvh - var(--top-h) - 96px); }
   }
 </style>
 </head>
@@ -55,141 +79,197 @@ let items = [], patients = [], rulesMissing = false;
 try{ ({ items, patients, rulesMissing } = await M.loadInbox(C)); }
 catch(err){ app.innerHTML = errorHTML(err); throw err; }
 
-const onlyPatient = params.get("patient");
-const state = {
-  vue: items.some(i => !i.lu) && !onlyPatient ? "nonlus" : "tous",
-  type: "tous",
-  q: ""
-};
-const open = new Set();
+const state = { cle: params.get("patient") || null, q: "", nonlus: false };
+const brouillons = new Map();
 
 const initials = n => String(n || "?").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("");
-const when = d => {
-  const rel = fmtRelDay(d);
-  const h = new Date(d).toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
-  return /jours/.test(rel) ? `${fmtShortDate(d)}, ${h}` : `${rel}, ${h}`;
-};
 const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+const heure = d => new Date(d).toLocaleTimeString("fr-FR", { hour:"2-digit", minute:"2-digit" });
+const jourCle = d => new Date(d).toDateString();
+const quand = d => {
+  if(jourCle(d) === new Date().toDateString()) return heure(d);
+  const rel = fmtRelDay(d);
+  return /jours/.test(rel) ? fmtShortDate(d) : rel;
+};
+const jourLabel = d => { const r = fmtRelDay(d); return /jours/.test(r) ? fmtShortDate(d) : r; };
 
-function visible(){
-  const q = norm(state.q);
-  return items.filter(i =>
-    (!onlyPatient || i.cle === onlyPatient) &&
-    (state.vue === "tous" || !i.lu) &&
-    (state.type === "tous" || i.type === state.type) &&
-    (!q || norm(`${i.patient.nom} ${i.sujet} ${i.texte}`).includes(q))
-  );
+/** Une conversation par patient : tous ses messages, bilans, commentaires et vos réponses. */
+function conversations(){
+  const map = new Map();
+  items.forEach(i => {
+    if(!map.has(i.cle)) map.set(i.cle, { cle:i.cle, patient:i.patient, items:[] });
+    map.get(i.cle).items.push(i);
+  });
+  // Un patient ouvert depuis sa fiche, sans message : conversation vide pour lui écrire.
+  if(state.cle && !map.has(state.cle)){
+    const p = patients.find(x => x.cle === state.cle);
+    if(p) map.set(p.cle, { cle:p.cle, patient:p, items:[] });
+  }
+  const list = [...map.values()].map(c => {
+    c.items.sort((a, b) => a.date - b.date);
+    c.last = c.items[c.items.length - 1] || null;
+    c.unread = c.items.filter(i => !i.lu).length;
+    return c;
+  });
+  return list.sort((a, b) => (b.last?.date || Infinity) - (a.last?.date || Infinity));
 }
 
-function replyLinks(i){
-  const p = i.patient;
-  const out = [];
-  if(i.kind === "envoye") return `<span class="small muted">${i.luPatient ? `${icon("check")} Lu par le patient` : "Pas encore lu"}</span>`;
-  out.push(`<button class="btn sm primary" type="button" data-reply>${icon("send")}Répondre dans l'application</button>`);
-  const sujet = i.kind === "message" && i.sujet ? `Re: ${i.sujet}` : "Votre message";
-  if(p.email) out.push(`<a class="btn sm" href="mailto:${esc(p.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(`Bonjour,\n\n\n\n${KINE.nom}`)}">${icon("reply")}Répondre par e-mail</a>`);
-  if(p.telephone) out.push(`<a class="btn sm" href="sms:${esc(String(p.telephone).replace(/[^\d+]/g, ""))}">${icon("message")}SMS</a>`);
-  return out.join("");
+function apercu(i){
+  if(!i) return "Aucun message";
+  const pre = i.kind === "envoye" ? "Vous : " : i.type === "bilan" ? "Bilan : " : i.kind === "commentaire" ? "Séance : " : "";
+  return pre + i.texte.replace(/\s+/g, " ");
 }
 
-function itemHTML(i){
-  const long = i.texte.length > 420 || i.texte.split("\n").length > 7;
-  const meta = i.kind === "commentaire"
-    ? [i.ressenti ? `séance ${esc(ressentiLabel(i.ressenti).toLowerCase())}` : "", i.eva !== undefined && i.eva !== null && i.eva !== "" ? `douleur ${esc(i.eva)}/10` : ""].filter(Boolean).join(", ")
-    : "";
-  return `<article class="mb-item ${i.lu ? "" : "unread"}" data-key="${esc(i.key)}">
-    <span class="avatar">${esc(initials(i.patient.nom))}</span>
-    <div class="mb-head">
-      ${i.lu ? "" : `<span class="mb-unread-dot" title="Non lu"></span>`}
-      <a class="who" href="/cloud.html?patient=${encodeURIComponent(i.cle)}">${esc(i.patient.nom || "Patient")}</a>
-      <span class="badge ${i.type === "bilan" ? "lagon" : ""}">${icon(M.TYPE_ICON[i.type] || "mail")}${esc(M.TYPE_LABEL[i.type] || "Message")}</span>
-      <span class="when">${esc(when(i.date))}</span>
+function convHTML(c){
+  return `<button class="mx-conv ${c.unread ? "unread" : ""}" type="button" data-conv="${esc(c.cle)}" aria-current="${c.cle === state.cle}">
+    <span class="avatar">${esc(initials(c.patient.nom))}</span>
+    <span class="nm">${esc(c.patient.nom || "Patient")}</span>
+    <span class="dt">${c.last ? esc(quand(c.last.date)) : ""}</span>
+    <span class="pv">${esc(apercu(c.last))}</span>
+    ${c.unread ? `<span class="mx-n" aria-label="${c.unread} non lu${c.unread > 1 ? "s" : ""}">${c.unread}</span>` : "<span></span>"}
+  </button>`;
+}
+
+function bulleHTML(i){
+  const moi = i.kind === "envoye";
+  let tag = "";
+  if(i.type === "bilan") tag = `${icon("chart")}Bilan de programme${i.sujet ? ` · ${esc(i.sujet)}` : ""}`;
+  else if(i.kind === "commentaire"){
+    const meta = [i.ressenti ? `séance ${esc(ressentiLabel(i.ressenti).toLowerCase())}` : "", i.eva !== undefined && i.eva !== null && i.eva !== "" ? `douleur ${esc(i.eva)}/10` : ""].filter(Boolean).join(", ");
+    tag = `${icon("message")}Fin de séance « ${esc(i.sujet)} »${meta ? ` · ${meta}` : ""}`;
+  } else if(i.sujet && !/^Re: /.test(i.sujet)) tag = esc(i.sujet);
+  const del = i.kind === "message" || i.kind === "envoye";
+  return `<div class="mx-b ${moi ? "moi" : "lui"} ${i.lu ? "" : "unread"}" data-key="${esc(i.key)}">
+    ${tag ? `<div class="tag">${tag}</div>` : ""}
+    <div class="tx">${esc(i.texte)}</div>
+    <div class="ft"><span>${esc(heure(i.date))}</span>${moi ? `<span>${i.luPatient ? `${icon("check", "ic-inline")} Lu` : "Envoyé"}</span>` : ""}${del ? `<button type="button" data-del aria-label="Supprimer ce message">${icon("trash", "ic-inline")}</button>` : ""}</div>
+  </div>`;
+}
+
+function threadHTML(c){
+  if(!c) return `<div class="mx-empty">${icon("inbox")}<p>Choisissez une conversation.</p></div>`;
+  const p = c.patient;
+  let lastDay = "", out = "";
+  c.items.forEach(i => {
+    const d = jourCle(i.date);
+    if(d !== lastDay){ out += `<div class="mx-day">${esc(jourLabel(i.date))}</div>`; lastDay = d; }
+    out += bulleHTML(i);
+  });
+  const tel = p.telephone ? String(p.telephone).replace(/[^\d+]/g, "") : "";
+  return `<div class="mx-th-head">
+      <button class="icon-btn sm mx-back" type="button" data-back aria-label="Retour aux conversations">${icon("back")}</button>
+      <span class="avatar">${esc(initials(p.nom))}</span>
+      <h2><a href="/cloud.html?patient=${encodeURIComponent(c.cle)}">${esc(p.nom || "Patient")}</a></h2>
+      ${c.items.some(i => i.lu && i.kind !== "envoye") ? `<button class="btn sm ghost" type="button" data-nonlu aria-label="Marquer comme non lu">${icon("circle")}<span class="lbl">Non lu</span></button>` : ""}
+      ${p.email ? `<a class="icon-btn sm" href="mailto:${esc(p.email)}?body=${encodeURIComponent(`Bonjour,\n\n\n\n${KINE.nom}`)}" aria-label="Écrire par e-mail">${icon("reply")}</a>` : ""}
+      ${tel ? `<a class="icon-btn sm" href="sms:${esc(tel)}" aria-label="Envoyer un SMS">${icon("message")}</a>` : ""}
+      <a class="icon-btn sm" href="/cloud.html?patient=${encodeURIComponent(c.cle)}" aria-label="Fiche du patient">${icon("user")}</a>
     </div>
-    <div class="mb-sub">${i.sujet ? `<strong>${esc(i.sujet)}</strong>` : ""}${meta ? `<span>${i.sujet ? "· " : ""}${meta}</span>` : ""}</div>
-    <div class="stack" style="--gap:6px;min-width:0">
-      <div class="mb-text ${long && !open.has(i.key) ? "clamp" : ""}">${esc(i.texte)}</div>
-      ${long ? `<button class="mb-more" type="button" data-more>${open.has(i.key) ? "Réduire" : "Lire la suite"}</button>` : ""}
-      <div class="mb-act">
-        ${i.kind === "envoye" ? "" : `<button class="btn sm ${i.lu ? "ghost" : ""}" type="button" data-lu>${icon(i.lu ? "circle" : "check")}${i.lu ? "Marquer non lu" : "Marquer comme lu"}</button>`}
-        ${replyLinks(i)}
-        <a class="btn sm ghost" href="/cloud.html?patient=${encodeURIComponent(i.cle)}">${icon("user")}Fiche</a>
-        ${i.kind === "message" || i.kind === "envoye" ? `<button class="icon-btn sm danger" type="button" data-del aria-label="Supprimer ce message">${icon("trash")}</button>` : ""}
-      </div>
-    </div>
-  </article>`;
+    <div class="mx-thread" id="thread">${out || `<div class="mx-empty">Aucun message pour l'instant. Écrivez le premier ci-dessous.</div>`}</div>
+    <form class="mx-comp" id="comp">
+      <textarea class="textarea" id="comp-t" rows="1" maxlength="5000" placeholder="Écrire à ${esc(p.nom || "votre patient")}…" aria-label="Votre message">${esc(brouillons.get(c.cle) || "")}</textarea>
+      <button class="btn primary" type="submit" aria-label="Envoyer">${icon("send")}</button>
+    </form>`;
 }
 
 function render(){
-  const scope = onlyPatient ? items.filter(i => i.cle === onlyPatient) : items;
-  const nonLus = scope.filter(i => !i.lu).length;
-  const counts = { tous: scope.length, message: 0, bilan: 0, commentaire: 0 };
-  scope.forEach(i => counts[i.type] = (counts[i.type] || 0) + 1);
-  const list = visible();
-  const who = onlyPatient ? patients.find(p => p.cle === onlyPatient) : null;
+  const convs = conversations();
+  const q = norm(state.q);
+  const shown = convs.filter(c => (!state.nonlus || c.unread) && (!q || norm(`${c.patient.nom} ${c.items.map(i => i.sujet + " " + i.texte).join(" ")}`).includes(q)));
+  const cur = convs.find(c => c.cle === state.cle) || null;
+  const total = convs.reduce((n, c) => n + c.unread, 0);
   app.innerHTML = `
     <div class="page-head">
-      <h1>${who ? `Messages de ${esc(who.nom)}` : "Messages des patients"}</h1>
-      ${nonLus ? `<button class="btn" type="button" id="all-read">${icon("check")}Tout marquer comme lu</button>` : ""}
-      <p class="lead">${nonLus ? `${nonLus} message${nonLus > 1 ? "s" : ""} non lu${nonLus > 1 ? "s" : ""}.` : "Vous êtes à jour."} Les e-mails envoyés depuis l'application, les bilans de programme et les commentaires de fin de séance arrivent ici.</p>
-      ${who ? `<p><a href="/messages.html">${icon("back", "ic-inline")} Tous les patients</a></p>` : ""}
+      <h1>Messages</h1>
+      <p class="lead">${total ? `${total} non lu${total > 1 ? "s" : ""}.` : "Vous êtes à jour."} Un fil par patient : messages, bilans de programme, commentaires de séance et vos réponses.</p>
     </div>
-    ${rulesMissing ? `<div class="notice warn" style="margin-bottom:16px">${icon("alert")}<span>Les messages ne sont pas encore activés dans Firebase : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. En attendant, seuls les commentaires de séance s'affichent.</span></div>` : ""}
-    <div class="mb-tools">
-      <div class="chips" role="group" aria-label="Affichage">
-        <button class="chip" type="button" data-vue="nonlus" aria-pressed="${state.vue === "nonlus"}">Non lus <span class="count">${nonLus}</span></button>
-        <button class="chip" type="button" data-vue="tous" aria-pressed="${state.vue === "tous"}">Tous <span class="count">${counts.tous}</span></button>
-      </div>
-      <div class="chips" role="group" aria-label="Type">
-        ${[["tous", "Tout type"], ["message", "Messages"], ["bilan", "Bilans"], ["commentaire", "Commentaires"], ["envoye", "Envoyés"]].map(([k, l]) => `<button class="chip" type="button" data-type="${k}" aria-pressed="${state.type === k}">${l}${k !== "tous" ? ` <span class="count">${counts[k] || 0}</span>` : ""}</button>`).join("")}
-      </div>
-      <label class="input-icon">${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient, un mot…" value="${esc(state.q)}" aria-label="Rechercher"></label>
-    </div>
-    ${list.length ? `<div class="mb-list">${list.map(itemHTML).join("")}</div>` : `<div class="panel">${emptyHTML(
-      state.vue === "nonlus" && !state.q && state.type === "tous"
-        ? { ico:"checkCircle", title:"Aucun message non lu", text:"Tous les messages ont été lus.", action:`<button class="btn" type="button" data-vue="tous">Voir tous les messages</button>` }
-        : { ico:"inbox", title:"Aucun message", text: state.q || state.type !== "tous" ? "Rien ne correspond à ces filtres." : "Quand un patient vous écrira depuis l'application, son message apparaîtra ici." }
-    )}</div>`}`;
-  bind();
+    ${rulesMissing ? `<div class="notice warn" style="margin-bottom:16px">${icon("alert")}<span>Les messages ne sont pas encore activés dans Firebase. En attendant, seuls les commentaires de séance s'affichent.</span></div>` : ""}
+    <div class="mx ${cur ? "has-thread" : ""}">
+      <section class="mx-pane mx-side" aria-label="Conversations">
+        <div class="mx-tools">
+          <label class="input-icon">${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient, un mot…" value="${esc(state.q)}" aria-label="Rechercher"></label>
+          <div class="chips" role="group" aria-label="Affichage">
+            <button class="chip" type="button" data-f="0" aria-pressed="${!state.nonlus}">Toutes <span class="count">${convs.length}</span></button>
+            <button class="chip" type="button" data-f="1" aria-pressed="${state.nonlus}">Non lues <span class="count">${convs.filter(c => c.unread).length}</span></button>
+          </div>
+        </div>
+        <div class="mx-list">${shown.length ? shown.map(convHTML).join("") : `<div class="mx-empty">${state.q || state.nonlus ? "Aucune conversation ne correspond." : "Quand un patient vous écrira depuis l'application, sa conversation apparaîtra ici."}</div>`}</div>
+      </section>
+      <section class="mx-pane mx-main" aria-label="Conversation">${threadHTML(cur)}</section>
+    </div>`;
+  bind(cur);
+  const t = $("#thread"); if(t) t.scrollTop = t.scrollHeight;
 }
 
-function bind(){
-  $$("[data-vue]").forEach(b => b.onclick = () => { state.vue = b.dataset.vue; render(); });
-  $$("[data-type]").forEach(b => b.onclick = () => { state.type = b.dataset.type; render(); });
+/** Ouvrir une conversation la marque comme lue, comme une boîte SMS. */
+async function marquerLue(c){
+  const nonLus = c.items.filter(i => !i.lu);
+  if(!nonLus.length) return;
+  const res = await Promise.allSettled(nonLus.map(i => M.setRead(C, i, true)));
+  if(res.some(r => r.status === "rejected")) toast("Certains messages n'ont pas pu être marqués comme lus.", { type:"err" });
+  M.setUnreadCache(items.filter(i => !i.lu).length);
+}
+
+function ouvrir(cle){
+  state.cle = cle;
+  history.replaceState(null, "", cle ? `?patient=${encodeURIComponent(cle)}` : location.pathname);
+  render();
+  const c = conversations().find(x => x.cle === cle);
+  if(c?.unread){
+    // Laisse voir les bulles « non lues » un instant, puis marque comme lu.
+    marquerLue(c).then(() => setTimeout(() => { if(state.cle === cle) render(); }, 1500));
+  }
+}
+
+function bind(cur){
+  $$("[data-conv]").forEach(b => b.onclick = () => ouvrir(b.dataset.conv));
+  $$("[data-f]").forEach(b => b.onclick = () => { state.nonlus = b.dataset.f === "1"; render(); });
   const q = $("#q");
   if(q) q.oninput = () => {
     state.q = q.value; const pos = q.selectionStart;
     render(); const n = $("#q"); n.focus(); try{ n.setSelectionRange(pos, pos); }catch(e){}
   };
-  $("#all-read")?.addEventListener("click", async e => {
-    const scope = items.filter(i => !i.lu && (!onlyPatient || i.cle === onlyPatient));
-    e.currentTarget.disabled = true;
-    const res = await Promise.allSettled(scope.map(i => M.setRead(C, i, true)));
-    if(res.some(r => r.status === "rejected")) toast("Certains messages n'ont pas pu être marqués. Réessayez.", { type:"err" });
-    else toast("Tout est marqué comme lu.", { type:"ok" });
-    M.setUnreadCache(items.filter(i => !i.lu).length);
-    render();
+  if(!cur) return;
+  $("[data-back]")?.addEventListener("click", () => ouvrir(null));
+  $("[data-nonlu]")?.addEventListener("click", async () => {
+    const dernier = [...cur.items].reverse().find(i => i.kind !== "envoye");
+    if(!dernier) return;
+    try{ await M.setRead(C, dernier, false); M.setUnreadCache(items.filter(i => !i.lu).length); state.cle = null; history.replaceState(null, "", location.pathname); render(); }
+    catch(e){ toast("Impossible pour le moment.", { type:"err" }); }
   });
-  $$(".mb-item").forEach(el => {
-    const i = items.find(x => x.key === el.dataset.key);
-    el.querySelector("[data-more]")?.addEventListener("click", () => { open.has(i.key) ? open.delete(i.key) : open.add(i.key); render(); });
-    if(el.querySelector("[data-lu]")) el.querySelector("[data-lu]").onclick = async () => {
-      try{ await M.setRead(C, i, !i.lu); M.setUnreadCache(items.filter(x => !x.lu).length); render(); }
-      catch(err){ toast("Impossible pour le moment. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
-    };
-    el.querySelector("[data-reply]")?.addEventListener("click", () => M.ecrireAuPatient(C, i.patient, {
-      sujet: i.kind === "message" && i.sujet ? `Re: ${i.sujet}` : i.kind === "commentaire" ? `Votre séance « ${i.sujet} »` : "",
-      onSent: m => { items = M.buildInbox({ patients:[i.patient], messages:[m], seances:[] }).concat(items).sort((a, b) => b.date - a.date); if(!i.lu) M.setRead(C, i, true).catch(() => {}); render(); }
-    }));
-    el.querySelector("[data-del]")?.addEventListener("click", async () => {
-      const ok = await confirmDialog({ title:"Supprimer ce message ?", message:"Il sera retiré de l'application. L'e-mail éventuellement reçu n'est pas touché.", confirm:"Supprimer", danger:true });
-      if(!ok) return;
-      try{ await C.deleteMessage(i.cle, i.id); items = items.filter(x => x !== i); M.setUnreadCache(items.filter(x => !x.lu).length); toast("Message supprimé.", { type:"ok" }); render(); }
-      catch(err){ toast("Suppression impossible.", { type:"err" }); }
-    });
+  const ta = $("#comp-t");
+  const grow = () => { ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight, 160) + "px"; };
+  ta.oninput = () => { brouillons.set(cur.cle, ta.value); grow(); };
+  ta.onkeydown = e => { if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) $("#comp").requestSubmit(); };
+  grow();
+  $("#comp").onsubmit = async e => {
+    e.preventDefault();
+    const texte = ta.value.trim();
+    if(!texte) return;
+    const btn = e.currentTarget.querySelector("[type=submit]"); btn.disabled = true; ta.disabled = true;
+    try{
+      const id = await C.addMessage(cur.cle, { texte, sujet:"", de:"kine" });
+      const m = { id, cle:cur.cle, texte, sujet:"", de:"kine", date:Date.now(), lu:false, type:"message" };
+      items = items.concat(M.buildInbox({ patients:[cur.patient], messages:[m], seances:[] }));
+      brouillons.delete(cur.cle);
+      render();
+      $("#comp-t")?.focus();
+    }catch(err){
+      btn.disabled = false; ta.disabled = false;
+      toast("Envoi impossible. Vérifiez la connexion.", { type:"err", duration:7000 });
+    }
+  };
+  $$(".mx-b [data-del]").forEach(b => b.onclick = async () => {
+    const i = items.find(x => x.key === b.closest(".mx-b").dataset.key);
+    const ok = await confirmDialog({ title:"Supprimer ce message ?", message:"Il sera retiré de l'application, pour vous et pour le patient.", confirm:"Supprimer", danger:true });
+    if(!ok) return;
+    try{ await C.deleteMessage(i.cle, i.id); items = items.filter(x => x !== i); M.setUnreadCache(items.filter(x => !x.lu).length); render(); }
+    catch(err){ toast("Suppression impossible.", { type:"err" }); }
   });
 }
 
 render();
+if(state.cle){ const c = conversations().find(x => x.cle === state.cle); if(c?.unread) marquerLue(c).then(() => setTimeout(render, 1500)); }
 </script>
 </body>
 </html>
