@@ -31,7 +31,9 @@ const KEY = "gt_cfg_modeles";
  * Monte la liste des modèles dans root.
  * onPick(modele) : le kiné a choisi un modèle (et un niveau).
  */
-export async function mountModelPicker(root, { onPick } = {}){
+export async function mountModelPicker(root, { onPick, lieu = null } = {}){
+  /* lieu() → "HEP" ou "CABINET" : seuls les modèles de ce type (ou mixtes, signalés) sont proposés */
+  const okLieu = m => { const l = lieu?.(); return !l || !m.lieu || m.lieu === l || m.lieu === "MIXTE"; };
   const F = { q:"", cat:"", zone:"", ...(store.get(KEY, {}) || {}) };
   const zoneOf = m => { const k = norm(m.zoneLabel); return ZONES.find(z => norm(z) === k) || ZONES.find(z => k && (k.includes(norm(z)) || norm(z).includes(k))) || ""; };
   const chosen = new Map();
@@ -46,7 +48,7 @@ export async function mountModelPicker(root, { onPick } = {}){
       <div data-results><div class="loading"><div class="spinner"></div><span>Chargement des modèles…</span></div></div>
     </div>`;
 
-  const all = await loadModeles();
+  const all = (await loadModeles()).filter(okLieu);
   const save = () => store.set(KEY, F);
 
   const renderCats = () => {
@@ -86,7 +88,7 @@ export async function mountModelPicker(root, { onPick } = {}){
           <button class="lib-row-main" type="button" data-see="${esc(g.key)}">
             ${exoImageHTML(coverOf(cur), "", "li-thumb")}
             <span class="li-main"><span class="li-title">${esc(g.nom)}</span>
-              <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}</span></span>
+              <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.lieu === "MIXTE" ? ` · <strong style="color:var(--danger)">Mixte maison + cabinet</strong>` : !lieu?.() && cur.lieu ? ` · ${cur.lieu === "HEP" ? "À la maison" : "Au cabinet"}` : ""}</span></span>
           </button>
           <button class="icon-btn filled" type="button" data-pick="${esc(cur.id)}" aria-label="Utiliser ${esc(cur.titre)}" title="Utiliser ce modèle">${icon("plus")}</button>
           ${levels ? `<div class="mo-levels mp-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${esc(levelButton(x))}</button>`).join("")}</div>` : ""}

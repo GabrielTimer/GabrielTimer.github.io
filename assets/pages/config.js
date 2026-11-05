@@ -36,8 +36,10 @@ const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"uniqu
 const LIEUX = { HEP:"À la maison (HEP)", CABINET:"Au cabinet" };
 const lieuExo = e => {
   if(e.source === "HEP" || e.source === "CABINET") return e.source;
-  if(e.source || e.id == null) return null;                       // exercice créé par le kiné ou personnalisé
-  return /\/HEP\//.test(e.image || "") ? "HEP" : /exercises\/images\//.test(e.image || "") ? "CABINET" : null;   // anciennes séances sans source
+  if(e.source) return null;                                       // exercice créé par le kiné
+  /* Anciennes séances et anciens modèles sans source : d'après l'image (photos HEP / dessins du cabinet) */
+  const img = e.image || "";
+  return /\/HEP\//.test(img) ? "HEP" : /^\/?(exercises\/)?images\/(?!eva\/)/.test(img) ? "CABINET" : null;
 };
 const horsLieu = (e, lieu = S.lieu) => { const l = lieuExo(e); return !!(l && lieu && l !== lieu); };
 function deduireLieu(){
@@ -486,6 +488,7 @@ function majLieu(){
   $$("[data-lieu]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lieu === S.lieu)));
   renderLieuWarn();
   sideLib?.then(l => l.relieu?.());
+  if(sideMods){ sideMods = false; if(sideTab === "modeles") mountSideModels(); }
 }
 /** Ancienne séance qui mélange HEP et cabinet : on le signale, avec un bouton pour corriger. */
 function renderLieuWarn(){
@@ -539,14 +542,14 @@ async function mountSideModels(){
   if(sideMods) return;
   sideMods = true;
   const { mountModelPicker } = await import("../modeles-ui.js");
-  mountModelPicker($("#mods"), { onPick: applyModele });
+  mountModelPicker($("#mods"), { onPick: applyModele, lieu: () => S.lieu });
 }
 
 async function openModelSheet(){
   const s = openSheet({ title:"Partir d'un modèle", wide:true, body:`<div id="mods-sheet"></div>`, foot:`<a class="btn" href="/programmes_admin.html">${icon("settings")}Gérer les modèles</a><button class="btn primary" type="button" data-close>Fermer</button>` });
   s.el.classList.add("full");
   const { mountModelPicker } = await import("../modeles-ui.js");
-  mountModelPicker(s.el.querySelector("#mods-sheet"), { onPick: m => { s.close(); applyModele(m); } });
+  mountModelPicker(s.el.querySelector("#mods-sheet"), { onPick: m => { s.close(); applyModele(m); }, lieu: () => S.lieu });
 }
 
 /** Utilise un modèle : remplace la séance (si elle est vide ou si le kiné le choisit) ou ajoute ses exercices à la suite. */

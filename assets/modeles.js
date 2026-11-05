@@ -36,6 +36,17 @@ const BUILTIN_META = {
   gainage_1: { categorie:"cabinet", zoneLabel:"Tronc" }
 };
 
+/** « HEP » (à la maison), « CABINET », « MIXTE » ou null (seulement des exercices personnalisés). */
+export function lieuDesExercices(exercices){
+  const l = new Set();
+  (exercices || []).forEach(e => {
+    const img = e.image || "";
+    const s = e.source || (/\/HEP\//.test(img) ? "HEP" : /^\/?(exercises\/)?images\/(?!eva\/)/.test(img) ? "CABINET" : null);
+    if(s === "HEP" || s === "CABINET") l.add(s);
+  });
+  return l.size === 2 ? "MIXTE" : l.size ? [...l][0] : null;
+}
+
 /** Un modèle, quelle que soit son origine, au même format. */
 export function normModele(raw, { builtin = false } = {}){
   const exercices = Array.isArray(raw.exercices) ? raw.exercices : (raw.data?.exercices || []);
@@ -48,6 +59,7 @@ export function normModele(raw, { builtin = false } = {}){
   if(!categories().some(c => c.id === categorie)) categorie = "autre";
   const zoneLabel = meta.zoneLabel || raw.zoneLabel || "";
   return {
+    lieu: lieuDesExercices(exercices),
     id: raw.id, raw, builtin, mine: !builtin,
     nom: base, niveau, categorie, zoneLabel, zoneKey: norm(zoneLabel),
     cover: raw.cover || null, pdf: raw.pdf || null,

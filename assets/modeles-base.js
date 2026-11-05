@@ -143,7 +143,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_lombalgie_2",
@@ -287,7 +288,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_lombalgie_3",
@@ -298,20 +300,20 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "GAINAGE_15",
-"source": "CABINET",
+"id": "200",
+"source": "HEP",
 "nom": "Planche ventrale",
-"image": "/exercises/images/gainage/planche-ventrale.png",
+"image": "/exercises/images/HEP/1408037133-planks.jpg",
 "consignes": [
-"Appui sur les avant-bras",
-"Corps aligné",
-"Contracter le transverse",
-"Respirer normalement"
+"Coudes sous les épaules.",
+"Décollez le corps en appui sur les avant-bras et les orteils.",
+"Dos droit, bassin aligné, serrez les fessiers et le ventre.",
+"Respirez normalement et maintenez 10 à 15 secondes."
 ],
-"position": "",
-"youtube": "",
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/bqxtqpiaHEM",
 "type": "timer",
-"conseil": "Appui sur les avant-bras<br>Corps aligné<br>Contracter le transverse<br>Respirer normalement",
+"conseil": "Coudes sous les épaules.<br>Décollez le corps en appui sur les avant-bras et les orteils.<br>Dos droit, bassin aligné, serrez les fessiers et le ventre.<br>Respirez normalement et maintenez 10 à 15 secondes.",
 "reps": 5,
 "ex": 10,
 "repos": 10,
@@ -337,21 +339,19 @@ export const MODELES_BASE = [
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 },
 {
-"id": "GAINAGE_14",
-"source": "CABINET",
-"nom": "Bird Dog complet",
-"image": "/exercises/images/gainage/bird-dog-complet.png",
+"id": "213",
+"source": "HEP",
+"nom": "Extension de jambe à quatre pattes",
+"image": "/exercises/images/HEP/1421405959-quadruped-leg-extension.jpg",
 "consignes": [
-"Position à quatre pattes",
-"Tendre simultanément bras et jambe opposés",
-"Maintenir le bassin stable",
-"Tenir 2 secondes",
-"Revenir lentement"
+"Dos droit, bassin stable.",
+"Tendez une jambe vers l'arrière, genou tendu, à hauteur du dos.",
+"Revenez lentement, puis alternez."
 ],
-"position": "",
-"youtube": "",
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/ll5ALtoaYVM",
 "type": "timer",
-"conseil": "Position à quatre pattes<br>Tendre simultanément bras et jambe opposés<br>Maintenir le bassin stable<br>Tenir 2 secondes<br>Revenir lentement",
+"conseil": "Dos droit, bassin stable.<br>Tendez une jambe vers l'arrière, genou tendu, à hauteur du dos.<br>Revenez lentement, puis alternez.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -415,26 +415,26 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "GAINAGE_18",
-"source": "CABINET",
-"nom": "Pallof Press",
-"image": "/exercises/images/gainage/pallof-press.png",
+"id": "429",
+"source": "HEP",
+"nom": "Planche latérale adaptée",
+"image": "/exercises/images/HEP/1477662296-modified-side-plank.jpg",
 "consignes": [
-"Se placer de profil à l'élastique",
-"Pousser les bras devant soi",
-"Résister à la rotation",
-"Revenir lentement"
+"Coude sous l'épaule.",
+"Montez le bassin pour aligner épaules, hanches et genoux.",
+"Serrez les fessiers et maintenez 15 à 30 secondes."
 ],
-"position": "",
-"youtube": "",
+"position": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+"youtube": "http://www.youtube.com/embed/yjcZlw5VDVg",
 "type": "timer",
-"conseil": "Se placer de profil à l'élastique<br>Pousser les bras devant soi<br>Résister à la rotation<br>Revenir lentement",
+"conseil": "Coude sous l'épaule.<br>Montez le bassin pour aligner épaules, hanches et genoux.<br>Serrez les fessiers et maintenez 15 à 30 secondes.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_sciatique_et_hernie_discale_1",
@@ -559,7 +559,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_sciatique_et_hernie_discale_2",
@@ -684,7 +685,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_cervicalgie_1",
@@ -806,7 +808,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_cervicalgie_2",
@@ -929,7 +932,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_de_la_coiffe_et_conflit_1",
@@ -1051,7 +1055,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_de_la_coiffe_et_conflit_2",
@@ -1178,7 +1183,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_de_la_coiffe_et_conflit_3",
@@ -1324,7 +1330,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_capsulite_rtractile_1",
@@ -1467,7 +1474,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_capsulite_rtractile_2",
@@ -1592,26 +1600,26 @@ export const MODELES_BASE = [
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 },
 {
-"id": "EPAULE_CAPS_06",
-"source": "CABINET",
-"nom": "Tirage élastique léger",
-"image": "/exercises/images/epaule/tirage_elastique.png",
+"id": "540",
+"source": "HEP",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
 "consignes": [
-"Garder le dos droit",
-"Tirer les coudes vers l’arrière",
-"Rapprocher légèrement les omoplates",
-"Contrôler le retour"
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
 "type": "timer",
-"conseil": "Garder le dos droit<br>Tirer les coudes vers l’arrière<br>Rapprocher légèrement les omoplates<br>Contrôler le retour",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_picondylite_tennis_elbow_1",
@@ -1621,26 +1629,6 @@ export const MODELES_BASE = [
 "zoneLabel": "Coude",
 "series": 1,
 "exercices": [
-{
-"id": "COUDE_01",
-"source": "CABINET",
-"nom": "Étirement des extenseurs du poignet",
-"image": "/exercises/images/coude/COUDE_01.webp",
-"consignes": [
-"Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.",
-"Pliez le poignet vers le bas, paume tournée vers vous.",
-"Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.",
-"Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez."
-],
-"position": "",
-"youtube": "",
-"type": "timer",
-"conseil": "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.<br>Pliez le poignet vers le bas, paume tournée vers vous.<br>Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.<br>Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez.",
-"reps": 3,
-"ex": 30,
-"repos": 10,
-"conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
-},
 {
 "id": "60",
 "source": "HEP",
@@ -1735,7 +1723,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_picondylite_tennis_elbow_2",
@@ -1746,21 +1735,18 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "COUDE_02",
-"source": "CABINET",
-"nom": "Renforcement excentrique des extenseurs du poignet",
-"image": "/exercises/images/coude/COUDE_02.webp",
+"id": "433",
+"source": "HEP",
+"nom": "Torsion de serviette en extension du poignet",
+"image": "/exercises/images/HEP/1477662688-towel-twist-with-wrist-extension.jpg",
 "consignes": [
-"Assis, avant-bras posé sur la table, paume vers le bas, le poignet dépassant du bord.",
-"Tenez le poids (bouteille d'eau ou haltère), poignet relevé.",
-"Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.",
-"Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.",
-"Faites 10 descentes par série."
+"Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.",
+"Changez de sens."
 ],
-"position": "",
-"youtube": "",
+"position": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
+"youtube": "http://www.youtube.com/embed/jcDYlCgMiEs",
 "type": "timer",
-"conseil": "Assis, avant-bras posé sur la table, paume vers le bas, le poignet dépassant du bord.<br>Tenez le poids (bouteille d'eau ou haltère), poignet relevé.<br>Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.<br>Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.<br>Faites 10 descentes par série.",
+"conseil": "Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.<br>Changez de sens.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -1787,21 +1773,18 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "COUDE_03",
-"source": "CABINET",
-"nom": "Renforcement en pronation et supination",
-"image": "/exercises/images/coude/COUDE_03.webp",
+"id": "48",
+"source": "HEP",
+"nom": "Pronation et supination avec poids",
+"image": "/exercises/images/HEP/1408868640-supination-pronation-with-weight.jpg",
 "consignes": [
-"Assis, avant-bras posé sur la table, coude plié à 90°.",
-"Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
-"Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.",
-"Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.",
-"Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès."
+"Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.",
+"Le coude reste immobile."
 ],
-"position": "",
-"youtube": "",
+"position": "Assis, coude plié à 90° collé au corps, un marteau tenu par le manche",
+"youtube": "http://www.youtube.com/embed/M6nV-Sxy1g8",
 "type": "timer",
-"conseil": "Assis, avant-bras posé sur la table, coude plié à 90°.<br>Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.<br>Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.<br>Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.<br>Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès.",
+"conseil": "Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.<br>Le coude reste immobile.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -1844,28 +1827,9 @@ export const MODELES_BASE = [
 "ex": 40,
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
-},
-{
-"id": "COUDE_01",
-"source": "CABINET",
-"nom": "Étirement des extenseurs du poignet",
-"image": "/exercises/images/coude/COUDE_01.webp",
-"consignes": [
-"Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.",
-"Pliez le poignet vers le bas, paume tournée vers vous.",
-"Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.",
-"Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez."
-],
-"position": "",
-"youtube": "",
-"type": "timer",
-"conseil": "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.<br>Pliez le poignet vers le bas, paume tournée vers vous.<br>Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.<br>Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez.",
-"reps": 3,
-"ex": 30,
-"repos": 10,
-"conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_canal_carpien_1",
@@ -1986,7 +1950,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_coxarthrose_1",
@@ -2128,7 +2093,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_coxarthrose_2",
@@ -2275,7 +2241,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_du_moyen_fessier_1",
@@ -2378,7 +2345,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_du_moyen_fessier_2",
@@ -2502,7 +2470,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_gonarthrose_1",
@@ -2647,7 +2616,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_gonarthrose_2",
@@ -2769,7 +2739,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_gonarthrose_3",
@@ -2780,19 +2751,19 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "GENOU_01",
-"source": "CABINET",
-"nom": "Squat avec élastique",
-"image": "/exercises/images/genou/squat-elastique.png",
+"id": "538",
+"source": "HEP",
+"nom": "Squat devant une chaise avec élastique",
+"image": "/exercises/images/HEP/squats-chair-band.jpg",
 "consignes": [
-"Garder le dos droit",
-"Pousser légèrement contre l’élastique",
-"Maintenir les genoux alignés"
+"Gardez les genoux écartés contre l'élastique.",
+"Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+"Remontez."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout devant une chaise, élastique au-dessus des genoux",
+"youtube": "http://www.youtube.com/embed/f2-KKASpQTs",
 "type": "timer",
-"conseil": "Garder le dos droit<br>Pousser légèrement contre l’élastique<br>Maintenir les genoux alignés",
+"conseil": "Gardez les genoux écartés contre l'élastique.<br>Descendez en reculant les fesses jusqu'à effleurer la chaise.<br>Remontez.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -2857,19 +2828,19 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "GENOU_04",
-"source": "CABINET",
-"nom": "Équilibre unipodal avec balle",
-"image": "/exercises/images/genou/equilibre-balle-1.png",
+"id": "698",
+"source": "HEP",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
 "consignes": [
-"Garder l’équilibre sur une jambe",
-"Contrôler les mouvements",
-"Regarder devant soi"
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout sur une jambe, une chaise devant vous",
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
 "type": "timer",
-"conseil": "Garder l’équilibre sur une jambe<br>Contrôler les mouvements<br>Regarder devant soi",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
 "reps": 3,
 "ex": 30,
 "repos": 15,
@@ -2894,7 +2865,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_syndrome_fmoro_patellaire_1",
@@ -3040,7 +3012,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_syndrome_fmoro_patellaire_2",
@@ -3051,19 +3024,19 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "GENOU_02",
-"source": "CABINET",
-"nom": "Squat anti-valgus",
-"image": "/exercises/images/genou/squat-anti-valgus.png",
+"id": "538",
+"source": "HEP",
+"nom": "Squat devant une chaise avec élastique",
+"image": "/exercises/images/HEP/squats-chair-band.jpg",
 "consignes": [
-"Résister à la traction de l’élastique",
-"Maintenir le genou aligné",
-"Contrôler la descente"
+"Gardez les genoux écartés contre l'élastique.",
+"Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+"Remontez."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout devant une chaise, élastique au-dessus des genoux",
+"youtube": "http://www.youtube.com/embed/f2-KKASpQTs",
 "type": "timer",
-"conseil": "Résister à la traction de l’élastique<br>Maintenir le genou aligné<br>Contrôler la descente",
+"conseil": "Gardez les genoux écartés contre l'élastique.<br>Descendez en reculant les fesses jusqu'à effleurer la chaise.<br>Remontez.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -3164,7 +3137,8 @@ export const MODELES_BASE = [
 "repos": 15,
 "conseil_kine": "Tenez-vous près d'un appui stable."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_entorse_de_cheville_1",
@@ -3308,7 +3282,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_entorse_de_cheville_2",
@@ -3375,39 +3350,37 @@ export const MODELES_BASE = [
 "conseil_kine": "Tenez-vous près d'un appui stable."
 },
 {
-"id": "CHEVILLE_04",
-"source": "CABINET",
-"nom": "Flexion dorsale contre le mur",
-"image": "/exercises/images/cheville/flexdorsalemur.png",
+"id": "159",
+"source": "HEP",
+"nom": "Flexion dorsale de cheville",
+"image": "/exercises/images/HEP/1407676479-ankle-dorsi-flexion.jpg",
 "consignes": [
-"Placer la jambe à étirer en arrière",
-"Conserver le talon au sol",
-"Avancer progressivement le bassin",
-"Maintenir l'étirement sans rebond"
+"Gardez la jambe tendue.",
+"Tirez doucement la pointe du pied vers vous, puis relâchez."
 ],
-"position": "",
-"youtube": "",
+"position": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+"youtube": "http://www.youtube.com/embed/-WL1KpF6w78",
 "type": "timer",
-"conseil": "Placer la jambe à étirer en arrière<br>Conserver le talon au sol<br>Avancer progressivement le bassin<br>Maintenir l'étirement sans rebond",
+"conseil": "Gardez la jambe tendue.<br>Tirez doucement la pointe du pied vers vous, puis relâchez.",
 "reps": 2,
 "ex": 45,
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 },
 {
-"id": "CHEV_007",
-"source": "CABINET",
-"nom": "Marche latérale élastique",
-"image": "/images/placeholders/cheville.webp",
+"id": "505",
+"source": "HEP",
+"nom": "Pas chassés avec élastique",
+"image": "/exercises/images/HEP/side-step-band.jpg",
 "consignes": [
-"Garder les pieds parallèles",
-"Faire des petits pas",
-"Rester gainé"
+"Fléchissez légèrement les genoux (mini-squat).",
+"Faites des pas sur le côté en gardant l'élastique tendu.",
+"Hanches et pieds restent tournés vers l'avant."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout, élastique au-dessus des genoux",
+"youtube": "http://www.youtube.com/embed/C5G4QO0oNDg",
 "type": "timer",
-"conseil": "Garder les pieds parallèles<br>Faire des petits pas<br>Rester gainé",
+"conseil": "Fléchissez légèrement les genoux (mini-squat).<br>Faites des pas sur le côté en gardant l'élastique tendu.<br>Hanches et pieds restent tournés vers l'avant.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -3433,7 +3406,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_entorse_de_cheville_3",
@@ -3540,25 +3514,27 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "244",
-"source": "HEP",
-"nom": "Montées sur pointes sur une jambe",
-"image": "/exercises/images/HEP/1411195314-single-leg-heel-raises.jpg",
+"id": "CHEVILLE_13",
+"source": "CABINET",
+"nom": "Montée sur pointe unipodale sur une marche",
+"image": "/exercises/images/cheville/pointe-unipodale-marche.webp",
 "consignes": [
-"Montez sur la pointe du pied.",
-"Redescendez lentement.",
-"Tenez-vous au support si besoin."
+"Debout sur une jambe, l'avant du pied sur le bord d'une marche, une main sur la rampe",
+"Monter sur la pointe du pied le plus haut possible en 2 secondes",
+"Redescendre lentement en 3 secondes, le talon passant un peu sous le niveau de la marche",
+"L'autre jambe reste pliée en arrière"
 ],
 "position": "Debout sur une jambe, à côté d'un support",
-"youtube": "http://www.youtube.com/embed/9Up6i1FIcyI",
+"youtube": "",
 "type": "timer",
-"conseil": "Montez sur la pointe du pied.<br>Redescendez lentement.<br>Tenez-vous au support si besoin.",
+"conseil": "Debout sur une jambe, l'avant du pied sur le bord d'une marche, une main sur la rampe<br>Monter sur la pointe du pied le plus haut possible en 2 secondes<br>Redescendre lentement en 3 secondes, le talon passant un peu sous le niveau de la marche<br>L'autre jambe reste pliée en arrière",
 "reps": 3,
 "ex": 40,
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "CABINET"
 },
 {
 "id": "base_tendinopathie_d_achille_1",
@@ -3664,7 +3640,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_tendinopathie_d_achille_2",
@@ -3751,27 +3728,9 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
-},
-{
-"id": "CHEV_008",
-"source": "CABINET",
-"nom": "Sauts sur place légers",
-"image": "/images/placeholders/cheville.webp",
-"consignes": [
-"Amortir doucement",
-"Garder les genoux souples",
-"Rester léger sur les appuis"
-],
-"position": "",
-"youtube": "",
-"type": "timer",
-"conseil": "Amortir doucement<br>Garder les genoux souples<br>Rester léger sur les appuis",
-"reps": 3,
-"ex": 40,
-"repos": 20,
-"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_fasciite_plantaire_1",
@@ -3914,7 +3873,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_ligamentoplastie_du_lca_1",
@@ -4054,7 +4014,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_ligamentoplastie_du_lca_2",
@@ -4176,7 +4137,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_ligamentoplastie_du_lca_3",
@@ -4225,38 +4187,19 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "GENOU_01",
-"source": "CABINET",
-"nom": "Squat avec élastique",
-"image": "/exercises/images/genou/squat-elastique.png",
+"id": "538",
+"source": "HEP",
+"nom": "Squat devant une chaise avec élastique",
+"image": "/exercises/images/HEP/squats-chair-band.jpg",
 "consignes": [
-"Garder le dos droit",
-"Pousser légèrement contre l’élastique",
-"Maintenir les genoux alignés"
+"Gardez les genoux écartés contre l'élastique.",
+"Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+"Remontez."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout devant une chaise, élastique au-dessus des genoux",
+"youtube": "http://www.youtube.com/embed/f2-KKASpQTs",
 "type": "timer",
-"conseil": "Garder le dos droit<br>Pousser légèrement contre l’élastique<br>Maintenir les genoux alignés",
-"reps": 3,
-"ex": 40,
-"repos": 20,
-"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
-},
-{
-"id": "GENOU_02",
-"source": "CABINET",
-"nom": "Squat anti-valgus",
-"image": "/exercises/images/genou/squat-anti-valgus.png",
-"consignes": [
-"Résister à la traction de l’élastique",
-"Maintenir le genou aligné",
-"Contrôler la descente"
-],
-"position": "",
-"youtube": "",
-"type": "timer",
-"conseil": "Résister à la traction de l’élastique<br>Maintenir le genou aligné<br>Contrôler la descente",
+"conseil": "Gardez les genoux écartés contre l'élastique.<br>Descendez en reculant les fesses jusqu'à effleurer la chaise.<br>Remontez.",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -4282,19 +4225,19 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "GENOU_04",
-"source": "CABINET",
-"nom": "Équilibre unipodal avec balle",
-"image": "/exercises/images/genou/equilibre-balle-1.png",
+"id": "698",
+"source": "HEP",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
 "consignes": [
-"Garder l’équilibre sur une jambe",
-"Contrôler les mouvements",
-"Regarder devant soi"
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
 ],
-"position": "",
-"youtube": "",
+"position": "Debout sur une jambe, une chaise devant vous",
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
 "type": "timer",
-"conseil": "Garder l’équilibre sur une jambe<br>Contrôler les mouvements<br>Regarder devant soi",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
 "reps": 3,
 "ex": 30,
 "repos": 15,
@@ -4320,7 +4263,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_ligamentoplastie_du_lca_4",
@@ -4331,19 +4275,20 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "90",
-"source": "HEP",
-"nom": "Fentes",
-"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"id": "HANCHE_08",
+"source": "CABINET",
+"nom": "Fente avant",
+"image": "/exercises/images/hanche/fente-avant.webp",
 "consignes": [
-"Dos droit, genou avant au-dessus de la cheville.",
-"Descendez le genou arrière vers le sol.",
-"Remontez lentement en poussant sur le pied avant."
+"Debout, faire un grand pas en avant",
+"Descendre le genou arrière vers le sol en gardant le buste droit",
+"S'arrêter quand les deux genoux sont à peu près à 90°",
+"Pousser sur le talon avant pour remonter, puis changer de jambe"
 ],
 "position": "Debout, un pied devant l'autre (grand pas)",
-"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"youtube": "",
 "type": "timer",
-"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"conseil": "Debout, faire un grand pas en avant<br>Descendre le genou arrière vers le sol en gardant le buste droit<br>S'arrêter quand les deux genoux sont à peu près à 90°<br>Pousser sur le talon avant pour remonter, puis changer de jambe",
 "reps": 3,
 "ex": 40,
 "repos": 20,
@@ -4443,7 +4388,8 @@ export const MODELES_BASE = [
 "ex": 300,
 "repos": 0
 }
-]
+],
+"lieu": "CABINET"
 },
 {
 "id": "base_prothse_totale_de_genou_ptg_1",
@@ -4584,7 +4530,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prothse_totale_de_genou_ptg_2",
@@ -4706,7 +4653,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prothse_totale_de_genou_ptg_3",
@@ -4830,7 +4778,8 @@ export const MODELES_BASE = [
 "repos": 15,
 "conseil_kine": "Tenez-vous près d'un appui stable."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prothse_totale_de_hanche_pth_1",
@@ -4952,7 +4901,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prothse_totale_de_hanche_pth_2",
@@ -5078,7 +5028,8 @@ export const MODELES_BASE = [
 "repos": 15,
 "conseil_kine": "Tenez-vous près d'un appui stable."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prothse_totale_de_hanche_pth_3",
@@ -5203,7 +5154,8 @@ export const MODELES_BASE = [
 "repos": 15,
 "conseil_kine": "Tenez-vous près d'un appui stable."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_rparation_de_la_coiffe_des_rotateurs_1",
@@ -5324,7 +5276,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_rparation_de_la_coiffe_des_rotateurs_2",
@@ -5449,7 +5402,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_rparation_de_la_coiffe_des_rotateurs_3",
@@ -5576,7 +5530,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prvention_des_chutes_1",
@@ -5699,7 +5654,8 @@ export const MODELES_BASE = [
 "ex": 300,
 "repos": 0
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prvention_des_chutes_2",
@@ -5839,7 +5795,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_prvention_des_chutes_3",
@@ -5963,7 +5920,8 @@ export const MODELES_BASE = [
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_dos_au_travail_1",
@@ -6106,7 +6064,8 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
 }
-]
+],
+"lieu": "HEP"
 },
 {
 "id": "base_dos_au_travail_2",
@@ -6232,6 +6191,7 @@ export const MODELES_BASE = [
 "repos": 10,
 "conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
 }
-]
+],
+"lieu": "HEP"
 }
 ];
