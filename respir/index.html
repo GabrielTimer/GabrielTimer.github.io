@@ -110,8 +110,11 @@ body.running .column{ height:min(70dvh,640px); }
 
 @media (max-width:720px){
   .stage{ flex-direction:column; gap:22px; }
-  .column{ height:min(36dvh,340px); }
-  body.running .column{ height:min(58dvh,560px); }
+  /* Le tube prend la place qui reste : sur un petit écran (ou avec un grand texte),
+     il rétrécit au lieu de pousser « Commencer » hors de l'écran. */
+  .column{ height:auto; flex:0 1 min(36dvh,340px); min-height:110px; transition:flex-basis 1.4s cubic-bezier(.45,.05,.55,.95); }
+  body.running .column{ height:auto; flex-basis:min(58dvh,560px); }
+  .stage{ gap:clamp(10px,2.5dvh,22px); }
   .hint{ font-size:.9rem; }
   .breath{ width:100%; align-items:center; text-align:center; }
   .word span{ left:50%; transform:translateX(-50%); }
@@ -142,6 +145,8 @@ body.running .column{ height:min(70dvh,640px); }
 body.running .panel{ opacity:0; transform:translateY(20px); pointer-events:none; position:absolute; left:0; right:0; bottom:16px; }
 body.running .breath .hint{ display:none; }
 @media (max-height:700px){ .hint{ display:none; } }
+/* Dernier recours (très petit écran, texte agrandi) : la page défile plutôt que de couper le bouton */
+body:not(.running) .app{ overflow-y:auto; }
 body.running .top{ opacity:.0; }
 body.running.controls .top{ opacity:1; }
 .dock{ position:fixed; left:50%; bottom:max(20px,env(safe-area-inset-bottom)); transform:translate(-50%,20px); z-index:5;
