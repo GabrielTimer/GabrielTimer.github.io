@@ -4,6 +4,8 @@
    - pathologies principales (les ~430 intitulés d'origine, souvent en
      doublon ou en abrégé anglais, sont regroupés en une quarantaine)
    - type d'exercice (renforcement, étirement, équilibre…)
+   - spécialité (orthopédie, traumatologie, rhumatologie, neurologie…),
+     déduite des pathologies et de certains types
    ========================================================= */
 
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -27,6 +29,35 @@ const MODE_VERS_TYPE = {
   "statique": "Isométrique", "pnf": "Étirement"
 };
 export const TYPES = ["Renforcement", "Étirement", "Mobilité", "Gainage", "Équilibre et proprioception", "Isométrique", "Respiration", "Cardio", "Contrôle moteur", "Au fauteuil (seniors)", "Ludique", "Au cabinet"];
+
+/* Spécialités, dans l'ordre d'affichage */
+export const SPECIALITES = [
+  "Orthopédie", "Traumatologie", "Rhumatologie", "Neurologie", "Vestibulaire", "Respiratoire",
+  "Cardio et reconditionnement", "Gériatrie et chutes", "Périnée et post-partum", "Sport", "Pédiatrie",
+  "Oncologie et lymphœdème", "Prévention et posture"
+];
+const O = "Orthopédie", T = "Traumatologie", R = "Rhumatologie", N = "Neurologie", VE = "Vestibulaire", RE = "Respiratoire",
+  CA = "Cardio et reconditionnement", G = "Gériatrie et chutes", PE = "Périnée et post-partum", SP = "Sport", PR = "Prévention et posture";
+
+/* Spécialités de chaque pathologie principale */
+const SPECS_PATHO = {
+  "Cervicalgie":[R, PR], "Névralgie cervico-brachiale":[R], "Tendinopathie de la coiffe / conflit":[R, SP], "Capsulite rétractile":[R],
+  "Tendinopathie du biceps":[R, SP], "Instabilité / luxation d'épaule":[T, O, SP], "Arthrose / prothèse d'épaule":[O, R],
+  "Épicondylite (tennis elbow)":[R, SP], "Épitrochléite (golf elbow)":[R, SP], "Canal carpien":[R, O], "Tendinite de De Quervain":[R],
+  "Arthrose de la main / rhizarthrose":[R], "Fracture du poignet":[T, O], "Lombalgie":[R, PR], "Hernie discale":[R],
+  "Sciatique / radiculalgie":[R], "Canal lombaire étroit":[R, G], "Spondylolisthèse":[R], "Spondylarthrite":[R], "Scoliose / posture":[PR],
+  "Arthrose lombaire":[R], "Post-partum / périnée":[PE], "Coxarthrose / prothèse de hanche":[O, R, G], "Conflit fémoro-acétabulaire":[O, SP],
+  "Tendinopathie du moyen fessier":[R], "Syndrome du piriforme":[R, SP], "Pubalgie":[SP], "Gonarthrose / prothèse de genou":[O, R, G],
+  "Ligament croisé (LCA)":[T, O, SP], "Lésion méniscale":[T, O, SP], "Syndrome fémoro-patellaire":[R, SP], "Tendinopathie rotulienne":[SP, R],
+  "Entorse du genou (LLI/LLE)":[T, SP], "Syndrome de l'essuie-glace":[SP], "Entorse / instabilité de cheville":[T, SP],
+  "Tendinopathie d'Achille":[R, SP], "Fasciite plantaire":[R, SP], "Fracture de cheville":[T, O], "Mâchoire (ATM) / céphalées":[R],
+  "Paralysie faciale":[N], "Arthrose (générale)":[R, G], "Prévention des chutes / équilibre":[G], "AVC / hémiplégie":[N],
+  "Maladie de Parkinson":[N], "Sclérose en plaques":[N], "SLA (maladie de Charcot)":[N], "Charcot-Marie-Tooth":[N],
+  "Vertiges / vestibulaire":[VE], "Respiratoire (BPCO, asthme…)":[RE], "Post-opératoire":[O], "Ostéoporose":[R, G],
+  "Déconditionnement / reprise":[CA]
+};
+/* Spécialités déduites du type d'exercice */
+const SPECS_TYPE = { "Respiration":[RE], "Cardio":[CA], "Au fauteuil (seniors)":[G] };
 
 /* Pathologies principales : [nom affiché, zone, motif reconnu dans les intitulés d'origine] */
 export const PATHOLOGIES = [
@@ -84,7 +115,8 @@ export const PATHOLOGIES = [
   ["Déconditionnement / reprise", "", /deconditionn|reprise|sedentar/]
 ].map(([nom, zone, re]) => ({ nom, zone, re }));
 
-/** Ajoute à un exercice de la bibliothèque : e.zone, e.types[], e.pathos[] (noms des pathologies principales). */
+/** Ajoute à un exercice de la bibliothèque : e.zone, e.types[], e.pathos[] (noms des pathologies principales), e.specs[] (spécialités). */
+export const specialitesDe = nomPatho => SPECS_PATHO[nomPatho] || [];
 export function classer(e){
   const cat = norm(e.categorie).trim();
   const zone = ZONES.find(z => norm(z) === cat) || CAT_VERS_ZONE[cat] || (/epaule/.test(cat) ? "Épaule" : /genou/.test(cat) ? "Genou" : /hanche/.test(cat) ? "Hanche" : /dos|lomb/.test(cat) ? "Dos" : /cheville|pied/.test(cat) ? "Cheville et pied" : /coude/.test(cat) ? "Coude" : /poignet|main/.test(cat) ? "Poignet et main" : /cervic|cou\b/.test(cat) ? "Cervicales" : /tronc|abdo/.test(cat) ? "Tronc" : /corps/.test(cat) ? "Corps entier" : "");
@@ -95,8 +127,16 @@ export function classer(e){
   if(e.source === "CABINET" && e.raw?.categorie === "cabinet") types.add("Au cabinet");
   const sources = [...(e.pathologies || []), cat === "post-partum" ? "post-partum" : "", cat === "pubalgie" ? "pubalgie" : ""].map(norm).filter(Boolean);
   const pathos = PATHOLOGIES.filter(p => sources.some(s => p.re.test(s))).map(p => p.nom);
+  const specs = new Set();
+  pathos.forEach(p => (SPECS_PATHO[p] || []).forEach(x => specs.add(x)));
+  types.forEach(t => (SPECS_TYPE[t] || []).forEach(x => specs.add(x)));
+  if(cat === "neurologie") specs.add(N);
+  if(cat === "post-partum" || /^perinee/.test(cat)) specs.add(PE);
+  /* Spécialités ajoutées à la main sur l'exercice (éditeur) */
+  (Array.isArray(e.specialites) ? e.specialites : []).forEach(x => { if(SPECIALITES.includes(x)) specs.add(x); });
   e.zone = zone;
   e.types = [...types];
   e.pathos = pathos;
+  e.specs = SPECIALITES.filter(x => specs.has(x));
   return e;
 }

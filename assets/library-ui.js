@@ -3,7 +3,7 @@
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
-import { ZONES, TYPES, PATHOLOGIES, classer } from "./classement.js";
+import { ZONES, TYPES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
 
 const PAGE = 30;
 
@@ -13,7 +13,7 @@ const PAGE = 30;
  */
 export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters", countIn = null } = {}){
   const saved = store.get(persistKey, {}) || {};
-  const state = { q: saved.q || "", cat: ZONES.includes(saved.cat) ? saved.cat : "", patho: saved.patho || "", type: saved.type || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
+  const state = { spec: SPECIALITES.includes(saved.spec) ? saved.spec : "", q: saved.q || "", cat: ZONES.includes(saved.cat) ? saved.cat : "", patho: saved.patho || "", type: saved.type || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
 
   root.innerHTML = `
     <div class="lib">
@@ -28,6 +28,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
           <select class="select sm-select" data-type aria-label="Type d'exercice"></select>
           <select class="select sm-select" data-niveau aria-label="Niveau"><option value="">Tous niveaux</option><option value="1">Niveau 1</option><option value="2">Niveau 2</option><option value="3">Niveau 3</option><option value="4">Niveau 4 et +</option></select>
         </div>
+        <div class="lib-zones"><span class="lib-zones-lbl">Spécialité</span><div class="chips scroll" data-specs role="group" aria-label="Spécialité"></div></div>
         <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div></div>
       </div>
       <div class="lib-count small muted" data-count></div>
@@ -40,23 +41,25 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   const all = await loadLibrary();
   all.forEach(e => { if(!("zone" in e)) classer(e); });
-  let counts = {}, cats = [];
+  let counts = {}, cats = [], specCounts = {};
+  const dansSpec = e => !state.spec || e.specs.includes(state.spec);
   const countCats = () => {
     all.forEach(e => classer(e));
-    counts = {};
-    all.forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
+    counts = {}; specCounts = {};
+    all.forEach(e => { if(!isHidden(exerciseKey(e))) e.specs.forEach(x => specCounts[x] = (specCounts[x] || 0) + 1); });
+    all.filter(dansSpec).forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
     cats = ZONES.filter(z => counts[z]);
     renderSelects();
   };
   /* Listes Pathologie et Type : seulement ce qui existe, avec le nombre d'exercices */
   /* Les pathologies proposées dépendent de la zone choisie ; les types, de la zone et de la pathologie */
   function renderSelects(){
-    const visibles = all.filter(e => !isHidden(exerciseKey(e)));
+    const visibles = all.filter(e => !isHidden(exerciseKey(e)) && dansSpec(e));
     const dansZone = state.cat ? visibles.filter(e => e.zone === state.cat) : visibles;
     const pc = {}, tc = {};
     dansZone.forEach(e => e.pathos.forEach(p => pc[p] = (pc[p] || 0) + 1));
     /* Dans une zone : seulement ses pathologies (et les pathologies générales qui la concernent vraiment) */
-    const propres = p => !state.cat || p.zone === state.cat || (!p.zone && pc[p.nom] >= 3);
+    const propres = p => (!state.spec || specialitesDe(p.nom).includes(state.spec)) && (!state.cat || p.zone === state.cat || (!p.zone && pc[p.nom] >= 3));
     if(state.patho && !(pc[state.patho] && propres(PATHOLOGIES.find(p => p.nom === state.patho) || {}))) state.patho = "";
     (state.patho ? dansZone.filter(e => e.pathos.includes(state.patho)) : dansZone).forEach(e => e.types.forEach(t => tc[t] = (tc[t] || 0) + 1));
     if(state.type && !tc[state.type]) state.type = "";
@@ -81,14 +84,25 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   countCats();
   /* Après création, correction ou suppression d'un exercice */
   const changed = (e, info = {}) => {
-    countCats(); renderCats(); renderResults();
+    countCats(); renderSpecs(); renderCats(); renderResults();
     if(info.created){
       exerciseSheet(e, { onAdd, addLabel, onEdited: changed });
     }
   };
 
-  const save = () => store.set(persistKey, { q: state.q, cat: state.cat, patho: state.patho, type: state.type, source: state.source, niveau: state.niveau });
+  const save = () => store.set(persistKey, { spec: state.spec, q: state.q, cat: state.cat, patho: state.patho, type: state.type, source: state.source, niveau: state.niveau });
 
+  const renderSpecs = () => {
+    $("[data-specs]", root).innerHTML =
+      `<button class="chip" type="button" data-spec="" aria-pressed="${!state.spec}">Toutes</button>` +
+      SPECIALITES.filter(x => specCounts[x]).map(x => `<button class="chip" type="button" data-spec="${esc(x)}" aria-pressed="${state.spec === x}">${esc(x)}<span class="count">${specCounts[x]}</span></button>`).join("");
+    $$("[data-spec]", root).forEach(b => b.onclick = () => {
+      state.spec = b.dataset.spec; state.limit = PAGE;
+      countCats();
+      if(state.cat && !counts[state.cat]) state.cat = "";
+      renderSelects(); save(); renderSpecs(); renderCats(); renderResults();
+    });
+  };
   const renderCats = () => {
     $("[data-cats]", root).innerHTML =
       `<button class="chip" type="button" data-cat="" aria-pressed="${!state.cat}">Toutes zones</button>` +
@@ -100,6 +114,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     let list = state.source === "HIDDEN" ? all.filter(e => isHidden(exerciseKey(e))) : all.filter(e => !isHidden(exerciseKey(e)));
     if(state.source === "FAV") list = list.filter(e => isFavorite(exerciseKey(e)));
     else if(state.source && state.source !== "HIDDEN") list = list.filter(e => e.source === state.source);
+    if(state.spec) list = list.filter(e => e.specs.includes(state.spec));
     if(state.cat) list = list.filter(e => e.zone === state.cat);
     if(state.patho) list = list.filter(e => e.pathos.includes(state.patho));
     if(state.type) list = list.filter(e => e.types.includes(state.type));
@@ -166,7 +181,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     openExerciseEditor(null, { onSaved: changed });
   };
 
-  renderCats();
+  renderSpecs(); renderCats();
   renderResults();
   return { focus: () => $("[data-q]", root).focus(), refresh: renderResults };
 }
