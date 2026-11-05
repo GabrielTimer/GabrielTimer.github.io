@@ -80,8 +80,9 @@ $("#app").innerHTML = `
     <div class="set-row"><div class="s-txt"><strong>Enchaîner automatiquement</strong><span>Passer à l'exercice suivant sans appuyer sur « Commencer ».</span></div>${sw("auto", auto)}</div>
   </div>
 
-  ${ctx.cle && !ctx.apercu ? `
+  ${ctx.cle ? `
   <div class="section-title section" id="rappels">Rappels de séance</div>
+  ${ctx.apercu ? `<div class="notice" style="margin-bottom:10px">${icon("eye")}<span>Aperçu : voici ce que voit votre patient. Les rappels se règlent sur son propre téléphone, rien n'est enregistré d'ici.</span></div>` : ""}
   <div class="panel" style="padding:0" id="rappels-box"></div>` : ""}
 
   ${!standalone ? `
@@ -164,6 +165,7 @@ async function rappelsUI(){
   const champs = () => box.querySelectorAll("input, select, [data-mode]");
   let attente = null;
   const apply = async () => {
+    if(ctx.apercu){ row.hidden = !on.checked; toast("Aperçu : rien n'est enregistré. Le patient active les rappels sur son téléphone."); return; }
     champs().forEach(c => c.disabled = true);
     try{
       if(on.checked){
