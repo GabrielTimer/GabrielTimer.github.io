@@ -274,7 +274,7 @@ export function mountGuide(app, ctx){
         </section>
 
         <div class="g-actions">
-          <button class="btn" type="button" data-gact="resume">${icon("file")}Voir le résumé</button>
+          <button class="btn" type="button" data-gact="resume">${icon("file")}Voir le récapitulatif</button>
           <button class="btn" type="button" data-gact="pdf">${icon("pdf")}PDF</button>
           <button class="btn" type="button" data-gact="send">${icon("share")}Envoyer</button>
         </div>`;
@@ -422,11 +422,13 @@ export function mountGuide(app, ctx){
     if(act === "full"){ ctx.onFull(); return; }
     if(act === "done"){ ctx.leave(); return; }
     if(act === "resume"){
+      const RC = await import("./bilan-recap.js");
       const text = B.summaryText(S, patient, ctx.opts());
-      const sh = openSheet({ title:"Résumé du bilan", wide:true,
-        body:`<textarea class="textarea" readonly style="min-height:50vh;font-size:var(--fs-sm);line-height:1.5">${esc(text)}</textarea>`,
-        foot:`<button class="btn" type="button" data-close>Fermer</button><button class="btn primary" type="button" data-copy>${icon("copy")}Copier pour Maiia</button>` });
+      const sh = openSheet({ title:"Récapitulatif du bilan", wide:true, tall:true,
+        body: RC.recapHTML(B.report(S, patient, ctx.opts()), S, K),
+        foot:`<button class="btn" type="button" data-close>Fermer</button><button class="btn" type="button" data-rpdf>${icon("pdf")}PDF</button><button class="btn primary" type="button" data-copy>${icon("copy")}Copier pour Maiia</button>` });
       sh.el.querySelector("[data-copy]").onclick = () => B.copyText(text);
+      sh.el.querySelector("[data-rpdf]").onclick = async ev => { const x = ev.currentTarget; x.disabled = true; try{ await B.downloadPdf(S, patient, ctx.opts()); }catch(err){ toast("Le PDF n'a pas pu être créé.", { type:"err" }); } finally{ x.disabled = false; } };
       return;
     }
     if(act === "pdf"){

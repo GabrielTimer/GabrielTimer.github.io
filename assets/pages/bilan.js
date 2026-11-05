@@ -16,7 +16,8 @@ const C = await import("../cloud.js");
 const B = await import("../bilan-core.js");
 const TC = await import("../tests-catalogue.js");
 const BC = await import("../bodychart.js");
-{ const st = document.createElement("style"); st.textContent = BC.BODY_CSS; document.head.append(st); }
+const RC = await import("../bilan-recap.js");
+{ const st = document.createElement("style"); st.textContent = BC.BODY_CSS + RC.RECAP_CSS; document.head.append(st); }
 
 const cle = params.get("patient");
 let id = params.get("id") || null;
@@ -180,8 +181,10 @@ function render(){
         </section>
 
         <section class="panel">
-          <div class="panel-head"><h2>Résumé pour Maiia</h2></div>
-          <textarea class="textarea" id="resume" readonly aria-label="Résumé du bilan"></textarea>
+          <div class="panel-head"><h2>Récapitulatif</h2></div>
+          <div id="recap"></div>
+          <details style="margin-top:14px"><summary class="sub" style="cursor:pointer">Texte pour Maiia</summary>
+            <textarea class="textarea" id="resume" readonly aria-label="Résumé du bilan"></textarea></details>
           <div class="btn-row" style="margin-top:12px">
             <button class="btn primary" type="button" id="a-copy">${icon("copy")}Copier le résumé</button>
             <button class="btn" type="button" id="a-pdf2">${icon("pdf")}Télécharger le PDF</button>
@@ -341,7 +344,10 @@ function drawEvo(){
     <p class="hint" style="margin-top:8px">MID : valeurs de la littérature, variables selon la population et la méthode. Pour l'EVA, un écart de 2 points est signalé.</p>` : "";
 }
 
-const drawResume = () => { const r = $("#resume"); if(r) r.value = B.summaryText(S, patient, opts()); };
+const drawResume = () => {
+  const r = $("#resume"); if(r) r.value = B.summaryText(S, patient, opts());
+  const rc = $("#recap"); if(rc) rc.innerHTML = RC.recapHTML(B.report(S, patient, opts()), S, K);
+};
 
 function drawDanger(){
   if(!$("#danger")) return;

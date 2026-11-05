@@ -9,6 +9,7 @@
 import { esc, icon, toast, openSheet, KINE, settings, logoSrc } from "./app.js";
 import { neuroSummary } from "./nerfs-data.js";
 import { lignesPlan } from "./bilan-traitement.js";
+import { silhouettePNG, vuesUtiles, evaHex } from "./bilan-recap.js";
 
 /* ---------- Chargement du contenu clinique ---------- */
 
@@ -342,6 +343,38 @@ export async function bilanPdf(S, patient, opts = {}){
     py += v.length * 4.8;
   });
   y += boxH + 8;
+
+  /* Silhouettes avec les zones douloureuses, et la liste des douleurs */
+  const zonesP = Object.entries(S.pain || {});
+  if(zonesP.length){
+    const vues = vuesUtiles(K, S.pain);
+    const pngs = await Promise.all(vues.map(v => silhouettePNG(K, v, S.pain)));
+    const fw = 30, fh = fw * 430 / 200;
+    ensure(fh + 6);
+    let fx = M;
+    pngs.forEach(png => { if(png){ d.addImage(png, "PNG", fx, y, fw, fh); fx += fw + 4; } });
+    const lx = fx + 6;
+    let ly = y + 6;
+    d.setFont("helvetica", "bold"); d.setFontSize(11.5); d.setTextColor(...LAGON);
+    d.text(t("Douleurs"), lx, ly); ly += 8;
+    zonesP.forEach(([z, p]) => {
+      const rgb = evaHex(p.eva).match(/\w\w/g).map(h => parseInt(h, 16));
+      d.setFillColor(...rgb); d.roundedRect(lx, ly - 5, 9, 7, 1.5, 1.5, "F");
+      d.setFont("helvetica", "bold"); d.setFontSize(10); d.setTextColor(255, 255, 255);
+      d.text(String(p.eva), lx + 4.5, ly, { align:"center" });
+      d.setTextColor(...INK); d.text(t(z), lx + 12, ly);
+      if((p.types || []).length){ d.setFont("helvetica", "normal"); d.setFontSize(9); d.setTextColor(...INK2); d.text(t(p.types.join(", ")), lx + 12, ly + 4.5); ly += 4.5; }
+      ly += 9;
+    });
+    const hyp = S.c?.hyp || [];
+    if(hyp.length){
+      ly += 2;
+      d.setFont("helvetica", "bold"); d.setFontSize(9); d.setTextColor(...INK2); d.text(t("HYPOTHÈSE RETENUE"), lx, ly); ly += 5.5;
+      d.setFontSize(11); d.setTextColor(...LAGON);
+      const hl = d.splitTextToSize(t(hyp.join(" · ")), W - M - lx); d.text(hl, lx, ly);
+    }
+    y += fh + 8;
+  }
 
   /* Sections */
   R.sections.forEach(s => {
