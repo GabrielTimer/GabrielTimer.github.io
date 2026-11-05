@@ -1,4 +1,5 @@
 /* Affichage d'un programme (semaines et séances), côté patient et côté kiné */
+import { etatSuppression, resteTexte } from "./inactivite.js";
 
 import {
   openSheet, toast, esc, icon, byWeek, fmtDate, fmtShortDate, startOfDay, daysFromToday, evaColor, ressentiLabel,
@@ -58,7 +59,14 @@ function sessionRow(s, { role, next }){
 }
 
 /** HTML d'un programme complet. */
-export function programmeHTML(prog, { role = "patient", open = true } = {}){
+export function programmeHTML(prog, { role = "patient", open = true, patient = null } = {}){
+  /* Programme sans activité depuis 3 semaines : bientôt mis à la corbeille (voir inactivite.js) */
+  const sup = !prog.termine && patient ? etatSuppression(prog, patient) : null;
+  const supHTML = !sup ? "" : sup.alerte
+    ? (role === "kine"
+      ? `<div class="notice warn" style="margin:10px 0">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">Aucune activité depuis ${sup.jours} jours : programme mis à la corbeille ${resteTexte(sup.reste)}.</span><button class="btn sm" type="button" data-pact="garder">${icon("check")}Garder</button><button class="btn sm" type="button" data-pact="toujours">${icon("lock")}Ne jamais supprimer</button></div></div>`
+      : `<div class="notice warn" style="margin:10px 0">${icon("bell")}<span>Pas de séance depuis ${sup.jours} jours. Sans nouvelle séance, ce programme sera retiré ${resteTexte(sup.reste)}. Une séance suffit à le garder !</span></div>`)
+    : sup.jamais && role === "kine" ? `<p class="small muted" style="margin:6px 0">${icon("lock", "ic-inline")} Conservé même sans activité · <button class="ee-link" type="button" data-pact="plus-garder">annuler</button></p>` : "";
   const weeks = byWeek(prog.seances);
   const next = prog.prochaine;
   const today = startOfDay(new Date());
@@ -97,6 +105,7 @@ export function programmeHTML(prog, { role = "patient", open = true } = {}){
           ${trTxt ? `<span>${trTxt}</span>` : ""}
         </div>
         <div class="spine" aria-label="${prog.faites} séances faites sur ${prog.total}">${spine}</div>
+        ${supHTML}
         <div class="prog-actions">${actions}</div>
       </div>
       ${weeks.map(w => {

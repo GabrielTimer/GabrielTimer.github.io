@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corbeille</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+</head>
+<body>
+<main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, emptyHTML, errorHTML, plural, fmtShortDate } from "/assets/app.js";
+import { JOURS_CORBEILLE } from "/assets/inactivite.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const C = await import("/assets/cloud.js");
+const app = $("#app");
+
+let items = [], patients = [];
+try{ [items, patients] = await Promise.all([C.listCorbeille(), C.listPatients()]); }
+catch(err){ app.innerHTML = errorHTML(err); throw err; }
+const nomDe = cle => patients.find(p => p.cle === cle)?.nom || "Patient supprimé";
+
+function groupes(){
+  const g = new Map();
+  items.forEach(s => {
+    const k = s.cle + "|" + (s.corbeilleProgramme || s.id);
+    if(!g.has(k)) g.set(k, { k, cle:s.cle, nom:s.corbeilleNom || "Programme", deletedAt:s.deletedAt || 0, raison:s.raison, seances:[] });
+    g.get(k).seances.push(s);
+  });
+  return [...g.values()].sort((a, b) => b.deletedAt - a.deletedAt);
+}
+
+function render(){
+  const list = groupes();
+  app.innerHTML = `
+    <div class="page-head"><h1>Corbeille</h1><p class="lead">Programmes supprimés à la main ou automatiquement (4 semaines sans activité). Ils restent ${JOURS_CORBEILLE} jours ici, puis sont effacés définitivement.</p></div>
+    ${list.length ? `<div class="list">${list.map(g => {
+      const reste = Math.max(0, JOURS_CORBEILLE - Math.floor((Date.now() - g.deletedAt) / 86400000));
+      const faites = g.seances.filter(s => s.terminee).length;
+      return `<div class="list-item" style="flex-wrap:wrap">
+        <span class="li-ico">${icon("trash")}</span>
+        <span class="li-main"><span class="li-title">${esc(g.nom)}</span>
+          <span class="li-sub">${esc(nomDe(g.cle))} · ${faites} sur ${plural(g.seances.length, "séance")} faites · ${g.raison === "inactivite" ? "inutilisé 4 semaines" : "supprimé par vous"} le ${esc(fmtShortDate(g.deletedAt))} · effacé dans ${plural(reste, "jour")}</span></span>
+        <span class="row" style="--gap:8px">
+          <button class="btn sm primary" type="button" data-rest="${esc(g.k)}">${icon("history")}Restaurer</button>
+          <button class="btn sm danger" type="button" data-del="${esc(g.k)}" aria-label="Effacer définitivement">${icon("trash")}</button>
+        </span>
+      </div>`; }).join("")}</div>`
+    : `<div class="panel">${emptyHTML({ ico:"trash", title:"La corbeille est vide", text:"Les programmes supprimés apparaîtront ici pendant 30 jours." })}</div>`}`;
+  const find = k => list.find(g => g.k === k);
+  $$("[data-rest]").forEach(b => b.onclick = async () => {
+    const g = find(b.dataset.rest); b.disabled = true;
+    try{ await C.restaurerCorbeille(g.seances); items = items.filter(s => !g.seances.includes(s)); toast(`« ${g.nom} » est de retour dans la fiche de ${nomDe(g.cle)}.`, { type:"ok" }); render(); }
+    catch(err){ b.disabled = false; toast("Restauration impossible.", { type:"err" }); }
+  });
+  $$("[data-del]").forEach(b => b.onclick = async () => {
+    const g = find(b.dataset.del);
+    if(!await confirmDialog({ title:"Effacer définitivement ?", message:`« ${g.nom} » (${nomDe(g.cle)}) et son historique seront perdus.`, confirm:"Effacer", danger:true })) return;
+    await C.viderCorbeille(g.seances); items = items.filter(s => !g.seances.includes(s)); toast("Effacé.", { type:"ok" }); render();
+  });
+}
+render();
+</script>
+</body>
+</html>

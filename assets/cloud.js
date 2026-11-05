@@ -268,6 +268,32 @@ export async function deleteProgramme(cle, programmeId){
   return seances.length;
 }
 
+/* ---------- Corbeille des programmes (kiné uniquement) ----------
+   corbeille/{idSéance} : la séance telle quelle + corbeilleProgramme, corbeilleNom, deletedAt, raison.
+   Gardée 30 jours puis effacée par la tâche automatique de nettoyage. */
+export async function mettreEnCorbeille(cle, programmeId, { raison = "kine" } = {}){
+  const seances = (await listSeances(cle)).filter(s => s.programmeId === programmeId);
+  if(!seances.length) return 0;
+  const deletedAt = Date.now();
+  await batchWrite(seances.map(s => {
+    const { firebaseId, ...rest } = s;
+    return [doc(db, "corbeille", s.id), { ...rest, cle, corbeilleProgramme: programmeId, corbeilleNom: s.programmeNom || s.data?.nom || "Programme", deletedAt, raison }];
+  }));
+  await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
+  return seances.length;
+}
+export async function listCorbeille(){
+  const snap = await getDocs(collection(db, "corbeille"));
+  return snap.docs.map(d => ({ ...d.data(), id: d.id }));
+}
+export async function restaurerCorbeille(items){
+  await batchWrite(items.map(({ corbeilleProgramme, corbeilleNom, deletedAt, raison, ...s }) => [doc(db, "patients", s.cle, "seances", s.id), { ...s, updatedAt: Date.now() }]));
+  await batchDelete(items.map(s => doc(db, "corbeille", s.id)));
+}
+export async function viderCorbeille(items){
+  await batchDelete(items.map(s => doc(db, "corbeille", s.id)));
+}
+
 /**
  * Validation d'une séance par le patient.
  * Renvoie { programmeTermine } pour savoir si tout le programme est fait.

@@ -126,6 +126,10 @@ service cloud.firestore {
     match /{path=**}/messages/{id} {
       allow read: if isKine();
     }
+    // Corbeille des programmes supprimés (30 jours), réservée au kiné
+    match /corbeille/{id} {
+      allow read, write: if isKine();
+    }
     match /{path=**}/rappels/{id} {
       allow read: if isKine();
     }

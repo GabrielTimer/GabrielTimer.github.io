@@ -41,7 +41,7 @@ async function patientView(ctx){
     app.innerHTML = `
       <div class="page-head"><h1>Mes programmes</h1><p class="lead">Vos séances semaine par semaine. Touchez « Commencer » pour lancer la suivante.</p></div>
       ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme pour l'instant", text:"Votre kiné ne vous a pas encore envoyé d'exercices." })}</div>` : ""}
-      ${programmes.map(p => programmeHTML(p, { role:"patient" })).join("")}
+      ${programmes.map(p => programmeHTML(p, { role:"patient", patient: data.patient })).join("")}
       ${seules.length ? `<div class="section">${seulesHTML(seules, { role:"patient" })}</div>` : ""}
       <section class="section">
         <div class="section-title">Sur cet appareil</div>
@@ -271,7 +271,7 @@ async function kineView(param){
       <section class="section">
         <div class="section-title">Programmes<span class="spacer"></span><a class="btn sm" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Ajouter</a></div>
         ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme", text:"Créez un premier programme pour ce patient.", action:`<a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Créer un programme</a>` })}</div>` : ""}
-        ${programmes.map(p => programmeHTML(p, { role:"kine" })).join("")}
+        ${programmes.map(p => programmeHTML(p, { role:"kine", patient })).join("")}
         ${seules.length ? `<div style="margin-top:16px">${seulesHTML(seules, { role:"kine" })}</div>` : ""}
       </section>`;
 
@@ -382,11 +382,20 @@ async function kineView(param){
           toast("Modèle enregistré.", { type:"ok", action:{ label:"Voir", run:() => location.href = "/programmes_admin.html" } });
         }
         if(act === "supprimer"){
-          const ok = await confirmDialog({ title:"Supprimer ce programme ?", message:`« ${prog.nom} » et ses ${prog.total} séances seront définitivement supprimés, y compris l'historique de douleur.`, confirm:"Supprimer le programme", danger:true });
+          const ok = await confirmDialog({ title:"Supprimer ce programme ?", message:`« ${prog.nom} » et ses ${prog.total} séances vont dans la corbeille (Outils → Corbeille), où vous pourrez les restaurer pendant 30 jours.`, confirm:"Mettre à la corbeille", danger:true });
           if(!ok) return;
-          await C.deleteProgramme(patient.cle, prog.id);
+          await C.mettreEnCorbeille(patient.cle, prog.id);
           seances = seances.filter(s => s.programmeId !== prog.id);
-          toast("Programme supprimé.", { type:"ok" });
+          toast("Programme mis à la corbeille.", { type:"ok", action:{ label:"Corbeille", run:() => location.href = "/corbeille.html" } });
+          render();
+        }
+        /* Programme sans activité : le garder 4 semaines de plus, ou toujours */
+        if(act === "garder" || act === "toujours" || act === "plus-garder"){
+          const g = { ...(patient.garderProgrammes || {}) };
+          if(act === "plus-garder") delete g[prog.id]; else g[prog.id] = act === "toujours" ? "toujours" : Date.now();
+          await C.updatePatient(patient.cle, { garderProgrammes: g });
+          patient.garderProgrammes = g;
+          toast(act === "toujours" ? "Ce programme ne sera jamais supprimé automatiquement." : act === "garder" ? "Programme gardé 4 semaines de plus." : "Le programme pourra de nouveau être supprimé s'il n'est pas utilisé.", { type:"ok" });
           render();
         }
       }));

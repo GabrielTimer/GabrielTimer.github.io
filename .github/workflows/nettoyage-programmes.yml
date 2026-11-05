@@ -1,0 +1,32 @@
+# Programmes inutilisés depuis 4 semaines → corbeille (préavis à 3 semaines), chaque nuit.
+# Voir .github/scripts/nettoyage-programmes.mjs. Lors d'une modification du script : simulation seulement.
+name: Programmes inutilisés
+
+on:
+  schedule:
+    - cron: "41 2 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/scripts/nettoyage-programmes.mjs, .github/workflows/nettoyage-programmes.yml]
+
+concurrency:
+  group: nettoyage-programmes
+  cancel-in-progress: false
+
+jobs:
+  nettoyage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund firebase-admin@12 web-push@3
+      - name: Nettoyage
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SIMULATION: ${{ github.event_name == 'push' && '1' || '0' }}
+        run: node .github/scripts/nettoyage-programmes.mjs

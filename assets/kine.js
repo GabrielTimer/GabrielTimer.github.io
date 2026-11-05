@@ -4,6 +4,7 @@
 
 import { currentKine } from "./cloud.js";
 import { groupProgrammes, startOfDay, evaTrend, kineHint, settings } from "./app.js";
+import { etatSuppression, resteTexte } from "./inactivite.js";
 
 /** À appeler en haut de chaque page réservée au kiné. */
 export async function requireKine(){
@@ -52,6 +53,11 @@ export function summarize(patient, seances){
   const recentComment = commentaires.find(s => Date.now() - s.dateValidation < 7 * DAY);
   if(recentComment){
     alertes.push({ niveau:"info", ico:"message", texte:"Nouveau commentaire" });
+  }
+  /* Programme sans activité depuis 3 semaines : bientôt à la corbeille */
+  const bientot = programmes.filter(p => !p.termine).map(p => ({ p, e: etatSuppression(p, patient) })).filter(x => x.e.alerte).sort((a, b) => a.e.reste - b.e.reste)[0];
+  if(bientot){
+    alertes.push({ niveau:"warn", ico:"trash", texte:`Programme inutilisé : corbeille ${resteTexte(bientot.e.reste)}` });
   }
   const termineRecent = programmes.find(p => p.termine && Date.now() - p.updatedAt < 10 * DAY);
   if(termineRecent){
