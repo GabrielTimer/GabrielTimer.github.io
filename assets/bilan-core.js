@@ -28,7 +28,8 @@ export async function loadClinic(){
   await loadScript("/bilan-kine/data.js");
   await loadScript("/bilan-kine/guide.js").catch(() => {});
   await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {} }")();
+  await loadScript("/bilan-kine/entretien.js").catch(() => {});
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} } }")();
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
@@ -67,6 +68,8 @@ export function blankState(type = "initial"){
 export function carryOver(prev){
   const S = blankState("intermediaire");
   if(!prev) return S;
+  /* Contexte de vie, antécédents, examens déjà faits : repris de l'entretien précédent */
+  ["imag", "ttt", "metier", "sport", "travail"].forEach(k => { if(prev.q?.[k] !== undefined){ S.q = S.q || {}; S.q[k] = structuredClone(prev.q[k]); } });
   ["prof", "naiss", "med", "medmail", "patho", "atcd", "medic"].forEach(k => { if(prev.f?.[k]) S.f[k] = prev.f[k]; });
   ["patho", "atcd", "medic"].forEach(k => { if(prev.c?.[k]?.length) S.c[k] = [...prev.c[k]]; });
   return S;
@@ -110,6 +113,33 @@ export function clusterText(r, c){
 }
 
 export const regionSources = r => [...new Set(r.T.map(t => t[4]).concat(r.src || []))];
+
+/* ---------- Entretien guidé : régions concernées et orientation ---------- */
+
+/** Régions du bilan : zones douloureuses reliées à une région + « Vertiges » coché dans le motif. */
+export function bilanRegions(S){
+  const out = [];
+  Object.keys(S.pain || {}).forEach(n => { const r = regionOf(n); if(r && !out.includes(r)) out.push(r); });
+  if((S.c?.patho || []).includes("Vertiges") && K.REG.vertiges && !out.includes("vertiges")) out.push("vertiges");
+  return out;
+}
+/** Zones du schéma rattachées à une région (pour les drapeaux rouges et les tests). */
+export function zonesOfRegion(S, reg){
+  const z = Object.keys(S.pain || {}).filter(n => regionOf(n) === reg);
+  return z.length ? z : [K.REG[reg]?.n || reg];
+}
+/** Hypothèses classées d'après les réponses « Oui » de l'entretien : [{ k, label, score, pour:[questions] }]. */
+export function orientation(S, reg){
+  const r = K.REG[reg], qs = K.ENT?.REGQ?.[reg] || [];
+  if(!r) return [];
+  const sc = {};
+  Object.keys(r.H).forEach(k => sc[k] = { k, label:r.H[k], score:0, pour:[] });
+  qs.forEach(([id, q, hint]) => {
+    if(S.q?.[reg + ":" + id] !== "Oui") return;
+    Object.entries(hint || {}).forEach(([k, w]) => { if(sc[k]){ sc[k].score += w; sc[k].pour.push(q); } });
+  });
+  return Object.values(sc).sort((a, b) => b.score - a.score);
+}
 
 /* ---------- Comparaison avec un bilan précédent ---------- */
 
@@ -159,10 +189,28 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
     ["Médication", joinSec(S, "medic")]
   ]);
 
+  /* Entretien guidé (questions fermées) */
+  const G = K.ENT?.G || [];
+  const ans = id => { const v = S.q?.[id]; return Array.isArray(v) ? v.join(", ") : (v || ""); };
+  const hist = G.filter(g => g[1] === "histoire").map(([id, , q]) => [q.replace(/ \?$|…$/, ""), ans(id)]);
+  if(hist.some(r => r[1])) add("Histoire", hist);
+  bilanRegions(S).forEach(reg => {
+    const qs = K.ENT?.REGQ?.[reg] || [];
+    const oui = qs.filter(([id]) => S.q?.[reg + ":" + id] === "Oui").map(x => x[1]);
+    const non = qs.filter(([id]) => S.q?.[reg + ":" + id] === "Non").map(x => x[1]);
+    const o = orientation(S, reg).filter(h => h.score > 0);
+    if(oui.length || non.length) add("Interrogatoire · " + (K.REG[reg]?.n || reg), [
+      ["Oui", oui.join(" ; ")],
+      ["Non", non.join(" ; ")],
+      ["Orientation", o.map(h => h.label).join(", ")]
+    ]);
+  });
+
   const pz = Object.entries(S.pain || {}).map(([n, p]) => n + " : EVA " + p.eva + "/10" + (p.types?.length ? " (" + p.types.join(", ").toLowerCase() + ")" : ""));
   const d4 = (S.c?.dn4 || []).length;
   add("Douleur et examen", [
     ["Douleur", pz.join(" ; ")],
+    ...G.filter(g => g[1] === "douleur").map(([id, , q]) => [q.replace(/ \?$|…$/, ""), ans(id)]),
     ["Observation", joinSec(S, "obs")],
     ["DN4", d4 ? `${d4}/10 ${d4 >= 4 ? "(douleur neuropathique probable, seuil ≥ 4)" : "(seuil ≥ 4 non atteint)"}` + (S.c.dn4.length ? " : " + S.c.dn4.join(", ").toLowerCase() : "") : ""]
   ]);
@@ -170,8 +218,8 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
   const neuro = neuroSummary(S.neuro || {});
   if(neuro.length) add("Examen neurologique", neuro.map(l => { const i = l.indexOf(" : "); return [l.slice(0, i), l.slice(i + 3)]; }));
 
-  Object.keys(S.pain || {}).filter(regionOf).forEach(n => {
-    const r = K.REG[regionOf(n)], c = zoneRead(S, n);
+  Object.keys(S.pain || {}).filter(regionOf).concat(S.cl?.Vertiges ? ["Vertiges"] : []).forEach(n => {
+    const r = K.REG[regionOf(n) || "vertiges"], c = zoneRead(S, n);
     const rf = c.s.filter(x => r.RF.includes(x));
     const tests = r.T.filter(t => c.t[t[0]]).map(t => t[0] + (c.t[t[0]] > 0 ? " positif (LR+ " + f1(t[2]) + ")" : " négatif (LR− " + f1(t[3]) + ")"));
     const k = clusterText(r, c);
@@ -181,6 +229,9 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
       ["Cluster", k ? r.CL.n + " : " + k : ""]
     ], rf.length ? { alerte: r.RFm } : {});
   });
+
+  const vie = G.filter(g => g[1] === "vie").map(([id, , q]) => [q, ans(id)]);
+  if(vie.some(r => r[1])) add("Retentissement et contexte", vie, (S.q?.jaunes || []).length >= 2 ? { alerte:"Plusieurs drapeaux jaunes : facteurs psychosociaux à prendre en compte (éducation, approche active)." } : {});
 
   const mes = K.MES.filter(([k]) => String(f[k] ?? "").trim() !== "").map(([k, l]) => [l, String(f[k])]);
   if(mes.length) add("Mesures", mes);
@@ -193,6 +244,7 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
   }
 
   add("Conclusion et projet", [
+    ["Hypothèse retenue", (S.c?.hyp || []).join(", ")],
     ["Diagnostic kiné", String(f.concl || "").trim()],
     ["Objectifs", joinSec(S, "obj")],
     ["Traitement prévu", joinSec(S, "plan")],

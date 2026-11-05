@@ -104,6 +104,7 @@ function render(){
         <div class="lead"><span>${esc(patient.nom)}</span><span id="st" class="save-st"></span></div>
       </div>
       <div class="row">
+        <button class="btn" type="button" id="a-guide">${icon("list")}Entretien guidé</button>
         <button class="btn" type="button" id="a-pdf">${icon("pdf")}PDF</button>
         <button class="btn" type="button" id="a-send">${icon("share")}Envoyer</button>
         <button class="btn primary" type="button" id="a-done">${icon("check")}Terminer</button>
@@ -203,6 +204,7 @@ function render(){
 }
 
 function drawNotes(){
+  if(!$("#notes")) return;
   const n = [];
   if(blocked) n.push(`<div class="notice danger">${icon("alert")}<span><strong>Firebase refuse l'accès aux bilans.</strong> Pour les activer une fois pour toutes : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. En attendant, ce bilan est gardé sur cet appareil et le PDF fonctionne.</span></div>`);
   if(info) n.push(`<div class="notice">${icon("info")}<span>${esc(info)}</span></div>`);
@@ -347,9 +349,10 @@ function drawEvo(){
     <p class="hint" style="margin-top:8px">MID : valeurs de la littérature, variables selon la population et la méthode. Pour l'EVA, un écart de 2 points est signalé.</p>` : "";
 }
 
-const drawResume = () => { $("#resume").value = B.summaryText(S, patient, opts()); };
+const drawResume = () => { const r = $("#resume"); if(r) r.value = B.summaryText(S, patient, opts()); };
 
 function drawDanger(){
+  if(!$("#danger")) return;
   $("#danger").innerHTML = id ? `<div class="row" style="justify-content:flex-end"><button class="btn danger sm" type="button" id="a-del">${icon("trash")}Supprimer ce bilan</button></div>` : "";
 }
 
@@ -357,7 +360,9 @@ function drawDanger(){
 
 let dirty = restored, inflight = null, blocked = !!rulesErr;
 
+let lastSt = ["", ""];
 function setSt(kind, txt){
+  lastSt = [kind, txt];
   const el = $("#st");
   if(!el) return;
   el.className = "save-st " + (kind || "");
@@ -485,6 +490,7 @@ app.addEventListener("click", async e => {
   if(d.info){ testSheet(d.info); return; }
 
   if(b.id === "a-done"){ leave(fiche); return; }
+  if(b.id === "a-guide"){ store.set("gt_bilan_mode", "guide"); start(); window.scrollTo(0, 0); return; }
   if(b.id === "a-copy"){ B.copyText($("#resume").value); return; }
   if(b.id === "a-pdf" || b.id === "a-pdf2"){
     b.disabled = true;
@@ -549,7 +555,21 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-tf]"
 
 function testSheet(n){ TC.ficheTest(K, n, "clinique"); }
 
-render();
+/* Entretien guidé (par défaut) ou vue complète */
+async function start(){
+  if(store.get("gt_bilan_mode", "guide") === "full"){ render(); return; }
+  const G = await import("../bilan-guide.js");
+  G.mountGuide(app, {
+    S, K, B, BC, TC, patient,
+    changed, save, opts,
+    leave: () => leave(fiche),
+    statusAgain: () => setSt(...lastSt),
+    onFull: () => { store.set("gt_bilan_mode", "full"); render(); window.scrollTo(0, 0); }
+  });
+  if(!lastSt[1]) setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
+  else setSt(...lastSt);
+}
+start();
 if(restored) queueSave();
 
 
