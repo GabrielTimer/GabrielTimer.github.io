@@ -433,14 +433,16 @@ export const PATHOLOGIES = [
     ]
    },
    {
-    "nom": "Étirement haut du dos",
+    "nom": "Étirement des membres supérieurs",
     "ex": 15,
     "repos": 10,
     "reps": 3,
-    "image": "/images/etirements_bureau/ex5.png",
-    "conseil": "Pousser les mains vers l’avant pour ouvrir le haut du dos.",
+    "image": "/exercises/images/HEP/arm-stretch-hands-clasped.jpg",
+    "conseil": "Croiser les doigts, paumes vers l’extérieur, et tendre les deux bras devant soi puis vers le plafond.",
     "consignes": [
-     "Pousser les mains vers l’avant pour ouvrir le haut du dos."
+     "Assis droit, croiser les doigts devant soi, paumes tournées vers l’extérieur.",
+     "Tendre les deux bras devant soi, puis les monter vers le plafond, aussi haut que possible sans douleur.",
+     "Tenir en respirant calmement, puis relâcher."
     ]
    },
    {
