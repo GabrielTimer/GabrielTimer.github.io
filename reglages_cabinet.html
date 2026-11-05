@@ -162,6 +162,18 @@ function render(){
     </section>
 
     <section class="panel">
+      <h2>${icon("trendUp")}Évolution des programmes</h2>
+      <p class="muted">Quand l'application vous propose de faire progresser ou d'alléger un programme. Rien ne change sans votre accord.</p>
+      <div class="rc-grid">
+        ${num("ev-jours", "Période observée (jours)", (R.evolution || {}).jours ?? 14, 7, 42)}
+        ${num("ev-min", "Séances faites au minimum pour progresser", (R.evolution || {}).minSeances ?? 4, 1, 20)}
+        ${num("ev-eva", "Progresser si la douleur reste ≤ (sur 10)", (R.evolution || {}).evaMax ?? 3, 0, 10)}
+        ${num("ev-hausse", "Alléger si la douleur monte d'au moins (points)", (R.evolution || {}).hausse ?? 2, 1, 10)}
+        ${num("ev-dur", "Alléger après « Trop dur » d'affilée (séances)", (R.evolution || {}).tropDur ?? 2, 1, 10)}
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>${icon("layers")}Catégories de modèles</h2>
       <p class="muted">Les filtres de la page Modèles. « Autres » ne peut pas être supprimée : les modèles d'une catégorie supprimée y sont rangés.</p>
       <div class="rc-list" id="cats"></div>
@@ -341,6 +353,7 @@ async function save(){
     },
     exercice: { reps: int("e-reps", 1, 200, 10), ex: int("e-ex", 1, 7200, 30), repos: int("e-repos", 0, 7200, 10) },
     alertes: { douleur: int("al-douleur", 1, 10, 7), hausse: int("al-hausse", 1, 10, 2), retard: int("al-retard", 1, 30, 2), joursSans: int("al-jours", 1, 90, 10) },
+    evolution: { jours: int("ev-jours", 7, 42, 14), minSeances: int("ev-min", 1, 20, 4), evaMax: int("ev-eva", 0, 10, 3), hausse: int("ev-hausse", 1, 10, 2), tropDur: int("ev-dur", 1, 10, 2) },
     listes: { categories: cats, niveaux: R.listes.niveaux.map((n, i) => ({ ...n, n: i + 1 })), zones: val("z-list").split("\n").map(s => s.trim()).filter(Boolean) }
   };
   if(!patch.messages.encouragements.length) patch.messages.encouragements = DEFAULTS.messages.encouragements;

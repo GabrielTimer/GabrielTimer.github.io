@@ -30,6 +30,8 @@ export const DEFAULTS = {
   },
   exercice: { ex: 30, repos: 10, reps: 10 },
   alertes: { douleur: 7, hausse: 2, retard: 2, joursSans: 10 },
+  /* Évolution des programmes : proposée au kiné, jamais appliquée sans lui */
+  evolution: { jours: 14, minSeances: 4, evaMax: 3, hausse: 2, tropDur: 2 },
   listes: {
     categories: [
       { id:"pathologie", label:"Pathologies", one:"Pathologie" },

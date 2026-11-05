@@ -115,6 +115,7 @@ async function init(){
   if(params.get("draft") && store.get("gt_draft")){
     const d = store.get("gt_draft");
     S = { ...blank(), nom: d.nom || "", series: d.series || 1, exercices: (d.exercices || []).map(normExo) };
+    if(d.origine) S.origine = d.origine;   // modèle et niveau d'origine (pour faire évoluer le programme)
     if(d.semaines && d.semaines > 1){
       S.type = "programme"; S.semaines = d.semaines; S.parSemaine = d.seancesParSemaine || 3;
       S.jours = d.jours && d.jours.length === S.parSemaine ? d.jours : DEFAULT_JOURS[S.parSemaine] || [1, 3, 5];
@@ -991,6 +992,7 @@ async function send(){
           patientId:p.patientId, programmeId, programmeNom:data.nom, joursProgramme:jourNoms,
           semaine, ordre:perWeek[semaine], categorie:"kine", dateDebut:S.debut,
           datePrevue:d.toISOString(), datePrevueTexte:d.toLocaleDateString("fr-FR"), terminee:false,
+          ...(S.origine ? { origine:S.origine } : {}),
           data:{ ...data, categorie:"kine" }
         };
       });

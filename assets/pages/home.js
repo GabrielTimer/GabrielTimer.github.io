@@ -355,6 +355,7 @@ async function renderKine(user){
       <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
       <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>
+    <section class="section" id="evol-sec" hidden><div class="section-title">À faire évoluer<span class="badge" id="evol-n"></span></div><div id="evol"></div></section>
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>
       <section><div class="section-title">Activité récente</div><div id="activity">${loadingHTML()}</div></section>
@@ -397,6 +398,7 @@ async function renderKine(user){
         <span class="btn sm primary">Lire</span></a>`;
     }
     const watch = sums.filter(s => s.alertes.some(a => a.niveau === "danger" || a.niveau === "warn")).sort((a, b) => b.score - a.score).slice(0, 8);
+    afficherEvolutions(C, sums).catch(e => console.warn("Évolution :", e));
 
     if(!patients.length){
       $("#watch").innerHTML = `<div class="panel">${emptyHTML({ ico:"users", title:"Aucun patient pour l'instant", text:"Créez un patient, ou importez vos anciens programmes depuis les outils.", action:`<a class="btn primary" href="/admin_tools.html#migration">${icon("upload")}Importer mes anciens programmes</a>` })}</div>`;
@@ -492,4 +494,36 @@ async function messagesDuKine(ctx, patient){
     nonLus.forEach(m => m.lu = true);
     box.querySelector(".notice")?.classList.add("soft");
   };
+}
+
+
+/* ---------- Programmes à faire évoluer (proposés, validés par le kiné) ---------- */
+async function afficherEvolutions(C, sums){
+  const E = await import("../faire-evoluer.js");
+  const modeles = await E.chargerModeles(C);
+  const items = [];
+  sums.forEach(sm => sm.programmes.forEach(prog => {
+    const p = E.proposer(prog, modeles);
+    if(p) items.push({ sm, prog, p });
+  }));
+  const ordre = { alleger:0, monter:1, fin:2 };
+  items.sort((a, b) => ordre[a.p.type] - ordre[b.p.type]);
+  const sec = document.getElementById("evol-sec"), box = document.getElementById("evol");
+  if(!sec || !box) return;
+  const paint = () => {
+    sec.hidden = !items.length;
+    document.getElementById("evol-n").textContent = items.length || "";
+    box.innerHTML = `<div class="list">${items.map(({ sm, prog, p }, i) => `
+      <button class="list-item" type="button" data-evi="${i}">
+        <span class="li-ico" style="color:${p.type === "alleger" ? "var(--warn)" : p.type === "monter" ? "var(--ok)" : "var(--lagon-strong)"}">${icon(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}</span>
+        <span class="li-main"><span class="li-title">${esc(sm.patient.nom)} · ${esc(p.titre)}</span><span class="li-sub">${esc(prog.nom)} — ${esc(E.changementTexte(p) || p.raison)}</span></span>
+        <span class="li-end">${icon("chevron")}</span>
+      </button>`).join("")}</div>`;
+    box.querySelectorAll("[data-evi]").forEach(b => b.onclick = () => {
+      const it = items[+b.dataset.evi];
+      const retirer = () => { items.splice(items.indexOf(it), 1); paint(); };
+      E.valider(C, it.sm.patient.cle, it.prog, it.p, { onDone: retirer, onIgnore: retirer });
+    });
+  };
+  paint();
 }

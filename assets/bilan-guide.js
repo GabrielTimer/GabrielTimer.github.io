@@ -292,11 +292,11 @@ export function mountGuide(app, ctx){
     if(STEPS[ui.step][0] === "traitement") refresh();
   }
 
-  function utiliser(nom, exercices, series, src){
+  function utiliser(nom, exercices, series, src, origine = null){
     const p = TX.profil(S);
     S.tx.prog = { nom, src };
     changed();
-    ctx.useProgram({ nom, series: series || 1, exercices }, { semaines: p.sem, parSemaine: p.lieu === "HEP" ? 3 : p.freq });
+    ctx.useProgram({ nom, series: series || 1, exercices }, { semaines: p.sem, parSemaine: p.lieu === "HEP" ? 3 : p.freq, origine });
   }
 
   /* ---------- Rendu ---------- */
@@ -401,7 +401,7 @@ export function mountGuide(app, ctx){
     if(d.gmodlv){ ui.choix[d.gmodlv] = d.v; refresh(); return; }
     if(d.gusemod){
       const m = (ui.modeles || []).find(x => String(x.id) === d.id);
-      if(m) utiliser(m.titre, m.exercices.map(e => ({ type:"timer", ...e })), m.series, "modele");
+      if(m) utiliser(m.titre, m.exercices.map(e => ({ type:"timer", ...e })), m.series, "modele", { modeleId:String(m.id), nom:m.nom, niveau:m.niveau || null });
       return;
     }
 

@@ -573,8 +573,8 @@ async function start(){
       return { list, visible: e => !ST.isHidden(L.exerciseKey(e)) };
     },
     toProgramExercise: (e, o) => L_toProgram(e, o),
-    useProgram: (prog, { semaines, parSemaine }) => {
-      store.set("gt_draft", { nom: prog.nom, series: prog.series || 1, exercices: prog.exercices, semaines, seancesParSemaine: parSemaine });
+    useProgram: (prog, { semaines, parSemaine, origine }) => {
+      store.set("gt_draft", { nom: prog.nom, series: prog.series || 1, exercices: prog.exercices, semaines, seancesParSemaine: parSemaine, ...(origine ? { origine } : {}) });
       toast("Le programme s'ouvre dans l'éditeur, avec ce patient : ajustez puis envoyez.", { type:"ok" });
       leave(`/config.html?draft=1&patient=${encodeURIComponent(cle)}`);
     }

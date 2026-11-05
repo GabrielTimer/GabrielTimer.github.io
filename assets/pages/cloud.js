@@ -11,6 +11,28 @@ import * as V from "../variantes.js";
 const app = $("#app");
 registerSW();
 
+/* Fiche patient (kiné) : proposition d'évolution en tête de chaque programme concerné */
+let modelesEvol = null;
+async function bannieresEvolution(programmes){
+  if(!programmes.length) return;
+  const C = await import("../cloud.js");
+  const E = await import("../faire-evoluer.js");
+  modelesEvol = modelesEvol || await E.chargerModeles(C);
+  programmes.forEach(prog => {
+    const p = E.proposer(prog, modelesEvol);
+    const art = document.querySelector(`[data-prog="${CSS.escape(prog.id)}"]`);
+    if(!p || !art || art.querySelector(".evol-band")) return;
+    const cle = prog.seances[0]?.cle || params.get("patient");
+    const band = document.createElement("button");
+    band.type = "button";
+    band.className = "notice evol-band " + (p.type === "alleger" ? "warn" : "");
+    band.style.cssText = "width:100%;text-align:left;cursor:pointer;margin-bottom:10px";
+    band.innerHTML = `${icon(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}<span><strong>${esc(p.titre)}</strong> · ${esc(E.changementTexte(p) || p.raison)}<br><span class="small muted">${esc(p.raison)}</span></span>`;
+    band.onclick = () => E.valider(C, cle, prog, p, { onDone: () => location.reload(), onIgnore: () => band.remove() });
+    art.prepend(band);
+  });
+}
+
 /* « Copier pour un patient » : on choisit le patient tout de suite,
    puis l'éditeur s'ouvre avec le programme copié et ce patient sélectionné. */
 async function choisirPatientCopie(nomProg, cleActuel){
@@ -326,6 +348,7 @@ async function kineView(param){
       </section>`;
 
     renderEvaChart($("#chart"), points);
+    bannieresEvolution(programmes).catch(e => console.warn("Évolution :", e));
     showRappels();
     if(!suiviBox){
       suiviBox = document.createElement("div");
