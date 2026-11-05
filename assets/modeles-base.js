@@ -15195,5 +15195,3294 @@ export const MODELES_BASE = [
 "reps": 3
 }
 ]
+},
+{
+"id": "base_lca_conservateur_1",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "85",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction isométrique du quadriceps",
+"image": "/exercises/images/HEP/1407678757-quad-sets2.jpg",
+"conseil": "Tirez la pointe du pied vers vous.<br>Écrasez la serviette avec l'arrière du genou en contractant la cuisse.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Écrasez la serviette avec l'arrière du genou en contractant la cuisse.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou allongé, jambe tendue, serviette roulée sous le genou",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/QPuDqtYk3Xo",
+"vimeo": "https://vimeo.com/101811395",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+},
+{
+"id": "101",
+"source": "HEP",
+"type": "timer",
+"nom": "Mobilisation de la rotule",
+"image": "/exercises/images/HEP/1407678724-patella-mobs1.jpg",
+"conseil": "Cuisse bien relâchée.<br>Avec les doigts, poussez doucement la rotule vers le haut et vers le bas, puis vers la gauche et vers la droite.",
+"consignes": [
+"Cuisse bien relâchée.",
+"Avec les doigts, poussez doucement la rotule vers le haut et vers le bas, puis vers la gauche et vers la droite."
+],
+"position": "Assis, jambe tendue et détendue",
+"precautions": [
+"Eviter les mouvements brusques. Respecter une douleur inférieure à 3/10. Ne pas rebondir pendant l'étirement."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/63O7Jlas5QU",
+"vimeo": "https://vimeo.com/101040084",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+},
+{
+"id": "575",
+"source": "HEP",
+"type": "timer",
+"nom": "Extension du genou sur un rouleau",
+"image": "/exercises/images/HEP/Knee-Prop-Roll.jpg",
+"conseil": "Laissez le genou se relâcher et descendre vers le sol avec son propre poids.<br>Restez 1 à 2 minutes.",
+"consignes": [
+"Laissez le genou se relâcher et descendre vers le sol avec son propre poids.",
+"Restez 1 à 2 minutes."
+],
+"position": "Assis au sol ou sur le lit, talon posé sur un rouleau",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/9Mzo0rp-bt0",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+},
+{
+"id": "665",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction des ischio-jambiers, assis",
+"image": "/exercises/images/HEP/seated-hamstring-sets3.jpg",
+"conseil": "Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, talon posé au sol devant vous",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/6kM68u8fyCY",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+},
+{
+"id": "72",
+"source": "HEP",
+"type": "timer",
+"nom": "Élévation de la jambe tendue, allongé",
+"image": "/exercises/images/HEP/1408868448-straight-leg-raise-supine.jpg",
+"conseil": "Pliez une jambe, pied à plat.<br>Tendez l'autre jambe, pointe du pied vers vous, cuisse contractée.<br>Montez la jambe tendue jusqu'à la hauteur de l'autre genou.<br>Redescendez lentement.",
+"consignes": [
+"Pliez une jambe, pied à plat.",
+"Tendez l'autre jambe, pointe du pied vers vous, cuisse contractée.",
+"Montez la jambe tendue jusqu'à la hauteur de l'autre genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/4ho27M3-JdQ",
+"vimeo": "https://vimeo.com/104196022",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+},
+{
+"id": "190",
+"source": "HEP",
+"type": "timer",
+"nom": "Glissement du talon",
+"image": "/exercises/images/HEP/heel-slides2.jpg",
+"conseil": "Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.<br>Maintenez 1 à 2 secondes.<br>Revenez lentement jambe tendue.",
+"consignes": [
+"Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.",
+"Maintenez 1 à 2 secondes.",
+"Revenez lentement jambe tendue."
+],
+"position": "Allongé sur le dos, jambes tendues",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ttZX7aVHado",
+"vimeo": "https://vimeo.com/100864215",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Récupérer l'extension complète en priorité. Pas de douleur au-delà de 3/10."
+}
+]
+},
+{
+"id": "base_lca_conservateur_2",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "405",
+"source": "HEP",
+"type": "timer",
+"nom": "Extension terminale du genou avec élastique",
+"image": "/exercises/images/HEP/1435246133-terminal-knee-extension2.jpg",
+"conseil": "Pliez légèrement le genou, pied au sol.<br>Tendez complètement le genou contre l'élastique en serrant la cuisse.<br>Revenez lentement.",
+"consignes": [
+"Pliez légèrement le genou, pied au sol.",
+"Tendez complètement le genou contre l'élastique en serrant la cuisse.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous, passé derrière le genou",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/0a6aA-pdOyI",
+"vimeo": "https://vimeo.com/131721512",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+},
+{
+"id": "404",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"vimeo": "https://vimeo.com/131722076",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+},
+{
+"id": "403",
+"source": "HEP",
+"type": "timer",
+"nom": "Descente de marche (step down)",
+"image": "/exercises/images/HEP/1435246052-step-downs2.jpg",
+"conseil": "La jambe à travailler reste sur la marche.<br>Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.<br>Remontez en poussant sur la jambe d'appui.",
+"consignes": [
+"La jambe à travailler reste sur la marche.",
+"Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.",
+"Remontez en poussant sur la jambe d'appui."
+],
+"position": "Debout sur une marche, en vous tenant",
+"precautions": [
+"Assurez-vous que la plateforme est solide",
+"et utilisez un bâton de marche ou une rampe pour l'équilibre si nécessaire."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/CBM8AxFj8tg",
+"vimeo": "https://vimeo.com/131721916",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+},
+{
+"id": "538",
+"source": "HEP",
+"type": "timer",
+"nom": "Squat devant une chaise avec élastique",
+"image": "/exercises/images/HEP/squats-chair-band.jpg",
+"conseil": "Gardez les genoux écartés contre l'élastique.<br>Descendez en reculant les fesses jusqu'à effleurer la chaise.<br>Remontez.",
+"consignes": [
+"Gardez les genoux écartés contre l'élastique.",
+"Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+"Remontez."
+],
+"position": "Debout devant une chaise, élastique au-dessus des genoux",
+"precautions": [
+"Évitez les mouvements brusques. Respectez la douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/f2-KKASpQTs",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+},
+{
+"id": "70",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"vimeo": "https://vimeo.com/100855945",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+},
+{
+"id": "243",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Éviter les mouvements soudains."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"vimeo": "https://vimeo.com/104193148",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque montée et descente. Pas de pivot."
+}
+]
+},
+{
+"id": "base_lca_conservateur_3",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+},
+{
+"id": "90",
+"source": "HEP",
+"type": "timer",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"precautions": [
+"Ne pas s'agenouiller trop profondément si des douleurs persistantes apparaissent. Gardez le dos droit tout au long de l'exercice."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"vimeo": "https://vimeo.com/101038393",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+},
+{
+"id": "71",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"precautions": [
+"Respectez une douleur inférieure à 3/10. Évitez les mouvements brusques."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"vimeo": "https://vimeo.com/104193346",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+},
+{
+"id": "395",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée latérale sur une marche",
+"image": "/exercises/images/HEP/1435245514-lateral-step-ups.jpg",
+"conseil": "La jambe à travailler du côté de la marche.<br>Montez latéralement sur la marche, puis redescendez en contrôlant.",
+"consignes": [
+"La jambe à travailler du côté de la marche.",
+"Montez latéralement sur la marche, puis redescendez en contrôlant."
+],
+"position": "Debout de profil à côté d'une marche",
+"precautions": [
+"Assurez-vous que la marcheuse est stable",
+"utilisez un bâton ou une rampe pour l'équilibre si nécessaire."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/99HBRhsK1WY",
+"vimeo": "https://vimeo.com/131720936",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+},
+{
+"id": "172",
+"source": "HEP",
+"type": "timer",
+"nom": "Montées sur pointes sur une marche, sur une jambe",
+"image": "/exercises/images/HEP/1407677372-calf-raises-single-leg-on-step.jpg",
+"conseil": "Placez l'avant du pied sur le bord de la marche, l'autre pied décollé.<br>Gardez le corps droit.<br>Montez sur la pointe du pied le plus haut possible.<br>Redescendez lentement le talon sous le niveau de la marche.",
+"consignes": [
+"Placez l'avant du pied sur le bord de la marche, l'autre pied décollé.",
+"Gardez le corps droit.",
+"Montez sur la pointe du pied le plus haut possible.",
+"Redescendez lentement le talon sous le niveau de la marche."
+],
+"position": "Debout sur une marche, sur une jambe, en vous tenant",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/649RHmjb4Hw",
+"vimeo": "https://vimeo.com/100856796",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+},
+{
+"id": "709",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe en lançant une balle",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"conseil": "Tenez-vous sur une jambe, genou légèrement fléchi.<br>Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.<br>Gardez le bassin horizontal et le genou au-dessus du pied.",
+"consignes": [
+"Tenez-vous sur une jambe, genou légèrement fléchi.",
+"Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.",
+"Gardez le bassin horizontal et le genou au-dessus du pied."
+],
+"position": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+"precautions": [
+"Gardez un appui proche (chaise",
+"mur) au début."
+],
+"materiel": [
+"Balle"
+],
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Contrôle du genou avant la vitesse. Reprise du pivot seulement sur critères (force, hop tests)."
+}
+]
+},
+{
+"id": "base_menisque_1",
+"nom": "Lésion méniscale",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "85",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction isométrique du quadriceps",
+"image": "/exercises/images/HEP/1407678757-quad-sets2.jpg",
+"conseil": "Tirez la pointe du pied vers vous.<br>Écrasez la serviette avec l'arrière du genou en contractant la cuisse.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Écrasez la serviette avec l'arrière du genou en contractant la cuisse.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou allongé, jambe tendue, serviette roulée sous le genou",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/QPuDqtYk3Xo",
+"vimeo": "https://vimeo.com/101811395",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+},
+{
+"id": "101",
+"source": "HEP",
+"type": "timer",
+"nom": "Mobilisation de la rotule",
+"image": "/exercises/images/HEP/1407678724-patella-mobs1.jpg",
+"conseil": "Cuisse bien relâchée.<br>Avec les doigts, poussez doucement la rotule vers le haut et vers le bas, puis vers la gauche et vers la droite.",
+"consignes": [
+"Cuisse bien relâchée.",
+"Avec les doigts, poussez doucement la rotule vers le haut et vers le bas, puis vers la gauche et vers la droite."
+],
+"position": "Assis, jambe tendue et détendue",
+"precautions": [
+"Eviter les mouvements brusques. Respecter une douleur inférieure à 3/10. Ne pas rebondir pendant l'étirement."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/63O7Jlas5QU",
+"vimeo": "https://vimeo.com/101040084",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+},
+{
+"id": "398",
+"source": "HEP",
+"type": "timer",
+"nom": "Extension du genou sur un rouleau (arc court)",
+"image": "/exercises/images/HEP/1435245781-short-arc-quad2.jpg",
+"conseil": "Tirez la pointe du pied vers vous.<br>Décollez le talon en tendant complètement le genou.<br>Redescendez lentement.",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Décollez le talon en tendant complètement le genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, un rouleau ou une serviette roulée sous le genou",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Coussin"
+],
+"youtube": "http://www.youtube.com/embed/htYxKm9bvHc",
+"vimeo": "https://vimeo.com/131727085",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+},
+{
+"id": "72",
+"source": "HEP",
+"type": "timer",
+"nom": "Élévation de la jambe tendue, allongé",
+"image": "/exercises/images/HEP/1408868448-straight-leg-raise-supine.jpg",
+"conseil": "Pliez une jambe, pied à plat.<br>Tendez l'autre jambe, pointe du pied vers vous, cuisse contractée.<br>Montez la jambe tendue jusqu'à la hauteur de l'autre genou.<br>Redescendez lentement.",
+"consignes": [
+"Pliez une jambe, pied à plat.",
+"Tendez l'autre jambe, pointe du pied vers vous, cuisse contractée.",
+"Montez la jambe tendue jusqu'à la hauteur de l'autre genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/4ho27M3-JdQ",
+"vimeo": "https://vimeo.com/104196022",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+},
+{
+"id": "190",
+"source": "HEP",
+"type": "timer",
+"nom": "Glissement du talon",
+"image": "/exercises/images/HEP/heel-slides2.jpg",
+"conseil": "Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.<br>Maintenez 1 à 2 secondes.<br>Revenez lentement jambe tendue.",
+"consignes": [
+"Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.",
+"Maintenez 1 à 2 secondes.",
+"Revenez lentement jambe tendue."
+],
+"position": "Allongé sur le dos, jambes tendues",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ttZX7aVHado",
+"vimeo": "https://vimeo.com/100864215",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+},
+{
+"id": "665",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction des ischio-jambiers, assis",
+"image": "/exercises/images/HEP/seated-hamstring-sets3.jpg",
+"conseil": "Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, talon posé au sol devant vous",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/6kM68u8fyCY",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements sans douleur. Pas d'accroupissement profond."
+}
+]
+},
+{
+"id": "base_menisque_2",
+"nom": "Lésion méniscale",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "99",
+"source": "HEP",
+"type": "timer",
+"nom": "Extension du genou, assis",
+"image": "/exercises/images/HEP/1408192464-seated-knee-extension.jpg",
+"conseil": "Tirez la pointe du pied vers vous.<br>Tendez complètement le genou.<br>Redescendez lentement.",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Tendez complètement le genou.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, dos droit",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/GlFdeqRiW8U",
+"vimeo": "https://vimeo.com/100986582",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+},
+{
+"id": "403",
+"source": "HEP",
+"type": "timer",
+"nom": "Descente de marche (step down)",
+"image": "/exercises/images/HEP/1435246052-step-downs2.jpg",
+"conseil": "La jambe à travailler reste sur la marche.<br>Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.<br>Remontez en poussant sur la jambe d'appui.",
+"consignes": [
+"La jambe à travailler reste sur la marche.",
+"Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.",
+"Remontez en poussant sur la jambe d'appui."
+],
+"position": "Debout sur une marche, en vous tenant",
+"precautions": [
+"Assurez-vous que la plateforme est solide",
+"et utilisez un bâton de marche ou une rampe pour l'équilibre si nécessaire."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/CBM8AxFj8tg",
+"vimeo": "https://vimeo.com/131721916",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+},
+{
+"id": "538",
+"source": "HEP",
+"type": "timer",
+"nom": "Squat devant une chaise avec élastique",
+"image": "/exercises/images/HEP/squats-chair-band.jpg",
+"conseil": "Gardez les genoux écartés contre l'élastique.<br>Descendez en reculant les fesses jusqu'à effleurer la chaise.<br>Remontez.",
+"consignes": [
+"Gardez les genoux écartés contre l'élastique.",
+"Descendez en reculant les fesses jusqu'à effleurer la chaise.",
+"Remontez."
+],
+"position": "Debout devant une chaise, élastique au-dessus des genoux",
+"precautions": [
+"Évitez les mouvements brusques. Respectez la douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/f2-KKASpQTs",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+},
+{
+"id": "70",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"vimeo": "https://vimeo.com/100855945",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+},
+{
+"id": "562",
+"source": "HEP",
+"type": "timer",
+"nom": "Ouverture des genoux avec élastique, assis (clamshell assis)",
+"image": "/exercises/images/HEP/seated-clamshell.jpg",
+"conseil": "Gardez un genou immobile.<br>Écartez l'autre genou vers l'extérieur contre l'élastique.<br>Revenez lentement, puis alternez.",
+"consignes": [
+"Gardez un genou immobile.",
+"Écartez l'autre genou vers l'extérieur contre l'élastique.",
+"Revenez lentement, puis alternez."
+],
+"position": "Assis sur une chaise, élastique au-dessus des genoux",
+"precautions": [
+"Eviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/GZAnYXE1DBo",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+},
+{
+"id": "243",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Éviter les mouvements soudains."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"vimeo": "https://vimeo.com/104193148",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Flexion limitée à 90° au début. Arrêter si blocage ou gonflement."
+}
+]
+},
+{
+"id": "base_menisque_3",
+"nom": "Lésion méniscale",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"exercices": [
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+},
+{
+"id": "404",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"vimeo": "https://vimeo.com/131722076",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+},
+{
+"id": "395",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée latérale sur une marche",
+"image": "/exercises/images/HEP/1435245514-lateral-step-ups.jpg",
+"conseil": "La jambe à travailler du côté de la marche.<br>Montez latéralement sur la marche, puis redescendez en contrôlant.",
+"consignes": [
+"La jambe à travailler du côté de la marche.",
+"Montez latéralement sur la marche, puis redescendez en contrôlant."
+],
+"position": "Debout de profil à côté d'une marche",
+"precautions": [
+"Assurez-vous que la marcheuse est stable",
+"utilisez un bâton ou une rampe pour l'équilibre si nécessaire."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/99HBRhsK1WY",
+"vimeo": "https://vimeo.com/131720936",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+},
+{
+"id": "505",
+"source": "HEP",
+"type": "timer",
+"nom": "Pas chassés avec élastique",
+"image": "/exercises/images/HEP/side-step-band.jpg",
+"conseil": "Fléchissez légèrement les genoux (mini-squat).<br>Faites des pas sur le côté en gardant l'élastique tendu.<br>Hanches et pieds restent tournés vers l'avant.",
+"consignes": [
+"Fléchissez légèrement les genoux (mini-squat).",
+"Faites des pas sur le côté en gardant l'élastique tendu.",
+"Hanches et pieds restent tournés vers l'avant."
+],
+"position": "Debout, élastique au-dessus des genoux",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/C5G4QO0oNDg",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+},
+{
+"id": "189",
+"source": "HEP",
+"type": "timer",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"vimeo": "https://vimeo.com/100863083",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+},
+{
+"id": "709",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe en lançant une balle",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"conseil": "Tenez-vous sur une jambe, genou légèrement fléchi.<br>Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.<br>Gardez le bassin horizontal et le genou au-dessus du pied.",
+"consignes": [
+"Tenez-vous sur une jambe, genou légèrement fléchi.",
+"Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.",
+"Gardez le bassin horizontal et le genou au-dessus du pied."
+],
+"position": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+"precautions": [
+"Gardez un appui proche (chaise",
+"mur) au début."
+],
+"materiel": [
+"Balle"
+],
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Augmenter la profondeur du squat progressivement, sans douleur le lendemain."
+}
+]
+},
+{
+"id": "base_instabilite_epaule_1",
+"nom": "Instabilité d'épaule",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"exercices": [
+{
+"id": "234",
+"source": "HEP",
+"type": "timer",
+"nom": "Isométrique d'épaule en flexion",
+"image": "/exercises/images/HEP/1426417972-shoulder-flexion-isometrics_new.jpg",
+"conseil": "Coude plié à 90°, collé au corps, poing fermé.<br>Posez l'autre main sur le poing.<br>Poussez vers l'avant et le haut contre la main, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"consignes": [
+"Coude plié à 90°, collé au corps, poing fermé.",
+"Posez l'autre main sur le poing.",
+"Poussez vers l'avant et le haut contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis ou debout",
+"precautions": [
+"Éviter les mouvements brusques."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/OHt2dlUP6TU",
+"vimeo": "https://vimeo.com/101047675",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Contractions sans mouvement, sans douleur. Pas de bras en armé (en haut et en arrière)."
+},
+{
+"id": "231",
+"source": "HEP",
+"type": "timer",
+"nom": "Isométrique d'épaule en extension",
+"image": "/exercises/images/HEP/1426417512-shoulder-extension-isometrics_new.jpg",
+"conseil": "Coude plié à 90°, collé au corps.<br>Poussez le coude vers l'arrière contre le dossier ou le mur, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"consignes": [
+"Coude plié à 90°, collé au corps.",
+"Poussez le coude vers l'arrière contre le dossier ou le mur, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis dos contre le dossier d'une chaise, ou debout dos à un mur",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/ysD_qT48w4U",
+"vimeo": "https://vimeo.com/101045506",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Contractions sans mouvement, sans douleur. Pas de bras en armé (en haut et en arrière)."
+},
+{
+"id": "383",
+"source": "HEP",
+"type": "timer",
+"nom": "Isométrique d'épaule en rotation externe",
+"image": "/exercises/images/HEP/1426417718-shoulder-external-rotation-isometrics_new.jpg",
+"conseil": "Coude plié à 90°, collé au corps, pouce vers le haut.<br>Posez l'autre main sur l'extérieur du poignet.<br>Poussez le poignet vers l'extérieur contre la main, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"consignes": [
+"Coude plié à 90°, collé au corps, pouce vers le haut.",
+"Posez l'autre main sur l'extérieur du poignet.",
+"Poussez le poignet vers l'extérieur contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis ou debout",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/r75uStoGV_0",
+"vimeo": "https://vimeo.com/101046839",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Contractions sans mouvement, sans douleur. Pas de bras en armé (en haut et en arrière)."
+},
+{
+"id": "232",
+"source": "HEP",
+"type": "timer",
+"nom": "Isométrique d'épaule en rotation interne",
+"image": "/exercises/images/HEP/1426608011-shoulder-internal-rotation-isometrics_new.jpg",
+"conseil": "Coude plié à 90°, collé au corps, pouce vers le haut.<br>Posez l'autre main sur l'intérieur du poignet.<br>Poussez le poignet vers le ventre contre la main, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"consignes": [
+"Coude plié à 90°, collé au corps, pouce vers le haut.",
+"Posez l'autre main sur l'intérieur du poignet.",
+"Poussez le poignet vers le ventre contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis ou debout",
+"precautions": [
+"Éviter les mouvements brusques.\nRespecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/VEYXcU4Xb-Y",
+"vimeo": "https://vimeo.com/101046618",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Contractions sans mouvement, sans douleur. Pas de bras en armé (en haut et en arrière)."
+},
+{
+"id": "413",
+"source": "HEP",
+"type": "timer",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"vimeo": "https://vimeo.com/104972249",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Contractions sans mouvement, sans douleur. Pas de bras en armé (en haut et en arrière)."
+}
+]
+},
+{
+"id": "base_instabilite_epaule_2",
+"nom": "Instabilité d'épaule",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"exercices": [
+{
+"id": "233",
+"source": "HEP",
+"type": "timer",
+"nom": "Rotation externe d'épaule avec élastique, coudes au corps",
+"image": "/exercises/images/HEP/1408200125-shoulder-external-rotation-resistive-band.jpg",
+"conseil": "Debout, tenez l'élastique devant vous, pouces vers le haut.<br>Coudes pliés à 90° et collés au corps.<br>Écartez les mains vers l'extérieur en gardant les coudes au corps et les poignets droits.<br>Revenez lentement.",
+"consignes": [
+"Debout, tenez l'élastique devant vous, pouces vers le haut.",
+"Coudes pliés à 90° et collés au corps.",
+"Écartez les mains vers l'extérieur en gardant les coudes au corps et les poignets droits.",
+"Revenez lentement."
+],
+"position": "Debout, coudes au corps",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/PwolIP1CUkE",
+"vimeo": "https://vimeo.com/101047062",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+},
+{
+"id": "537",
+"source": "HEP",
+"type": "timer",
+"nom": "Rotation interne d'épaule avec élastique, debout",
+"image": "/exercises/images/HEP/shoulder-internal-rotation-band.jpg",
+"conseil": "Coude plié à 90°, collé au corps, pouce vers le haut.<br>Départ : avant-bras tourné vers l'extérieur.<br>Ramenez la main vers le ventre contre l'élastique, coude toujours collé.<br>Revenez lentement.",
+"consignes": [
+"Coude plié à 90°, collé au corps, pouce vers le haut.",
+"Départ : avant-bras tourné vers l'extérieur.",
+"Ramenez la main vers le ventre contre l'élastique, coude toujours collé.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé sur le côté à hauteur de coude, du côté du bras travaillé",
+"precautions": [
+"Evitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/xRH41kgJw-0",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+},
+{
+"id": "226",
+"source": "HEP",
+"type": "timer",
+"nom": "Rowing avec élastique, assis",
+"image": "/exercises/images/HEP/1408193039-seated-rows.jpg",
+"conseil": "Une extrémité dans chaque main, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.<br>Revenez lentement.",
+"consignes": [
+"Une extrémité dans chaque main, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.",
+"Revenez lentement."
+],
+"position": "Assis au sol ou sur une chaise, élastique autour des pieds",
+"precautions": [
+"Respecter une douleur inférieure à 3/10. Ne pas faire d'impulsions pendant les glissements."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/Uv0dmnlDUaw",
+"vimeo": "https://vimeo.com/101044571",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+},
+{
+"id": "142",
+"source": "HEP",
+"type": "timer",
+"nom": "Poussée du dentelé antérieur avec élastique",
+"image": "/exercises/images/HEP/1408194340-serratus-stretches-resistive-band.jpg",
+"conseil": "Tenez une extrémité dans chaque main, devant vous.<br>Bras tendus, poussez les mains vers l'avant en avançant les épaules.<br>Revenez lentement.",
+"consignes": [
+"Tenez une extrémité dans chaque main, devant vous.",
+"Bras tendus, poussez les mains vers l'avant en avançant les épaules.",
+"Revenez lentement."
+],
+"position": "Debout, élastique passé dans le dos sous les épaules",
+"precautions": [
+"Evitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/DvvY-YTDdVQ",
+"vimeo": "https://vimeo.com/101045357",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+},
+{
+"id": "153",
+"source": "HEP",
+"type": "timer",
+"nom": "Élévation des bras en T, sur le ventre",
+"image": "/exercises/images/HEP/1409592730-shoulder-ts.jpg",
+"conseil": "Bras tendus sur les côtés à hauteur d'épaule, pouces vers le haut (position T).<br>Décollez les bras du sol en serrant les omoplates.<br>Maintenez 1 à 2 secondes, puis redescendez lentement.",
+"consignes": [
+"Bras tendus sur les côtés à hauteur d'épaule, pouces vers le haut (position T).",
+"Décollez les bras du sol en serrant les omoplates.",
+"Maintenez 1 à 2 secondes, puis redescendez lentement."
+],
+"position": "Allongé sur le ventre, front sur une serviette",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/b6F63Yo2oI8",
+"vimeo": "https://vimeo.com/104968598",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+},
+{
+"id": "577",
+"source": "HEP",
+"type": "timer",
+"nom": "Pompe adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/Modified-Pushup.jpg",
+"conseil": "Avancez les mains pour que le corps forme une ligne des genoux aux épaules.<br>Pliez les coudes pour descendre la poitrine vers le sol, dos droit.<br>Remontez en poussant sur les mains.",
+"consignes": [
+"Avancez les mains pour que le corps forme une ligne des genoux aux épaules.",
+"Pliez les coudes pour descendre la poitrine vers le sol, dos droit.",
+"Remontez en poussant sur les mains."
+],
+"position": "À quatre pattes",
+"precautions": [
+"Evitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ABVGLKDZQuk",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Coude au corps pour les rotations. Contrôler l'omoplate à chaque mouvement."
+}
+]
+},
+{
+"id": "base_instabilite_epaule_3",
+"nom": "Instabilité d'épaule",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"exercices": [
+{
+"id": "450",
+"source": "HEP",
+"type": "timer",
+"nom": "Rotation externe contre résistance à 90/90",
+"image": "/exercises/images/HEP/1493564162-external-rotation-90-90.jpg",
+"conseil": "Bras écarté à hauteur d'épaule, coude plié à 90°.<br>Faites tourner l'avant-bras vers le haut et l'arrière contre l'élastique.<br>Revenez lentement.",
+"consignes": [
+"Bras écarté à hauteur d'épaule, coude plié à 90°.",
+"Faites tourner l'avant-bras vers le haut et l'arrière contre l'élastique.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur d'épaule",
+"precautions": [
+"Respecter une douleur inférieure à 3/10.\nEviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/o1N1Lh9l4sE",
+"vimeo": "https://vimeo.com/215437862",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+},
+{
+"id": "556",
+"source": "HEP",
+"type": "timer",
+"nom": "Pompe adaptée avec protraction (push-up plus)",
+"image": "/exercises/images/HEP/modified-push-up-plus.jpg",
+"conseil": "Bras tendus, laissez descendre la poitrine entre les omoplates.<br>Poussez ensuite fort dans le sol pour arrondir le haut du dos et écarter les omoplates.<br>Revenez lentement.",
+"consignes": [
+"Bras tendus, laissez descendre la poitrine entre les omoplates.",
+"Poussez ensuite fort dans le sol pour arrondir le haut du dos et écarter les omoplates.",
+"Revenez lentement."
+],
+"position": "À quatre pattes, mains sous les épaules",
+"precautions": [
+"Respecter une douleur inférieure à 3/10. Ne pas ployer le dos trop fortement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/FqytxAcSv4Q",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+},
+{
+"id": "154",
+"source": "HEP",
+"type": "timer",
+"nom": "Élévation des bras en Y, sur le ventre",
+"image": "/exercises/images/HEP/1409592819-shoulder-ys2.jpg",
+"conseil": "Allongez-vous sur le ventre, bras tendus en avant en forme de Y, pouces vers le haut.<br>Gardez les bras tendus et décollez-les du sol en serrant les omoplates.<br>Maintenez 1 à 2 secondes, puis redescendez lentement.",
+"consignes": [
+"Allongez-vous sur le ventre, bras tendus en avant en forme de Y, pouces vers le haut.",
+"Gardez les bras tendus et décollez-les du sol en serrant les omoplates.",
+"Maintenez 1 à 2 secondes, puis redescendez lentement."
+],
+"position": "Allongé sur le ventre",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/Jj0JOyLftyw",
+"vimeo": "https://vimeo.com/104968783",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+},
+{
+"id": "540",
+"source": "HEP",
+"type": "timer",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
+"consignes": [
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+},
+{
+"id": "694",
+"source": "HEP",
+"type": "timer",
+"nom": "Étreinte (bear hug) debout",
+"image": "/exercises/images/HEP/standing-bear-hugs.jpg",
+"conseil": "Tenez une extrémité dans chaque main, pouces vers le haut.<br>Coudes légèrement pliés, poussez les bras vers l'avant et l'intérieur comme pour serrer quelqu'un dans vos bras.<br>Revenez lentement.",
+"consignes": [
+"Tenez une extrémité dans chaque main, pouces vers le haut.",
+"Coudes légèrement pliés, poussez les bras vers l'avant et l'intérieur comme pour serrer quelqu'un dans vos bras.",
+"Revenez lentement."
+],
+"position": "Debout, élastique passé dans le dos à hauteur des aisselles",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/pobKrCLAi_o",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+},
+{
+"id": "579",
+"source": "HEP",
+"type": "timer",
+"nom": "Planche avec touchers d'épaule",
+"image": "/exercises/images/HEP/Planks-Hand-Taps.jpg",
+"conseil": "Corps aligné des épaules aux talons.<br>Touchez l'épaule opposée avec une main, puis l'autre, en alternant.<br>Gardez le bassin immobile.",
+"consignes": [
+"Corps aligné des épaules aux talons.",
+"Touchez l'épaule opposée avec une main, puis l'autre, en alternant.",
+"Gardez le bassin immobile."
+],
+"position": "En planche, bras tendus",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/DW_ITezWYgs",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Rotation à 90° seulement si aucune appréhension. Contrôle avant la charge."
+}
+]
+},
+{
+"id": "base_cfa_1",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"exercices": [
+{
+"id": "187",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction des fessiers",
+"image": "/exercises/images/HEP/1407868116-glute-sets.jpg",
+"conseil": "Serrez fort les fessiers.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Serrez fort les fessiers.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Allongé sur le dos ou sur le ventre",
+"precautions": [
+"Evitez les mouvements brusques.\nRespectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/hdqsmA6r8-c",
+"vimeo": "https://vimeo.com/100861750",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Éviter la flexion de hanche profonde et douloureuse. Bassin stable."
+},
+{
+"id": "87",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction isométrique de hanche, allongé genoux fléchis",
+"image": "/exercises/images/HEP/1407678161-hip-abduction-hook-lying-isometric1.jpg",
+"conseil": "Serrez une sangle ou une ceinture juste au-dessus des genoux.<br>Poussez les genoux vers l'extérieur contre la sangle, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"consignes": [
+"Serrez une sangle ou une ceinture juste au-dessus des genoux.",
+"Poussez les genoux vers l'extérieur contre la sangle, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Allongé sur le dos, genoux pliés, sangle autour des cuisses",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/MRlN5w5tSdU",
+"vimeo": "https://vimeo.com/100864222",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Éviter la flexion de hanche profonde et douloureuse. Bassin stable."
+},
+{
+"id": "267",
+"source": "HEP",
+"type": "timer",
+"nom": "Clamshell (ouverture du genou), allongé sur le côté",
+"image": "/exercises/images/HEP/1409068220-clam-shell-side-lying.jpg",
+"conseil": "Hanches l'une au-dessus de l'autre, pieds joints.<br>Écartez le genou du dessus vers le plafond, sans faire basculer le bassin en arrière.<br>Redescendez lentement.",
+"consignes": [
+"Hanches l'une au-dessus de l'autre, pieds joints.",
+"Écartez le genou du dessus vers le plafond, sans faire basculer le bassin en arrière.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le côté, genoux pliés",
+"precautions": [
+"Éviter tout mouvement brusque.\nRespecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/Gj_gwbQCMr8",
+"vimeo": "https://vimeo.com/104362663",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Éviter la flexion de hanche profonde et douloureuse. Bassin stable."
+},
+{
+"id": "70",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"vimeo": "https://vimeo.com/100855945",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Éviter la flexion de hanche profonde et douloureuse. Bassin stable."
+},
+{
+"id": "429",
+"source": "HEP",
+"type": "timer",
+"nom": "Planche latérale adaptée",
+"image": "/exercises/images/HEP/1477662296-modified-side-plank.jpg",
+"conseil": "Coude sous l'épaule.<br>Montez le bassin pour aligner épaules, hanches et genoux.<br>Serrez les fessiers et maintenez 15 à 30 secondes.",
+"consignes": [
+"Coude sous l'épaule.",
+"Montez le bassin pour aligner épaules, hanches et genoux.",
+"Serrez les fessiers et maintenez 15 à 30 secondes."
+],
+"position": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/yjcZlw5VDVg",
+"vimeo": "https://vimeo.com/188454270",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Éviter la flexion de hanche profonde et douloureuse. Bassin stable."
+}
+]
+},
+{
+"id": "base_cfa_2",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"exercices": [
+{
+"id": "268",
+"source": "HEP",
+"type": "timer",
+"nom": "Clamshell avec élastique, allongé sur le côté",
+"image": "/exercises/images/HEP/1409068330-clam-shell-side-lying-with-resistive-band.jpg",
+"conseil": "Hanches l'une au-dessus de l'autre, pieds joints.<br>Écartez le genou du dessus contre l'élastique, sans faire basculer le bassin.<br>Redescendez lentement.",
+"consignes": [
+"Hanches l'une au-dessus de l'autre, pieds joints.",
+"Écartez le genou du dessus contre l'élastique, sans faire basculer le bassin.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le côté, genoux pliés, élastique au-dessus des genoux",
+"precautions": [
+"Eviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/1zVCC26xJQw",
+"vimeo": "https://vimeo.com/104362438",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+},
+{
+"id": "74",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction de hanche, allongé sur le côté",
+"image": "/exercises/images/HEP/1407678107-hip-abduction-side-lying2.jpg",
+"conseil": "Pliez la jambe du dessous pour être stable.<br>Gardez le corps aligné et le bassin bien de profil.<br>Tirez la pointe du pied vers vous, genou tendu.<br>Montez la jambe d'environ 30 cm en menant avec le talon, puis redescendez lentement.",
+"consignes": [
+"Pliez la jambe du dessous pour être stable.",
+"Gardez le corps aligné et le bassin bien de profil.",
+"Tirez la pointe du pied vers vous, genou tendu.",
+"Montez la jambe d'environ 30 cm en menant avec le talon, puis redescendez lentement."
+],
+"position": "Allongé sur le côté, jambe à travailler au-dessus",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/MyaMRYSoEbY",
+"vimeo": "https://vimeo.com/100864220",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+},
+{
+"id": "422",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier avec élastique",
+"image": "/exercises/images/HEP/1477661207-bridging-with-band.jpg",
+"conseil": "Placez l'élastique juste au-dessus des genoux.<br>Écartez légèrement les genoux contre l'élastique.<br>Gardez cette tension et soulevez le bassin.<br>Redescendez doucement.",
+"consignes": [
+"Placez l'élastique juste au-dessus des genoux.",
+"Écartez légèrement les genoux contre l'élastique.",
+"Gardez cette tension et soulevez le bassin.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, élastique autour des cuisses",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/MBNmlbpGDfE",
+"vimeo": "https://vimeo.com/188454264",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+},
+{
+"id": "428",
+"source": "HEP",
+"type": "timer",
+"nom": "Planche adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/1477662192-modified-plank.jpg",
+"conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
+"consignes": [
+"Posez les avant-bras au sol, coudes sous les épaules.",
+"Reculez les genoux pour aligner dos et cuisses.",
+"Serrez les fessiers et le ventre, dos plat.",
+"Maintenez en respirant."
+],
+"position": "À quatre pattes",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
+"vimeo": "https://vimeo.com/188454272",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+},
+{
+"id": "296",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction de hanche avec élastique, debout",
+"image": "/exercises/images/HEP/1409075120-hip-abduction-with-band.jpg",
+"conseil": "Tenez-vous si besoin.<br>Dos droit, genou tendu.<br>Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.<br>Revenez lentement.",
+"consignes": [
+"Tenez-vous si besoin.",
+"Dos droit, genou tendu.",
+"Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.",
+"Revenez lentement."
+],
+"position": "Debout, élastique autour des deux chevilles",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/n5eZKkC3mJk",
+"vimeo": "https://vimeo.com/104455689",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+},
+{
+"id": "243",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Éviter les mouvements soudains."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"vimeo": "https://vimeo.com/104193148",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer les fessiers sans pincement à l'aine."
+}
+]
+},
+{
+"id": "base_cfa_3",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"exercices": [
+{
+"id": "71",
+"source": "HEP",
+"type": "timer",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"precautions": [
+"Respectez une douleur inférieure à 3/10. Évitez les mouvements brusques."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"vimeo": "https://vimeo.com/104193346",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+},
+{
+"id": "640",
+"source": "HEP",
+"type": "timer",
+"nom": "Élévation du bassin d'un côté, sur une marche",
+"image": "/exercises/images/HEP/hip-hikes-step.jpg",
+"conseil": "L'autre pied dans le vide, tenez-vous à une rampe.<br>Genou d'appui tendu, laissez descendre le bassin du côté libre.<br>Remontez le bassin en contractant la hanche d'appui.",
+"consignes": [
+"L'autre pied dans le vide, tenez-vous à une rampe.",
+"Genou d'appui tendu, laissez descendre le bassin du côté libre.",
+"Remontez le bassin en contractant la hanche d'appui."
+],
+"position": "Debout de profil sur une marche, sur la jambe à travailler",
+"precautions": [
+"Evitez les mouvements rapides et soudains."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/m9pw1-iG9OM",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+},
+{
+"id": "241",
+"source": "HEP",
+"type": "timer",
+"nom": "Planche latérale",
+"image": "/exercises/images/HEP/1426413501-side-planks_new.jpg",
+"conseil": "Coude sous l'épaule, jambes tendues.<br>Décollez le bassin pour aligner épaules, hanches et pieds.<br>Maintenez.",
+"consignes": [
+"Coude sous l'épaule, jambes tendues.",
+"Décollez le bassin pour aligner épaules, hanches et pieds.",
+"Maintenez."
+],
+"position": "Allongé sur le côté, en appui sur l'avant-bras",
+"precautions": [
+"Evitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ZEtqBumNKeo",
+"vimeo": "https://vimeo.com/104192850",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+},
+{
+"id": "502",
+"source": "HEP",
+"type": "timer",
+"nom": "Fente adaptée",
+"image": "/exercises/images/HEP/modified-lunge.jpg",
+"conseil": "Un pied devant, un pied derrière, pointes vers l'avant.<br>Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le coussin, sans le poser.<br>Remontez doucement.",
+"consignes": [
+"Un pied devant, un pied derrière, pointes vers l'avant.",
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le coussin, sans le poser.",
+"Remontez doucement."
+],
+"position": "Debout, un coussin au sol sous le genou arrière",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/I777Cxy-znA",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+},
+{
+"id": "461",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe avec rotation et poids",
+"image": "/exercises/images/HEP/1501426633-single-leg-stance-with-twist-and-a-weight.jpg",
+"conseil": "Tournez le haut du corps d'un côté puis de l'autre.<br>Gardez le bassin face à l'avant.",
+"consignes": [
+"Tournez le haut du corps d'un côté puis de l'autre.",
+"Gardez le bassin face à l'avant."
+],
+"position": "Debout sur une jambe, un poids tenu à deux mains devant vous",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/AliSb_ibTpY",
+"vimeo": "https://vimeo.com/227322116",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+},
+{
+"id": "404",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"vimeo": "https://vimeo.com/131722076",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Garder le bassin horizontal et le genou dans l'axe."
+}
+]
+},
+{
+"id": "base_golf_elbow_1",
+"nom": "Épitrochléite (golf elbow)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Coude",
+"series": 1,
+"exercices": [
+{
+"id": "59",
+"source": "HEP",
+"type": "timer",
+"nom": "Étirement des fléchisseurs du poignet, coude tendu",
+"image": "/exercises/images/HEP/1408880877-wrist-flexor-stretches-with-elbow-extended.jpg",
+"conseil": "Avec l'autre main, ramenez doucement les doigts vers le bas.<br>Maintenez quand vous sentez l'étirement sous l'avant-bras.",
+"consignes": [
+"Avec l'autre main, ramenez doucement les doigts vers le bas.",
+"Maintenez quand vous sentez l'étirement sous l'avant-bras."
+],
+"position": "Debout ou assis, bras tendu devant vous, paume vers le haut",
+"precautions": [
+"Éviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/9tNzUmYm_6I",
+"vimeo": "https://vimeo.com/104202039",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Douleur tolérée jusqu'à 3/10, qui doit redescendre le lendemain."
+},
+{
+"id": "263",
+"source": "HEP",
+"type": "timer",
+"nom": "Pronation et supination",
+"image": "/exercises/images/HEP/1408881217-wrist-supination-pronation.jpg",
+"conseil": "Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.<br>Le coude reste immobile.",
+"consignes": [
+"Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.",
+"Le coude reste immobile."
+],
+"position": "Assis ou debout, coude plié à 90° collé au corps",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/VBBQa7ZbU18",
+"vimeo": "https://vimeo.com/104202410",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Douleur tolérée jusqu'à 3/10, qui doit redescendre le lendemain."
+},
+{
+"id": "262",
+"source": "HEP",
+"type": "timer",
+"nom": "Flexion du poignet, coude fléchi",
+"image": "/exercises/images/HEP/1408880525-wrist-flexion-elbow-flexion.jpg",
+"conseil": "Fermez le poing.<br>Montez le poing vers le plafond en pliant le poignet.<br>Redescendez lentement.",
+"consignes": [
+"Fermez le poing.",
+"Montez le poing vers le plafond en pliant le poignet.",
+"Redescendez lentement."
+],
+"position": "Avant-bras posé sur une table, main dans le vide, paume vers le haut",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/Aq-zkyeToJ0",
+"vimeo": "https://vimeo.com/104201218",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Douleur tolérée jusqu'à 3/10, qui doit redescendre le lendemain."
+},
+{
+"id": "56",
+"source": "HEP",
+"type": "timer",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"precautions": [
+"N'éprouvez aucune douleur intense. Effectuez les mouvements doucement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"vimeo": "https://vimeo.com/100855371",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Douleur tolérée jusqu'à 3/10, qui doit redescendre le lendemain."
+}
+]
+},
+{
+"id": "base_golf_elbow_2",
+"nom": "Épitrochléite (golf elbow)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Coude",
+"series": 1,
+"exercices": [
+{
+"id": "438",
+"source": "HEP",
+"type": "timer",
+"nom": "Flexion du poignet avec élastique",
+"image": "/exercises/images/HEP/1477663142-wrist-flexion-with-band.jpg",
+"conseil": "Avant-bras sur la cuisse, paume vers le haut.<br>Pliez le poignet vers le haut contre l'élastique.<br>Redescendez lentement.",
+"consignes": [
+"Avant-bras sur la cuisse, paume vers le haut.",
+"Pliez le poignet vers le haut contre l'élastique.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, élastique bloqué sous le pied",
+"precautions": [
+"Éviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/M-9qcdlJPG0",
+"vimeo": "https://vimeo.com/188454280",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
+},
+{
+"id": "513",
+"source": "HEP",
+"type": "timer",
+"nom": "Renforcement en flexion du poignet avec enrouleur de poids",
+"image": "/exercises/images/HEP/wrist-flex-weight-rollup.jpg",
+"conseil": "Enroulez la corde en tournant le bâton, poignets vers le bas, pour faire monter le poids.<br>Déroulez lentement pour le faire redescendre.",
+"consignes": [
+"Enroulez la corde en tournant le bâton, poignets vers le bas, pour faire monter le poids.",
+"Déroulez lentement pour le faire redescendre."
+],
+"position": "Debout, bras tendus devant vous, bâton avec une corde et un poids",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/dZ2_lU5Ur2Q",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
+},
+{
+"id": "543",
+"source": "HEP",
+"type": "timer",
+"nom": "Flexion du poignet avec barre souple",
+"image": "/exercises/images/HEP/wrist-flexion-resistivebar.jpg",
+"conseil": "Tordez la barre en pliant le poignet travaillé vers l'avant.<br>Revenez lentement.",
+"consignes": [
+"Tordez la barre en pliant le poignet travaillé vers l'avant.",
+"Revenez lentement."
+],
+"position": "Assis, barre souple tenue à deux mains devant vous",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Barre résistive"
+],
+"youtube": "http://www.youtube.com/embed/Bfyry148ors",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
+},
+{
+"id": "48",
+"source": "HEP",
+"type": "timer",
+"nom": "Pronation et supination avec poids",
+"image": "/exercises/images/HEP/1408868640-supination-pronation-with-weight.jpg",
+"conseil": "Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.<br>Le coude reste immobile.",
+"consignes": [
+"Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.",
+"Le coude reste immobile."
+],
+"position": "Assis, coude plié à 90° collé au corps, un marteau tenu par le manche",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Chaise",
+"poids (ex: marteau)"
+],
+"youtube": "http://www.youtube.com/embed/M6nV-Sxy1g8",
+"vimeo": "https://vimeo.com/104196295",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
+},
+{
+"id": "59",
+"source": "HEP",
+"type": "timer",
+"nom": "Étirement des fléchisseurs du poignet, coude tendu",
+"image": "/exercises/images/HEP/1408880877-wrist-flexor-stretches-with-elbow-extended.jpg",
+"conseil": "Avec l'autre main, ramenez doucement les doigts vers le bas.<br>Maintenez quand vous sentez l'étirement sous l'avant-bras.",
+"consignes": [
+"Avec l'autre main, ramenez doucement les doigts vers le bas.",
+"Maintenez quand vous sentez l'étirement sous l'avant-bras."
+],
+"position": "Debout ou assis, bras tendu devant vous, paume vers le haut",
+"precautions": [
+"Éviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/9tNzUmYm_6I",
+"vimeo": "https://vimeo.com/104202039",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
+}
+]
+},
+{
+"id": "base_de_quervain_1",
+"nom": "Tendinite de De Quervain",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"exercices": [
+{
+"id": "54",
+"source": "HEP",
+"type": "timer",
+"nom": "Mobilité du pouce",
+"image": "/exercises/images/HEP/1424525678-thumb-range-of-motion.jpg",
+"conseil": "Ouvrez bien la main en tendant les doigts.<br>Touchez avec le pouce l'extrémité de chaque doigt, un par un.",
+"consignes": [
+"Ouvrez bien la main en tendant les doigts.",
+"Touchez avec le pouce l'extrémité de chaque doigt, un par un."
+],
+"position": "Main détendue",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/qPFQQnetqRI",
+"vimeo": "https://vimeo.com/104196799",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements doux, sans douleur. Garder l'orthèse la nuit si elle a été prescrite."
+},
+{
+"id": "631",
+"source": "HEP",
+"type": "timer",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/HEP/thumb-opposition.jpg",
+"conseil": "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.<br>Revenez lentement.",
+"consignes": [
+"Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+"Revenez lentement."
+],
+"position": "Main ouverte, doigts tendus",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/AAj3sEOrXcs",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements doux, sans douleur. Garder l'orthèse la nuit si elle a été prescrite."
+},
+{
+"id": "674",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction du pouce",
+"image": "/exercises/images/HEP/thumb-abduction.jpg",
+"conseil": "Éloignez le pouce de la paume vers le plafond.<br>Revenez lentement.",
+"consignes": [
+"Éloignez le pouce de la paume vers le plafond.",
+"Revenez lentement."
+],
+"position": "Main posée sur une table, paume vers le haut",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/UIf2xmzq3Ns",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements doux, sans douleur. Garder l'orthèse la nuit si elle a été prescrite."
+},
+{
+"id": "263",
+"source": "HEP",
+"type": "timer",
+"nom": "Pronation et supination",
+"image": "/exercises/images/HEP/1408881217-wrist-supination-pronation.jpg",
+"conseil": "Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.<br>Le coude reste immobile.",
+"consignes": [
+"Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.",
+"Le coude reste immobile."
+],
+"position": "Assis ou debout, coude plié à 90° collé au corps",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/VBBQa7ZbU18",
+"vimeo": "https://vimeo.com/104202410",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements doux, sans douleur. Garder l'orthèse la nuit si elle a été prescrite."
+},
+{
+"id": "620",
+"source": "HEP",
+"type": "timer",
+"nom": "Pianotage doigts et pouce",
+"image": "/exercises/images/HEP/finger-thumb-taps.jpg",
+"conseil": "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.<br>Rouvrez bien la main entre chaque touche.",
+"consignes": [
+"Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+"Rouvrez bien la main entre chaque touche."
+],
+"position": "Main ouverte, doigts écartés",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/JNh5l5yuLKQ",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mouvements doux, sans douleur. Garder l'orthèse la nuit si elle a été prescrite."
+}
+]
+},
+{
+"id": "base_de_quervain_2",
+"nom": "Tendinite de De Quervain",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"exercices": [
+{
+"id": "564",
+"source": "HEP",
+"type": "timer",
+"nom": "Inclinaisons radiale et ulnaire du poignet contre la pesanteur",
+"image": "/exercises/images/HEP/wrist-radial-ulnar-deviation-gravity.jpg",
+"conseil": "Poing fermé.<br>Relevez le poing vers le plafond en inclinant le poignet côté pouce.<br>Redescendez lentement.",
+"consignes": [
+"Poing fermé.",
+"Relevez le poing vers le plafond en inclinant le poignet côté pouce.",
+"Redescendez lentement."
+],
+"position": "Avant-bras posé sur une table, sur la tranche, pouce vers le haut",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ep4SNu0mlSA",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Charge légère et progressive. Éviter de porter avec le pouce écarté (bébé, sacs)."
+},
+{
+"id": "217",
+"source": "HEP",
+"type": "timer",
+"nom": "Inclinaison radiale du poignet avec poids",
+"image": "/exercises/images/HEP/1408186838-radial-deviation-with-weight.jpg",
+"conseil": "Pouce vers le haut, main dans le vide.<br>Inclinez le poignet vers le haut, côté pouce.<br>Redescendez lentement.",
+"consignes": [
+"Pouce vers le haut, main dans le vide.",
+"Inclinez le poignet vers le haut, côté pouce.",
+"Redescendez lentement."
+],
+"position": "Avant-bras posé sur une table, sur la tranche, un poids dans la main",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/VAqgjGv1Y7o",
+"vimeo": "https://vimeo.com/101812329",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Charge légère et progressive. Éviter de porter avec le pouce écarté (bébé, sacs)."
+},
+{
+"id": "675",
+"source": "HEP",
+"type": "timer",
+"nom": "Flexion du pouce",
+"image": "/exercises/images/HEP/thumb-flexion.jpg",
+"conseil": "Pliez le pouce pour amener son extrémité vers la base du petit doigt.<br>Revenez lentement.",
+"consignes": [
+"Pliez le pouce pour amener son extrémité vers la base du petit doigt.",
+"Revenez lentement."
+],
+"position": "Main ouverte",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/01M8erXfxTQ",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Charge légère et progressive. Éviter de porter avec le pouce écarté (bébé, sacs)."
+},
+{
+"id": "55",
+"source": "HEP",
+"type": "timer",
+"nom": "Renforcement des doigts avec élastique",
+"image": "/exercises/images/HEP/1407677743-finger-strengthening-with-band2.jpg",
+"conseil": "Placez l'élastique autour de l'extrémité des doigts et du pouce.<br>Écartez les doigts contre l'élastique.<br>Revenez lentement.",
+"consignes": [
+"Placez l'élastique autour de l'extrémité des doigts et du pouce.",
+"Écartez les doigts contre l'élastique.",
+"Revenez lentement."
+],
+"position": "Coude posé sur une table, élastique autour des doigts",
+"precautions": [
+"Evitez les mouvements trop brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/liw3wTIDfio",
+"vimeo": "https://vimeo.com/100860549",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Charge légère et progressive. Éviter de porter avec le pouce écarté (bébé, sacs)."
+},
+{
+"id": "56",
+"source": "HEP",
+"type": "timer",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"precautions": [
+"N'éprouvez aucune douleur intense. Effectuez les mouvements doucement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"vimeo": "https://vimeo.com/100855371",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Charge légère et progressive. Éviter de porter avec le pouce écarté (bébé, sacs)."
+}
+]
+},
+{
+"id": "base_rhizarthrose_1",
+"nom": "Rhizarthrose",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"exercices": [
+{
+"id": "54",
+"source": "HEP",
+"type": "timer",
+"nom": "Mobilité du pouce",
+"image": "/exercises/images/HEP/1424525678-thumb-range-of-motion.jpg",
+"conseil": "Ouvrez bien la main en tendant les doigts.<br>Touchez avec le pouce l'extrémité de chaque doigt, un par un.",
+"consignes": [
+"Ouvrez bien la main en tendant les doigts.",
+"Touchez avec le pouce l'extrémité de chaque doigt, un par un."
+],
+"position": "Main détendue",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/qPFQQnetqRI",
+"vimeo": "https://vimeo.com/104196799",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mobilité douce du pouce, sans forcer la pince."
+},
+{
+"id": "631",
+"source": "HEP",
+"type": "timer",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/HEP/thumb-opposition.jpg",
+"conseil": "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.<br>Revenez lentement.",
+"consignes": [
+"Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+"Revenez lentement."
+],
+"position": "Main ouverte, doigts tendus",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/AAj3sEOrXcs",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mobilité douce du pouce, sans forcer la pince."
+},
+{
+"id": "674",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction du pouce",
+"image": "/exercises/images/HEP/thumb-abduction.jpg",
+"conseil": "Éloignez le pouce de la paume vers le plafond.<br>Revenez lentement.",
+"consignes": [
+"Éloignez le pouce de la paume vers le plafond.",
+"Revenez lentement."
+],
+"position": "Main posée sur une table, paume vers le haut",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/UIf2xmzq3Ns",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mobilité douce du pouce, sans forcer la pince."
+},
+{
+"id": "619",
+"source": "HEP",
+"type": "timer",
+"nom": "Étirement des doigts en extension",
+"image": "/exercises/images/HEP/finger-extension-stretch.jpg",
+"conseil": "Avec l'autre main, ramenez doucement les doigts vers l'arrière.<br>Arrêtez à un étirement confortable et maintenez.",
+"consignes": [
+"Avec l'autre main, ramenez doucement les doigts vers l'arrière.",
+"Arrêtez à un étirement confortable et maintenez."
+],
+"position": "Main posée devant vous, paume vers le bas",
+"precautions": [
+"Evitez de forcer sur un doigt qui causerait une douleur supérieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/4BGcwaHY-T0",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mobilité douce du pouce, sans forcer la pince."
+},
+{
+"id": "620",
+"source": "HEP",
+"type": "timer",
+"nom": "Pianotage doigts et pouce",
+"image": "/exercises/images/HEP/finger-thumb-taps.jpg",
+"conseil": "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.<br>Rouvrez bien la main entre chaque touche.",
+"consignes": [
+"Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+"Rouvrez bien la main entre chaque touche."
+],
+"position": "Main ouverte, doigts écartés",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/JNh5l5yuLKQ",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Mobilité douce du pouce, sans forcer la pince."
+}
+]
+},
+{
+"id": "base_rhizarthrose_2",
+"nom": "Rhizarthrose",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"exercices": [
+{
+"id": "674",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction du pouce",
+"image": "/exercises/images/HEP/thumb-abduction.jpg",
+"conseil": "Éloignez le pouce de la paume vers le plafond.<br>Revenez lentement.",
+"consignes": [
+"Éloignez le pouce de la paume vers le plafond.",
+"Revenez lentement."
+],
+"position": "Main posée sur une table, paume vers le haut",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/UIf2xmzq3Ns",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer l'ouverture du pouce. Éviter les pinces fortes et prolongées."
+},
+{
+"id": "675",
+"source": "HEP",
+"type": "timer",
+"nom": "Flexion du pouce",
+"image": "/exercises/images/HEP/thumb-flexion.jpg",
+"conseil": "Pliez le pouce pour amener son extrémité vers la base du petit doigt.<br>Revenez lentement.",
+"consignes": [
+"Pliez le pouce pour amener son extrémité vers la base du petit doigt.",
+"Revenez lentement."
+],
+"position": "Main ouverte",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/01M8erXfxTQ",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer l'ouverture du pouce. Éviter les pinces fortes et prolongées."
+},
+{
+"id": "55",
+"source": "HEP",
+"type": "timer",
+"nom": "Renforcement des doigts avec élastique",
+"image": "/exercises/images/HEP/1407677743-finger-strengthening-with-band2.jpg",
+"conseil": "Placez l'élastique autour de l'extrémité des doigts et du pouce.<br>Écartez les doigts contre l'élastique.<br>Revenez lentement.",
+"consignes": [
+"Placez l'élastique autour de l'extrémité des doigts et du pouce.",
+"Écartez les doigts contre l'élastique.",
+"Revenez lentement."
+],
+"position": "Coude posé sur une table, élastique autour des doigts",
+"precautions": [
+"Evitez les mouvements trop brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/liw3wTIDfio",
+"vimeo": "https://vimeo.com/100860549",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer l'ouverture du pouce. Éviter les pinces fortes et prolongées."
+},
+{
+"id": "56",
+"source": "HEP",
+"type": "timer",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"precautions": [
+"N'éprouvez aucune douleur intense. Effectuez les mouvements doucement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"vimeo": "https://vimeo.com/100855371",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer l'ouverture du pouce. Éviter les pinces fortes et prolongées."
+},
+{
+"id": "631",
+"source": "HEP",
+"type": "timer",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/HEP/thumb-opposition.jpg",
+"conseil": "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.<br>Revenez lentement.",
+"consignes": [
+"Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+"Revenez lentement."
+],
+"position": "Main ouverte, doigts tendus",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/AAj3sEOrXcs",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Renforcer l'ouverture du pouce. Éviter les pinces fortes et prolongées."
+}
+]
+},
+{
+"id": "base_vestibulaire_1",
+"nom": "Rééducation vestibulaire",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"exercices": [
+{
+"id": "360",
+"source": "HEP",
+"type": "timer",
+"nom": "Stabilisation du regard (vertiges)",
+"image": "/exercises/images/HEP/1426416783-vertigo-gaze-stabilization_new.jpg",
+"conseil": "Fixez le doigt du regard.<br>Tournez la tête de gauche à droite en gardant les yeux sur le doigt.<br>Puis de haut en bas.<br>Commencez lentement, puis accélérez progressivement.",
+"consignes": [
+"Fixez le doigt du regard.",
+"Tournez la tête de gauche à droite en gardant les yeux sur le doigt.",
+"Puis de haut en bas.",
+"Commencez lentement, puis accélérez progressivement."
+],
+"position": "Assis ou debout, un doigt tendu devant vous",
+"precautions": [
+"Ne pas forcer les mouvements. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/zc-dtMy9pHk",
+"vimeo": "https://vimeo.com/109535911",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Près d'un mur ou d'une chaise. Un vertige léger et bref est attendu ; arrêter s'il dure."
+},
+{
+"id": "359",
+"source": "HEP",
+"type": "timer",
+"nom": "Mouvements des yeux (vertiges)",
+"image": "/exercises/images/HEP/1426416604-vertigo-eye-movements_new.jpg",
+"conseil": "Sans bouger la tête, regardez à gauche puis à droite.<br>Puis en haut et en bas.<br>Puis en diagonale.<br>Commencez lentement, puis accélérez progressivement.",
+"consignes": [
+"Sans bouger la tête, regardez à gauche puis à droite.",
+"Puis en haut et en bas.",
+"Puis en diagonale.",
+"Commencez lentement, puis accélérez progressivement."
+],
+"position": "Assis, tête immobile",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/P-hPbS_GRsk",
+"vimeo": "https://vimeo.com/109535395",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Près d'un mur ou d'une chaise. Un vertige léger et bref est attendu ; arrêter s'il dure."
+},
+{
+"id": "22",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Ne pas se déplacer brusquement."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"vimeo": "https://vimeo.com/104966287",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Près d'un mur ou d'une chaise. Un vertige léger et bref est attendu ; arrêter s'il dure."
+},
+{
+"id": "318",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints, tête gauche-droite",
+"image": "/exercises/images/HEP/1426346761-rhomberg-stance-head-mvmt-side-to-side_new.jpg",
+"conseil": "Trouvez votre équilibre, pieds joints.<br>Tournez lentement la tête de gauche à droite, en gardant le corps stable.",
+"consignes": [
+"Trouvez votre équilibre, pieds joints.",
+"Tournez lentement la tête de gauche à droite, en gardant le corps stable."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Ne pas tourner la tête trop rapidement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/tPXWJreARbM",
+"vimeo": "https://vimeo.com/104966859",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Près d'un mur ou d'une chaise. Un vertige léger et bref est attendu ; arrêter s'il dure."
+},
+{
+"id": "319",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints, tête haut-bas",
+"image": "/exercises/images/HEP/1426346810-rhomberg-stance-head-mvmt-up-and-down_new.jpg",
+"conseil": "Trouvez votre équilibre, pieds joints.<br>Levez puis baissez lentement la tête, en gardant le corps stable.",
+"consignes": [
+"Trouvez votre équilibre, pieds joints.",
+"Levez puis baissez lentement la tête, en gardant le corps stable."
+],
+"description_fr": "Exercice d'équilibre consistant à maintenir une position de Romberg tout en effectuant des mouvements de tête de haut en bas afin de stimuler le système vestibulaire et le contrôle postural.",
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Toujours réaliser l'exercice à proximité d'un support stable afin d'éviter une chute. Arrêter en cas de vertiges importants."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/i4RpUKhz_nY",
+"vimeo": "https://vimeo.com/104965051",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Près d'un mur ou d'une chaise. Un vertige léger et bref est attendu ; arrêter s'il dure."
+}
+]
+},
+{
+"id": "base_vestibulaire_2",
+"nom": "Rééducation vestibulaire",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"exercices": [
+{
+"id": "360",
+"source": "HEP",
+"type": "timer",
+"nom": "Stabilisation du regard (vertiges)",
+"image": "/exercises/images/HEP/1426416783-vertigo-gaze-stabilization_new.jpg",
+"conseil": "Fixez le doigt du regard.<br>Tournez la tête de gauche à droite en gardant les yeux sur le doigt.<br>Puis de haut en bas.<br>Commencez lentement, puis accélérez progressivement.",
+"consignes": [
+"Fixez le doigt du regard.",
+"Tournez la tête de gauche à droite en gardant les yeux sur le doigt.",
+"Puis de haut en bas.",
+"Commencez lentement, puis accélérez progressivement."
+],
+"position": "Assis ou debout, un doigt tendu devant vous",
+"precautions": [
+"Ne pas forcer les mouvements. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/zc-dtMy9pHk",
+"vimeo": "https://vimeo.com/109535911",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+},
+{
+"id": "23",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds en ligne (tandem)",
+"image": "/exercises/images/HEP/1426346890-tandem-stance_new.jpg",
+"conseil": "Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.<br>Tenez l'équilibre 10 à 15 secondes.<br>Changez de pied devant.",
+"consignes": [
+"Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.",
+"Tenez l'équilibre 10 à 15 secondes.",
+"Changez de pied devant."
+],
+"position": "Debout, à côté d'un support",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/diqiKO9KN6o",
+"vimeo": "https://vimeo.com/104969591",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+},
+{
+"id": "325",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds en ligne, tête gauche-droite",
+"image": "/exercises/images/HEP/1426346934-tandem-stance-head-mvmt-side-to-side_new.jpg",
+"conseil": "Placez un pied juste devant l'autre, comme sur une ligne.<br>Tournez lentement la tête de gauche à droite.<br>Changez de pied devant.",
+"consignes": [
+"Placez un pied juste devant l'autre, comme sur une ligne.",
+"Tournez lentement la tête de gauche à droite.",
+"Changez de pied devant."
+],
+"position": "Debout, à côté d'un support",
+"precautions": [
+"Evitez les mouvements brusques.\nRespectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/yfodC6x3l-Y",
+"vimeo": "https://vimeo.com/104966168",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+},
+{
+"id": "315",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints, yeux fermés",
+"image": "/exercises/images/HEP/1426346668-rhomberg-stance-eyes-closed_new.jpg",
+"conseil": "Trouvez votre équilibre, pieds joints.<br>Fermez les yeux et gardez la position.<br>Ne vous tenez au support qu'en cas de besoin.",
+"consignes": [
+"Trouvez votre équilibre, pieds joints.",
+"Fermez les yeux et gardez la position.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"N'effectuez pas de mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/FpjbhP1xfNQ",
+"vimeo": "https://vimeo.com/104966631",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+},
+{
+"id": "509",
+"source": "HEP",
+"type": "timer",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+},
+{
+"id": "243",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Éviter les mouvements soudains."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"vimeo": "https://vimeo.com/104193148",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Augmenter la vitesse des mouvements de tête progressivement."
+}
+]
+},
+{
+"id": "base_vestibulaire_3",
+"nom": "Rééducation vestibulaire",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"exercices": [
+{
+"id": "326",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds en ligne, tête gauche-droite, yeux fermés",
+"image": "/exercises/images/HEP/1426346957-tandem-stance-head-mvmt-side-to-side-eyes-closed_new.jpg",
+"conseil": "Placez un pied juste devant l'autre, comme sur une ligne.<br>Fermez les yeux et tournez lentement la tête de gauche à droite.<br>Changez de pied devant.",
+"consignes": [
+"Placez un pied juste devant l'autre, comme sur une ligne.",
+"Fermez les yeux et tournez lentement la tête de gauche à droite.",
+"Changez de pied devant."
+],
+"position": "Debout, à côté d'un support",
+"precautions": [
+"Ne pas perdre l'équilibre."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/_j2V180N45o",
+"vimeo": "https://vimeo.com/104967649",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+},
+{
+"id": "329",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds en ligne sur surface instable",
+"image": "/exercises/images/HEP/1426347036-tandem-stance-on-uneven-surface_new.jpg",
+"conseil": "Placez un pied juste devant l'autre, comme sur une ligne.<br>Tenez l'équilibre.<br>Changez de pied devant.",
+"consignes": [
+"Placez un pied juste devant l'autre, comme sur une ligne.",
+"Tenez l'équilibre.",
+"Changez de pied devant."
+],
+"position": "Debout sur un coussin, à côté d'un support",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/MvHKXedbgpE",
+"vimeo": "https://vimeo.com/104969479",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+},
+{
+"id": "320",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints sur surface instable",
+"image": "/exercises/images/HEP/1426346860-rhomberg-stance-on-uneven-surface_new.jpg",
+"conseil": "Montez pieds joints sur une surface instable (coussin, mousse).<br>Trouvez votre équilibre et gardez la position.",
+"consignes": [
+"Montez pieds joints sur une surface instable (coussin, mousse).",
+"Trouvez votre équilibre et gardez la position."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"precautions": [
+"N'effectuez pas de mouvements brusques.\nRespectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Tapis"
+],
+"youtube": "http://www.youtube.com/embed/ygAqwAVAxN4",
+"vimeo": "https://vimeo.com/104970761",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+},
+{
+"id": "461",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe avec rotation et poids",
+"image": "/exercises/images/HEP/1501426633-single-leg-stance-with-twist-and-a-weight.jpg",
+"conseil": "Tournez le haut du corps d'un côté puis de l'autre.<br>Gardez le bassin face à l'avant.",
+"consignes": [
+"Tournez le haut du corps d'un côté puis de l'autre.",
+"Gardez le bassin face à l'avant."
+],
+"position": "Debout sur une jambe, un poids tenu à deux mains devant vous",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/AliSb_ibTpY",
+"vimeo": "https://vimeo.com/227322116",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+},
+{
+"id": "509",
+"source": "HEP",
+"type": "timer",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+},
+{
+"id": "360",
+"source": "HEP",
+"type": "timer",
+"nom": "Stabilisation du regard (vertiges)",
+"image": "/exercises/images/HEP/1426416783-vertigo-gaze-stabilization_new.jpg",
+"conseil": "Fixez le doigt du regard.<br>Tournez la tête de gauche à droite en gardant les yeux sur le doigt.<br>Puis de haut en bas.<br>Commencez lentement, puis accélérez progressivement.",
+"consignes": [
+"Fixez le doigt du regard.",
+"Tournez la tête de gauche à droite en gardant les yeux sur le doigt.",
+"Puis de haut en bas.",
+"Commencez lentement, puis accélérez progressivement."
+],
+"position": "Assis ou debout, un doigt tendu devant vous",
+"precautions": [
+"Ne pas forcer les mouvements. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/zc-dtMy9pHk",
+"vimeo": "https://vimeo.com/109535911",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours en sécurité près d'un appui. Yeux fermés seulement si stable."
+}
+]
+},
+{
+"id": "base_vppb_1",
+"nom": "VPPB (après manœuvre)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"exercices": [
+{
+"id": "358",
+"source": "HEP",
+"type": "timer",
+"nom": "Exercices de Brandt-Daroff (vertiges)",
+"image": "/exercises/images/HEP/1414152271-vertigo-brant-daroff.jpg",
+"conseil": "Tournez la tête de 45° vers la gauche.<br>Allongez-vous rapidement sur le côté droit, tête toujours tournée. Restez 30 secondes ou jusqu'à ce que le vertige passe.<br>Rasseyez-vous et attendez 30 secondes.<br>Faites l'inverse : tête tournée à droite, allongez-vous sur le côté gauche.<br>À faire avec l'accord de votre kiné, une personne à côté de vous les premières fois.",
+"consignes": [
+"Tournez la tête de 45° vers la gauche.",
+"Allongez-vous rapidement sur le côté droit, tête toujours tournée. Restez 30 secondes ou jusqu'à ce que le vertige passe.",
+"Rasseyez-vous et attendez 30 secondes.",
+"Faites l'inverse : tête tournée à droite, allongez-vous sur le côté gauche.",
+"À faire avec l'accord de votre kiné, une personne à côté de vous les premières fois."
+],
+"position": "Assis au milieu d'un lit",
+"precautions": [
+"Effectuer les mouvements de manière douce et progressive. Ne pas forcer si des douleurs apparaissent."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/Hz6oopuKONU",
+"vimeo": "https://vimeo.com/109534788",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "À faire après la manœuvre, si le kiné le conseille. Assis ou près d'un appui."
+},
+{
+"id": "360",
+"source": "HEP",
+"type": "timer",
+"nom": "Stabilisation du regard (vertiges)",
+"image": "/exercises/images/HEP/1426416783-vertigo-gaze-stabilization_new.jpg",
+"conseil": "Fixez le doigt du regard.<br>Tournez la tête de gauche à droite en gardant les yeux sur le doigt.<br>Puis de haut en bas.<br>Commencez lentement, puis accélérez progressivement.",
+"consignes": [
+"Fixez le doigt du regard.",
+"Tournez la tête de gauche à droite en gardant les yeux sur le doigt.",
+"Puis de haut en bas.",
+"Commencez lentement, puis accélérez progressivement."
+],
+"position": "Assis ou debout, un doigt tendu devant vous",
+"precautions": [
+"Ne pas forcer les mouvements. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/zc-dtMy9pHk",
+"vimeo": "https://vimeo.com/109535911",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "À faire après la manœuvre, si le kiné le conseille. Assis ou près d'un appui."
+},
+{
+"id": "22",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Ne pas se déplacer brusquement."
+],
+"materiel": [
+"Mur"
+],
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"vimeo": "https://vimeo.com/104966287",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "À faire après la manœuvre, si le kiné le conseille. Assis ou près d'un appui."
+},
+{
+"id": "318",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre pieds joints, tête gauche-droite",
+"image": "/exercises/images/HEP/1426346761-rhomberg-stance-head-mvmt-side-to-side_new.jpg",
+"conseil": "Trouvez votre équilibre, pieds joints.<br>Tournez lentement la tête de gauche à droite, en gardant le corps stable.",
+"consignes": [
+"Trouvez votre équilibre, pieds joints.",
+"Tournez lentement la tête de gauche à droite, en gardant le corps stable."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"precautions": [
+"Ne pas tourner la tête trop rapidement."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/tPXWJreARbM",
+"vimeo": "https://vimeo.com/104966859",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "À faire après la manœuvre, si le kiné le conseille. Assis ou près d'un appui."
+}
+]
 }
 ];

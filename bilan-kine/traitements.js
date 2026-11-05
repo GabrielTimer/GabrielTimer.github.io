@@ -20,13 +20,13 @@ HYP: {
     axes: ["Contrôle de l'épanchement, récupération de l'extension complète", "Renforcement quadriceps et ischio-jambiers (chaîne fermée puis ouverte)", "Contrôle neuromusculaire et proprioception", "Retour au sport sur critères objectifs (force, hop tests)"],
     eviter: ["Retour au pivot sans critères objectifs de récupération"],
     avis: "Avis chirurgical selon l'instabilité, le niveau d'activité et les lésions associées.",
-    postop: ["Ligamentoplastie du LCA"], patho: "Ligament croisé (LCA)"
+    modeles: ["Rupture du LCA (sans opération)"], postop: ["Ligamentoplastie du LCA"], patho: "Ligament croisé (LCA)"
   },
   "genou:MEN": {
     axes: ["Exercice thérapeutique en première intention (renforcement, contrôle moteur)", "Gestion de la charge, reprise progressive", "Récupération des amplitudes"],
     eviter: ["Arthroscopie d'emblée pour une lésion dégénérative"],
     avis: "Avis chirurgical si blocages vrais persistants.",
-    patho: "Lésion méniscale"
+    modeles: ["Lésion méniscale"], patho: "Lésion méniscale"
   },
   "genou:SFP": {
     axes: ["Renforcement hanche et genou combinés", "Éducation et gestion de la charge (escaliers, accroupi, course)", "Orthèses plantaires ou taping à court terme si besoin"],
@@ -60,7 +60,7 @@ HYP: {
   "epaule:INS": {
     axes: ["Renforcement de la coiffe et des stabilisateurs scapulaires", "Proprioception et contrôle dynamique", "Reprise progressive des positions à risque"],
     avis: "Avis chirurgical si luxations récidivantes, surtout chez le jeune sportif.",
-    patho: "Instabilité / luxation d'épaule"
+    modeles: ["Instabilité d'épaule"], patho: "Instabilité / luxation d'épaule"
   },
 
   "lombes:RAD": {
@@ -98,7 +98,7 @@ HYP: {
   "hanche:CFA": {
     axes: ["Renforcement de la hanche et du tronc, contrôle moteur", "Adapter les positions de flexion profonde douloureuses"],
     avis: "Avis spécialisé si blocages ou échec du traitement conservateur.",
-    patho: "Conflit fémoro-acétabulaire"
+    modeles: ["Conflit fémoro-acétabulaire"], patho: "Conflit fémoro-acétabulaire"
   },
   "hanche:GTPS": {
     axes: ["Éducation : éviter la compression du tendon (jambes croisées, couché sur le côté atteint)", "Renforcement progressif des abducteurs (isométrique puis dynamique)"],
@@ -116,7 +116,7 @@ HYP: {
   },
   "coude:EPT": {
     axes: ["Renforcement progressif des fléchisseurs du poignet", "Gestion de la charge, ergonomie"],
-    patho: "Épitrochléite (golf elbow)"
+    modeles: ["Épitrochléite (golf elbow)"], patho: "Épitrochléite (golf elbow)"
   },
 
   "main:CC": {
@@ -126,34 +126,34 @@ HYP: {
   },
   "main:DQ": {
     axes: ["Orthèse de repos pouce-poignet", "Exercices progressifs, adaptation des gestes (port du bébé)"],
-    patho: "Tendinite de De Quervain"
+    modeles: ["Tendinite de De Quervain"], patho: "Tendinite de De Quervain"
   },
   "main:RHZ": {
     axes: ["Orthèse de pouce", "Exercices de stabilisation du pouce", "Éducation : économie articulaire, aides techniques"],
-    patho: "Arthrose de la main / rhizarthrose"
+    modeles: ["Rhizarthrose"], patho: "Arthrose de la main / rhizarthrose"
   },
 
   "vertiges:VPPB": {
     axes: ["Manœuvre de repositionnement selon le canal (Epley, Semont)", "Réévaluation à une semaine"],
     eviter: ["Exercices d'habituation seuls à la place de la manœuvre"],
-    patho: "Vertiges / vestibulaire"
+    modeles: ["VPPB (après manœuvre)"], patho: "Vertiges / vestibulaire"
   },
   "vertiges:HYPO": {
     axes: ["Rééducation vestibulaire : stabilisation du regard", "Habituation aux mouvements de tête", "Équilibre et marche"],
-    patho: "Vertiges / vestibulaire"
+    modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire"
   }
 },
 
 REGION: {
-  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
-  epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile"], postop: ["Réparation de la coiffe des rotateurs"] },
+  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
+  epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
   lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique et hernie discale", "Dos au travail"] },
   cerv: { zone: "Cervicales", modeles: ["Cervicalgie"] },
   chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire"] },
-  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier"], postop: ["Prothèse totale de hanche (PTH)"] },
-  coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)"] },
-  main: { zone: "Poignet et main", modeles: ["Canal carpien"] },
-  vertiges: { zone: "Corps entier", modeles: [] }
+  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire"], postop: ["Prothèse totale de hanche (PTH)"] },
+  coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)", "Épitrochléite (golf elbow)"] },
+  main: { zone: "Poignet et main", modeles: ["Canal carpien", "Tendinite de De Quervain", "Rhizarthrose"] },
+  vertiges: { zone: "Corps entier", modeles: ["Rééducation vestibulaire", "VPPB (après manœuvre)"] }
 },
 
 MOTIF: {
@@ -163,7 +163,7 @@ MOTIF: {
   "Trouble de l’équilibre": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
   "Chutes / personne âgée": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
   "Neurologie (AVC, Parkinson, SEP…)": { modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] },
-  "Vertiges": { patho: "Vertiges / vestibulaire" },
+  "Vertiges": { modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire" },
   "Respiratoire": { patho: "Respiratoire (BPCO, asthme…)" }
 },
 
