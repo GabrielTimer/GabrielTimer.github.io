@@ -4,8 +4,10 @@ import {
   $, $$, esc, icon, params, getRunProgram, fmtDuree, plural, EVA_LABELS, evaFace, RESSENTIS,
   localProgs, toast, vibrate, session, KINE, prenom, store, settings
 } from "../app.js";
+import * as MS from "../mode-seance.js";
 
 const app = $("#app");
+if(MS.actif()) MS.demarrer();
 const prog = getRunProgram() || { nom:"Séance", exercices:[] };
 const cle = params.get("cle");
 const sid = params.get("s");
@@ -156,6 +158,11 @@ function done({ programmeTermine, offline }){
     : from === "config" ? "/config.html"
     : from === "favoris" ? "/mes_programmes.html"
     : "/index.html";
+  if(MS.actif()){
+    // Tablette prêtée au patient : écran neutre, rien de privé, retour au kiné par code
+    MS.ecranFin(app, { titre: programmeTermine ? "Programme terminé !" : "Séance enregistrée", suite: from === "config" ? "/config.html" : "/index.html" });
+    return;
+  }
   app.innerHTML = `
     <section class="done-screen stack" style="--gap:16px;padding-top:12vh">
       <div class="medal" style="margin:0 auto">${icon(programmeTermine ? "starFill" : "check")}</div>

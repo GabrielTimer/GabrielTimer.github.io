@@ -9,6 +9,7 @@ import {
 import { exerciseImage, exerciseSteps, videoEmbed } from "../library.js";
 import * as V from "../variantes.js";
 import { doseOf, doseParole } from "../evolution.js";
+import * as MS from "../mode-seance.js";
 
 const PREP = 5;                       // secondes pour se mettre en position
 const RESP = { RESP_DEBUTER:"beginner", RESP_APAISER:"calm", RESP_EQUILIBRER:"balance" };
@@ -34,6 +35,15 @@ if((!prog || !prog.exercices?.length) && ctx.cle && ctx.s){
 if(!prog || !Array.isArray(prog.exercices) || !prog.exercices.length){
   location.replace("/index.html");
   throw new Error("Aucune séance");
+}
+
+// Tablette prêtée au patient : plein écran, sortie protégée par le code du kiné
+const modeSeance = await MS.demarrer({ apercu: ctx.apercu }).catch(() => false);
+if(modeSeance){
+  const q = document.getElementById("quit");
+  q.innerHTML = icon("lock");
+  q.setAttribute("aria-label", "Arrêter la séance (réservé au kiné)");
+  q.style.opacity = ".55";
 }
 
 try{ V.setContexteSeance?.(ctx.cle, prog); }catch(e){ console.warn("Illustrations :", e); }
@@ -439,6 +449,7 @@ el.sound.onclick = () => {
 $("#quit").onclick = async () => {
   const wasRunning = running;
   pause();
+  if(modeSeance && MS.actif() && !(await MS.verifierPin("Saisissez le code du kiné pour arrêter la séance."))){ if(wasRunning) start(); return; }
   const ok = await confirmDialog({
     title:"Arrêter la séance ?",
     message:"Votre séance ne sera pas validée. Vous pourrez la recommencer plus tard.",
@@ -446,6 +457,7 @@ $("#quit").onclick = async () => {
   });
   if(!ok){ if(wasRunning) start(); return; }
   session.del("gt_timer_state");
+  MS.terminer();
   location.href = ctx.from === "config" ? "/config.html" : ctx.from === "favoris" ? "/mes_programmes.html" : ctx.cle ? "/index.html" : "/index.html";
 };
 document.addEventListener("keydown", e => {

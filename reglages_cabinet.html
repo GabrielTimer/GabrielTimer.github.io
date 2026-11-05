@@ -65,6 +65,27 @@ const area = (id, label, value, { rows = 4, hint = "", ph = "" } = {}) => `
   <div class="field"><label for="${id}">${esc(label)}</label><textarea class="textarea" id="${id}" rows="${rows}" placeholder="${esc(ph)}">${esc(value ?? "")}</textarea>${hint ? `<span class="hint">${esc(hint)}</span>` : ""}</div>`;
 const num = (id, label, value, min, max, hint = "") => field(id, label, value, { type:"number", hint, attrs:`min="${min}" max="${max}" inputmode="numeric"` });
 
+async function initModeSeance(){
+  const MS = await import("/assets/mode-seance.js");
+  const box = $("#ms");
+  ["input", "change"].forEach(t => box.addEventListener(t, e => e.stopPropagation()));
+  const maj = () => {
+    $("#ms-on").checked = MS.reglage.actifParDefaut();
+    $("#ms-pin-t").textContent = MS.reglage.pinDefini() ? "Changer le code" : "Créer le code";
+    $("#ms-del").hidden = !MS.reglage.pinDefini();
+  };
+  maj();
+  $("#ms-on").onchange = e => { MS.reglage.setActifParDefaut(e.target.checked); toast(e.target.checked ? "Mode séance activé sur cet appareil." : "Mode séance désactivé sur cet appareil."); };
+  $("#ms-pin").onclick = async () => {
+    if(MS.reglage.pinDefini() && !(await MS.verifierPin("Saisissez le code actuel."))) return;
+    await MS.creerPin(); maj();
+  };
+  $("#ms-del").onclick = async () => {
+    if(!(await MS.verifierPin("Saisissez le code actuel pour le supprimer."))) return;
+    MS.reglage.oublierPin(); toast("Code supprimé."); maj();
+  };
+}
+
 function render(){
   const A = R.messages.annonce;
   app.innerHTML = `
@@ -168,6 +189,17 @@ function render(){
       <div class="stack" style="--gap:10px" id="masks"></div>
     </section>
 
+    <section class="panel" id="ms">
+      <h2>${icon("lock")}Mode séance (tablette prêtée au patient)</h2>
+      <p class="muted">Quand une séance est lancée depuis cet appareil en mode kiné, elle s'ouvre en plein écran, sans accès à vos patients ni à vos messages. Le bouton Retour ne quitte pas la séance. Pour l'arrêter ou revenir à l'espace kiné, il faut votre code. Réglage propre à cet appareil, enregistré tout de suite.</p>
+      <label class="rc-switch" style="margin-bottom:12px"><input type="checkbox" id="ms-on">Activer le mode séance quand je lance une séance</label>
+      <div class="row wrap" style="--gap:10px">
+        <button class="btn" type="button" id="ms-pin">${icon("key")}<span id="ms-pin-t"></span></button>
+        <button class="btn" type="button" id="ms-del" hidden>${icon("trash")}Supprimer le code</button>
+      </div>
+      <p class="hint" style="margin-top:10px">Pour que le patient ne puisse pas non plus sortir de l'application, activez aussi l'épinglage d'écran d'Android (Paramètres → Écran de verrouillage et sécurité → Autres paramètres de sécurité → Épingler les fenêtres) et le mode Ne pas déranger.</p>
+    </section>
+
     <section class="panel" id="backup">
       <h2>${icon("download")}Sauvegarde</h2>
       <p class="muted"><strong>Tout sauvegarder</strong> télécharge deux fichiers à garder ensemble sur votre ordinateur ou une clé USB :</p>
@@ -190,6 +222,7 @@ function render(){
   <div class="rc-save"><span class="state" id="state"></span><button class="btn primary big" type="button" id="save">${icon("check")}Enregistrer les réglages</button></div>`;
 
   renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
+  initModeSeance();
   const last = localStorage.getItem("gt_last_backup");
   $("#bk-last").textContent = last ? `Dernière sauvegarde depuis cet appareil : ${new Date(Number(last)).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}.` : "Conseil : faites une sauvegarde une fois par mois.";
 
