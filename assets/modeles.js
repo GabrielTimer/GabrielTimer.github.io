@@ -82,8 +82,10 @@ export function groupModeles(list){
   const groups = new Map();
   list.forEach(m => {
     /* Vos modèles et ceux fournis avec l'application ne sont jamais mélangés sur une même carte */
-    const k = `${m.mine ? "m" : "b"}|${m.categorie}|${norm(m.nom)}`;
-    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:m.mine, items:[] });
+    /* … ni les versions maison et cabinet d'une même pathologie */
+    const lieu = m.lieu === "HEP" || m.lieu === "CABINET" ? m.lieu : "";
+    const k = `${m.mine ? "m" : "b"}|${m.categorie}|${norm(m.nom)}|${lieu}`;
+    if(!groups.has(k)) groups.set(k, { key:k, nom:m.nom, categorie:m.categorie, mine:m.mine, lieu, items:[] });
     groups.get(k).items.push(m);
   });
   const out = [...groups.values()];
