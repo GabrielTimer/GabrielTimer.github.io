@@ -8,6 +8,7 @@
 
 import { esc, icon, toast, openSheet, KINE, settings, logoSrc } from "./app.js";
 import { neuroSummary } from "./nerfs-data.js";
+import { lignesPlan } from "./bilan-traitement.js";
 
 /* ---------- Chargement du contenu clinique ---------- */
 
@@ -29,7 +30,8 @@ export async function loadClinic(){
   await loadScript("/bilan-kine/guide.js").catch(() => {});
   await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
   await loadScript("/bilan-kine/entretien.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} } }")();
+  await loadScript("/bilan-kine/traitements.js").catch(() => {});
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
@@ -250,6 +252,8 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
     ["Traitement prévu", joinSec(S, "plan")],
     ["Repères retenus", (S.c?.prog || []).join(" ; ")]
   ]);
+  const plan = lignesPlan(S, K);
+  if(plan.length) add("Plan de traitement", plan, S.tx?.avis?.length ? { alerte: S.tx.avis.join(" ") } : {});
   return R;
 }
 

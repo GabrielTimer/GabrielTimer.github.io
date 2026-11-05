@@ -548,6 +548,7 @@ document.addEventListener("click", e => { const b = e.target.closest("[data-tf]"
 function testSheet(n){ TC.ficheTest(K, n, "clinique"); }
 
 /* Entretien guidé (par défaut) ou vue complète */
+let L_toProgram = null;
 async function start(){
   if(store.get("gt_bilan_mode", "guide") === "full"){ render(); return; }
   const G = await import("../bilan-guide.js");
@@ -556,7 +557,27 @@ async function start(){
     changed, save, opts,
     leave: () => leave(fiche),
     statusAgain: () => setSt(...lastSt),
-    onFull: () => { store.set("gt_bilan_mode", "full"); render(); window.scrollTo(0, 0); }
+    onFull: () => { store.set("gt_bilan_mode", "full"); render(); window.scrollTo(0, 0); },
+    /* Proposition de traitement : modèles (fournis + cabinet), bibliothèque, ouverture dans l'éditeur */
+    loadModeles: async () => {
+      const M = await import("../modeles.js");
+      const own = (await C.listModeles().catch(() => [])).map(r => M.normModele(r));
+      const remplaces = new Set(own.map(m => m.remplace).filter(Boolean));
+      return [...own, ...M.BUILTIN.filter(b => !M.isBuiltinHidden(b.id) && !remplaces.has(b.id))];
+    },
+    loadLibrary: async () => {
+      const [L, CL, ST] = await Promise.all([import("../library.js"), import("../classement.js"), import("../settings.js")]);
+      const list = await L.loadLibrary();
+      list.forEach(e => { if(!("zone" in e)) CL.classer(e); });
+      L_toProgram = L.toProgramExercise;
+      return { list, visible: e => !ST.isHidden(L.exerciseKey(e)) };
+    },
+    toProgramExercise: (e, o) => L_toProgram(e, o),
+    useProgram: (prog, { semaines, parSemaine }) => {
+      store.set("gt_draft", { nom: prog.nom, series: prog.series || 1, exercices: prog.exercices, semaines, seancesParSemaine: parSemaine });
+      toast("Le programme s'ouvre dans l'éditeur, avec ce patient : ajustez puis envoyez.", { type:"ok" });
+      leave(`/config.html?draft=1&patient=${encodeURIComponent(cle)}`);
+    }
   });
   if(!lastSt[1]) setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
   else setSt(...lastSt);

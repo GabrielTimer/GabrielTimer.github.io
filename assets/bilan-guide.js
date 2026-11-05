@@ -9,6 +9,8 @@
    ========================================================= */
 
 import { esc, icon, toast, openSheet, evaColor } from "./app.js";
+import * as TX from "./bilan-traitement.js";
+import { exerciseImage } from "./library.js";
 
 const STEPS = [
   ["motif", "Motif"],
@@ -18,13 +20,15 @@ const STEPS = [
   ["cible", "Questions ciblées"],
   ["vie", "Contexte"],
   ["tests", "Tests"],
-  ["synthese", "Synthèse"]
+  ["synthese", "Synthèse"],
+  ["traitement", "Traitement"]
 ];
 
 export function mountGuide(app, ctx){
   const { S, K, B, BC, TC, patient } = ctx;
   S.q = S.q || {}; S.c = S.c || {}; S.f = S.f || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
-  const ui = { step: Math.max(0, STEPS.findIndex(s => s[0] === S.gstep)), view: "face", sel: null };
+  const ui = { step: Math.max(0, STEPS.findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
+    modeles: null, lib: null, choix: {}, gen: null, seed: 1, loading: false };
   if(ui.step < 0) ui.step = 0;
 
   const root = document.createElement("div");
@@ -183,6 +187,81 @@ export function mountGuide(app, ctx){
         <div class="g-q"><div class="g-qt">Traitement prévu<span class="g-multi">plusieurs choix</span></div>${chipsMulti("plan", K.sec("plan")[2])}</div>
         <details class="g-more" ${S.f.concl ? "open" : ""}><summary>Ajouter une note (facultatif)</summary>
           <textarea class="textarea" data-gf="concl" rows="3" placeholder="Diagnostic kiné, précision…">${esc(S.f.concl || "")}</textarea></details>
+        <p class="g-hint" style="margin-top:18px">Étape suivante : la proposition de traitement (plan kiné et programme d'exercices).</p>`;
+    },
+
+    traitement(){
+      const P = TX.proposition(S, K, B);
+      if(!S.tx?.init){ S.tx = { init:true, axes: P.axes.slice() }; changed(); }
+      S.tx.avis = P.avis;
+      const p = P.profil, a = p.auto, t = S.tx;
+      const opt = (key, vals, cur, auto, fmt = v => v) => `<div class="g-chips">${vals.map(v => `<button type="button" class="g-chip" data-gtx="${key}" data-v="${esc(String(v))}" aria-pressed="${cur === v}">${esc(fmt(v))}${auto === v ? `<span class="g-auto">proposé</span>` : ""}</button>`).join("")}</div>`;
+      const axesTous = [...new Set([...P.axes, ...(t.axes || [])])];
+      if(!ui.modeles && !ui.loading) chargerTraitement();
+
+      const lieu = p.lieu;
+      const groupes = ui.modeles ? TX.modelesPour(P.modeles, ui.modeles, lieu) : [];
+      const autres = ui.modeles ? TX.modelesPour(P.autres, ui.modeles, lieu) : [];
+      const carte = (g, gi, zone) => {
+        const m = g.items.find(x => x.id === ui.choix[g.nom]) || TX.choisirNiveau(g.items, p.niveau);
+        const imgs = m.exercices.slice(0, 5).map(e => exerciseImage(e)).filter(Boolean);
+        const pris = t.prog?.nom === m.titre;
+        return `<div class="g-model ${pris ? "pris" : ""}">
+          <div class="g-mtop"><strong>${esc(g.nom)}</strong>${m.mine ? `<span class="badge">votre modèle</span>` : ""}${pris ? `<span class="badge ok">${icon("check")}choisi</span>` : ""}</div>
+          <div class="g-chips g-lv">${g.items.map(x => `<button type="button" class="g-chip" data-gmodlv="${esc(g.nom)}" data-v="${esc(x.id)}" aria-pressed="${x.id === m.id}">${esc(x.niveau ? "Niveau " + x.niveau : "Sans niveau")}${x.doublon ? ` (${x.doublon})` : ""}${x.niveau === p.niveau ? `<span class="g-auto">proposé</span>` : ""}</button>`).join("")}</div>
+          <div class="g-thumbs">${imgs.map(src => `<img src="${esc(src)}" alt="" loading="lazy">`).join("")}<span class="g-nb">${m.exercices.length} exercices</span></div>
+          <button type="button" class="btn primary" data-gusemod="${esc(zone)}" data-i="${gi}" data-id="${esc(m.id)}">${icon("check")}Utiliser ce modèle</button>
+        </div>`;
+      };
+      const gen = ui.gen;
+      const titreSM = (P.hyps[0]?.label || P.pathos[0] || "Programme") + " · sur mesure";
+      return `<h2 class="g-h">Proposition de traitement</h2>
+        ${P.rf ? `<div class="notice danger" style="margin-bottom:12px">${icon("alert")}<span><strong>${esc(P.rfTexte || "")}</strong></span></div>` : ""}
+        ${P.avis.length ? `<div class="notice warn" style="margin-bottom:12px">${icon("alert")}<span>${P.avis.map(esc).join("<br>")}</span></div>` : ""}
+
+        <section class="g-card">
+          <h3>Profil du patient</h3>
+          <p class="g-hint">${P.hyps.length ? `Hypothèse${P.hyps.length > 1 ? "s" : ""} : <strong>${P.hyps.map(h => esc(h.label)).join(", ")}</strong>${P.hyps.some(h => !h.retenue) ? " (d'après l'entretien, à confirmer dans la synthèse)" : ""}` : "Aucune hypothèse retenue : la proposition s'appuie sur le motif et les zones."}</p>
+          <div class="g-q"><div class="g-qt">Phase</div>${opt("phase", ["Aiguë", "Subaiguë", "Chronique"], p.phase, a.phase)}</div>
+          <div class="g-q"><div class="g-qt">Irritabilité<span class="g-multi">douleur, nuit, repos, évolution, gêne</span></div>${opt("irrit", ["Élevée", "Modérée", "Faible"], p.irrit, a.irrit)}</div>
+        </section>
+
+        <section class="g-card">
+          <h3>Plan de traitement kiné</h3>
+          <div class="g-qt">Axes<span class="g-multi">pré-cochés d'après le bilan, touchez pour retirer ou ajouter</span></div>
+          <div class="g-chips g-axes">${axesTous.map(x => `<button type="button" class="g-chip" data-gtxa="${esc(x)}" aria-pressed="${(t.axes || []).includes(x)}">${esc(x)}</button>`).join("") || `<span class="g-hint">Choisissez une hypothèse dans la synthèse pour des axes ciblés.</span>`}</div>
+          ${P.eviter.length ? `<p class="g-eviter">${icon("alert")}<span><strong>Non recommandé :</strong> ${P.eviter.map(esc).join(" ; ")}</span></p>` : ""}
+          <div class="g-q" style="margin-top:18px"><div class="g-qt">Séances au cabinet par semaine</div>${opt("freq", [1, 2, 3, 4], p.freq, a.freq)}</div>
+          <div class="g-q"><div class="g-qt">Durée</div>${opt("sem", [4, 6, 8, 12], p.sem, a.sem, v => v + " semaines")}</div>
+          <div class="g-q"><div class="g-qt">Bilan intermédiaire dans</div>${opt("reeval", [2, 4, 6, 8], p.reeval, a.reeval, v => v + " semaines")}</div>
+          <button type="button" class="btn ghost sm" data-gact="txreset">${icon("repeat")}Recalculer la proposition</button>
+        </section>
+
+        <section class="g-card">
+          <h3>Programme d'exercices</h3>
+          <div class="g-q"><div class="g-qt">Où ?</div><div class="g-chips">${[["HEP", "À la maison"], ["CABINET", "Au cabinet"]].map(([v, l]) => `<button type="button" class="g-chip" data-gtx="lieu" data-v="${v}" aria-pressed="${lieu === v}">${l}</button>`).join("")}</div></div>
+          <div class="g-q"><div class="g-qt">Niveau de départ</div>${opt("niveau", [1, 2, 3], p.niveau, a.niveau, v => "Niveau " + v)}</div>
+          ${t.prog ? `<p class="g-ori">${icon("check")}<span>Programme choisi : <strong>${esc(t.prog.nom)}</strong></span></p>` : ""}
+          ${!ui.modeles ? `<p class="g-hint">${icon("clock")} Recherche des modèles…</p>`
+            : groupes.length ? `<div class="g-qt">Modèles conseillés</div><div class="g-models">${groupes.map((g, i) => carte(g, i, "p")).join("")}</div>`
+            : `<p class="g-hint">Pas de modèle ${lieu === "HEP" ? "maison" : "cabinet"} pour cette hypothèse : composez un programme sur mesure ci-dessous${autres.length ? " ou choisissez un modèle de la région" : ""}.</p>`}
+          ${autres.length ? `<details class="g-more" ${groupes.length ? "" : "open"}><summary>Autres modèles de la région (${autres.length})</summary><div class="g-models">${autres.map((g, i) => carte(g, i, "a")).join("")}</div></details>` : ""}
+
+          <div class="g-qt" style="margin-top:20px">Sur mesure</div>
+          ${!gen ? `<p class="g-hint">Compose 6 exercices de la bibliothèque ${lieu === "HEP" ? "maison" : "cabinet"} pour ${esc(P.pathos[0] || P.zones[0] || "la zone")}, adaptés au niveau ${p.niveau}${p.niveau === 1 ? " (mobilité, isométrique, sans douleur)" : p.niveau === 2 ? " (mobilité, renforcement, contrôle moteur)" : " (renforcement, équilibre, gainage)"}.</p>
+            <button type="button" class="btn" data-gact="gen" ${ui.lib ? "" : "disabled"}>${icon("zap")}Composer un programme sur mesure</button>`
+          : gen.length ? `<div class="g-model">
+              <div class="g-mtop"><strong>${esc(titreSM)}</strong><span class="badge">niveau ${p.niveau}</span></div>
+              <ol class="g-genlist">${gen.map(e => `<li>${exerciseImage(e) ? `<img src="${esc(exerciseImage(e))}" alt="" loading="lazy">` : ""}<span>${esc(e.nom)}<small>${esc((e.types || []).slice(0, 2).join(", "))}</small></span></li>`).join("")}</ol>
+              <div class="g-actions" style="margin-top:10px">
+                <button type="button" class="btn" data-gact="gen">${icon("repeat")}Autre proposition</button>
+                <button type="button" class="btn primary" data-gact="genuse">${icon("check")}Utiliser ce programme</button>
+              </div>
+              <p class="g-hint" style="margin:8px 0 0">Vous pourrez retirer, ajouter ou doser chaque exercice dans l'éditeur avant l'envoi.</p>
+            </div>`
+          : `<p class="g-hint">Pas assez d'exercices trouvés dans la bibliothèque pour cette zone.</p><button type="button" class="btn" data-gact="gen">${icon("repeat")}Réessayer</button>`}
+        </section>
+
         <div class="g-actions">
           <button class="btn" type="button" data-gact="resume">${icon("file")}Voir le résumé</button>
           <button class="btn" type="button" data-gact="pdf">${icon("pdf")}PDF</button>
@@ -190,6 +269,24 @@ export function mountGuide(app, ctx){
         </div>`;
     }
   };
+
+  /* Modèles (fournis + cabinet) et bibliothèque : chargés à l'arrivée sur l'étape Traitement */
+  async function chargerTraitement(){
+    ui.loading = true;
+    try{
+      const [mods, lib] = await Promise.all([ctx.loadModeles(), ctx.loadLibrary().catch(() => null)]);
+      ui.modeles = mods || []; ui.lib = lib;
+    }catch(e){ console.warn(e); ui.modeles = []; }
+    ui.loading = false;
+    if(STEPS[ui.step][0] === "traitement") refresh();
+  }
+
+  function utiliser(nom, exercices, series, src){
+    const p = TX.profil(S);
+    S.tx.prog = { nom, src };
+    changed();
+    ctx.useProgram({ nom, series: series || 1, exercices }, { semaines: p.sem, parSemaine: p.lieu === "HEP" ? 3 : p.freq });
+  }
 
   /* ---------- Rendu ---------- */
 
@@ -222,6 +319,7 @@ export function mountGuide(app, ctx){
     if(k === "cible") return regions().some(reg => (K.ENT.REGQ[reg] || []).some(([id]) => S.q[reg + ":" + id]));
     if(k === "tests") return Object.values(S.cl).some(c => Object.keys(c.t || {}).length) || (K.TF || []).some(t => (S.f[t[0]] ?? "") !== "");
     if(k === "synthese") return (S.c.hyp || []).length > 0 || (S.c.obj || []).length > 0;
+    if(k === "traitement") return !!S.tx?.prog;
     return false;
   }
 
@@ -281,7 +379,35 @@ export function mountGuide(app, ctx){
     if(d.ginfo){ TC.ficheTest(K, d.ginfo, "clinique"); return; }
     if(d.tf){ TC.ficheTest(K, d.tf, "fonctionnel"); return; }
 
+    if(d.gtx){
+      const num = ["freq", "sem", "reeval", "niveau"].includes(d.gtx);
+      const v = num ? +d.v : d.v;
+      S.tx[d.gtx] = S.tx[d.gtx] === v && d.gtx !== "lieu" ? null : v;
+      if(d.gtx === "niveau" || d.gtx === "lieu"){ ui.choix = {}; ui.gen = null; }
+      changed(); refresh(); return;
+    }
+    if(d.gtxa){ toggle(S.tx.axes = S.tx.axes || [], d.gtxa); changed(); refresh(); return; }
+    if(d.gmodlv){ ui.choix[d.gmodlv] = d.v; refresh(); return; }
+    if(d.gusemod){
+      const m = (ui.modeles || []).find(x => String(x.id) === d.id);
+      if(m) utiliser(m.titre, m.exercices.map(e => ({ type:"timer", ...e })), m.series, "modele");
+      return;
+    }
+
     const act = d.gact;
+    if(act === "txreset"){ const keep = S.tx?.prog; S.tx = { init:false }; if(keep) S.tx.prog = keep; ui.gen = null; ui.choix = {}; refresh(); return; }
+    if(act === "gen" && ui.lib){
+      const P = TX.proposition(S, K, B), p = P.profil;
+      ui.seed++;
+      ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu:p.lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post });
+      refresh(); return;
+    }
+    if(act === "genuse" && ui.gen?.length){
+      const P = TX.proposition(S, K, B), p = P.profil, dose = TX.dosage(p.niveau);
+      const nom = (P.hyps[0]?.label || P.pathos[0] || "Programme") + ` niveau ${p.niveau}`;
+      utiliser(nom, ui.gen.map(e => ctx.toProgramExercise(e, dose)), 1, "sur-mesure");
+      return;
+    }
     if(act === "full"){ ctx.onFull(); return; }
     if(act === "done"){ ctx.leave(); return; }
     if(act === "resume"){

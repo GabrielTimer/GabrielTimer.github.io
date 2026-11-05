@@ -153,6 +153,28 @@
   .has-nav .g-wrap{ padding-bottom:110px; }
   @media (min-width:960px){ .has-nav .g-foot{ left:var(--side-w); bottom:0; padding-bottom:max(10px, env(safe-area-inset-bottom)); } }
   @media (max-width:520px){ .g-foot .btn{ min-width:0; flex:1; } .g-count{ display:none; } .g-ynb button{ min-width:60px; } }
+
+  /* Traitement */
+  .g-auto{ display:inline-block; margin-left:8px; padding:1px 7px; border-radius:999px; font-size:.72rem; font-weight:800; background:var(--soleil); color:var(--on-soleil); vertical-align:middle; }
+  .g-chip[aria-pressed="true"] .g-auto{ background:rgba(255,255,255,.25); color:inherit; }
+  .g-axes .g-chip{ flex:1 1 280px; }
+  .g-eviter{ display:flex; gap:8px; align-items:flex-start; margin:14px 0 0; padding:10px 12px; border-radius:var(--r-md); background:var(--surface-2); font-size:var(--fs-sm); color:var(--ink-2); }
+  .g-eviter svg{ width:18px; height:18px; flex:none; color:var(--warn); }
+  .g-models{ display:grid; gap:12px; margin-top:8px; }
+  @media (min-width:760px){ .g-models{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .g-model{ border:1.5px solid var(--line); border-radius:var(--r-lg); padding:14px; background:var(--surface); display:flex; flex-direction:column; gap:10px; }
+  .g-model.pris{ border-color:var(--ok); }
+  .g-mtop{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:1.08rem; }
+  .g-lv .g-chip{ min-height:44px; padding:6px 12px; font-size:.95rem; }
+  .g-thumbs{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+  .g-thumbs img{ width:56px; height:56px; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:10px; }
+  .g-nb{ font-size:var(--fs-sm); color:var(--ink-2); margin-left:4px; }
+  .g-model .btn.primary{ min-height:52px; }
+  .g-genlist{ margin:0; padding:0; list-style:none; display:grid; gap:8px; }
+  .g-genlist li{ display:flex; align-items:center; gap:12px; }
+  .g-genlist img{ width:56px; height:56px; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:10px; flex:none; }
+  .g-genlist span{ display:flex; flex-direction:column; font-weight:700; }
+  .g-genlist small{ font-weight:500; color:var(--ink-2); }
 </style>
 </head>
 <body>
