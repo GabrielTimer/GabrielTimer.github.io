@@ -483,7 +483,8 @@ const NAV = {
   patient: [
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
     { id:"programmes", label:"Programmes", href:"/cloud.html", ico:"calendar" },
-    { id:"progression", label:"Progrès", href:"/progression.html", ico:"chart" }
+    { id:"progression", label:"Progrès", href:"/progression.html", ico:"chart" },
+    { id:"reglages", label:"Réglages", href:"/reglages.html", ico:"settings" }
   ],
   kine: [
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
@@ -516,7 +517,10 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   const inboxBtn = role === "kine" && !apercu
     ? `<a class="icon-btn inbox-btn" href="/messages.html" data-inbox-link aria-label="Messages des patients" title="Messages des patients">${icon("inbox")}<span class="inbox-badge" data-inbox-badge hidden></span></a>`
     : "";
-  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${inboxBtn}${themeBtn}</div></header>`);
+  const kineBtn = role === "patient" && !apercu && modePatient.get()
+    ? `<button class="btn sm" type="button" style="white-space:nowrap" data-mode-kine title="Revenir à l'espace kiné">${icon("stethoscope")}Espace kiné</button>`
+    : "";
+  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${inboxBtn}${themeBtn}</div></header>`);
 
   if(apercu){
     body.prepend(h(`<div class="apercu-band">${icon("eye")}<span>Aperçu : vous voyez l'application comme votre patient</span><button type="button" data-leave-apercu>Quitter</button></div>`));
@@ -538,7 +542,6 @@ export function mountShell({ role = "none", active = "", title = "", back = null
           <div class="nav-app">${appMarkHTML()}</div>
         </div>`
       : `<div class="nav-foot">
-          <a class="nav-link" href="/reglages.html"><span class="nav-ico">${icon("settings")}</span><span>Réglages</span></a>
           <div class="nav-app">${appMarkHTML()}</div>
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
@@ -554,6 +557,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     import("./messages.js").then(m => m.refreshUnread()).catch(() => {});
   }
 
+  topbar.querySelector("[data-mode-kine]")?.addEventListener("click", () => modePatient.quitter());
   topbar.querySelector("[data-theme-toggle]").onclick = e => {
     toggleTheme();
     e.currentTarget.innerHTML = icon(isDark() ? "sun" : "moon");

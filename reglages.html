@@ -39,7 +39,7 @@ const { choixIllustrations, setChoixIllustrations } = V;
 registerSW();
 const ctx = readPatientContext();
 const isKine = kineHint.get() && !ctx.apercu;
-mountShell({ role: isKine ? "kine" : ctx.cle ? "patient" : "none", active:"", back: isKine ? "/admin_tools.html" : "/index.html" });
+mountShell({ role: isKine ? "kine" : ctx.cle ? "patient" : "none", active: isKine ? "" : "reglages", back: isKine ? "/admin_tools.html" : "/index.html" });
 
 /* Patient : le choix femme / homme part de celui du kiné et se change ici. */
 const patientIllus = !isKine && !!ctx.cle && typeof V.choisirIllustrations === "function";
