@@ -497,11 +497,33 @@ function exoAutoScroll(){
   if(dy){ scrollBy(0, dy); exoPlace(); exoHit(); exoScrollRaf = requestAnimationFrame(exoAutoScroll); }
 }
 function exoBegin(card, y, pointerId){
-  exoDrag = { card, py: y, gy: y - exoNaturalTop(card), id: pointerId };
+  const list = $("#exos");
+  const cards = [...list.children].filter(c => c.classList.contains("exo"));
+  let gy = y - exoNaturalTop(card);
+  /* Cartes réduites (image + nom) pendant le déplacement : on voit tout le programme */
+  if(cards.length > 2){
+    const first = new Map(cards.map(c => [c, c.getBoundingClientRect().top]));
+    list.classList.add("compact");
+    gy = Math.min(gy, card.offsetHeight / 2);
+    if(!dragReduce) cards.forEach(c => {
+      if(c === card) return;
+      const dy = first.get(c) - exoNaturalTop(c);
+      if(!dy) return;
+      c.style.transition = "none"; c.style.transform = `translateY(${dy}px)`;
+    });
+    list.offsetWidth;
+    cards.forEach(c => {
+      if(c === card || !c.style.transform) return;
+      c.style.transition = `transform ${DRAG_ANIM + 60}ms cubic-bezier(.2,.8,.2,1)`; c.style.transform = "";
+      clearTimeout(c._flip); c._flip = setTimeout(() => { c.style.transition = ""; }, DRAG_ANIM + 90);
+    });
+  }
+  exoDrag = { card, py: y, gy, id: pointerId };
   card.classList.add("dragging");
   document.body.classList.add("exo-dragging");
   card.style.transition = dragReduce ? "none" : "transform .15s ease";
   exoPlace();
+  exoHit();   // après réduction des cartes : la place libre vient sous le doigt
   setTimeout(() => { if(exoDrag?.card === card) card.style.transition = "none"; }, 160);
   navigator.vibrate?.(12);
 }
@@ -517,12 +539,24 @@ function exoEnd(){
   setTimeout(() => {
     card.classList.remove("dragging"); card.style.transition = "";
     const list = $("#exos");
-    const order = [...list.children].filter(c => c.classList.contains("exo")).map(c => +c.dataset.i);
+    const cards = [...list.children].filter(c => c.classList.contains("exo"));
+    const order = cards.map(c => +c.dataset.i);
+    const pos = cards.indexOf(card);
+    list.classList.remove("compact");
     if(order.some((v, k) => v !== k)){
+      const avant = S.exercices.slice();
       S.exercices = order.map(k => S.exercices[k]);
       persist();
+      toast("Exercice déplacé.", { action:{ label:"Annuler", run:() => { S.exercices = avant; persist(); renderExos(); } } });
     }
     renderExos();
+    const placed = $(`.exo[data-i="${pos}"]`);
+    if(placed){
+      placed.classList.add("just-dropped");
+      const r = placed.getBoundingClientRect();
+      if(r.top < 70 || r.bottom > innerHeight - 70) placed.scrollIntoView({ block:"center", behavior: dragReduce ? "auto" : "smooth" });
+      setTimeout(() => placed.classList.remove("just-dropped"), 900);
+    }
   }, dragReduce ? 0 : DRAG_ANIM);
 }
 const EXO_NO_PRESS = "input, textarea, select, a, label, button:not(.thumb), .stepper, details, summary, [contenteditable]";

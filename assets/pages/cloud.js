@@ -11,6 +11,45 @@ import * as V from "../variantes.js";
 const app = $("#app");
 registerSW();
 
+/* « Copier pour un patient » : on choisit le patient tout de suite,
+   puis l'éditeur s'ouvre avec le programme copié et ce patient sélectionné. */
+async function choisirPatientCopie(nomProg, cleActuel){
+  const sh = openSheet({
+    title: "Copier pour quel patient ?",
+    tall: true,
+    body: `<p class="small muted" style="margin:0 0 10px">« ${esc(nomProg)} » sera copié : vous pourrez l'ajuster avant de l'envoyer.</p>
+      <input class="input" type="search" id="cp-q" placeholder="Rechercher un patient" autocomplete="off" aria-label="Rechercher un patient">
+      <div class="list" id="cp-list" style="margin-top:10px">${loadingHTML()}</div>
+      <button class="btn block" type="button" id="cp-none" style="margin-top:12px">${icon("edit")}Choisir plus tard dans l'éditeur</button>`
+  });
+  const go = cle => { sh.close(); location.href = "/config.html?draft=1" + (cle ? "&patient=" + encodeURIComponent(cle) : ""); };
+  sh.el.querySelector("#cp-none").onclick = () => go(null);
+  let patients = [];
+  try{
+    const C = await import("../cloud.js");
+    patients = (await C.listPatients()).slice().sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr"));
+  }catch(e){
+    sh.el.querySelector("#cp-list").innerHTML = `<p class="small muted">Liste des patients indisponible. Choisissez le patient dans l'éditeur.</p>`;
+    return;
+  }
+  const norm = t => (t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const paint = () => {
+    const q = norm(sh.el.querySelector("#cp-q").value.trim());
+    const list = patients.filter(p => !q || norm(p.nom).includes(q));
+    sh.el.querySelector("#cp-list").innerHTML = list.length ? list.map(p => `
+      <button class="list-item" type="button" data-cp="${esc(p.cle)}">
+        <span class="avatar">${esc((p.nom || "?").split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase())}</span>
+        <span class="li-main"><span class="li-title">${esc(p.nom || "Sans nom")}</span>${p.cle === cleActuel ? `<span class="small muted">Patient actuel</span>` : ""}</span>
+        ${icon("chevron")}
+      </button>`).join("") : `<p class="small muted" style="padding:10px 0">Aucun patient trouvé.</p>`;
+    sh.el.querySelectorAll("[data-cp]").forEach(b => b.onclick = () => go(b.dataset.cp));
+  };
+  paint();
+  const qi = sh.el.querySelector("#cp-q");
+  qi.addEventListener("input", paint);
+  if(matchMedia("(min-width:700px)").matches) qi.focus();
+}
+
 const ctx = readPatientContext();
 const pParam = params.get("patient");
 
@@ -385,7 +424,7 @@ async function kineView(param){
             nom: prog.nom, series: first.data.series, exercices: first.data.exercices,
             semaines: weeks.length, seancesParSemaine: Math.max(...weeks.map(w => w.seances.length)), jours
           });
-          location.href = "/config.html?draft=1";
+          choisirPatientCopie(prog.nom, patient.cle);
         }
         if(act === "modele"){
           const nom = await promptDialog({ title:"Enregistrer comme modèle", label:"Nom du modèle", value:prog.nom, confirm:"Enregistrer" });
