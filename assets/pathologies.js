@@ -393,7 +393,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 3,
-    "image": "/exercises/images/bureau/allonger-colonne.webp",
+    "image": "/exercises/images/bureau/allonger-colonne-v2.webp",
     "conseil": "Pousser les mains vers le ciel en gardant les épaules abaissées.",
     "consignes": [
      "Pousser les mains vers le ciel en gardant les épaules abaissées."
@@ -437,7 +437,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 3,
-    "image": "/exercises/images/bureau/etirement-haut-dos.webp",
+    "image": "/exercises/images/bureau/etirement-haut-dos-v2.webp",
     "conseil": "Croiser les doigts, paumes vers l’extérieur, et tendre les deux bras devant soi puis vers le plafond.",
     "consignes": [
      "Assis droit, croiser les doigts devant soi, paumes tournées vers l’extérieur.",
