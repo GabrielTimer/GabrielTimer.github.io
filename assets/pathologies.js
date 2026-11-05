@@ -393,7 +393,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 3,
-    "image": "/images/etirements_bureau/ex1.png",
+    "image": "/exercises/images/bureau/allonger-colonne.webp",
     "conseil": "Pousser les mains vers le ciel en gardant les épaules abaissées.",
     "consignes": [
      "Pousser les mains vers le ciel en gardant les épaules abaissées."
@@ -404,7 +404,7 @@ export const PATHOLOGIES = [
     "ex": 10,
     "repos": 10,
     "reps": 3,
-    "image": "/images/etirements_bureau/ex2.png",
+    "image": "/exercises/images/bureau/relacher-epaules.webp",
     "conseil": "Monter les épaules puis les laisser retomber complètement.",
     "consignes": [
      "Monter les épaules puis les laisser retomber complètement."
@@ -415,7 +415,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 2,
-    "image": "/images/etirements_bureau/ex3.png",
+    "image": "/exercises/images/bureau/etirement-lateral.webp",
     "conseil": "Incliner le buste doucement jusqu’à sentir l’étirement du flanc.",
     "consignes": [
      "Incliner le buste doucement jusqu’à sentir l’étirement du flanc."
@@ -426,7 +426,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 2,
-    "image": "/images/etirements_bureau/ex4.png",
+    "image": "/exercises/images/bureau/etirement-nuque.webp",
     "conseil": "Incliner lentement la tête sans forcer.",
     "consignes": [
      "Incliner lentement la tête sans forcer."
@@ -450,7 +450,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 2,
-    "image": "/images/etirements_bureau/ex6.png",
+    "image": "/exercises/images/bureau/soulager-lombaires.webp",
     "conseil": "Ouvrir doucement la cage thoracique sans casser les lombaires.",
     "consignes": [
      "Ouvrir doucement la cage thoracique sans casser les lombaires."
@@ -461,7 +461,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 2,
-    "image": "/images/etirements_bureau/ex7.png",
+    "image": "/exercises/images/bureau/torsion-assise.webp",
     "conseil": "Faire partir la rotation depuis les hanches.",
     "consignes": [
      "Faire partir la rotation depuis les hanches."
@@ -472,7 +472,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 2,
-    "image": "/images/etirements_bureau/ex8.png",
+    "image": "/exercises/images/bureau/etirement-poignets.webp",
     "conseil": "Descendre les mains lentement sans décoller les paumes.",
     "consignes": [
      "Descendre les mains lentement sans décoller les paumes."
