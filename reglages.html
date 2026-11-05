@@ -32,7 +32,7 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW, toast } from "/assets/app.js";
+import { $, esc, icon, appMarkHTML, store, applyPrefs, readPatientContext, kineHint, modePatient, mountShell, confirmDialog, forgetPatient, fmtCode, KINE, registerSW, toast } from "/assets/app.js";
 import { APP_VERSION } from "/assets/config.js";
 import * as V from "/assets/variantes.js";
 const { choixIllustrations, setChoixIllustrations } = V;
@@ -80,7 +80,7 @@ $("#app").innerHTML = `
     <div class="set-row"><div class="s-txt"><strong>Enchaîner automatiquement</strong><span>Passer à l'exercice suivant sans appuyer sur « Commencer ».</span></div>${sw("auto", auto)}</div>
   </div>
 
-  ${ctx.cle ? `
+  ${ctx.cle && (!isKine || ctx.apercu) ? `
   <div class="section-title section" id="rappels">Rappels de séance</div>
   ${ctx.apercu ? `<div class="notice" style="margin-bottom:10px">${icon("eye")}<span>Aperçu : voici ce que voit votre patient. Les rappels se règlent sur son propre téléphone, rien n'est enregistré d'ici.</span></div>` : ""}
   <div class="panel" style="padding:0" id="rappels-box"></div>` : ""}
@@ -94,7 +94,17 @@ $("#app").innerHTML = `
       : `<button class="btn primary" type="button" id="install" hidden>${icon("download")}Installer</button><ol id="install-steps"><li>Ouvrez le menu du navigateur (les trois points).</li><li>Choisissez <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</li></ol>`}
   </div>` : ""}
 
-  ${ctx.cle && !ctx.apercu ? `
+  ${kineHint.connecte() && !ctx.apercu && (modePatient.get() || ctx.cle) ? `
+  <div class="section-title section">Mode kiné / mode patient</div>
+  <div class="panel stack" style="--gap:12px">
+    ${modePatient.get()
+      ? `<p>Cet appareil est en <strong>mode patient</strong>${store.get("gt_patient_nom") ? ` (${esc(store.get("gt_patient_nom"))})` : ""}. Votre compte kiné reste connecté.</p>
+         <div><button class="btn primary" type="button" id="mode-kine">${icon("stethoscope")}Revenir à l'espace kiné</button></div>`
+      : `<p>Vous pouvez utiliser cet appareil comme le patient${store.get("gt_patient_nom") ? ` <strong>${esc(store.get("gt_patient_nom"))}</strong>` : ""} (votre propre fiche, par exemple).</p>
+         <div><button class="btn" type="button" id="mode-patient">${icon("phone")}Passer en mode patient</button></div>`}
+  </div>` : ""}
+
+  ${ctx.cle && !ctx.apercu && !isKine ? `
   <div class="section-title section">Mon accès</div>
   <div class="panel stack" style="--gap:12px">
     <p>Code d'accès de cet appareil : <strong class="num">${esc(fmtCode(ctx.cle))}</strong></p>
@@ -117,6 +127,8 @@ document.querySelectorAll("[data-illus]").forEach(b => b.onclick = () => {
 $("#sound").onchange = e => store.set("gt_sound", e.target.checked ? 1 : 0);
 $("#voice").onchange = e => store.set("gt_voice", e.target.checked ? 1 : 0);
 $("#auto").onchange = e => store.set("gt_autonext", e.target.checked ? 1 : 0);
+$("#mode-kine")?.addEventListener("click", () => modePatient.quitter());
+$("#mode-patient")?.addEventListener("click", () => modePatient.activer(ctx.cle));
 $("#forget")?.addEventListener("click", async () => {
   if(!await confirmDialog({ title:"Déconnecter cet appareil ?", message:"Vous aurez besoin de votre lien ou de votre code pour revenir.", confirm:"Déconnecter", danger:true })) return;
   forgetPatient(); location.replace("/index.html");

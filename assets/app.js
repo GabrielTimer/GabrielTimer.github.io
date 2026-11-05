@@ -167,8 +167,20 @@ export function leaveApercu(){
 
 /** Indice local (non sécurisé) pour savoir s'il faut attendre la connexion kiné. */
 export const kineHint = {
-  get: () => store.get("gt_kine") === 1 || store.get("gt_kine") === "1",
+  /** Kiné connecté sur cet appareil ET pas en « mode patient ». */
+  get: () => (store.get("gt_kine") === 1 || store.get("gt_kine") === "1") && !modePatient.get(),
+  /** Kiné connecté sur cet appareil, même en mode patient. */
+  connecte: () => store.get("gt_kine") === 1 || store.get("gt_kine") === "1",
   set: v => v ? store.set("gt_kine", 1) : store.del("gt_kine")
+};
+
+/** Mode patient : le kiné utilise cet appareil comme un patient (sa propre fiche, par exemple). */
+export const modePatient = {
+  get: () => store.get("gt_mode_patient") === 1 && typeof store.get("gt_cle") === "string",
+  /** Passe cet appareil en mode patient pour ce code d'accès. */
+  activer(cle){ session.del("gt_apercu"); store.set("gt_cle", cle); store.set("gt_mode_patient", 1); location.href = "/index.html"; },
+  /** Revient à l'espace kiné (la fiche patient reste mémorisée pour y revenir). */
+  quitter(){ store.del("gt_mode_patient"); location.href = "/index.html"; }
 };
 
 /* ---------- Mise en forme ---------- */
