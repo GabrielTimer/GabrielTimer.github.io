@@ -133,30 +133,72 @@ async function rappelsUI(){
       : "Ce navigateur ne permet pas les notifications. Vous pouvez ajouter vos séances à votre agenda depuis l'accueil."}</span></div></div>`;
     return;
   }
+  const opt = (sel) => R.HEURES.map(x => `<option value="${x}" ${x === sel ? "selected" : ""}>${x} h</option>`).join("");
+  const perso = st.mode === "perso";
+  const jours = R.nettoyerJours(st.jours);
   box.innerHTML = `
-    <div class="set-row"><div class="s-txt"><strong>Me rappeler mes séances</strong><span>Une notification le jour de chaque séance prévue, si elle n'est pas encore faite.</span></div>${sw("rp-on", st.actif)}</div>
-    <div class="set-row"><div class="s-txt"><strong>Heure du rappel</strong><span>Choisissez un moment où vous êtes disponible.</span></div>
-      <select class="select" id="rp-h" style="width:auto" aria-label="Heure du rappel">${R.HEURES.map(h => `<option value="${h}" ${h === st.heure ? "selected" : ""}>${h} h</option>`).join("")}</select></div>
-    <div class="set-row" id="rp-test-row" ${st.actif ? "" : "hidden"}><div class="s-txt"><span id="rp-msg">Rappels activés à ${st.heure} h.</span></div><button class="btn sm" type="button" id="rp-test">${icon("bell")}Essayer</button></div>`;
+    <div class="set-row"><div class="s-txt"><strong>Me rappeler mes séances</strong><span>Une notification en haut de l'écran pour penser à vos exercices.</span></div>${sw("rp-on", st.actif)}</div>
+    <div class="set-row"><div class="s-txt"><strong>Quand ?</strong></div>
+      <div class="segmented" role="group" aria-label="Quand recevoir le rappel">
+        <button type="button" data-mode="seances" aria-pressed="${!perso}">Les jours de mes séances</button>
+        <button type="button" data-mode="perso" aria-pressed="${perso}">Mes jours et heures</button>
+      </div></div>
+    <div class="set-row" id="rp-seances" ${perso ? "hidden" : ""}><div class="s-txt"><strong>Heure du rappel</strong><span>Le jour de chaque séance prévue, si elle n'est pas encore faite.</span></div>
+      <select class="select" id="rp-h" style="width:auto" aria-label="Heure du rappel">${opt(st.heure)}</select></div>
+    <div id="rp-perso" ${perso ? "" : "hidden"}>
+      ${R.JOURS.map(([j, nom]) => `
+      <div class="set-row" style="padding-top:8px;padding-bottom:8px">
+        <label class="s-txt" style="display:flex;align-items:center;gap:10px;font-weight:700"><input type="checkbox" data-j="${j}" ${j in jours ? "checked" : ""} style="width:22px;height:22px">${nom}</label>
+        <select class="select" data-jh="${j}" style="width:auto" aria-label="Heure du ${nom.toLowerCase()}" ${j in jours ? "" : "disabled"}>${opt(jours[j] ?? st.heure ?? 18)}</select>
+      </div>`).join("")}
+      <div class="set-row"><span class="hint">Tant que votre programme est en cours. Rien n'est envoyé si la séance du jour est déjà faite.</span></div>
+    </div>
+    <div class="set-row" id="rp-test-row" ${st.actif ? "" : "hidden"}><div class="s-txt"><span id="rp-msg">Rappels activés ${esc(R.resumeRappels(st))}.</span></div><button class="btn sm" type="button" id="rp-test">${icon("bell")}Essayer</button></div>`;
   const on = $("#rp-on"), h = $("#rp-h"), row = $("#rp-test-row");
+  let mode = perso ? "perso" : "seances";
+  const lireJours = () => {
+    const out = {};
+    box.querySelectorAll("[data-j]").forEach(c => { if(c.checked) out[c.dataset.j] = Number(box.querySelector(`[data-jh="${c.dataset.j}"]`).value); });
+    return out;
+  };
+  const champs = () => box.querySelectorAll("input, select, [data-mode]");
+  let attente = null;
   const apply = async () => {
-    on.disabled = h.disabled = true;
+    champs().forEach(c => c.disabled = true);
     try{
       if(on.checked){
-        const s = await R.activerRappels(ctx.cle, Number(h.value));
-        row.hidden = false; $("#rp-msg").textContent = `Rappels activés à ${s.heure} h.`;
-        toast("Rappels activés.", { type:"ok" });
+        const s = await R.activerRappels(ctx.cle, Number(h.value), { mode, jours: lireJours() });
+        row.hidden = false; $("#rp-msg").textContent = `Rappels activés ${R.resumeRappels(s)}.`;
+        toast("Rappels enregistrés.", { type:"ok" });
       }else{
         await R.desactiverRappels(ctx.cle);
         row.hidden = true; toast("Rappels désactivés.");
       }
     }catch(e){
-      on.checked = false; row.hidden = true;
+      if(e.message !== "Cochez au moins un jour."){ on.checked = false; row.hidden = true; }
       toast(e.message || "Impossible d'activer les rappels.", { type:"err", duration:7000 });
-    }finally{ on.disabled = h.disabled = false; }
+    }finally{
+      champs().forEach(c => c.disabled = false);
+      box.querySelectorAll("[data-j]").forEach(c => { box.querySelector(`[data-jh="${c.dataset.j}"]`).disabled = !c.checked; });
+    }
   };
+  // Plusieurs réglages de suite : un seul enregistrement
+  const plusTard = () => { if(!on.checked) return; clearTimeout(attente); attente = setTimeout(apply, 900); };
   on.onchange = apply;
-  h.onchange = () => { if(on.checked) apply(); };
+  h.onchange = plusTard;
+  box.querySelectorAll("[data-mode]").forEach(b => b.onclick = () => {
+    mode = b.dataset.mode;
+    box.querySelectorAll("[data-mode]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    $("#rp-seances").hidden = mode !== "seances";
+    $("#rp-perso").hidden = mode !== "perso";
+    if(mode === "perso" && !Object.keys(lireJours()).length) return;   // attendre qu'un jour soit coché
+    plusTard();
+  });
+  box.querySelectorAll("[data-j]").forEach(c => c.onchange = () => {
+    box.querySelector(`[data-jh="${c.dataset.j}"]`).disabled = !c.checked;
+    plusTard();
+  });
+  box.querySelectorAll("[data-jh]").forEach(sel => sel.onchange = plusTard);
   $("#rp-test").onclick = () => R.essaiRappel().catch(() => toast("Notification impossible sur ce téléphone.", { type:"err" }));
   if(location.hash === "#rappels") setTimeout(() => scrollTo({ top: $("#rappels").getBoundingClientRect().top + scrollY - 90 }), 60);
 }

@@ -7,7 +7,7 @@
    - plein écran, seulement le minuteur et les exercices ;
    - le bouton Retour d'Android ne quitte plus la séance ;
    - pour sortir (arrêter la séance ou revenir à l'espace kiné),
-     il faut le code du kiné (4 chiffres, enregistré sur l'appareil) ;
+     il faut le code du kiné (4 chiffres, 7777 par défaut, modifiable) ;
    - en fin de séance, écran neutre « rendez la tablette ».
    Réglable dans Réglages du cabinet (activé par défaut).
    ========================================================= */
@@ -17,14 +17,15 @@ import { store, session, kineHint, openSheet, esc, icon, toast } from "./app.js"
 const FLAG = "gt_mode_seance";          // sessionStorage : séance verrouillée en cours
 const PIN = "gt_pin_seance";            // localStorage : empreinte du code
 const OFF = "gt_mode_seance_off";       // localStorage : 1 = mode séance désactivé
+export const PIN_DEFAUT = "7777";
 
 /* ---------- Réglages ---------- */
 
 export const reglage = {
   actifParDefaut: () => store.get(OFF) !== 1,
   setActifParDefaut: v => v ? store.del(OFF) : store.set(OFF, 1),
-  pinDefini: () => !!store.get(PIN),
-  oublierPin: () => store.del(PIN)
+  pinPerso: () => !!store.get(PIN),           // false = code par défaut (7777)
+  pinParDefaut: () => store.del(PIN)
 };
 
 async function empreinte(code){
@@ -39,7 +40,10 @@ async function empreinte(code){
 }
 
 export async function enregistrerPin(code){ store.set(PIN, await empreinte(code)); }
-async function pinCorrect(code){ return store.get(PIN) === await empreinte(code); }
+async function pinCorrect(code){
+  const perso = store.get(PIN);
+  return perso ? perso === await empreinte(code) : code === PIN_DEFAUT;
+}
 
 /* ---------- Fenêtre de saisie du code ---------- */
 
@@ -78,7 +82,7 @@ function demanderCode({ title, texte, confirm = "Valider", annulable = true }){
 /** Création du code (deux saisies identiques). Renvoie true si un code est enregistré. */
 export async function creerPin(){
   const a = await demanderCode({
-    title:"Code du mode séance",
+    title:"Nouveau code du mode séance",
     texte:"Choisissez un code à 4 chiffres. Il sera demandé pour arrêter une séance ou revenir à l'espace kiné quand la tablette est prêtée à un patient."
   });
   if(!a) return false;
@@ -92,7 +96,6 @@ export async function creerPin(){
 
 /** Demande le code du kiné. Renvoie true si le code est bon. */
 export async function verifierPin(texte = "Saisissez le code du kiné."){
-  if(!reglage.pinDefini()) return true;
   for(let essai = 0; essai < 3; essai++){
     const v = await demanderCode({ title:"Réservé au kiné", texte: essai ? "Code incorrect. Réessayez." : texte });
     if(v === null) return false;
@@ -115,10 +118,6 @@ export async function demarrer({ apercu = false } = {}){
   if(!actif()){
     if(!kineHint.get() || !reglage.actifParDefaut()) return false;
     session.set(FLAG, 1);
-  }
-  if(!reglage.pinDefini()){
-    const ok = await creerPin();
-    if(!ok) toast("Sans code, n'importe qui pourra quitter la séance. Vous pourrez le créer dans Réglages du cabinet.", { duration:6000 });
   }
   verrouiller();
   return true;

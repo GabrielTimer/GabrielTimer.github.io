@@ -1,5 +1,7 @@
-// Rappels de séance : envoie une notification aux patients qui ont une séance
-// prévue aujourd'hui, pas encore faite, à l'heure qu'ils ont choisie.
+// Rappels de séance : envoie une notification aux patients
+// - mode « seances » (par défaut) : le jour d'une séance prévue, pas encore faite, à l'heure choisie ;
+// - mode « perso » : les jours de la semaine choisis par le patient, à l'heure choisie pour chaque jour,
+//   tant qu'il reste des séances à faire et si aucune séance n'a déjà été faite ce jour-là.
 // Lancé chaque heure par .github/workflows/rappels.yml.
 // Au premier lancement, crée les clés d'envoi (prive/push, reglages/push).
 import admin from "firebase-admin";
@@ -35,6 +37,7 @@ const now = new Date();
 const dayOf = d => new Date(d).toLocaleDateString("sv-SE", { timeZone: TZ });   // AAAA-MM-JJ
 const today = dayOf(now);
 const hour = Number(new Intl.DateTimeFormat("fr-FR", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(now));
+const JOUR = String(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].indexOf(new Intl.DateTimeFormat("en-US", { timeZone: TZ, weekday: "short" }).format(now)) + 1);   // 1 = lundi
 console.log(`Paris : ${today}, ${hour} h.`);
 
 if(process.env.SEULEMENT_CLES === "1"){ console.log("Clés vérifiées, pas d'envoi."); process.exit(0); }
@@ -55,17 +58,32 @@ let envoyes = 0, retires = 0, erreurs = 0;
 for(const d of subs.docs){
   const r = d.data();
   if(!r.actif || !r.endpoint) continue;
-  if((Number(r.heure) || 18) > hour) continue;
   if(r.dernierEnvoi === today) continue;
+  const perso = r.mode === "perso" && r.jours && typeof r.jours === "object";
+  const heureDuJour = perso ? Number(r.jours[JOUR]) : (Number(r.heure) || 18);
+  if(!heureDuJour || heureDuJour > hour) continue;
   const cle = d.ref.parent.parent?.id;
   if(!cle) continue;
 
-  const dues = (await seancesDe(cle)).filter(s => !s.terminee && s.datePrevue && dayOf(s.datePrevue) === today);
+  const seances = await seancesDe(cle);
+  let payload;
+  if(perso){
+    const restantes = seances.filter(s => !s.terminee);
+    if(!restantes.length) continue;                                         // programme terminé
+    if(seances.some(s => s.terminee && s.dateValidation && dayOf(s.dateValidation) === today)) continue;   // déjà faite aujourd'hui
+    payload = {
+      title: "C'est l'heure de vos exercices",
+      body: "Votre séance vous attend. Quelques minutes suffisent !",
+      url: "/index.html",
+      tag: `seance-${today}`
+    };
+  }else{
+  const dues = seances.filter(s => !s.terminee && s.datePrevue && dayOf(s.datePrevue) === today);
   if(!dues.length) continue;
 
   const s = dues[0];
   const nom = (s.label || s.nom || s.data?.nom || "").trim();
-  const payload = {
+  payload = {
     title: "Votre séance du jour",
     body: dues.length > 1
       ? `${dues.length} séances sont prévues aujourd'hui. Quelques minutes suffisent !`
@@ -73,6 +91,7 @@ for(const d of subs.docs){
     url: "/index.html",
     tag: `seance-${today}`
   };
+  }
   try{
     await webpush.sendNotification({ endpoint: r.endpoint, keys: { p256dh: r.p256dh, auth: r.auth } }, JSON.stringify(payload), { TTL: 6 * 3600 });
     await d.ref.update({ dernierEnvoi: today });

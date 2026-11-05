@@ -83,16 +83,19 @@ service cloud.firestore {
         && d.lu == false;
     }
 
-    // Un abonnement aux rappels : adresse de notification et heure choisie
+    // Un abonnement aux rappels : adresse de notification, heure choisie,
+    // et éventuellement jours et heures personnels (mode « perso »)
     function isRappel() {
       let d = request.resource.data;
-      return d.keys().hasOnly(["endpoint", "p256dh", "auth", "heure", "actif", "createdAt", "tz", "dernierEnvoi"])
+      return d.keys().hasOnly(["endpoint", "p256dh", "auth", "heure", "actif", "createdAt", "tz", "dernierEnvoi", "mode", "jours"])
         && d.endpoint is string && d.endpoint.size() <= 1000 && d.endpoint.matches("https://.*")
         && d.p256dh is string && d.p256dh.size() <= 200
         && d.auth is string && d.auth.size() <= 100
         && d.heure is int && d.heure >= 6 && d.heure <= 22
         && d.actif is bool
-        && (!("tz" in d) || (d.tz is string && d.tz.size() <= 60));
+        && (!("tz" in d) || (d.tz is string && d.tz.size() <= 60))
+        && (!("mode" in d) || d.mode in ["seances", "perso"])
+        && (!("jours" in d) || (d.jours is map && d.jours.keys().hasOnly(["1", "2", "3", "4", "5", "6", "7"])));
     }
 
     // Une réponse de patient : type connu, taille raisonnable

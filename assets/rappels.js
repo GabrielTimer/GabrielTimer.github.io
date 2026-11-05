@@ -13,6 +13,18 @@ import { doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebase
 
 const KEY = "gt_rappel";
 export const HEURES = Array.from({ length: 15 }, (_, i) => i + 7);   // 7 h → 21 h
+/** Jours de la semaine, numérotés comme la norme ISO (1 = lundi … 7 = dimanche). */
+export const JOURS = [["1","Lundi"],["2","Mardi"],["3","Mercredi"],["4","Jeudi"],["5","Vendredi"],["6","Samedi"],["7","Dimanche"]];
+
+/** Nettoie un planning { "1":18, "3":7 } : jours connus, heures 7-21. */
+export function nettoyerJours(jours){
+  const out = {};
+  for(const [j] of JOURS){
+    const h = Math.round(Number(jours?.[j]));
+    if(jours && j in jours && h >= 7 && h <= 21) out[j] = h;
+  }
+  return out;
+}
 
 const read = () => { try{ return JSON.parse(localStorage.getItem(KEY) || "null"); }catch(e){ return null; } };
 const write = v => { try{ v ? localStorage.setItem(KEY, JSON.stringify(v)) : localStorage.removeItem(KEY); }catch(e){} };
@@ -27,7 +39,7 @@ export function rappelSupport(){
   return { ok:false, ios, standalone, raison:"navigateur" };
 }
 
-/** État enregistré sur cet appareil : { cle, id, heure, actif } ou null. */
+/** État enregistré sur cet appareil : { cle, id, heure, actif, mode, jours } ou null. */
 export function rappelState(cle){
   const s = read();
   if(!s || s.cle !== cle) return null;
@@ -48,7 +60,9 @@ async function registration(){
 }
 
 /** Active (ou met à jour) les rappels. Lance une erreur lisible si ce n'est pas possible. */
-export async function activerRappels(cle, heure = 18){
+export async function activerRappels(cle, heure = 18, { mode = "seances", jours = {} } = {}){
+  jours = nettoyerJours(jours);
+  if(mode === "perso" && !Object.keys(jours).length) throw new Error("Cochez au moins un jour.");
   const sup = rappelSupport();
   if(!sup.ok) throw new Error(sup.raison === "ios-ecran"
     ? "Sur iPhone, ajoutez d'abord l'application à l'écran d'accueil, puis ouvrez-la depuis son icône."
@@ -73,10 +87,10 @@ export async function activerRappels(cle, heure = 18){
   const id = prev?.cle === cle && prev.id ? prev.id : (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2));
   await setDoc(doc(db, "patients", cle, "rappels", id), {
     endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth,
-    heure: Number(heure), actif: true, createdAt: Date.now(),
+    heure: Number(heure), actif: true, createdAt: Date.now(), mode, jours,
     tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris"
   }, { merge:true });
-  const state = { cle, id, heure: Number(heure), actif:true };
+  const state = { cle, id, heure: Number(heure), actif:true, mode, jours };
   write(state);
   return state;
 }
@@ -100,4 +114,17 @@ export async function essaiRappel(){
     body: "C'est ainsi que vous serez prévenu le jour de vos séances.",
     icon: "/icon-192.png", badge: "/icon-192.png", tag: "essai", data:{ url:"/index.html" }
   });
+}
+
+/** Phrase qui résume les rappels : « à 18 h les jours de séance » ou « lundi 7 h, mercredi 18 h ». */
+export function resumeRappels(st){
+  if(!st) return "";
+  if(st.mode === "perso"){
+    const j = nettoyerJours(st.jours);
+    const parts = JOURS.filter(([k]) => k in j).map(([k, nom]) => `${nom.toLowerCase()} ${j[k]} h`);
+    const memes = new Set(Object.values(j)).size === 1;
+    if(memes && parts.length > 1) return `${JOURS.filter(([k]) => k in j).map(([, n]) => n.toLowerCase()).join(", ")} à ${Object.values(j)[0]} h`;
+    return parts.join(", ");
+  }
+  return `à ${st.heure} h les jours de séance`;
 }

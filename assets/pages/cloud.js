@@ -177,7 +177,9 @@ async function kineView(param){
     if(!el) return;
     el.hidden = false;
     el.innerHTML = list.length
-      ? `${icon("bell")}Rappels activés à ${[...new Set(list.map(r => `${r.heure} h`))].join(", ")}${list.length > 1 ? ` (${list.length} appareils)` : ""}`
+      ? `${icon("bell")}Rappels activés ${[...new Set(list.map(r => r.mode === "perso" && r.jours
+        ? Object.keys(r.jours).sort().map(j => `${["lun.","mar.","mer.","jeu.","ven.","sam.","dim."][j - 1]} ${r.jours[j]} h`).join(", ")
+        : `à ${r.heure} h`))].join(" ; ")}${list.length > 1 ? ` (${list.length} appareils)` : ""}`
       : `<span class="muted">${icon("bell")}Rappels non activés</span>`;
   };
 
