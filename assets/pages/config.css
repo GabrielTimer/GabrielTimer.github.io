@@ -102,3 +102,5 @@
   .exo-params .stepper button svg,.ev-nums .stepper button svg{ width:14px; height:14px; }
   .exo-params .stepper input,.ev-nums .stepper input{ font-size:min(var(--fs-md), 4.4vw); }
 }
+#lieu button{ display:inline-flex; align-items:center; gap:6px; }
+#lieu svg{ width:18px; height:18px; }

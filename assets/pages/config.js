@@ -27,7 +27,25 @@ const JOURS = [[1, "L", "lundi"], [2, "M", "mardi"], [3, "M", "mercredi"], [4, "
 const DEFAULT_JOURS = { 1:[3], 2:[2, 5], 3:[1, 3, 5], 4:[1, 2, 4, 5], 5:[1, 2, 3, 4, 5], 6:[1, 2, 3, 4, 5, 6], 7:[1, 2, 3, 4, 5, 6, 0] };
 const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
 
-const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"unique", semaines:4, parSemaine:3, jours:[1, 3, 5], debut:todayISO() });
+const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"unique", semaines:4, parSemaine:3, jours:[1, 3, 5], debut:todayISO(), lieu:null });
+
+/* ---------- Lieu : programme 100 % maison (HEP) ou 100 % cabinet ----------
+   Un exercice de la base HEP ne va que dans un programme HEP, un exercice
+   du cabinet que dans un programme cabinet. Les exercices créés par le kiné
+   et les exercices personnalisés vont dans les deux. */
+const LIEUX = { HEP:"À la maison (HEP)", CABINET:"Au cabinet" };
+const lieuExo = e => {
+  if(e.source === "HEP" || e.source === "CABINET") return e.source;
+  if(e.source || e.id == null) return null;                       // exercice créé par le kiné ou personnalisé
+  return /\/HEP\//.test(e.image || "") ? "HEP" : /exercises\/images\//.test(e.image || "") ? "CABINET" : null;   // anciennes séances sans source
+};
+const horsLieu = (e, lieu = S.lieu) => { const l = lieuExo(e); return !!(l && lieu && l !== lieu); };
+function deduireLieu(){
+  if(S.lieu === "HEP" || S.lieu === "CABINET") return;
+  const n = { HEP:0, CABINET:0 };
+  S.exercices.forEach(e => { const l = lieuExo(e); if(l) n[l]++; });
+  S.lieu = n.HEP || n.CABINET ? (n.HEP >= n.CABINET ? "HEP" : "CABINET") : (store.get("gt_lieu") === "CABINET" ? "CABINET" : "HEP");
+}
 const normExo = e => ({ ...e, ex: Math.max(1, Math.round(Number(e.ex) || 30)), repos: Math.max(0, Math.round(Number(e.repos ?? 10))), reps: Math.max(1, Math.round(Number(e.reps) || 1)) });
 
 /* ---------- Chargement du contexte ---------- */
@@ -133,6 +151,7 @@ function build(){
     categorie: "kine",
     objectifs: [], conseils: [], precautions: [], contreIndications: [],
     exercices: exos,
+    lieu: S.lieu,
     illus: S.illus === "h" || S.illus === "f" ? S.illus : illustrationsActives()
   };
 }
@@ -154,6 +173,7 @@ const shell = mountShell({ role:"kine", active: params.get("patient") || mode.ki
 
 async function main(){
   if(!(await init())) return;
+  deduireLieu();
   mountView();
   C.listPatients().then(list => { patients = list; renderSend(); }).catch(() => {});
 }
@@ -173,6 +193,10 @@ function mountView(){
         ${restored ? `<div class="notice" style="margin-bottom:14px">${icon("history")}<div class="row wrap" style="flex:1"><span style="flex:1 1 220px">Vous reprenez la séance en cours de préparation.</span><button class="btn sm" type="button" id="restart">${icon("plus")}Repartir de zéro</button></div></div>` : ""}
         <div class="panel cfg-head">
           <span class="cfg-mode badge lagon" style="align-self:flex-start">${esc(titleText())}</span>
+          <div class="segmented" role="group" aria-label="Type de programme" id="lieu">
+            ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "home" : "dumbbell")}${esc(v)}</button>`).join("")}
+          </div>
+          <div id="lieu-warn"></div>
           <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-modele" ? "Nom du modèle, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
           <div class="cfg-summary">
             <span id="sum-dur">${icon("clock")}</span>
@@ -201,6 +225,8 @@ function mountView(){
     </div>`;
 
   $("#nom").addEventListener("input", e => { S.nom = e.target.value; persist(); renderSend(false); });
+  $$("[data-lieu]").forEach(b => b.onclick = () => changerLieu(b.dataset.lieu));
+  renderLieuWarn();
   $("#series").addEventListener("input", e => { S.series = clamp(+e.target.value, 1, 20); persist(); renderSummary(); });
   $("#series").addEventListener("change", e => { e.target.value = S.series; });
   $$("[data-step=series]").forEach(b => b.onclick = () => { S.series = clamp(S.series + Number(b.dataset.d), 1, 20); $("#series").value = S.series; persist(); renderSummary(); });
@@ -220,7 +246,7 @@ function mountView(){
   });
 
   if(matchMedia("(min-width:1100px)").matches){
-    sideLib = mountLibrary($("#lib"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter à la séance", countIn });
+    sideLib = mountLibrary($("#lib"), { onAdd: e => addExercise(toProgramExercise(e)), addLabel:"Ajouter à la séance", countIn, lieu: () => S.lieu });
     if(sideTab === "modeles") mountSideModels();
   }
   renderExos();
@@ -456,7 +482,40 @@ function startDrag(ev){
   grip.addEventListener("pointercancel", onUp);
 }
 
+function majLieu(){
+  $$("[data-lieu]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lieu === S.lieu)));
+  renderLieuWarn();
+  sideLib?.then(l => l.relieu?.());
+}
+/** Ancienne séance qui mélange HEP et cabinet : on le signale, avec un bouton pour corriger. */
+function renderLieuWarn(){
+  const box = $("#lieu-warn"); if(!box) return;
+  const hors = S.exercices.filter(e => horsLieu(e));
+  box.innerHTML = hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} ${S.lieu === "HEP" ? "du cabinet" : "de la base HEP"} dans ce programme ${S.lieu === "HEP" ? "à la maison" : "au cabinet"}.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "";
+  $("#lieu-fix")?.addEventListener("click", () => {
+    S.exercices = S.exercices.filter(e => !horsLieu(e));
+    persist(); renderExos(); renderSend(false); renderLieuWarn(); sideLib?.then(l => l.refresh());
+  });
+}
+async function changerLieu(lieu){
+  if(lieu === S.lieu) return;
+  const hors = S.exercices.filter(e => horsLieu(e, lieu));
+  if(hors.length){
+    const ok = await confirmDialog({
+      title: lieu === "HEP" ? "Passer en programme à la maison ?" : "Passer en programme au cabinet ?",
+      message: `${plural(hors.length, "exercice")} ${lieu === "HEP" ? "du cabinet" : "de la base HEP"} ne ${hors.length > 1 ? "peuvent" : "peut"} pas rester dans ce programme et ${hors.length > 1 ? "seront retirés" : "sera retiré"} : ${hors.slice(0, 4).map(e => e.nom).join(", ")}${hors.length > 4 ? "…" : ""}`,
+      confirm: "Changer et retirer", danger: true
+    });
+    if(!ok) return;
+    S.exercices = S.exercices.filter(e => !horsLieu(e, lieu));
+    renderExos(); renderSend(false);
+  }
+  S.lieu = lieu; store.set("gt_lieu", lieu);
+  persist(); majLieu();
+}
+
 function addExercise(exo){
+  if(horsLieu(exo)){ toast(`« ${exo.nom} » ${S.lieu === "HEP" ? "est un exercice du cabinet" : "vient de la base HEP"} : il ne peut pas aller dans ce programme.`, { type:"err" }); return; }
   S.exercices.push(normExo(exo));
   persist(); renderExos(); renderSend(false);
   sideLib?.then(l => l.refresh());
@@ -495,7 +554,20 @@ async function applyModele(m){
   if(!m) return;
   const { asProgram } = await import("../modeles.js");
   const prog = asProgram(m);
-  const exos = prog.exercices.map(e => normExo(e));
+  const tous = prog.exercices.map(e => normExo(e));
+  const exos = tous.filter(e => !horsLieu(e));
+  if(!exos.length){
+    toast(`Ce modèle ne contient que des exercices ${S.lieu === "HEP" ? "du cabinet" : "de la base HEP"}. Choisissez un modèle ${S.lieu === "HEP" ? "à la maison" : "au cabinet"}, ou changez le type de programme.`, { type:"err", duration:7000 });
+    return;
+  }
+  if(exos.length < tous.length){
+    const ok = await confirmDialog({
+      title: "Modèle mixte",
+      message: `${plural(tous.length - exos.length, "exercice")} de ce modèle ${S.lieu === "HEP" ? "sont du cabinet" : "viennent de la base HEP"} et ne seront pas ajoutés : ${tous.filter(e => horsLieu(e)).slice(0, 4).map(e => e.nom).join(", ")}${tous.length - exos.length > 4 ? "…" : ""}`,
+      confirm: `Utiliser les ${plural(exos.length, "autre")}`
+    });
+    if(!ok) return;
+  }
   let how = "remplacer";
   if(S.exercices.length){
     how = await new Promise(resolve => {
@@ -539,7 +611,7 @@ function openLibrarySheet(full){
   s.el.classList.add("full");
   mountLibrary(s.el.querySelector("#lib-sheet"), {
     onAdd: e => { addExercise(toProgramExercise(e)); s.el.querySelector("#lib-sum").textContent = head(); },
-    addLabel: "Ajouter", countIn, layout: full ? "grid" : "list"
+    addLabel: "Ajouter", countIn, layout: full ? "grid" : "list", lieu: () => S.lieu
   });
 }
 

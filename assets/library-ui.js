@@ -11,7 +11,9 @@ const PAGE = 30;
  * Monte la bibliothèque dans un conteneur.
  * opts : { onAdd(exo), layout:"list"|"grid", addLabel, persistKey }
  */
-export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters", countIn = null } = {}){
+export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "Ajouter", persistKey = "gt_lib_filters", countIn = null, lieu = null } = {}){
+  /* lieu() → "HEP" ou "CABINET" : seuls les exercices de cette source (et ceux créés par le kiné) sont proposés */
+  const okLieu = e => { const l = lieu?.(); return !l || e.source === l || e.source === "PERSO"; };
   const saved = store.get(persistKey, {}) || {};
   const state = { spec: SPECIALITES.includes(saved.spec) ? saved.spec : "", q: saved.q || "", cat: ZONES.includes(saved.cat) ? saved.cat : "", patho: saved.patho || "", type: saved.type || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
 
@@ -46,15 +48,15 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   const countCats = () => {
     all.forEach(e => classer(e));
     counts = {}; specCounts = {};
-    all.forEach(e => { if(!isHidden(exerciseKey(e))) e.specs.forEach(x => specCounts[x] = (specCounts[x] || 0) + 1); });
-    all.filter(dansSpec).forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
+    all.forEach(e => { if(!isHidden(exerciseKey(e)) && okLieu(e)) e.specs.forEach(x => specCounts[x] = (specCounts[x] || 0) + 1); });
+    all.filter(e => dansSpec(e) && okLieu(e)).forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
     cats = ZONES.filter(z => counts[z]);
     renderSelects();
   };
   /* Listes Pathologie et Type : seulement ce qui existe, avec le nombre d'exercices */
   /* Les pathologies proposées dépendent de la zone choisie ; les types, de la zone et de la pathologie */
   function renderSelects(){
-    const visibles = all.filter(e => !isHidden(exerciseKey(e)) && dansSpec(e));
+    const visibles = all.filter(e => !isHidden(exerciseKey(e)) && dansSpec(e) && okLieu(e));
     const dansZone = state.cat ? visibles.filter(e => e.zone === state.cat) : visibles;
     const pc = {}, tc = {};
     dansZone.forEach(e => e.pathos.forEach(p => pc[p] = (pc[p] || 0) + 1));
@@ -114,6 +116,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     let list = state.source === "HIDDEN" ? all.filter(e => isHidden(exerciseKey(e))) : all.filter(e => !isHidden(exerciseKey(e)));
     if(state.source === "FAV") list = list.filter(e => isFavorite(exerciseKey(e)));
     else if(state.source && state.source !== "HIDDEN") list = list.filter(e => e.source === state.source);
+    list = list.filter(okLieu);
     if(state.spec) list = list.filter(e => e.specs.includes(state.spec));
     if(state.cat) list = list.filter(e => e.zone === state.cat);
     if(state.patho) list = list.filter(e => e.pathos.includes(state.patho));
@@ -183,7 +186,16 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   renderSpecs(); renderCats();
   renderResults();
-  return { focus: () => $("[data-q]", root).focus(), refresh: renderResults };
+  /* Sources proposées selon le lieu du programme */
+  const majSources = () => {
+    const l = lieu?.();
+    $$("[data-source] option", root).forEach(o => { o.hidden = !!l && (o.value === "HEP" || o.value === "CABINET") && o.value !== l; });
+    if(l && (state.source === "HEP" || state.source === "CABINET") && state.source !== l){ state.source = ""; $("[data-source]", root).value = ""; }
+  };
+  majSources();
+  const relieu = () => { majSources(); countCats(); if(state.cat && !counts[state.cat]) state.cat = ""; if(state.spec && !specCounts[state.spec]) state.spec = ""; renderSpecs(); renderCats(); state.limit = PAGE; renderResults(); };
+  if(lieu) relieu();
+  return { focus: () => $("[data-q]", root).focus(), refresh: renderResults, relieu };
 }
 
 /** Fiche détaillée d'un exercice de la bibliothèque. */
