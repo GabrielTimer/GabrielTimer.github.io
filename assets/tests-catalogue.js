@@ -114,3 +114,31 @@ export function ficheTest(K, nom, kind){
     foot: `${yt ? `<a class="btn" href="${esc(lien)}" target="_blank" rel="noopener">${icon("video")}Ouvrir sur YouTube</a>` : `<a class="btn" href="${esc(lien)}" target="_blank" rel="noopener">${icon("video")}${g.v ? "Voir la vidéo" : "Chercher une vidéo"}</a>`}${g.r ? `<a class="btn" href="${esc(g.r)}" target="_blank" rel="noopener">${icon("link")}Fiche de référence</a>` : ""}<button class="btn primary" type="button" data-close>Fermer</button>`
   });
 }
+
+/* ---------- Questionnaires conseillés pour un bilan ---------- */
+/* clé du modèle (assets/questionnaires.js) ← motifs du bilan et zones douloureuses */
+const Q_MOTIFS = {
+  "Lombalgie":["ODI", "STARTBACK", "TSK"], "Sciatique":["ODI", "STARTBACK"], "Dorsalgie":["STARTBACK"],
+  "Cervicalgie":["NDI", "TSK"], "Gonalgie":["KOOS", "LEFS"], "Entorse":["LEFS"], "Post-opératoire":["LEFS"],
+  [EQ]:["FESI", "ABC"], [CH]:["FESI", "ABC"], [NEU]:["ABC", "FESI"], [VE]:["DHI", "ABC"], [RE]:["MMRC", "CAT"],
+  [SP]:["LEFS"], "Tendinopathie":[], "Fracture":[]
+};
+const Q_ZONES = [
+  [/^(Lombaires)$/, ["ODI", "STARTBACK"]], [/^(Cervicales|Cou)$/, ["NDI"]],
+  [/^Épaule$/, ["QDASH", "SPADI"]], [/^(Bras|Avant-bras|Main)$/, ["QDASH"]],
+  [/^(Genou|Creux)/, ["KOOS", "LEFS"]], [/^(Hanche|Fessier|Cuisse|Jambe|Mollet|Pied|Talon)/, ["LEFS"]]
+];
+/** Clés des questionnaires conseillés, dans l'ordre de pertinence. */
+export function questionnairesConseilles(S){
+  const out = [];
+  const add = l => l.forEach(k => { if(!out.includes(k)) out.push(k); });
+  const motifs = S?.c?.patho || [];
+  const zones = Object.keys(S?.pain || {}).map(z => z.replace(/ [DG]$/, ""));
+  zones.forEach(z => Q_ZONES.forEach(([re, l]) => { if(re.test(z)) add(l); }));
+  motifs.forEach(m => add(Q_MOTIFS[m] || []));
+  /* Retour au sport après LCA : genou + reprise du sport */
+  if(motifs.includes(SP) && zones.some(z => /^(Genou|Creux)/.test(z))) add(["ACLRSI"]);
+  /* Douleur qui dure : facteurs psychosociaux */
+  if(motifs.some(m => ["Lombalgie", "Cervicalgie", "Sciatique"].includes(m))) add(["PCS"]);
+  return out;
+}

@@ -166,6 +166,7 @@ function render(){
           <div class="field" style="margin-bottom:14px"><label>Douleur globale (EVA / NPRS)</label>${smileysHTML("nprs", S.f.m_nprs === undefined || S.f.m_nprs === "" ? null : +S.f.m_nprs)}<span class="hint">Touchez un visage (0, 2, 4, 6, 8 ou 10) ou saisissez la valeur exacte dans « NPRS » ci-dessous.</span></div>
           <div class="mes-grid">${K.MES.map(([k, l]) => `<div class="field"><label for="f-${k}">${esc(l)}</label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
           <div id="evo"></div>
+          <div id="q-reco"></div>
         </section>
 
         ${(K.TF || []).length ? `<section class="panel">
@@ -197,7 +198,7 @@ function render(){
     </div>`;
   S.neuro = S.neuro || {};
   NF.mountNerfs($("#neuro"), { state:S.neuro, onChange:() => { changed(); } });
-  drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawTF(); drawDN4(); drawEvo(); drawResume(); drawDanger();
+  drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawTF(); drawQReco(); drawDN4(); drawEvo(); drawResume(); drawDanger();
   setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
 }
 
@@ -258,6 +259,40 @@ function analysisHTML(n){
     ${r.note ? `<p class="small muted" style="margin-top:8px"><em>${esc(r.note)}</em></p>` : ""}
     <details class="src"><summary>Sources</summary><ol>${srcs.map(s => `<li>${esc(K.SRC[s] || s)}</li>`).join("")}</ol></details>
   </section>`;
+}
+
+/* Questionnaires conseillés selon le motif et les zones : proposés au patient en un clic */
+let qCabinet = null;
+async function drawQReco(){
+  const box = $("#q-reco"); if(!box) return;
+  const conseils = TC.questionnairesConseilles(S);
+  if(!conseils.length){ box.innerHTML = ""; return; }
+  if(!qCabinet) qCabinet = await C.listQuestionnaires().catch(() => []);
+  const Q = await import("../questionnaires.js");
+  const proposes = new Set((patient.questionnaires || []).map(a => a.qid));
+  const items = conseils.map(k => {
+    const modele = Q.MODELES.find(m => m.cle === k);
+    const q = qCabinet.find(x => x.cle === k && !Q.hasPlaceholders(x.items || Q.parseQuestions(x.texte, x.debut || 0)));
+    return { k, nom: modele?.nom || k, but: Q.butOf(modele || { cle:k }), q, deja: q && proposes.has(q.id) };
+  });
+  box.innerHTML = `<div class="sub" style="margin-top:20px">Questionnaires conseillés pour ce bilan</div>
+    <div class="stack" style="--gap:8px">${items.map(it => `<div class="row wrap" style="--gap:8px;align-items:center">
+      <span style="flex:1 1 220px"><strong>${esc(it.nom)}</strong><span class="small muted"> · ${esc(it.but)}</span></span>
+      ${it.deja ? `<span class="badge ok">${icon("check")}Proposé au patient</span>`
+        : it.q ? `<button class="btn sm" type="button" data-qprop="${esc(it.q.id)}">${icon("send")}Proposer au patient</button>`
+        : `<a class="btn sm" href="/questionnaires.html" title="Ce questionnaire n'est pas encore prêt dans votre cabinet">${icon("plus")}À préparer</a>`}
+    </div>`).join("")}</div>
+    <p class="hint" style="margin-top:8px">Le patient le remplit sur son téléphone ; « Reprendre les réponses du patient » reporte ensuite les scores ici.</p>`;
+  box.querySelectorAll("[data-qprop]").forEach(b => b.onclick = async () => {
+    b.disabled = true;
+    try{
+      const list = (patient.questionnaires || []).filter(a => a.qid !== b.dataset.qprop).concat({ qid: b.dataset.qprop, jours: 28, depuis: Date.now() });
+      await C.updatePatient(patient.cle, { questionnaires: list });
+      patient.questionnaires = list;
+      toast("Questionnaire proposé au patient (à remplir toutes les 4 semaines).", { type:"ok" });
+      drawQReco();
+    }catch(err){ b.disabled = false; toast("Impossible de proposer le questionnaire.", { type:"err" }); }
+  });
 }
 
 /* Tests fonctionnels : d'abord ceux qui servent ce bilan (motif + zones), les autres repliés */
@@ -403,7 +438,7 @@ app.addEventListener("click", async e => {
 
   if(d.view){ ui.view = d.view; ui.sel = null; drawBody(); drawZone(); return; }
   if(d.zone){
-    if(!S.pain[d.zone]){ S.pain[d.zone] = { eva:5, types:[] }; ui.sel = d.zone; drawBody(); drawZone(); drawAnalysis(); drawTF(); drawEvo(); changed(); }
+    if(!S.pain[d.zone]){ S.pain[d.zone] = { eva:5, types:[] }; ui.sel = d.zone; drawBody(); drawZone(); drawAnalysis(); drawTF(); drawQReco(); drawEvo(); changed(); }
     else{ ui.sel = d.zone; drawBody(); drawZone(); }
     return;
   }
@@ -421,14 +456,14 @@ app.addEventListener("click", async e => {
   }
   if(d.rmzone !== undefined && ui.sel){
     delete S.pain[ui.sel]; delete S.cl[ui.sel]; ui.sel = null;
-    drawBody(); drawZone(); drawAnalysis(); drawTF(); drawEvo(); changed(); return;
+    drawBody(); drawZone(); drawAnalysis(); drawTF(); drawQReco(); drawEvo(); changed(); return;
   }
   if(d.chip){
     const a = S.c[d.chip] = S.c[d.chip] || [], i = a.indexOf(d.val);
     i < 0 ? a.push(d.val) : a.splice(i, 1);
     b.setAttribute("aria-pressed", i < 0);
     if(d.chip === "dn4") drawDN4();
-    if(d.chip === "patho") drawTF();
+    if(d.chip === "patho"){ drawTF(); drawQReco(); }
     changed(); return;
   }
   if(d.rf){

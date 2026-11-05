@@ -55,6 +55,19 @@ export const SCORINGS = {
       return { "Psychosocial (5–9)": psy, "Risque": total <= 3 ? "faible" : psy <= 3 ? "moyen" : "élevé" };
     }
   },
+  sections: {
+    label: "Somme totale, et somme de chaque section (ex. HAD : anxiété, dépression)",
+    unite: "",
+    calc(items, rep){
+      const v = rep.filter(x => x !== null && x !== undefined);
+      return v.length ? v.reduce((a, b) => a + b, 0) : null;
+    },
+    sous(items, rep){
+      const out = {};
+      items.forEach((it, i) => { const k = it.section || "Score"; if(rep[i] !== null && rep[i] !== undefined) out[k] = (out[k] || 0) + rep[i]; });
+      return Object.keys(out).length ? out : null;
+    }
+  },
   koos: {
     label: "KOOS : 100 − (moyenne de la section × 25), par section",
     unite: "/100",
@@ -486,6 +499,101 @@ export const MODELES = [
 ? Sautiller.
 ? Vous retourner dans le lit.
 `
+  },
+
+  /* ---------- Modèles ajoutés le 5 nov. 2026 : structure et calcul seulement.
+     Les textes officiels sont protégés : collez-les depuis la version française validée. ---------- */
+  {
+    cle: "DHI", nom: "Dizziness Handicap Inventory (DHI)", zone: "Vertiges", scoring: "somme", debut: 0, sens: "bas", max: 100, unite: "/100",
+    consigne: "Ces questions portent sur les difficultés liées à vos vertiges ou à vos troubles de l'équilibre. Répondez à chaque question.",
+    interpretation: "0–30 : handicap léger ; 31–60 : modéré ; 61–100 : sévère. Écart cliniquement important : environ 18 points.",
+    aideKine: "25 questions, réponses Oui (4), Parfois (2), Non (0). Collez les 25 questions de la version française validée.",
+    texte: `@options Oui = 4 | Parfois = 2 | Non = 0\n` + Array.from({ length: 25 }, (_, i) => `? Question ${i + 1} : texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "FESI", nom: "FES-I (peur de chuter)", zone: "Chutes", scoring: "somme", debut: 1, sens: "bas", max: 64, unite: "/64",
+    consigne: "Pour chaque activité, indiquez à quel point vous êtes inquiet(e) de tomber en la faisant, même si vous ne la faites pas habituellement.",
+    interpretation: "16–19 : préoccupation faible ; 20–27 : modérée ; 28–64 : élevée (Delbaere 2010).",
+    aideKine: "16 activités notées de 1 (pas du tout inquiet) à 4 (très inquiet). Collez les 16 activités de la version française validée.",
+    texte: `@options Pas du tout inquiet(e) = 1 | Un peu inquiet(e) = 2 | Assez inquiet(e) = 3 | Très inquiet(e) = 4\n` + Array.from({ length: 16 }, (_, i) => `? Activité ${i + 1} : texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "ABC", nom: "ABC Scale (confiance en son équilibre)", zone: "Chutes", scoring: "pct", debut: 0, sens: "haut", unite: "%",
+    consigne: "Pour chaque activité, indiquez votre degré de confiance à la réaliser sans perdre l'équilibre, de 0 % (aucune confiance) à 100 % (confiance totale).",
+    interpretation: "Score moyen de 0 à 100 %. Un score inférieur à 67 % est associé à un risque de chute accru chez la personne âgée (Lajoie et Gallagher 2004).",
+    aideKine: "16 activités notées de 0 à 100 % par paliers de 10. Collez les 16 activités de la version française validée.",
+    texte: `@options 0 % = 0 | 10 % = 10 | 20 % = 20 | 30 % = 30 | 40 % = 40 | 50 % = 50 | 60 % = 60 | 70 % = 70 | 80 % = 80 | 90 % = 90 | 100 % = 100\n` + Array.from({ length: 16 }, (_, i) => `? Activité ${i + 1} : texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "TSK", nom: "Échelle de Tampa (kinésiophobie)", zone: "Douleur chronique", scoring: "somme", debut: 1, sens: "bas", max: 68, unite: "/68",
+    consigne: "Indiquez pour chaque affirmation dans quelle mesure vous êtes d'accord, en pensant à votre douleur.",
+    interpretation: "Score de 17 à 68. Au-dessus de 37 : peur du mouvement élevée (Vlaeyen 1995).",
+    aideKine: "17 affirmations notées de 1 (pas du tout d'accord) à 4 (tout à fait d'accord). Les affirmations 4, 8, 12 et 16 sont inversées (déjà réglé ici). Collez les textes de la version française validée.",
+    texte: Array.from({ length: 17 }, (_, i) => {
+      const inv = [4, 8, 12, 16].includes(i + 1);
+      const v = inv ? [4, 3, 2, 1] : [1, 2, 3, 4];
+      return `? ${i + 1}. Affirmation : texte ${PLACEHOLDER}\n- Pas du tout d'accord = ${v[0]}\n- Plutôt pas d'accord = ${v[1]}\n- Plutôt d'accord = ${v[2]}\n- Tout à fait d'accord = ${v[3]}`;
+    }).join("\n")
+  },
+  {
+    cle: "PCS", nom: "Échelle de catastrophisme (PCS)", zone: "Douleur chronique", scoring: "somme", debut: 0, sens: "bas", max: 52, unite: "/52",
+    consigne: "Indiquez à quel point vous avez ces pensées ou ces sentiments quand vous avez mal.",
+    interpretation: "Score de 0 à 52. À partir de 30 : catastrophisme cliniquement important (Sullivan 1995).",
+    aideKine: "13 affirmations notées de 0 (pas du tout) à 4 (tout le temps). Collez les textes de la version française validée.",
+    texte: `@options Pas du tout = 0 | Quelque peu = 1 | De façon modérée = 2 | Beaucoup = 3 | Tout le temps = 4\n` + Array.from({ length: 13 }, (_, i) => `? ${i + 1}. Affirmation : texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "HAD", nom: "HAD (anxiété et dépression)", zone: "Douleur chronique", scoring: "sections", debut: 0, sens: "bas", max: 42, unite: "/42",
+    consigne: "Pour chaque question, choisissez la réponse qui décrit le mieux ce que vous avez ressenti au cours de la semaine passée.",
+    interpretation: "Deux sous-scores de 0 à 21. Pour chacun : ≤ 7 absence de symptomatologie ; 8–10 symptomatologie douteuse ; ≥ 11 symptomatologie certaine (Zigmond et Snaith 1983).",
+    aideKine: "14 questions (7 anxiété, 7 dépression), 4 réponses notées de 0 à 3. Le sens change selon la question : lors du collage, gardez la valeur « = x » de chaque réponse de la version officielle.",
+    texte: `# Anxiété\n` + Array.from({ length: 7 }, (_, i) => `? A${i + 1}. Question : texte ${PLACEHOLDER}\n` + [0, 1, 2, 3].map(k => `- Réponse : texte ${PLACEHOLDER} = ${k}`).join("\n")).join("\n")
+      + `\n# Dépression\n` + Array.from({ length: 7 }, (_, i) => `? D${i + 1}. Question : texte ${PLACEHOLDER}\n` + [0, 1, 2, 3].map(k => `- Réponse : texte ${PLACEHOLDER} = ${k}`).join("\n")).join("\n")
+  },
+  {
+    cle: "MMRC", nom: "Échelle de dyspnée mMRC", zone: "Respiratoire", scoring: "somme", debut: 0, sens: "bas", max: 4, unite: "/4",
+    consigne: "Choisissez la phrase qui décrit le mieux votre essoufflement.",
+    interpretation: "Stade 0 à 4. À partir du stade 2 : dyspnée importante (GOLD).",
+    aideKine: "Une seule question, 5 stades de 0 à 4. Collez les 5 descriptions de la version française.",
+    texte: `? Votre essoufflement\n` + [0, 1, 2, 3, 4].map(k => `- Stade ${k} : texte ${PLACEHOLDER} = ${k}`).join("\n")
+  },
+  {
+    cle: "CAT", nom: "CAT (BPCO)", zone: "Respiratoire", scoring: "somme", debut: 0, sens: "bas", max: 40, unite: "/40",
+    consigne: "Pour chaque ligne, choisissez le chiffre qui décrit le mieux votre état actuel.",
+    interpretation: "< 10 : impact faible ; 10–20 : moyen ; 21–30 : élevé ; > 30 : très élevé. Écart cliniquement important : 2 points.",
+    aideKine: "8 lignes notées de 0 à 5 entre deux affirmations opposées. Collez les textes de la version française officielle (outil gratuit pour le soin, sous conditions de son éditeur).",
+    texte: `@options 0 | 1 | 2 | 3 | 4 | 5\n` + Array.from({ length: 8 }, (_, i) => `? ${i + 1}. Texte ${PLACEHOLDER} (0) ↔ texte ${PLACEHOLDER} (5)`).join("\n")
+  },
+  {
+    cle: "SPADI", nom: "SPADI (épaule)", zone: "Épaule", scoring: "pct", debut: 0, sens: "bas", unite: "%",
+    consigne: "Notez de 0 à 10 votre douleur et vos difficultés à l'épaule au cours de la semaine passée.",
+    interpretation: "Score de 0 à 100 % : plus il est élevé, plus l'atteinte est importante. Écart cliniquement important : environ 8 à 13 points.",
+    aideKine: "13 questions notées de 0 à 10 : 5 sur la douleur, 8 sur les difficultés. Collez les textes de la version française validée.",
+    texte: `# Douleur\n@options 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10\n` + Array.from({ length: 5 }, (_, i) => `? D${i + 1}. Texte ${PLACEHOLDER}`).join("\n")
+      + `\n# Incapacité\n@options 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10\n` + Array.from({ length: 8 }, (_, i) => `? I${i + 1}. Texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "OSS", nom: "Oxford Shoulder Score", zone: "Épaule", scoring: "somme", debut: 0, sens: "haut", max: 48, unite: "/48",
+    consigne: "Répondez en pensant à votre épaule au cours des 4 dernières semaines.",
+    interpretation: "Score de 0 (le plus sévère) à 48 (meilleure fonction).",
+    aideKine: "12 questions, 5 réponses notées de 4 (meilleur) à 0 (pire). Collez les textes de la version française validée en gardant les valeurs.",
+    texte: Array.from({ length: 12 }, (_, i) => `? ${i + 1}. Question : texte ${PLACEHOLDER}\n` + [4, 3, 2, 1, 0].map(k => `- Réponse : texte ${PLACEHOLDER} = ${k}`).join("\n")).join("\n")
+  },
+  {
+    cle: "ACLRSI", nom: "ACL-RSI (retour au sport après LCA)", zone: "Genou", scoring: "pct", debut: 0, sens: "haut", unite: "%",
+    consigne: "Répondez en pensant au sport que vous pratiquiez avant votre blessure.",
+    interpretation: "Score de 0 à 100 % : plus il est élevé, plus la préparation psychologique au retour au sport est bonne.",
+    aideKine: "12 questions notées de 0 à 10 (certaines échelles sont présentées à l'envers sur la version papier : gardez le sens de la version validée). Collez les textes de la version française validée.",
+    texte: `@options 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10\n` + Array.from({ length: 12 }, (_, i) => `? ${i + 1}. Question : texte ${PLACEHOLDER}`).join("\n")
+  },
+  {
+    cle: "ICIQ", nom: "ICIQ-SF (incontinence urinaire)", zone: "Périnée", scoring: "somme", debut: 0, sens: "bas", max: 21, unite: "/21",
+    consigne: "Répondez en pensant aux 4 dernières semaines.",
+    interpretation: "Score de 0 à 21 : 1–5 léger ; 6–12 modéré ; 13–18 sévère ; 19–21 très sévère.",
+    aideKine: "3 questions comptées : fréquence des fuites (0–5), quantité (0, 2, 4, 6), gêne (0–10). La question sur les circonstances n'entre pas dans le score. Collez les textes de la version française validée.",
+    texte: `? Fréquence des fuites : texte ${PLACEHOLDER}\n` + [0, 1, 2, 3, 4, 5].map(k => `- Réponse : texte ${PLACEHOLDER} = ${k}`).join("\n")
+      + `\n? Quantité : texte ${PLACEHOLDER}\n` + [0, 2, 4, 6].map(k => `- Réponse : texte ${PLACEHOLDER} = ${k}`).join("\n")
+      + `\n? Gêne dans la vie de tous les jours (0 = pas du tout, 10 = énormément)\n@options 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10`
   }
 ];
 
@@ -522,7 +630,7 @@ export function isDue(lastDate, jours){
 /* ---------- Comparaison avant / après ---------- */
 
 /** Écart cliniquement important (MCID) par questionnaire, dans l'unité du score. */
-export const MCID = { ODI:10, NDI:7.5, QDASH:8, EIFEL:3, LEFS:9, KOOS:8 };
+export const MCID = { ODI:10, NDI:7.5, QDASH:8, EIFEL:3, LEFS:9, KOOS:8, DHI:18, CAT:2, SPADI:13 };
 const mcidOf = q => q.mcid ?? MCID[q.cle] ?? MCID[String(q.cle || "").toUpperCase()] ?? null;
 
 /** Lecture d'un écart : "mieux", "moins", "stable" (écart < MCID) ou null (pas de seuil connu). */
@@ -573,6 +681,18 @@ export const BUT = {
   EIFEL: "Lombalgie : retentissement sur les activités du jour",
   KOOS: "Genou : symptômes, douleur, fonction, sport, qualité de vie",
   LEFS: "Hanche, genou, cheville : fonction du membre inférieur",
-  STARTBACK: "Lombalgie : risque de passage à la chronicité"
+  STARTBACK: "Lombalgie : risque de passage à la chronicité",
+  DHI: "Vertiges : retentissement sur la vie quotidienne",
+  FESI: "Personne âgée : peur de chuter",
+  ABC: "Équilibre : confiance dans les activités du quotidien",
+  TSK: "Douleur chronique : peur du mouvement (kinésiophobie)",
+  PCS: "Douleur chronique : pensées catastrophistes",
+  HAD: "Anxiété et dépression (dépistage)",
+  MMRC: "Respiratoire : niveau d'essoufflement",
+  CAT: "BPCO : retentissement sur la vie quotidienne",
+  SPADI: "Épaule : douleur et incapacité",
+  OSS: "Épaule : douleur et fonction",
+  ACLRSI: "LCA : préparation psychologique au retour au sport",
+  ICIQ: "Périnée : fuites urinaires et gêne"
 };
 export const butOf = q => q.but || BUT[String(q.cle || "").toUpperCase()] || q.zone || "";
