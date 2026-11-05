@@ -116,6 +116,7 @@ export async function ecrireAuPatient(C, patient, { sujet = "", onSent = null } 
     foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="wp">${icon("send")}Envoyer</button>`
   });
   setTimeout(() => s.el.querySelector("#wp-t").focus(), 30);
+  import("./smileys.js").then(S => S.ajouterSmileys(s.el.querySelector("#wp-t"), s.el.querySelector("#wp-t"))).catch(() => {});
   s.el.querySelector("#wp").addEventListener("submit", async e => {
     e.preventDefault();
     const texte = s.el.querySelector("#wp-t").value.trim();

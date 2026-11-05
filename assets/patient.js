@@ -129,6 +129,7 @@ export function writeToKine({ cle, apercu = false, patientNom = "", sujet = "" }
   });
   const t = s.el.querySelector("#wk-t");
   setTimeout(() => t.focus(), 50);
+  import("./smileys.js").then(S => S.ajouterSmileys(t, t)).catch(() => {});
   s.el.querySelector("#wk").addEventListener("submit", async e => {
     e.preventDefault();
     const texte = t.value.trim();

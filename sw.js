@@ -6,7 +6,7 @@ const MEDIA = `${VERSION}-media`;
 
 const PRECACHE = [
   "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/progression.html", "/suivi.html", "/conseils.html",
-  "/assets/suivi.js", "/assets/messages.js", "/assets/bodychart.js", "/assets/nerfs-data.js", "/assets/nerfs-ui.js", "/assets/evolution.js", "/assets/questionnaires.js", "/assets/conseils-data.js",
+  "/assets/suivi.js", "/assets/messages.js", "/assets/smileys.js", "/assets/bodychart.js", "/assets/nerfs-data.js", "/assets/nerfs-ui.js", "/assets/evolution.js", "/assets/questionnaires.js", "/assets/conseils-data.js",
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js",

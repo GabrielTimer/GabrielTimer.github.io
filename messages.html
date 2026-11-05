@@ -73,6 +73,7 @@ registerSW();
 mountShell({ role:"kine", active:"messages", back:"/index.html" });
 const C = await import("/assets/cloud.js");
 const M = await import("/assets/messages.js");
+const S = await import("/assets/smileys.js");
 const app = $("#app");
 
 let items = [], patients = [], rulesMissing = false;
@@ -167,6 +168,7 @@ function threadHTML(c){
     </div>
     <div class="mx-thread" id="thread">${out || `<div class="mx-empty">Aucun message pour l'instant. Écrivez le premier ci-dessous.</div>`}</div>
     <form class="mx-comp" id="comp">
+      <span id="comp-sm"></span>
       <textarea class="textarea" id="comp-t" rows="1" maxlength="5000" placeholder="Écrire à ${esc(p.nom || "votre patient")}…" aria-label="Votre message">${esc(brouillons.get(c.cle) || "")}</textarea>
       <button class="btn primary" type="submit" aria-label="Envoyer">${icon("send")}</button>
     </form>`;
@@ -240,6 +242,7 @@ function bind(cur){
   const ta = $("#comp-t");
   const grow = () => { ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight, 160) + "px"; };
   ta.oninput = () => { brouillons.set(cur.cle, ta.value); grow(); };
+  S.ajouterSmileys(ta, $("#comp-sm"), { dedans:true });
   ta.onkeydown = e => { if(e.key === "Enter" && (e.ctrlKey || e.metaKey)) $("#comp").requestSubmit(); };
   grow();
   $("#comp").onsubmit = async e => {
