@@ -437,7 +437,7 @@ export const PATHOLOGIES = [
     "ex": 15,
     "repos": 10,
     "reps": 3,
-    "image": "/images/etirements_bureau/ex5.png",
+    "image": "/images/etirements_bureau/ex5-deux-bras.webp",
     "conseil": "Croiser les doigts, paumes vers l’extérieur, et tendre les deux bras devant soi puis vers le plafond.",
     "consignes": [
      "Assis droit, croiser les doigts devant soi, paumes tournées vers l’extérieur.",
