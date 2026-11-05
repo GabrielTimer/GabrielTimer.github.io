@@ -344,6 +344,7 @@ async function renderKine(user){
     <div id="inbox-banner"></div>
     <div class="tiles">
       <button class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
+      <a class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
       <a class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
       <a class="tile" href="/patients.html"><span class="t-ico">${icon("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
       <a class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
@@ -374,6 +375,8 @@ async function renderKine(user){
     const inbox = M.buildInbox({ patients, messages, seances });
     const unread = inbox.filter(i => !i.lu);
     M.setUnreadCache(unread.length);
+    /* Retour sur l'accueil (bouton précédent) : remettre le chiffre à jour */
+    addEventListener("pageshow", e => { if(e.persisted) M.refreshUnread({ force:true }); });
     if(unread.length){
       const who = [...new Set(unread.map(i => i.patient.nom))];
       $("#inbox-banner").innerHTML = `<a class="inbox-banner" href="/messages.html">
