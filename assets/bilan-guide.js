@@ -213,6 +213,14 @@ export function mountGuide(app, ctx){
           <button type="button" class="btn primary" data-gusemod="${esc(zone)}" data-i="${gi}" data-id="${esc(m.id)}">${icon("check")}Utiliser ce modèle</button>
         </div>`;
       };
+      /* Meilleur modèle : celui de l'hypothèse, sinon le plus proche de la région */
+      const best = groupes[0] || autres[0] || null;
+      const proche = !groupes.length && !!autres.length;
+      const reste = [...groupes, ...autres].filter(g => g !== best);
+      /* Sur mesure composé d'office, à côté du modèle */
+      if(ui.lib && !ui.gen){
+        ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post });
+      }
       const gen = ui.gen;
       const titreSM = (P.hyps[0]?.label || P.pathos[0] || "Programme") + " · sur mesure";
       return `<h2 class="g-h">Proposition de traitement</h2>
@@ -242,24 +250,27 @@ export function mountGuide(app, ctx){
           <div class="g-q"><div class="g-qt">Où ?</div><div class="g-chips">${[["HEP", "À la maison"], ["CABINET", "Au cabinet"]].map(([v, l]) => `<button type="button" class="g-chip" data-gtx="lieu" data-v="${v}" aria-pressed="${lieu === v}">${l}</button>`).join("")}</div></div>
           <div class="g-q"><div class="g-qt">Niveau de départ</div>${opt("niveau", [1, 2, 3], p.niveau, a.niveau, v => "Niveau " + v)}</div>
           ${t.prog ? `<p class="g-ori">${icon("check")}<span>Programme choisi : <strong>${esc(t.prog.nom)}</strong></span></p>` : ""}
-          ${!ui.modeles ? `<p class="g-hint">${icon("clock")} Recherche des modèles…</p>`
-            : groupes.length ? `<div class="g-qt">Modèles conseillés</div><div class="g-models">${groupes.map((g, i) => carte(g, i, "p")).join("")}</div>`
-            : `<p class="g-hint">Pas de modèle ${lieu === "HEP" ? "maison" : "cabinet"} pour cette hypothèse : composez un programme sur mesure ci-dessous${autres.length ? " ou choisissez un modèle de la région" : ""}.</p>`}
-          ${autres.length ? `<details class="g-more" ${groupes.length ? "" : "open"}><summary>Autres modèles de la région (${autres.length})</summary><div class="g-models">${autres.map((g, i) => carte(g, i, "a")).join("")}</div></details>` : ""}
-
-          <div class="g-qt" style="margin-top:20px">Sur mesure</div>
-          ${!gen ? `<p class="g-hint">Compose 6 exercices de la bibliothèque ${lieu === "HEP" ? "maison" : "cabinet"} pour ${esc(P.pathos[0] || P.zones[0] || "la zone")}, adaptés au niveau ${p.niveau}${p.niveau === 1 ? " (mobilité, isométrique, sans douleur)" : p.niveau === 2 ? " (mobilité, renforcement, contrôle moteur)" : " (renforcement, équilibre, gainage)"}.</p>
-            <button type="button" class="btn" data-gact="gen" ${ui.lib ? "" : "disabled"}>${icon("zap")}Composer un programme sur mesure</button>`
-          : gen.length ? `<div class="g-model">
-              <div class="g-mtop"><strong>${esc(titreSM)}</strong><span class="badge">niveau ${p.niveau}</span></div>
-              <ol class="g-genlist">${gen.map(e => `<li>${exerciseImage(e) ? `<img src="${esc(exerciseImage(e))}" alt="" loading="lazy">` : ""}<span>${esc(e.nom)}<small>${esc((e.types || []).slice(0, 2).join(", "))}</small></span></li>`).join("")}</ol>
-              <div class="g-actions" style="margin-top:10px">
+          ${!ui.modeles ? `<p class="g-hint">${icon("clock")} Recherche des modèles et de la bibliothèque…</p>` : `
+          <div class="g-qt">Deux propositions<span class="g-multi">choisissez, puis ajustez dans l'éditeur</span></div>
+          <div class="g-duo">
+            <div class="g-pick">
+              <div class="g-tag">${icon("layers")}Modèle existant${proche ? ` <span class="g-multi">le plus proche pour la région</span>` : ""}</div>
+              ${best ? carte(best, 0, "p") : `<div class="g-model"><p class="g-hint" style="margin:0">Pas de modèle ${lieu === "HEP" ? "maison" : "cabinet"} pour cette région. Le programme sur mesure est à côté.</p></div>`}
+            </div>
+            <div class="g-pick">
+              <div class="g-tag">${icon("sparkle")}Sur mesure</div>
+              ${gen && gen.length ? `<div class="g-model">
+                <div class="g-mtop"><strong>${esc(titreSM)}</strong><span class="badge">niveau ${p.niveau}</span></div>
+                <ol class="g-genlist">${gen.map(e => `<li>${exerciseImage(e) ? `<img src="${esc(exerciseImage(e))}" alt="" loading="lazy">` : ""}<span>${esc(e.nom)}<small>${esc((e.types || []).slice(0, 2).join(", "))}</small></span></li>`).join("")}</ol>
                 <button type="button" class="btn" data-gact="gen">${icon("repeat")}Autre proposition</button>
                 <button type="button" class="btn primary" data-gact="genuse">${icon("check")}Utiliser ce programme</button>
-              </div>
-              <p class="g-hint" style="margin:8px 0 0">Vous pourrez retirer, ajouter ou doser chaque exercice dans l'éditeur avant l'envoi.</p>
-            </div>`
-          : `<p class="g-hint">Pas assez d'exercices trouvés dans la bibliothèque pour cette zone.</p><button type="button" class="btn" data-gact="gen">${icon("repeat")}Réessayer</button>`}
+              </div>`
+              : ui.lib ? `<div class="g-model"><p class="g-hint" style="margin:0">Pas assez d'exercices trouvés dans la bibliothèque pour cette zone.</p><button type="button" class="btn" data-gact="gen">${icon("repeat")}Réessayer</button></div>`
+              : `<div class="g-model"><p class="g-hint" style="margin:0">${icon("clock")} Composition…</p></div>`}
+            </div>
+          </div>
+          <p class="g-hint" style="margin-top:10px">Les deux s'ouvrent dans l'éditeur avec ce patient : vous retirez, ajoutez ou dosez chaque exercice avant l'envoi.</p>
+          ${reste.length ? `<details class="g-more"><summary>Autres modèles (${reste.length})</summary><div class="g-models">${reste.map((g, i) => carte(g, i, "a")).join("")}</div></details>` : ""}`}
         </section>
 
         <div class="g-actions">

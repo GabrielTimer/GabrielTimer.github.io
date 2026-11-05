@@ -155,6 +155,13 @@
   @media (max-width:520px){ .g-foot .btn{ min-width:0; flex:1; } .g-count{ display:none; } .g-ynb button{ min-width:60px; } }
 
   /* Traitement */
+  .g-duo{ display:grid; gap:14px; }
+  @media (min-width:760px){ .g-duo{ grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; } }
+  .g-pick{ display:flex; flex-direction:column; gap:8px; }
+  .g-tag{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-weight:800; color:var(--lagon-strong); }
+  .g-tag svg{ width:20px; height:20px; }
+  .g-pick .g-model{ flex:1; }
+  .g-pick .g-model .btn{ min-height:52px; }
   .g-auto{ display:inline-block; margin-left:8px; padding:1px 7px; border-radius:999px; font-size:.72rem; font-weight:800; background:var(--soleil); color:var(--on-soleil); vertical-align:middle; }
   .g-chip[aria-pressed="true"] .g-auto{ background:rgba(255,255,255,.25); color:inherit; }
   .g-axes .g-chip{ flex:1 1 280px; }
