@@ -31,7 +31,7 @@
 *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
 html,body{ height:100%; }
 body{
-  min-height:100dvh; overflow:hidden;
+  min-height:var(--app-h,100dvh); overflow:hidden;
   background:var(--night); color:var(--text);
   font-family:var(--font); font-weight:300;
   -webkit-font-smoothing:antialiased;
@@ -56,8 +56,8 @@ button:focus-visible{ outline:2px solid var(--mist); outline-offset:3px; border-
 @keyframes twinkle{ 50%{ opacity:var(--o,.5); } }
 
 /* ===== Structure ===== */
-.app{ position:relative; z-index:1; height:100dvh; display:grid; grid-template-rows:auto 1fr auto; grid-template-columns:minmax(0,1fr);
-  padding:max(14px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left)); }
+.app{ position:relative; z-index:1; height:var(--app-h,100dvh); display:grid; grid-template-rows:auto 1fr auto; grid-template-columns:minmax(0,1fr);
+  padding:max(14px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(28px,calc(env(safe-area-inset-bottom) + 14px)) max(18px,env(safe-area-inset-left)); }
 .top{ display:flex; align-items:center; gap:10px; min-height:48px; transition:opacity .8s; }
 .top .title{ flex:1; text-align:center; font-weight:400; letter-spacing:.14em; font-size:.82rem; color:var(--faint); text-transform:lowercase; }
 .icon{ width:46px; height:46px; display:grid; place-items:center; border-radius:50%; color:var(--soft); transition:background .3s,color .3s; }
@@ -281,6 +281,17 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
 
 <script>
 (() => {
+/* Hauteur réellement visible : sur certains Android (appli installée),
+   100dvh compte aussi la barre de navigation et le bouton « Commencer » passe dessous. */
+function fitHeight(){
+  const vv = window.visualViewport;
+  const h = Math.min(window.innerHeight || 1e9, vv ? vv.height : 1e9, document.documentElement.clientHeight || 1e9);
+  if(h > 200 && h < 1e9) document.documentElement.style.setProperty("--app-h", Math.round(h) + "px");
+}
+fitHeight();
+addEventListener("resize", fitHeight);
+addEventListener("orientationchange", () => setTimeout(fitHeight, 300));
+if(window.visualViewport) visualViewport.addEventListener("resize", fitHeight);
 /* =========================================================
    Réglages et préférences
    ========================================================= */
