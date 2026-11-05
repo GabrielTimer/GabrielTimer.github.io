@@ -128,6 +128,13 @@ body.running .column{ height:min(70dvh,640px); }
 .row > :first-child{ margin-left:auto; }
 .row > :last-child{ margin-right:auto; }
 .row::-webkit-scrollbar{ display:none; }
+/* Les quatre rythmes tiennent toujours sur une ligne, sans glisser */
+#modes{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; overflow:visible; }
+#modes > :first-child, #modes > :last-child{ margin:0; }
+#modes .pill{ min-width:0; padding:8px 3px; font-size:clamp(.74rem,3.6vw,1rem); text-align:center; }
+#modes .pill .nm{ display:block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#modes .pill .nm-s{ display:none; }
+@media (max-width:480px){ #modes .pill .nm-l{ display:none; } #modes .pill .nm-s{ display:block; } }
 .label{ font-size:.78rem; letter-spacing:.14em; color:var(--faint); text-align:center; text-transform:lowercase; }
 .pill{ flex:0 0 auto; min-height:44px; padding:8px 16px; border-radius:999px; background:var(--glass); border:1px solid var(--glass-line); color:var(--soft); font-weight:400; display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1.15; transition:background .35s,color .35s,border-color .35s; }
 .pill small{ font-size:.72rem; color:var(--faint); letter-spacing:.06em; }
@@ -279,7 +286,7 @@ const MODES = {
   beginner:{ name:"Débuter",    inhale:3, hold:0, exhale:5 },
   balance: { name:"Équilibrer", inhale:5, hold:0, exhale:5 },
   calm:    { name:"Apaiser",    inhale:4, hold:0, exhale:8 },
-  custom:  { name:"Personnalisé", inhale:4, hold:0, exhale:6 }
+  custom:  { name:"Personnalisé", short:"Perso", inhale:4, hold:0, exhale:6 }
 };
 const DURATIONS = [2, 3, 5, 10, 15, 20];
 const ls = {
@@ -592,7 +599,7 @@ $("back").onclick = () => {
    ========================================================= */
 function renderModes(){
   $("modes").innerHTML = Object.entries(MODES).map(([k, m]) => `
-    <button class="pill" type="button" data-mode="${k}" aria-pressed="${k === mode}">${m.name}<small>${m.inhale}${m.hold ? " · " + m.hold : ""} · ${m.exhale}</small></button>`).join("");
+    <button class="pill" type="button" data-mode="${k}" aria-pressed="${k === mode}" title="${m.name}">${m.short ? `<span class="nm nm-l">${m.name}</span><span class="nm nm-s">${m.short}</span>` : `<span class="nm">${m.name}</span>`}<small>${m.inhale}${m.hold ? " · " + m.hold : ""} · ${m.exhale}</small></button>`).join("");
   $("modes").querySelectorAll("[data-mode]").forEach(b => b.onclick = () => {
     mode = b.dataset.mode; renderModes();
     if(mode === "custom") openSettings();
