@@ -15,6 +15,11 @@ const ua = navigator.userAgent || "";
 export const estIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 export const estAndroid = /android/i.test(ua);
 export const estInstallee = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+export const estSamsung = /SamsungBrowser/i.test(ua);
+/* Android 8 et plus ancien + Chrome : l'application installée par Chrome peut s'arrêter au lancement
+   (constaté sur Galaxy Tab, Chrome 138). Samsung Internet ou Firefox installent sans souci. */
+const versionAndroid = Number((/Android (\d+)/i.exec(ua) || [])[1]) || 0;
+export const ancienAndroidChrome = estAndroid && versionAndroid > 0 && versionAndroid <= 8 && !estSamsung && /Chrome\//.test(ua) && !/Firefox/i.test(ua);
 // Navigateurs intégrés aux applis (on ne peut pas installer depuis ceux-là)
 const integre = /FBAN|FBAV|FB_IAB|Instagram|Line\/|WhatsApp|Snapchat|Messenger|LinkedInApp|GSA\/|; wv\)/i.test(ua);
 
@@ -56,7 +61,17 @@ function etapesIOS(){
 `;
 }
 
+function etapesSamsung(){
+  return `<ol class="inst-steps">
+    <li><span class="inst-n">1</span><span>Touchez le menu <strong>☰</strong> en bas à droite de Samsung Internet.</span></li>
+    <li><span class="inst-n">2</span><span>Choisissez <strong>Ajouter la page à</strong>, puis <strong>Écran d'accueil</strong>.</span></li>
+    <li><span class="inst-n">3</span><span>Confirmez. L'icône ApiKiné apparaît sur votre écran.</span></li>
+  </ol>`;
+}
+const noteAncienAndroid = () => `<div class="notice warn" style="margin-top:10px">${icon("info")}<span>Sur cet appareil (Android ${versionAndroid}), l'application installée avec Chrome peut refuser de s'ouvrir. Dans ce cas, ouvrez ce lien avec <strong>Samsung Internet</strong> (icône violette) ou <strong>Firefox</strong>, puis ajoutez-le à l'écran d'accueil depuis leur menu.</span></div>`;
+
 function etapesAndroidMenu(){
+  if(estSamsung) return etapesSamsung();
   return `<ol class="inst-steps">
     <li><span class="inst-n">1</span><span>Touchez le menu <strong>⋮</strong> en haut à droite du navigateur.</span></li>
     <li><span class="inst-n">2</span><span>Choisissez <strong>Installer l'application</strong> ou <strong>Ajouter à l'écran d'accueil</strong>.</span></li>
@@ -95,10 +110,10 @@ export function ouvrirInstallation(cle){
     body = `${intro}${etapesIOS()}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary" type="button" data-close>J'ai compris</button>`;
   }else if(invite){
-    body = `${intro}<p>Un seul appui suffit.</p>`;
+    body = `${intro}<p>Un seul appui suffit.</p>${ancienAndroidChrome ? noteAncienAndroid() : ""}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary big" type="button" id="inst-go">${icon("download")}Installer</button>`;
   }else{
-    body = `${intro}${etapesAndroidMenu()}`;
+    body = `${intro}${etapesAndroidMenu()}${ancienAndroidChrome ? noteAncienAndroid() : ""}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary" type="button" data-close>J'ai compris</button>`;
   }
   const s = openSheet({ title:"Installer l'application", body, foot, onClose: () => s?.el?.querySelector(".inst-arrow")?.remove() });
