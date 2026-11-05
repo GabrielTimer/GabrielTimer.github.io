@@ -239,15 +239,16 @@ async function kineView(param){
             const box = M.buildInbox({ patients:[patient], messages, seances });
             const nonLus = box.filter(i => !i.lu);
             const feed = [
-              ...messages.map(m => ({ date:m.date || 0, msg:m, lu: !!m.lu })),
+              ...messages.map(m => ({ date:m.date || 0, msg:m, lu: m.de === "kine" || !!m.lu })),
               ...valides.filter(s => s.commentaire || s.ressenti).map(s => ({ date:s.dateValidation, s, lu: !box.some(i => i.kind === "commentaire" && i.id === s.id && !i.lu) }))
             ].sort((a, b) => b.date - a.date).slice(0, 8);
             return `<div class="panel-head" style="flex-wrap:wrap"><h2 style="font-size:var(--fs-lg)">Messages et ressentis</h2>
+              <button class="btn sm" type="button" id="msg-ecrire">${icon("send")}Écrire</button>
               <a class="btn sm ghost" href="/messages.html?patient=${encodeURIComponent(patient.cle)}">Tout voir</a>
               ${nonLus.length ? `<div class="row wrap" style="--gap:8px;width:100%"><span class="badge danger">${nonLus.length} non lu${nonLus.length > 1 ? "s" : ""}</span><button class="btn sm" type="button" id="msg-lu">${icon("check")}Marquer comme lu</button></div>` : ""}</div>
             ${feed.length ? `<div class="msg-list">${feed.map(f => f.msg ? `
-              <div class="${f.lu ? "" : "is-new"}">
-                <div class="m-meta">${icon(M.TYPE_ICON[f.msg.type] || "mail", "ic-inline")} ${esc(fmtShortDate(f.msg.date))}, ${esc(M.TYPE_LABEL[f.msg.type] || "Message")}${f.msg.sujet ? ` : ${esc(f.msg.sujet)}` : ""}${f.lu ? "" : ` <span class="badge danger">Nouveau</span>`}</div>
+              <div class="${f.lu || f.msg.de === "kine" ? "" : "is-new"}">
+                <div class="m-meta">${icon(f.msg.de === "kine" ? "send" : M.TYPE_ICON[f.msg.type] || "mail", "ic-inline")} ${esc(fmtShortDate(f.msg.date))}, ${f.msg.de === "kine" ? `Votre message${f.msg.lu ? " (lu)" : ""}` : esc(M.TYPE_LABEL[f.msg.type] || "Message")}${f.msg.sujet ? ` : ${esc(f.msg.sujet)}` : ""}${f.lu ? "" : ` <span class="badge danger">Nouveau</span>`}</div>
                 <div class="quote pre">${esc(f.msg.texte)}</div>
               </div>` : `
               <div class="${f.lu ? "" : "is-new"}">
@@ -289,6 +290,7 @@ async function kineView(param){
     $("#acces").onclick = () => UI.accessSheet(patient);
     $("#apercu").onclick = () => window.open(`/index.html?apercu=${patient.cle}`, "_blank");
     $("#edit").onclick = editPatient;
+    $("#msg-ecrire")?.addEventListener("click", () => M.ecrireAuPatient(C, patient, { onSent: m => { messages.unshift(m); render(); } }));
     $("#msg-lu")?.addEventListener("click", async e => {
       e.currentTarget.disabled = true;
       const box = M.buildInbox({ patients:[patient], messages, seances }).filter(i => !i.lu);

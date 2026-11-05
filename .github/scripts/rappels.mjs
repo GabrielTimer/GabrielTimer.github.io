@@ -45,6 +45,26 @@ console.log(`Paris : ${today}, ${hour} h ${String(minute).padStart(2, "0")}.`);
 if(process.env.SEULEMENT_CLES === "1"){ console.log("Clés vérifiées, pas d'envoi."); process.exit(0); }
 if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0); }
 
+/* ---------- Messages du kiné : notification au patient ---------- */
+{
+  const msgs = (await db.collectionGroup("messages").get()).docs
+    .filter(d => { const m = d.data(); return m.de === "kine" && !m.notifie && !m.lu && Date.now() - (m.date || 0) < 3 * 864e5; });
+  let n = 0;
+  for(const d of msgs){
+    const pref = d.ref.parent.parent;
+    const subs = await pref.collection("rappels").get();
+    for(const sd of subs.docs){
+      const r = sd.data();
+      if(!r.actif || !r.endpoint) continue;
+      const payload = { title: "Message de votre kiné", body: String(d.data().texte || "").slice(0, 120), url: "/index.html", tag: `msg-${d.id}` };
+      try{ await webpush.sendNotification({ endpoint: r.endpoint, keys: { p256dh: r.p256dh, auth: r.auth } }, JSON.stringify(payload), { TTL: 24 * 3600 }); n++; }
+      catch(e){ if(e.statusCode === 404 || e.statusCode === 410) await sd.ref.delete(); }
+    }
+    await d.ref.update({ notifie: true });
+  }
+  if(msgs.length) console.log(`::notice::${msgs.length} message(s) du kiné, ${n} notification(s) envoyée(s).`);
+}
+
 /* ---------- Envoi ---------- */
 const subs = await db.collectionGroup("rappels").get();
 const seancesCache = new Map();

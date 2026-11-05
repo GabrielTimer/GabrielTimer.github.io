@@ -55,7 +55,10 @@ service cloud.firestore {
       match /messages/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
         allow create: if isKine() || isMessage();
-        allow update, delete: if isKine();
+        allow delete: if isKine();
+        // Le patient peut seulement marquer comme lu un message reçu de son kiné
+        allow update: if isKine() || (resource.data.de == "kine"
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["lu"]));
       }
 
       // Rappels de séance : abonnement aux notifications du téléphone du patient

@@ -84,6 +84,8 @@ function visible(){
 function replyLinks(i){
   const p = i.patient;
   const out = [];
+  if(i.kind === "envoye") return `<span class="small muted">${i.luPatient ? `${icon("check")} Lu par le patient` : "Pas encore lu"}</span>`;
+  out.push(`<button class="btn sm primary" type="button" data-reply>${icon("send")}Répondre dans l'application</button>`);
   const sujet = i.kind === "message" && i.sujet ? `Re: ${i.sujet}` : "Votre message";
   if(p.email) out.push(`<a class="btn sm" href="mailto:${esc(p.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(`Bonjour,\n\n\n\n${KINE.nom}`)}">${icon("reply")}Répondre par e-mail</a>`);
   if(p.telephone) out.push(`<a class="btn sm" href="sms:${esc(String(p.telephone).replace(/[^\d+]/g, ""))}">${icon("message")}SMS</a>`);
@@ -108,10 +110,10 @@ function itemHTML(i){
       <div class="mb-text ${long && !open.has(i.key) ? "clamp" : ""}">${esc(i.texte)}</div>
       ${long ? `<button class="mb-more" type="button" data-more>${open.has(i.key) ? "Réduire" : "Lire la suite"}</button>` : ""}
       <div class="mb-act">
-        <button class="btn sm ${i.lu ? "ghost" : "primary"}" type="button" data-lu>${icon(i.lu ? "circle" : "check")}${i.lu ? "Marquer non lu" : "Marquer comme lu"}</button>
+        ${i.kind === "envoye" ? "" : `<button class="btn sm ${i.lu ? "ghost" : ""}" type="button" data-lu>${icon(i.lu ? "circle" : "check")}${i.lu ? "Marquer non lu" : "Marquer comme lu"}</button>`}
         ${replyLinks(i)}
         <a class="btn sm ghost" href="/cloud.html?patient=${encodeURIComponent(i.cle)}">${icon("user")}Fiche</a>
-        ${i.kind === "message" ? `<button class="icon-btn sm danger" type="button" data-del aria-label="Supprimer ce message">${icon("trash")}</button>` : ""}
+        ${i.kind === "message" || i.kind === "envoye" ? `<button class="icon-btn sm danger" type="button" data-del aria-label="Supprimer ce message">${icon("trash")}</button>` : ""}
       </div>
     </div>
   </article>`;
@@ -138,7 +140,7 @@ function render(){
         <button class="chip" type="button" data-vue="tous" aria-pressed="${state.vue === "tous"}">Tous <span class="count">${counts.tous}</span></button>
       </div>
       <div class="chips" role="group" aria-label="Type">
-        ${[["tous", "Tout type"], ["message", "Messages"], ["bilan", "Bilans"], ["commentaire", "Commentaires"]].map(([k, l]) => `<button class="chip" type="button" data-type="${k}" aria-pressed="${state.type === k}">${l}${k !== "tous" ? ` <span class="count">${counts[k] || 0}</span>` : ""}</button>`).join("")}
+        ${[["tous", "Tout type"], ["message", "Messages"], ["bilan", "Bilans"], ["commentaire", "Commentaires"], ["envoye", "Envoyés"]].map(([k, l]) => `<button class="chip" type="button" data-type="${k}" aria-pressed="${state.type === k}">${l}${k !== "tous" ? ` <span class="count">${counts[k] || 0}</span>` : ""}</button>`).join("")}
       </div>
       <label class="input-icon">${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient, un mot…" value="${esc(state.q)}" aria-label="Rechercher"></label>
     </div>
@@ -170,10 +172,14 @@ function bind(){
   $$(".mb-item").forEach(el => {
     const i = items.find(x => x.key === el.dataset.key);
     el.querySelector("[data-more]")?.addEventListener("click", () => { open.has(i.key) ? open.delete(i.key) : open.add(i.key); render(); });
-    el.querySelector("[data-lu]").onclick = async () => {
+    if(el.querySelector("[data-lu]")) el.querySelector("[data-lu]").onclick = async () => {
       try{ await M.setRead(C, i, !i.lu); M.setUnreadCache(items.filter(x => !x.lu).length); render(); }
       catch(err){ toast("Impossible pour le moment. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
     };
+    el.querySelector("[data-reply]")?.addEventListener("click", () => M.ecrireAuPatient(C, i.patient, {
+      sujet: i.kind === "message" && i.sujet ? `Re: ${i.sujet}` : i.kind === "commentaire" ? `Votre séance « ${i.sujet} »` : "",
+      onSent: m => { items = M.buildInbox({ patients:[i.patient], messages:[m], seances:[] }).concat(items).sort((a, b) => b.date - a.date); if(!i.lu) M.setRead(C, i, true).catch(() => {}); render(); }
+    }));
     el.querySelector("[data-del]")?.addEventListener("click", async () => {
       const ok = await confirmDialog({ title:"Supprimer ce message ?", message:"Il sera retiré de l'application. L'e-mail éventuellement reçu n'est pas touché.", confirm:"Supprimer", danger:true });
       if(!ok) return;

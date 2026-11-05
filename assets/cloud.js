@@ -480,9 +480,10 @@ export async function deleteSuivi(cle, id){
 /* ---------- Messages du patient (copie dans ApiKiné) ----------
    patients/{code}/messages/{id} : { type:"message"|"bilan", sujet, texte, date, lu } */
 
-export async function addMessage(cle, { type = "message", sujet = "", texte = "" }){
+export async function addMessage(cle, { type = "message", sujet = "", texte = "", de = null }){
   const id = newId();
-  await setDoc(doc(db, "patients", cle, "messages", id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false }));
+  /* de: "kine" → message du kiné au patient (lu = lu par le patient) ; sinon message du patient */
+  await setDoc(doc(db, "patients", cle, "messages", id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false, ...(de === "kine" ? { de:"kine" } : {}) }));
   return id;
 }
 

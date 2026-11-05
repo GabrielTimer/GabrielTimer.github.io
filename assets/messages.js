@@ -27,9 +27,11 @@ export function buildInbox({ patients = [], messages = [], seances = [] }){
   const items = [];
   messages.forEach(m => {
     if(!known.has(m.cle)) return;
+    const kine = m.de === "kine";
     items.push({
-      kind: "message", key: `m:${m.cle}:${m.id}`, id: m.id, cle: m.cle, patient: known.get(m.cle),
-      type: m.type || "message", date: m.date || 0, sujet: m.sujet || "", texte: m.texte || "", lu: !!m.lu
+      kind: kine ? "envoye" : "message", key: `m:${m.cle}:${m.id}`, id: m.id, cle: m.cle, patient: known.get(m.cle),
+      type: kine ? "envoye" : m.type || "message", date: m.date || 0, sujet: m.sujet || "", texte: m.texte || "",
+      lu: kine ? true : !!m.lu, luPatient: kine ? !!m.lu : null
     });
   });
   seances.forEach(s => {
@@ -99,5 +101,30 @@ export async function refreshUnread({ force = false } = {}){
   }catch(e){ return 0; }
 }
 
-export const TYPE_LABEL = { message: "Message", bilan: "Bilan de programme", commentaire: "Commentaire de séance" };
-export const TYPE_ICON = { message: "mail", bilan: "chart", commentaire: "message" };
+export const TYPE_LABEL = { message: "Message", bilan: "Bilan de programme", commentaire: "Commentaire de séance", envoye: "Votre message" };
+export const TYPE_ICON = { message: "mail", bilan: "chart", commentaire: "message", envoye: "send" };
+
+/** Fenêtre « Écrire au patient » (kiné) : message gardé dans ApiKiné, notifié sur le téléphone du patient. */
+export async function ecrireAuPatient(C, patient, { sujet = "", onSent = null } = {}){
+  const { openSheet, toast, esc, icon } = await import("./app.js");
+  const s = openSheet({
+    title: `Message à ${patient.nom || "votre patient"}`,
+    body: `<form id="wp" class="stack" style="--gap:12px">
+      <div class="field"><label for="wp-t">Message</label><textarea class="textarea" id="wp-t" rows="6" maxlength="5000" required placeholder="Bonjour…"></textarea></div>
+      <p class="small muted">Le patient le lit dans l'application (accueil) et reçoit une notification s'il a activé les rappels. Pas d'information médicale sensible : préférez la séance ou une messagerie de santé sécurisée.</p>
+    </form>`,
+    foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="wp">${icon("send")}Envoyer</button>`
+  });
+  setTimeout(() => s.el.querySelector("#wp-t").focus(), 30);
+  s.el.querySelector("#wp").addEventListener("submit", async e => {
+    e.preventDefault();
+    const texte = s.el.querySelector("#wp-t").value.trim();
+    if(!texte) return;
+    const btn = s.el.querySelector("[type=submit]"); btn.disabled = true;
+    try{
+      const id = await C.addMessage(patient.cle, { texte, sujet, de:"kine" });
+      s.close(); toast("Message envoyé.", { type:"ok" });
+      onSent?.({ id, cle: patient.cle, texte, sujet, de:"kine", date: Date.now(), lu:false, type:"message" });
+    }catch(err){ btn.disabled = false; toast("Envoi impossible. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
+  });
+}

@@ -256,6 +256,7 @@ async function renderPatient(ctx){
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(patient.nom))}</h1></div>
     <div id="inst-slot"></div>
     <div id="annonce"></div>
+    <div id="msg-kine"></div>
     ${futures && !ctx.apercu && !store.get("gt_rappel_vu", 0) && !(store.get("gt_rappel", null) || {}).actif && "serviceWorker" in navigator ? `
     <div class="notice" id="rp-invite" style="margin-bottom:16px;align-items:center;flex-wrap:wrap">${icon("bell")}<span style="flex:1 1 180px">Recevoir un rappel sur ce téléphone le jour de vos séances ?</span>
       <span style="display:flex;gap:8px"><a class="btn sm primary" href="/reglages.html#rappels">Activer</a><button class="btn sm" type="button" id="rp-later">Non merci</button></span></div>` : ""}
@@ -283,6 +284,7 @@ async function renderPatient(ctx){
     <footer class="app-foot">${appMarkHTML()}</footer>`;
   showAnnonce();
   loadSettings({ force:true }).then(showAnnonce);
+  if(!ctx.apercu) messagesDuKine(ctx, patient).catch(e => console.warn("Messages :", e));
   homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
@@ -422,4 +424,33 @@ async function homeSuivi(ctx, patient, seances, actif){
       <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
       <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
+}
+
+
+/* ---------- Messages du kiné au patient ---------- */
+async function messagesDuKine(ctx, patient){
+  const box = document.getElementById("msg-kine"); if(!box) return;
+  const C = await import("../cloud.js");
+  const all = await C.listMessages(ctx.cle);
+  const recus = all.filter(m => m.de === "kine");
+  if(!recus.length) return;
+  const nonLus = recus.filter(m => !m.lu);
+  const dernier = recus[0];
+  box.innerHTML = `<button class="notice ${nonLus.length ? "" : "soft"}" type="button" id="mk-open" style="width:100%;text-align:left;margin-bottom:16px;cursor:pointer;border:0;font:inherit;color:inherit">
+    ${icon("mail")}<span style="flex:1"><strong>${nonLus.length ? (nonLus.length > 1 ? `${nonLus.length} nouveaux messages de votre kiné` : "Nouveau message de votre kiné") : "Messages de votre kiné"}</strong><br><span class="small">${esc(String(dernier.texte).slice(0, 90))}${String(dernier.texte).length > 90 ? "…" : ""}</span></span>${icon("chevron")}</button>`;
+  document.getElementById("mk-open").onclick = async () => {
+    const { openSheet } = await import("../app.js");
+    const fil = all.filter(m => m.de === "kine" || m.type === "message").slice().sort((a, b) => (a.date || 0) - (b.date || 0)).slice(-20);
+    const s = openSheet({
+      title: "Messages avec votre kiné",
+      body: `<div class="stack" style="--gap:10px">${fil.map(m => `<div style="max-width:88%;${m.de === "kine" ? "" : "margin-left:auto;"}padding:10px 12px;border-radius:var(--r-md);background:${m.de === "kine" ? "var(--surface-2)" : "var(--lagon-soft, var(--surface-2))"}">
+        <div class="small muted">${m.de === "kine" ? "Votre kiné" : "Vous"} · ${esc(new Date(m.date).toLocaleDateString("fr-FR", { day:"numeric", month:"short" }))}</div>
+        <div style="white-space:pre-wrap">${esc(m.texte)}</div></div>`).join("")}</div>`,
+      foot: `<button class="btn" type="button" data-close>Fermer</button><button class="btn primary" type="button" id="mk-rep">${icon("send")}Répondre</button>`
+    });
+    s.el.querySelector("#mk-rep").onclick = async () => { s.close(); const P = await import("../patient.js"); P.writeToKine({ cle: ctx.cle, apercu: ctx.apercu, patientNom: patient.nom, sujet: dernier.sujet ? `Re: ${dernier.sujet.replace(/^Re: /, "")}` : "" }); };
+    await Promise.all(nonLus.map(m => C.setMessageLu(ctx.cle, m.id, true).catch(() => {})));
+    nonLus.forEach(m => m.lu = true);
+    box.querySelector(".notice")?.classList.add("soft");
+  };
 }

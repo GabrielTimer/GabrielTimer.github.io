@@ -754,3 +754,4 @@ a.chip{ text-decoration:none; }
 .lib-zones-lbl{ font-size:var(--fs-xs); font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.04em; }
 .lib-tools .select.on{ border-color:var(--lagon); background-color:var(--lagon-soft); color:var(--lagon-strong); font-weight:700; }
 .mo-tools .select.on{ border-color:var(--lagon); background-color:var(--lagon-soft); color:var(--lagon-strong); font-weight:700; }
+.notice.soft{ background:var(--surface-2); }
