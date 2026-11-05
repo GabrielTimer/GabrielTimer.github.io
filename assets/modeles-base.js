@@ -14907,5 +14907,293 @@ export const MODELES_BASE = [
 "conseil_kine": ""
 }
 ]
+},
+{
+"id": "base_entorse_de_cheville_3_maison",
+"nom": "Entorse de cheville",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Cheville et pied",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "698",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
+"consignes": [
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
+],
+"position": "Debout sur une jambe, une chaise devant vous",
+"precautions": [
+"Evitez les mouvements brusques."
+],
+"materiel": [
+"Chaise"
+],
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
+"ex": 40,
+"repos": 15,
+"reps": 2
+},
+{
+"id": "704",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts sur place légers",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
+"conseil": "Debout, pieds écartés de la largeur du bassin.<br>Faites de petits sauts sur place, sur l'avant des pieds.<br>Amortissez chaque réception en gardant les genoux souples.<br>Restez léger et silencieux sur vos appuis.",
+"consignes": [
+"Debout, pieds écartés de la largeur du bassin.",
+"Faites de petits sauts sur place, sur l'avant des pieds.",
+"Amortissez chaque réception en gardant les genoux souples.",
+"Restez léger et silencieux sur vos appuis."
+],
+"position": "Debout, pieds écartés de la largeur du bassin, genoux légèrement fléchis.",
+"precautions": [
+"Commencez par des séries courtes. Pas de douleur au-delà de 3/10 pendant ou le lendemain."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3
+},
+{
+"id": "705",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts latéraux sur une jambe",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
+"conseil": "Debout sur une jambe, genou légèrement fléchi.<br>Sautez de côté sur la même jambe, puis revenez.<br>Amortissez chaque réception et stabilisez-vous une seconde.<br>Gardez le genou bien aligné au-dessus du pied.",
+"consignes": [
+"Debout sur une jambe, genou légèrement fléchi.",
+"Sautez de côté sur la même jambe, puis revenez.",
+"Amortissez chaque réception et stabilisez-vous une seconde.",
+"Gardez le genou bien aligné au-dessus du pied."
+],
+"position": "Debout sur une jambe, l'autre pied décollé du sol, près d'un mur ou d'une chaise si besoin.",
+"precautions": [
+"Seulement si les sauts sur deux pieds sont faciles et sans douleur. Le genou ne doit pas rentrer vers l'intérieur."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3
+},
+{
+"id": "706",
+"source": "HEP",
+"type": "timer",
+"nom": "Réceptions sur une jambe",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
+"conseil": "Debout sur deux pieds.<br>Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.<br>Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.<br>Tenez la position stable 2 secondes, puis recommencez.",
+"consignes": [
+"Debout sur deux pieds.",
+"Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.",
+"Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.",
+"Tenez la position stable 2 secondes, puis recommencez."
+],
+"position": "Debout, pieds joints, avec un repère au sol devant vous.",
+"precautions": [
+"Réception silencieuse et contrôlée. Arrêtez si le genou part vers l'intérieur ou si la douleur dépasse 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 40,
+"repos": 30,
+"reps": 3
+},
+{
+"id": "709",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe en lançant une balle",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"conseil": "Tenez-vous sur une jambe, genou légèrement fléchi.<br>Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.<br>Gardez le bassin horizontal et le genou au-dessus du pied.",
+"consignes": [
+"Tenez-vous sur une jambe, genou légèrement fléchi.",
+"Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.",
+"Gardez le bassin horizontal et le genou au-dessus du pied."
+],
+"position": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+"precautions": [
+"Gardez un appui proche (chaise",
+"mur) au début."
+],
+"materiel": [
+"Balle"
+],
+"ex": 40,
+"repos": 20,
+"reps": 2
+}
+]
+},
+{
+"id": "base_ligamentoplastie_du_lca_4_maison",
+"nom": "Ligamentoplastie du LCA",
+"niveau": 4,
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "502",
+"source": "HEP",
+"type": "timer",
+"nom": "Fente adaptée",
+"image": "/exercises/images/HEP/modified-lunge.jpg",
+"conseil": "Un pied devant, un pied derrière, pointes vers l'avant.<br>Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le coussin, sans le poser.<br>Remontez doucement.",
+"consignes": [
+"Un pied devant, un pied derrière, pointes vers l'avant.",
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le coussin, sans le poser.",
+"Remontez doucement."
+],
+"position": "Debout, un coussin au sol sous le genou arrière",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/I777Cxy-znA",
+"ex": 40,
+"repos": 20,
+"reps": 3
+},
+{
+"id": "708",
+"source": "HEP",
+"type": "timer",
+"nom": "Pallof press avec élastique",
+"image": "/exercises/images/post-partum/pallof-press.webp",
+"conseil": "Attachez l'élastique à hauteur de poitrine (poignée de porte fermée).<br>Placez-vous de profil, mains jointes contre la poitrine.<br>Poussez les mains droit devant vous sans laisser le tronc tourner.<br>Tenez 2 secondes, puis ramenez lentement les mains.",
+"consignes": [
+"Attachez l'élastique à hauteur de poitrine (poignée de porte fermée).",
+"Placez-vous de profil, mains jointes contre la poitrine.",
+"Poussez les mains droit devant vous sans laisser le tronc tourner.",
+"Tenez 2 secondes, puis ramenez lentement les mains."
+],
+"position": "Debout de profil par rapport au point d'attache, pieds écartés, genoux légèrement fléchis.",
+"precautions": [
+"Le tronc ne doit pas tourner. Faites les deux côtés."
+],
+"materiel": [
+"Élastique"
+],
+"ex": 40,
+"repos": 20,
+"reps": 2
+},
+{
+"id": "709",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe en lançant une balle",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"conseil": "Tenez-vous sur une jambe, genou légèrement fléchi.<br>Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.<br>Gardez le bassin horizontal et le genou au-dessus du pied.",
+"consignes": [
+"Tenez-vous sur une jambe, genou légèrement fléchi.",
+"Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.",
+"Gardez le bassin horizontal et le genou au-dessus du pied."
+],
+"position": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+"precautions": [
+"Gardez un appui proche (chaise",
+"mur) au début."
+],
+"materiel": [
+"Balle"
+],
+"ex": 40,
+"repos": 20,
+"reps": 2
+},
+{
+"id": "706",
+"source": "HEP",
+"type": "timer",
+"nom": "Réceptions sur une jambe",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
+"conseil": "Debout sur deux pieds.<br>Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.<br>Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.<br>Tenez la position stable 2 secondes, puis recommencez.",
+"consignes": [
+"Debout sur deux pieds.",
+"Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.",
+"Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.",
+"Tenez la position stable 2 secondes, puis recommencez."
+],
+"position": "Debout, pieds joints, avec un repère au sol devant vous.",
+"precautions": [
+"Réception silencieuse et contrôlée. Arrêtez si le genou part vers l'intérieur ou si la douleur dépasse 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 40,
+"repos": 30,
+"reps": 3
+},
+{
+"id": "705",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts latéraux sur une jambe",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
+"conseil": "Debout sur une jambe, genou légèrement fléchi.<br>Sautez de côté sur la même jambe, puis revenez.<br>Amortissez chaque réception et stabilisez-vous une seconde.<br>Gardez le genou bien aligné au-dessus du pied.",
+"consignes": [
+"Debout sur une jambe, genou légèrement fléchi.",
+"Sautez de côté sur la même jambe, puis revenez.",
+"Amortissez chaque réception et stabilisez-vous une seconde.",
+"Gardez le genou bien aligné au-dessus du pied."
+],
+"position": "Debout sur une jambe, l'autre pied décollé du sol, près d'un mur ou d'une chaise si besoin.",
+"precautions": [
+"Seulement si les sauts sur deux pieds sont faciles et sans douleur. Le genou ne doit pas rentrer vers l'intérieur."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3
+},
+{
+"id": "707",
+"source": "HEP",
+"type": "timer",
+"nom": "Course avec changements de direction",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
+"conseil": "Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.<br>Courez de l'un à l'autre en changeant de direction à chaque repère.<br>Ralentissez avant chaque virage, posez bien le pied et repartez.<br>Commencez lentement, puis accélérez si tout va bien.",
+"consignes": [
+"Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.",
+"Courez de l'un à l'autre en changeant de direction à chaque repère.",
+"Ralentissez avant chaque virage, posez bien le pied et repartez.",
+"Commencez lentement, puis accélérez si tout va bien."
+],
+"position": "Dehors ou dans un grand espace dégagé, sol non glissant.",
+"precautions": [
+"Uniquement après une course en ligne droite sans douleur. Chaussures de sport",
+"sol sec."
+],
+"materiel": [
+"Repères au sol"
+],
+"ex": 60,
+"repos": 60,
+"reps": 3
+}
+]
 }
 ];

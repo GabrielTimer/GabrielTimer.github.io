@@ -167,6 +167,7 @@ function fromHep(x){
     materiel: toList(x.materiel),
     muscles: toList(x.muscles_principaux),
     tags: toList(x.tags_fr),
+    specialites: toList(x.specialites),
     conseil_posture: [], erreurs_frequentes: [], respiration: [], version_facile: [],
     version_avancee: (() => {
       const p = String(x.progression || "");

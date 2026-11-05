@@ -34813,5 +34813,332 @@
       "Bursite de l'épaule"
     ],
     "source": "HEP"
-  }
+  },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "704",
+        "nom": "Sauts sur place légers",
+        "nom_fr": "Sauts sur place légers",
+        "image": "/exercises/images/cheville/sauts-sur-place.webp",
+        "instructions_fr": "Debout, pieds écartés de la largeur du bassin.\nFaites de petits sauts sur place, sur l'avant des pieds.\nAmortissez chaque réception en gardant les genoux souples.\nRestez léger et silencieux sur vos appuis.",
+        "description_fr": "",
+        "description": "",
+        "tags": "sauts, pliométrie, reprise du sport, course, cheville, entorse, réception",
+        "tags_fr": "sauts, pliométrie, reprise du sport, course, cheville, entorse, réception",
+        "categorie": "cheville_pied",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Entorse de cheville",
+            "Tendinopathie d'Achille"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Entorse de cheville",
+            "Tendinopathie d'Achille"
+        ],
+        "objectifs": [
+            "Pliométrie",
+            "Renforcement"
+        ],
+        "materiel": "Aucun",
+        "exercise_mode": "renforcement",
+        "type_contraction": "dynamique",
+        "difficulte": 2,
+        "muscles_principaux": [
+            "Triceps sural",
+            "Quadriceps"
+        ],
+        "position_depart": "Debout, pieds écartés de la largeur du bassin, genoux légèrement fléchis.",
+        "membre": "Jambes",
+        "bilateral": true,
+        "precautions": "Commencez par des séries courtes. Pas de douleur au-delà de 3/10 pendant ou le lendemain."
+    },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "705",
+        "nom": "Sauts latéraux sur une jambe",
+        "nom_fr": "Sauts latéraux sur une jambe",
+        "image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
+        "instructions_fr": "Debout sur une jambe, genou légèrement fléchi.\nSautez de côté sur la même jambe, puis revenez.\nAmortissez chaque réception et stabilisez-vous une seconde.\nGardez le genou bien aligné au-dessus du pied.",
+        "description_fr": "",
+        "description": "",
+        "tags": "sauts, unipodal, latéral, pliométrie, reprise du sport, LCA, cheville, réception, stabilité",
+        "tags_fr": "sauts, unipodal, latéral, pliométrie, reprise du sport, LCA, cheville, réception, stabilité",
+        "categorie": "cheville_pied",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Entorse de cheville",
+            "Ligament croisé (LCA)"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Entorse de cheville",
+            "Ligament croisé (LCA)"
+        ],
+        "objectifs": [
+            "Pliométrie",
+            "Proprioception"
+        ],
+        "materiel": "Aucun",
+        "exercise_mode": "renforcement",
+        "type_contraction": "dynamique",
+        "difficulte": 4,
+        "muscles_principaux": [
+            "Moyen fessier",
+            "Triceps sural",
+            "Quadriceps"
+        ],
+        "position_depart": "Debout sur une jambe, l'autre pied décollé du sol, près d'un mur ou d'une chaise si besoin.",
+        "membre": "Jambes",
+        "bilateral": false,
+        "precautions": "Seulement si les sauts sur deux pieds sont faciles et sans douleur. Le genou ne doit pas rentrer vers l'intérieur."
+    },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "706",
+        "nom": "Réceptions sur une jambe",
+        "nom_fr": "Réceptions sur une jambe",
+        "image": "/exercises/images/cheville/receptions-unipodales.webp",
+        "instructions_fr": "Debout sur deux pieds.\nFaites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.\nAmortissez en pliant la hanche et le genou, le genou au-dessus du pied.\nTenez la position stable 2 secondes, puis recommencez.",
+        "description_fr": "",
+        "description": "",
+        "tags": "réception, atterrissage, saut, unipodal, LCA, genou, reprise du sport, contrôle moteur",
+        "tags_fr": "réception, atterrissage, saut, unipodal, LCA, genou, reprise du sport, contrôle moteur",
+        "categorie": "genou",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "objectifs": [
+            "Pliométrie",
+            "Proprioception",
+            "Contrôle moteur"
+        ],
+        "materiel": "Aucun",
+        "exercise_mode": "renforcement",
+        "type_contraction": "dynamique",
+        "difficulte": 4,
+        "muscles_principaux": [
+            "Quadriceps",
+            "Moyen fessier",
+            "Ischio-jambiers"
+        ],
+        "position_depart": "Debout, pieds joints, avec un repère au sol devant vous.",
+        "membre": "Jambes",
+        "bilateral": false,
+        "precautions": "Réception silencieuse et contrôlée. Arrêtez si le genou part vers l'intérieur ou si la douleur dépasse 3/10."
+    },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "707",
+        "nom": "Course avec changements de direction",
+        "nom_fr": "Course avec changements de direction",
+        "image": "/exercises/images/cheville/course-changements-direction.webp",
+        "instructions_fr": "Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.\nCourez de l'un à l'autre en changeant de direction à chaque repère.\nRalentissez avant chaque virage, posez bien le pied et repartez.\nCommencez lentement, puis accélérez si tout va bien.",
+        "description_fr": "",
+        "description": "",
+        "tags": "course, agilité, changement de direction, appuis, reprise du sport, LCA, cheville, football",
+        "tags_fr": "course, agilité, changement de direction, appuis, reprise du sport, LCA, cheville, football",
+        "categorie": "corps_entier",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "objectifs": [
+            "Agilité",
+            "Cardio",
+            "Reprise du sport"
+        ],
+        "materiel": "Repères au sol",
+        "exercise_mode": "cardio",
+        "type_contraction": "dynamique",
+        "difficulte": 4,
+        "muscles_principaux": [
+            "Quadriceps",
+            "Fessiers",
+            "Triceps sural"
+        ],
+        "position_depart": "Dehors ou dans un grand espace dégagé, sol non glissant.",
+        "membre": "Jambes",
+        "bilateral": true,
+        "precautions": "Uniquement après une course en ligne droite sans douleur. Chaussures de sport, sol sec."
+    },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "708",
+        "nom": "Pallof press avec élastique",
+        "nom_fr": "Pallof press avec élastique",
+        "image": "/exercises/images/post-partum/pallof-press.webp",
+        "instructions_fr": "Attachez l'élastique à hauteur de poitrine (poignée de porte fermée).\nPlacez-vous de profil, mains jointes contre la poitrine.\nPoussez les mains droit devant vous sans laisser le tronc tourner.\nTenez 2 secondes, puis ramenez lentement les mains.",
+        "description_fr": "",
+        "description": "",
+        "tags": "gainage, anti-rotation, tronc, abdominaux, élastique, Pallof, reprise du sport, lombalgie",
+        "tags_fr": "gainage, anti-rotation, tronc, abdominaux, élastique, Pallof, reprise du sport, lombalgie",
+        "categorie": "dos",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Lombalgie"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Lombalgie"
+        ],
+        "objectifs": [
+            "Renforcement",
+            "Gainage"
+        ],
+        "materiel": "Élastique",
+        "exercise_mode": "renforcement",
+        "type_contraction": "dynamique",
+        "difficulte": 3,
+        "muscles_principaux": [
+            "Obliques",
+            "Transverse de l'abdomen"
+        ],
+        "position_depart": "Debout de profil par rapport au point d'attache, pieds écartés, genoux légèrement fléchis.",
+        "membre": "Tronc",
+        "bilateral": false,
+        "precautions": "Le tronc ne doit pas tourner. Faites les deux côtés."
+    },
+    {
+        "youtube": "",
+        "vimeo": "",
+        "progression": {
+            "principale": "",
+            "secondaire": "",
+            "tertiaire": ""
+        },
+        "muscles_secondaires": [],
+        "contre_indications": "Douleur vive, gonflement ou instabilité : arrêter et en parler à votre kiné.",
+        "confidence": 100,
+        "source": "HEP",
+        "specialites": [
+            "Sport"
+        ],
+        "id": "709",
+        "nom": "Équilibre sur une jambe en lançant une balle",
+        "nom_fr": "Équilibre sur une jambe en lançant une balle",
+        "image": "/exercises/images/genou/equilibre-balle-2.png",
+        "instructions_fr": "Tenez-vous sur une jambe, genou légèrement fléchi.\nLancez une balle contre un mur et rattrapez-la sans poser l'autre pied.\nGardez le bassin horizontal et le genou au-dessus du pied.",
+        "description_fr": "",
+        "description": "",
+        "tags": "équilibre, unipodal, balle, double tâche, proprioception, genou, cheville, reprise du sport",
+        "tags_fr": "équilibre, unipodal, balle, double tâche, proprioception, genou, cheville, reprise du sport",
+        "categorie": "genou",
+        "pathologies_principales": [
+            "Reprise du sport"
+        ],
+        "pathologies_secondaires": [
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "pathologies": [
+            "Reprise du sport",
+            "Ligament croisé (LCA)",
+            "Entorse de cheville"
+        ],
+        "objectifs": [
+            "Proprioception",
+            "Équilibre"
+        ],
+        "materiel": "Balle",
+        "exercise_mode": "proprioception",
+        "type_contraction": "dynamique",
+        "difficulte": 3,
+        "muscles_principaux": [
+            "Moyen fessier",
+            "Quadriceps"
+        ],
+        "position_depart": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+        "membre": "Jambes",
+        "bilateral": false,
+        "precautions": "Gardez un appui proche (chaise, mur) au début."
+    }
 ]
