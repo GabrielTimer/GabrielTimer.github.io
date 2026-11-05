@@ -127,7 +127,7 @@ document.querySelectorAll("[data-illus]").forEach(b => b.onclick = () => {
 $("#sound").onchange = e => store.set("gt_sound", e.target.checked ? 1 : 0);
 $("#voice").onchange = e => store.set("gt_voice", e.target.checked ? 1 : 0);
 $("#auto").onchange = e => store.set("gt_autonext", e.target.checked ? 1 : 0);
-$("#mode-kine")?.addEventListener("click", () => modePatient.quitter());
+$("#mode-kine")?.addEventListener("click", () => modePatient.revenirKine());
 $("#mode-patient")?.addEventListener("click", () => modePatient.activer(ctx.cle));
 $("#forget")?.addEventListener("click", async () => {
   if(!await confirmDialog({ title:"Déconnecter cet appareil ?", message:"Vous aurez besoin de votre lien ou de votre code pour revenir.", confirm:"Déconnecter", danger:true })) return;

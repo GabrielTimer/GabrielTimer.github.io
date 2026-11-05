@@ -176,11 +176,24 @@ export const kineHint = {
 
 /** Mode patient : le kiné utilise cet appareil comme un patient (sa propre fiche, par exemple). */
 export const modePatient = {
-  get: () => store.get("gt_mode_patient") === 1 && typeof store.get("gt_cle") === "string",
+  /* Seul un appareil où le kiné s'est connecté peut être en mode patient :
+     sans cette connexion, le drapeau est ignoré (et le bouton « Espace kiné » n'apparaît jamais). */
+  get: () => store.get("gt_mode_patient") === 1 && typeof store.get("gt_cle") === "string"
+    && (store.get("gt_kine") === 1 || store.get("gt_kine") === "1"),
   /** Passe cet appareil en mode patient pour ce code d'accès. */
   activer(cle){ session.del("gt_apercu"); store.set("gt_cle", cle); store.set("gt_mode_patient", 1); location.href = "/index.html"; },
   /** Revient à l'espace kiné (la fiche patient reste mémorisée pour y revenir). */
-  quitter(){ store.del("gt_mode_patient"); location.href = "/index.html"; }
+  quitter(){ store.del("gt_mode_patient"); location.href = "/index.html"; },
+  /** Bouton « Espace kiné » : code du kiné, puis compte kiné vérifié avant de quitter le mode patient. */
+  async revenirKine(){
+    const { verifierPin } = await import("./mode-seance.js");
+    if(!await verifierPin("Saisissez votre code kiné pour revenir à l'espace kiné.")) return;
+    try{
+      const { currentKine } = await import("./cloud.js");
+      if(!await currentKine()){ location.href = "/login.html"; return; }
+    }catch(e){ location.href = "/login.html"; return; }
+    modePatient.quitter();
+  }
 };
 
 /* ---------- Mise en forme ---------- */
@@ -517,8 +530,10 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   const inboxBtn = role === "kine" && !apercu
     ? `<a class="icon-btn inbox-btn" href="/messages.html" data-inbox-link aria-label="Messages des patients" title="Messages des patients">${icon("inbox")}<span class="inbox-badge" data-inbox-badge hidden></span></a>`
     : "";
-  const kineBtn = role === "patient" && !apercu && modePatient.get()
-    ? `<button class="btn sm" type="button" style="white-space:nowrap" data-mode-kine title="Revenir à l'espace kiné">${icon("stethoscope")}Espace kiné</button>`
+  /* Visible seulement sur un appareil où le kiné est connecté et qu'il a passé en mode patient.
+     Les vrais patients ne le voient jamais. Sur téléphone : icône seule, pour ne pas couper le nom. */
+  const kineBtn = role === "patient" && !apercu && modePatient.get() && kineHint.connecte()
+    ? `<button class="icon-btn kine-btn" type="button" data-mode-kine aria-label="Revenir à l'espace kiné" title="Revenir à l'espace kiné">${icon("stethoscope")}<span class="kine-btn-lbl">Espace kiné</span></button>`
     : "";
   const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${inboxBtn}${themeBtn}</div></header>`);
 
@@ -557,7 +572,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     import("./messages.js").then(m => m.refreshUnread()).catch(() => {});
   }
 
-  topbar.querySelector("[data-mode-kine]")?.addEventListener("click", () => modePatient.quitter());
+  topbar.querySelector("[data-mode-kine]")?.addEventListener("click", () => modePatient.revenirKine());
   topbar.querySelector("[data-theme-toggle]").onclick = e => {
     toggleTheme();
     e.currentTarget.innerHTML = icon(isDark() ? "sun" : "moon");

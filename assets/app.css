@@ -158,11 +158,17 @@ p{ margin:0; }
 .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); min-width:0; }
 .brand img{ width:34px; height:34px; object-fit:contain; flex:none; }
 .brand-text{ display:flex; flex-direction:column; line-height:1.1; min-width:0; }
-.brand-name{ font-weight:800; font-size:var(--fs-md); white-space:nowrap; }
+.brand-name{ font-weight:800; font-size:var(--fs-md); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .brand-sub{ font-size:var(--fs-xs); color:var(--ink-3); white-space:nowrap; }
 .topbar-title{ font-weight:800; font-size:var(--fs-lg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
 .topbar .spacer{ flex:1; }
 .topbar-actions{ display:flex; gap:6px; align-items:center; }
+/* Bouton « Espace kiné » (mode patient du kiné) : icône seule sur téléphone, avec libellé sur grand écran */
+.kine-btn .kine-btn-lbl{ display:none; }
+@media (min-width:641px){
+  .icon-btn.kine-btn{ display:inline-flex; align-items:center; width:auto; padding:0 12px; gap:8px; font-weight:700; font-size:var(--fs-sm); white-space:nowrap; }
+  .kine-btn .kine-btn-lbl{ display:inline; }
+}
 
 .page{
   width:100%;
