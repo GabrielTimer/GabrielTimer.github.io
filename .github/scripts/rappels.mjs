@@ -37,8 +37,10 @@ const now = new Date();
 const dayOf = d => new Date(d).toLocaleDateString("sv-SE", { timeZone: TZ });   // AAAA-MM-JJ
 const today = dayOf(now);
 const hour = Number(new Intl.DateTimeFormat("fr-FR", { timeZone: TZ, hour: "2-digit", hourCycle: "h23" }).format(now));
+const minute = Number(new Intl.DateTimeFormat("fr-FR", { timeZone: TZ, minute: "2-digit" }).format(now));
+const maintenant = hour + minute / 60;       // ex. 18,28 pour 18 h 17
 const JOUR = String(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].indexOf(new Intl.DateTimeFormat("en-US", { timeZone: TZ, weekday: "short" }).format(now)) + 1);   // 1 = lundi
-console.log(`Paris : ${today}, ${hour} h.`);
+console.log(`Paris : ${today}, ${hour} h ${String(minute).padStart(2, "0")}.`);
 
 if(process.env.SEULEMENT_CLES === "1"){ console.log("Clés vérifiées, pas d'envoi."); process.exit(0); }
 if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0); }
@@ -61,7 +63,7 @@ for(const d of subs.docs){
   if(r.dernierEnvoi === today) continue;
   const perso = r.mode === "perso" && r.jours && typeof r.jours === "object";
   const heureDuJour = perso ? Number(r.jours[JOUR]) : (Number(r.heure) || 18);
-  if(!heureDuJour || heureDuJour > hour) continue;
+  if(!heureDuJour || heureDuJour > maintenant) continue;
   const cle = d.ref.parent.parent?.id;
   if(!cle) continue;
 

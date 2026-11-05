@@ -167,6 +167,7 @@ async function kineView(param){
 
   /* Rappels de séance activés par le patient sur son téléphone */
   let rappels = null;
+  const fh = x => { const h = Math.floor(x), m = Math.round((x - h) * 60); return m ? `${h} h ${String(m).padStart(2, "0")}` : `${h} h`; };
   const showRappels = async () => {
     if(!rappels) rappels = Promise.all([import("../cloud.js"), import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js")])
       .then(([C, F]) => F.getDocs(F.collection(C.db, "patients", patient.cle, "rappels")))
@@ -178,8 +179,8 @@ async function kineView(param){
     el.hidden = false;
     el.innerHTML = list.length
       ? `${icon("bell")}Rappels activés ${[...new Set(list.map(r => r.mode === "perso" && r.jours
-        ? Object.keys(r.jours).sort().map(j => `${["lun.","mar.","mer.","jeu.","ven.","sam.","dim."][j - 1]} ${r.jours[j]} h`).join(", ")
-        : `à ${r.heure} h`))].join(" ; ")}${list.length > 1 ? ` (${list.length} appareils)` : ""}`
+        ? Object.keys(r.jours).sort().map(j => `${["lun.","mar.","mer.","jeu.","ven.","sam.","dim."][j - 1]} ${fh(r.jours[j])}`).join(", ")
+        : `à ${fh(r.heure)}`))].join(" ; ")}${list.length > 1 ? ` (${list.length} appareils)` : ""}`
       : `<span class="muted">${icon("bell")}Rappels non activés</span>`;
   };
 

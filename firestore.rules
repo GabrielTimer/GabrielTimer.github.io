@@ -91,7 +91,7 @@ service cloud.firestore {
         && d.endpoint is string && d.endpoint.size() <= 1000 && d.endpoint.matches("https://.*")
         && d.p256dh is string && d.p256dh.size() <= 200
         && d.auth is string && d.auth.size() <= 100
-        && d.heure is int && d.heure >= 6 && d.heure <= 22
+        && d.heure is number && d.heure >= 6 && d.heure <= 22
         && d.actif is bool
         && (!("tz" in d) || (d.tz is string && d.tz.size() <= 60))
         && (!("mode" in d) || d.mode in ["seances", "perso"])

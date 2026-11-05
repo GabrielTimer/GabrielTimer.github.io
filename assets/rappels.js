@@ -4,7 +4,7 @@
    Le patient active les rappels dans Réglages : son téléphone reçoit
    une notification le jour de chaque séance prévue, à l'heure choisie.
    L'abonnement est rangé dans patients/{code}/rappels/{id}.
-   L'envoi est fait chaque heure par GitHub (.github/workflows/rappels.yml),
+   L'envoi est fait tous les quarts d'heure par GitHub (.github/workflows/rappels.yml),
    qui crée aussi lui-même les clés nécessaires (reglages/push).
    ========================================================= */
 
@@ -12,7 +12,11 @@ import { db } from "./cloud.js";
 import { doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const KEY = "gt_rappel";
-export const HEURES = Array.from({ length: 15 }, (_, i) => i + 7);   // 7 h → 21 h
+/** Heures proposées, au quart d'heure : 7 → 21,75 (18,5 = 18 h 30). */
+export const HEURES = Array.from({ length: 60 }, (_, i) => 7 + i / 4);
+/** 18.5 → « 18 h 30 », 18 → « 18 h ». */
+export const fmtH = x => { const h = Math.floor(x), m = Math.round((x - h) * 60); return m ? `${h} h ${String(m).padStart(2, "0")}` : `${h} h`; };
+const quart = x => Math.round(Number(x) * 4) / 4;
 /** Jours de la semaine, numérotés comme la norme ISO (1 = lundi … 7 = dimanche). */
 export const JOURS = [["1","Lundi"],["2","Mardi"],["3","Mercredi"],["4","Jeudi"],["5","Vendredi"],["6","Samedi"],["7","Dimanche"]];
 
@@ -20,8 +24,8 @@ export const JOURS = [["1","Lundi"],["2","Mardi"],["3","Mercredi"],["4","Jeudi"]
 export function nettoyerJours(jours){
   const out = {};
   for(const [j] of JOURS){
-    const h = Math.round(Number(jours?.[j]));
-    if(jours && j in jours && h >= 7 && h <= 21) out[j] = h;
+    const h = quart(jours?.[j]);
+    if(jours && j in jours && h >= 7 && h <= 21.75) out[j] = h;
   }
   return out;
 }
@@ -87,10 +91,10 @@ export async function activerRappels(cle, heure = 18, { mode = "seances", jours 
   const id = prev?.cle === cle && prev.id ? prev.id : (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(36).slice(2));
   await setDoc(doc(db, "patients", cle, "rappels", id), {
     endpoint: j.endpoint, p256dh: j.keys.p256dh, auth: j.keys.auth,
-    heure: Number(heure), actif: true, createdAt: Date.now(), mode, jours,
+    heure: quart(heure), actif: true, createdAt: Date.now(), mode, jours,
     tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris"
   }, { merge:true });
-  const state = { cle, id, heure: Number(heure), actif:true, mode, jours };
+  const state = { cle, id, heure: quart(heure), actif:true, mode, jours };
   write(state);
   return state;
 }
@@ -121,10 +125,10 @@ export function resumeRappels(st){
   if(!st) return "";
   if(st.mode === "perso"){
     const j = nettoyerJours(st.jours);
-    const parts = JOURS.filter(([k]) => k in j).map(([k, nom]) => `${nom.toLowerCase()} ${j[k]} h`);
+    const parts = JOURS.filter(([k]) => k in j).map(([k, nom]) => `${nom.toLowerCase()} ${fmtH(j[k])}`);
     const memes = new Set(Object.values(j)).size === 1;
-    if(memes && parts.length > 1) return `${JOURS.filter(([k]) => k in j).map(([, n]) => n.toLowerCase()).join(", ")} à ${Object.values(j)[0]} h`;
+    if(memes && parts.length > 1) return `${JOURS.filter(([k]) => k in j).map(([, n]) => n.toLowerCase()).join(", ")} à ${fmtH(Object.values(j)[0])}`;
     return parts.join(", ");
   }
-  return `à ${st.heure} h les jours de séance`;
+  return `à ${fmtH(st.heure)} les jours de séance`;
 }

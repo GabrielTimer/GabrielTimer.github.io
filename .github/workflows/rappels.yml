@@ -1,11 +1,11 @@
-# Rappels de séance : chaque heure, envoie une notification aux patients
+# Rappels de séance : tous les quarts d'heure, envoie une notification aux patients
 # qui ont une séance prévue aujourd'hui (voir .github/scripts/rappels.mjs).
 # Utilise le même secret que la publication des règles : FIREBASE_SERVICE_ACCOUNT.
 name: Rappels de séance
 
 on:
   schedule:
-    - cron: "7 * * * *"
+    - cron: "2,17,32,47 * * * *"
   workflow_dispatch:
   push:
     branches: [main]

@@ -133,7 +133,7 @@ async function rappelsUI(){
       : "Ce navigateur ne permet pas les notifications. Vous pouvez ajouter vos séances à votre agenda depuis l'accueil."}</span></div></div>`;
     return;
   }
-  const opt = (sel) => R.HEURES.map(x => `<option value="${x}" ${x === sel ? "selected" : ""}>${x} h</option>`).join("");
+  const opt = (sel) => R.HEURES.map(x => `<option value="${x}" ${x === Number(sel) ? "selected" : ""}>${R.fmtH(x)}</option>`).join("");
   const perso = st.mode === "perso";
   const jours = R.nettoyerJours(st.jours);
   box.innerHTML = `
