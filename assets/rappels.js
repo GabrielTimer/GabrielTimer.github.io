@@ -9,6 +9,7 @@
    ========================================================= */
 
 import { db } from "./cloud.js";
+import { openSheet } from "./app.js";
 import { doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const KEY = "gt_rappel";
@@ -72,7 +73,11 @@ export async function activerRappels(cle, heure = 18, { mode = "seances", jours 
     ? "Sur iPhone, ajoutez d'abord l'application à l'écran d'accueil, puis ouvrez-la depuis son icône."
     : "Ce navigateur ne permet pas les notifications. Essayez avec Chrome, Safari ou Firefox à jour.");
   const perm = Notification.permission === "granted" ? "granted" : await Notification.requestPermission();
-  if(perm !== "granted") throw new Error("Les notifications sont refusées pour ce site. Autorisez-les dans les réglages du téléphone, puis réessayez.");
+  if(perm !== "granted"){
+    const err = new Error("Les notifications sont bloquées sur ce téléphone pour l'application.");
+    err.code = "app/notif-bloquees";
+    throw err;
+  }
 
   const pub = (await getDoc(doc(db, "reglages", "push")).catch(() => null))?.data()?.publicKey;
   if(!pub) throw new Error("Les rappels ne sont pas encore prêts côté cabinet. Réessayez dans quelques minutes.");
@@ -83,7 +88,11 @@ export async function activerRappels(cle, heure = 18, { mode = "seances", jours 
   if(sub && sub.options?.applicationServerKey && b64(sub.options.applicationServerKey) !== pub){ await sub.unsubscribe().catch(() => {}); sub = null; }
   if(!sub){
     try{ sub = await reg.pushManager.subscribe({ userVisibleOnly:true, applicationServerKey: keyBytes(pub) }); }
-    catch(e){ throw new Error("Le téléphone a refusé l'abonnement aux notifications. Vérifiez qu'elles sont autorisées pour l'application (et que vous n'êtes pas en navigation privée), puis réessayez."); }
+    catch(e){
+      const err = new Error("Le téléphone a refusé l'abonnement aux notifications. Vérifiez qu'elles sont autorisées pour l'application (et que vous n'êtes pas en navigation privée), puis réessayez.");
+      err.code = "app/notif-bloquees";
+      throw err;
+    }
   }
 
   const j = sub.toJSON();
@@ -131,4 +140,35 @@ export function resumeRappels(st){
     return parts.join(", ");
   }
   return `à ${fmtH(st.heure)} les jours de séance`;
+}
+
+
+/* ---------- Aide : notifications bloquées ---------- */
+
+/** true si le patient (ou le téléphone) a bloqué les notifications pour l'application. */
+export const notifsBloquees = () => "Notification" in window && Notification.permission === "denied";
+
+/** Explique, selon le téléphone, comment autoriser à nouveau les notifications. */
+export function aideNotifications(){
+  const { ios, standalone } = rappelSupport();
+  const etapes = l => `<ol style="margin:0 0 14px;padding-left:1.3em;line-height:1.6">${l.map(e => `<li>${e}</li>`).join("")}</ol>`;
+  let corps;
+  if(ios){
+    corps = `${standalone ? "" : `<p><strong>D'abord :</strong> sur iPhone, les rappels ne marchent que depuis l'icône de l'application.</p>
+      ${etapes(["Dans Safari, touchez <strong>Partager</strong> (carré avec une flèche).", "Choisissez <strong>Sur l'écran d'accueil</strong>, puis <strong>Ajouter</strong>.", "Ouvrez l'application depuis sa nouvelle icône."])}`}
+      <p><strong>Pour autoriser les notifications :</strong></p>
+      ${etapes(["Ouvrez les <strong>Réglages</strong> de l'iPhone.", "Touchez <strong>Notifications</strong>, puis le nom de l'application.", "Activez <strong>Autoriser les notifications</strong>."])}`;
+  }else{
+    corps = `<p><strong>Si l'application est sur votre écran d'accueil :</strong></p>
+      ${etapes(["Faites un <strong>appui long</strong> sur son icône.", "Touchez <strong>ⓘ</strong> ou <strong>Infos sur l'appli</strong>.", "Touchez <strong>Notifications</strong> et activez-les."])}
+      <p><strong>Si vous l'ouvrez dans Chrome :</strong></p>
+      ${etapes(["Touchez l'icône à gauche de l'adresse, en haut de l'écran.", "Touchez <strong>Autorisations</strong> (ou Paramètres du site).", "Mettez <strong>Notifications</strong> sur <strong>Autoriser</strong>."])}`;
+  }
+  openSheet({
+    title: "Autoriser les notifications",
+    body: `<p class="muted" style="margin-bottom:12px">Les notifications ont été bloquées sur ce téléphone. Seul vous pouvez les rétablir, en quelques secondes :</p>
+      ${corps}
+      <p class="muted">Revenez ensuite ici et réactivez « Me rappeler mes séances ».</p>`,
+    foot: `<button class="btn primary" type="button" data-close>J'ai compris</button>`
+  });
 }

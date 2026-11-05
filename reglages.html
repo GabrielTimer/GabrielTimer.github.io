@@ -167,6 +167,12 @@ async function rappelsUI(){
       <div class="set-row"><span class="hint">Tant que votre programme est en cours. Rien n'est envoyé si la séance du jour est déjà faite.</span></div>
     </div>
     <div class="set-row" id="rp-test-row" ${st.actif ? "" : "hidden"}><div class="s-txt"><span id="rp-msg">Rappels activés ${esc(R.resumeRappels(st))}.</span></div><button class="btn sm" type="button" id="rp-test">${icon("bell")}Essayer</button></div>`;
+  /* Notifications bloquées : lien d'aide toujours visible sous l'interrupteur */
+  box.querySelector(".set-row").insertAdjacentHTML("afterend", `<div class="set-row" id="rp-aide" hidden><div class="s-txt"><span>Les notifications sont bloquées sur ce téléphone.</span></div><button class="btn sm" type="button" id="rp-aide-btn">${icon("info")}Comment faire ?</button></div>`);
+  const majAide = () => { $("#rp-aide").hidden = !R.notifsBloquees(); };
+  $("#rp-aide-btn").addEventListener("click", () => R.aideNotifications());
+  majAide();
+  document.addEventListener("visibilitychange", () => { if(!document.hidden) majAide(); });
   const on = $("#rp-on"), h = $("#rp-h"), row = $("#rp-test-row");
   let mode = perso ? "perso" : "seances";
   const lireJours = () => {
@@ -190,7 +196,11 @@ async function rappelsUI(){
       }
     }catch(e){
       if(e.message !== "Cochez au moins un jour."){ on.checked = false; row.hidden = true; }
-      toast(e.message || "Impossible d'activer les rappels.", { type:"err", duration:7000 });
+      if(e.code === "app/notif-bloquees"){
+        toast(e.message, { type:"err", duration:10000, action:{ label:"Comment faire ?", run: R.aideNotifications } });
+        R.aideNotifications();
+        majAide();
+      }else toast(e.message || "Impossible d'activer les rappels.", { type:"err", duration:7000 });
     }finally{
       champs().forEach(c => c.disabled = false);
       box.querySelectorAll("[data-j]").forEach(c => { box.querySelector(`[data-jh="${c.dataset.j}"]`).disabled = !c.checked; });
