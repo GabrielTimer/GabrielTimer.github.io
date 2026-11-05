@@ -14,6 +14,7 @@ const { requireKine } = await import("../kine.js");
 await requireKine();
 const C = await import("../cloud.js");
 const B = await import("../bilan-core.js");
+const TC = await import("../tests-catalogue.js");
 const BC = await import("../bodychart.js");
 const NF = await import("../nerfs-ui.js");
 { const st = document.createElement("style"); st.textContent = BC.BODY_CSS + NF.NERFS_CSS; document.head.append(st); }
@@ -170,7 +171,7 @@ function render(){
         ${(K.TF || []).length ? `<section class="panel">
           <div class="panel-head"><h2>Tests fonctionnels</h2><span class="badge">protocole · normes · vidéo</span></div>
           <p class="hint" style="margin-bottom:10px">Remplissez seulement les tests réalisés. Touchez le nom d'un test pour voir le protocole, les normes et la vidéo de démonstration. L'évolution s'affiche avec les mesures.</p>
-          <div class="mes-grid">${K.TF.map(([k, nom, u]) => `<div class="field"><label for="f-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`).join("")}</div>
+          <div id="tf-box"></div>
         </section>` : ""}
 
         <section class="panel">
@@ -196,7 +197,7 @@ function render(){
     </div>`;
   S.neuro = S.neuro || {};
   NF.mountNerfs($("#neuro"), { state:S.neuro, onChange:() => { changed(); } });
-  drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawDN4(); drawEvo(); drawResume(); drawDanger();
+  drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawTF(); drawDN4(); drawEvo(); drawResume(); drawDanger();
   setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
 }
 
@@ -257,6 +258,26 @@ function analysisHTML(n){
     ${r.note ? `<p class="small muted" style="margin-top:8px"><em>${esc(r.note)}</em></p>` : ""}
     <details class="src"><summary>Sources</summary><ol>${srcs.map(s => `<li>${esc(K.SRC[s] || s)}</li>`).join("")}</ol></details>
   </section>`;
+}
+
+/* Tests fonctionnels : d'abord ceux qui servent ce bilan (motif + zones), les autres repliés */
+let tfOuvert = false;
+function drawTF(){
+  const box = $("#tf-box"); if(!box) return;
+  const reco = TC.tfRecommandes(S);
+  const rempli = k => S.f[k] !== undefined && S.f[k] !== "";
+  const champ = ([k, nom, u]) => `<div class="field"><label for="f-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`;
+  const haut = K.TF.filter(t => reco.has(t[0]) || rempli(t[0]));
+  const bas = K.TF.filter(t => !haut.includes(t));
+  if(!haut.length){
+    box.innerHTML = `<p class="hint" style="margin-bottom:10px">Cochez un motif (ex. trouble de l'équilibre, reprise du sport) ou une zone douloureuse : les tests utiles à ce bilan s'afficheront en premier.</p>
+      <details class="tf-autres" ${tfOuvert ? "open" : ""}><summary class="sub" style="cursor:pointer">Tous les tests fonctionnels (${K.TF.length})</summary><div class="mes-grid">${K.TF.map(champ).join("")}</div></details>`;
+  }else{
+    box.innerHTML = `<div class="sub">Recommandés pour ce bilan (${haut.length})</div><div class="mes-grid">${haut.map(champ).join("")}</div>
+      ${bas.length ? `<details class="tf-autres" style="margin-top:14px" ${tfOuvert ? "open" : ""}><summary class="sub" style="cursor:pointer">Autres tests (${bas.length})</summary><div class="mes-grid">${bas.map(champ).join("")}</div></details>` : ""}`;
+  }
+  box.querySelector(".tf-autres")?.addEventListener("toggle", e => { tfOuvert = e.target.open; });
+  drawEvo();
 }
 
 function drawAnalysis(){
@@ -382,7 +403,7 @@ app.addEventListener("click", async e => {
 
   if(d.view){ ui.view = d.view; ui.sel = null; drawBody(); drawZone(); return; }
   if(d.zone){
-    if(!S.pain[d.zone]){ S.pain[d.zone] = { eva:5, types:[] }; ui.sel = d.zone; drawBody(); drawZone(); drawAnalysis(); drawEvo(); changed(); }
+    if(!S.pain[d.zone]){ S.pain[d.zone] = { eva:5, types:[] }; ui.sel = d.zone; drawBody(); drawZone(); drawAnalysis(); drawTF(); drawEvo(); changed(); }
     else{ ui.sel = d.zone; drawBody(); drawZone(); }
     return;
   }
@@ -400,13 +421,14 @@ app.addEventListener("click", async e => {
   }
   if(d.rmzone !== undefined && ui.sel){
     delete S.pain[ui.sel]; delete S.cl[ui.sel]; ui.sel = null;
-    drawBody(); drawZone(); drawAnalysis(); drawEvo(); changed(); return;
+    drawBody(); drawZone(); drawAnalysis(); drawTF(); drawEvo(); changed(); return;
   }
   if(d.chip){
     const a = S.c[d.chip] = S.c[d.chip] || [], i = a.indexOf(d.val);
     i < 0 ? a.push(d.val) : a.splice(i, 1);
     b.setAttribute("aria-pressed", i < 0);
     if(d.chip === "dn4") drawDN4();
+    if(d.chip === "patho") drawTF();
     changed(); return;
   }
   if(d.rf){
@@ -487,36 +509,10 @@ if(back) back.addEventListener("click", e => { e.preventDefault(); leave(fiche);
 
 /* ---------- Fiche d'un test ---------- */
 
-function tfSheet(n){
-  const g = (K.GUIDE_TF || {})[n] || {};
-  const video = g.v || "https://www.youtube.com/results?search_query=" + encodeURIComponent(n + " test");
-  openSheet({
-    title:n,
-    body:`<div class="g-sheet">
-      ${g.t ? `<p><strong>Protocole</strong><br>${esc(g.t)}</p>` : ""}
-      ${g.n ? `<p><strong>Normes et seuils</strong><br>${esc(g.n)}</p>` : ""}
-      ${g.src ? `<p class="hint">Références : ${esc(g.src)}</p>` : ""}
-      <p class="hint">Valeurs de la littérature, à interpréter selon la population et le protocole utilisé.</p>
-    </div>`,
-    foot:`<a class="btn" href="${esc(video)}" target="_blank" rel="noopener">${icon("video")}Voir la vidéo</a><button class="btn primary" type="button" data-close>Fermer</button>`
-  });
-}
+function tfSheet(n){ TC.ficheTest(K, n, "fonctionnel"); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-tf]"); if(b){ e.preventDefault(); tfSheet(b.dataset.tf); } });
 
-function testSheet(n){
-  const g = K.GUIDE[n] || {};
-  const video = g.v || "https://www.youtube.com/results?search_query=" + encodeURIComponent(n + " test kinésithérapie");
-  openSheet({
-    title:n,
-    body:`<div class="g-sheet">
-      ${g.t ? `<p><strong>Technique</strong><br>${esc(g.t)}</p>` : `<p class="muted">Description à compléter dans bilan-kine/guide.js.</p>`}
-      ${g.p ? `<p><strong>Positif si</strong><br>${esc(g.p)}</p>` : ""}
-      ${g.i ? `<img src="/bilan-kine/${esc(g.i)}" alt="${esc(n)}">` : ""}
-      <p class="hint">Résumé pédagogique, à confronter à la technique que vous pratiquez.</p>
-    </div>`,
-    foot:`<a class="btn" href="${esc(video)}" target="_blank" rel="noopener">${icon("video")}${g.v ? "Voir la vidéo" : "Chercher une vidéo"}</a>${g.r ? `<a class="btn" href="${esc(g.r)}" target="_blank" rel="noopener">${icon("link")}Fiche de référence</a>` : ""}<button class="btn primary" type="button" data-close>Fermer</button>`
-  });
-}
+function testSheet(n){ TC.ficheTest(K, n, "clinique"); }
 
 render();
 if(restored) queueSave();
