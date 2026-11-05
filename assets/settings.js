@@ -48,7 +48,8 @@ export const DEFAULTS = {
     ]
   },
   masques: { exercices: [], modeles: [], reaffiches: [] },
-  favoris: { exercices: [] }
+  favoris: { exercices: [] },
+  accueil: { tuiles: [] }   // ordre des tuiles de l'accueil kiné (même ordre sur tous les appareils)
 };
 
 const isObj = v => v && typeof v === "object" && !Array.isArray(v);

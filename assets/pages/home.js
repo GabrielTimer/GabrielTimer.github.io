@@ -6,7 +6,7 @@ import {
   plural, loadingHTML, emptyHTML, errorHTML, exoImageHTML, normCode, fmtCode, KINE, byWeek, evaTrend,
   ressentiLabel, forgetPatient, logoSrc
 } from "../app.js";
-import { currentAnnonce, loadSettings } from "../settings.js";
+import { currentAnnonce, loadSettings, settings as reglages } from "../settings.js";
 import { exerciseImage } from "../library.js";
 import * as V from "../variantes.js";
 import * as Installer from "../installer.js";
@@ -360,7 +360,16 @@ async function renderKine(user){
     </div>
     <footer class="app-foot">${appMarkHTML()}</footer>`;
 
-  import("../tiles-reorder.js").then(R => R.enableTileReorder(document.querySelector(".tiles"), { key:"gt_home_tiles_kine" })).catch(() => {});
+  import("../tiles-reorder.js").then(R => {
+    const S = import("../settings.js");
+    const ctl = R.enableTileReorder(document.querySelector(".tiles"), {
+      key: "gt_home_tiles_kine",
+      load: () => reglages.accueil?.tuiles,
+      save: ids => S.then(m => m.saveSettings({ accueil: { tuiles: ids } }))
+    });
+    // Ordre changé sur un autre appareil : reprise des réglages à jour
+    loadSettings({ force: true }).then(st => { const ids = st?.accueil?.tuiles; if(ids?.length) ctl?.refresh(ids); }).catch(() => {});
+  }).catch(() => {});
   const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
     const p = await newPatientSheet();

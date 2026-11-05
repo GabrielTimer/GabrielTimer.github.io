@@ -5,7 +5,8 @@
      frétillent et celle sous le doigt se soulève ;
    - glisser : les autres tuiles s'écartent en douceur (animation FLIP) ;
    - « Terminé » ou toucher à côté : fin du rangement ;
-   - l'ordre est gardé sur l'appareil (localStorage).
+   - l'ordre est gardé sur l'appareil et, si load/save sont fournis,
+     dans le compte (même ordre sur tous les appareils).
    Chaque tuile porte data-tile="identifiant".
    ========================================================= */
 
@@ -17,18 +18,24 @@ function readOrder(key){ try{ return JSON.parse(localStorage.getItem(key) || "nu
 function writeOrder(key, ids){ try{ localStorage.setItem(key, JSON.stringify(ids)); }catch(e){} }
 function clearOrder(key){ try{ localStorage.removeItem(key); }catch(e){} }
 
-export function enableTileReorder(grid, { key = "gt_home_tiles", onEdit = null } = {}){
-  if(!grid) return;
+export function enableTileReorder(grid, { key = "gt_home_tiles", onEdit = null, load = null, save = null } = {}){
+  if(!grid) return null;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const tiles = () => [...grid.querySelectorAll(":scope > [data-tile]")];
   const defaultOrder = tiles().map(t => t.dataset.tile);
 
   /* Ordre enregistré (les tuiles ajoutées plus tard vont à la fin) */
-  const saved = readOrder(key);
-  if(Array.isArray(saved)){
+  function applyOrder(ids){
+    if(!Array.isArray(ids) || !ids.length) return;
     const map = new Map(tiles().map(t => [t.dataset.tile, t]));
-    saved.forEach(id => { const t = map.get(id); if(t){ grid.appendChild(t); map.delete(id); } });
+    ids.forEach(id => { const t = map.get(id); if(t){ grid.appendChild(t); map.delete(id); } });
     map.forEach(t => grid.appendChild(t));
+  }
+  const fromAccount = load?.();
+  applyOrder(Array.isArray(fromAccount) && fromAccount.length ? fromAccount : readOrder(key));
+  function persist(ids){
+    ids ? writeOrder(key, ids) : clearOrder(key);
+    try{ Promise.resolve(save?.(ids || [])).catch(() => {}); }catch(e){}
   }
 
   /* Barre du mode rangement */
@@ -145,7 +152,7 @@ export function enableTileReorder(grid, { key = "gt_home_tiles", onEdit = null }
     el.style.transition = reduce ? "none" : `transform ${ANIM}ms cubic-bezier(.2,.8,.2,1)`;
     el.style.transform = "";
     setTimeout(() => { el.classList.remove("dragging"); el.style.transition = ""; }, reduce ? 0 : ANIM);
-    writeOrder(key, tiles().map(t => t.dataset.tile));
+    persist(tiles().map(t => t.dataset.tile));
   }
 
   grid.addEventListener("pointerdown", e => {
@@ -206,7 +213,7 @@ export function enableTileReorder(grid, { key = "gt_home_tiles", onEdit = null }
     const map = new Map(tiles().map(t => [t.dataset.tile, t]));
     const before = new Map(tiles().map(t => [t, t.getBoundingClientRect()]));
     defaultOrder.forEach(id => { const t = map.get(id); if(t) grid.appendChild(t); });
-    clearOrder(key);
+    persist(defaultOrder.slice());
     if(!reduce) tiles().forEach(t => {
       const a = before.get(t), b = natural(t);
       t.style.transition = "none"; t.style.transform = `translate(${a.left - b.x}px,${a.top - b.y}px)`;
@@ -219,4 +226,14 @@ export function enableTileReorder(grid, { key = "gt_home_tiles", onEdit = null }
     if(editing && !drag && !e.target.closest("[data-tile], .tiles-edit-bar")) stopEdit();
   });
   document.addEventListener("keydown", e => { if(e.key === "Escape") stopEdit(); });
+
+  /* Ordre reçu d'un autre appareil : appliqué si on n'est pas en train de ranger */
+  return {
+    refresh(ids){
+      if(editing || drag || !Array.isArray(ids)) return;
+      const cur = tiles().map(t => t.dataset.tile).join();
+      applyOrder(ids.length ? ids : defaultOrder);
+      if(tiles().map(t => t.dataset.tile).join() !== cur) ids.length ? writeOrder(key, ids) : clearOrder(key);
+    }
+  };
 }
