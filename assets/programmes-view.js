@@ -187,7 +187,7 @@ export function replanDates(prog, jours){
 }
 
 /** Fenêtre de choix des jours. onSave(changes) reçoit la liste à enregistrer. */
-export function changeDaysSheet(prog, { role = "patient", onSave }){
+export function changeDaysSheet(prog, { role = "patient", rappelTxt = "", onSave }){
   const weeks = byWeek(prog.seances.slice());
   const n = Math.max(1, ...weeks.map(w => w.seances.length));
   const current = Array.from(new Set(prog.seances.filter(s => !s.terminee && s.datePrevue).map(s => new Date(s.datePrevue).getDay())));
@@ -200,6 +200,7 @@ export function changeDaysSheet(prog, { role = "patient", onSave }){
         <div class="days" id="cd-days">${JOURS.map(([v, l, full]) => `<button type="button" data-day="${v}" aria-pressed="${jours.includes(v)}" aria-label="${full}">${l}</button>`).join("")}</div>
         <p class="hint" id="cd-hint"></p>
         <div class="plan-preview" id="cd-prev" style="padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);font-size:var(--fs-sm);color:var(--ink-2)"></div>
+        ${role === "kine" ? "" : `<a class="list-item" href="/reglages.html#rappels" style="border:1px solid var(--line);border-radius:var(--r-md)"><span class="li-ico">${icon("bell")}</span><span class="li-main"><span class="li-title">Rappel le jour de la séance</span><span class="li-sub">${esc(rappelTxt || "Activer ou couper la notification, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>`}
       </div>`,
     foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="cd-ok">${icon("check")}Enregistrer</button>`
   });

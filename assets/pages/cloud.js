@@ -35,9 +35,18 @@ async function patientView(ctx){
   catch(err){ app.querySelector(".loading").outerHTML = errorHTML(err); return; }
   if(!data){ location.replace("/index.html"); return; }
 
+  let rpTxt = "", rpCharge = false;
   const render = () => {
     const { programmes, seules } = data;
     try{ V.setContextePatient?.(ctx.cle, data.patient?.genre, (programmes.find(p => !p.termine)?.seances?.[0] || programmes[0]?.seances?.[0] || seules?.[0])?.data, data.patient?.genreMaj); }catch(e){ console.warn("Illustrations :", e); }
+    if(!rpCharge){
+      rpCharge = true;
+      import("../rappels.js").then(R => {
+        const st = R.rappelState(ctx.cle);
+        rpTxt = st?.actif ? `Activés : ${R.resumeRappels(st)}` : "Désactivés. Touchez pour les activer";
+        const el = document.getElementById("rp-sub"); if(el) el.textContent = rpTxt;
+      }).catch(() => {});
+    }
     app.innerHTML = `
       <div class="page-head"><h1>Mes programmes</h1><p class="lead">Vos séances semaine par semaine. Touchez « Commencer » pour lancer la suivante.</p></div>
       ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme pour l'instant", text:"Votre kiné ne vous a pas encore envoyé d'exercices." })}</div>` : ""}
@@ -46,6 +55,7 @@ async function patientView(ctx){
       <section class="section">
         <div class="section-title">Sur cet appareil</div>
         <div class="list">
+          <a class="list-item" href="/reglages.html#rappels"><span class="li-ico">${icon("bell")}</span><span class="li-main"><span class="li-title">Rappels de séance</span><span class="li-sub" id="rp-sub">${esc(rpTxt || "Activer ou couper les notifications, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>
           <a class="list-item" href="/historique.html"><span class="li-ico">${icon("history")}</span><span class="li-main"><span class="li-title">Historique</span><span class="li-sub">Les séances faites sur ce téléphone</span></span><span class="li-end">${icon("chevron")}</span></a>
           <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Pour refaire une séance quand vous voulez</span></span><span class="li-end">${icon("chevron")}</span></a>
         </div>
@@ -69,7 +79,7 @@ async function patientView(ctx){
       article.querySelectorAll("[data-pact]").forEach(b => b.addEventListener("click", async () => {
         if(b.dataset.pact === "pdf") openProgrammePdf(prog, data.patient.nom);
         if(b.dataset.pact === "jours"){
-          changeDaysSheet(prog, { role:"patient", onSave: async changes => {
+          changeDaysSheet(prog, { role:"patient", rappelTxt: rpTxt, onSave: async changes => {
             if(ctx.apercu){ toast("Aperçu : les jours ne sont pas modifiés."); return; }
             const C = await import("../cloud.js");
             await C.replanSeances(ctx.cle, changes);
