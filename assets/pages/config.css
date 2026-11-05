@@ -28,7 +28,12 @@
   background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:12px;
   position:relative;
 }
-.exo.dragging{ box-shadow:var(--shadow-2); border-color:var(--lagon); z-index:5; opacity:.96; }
+.exo-list{ position:relative; }
+.exo{ -webkit-touch-callout:none; transition:scale .2s ease; }
+.exo.pressing{ scale:.98; transition:scale .45s ease; }
+.exo.dragging{ box-shadow:0 18px 40px rgba(0,0,0,.2); border-color:var(--lagon); z-index:20; opacity:.97; }
+body.exo-dragging{ -webkit-user-select:none; user-select:none; cursor:grabbing; }
+.exo .thumb{ -webkit-user-select:none; user-select:none; }
 .exo .grip{ width:32px; height:64px; border:0; background:none; color:var(--ink-3); cursor:grab; display:grid; place-items:center; touch-action:none; border-radius:var(--r-sm); }
 .exo .grip:hover{ background:var(--surface-2); color:var(--ink); }
 .exo .grip svg{ width:20px; height:20px; }

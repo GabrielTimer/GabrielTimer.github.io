@@ -425,8 +425,8 @@ function bindExos(){
       }
     });
   });
-  $$(".grip", list).forEach(g => g.addEventListener("pointerdown", startDrag));
   bindEvol(list);
+  bindExoDrag(list);
 }
 
 function setField(i, f, v, rerenderInput){
@@ -447,41 +447,131 @@ function move(from, to){
   $(`.exo[data-i="${to}"] [data-move="${to > from ? 1 : -1}"]`)?.focus();
 }
 
-/* Glisser-déposer au doigt ou à la souris */
-function startDrag(ev){
-  ev.preventDefault();
-  const grip = ev.currentTarget;
-  const card = grip.closest(".exo");
-  const list = $("#exos");
+/* =========================================================
+   Glisser-déposer des exercices (doigt ou souris)
+   - poignée ⋮⋮ : on attrape tout de suite ;
+   - appui long (≈ 0,45 s) sur l'image ou une zone libre de la carte ;
+   la carte suit le doigt, les autres s'écartent en douceur.
+   ========================================================= */
+const DRAG_LONG = 450, DRAG_ANIM = 240;
+const dragReduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let exoDrag = null, exoPress = null, exoScrollRaf = 0, exoSuppressClick = false;
+
+function exoNaturalTop(card){ return $("#exos").getBoundingClientRect().top + card.offsetTop; }
+function exoPlace(){
+  if(!exoDrag) return;
+  exoDrag.card.style.transform = `translateY(${exoDrag.py - exoDrag.gy - exoNaturalTop(exoDrag.card)}px) scale(1.02)`;
+}
+function exoHit(){
+  const list = $("#exos"), card = exoDrag.card;
+  const others = [...list.children].filter(c => c !== card && c.classList.contains("exo"));
+  const top = list.getBoundingClientRect().top;
+  let before = null;
+  for(const c of others){ if(exoDrag.py < top + c.offsetTop + c.offsetHeight / 2){ before = c; break; } }
+  if(card.nextSibling === before || (!before && card === list.lastElementChild)) return;
+  const first = new Map(others.map(c => [c, c.getBoundingClientRect().top]));
+  list.insertBefore(card, before);
+  if(!dragReduce) others.forEach(c => {
+    const dy = first.get(c) - (top + c.offsetTop);
+    if(!dy) return;
+    c.style.transition = "none"; c.style.transform = `translateY(${dy}px)`;
+  });
+  list.offsetWidth;
+  others.forEach(c => {
+    if(!c.style.transform) return;
+    c.style.transition = `transform ${DRAG_ANIM}ms cubic-bezier(.2,.8,.2,1)`; c.style.transform = "";
+    clearTimeout(c._flip); c._flip = setTimeout(() => { c.style.transition = ""; }, DRAG_ANIM + 30);
+  });
+  navigator.vibrate?.(6);
+  exoPlace();
+}
+function exoAutoScroll(){
+  exoScrollRaf = 0;
+  if(!exoDrag) return;
+  const nav = document.querySelector(".nav");
+  const nr = nav ? nav.getBoundingClientRect() : null;
+  const bottom = nr && getComputedStyle(nav).position === "fixed" && nr.top > innerHeight / 2 ? nr.top : innerHeight;
+  let dy = 0;
+  if(exoDrag.py < 90) dy = -Math.ceil((90 - exoDrag.py) / 5);
+  else if(exoDrag.py > bottom - 90) dy = Math.ceil((exoDrag.py - (bottom - 90)) / 5);
+  if(dy){ scrollBy(0, dy); exoPlace(); exoHit(); exoScrollRaf = requestAnimationFrame(exoAutoScroll); }
+}
+function exoBegin(card, y, pointerId){
+  exoDrag = { card, py: y, gy: y - exoNaturalTop(card), id: pointerId };
   card.classList.add("dragging");
-  grip.setPointerCapture(ev.pointerId);
-  let scrollTimer = null;
-  const onMove = e => {
-    const y = e.clientY;
-    const others = Array.from(list.children).filter(c => c !== card);
-    let before = null;
-    for(const c of others){ const r = c.getBoundingClientRect(); if(y < r.top + r.height / 2){ before = c; break; } }
-    if(card.nextSibling !== before) list.insertBefore(card, before);
-    clearInterval(scrollTimer);
-    if(y < 90) scrollTimer = setInterval(() => scrollBy(0, -12), 16);
-    else if(y > innerHeight - 90) scrollTimer = setInterval(() => scrollBy(0, 12), 16);
-  };
-  const onUp = () => {
-    clearInterval(scrollTimer);
-    grip.removeEventListener("pointermove", onMove);
-    grip.removeEventListener("pointerup", onUp);
-    grip.removeEventListener("pointercancel", onUp);
-    card.classList.remove("dragging");
-    const order = Array.from(list.children).map(c => +c.dataset.i);
+  document.body.classList.add("exo-dragging");
+  card.style.transition = dragReduce ? "none" : "transform .15s ease";
+  exoPlace();
+  setTimeout(() => { if(exoDrag?.card === card) card.style.transition = "none"; }, 160);
+  navigator.vibrate?.(12);
+}
+function exoEnd(){
+  if(!exoDrag) return;
+  const { card } = exoDrag;
+  exoDrag = null;
+  cancelAnimationFrame(exoScrollRaf); exoScrollRaf = 0;
+  document.body.classList.remove("exo-dragging");
+  card.style.transition = dragReduce ? "none" : `transform ${DRAG_ANIM}ms cubic-bezier(.2,.8,.2,1)`;
+  card.style.transform = "";
+  exoSuppressClick = true; setTimeout(() => { exoSuppressClick = false; }, 350);
+  setTimeout(() => {
+    card.classList.remove("dragging"); card.style.transition = "";
+    const list = $("#exos");
+    const order = [...list.children].filter(c => c.classList.contains("exo")).map(c => +c.dataset.i);
     if(order.some((v, k) => v !== k)){
       S.exercices = order.map(k => S.exercices[k]);
       persist();
     }
     renderExos();
+  }, dragReduce ? 0 : DRAG_ANIM);
+}
+const EXO_NO_PRESS = "input, textarea, select, a, label, button:not(.thumb), .stepper, details, summary, [contenteditable]";
+function exoPointerDown(ev){
+  if(ev.button > 0 || exoDrag) return;
+  const card = ev.target.closest(".exo");
+  if(!card) return;
+  if(ev.target.closest(".grip")){
+    ev.preventDefault();
+    exoPress = { card, x: ev.clientX, y: ev.clientY, id: ev.pointerId };
+    exoBegin(card, ev.clientY, ev.pointerId);
+    return;
+  }
+  if(ev.target.closest(EXO_NO_PRESS)) return;
+  exoPress = { card, x: ev.clientX, y: ev.clientY, id: ev.pointerId };
+  card.classList.add("pressing");
+  exoPress.timer = setTimeout(() => {
+    if(exoPress?.card !== card) return;
+    card.classList.remove("pressing");
+    exoBegin(card, exoPress.y, exoPress.id);
+  }, DRAG_LONG);
+}
+let exoDragBound = false;
+function bindExoDrag(list){
+  if(list._dragBound) return;
+  list._dragBound = true;
+  list.addEventListener("pointerdown", exoPointerDown);
+  list.addEventListener("click", e => { if(exoSuppressClick){ e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+  list.addEventListener("contextmenu", e => { if(exoPress || exoDrag) e.preventDefault(); });
+  if(exoDragBound) return;
+  exoDragBound = true;
+  addEventListener("pointermove", e => {
+    if(exoDrag && e.pointerId === exoDrag.id){
+      exoDrag.py = e.clientY; exoPlace(); exoHit();
+      if(!exoScrollRaf) exoScrollRaf = requestAnimationFrame(exoAutoScroll);
+      return;
+    }
+    if(exoPress && e.pointerId === exoPress.id && Math.hypot(e.clientX - exoPress.x, e.clientY - exoPress.y) > 10){
+      clearTimeout(exoPress.timer); exoPress.card.classList.remove("pressing"); exoPress = null;
+    }
+  }, { passive: true });
+  const up = e => {
+    if(!exoPress || e.pointerId !== exoPress.id) return;
+    clearTimeout(exoPress.timer); exoPress.card.classList.remove("pressing"); exoPress = null;
+    exoEnd();
   };
-  grip.addEventListener("pointermove", onMove);
-  grip.addEventListener("pointerup", onUp);
-  grip.addEventListener("pointercancel", onUp);
+  addEventListener("pointerup", up);
+  addEventListener("pointercancel", up);
+  document.addEventListener("touchmove", e => { if(exoDrag) e.preventDefault(); }, { passive: false });
 }
 
 function majLieu(){
