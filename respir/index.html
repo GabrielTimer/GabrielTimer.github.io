@@ -262,18 +262,20 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
 </div>
 
 <dialog id="dlg" aria-label="Réglages">
-  <h3>Réglages</h3>
+  <h3 id="dlgTitle">Réglages</h3>
   <div id="customBlock">
     <div class="set"><div class="s-l">Inspiration</div><div class="step"><button type="button" data-k="inhale" data-d="-1" aria-label="Moins">−</button><output id="o-inhale"></output><button type="button" data-k="inhale" data-d="1" aria-label="Plus">+</button></div></div>
-    <div class="set"><div class="s-l">Rétention<small>poumons pleins</small></div><div class="step"><button type="button" data-k="hold" data-d="-1" aria-label="Moins">−</button><output id="o-hold"></output><button type="button" data-k="hold" data-d="1" aria-label="Plus">+</button></div></div>
+    <div class="set"><div class="s-l">Apnée<small>poumons pleins</small></div><div class="step"><button type="button" data-k="hold" data-d="-1" aria-label="Moins">−</button><output id="o-hold"></output><button type="button" data-k="hold" data-d="1" aria-label="Plus">+</button></div></div>
     <div class="set"><div class="s-l">Expiration</div><div class="step"><button type="button" data-k="exhale" data-d="-1" aria-label="Moins">−</button><output id="o-exhale"></output><button type="button" data-k="exhale" data-d="1" aria-label="Plus">+</button></div></div>
   </div>
+  <div id="soundBlock">
   <div class="set"><div class="s-l">Sons<small>en haut et en bas de la colonne</small></div><label class="switch"><input type="checkbox" id="t-bells"><i></i></label></div>
   <div class="vol" id="v-bells-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5Z"/><path d="M16.5 9a4 4 0 0 1 0 6"/></svg><input type="range" id="v-bells" min="0" max="100" step="5" aria-label="Volume des sons"><output id="o-bells"></output></div>
   <div class="set"><div class="s-l">Fond sonore<small>bruit des vagues · enregistrement de Luftrum, licence CC BY</small></div><label class="switch"><input type="checkbox" id="t-ambient"><i></i></label></div>
   <div class="vol" id="v-ambient-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5v5h4l5 4.5v-14L8 9.5Z"/><path d="M16.5 9a4 4 0 0 1 0 6"/></svg><input type="range" id="v-ambient" min="0" max="100" step="5" aria-label="Volume du fond sonore"><output id="o-ambient"></output></div>
   <div class="set"><div class="s-l">Voix<small>« inspirez », « expirez » les premières fois</small></div><label class="switch"><input type="checkbox" id="t-voice"><i></i></label></div>
   <div class="set"><div class="s-l">Vibrations</div><label class="switch"><input type="checkbox" id="t-vibe"><i></i></label></div>
+  </div>
   <div class="d-foot"><button class="ok" type="button" id="dlgOk">Valider</button></div>
 </dialog>
 
@@ -602,7 +604,7 @@ function renderModes(){
     <button class="pill" type="button" data-mode="${k}" aria-pressed="${k === mode}" title="${m.name}">${m.short ? `<span class="nm nm-l">${m.name}</span><span class="nm nm-s">${m.short}</span>` : `<span class="nm">${m.name}</span>`}<small>${m.inhale}${m.hold ? " · " + m.hold : ""} · ${m.exhale}</small></button>`).join("");
   $("modes").querySelectorAll("[data-mode]").forEach(b => b.onclick = () => {
     mode = b.dataset.mode; renderModes();
-    if(mode === "custom") openSettings();
+    if(mode === "custom") openSettings("rhythm");
   });
 }
 function renderDurations(){
@@ -611,10 +613,16 @@ function renderDurations(){
   $("durations").querySelectorAll("[data-min]").forEach(b => b.onclick = () => { minutes = Number(b.dataset.min); renderDurations(); });
 }
 
-function openSettings(){
+/* Deux fenêtres distinctes : « Perso » = uniquement le rythme ;
+   bouton Réglages = uniquement sons, fond sonore, voix, vibrations. */
+function openSettings(kind){
   const d = $("dlg");
   const c = MODES.custom;
-  $("customBlock").style.display = mode === "custom" ? "" : "none";
+  const rhythm = kind === "rhythm";
+  $("customBlock").style.display = rhythm ? "" : "none";
+  $("soundBlock").style.display = rhythm ? "none" : "";
+  $("dlgTitle").textContent = rhythm ? "Rythme personnalisé" : "Réglages";
+  d.setAttribute("aria-label", rhythm ? "Rythme personnalisé" : "Réglages");
   const out = () => { ["inhale", "hold", "exhale"].forEach(k => $("o-" + k).textContent = c[k] + " s"); };
   out();
   d.querySelectorAll("[data-k]").forEach(b => b.onclick = () => {
@@ -651,7 +659,7 @@ function openSettings(){
   });
   d.showModal();
 }
-$("settings").onclick = openSettings;
+$("settings").onclick = () => openSettings("sound");
 $("dlgOk").onclick = () => $("dlg").close();
 $("dlg").addEventListener("click", e => { if(e.target === $("dlg")) $("dlg").close(); });
 
