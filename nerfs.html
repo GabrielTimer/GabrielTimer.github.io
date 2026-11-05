@@ -28,7 +28,7 @@ import { mountNerfs, NERFS_CSS } from "/assets/nerfs-ui.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
-mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+mountShell({ role:"kine", active:"", back:"history" });
 const st = document.createElement("style"); st.textContent = NERFS_CSS; document.head.append(st);
 const app = $("#app");
 app.innerHTML = `<div class="page-head"><h1>Atlas des nerfs</h1><p class="lead">Dermatomes, territoires des nerfs périphériques, racines, muscles et réflexes. Le même outil se trouve dans le bilan, où vous pouvez noter vos constats.</p></div><section class="panel atlas"><div id="nf"></div></section>`;

@@ -16,8 +16,7 @@ const C = await import("../cloud.js");
 const B = await import("../bilan-core.js");
 const TC = await import("../tests-catalogue.js");
 const BC = await import("../bodychart.js");
-const NF = await import("../nerfs-ui.js");
-{ const st = document.createElement("style"); st.textContent = BC.BODY_CSS + NF.NERFS_CSS; document.head.append(st); }
+{ const st = document.createElement("style"); st.textContent = BC.BODY_CSS; document.head.append(st); }
 
 const cle = params.get("patient");
 let id = params.get("id") || null;
@@ -156,11 +155,6 @@ function render(){
           </div>
         </section>
 
-        <section class="panel">
-          <div class="panel-head"><h2>Examen neurologique</h2><span class="badge">racines · nerfs · moteur</span></div>
-          <p class="hint" style="margin-bottom:10px">Touchez un territoire pour voir le nerf ou la racine, puis notez vos constats (sensibilité, force, réflexe). Ils s'ajoutent au résumé et au PDF.</p>
-          <div id="neuro"></div>
-        </section>
 
         <section class="panel">
           <div class="panel-head"><h2>Mesures</h2><span class="badge">scores validés</span><span class="spacer"></span><button class="btn sm" type="button" id="a-scores">${icon("download")}Reprendre les réponses du patient</button></div>
@@ -197,8 +191,6 @@ function render(){
         <div id="danger"></div>
       </div>
     </div>`;
-  S.neuro = S.neuro || {};
-  NF.mountNerfs($("#neuro"), { state:S.neuro, onChange:() => { changed(); } });
   drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawTF(); drawQReco(); drawDN4(); drawEvo(); drawResume(); drawDanger();
   setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
 }

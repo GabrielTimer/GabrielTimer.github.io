@@ -351,6 +351,7 @@ async function renderKine(user){
       <a data-tile="modeles" class="tile" href="/programmes_admin.html"><span class="t-ico">${icon("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
       <a data-tile="exercices" class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
       <a data-tile="course" class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
+      <a data-tile="ressources" class="tile" href="/ressources.html"><span class="t-ico">${icon("body")}</span><strong>Ressources</strong><span class="t-sub">Territoires nerveux, tests, questionnaires</span></a>
       <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
       <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>

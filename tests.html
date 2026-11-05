@@ -34,7 +34,7 @@ import { SPECIALITES } from "/assets/classement.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
-mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+mountShell({ role:"kine", active:"", back:"history" });
 const B = await import("/assets/bilan-core.js");
 const TC = await import("/assets/tests-catalogue.js");
 const K = await B.loadClinic();
