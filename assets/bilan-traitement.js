@@ -155,7 +155,10 @@ export function composer(lib, { pathos = [], zones = [], lieu = "HEP", niveau = 
   const postOnly = e => /b[ée]quille|d[ée]ambulateur|canne|post-?op/i.test(e.nom || "") || ((e.pathos || []).includes("Post-opératoire") && !(e.pathos || []).some(p => pathos.includes(p)));
   /* Exercices en piscine : jamais proposés d'office */
   const eau = e => /dans l'eau|piscine|aquatique|en bassin/i.test(e.nom || "");
-  const ok = lib.filter(e => e.source === src && e.image && visible(e) && !eau(e) && (postop || !postOnly(e)));
+  /* À la maison : très peu de matériel (élastique, chaise, serviette, bâton, petit poids…).
+     Pas de swiss ball, poulie, enrouleur, barre souple, plateau ou disque d'équilibre. */
+  const lourd = e => /swiss|ballon suisse|balle suisse|poulie|pulley|enrouleur|barre souple|barre r[ée]sistive|disque|bosu|plateau|trampoline/i.test(`${e.nom || ""} ${[].concat(e.materiel || []).join(" ")}`);
+  const ok = lib.filter(e => e.source === src && e.image && visible(e) && !eau(e) && (postop || !postOnly(e)) && (src !== "HEP" || !lourd(e)));
   const rand = rng(seed);
   const score = e => {
     let s = 0;

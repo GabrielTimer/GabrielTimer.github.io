@@ -1486,60 +1486,81 @@ export const MODELES_BASE = [
 "series": 1,
 "exercices": [
 {
-"id": "516",
+"id": "105",
 "source": "HEP",
-"nom": "Flexion d'épaule avec poulie",
-"image": "/exercises/images/HEP/shoulder-flexion-pulley.jpg",
-"consignes": [
-"Tenez une poignée dans chaque main, devant vous.",
-"Tirez avec le bras valide pour monter le bras douloureux vers l'avant, sans le contracter.",
-"Montez jusqu'à un étirement confortable, puis redescendez."
-],
-"position": "Assis ou debout, poulie fixée en haut d'une porte",
-"youtube": "http://www.youtube.com/embed/Os2LghEPmI4",
 "type": "timer",
-"conseil": "Tenez une poignée dans chaque main, devant vous.<br>Tirez avec le bras valide pour monter le bras douloureux vers l'avant, sans le contracter.<br>Montez jusqu'à un étirement confortable, puis redescendez.",
-"reps": 2,
+"nom": "Flexion d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409592168-shoulder-flexion-prom-with-stick.jpg",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton vers l'avant et le haut.<br>Allez jusqu'à un étirement confortable, puis redescendez doucement.",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton vers l'avant et le haut.",
+"Allez jusqu'à un étirement confortable, puis redescendez doucement."
+],
+"position": "Debout, un bâton tenu à deux mains devant vous",
+"precautions": [
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Bâton"
+],
+"youtube": "http://www.youtube.com/embed/b3yK9oLbnpU",
+"vimeo": "https://vimeo.com/104965986",
 "ex": 45,
 "repos": 10,
+"reps": 2,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 },
 {
-"id": "514",
+"id": "106",
 "source": "HEP",
-"nom": "Abduction d'épaule avec poulie",
-"image": "/exercises/images/HEP/shoulder_abduction-pulley.jpg",
+"type": "timer",
+"nom": "Abduction d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409591683-shoulder-abduction2.jpg",
+"conseil": "Le bras douloureux est détendu.<br>Avec le bras valide, poussez le bâton pour écarter le bras douloureux sur le côté.<br>Montez jusqu'à un étirement confortable, puis redescendez.",
 "consignes": [
-"Tenez une poignée dans chaque main, bras le long du corps.",
-"Tirez avec le bras valide pour monter le bras douloureux sur le côté, sans le contracter.",
+"Le bras douloureux est détendu.",
+"Avec le bras valide, poussez le bâton pour écarter le bras douloureux sur le côté.",
 "Montez jusqu'à un étirement confortable, puis redescendez."
 ],
-"position": "Assis ou debout, poulie fixée en haut d'une porte",
-"youtube": "http://www.youtube.com/embed/qlO-kdvViCo",
-"type": "timer",
-"conseil": "Tenez une poignée dans chaque main, bras le long du corps.<br>Tirez avec le bras valide pour monter le bras douloureux sur le côté, sans le contracter.<br>Montez jusqu'à un étirement confortable, puis redescendez.",
-"reps": 2,
+"position": "Debout, un bâton tenu à deux mains",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Bâton"
+],
+"youtube": "http://www.youtube.com/embed/EJa7m2LVUYU",
+"vimeo": "https://vimeo.com/104968232",
 "ex": 45,
 "repos": 10,
+"reps": 2,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 },
 {
-"id": "515",
+"id": "107",
 "source": "HEP",
-"nom": "Rotation externe d'épaule avec poulie",
-"image": "/exercises/images/HEP/shoulder-external-rotation-pulley.jpg",
+"type": "timer",
+"nom": "Rotation externe d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409592073-shoulder-external-rotation2.jpg",
+"conseil": "Coude du côté douloureux plié à 90°, collé au corps, main détendue sur le bâton.<br>Avec l'autre main, poussez le bâton pour faire tourner l'avant-bras douloureux vers l'extérieur.<br>Allez jusqu'à un étirement confortable, puis revenez.",
 "consignes": [
-"Coude du côté douloureux plié à 90°, collé au corps.",
-"Tirez avec le bras valide pour faire tourner l'avant-bras douloureux vers l'extérieur.",
+"Coude du côté douloureux plié à 90°, collé au corps, main détendue sur le bâton.",
+"Avec l'autre main, poussez le bâton pour faire tourner l'avant-bras douloureux vers l'extérieur.",
 "Allez jusqu'à un étirement confortable, puis revenez."
 ],
-"position": "Assis ou debout, poulie fixée sur la porte, légèrement derrière vous",
-"youtube": "http://www.youtube.com/embed/0L8aGVwBlck",
-"type": "timer",
-"conseil": "Coude du côté douloureux plié à 90°, collé au corps.<br>Tirez avec le bras valide pour faire tourner l'avant-bras douloureux vers l'extérieur.<br>Allez jusqu'à un étirement confortable, puis revenez.",
-"reps": 2,
+"position": "Debout ou allongé, un bâton tenu à deux mains",
+"precautions": [
+"Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Bâton"
+],
+"youtube": "http://www.youtube.com/embed/9baME663oPs",
+"vimeo": "https://vimeo.com/104965492",
 "ex": 45,
 "repos": 10,
+"reps": 2,
 "conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
 },
 {
@@ -1753,23 +1774,28 @@ export const MODELES_BASE = [
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
-"id": "523",
+"id": "433",
 "source": "HEP",
-"nom": "Torsion excentrique avec barre souple (tennis elbow)",
-"image": "/exercises/images/HEP/tennis-elbow-resistivebar.jpg",
-"consignes": [
-"Tenez le bas de la barre avec la main du côté à travailler, poignet relevé.",
-"Attrapez le haut de la barre avec l'autre main, paume vers l'avant, et tordez-la.",
-"Tendez les bras devant vous en gardant la torsion.",
-"Laissez lentement la barre se détordre en abaissant le poignet du côté travaillé."
-],
-"position": "Assis, barre souple (type Flexbar) tenue verticalement devant vous",
-"youtube": "http://www.youtube.com/embed/f6VYt5dTiLY",
 "type": "timer",
-"conseil": "Tenez le bas de la barre avec la main du côté à travailler, poignet relevé.<br>Attrapez le haut de la barre avec l'autre main, paume vers l'avant, et tordez-la.<br>Tendez les bras devant vous en gardant la torsion.<br>Laissez lentement la barre se détordre en abaissant le poignet du côté travaillé.",
-"reps": 3,
+"nom": "Torsion de serviette en extension du poignet",
+"image": "/exercises/images/HEP/1477662688-towel-twist-with-wrist-extension.jpg",
+"conseil": "Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.<br>Changez de sens.",
+"consignes": [
+"Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.",
+"Changez de sens."
+],
+"position": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
+"precautions": [
+"Evitez les mouvements brusques et respectez la douleur."
+],
+"materiel": [
+"Serviette"
+],
+"youtube": "http://www.youtube.com/embed/jcDYlCgMiEs",
+"vimeo": "https://vimeo.com/188454717",
 "ex": 40,
 "repos": 20,
+"reps": 3,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
 },
 {
@@ -17269,48 +17295,51 @@ export const MODELES_BASE = [
 "conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
 },
 {
-"id": "513",
+"id": "434",
 "source": "HEP",
 "type": "timer",
-"nom": "Renforcement en flexion du poignet avec enrouleur de poids",
-"image": "/exercises/images/HEP/wrist-flex-weight-rollup.jpg",
-"conseil": "Enroulez la corde en tournant le bâton, poignets vers le bas, pour faire monter le poids.<br>Déroulez lentement pour le faire redescendre.",
+"nom": "Torsion de serviette en flexion du poignet",
+"image": "/exercises/images/HEP/1477662781-towel-twist-with-wrist-flexion.jpg",
+"conseil": "Tordez la serviette comme pour l'essorer, les poignets s'enroulant vers le bas.<br>Changez de sens.",
 "consignes": [
-"Enroulez la corde en tournant le bâton, poignets vers le bas, pour faire monter le poids.",
-"Déroulez lentement pour le faire redescendre."
+"Tordez la serviette comme pour l'essorer, les poignets s'enroulant vers le bas.",
+"Changez de sens."
 ],
-"position": "Debout, bras tendus devant vous, bâton avec une corde et un poids",
+"position": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
 "precautions": [
-"Evitez les mouvements brusques."
+"Eviter les mouvements brusques."
 ],
 "materiel": [
-"Élastique"
+"Serviette"
 ],
-"youtube": "http://www.youtube.com/embed/dZ2_lU5Ur2Q",
+"youtube": "http://www.youtube.com/embed/emcEPwM70Go",
+"vimeo": "https://vimeo.com/188454718",
 "ex": 40,
 "repos": 15,
 "reps": 3,
 "conseil_kine": "Descente lente (3 secondes) sur les exercices de poignet. Augmenter la charge chaque semaine si bien toléré."
 },
 {
-"id": "543",
+"id": "58",
 "source": "HEP",
 "type": "timer",
-"nom": "Flexion du poignet avec barre souple",
-"image": "/exercises/images/HEP/wrist-flexion-resistivebar.jpg",
-"conseil": "Tordez la barre en pliant le poignet travaillé vers l'avant.<br>Revenez lentement.",
+"nom": "Flexion du poignet avec poids",
+"image": "/exercises/images/HEP/1408880746-wrist-flexion-with-weight.jpg",
+"conseil": "Paume vers le haut.<br>Pliez le poignet vers le haut.<br>Redescendez lentement.",
 "consignes": [
-"Tordez la barre en pliant le poignet travaillé vers l'avant.",
-"Revenez lentement."
+"Paume vers le haut.",
+"Pliez le poignet vers le haut.",
+"Redescendez lentement."
 ],
-"position": "Assis, barre souple tenue à deux mains devant vous",
+"position": "Avant-bras posé sur une table, main dans le vide, un poids dans la main",
 "precautions": [
-"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+"Évitez les mouvements brusques. Respectez une douleur inférieure à 3/10. Ne rebondissez pas pendant l'étirement."
 ],
 "materiel": [
-"Barre résistive"
+"Haltère"
 ],
-"youtube": "http://www.youtube.com/embed/Bfyry148ors",
+"youtube": "http://www.youtube.com/embed/svgTwWhlGws",
+"vimeo": "https://vimeo.com/104201714",
 "ex": 40,
 "repos": 15,
 "reps": 3,

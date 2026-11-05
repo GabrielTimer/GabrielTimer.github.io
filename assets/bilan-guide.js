@@ -247,7 +247,7 @@ export function mountGuide(app, ctx){
 
         <section class="g-card">
           <h3>Programme d'exercices</h3>
-          <div class="g-q"><div class="g-qt">Où ?</div><div class="g-chips">${[["HEP", "À la maison"], ["CABINET", "Au cabinet"]].map(([v, l]) => `<button type="button" class="g-chip" data-gtx="lieu" data-v="${v}" aria-pressed="${lieu === v}">${l}</button>`).join("")}</div></div>
+          <div class="g-q"><div class="g-qt">Où ?</div><div class="g-chips">${[["HEP", "À la maison · peu de matériel"], ["CABINET", "Au cabinet · tout le matériel"]].map(([v, l]) => `<button type="button" class="g-chip" data-gtx="lieu" data-v="${v}" aria-pressed="${lieu === v}">${l}</button>`).join("")}</div></div>
           <div class="g-q"><div class="g-qt">Niveau de départ</div>${opt("niveau", [1, 2, 3], p.niveau, a.niveau, v => "Niveau " + v)}</div>
           ${t.prog ? `<p class="g-ori">${icon("check")}<span>Programme choisi : <strong>${esc(t.prog.nom)}</strong></span></p>` : ""}
           ${!ui.modeles ? `<p class="g-hint">${icon("clock")} Recherche des modèles et de la bibliothèque…</p>` : `
