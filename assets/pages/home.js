@@ -343,16 +343,16 @@ async function renderKine(user){
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(KINE.nom))}</h1></div>
     <div id="inbox-banner"></div>
     <div class="tiles">
-      <button class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
-      <a class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
-      <a class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
-      <a class="tile" href="/patients.html"><span class="t-ico">${icon("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
-      <a class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
-      <a class="tile" href="/programmes_admin.html"><span class="t-ico">${icon("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
-      <a class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
-      <a class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
-      <a class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
-      <a class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
+      <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
+      <a data-tile="messages" class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
+      <a data-tile="creer" class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
+      <a data-tile="patients" class="tile" href="/patients.html"><span class="t-ico">${icon("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
+      <a data-tile="libre" class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
+      <a data-tile="modeles" class="tile" href="/programmes_admin.html"><span class="t-ico">${icon("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
+      <a data-tile="exercices" class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
+      <a data-tile="course" class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
+      <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
+      <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>
@@ -360,6 +360,7 @@ async function renderKine(user){
     </div>
     <footer class="app-foot">${appMarkHTML()}</footer>`;
 
+  import("../tiles-reorder.js").then(R => R.enableTileReorder(document.querySelector(".tiles"), { key:"gt_home_tiles_kine" })).catch(() => {});
   const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
     const p = await newPatientSheet();
