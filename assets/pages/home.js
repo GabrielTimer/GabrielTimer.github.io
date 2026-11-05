@@ -237,17 +237,42 @@ async function renderPatient(ctx){
       <div class="kpi"><span class="k-val">${lastEva === null ? "–" : `<img src="${evaFace(lastEva)}" alt="">${lastEva}`}${trendIco}</span><span class="k-lab">douleur récente</span></div>
     </div>`;
 
-  const seulesHTML = seules.length ? `
+  /* Séances libres (sans dates) : même présentation que les séances programmées. */
+  const vignettes = (exos, n = 4) => exos.slice(0, n).map(e => exoImageHTML(exerciseImage(e), "")).join("") + (exos.length > n ? `<span class="more">+${exos.length - n}</span>` : "");
+  const seuleHero = s => {
+    const exos = s.data.exercices || [];
+    return `
+      <section class="hero" aria-labelledby="hero-${esc(s.id)}">
+        <div class="hero-top">
+          <span class="tag">${icon(s.terminee ? "checkCircle" : "play")}${s.terminee ? "Déjà faite, à refaire quand vous voulez" : "À faire quand vous voulez"}</span>
+        </div>
+        <h2 class="hero-title" id="hero-${esc(s.id)}">${esc(s.data.nom || s.nom || "Séance")}</h2>
+        <div class="hero-meta">
+          <span>${icon("clock")}${esc(fmtDuree(sessionDuration(s.data)))}</span>
+          <span>${icon("dumbbell")}${plural(exos.length, "exercice")}</span>
+          ${Number(s.data.series) > 1 ? `<span>${icon("repeat")}${plural(Number(s.data.series), "tour")}</span>` : ""}
+        </div>
+        <div class="thumbs" aria-hidden="true">${vignettes(exos)}</div>
+        <button class="btn sun big block" type="button" data-seule="${esc(s.id)}">${icon("play")}Commencer la séance</button>
+      </section>`;
+  };
+  const seuleCarte = s => {
+    const exos = s.data.exercices || [];
+    return `
+      <button class="seule-card" type="button" data-seule="${esc(s.id)}">
+        <span class="sc-head"><span class="sc-title">${esc(s.data.nom || s.nom || "Séance")}</span><span class="sc-play">${icon("play")}</span></span>
+        <span class="sc-sub">${esc(fmtDuree(sessionDuration(s.data)))}, ${plural(exos.length, "exercice")}${s.terminee ? ", déjà faite" : ""}</span>
+        <span class="sc-thumbs" aria-hidden="true">${vignettes(exos, 5)}</span>
+      </button>`;
+  };
+  // Pas de séance programmée : la première séance libre prend la place de la grande carte.
+  const seuleEnTete = !next && !hero && seules.length ? seules[0] : null;
+  if(seuleEnTete) hero = seuleHero(seuleEnTete);
+  const autresSeules = seules.filter(s => s !== seuleEnTete);
+  const seulesHTML = autresSeules.length ? `
     <section class="section">
-      <div class="section-title">Séances à faire quand vous voulez</div>
-      <div class="list">
-        ${seules.map(s => `
-          <button class="list-item" type="button" data-seule="${esc(s.id)}">
-            <span class="li-ico">${icon("play")}</span>
-            <span class="li-main"><span class="li-title">${esc(s.data.nom || s.nom || "Séance")}</span><span class="li-sub">${esc(fmtDuree(sessionDuration(s.data)))}, ${plural((s.data.exercices || []).length, "exercice")}${s.terminee ? ", déjà faite" : ""}</span></span>
-            <span class="li-end">${icon("chevron")}</span>
-          </button>`).join("")}
-      </div>
+      <div class="section-title">${seuleEnTete ? "Autres séances à faire quand vous voulez" : "Séances à faire quand vous voulez"}</div>
+      <div class="seule-grid">${autresSeules.map(seuleCarte).join("")}</div>
     </section>` : "";
 
   const futures = seances.filter(s => !s.terminee && s.datePrevue && new Date(s.datePrevue) >= today).length;

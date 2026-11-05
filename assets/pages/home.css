@@ -113,3 +113,16 @@
 .inbox-banner .t-ico svg{ width:22px; height:22px; }
 .inbox-banner .li-main{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
 .inbox-banner .small{ color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Séances libres en cartes illustrées */
+.seule-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+.seule-card{ display:flex; flex-direction:column; gap:6px; text-align:left; font:inherit; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:16px; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
+.seule-card:hover{ border-color:color-mix(in srgb,var(--lagon) 50%,var(--line)); box-shadow:0 6px 18px color-mix(in srgb,var(--lagon) 14%,transparent); }
+.sc-head{ display:flex; align-items:center; gap:10px; }
+.sc-title{ flex:1; font-weight:800; font-size:1.05rem; }
+.sc-play{ width:38px; height:38px; border-radius:50%; background:var(--lagon); color:var(--on-lagon); display:grid; place-items:center; flex:none; }
+.sc-play svg{ width:18px; height:18px; }
+.sc-sub{ color:var(--ink-2); font-size:var(--fs-sm); }
+.sc-thumbs{ display:flex; gap:6px; margin-top:6px; }
+.sc-thumbs > *{ width:48px; height:48px; border-radius:10px; flex:none; background:#fff; object-fit:contain; border:1px solid var(--line); }
+.sc-thumbs .more{ display:grid; place-items:center; background:var(--surface-2); color:var(--ink-2); font-weight:800; font-size:var(--fs-sm); }
