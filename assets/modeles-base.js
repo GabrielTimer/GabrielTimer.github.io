@@ -14609,6 +14609,46 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "NEURO_04",
+"source": "CABINET",
+"nom": "Marche à grands pas",
+"image": "/exercises/images/neuro/marche-grands-pas.webp",
+"consignes": [
+"Marcher dans un couloir en faisant de grands pas",
+"Poser le talon en premier",
+"Balancer largement les bras",
+"Compter les pas à voix haute pour garder le rythme"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher dans un couloir en faisant de grands pas<br>Poser le talon en premier<br>Balancer largement les bras<br>Compter les pas à voix haute pour garder le rythme",
+"reps": 3,
+"ex": 60,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_14",
+"source": "CABINET",
+"nom": "Étirement du mollet à la sangle",
+"image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+"consignes": [
+"Assise au sol ou sur un lit, jambe tendue devant soi",
+"Passer une sangle sous l'avant-pied",
+"Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+"Tenir 30 secondes en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au sol ou sur un lit, jambe tendue devant soi<br>Passer une sangle sous l'avant-pied<br>Tirer doucement la sangle vers soi avec les deux mains, dos droit<br>Tenir 30 secondes en respirant",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": ""
 }
 ]
 },
@@ -14679,6 +14719,46 @@ export const MODELES_BASE = [
 "reps": 10,
 "ex": 3,
 "repos": 3,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_10",
+"source": "CABINET",
+"nom": "Demi-tour en plusieurs pas",
+"image": "/exercises/images/neuro/demi-tour.webp",
+"consignes": [
+"Debout près d'un appui",
+"Faire demi-tour en plusieurs petits pas en dessinant un arc",
+"Ne pas pivoter sur un seul pied",
+"Tourner dans les deux sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un appui<br>Faire demi-tour en plusieurs petits pas en dessinant un arc<br>Ne pas pivoter sur un seul pied<br>Tourner dans les deux sens",
+"reps": 6,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_17",
+"source": "CABINET",
+"nom": "Transfert de poids debout",
+"image": "/exercises/images/neuro/transfert-poids-debout.webp",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier, pieds écartés largeur du bassin",
+"Déplacer lentement le poids du corps sur la jambe atteinte",
+"Tenir 3 secondes, bassin droit",
+"Revenir au centre puis de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier, pieds écartés largeur du bassin<br>Déplacer lentement le poids du corps sur la jambe atteinte<br>Tenir 3 secondes, bassin droit<br>Revenir au centre puis de l'autre côté",
+"reps": 10,
+"ex": 3,
+"repos": 20,
 "conseil_kine": ""
 }
 ]
@@ -14861,6 +14941,46 @@ export const MODELES_BASE = [
 "ex": 1,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "NEURO_13",
+"source": "CABINET",
+"nom": "Releveurs du pied à l'élastique assis",
+"image": "/exercises/images/neuro/releveurs-elastique.webp",
+"consignes": [
+"Assis, jambe tendue devant soi, talon posé au sol",
+"Élastique autour de l'avant-pied, l'autre extrémité tenue par une personne ou attachée à un pied de table devant",
+"Remonter la pointe du pied vers soi contre l'élastique",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, jambe tendue devant soi, talon posé au sol<br>Élastique autour de l'avant-pied, l'autre extrémité tenue par une personne ou attachée à un pied de table devant<br>Remonter la pointe du pied vers soi contre l'élastique<br>Revenir lentement",
+"reps": 10,
+"ex": 3,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": ""
 }
 ]
 },
@@ -14931,6 +15051,1808 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "CHEVILLE_05",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds",
+"image": "/exercises/images/cheville/pointepieds.png",
+"consignes": [
+"Monter sur la pointe des pieds",
+"Marquer un court maintien en haut",
+"Redescendre lentement",
+"S'aider du mur pour l'équilibre si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Monter sur la pointe des pieds<br>Marquer un court maintien en haut<br>Redescendre lentement<br>S'aider du mur pour l'équilibre si besoin",
+"reps": 15,
+"ex": 1,
+"repos": 10,
+"conseil_kine": ""
+},
+{
+"id": "MAIN_06",
+"source": "CABINET",
+"nom": "Pince pouce-doigts avec pâte",
+"image": "/exercises/images/main/pince-pate.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index",
+"Pincer la pâte en 2 secondes",
+"Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire",
+"Garder le pouce bien arrondi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index<br>Pincer la pâte en 2 secondes<br>Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire<br>Garder le pouce bien arrondi",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "base_maladie_de_parkinson_1",
+"nom": "Maladie de Parkinson",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "254",
+"source": "HEP",
+"nom": "Rotation du tronc, allongé",
+"image": "/exercises/images/HEP/1424527396-trunk-rotation-exercise.jpg",
+"consignes": [
+"Gardez les épaules au sol.",
+"Laissez tomber les genoux d'un côté, aussi loin que confortable.",
+"Revenez et allez de l'autre côté."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds joints",
+"youtube": "http://www.youtube.com/embed/0Mi80lUhrNQ",
+"type": "timer",
+"conseil": "Gardez les épaules au sol.<br>Laissez tomber les genoux d'un côté, aussi loin que confortable.<br>Revenez et allez de l'autre côté.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "228",
+"source": "HEP",
+"nom": "Rotation du tronc, assis",
+"image": "/exercises/images/HEP/1408193555-seated-trunk-rotation.jpg",
+"consignes": [
+"Tournez le haut du corps d'un côté en gardant le bassin immobile.",
+"Aidez-vous du dossier pour aller un peu plus loin.",
+"Maintenez 10 à 15 secondes, puis changez de côté."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NYix1Y7CfXM",
+"type": "timer",
+"conseil": "Tournez le haut du corps d'un côté en gardant le bassin immobile.<br>Aidez-vous du dossier pour aller un peu plus loin.<br>Maintenez 10 à 15 secondes, puis changez de côté.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "227",
+"source": "HEP",
+"nom": "Extension thoracique, assis",
+"image": "/exercises/images/HEP/1408193340-seated-thoracic-extension.jpg",
+"consignes": [
+"Mains derrière la tête.",
+"Penchez-vous en arrière par-dessus le dossier, en regardant vers le plafond.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Assis sur une chaise à dossier bas",
+"youtube": "http://www.youtube.com/embed/wtzTdC1cmAY",
+"type": "timer",
+"conseil": "Mains derrière la tête.<br>Penchez-vous en arrière par-dessus le dossier, en regardant vers le plafond.<br>Maintenez 10 à 15 secondes.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "633",
+"source": "HEP",
+"nom": "Étirement des bras, mains jointes",
+"image": "/exercises/images/HEP/arm-stretch-hands-clasped.jpg",
+"consignes": [
+"Croisez les doigts devant vous, paumes tournées vers l'extérieur.",
+"Levez les bras vers le plafond aussi haut que possible sans douleur.",
+"Maintenez, puis relâchez."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/UvhHOn3wu_g",
+"type": "timer",
+"conseil": "Croisez les doigts devant vous, paumes tournées vers l'extérieur.<br>Levez les bras vers le plafond aussi haut que possible sans douleur.<br>Maintenez, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "167",
+"source": "HEP",
+"nom": "Pompage de cheville",
+"image": "/exercises/images/HEP/1407676907-ankle-pumps.jpg",
+"consignes": [
+"Tirez la pointe des pieds vers vous, puis poussez-la vers le bas.",
+"Enchaînez les mouvements à un rythme régulier, seule la cheville bouge."
+],
+"position": "Assis ou allongé, jambes tendues",
+"youtube": "http://www.youtube.com/embed/Dn3yMQ5B3FE",
+"type": "timer",
+"conseil": "Tirez la pointe des pieds vers vous, puis poussez-la vers le bas.<br>Enchaînez les mouvements à un rythme régulier, seule la cheville bouge.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+}
+]
+},
+{
+"id": "base_maladie_de_parkinson_2",
+"nom": "Maladie de Parkinson",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "248",
+"source": "HEP",
+"nom": "Extension du tronc, debout",
+"image": "/exercises/images/HEP/1408867966-standing-trunk-extension.jpg",
+"consignes": [
+"Posez les mains dans le bas du dos.",
+"Penchez-vous doucement en arrière en poussant le bassin vers l'avant.",
+"Revenez lentement."
+],
+"position": "Debout, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/y6zpPIgz_pk",
+"type": "timer",
+"conseil": "Posez les mains dans le bas du dos.<br>Penchez-vous doucement en arrière en poussant le bassin vers l'avant.<br>Revenez lentement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "557",
+"source": "HEP",
+"nom": "Étirement des pectoraux dans un encadrement de porte",
+"image": "/exercises/images/HEP/pec-stretch-doorway.jpg",
+"consignes": [
+"Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.",
+"Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.",
+"Maintenez."
+],
+"position": "Debout dans un encadrement de porte",
+"youtube": "http://www.youtube.com/embed/sJK-_Fmr5Fg",
+"type": "timer",
+"conseil": "Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.<br>Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "94",
+"source": "HEP",
+"nom": "Flexion de hanche, debout",
+"image": "/exercises/images/HEP/1408867705-standing-hip-flexion.jpg",
+"consignes": [
+"Tronc droit.",
+"Genou tendu, pointe du pied vers vous.",
+"Levez la jambe vers l'avant, sans vous pencher en arrière.",
+"Redescendez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/__5bdZ8K0-w",
+"type": "timer",
+"conseil": "Tronc droit.<br>Genou tendu, pointe du pied vers vous.<br>Levez la jambe vers l'avant, sans vous pencher en arrière.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+}
+]
+},
+{
+"id": "base_maladie_de_parkinson_3",
+"nom": "Maladie de Parkinson",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "332",
+"source": "HEP",
+"nom": "Se relever du sol",
+"image": "/exercises/images/HEP/1414150581-getting-up-off-floor_final.jpg",
+"consignes": [
+"Tournez-vous sur le côté pour vous mettre à quatre pattes.",
+"Avancez la bonne jambe et posez le pied au sol (un genou à terre).",
+"Posez les mains sur le genou avant et poussez pour vous redresser.",
+"Ramenez l'autre jambe pour vous mettre debout."
+],
+"position": "Assis au sol, genoux pliés",
+"youtube": "http://www.youtube.com/embed/a6cVEQDLR84",
+"type": "timer",
+"conseil": "Tournez-vous sur le côté pour vous mettre à quatre pattes.<br>Avancez la bonne jambe et posez le pied au sol (un genou à terre).<br>Posez les mains sur le genou avant et poussez pour vous redresser.<br>Ramenez l'autre jambe pour vous mettre debout.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "509",
+"source": "HEP",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"type": "timer",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "698",
+"source": "HEP",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
+"consignes": [
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
+],
+"position": "Debout sur une jambe, une chaise devant vous",
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
+"type": "timer",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+},
+{
+"id": "260",
+"source": "HEP",
+"nom": "Marche sur les talons",
+"image": "/exercises/images/HEP/1424534409-walking-on-heels.jpg",
+"consignes": [
+"Relevez les orteils et marchez sur les talons.",
+"Ne reculez pas les fesses."
+],
+"position": "Debout, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/ToaXazP8Lw8",
+"type": "timer",
+"conseil": "Relevez les orteils et marchez sur les talons.<br>Ne reculez pas les fesses.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Mouvements amples et rythmés, en comptant à voix haute."
+}
+]
+},
+{
+"id": "base_sclerose_en_plaques_1",
+"nom": "Sclérose en plaques",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "82",
+"source": "HEP",
+"nom": "Étirement du mollet, assis jambes tendues",
+"image": "/exercises/images/HEP/1406372063-calf-stertch-with-strap2.jpg",
+"consignes": [
+"Vous pouvez plier la jambe qui ne travaille pas.",
+"Passez une sangle ou une serviette autour de l'avant du pied.",
+"Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.",
+"Maintenez."
+],
+"position": "Assis, jambes tendues devant vous",
+"youtube": "http://www.youtube.com/embed/Quygqsbu-fw",
+"type": "timer",
+"conseil": "Vous pouvez plier la jambe qui ne travaille pas.<br>Passez une sangle ou une serviette autour de l'avant du pied.<br>Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "160",
+"source": "HEP",
+"nom": "Flexion dorsale de cheville avec élastique",
+"image": "/exercises/images/HEP/1407676535-ankle-dorsi-flexion-with-resistive-band.jpg",
+"consignes": [
+"Placez l'élastique sur le dessus du pied et fixez-le à un point solide devant vous.",
+"Gardez la jambe tendue et tirez la pointe du pied vers vous.",
+"Revenez lentement en contrôlant l'élastique."
+],
+"position": "Assis, jambe tendue, élastique fixé devant le pied",
+"youtube": "http://www.youtube.com/embed/DTmL53gq0Z0",
+"type": "timer",
+"conseil": "Placez l'élastique sur le dessus du pied et fixez-le à un point solide devant vous.<br>Gardez la jambe tendue et tirez la pointe du pied vers vous.<br>Revenez lentement en contrôlant l'élastique.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "99",
+"source": "HEP",
+"nom": "Extension du genou, assis",
+"image": "/exercises/images/HEP/1408192464-seated-knee-extension.jpg",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Tendez complètement le genou.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/GlFdeqRiW8U",
+"type": "timer",
+"conseil": "Tirez la pointe du pied vers vous.<br>Tendez complètement le genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "228",
+"source": "HEP",
+"nom": "Rotation du tronc, assis",
+"image": "/exercises/images/HEP/1408193555-seated-trunk-rotation.jpg",
+"consignes": [
+"Tournez le haut du corps d'un côté en gardant le bassin immobile.",
+"Aidez-vous du dossier pour aller un peu plus loin.",
+"Maintenez 10 à 15 secondes, puis changez de côté."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NYix1Y7CfXM",
+"type": "timer",
+"conseil": "Tournez le haut du corps d'un côté en gardant le bassin immobile.<br>Aidez-vous du dossier pour aller un peu plus loin.<br>Maintenez 10 à 15 secondes, puis changez de côté.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+}
+]
+},
+{
+"id": "base_sclerose_en_plaques_2",
+"nom": "Sclérose en plaques",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "509",
+"source": "HEP",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"type": "timer",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "96",
+"source": "HEP",
+"nom": "Abduction de hanche, debout",
+"image": "/exercises/images/HEP/1407678354-hip-abduction-standing.jpg",
+"consignes": [
+"Tronc droit et immobile.",
+"Genou tendu, pointe du pied vers vous.",
+"Écartez la jambe sur le côté en menant avec le talon.",
+"Revenez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/qSEFfZQRQkw",
+"type": "timer",
+"conseil": "Tronc droit et immobile.<br>Genou tendu, pointe du pied vers vous.<br>Écartez la jambe sur le côté en menant avec le talon.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+}
+]
+},
+{
+"id": "base_sclerose_en_plaques_3",
+"nom": "Sclérose en plaques",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "23",
+"source": "HEP",
+"nom": "Équilibre pieds en ligne (tandem)",
+"image": "/exercises/images/HEP/1426346890-tandem-stance_new.jpg",
+"consignes": [
+"Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.",
+"Tenez l'équilibre 10 à 15 secondes.",
+"Changez de pied devant."
+],
+"position": "Debout, à côté d'un support",
+"youtube": "http://www.youtube.com/embed/diqiKO9KN6o",
+"type": "timer",
+"conseil": "Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.<br>Tenez l'équilibre 10 à 15 secondes.<br>Changez de pied devant.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). S'arrêter avant la fatigue ; plutôt le matin, au frais."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "S'arrêter avant la fatigue ; plutôt le matin, au frais."
+}
+]
+},
+{
+"id": "base_hemiplegie_avc_1",
+"nom": "Hémiplégie (AVC)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "235",
+"source": "HEP",
+"nom": "Glissement sur table : flexion d'épaule",
+"image": "/exercises/images/HEP/1408201168-shoulder-flexion-table-slide.jpg",
+"consignes": [
+"Une serviette sous la main aide à glisser.",
+"Faites glisser le bras vers l'avant en penchant le tronc.",
+"Revenez lentement."
+],
+"position": "Assis face à une table, bras posé dessus, pouce vers le haut",
+"youtube": "http://www.youtube.com/embed/aQMOojsHXD4",
+"type": "timer",
+"conseil": "Une serviette sous la main aide à glisser.<br>Faites glisser le bras vers l'avant en penchant le tronc.<br>Revenez lentement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "322",
+"source": "HEP",
+"nom": "Flexion d'épaule passive avec bâton, allongé",
+"image": "/exercises/images/HEP/1409592671-shoulder-supine-flexion-prom-with-stick.jpg",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton au-dessus de la tête.",
+"Allez jusqu'à un étirement confortable, puis revenez doucement."
+],
+"position": "Allongé sur le dos, un bâton tenu à deux mains",
+"youtube": "http://www.youtube.com/embed/FMOuwmQzj6w",
+"type": "timer",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton au-dessus de la tête.<br>Allez jusqu'à un étirement confortable, puis revenez doucement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "254",
+"source": "HEP",
+"nom": "Rotation du tronc, allongé",
+"image": "/exercises/images/HEP/1424527396-trunk-rotation-exercise.jpg",
+"consignes": [
+"Gardez les épaules au sol.",
+"Laissez tomber les genoux d'un côté, aussi loin que confortable.",
+"Revenez et allez de l'autre côté."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds joints",
+"youtube": "http://www.youtube.com/embed/0Mi80lUhrNQ",
+"type": "timer",
+"conseil": "Gardez les épaules au sol.<br>Laissez tomber les genoux d'un côté, aussi loin que confortable.<br>Revenez et allez de l'autre côté.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "190",
+"source": "HEP",
+"nom": "Glissement du talon",
+"image": "/exercises/images/HEP/heel-slides2.jpg",
+"consignes": [
+"Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.",
+"Maintenez 1 à 2 secondes.",
+"Revenez lentement jambe tendue."
+],
+"position": "Allongé sur le dos, jambes tendues",
+"youtube": "http://www.youtube.com/embed/ttZX7aVHado",
+"type": "timer",
+"conseil": "Pliez le genou en faisant glisser le talon vers la fesse, aussi loin que possible sans douleur.<br>Maintenez 1 à 2 secondes.<br>Revenez lentement jambe tendue.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "56",
+"source": "HEP",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"type": "timer",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+}
+]
+},
+{
+"id": "base_hemiplegie_avc_2",
+"nom": "Hémiplégie (AVC)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "94",
+"source": "HEP",
+"nom": "Flexion de hanche, debout",
+"image": "/exercises/images/HEP/1408867705-standing-hip-flexion.jpg",
+"consignes": [
+"Tronc droit.",
+"Genou tendu, pointe du pied vers vous.",
+"Levez la jambe vers l'avant, sans vous pencher en arrière.",
+"Redescendez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/__5bdZ8K0-w",
+"type": "timer",
+"conseil": "Tronc droit.<br>Genou tendu, pointe du pied vers vous.<br>Levez la jambe vers l'avant, sans vous pencher en arrière.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "96",
+"source": "HEP",
+"nom": "Abduction de hanche, debout",
+"image": "/exercises/images/HEP/1407678354-hip-abduction-standing.jpg",
+"consignes": [
+"Tronc droit et immobile.",
+"Genou tendu, pointe du pied vers vous.",
+"Écartez la jambe sur le côté en menant avec le talon.",
+"Revenez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/qSEFfZQRQkw",
+"type": "timer",
+"conseil": "Tronc droit et immobile.<br>Genou tendu, pointe du pied vers vous.<br>Écartez la jambe sur le côté en menant avec le talon.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "159",
+"source": "HEP",
+"nom": "Flexion dorsale de cheville",
+"image": "/exercises/images/HEP/1407676479-ankle-dorsi-flexion.jpg",
+"consignes": [
+"Gardez la jambe tendue.",
+"Tirez doucement la pointe du pied vers vous, puis relâchez."
+],
+"position": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+"youtube": "http://www.youtube.com/embed/-WL1KpF6w78",
+"type": "timer",
+"conseil": "Gardez la jambe tendue.<br>Tirez doucement la pointe du pied vers vous, puis relâchez.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "228",
+"source": "HEP",
+"nom": "Rotation du tronc, assis",
+"image": "/exercises/images/HEP/1408193555-seated-trunk-rotation.jpg",
+"consignes": [
+"Tournez le haut du corps d'un côté en gardant le bassin immobile.",
+"Aidez-vous du dossier pour aller un peu plus loin.",
+"Maintenez 10 à 15 secondes, puis changez de côté."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NYix1Y7CfXM",
+"type": "timer",
+"conseil": "Tournez le haut du corps d'un côté en gardant le bassin immobile.<br>Aidez-vous du dossier pour aller un peu plus loin.<br>Maintenez 10 à 15 secondes, puis changez de côté.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "631",
+"source": "HEP",
+"type": "timer",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/HEP/thumb-opposition.jpg",
+"conseil": "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.<br>Revenez lentement.",
+"consignes": [
+"Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+"Revenez lentement."
+],
+"position": "Main ouverte, doigts tendus",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/AAj3sEOrXcs",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+}
+]
+},
+{
+"id": "base_hemiplegie_avc_3",
+"nom": "Hémiplégie (AVC)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 180,
+"repos": 0,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "395",
+"source": "HEP",
+"type": "timer",
+"nom": "Montée latérale sur une marche",
+"image": "/exercises/images/HEP/1435245514-lateral-step-ups.jpg",
+"conseil": "La jambe à travailler du côté de la marche.<br>Montez latéralement sur la marche, puis redescendez en contrôlant.",
+"consignes": [
+"La jambe à travailler du côté de la marche.",
+"Montez latéralement sur la marche, puis redescendez en contrôlant."
+],
+"position": "Debout de profil à côté d'une marche",
+"precautions": [
+"Assurez-vous que la marcheuse est stable",
+"utilisez un bâton ou une rampe pour l'équilibre si nécessaire."
+],
+"materiel": [
+"Step"
+],
+"youtube": "http://www.youtube.com/embed/99HBRhsK1WY",
+"vimeo": "https://vimeo.com/131720936",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "23",
+"source": "HEP",
+"nom": "Équilibre pieds en ligne (tandem)",
+"image": "/exercises/images/HEP/1426346890-tandem-stance_new.jpg",
+"consignes": [
+"Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.",
+"Tenez l'équilibre 10 à 15 secondes.",
+"Changez de pied devant."
+],
+"position": "Debout, à côté d'un support",
+"youtube": "http://www.youtube.com/embed/diqiKO9KN6o",
+"type": "timer",
+"conseil": "Placez un pied juste devant l'autre, talon contre orteils, comme sur une ligne.<br>Tenez l'équilibre 10 à 15 secondes.<br>Changez de pied devant.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Faire travailler surtout le côté atteint, lentement."
+},
+{
+"id": "620",
+"source": "HEP",
+"nom": "Pianotage doigts et pouce",
+"image": "/exercises/images/HEP/finger-thumb-taps.jpg",
+"consignes": [
+"Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+"Rouvrez bien la main entre chaque touche."
+],
+"position": "Main ouverte, doigts écartés",
+"youtube": "http://www.youtube.com/embed/JNh5l5yuLKQ",
+"type": "timer",
+"conseil": "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.<br>Rouvrez bien la main entre chaque touche.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Faire travailler surtout le côté atteint, lentement."
+}
+]
+},
+{
+"id": "base_sla_maladie_de_charcot_1",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "322",
+"source": "HEP",
+"nom": "Flexion d'épaule passive avec bâton, allongé",
+"image": "/exercises/images/HEP/1409592671-shoulder-supine-flexion-prom-with-stick.jpg",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton au-dessus de la tête.",
+"Allez jusqu'à un étirement confortable, puis revenez doucement."
+],
+"position": "Allongé sur le dos, un bâton tenu à deux mains",
+"youtube": "http://www.youtube.com/embed/FMOuwmQzj6w",
+"type": "timer",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton au-dessus de la tête.<br>Allez jusqu'à un étirement confortable, puis revenez doucement.",
+"reps": 2,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "82",
+"source": "HEP",
+"nom": "Étirement du mollet, assis jambes tendues",
+"image": "/exercises/images/HEP/1406372063-calf-stertch-with-strap2.jpg",
+"consignes": [
+"Vous pouvez plier la jambe qui ne travaille pas.",
+"Passez une sangle ou une serviette autour de l'avant du pied.",
+"Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.",
+"Maintenez."
+],
+"position": "Assis, jambes tendues devant vous",
+"youtube": "http://www.youtube.com/embed/Quygqsbu-fw",
+"type": "timer",
+"conseil": "Vous pouvez plier la jambe qui ne travaille pas.<br>Passez une sangle ou une serviette autour de l'avant du pied.<br>Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.<br>Maintenez.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "167",
+"source": "HEP",
+"nom": "Pompage de cheville",
+"image": "/exercises/images/HEP/1407676907-ankle-pumps.jpg",
+"consignes": [
+"Tirez la pointe des pieds vers vous, puis poussez-la vers le bas.",
+"Enchaînez les mouvements à un rythme régulier, seule la cheville bouge."
+],
+"position": "Assis ou allongé, jambes tendues",
+"youtube": "http://www.youtube.com/embed/Dn3yMQ5B3FE",
+"type": "timer",
+"conseil": "Tirez la pointe des pieds vers vous, puis poussez-la vers le bas.<br>Enchaînez les mouvements à un rythme régulier, seule la cheville bouge.",
+"reps": 2,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "186",
+"source": "HEP",
+"nom": "Étirement des doigts",
+"image": "/exercises/images/HEP/1407867747-finger-stretches.jpg",
+"consignes": [
+"Pliez les doigts au niveau des articulations du milieu, en gardant les jointures de la main droites, puis redressez.",
+"Pliez ensuite les dernières phalanges, puis redressez.",
+"Aidez-vous de l'autre main pour bloquer les autres articulations si besoin."
+],
+"position": "Coude posé sur une table",
+"youtube": "http://www.youtube.com/embed/iSZ8yNgLCBw",
+"type": "timer",
+"conseil": "Pliez les doigts au niveau des articulations du milieu, en gardant les jointures de la main droites, puis redressez.<br>Pliez ensuite les dernières phalanges, puis redressez.<br>Aidez-vous de l'autre main pour bloquer les autres articulations si besoin.",
+"reps": 2,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+}
+]
+},
+{
+"id": "base_sla_maladie_de_charcot_2",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "228",
+"source": "HEP",
+"nom": "Rotation du tronc, assis",
+"image": "/exercises/images/HEP/1408193555-seated-trunk-rotation.jpg",
+"consignes": [
+"Tournez le haut du corps d'un côté en gardant le bassin immobile.",
+"Aidez-vous du dossier pour aller un peu plus loin.",
+"Maintenez 10 à 15 secondes, puis changez de côté."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NYix1Y7CfXM",
+"type": "timer",
+"conseil": "Tournez le haut du corps d'un côté en gardant le bassin immobile.<br>Aidez-vous du dossier pour aller un peu plus loin.<br>Maintenez 10 à 15 secondes, puis changez de côté.",
+"reps": 2,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "99",
+"source": "HEP",
+"nom": "Extension du genou, assis",
+"image": "/exercises/images/HEP/1408192464-seated-knee-extension.jpg",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Tendez complètement le genou.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/GlFdeqRiW8U",
+"type": "timer",
+"conseil": "Tirez la pointe du pied vers vous.<br>Tendez complètement le genou.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "633",
+"source": "HEP",
+"nom": "Étirement des bras, mains jointes",
+"image": "/exercises/images/HEP/arm-stretch-hands-clasped.jpg",
+"consignes": [
+"Croisez les doigts devant vous, paumes tournées vers l'extérieur.",
+"Levez les bras vers le plafond aussi haut que possible sans douleur.",
+"Maintenez, puis relâchez."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/UvhHOn3wu_g",
+"type": "timer",
+"conseil": "Croisez les doigts devant vous, paumes tournées vers l'extérieur.<br>Levez les bras vers le plafond aussi haut que possible sans douleur.<br>Maintenez, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+}
+]
+},
+{
+"id": "base_sla_maladie_de_charcot_3",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 120,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "94",
+"source": "HEP",
+"nom": "Flexion de hanche, debout",
+"image": "/exercises/images/HEP/1408867705-standing-hip-flexion.jpg",
+"consignes": [
+"Tronc droit.",
+"Genou tendu, pointe du pied vers vous.",
+"Levez la jambe vers l'avant, sans vous pencher en arrière.",
+"Redescendez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/__5bdZ8K0-w",
+"type": "timer",
+"conseil": "Tronc droit.<br>Genou tendu, pointe du pied vers vous.<br>Levez la jambe vers l'avant, sans vous pencher en arrière.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+},
+{
+"id": "96",
+"source": "HEP",
+"nom": "Abduction de hanche, debout",
+"image": "/exercises/images/HEP/1407678354-hip-abduction-standing.jpg",
+"consignes": [
+"Tronc droit et immobile.",
+"Genou tendu, pointe du pied vers vous.",
+"Écartez la jambe sur le côté en menant avec le talon.",
+"Revenez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/qSEFfZQRQkw",
+"type": "timer",
+"conseil": "Tronc droit et immobile.<br>Genou tendu, pointe du pied vers vous.<br>Écartez la jambe sur le côté en menant avec le talon.<br>Revenez lentement.",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Jamais jusqu'à l'épuisement : s'arrêter dès que la fatigue arrive."
+}
+]
+},
+{
+"id": "base_charcot_marie_tooth_1",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "82",
+"source": "HEP",
+"nom": "Étirement du mollet, assis jambes tendues",
+"image": "/exercises/images/HEP/1406372063-calf-stertch-with-strap2.jpg",
+"consignes": [
+"Vous pouvez plier la jambe qui ne travaille pas.",
+"Passez une sangle ou une serviette autour de l'avant du pied.",
+"Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.",
+"Maintenez."
+],
+"position": "Assis, jambes tendues devant vous",
+"youtube": "http://www.youtube.com/embed/Quygqsbu-fw",
+"type": "timer",
+"conseil": "Vous pouvez plier la jambe qui ne travaille pas.<br>Passez une sangle ou une serviette autour de l'avant du pied.<br>Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "160",
+"source": "HEP",
+"nom": "Flexion dorsale de cheville avec élastique",
+"image": "/exercises/images/HEP/1407676535-ankle-dorsi-flexion-with-resistive-band.jpg",
+"consignes": [
+"Placez l'élastique sur le dessus du pied et fixez-le à un point solide devant vous.",
+"Gardez la jambe tendue et tirez la pointe du pied vers vous.",
+"Revenez lentement en contrôlant l'élastique."
+],
+"position": "Assis, jambe tendue, élastique fixé devant le pied",
+"youtube": "http://www.youtube.com/embed/DTmL53gq0Z0",
+"type": "timer",
+"conseil": "Placez l'élastique sur le dessus du pied et fixez-le à un point solide devant vous.<br>Gardez la jambe tendue et tirez la pointe du pied vers vous.<br>Revenez lentement en contrôlant l'élastique.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "253",
+"source": "HEP",
+"nom": "Froisser une serviette avec les orteils",
+"image": "/exercises/images/HEP/1408869247-towel-crunch.jpg",
+"consignes": [
+"Talon au sol.",
+"Froissez la serviette vers vous avec les orteils.",
+"Étalez-la de nouveau et recommencez."
+],
+"position": "Assis sur une chaise, une serviette à plat sous le pied",
+"youtube": "http://www.youtube.com/embed/32EN1jXwNmo",
+"type": "timer",
+"conseil": "Talon au sol.<br>Froissez la serviette vers vous avec les orteils.<br>Étalez-la de nouveau et recommencez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "56",
+"source": "HEP",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"type": "timer",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "55",
+"source": "HEP",
+"type": "timer",
+"nom": "Renforcement des doigts avec élastique",
+"image": "/exercises/images/HEP/1407677743-finger-strengthening-with-band2.jpg",
+"conseil": "Placez l'élastique autour de l'extrémité des doigts et du pouce.<br>Écartez les doigts contre l'élastique.<br>Revenez lentement.",
+"consignes": [
+"Placez l'élastique autour de l'extrémité des doigts et du pouce.",
+"Écartez les doigts contre l'élastique.",
+"Revenez lentement."
+],
+"position": "Coude posé sur une table, élastique autour des doigts",
+"precautions": [
+"Evitez les mouvements trop brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/liw3wTIDfio",
+"vimeo": "https://vimeo.com/100860549",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "631",
+"source": "HEP",
+"type": "timer",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/HEP/thumb-opposition.jpg",
+"conseil": "Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.<br>Revenez lentement.",
+"consignes": [
+"Amenez le pouce en travers de la paume jusqu'à la base de l'annulaire.",
+"Revenez lentement."
+],
+"position": "Main ouverte, doigts tendus",
+"precautions": [
+"Évitez les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/AAj3sEOrXcs",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+}
+]
+},
+{
+"id": "base_charcot_marie_tooth_2",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "174",
+"source": "HEP",
+"nom": "Étirement du mollet debout (étirement du coureur)",
+"image": "/exercises/images/HEP/1407677511-calf-stretch-standing.jpg",
+"consignes": [
+"Mains contre le mur.",
+"Jambe arrière tendue, talon bien au sol.",
+"Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.",
+"Maintenez 30 secondes."
+],
+"position": "Debout face à un mur, un pied devant l'autre",
+"youtube": "http://www.youtube.com/embed/7P81LL4Vws4",
+"type": "timer",
+"conseil": "Mains contre le mur.<br>Jambe arrière tendue, talon bien au sol.<br>Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.<br>Maintenez 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "159",
+"source": "HEP",
+"nom": "Flexion dorsale de cheville",
+"image": "/exercises/images/HEP/1407676479-ankle-dorsi-flexion.jpg",
+"consignes": [
+"Gardez la jambe tendue.",
+"Tirez doucement la pointe du pied vers vous, puis relâchez."
+],
+"position": "Assis ou allongé, jambe tendue, un rouleau sous la cheville",
+"youtube": "http://www.youtube.com/embed/-WL1KpF6w78",
+"type": "timer",
+"conseil": "Gardez la jambe tendue.<br>Tirez doucement la pointe du pied vers vous, puis relâchez.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "544",
+"source": "HEP",
+"nom": "Renforcement de la voûte plantaire",
+"image": "/exercises/images/HEP/arch_strengthening.jpg",
+"consignes": [
+"Gardez les orteils et le talon en contact avec le sol.",
+"Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, pied nu au sol",
+"youtube": "http://www.youtube.com/embed/VGf7oIAsVgM",
+"type": "timer",
+"conseil": "Gardez les orteils et le talon en contact avec le sol.<br>Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+}
+]
+},
+{
+"id": "base_charcot_marie_tooth_3",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "509",
+"source": "HEP",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"type": "timer",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "260",
+"source": "HEP",
+"nom": "Marche sur les talons",
+"image": "/exercises/images/HEP/1424534409-walking-on-heels.jpg",
+"consignes": [
+"Relevez les orteils et marchez sur les talons.",
+"Ne reculez pas les fesses."
+],
+"position": "Debout, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/ToaXazP8Lw8",
+"type": "timer",
+"conseil": "Relevez les orteils et marchez sur les talons.<br>Ne reculez pas les fesses.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "555",
+"source": "HEP",
+"nom": "Montées sur pointes puis sur talons",
+"image": "/exercises/images/HEP/heel-toe-raise-combo.jpg",
+"consignes": [
+"Montez sur la pointe des pieds.",
+"Redescendez, puis basculez sur les talons en relevant l'avant des pieds.",
+"Alternez sans pousser les fesses en arrière."
+],
+"position": "Debout, pieds écartés largeur d'épaules, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/cJ8k5kOLaSE",
+"type": "timer",
+"conseil": "Montez sur la pointe des pieds.<br>Redescendez, puis basculez sur les talons en relevant l'avant des pieds.<br>Alternez sans pousser les fesses en arrière.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Toujours près d'un appui stable (chaise, plan de travail). Surveiller les pieds (rougeurs, frottements) et bien se chausser."
+},
+{
+"id": "56",
+"source": "HEP",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"type": "timer",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Surveiller les pieds (rougeurs, frottements) et bien se chausser."
 }
 ]
 },
