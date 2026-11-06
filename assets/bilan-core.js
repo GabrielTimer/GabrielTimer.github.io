@@ -10,6 +10,7 @@ import { esc, icon, toast, openSheet, KINE, settings, logoSrc } from "./app.js";
 import { neuroSummary } from "./nerfs-data.js";
 import { lignesPlan } from "./bilan-traitement.js";
 import { silhouettePNG, vuesUtiles, evaHex } from "./bilan-recap.js";
+import * as DOS from "./dossiers.js";
 
 /* ---------- Chargement du contenu clinique ---------- */
 
@@ -450,8 +451,10 @@ export const pdfName = (S, patient) =>
   `${typeLabel(S.type)} ${patient.nom || ""} ${fmtISO(S.date).replace(/\//g, "-")}`.replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, " ").trim() + ".pdf";
 
 export async function downloadPdf(S, patient, opts){
+  await DOS.autoriser("bilans");   // tout de suite, pendant que le clic compte encore
   const d = await bilanPdf(S, patient, opts);
-  d.save(pdfName(S, patient));
+  const r = await DOS.enregistrer("bilans", d.output("blob"), pdfName(S, patient));
+  if(r.dossier) toast(`PDF enregistré dans le dossier « ${r.dossier} ».`);
 }
 
 /* ---------- Fenêtre « Envoyer » ---------- */

@@ -661,6 +661,10 @@ weeks.appendChild(block);
 }
 async function downloadPdf(){
 
+const DOS = await import("/assets/dossiers.js");
+await DOS.autoriser("documents");
+
+
 const page1 =
 document.getElementById("page");
 
@@ -713,9 +717,7 @@ canvas2.toDataURL(
 297
 );
 
-pdf.save(
-"ProgrammeCourse.pdf"
-);
+await DOS.enregistrer("documents", pdf.output("blob"), "ProgrammeCourse.pdf");
 
 }
 </script>

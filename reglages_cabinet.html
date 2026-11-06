@@ -86,6 +86,33 @@ async function initModeSeance(){
   };
 }
 
+async function initDossiers(){
+  const D = await import("/assets/dossiers.js");
+  const box = $("#dos");
+  if(!D.supporte()){
+    box.querySelector("#dos-list").innerHTML = `<div class="notice">${icon("info")}<span>Sur cet appareil, le navigateur ne permet pas de choisir un dossier : les bilans et documents vont dans <strong>Téléchargements</strong>. Le choix du dossier fonctionne sur ordinateur, avec Chrome ou Edge.</span></div>`;
+    return;
+  }
+  const maj = async () => {
+    const lignes = await Promise.all(Object.entries(D.TYPES).map(async ([type, label]) => {
+      const h = await D.dossier(type);
+      return `<div class="row wrap" style="--gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)">
+        <div><strong>${esc(label)}</strong><div class="small muted">${h ? `${icon("folder")} Dossier « ${esc(h.name)} »` : "Téléchargements (par défaut)"}</div></div>
+        <div class="row wrap" style="--gap:8px">
+          <button class="btn" type="button" data-dos-choisir="${type}">${icon("folder")}${h ? "Changer de dossier" : "Choisir le dossier"}</button>
+          ${h ? `<button class="btn" type="button" data-dos-oublier="${type}">Revenir aux Téléchargements</button>` : ""}
+        </div></div>`;
+    }));
+    box.querySelector("#dos-list").innerHTML = lignes.join("");
+    $$("[data-dos-choisir]", box).forEach(b => b.onclick = async () => {
+      try{ const h = await D.choisir(b.dataset.dosChoisir); toast(`Les fichiers iront dans « ${h.name} ».`); maj(); }
+      catch(e){ if(e?.name !== "AbortError") toast("Ce dossier ne peut pas être utilisé. Choisissez-en un autre (pas un dossier système).", { type:"err" }); }
+    });
+    $$("[data-dos-oublier]", box).forEach(b => b.onclick = async () => { await D.oublier(b.dataset.dosOublier); toast("Retour au dossier Téléchargements."); maj(); });
+  };
+  maj();
+}
+
 function render(){
   const A = R.messages.annonce;
   app.innerHTML = `
@@ -201,6 +228,13 @@ function render(){
       <div class="stack" style="--gap:10px" id="masks"></div>
     </section>
 
+    <section class="panel" id="dos">
+      <h2>${icon("folder")}Dossiers d'enregistrement</h2>
+      <p class="muted">Choisissez une fois où s'enregistrent les PDF (par exemple Documents › ApiKiné › Bilans) : ils y iront ensuite directement, à chaque téléchargement. Vous pouvez créer le dossier depuis la fenêtre de choix. Réglage propre à cet appareil, enregistré tout de suite.</p>
+      <div id="dos-list"></div>
+      <p class="hint" style="margin-top:10px">Au premier enregistrement après avoir rouvert le navigateur, Chrome peut demander de confirmer l'accès au dossier : choisissez « Autoriser à chaque visite » pour ne plus avoir la question.</p>
+    </section>
+
     <section class="panel" id="ms">
       <h2>${icon("lock")}Mode séance (tablette prêtée au patient)</h2>
       <p class="muted">Quand une séance est lancée depuis cet appareil en mode kiné, elle s'ouvre en plein écran, sans accès à vos patients ni à vos messages. Le bouton Retour ne quitte pas la séance. Pour l'arrêter ou revenir à l'espace kiné, il faut votre code (<strong>7777</strong> par défaut). Réglage propre à cet appareil, enregistré tout de suite.</p>
@@ -235,6 +269,7 @@ function render(){
 
   renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
   initModeSeance();
+  initDossiers();
   const last = localStorage.getItem("gt_last_backup");
   $("#bk-last").textContent = last ? `Dernière sauvegarde depuis cet appareil : ${new Date(Number(last)).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}.` : "Conseil : faites une sauvegarde une fois par mois.";
 

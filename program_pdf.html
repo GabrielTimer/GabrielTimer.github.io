@@ -953,6 +953,10 @@ height:90
 
 async function downloadPdf(){
 
+const DOS = await import("/assets/dossiers.js");
+await DOS.autoriser("documents");
+
+
 const pages =
 document.querySelectorAll(
 ".pdfPage,.exercisePage"
@@ -999,7 +1003,11 @@ canvas.toDataURL("image/jpeg",0.95),
 
 }
 
-pdf.save(
+await DOS.enregistrer(
+
+"documents",
+
+pdf.output("blob"),
 
 (data.nom || "Programme")
 
