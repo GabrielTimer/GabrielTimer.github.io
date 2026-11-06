@@ -308,7 +308,8 @@ export function mountGuide(app, ctx){
     root.innerHTML = `
       <div class="g-top">
         <div class="g-id"><strong>${esc(B.typeLabel(S.type))}</strong><span>${esc(nomAffiche(patient.nom))}</span><span id="st" class="save-st"></span></div>
-        <button class="btn sm" type="button" data-gact="full">${icon("list")}Vue complète</button>
+        <div class="row" style="--gap:8px"><button class="btn sm" type="button" data-gact="photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
+        <button class="btn sm" type="button" data-gact="full">${icon("list")}Vue complète</button></div>
       </div>
       <nav class="g-steps" aria-label="Étapes du bilan">${STEPS.map(([sk, l], i) => `<button type="button" data-gstep="${i}" aria-current="${i === ui.step ? "step" : "false"}" class="${stepDone(sk) ? "done" : ""}"><b>${stepDone(sk) && i !== ui.step ? icon("check") : i + 1}</b><span>${esc(l)}</span></button>`).join("")}</nav>
       <div class="g-body-step">${views[k]()}</div>
@@ -319,6 +320,7 @@ export function mountGuide(app, ctx){
           ? `<button class="btn primary" type="button" data-gnav="1">Suivant${icon("chevron")}</button>`
           : `<button class="btn primary" type="button" data-gact="done">${icon("check")}Terminer</button>`}
       </div>`;
+    ctx.majPhotos?.();
     ctx.statusAgain?.();
     root.querySelector('.g-steps [aria-current="step"]')?.scrollIntoView({ block:"nearest", inline:"center" });
   }
@@ -421,6 +423,7 @@ export function mountGuide(app, ctx){
       return;
     }
     if(act === "full"){ ctx.onFull(); return; }
+    if(act === "photos"){ ctx.photos?.(); return; }
     if(act === "done"){ ctx.leave(); return; }
     if(act === "resume"){
       const RC = await import("./bilan-recap.js");

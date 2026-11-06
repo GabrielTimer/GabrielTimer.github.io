@@ -25,6 +25,13 @@ let id = params.get("id") || null;
 if(!cle) location.replace("/patients.html");
 const fiche = `/cloud.html?patient=${encodeURIComponent(cle)}`;
 
+/* ---------- Photos (enregistrées seulement sur cet appareil) ---------- */
+
+const PH = await import("../bilan-photos.js");
+function badgePhotos(n){ $$("[data-ph-n]").forEach(x => { x.textContent = n; x.hidden = !n; }); }
+async function majPhotos(){ badgePhotos(await PH.nombre(patient, S)); }
+function ouvrirPhotosBilan(){ PH.ouvrirPhotos({ patient, S, label: B.typeLabel(S.type), onChange: badgePhotos, save: () => changed() }); }
+
 /* ---------- Chargement ---------- */
 
 let patient = null, list = [], rulesErr = null, K;
@@ -106,6 +113,7 @@ function render(){
       </div>
       <div class="row">
         <button class="btn" type="button" id="a-guide">${icon("list")}Entretien guidé</button>
+        <button class="btn" type="button" id="a-photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
         <button class="btn" type="button" id="a-pdf">${icon("pdf")}PDF</button>
         <button class="btn" type="button" id="a-send">${icon("share")}Envoyer</button>
         <button class="btn primary" type="button" id="a-done">${icon("check")}Terminer</button>
@@ -195,6 +203,7 @@ function render(){
         <div id="danger"></div>
       </div>
     </div>`;
+  majPhotos();
   drawNotes(); drawBody(); drawZone(); drawAnalysis(); drawTF(); drawQReco(); drawDN4(); drawEvo(); drawResume(); drawDanger();
   setSt(restored ? "wait" : saved ? "ok" : "", restored ? "Brouillon restauré" : saved ? "Enregistré" : "Nouveau bilan");
 }
@@ -488,6 +497,7 @@ app.addEventListener("click", async e => {
   }
   if(d.info){ testSheet(d.info); return; }
 
+  if(b.id === "a-photos"){ ouvrirPhotosBilan(); return; }
   if(b.id === "a-done"){ leave(fiche); return; }
   if(b.id === "a-guide"){ store.set("gt_bilan_mode", "guide"); start(); window.scrollTo(0, 0); return; }
   if(b.id === "a-copy"){ B.copyText($("#resume").value); return; }
@@ -561,6 +571,7 @@ async function start(){
   const G = await import("../bilan-guide.js");
   G.mountGuide(app, {
     S, K, B, BC, TC, patient,
+    photos: ouvrirPhotosBilan, majPhotos,
     changed, save, opts,
     leave: () => leave(fiche),
     statusAgain: () => setSt(...lastSt),
