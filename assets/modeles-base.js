@@ -20435,5 +20435,489 @@ export const MODELES_BASE = [
 "conseil_kine": "À faire après la manœuvre, si le kiné le conseille. Assis ou près d'un appui."
 }
 ]
+},
+{
+"id": "base_remise_en_forme_1",
+"nom": "Remise en forme (gym adaptée)",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 180,
+"repos": 0,
+"conseil_kine": "Échauffement : rythme tranquille, puis un peu plus soutenu. Vous devez pouvoir parler."
+},
+{
+"id": "483",
+"source": "HEP",
+"nom": "Flexion d'épaule active",
+"image": "/exercises/images/HEP/1504798259-shoulder-flexion-active-rom.jpg",
+"consignes": [
+"Bras tendu, pouce vers l'avant.",
+"Levez le bras devant vous jusqu'à l'horizontale (ou plus haut si possible sans douleur).",
+"Redescendez lentement."
+],
+"position": "Debout, bras le long du corps",
+"youtube": "http://www.youtube.com/embed/-HeNGZhH-uQ",
+"type": "timer",
+"conseil": "Bras tendu, pouce vers l'avant.<br>Levez le bras devant vous jusqu'à l'horizontale (ou plus haut si possible sans douleur).<br>Redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "413",
+"source": "HEP",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"type": "timer",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "633",
+"source": "HEP",
+"nom": "Étirement des bras, mains jointes",
+"image": "/exercises/images/HEP/arm-stretch-hands-clasped.jpg",
+"consignes": [
+"Croisez les doigts devant vous, paumes tournées vers l'extérieur.",
+"Levez les bras vers le plafond aussi haut que possible sans douleur.",
+"Maintenez, puis relâchez."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/UvhHOn3wu_g",
+"type": "timer",
+"conseil": "Croisez les doigts devant vous, paumes tournées vers l'extérieur.<br>Levez les bras vers le plafond aussi haut que possible sans douleur.<br>Maintenez, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirement doux, en respirant calmement."
+}
+]
+},
+{
+"id": "base_remise_en_forme_2",
+"nom": "Remise en forme (gym adaptée)",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Échauffement : rythme tranquille, puis un peu plus soutenu. Vous devez pouvoir parler."
+},
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "577",
+"source": "HEP",
+"type": "timer",
+"nom": "Pompe adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/Modified-Pushup.jpg",
+"conseil": "Avancez les mains pour que le corps forme une ligne des genoux aux épaules.<br>Pliez les coudes pour descendre la poitrine vers le sol, dos droit.<br>Remontez en poussant sur les mains.",
+"consignes": [
+"Avancez les mains pour que le corps forme une ligne des genoux aux épaules.",
+"Pliez les coudes pour descendre la poitrine vers le sol, dos droit.",
+"Remontez en poussant sur les mains."
+],
+"position": "À quatre pattes",
+"precautions": [
+"Evitez les mouvements brusques. Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/ABVGLKDZQuk",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "540",
+"source": "HEP",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
+"consignes": [
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
+"type": "timer",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "214",
+"source": "HEP",
+"nom": "Bras et jambe opposés à quatre pattes (bird dog)",
+"image": "/exercises/images/HEP/1421406091-quadruped-opposite-arm-leg-extension.jpg",
+"consignes": [
+"Dos droit, bassin stable.",
+"Tendez un bras vers l'avant et la jambe opposée vers l'arrière.",
+"Revenez lentement, puis alternez."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/B1LH2_6A-n4",
+"type": "timer",
+"conseil": "Dos droit, bassin stable.<br>Tendez un bras vers l'avant et la jambe opposée vers l'arrière.<br>Revenez lentement, puis alternez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "96",
+"source": "HEP",
+"nom": "Abduction de hanche, debout",
+"image": "/exercises/images/HEP/1407678354-hip-abduction-standing.jpg",
+"consignes": [
+"Tronc droit et immobile.",
+"Genou tendu, pointe du pied vers vous.",
+"Écartez la jambe sur le côté en menant avec le talon.",
+"Revenez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/qSEFfZQRQkw",
+"type": "timer",
+"conseil": "Tronc droit et immobile.<br>Genou tendu, pointe du pied vers vous.<br>Écartez la jambe sur le côté en menant avec le talon.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "428",
+"source": "HEP",
+"nom": "Planche adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/1477662192-modified-plank.jpg",
+"consignes": [
+"Posez les avant-bras au sol, coudes sous les épaules.",
+"Reculez les genoux pour aligner dos et cuisses.",
+"Serrez les fessiers et le ventre, dos plat.",
+"Maintenez en respirant."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
+"type": "timer",
+"conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "557",
+"source": "HEP",
+"nom": "Étirement des pectoraux dans un encadrement de porte",
+"image": "/exercises/images/HEP/pec-stretch-doorway.jpg",
+"consignes": [
+"Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.",
+"Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.",
+"Maintenez."
+],
+"position": "Debout dans un encadrement de porte",
+"youtube": "http://www.youtube.com/embed/sJK-_Fmr5Fg",
+"type": "timer",
+"conseil": "Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.<br>Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirement doux, en respirant calmement."
+}
+]
+},
+{
+"id": "base_remise_en_forme_3",
+"nom": "Remise en forme (gym adaptée)",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Échauffement : rythme tranquille, puis un peu plus soutenu. Vous devez pouvoir parler."
+},
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "558",
+"source": "HEP",
+"nom": "Pompe avec protraction des omoplates (push-up plus)",
+"image": "/exercises/images/HEP/push-up-plus.jpg",
+"consignes": [
+"Mains un peu plus écartées que les épaules.",
+"Faites une pompe.",
+"En haut, poussez encore dans le sol pour arrondir le haut du dos et écarter les omoplates.",
+"Revenez et recommencez."
+],
+"position": "En position de pompe, sur les genoux ou les pieds",
+"youtube": "http://www.youtube.com/embed/sLLgYGJpHog",
+"type": "timer",
+"conseil": "Mains un peu plus écartées que les épaules.<br>Faites une pompe.<br>En haut, poussez encore dans le sol pour arrondir le haut du dos et écarter les omoplates.<br>Revenez et recommencez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "540",
+"source": "HEP",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
+"consignes": [
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
+"type": "timer",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "71",
+"source": "HEP",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"type": "timer",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "200",
+"source": "HEP",
+"nom": "Planche ventrale",
+"image": "/exercises/images/HEP/1408037133-planks.jpg",
+"consignes": [
+"Coudes sous les épaules.",
+"Décollez le corps en appui sur les avant-bras et les orteils.",
+"Dos droit, bassin aligné, serrez les fessiers et le ventre.",
+"Respirez normalement et maintenez 10 à 15 secondes."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/bqxtqpiaHEM",
+"type": "timer",
+"conseil": "Coudes sous les épaules.<br>Décollez le corps en appui sur les avant-bras et les orteils.<br>Dos droit, bassin aligné, serrez les fessiers et le ventre.<br>Respirez normalement et maintenez 10 à 15 secondes.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "698",
+"source": "HEP",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
+"consignes": [
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
+],
+"position": "Debout sur une jambe, une chaise devant vous",
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
+"type": "timer",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Effort modéré : vous devez pouvoir parler pendant l'exercice. Jamais de douleur."
+},
+{
+"id": "557",
+"source": "HEP",
+"nom": "Étirement des pectoraux dans un encadrement de porte",
+"image": "/exercises/images/HEP/pec-stretch-doorway.jpg",
+"consignes": [
+"Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.",
+"Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.",
+"Maintenez."
+],
+"position": "Debout dans un encadrement de porte",
+"youtube": "http://www.youtube.com/embed/sJK-_Fmr5Fg",
+"type": "timer",
+"conseil": "Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.<br>Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirement doux, en respirant calmement."
+}
+]
 }
 ];

@@ -11,7 +11,7 @@ const ID=[["code","Code patient (initiales + année, sans nom)"],["nom","Nom"],[
 // Mesures : [id, libellé, MID, sens(1 = plus haut est mieux)] ; MID 0 = pas de seuil retenu
 const MES=[["m_nprs","NPRS (0-10)",2,-1],["m_psfs","PSFS (0-10)",2,1],["m_odi","Oswestry (%)",11,-1],["m_ndi","NDI (%)",0,-1],["m_qdash","QuickDASH (%)",8,-1],["m_lefs","LEFS (/80)",9,1]];
 const SEC=[
-["patho","Pathologie / motif",["Lombalgie","Cervicalgie","Dorsalgie","Sciatique","Gonalgie","Entorse","Tendinopathie","Post-opératoire","Fracture","Trouble de l’équilibre","Chutes / personne âgée","Neurologie (AVC, Parkinson, SEP…)","Vertiges","Respiratoire","Reprise du sport"]],
+["patho","Pathologie / motif",["Lombalgie","Cervicalgie","Dorsalgie","Sciatique","Gonalgie","Entorse","Tendinopathie","Post-opératoire","Fracture","Trouble de l’équilibre","Chutes / personne âgée","Neurologie (AVC, Parkinson, SEP…)","Vertiges","Respiratoire","Reprise du sport","Remise en forme / reconditionnement"]],
 ["atcd","Antécédents",["HTA","Diabète","Cardiopathie","Chirurgie","Traumatisme","Asthme","Grossesse","Ostéoporose","Cancer"]],
 ["medic","Médication",["Anticoagulants","AINS","Antalgiques","Corticoïdes","Myorelaxants","Aucune"]],
 ["obs","Bilan observationnel",["Boiterie","Attitude antalgique","Raideur","Œdème","Contracture","Amplitude limitée","Force diminuée","Troubles sensitifs"]],

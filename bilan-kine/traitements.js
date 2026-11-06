@@ -164,7 +164,8 @@ MOTIF: {
   "Chutes / personne âgée": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
   "Neurologie (AVC, Parkinson, SEP…)": { modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] },
   "Vertiges": { modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire" },
-  "Respiratoire": { patho: "Respiratoire (BPCO, asthme…)" }
+  "Respiratoire": { patho: "Respiratoire (BPCO, asthme…)" },
+  "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)"] }
 },
 
 PROFIL: {
