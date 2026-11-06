@@ -283,15 +283,17 @@ export function shortLine(S){
 const PDF_MAP = { "≥":">=", "≤":"<=", "→":"->", "≈":"~", "−":"-", "–":"-", "—":"-", "‘":"'", "’":"'", "“":"\"", "”":"\"", "…":"...", " ":" ", " ":" ", "œ":"oe", "Œ":"OE", "•":"-" };
 const pdfSafe = s => String(s ?? "").replace(/[^\x00-\xFF]/g, ch => PDF_MAP[ch] ?? "");
 
-function imageData(src){
+/* Logo réduit (600 px de large au plus : bien assez pour 28 mm imprimés) */
+function imageData(src, maxW = 600){
   return new Promise(resolve => {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
       try{
+        const k = Math.min(1, maxW / (img.naturalWidth || maxW));
         const c = document.createElement("canvas");
-        c.width = img.naturalWidth; c.height = img.naturalHeight;
-        c.getContext("2d").drawImage(img, 0, 0);
+        c.width = Math.max(1, Math.round(img.naturalWidth * k)); c.height = Math.max(1, Math.round(img.naturalHeight * k));
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
         resolve({ data: c.toDataURL("image/png"), ratio: img.naturalWidth / img.naturalHeight || 1 });
       }catch(e){ resolve(null); }
     };
@@ -300,11 +302,29 @@ function imageData(src){
   });
 }
 
+/* Le PDF ne doit jamais dépasser 10 Mo (pièce jointe, dossier patient).
+   Images compressées ; au-delà de la limite, nouvel essai avec des images plus légères, puis sans images. */
+export const PDF_MAX = 10 * 1024 * 1024;
+const PDF_QUALITE = [
+  { logo:600, silh:1, jpeg:.85 },
+  { logo:300, silh:.6, jpeg:.6 },
+  { sansImages:true }
+];
+
 export async function bilanPdf(S, patient, opts = {}){
   await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+  let d;
+  for(const q of PDF_QUALITE){
+    d = await construirePdf(S, patient, opts, q);
+    if(d.output("arraybuffer").byteLength <= PDF_MAX) return d;
+  }
+  return d;
+}
+
+async function construirePdf(S, patient, opts, Q){
   const { jsPDF } = window.jspdf;
   const R = report(S, patient, opts);
-  const d = new jsPDF({ unit:"mm", format:"a4" });
+  const d = new jsPDF({ unit:"mm", format:"a4", compress:true });
   const W = 210, H = 297, M = 18, CW = W - 2 * M, LAB = 40;
   const INK = [20, 48, 58], INK2 = [71, 97, 107], LAGON = [11, 110, 128], LINE = [213, 226, 229], DANGER = [201, 58, 58];
   const t = pdfSafe;
@@ -312,9 +332,9 @@ export async function bilanPdf(S, patient, opts = {}){
   const ensure = h => { if(y + h > H - 20){ d.addPage(); y = M; } };
 
   /* En-tête : logo, praticien, coordonnées */
-  const logo = await imageData(logoSrc());
+  const logo = Q.sansImages ? null : await imageData(logoSrc(), Q.logo);
   let x0 = M;
-  if(logo){ const h = 14, w = Math.min(28, h * logo.ratio); d.addImage(logo.data, "PNG", M, y, w, h); x0 = M + w + 4; }
+  if(logo){ const h = 14, w = Math.min(28, h * logo.ratio); d.addImage(logo.data, "PNG", M, y, w, h, "logo", "FAST"); x0 = M + w + 4; }
   d.setFont("helvetica", "bold"); d.setFontSize(12); d.setTextColor(...INK);
   d.text(t(KINE.nom), x0, y + 5.5);
   d.setFont("helvetica", "normal"); d.setFontSize(9); d.setTextColor(...INK2);
@@ -348,11 +368,11 @@ export async function bilanPdf(S, patient, opts = {}){
   const zonesP = Object.entries(S.pain || {});
   if(zonesP.length){
     const vues = vuesUtiles(K, S.pain);
-    const pngs = await Promise.all(vues.map(v => silhouettePNG(K, v, S.pain)));
+    const pngs = Q.sansImages ? [] : await Promise.all(vues.map(v => silhouettePNG(K, v, S.pain, Q.silh, Q.jpeg)));
     const fw = 30, fh = fw * 430 / 200;
     ensure(fh + 6);
     let fx = M;
-    pngs.forEach(png => { if(png){ d.addImage(png, "PNG", fx, y, fw, fh); fx += fw + 4; } });
+    pngs.forEach((png, i) => { if(png){ d.addImage(png, "JPEG", fx, y, fw, fh, "silh" + i, "FAST"); fx += fw + 4; } });
     const lx = fx + 6;
     let ly = y + 6;
     d.setFont("helvetica", "bold"); d.setFontSize(11.5); d.setTextColor(...LAGON);

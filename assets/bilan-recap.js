@@ -50,7 +50,7 @@ export function vuesUtiles(K, pain = {}){
 }
 
 /** PNG (pour le PDF) d'une vue. Résout null si le navigateur refuse. */
-export function silhouettePNG(K, view, pain, scale = 2){
+export function silhouettePNG(K, view, pain, scale = 2, jpeg = 0){
   return new Promise(resolve => {
     const img = new Image();
     img.onload = () => {
@@ -58,8 +58,9 @@ export function silhouettePNG(K, view, pain, scale = 2){
         const c = document.createElement("canvas");
         c.width = 400 * scale; c.height = 860 * scale;
         const g = c.getContext("2d");
+        if(jpeg){ g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); }
         g.drawImage(img, 0, 0, c.width, c.height);
-        resolve(c.toDataURL("image/png"));
+        resolve(jpeg ? c.toDataURL("image/jpeg", jpeg) : c.toDataURL("image/png"));
       }catch(e){ resolve(null); }
     };
     img.onerror = () => resolve(null);
