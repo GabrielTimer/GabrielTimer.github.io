@@ -8,6 +8,7 @@ import {
 import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
 import * as V from "../variantes.js";
 import { compareNoms } from "../noms.js";
+import { nomAffiche } from "../noms.js";
 
 const app = $("#app");
 registerSW();
@@ -62,7 +63,7 @@ async function choisirPatientCopie(nomProg, cleActuel){
     sh.el.querySelector("#cp-list").innerHTML = list.length ? list.map(p => `
       <button class="list-item" type="button" data-cp="${esc(p.cle)}">
         <span class="avatar">${esc((p.nom || "?").split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase())}</span>
-        <span class="li-main"><span class="li-title">${esc(p.nom || "Sans nom")}</span>${p.cle === cleActuel ? `<span class="small muted">Patient actuel</span>` : ""}</span>
+        <span class="li-main"><span class="li-title">${esc(nomAffiche(p.nom) || "Sans nom")}</span>${p.cle === cleActuel ? `<span class="small muted">Patient actuel</span>` : ""}</span>
         ${icon("chevron")}
       </button>`).join("") : `<p class="small muted" style="padding:10px 0">Aucun patient trouvé.</p>`;
     sh.el.querySelectorAll("[data-cp]").forEach(b => b.onclick = () => go(b.dataset.cp));
@@ -274,7 +275,7 @@ async function kineView(param){
         <div class="pt-head">
           <span class="avatar">${esc(initials)}</span>
           <div class="pt-id">
-            <h1>${esc(patient.nom)}</h1>
+            <h1>${esc(nomAffiche(patient.nom))}</h1>
             <div class="pt-contact">
               ${patient.telephone ? `<a href="tel:${esc(patient.telephone)}">${icon("phone")}${esc(patient.telephone)}</a>` : ""}
               ${patient.email ? `<a href="mailto:${esc(patient.email)}">${icon("mail")}${esc(patient.email)}</a>` : ""}

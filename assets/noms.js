@@ -21,3 +21,13 @@ export function compareNoms(a, b){
   return sansAccent(nomDeFamille(na)).localeCompare(sansAccent(nomDeFamille(nb)), "fr")
     || sansAccent(na).localeCompare(sansAccent(nb), "fr");
 }
+
+/** Nom à afficher dans les listes du kiné : « DUPONT Marie » (nom de famille en majuscules, puis prénom). */
+export function nomAffiche(nom){
+  const n = String(nom || "").trim().replace(/\s+/g, " ");
+  const fam = nomDeFamille(n);
+  if(!fam || fam === n) return n;
+  const reste = n.startsWith(fam) ? n.slice(fam.length).trim() : n.slice(0, n.length - fam.length).trim();
+  const cap = w => w.split("-").map(x => x.charAt(0).toLocaleUpperCase("fr") + x.slice(1)).join("-");
+  return `${fam.toLocaleUpperCase("fr")} ${reste.split(" ").map(cap).join(" ")}`.trim();
+}

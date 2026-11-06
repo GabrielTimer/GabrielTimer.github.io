@@ -9,6 +9,7 @@ import {
 import { currentAnnonce, loadSettings, settings as reglages } from "../settings.js";
 import { exerciseImage } from "../library.js";
 import * as V from "../variantes.js";
+import { nomAffiche } from "../noms.js";
 import * as Installer from "../installer.js";
 
 const app = $("#app");
@@ -408,7 +409,7 @@ async function renderKine(user){
       $("#watch").innerHTML = `<div class="list">${watch.map(s => `
         <a class="list-item alert-row" href="/cloud.html?patient=${encodeURIComponent(s.patient.cle)}">
           <span class="avatar">${esc(initials(s.patient.nom))}</span>
-          <span class="li-main"><span class="li-title">${esc(s.patient.nom)}</span>
+          <span class="li-main"><span class="li-title">${esc(nomAffiche(s.patient.nom))}</span>
             <span class="li-sub">${s.alertes.filter(a => a.niveau !== "ok").map(a => `<span class="badge ${a.niveau === "danger" ? "danger" : a.niveau === "warn" ? "warn" : "lagon"}">${icon(a.ico)}${esc(a.texte)}</span>`).join("")}</span>
           </span>
           <span class="li-end">${icon("chevron")}</span>

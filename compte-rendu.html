@@ -58,6 +58,7 @@
 <script type="module">
 import { $, esc, icon, params, settings, logoSrc, KINE, fmtShortDate, fmtDate, groupProgrammes, byWeek, evaTrend, ressentiLabel, fmtNum } from "/assets/app.js";
 import { fmtScore } from "/assets/questionnaires.js";
+import { nomAffiche } from "/assets/noms.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 const C = await import("/assets/cloud.js");
@@ -112,7 +113,7 @@ $("#doc").innerHTML = `
   <h1>Compte rendu de rééducation</h1>
   <p class="muted" style="margin:2px 0 12px">Établi le ${esc(fmtDate(new Date(), { day:"numeric", month:"long", year:"numeric" }))}</p>
   <div class="meta">
-    <div><b>Patient</b>${esc(patient.nom)}</div>
+    <div><b>Patient</b>${esc(nomAffiche(patient.nom))}</div>
     <div><b>Période de suivi</b>${esc(fmtShortDate(first))} au ${esc(fmtShortDate(last))}</div>
     <div><b>Séances à domicile réalisées</b>${valides.length}</div>
   </div>

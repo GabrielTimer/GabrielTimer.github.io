@@ -10,6 +10,7 @@ import {
 import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
 import * as V from "../variantes.js";
 import { compareNoms } from "../noms.js";
+import { nomAffiche } from "../noms.js";
 const illustrationsActives = () => V.illustrationsActives ? V.illustrationsActives() : "h";
 const choisirIllustrations = v => { try{ V.choisirIllustrations?.(v); }catch(e){} };
 const aVariantes = src => { try{ return V.aVariantes ? V.aVariantes(src) : false; }catch(e){ return false; } };
@@ -772,7 +773,7 @@ function renderSend(full = true){
     box.innerHTML = `
       <h2>Enregistrer</h2>
       <div class="group">
-        <p>Séance <strong>${esc(editSeance.label || "")}</strong>${editSeance.programmeNom ? ` du programme « ${esc(editSeance.programmeNom)} »` : ""}${pt ? `, pour ${esc(pt.nom)}` : ""}.</p>
+        <p>Séance <strong>${esc(editSeance.label || "")}</strong>${editSeance.programmeNom ? ` du programme « ${esc(editSeance.programmeNom)} »` : ""}${pt ? `, pour ${esc(nomAffiche(pt.nom))}` : ""}.</p>
         ${sib.length ? `<label class="check"><input type="checkbox" id="apply-all" checked> Appliquer aussi aux ${plural(sib.length, "autre séance")} non faite${sib.length > 1 ? "s" : ""} de ce programme</label>` : ""}
       </div>
       <div class="send-actions">
@@ -808,7 +809,7 @@ function renderSend(full = true){
         <div class="row">
           <select class="select" id="patient">
             <option value="">Aucun patient (lancer moi-même)</option>
-            ${patients.map(x => `<option value="${esc(x.cle)}" ${x.cle === S.patient ? "selected" : ""}>${esc(x.nom)}</option>`).join("")}
+            ${patients.map(x => `<option value="${esc(x.cle)}" ${x.cle === S.patient ? "selected" : ""}>${esc(nomAffiche(x.nom))}</option>`).join("")}
             ${S.patient && !p ? `<option value="${esc(S.patient)}" selected>Patient sélectionné</option>` : ""}
           </select>
           <button class="btn" type="button" id="new-patient" aria-label="Nouveau patient">${icon("userPlus")}<span class="nowrap">Nouveau</span></button>

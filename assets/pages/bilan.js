@@ -6,6 +6,7 @@ import {
   $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, openSheet,
   errorHTML, emptyHTML, debounce, evaColor, evaFace
 } from "../app.js";
+import { nomAffiche } from "../noms.js";
 
 const app = $("#app");
 registerSW();
@@ -101,7 +102,7 @@ function render(){
     <div class="bl-head">
       <div class="bl-id">
         <h1 id="h-title">${esc(B.typeLabel(S.type))}</h1>
-        <div class="lead"><span>${esc(patient.nom)}</span><span id="st" class="save-st"></span></div>
+        <div class="lead"><span>${esc(nomAffiche(patient.nom))}</span><span id="st" class="save-st"></span></div>
       </div>
       <div class="row">
         <button class="btn" type="button" id="a-guide">${icon("list")}Entretien guidé</button>

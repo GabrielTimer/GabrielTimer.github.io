@@ -67,6 +67,7 @@
 <main class="page wide" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement des messages…</span></div></main>
 <script type="module">
 import { $, $$, esc, icon, params, mountShell, registerSW, errorHTML, emptyHTML, toast, confirmDialog, fmtShortDate, fmtRelDay, ressentiLabel, KINE } from "/assets/app.js";
+import { nomAffiche } from "/assets/noms.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -124,7 +125,7 @@ function apercu(i){
 function convHTML(c){
   return `<button class="mx-conv ${c.unread ? "unread" : ""}" type="button" data-conv="${esc(c.cle)}" aria-current="${c.cle === state.cle}">
     <span class="avatar">${esc(initials(c.patient.nom))}</span>
-    <span class="nm">${esc(c.patient.nom || "Patient")}</span>
+    <span class="nm">${esc(nomAffiche(c.patient.nom) || "Patient")}</span>
     <span class="dt">${c.last ? esc(quand(c.last.date)) : ""}</span>
     <span class="pv">${esc(apercu(c.last))}</span>
     ${c.unread ? `<span class="mx-n" aria-label="${c.unread} non lu${c.unread > 1 ? "s" : ""}">${c.unread}</span>` : "<span></span>"}
@@ -160,7 +161,7 @@ function threadHTML(c){
   return `<div class="mx-th-head">
       <button class="icon-btn sm mx-back" type="button" data-back aria-label="Retour aux conversations">${icon("back")}</button>
       <span class="avatar">${esc(initials(p.nom))}</span>
-      <h2><a href="/cloud.html?patient=${encodeURIComponent(c.cle)}">${esc(p.nom || "Patient")}</a></h2>
+      <h2><a href="/cloud.html?patient=${encodeURIComponent(c.cle)}">${esc(nomAffiche(p.nom) || "Patient")}</a></h2>
       ${c.items.some(i => i.lu && i.kind !== "envoye") ? `<button class="btn sm ghost" type="button" data-nonlu aria-label="Marquer comme non lu">${icon("circle")}<span class="lbl">Non lu</span></button>` : ""}
       ${p.email ? `<a class="icon-btn sm" href="mailto:${esc(p.email)}?body=${encodeURIComponent(`Bonjour,\n\n\n\n${KINE.nom}`)}" aria-label="Écrire par e-mail">${icon("reply")}</a>` : ""}
       ${tel ? `<a class="icon-btn sm" href="sms:${esc(tel)}" aria-label="Envoyer un SMS">${icon("message")}</a>` : ""}

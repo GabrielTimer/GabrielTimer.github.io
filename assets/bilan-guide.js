@@ -11,6 +11,7 @@
 import { esc, icon, toast, openSheet, evaColor } from "./app.js";
 import * as TX from "./bilan-traitement.js";
 import { exerciseImage } from "./library.js";
+import { nomAffiche } from "./noms.js";
 
 const STEPS = [
   ["motif", "Motif"],
@@ -306,7 +307,7 @@ export function mountGuide(app, ctx){
     S.gstep = k;
     root.innerHTML = `
       <div class="g-top">
-        <div class="g-id"><strong>${esc(B.typeLabel(S.type))}</strong><span>${esc(patient.nom || "")}</span><span id="st" class="save-st"></span></div>
+        <div class="g-id"><strong>${esc(B.typeLabel(S.type))}</strong><span>${esc(nomAffiche(patient.nom))}</span><span id="st" class="save-st"></span></div>
         <button class="btn sm" type="button" data-gact="full">${icon("list")}Vue complète</button>
       </div>
       <nav class="g-steps" aria-label="Étapes du bilan">${STEPS.map(([sk, l], i) => `<button type="button" data-gstep="${i}" aria-current="${i === ui.step ? "step" : "false"}" class="${stepDone(sk) ? "done" : ""}"><b>${stepDone(sk) && i !== ui.step ? icon("check") : i + 1}</b><span>${esc(l)}</span></button>`).join("")}</nav>
