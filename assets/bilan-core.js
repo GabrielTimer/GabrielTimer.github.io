@@ -303,9 +303,9 @@ function imageData(src, maxW = 600){
   });
 }
 
-/* Le PDF ne doit jamais dépasser 10 Mo (pièce jointe, dossier patient).
+/* Le PDF ne doit jamais dépasser 5 Mo (limite d'import de Maiia) (pièce jointe, dossier patient).
    Images compressées ; au-delà de la limite, nouvel essai avec des images plus légères, puis sans images. */
-export const PDF_MAX = 10 * 1024 * 1024;
+export const PDF_MAX = 5 * 1024 * 1024;
 const PDF_QUALITE = [
   { logo:600, silh:1, jpeg:.85 },
   { logo:300, silh:.6, jpeg:.6 },
