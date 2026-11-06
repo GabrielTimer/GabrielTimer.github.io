@@ -5,7 +5,7 @@
 
 import { esc, icon, toast, openSheet, confirmDialog } from "./app.js";
 
-const DB = "apikine-photos", STORE = "photos", MAX = 1600, QUALITE = .85;
+const DB = "apikine-photos", STORE = "photos", MAX = 2560, QUALITE = .92;
 
 function base(){
   return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ export async function nombre(patient, S){
   try{ return (await photosDuPatient(patient.cle)).filter(p => p.pk === S.pk).length; }catch(e){ return 0; }
 }
 
-/* Réduit la photo (1600 px au plus, JPEG) : assez pour zoomer, sans remplir la tablette. */
+/* Réduit la photo (2560 px au plus, JPEG haute qualité) : assez pour zoomer, sans remplir la tablette. */
 function reduire(file){
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
