@@ -46,7 +46,8 @@ export const DEFAULTS = {
       { n:1, label:"Niveau 1", sub:"débutant, phase initiale" },
       { n:2, label:"Niveau 2", sub:"intermédiaire" },
       { n:3, label:"Niveau 3", sub:"avancé" },
-      { n:4, label:"Niveau 4", sub:"expert, retour au sport" }
+      { n:4, label:"Niveau 4", sub:"expert, retour au sport" },
+      { n:5, label:"Niveau 5", sub:"très avancé" }
     ]
   },
   masques: { exercices: [], modeles: [], reaffiches: [] },
