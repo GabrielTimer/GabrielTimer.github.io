@@ -33,11 +33,11 @@ export const TYPES = ["Renforcement", "Étirement", "Mobilité", "Gainage", "Éq
 /* Spécialités, dans l'ordre d'affichage */
 export const SPECIALITES = [
   "Orthopédie", "Traumatologie", "Rhumatologie", "Neurologie", "Vestibulaire", "Respiratoire",
-  "Cardio et reconditionnement", "Gériatrie et chutes", "Périnée et post-partum", "Sport", "Pédiatrie",
+  "Cardio et reconditionnement", "Remise en forme", "Gériatrie et chutes", "Périnée et post-partum", "Sport", "Pédiatrie",
   "Oncologie et lymphœdème", "Prévention et posture"
 ];
 const O = "Orthopédie", T = "Traumatologie", R = "Rhumatologie", N = "Neurologie", VE = "Vestibulaire", RE = "Respiratoire",
-  CA = "Cardio et reconditionnement", G = "Gériatrie et chutes", PE = "Périnée et post-partum", SP = "Sport", PR = "Prévention et posture";
+  CA = "Cardio et reconditionnement", G = "Gériatrie et chutes", PE = "Périnée et post-partum", SP = "Sport", PR = "Prévention et posture", RF = "Remise en forme";
 
 /* Spécialités de chaque pathologie principale */
 const SPECS_PATHO = {
@@ -54,7 +54,7 @@ const SPECS_PATHO = {
   "Paralysie faciale":[N], "Arthrose (générale)":[R, G], "Prévention des chutes / équilibre":[G], "AVC / hémiplégie":[N],
   "Maladie de Parkinson":[N], "Sclérose en plaques":[N], "SLA (maladie de Charcot)":[N], "Charcot-Marie-Tooth":[N],
   "Vertiges / vestibulaire":[VE], "Respiratoire (BPCO, asthme…)":[RE], "Post-opératoire":[O], "Ostéoporose":[R, G],
-  "Déconditionnement / reprise":[CA]
+  "Déconditionnement / reprise":[RF, CA]
 };
 /* Spécialités déduites du type d'exercice */
 const SPECS_TYPE = { "Respiration":[RE], "Cardio":[CA], "Au fauteuil (seniors)":[G] };
@@ -112,7 +112,7 @@ export const PATHOLOGIES = [
   ["Respiratoire (BPCO, asthme…)", "", /respirat|bpco|asthme|hyperventil|dyspnee|thoraci/],
   ["Post-opératoire", "", /post-?op|chirurgi|reparation/],
   ["Ostéoporose", "", /osteopor/],
-  ["Déconditionnement / reprise", "", /deconditionn|reprise|sedentar/]
+  ["Déconditionnement / reprise", "", /deconditionn|reconditionn|remise en forme|gym adaptee|reprise|sedentar/]
 ].map(([nom, zone, re]) => ({ nom, zone, re }));
 
 /** Ajoute à un exercice de la bibliothèque : e.zone, e.types[], e.pathos[] (noms des pathologies principales), e.specs[] (spécialités). */
