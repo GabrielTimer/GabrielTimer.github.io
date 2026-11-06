@@ -34,6 +34,7 @@
 <script type="module">
 import { $, $$, esc, icon, mountShell, registerSW, loadingHTML, emptyHTML, errorHTML, fmtRelDay, evaColor, debounce, store } from "/assets/app.js";
 import { norm } from "/assets/library.js";
+import { compareNoms } from "/assets/noms.js";
 const { requireKine, summarizeAll } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -78,7 +79,7 @@ function render(){
   let list = sums.filter(FILTERS.find(f => f[0] === filter)[2]);
   if(q) list = list.filter(s => norm(`${s.patient.nom} ${s.patient.note || ""} ${s.actif?.nom || ""}`).includes(q));
   list.sort((a, b) =>
-    sort === "nom" ? a.patient.nom.localeCompare(b.patient.nom, "fr")
+    sort === "nom" ? compareNoms(a.patient, b.patient)
     : sort === "recent" ? (b.derniere?.dateValidation || 0) - (a.derniere?.dateValidation || 0)
     : (b.score - a.score) || ((b.derniere?.dateValidation || 0) - (a.derniere?.dateValidation || 0)));
 

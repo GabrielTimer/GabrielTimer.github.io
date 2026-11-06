@@ -9,6 +9,7 @@ import {
 } from "../app.js";
 import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
 import * as V from "../variantes.js";
+import { compareNoms } from "../noms.js";
 const illustrationsActives = () => V.illustrationsActives ? V.illustrationsActives() : "h";
 const choisirIllustrations = v => { try{ V.choisirIllustrations?.(v); }catch(e){} };
 const aVariantes = src => { try{ return V.aVariantes ? V.aVariantes(src) : false; }catch(e){ return false; } };
@@ -865,7 +866,7 @@ function renderSend(full = true){
   $("#new-patient").onclick = async () => {
     const { newPatientSheet } = await import("../kine-ui.js");
     const np = await newPatientSheet();
-    if(np){ patients.push(np); patients.sort((a, b) => a.nom.localeCompare(b.nom, "fr")); S.patient = np.cle; if(np.genre){ S.illus = np.genre; choisirIllustrations(np.genre); } persist(); box.dataset.ready = ""; renderSend(); }
+    if(np){ patients.push(np); patients.sort(compareNoms); S.patient = np.cle; if(np.genre){ S.illus = np.genre; choisirIllustrations(np.genre); } persist(); box.dataset.ready = ""; renderSend(); }
   };
   $$("[data-type]").forEach(b => b.onclick = () => {
     S.type = b.dataset.type; persist();

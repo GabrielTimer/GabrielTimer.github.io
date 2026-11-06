@@ -7,6 +7,7 @@ import {
 } from "../app.js";
 import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
 import * as V from "../variantes.js";
+import { compareNoms } from "../noms.js";
 
 const app = $("#app");
 registerSW();
@@ -49,7 +50,7 @@ async function choisirPatientCopie(nomProg, cleActuel){
   let patients = [];
   try{
     const C = await import("../cloud.js");
-    patients = (await C.listPatients()).slice().sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr"));
+    patients = (await C.listPatients()).slice().sort(compareNoms);
   }catch(e){
     sh.el.querySelector("#cp-list").innerHTML = `<p class="small muted">Liste des patients indisponible. Choisissez le patient dans l'éditeur.</p>`;
     return;

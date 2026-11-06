@@ -24,6 +24,7 @@ import {
 
 import { FIREBASE_CONFIG, ADMIN_EMAILS } from "./config.js";
 import { updateSessionExercise } from "./library.js";
+import { compareNoms } from "./noms.js";
 
 const app = initializeApp(FIREBASE_CONFIG);
 
@@ -138,7 +139,7 @@ export async function listPatients(){
   ]);
   const byCle = new Map(fiches.docs.map(d => [d.id, d.data()]));
   return snap.docs.map(d => ({ cle: d.id, ...d.data(), ...(byCle.get(d.id) || {}) }))
-    .sort((a, b) => (a.nom || "").localeCompare(b.nom || "", "fr"));
+    .sort(compareNoms);
 }
 
 export async function createPatient({ nom, telephone = "", email = "", note = "", legacyId = "", genre = "" }){
