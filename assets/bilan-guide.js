@@ -456,7 +456,9 @@ export function mountGuide(app, ctx){
     if(d.gmodlv){ ui.choix[d.gmodlv] = d.v; refresh(); return; }
     if(d.gusemod){
       const m = (ui.modeles || []).find(x => String(x.id) === d.id);
-      if(m) utiliser(m.titre, m.exercices.map(e => ({ type:"timer", ...e })), m.series, "modele", { modeleId:String(m.id), nom:m.nom, niveau:m.niveau || null });
+      if(m) import("./modeles.js").then(({ choisirOptions }) => choisirOptions(m)).then(mm => {
+        if(mm) utiliser(mm.titre, mm.exercices.map(e => ({ type:"timer", ...e })), mm.series, "modele", { modeleId:String(mm.id), nom:mm.nom, niveau:mm.niveau || null, ...(mm.choix ? { choix:mm.choix } : {}) });
+      });
       return;
     }
 

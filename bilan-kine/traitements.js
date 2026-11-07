@@ -77,7 +77,7 @@ HYP: {
   "cerv:RAD": {
     axes: ["Mobilité cervicale et mobilisations neurales", "Renforcement des fléchisseurs profonds du cou", "Thérapie manuelle associée à l'exercice"],
     avis: "Avis médical si déficit moteur progressif.",
-    modeles: ["Cervicalgie"], patho: "Névralgie cervico-brachiale"
+    modeles: ["Névralgie cervico-brachiale", "Cervicalgie"], patho: "Névralgie cervico-brachiale"
   },
   "cerv:CEF": {
     axes: ["Thérapie manuelle cervicale haute", "Exercices des fléchisseurs profonds (flexion cranio-cervicale)", "Posture et ergonomie"],
@@ -148,7 +148,7 @@ REGION: {
   genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
   epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
   lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique et hernie discale", "Dos au travail"] },
-  cerv: { zone: "Cervicales", modeles: ["Cervicalgie"] },
+  cerv: { zone: "Cervicales", modeles: ["Cervicalgie", "Névralgie cervico-brachiale"] },
   chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire", "Épine calcanéenne"] },
   hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire"], postop: ["Prothèse totale de hanche (PTH)"] },
   coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)", "Épitrochléite (golf elbow)"] },

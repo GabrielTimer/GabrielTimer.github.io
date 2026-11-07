@@ -11,6 +11,7 @@
    ========================================================= */
 
 import { settings } from "./settings.js";
+import { filtrerOptions, choixDuNom } from "./modeles.js";
 import { openSheet, toast, esc, icon } from "./app.js";
 
 const DAY = 864e5;
@@ -31,14 +32,15 @@ export function origineDe(prog, modeles){
   const o = prog.seances.find(s => s.origine)?.origine;
   if(o?.modeleId){
     const m = modeles.find(x => String(x.id) === String(o.modeleId));
-    if(m) return { modele: m, niveau: m.niveau || o.niveau || null, base: m.nom };
+    if(m) return { modele: m, niveau: m.niveau || o.niveau || null, base: m.nom, choix: o.choix || choixDuNom(m, prog.nom) };
   }
-  const { base, niveau } = o?.nom ? { base: o.nom, niveau: o.niveau } : nomNiveau(prog.nom);
+  const nn = o?.nom ? { base: o.nom, niveau: o.niveau } : nomNiveau(prog.nom);
+  const base = String(nn.base).replace(/\s*\([^)]*\)\s*$/, ""), niveau = nn.niveau;   // « Névralgie cervico-brachiale (médian) »
   if(!niveau) return { modele: null, niveau: null, base };
   const lieu = lieuProg(prog);
   const cands = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
   const m = cands.find(x => x.lieu === lieu) || cands[0] || null;
-  return { modele: m, niveau, base };
+  return { modele: m, niveau, base, choix: choixDuNom(m, prog.nom) };
 }
 
 function lieuProg(prog){
@@ -111,7 +113,7 @@ function niveauVoisin(prog, modeles, sens){
   const series = Number(prog.seances.find(s => !s.terminee)?.data?.series || prog.seances[0]?.data?.series || 1);
   if(o.niveau){
     const c = auNiveau(modeles, o.base, o.niveau + sens, o.modele?.lieu || lieuProg(prog));
-    if(c) return { cible: c, series: null };
+    if(c) return { cible: filtrerOptions(c, o.choix), series: null };
   }
   if(sens > 0) return { cible: null, series: Math.min(series + 1, 5) };
   return { cible: null, series: series > 1 ? series - 1 : null, reps: series > 1 ? null : 0.7 };
@@ -119,7 +121,7 @@ function niveauVoisin(prog, modeles, sens){
 
 function suivant(prog, modeles){
   const o = origineDe(prog, modeles);
-  return o.niveau ? auNiveau(modeles, o.base, o.niveau + 1, o.modele?.lieu || lieuProg(prog)) : null;
+  return o.niveau ? filtrerOptions(auNiveau(modeles, o.base, o.niveau + 1, o.modele?.lieu || lieuProg(prog)), o.choix) : null;
 }
 
 /** Texte court du changement proposé. */
@@ -143,7 +145,7 @@ export function changements(prog, p){
       data.series = p.cible.series || 1;
       data.nom = p.cible.titre;
       patch.programmeNom = p.cible.titre;
-      patch.origine = { modeleId: String(p.cible.id), nom: p.cible.nom, niveau: p.cible.niveau || null };
+      patch.origine = { modeleId: String(p.cible.id), nom: p.cible.nom, niveau: p.cible.niveau || null, ...(p.cible.choix ? { choix: p.cible.choix } : {}) };
     }else if(p.series){
       data.series = p.series;
     }else if(p.reps){
@@ -195,7 +197,7 @@ export function valider(C, cle, prog, p, { onDone = null, onIgnore = null } = {}
   sh.el.querySelector("[data-next]")?.addEventListener("click", () => {
     const n = prog.seances.length, sem = Math.max(...prog.seances.map(s => s.semaine || 1));
     try{ localStorage.setItem("gt_draft", JSON.stringify({ nom: p.cible.titre, series: p.cible.series || 1, exercices: p.cible.exercices, semaines: sem, seancesParSemaine: Math.max(1, Math.round(n / sem)),
-      origine: { modeleId: String(p.cible.id), nom: p.cible.nom, niveau: p.cible.niveau || null } })); }catch(e){}
+      origine: { modeleId: String(p.cible.id), nom: p.cible.nom, niveau: p.cible.niveau || null, ...(p.cible.choix ? { choix: p.cible.choix } : {}) } })); }catch(e){}
     location.href = `/config.html?draft=1&patient=${encodeURIComponent(cle)}`;
   });
   sh.el.querySelector("[data-ok]")?.addEventListener("click", async e => {

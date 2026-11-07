@@ -936,6 +936,558 @@ export const MODELES_BASE = [
 "lieu": "HEP"
 },
 {
+"id": "base_nevralgie_cervico_brachiale_1",
+"nom": "Névralgie cervico-brachiale",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "HEP",
+"options": {
+"titre": "Nerf(s) concerné(s)",
+"choix": [
+{
+"k": "median",
+"l": "Nerf médian",
+"court": "médian",
+"aide": "Pouce, index, majeur ; face avant de l'avant-bras"
+},
+{
+"k": "ulnaire",
+"l": "Nerf ulnaire",
+"court": "ulnaire",
+"aide": "Annulaire, auriculaire ; bord interne de l'avant-bras"
+},
+{
+"k": "radial",
+"l": "Nerf radial",
+"court": "radial",
+"aide": "Dos de la main et du pouce ; face externe de l'avant-bras"
+}
+]
+},
+"exercices": [
+{
+"id": "488",
+"source": "HEP",
+"nom": "Rentrée du menton, allongé",
+"image": "/exercises/images/HEP/Chin-Tuck-Lying-Down.jpg",
+"consignes": [
+"Rentrez le menton comme pour faire un double menton, en appuyant la nuque sur la serviette.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Allongé sur le dos, une serviette roulée sous la nuque",
+"youtube": "http://www.youtube.com/embed/JymJPo0R9Yg",
+"type": "timer",
+"conseil": "Rentrez le menton comme pour faire un double menton, en appuyant la nuque sur la serviette.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Mouvement doux, nuque sur la serviette. Si la douleur du bras augmente, arrêtez cet exercice."
+},
+{
+"id": "179",
+"source": "HEP",
+"nom": "Rotation cervicale",
+"image": "/exercises/images/HEP/1407867186-cervical-rotation.jpg",
+"consignes": [
+"Tournez lentement la tête pour regarder par-dessus l'épaule.",
+"Revenez au centre, puis tournez de l'autre côté."
+],
+"position": "Assis ou debout, épaules relâchées",
+"youtube": "http://www.youtube.com/embed/SyKMG03ijFI",
+"type": "timer",
+"conseil": "Tournez lentement la tête pour regarder par-dessus l'épaule.<br>Revenez au centre, puis tournez de l'autre côté.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Seulement dans l'amplitude qui n'augmente pas la douleur du bras."
+},
+{
+"id": "413",
+"source": "HEP",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"type": "timer",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Épaules basses, sans hausser."
+},
+{
+"id": "125",
+"source": "HEP",
+"nom": "Cercles d'épaule",
+"image": "/exercises/images/HEP/1484923603-shoulder-circles1.jpg",
+"consignes": [
+"Faites de grands cercles avec les épaules : vers l'avant, en haut, vers l'arrière, en bas.",
+"Changez ensuite de sens."
+],
+"position": "Assis ou debout, bras le long du corps",
+"youtube": "http://www.youtube.com/embed/-qSQXdsZyy0",
+"type": "timer",
+"conseil": "Faites de grands cercles avec les épaules : vers l'avant, en haut, vers l'arrière, en bas.<br>Changez ensuite de sens.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petits cercles lents, épaules relâchées."
+},
+{
+"id": "64",
+"source": "HEP",
+"nom": "Glissement neural du nerf médian",
+"image": "/exercises/images/HEP/1407678628-median-nerve-glide2.jpg",
+"consignes": [
+"Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.",
+"Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.",
+"Revenez en baissant le poignet et en inclinant la tête vers le bras.",
+"Mouvements doux, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/U74KlvWIL0s",
+"type": "timer",
+"conseil": "Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.<br>Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.<br>Revenez en baissant le poignet et en inclinant la tête vers le bras.<br>Mouvements doux, sans provoquer de fourmillements durables.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Version douce : quand vous relevez le poignet, penchez la tête VERS le bras ; quand vous baissez le poignet, penchez-la de l'autre côté. Petite amplitude. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "median"
+},
+{
+"id": "62",
+"source": "HEP",
+"nom": "Glissement neural du nerf ulnaire",
+"image": "/exercises/images/HEP/1408869921-ulnar-nerve-glide3.jpg",
+"consignes": [
+"Formez un rond avec le pouce et l'index (signe OK).",
+"Écartez le bras sur le côté, coude plié.",
+"Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.",
+"Revenez doucement, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/LUDYwfPUj_k",
+"type": "timer",
+"conseil": "Formez un rond avec le pouce et l'index (signe OK).<br>Écartez le bras sur le côté, coude plié.<br>Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.<br>Revenez doucement, sans provoquer de fourmillements durables.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Version douce : quand la main monte vers l'œil, penchez la tête VERS le bras. Petite amplitude, sans aller jusqu'au masque complet. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "ulnaire"
+},
+{
+"id": "65",
+"source": "HEP",
+"nom": "Glissement neural du nerf radial",
+"image": "/exercises/images/HEP/1407678799-radial-nerve-glide2.jpg",
+"consignes": [
+"Bras le long du corps, légèrement en arrière, paume vers l'arrière.",
+"Fermez le poing et pliez le poignet vers le bas.",
+"Inclinez la tête de l'autre côté.",
+"Revenez, puis recommencez doucement."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/ppibRKXiFFA",
+"type": "timer",
+"conseil": "Bras le long du corps, légèrement en arrière, paume vers l'arrière.<br>Fermez le poing et pliez le poignet vers le bas.<br>Inclinez la tête de l'autre côté.<br>Revenez, puis recommencez doucement.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Version douce : quand vous pliez le poignet, penchez la tête VERS le bras. Petite amplitude. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "radial"
+}
+]
+},
+{
+"id": "base_nevralgie_cervico_brachiale_2",
+"nom": "Névralgie cervico-brachiale",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "HEP",
+"options": {
+"titre": "Nerf(s) concerné(s)",
+"choix": [
+{
+"k": "median",
+"l": "Nerf médian",
+"court": "médian",
+"aide": "Pouce, index, majeur ; face avant de l'avant-bras"
+},
+{
+"k": "ulnaire",
+"l": "Nerf ulnaire",
+"court": "ulnaire",
+"aide": "Annulaire, auriculaire ; bord interne de l'avant-bras"
+},
+{
+"k": "radial",
+"l": "Nerf radial",
+"court": "radial",
+"aide": "Dos de la main et du pouce ; face externe de l'avant-bras"
+}
+]
+},
+"exercices": [
+{
+"id": "137",
+"source": "HEP",
+"nom": "Rentrée du menton, assis",
+"image": "/exercises/images/HEP/1407867305-chin-tucks-sitting.jpg",
+"consignes": [
+"Posez un doigt sur le menton.",
+"Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NWUbMPN8vfg",
+"type": "timer",
+"conseil": "Posez un doigt sur le menton.<br>Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Sans baisser la tête ; à refaire souvent dans la journée, surtout devant un écran."
+},
+{
+"id": "680",
+"source": "HEP",
+"nom": "Rentrée du menton avec serrage des omoplates",
+"image": "/exercises/images/HEP/chin-tuck-shoulder-squeezes.jpg",
+"consignes": [
+"Rentrez le menton en reculant la tête.",
+"Gardez cette position et serrez les omoplates vers l'arrière, épaules basses.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/MdBgvJayUuM",
+"type": "timer",
+"conseil": "Rentrez le menton en reculant la tête.<br>Gardez cette position et serrez les omoplates vers l'arrière, épaules basses.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Épaules basses, sans cambrer."
+},
+{
+"id": "180",
+"source": "HEP",
+"nom": "Inclinaison cervicale",
+"image": "/exercises/images/HEP/1407867257-cervical-side-bend.jpg",
+"consignes": [
+"Penchez doucement la tête pour approcher l'oreille de l'épaule, sans monter l'épaule.",
+"Maintenez 1 à 2 secondes.",
+"Revenez, puis penchez de l'autre côté."
+],
+"position": "Assis ou debout, épaules relâchées",
+"youtube": "http://www.youtube.com/embed/54NLZgdTFlA",
+"type": "timer",
+"conseil": "Penchez doucement la tête pour approcher l'oreille de l'épaule, sans monter l'épaule.<br>Maintenez 1 à 2 secondes.<br>Revenez, puis penchez de l'autre côté.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Si pencher du côté douloureux réveille le bras, travaillez surtout de l'autre côté."
+},
+{
+"id": "684",
+"source": "HEP",
+"nom": "Rotation du cou et rotation thoracique opposée",
+"image": "/exercises/images/HEP/neck-rotation-thoracic-rotation.jpg",
+"consignes": [
+"Tournez la tête d'un côté en tournant le tronc de l'autre côté.",
+"Revenez au centre et inversez."
+],
+"position": "Assis ou debout, bras croisés sur la poitrine",
+"youtube": "http://www.youtube.com/embed/MEtE9IjUSfo",
+"type": "timer",
+"conseil": "Tournez la tête d'un côté en tournant le tronc de l'autre côté.<br>Revenez au centre et inversez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Mouvement lent et ample, sans forcer en fin de rotation."
+},
+{
+"id": "131",
+"source": "HEP",
+"nom": "Isométrique cervical en rotation",
+"image": "/exercises/images/HEP/1407953717-isometric-cervical-rotation.jpg",
+"consignes": [
+"Posez la main sur le côté de la tête, à hauteur de la tempe.",
+"Essayez de tourner la tête vers la main, sans bouger.",
+"Maintenez 3 à 5 secondes, puis faites l'autre côté."
+],
+"position": "Assis ou debout, épaules relâchées",
+"youtube": "http://www.youtube.com/embed/YYsPgQRqqKs",
+"type": "timer",
+"conseil": "Posez la main sur le côté de la tête, à hauteur de la tempe.<br>Essayez de tourner la tête vers la main, sans bouger.<br>Maintenez 3 à 5 secondes, puis faites l'autre côté.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Poussée légère (environ 30 % de votre force), sans douleur dans le bras."
+},
+{
+"id": "64",
+"source": "HEP",
+"nom": "Glissement neural du nerf médian",
+"image": "/exercises/images/HEP/1407678628-median-nerve-glide2.jpg",
+"consignes": [
+"Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.",
+"Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.",
+"Revenez en baissant le poignet et en inclinant la tête vers le bras.",
+"Mouvements doux, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/U74KlvWIL0s",
+"type": "timer",
+"conseil": "Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.<br>Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.<br>Revenez en baissant le poignet et en inclinant la tête vers le bras.<br>Mouvements doux, sans provoquer de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Mouvement complet comme décrit, lent : environ 10 allers-retours. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "median"
+},
+{
+"id": "62",
+"source": "HEP",
+"nom": "Glissement neural du nerf ulnaire",
+"image": "/exercises/images/HEP/1408869921-ulnar-nerve-glide3.jpg",
+"consignes": [
+"Formez un rond avec le pouce et l'index (signe OK).",
+"Écartez le bras sur le côté, coude plié.",
+"Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.",
+"Revenez doucement, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/LUDYwfPUj_k",
+"type": "timer",
+"conseil": "Formez un rond avec le pouce et l'index (signe OK).<br>Écartez le bras sur le côté, coude plié.<br>Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.<br>Revenez doucement, sans provoquer de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Mouvement complet comme décrit, lent : environ 10 allers-retours. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude. Évitez de garder le coude plié longtemps (téléphone, sommeil).",
+"opt": "ulnaire"
+},
+{
+"id": "65",
+"source": "HEP",
+"nom": "Glissement neural du nerf radial",
+"image": "/exercises/images/HEP/1407678799-radial-nerve-glide2.jpg",
+"consignes": [
+"Bras le long du corps, légèrement en arrière, paume vers l'arrière.",
+"Fermez le poing et pliez le poignet vers le bas.",
+"Inclinez la tête de l'autre côté.",
+"Revenez, puis recommencez doucement."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/ppibRKXiFFA",
+"type": "timer",
+"conseil": "Bras le long du corps, légèrement en arrière, paume vers l'arrière.<br>Fermez le poing et pliez le poignet vers le bas.<br>Inclinez la tête de l'autre côté.<br>Revenez, puis recommencez doucement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Mouvement complet comme décrit, lent : environ 10 allers-retours. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "radial"
+}
+]
+},
+{
+"id": "base_nevralgie_cervico_brachiale_3",
+"nom": "Névralgie cervico-brachiale",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "HEP",
+"options": {
+"titre": "Nerf(s) concerné(s)",
+"choix": [
+{
+"k": "median",
+"l": "Nerf médian",
+"court": "médian",
+"aide": "Pouce, index, majeur ; face avant de l'avant-bras"
+},
+{
+"k": "ulnaire",
+"l": "Nerf ulnaire",
+"court": "ulnaire",
+"aide": "Annulaire, auriculaire ; bord interne de l'avant-bras"
+},
+{
+"k": "radial",
+"l": "Nerf radial",
+"court": "radial",
+"aide": "Dos de la main et du pouce ; face externe de l'avant-bras"
+}
+]
+},
+"exercices": [
+{
+"id": "472",
+"source": "HEP",
+"nom": "Rentrée du menton avec élastique",
+"image": "/exercises/images/HEP/1504795847-chin-tucks-with-band.jpg",
+"consignes": [
+"Tenez les extrémités de l'élastique devant vous.",
+"Reculez la tête en rentrant le menton contre la résistance de l'élastique.",
+"Revenez lentement."
+],
+"position": "Assis, élastique passé derrière la tête",
+"youtube": "http://www.youtube.com/embed/YeYuyizqFrk",
+"type": "timer",
+"conseil": "Tenez les extrémités de l'élastique devant vous.<br>Reculez la tête en rentrant le menton contre la résistance de l'élastique.<br>Revenez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Contrôlez le retour, sans pousser le menton en avant."
+},
+{
+"id": "133",
+"source": "HEP",
+"nom": "Isométrique cervical en flexion",
+"image": "/exercises/images/HEP/1407953405-isometric-cervical-flexion.jpg",
+"consignes": [
+"Posez la main sur le front.",
+"Poussez la tête vers l'avant contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou debout, épaules relâchées",
+"youtube": "http://www.youtube.com/embed/AwEXXiU_Gmc",
+"type": "timer",
+"conseil": "Posez la main sur le front.<br>Poussez la tête vers l'avant contre la main, sans bouger.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Poussée modérée, sans douleur dans le bras."
+},
+{
+"id": "134",
+"source": "HEP",
+"nom": "Isométrique cervical en extension",
+"image": "/exercises/images/HEP/1407953614-isometric-cervical-extension.jpg",
+"consignes": [
+"Posez une main derrière la tête.",
+"Poussez la tête en arrière contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou debout, épaules relâchées",
+"youtube": "http://www.youtube.com/embed/_k9sFuwoZ8M",
+"type": "timer",
+"conseil": "Posez une main derrière la tête.<br>Poussez la tête en arrière contre la main, sans bouger.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Poussée modérée, sans douleur dans le bras."
+},
+{
+"id": "114",
+"source": "HEP",
+"nom": "Élévation du bras dans le plan de l'omoplate avec élastique, debout",
+"image": "/exercises/images/HEP/1414151727-standing-shoulder-scaption-with-resistive-band2.jpg",
+"consignes": [
+"Bras tendu, pouce vers le haut.",
+"Montez le bras entre l'avant et le côté (plan de l'omoplate) jusqu'à l'horizontale.",
+"Redescendez lentement."
+],
+"position": "Debout, élastique bloqué sous le pied du côté travaillé",
+"youtube": "http://www.youtube.com/embed/7h0PrYT6WQo",
+"type": "timer",
+"conseil": "Bras tendu, pouce vers le haut.<br>Montez le bras entre l'avant et le côté (plan de l'omoplate) jusqu'à l'horizontale.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Côté atteint, élastique léger. Arrêtez si les fourmillements augmentent."
+},
+{
+"id": "351",
+"source": "HEP",
+"nom": "Extension d'épaule avec élastique, debout",
+"image": "/exercises/images/HEP/1414151837-standing-shoulder-extension-with-resistive-band2.jpg",
+"consignes": [
+"Bras tendu, pouce vers l'avant.",
+"Amenez le bras vers l'arrière, le long du corps, à environ 40°.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous",
+"youtube": "http://www.youtube.com/embed/4GOw75k7AqY",
+"type": "timer",
+"conseil": "Bras tendu, pouce vers l'avant.<br>Amenez le bras vers l'arrière, le long du corps, à environ 40°.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Côté atteint, omoplate serrée vers l'arrière pendant le mouvement."
+},
+{
+"id": "64",
+"source": "HEP",
+"nom": "Glissement neural du nerf médian",
+"image": "/exercises/images/HEP/1407678628-median-nerve-glide2.jpg",
+"consignes": [
+"Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.",
+"Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.",
+"Revenez en baissant le poignet et en inclinant la tête vers le bras.",
+"Mouvements doux, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/U74KlvWIL0s",
+"type": "timer",
+"conseil": "Écartez le bras sur le côté à hauteur d'épaule, paume vers le haut, doigts tendus.<br>Relevez le poignet (doigts vers le plafond) en inclinant la tête de l'autre côté.<br>Revenez en baissant le poignet et en inclinant la tête vers le bras.<br>Mouvements doux, sans provoquer de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Amplitude complète ; tenez 2 secondes en fin de mouvement si c'est bien toléré. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "median"
+},
+{
+"id": "62",
+"source": "HEP",
+"nom": "Glissement neural du nerf ulnaire",
+"image": "/exercises/images/HEP/1408869921-ulnar-nerve-glide3.jpg",
+"consignes": [
+"Formez un rond avec le pouce et l'index (signe OK).",
+"Écartez le bras sur le côté, coude plié.",
+"Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.",
+"Revenez doucement, sans provoquer de fourmillements durables."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/LUDYwfPUj_k",
+"type": "timer",
+"conseil": "Formez un rond avec le pouce et l'index (signe OK).<br>Écartez le bras sur le côté, coude plié.<br>Retournez la main pour poser le rond autour de l'œil, comme un masque, doigts vers l'oreille.<br>Revenez doucement, sans provoquer de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Amplitude complète ; tenez 2 secondes en fin de mouvement si c'est bien toléré. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "ulnaire"
+},
+{
+"id": "65",
+"source": "HEP",
+"nom": "Glissement neural du nerf radial",
+"image": "/exercises/images/HEP/1407678799-radial-nerve-glide2.jpg",
+"consignes": [
+"Bras le long du corps, légèrement en arrière, paume vers l'arrière.",
+"Fermez le poing et pliez le poignet vers le bas.",
+"Inclinez la tête de l'autre côté.",
+"Revenez, puis recommencez doucement."
+],
+"position": "Assis ou debout",
+"youtube": "http://www.youtube.com/embed/ppibRKXiFFA",
+"type": "timer",
+"conseil": "Bras le long du corps, légèrement en arrière, paume vers l'arrière.<br>Fermez le poing et pliez le poignet vers le bas.<br>Inclinez la tête de l'autre côté.<br>Revenez, puis recommencez doucement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Amplitude complète ; tenez 2 secondes en fin de mouvement si c'est bien toléré. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude.",
+"opt": "radial"
+}
+]
+},
+{
 "id": "base_tendinopathie_de_la_coiffe_et_conflit_1",
 "nom": "Tendinopathie de la coiffe et conflit",
 "niveau": 1,

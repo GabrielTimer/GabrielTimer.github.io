@@ -682,7 +682,9 @@ async function openModelSheet(){
 /** Utilise un modèle : remplace la séance (si elle est vide ou si le kiné le choisit) ou ajoute ses exercices à la suite. */
 async function applyModele(m){
   if(!m) return;
-  const { asProgram } = await import("../modeles.js");
+  const { asProgram, choisirOptions } = await import("../modeles.js");
+  m = await choisirOptions(m);   // modèle à options (ex. nerf médian / ulnaire / radial)
+  if(!m) return;
   const prog = asProgram(m);
   const tous = prog.exercices.map(e => normExo(e));
   const exos = tous.filter(e => !horsLieu(e));

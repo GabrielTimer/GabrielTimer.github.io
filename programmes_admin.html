@@ -47,7 +47,7 @@
 import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
-import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden } from "/assets/modeles.js";
+import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden, choisirOptions } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 import { ZONES, PATHOLOGIES as PATHOS, SPECIALITES, specialitesDe } from "/assets/classement.js";
 const { requireKine } = await import("/assets/kine.js");
@@ -133,14 +133,16 @@ const all = () => {
 
 /* ---------- Actions ---------- */
 const findM = id => all().find(m => m.id === id);
-const useIt = m => { store.set("gt_draft", asProgram(m)); location.href = "/config.html?draft=1"; };
-const runIt = m => { setRunProgram(asProgram(m)); location.href = "/timer.html"; };
+const useIt = async m => { m = await choisirOptions(m); if(!m) return; store.set("gt_draft", asProgram(m)); location.href = "/config.html?draft=1"; };
+const runIt = async m => { m = await choisirOptions(m); if(!m) return; setRunProgram(asProgram(m)); location.href = "/timer.html"; };
 const editIt = m => { location.href = m.mine ? `/config.html?modele=${encodeURIComponent(m.id)}` : `/config.html?modele=${encodeURIComponent(m.id)}&remplace=1`; };
 const copyIt = m => { location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}`; };
-const pdfIt = m => {
+const pdfIt = async m => {
   if(m.pdf){ window.open(m.pdf, "_blank"); return; }
+  const opt = !!m.options;
+  m = await choisirOptions(m); if(!m) return;
   store.set("programme_pdf", { ...asProgram(m), patient:"", niveau: m.niveau ? `Niveau ${m.niveau}` : "" });
-  window.open("/program_pdf.html", "_blank");
+  if(opt) location.href = "/program_pdf.html"; else window.open("/program_pdf.html", "_blank");
 };
 const noteOf = e => e.conseil_kine || (e.consignes?.length ? "" : String(e.conseil || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, ""));
 
@@ -175,7 +177,12 @@ function detail(m, group){
     if(a === "use") useIt(m);
     if(a === "run") runIt(m);
     if(a === "pdf") pdfIt(m);
-    if(a === "print"){ store.set("programme_print", { ...asProgram(m), patient:"" }); window.open("/impression.html", "_blank"); }
+    if(a === "print"){
+      /* Modèle à options : choix d'abord, puis impression dans cet onglet (un nouvel onglet ouvert après coup serait bloqué) */
+      const mm = await choisirOptions(m); if(!mm) return;
+      store.set("programme_print", { ...asProgram(mm), patient:"" });
+      if(m.options) location.href = "/impression.html"; else window.open("/impression.html", "_blank");
+    }
     if(a === "edit") editIt(m);
     if(a === "copy") copyIt(m);
     if(a === "hide"){
@@ -276,7 +283,7 @@ function render(){
           <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · À la maison" : cur.lieu === "CABINET" ? " · Au cabinet" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
           <h2>${esc(g.nom)}</h2>
           ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${esc(levelButton(x))}</button>`).join("")}</div>` : ""}
-          <span class="small muted">${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
+          <span class="small muted">${cur.options ? `${plural(cur.exercices.filter(e => !e.opt).length, "exercice")} + 1 par ${esc(cur.options.titre.toLowerCase().includes("nerf") ? "nerf choisi" : "choix")}` : `${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}`}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
         </div>
         <div class="mo-actions">
           <button class="btn primary" type="button" data-use="${esc(cur.id)}">${icon("share")}Utiliser</button>
