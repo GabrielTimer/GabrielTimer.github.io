@@ -229,6 +229,7 @@ async function kineView(param){
           <span class="li-sub">${esc(b.motif || "")}</span>
         </a>
         <span class="li-end">
+          <a class="icon-btn sm" href="/courrier.html?patient=${encodeURIComponent(patient.cle)}&bilan=${encodeURIComponent(b.id)}" target="_blank" rel="noopener" aria-label="Lettre au médecin" title="Lettre au médecin">${icon("mail")}</a>
           <button class="icon-btn sm" type="button" data-bact="pdf" data-id="${esc(b.id)}" aria-label="Télécharger le PDF" title="PDF">${icon("pdf")}</button>
           <button class="icon-btn sm" type="button" data-bact="send" data-id="${esc(b.id)}" aria-label="Envoyer" title="Envoyer">${icon("share")}</button>
           <button class="icon-btn sm danger" type="button" data-bact="del" data-id="${esc(b.id)}" aria-label="Supprimer" title="Supprimer">${icon("trash")}</button>
@@ -333,7 +334,7 @@ async function kineView(param){
       </div>
 
       <section class="section">
-        <div class="section-title">Suivi<span class="spacer"></span><a class="btn sm" href="/compte-rendu.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("file")}Compte rendu médecin</a></div>
+        <div class="section-title" style="flex-wrap:wrap">Suivi<span class="spacer"></span><a class="btn sm" href="/compte-rendu.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("file")}Compte rendu médecin</a><a class="btn sm" href="/courrier.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("mail")}Lettre au médecin</a></div>
         <div id="suivi-slot"></div>
       </section>
 

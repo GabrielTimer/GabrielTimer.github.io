@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Courrier au médecin</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  /* Courrier de suivi kiné au médecin : lettre A4 rédigée d'après le bilan, le traitement et le suivi à domicile.
+     URL : /courrier.html?patient=CODE (dernier bilan) ou &bilan=ID.
+     Cases « Dans la lettre » : ce que la lettre résume. Cases « Joindre » : pièces jointes imprimées à la suite.
+     Tout le texte de la lettre reste modifiable avant impression. */
+  body{ background:var(--bg); }
+  .tools{ position:sticky; top:0; z-index:5; display:flex; gap:10px; flex-wrap:wrap; align-items:flex-end; padding:12px var(--gutter); background:var(--surface); border-bottom:1px solid var(--line); }
+  .tools .field{ margin:0; min-width:0; }
+  .tools .field label{ font-size:var(--fs-xs); }
+  .tools .spacer{ flex:1; }
+  .tools .hint{ width:100%; margin:0; }
+  #med{ min-width:220px; }
+  .opts{ width:100%; display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; font-size:var(--fs-sm); }
+  .opts > b{ font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.06em; color:var(--ink-3); min-width:96px; }
+  .sheet-a4{ width:min(100% - 24px, 210mm); margin:20px auto 20px; background:#fff; color:#14303A; padding:18mm 18mm 16mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:11pt; line-height:1.55; }
+  #annexes .sheet-a4{ font-size:9.8pt; line-height:1.45; }
+  #annexes{ margin-bottom:60px; }
+  .lt-from{ display:flex; gap:12px; align-items:flex-start; font-size:9.5pt; color:#47616B; white-space:pre-line; }
+  .lt-from img{ width:44px; height:44px; object-fit:contain; }
+  .lt-from strong{ display:block; font-size:11.5pt; color:#0B6E80; }
+  .lt-to{ margin:26px 0 0 auto; width:min(48%, 80mm); font-size:11pt; }
+  .lt-to .vide{ color:#C93A3A; }
+  .lt-date{ text-align:right; margin:22px 0 16px; }
+  .lt-obj{ margin:0 0 4px; }
+  .lt-ref{ margin:0 0 18px; color:#47616B; font-size:10pt; }
+  .lt-body p{ margin:0 0 10px; text-align:justify; }
+  .lt-body:focus{ outline:2px dashed #9FB6BC; outline-offset:6px; border-radius:4px; }
+  .lt-pj{ margin-top:14px; font-size:10pt; }
+  .lt-sign{ margin:24px 0 0 auto; width:min(48%, 80mm); }
+  .lt-sign .space{ height:52px; }
+  .ax h1{ font-size:14pt; color:#0B6E80; margin:0 0 2px; }
+  .ax h2{ font-size:10.5pt; margin:14px 0 6px; padding-bottom:3px; border-bottom:1.5px solid #138FA6; color:#0B6E80; }
+  .ax .sub{ color:#6F878F; margin:0 0 10px; }
+  .ax table{ width:100%; border-collapse:collapse; }
+  .ax th{ text-align:left; font-size:8.5pt; color:#6F878F; font-weight:700; border-bottom:1px solid #C9D9DD; padding:4px 6px; }
+  .ax td{ border-bottom:1px solid #E3EDEF; padding:4px 6px; vertical-align:top; }
+  .ax td.l{ width:34%; color:#47616B; font-weight:600; }
+  .ax td.n{ white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .ax .alerte{ color:#C93A3A; font-weight:700; margin:4px 0; }
+  .ax .muted{ color:#6F878F; }
+  @media print{
+    @page{ size:A4; margin:14mm; }
+    body{ background:#fff; }
+    .tools{ display:none; }
+    .sheet-a4{ width:auto; margin:0; padding:0; box-shadow:none; border-radius:0; }
+    #annexes .sheet-a4{ break-before:page; }
+    .lt-to .vide{ color:inherit; }
+    .lt-body p{ break-inside:avoid; }
+    .ax h2{ break-after:avoid; } .ax tr{ break-inside:avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a class="btn sm ghost" id="back" href="/patients.html">Retour</a>
+  <div class="field"><label for="med">Médecin destinataire</label><input class="input" id="med" type="text" autocomplete="off" placeholder="Nom du médecin (ex. Martin)"></div>
+  <div class="field" id="f-bilan" hidden><label for="bilan">Bilan</label><select class="input" id="bilan"></select></div>
+  <span class="spacer"></span>
+  <button class="btn" type="button" id="copy">Copier</button>
+  <button class="btn" type="button" id="mail">E-mail</button>
+  <button class="btn primary" type="button" id="print">Imprimer ou PDF</button>
+  <div class="opts" id="o-lettre"><b>Dans la lettre</b></div>
+  <div class="opts" id="o-joindre"><b>Joindre</b></div>
+  <p class="hint">La lettre résume l'essentiel ; les pièces jointes cochées s'impriment à la suite. Touchez le texte pour le modifier.</p>
+</div>
+<div class="sheet-a4" id="doc"><div class="loading"><div class="spinner"></div><span>Rédaction du courrier…</span></div></div>
+<div id="annexes"></div>
+<script type="module">
+import { $, $$, esc, icon, params, settings, logoSrc, KINE, toast, confirmDialog, groupProgrammes, evaTrend, fmtNum } from "/assets/app.js";
+import { nomAffiche } from "/assets/noms.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+const C = await import("/assets/cloud.js");
+const B = await import("/assets/bilan-core.js");
+const T = await import("/assets/bilan-traitement.js");
+const P = await import("/assets/patient.js");
+const { fmtScore } = await import("/assets/questionnaires.js");
+
+const cle = params.get("patient");
+if(!cle) location.replace("/patients.html");
+$("#back").href = `/cloud.html?patient=${encodeURIComponent(cle)}`;
+$("#back").innerHTML = icon("back") + "Retour à la fiche";
+$("#print").innerHTML = icon("print") + $("#print").textContent;
+$("#copy").innerHTML = icon("copy") + $("#copy").textContent;
+$("#mail").innerHTML = icon("mail") + $("#mail").textContent;
+
+const [patient, K, bilans, seancesAll, suivis, questionnaires] = await Promise.all([
+  C.getPatient(cle, { fiche:true }), B.loadClinic(), C.listBilans(cle).catch(() => []),
+  C.listSeances(cle).catch(() => []), C.listSuivis(cle).catch(() => []), C.listQuestionnaires().catch(() => [])
+]);
+if(!patient){ $("#doc").innerHTML = "<p>Patient introuvable.</p>"; throw new Error("patient"); }
+const nom = nomAffiche(patient.nom);
+document.title = `Courrier – ${nom}`;
+const liste = bilans.filter(b => b.etat);               // du plus récent au plus ancien
+const premier = liste.length ? liste[liste.length - 1] : null;
+
+/* ---------- Petits outils de rédaction ---------- */
+const G = patient.genre === "f" ? "f" : patient.genre === "h" ? "h" : "";
+const ac = (m, f, n = m + "(e)") => G === "f" ? f : G === "h" ? m : n;   // adressé / adressée / adressé(e)
+const civ = G === "f" ? "Mme " : G === "h" ? "M. " : "";
+const ilElle = ac("il", "elle", "il ou elle"), Il = ilElle.charAt(0).toUpperCase() + ilElle.slice(1);
+const low = s => { s = String(s || ""); return /^.[A-ZÀ-Ý0-9]/.test(s) ? s : s.charAt(0).toLowerCase() + s.slice(1); };   // garde les sigles (HTA, LCA, IRM)
+const et = a => { a = a.filter(Boolean); return a.length <= 1 ? (a[0] || "") : a.slice(0, -1).join(", ") + " et " + a[a.length - 1]; };
+const phrase = s => { s = String(s || "").trim(); if(!s) return ""; s = s.charAt(0).toUpperCase() + s.slice(1); return /[.!?]$/.test(s) ? s : s + "."; };
+const joinSec = (S, key) => [...(S.c?.[key] || []), String(S.f?.[key] || "").trim()].filter(Boolean);
+const q = (S, id) => S.q?.[id];
+const qa = (S, id) => [].concat(S.q?.[id] || []);
+const isoDe = ts => { const d = new Date(ts); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+const cab = settings.cabinet || {};
+const ville = (String(cab.adresse || "").trim().split("\n").pop().match(/\d{5}\s+(.+)$/) || [])[1] || "";
+
+/* Mesures du bilan : questionnaires (MES) et tests fonctionnels (TF), avec leur unité */
+const sansParen = l => l.replace(/\s*\([^)]*\)$/, "");
+function mesures(S, quoi){
+  const f = S?.f || {}, out = [];
+  if(quoi === "quest") K.MES.forEach(([k, l]) => {
+    const v = String(f[k] ?? "").trim(); if(!v) return;
+    const u = (l.match(/\(([^)]*)\)$/) || [])[1] || "";
+    out.push({ k, label: sansParen(l), val: v + (u === "%" ? " %" : u.startsWith("/") ? u : u === "0-10" ? "/10" : "") });
+  });
+  if(quoi === "tf") (K.TF || []).forEach(([k, n, u]) => {
+    const v = String(f[k] ?? "").trim(); if(v) out.push({ k, label: n, val: `${v} ${u}`.trim() });
+  });
+  return out;
+}
+/* Tests cliniques cotés dans le bilan : [{ zone, test, pos, lrp, lrm }] et drapeaux rouges */
+function testsCliniques(S){
+  const tests = [], rf = [], rfm = [];
+  if(!S) return { tests, rf, rfm };
+  Object.keys(S.pain || {}).filter(B.regionOf).concat(S.cl?.Vertiges ? ["Vertiges"] : []).forEach(n => {
+    const r = K.REG[B.regionOf(n) || "vertiges"], c = S.cl?.[n];
+    if(!r || !c) return;
+    r.T.forEach(x => { if(c.t?.[x[0]]) tests.push({ zone:n, test:x[0], pos:c.t[x[0]] > 0, lrp:x[2], lrm:x[3] }); });
+    const f = (c.s || []).filter(x => r.RF.includes(x));
+    if(f.length){ rf.push(...f); if(r.RFm && !rfm.includes(r.RFm)) rfm.push(r.RFm); }
+  });
+  return { tests, rf, rfm };
+}
+/* Questionnaires validés par le patient dans l'application */
+function questApp(depuis){
+  const qS = suivis.filter(s => s.type === "questionnaire" && s.score != null && (!depuis || isoDe(s.date) >= depuis));
+  return [...new Set(qS.map(s => s.qid))].map(id => {
+    const r = qS.filter(s => s.qid === id).sort((a, b) => a.date - b.date);
+    const qq = questionnaires.find(x => x.id === id) || { nom: r[0].nom };
+    return { q: qq, r, first: r[0], last: r[r.length - 1] };
+  });
+}
+
+/* ---------- Options ---------- */
+const OPTS_L = [
+  ["hist", "Histoire et antécédents", true],
+  ["exam", "Douleur et examen", true],
+  ["tests", "Tests cliniques", true],
+  ["quest", "Questionnaires et mesures", true],
+  ["evol", "Évolution", true],
+  ["suivi", "Suivi à domicile", true],
+  ["tx", "Traitement proposé", true]
+];
+const OPTS_J = [
+  ["j-bilan", "Bilan complet"],
+  ["j-tests", "Tests cliniques détaillés"],
+  ["j-quest", "Questionnaires et mesures"],
+  ["j-suivi", "Suivi à domicile détaillé"]
+];
+const memoOpts = "gt_courrier_opts";
+let memo = {}; try{ memo = JSON.parse(localStorage.getItem(memoOpts) || "{}"); }catch(e){}
+$("#o-lettre").insertAdjacentHTML("beforeend", OPTS_L.map(([k, l, d]) => `<label class="check"><input type="checkbox" data-o="${k}" ${(memo[k] ?? d) ? "checked" : ""}> ${esc(l)}</label>`).join(""));
+$("#o-joindre").insertAdjacentHTML("beforeend", OPTS_J.map(([k, l]) => `<label class="check"><input type="checkbox" data-o="${k}" ${memo[k] ? "checked" : ""}> ${esc(l)}</label>`).join(""));
+const opt = k => !!$(`[data-o="${k}"]`)?.checked;
+const optsActuelles = () => Object.fromEntries($$("[data-o]").map(x => [x.dataset.o, x.checked]));
+
+/* ---------- Données du suivi à domicile (depuis le premier bilan) ---------- */
+function suiviDomicile(){
+  const depuis = premier?.date || "";
+  const valides = seancesAll.filter(s => s.data && Array.isArray(s.data.exercices) && s.terminee && s.dateValidation && (!depuis || isoDe(s.dateValidation) >= depuis))
+    .sort((a, b) => a.dateValidation - b.dateValidation);
+  const progs = groupProgrammes(seancesAll.filter(s => s.data && Array.isArray(s.data.exercices))).programmes;
+  const dus = progs.flatMap(p => p.seances).filter(s => !depuis || !s.datePrevue || isoDe(new Date(s.datePrevue)) >= depuis);
+  const evas = valides.map(s => s.eva).filter(x => x !== null && x !== undefined && x !== "").map(Number);
+  return { depuis, valides, progs, reg: P.regularity(dus), evas, tr: evaTrend(evas) };
+}
+
+/* ---------- Le courrier, paragraphe par paragraphe ---------- */
+function rediger(bl){
+  const S = bl?.etat || null;
+  const type = S?.type || "intermediaire";
+  const prev = S ? B.previousOf(liste, bl.id, bl.date) : null;
+  const motifs = S ? joinSec(S, "patho") : [];
+  const motif = motifs.length ? et(motifs.map(low)) : "";
+  const hyp = S?.c?.hyp || [];
+  const naiss = S?.f?.naiss ? `, ${ac("né", "née")} le ${S.f.naiss}` : "";
+  const prof = S?.f?.prof ? `, ${low(S.f.prof)}` : "";
+  const out = [];
+  const depuisLe = premier && bl && premier.id !== bl.id ? B.fmtISOLong(premier.date) : "";
+
+  /* Introduction */
+  if(!S) out.push(`Je vous adresse des nouvelles de ${civ}${nom}, ${ac("suivi", "suivie")} en kinésithérapie.`);
+  else if(type === "initial") out.push(`Je vous remercie de m'avoir ${ac("adressé", "adressée")} ${civ}${nom}${naiss}${prof}${motif ? `, pour ${motif}` : ""}. Je l'ai ${ac("reçu", "reçue")} en bilan kinésithérapique le ${B.fmtISOLong(bl.date)}.`);
+  else if(type === "final") out.push(`${civ}${nom}${naiss}, que vous m'aviez ${ac("adressé", "adressée")}${motif ? ` pour ${motif}` : ""}, arrive au terme de sa prise en charge en kinésithérapie${depuisLe ? ` (débutée le ${depuisLe})` : ""}. Le bilan de fin de traitement a été réalisé le ${B.fmtISOLong(bl.date)}.`);
+  else out.push(`Je vous adresse des nouvelles de ${civ}${nom}${naiss}, ${ac("suivi", "suivie")} en kinésithérapie${depuisLe ? ` depuis le ${depuisLe}` : ""}${motif ? ` pour ${motif}` : ""}. Un bilan intermédiaire a été réalisé le ${B.fmtISOLong(bl.date)}.`);
+
+  const { tests, rf, rfm } = testsCliniques(S);
+  let evolScore = 0;
+
+  if(S){
+    /* Histoire (bilan initial) */
+    if(opt("hist") && type === "initial"){
+      const DEBUT = { "Traumatisme / accident":"à la suite d'un traumatisme", "Progressivement":"d'installation progressive", "Après une opération":"après une intervention chirurgicale", "Sans cause retrouvée":"sans cause déclenchante retrouvée" };
+      const EVOL = { "En amélioration":"plutôt en amélioration", "Stable":"stables", "En aggravation":"en aggravation", "Fluctuant":"fluctuants" };
+      const h = [];
+      if(q(S, "duree")) h.push(`évoluent depuis ${low(q(S, "duree")).replace("moins d'1", "moins d'une")}`);
+      if(DEBUT[q(S, "debut")]) h.push(DEBUT[q(S, "debut")]);
+      let t = h.length ? `Les symptômes ${h.join(", ")}` : "";
+      if(EVOL[q(S, "evol")]) t += (t ? " et sont " : "Les symptômes sont ") + EVOL[q(S, "evol")];
+      t = phrase(t);
+      if(q(S, "recid") === "Oui, récidives") t += " Il s'agit d'une récidive.";
+      else if(q(S, "recid") === "Oui, une fois") t += " Un épisode similaire est déjà survenu.";
+      const ex = qa(S, "imag").filter(x => x !== "Aucun"), tt = qa(S, "ttt").filter(x => x !== "Rien");
+      if(ex.length) t += ` Examens réalisés : ${et(ex.map(low))}.`;
+      if(tt.length) t += ` Déjà ${ac("traité", "traitée")} par ${et(tt.map(low))}.`;
+      const atcd = joinSec(S, "atcd"), med = joinSec(S, "medic").filter(x => x !== "Aucune");
+      if(atcd.length) t += ` Antécédents notables : ${et(atcd.map(low))}.`;
+      if(med.length) t += ` Traitement en cours : ${et(med.map(low))}.`;
+      if(t.trim()) out.push(t.trim());
+    }
+
+    /* Douleur et examen, tests, mesures : un seul paragraphe court */
+    let t = "";
+    if(opt("exam")){
+      const ex = [];
+      const zones = Object.entries(S.pain || {});
+      if(zones.length) ex.push(`La douleur est cotée ${zones.map(([z, p]) => `${p.eva}/10 (${low(z)}${p.types?.length ? ", " + low(p.types.join(", ")) : ""})`).join(", ")}`);
+      const H = { "À l'effort, mieux au repos":"à l'effort, soulagée par le repos", "Au repos aussi":"également au repos", "Réveils nocturnes":"avec des réveils nocturnes", "Raideur le matin < 30 min":"avec une raideur matinale brève", "Raideur le matin > 30 min":"avec une raideur matinale prolongée" };
+      const init = type === "initial";   // suivi et fin : seulement la douleur et l'examen, le reste est déjà connu du médecin
+      const hor = init ? qa(S, "horaire").map(h => H[h]).filter(Boolean) : [];
+      if(hor.length) ex.push(`ressentie ${et(hor)}`);
+      if(init && q(S, "irrad") === "Descend dans le bras ou la jambe") ex.push("avec une irradiation dans le membre");
+      if(init && q(S, "pares") === "Oui") ex.push("associée à des paresthésies");
+      t = ex.length ? phrase(ex.join(", ")) : "";
+      const d4 = (S.c?.dn4 || []).length;
+      if(d4 >= 4) t += ` Le DN4 est à ${d4}/10, en faveur d'une composante neuropathique.`;
+      const obs = joinSec(S, "obs");
+      if(obs.length) t += ` À l'examen : ${et(obs.map(low))}.`;
+      const v = [];
+      if(q(S, "sommeil") === "Gêné par la douleur") v.push("le sommeil est perturbé");
+      if(q(S, "avq") === "Beaucoup") v.push("la gêne est importante dans la vie quotidienne");
+      else if(q(S, "avq") === "Activités impossibles") v.push("certaines activités quotidiennes sont impossibles");
+      if(q(S, "travail") === "Arrêt de travail") v.push(`${ilElle} est en arrêt de travail`);
+      else if(q(S, "travail") === "Poste aménagé") v.push(`${ilElle} travaille sur un poste aménagé`);
+      if(init && v.length) t += ` Sur le plan fonctionnel, ${et(v)}.`;
+      if(init && qa(S, "jaunes").length >= 2) t += ` Des facteurs psychosociaux sont à prendre en compte (${et(qa(S, "jaunes").map(low))}).`;
+    }
+    if(opt("tests")){
+      const pos = tests.filter(x => x.pos).map(x => x.test);
+      const neg = tests.filter(x => !x.pos && x.lrm != null && x.lrm <= 0.3).map(x => x.test);
+      if(pos.length) t += ` Tests positifs : ${et(pos)}.`;
+      if(neg.length) t += ` Tests négatifs contributifs : ${et(neg)}.`;
+      const tf = mesures(S, "tf");
+      if(tf.length) t += ` Tests fonctionnels : ${tf.map(m => `${m.label} ${m.val}`).join(", ")}.`;
+    }
+    if(opt("quest")){
+      const m = mesures(S, "quest").filter(m => m.k !== "m_nprs");
+      if(m.length) t += ` Questionnaires : ${m.map(m => `${m.label} ${m.val}`).join(", ")}.`;
+    }
+    if(t.trim()) out.push(t.trim());
+
+    /* Évolution depuis le bilan précédent */
+    if(prev && type !== "initial"){
+      const ev = B.compare(prev.etat, S).filter(e => e.from != null && e.to != null);
+      evolScore = Math.sign(ev.reduce((n, e) => n + (e.sens === "mieux" ? 1 : e.sens === "moins" ? -1 : 0), 0));
+      const zEva = ev.some(e => /^EVA /.test(e.label));
+      const utiles = ev.filter(e => (e.sens || /^EVA /.test(e.label)) && !(zEva && /^NPRS/.test(e.label)));
+      if(opt("evol") && utiles.length) out.push(`Depuis le bilan du ${B.fmtISO(prev.date)} : ${utiles.map(e => `${e.label.replace(/^EVA (.*)$/, (_, z) => "douleur " + low(z)).replace(/\s*\([^)]*\)$/, "")} ${fmtNum(e.from)} → ${fmtNum(e.to)}${e.sens === "mieux" ? " (amélioration significative)" : e.sens === "moins" ? " (aggravation)" : ""}`).join(", ")}.`);
+    }
+
+    /* Diagnostic kinésithérapique */
+    const dk = String(S.f?.concl || "").trim();
+    if(hyp.length || dk) out.push([hyp.length ? `Le tableau clinique est compatible avec ${et(hyp.map(low))}.` : "", dk ? `Diagnostic kinésithérapique : ${phrase(low(dk))}` : ""].filter(Boolean).join(" "));
+
+    /* Drapeaux et avis : toujours dans la lettre */
+    const alertes = [];
+    if(rf.length) alertes.push(`signe d'alerte relevé (${et(rf.map(low))}) : ${low(rfm.join(" "))}`);
+    if(S.tx?.avis?.length) alertes.push(S.tx.avis.join(" "));
+    if(alertes.length) out.push(`<strong>Point d'attention :</strong> ${esc(alertes.map(phrase).join(" "))}`);
+  }
+
+  /* Suivi à domicile et questionnaires de l'application */
+  const D = suiviDomicile();
+  if(D.tr) evolScore = evolScore || (D.tr.delta <= -1 ? 1 : D.tr.delta >= 1 ? -1 : 0);
+  const p = [];
+  if(opt("suivi")){
+    if(D.valides.length) p.push(`${D.valides.length} séance${D.valides.length > 1 ? "s" : ""} d'exercices réalisée${D.valides.length > 1 ? "s" : ""} à domicile${D.reg !== null ? ` (assiduité ${D.reg} %)` : ""}`);
+    if(D.tr) p.push(`douleur après séance passée de ${fmtNum(Math.round(D.tr.debut * 10) / 10)} à ${fmtNum(Math.round(D.tr.fin * 10) / 10)}/10`);
+  }
+  if(opt("quest")) questApp(D.depuis).forEach(x => p.push(x.r.length > 1 ? `${x.q.nom} ${fmtScore(x.first.score, x.q)} → ${fmtScore(x.last.score, x.q)}` : `${x.q.nom} ${fmtScore(x.first.score, x.q)}`));
+  if(p.length) out.push(`Suivi via l'application : ${p.join(", ")}.`);
+
+  /* Traitement et proposition */
+  const pr = S?.tx?.init ? T.profil(S) : null;
+  const progEx = S?.tx?.prog?.nom || "";
+  if(opt("tx") && S && type !== "final"){
+    let t = "";
+    const objs = joinSec(S, "obj");
+    const O = { "Réduire la douleur":"réduire la douleur", "Récupérer la mobilité":"récupérer la mobilité", "Renforcement":"renforcer", "Reprise du sport":"reprendre le sport", "Reprise du travail":"reprendre le travail", "Autonomie":"retrouver l'autonomie" };
+    if(objs.length) t += `Objectifs : ${et(objs.map(o => O[o] || low(o)))}. `;
+    const ax = (S.tx?.axes || []).length ? S.tx.axes : joinSec(S, "plan");
+    if(ax.length) t += `La rééducation comprend : ${ax.map(low).join(" ; ")}. `;
+    if(progEx) t += `Un programme d'exercices à domicile (${progEx}) lui est remis sur l'application, avec un relevé de la douleur après chaque séance.`;
+    if(t.trim()) out.push(t.trim());
+  }
+  const rythme = pr ? ` à raison de ${pr.freq} séance${pr.freq > 1 ? "s" : ""} par semaine` : "";
+  if(type === "initial") out.push(pr ? `Je propose ${pr.freq} séance${pr.freq > 1 ? "s" : ""} par semaine pendant environ ${pr.sem} semaines, avec un bilan intermédiaire dans ${pr.reeval} semaines. Je vous tiendrai ${"informé"} de l'évolution.` : `Je vous tiendrai informé de l'évolution.`);
+  else if(type === "final"){
+    out.push(evolScore < 0 ? `Les objectifs ne sont que partiellement atteints ; je vous laisse juger de la suite à donner.` : `Les objectifs fixés en début de prise en charge sont atteints${evolScore > 0 ? ", avec une amélioration significative" : ""}. Je mets donc fin à la rééducation.`);
+    out.push(`${Il} poursuit en autonomie ${progEx ? `son programme d'exercices (${progEx})` : "ses exercices"} à domicile.`);
+  }else out.push(evolScore > 0 ? `L'évolution est favorable. Je vous propose de poursuivre la rééducation${rythme} et, si vous en êtes d'accord, de renouveler la prescription.`
+    : evolScore < 0 ? `L'évolution est insuffisante à ce stade. Je poursuis la rééducation${rythme} en l'adaptant, mais un nouvel avis de votre part me paraît utile.`
+    : `Je vous propose de poursuivre la rééducation${rythme} et, si vous en êtes d'accord, de renouveler la prescription.`);
+
+  const pour = hyp.length ? et(hyp.map(low)) : motif;
+  return {
+    objet: (S ? (type === "initial" ? "Bilan kinésithérapique initial" : type === "final" ? "Fin de prise en charge en kinésithérapie" : "Suivi de rééducation") : "Suivi de rééducation") + (pour ? ` (${pour})` : ""),
+    paras: out.filter(Boolean).map(x => x.startsWith("<strong>") ? x : esc(x))
+  };
+}
+
+/* ---------- Pièces jointes ---------- */
+const enTete = (titre, sub) => `<div class="lt-from" style="margin-bottom:14px"><img src="${esc(logoSrc())}" alt=""><div><strong>${esc(KINE.nom)}</strong>${esc(KINE.titre)}</div></div><h1>${esc(titre)}</h1><p class="sub">${esc(civ + nom)}${sub ? " · " + esc(sub) : ""}</p>`;
+const table = rows => `<table><tbody>${rows.map(([l, v]) => `<tr><td class="l">${esc(l)}</td><td>${esc(v)}</td></tr>`).join("")}</tbody></table>`;
+
+function annexes(bl){
+  const S = bl?.etat, out = [], noms = [];
+  const prev = S ? B.previousOf(liste, bl.id, bl.date) : null;
+  if(opt("j-bilan") && S){
+    const R = B.report(S, { ...patient, nom }, prev ? { prev: prev.etat, prevDate: prev.date } : {});
+    noms.push(`${R.titre} du ${R.date}`);
+    out.push(`<div class="sheet-a4 ax">${enTete(R.titre, R.date)}${table(R.patient.filter(p => p[0] !== "Patient"))}${R.sections.map(s => `<h2>${esc(s.h)}</h2>${s.alerte ? `<p class="alerte">${esc(s.alerte)}</p>` : ""}${table(s.rows)}`).join("")}</div>`);
+  }
+  if(opt("j-tests") && S){
+    const { tests } = testsCliniques(S), tf = mesures(S, "tf");
+    if(tests.length || tf.length){
+      noms.push("Tests cliniques");
+      out.push(`<div class="sheet-a4 ax">${enTete("Tests cliniques", B.fmtISO(bl.date))}
+        ${tests.length ? `<h2>Tests diagnostiques</h2><table><thead><tr><th>Zone</th><th>Test</th><th>Résultat</th><th>LR+</th><th>LR−</th><th>Apport</th></tr></thead><tbody>${tests.map(x => `<tr><td>${esc(x.zone)}</td><td>${esc(x.test)}</td><td><strong>${x.pos ? "Positif" : "Négatif"}</strong></td><td class="n">${esc(B.f1(x.lrp))}</td><td class="n">${esc(B.f1(x.lrm))}</td><td>${esc(x.pos ? (x.lrp != null && x.lrp >= 5 ? "aide à confirmer" : "apport limité") : (x.lrm != null && x.lrm <= 0.2 ? "aide à exclure" : "apport limité"))}</td></tr>`).join("")}</tbody></table>
+        <p class="muted" style="font-size:8.5pt">LR : rapports de vraisemblance issus de la littérature (LR+ ≥ 5 : aide à confirmer ; LR− ≤ 0,2 : aide à exclure).</p>` : ""}
+        ${tf.length ? `<h2>Tests fonctionnels</h2>${table(tf.map(m => [m.label, m.val]))}` : ""}</div>`);
+    }
+  }
+  if(opt("j-quest")){
+    const mq = mesures(S, "quest"), qa_ = questApp(premier?.date || "");
+    if(mq.length || qa_.length){
+      noms.push("Questionnaires");
+      out.push(`<div class="sheet-a4 ax">${enTete("Questionnaires et mesures")}
+        ${mq.length ? `<h2>Relevés au bilan du ${esc(B.fmtISO(bl.date))}</h2>${table(mq.map(m => [m.label, m.val]))}` : ""}
+        ${qa_.length ? `<h2>Questionnaires remplis par le patient</h2><table><thead><tr><th>Questionnaire</th><th>Premier score</th><th>Dernier score</th></tr></thead><tbody>${qa_.map(x => `<tr><td>${esc(x.q.nom)}${x.q.interpretation ? `<br><span class="muted" style="font-size:8.5pt">${esc(x.q.interpretation)}</span>` : ""}</td><td class="n">${esc(fmtScore(x.first.score, x.q))}<br><span class="muted">${esc(new Date(x.first.date).toLocaleDateString("fr-FR"))}</span></td><td class="n">${x.r.length > 1 ? `${esc(fmtScore(x.last.score, x.q))}<br><span class="muted">${esc(new Date(x.last.date).toLocaleDateString("fr-FR"))}</span>` : "–"}</td></tr>`).join("")}</tbody></table>` : ""}</div>`);
+    }
+  }
+  if(opt("j-suivi")){
+    const D = suiviDomicile();
+    if(D.valides.length){
+      noms.push("Suivi à domicile");
+      out.push(`<div class="sheet-a4 ax">${enTete("Suivi des exercices à domicile")}
+        <h2>Programmes</h2><table><thead><tr><th>Programme</th><th>Séances faites</th><th>Assiduité</th></tr></thead><tbody>${D.progs.map(p => { const r = P.regularity(p.seances); return `<tr><td>${esc(p.nom)}</td><td class="n">${p.faites} / ${p.total}</td><td class="n">${r === null ? "–" : r + " %"}</td></tr>`; }).join("")}</tbody></table>
+        ${D.evas.length ? `<h2>Douleur après les séances (0–10)</h2><table><thead><tr><th>Date</th><th>Séance</th><th>Douleur</th></tr></thead><tbody>${D.valides.filter(s => s.eva != null && s.eva !== "").slice(-15).map(s => `<tr><td class="n">${esc(new Date(s.dateValidation).toLocaleDateString("fr-FR"))}</td><td>${esc(s.label || s.nom || "Séance")}</td><td class="n">${esc(s.eva)}/10</td></tr>`).join("")}</tbody></table>${D.evas.length > 15 ? `<p class="muted" style="font-size:8.5pt">15 dernières mesures sur ${D.evas.length}.</p>` : ""}` : ""}</div>`);
+    }
+  }
+  return { html: out.join(""), noms };
+}
+
+/* ---------- Mise en page ---------- */
+const memoMed = `gt_courrier_med_${cle}`;
+let bl = liste.find(b => b.id === params.get("bilan")) || liste[0] || null;
+const medDe = b => String(b?.etat?.f?.med || "").replace(/^(dr\.?|docteur)\s+/i, "").trim();
+let saisi = ""; try{ saisi = localStorage.getItem(memoMed) || ""; }catch(e){}
+$("#med").value = medDe(bl) || saisi;
+if(liste.length > 1){
+  $("#f-bilan").hidden = false;
+  $("#bilan").innerHTML = liste.map(b => `<option value="${esc(b.id)}" ${b.id === bl?.id ? "selected" : ""}>${esc(B.typeLabel(b.etat.type))} du ${esc(B.fmtISO(b.date))}</option>`).join("");
+}
+const coord = [cab.adresse, cab.telephone ? "Tél. " + cab.telephone : "", cab.email || KINE.email].filter(Boolean).join("\n");
+let edited = false;
+
+function destinataire(){
+  const m = $("#med").value.trim().replace(/^(dr\.?|docteur)\s+/i, "");
+  $("#to").innerHTML = m ? `Docteur ${esc(m)}` : `<span class="vide">Docteur …</span>`;
+}
+function rendreAnnexes(){
+  const A = annexes(bl);
+  $("#annexes").innerHTML = A.html;
+  $("#pj").innerHTML = A.noms.length ? `<strong>Pièce${A.noms.length > 1 ? "s" : ""} jointe${A.noms.length > 1 ? "s" : ""} :</strong> ${esc(A.noms.join(" ; "))}` : "";
+}
+function rendre(){
+  const L = rediger(bl);
+  $("#doc").innerHTML = `
+    <div class="lt-from"><img src="${esc(logoSrc())}" alt=""><div><strong>${esc(KINE.nom)}</strong>${esc(KINE.titre)}\n${esc(coord)}</div></div>
+    <div class="lt-to" id="to"></div>
+    <p class="lt-date">${ville ? esc(ville) + ", le" : "Le"} ${esc(new Date().toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }))}</p>
+    <p class="lt-obj"><strong>Objet :</strong> ${esc(L.objet)}</p>
+    <p class="lt-ref">Patient${G === "f" ? "e" : ""} : ${esc(civ + nom)}${bl?.etat?.f?.naiss ? `, ${ac("né", "née")} le ${esc(bl.etat.f.naiss)}` : ""}</p>
+    <div class="lt-body" id="corps" contenteditable="true" spellcheck="true">
+      <p>Docteur,</p>
+      ${L.paras.map(p => `<p>${p}</p>`).join("")}
+      <p>Je reste à votre disposition pour tout renseignement complémentaire et vous remercie de votre confiance.</p>
+      <p>Je vous prie d'agréer, Docteur, l'expression de mes salutations distinguées.</p>
+    </div>
+    <div class="lt-sign"><strong>${esc(KINE.nom)}</strong><br>${esc(KINE.titre)}<div class="space"></div></div>
+    <div class="lt-pj" id="pj"></div>`;
+  destinataire();
+  rendreAnnexes();
+  edited = false;
+  $("#corps").addEventListener("input", () => { edited = true; }, { once:true });
+}
+
+if(!liste.length){
+  toast("Aucun bilan enregistré : la lettre reprend seulement le suivi à domicile.", { duration:6000 });
+  ["hist", "exam", "tests", "evol", "tx", "j-bilan", "j-tests"].forEach(k => { const x = $(`[data-o="${k}"]`); if(x) x.closest("label").hidden = true; });
+}
+rendre();
+
+async function regenerer(){
+  if(edited && !(await confirmDialog({ title:"Réécrire la lettre ?", message:"Vos modifications du texte seront remplacées par une nouvelle rédaction.", confirm:"Réécrire" }))) return false;
+  rendre();
+  return true;
+}
+$("#med").addEventListener("input", () => { destinataire(); try{ localStorage.setItem(memoMed, $("#med").value.trim()); }catch(e){} });
+$("#bilan").onchange = async () => {
+  const avant = bl;
+  bl = liste.find(b => b.id === $("#bilan").value) || bl;
+  if(!(await regenerer())){ bl = avant; $("#bilan").value = avant.id; return; }
+  if(medDe(bl) && !$("#med").value.trim()){ $("#med").value = medDe(bl); destinataire(); }
+};
+$$("[data-o]").forEach(x => x.onchange = async () => {
+  if(x.dataset.o.startsWith("j-")) rendreAnnexes();          // les pièces jointes ne touchent pas au texte de la lettre
+  else if(!(await regenerer())){ x.checked = !x.checked; return; }
+  try{ localStorage.setItem(memoOpts, JSON.stringify(optsActuelles())); }catch(e){}
+});
+
+const texte = () => {
+  const d = $("#doc");
+  return [d.querySelector(".lt-from").innerText, "", $("#to").innerText, "", d.querySelector(".lt-date").innerText, "", d.querySelector(".lt-obj").innerText, d.querySelector(".lt-ref").innerText, "",
+    [...$("#corps").querySelectorAll("p")].map(p => p.innerText.trim()).filter(Boolean).join("\n\n"), "", KINE.nom, KINE.titre, $("#pj").innerText ? "\n" + $("#pj").innerText : ""].join("\n");
+};
+const verifMed = () => { if($("#med").value.trim()) return true; $("#med").focus(); toast("Indiquez le nom du médecin.", { type:"err" }); return false; };
+$("#print").onclick = () => { if(verifMed()) print(); };
+$("#copy").onclick = async () => {
+  try{ await navigator.clipboard.writeText(texte()); toast("Lettre copiée.", { type:"ok" }); }
+  catch(e){ B.copyText(texte()); }
+};
+$("#mail").onclick = () => {
+  if(!verifMed()) return;
+  if($("#pj").innerText) toast("Pensez à joindre le PDF des pièces jointes (Imprimer ou PDF).", { duration:6000 });
+  const objet = $("#doc .lt-obj").innerText.replace(/^Objet :\s*/, "") + " – " + nom;
+  location.href = `mailto:${encodeURIComponent(bl?.etat?.f?.medmail || "")}?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(texte())}`;
+};
+</script>
+</body>
+</html>
