@@ -334,7 +334,7 @@ async function kineView(param){
       </div>
 
       <section class="section">
-        <div class="section-title" style="flex-wrap:wrap">Suivi<span class="spacer"></span><a class="btn sm" href="/compte-rendu.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("file")}Compte rendu médecin</a><a class="btn sm" href="/courrier.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("mail")}Lettre au médecin</a></div>
+        <div class="section-title" style="flex-wrap:wrap">Suivi<span class="spacer"></span><a class="btn sm primary" href="/courrier.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener">${icon("mail")}Lettre au médecin</a><a class="btn sm ghost" href="/compte-rendu.html?patient=${encodeURIComponent(patient.cle)}" target="_blank" rel="noopener" title="Tableau des scores et de l'assiduité">${icon("chart")}Tableau des scores</a></div>
         <div id="suivi-slot"></div>
       </section>
 
