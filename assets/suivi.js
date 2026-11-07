@@ -308,14 +308,33 @@ export async function mountKineSuivi(box, patient, C){
             <span>→</span>
             <select class="select" id="aa-b" aria-label="Après" style="width:auto">${res.map((r, k) => `<option value="${k}" ${k === 0 ? "selected" : ""}>${esc(fmtShortDate(r.date))}</option>`).join("")}</select></div>
             <div id="aa-out" style="margin-top:12px"></div></div>` : ""}
-          ${res.length ? `<table class="tbl"><thead><tr><th>Date</th><th>Score</th>${res.some(r => r.sousScores) ? "<th>Détail</th>" : ""}</tr></thead><tbody>${res.map((r, k) => {
+          ${res.length ? `<table class="tbl"><thead><tr><th>Date</th><th>Score</th>${res.some(r => r.sousScores) ? "<th>Détail</th>" : ""}<th></th></tr></thead><tbody>${res.map((r, k) => {
             const prev = res[k + 1];
             const delta = prev && r.score !== undefined && prev.score !== undefined ? Math.round((r.score - prev.score) * 10) / 10 : null;
-            return `<tr><td>${esc(fmtShortDate(r.date))}</td><td class="num"><strong>${esc(fmtScore(r.score, q))}</strong>${delta ? ` <span class="faint">(${delta > 0 ? "+" : ""}${String(delta).replace(".", ",")})</span>` : ""}</td>${r.sousScores ? `<td class="small">${Object.entries(r.sousScores).map(([k2, v]) => `${esc(k2)} ${v === null ? "–" : String(v).replace(".", ",")}`).join(" ; ")}</td>` : (res.some(x => x.sousScores) ? "<td></td>" : "")}</tr>`; }).join("")}</tbody></table>`
+            return `<tr><td>${esc(fmtShortDate(r.date))}</td><td class="num"><strong>${esc(fmtScore(r.score, q))}</strong>${delta ? ` <span class="faint">(${delta > 0 ? "+" : ""}${String(delta).replace(".", ",")})</span>` : ""}</td>${r.sousScores ? `<td class="small">${Object.entries(r.sousScores).map(([k2, v]) => `${esc(k2)} ${v === null ? "–" : String(v).replace(".", ",")}`).join(" ; ")}</td>` : (res.some(x => x.sousScores) ? "<td></td>" : "")}<td style="width:40px"><button class="icon-btn sm danger" type="button" data-qdel="${esc(r.id)}" aria-label="Supprimer cette réponse" title="Supprimer cette réponse">${icon("trash")}</button></td></tr>`; }).join("")}</tbody></table>`
           : `<p class="muted">Pas encore de réponse.</p>`}
           <a class="btn" href="/suivi.html?q=${encodeURIComponent(id)}&pour=${encodeURIComponent(patient.cle)}">${icon("edit")}Remplir avec le patient, ici</a>
         </div>`,
-        foot: `${a ? `<button class="btn danger" type="button" id="qd-stop">Ne plus proposer</button>` : ""}<button class="btn primary" type="button" data-close>Fermer</button>`
+        foot: `${res.length > 1 ? `<button class="btn danger" type="button" id="qd-all">${icon("trash")}Supprimer toutes les réponses</button>` : ""}${a ? `<button class="btn danger" type="button" id="qd-stop">Ne plus proposer</button>` : ""}<button class="btn primary" type="button" data-close>Fermer</button>`
+      });
+      /* Suppression de réponses remplies (erreur de saisie, test) */
+      const supprimer = async ids => {
+        try{
+          await Promise.all(ids.map(x => C.deleteSuivi(patient.cle, x)));
+          suivis = suivis.filter(x => !ids.includes(x.id));
+          s.close(); render();
+          toast(ids.length > 1 ? "Réponses supprimées." : "Réponse supprimée.", { type:"ok" });
+          if(ids.length === 1 && suivis.some(x => x.type === "questionnaire" && x.qid === id)) actions["q-detail"](id);
+        }catch(err){ console.error(err); toast("Suppression impossible. Réessayez.", { type:"err" }); }
+      };
+      s.el.querySelectorAll("[data-qdel]").forEach(b => b.addEventListener("click", async () => {
+        const r = res.find(x => x.id === b.dataset.qdel);
+        if(!await confirmDialog({ title:"Supprimer cette réponse ?", message:`${q.nom} du ${fmtShortDate(r.date)} (score ${fmtScore(r.score, q)}) sera définitivement supprimé.`, confirm:"Supprimer", danger:true })) return;
+        supprimer([r.id]);
+      }));
+      s.el.querySelector("#qd-all")?.addEventListener("click", async () => {
+        if(!await confirmDialog({ title:"Supprimer toutes les réponses ?", message:`Les ${res.length} réponses au questionnaire ${q.nom} seront définitivement supprimées.`, confirm:"Tout supprimer", danger:true })) return;
+        supprimer(res.map(x => x.id));
       });
       const aaDraw = () => {
         const out = s.el.querySelector("#aa-out"); if(!out) return;
