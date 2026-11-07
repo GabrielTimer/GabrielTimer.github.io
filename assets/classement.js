@@ -50,7 +50,7 @@ const SPECS_PATHO = {
   "Tendinopathie du moyen fessier":[R], "Syndrome du piriforme":[R, SP], "Pubalgie":[SP], "Gonarthrose / prothèse de genou":[O, R, G],
   "Ligament croisé (LCA)":[T, O, SP], "Lésion méniscale":[T, O, SP], "Syndrome fémoro-patellaire":[R, SP], "Tendinopathie rotulienne":[SP, R],
   "Entorse du genou (LLI/LLE)":[T, SP], "Syndrome de l'essuie-glace":[SP], "Entorse / instabilité de cheville":[T, SP],
-  "Tendinopathie d'Achille":[R, SP], "Fasciite plantaire":[R, SP], "Fracture de cheville":[T, O], "Mâchoire (ATM) / céphalées":[R],
+  "Tendinopathie d'Achille":[R, SP], "Fasciite plantaire":[R, SP], "Épine calcanéenne":[R, SP], "Fracture de cheville":[T, O], "Mâchoire (ATM) / céphalées":[R],
   "Paralysie faciale":[N], "Arthrose (générale)":[R, G], "Prévention des chutes / équilibre":[G], "AVC / hémiplégie":[N],
   "Maladie de Parkinson":[N], "Sclérose en plaques":[N], "SLA (maladie de Charcot)":[N], "Charcot-Marie-Tooth":[N],
   "Vertiges / vestibulaire":[VE], "Respiratoire (BPCO, asthme…)":[RE], "Post-opératoire":[O], "Ostéoporose":[R, G],

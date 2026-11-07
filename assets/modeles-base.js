@@ -3903,6 +3903,256 @@ export const MODELES_BASE = [
 "lieu": "HEP"
 },
 {
+"id": "base_epine_calcaneenne_1",
+"nom": "Épine calcanéenne",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cheville et pied",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "252",
+"source": "HEP",
+"nom": "Étirement des orteils avec une serviette",
+"image": "/exercises/images/HEP/1408869179-toe-stretch-with-towel.jpg",
+"consignes": [
+"Posez les orteils sur la serviette.",
+"Tirez la serviette vers le haut pour relever les orteils.",
+"Maintenez 30 secondes quand vous sentez l'étirement sous le pied."
+],
+"position": "Assis sur une chaise, une serviette sous l'avant du pied",
+"youtube": "http://www.youtube.com/embed/oTTjFQMkqa4",
+"type": "timer",
+"conseil": "Posez les orteils sur la serviette.<br>Tirez la serviette vers le haut pour relever les orteils.<br>Maintenez 30 secondes quand vous sentez l'étirement sous le pied.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "À faire aussi le matin au bord du lit, avant les premiers pas : ils seront moins douloureux."
+},
+{
+"id": "82",
+"source": "HEP",
+"nom": "Étirement du mollet, assis jambes tendues",
+"image": "/exercises/images/HEP/1406372063-calf-stertch-with-strap2.jpg",
+"consignes": [
+"Vous pouvez plier la jambe qui ne travaille pas.",
+"Passez une sangle ou une serviette autour de l'avant du pied.",
+"Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.",
+"Maintenez."
+],
+"position": "Assis, jambes tendues devant vous",
+"youtube": "http://www.youtube.com/embed/Quygqsbu-fw",
+"type": "timer",
+"conseil": "Vous pouvez plier la jambe qui ne travaille pas.<br>Passez une sangle ou une serviette autour de l'avant du pied.<br>Dos et genou droits, tirez la pointe du pied vers vous jusqu'à sentir l'étirement dans le mollet.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirement doux et tenu, sans à-coups."
+},
+{
+"id": "690",
+"source": "HEP",
+"nom": "Étirement du soléaire, assis",
+"image": "/exercises/images/HEP/seated-soleus-stretch.jpg",
+"consignes": [
+"Reculez le pied sous la chaise, talon au sol.",
+"Penchez-vous en avant pour avancer le genou jusqu'à sentir l'étirement dans le bas du mollet.",
+"Maintenez."
+],
+"position": "Assis sur une chaise",
+"youtube": "http://www.youtube.com/embed/FkufSBgVpgo",
+"type": "timer",
+"conseil": "Reculez le pied sous la chaise, talon au sol.<br>Penchez-vous en avant pour avancer le genou jusqu'à sentir l'étirement dans le bas du mollet.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Gardez le talon au sol tout du long."
+},
+{
+"id": "645",
+"source": "HEP",
+"nom": "Massage de la voûte plantaire avec une balle, assis",
+"image": "/exercises/images/HEP/plantar-fasciia-stretch-ball-sitting.jpg",
+"consignes": [
+"Faites rouler la balle sous la voûte plantaire, du talon aux orteils.",
+"Appuyez plus ou moins selon la sensation."
+],
+"position": "Assis, une balle sous le pied",
+"youtube": "http://www.youtube.com/embed/KLeiV5Gv5Xg",
+"type": "timer",
+"conseil": "Faites rouler la balle sous la voûte plantaire, du talon aux orteils.<br>Appuyez plus ou moins selon la sensation.",
+"reps": 2,
+"ex": 60,
+"repos": 10,
+"conseil_kine": "Roulez sous la voûte, sans appuyer sur la pointe du talon. Quand le talon est douloureux, une petite bouteille d'eau glacée peut remplacer la balle."
+},
+{
+"id": "544",
+"source": "HEP",
+"nom": "Renforcement de la voûte plantaire",
+"image": "/exercises/images/HEP/arch_strengthening.jpg",
+"consignes": [
+"Gardez les orteils et le talon en contact avec le sol.",
+"Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, pied nu au sol",
+"youtube": "http://www.youtube.com/embed/VGf7oIAsVgM",
+"type": "timer",
+"conseil": "Gardez les orteils et le talon en contact avec le sol.<br>Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Sans plier les orteils. Commencez assis, puis debout quand c'est facile."
+},
+{
+"id": "253",
+"source": "HEP",
+"nom": "Froisser une serviette avec les orteils",
+"image": "/exercises/images/HEP/1408869247-towel-crunch.jpg",
+"consignes": [
+"Talon au sol.",
+"Froissez la serviette vers vous avec les orteils.",
+"Étalez-la de nouveau et recommencez."
+],
+"position": "Assis sur une chaise, une serviette à plat sous le pied",
+"youtube": "http://www.youtube.com/embed/32EN1jXwNmo",
+"type": "timer",
+"conseil": "Talon au sol.<br>Froissez la serviette vers vous avec les orteils.<br>Étalez-la de nouveau et recommencez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Talon posé au sol, sans appuyer dessus."
+}
+]
+},
+{
+"id": "base_epine_calcaneenne_2",
+"nom": "Épine calcanéenne",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Cheville et pied",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "252",
+"source": "HEP",
+"nom": "Étirement des orteils avec une serviette",
+"image": "/exercises/images/HEP/1408869179-toe-stretch-with-towel.jpg",
+"consignes": [
+"Posez les orteils sur la serviette.",
+"Tirez la serviette vers le haut pour relever les orteils.",
+"Maintenez 30 secondes quand vous sentez l'étirement sous le pied."
+],
+"position": "Assis sur une chaise, une serviette sous l'avant du pied",
+"youtube": "http://www.youtube.com/embed/oTTjFQMkqa4",
+"type": "timer",
+"conseil": "Posez les orteils sur la serviette.<br>Tirez la serviette vers le haut pour relever les orteils.<br>Maintenez 30 secondes quand vous sentez l'étirement sous le pied.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "À faire aussi le matin au bord du lit, avant les premiers pas : ils seront moins douloureux."
+},
+{
+"id": "174",
+"source": "HEP",
+"nom": "Étirement du mollet debout (étirement du coureur)",
+"image": "/exercises/images/HEP/1407677511-calf-stretch-standing.jpg",
+"consignes": [
+"Mains contre le mur.",
+"Jambe arrière tendue, talon bien au sol.",
+"Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.",
+"Maintenez 30 secondes."
+],
+"position": "Debout face à un mur, un pied devant l'autre",
+"youtube": "http://www.youtube.com/embed/7P81LL4Vws4",
+"type": "timer",
+"conseil": "Mains contre le mur.<br>Jambe arrière tendue, talon bien au sol.<br>Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.<br>Maintenez 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Talon bien au sol ; gardez vos chaussures si le talon est sensible."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Montée en 3 secondes, descente en 3 secondes."
+},
+{
+"id": "244",
+"source": "HEP",
+"nom": "Montées sur pointes sur une jambe",
+"image": "/exercises/images/HEP/1411195314-single-leg-heel-raises.jpg",
+"consignes": [
+"Montez sur la pointe du pied.",
+"Redescendez lentement.",
+"Tenez-vous au support si besoin."
+],
+"position": "Debout sur une jambe, à côté d'un support",
+"youtube": "http://www.youtube.com/embed/9Up6i1FIcyI",
+"type": "timer",
+"conseil": "Montez sur la pointe du pied.<br>Redescendez lentement.<br>Tenez-vous au support si besoin.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Tenez-vous au mur. Une serviette roulée sous les orteils étire la voûte pendant la montée. Montée et descente lentes, 3 secondes chacune. Une gêne jusqu'à 4/10 est acceptable si elle passe le lendemain."
+},
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Sur un tapis, près d'un appui stable."
+},
+{
+"id": "544",
+"source": "HEP",
+"nom": "Renforcement de la voûte plantaire",
+"image": "/exercises/images/HEP/arch_strengthening.jpg",
+"consignes": [
+"Gardez les orteils et le talon en contact avec le sol.",
+"Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, pied nu au sol",
+"youtube": "http://www.youtube.com/embed/VGf7oIAsVgM",
+"type": "timer",
+"conseil": "Gardez les orteils et le talon en contact avec le sol.<br>Creusez la voûte plantaire en rapprochant l'avant du pied du talon, sans plier les orteils.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Debout, poids sur le pied travaillé."
+}
+]
+},
+{
 "id": "base_ligamentoplastie_du_lca_1",
 "nom": "Ligamentoplastie du LCA",
 "niveau": 1,

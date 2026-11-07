@@ -149,7 +149,7 @@ REGION: {
   epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
   lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique et hernie discale", "Dos au travail"] },
   cerv: { zone: "Cervicales", modeles: ["Cervicalgie"] },
-  chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire"] },
+  chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire", "Épine calcanéenne"] },
   hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire"], postop: ["Prothèse totale de hanche (PTH)"] },
   coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)", "Épitrochléite (golf elbow)"] },
   main: { zone: "Poignet et main", modeles: ["Canal carpien", "Tendinite de De Quervain", "Rhizarthrose"] },
