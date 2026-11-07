@@ -190,13 +190,27 @@ function suiviDomicile(){
   return { depuis, valides, progs, reg: P.regularity(dus), evas, tr: evaTrend(evas) };
 }
 
-/* ---------- Le courrier, paragraphe par paragraphe ---------- */
+/* ---------- Le courrier, paragraphe par paragraphe (en phrases) ---------- */
+const ART = {
+  /* observation */ "Boiterie":"une boiterie", "Attitude antalgique":"une attitude antalgique", "Raideur":"une raideur", "Œdème":"un œdème", "Contracture":"une contracture", "Amplitude limitée":"une limitation des amplitudes", "Force diminuée":"une diminution de la force", "Troubles sensitifs":"des troubles sensitifs",
+  /* antécédents */ "HTA":"une HTA", "Diabète":"un diabète", "Cardiopathie":"une cardiopathie", "Chirurgie":"une chirurgie", "Traumatisme":"un traumatisme", "Asthme":"un asthme", "Grossesse":"une grossesse", "Ostéoporose":"une ostéoporose", "Cancer":"un cancer",
+  /* examens */ "Radiographie":"une radiographie", "Échographie":"une échographie", "IRM":"une IRM", "Scanner":"un scanner", "EMG":"un EMG",
+  /* traitements */ "Médicaments":"un traitement médicamenteux", "Kinésithérapie":"de la kinésithérapie", "Infiltration":"une infiltration", "Ostéopathie":"de l'ostéopathie"
+};
+const PATHO = { "Lombalgie":"une lombalgie", "Cervicalgie":"une cervicalgie", "Dorsalgie":"une dorsalgie", "Sciatique":"une sciatique", "Gonalgie":"une gonalgie", "Entorse":"une entorse", "Tendinopathie":"une tendinopathie", "Post-opératoire":"une rééducation post-opératoire", "Fracture":"une fracture", "Trouble de l’équilibre":"des troubles de l'équilibre", "Chutes / personne âgée":"un risque de chute", "Neurologie (AVC, Parkinson, SEP…)":"une pathologie neurologique", "Vertiges":"des vertiges", "Respiratoire":"une rééducation respiratoire", "Reprise du sport":"une reprise du sport", "Remise en forme / reconditionnement":"un reconditionnement à l'effort" };
+const art = x => ART[x] || PATHO[x] || low(x);
+const zoneTxt = z => low(z).replace(/ D$/, ", côté droit").replace(/ G$/, ", côté gauche");
+const nb = v => fmtNum(Math.round(Number(String(v).replace(",", ".")) * 10) / 10);
+const unite = l => { const u = (l.match(/\(([^)]*)\)$/) || [])[1] || ""; return u === "%" ? " %" : u.startsWith("/") ? u : u === "0-10" ? "/10" : ""; };
+const scoreDe = nom => /^[AEIOUYÉÈ]/i.test(nom) ? `le score d'${nom}` : `le score ${nom}`;   // le score d'Oswestry, le score QuickDASH
+
 function rediger(bl){
   const S = bl?.etat || null;
   const type = S?.type || "intermediaire";
   const prev = S ? B.previousOf(liste, bl.id, bl.date) : null;
   const motifs = S ? joinSec(S, "patho") : [];
-  const motif = motifs.length ? et(motifs.map(low)) : "";
+  const motif = motifs.length ? et(motifs.map(art)) : "";
+  const motifObjet = motifs.length ? et(motifs.map(low)) : "";
   const hyp = S?.c?.hyp || [];
   const naiss = S?.f?.naiss ? `, ${ac("né", "née")} le ${S.f.naiss}` : "";
   const prof = S?.f?.prof ? `, ${low(S.f.prof)}` : "";
@@ -204,10 +218,10 @@ function rediger(bl){
   const depuisLe = premier && bl && premier.id !== bl.id ? B.fmtISOLong(premier.date) : "";
 
   /* Introduction */
-  if(!S) out.push(`Je vous adresse des nouvelles de ${civ}${nom}, ${ac("suivi", "suivie")} en kinésithérapie.`);
+  if(!S) out.push(`Je vous adresse des nouvelles de ${civ}${nom}, ${ac("suivi", "suivie")} en kinésithérapie à mon cabinet.`);
   else if(type === "initial") out.push(`Je vous remercie de m'avoir ${ac("adressé", "adressée")} ${civ}${nom}${naiss}${prof}${motif ? `, pour ${motif}` : ""}. Je l'ai ${ac("reçu", "reçue")} en bilan kinésithérapique le ${B.fmtISOLong(bl.date)}.`);
-  else if(type === "final") out.push(`${civ}${nom}${naiss}, que vous m'aviez ${ac("adressé", "adressée")}${motif ? ` pour ${motif}` : ""}, arrive au terme de sa prise en charge en kinésithérapie${depuisLe ? ` (débutée le ${depuisLe})` : ""}. Le bilan de fin de traitement a été réalisé le ${B.fmtISOLong(bl.date)}.`);
-  else out.push(`Je vous adresse des nouvelles de ${civ}${nom}${naiss}, ${ac("suivi", "suivie")} en kinésithérapie${depuisLe ? ` depuis le ${depuisLe}` : ""}${motif ? ` pour ${motif}` : ""}. Un bilan intermédiaire a été réalisé le ${B.fmtISOLong(bl.date)}.`);
+  else if(type === "final") out.push(`${civ}${nom}${naiss}, que vous m'aviez ${ac("adressé", "adressée")}${motif ? ` pour ${motif}` : ""}, arrive au terme de sa prise en charge en kinésithérapie${depuisLe ? `, débutée le ${depuisLe}` : ""}. J'ai réalisé son bilan de fin de traitement le ${B.fmtISOLong(bl.date)}.`);
+  else out.push(`Je vous adresse des nouvelles de ${civ}${nom}${naiss}, que je suis en kinésithérapie${depuisLe ? ` depuis le ${depuisLe}` : ""}${motif ? ` pour ${motif}` : ""}. J'ai réalisé un bilan intermédiaire le ${B.fmtISOLong(bl.date)}.`);
 
   const { tests, rf, rfm } = testsCliniques(S);
   let evolScore = 0;
@@ -215,62 +229,66 @@ function rediger(bl){
   if(S){
     /* Histoire (bilan initial) */
     if(opt("hist") && type === "initial"){
-      const DEBUT = { "Traumatisme / accident":"à la suite d'un traumatisme", "Progressivement":"d'installation progressive", "Après une opération":"après une intervention chirurgicale", "Sans cause retrouvée":"sans cause déclenchante retrouvée" };
-      const EVOL = { "En amélioration":"plutôt en amélioration", "Stable":"stables", "En aggravation":"en aggravation", "Fluctuant":"fluctuants" };
-      const h = [];
-      if(q(S, "duree")) h.push(`évoluent depuis ${low(q(S, "duree")).replace("moins d'1", "moins d'une")}`);
-      if(DEBUT[q(S, "debut")]) h.push(DEBUT[q(S, "debut")]);
-      let t = h.length ? `Les symptômes ${h.join(", ")}` : "";
-      if(EVOL[q(S, "evol")]) t += (t ? " et sont " : "Les symptômes sont ") + EVOL[q(S, "evol")];
-      t = phrase(t);
-      if(q(S, "recid") === "Oui, récidives") t += " Il s'agit d'une récidive.";
-      else if(q(S, "recid") === "Oui, une fois") t += " Un épisode similaire est déjà survenu.";
+      const DUREE = { "Moins d'1 semaine":"depuis moins d'une semaine", "1 à 6 semaines":"depuis une à six semaines", "6 semaines à 3 mois":"depuis six semaines à trois mois", "Plus de 3 mois":"depuis plus de trois mois" };
+      const DEBUT = { "Traumatisme / accident":"à la suite d'un traumatisme", "Progressivement":"de façon progressive", "Après une opération":"après une intervention chirurgicale", "Sans cause retrouvée":"sans cause déclenchante retrouvée" };
+      const EVOL = { "En amélioration":"tendent à s'améliorer", "Stable":"restent stables", "En aggravation":"s'aggravent", "Fluctuant":"fluctuent" };
+      let t = "";
+      const h = [DEBUT[q(S, "debut")] ? `sont apparus ${DEBUT[q(S, "debut")]}` : "", DUREE[q(S, "duree")] ? `évoluent ${DUREE[q(S, "duree")]}` : "", EVOL[q(S, "evol")] || ""].filter(Boolean);
+      if(h.length) t += `Les symptômes ${et(h)}.`;
+      if(q(S, "recid") === "Oui, récidives") t += ` Il s'agit d'une récidive.`;
+      else if(q(S, "recid") === "Oui, une fois") t += ` Un épisode similaire est déjà survenu par le passé.`;
       const ex = qa(S, "imag").filter(x => x !== "Aucun"), tt = qa(S, "ttt").filter(x => x !== "Rien");
-      if(ex.length) t += ` Examens réalisés : ${et(ex.map(low))}.`;
-      if(tt.length) t += ` Déjà ${ac("traité", "traitée")} par ${et(tt.map(low))}.`;
+      if(ex.length) t += ` ${Il} a bénéficié ${et(ex.map(art)).replace(/^une /, "d'une ").replace(/^un /, "d'un ").replace(/ et une /g, " et d'une ").replace(/ et un /g, " et d'un ").replace(/, une /g, ", d'une ").replace(/, un /g, ", d'un ")}.`;
+      if(tt.length) t += ` ${Il} a déjà reçu ${et(tt.map(art))}.`;
       const atcd = joinSec(S, "atcd"), med = joinSec(S, "medic").filter(x => x !== "Aucune");
-      if(atcd.length) t += ` Antécédents notables : ${et(atcd.map(low))}.`;
-      if(med.length) t += ` Traitement en cours : ${et(med.map(low))}.`;
+      if(atcd.length) t += ` On note dans ses antécédents ${et(atcd.map(art))}.`;
+      if(med.length) t += ` ${Il} est actuellement sous ${et(med.map(low))}.`;
       if(t.trim()) out.push(t.trim());
     }
 
-    /* Douleur et examen, tests, mesures : un seul paragraphe court */
+    /* Douleur et examen */
     let t = "";
+    const init = type === "initial";   // suivi et fin : douleur et examen seulement, le reste est déjà connu du médecin
     if(opt("exam")){
-      const ex = [];
       const zones = Object.entries(S.pain || {});
-      if(zones.length) ex.push(`La douleur est cotée ${zones.map(([z, p]) => `${p.eva}/10 (${low(z)}${p.types?.length ? ", " + low(p.types.join(", ")) : ""})`).join(", ")}`);
-      const H = { "À l'effort, mieux au repos":"à l'effort, soulagée par le repos", "Au repos aussi":"également au repos", "Réveils nocturnes":"avec des réveils nocturnes", "Raideur le matin < 30 min":"avec une raideur matinale brève", "Raideur le matin > 30 min":"avec une raideur matinale prolongée" };
-      const init = type === "initial";   // suivi et fin : seulement la douleur et l'examen, le reste est déjà connu du médecin
-      const hor = init ? qa(S, "horaire").map(h => H[h]).filter(Boolean) : [];
-      if(hor.length) ex.push(`ressentie ${et(hor)}`);
-      if(init && q(S, "irrad") === "Descend dans le bras ou la jambe") ex.push("avec une irradiation dans le membre");
-      if(init && q(S, "pares") === "Oui") ex.push("associée à des paresthésies");
-      t = ex.length ? phrase(ex.join(", ")) : "";
+      if(zones.length){
+        const types = [...new Set(zones.flatMap(([, p]) => p.types || []))].map(low);
+        t += `${init ? `${Il} décrit` : `${Il} rapporte aujourd'hui`} une douleur${types.length ? ` de type ${et(types)}` : ""}, cotée à ${et(zones.map(([z, p]) => `${p.eva}/10 (${zoneTxt(z)})`))} sur l'échelle numérique.`;
+      }
+      if(init){
+        const H = { "À l'effort, mieux au repos":"survient à l'effort et cède au repos", "Au repos aussi":"persiste au repos", "Réveils nocturnes":"provoque des réveils nocturnes" };
+        const hor = qa(S, "horaire").map(h => H[h]).filter(Boolean);
+        if(hor.length) t += ` Elle ${hor.length > 1 ? hor.slice(0, -1).join(", ") + ", et " + hor[hor.length - 1] : hor[0]}.`;
+        if(qa(S, "horaire").some(h => /> 30 min/.test(h))) t += ` Une raideur matinale prolongée est signalée.`;
+        if(q(S, "irrad") === "Descend dans le bras ou la jambe") t += ` Elle irradie dans le membre${q(S, "pares") === "Oui" ? ", avec des paresthésies" : ""}.`;
+        else if(q(S, "pares") === "Oui") t += ` Des paresthésies sont associées.`;
+      }
       const d4 = (S.c?.dn4 || []).length;
-      if(d4 >= 4) t += ` Le DN4 est à ${d4}/10, en faveur d'une composante neuropathique.`;
+      if(d4 >= 4) t += ` Le DN4 est à ${d4}/10, ce qui est en faveur d'une composante neuropathique.`;
       const obs = joinSec(S, "obs");
-      if(obs.length) t += ` À l'examen : ${et(obs.map(low))}.`;
-      const v = [];
-      if(q(S, "sommeil") === "Gêné par la douleur") v.push("le sommeil est perturbé");
-      if(q(S, "avq") === "Beaucoup") v.push("la gêne est importante dans la vie quotidienne");
-      else if(q(S, "avq") === "Activités impossibles") v.push("certaines activités quotidiennes sont impossibles");
-      if(q(S, "travail") === "Arrêt de travail") v.push(`${ilElle} est en arrêt de travail`);
-      else if(q(S, "travail") === "Poste aménagé") v.push(`${ilElle} travaille sur un poste aménagé`);
-      if(init && v.length) t += ` Sur le plan fonctionnel, ${et(v)}.`;
-      if(init && qa(S, "jaunes").length >= 2) t += ` Des facteurs psychosociaux sont à prendre en compte (${et(qa(S, "jaunes").map(low))}).`;
+      if(obs.length) t += ` À l'examen, on retrouve ${et(obs.map(art))}.`;
     }
     if(opt("tests")){
       const pos = tests.filter(x => x.pos).map(x => x.test);
       const neg = tests.filter(x => !x.pos && x.lrm != null && x.lrm <= 0.3).map(x => x.test);
-      if(pos.length) t += ` Tests positifs : ${et(pos)}.`;
-      if(neg.length) t += ` Tests négatifs contributifs : ${et(neg)}.`;
+      if(pos.length) t += ` ${pos.length > 1 ? `Les tests ${et(pos.map(p => (/^[AEIOUYÉH]/i.test(p) ? "d'" : "de ") + p))} sont positifs` : `Le test ${/^[AEIOUYÉH]/i.test(pos[0]) ? "d'" : "de "}${pos[0]} est positif`}${hyp.length ? ", ce qui conforte l'hypothèse clinique" : ""}.`;
+      if(neg.length) t += ` ${neg.length > 1 ? `Les tests ${et(neg)} sont négatifs` : `Le test ${neg[0]} est négatif`}, ce qui rend peu probable une autre atteinte.`;
       const tf = mesures(S, "tf");
-      if(tf.length) t += ` Tests fonctionnels : ${tf.map(m => `${m.label} ${m.val}`).join(", ")}.`;
+      if(tf.length) t += ` Sur le plan fonctionnel, ${et(tf.map(m => `le résultat au test « ${m.label} » est de ${m.val.replace(/ s$/, " secondes").replace(/ m$/, " mètres")}`))}.`;
     }
     if(opt("quest")){
-      const m = mesures(S, "quest").filter(m => m.k !== "m_nprs");
-      if(m.length) t += ` Questionnaires : ${m.map(m => `${m.label} ${m.val}`).join(", ")}.`;
+      const m = mesures(S, "quest").filter(m => m.k !== "m_nprs" && m.k !== "m_psfs");
+      if(m.length) t += ` ${phrase(et(m.map(m => `${scoreDe(m.label)} est de ${m.val}`)))}`;
+    }
+    if(init && opt("exam")){
+      const v = [];
+      if(q(S, "sommeil") === "Gêné par la douleur") v.push("son sommeil est perturbé");
+      if(q(S, "avq") === "Beaucoup") v.push("la gêne est importante dans la vie quotidienne");
+      else if(q(S, "avq") === "Activités impossibles") v.push("certaines activités quotidiennes sont devenues impossibles");
+      if(q(S, "travail") === "Arrêt de travail") v.push(`${ilElle} est actuellement en arrêt de travail`);
+      else if(q(S, "travail") === "Poste aménagé") v.push(`${ilElle} travaille sur un poste aménagé`);
+      if(v.length) t += ` Sur le plan du retentissement, ${et(v)}.`;
+      if(qa(S, "jaunes").length >= 2) t += ` Des facteurs psychosociaux sont à prendre en compte (${et(qa(S, "jaunes").map(low))}).`;
     }
     if(t.trim()) out.push(t.trim());
 
@@ -279,31 +297,45 @@ function rediger(bl){
       const ev = B.compare(prev.etat, S).filter(e => e.from != null && e.to != null);
       evolScore = Math.sign(ev.reduce((n, e) => n + (e.sens === "mieux" ? 1 : e.sens === "moins" ? -1 : 0), 0));
       const zEva = ev.some(e => /^EVA /.test(e.label));
-      const utiles = ev.filter(e => (e.sens || /^EVA /.test(e.label)) && !(zEva && /^NPRS/.test(e.label)));
-      if(opt("evol") && utiles.length) out.push(`Depuis le bilan du ${B.fmtISO(prev.date)} : ${utiles.map(e => `${e.label.replace(/^EVA (.*)$/, (_, z) => "douleur " + low(z)).replace(/\s*\([^)]*\)$/, "")} ${fmtNum(e.from)} → ${fmtNum(e.to)}${e.sens === "mieux" ? " (amélioration significative)" : e.sens === "moins" ? " (aggravation)" : ""}`).join(", ")}.`);
+      const utiles = ev.filter(e => (e.sens || /^EVA /.test(e.label)) && !(zEva && /^NPRS/.test(e.label)) && e.delta);
+      if(opt("evol") && utiles.length){
+        const bouts = utiles.map(e => {
+          if(/^EVA /.test(e.label)) return `la douleur (${zoneTxt(e.label.slice(4))}) est passée de ${nb(e.from)} à ${nb(e.to)}/10`;
+          const u = unite(e.label), n = e.label.replace(/\s*\([^)]*\)$/, "");
+          return `${scoreDe(n)} est passé de ${nb(e.from)} à ${nb(e.to)}${u}`;
+        });
+        const mieux = utiles.filter(e => e.sens === "mieux").length, moins = utiles.filter(e => e.sens === "moins").length;
+        out.push(`Depuis le bilan du ${B.fmtISOLong(prev.date)}, ${et(bouts)}. ${mieux && !moins ? "Il s'agit d'une amélioration cliniquement significative." : moins && !mieux ? "Cette évolution est défavorable." : mieux && moins ? "L'évolution est contrastée selon les critères." : "Les variations restent en deçà du seuil cliniquement significatif."}`);
+      }
     }
 
     /* Diagnostic kinésithérapique */
-    const dk = String(S.f?.concl || "").trim();
-    if(hyp.length || dk) out.push([hyp.length ? `Le tableau clinique est compatible avec ${et(hyp.map(low))}.` : "", dk ? `Diagnostic kinésithérapique : ${phrase(low(dk))}` : ""].filter(Boolean).join(" "));
+    const dk = String(S.f?.concl || "").trim().replace(/\.$/, "");
+    if(hyp.length || dk) out.push([hyp.length ? `Au terme de ce bilan, le tableau clinique est compatible avec ${et(hyp.map(low))}.` : "", dk ? `${hyp.length ? "Mon" : "Au terme de ce bilan, mon"} diagnostic kinésithérapique est le suivant : ${low(dk)}.` : ""].filter(Boolean).join(" "));
 
     /* Drapeaux et avis : toujours dans la lettre */
     const alertes = [];
-    if(rf.length) alertes.push(`signe d'alerte relevé (${et(rf.map(low))}) : ${low(rfm.join(" "))}`);
-    if(S.tx?.avis?.length) alertes.push(S.tx.avis.join(" "));
-    if(alertes.length) out.push(`<strong>Point d'attention :</strong> ${esc(alertes.map(phrase).join(" "))}`);
+    if(rf.length) alertes.push(`J'ai relevé un signe d'alerte (${et(rf.map(low))}). ${phrase(rfm.join(" "))}`);
+    if(S.tx?.avis?.length) alertes.push(phrase(S.tx.avis.join(" ")));
+    if(alertes.length) out.push(`<strong>Point d'attention :</strong> ${esc(alertes.join(" "))}`);
   }
 
   /* Suivi à domicile et questionnaires de l'application */
   const D = suiviDomicile();
   if(D.tr) evolScore = evolScore || (D.tr.delta <= -1 ? 1 : D.tr.delta >= 1 ? -1 : 0);
-  const p = [];
-  if(opt("suivi")){
-    if(D.valides.length) p.push(`${D.valides.length} séance${D.valides.length > 1 ? "s" : ""} d'exercices réalisée${D.valides.length > 1 ? "s" : ""} à domicile${D.reg !== null ? ` (assiduité ${D.reg} %)` : ""}`);
-    if(D.tr) p.push(`douleur après séance passée de ${fmtNum(Math.round(D.tr.debut * 10) / 10)} à ${fmtNum(Math.round(D.tr.fin * 10) / 10)}/10`);
+  let s = "";
+  if(opt("suivi") && D.valides.length){
+    const reg = D.reg;
+    const comment = reg === null ? "" : reg >= 80 ? "régulièrement " : reg >= 50 ? "de façon assez régulière " : "de façon irrégulière ";
+    s += `${Il} réalise ${comment}son programme d'exercices à domicile, avec ${D.valides.length} séance${D.valides.length > 1 ? "s" : ""} effectuée${D.valides.length > 1 ? "s" : ""}${reg !== null ? `, soit ${reg} % des séances prévues` : ""}.`;
+    if(D.tr) s += ` La douleur ressentie après les séances ${Math.abs(D.tr.delta) < 1 ? `reste stable, autour de ${nb(D.tr.fin)}/10` : `est passée de ${nb(D.tr.debut)} à ${nb(D.tr.fin)}/10 en moyenne`}.`;
   }
-  if(opt("quest")) questApp(D.depuis).forEach(x => p.push(x.r.length > 1 ? `${x.q.nom} ${fmtScore(x.first.score, x.q)} → ${fmtScore(x.last.score, x.q)}` : `${x.q.nom} ${fmtScore(x.first.score, x.q)}`));
-  if(p.length) out.push(`Suivi via l'application : ${p.join(", ")}.`);
+  if(opt("quest")){
+    const Q = questApp(D.depuis);
+    const bouts = Q.map(x => x.r.length > 1 && x.last.score !== x.first.score ? `${scoreDe(x.q.nom)} est passé de ${fmtScore(x.first.score, x.q)} à ${fmtScore(x.last.score, x.q)}` : `${scoreDe(x.q.nom)} est de ${fmtScore(x.last.score, x.q)}`);
+    if(bouts.length) s += ` Aux questionnaires remplis sur l'application, ${et(bouts)}.`;
+  }
+  if(s.trim()) out.push(s.trim());
 
   /* Traitement et proposition */
   const pr = S?.tx?.init ? T.profil(S) : null;
@@ -311,23 +343,23 @@ function rediger(bl){
   if(opt("tx") && S && type !== "final"){
     let t = "";
     const objs = joinSec(S, "obj");
-    const O = { "Réduire la douleur":"réduire la douleur", "Récupérer la mobilité":"récupérer la mobilité", "Renforcement":"renforcer", "Reprise du sport":"reprendre le sport", "Reprise du travail":"reprendre le travail", "Autonomie":"retrouver l'autonomie" };
-    if(objs.length) t += `Objectifs : ${et(objs.map(o => O[o] || low(o)))}. `;
+    const O = { "Réduire la douleur":"réduire la douleur", "Récupérer la mobilité":"récupérer la mobilité", "Renforcement":"renforcer la musculature", "Reprise du sport":"permettre la reprise du sport", "Reprise du travail":"permettre la reprise du travail", "Autonomie":"retrouver l'autonomie" };
+    if(objs.length) t += `La rééducation a pour objectif${objs.length > 1 ? "s" : ""} ${et(objs.map(o => "de " + (O[o] || low(o))).map(x => x.replace(/^de ([aeiouyéèh])/i, "d'$1")))}.`;
     const ax = (S.tx?.axes || []).length ? S.tx.axes : joinSec(S, "plan");
-    if(ax.length) t += `La rééducation comprend : ${ax.map(low).join(" ; ")}. `;
-    if(progEx) t += `Un programme d'exercices à domicile (${progEx}) lui est remis sur l'application, avec un relevé de la douleur après chaque séance.`;
+    if(ax.length) t += ` ${ax.length > 1 ? "Les axes de traitement retenus sont les suivants" : "L'axe de traitement retenu est le suivant"} : ${ax.map(low).join(", ")}.`;
+    if(progEx) t += ` Je lui ai remis un programme d'exercices à domicile sur l'application ApiKiné, dans lequel ${ilElle} note sa douleur après chaque séance, ce qui me permet d'ajuster la progression.`;
     if(t.trim()) out.push(t.trim());
   }
   const rythme = pr ? ` à raison de ${pr.freq} séance${pr.freq > 1 ? "s" : ""} par semaine` : "";
-  if(type === "initial") out.push(pr ? `Je propose ${pr.freq} séance${pr.freq > 1 ? "s" : ""} par semaine pendant environ ${pr.sem} semaines, avec un bilan intermédiaire dans ${pr.reeval} semaines. Je vous tiendrai ${"informé"} de l'évolution.` : `Je vous tiendrai informé de l'évolution.`);
+  if(type === "initial") out.push(pr ? `Je propose ${pr.freq} séance${pr.freq > 1 ? "s" : ""} par semaine pendant environ ${pr.sem} semaines, avec un bilan intermédiaire dans ${pr.reeval} semaines. Je ne manquerai pas de vous tenir informé de l'évolution.` : `Je ne manquerai pas de vous tenir informé de l'évolution.`);
   else if(type === "final"){
-    out.push(evolScore < 0 ? `Les objectifs ne sont que partiellement atteints ; je vous laisse juger de la suite à donner.` : `Les objectifs fixés en début de prise en charge sont atteints${evolScore > 0 ? ", avec une amélioration significative" : ""}. Je mets donc fin à la rééducation.`);
-    out.push(`${Il} poursuit en autonomie ${progEx ? `son programme d'exercices (${progEx})` : "ses exercices"} à domicile.`);
+    out.push(evolScore < 0 ? `Les objectifs ne sont que partiellement atteints, et je vous laisse juger de la suite à donner.` : `Les objectifs fixés en début de prise en charge sont atteints${evolScore > 0 ? ", avec une amélioration cliniquement significative" : ""}. Je mets donc fin à la rééducation.`);
+    out.push(`${Il} poursuivra en autonomie ${progEx ? "son programme d'exercices" : "ses exercices"} à domicile, que je lui ai expliqués.`);
   }else out.push(evolScore > 0 ? `L'évolution est favorable. Je vous propose de poursuivre la rééducation${rythme} et, si vous en êtes d'accord, de renouveler la prescription.`
     : evolScore < 0 ? `L'évolution est insuffisante à ce stade. Je poursuis la rééducation${rythme} en l'adaptant, mais un nouvel avis de votre part me paraît utile.`
     : `Je vous propose de poursuivre la rééducation${rythme} et, si vous en êtes d'accord, de renouveler la prescription.`);
 
-  const pour = hyp.length ? et(hyp.map(low)) : motif;
+  const pour = hyp.length ? et(hyp.map(low)) : motifObjet;
   return {
     objet: (S ? (type === "initial" ? "Bilan kinésithérapique initial" : type === "final" ? "Fin de prise en charge en kinésithérapie" : "Suivi de rééducation") : "Suivi de rééducation") + (pour ? ` (${pour})` : ""),
     paras: out.filter(Boolean).map(x => x.startsWith("<strong>") ? x : esc(x))
