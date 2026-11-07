@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.10.4";
+const VERSION = "gt-2.10.5";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";

@@ -286,7 +286,7 @@ function renderExos(){
       <div class="exo-body">
         <div class="exo-top">
           <span class="exo-num">${i + 1}.</span>
-          <input class="exo-name" value="${esc(e.nom)}" data-i="${i}" aria-label="Nom de l'exercice ${i + 1}">
+          <textarea class="exo-name" rows="1" data-i="${i}" aria-label="Nom de l'exercice ${i + 1}" spellcheck="false">${esc(e.nom)}</textarea>
           <div class="exo-actions">
             <button class="icon-btn sm" type="button" data-move="-1" data-i="${i}" aria-label="Monter" ${i === 0 ? "disabled" : ""}>${icon("up")}</button>
             <button class="icon-btn sm" type="button" data-move="1" data-i="${i}" aria-label="Descendre" ${i === S.exercices.length - 1 ? "disabled" : ""}>${icon("down")}</button>
@@ -385,7 +385,17 @@ function exoTotal(e){
 
 function bindExos(){
   const list = $("#exos");
-  $$(".exo-name", list).forEach(inp => inp.addEventListener("input", () => { S.exercices[inp.dataset.i].nom = inp.value; persist(); }));
+  /* Nom sur plusieurs lignes si besoin (téléphone) : la hauteur suit le texte, Entrée valide sans retour à la ligne */
+  const ajuster = t => { t.style.height = "auto"; t.style.height = t.scrollHeight + "px"; };
+  $$(".exo-name", list).forEach(inp => {
+    ajuster(inp);
+    inp.addEventListener("input", () => { inp.value = inp.value.replace(/\n/g, " "); S.exercices[inp.dataset.i].nom = inp.value; persist(); ajuster(inp); });
+    inp.addEventListener("keydown", ev => { if(ev.key === "Enter"){ ev.preventDefault(); inp.blur(); } });
+  });
+  const ajusterNote = t => { if(!t.offsetParent) return; t.style.height = "auto"; t.style.height = Math.max(70, t.scrollHeight + 2) + "px"; };
+  $$("[data-note]", list).forEach(t => t.addEventListener("input", () => ajusterNote(t)));
+  $$(".exo-note", list).forEach(d => d.addEventListener("toggle", () => { const t = d.querySelector("[data-note]"); if(t) ajusterNote(t); }));
+  requestAnimationFrame(() => { $$(".exo-name", list).forEach(ajuster); $$("[data-note]", list).forEach(ajusterNote); });
   $$("[data-note]", list).forEach(t => t.addEventListener("input", () => { S.exercices[t.dataset.note].conseil_kine = t.value; persist(); }));
   $$("input[data-field]", list).forEach(inp => {
     inp.addEventListener("input", () => setField(+inp.dataset.i, inp.dataset.field, inp.value, false));
