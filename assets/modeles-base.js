@@ -437,9 +437,510 @@ export const MODELES_BASE = [
 "lieu": "HEP"
 },
 {
-"id": "base_sciatique_et_hernie_discale_1",
-"nom": "Sciatique et hernie discale",
+"id": "base_sciatique_1",
+"nom": "Sciatique",
 "niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "67",
+"source": "HEP",
+"nom": "Glissement neural du nerf sciatique",
+"image": "/exercises/images/HEP/1408191588-sciatic-nerve-glide.jpg",
+"consignes": [
+"Tenez l'arrière d'une cuisse, hanche à 90°.",
+"Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.",
+"Pliez de nouveau le genou en relâchant le pied.",
+"Mouvements doux, sans provoquer de douleur ni de fourmillements durables."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/0gnme9jTkJ8",
+"type": "timer",
+"conseil": "Tenez l'arrière d'une cuisse, hanche à 90°.<br>Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.<br>Pliez de nouveau le genou en relâchant le pied.<br>Mouvements doux, sans provoquer de douleur ni de fourmillements durables.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Version douce : quand vous tendez la jambe, relevez la tête ; quand vous la pliez, baissez la tête. Petite amplitude. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude."
+},
+{
+"id": "208",
+"source": "HEP",
+"nom": "Appui sur les coudes, sur le ventre (sphinx)",
+"image": "/exercises/images/HEP/1408183542-prone-props.jpg",
+"consignes": [
+"Coudes sous les épaules, bassin au sol.",
+"Relâchez le dos et laissez-le se creuser doucement.",
+"Maintenez en respirant calmement."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/LlrZONaPhC0",
+"type": "timer",
+"conseil": "Coudes sous les épaules, bassin au sol.<br>Relâchez le dos et laissez-le se creuser doucement.<br>Maintenez en respirant calmement.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Si cette position soulage la jambe, restez plus longtemps. Si la douleur descend plus bas dans la jambe, réduisez l'amplitude ou arrêtez cet exercice ; si elle remonte vers le dos, c'est bon signe."
+},
+{
+"id": "610",
+"source": "HEP",
+"nom": "Bascule du bassin, allongé",
+"image": "/exercises/images/HEP/supine-anterior-exterior-pelvic-tilt.jpg",
+"consignes": [
+"Creusez le bas du dos en basculant le bassin vers l'avant.",
+"Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.",
+"Alternez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/Q08dMpidl58",
+"type": "timer",
+"conseil": "Creusez le bas du dos en basculant le bassin vers l'avant.<br>Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.<br>Alternez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petite amplitude, sans douleur dans la jambe."
+},
+{
+"id": "254",
+"source": "HEP",
+"nom": "Rotation du tronc, allongé",
+"image": "/exercises/images/HEP/1424527396-trunk-rotation-exercise.jpg",
+"consignes": [
+"Gardez les épaules au sol.",
+"Laissez tomber les genoux d'un côté, aussi loin que confortable.",
+"Revenez et allez de l'autre côté."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds joints",
+"youtube": "http://www.youtube.com/embed/0Mi80lUhrNQ",
+"type": "timer",
+"conseil": "Gardez les épaules au sol.<br>Laissez tomber les genoux d'un côté, aussi loin que confortable.<br>Revenez et allez de l'autre côté.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petite amplitude ; seulement du côté qui ne réveille pas la jambe si besoin."
+},
+{
+"id": "432",
+"source": "HEP",
+"nom": "Activation du transverse de l'abdomen",
+"image": "/exercises/images/HEP/1477662600-ta-recruitment.jpg",
+"consignes": [
+"Posez deux doigts à l'intérieur des os du bassin, à l'avant.",
+"Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.",
+"Maintenez en respirant normalement, puis relâchez."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/QQoVcC-0Gds",
+"type": "timer",
+"conseil": "Posez deux doigts à l'intérieur des os du bassin, à l'avant.<br>Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.<br>Maintenez en respirant normalement, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Respirez normalement pendant la contraction."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 60,
+"repos": 10,
+"conseil_kine": "Pour relâcher quand la douleur monte."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_sciatique_2",
+"nom": "Sciatique",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "559",
+"source": "HEP",
+"nom": "Glissement neural du nerf sciatique avec extension de jambe",
+"image": "/exercises/images/HEP/sciatic-nerve-glide-leg-kick-out.jpg",
+"consignes": [
+"Tendez le genou en relevant la tête pour regarder vers le haut.",
+"Pliez le genou en baissant la tête.",
+"Alternez doucement, sans provoquer de douleur ni de fourmillements durables."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/HMrocixKdmU",
+"type": "timer",
+"conseil": "Tendez le genou en relevant la tête pour regarder vers le haut.<br>Pliez le genou en baissant la tête.<br>Alternez doucement, sans provoquer de douleur ni de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Mouvement complet et lent, environ 10 allers-retours. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Montée sans cambrer le bas du dos."
+},
+{
+"id": "214",
+"source": "HEP",
+"nom": "Bras et jambe opposés à quatre pattes (bird dog)",
+"image": "/exercises/images/HEP/1421406091-quadruped-opposite-arm-leg-extension.jpg",
+"consignes": [
+"Dos droit, bassin stable.",
+"Tendez un bras vers l'avant et la jambe opposée vers l'arrière.",
+"Revenez lentement, puis alternez."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/B1LH2_6A-n4",
+"type": "timer",
+"conseil": "Dos droit, bassin stable.<br>Tendez un bras vers l'avant et la jambe opposée vers l'arrière.<br>Revenez lentement, puis alternez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Dos plat, sans tourner le bassin."
+},
+{
+"id": "453",
+"source": "HEP",
+"nom": "Étirement en 4 (FABER), allongé",
+"image": "/exercises/images/HEP/1501425116-figure-4-stretch-lying-down.jpg",
+"consignes": [
+"Pliez la jambe à étirer et posez la cheville juste au-dessus du genou opposé (forme d'un 4).",
+"Laissez le genou plié descendre vers le sol.",
+"Maintenez l'étirement."
+],
+"position": "Allongé sur le dos, jambes tendues",
+"youtube": "http://www.youtube.com/embed/VyXQ1mNmhiM",
+"type": "timer",
+"conseil": "Pliez la jambe à étirer et posez la cheville juste au-dessus du genou opposé (forme d'un 4).<br>Laissez le genou plié descendre vers le sol.<br>Maintenez l'étirement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étire le fessier ; arrêtez si la douleur descend dans la jambe."
+},
+{
+"id": "68",
+"source": "HEP",
+"nom": "Étirement des ischio-jambiers avec une sangle, allongé",
+"image": "/exercises/images/HEP/1408868706-supine-hamstring-stretch-with-strap.jpg",
+"consignes": [
+"Pliez l'autre jambe, pied à plat, pour protéger le dos.",
+"Montez la jambe tendue en tirant doucement sur la sangle.",
+"Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes."
+],
+"position": "Allongé sur le dos, une sangle autour du pied",
+"youtube": "http://www.youtube.com/embed/oDzhSppZSU0",
+"type": "timer",
+"conseil": "Pliez l'autre jambe, pied à plat, pour protéger le dos.<br>Montez la jambe tendue en tirant doucement sur la sangle.<br>Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Jusqu'à une légère tension derrière la cuisse, jamais de douleur dans le mollet ou le pied."
+},
+{
+"id": "428",
+"source": "HEP",
+"nom": "Planche adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/1477662192-modified-plank.jpg",
+"consignes": [
+"Posez les avant-bras au sol, coudes sous les épaules.",
+"Reculez les genoux pour aligner dos et cuisses.",
+"Serrez les fessiers et le ventre, dos plat.",
+"Maintenez en respirant."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
+"type": "timer",
+"conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Dos plat, respirez pendant le maintien."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_sciatique_3",
+"nom": "Sciatique",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "559",
+"source": "HEP",
+"nom": "Glissement neural du nerf sciatique avec extension de jambe",
+"image": "/exercises/images/HEP/sciatic-nerve-glide-leg-kick-out.jpg",
+"consignes": [
+"Tendez le genou en relevant la tête pour regarder vers le haut.",
+"Pliez le genou en baissant la tête.",
+"Alternez doucement, sans provoquer de douleur ni de fourmillements durables."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/HMrocixKdmU",
+"type": "timer",
+"conseil": "Tendez le genou en relevant la tête pour regarder vers le haut.<br>Pliez le genou en baissant la tête.<br>Alternez doucement, sans provoquer de douleur ni de fourmillements durables.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Amplitude complète ; tenez 2 secondes en fin de mouvement si c'est bien toléré. Les fourmillements doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude."
+},
+{
+"id": "200",
+"source": "HEP",
+"nom": "Planche ventrale",
+"image": "/exercises/images/HEP/1408037133-planks.jpg",
+"consignes": [
+"Coudes sous les épaules.",
+"Décollez le corps en appui sur les avant-bras et les orteils.",
+"Dos droit, bassin aligné, serrez les fessiers et le ventre.",
+"Respirez normalement et maintenez 10 à 15 secondes."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/bqxtqpiaHEM",
+"type": "timer",
+"conseil": "Coudes sous les épaules.<br>Décollez le corps en appui sur les avant-bras et les orteils.<br>Dos droit, bassin aligné, serrez les fessiers et le ventre.<br>Respirez normalement et maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Corps aligné ; posez les genoux si le dos se creuse."
+},
+{
+"id": "429",
+"source": "HEP",
+"nom": "Planche latérale adaptée",
+"image": "/exercises/images/HEP/1477662296-modified-side-plank.jpg",
+"consignes": [
+"Coude sous l'épaule.",
+"Montez le bassin pour aligner épaules, hanches et genoux.",
+"Serrez les fessiers et maintenez 15 à 30 secondes."
+],
+"position": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+"youtube": "http://www.youtube.com/embed/yjcZlw5VDVg",
+"type": "timer",
+"conseil": "Coude sous l'épaule.<br>Montez le bassin pour aligner épaules, hanches et genoux.<br>Serrez les fessiers et maintenez 15 à 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Chaque côté."
+},
+{
+"id": "71",
+"source": "HEP",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"type": "timer",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Côté douloureux en appui ; bassin horizontal."
+},
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Descente lente ; appuyez-vous si besoin au début."
+},
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Près d'un appui stable ; sur la jambe douloureuse aussi."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_hernie_discale_1",
+"nom": "Hernie discale",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "208",
+"source": "HEP",
+"nom": "Appui sur les coudes, sur le ventre (sphinx)",
+"image": "/exercises/images/HEP/1408183542-prone-props.jpg",
+"consignes": [
+"Coudes sous les épaules, bassin au sol.",
+"Relâchez le dos et laissez-le se creuser doucement.",
+"Maintenez en respirant calmement."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/LlrZONaPhC0",
+"type": "timer",
+"conseil": "Coudes sous les épaules, bassin au sol.<br>Relâchez le dos et laissez-le se creuser doucement.<br>Maintenez en respirant calmement.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Commencez par 30 secondes ; restez plus longtemps si c'est confortable. Si la douleur descend plus bas dans la jambe, réduisez l'amplitude ou arrêtez cet exercice ; si elle remonte vers le dos, c'est bon signe."
+},
+{
+"id": "207",
+"source": "HEP",
+"nom": "Extension lombaire sur les bras (McKenzie)",
+"image": "/exercises/images/HEP/1408183357-prone-press-ups.jpg",
+"consignes": [
+"Bassin bien posé au sol.",
+"Tendez les bras pour soulever le haut du corps, en laissant le dos se creuser.",
+"Relâchez les fessiers et le dos, maintenez 1 à 2 secondes.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le ventre, mains au sol sous les épaules",
+"youtube": "http://www.youtube.com/embed/0qS5dCe0AD4",
+"type": "timer",
+"conseil": "Bassin bien posé au sol.<br>Tendez les bras pour soulever le haut du corps, en laissant le dos se creuser.<br>Relâchez les fessiers et le dos, maintenez 1 à 2 secondes.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Montez seulement jusqu'où c'est confortable, bassin au sol, fesses relâchées. Si la douleur descend plus bas dans la jambe, réduisez l'amplitude ou arrêtez cet exercice ; si elle remonte vers le dos, c'est bon signe."
+},
+{
+"id": "545",
+"source": "HEP",
+"nom": "Extension du dos, mains derrière le dos",
+"image": "/exercises/images/HEP/back-adjustment-hands-behind-back.jpg",
+"consignes": [
+"Placez les mains dans le bas du dos, sur la zone douloureuse.",
+"Penchez-vous doucement vers l'arrière en poussant le bassin vers l'avant avec les mains.",
+"Revenez, puis recommencez."
+],
+"position": "Debout ou assis",
+"youtube": "http://www.youtube.com/embed/EkOY_UUHXKw",
+"type": "timer",
+"conseil": "Placez les mains dans le bas du dos, sur la zone douloureuse.<br>Penchez-vous doucement vers l'arrière en poussant le bassin vers l'avant avec les mains.<br>Revenez, puis recommencez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "À faire plusieurs fois par jour, surtout après être resté assis longtemps."
+},
+{
+"id": "610",
+"source": "HEP",
+"nom": "Bascule du bassin, allongé",
+"image": "/exercises/images/HEP/supine-anterior-exterior-pelvic-tilt.jpg",
+"consignes": [
+"Creusez le bas du dos en basculant le bassin vers l'avant.",
+"Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.",
+"Alternez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/Q08dMpidl58",
+"type": "timer",
+"conseil": "Creusez le bas du dos en basculant le bassin vers l'avant.<br>Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.<br>Alternez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petite amplitude, sans douleur."
+},
+{
+"id": "432",
+"source": "HEP",
+"nom": "Activation du transverse de l'abdomen",
+"image": "/exercises/images/HEP/1477662600-ta-recruitment.jpg",
+"consignes": [
+"Posez deux doigts à l'intérieur des os du bassin, à l'avant.",
+"Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.",
+"Maintenez en respirant normalement, puis relâchez."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/QQoVcC-0Gds",
+"type": "timer",
+"conseil": "Posez deux doigts à l'intérieur des os du bassin, à l'avant.<br>Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.<br>Maintenez en respirant normalement, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Respirez normalement pendant la contraction."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 60,
+"repos": 10,
+"conseil_kine": "Pour relâcher le dos quand la douleur monte."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_hernie_discale_2",
+"nom": "Hernie discale",
+"niveau": 2,
 "categorie": "pathologie",
 "zoneLabel": "Dos",
 "series": 1,
@@ -459,117 +960,11 @@ export const MODELES_BASE = [
 "youtube": "http://www.youtube.com/embed/0qS5dCe0AD4",
 "type": "timer",
 "conseil": "Bassin bien posé au sol.<br>Tendez les bras pour soulever le haut du corps, en laissant le dos se creuser.<br>Relâchez les fessiers et le dos, maintenez 1 à 2 secondes.<br>Redescendez lentement.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Montée un peu plus haute qu'au niveau 1 si c'est bien toléré."
 },
-{
-"id": "208",
-"source": "HEP",
-"nom": "Appui sur les coudes, sur le ventre (sphinx)",
-"image": "/exercises/images/HEP/1408183542-prone-props.jpg",
-"consignes": [
-"Coudes sous les épaules, bassin au sol.",
-"Relâchez le dos et laissez-le se creuser doucement.",
-"Maintenez en respirant calmement."
-],
-"position": "Allongé sur le ventre, en appui sur les avant-bras",
-"youtube": "http://www.youtube.com/embed/LlrZONaPhC0",
-"type": "timer",
-"conseil": "Coudes sous les épaules, bassin au sol.<br>Relâchez le dos et laissez-le se creuser doucement.<br>Maintenez en respirant calmement.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
-},
-{
-"id": "67",
-"source": "HEP",
-"nom": "Glissement neural du nerf sciatique",
-"image": "/exercises/images/HEP/1408191588-sciatic-nerve-glide.jpg",
-"consignes": [
-"Tenez l'arrière d'une cuisse, hanche à 90°.",
-"Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.",
-"Pliez de nouveau le genou en relâchant le pied.",
-"Mouvements doux, sans provoquer de douleur ni de fourmillements durables."
-],
-"position": "Allongé sur le dos, genoux pliés",
-"youtube": "http://www.youtube.com/embed/0gnme9jTkJ8",
-"type": "timer",
-"conseil": "Tenez l'arrière d'une cuisse, hanche à 90°.<br>Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.<br>Pliez de nouveau le genou en relâchant le pied.<br>Mouvements doux, sans provoquer de douleur ni de fourmillements durables.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
-},
-{
-"id": "610",
-"source": "HEP",
-"nom": "Bascule du bassin, allongé",
-"image": "/exercises/images/HEP/supine-anterior-exterior-pelvic-tilt.jpg",
-"consignes": [
-"Creusez le bas du dos en basculant le bassin vers l'avant.",
-"Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.",
-"Alternez lentement."
-],
-"position": "Allongé sur le dos, genoux pliés",
-"youtube": "http://www.youtube.com/embed/Q08dMpidl58",
-"type": "timer",
-"conseil": "Creusez le bas du dos en basculant le bassin vers l'avant.<br>Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.<br>Alternez lentement.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
-},
-{
-"id": "546",
-"source": "HEP",
-"nom": "Respiration abdominale, allongé",
-"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
-"consignes": [
-"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
-"Soufflez lentement par la bouche en laissant le ventre redescendre."
-],
-"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
-"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
-"type": "timer",
-"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
-},
-{
-"id": "431",
-"source": "HEP",
-"nom": "Bascule du bassin, allongé sur le dos",
-"image": "/exercises/images/HEP/1477662515-supine-pelvic-tilt.jpg",
-"consignes": [
-"Basculez le bassin vers l'arrière pour plaquer le bas du dos au sol.",
-"Imaginez écraser une main glissée sous le bas du dos.",
-"Maintenez quelques secondes, puis relâchez."
-],
-"position": "Allongé sur le dos, genoux pliés",
-"youtube": "http://www.youtube.com/embed/4Ve37m_4z8Q",
-"type": "timer",
-"conseil": "Basculez le bassin vers l'arrière pour plaquer le bas du dos au sol.<br>Imaginez écraser une main glissée sous le bas du dos.<br>Maintenez quelques secondes, puis relâchez.",
-"reps": 5,
-"ex": 10,
-"repos": 10,
-"conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
-}
-],
-"lieu": "HEP"
-},
-{
-"id": "base_sciatique_et_hernie_discale_2",
-"nom": "Sciatique et hernie discale",
-"niveau": 2,
-"categorie": "pathologie",
-"zoneLabel": "Dos",
-"series": 1,
-"exercices": [
 {
 "id": "432",
 "source": "HEP",
@@ -584,10 +979,30 @@ export const MODELES_BASE = [
 "youtube": "http://www.youtube.com/embed/QQoVcC-0Gds",
 "type": "timer",
 "conseil": "Posez deux doigts à l'intérieur des os du bassin, à l'avant.<br>Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.<br>Maintenez en respirant normalement, puis relâchez.",
-"reps": 5,
-"ex": 10,
-"repos": 10,
-"conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Tenez 10 secondes, puis relâchez."
+},
+{
+"id": "425",
+"source": "HEP",
+"nom": "Dead bug",
+"image": "/exercises/images/HEP/1477661803-dead-bug.jpg",
+"consignes": [
+"Plaquez le bas du dos au sol.",
+"Tendez lentement un bras derrière la tête et la jambe opposée vers l'avant.",
+"Gardez le dos plaqué tout au long du mouvement.",
+"Revenez et changez de côté."
+],
+"position": "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux à 90°",
+"youtube": "http://www.youtube.com/embed/PJW74ahttdE",
+"type": "timer",
+"conseil": "Plaquez le bas du dos au sol.<br>Tendez lentement un bras derrière la tête et la jambe opposée vers l'avant.<br>Gardez le dos plaqué tout au long du mouvement.<br>Revenez et changez de côté.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Bas du dos plaqué au sol pendant tout l'exercice."
 },
 {
 "id": "70",
@@ -604,9 +1019,9 @@ export const MODELES_BASE = [
 "type": "timer",
 "conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
 "reps": 3,
-"ex": 40,
-"repos": 20,
-"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Montée sans cambrer le bas du dos."
 },
 {
 "id": "214",
@@ -623,47 +1038,9 @@ export const MODELES_BASE = [
 "type": "timer",
 "conseil": "Dos droit, bassin stable.<br>Tendez un bras vers l'avant et la jambe opposée vers l'arrière.<br>Revenez lentement, puis alternez.",
 "reps": 3,
-"ex": 40,
-"repos": 20,
-"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
-},
-{
-"id": "559",
-"source": "HEP",
-"nom": "Glissement neural du nerf sciatique avec extension de jambe",
-"image": "/exercises/images/HEP/sciatic-nerve-glide-leg-kick-out.jpg",
-"consignes": [
-"Tendez le genou en relevant la tête pour regarder vers le haut.",
-"Pliez le genou en baissant la tête.",
-"Alternez doucement, sans provoquer de douleur ni de fourmillements durables."
-],
-"position": "Assis sur une chaise, dos droit",
-"youtube": "http://www.youtube.com/embed/HMrocixKdmU",
-"type": "timer",
-"conseil": "Tendez le genou en relevant la tête pour regarder vers le haut.<br>Pliez le genou en baissant la tête.<br>Alternez doucement, sans provoquer de douleur ni de fourmillements durables.",
-"reps": 2,
-"ex": 45,
-"repos": 10,
-"conseil_kine": "Mouvements lents, dans une amplitude sans douleur."
-},
-{
-"id": "68",
-"source": "HEP",
-"nom": "Étirement des ischio-jambiers avec une sangle, allongé",
-"image": "/exercises/images/HEP/1408868706-supine-hamstring-stretch-with-strap.jpg",
-"consignes": [
-"Pliez l'autre jambe, pied à plat, pour protéger le dos.",
-"Montez la jambe tendue en tirant doucement sur la sangle.",
-"Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes."
-],
-"position": "Allongé sur le dos, une sangle autour du pied",
-"youtube": "http://www.youtube.com/embed/oDzhSppZSU0",
-"type": "timer",
-"conseil": "Pliez l'autre jambe, pied à plat, pour protéger le dos.<br>Montez la jambe tendue en tirant doucement sur la sangle.<br>Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes.",
-"reps": 3,
 "ex": 30,
-"repos": 10,
-"conseil_kine": "Étirement doux, sans douleur, en respirant calmement."
+"repos": 15,
+"conseil_kine": "Dos plat comme une table, sans tourner le bassin."
 },
 {
 "id": "428",
@@ -680,10 +1057,136 @@ export const MODELES_BASE = [
 "youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
 "type": "timer",
 "conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
-"reps": 5,
-"ex": 10,
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Dos plat, respirez pendant le maintien."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_hernie_discale_3",
+"nom": "Hernie discale",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "200",
+"source": "HEP",
+"nom": "Planche ventrale",
+"image": "/exercises/images/HEP/1408037133-planks.jpg",
+"consignes": [
+"Coudes sous les épaules.",
+"Décollez le corps en appui sur les avant-bras et les orteils.",
+"Dos droit, bassin aligné, serrez les fessiers et le ventre.",
+"Respirez normalement et maintenez 10 à 15 secondes."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/bqxtqpiaHEM",
+"type": "timer",
+"conseil": "Coudes sous les épaules.<br>Décollez le corps en appui sur les avant-bras et les orteils.<br>Dos droit, bassin aligné, serrez les fessiers et le ventre.<br>Respirez normalement et maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Corps aligné ; posez les genoux si le dos se creuse."
+},
+{
+"id": "429",
+"source": "HEP",
+"nom": "Planche latérale adaptée",
+"image": "/exercises/images/HEP/1477662296-modified-side-plank.jpg",
+"consignes": [
+"Coude sous l'épaule.",
+"Montez le bassin pour aligner épaules, hanches et genoux.",
+"Serrez les fessiers et maintenez 15 à 30 secondes."
+],
+"position": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+"youtube": "http://www.youtube.com/embed/yjcZlw5VDVg",
+"type": "timer",
+"conseil": "Coude sous l'épaule.<br>Montez le bassin pour aligner épaules, hanches et genoux.<br>Serrez les fessiers et maintenez 15 à 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Chaque côté ; bassin bien aligné."
+},
+{
+"id": "213",
+"source": "HEP",
+"nom": "Extension de jambe à quatre pattes",
+"image": "/exercises/images/HEP/1421405959-quadruped-leg-extension.jpg",
+"consignes": [
+"Dos droit, bassin stable.",
+"Tendez une jambe vers l'arrière, genou tendu, à hauteur du dos.",
+"Revenez lentement, puis alternez."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/ll5ALtoaYVM",
+"type": "timer",
+"conseil": "Dos droit, bassin stable.<br>Tendez une jambe vers l'arrière, genou tendu, à hauteur du dos.<br>Revenez lentement, puis alternez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Sans creuser le dos ; jambe tendue à hauteur du bassin."
+},
+{
+"id": "71",
+"source": "HEP",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"type": "timer",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Bassin bien horizontal pendant la montée."
+},
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Pliez les hanches, dos droit : c'est le geste à utiliser pour ramasser un objet."
+},
+{
+"id": "545",
+"source": "HEP",
+"nom": "Extension du dos, mains derrière le dos",
+"image": "/exercises/images/HEP/back-adjustment-hands-behind-back.jpg",
+"consignes": [
+"Placez les mains dans le bas du dos, sur la zone douloureuse.",
+"Penchez-vous doucement vers l'arrière en poussant le bassin vers l'avant avec les mains.",
+"Revenez, puis recommencez."
+],
+"position": "Debout ou assis",
+"youtube": "http://www.youtube.com/embed/EkOY_UUHXKw",
+"type": "timer",
+"conseil": "Placez les mains dans le bas du dos, sur la zone douloureuse.<br>Penchez-vous doucement vers l'arrière en poussant le bassin vers l'avant avec les mains.<br>Revenez, puis recommencez.",
+"reps": 2,
+"ex": 30,
 "repos": 10,
-"conseil_kine": "Contraction sans mouvement, sans bloquer la respiration."
+"conseil_kine": "À garder dans la journée, surtout après être resté assis."
 }
 ],
 "lieu": "HEP"

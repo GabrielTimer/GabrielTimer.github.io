@@ -35,9 +35,11 @@ export function origineDe(prog, modeles){
     if(m) return { modele: m, niveau: m.niveau || o.niveau || null, base: m.nom, choix: o.choix || choixDuNom(m, prog.nom) };
   }
   const nn = o?.nom ? { base: o.nom, niveau: o.niveau } : nomNiveau(prog.nom);
-  const base = String(nn.base).replace(/\s*\([^)]*\)\s*$/, ""), niveau = nn.niveau;   // « Névralgie cervico-brachiale (médian) »
+  let base = String(nn.base).replace(/\s*\([^)]*\)\s*$/, ""), niveau = nn.niveau;   // « Névralgie cervico-brachiale (médian) »
   if(!niveau) return { modele: null, niveau: null, base };
   const lieu = lieuProg(prog);
+  /* Ancien modèle maison « Sciatique et hernie discale » (7 nov. 2026) : séparé en « Sciatique » et « Hernie discale » */
+  if(lieu === "HEP" && norm(base) === norm("Sciatique et hernie discale")) base = "Sciatique";
   const cands = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
   const m = cands.find(x => x.lieu === lieu) || cands[0] || null;
   return { modele: m, niveau, base, choix: choixDuNom(m, prog.nom) };

@@ -67,7 +67,7 @@ HYP: {
     axes: ["Éducation, rester actif", "Exercices dirigés selon la réponse (centralisation, mobilité neurale)", "Surveillance neurologique à chaque séance"],
     eviter: ["Repos au lit prolongé"],
     avis: "Avis urgent si déficit moteur progressif ou signes de queue-de-cheval.",
-    modeles: ["Sciatique et hernie discale", "Cruralgie"], patho: "Sciatique / radiculalgie"
+    modeles: ["Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie"], patho: "Sciatique / radiculalgie"
   },
   "lombes:STE": {
     axes: ["Exercices en flexion, mobilité lombaire", "Renforcement des membres inférieurs et du tronc", "Endurance : vélo, marche fractionnée"],
@@ -147,7 +147,7 @@ HYP: {
 REGION: {
   genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
   epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
-  lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
+  lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
   cerv: { zone: "Cervicales", modeles: ["Cervicalgie", "Névralgie cervico-brachiale"] },
   chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire", "Épine calcanéenne"] },
   hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire"], postop: ["Prothèse totale de hanche (PTH)"] },
@@ -159,7 +159,7 @@ REGION: {
 MOTIF: {
   "Lombalgie": { modeles: ["Lombalgie"], patho: "Lombalgie" },
   "Cervicalgie": { modeles: ["Cervicalgie"], patho: "Cervicalgie" },
-  "Sciatique": { modeles: ["Sciatique et hernie discale"], patho: "Sciatique / radiculalgie" },
+  "Sciatique": { modeles: ["Sciatique", "Hernie discale", "Sciatique et hernie discale"], patho: "Sciatique / radiculalgie" },
   "Trouble de l’équilibre": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
   "Chutes / personne âgée": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
   "Neurologie (AVC, Parkinson, SEP…)": { modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] },
