@@ -149,7 +149,7 @@ $("#doc").innerHTML = `
 
   <div id="sec-notes" class="opt-hidden">
     <h2>Notes de séance</h2>
-    ${notes.length ? `<table><tbody>${notes.slice().reverse().map(n => `<tr><td class="n" style="width:80px">${esc(fmtShortDate(n.date))}</td><td>${esc(n.texte).replace(/\n/g, "<br>")}</td></tr>`).join("")}</tbody></table>` : `<p class="muted">Aucune note.</p>`}
+    ${notes.length ? `<table><tbody>${notes.slice().reverse().map(n => `<tr><td class="n" style="width:80px">${esc(fmtShortDate(n.date))}</td><td>${[n.eva != null && n.eva !== "" ? `Douleur ${esc(n.eva)}/10` : "", (n.tags || []).map(esc).join(", "), esc(n.texte || "").replace(/\n/g, "<br>")].filter(Boolean).join(" · ")}</td></tr>`).join("")}</tbody></table>` : `<p class="muted">Aucune note.</p>`}
   </div>
 
   <h2>Conclusion</h2>

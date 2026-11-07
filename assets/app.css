@@ -761,3 +761,10 @@ a.chip{ text-decoration:none; }
 .lib-tools .select.on{ border-color:var(--lagon); background-color:var(--lagon-soft); color:var(--lagon-strong); font-weight:700; }
 .mo-tools .select.on{ border-color:var(--lagon); background-color:var(--lagon-soft); color:var(--lagon-strong); font-weight:700; }
 .notice.soft{ background:var(--surface-2); }
+
+/* Note de séance rapide */
+.nq-eva{ display:grid; grid-template-columns:repeat(11,minmax(0,1fr)); gap:4px; }
+.nq-eva button{ min-height:46px; padding:0; border:1.5px solid var(--line-strong); border-radius:10px; background:var(--surface); color:var(--ink-2); font-family:var(--mono); font-weight:800; font-size:1rem; cursor:pointer; position:relative; overflow:hidden; }
+.nq-eva button::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--c); }
+.nq-eva button[aria-pressed="true"]{ background:var(--c); border-color:var(--c); color:#fff; }
+.note-tags{ display:flex; flex-wrap:wrap; gap:4px; margin:2px 0 4px; }

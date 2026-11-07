@@ -229,6 +229,7 @@ async function kineView(param){
           <span class="li-sub">${esc(b.motif || "")}</span>
         </a>
         <span class="li-end">
+          <a class="icon-btn sm" href="/conseils-bilan.html?patient=${encodeURIComponent(patient.cle)}&bilan=${encodeURIComponent(b.id)}" target="_blank" rel="noopener" aria-label="Fiche conseils patient" title="Fiche conseils patient">${icon("book")}</a>
           <a class="icon-btn sm" href="/courrier.html?patient=${encodeURIComponent(patient.cle)}&bilan=${encodeURIComponent(b.id)}" target="_blank" rel="noopener" aria-label="Lettre au médecin" title="Lettre au médecin">${icon("mail")}</a>
           <button class="icon-btn sm" type="button" data-bact="pdf" data-id="${esc(b.id)}" aria-label="Télécharger le PDF" title="PDF">${icon("pdf")}</button>
           <button class="icon-btn sm" type="button" data-bact="send" data-id="${esc(b.id)}" aria-label="Envoyer" title="Envoyer">${icon("share")}</button>
@@ -288,6 +289,7 @@ async function kineView(param){
         ${sum.alertes.length ? `<div class="chips" style="margin-top:14px">${sum.alertes.map(a => `<span class="badge ${a.niveau === "danger" ? "danger" : a.niveau === "warn" ? "warn" : a.niveau === "ok" ? "ok" : "lagon"}">${icon(a.ico)}${esc(a.texte)}</span>`).join("")}</div>` : ""}
         <div class="pt-actions">
           <a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Nouveau programme</a>
+          <button class="btn soft" type="button" id="note-jour">${icon("edit")}Séance du jour</button>
           <a class="btn soft" href="${bilanURL()}">${icon("stethoscope")}Bilan</a>
           <button class="btn" type="button" id="acces">${icon("qr")}Accès patient</button>
           <button class="btn" type="button" id="apercu">${icon("eye")}Vue patient</button>
@@ -363,6 +365,9 @@ async function kineView(param){
 
   const bind = (sum) => {
     $("#acces").onclick = () => UI.accessSheet(patient);
+    $("#note-jour").onclick = () => {
+      document.dispatchEvent(new CustomEvent("kine:note-du-jour"));
+    };
     $("#apercu").onclick = () => window.open(`/index.html?apercu=${patient.cle}`, "_blank");
     $("#edit").onclick = editPatient;
     $("#msg-ecrire")?.addEventListener("click", () => M.ecrireAuPatient(C, patient, { onSent: m => { messages.unshift(m); render(); } }));

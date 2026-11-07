@@ -74,7 +74,7 @@ if(saved && saved.etat){
 }else{
   const last = list.find(b => b.etat);
   S = last ? B.carryOver(last.etat) : B.blankState("initial");
-  if(last) info = `Motif, antécédents, médication et médecin sont repris du bilan du ${B.fmtISO(last.date)}. Modifiez-les si besoin.`;
+  if(last) info = `Bilan de suivi pré-rempli d'après le bilan du ${B.fmtISO(last.date)} (zones, contexte, hypothèse, plan) : modifiez seulement ce qui a changé. Les tests et mesures sont à refaire.`;
 }
 const draft = store.get(draftKey(), null);
 let restored = false;
@@ -572,6 +572,7 @@ async function start(){
   G.mountGuide(app, {
     S, K, B, BC, TC, patient,
     photos: ouvrirPhotosBilan, majPhotos,
+    bilanId: () => id,
     changed, save, opts,
     leave: () => leave(fiche),
     statusAgain: () => setSt(...lastSt),

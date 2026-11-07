@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiche conseils</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  /* Fiche conseils remise au patient après le bilan : mots simples, une page.
+     URL : /conseils-bilan.html?patient=CODE (dernier bilan) ou &bilan=ID.
+     Contenu dans /bilan-kine/conseils-patient.js. Texte modifiable avant impression ou envoi. */
+  body{ background:var(--bg); }
+  .tools{ position:sticky; top:0; z-index:5; display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:12px var(--gutter); background:var(--surface); border-bottom:1px solid var(--line); }
+  .tools .spacer{ flex:1; }
+  .tools .hint{ width:100%; margin:0; }
+  .sheet-a4{ width:min(100% - 24px, 210mm); margin:20px auto 60px; background:#fff; color:#14303A; padding:16mm 16mm 14mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:12pt; line-height:1.5; }
+  .cp-head{ display:flex; gap:12px; align-items:center; border-bottom:2.5px solid #138FA6; padding-bottom:10px; margin-bottom:14px; }
+  .cp-head img{ width:42px; height:42px; object-fit:contain; }
+  .cp-head .who{ flex:1; font-size:10pt; color:#47616B; }
+  .cp-head .who strong{ display:block; font-size:12pt; color:#0B6E80; }
+  .cp-head .coord{ text-align:right; font-size:9.5pt; color:#47616B; white-space:pre-line; }
+  h1{ font-size:19pt; color:#0B6E80; margin:0; }
+  .sub{ color:#6F878F; margin:2px 0 14px; }
+  .cp-box{ border-radius:10px; padding:10px 14px; margin:0 0 12px; break-inside:avoid; }
+  .cp-box h2{ font-size:12.5pt; margin:0 0 6px; display:flex; gap:8px; align-items:center; }
+  .cp-box ul{ margin:0; padding-left:20px; }
+  .cp-box li{ margin:3px 0; }
+  .cp-box p{ margin:0 0 6px; }
+  .b-what{ background:#EEF6F7; } .b-what h2{ color:#0B6E80; }
+  .b-do{ background:#EAF6EF; } .b-do h2{ color:#1E7A4C; }
+  .b-avoid{ background:#FFF6E6; } .b-avoid h2{ color:#9A6200; }
+  .b-ex{ background:#F3F6F7; } .b-ex h2{ color:#34505A; }
+  .b-call{ background:#FDECEC; } .b-call h2{ color:#B42F2F; }
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .cols .cp-box{ margin:0; }
+  .cols + .cp-box, .cp-box + .cols{ margin-top:12px; }
+  #corps:focus{ outline:2px dashed #9FB6BC; outline-offset:6px; border-radius:4px; }
+  .foot{ margin-top:14px; font-size:9.5pt; color:#6F878F; text-align:center; }
+  @media (max-width:640px){ .cols{ grid-template-columns:1fr; } }
+  @media print{
+    @page{ size:A4; margin:12mm; }
+    body{ background:#fff; }
+    .tools{ display:none; }
+    .sheet-a4{ width:auto; margin:0; padding:0; box-shadow:none; border-radius:0; }
+    .cp-box{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a class="btn sm ghost" id="back" href="/patients.html">Retour</a>
+  <span class="spacer"></span>
+  <button class="btn" type="button" id="copy">Copier</button>
+  <button class="btn" type="button" id="send">Envoyer au patient</button>
+  <button class="btn primary" type="button" id="print">Imprimer ou PDF</button>
+  <p class="hint">Fiche rédigée d'après le bilan : touchez le texte pour l'adapter avant de l'imprimer ou de l'envoyer.</p>
+</div>
+<div class="sheet-a4" id="doc"><div class="loading"><div class="spinner"></div><span>Préparation de la fiche…</span></div></div>
+<script type="module">
+import { $, esc, icon, params, settings, logoSrc, KINE, toast } from "/assets/app.js";
+import { nomAffiche } from "/assets/noms.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+const C = await import("/assets/cloud.js");
+const B = await import("/assets/bilan-core.js");
+const T = await import("/assets/bilan-traitement.js");
+
+const cle = params.get("patient");
+if(!cle) location.replace("/patients.html");
+$("#back").href = `/cloud.html?patient=${encodeURIComponent(cle)}`;
+$("#back").innerHTML = icon("back") + "Retour à la fiche";
+$("#print").innerHTML = icon("print") + $("#print").textContent;
+$("#copy").innerHTML = icon("copy") + $("#copy").textContent;
+$("#send").innerHTML = icon("send") + $("#send").textContent;
+
+/* Contenu des conseils (fichier de données, comme les autres contenus cliniques) */
+await new Promise((res, rej) => { const sc = document.createElement("script"); sc.src = "/bilan-kine/conseils-patient.js"; sc.onload = res; sc.onerror = rej; document.head.append(sc); });
+const CPD = new Function("return CP")();
+
+const [patient, K, bilans] = await Promise.all([C.getPatient(cle, { fiche:true }), B.loadClinic(), C.listBilans(cle).catch(() => [])]);
+if(!patient){ $("#doc").innerHTML = "<p>Patient introuvable.</p>"; throw new Error("patient"); }
+const liste = bilans.filter(b => b.etat);
+const bl = liste.find(b => b.id === params.get("bilan")) || liste[0] || null;
+const S = bl?.etat || { c:{}, f:{}, q:{}, pain:{} };
+const nom = nomAffiche(patient.nom);
+document.title = `Conseils – ${nom}`;
+
+/* Blocs de conseils : hypothèses retenues (ou orientées), sinon motif, sinon généraux */
+let blocs = [];
+try{ blocs = T.hypotheses(S, K, B).map(h => CPD.HYP[`${h.reg}:${h.k}`]).filter(Boolean); }catch(e){ console.warn(e); }
+if(!blocs.length) blocs = (S.c?.patho || []).map(m => CPD.MOTIF[m]).filter(Boolean);
+if(!blocs.length) blocs = [CPD.COMMUN.generic];
+blocs = blocs.slice(0, 2);
+const uniq = a => [...new Set(a)];
+const faire = uniq(blocs.flatMap(b => b.faire)), eviter = uniq(blocs.flatMap(b => b.eviter)), consulter = uniq(blocs.flatMap(b => b.consulter));
+
+/* Profil (douleur vive, ancienne, inquiétudes) et suivi */
+const p = S.tx?.init ? T.profil(S) : T.profilAuto(S);
+const rf = Object.values(S.cl || {}).some(c => (c.s || []).length);
+const exo = [CPD.COMMUN.douleur];
+if(p.irrit === "Élevée") exo.push(CPD.COMMUN.irritHaute);
+if(p.phase === "Chronique") exo.push(CPD.COMMUN.chronique);
+if((S.q?.jaunes || []).length && !rf) exo.push(CPD.COMMUN.jaunes);
+const suivi = [];
+if(S.tx?.init && p.freq) suivi.push(`Séances au cabinet : ${p.freq} par semaine pendant environ ${p.sem} semaines.`);
+if(S.tx?.prog?.nom) suivi.push(`Exercices à la maison : « ${S.tx.prog.nom} », dans l'application.`);
+if(S.tx?.init && p.reeval && bl?.date){ const d = new Date(bl.date); d.setDate(d.getDate() + p.reeval * 7); suivi.push(`Prochain bilan vers le ${d.toLocaleDateString("fr-FR", { day:"numeric", month:"long" })}.`); }
+suivi.push(CPD.COMMUN.programme);
+
+const cab = settings.cabinet || {};
+const coord = [cab.telephone ? "Tél. " + cab.telephone : "", cab.email || KINE.email].filter(Boolean).join("\n");
+const li = a => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+$("#doc").innerHTML = `
+  <div class="cp-head"><img src="${esc(logoSrc())}" alt=""><div class="who"><strong>${esc(KINE.nom)}</strong>${esc(KINE.titre)}</div><div class="coord">${esc(coord)}</div></div>
+  <div id="corps" contenteditable="true" spellcheck="true">
+    <h1>Vos conseils</h1>
+    <p class="sub">${esc(nom)}${bl ? ` · bilan du ${esc(B.fmtISOLong(bl.date))}` : ""}</p>
+    <div class="cp-box b-what"><h2>Ce que vous avez</h2>${blocs.map(b => `<p><strong>${esc(b.titre)}.</strong> ${esc(b.cest)}</p>`).join("")}</div>
+    <div class="cols">
+      <div class="cp-box b-do"><h2>✓ Ce qui aide</h2>${li(faire)}</div>
+      <div class="cp-box b-avoid"><h2>À éviter pour l'instant</h2>${li(eviter)}</div>
+    </div>
+    <div class="cp-box b-ex"><h2>Pendant les exercices</h2>${exo.map(x => `<p>${esc(x)}</p>`).join("")}</div>
+    <div class="cp-box b-ex"><h2>Votre suivi</h2>${li(suivi)}</div>
+    <div class="cp-box b-call"><h2>Appelez-moi ou consultez si</h2>${li(consulter)}</div>
+  </div>
+  <p class="foot">${esc(KINE.nom)} · ${esc(KINE.titre)}${cab.telephone ? " · " + esc(cab.telephone) : ""}</p>`;
+if(!bl) toast("Aucun bilan enregistré : la fiche contient des conseils généraux.", { duration:6000 });
+
+const texte = () => [...$("#corps").children].map(el => {
+  if(el.tagName === "H1") return el.innerText.toUpperCase();
+  const h = el.querySelectorAll("h2");
+  if(!h.length) return el.innerText;
+  return [...el.querySelectorAll(".cp-box")].concat(el.classList.contains("cp-box") ? [el] : [])
+    .map(b => `${b.querySelector("h2").innerText.replace(/^✓\s*/, "").toUpperCase()}\n` + [...b.querySelectorAll("p, li")].map(x => (x.tagName === "LI" ? "• " : "") + x.innerText.trim()).join("\n")).join("\n\n");
+}).join("\n\n") + `\n\n${KINE.nom}`;
+
+$("#print").onclick = () => print();
+$("#copy").onclick = async () => {
+  try{ await navigator.clipboard.writeText(texte()); toast("Fiche copiée.", { type:"ok" }); }
+  catch(e){ B.copyText(texte()); }
+};
+$("#send").onclick = async () => {
+  const b = $("#send"); b.disabled = true;
+  try{
+    await C.addMessage(cle, { sujet:"Vos conseils après le bilan", texte: texte(), de:"kine" });
+    toast("Fiche envoyée : le patient la retrouve dans ses messages.", { type:"ok", duration:5000 });
+  }catch(e){ console.error(e); toast("Envoi impossible. Réessayez.", { type:"err" }); }
+  finally{ b.disabled = false; }
+};
+</script>
+</body>
+</html>

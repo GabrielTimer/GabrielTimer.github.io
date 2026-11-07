@@ -3,7 +3,7 @@
    notes privées, encouragements
    ========================================================= */
 
-import { esc, icon, openSheet, toast, confirmDialog, promptDialog, fmtShortDate, fmtDate, startOfDay, plural } from "./app.js";
+import { esc, icon, openSheet, toast, confirmDialog, promptDialog, fmtShortDate, fmtDate, startOfDay, plural, evaColor } from "./app.js";
 import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions, butOf } from "./questionnaires.js";
 import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
 
@@ -76,6 +76,27 @@ export function streakMessage(n){
   if(n >= 8) return `${n} semaines sans manquer une séance. Remarquable.`;
   if(n >= 4) return `${n} semaines de suite sans séance manquée. Belle régularité.`;
   return `${n} semaines de suite sans séance manquée. Continuez ainsi.`;
+}
+
+/* ---------- Note de séance rapide : EVA du jour + mots-clés en un clic ----------
+   Note : { date, texte, eva (0-10, facultatif), tags:[…] }. Reprise par la lettre au médecin. */
+export const NOTE_TAGS = [
+  ["Fait aujourd'hui", ["Travail manuel", "Mobilisations", "Étirements", "Renforcement", "Proprioception / équilibre", "Marche / transferts", "Réentraînement à l'effort", "Respiratoire", "Physiothérapie", "Éducation / conseils", "Exercices du programme revus", "Programme modifié"]],
+  ["Évolution", ["Mieux", "Stable", "Moins bien"]],
+  ["À la maison", ["Exercices bien faits", "Exercices peu faits"]],
+  ["Suite", ["Poursuivre", "Faire progresser", "Alléger", "Bilan intermédiaire à prévoir", "Avis médical à demander"]]
+];
+export function noteHTML(n, { actions = true, long = false } = {}){
+  const tags = n.tags || [];
+  return `<div class="note">
+    <div class="note-head"><span class="small" style="font-weight:700">${esc(fmtDate(n.date, long ? { weekday:"long", day:"numeric", month:"long", year:"numeric" } : { weekday:"short", day:"numeric", month:"short", year:"numeric" }))}</span>
+      ${n.eva !== undefined && n.eva !== null && n.eva !== "" ? `<span class="eva-pill"><i style="background:${evaColor(n.eva)}"></i>${esc(n.eva)}/10</span>` : ""}
+      <span class="spacer"></span>
+      ${actions ? `<button class="icon-btn sm" type="button" data-s="n-edit" data-id="${esc(n.id)}" aria-label="Modifier">${icon("edit")}</button>
+      <button class="icon-btn sm danger" type="button" data-s="n-del" data-id="${esc(n.id)}" aria-label="Supprimer">${icon("trash")}</button>` : ""}</div>
+    ${tags.length ? `<div class="note-tags">${tags.map(t => `<span class="badge ${["Moins bien", "Exercices peu faits", "Avis médical à demander"].includes(t) ? "warn" : t === "Mieux" || t === "Exercices bien faits" ? "ok" : ""}">${esc(t)}</span>`).join("")}</div>` : ""}
+    ${n.texte ? `<div class="note-txt">${esc(n.texte).replace(/\n/g, "<br>")}</div>` : ""}
+  </div>`;
 }
 
 /* ---------- Côté kiné : bloc « Suivi » de la fiche patient ---------- */
@@ -161,15 +182,8 @@ export async function mountKineSuivi(box, patient, C){
         </section>
 
         <section class="panel">
-          <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("lock", "ic-inline lagon")} Notes de séance</h2><button class="btn sm" type="button" data-s="n-add">${icon("plus")}Ajouter</button></div>
-          ${notes.length ? `<div class="notes">${notes.slice(0, 6).map(n => `
-            <div class="note">
-              <div class="note-head"><span class="small" style="font-weight:700">${esc(fmtDate(n.date, { weekday:"short", day:"numeric", month:"short", year:"numeric" }))}</span>
-                <span class="spacer"></span>
-                <button class="icon-btn sm" type="button" data-s="n-edit" data-id="${esc(n.id)}" aria-label="Modifier">${icon("edit")}</button>
-                <button class="icon-btn sm danger" type="button" data-s="n-del" data-id="${esc(n.id)}" aria-label="Supprimer">${icon("trash")}</button></div>
-              <div class="note-txt">${esc(n.texte).replace(/\n/g, "<br>")}</div>
-            </div>`).join("")}${notes.length > 6 ? `<button class="btn sm ghost" type="button" data-s="n-all">Voir les ${notes.length} notes</button>` : ""}</div>`
+          <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("lock", "ic-inline lagon")} Notes de séance</h2><button class="btn sm primary" type="button" data-s="n-add">${icon("plus")}Séance du jour</button></div>
+          ${notes.length ? `<div class="notes">${notes.slice(0, 6).map(n => noteHTML(n)).join("")}${notes.length > 6 ? `<button class="btn sm ghost" type="button" data-s="n-all">Voir les ${notes.length} notes</button>` : ""}</div>`
           : `<p class="muted small">Notes datées, visibles par vous seul : ce qui a été fait au cabinet, les réactions, la suite prévue.</p>`}
         </section>
       </div>`;
@@ -209,28 +223,55 @@ export async function mountKineSuivi(box, patient, C){
 
   const noteSheet = (note = null) => {
     const today = new Date(); const iso = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`; };
+    const st = { eva: note?.eva ?? null, tags: [...(note?.tags || [])] };
+    const derniere = !note && notes[0];
     const s = openSheet({
-      title: note ? "Modifier la note" : "Note de séance",
-      body: `<form id="nf" class="stack" style="--gap:14px">
+      title: note ? "Modifier la note" : "Séance du jour",
+      body: `<form id="nf" class="stack" style="--gap:16px">
+        <div class="field"><label>Douleur aujourd'hui (0 à 10)${derniere && derniere.eva != null ? ` <span class="faint">· ${esc(derniere.eva)}/10 la dernière fois</span>` : ""}</label>
+          <div class="nq-eva">${[...Array(11).keys()].map(i => `<button type="button" data-eva="${i}" style="--c:${evaColor(i)}" aria-pressed="${st.eva === i}">${i}</button>`).join("")}</div></div>
+        ${NOTE_TAGS.map(([g, tags]) => `<div class="field"><label>${esc(g)}</label><div class="chips">${tags.map(t => `<button type="button" class="chip" data-tag="${esc(t)}" aria-pressed="${st.tags.includes(t)}">${esc(t)}</button>`).join("")}</div></div>`).join("")}
+        <div class="field"><label for="n-t">Précisions (facultatif)</label><textarea class="textarea" id="n-t" style="min-height:90px" placeholder="Réaction du patient, ce qui a changé…">${esc(note?.texte || "")}</textarea><span class="hint">${icon("lock", "ic-inline")} Visible par vous seul.</span></div>
         <div class="field"><label for="n-d">Date</label><input class="input" id="n-d" type="date" value="${iso(note?.date || today)}"></div>
-        <div class="field"><label for="n-t">Note</label><textarea class="textarea" id="n-t" style="min-height:180px" placeholder="Ce qui a été fait, réaction du patient, suite prévue…" required>${esc(note?.texte || "")}</textarea><span class="hint">${icon("lock", "ic-inline")} Visible par vous seul.</span></div>
       </form>`,
       foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="nf">${icon("check")}Enregistrer</button>`
     });
-    setTimeout(() => s.el.querySelector("#n-t").focus(), 50);
+    s.el.querySelector("#nf").addEventListener("click", e => {
+      const b = e.target.closest("button[data-eva], button[data-tag]");
+      if(!b) return;
+      if(b.dataset.eva !== undefined){
+        const v = +b.dataset.eva; st.eva = st.eva === v ? null : v;
+        s.el.querySelectorAll("[data-eva]").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.eva === st.eva)));
+      }else{
+        const t = b.dataset.tag, i = st.tags.indexOf(t);
+        /* Évolution : un seul choix */
+        const groupe = NOTE_TAGS.find(([, l]) => l.includes(t))?.[0];
+        if(i >= 0) st.tags.splice(i, 1);
+        else{
+          if(groupe === "Évolution") st.tags = st.tags.filter(x => !NOTE_TAGS[1][1].includes(x));
+          if(groupe === "À la maison") st.tags = st.tags.filter(x => !NOTE_TAGS[2][1].includes(x));
+          st.tags.push(t);
+        }
+        s.el.querySelectorAll("[data-tag]").forEach(x => x.setAttribute("aria-pressed", String(st.tags.includes(x.dataset.tag))));
+      }
+    });
     s.el.querySelector("#nf").addEventListener("submit", async e => {
       e.preventDefault();
       const texte = s.el.querySelector("#n-t").value.trim();
-      if(!texte) return;
+      if(!texte && !st.tags.length && st.eva === null){ toast("Touchez au moins une case ou écrivez une précision.", { type:"err" }); return; }
       const [y, m, d] = s.el.querySelector("#n-d").value.split("-").map(Number);
       const date = y ? new Date(y, m - 1, d, 12).getTime() : Date.now();
+      const data = { ...(note || {}), texte, date, tags: st.tags, eva: st.eva };
       try{
-        const id = await C.saveNote(patient.cle, { ...(note || {}), texte, date });
-        notes = notes.filter(n => n.id !== id).concat({ ...(note || {}), id, texte, date }).sort((a, b) => b.date - a.date);
-        s.close(); render(); toast("Note enregistrée.", { type:"ok" });
+        const id = await C.saveNote(patient.cle, data);
+        notes = notes.filter(n => n.id !== id).concat({ ...data, id }).sort((a, b) => b.date - a.date);
+        s.close(); render(); toast("Séance notée.", { type:"ok" });
       }catch(err){ toast("Enregistrement impossible. Avez-vous publié les nouvelles règles Firebase ?", { type:"err", duration:7000 }); }
     });
   };
+
+  /* Bouton « Séance du jour » en haut de la fiche */
+  document.addEventListener("kine:note-du-jour", () => noteSheet());
 
   const actions = {
     "obj-add": () => goalSheet(),
@@ -309,7 +350,7 @@ export async function mountKineSuivi(box, patient, C){
       if(!await confirmDialog({ title:"Supprimer cette note ?", confirm:"Supprimer", danger:true })) return;
       await C.deleteNote(patient.cle, id); notes = notes.filter(n => n.id !== id); render();
     },
-    "n-all": () => openSheet({ title:"Notes de séance", wide:true, body:`<div class="notes">${notes.map(n => `<div class="note"><div class="small" style="font-weight:700">${esc(fmtDate(n.date, { weekday:"long", day:"numeric", month:"long", year:"numeric" }))}</div><div class="note-txt">${esc(n.texte).replace(/\n/g, "<br>")}</div></div>`).join("")}</div>` })
+    "n-all": () => openSheet({ title:"Notes de séance", wide:true, body:`<div class="notes">${notes.map(n => noteHTML(n, { actions:false, long:true })).join("")}</div>` })
   };
 
   render();

@@ -151,6 +151,13 @@ async function renderPatient(ctx){
 
   const { patient, seances, programmes, seules } = data;
   const P = await import("../patient.js");
+  /* Hors ligne : les images des séances à venir sont mises de côté sur le téléphone */
+  try{
+    const aVenir = [...programmes.filter(p => !p.termine).flatMap(p => p.seances), ...(seules || [])].filter(s => !s.terminee);
+    const urls = [...new Set(aVenir.flatMap(s => (s.data?.exercices || []).map(e => exerciseImage(e))).filter(Boolean))];
+    if(urls.length && navigator.serviceWorker?.controller) navigator.serviceWorker.controller.postMessage({ type:"precache-media", urls });
+  }catch(e){ console.warn("Hors ligne :", e); }
+  if(!navigator.onLine) toast("Pas de réseau : vos exercices restent disponibles. Votre séance sera enregistrée au retour du réseau.", { duration:6000 });
   const next = P.nextSession(programmes);
   try{ V.setContextePatient?.(ctx.cle, patient.genre, (next?.seance || programmes.find(p => !p.termine)?.seances?.[0] || seules?.[0])?.data, patient.genreMaj); }catch(e){ console.warn("Illustrations :", e); }
   const actif = programmes.find(p => !p.termine) || null;
@@ -356,6 +363,7 @@ async function renderKine(user){
       <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
       <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>
+    <section class="section" id="jour-sec" hidden><div class="section-title">Aujourd'hui<span class="badge" id="jour-n"></span></div><div id="jour"></div></section>
     <section class="section" id="evol-sec" hidden><div class="section-title">À faire évoluer<span class="badge" id="evol-n"></span></div><div id="evol"></div></section>
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>
@@ -400,6 +408,7 @@ async function renderKine(user){
     }
     const watch = sums.filter(s => s.alertes.some(a => a.niveau === "danger" || a.niveau === "warn")).sort((a, b) => b.score - a.score).slice(0, 8);
     afficherEvolutions(C, sums).catch(e => console.warn("Évolution :", e));
+    afficherAujourdhui(C, patients, sums).catch(e => console.warn("Aujourd'hui :", e));
 
     if(!patients.length){
       $("#watch").innerHTML = `<div class="panel">${emptyHTML({ ico:"users", title:"Aucun patient pour l'instant", text:"Créez un patient, ou importez vos anciens programmes depuis les outils.", action:`<a class="btn primary" href="/admin_tools.html#migration">${icon("upload")}Importer mes anciens programmes</a>` })}</div>`;
@@ -497,6 +506,66 @@ async function messagesDuKine(ctx, patient){
   };
 }
 
+
+/* ---------- Tableau de bord du matin : bilans à refaire, programmes qui se terminent, questionnaires reçus ---------- */
+async function afficherAujourdhui(C, patients, sums){
+  const [bilans, suivis, T] = await Promise.all([
+    C.listAllBilans ? C.listAllBilans().catch(() => []) : [],
+    C.listAllSuivis().catch(() => []),
+    import("../bilan-traitement.js")
+  ]);
+  const J = 864e5, now = Date.now(), today = startOfDay(new Date()).getTime();
+  const parCle = Object.fromEntries(patients.map(p => [p.cle, p]));
+  const actifs = new Set(sums.filter(sm => sm.programmes.some(pr => !pr.termine)).map(sm => sm.patient.cle));
+  const fmtJ = t => new Date(t).toLocaleDateString("fr-FR", { weekday:"short", day:"numeric", month:"short" });
+  const items = [];
+
+  /* Bilans à refaire : dernier bilan (non final) + délai de réévaluation prévu */
+  const derniers = {};
+  bilans.filter(b => b.etat && parCle[b.cle]).forEach(b => { if(!derniers[b.cle] || String(b.date) > String(derniers[b.cle].date)) derniers[b.cle] = b; });
+  Object.values(derniers).forEach(b => {
+    if(b.etat.type === "final" || !actifs.has(b.cle)) return;
+    let sem = 6; try{ sem = (b.etat.tx?.init ? T.profil(b.etat) : T.profilAuto(b.etat)).reeval || 6; }catch(e){}
+    const [y, m, d] = String(b.date).split("-").map(Number);
+    const due = new Date(y, m - 1, d).getTime() + sem * 7 * J;
+    if(due > today + 7 * J) return;
+    const retard = Math.round((today - due) / J);
+    items.push({ ordre: retard > 0 ? 0 : 1, cle:b.cle, ico:"stethoscope", couleur: retard > 7 ? "var(--warn)" : "var(--lagon-strong)",
+      titre:"Bilan intermédiaire à faire", sub: retard > 0 ? `prévu le ${fmtJ(due)}, ${retard} jour${retard > 1 ? "s" : ""} de retard` : `prévu ${retard === 0 ? "aujourd'hui" : "le " + fmtJ(due)}`,
+      href:`/bilan.html?patient=${encodeURIComponent(b.cle)}` });
+  });
+  /* Patients avec un programme en cours mais sans bilan */
+  actifs.forEach(cle => {
+    const p = parCle[cle];
+    if(derniers[cle] || !p || (p.createdAt && p.createdAt < now - 60 * J)) return;
+    items.push({ ordre:3, cle, ico:"stethoscope", couleur:"var(--ink-3)", titre:"Pas encore de bilan", sub:"programme en cours", href:`/bilan.html?patient=${encodeURIComponent(cle)}` });
+  });
+  /* Programmes qui se terminent dans les 7 jours */
+  sums.forEach(sm => sm.programmes.filter(pr => !pr.termine).forEach(pr => {
+    const fin = Math.max(...pr.seances.map(x => x.datePrevue ? new Date(x.datePrevue).getTime() : 0));
+    if(!fin || fin < today || fin > today + 7 * J) return;
+    items.push({ ordre:2, cle:sm.patient.cle, ico:"calendar", couleur:"var(--lagon-strong)", titre:`Programme qui se termine ${startOfDay(new Date(fin)).getTime() === today ? "aujourd'hui" : "le " + fmtJ(fin)}`,
+      sub:`${pr.nom} · ${pr.faites}/${pr.total} séances : prévoir la suite`, href:`/cloud.html?patient=${encodeURIComponent(sm.patient.cle)}` });
+  }));
+  /* Questionnaires remplis ces 7 derniers jours */
+  suivis.filter(x => x.type === "questionnaire" && x.date >= now - 7 * J && parCle[x.cle]).sort((a, b) => b.date - a.date).forEach(x => {
+    items.push({ ordre:4, cle:x.cle, ico:"list", couleur:"var(--ok)", titre:`Questionnaire rempli : ${x.nom || "questionnaire"}`,
+      sub:`${x.score != null ? `score ${String(x.score).replace(".", ",")}${x.unite || ""}, ` : ""}${fmtRelDay(x.date).toLowerCase()}`, href:`/cloud.html?patient=${encodeURIComponent(x.cle)}` });
+  });
+
+  items.sort((a, b) => a.ordre - b.ordre);
+  const sec = document.getElementById("jour-sec"), box = document.getElementById("jour");
+  if(!sec || !box) return;
+  sec.hidden = !items.length;
+  document.getElementById("jour-n").textContent = items.length || "";
+  const max = 8, html = it => `
+    <a class="list-item" href="${it.href}">
+      <span class="li-ico" style="color:${it.couleur}">${icon(it.ico)}</span>
+      <span class="li-main"><span class="li-title">${esc(nomAffiche(parCle[it.cle]?.nom || ""))} · ${esc(it.titre)}</span><span class="li-sub">${esc(it.sub)}</span></span>
+      <span class="li-end">${icon("chevron")}</span>
+    </a>`;
+  box.innerHTML = `<div class="list">${items.slice(0, max).map(html).join("")}</div>${items.length > max ? `<details class="g-more" style="margin-top:8px"><summary class="btn sm ghost">Voir les ${items.length - max} autres</summary><div class="list" style="margin-top:8px">${items.slice(max).map(html).join("")}</div></details>` : ""}`;
+}
 
 /* ---------- Programmes à faire évoluer (proposés, validés par le kiné) ---------- */
 async function afficherEvolutions(C, sums){

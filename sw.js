@@ -1,8 +1,10 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.9.86";
+const VERSION = "gt-2.10.0";
 const SHELL = `${VERSION}-shell`;
-const MEDIA = `${VERSION}-media`;
+/* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
+const MEDIA = "gt-media-v1";
+const MEDIA_MAX = 600;   // nombre d'images gardées au plus
 
 const PRECACHE = [
   "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/progression.html", "/suivi.html", "/conseils.html",
@@ -25,14 +27,31 @@ self.addEventListener("install", event => {
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(k => !k.startsWith(VERSION)).map(k => caches.delete(k))))
+    caches.keys().then(keys => Promise.all(keys.filter(k => !k.startsWith(VERSION) && k !== MEDIA).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener("message", event => {
   if(event.data === "skipWaiting") self.skipWaiting();
+  /* Accueil du patient : met de côté les images de ses prochaines séances, pour s'en servir sans réseau */
+  if(event.data?.type === "precache-media" && Array.isArray(event.data.urls)) event.waitUntil(precacheMedia(event.data.urls));
 });
+
+async function precacheMedia(urls){
+  const cache = await caches.open(MEDIA);
+  for(const u of urls.slice(0, 300)){
+    try{
+      const url = new URL(u, self.location.origin);
+      if(url.origin !== self.location.origin) continue;
+      if(await cache.match(url.href)) continue;
+      const r = await fetch(url.href);
+      if(r.ok) await cache.put(url.href, r);
+    }catch(e){ /* hors ligne ou image absente : on réessaiera à la prochaine visite */ }
+  }
+  const keys = await cache.keys();
+  if(keys.length > MEDIA_MAX) await Promise.all(keys.slice(0, keys.length - MEDIA_MAX).map(k => cache.delete(k)));
+}
 
 /* Rappels de séance : notification envoyée par le cabinet (voir assets/rappels.js) */
 self.addEventListener("push", event => {
@@ -62,12 +81,18 @@ const isImmutableCdn = url =>
 
 async function networkFirst(request, cacheName){
   const cache = await caches.open(cacheName);
-  try{
-    // « no-cache » : toujours revérifier auprès du serveur, pour ne jamais mélanger
-    // un fichier à jour avec un autre resté dans le cache du navigateur.
-    const response = await fetch(request, request.mode === "navigate" ? undefined : { cache:"no-cache" });
+  // « no-cache » : toujours revérifier auprès du serveur, pour ne jamais mélanger
+  // un fichier à jour avec un autre resté dans le cache du navigateur.
+  const net = fetch(request, request.mode === "navigate" ? undefined : { cache:"no-cache" }).then(response => {
     if(response && response.ok) cache.put(request, response.clone());
     return response;
+  });
+  net.catch(() => {});
+  try{
+    /* Réseau très lent (cave, campagne) : au-delà de 4 s, la copie gardée sur le téléphone est servie */
+    const cached = await cache.match(request, { ignoreSearch: request.mode === "navigate" });
+    if(!cached) return await net;
+    return await Promise.race([net, new Promise((_, rej) => setTimeout(() => rej(new Error("lent")), 4000))]);
   }catch(err){
     const cached = await cache.match(request, { ignoreSearch: request.mode === "navigate" });
     if(cached) return cached;

@@ -68,14 +68,23 @@ export function blankState(type = "initial"){
   return { type, date: todayISO(), f:{}, c:{}, pain:{}, cl:{}, view:"face" };
 }
 
-/** Pour un nouveau bilan : reprend ce qui change peu (contexte, antécédents, médecin). */
+/** Pour un nouveau bilan (suivi) : reprend le bilan précédent, il ne reste qu'à modifier ce qui a changé.
+    Repris : contexte, antécédents, médecin, zones douloureuses (EVA de départ = la précédente), hypothèse,
+    objectifs, plan et programme. Non repris : résultats des tests et mesures (à refaire). */
 export function carryOver(prev){
   const S = blankState("intermediaire");
   if(!prev) return S;
-  /* Contexte de vie, antécédents, examens déjà faits : repris de l'entretien précédent */
-  ["imag", "ttt", "metier", "sport", "travail"].forEach(k => { if(prev.q?.[k] !== undefined){ S.q = S.q || {}; S.q[k] = structuredClone(prev.q[k]); } });
-  ["prof", "naiss", "med", "medmail", "patho", "atcd", "medic"].forEach(k => { if(prev.f?.[k]) S.f[k] = prev.f[k]; });
-  ["patho", "atcd", "medic"].forEach(k => { if(prev.c?.[k]?.length) S.c[k] = [...prev.c[k]]; });
+  S.q = {};
+  ["duree", "debut", "recid", "imag", "ttt", "horaire", "irrad", "pares", "soulag", "sommeil", "avq", "metier", "sport", "travail", "jaunes"]
+    .forEach(k => { if(prev.q?.[k] !== undefined) S.q[k] = structuredClone(prev.q[k]); });
+  ["prof", "naiss", "med", "medmail", "patho", "atcd", "medic", "concl"].forEach(k => { if(prev.f?.[k]) S.f[k] = prev.f[k]; });
+  ["patho", "atcd", "medic", "hyp", "obj", "plan"].forEach(k => { if(prev.c?.[k]?.length) S.c[k] = [...prev.c[k]]; });
+  Object.entries(prev.pain || {}).forEach(([n, p]) => { S.pain[n] = { eva: p.eva, types: [...(p.types || [])] }; });
+  if(prev.tx?.init){
+    const { avis, decision, ...tx } = prev.tx;
+    S.tx = structuredClone(tx);
+  }
+  S.suivi = true;   // entretien guidé court (bilan de suivi)
   return S;
 }
 
@@ -233,6 +242,11 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
       ["Cluster", k ? r.CL.n + " : " + k : ""]
     ], rf.length ? { alerte: r.RFm } : {});
   });
+
+  if(S.q?.ressenti || S.q?.observance) add("Depuis le dernier bilan", [
+    ["Ressenti du patient", S.q.ressenti || ""],
+    ["Exercices à la maison", S.q.observance || ""]
+  ]);
 
   const vie = G.filter(g => g[1] === "vie").map(([id, , q]) => [q, ans(id)]);
   if(vie.some(r => r[1])) add("Retentissement et contexte", vie, (S.q?.jaunes || []).length >= 2 ? { alerte:"Plusieurs drapeaux jaunes : facteurs psychosociaux à prendre en compte (éducation, approche active)." } : {});

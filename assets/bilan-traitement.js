@@ -194,6 +194,7 @@ export function lignesPlan(S, K, B){
     ["Axes de traitement", (t.axes || []).join(" ; ")],
     ["Rythme", `${p.freq} séance${p.freq > 1 ? "s" : ""} par semaine pendant ${p.sem} semaines`],
     ["Réévaluation", `bilan intermédiaire dans ${p.reeval} semaines`],
+    ["Décision", t.decision || ""],
     ["Programme d'exercices", t.prog ? `${t.prog.nom}${t.prog.src === "sur-mesure" ? " (composé sur mesure)" : ""}` : ""]
   ];
 }

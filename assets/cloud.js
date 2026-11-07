@@ -337,6 +337,12 @@ export async function listBilans(cle){
     .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.createdAt || 0) - (a.createdAt || 0));
 }
 
+/** Tous les bilans du cabinet (tableau de bord du kiné). */
+export async function listAllBilans(){
+  const snap = await getDocs(collection(db, "bilans"));
+  return snap.docs.map(mapBilan);
+}
+
 export async function getBilan(id){
   const snap = await getDoc(doc(db, "bilans", id));
   return snap.exists() ? mapBilan(snap) : null;
