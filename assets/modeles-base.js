@@ -689,6 +689,255 @@ export const MODELES_BASE = [
 "lieu": "HEP"
 },
 {
+"id": "base_cruralgie_1",
+"nom": "Cruralgie",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "185",
+"source": "HEP",
+"nom": "Genoux à la poitrine",
+"image": "/exercises/images/HEP/1407867674-double-knee-to-chest.jpg",
+"consignes": [
+"Ramenez les genoux vers la poitrine.",
+"Tenez-les derrière les cuisses et tirez doucement.",
+"Maintenez l'étirement en respirant calmement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/61J2ndeusXs",
+"type": "timer",
+"conseil": "Ramenez les genoux vers la poitrine.<br>Tenez-les derrière les cuisses et tirez doucement.<br>Maintenez l'étirement en respirant calmement.",
+"reps": 2,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Position souvent soulageante. Si la douleur descend dans la cuisse, ramenez moins les genoux."
+},
+{
+"id": "610",
+"source": "HEP",
+"nom": "Bascule du bassin, allongé",
+"image": "/exercises/images/HEP/supine-anterior-exterior-pelvic-tilt.jpg",
+"consignes": [
+"Creusez le bas du dos en basculant le bassin vers l'avant.",
+"Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.",
+"Alternez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/Q08dMpidl58",
+"type": "timer",
+"conseil": "Creusez le bas du dos en basculant le bassin vers l'avant.<br>Plaquez ensuite le bas du dos au sol en basculant le bassin vers l'arrière.<br>Alternez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petite amplitude, sans douleur dans la cuisse."
+},
+{
+"id": "254",
+"source": "HEP",
+"nom": "Rotation du tronc, allongé",
+"image": "/exercises/images/HEP/1424527396-trunk-rotation-exercise.jpg",
+"consignes": [
+"Gardez les épaules au sol.",
+"Laissez tomber les genoux d'un côté, aussi loin que confortable.",
+"Revenez et allez de l'autre côté."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds joints",
+"youtube": "http://www.youtube.com/embed/0Mi80lUhrNQ",
+"type": "timer",
+"conseil": "Gardez les épaules au sol.<br>Laissez tomber les genoux d'un côté, aussi loin que confortable.<br>Revenez et allez de l'autre côté.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Petite amplitude au début, seulement du côté qui ne réveille pas la cuisse si besoin."
+},
+{
+"id": "78",
+"source": "HEP",
+"nom": "Glissement du nerf fémoral, allongé sur le côté",
+"image": "/exercises/images/HEP/1412425570-hamstring-stretch-side-lying.jpg",
+"consignes": [
+"Pliez le genou du dessus et attrapez la cheville (ou utilisez une sangle).",
+"Tirez doucement le talon vers la fesse, genoux alignés.",
+"Maintenez quand vous sentez l'étirement à l'avant de la cuisse."
+],
+"position": "Allongé sur le côté, jambe à étirer au-dessus",
+"youtube": "http://www.youtube.com/embed/_iR7ujBxma4",
+"type": "timer",
+"conseil": "Pliez le genou du dessus et attrapez la cheville (ou utilisez une sangle).<br>Tirez doucement le talon vers la fesse, genoux alignés.<br>Maintenez quand vous sentez l'étirement à l'avant de la cuisse.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Version glissement du nerf, couché sur le côté non douloureux : quand vous pliez le genou du dessus, penchez la tête vers l'avant (menton vers la poitrine) ; quand vous le dépliez, relevez la tête. Mouvement lent, sans tirer fort. Les fourmillements ou la brûlure dans la cuisse doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude."
+},
+{
+"id": "432",
+"source": "HEP",
+"nom": "Activation du transverse de l'abdomen",
+"image": "/exercises/images/HEP/1477662600-ta-recruitment.jpg",
+"consignes": [
+"Posez deux doigts à l'intérieur des os du bassin, à l'avant.",
+"Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.",
+"Maintenez en respirant normalement, puis relâchez."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/QQoVcC-0Gds",
+"type": "timer",
+"conseil": "Posez deux doigts à l'intérieur des os du bassin, à l'avant.<br>Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.<br>Maintenez en respirant normalement, puis relâchez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Respirez normalement pendant la contraction."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 60,
+"repos": 10,
+"conseil_kine": "À faire aussi quand la douleur monte, pour détendre le dos."
+}
+],
+"lieu": "HEP"
+},
+{
+"id": "base_cruralgie_2",
+"nom": "Cruralgie",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"exercices": [
+{
+"id": "424",
+"source": "HEP",
+"nom": "Dos rond, dos creux (chat-vache)",
+"image": "/exercises/images/HEP/1477661691-cat-dog-stretch.jpg",
+"consignes": [
+"Arrondissez le dos vers le plafond en rentrant la tête.",
+"Creusez ensuite le dos en relevant doucement la tête.",
+"Alternez lentement."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/WyvnkwfJcto",
+"type": "timer",
+"conseil": "Arrondissez le dos vers le plafond en rentrant la tête.<br>Creusez ensuite le dos en relevant doucement la tête.<br>Alternez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Mouvement lent ; restez dans l'amplitude qui ne réveille pas la cuisse."
+},
+{
+"id": "79",
+"source": "HEP",
+"nom": "Flexion du genou (ischio-jambiers), sur le ventre",
+"image": "/exercises/images/HEP/1407677794-hamstring-curls-prone2.jpg",
+"consignes": [
+"Pliez le genou pour amener le talon vers la fesse.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le ventre, jambes tendues",
+"youtube": "http://www.youtube.com/embed/3TNRivlxAC8",
+"type": "timer",
+"conseil": "Pliez le genou pour amener le talon vers la fesse.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Mise en tension douce du nerf fémoral : pliez le genou jusqu'à sentir une légère tension à l'avant de la cuisse, puis redescendez. Coussin sous le ventre si le dos est sensible. Les fourmillements ou la brûlure dans la cuisse doivent disparaître en quelques secondes ; sinon, réduisez l'amplitude."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Montée sans cambrer le bas du dos."
+},
+{
+"id": "214",
+"source": "HEP",
+"nom": "Bras et jambe opposés à quatre pattes (bird dog)",
+"image": "/exercises/images/HEP/1421406091-quadruped-opposite-arm-leg-extension.jpg",
+"consignes": [
+"Dos droit, bassin stable.",
+"Tendez un bras vers l'avant et la jambe opposée vers l'arrière.",
+"Revenez lentement, puis alternez."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/B1LH2_6A-n4",
+"type": "timer",
+"conseil": "Dos droit, bassin stable.<br>Tendez un bras vers l'avant et la jambe opposée vers l'arrière.<br>Revenez lentement, puis alternez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Bassin stable, sans creuser le dos."
+},
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Renforce les cuisses, souvent affaiblies par la cruralgie. Descendez lentement, appuyez-vous sur les accoudoirs au début si besoin."
+},
+{
+"id": "428",
+"source": "HEP",
+"nom": "Planche adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/1477662192-modified-plank.jpg",
+"consignes": [
+"Posez les avant-bras au sol, coudes sous les épaules.",
+"Reculez les genoux pour aligner dos et cuisses.",
+"Serrez les fessiers et le ventre, dos plat.",
+"Maintenez en respirant."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
+"type": "timer",
+"conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Dos plat, respirez pendant le maintien."
+}
+],
+"lieu": "HEP"
+},
+{
 "id": "base_cervicalgie_1",
 "nom": "Cervicalgie",
 "niveau": 1,
