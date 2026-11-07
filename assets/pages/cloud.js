@@ -222,7 +222,7 @@ async function kineView(param){
     if(bilansErr) return `<div class="notice warn">${icon("alert")}<span>Les bilans ne sont pas encore activés dans Firebase : copiez le fichier <em>firestore.rules</em> dans Firebase (Firestore Database → Règles) puis <em>Publier</em>. Vous pouvez déjà faire un bilan : il sera gardé sur cet appareil.</span></div>`;
     if(!bilans.length) return `<div class="panel">${emptyHTML({ ico:"stethoscope", title:"Aucun bilan", text:"Faites le bilan d'entrée : schéma de douleur, tests validés, mesures, résumé pour Maiia et PDF.", action:`<a class="btn primary" href="${bilanURL()}">${icon("stethoscope")}Faire le bilan d'entrée</a>` })}</div>`;
     return `<div class="list">${bilans.map(b => `
-      <div class="list-item">
+      <div class="list-item bilan-item">
         <span class="li-ico">${icon("stethoscope")}</span>
         <a class="li-main" href="${bilanURL(b.id)}" style="color:inherit;text-decoration:none">
           <span class="li-title">${esc(BT[b.type] || "Bilan")} · ${esc(fmtISO(b.date))}</span>
@@ -341,7 +341,7 @@ async function kineView(param){
       </section>
 
       <section class="section" id="bilans">
-        <div class="section-title">Bilans<span class="badge" style="font-size:var(--fs-xs)">${icon("lock")}visible par vous seul</span><span class="spacer"></span>${bilans.length ? `<a class="btn sm" href="${bilanURL()}">${icon("plus")}Nouveau bilan</a>` : ""}</div>
+        <div class="section-title" style="flex-wrap:wrap">Bilans<span class="badge" style="font-size:var(--fs-xs)">${icon("lock")}visible par vous seul</span><span class="spacer"></span>${bilans.length ? `<a class="btn sm" href="${bilanURL()}">${icon("plus")}Nouveau bilan</a>` : ""}</div>
         ${bilansHTML()}
       </section>
 

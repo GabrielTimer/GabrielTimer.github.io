@@ -768,3 +768,11 @@ a.chip{ text-decoration:none; }
 .nq-eva button::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background:var(--c); }
 .nq-eva button[aria-pressed="true"]{ background:var(--c); border-color:var(--c); color:#fff; }
 .note-tags{ display:flex; flex-wrap:wrap; gap:4px; margin:2px 0 4px; }
+
+/* Fiche patient : sur téléphone, les actions d'un bilan passent sous le titre */
+@media (max-width:640px){
+  .list-item.bilan-item{ flex-wrap:wrap; row-gap:6px; }
+  .list-item.bilan-item .li-main{ flex:1 1 calc(100% - 64px); }
+  .list-item.bilan-item .li-title{ white-space:normal; }
+  .list-item.bilan-item .li-end{ width:100%; justify-content:space-between; padding-left:58px; }
+}
