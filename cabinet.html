@@ -22,6 +22,21 @@
   .cab-head p{ margin:4px 0 0; color:var(--ink-2); }
   .cab-actions{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; }
   .cab-map{ width:100%; height:260px; border:0; border-radius:var(--r-md); display:block; background:var(--surface-2); }
+  .cab-gal{ display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; margin:0 calc(-1 * var(--gutter, 16px)); padding:0 var(--gutter, 16px) 4px; scrollbar-width:none; }
+  .cab-gal::-webkit-scrollbar{ display:none; }
+  .cab-gal button{ flex:0 0 min(82%, 420px); scroll-snap-align:center; border:0; padding:0; background:none; cursor:zoom-in; text-align:left; font:inherit; color:inherit; }
+  .cab-gal button:only-child{ flex-basis:100%; }
+  .cab-gal img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--r-md); display:block; background:var(--surface-2); }
+  .cab-gal figcaption{ font-size:var(--fs-sm); color:var(--ink-2); margin-top:6px; }
+  .cab-lb{ border:0; padding:0; background:transparent; max-width:100vw; max-height:100dvh; width:100vw; height:100dvh; }
+  .cab-lb::backdrop{ background:rgba(5,15,20,.92); }
+  .cab-lb figure{ margin:0; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; padding:16px; box-sizing:border-box; }
+  .cab-lb img{ max-width:100%; max-height:calc(100dvh - 110px); object-fit:contain; border-radius:8px; }
+  .cab-lb figcaption{ color:#fff; text-align:center; }
+  .cab-lb .lb-btn{ position:fixed; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; border:0; background:rgba(255,255,255,.15); color:#fff; display:grid; place-items:center; cursor:pointer; }
+  .cab-lb .lb-prev{ left:10px; } .cab-lb .lb-next{ right:10px; }
+  .cab-lb .lb-close{ position:fixed; top:12px; right:12px; width:44px; height:44px; border-radius:50%; border:0; background:rgba(255,255,255,.15); color:#fff; display:grid; place-items:center; cursor:pointer; }
+  .cab-lb svg{ width:22px; height:22px; }
   .cab-foot{ text-align:center; font-size:var(--fs-sm); color:var(--ink-3); }
   .cab .panel h2{ font-size:var(--fs-lg); display:flex; align-items:center; gap:10px; margin:0 0 10px; }
   .cab .panel h2 svg{ width:22px; height:22px; color:var(--lagon); }
@@ -32,6 +47,7 @@
 </style>
 </head>
 <body>
+<dialog class="cab-lb" id="lb"></dialog>
 <main class="cab" id="cab"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
 import { $, esc, icon } from "/assets/app.js";
@@ -56,6 +72,7 @@ function render(){
       ${tel ? `<a class="btn primary big cab-call" href="tel:${esc(tel.replace(/[^\d+]/g, ""))}">${icon("call")}<span><b>Appeler</b><small>${esc(tel)}</small></span></a>` : ""}
       ${adr ? `<a class="btn big" href="${esc(maps)}" target="_blank" rel="noopener">${icon("pin")}Itinéraire</a>` : ""}
     </div>
+    <div id="gal"></div>
     ${hor ? `
     <section class="panel">
       <h2>${icon("clock")}Horaires</h2>
@@ -69,8 +86,35 @@ function render(){
     </section>` : ""}
     <p class="cab-foot">${esc(c.nom)}${c.titre ? " · " + esc(c.titre) : ""}</p>`;
 }
+/* ---------- Photos (Réglages du cabinet → Photos) ---------- */
+let photos = [];
+function galerie(){
+  const box = $("#gal"); if(!box) return;
+  box.innerHTML = photos.length ? `<div class="cab-gal">${photos.map((p, i) => `<button type="button" data-i="${i}"><figure style="margin:0"><img src="${esc(p.data)}" alt="${esc(p.legende || "Photo du cabinet")}" loading="lazy">${p.legende ? `<figcaption>${esc(p.legende)}</figcaption>` : ""}</figure></button>`).join("")}</div>` : "";
+  box.querySelectorAll("[data-i]").forEach(b => b.onclick = () => ouvrir(Number(b.dataset.i)));
+}
+const lb = $("#lb");
+let cur = 0;
+function ouvrir(i){
+  cur = (i + photos.length) % photos.length;
+  const p = photos[cur], plus = photos.length > 1;
+  lb.innerHTML = `<figure><img src="${esc(p.data)}" alt="${esc(p.legende || "Photo du cabinet")}">${p.legende ? `<figcaption>${esc(p.legende)}</figcaption>` : ""}</figure>
+    <button class="lb-close" type="button" aria-label="Fermer">${icon("close")}</button>
+    ${plus ? `<button class="lb-btn lb-prev" type="button" aria-label="Photo précédente">${icon("back")}</button><button class="lb-btn lb-next" type="button" aria-label="Photo suivante">${icon("chevron")}</button>` : ""}`;
+  lb.querySelector(".lb-close").onclick = () => lb.close();
+  lb.querySelector(".lb-prev")?.addEventListener("click", () => ouvrir(cur - 1));
+  lb.querySelector(".lb-next")?.addEventListener("click", () => ouvrir(cur + 1));
+  if(!lb.open) lb.showModal();
+}
+lb.addEventListener("click", e => { if(e.target === lb || e.target.tagName === "FIGURE") lb.close(); });
+let x0 = null;
+lb.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive:true });
+lb.addEventListener("touchend", e => { if(x0 === null || photos.length < 2) return; const dx = e.changedTouches[0].clientX - x0; x0 = null; if(Math.abs(dx) > 50) ouvrir(cur + (dx < 0 ? 1 : -1)); });
+document.addEventListener("keydown", e => { if(!lb.open) return; if(e.key === "ArrowRight") ouvrir(cur + 1); if(e.key === "ArrowLeft") ouvrir(cur - 1); });
+
 render();
-loadSettings({ force:true }).then(render);
+loadSettings({ force:true }).then(() => { render(); galerie(); });
+import("/assets/cloud.js").then(C => C.getPhotosCabinet()).then(l => { photos = l; galerie(); }).catch(() => {});
 </script>
 </body>
 </html>

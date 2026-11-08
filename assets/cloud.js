@@ -459,6 +459,36 @@ export async function saveReglages(data){
   await setDoc(doc(db, "reglages", "cabinet"), clean({ ...data, updatedAt: Date.now() }));
 }
 
+/* ---------- Photos du cabinet (page publique) ----------
+   reglages/photos : { liste:[{ id, legende }] } (ordre d'affichage)
+   reglages/photo_<id> : { data } (image compressée, un document par photo : limite de 1 Mo par document) */
+
+export async function getPhotosIndex(){
+  const snap = await getDoc(doc(db, "reglages", "photos"));
+  return snap.exists() ? (snap.data().liste || []) : [];
+}
+export async function savePhotosIndex(liste){
+  await setDoc(doc(db, "reglages", "photos"), { liste: liste.map(p => ({ id: p.id, legende: String(p.legende || "") })), updatedAt: Date.now() });
+}
+export async function getPhotosCabinet(){
+  const liste = await getPhotosIndex();
+  const docs = await Promise.all(liste.map(p => getDoc(doc(db, "reglages", "photo_" + p.id)).catch(() => null)));
+  return liste.map((p, i) => ({ ...p, data: docs[i]?.exists() ? docs[i].data().data : "" })).filter(p => p.data);
+}
+export async function addPhotoCabinet(data, legende = ""){
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  await setDoc(doc(db, "reglages", "photo_" + id), { data, createdAt: Date.now() });
+  const liste = await getPhotosIndex();
+  liste.push({ id, legende });
+  await savePhotosIndex(liste);
+  return id;
+}
+export async function deletePhotoCabinet(id){
+  const liste = (await getPhotosIndex()).filter(p => p.id !== id);
+  await savePhotosIndex(liste);
+  await deleteDoc(doc(db, "reglages", "photo_" + id)).catch(() => {});
+}
+
 /* ---------- Suivi du patient : objectifs, questionnaires ----------
    patients/{code}/suivis/{id} : réponses du patient (il peut en ajouter, pas les modifier)
    { type:"objectifs", notes:{ idObjectif: 0-10 }, date }

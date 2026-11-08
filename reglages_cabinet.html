@@ -43,6 +43,11 @@
   .rc-hc.ferme input{ opacity:.35; }
   .rc-hc.domicile select{ color:var(--sun-strong, #A15C00); font-weight:700; }
   @media (max-width:640px){ .rc-hj{ grid-template-columns:1fr; } }
+  .rc-ph{ display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:12px; margin-bottom:12px; }
+  .rc-ph figure{ margin:0; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; background:var(--surface); display:flex; flex-direction:column; }
+  .rc-ph img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; background:var(--surface-2); }
+  .rc-ph .input{ border:0; border-top:1px solid var(--line); border-radius:0; font-size:var(--fs-sm); }
+  .rc-ph .acts{ display:flex; justify-content:space-between; padding:4px; border-top:1px solid var(--line); }
   .rc-rule{ font-family:var(--mono); font-size:var(--fs-xs); background:var(--surface-2); padding:10px 12px; border-radius:var(--r-sm); white-space:pre; overflow:auto; }
 </style>
 </head>
@@ -175,6 +180,13 @@ function render(){
       ${area("h-note", "Remarque (facultatif)", R.cabinet.horaires.note, { rows:2, ph:"Sur rendez-vous uniquement. Fermé les jours fériés." })}
     </section>
 
+    <section class="panel" id="photos">
+      <h2>${icon("camera")}Photos du cabinet</h2>
+      <p class="muted">Affichées sur la <a href="/cabinet.html" target="_blank" rel="noopener">page publique du cabinet</a>, dans cet ordre. Chaque photo est enregistrée dès qu'elle est ajoutée (inutile de toucher « Enregistrer »). Évitez les patients et les documents visibles.</p>
+      <div class="rc-ph" id="ph-list"><div class="loading"><div class="spinner"></div></div></div>
+      <label class="btn soft ee-file" id="ph-add">${icon("upload")}<span>Ajouter des photos</span><input type="file" id="ph-file" accept="image/*" multiple hidden></label>
+    </section>
+
     <section class="panel">
       <h2>${icon("bell")}Annonce aux patients</h2>
       <p class="muted">Un bandeau en haut de l'accueil de tous vos patients. Par exemple : « Le cabinet sera fermé du 23 au 31 décembre. »</p>
@@ -304,6 +316,7 @@ function render(){
   renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
   initModeSeance();
   initDossiers();
+  initPhotos();
   const last = localStorage.getItem("gt_last_backup");
   $("#bk-last").textContent = last ? `Dernière sauvegarde depuis cet appareil : ${new Date(Number(last)).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}.` : "Conseil : faites une sauvegarde une fois par mois.";
 
@@ -361,6 +374,69 @@ function setDirty(v){
   $("#save").disabled = !v;
 }
 addEventListener("beforeunload", e => { if(dirty){ e.preventDefault(); e.returnValue = ""; } });
+
+/* ---------- Photos du cabinet (enregistrées tout de suite, hors bouton Enregistrer) ---------- */
+const MAX_PHOTOS = 12;
+let photos = null;
+async function initPhotos(){
+  const box = $("#photos");
+  ["input", "change"].forEach(t => box.addEventListener(t, e => e.stopPropagation()));   // ne compte pas comme « modifications à enregistrer »
+  const list = $("#ph-list");
+  const show = () => {
+    if(!photos.length){ list.innerHTML = `<p class="small muted" style="grid-column:1/-1;margin:0">Aucune photo pour l'instant.</p>`; return; }
+    list.innerHTML = photos.map((p, i) => `
+      <figure data-ph="${esc(p.id)}">
+        <img src="${esc(p.data)}" alt="" loading="lazy">
+        <input class="input" type="text" value="${esc(p.legende || "")}" placeholder="Légende (facultatif)" data-leg="${esc(p.id)}" maxlength="80">
+        <div class="acts">
+          <button class="icon-btn sm" type="button" data-mv="-1" aria-label="Avant" ${i ? "" : "disabled"}>${icon("back")}</button>
+          <button class="icon-btn sm" type="button" data-del aria-label="Supprimer">${icon("trash")}</button>
+          <button class="icon-btn sm" type="button" data-mv="1" aria-label="Après" ${i < photos.length - 1 ? "" : "disabled"}>${icon("chevron")}</button>
+        </div>
+      </figure>`).join("");
+  };
+  try{ photos = await C.getPhotosCabinet(); }catch(e){ photos = []; }
+  show();
+  const saveIndex = async () => { try{ await C.savePhotosIndex(photos); }catch(err){ failed(err); } };
+  list.addEventListener("click", async e => {
+    const fig = e.target.closest("[data-ph]"); if(!fig) return;
+    const i = photos.findIndex(p => p.id === fig.dataset.ph);
+    const mv = e.target.closest("[data-mv]");
+    if(mv){
+      const j = i + Number(mv.dataset.mv); if(j < 0 || j >= photos.length) return;
+      [photos[i], photos[j]] = [photos[j], photos[i]]; show(); await saveIndex(); return;
+    }
+    if(e.target.closest("[data-del]")){
+      if(!await confirmDialog({ title:"Supprimer cette photo ?", message:"Elle disparaîtra de la page du cabinet.", confirm:"Supprimer", danger:true })) return;
+      try{ await C.deletePhotoCabinet(photos[i].id); photos.splice(i, 1); show(); toast("Photo supprimée."); }catch(err){ failed(err); }
+    }
+  });
+  list.addEventListener("change", async e => {
+    const id = e.target.dataset.leg; if(!id) return;
+    const p = photos.find(x => x.id === id); if(!p) return;
+    p.legende = e.target.value.trim(); await saveIndex(); toast("Légende enregistrée.");
+  });
+  $("#ph-file").onchange = async ev => {
+    const files = [...ev.target.files]; ev.target.value = "";
+    if(!files.length) return;
+    const place = MAX_PHOTOS - photos.length;
+    if(place <= 0){ toast(`${MAX_PHOTOS} photos au plus : supprimez-en une d'abord.`, { type:"err" }); return; }
+    const lab = $("#ph-add span"), txt = lab.textContent;
+    const { compressPhoto } = await import("/assets/photos-cabinet.js");
+    let ok = 0;
+    for(const f of files.slice(0, place)){
+      lab.textContent = `Envoi ${ok + 1} sur ${Math.min(files.length, place)}…`;
+      try{
+        const data = await compressPhoto(f);
+        const id = await C.addPhotoCabinet(data);
+        photos.push({ id, legende:"", data }); ok++; show();
+      }catch(err){ failed(err); break; }
+    }
+    lab.textContent = txt;
+    if(ok) toast(ok > 1 ? `${ok} photos ajoutées.` : "Photo ajoutée.", { type:"ok" });
+    if(files.length > place) toast(`${MAX_PHOTOS} photos au plus : les autres n'ont pas été ajoutées.`, { type:"err" });
+  };
+}
 
 function renderLogo(){ $("#logo-prev").innerHTML = `<img src="${esc(logo || "/logo.png")}" alt="Logo">`; }
 
