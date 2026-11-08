@@ -43,6 +43,7 @@ function sessionRow(s, { role, next }){
     actions = s.terminee
       ? `<button class="btn sm ghost" type="button" data-act="lancer" data-id="${esc(s.id)}">${icon("repeat")}Refaire</button>`
       : `<button class="btn sm ${st === "next" ? "primary" : ""}" type="button" data-act="lancer" data-id="${esc(s.id)}">${icon("play")}${st === "next" ? "Commencer" : "Lancer"}</button>
+         ${isLate && s.programmeId ? `<button class="btn sm ghost" type="button" data-act="decaler" data-id="${esc(s.id)}">${icon("calendar")}Décaler</button>` : ""}
          <button class="btn sm ghost" type="button" data-act="valider" data-id="${esc(s.id)}">À valider</button>`;
   }
 
@@ -80,7 +81,10 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
   const isCourse = prog.categorie === "course";
 
   const canMove = !prog.termine && prog.seances.some(x => !x.terminee && x.datePrevue);
-  const daysBtn = canMove ? `<button class="btn sm" type="button" data-pact="jours">${icon("calendar")}${role === "kine" ? "Changer les jours" : "Changer mes jours"}</button>` : "";
+  const pz = etatPause(prog);
+  const daysBtn = canMove ? `<button class="btn sm" type="button" data-pact="jours">${icon("calendar")}${role === "kine" ? "Changer les jours" : "Changer mes jours"}</button>
+      <button class="btn sm" type="button" data-pact="pause">${icon(pz ? "play" : "pause")}${pz ? (pz.debut ? "Changer la date de début" : "Changer la reprise") : "Pause ou report"}</button>` : "";
+  const pauseHTML = pz ? `<div class="notice" style="margin:10px 0">${icon(pz.debut ? "calendar" : "pause")}<span>${pz.debut ? "Programme qui commence" : "Programme en pause, reprise"} <strong>${esc(fmtDate(pz.date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}</strong>. ${role === "kine" ? "Les séances ne comptent pas en retard d'ici là." : "Aucune séance n'est en retard d'ici là."}</span></div>` : "";
   const actions = role === "kine" ? `
       ${daysBtn}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
@@ -105,6 +109,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
           ${trTxt ? `<span>${trTxt}</span>` : ""}
         </div>
         <div class="spine" aria-label="${prog.faites} séances faites sur ${prog.total}">${spine}</div>
+        ${pauseHTML}
         ${supHTML}
         <div class="prog-actions">${actions}</div>
       </div>
@@ -170,13 +175,13 @@ export function openSeancePdf(s, patientNom = ""){
 const JOURS = [[1, "L", "Lundi"], [2, "M", "Mardi"], [3, "M", "Mercredi"], [4, "J", "Jeudi"], [5, "V", "Vendredi"], [6, "S", "Samedi"], [0, "D", "Dimanche"]];
 
 /** Nouvelles dates des séances non faites, à partir d'aujourd'hui, sur les jours choisis. */
-export function replanDates(prog, jours){
+export function replanDates(prog, jours, depuis = null){
   const restantes = prog.seances.filter(s => !s.terminee).slice()
     .sort((a, b) => (a.semaine || 0) - (b.semaine || 0) || new Date(a.datePrevue || 0) - new Date(b.datePrevue || 0));
   const today = startOfDay(new Date());
   const faiteAujourdhui = prog.seances.some(s => s.terminee && s.dateValidation && startOfDay(s.dateValidation).getTime() === today.getTime());
-  const d = new Date(today); d.setHours(12, 0, 0, 0);
-  if(faiteAujourdhui) d.setDate(d.getDate() + 1);
+  const d = depuis ? startOfDay(depuis) : new Date(today); d.setHours(12, 0, 0, 0);
+  if(!depuis && faiteAujourdhui) d.setDate(d.getDate() + 1);
   const out = [];
   let guard = 0;
   while(out.length < restantes.length && guard++ < 800){
@@ -184,6 +189,89 @@ export function replanDates(prog, jours){
     d.setDate(d.getDate() + 1);
   }
   return restantes.map((s, i) => ({ seance: s, date: out[i] }));
+}
+
+/* ---------- Pause ou report du programme ----------
+   Pas de champ « pause » : les séances restantes sont simplement replacées à partir de la date
+   de reprise (même règle Firestore que « Changer mes jours »). Rien n'est donc « en retard » d'ici là.
+   La pause se déduit des dates : prochaine séance dans plus de 8 jours (ou programme pas commencé). */
+const DAY_MS = 864e5;
+
+/** { date, debut } si le programme est en pause (ou pas encore commencé) ; sinon null. */
+export function etatPause(prog){
+  if(!prog || prog.termine) return null;
+  const restantes = prog.seances.filter(s => !s.terminee && s.datePrevue).map(s => startOfDay(s.datePrevue)).sort((a, b) => a - b);
+  if(!restantes.length) return null;
+  const today = startOfDay(new Date()), first = restantes[0];
+  if(first <= today) return null;
+  const aucuneFaite = !prog.seances.some(s => s.terminee);
+  if(aucuneFaite) return (first - today) / DAY_MS >= 2 ? { date: first, debut: true } : null;
+  return (first - today) / DAY_MS > 8 ? { date: first, debut: false } : null;
+}
+
+const isoJour = d => { const x = new Date(d); return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`; };
+export const joursDuProgramme = prog => {
+  const src = prog.seances.filter(s => !s.terminee && s.datePrevue);
+  const j = Array.from(new Set((src.length ? src : prog.seances.filter(s => s.datePrevue)).map(s => new Date(s.datePrevue).getDay())));
+  return j.length ? j : [1, 3, 5];
+};
+
+/** Fenêtre « Pause ou report ». onSave(changes, { date, motif, precision }) enregistre. */
+export function pauseSheet(prog, { role = "patient", onSave }){
+  const jours = joursDuProgramme(prog);
+  const pz = etatPause(prog);
+  const pasCommence = !prog.seances.some(s => s.terminee);
+  const today = startOfDay(new Date());
+  const plus = n => { const d = new Date(today); d.setDate(d.getDate() + n); return d; };
+  let date = pz ? pz.date : plus(7), motif = "";
+  const MOTIFS = ["Blessure", "Maladie", "Voyage", "Autre"];
+  const RAPIDES = [[7, "1 semaine"], [14, "2 semaines"], [21, "3 semaines"], [30, "1 mois"]];
+  const s = openSheet({
+    title: pasCommence ? "Choisir la date de début" : (role === "kine" ? "Pause ou report" : "Mettre en pause"),
+    body: `
+      <div class="stack" style="--gap:16px">
+        <p>${pasCommence
+          ? (role === "kine" ? "Les séances commenceront à cette date, sur les mêmes jours de la semaine." : "Choisissez quand vous voulez commencer. Vos séances seront placées à partir de cette date, sur les mêmes jours de la semaine.")
+          : (role === "kine" ? "Blessure, voyage, maladie… Les séances restantes sont décalées à partir de la date de reprise, sans être comptées en retard." : "Blessure, voyage, maladie… Choisissez quand reprendre : vos séances restantes seront décalées à partir de cette date, sans être marquées en retard.")}</p>
+        <div class="chips" id="pz-quick">${RAPIDES.map(([n, l]) => `<button class="chip" type="button" data-n="${n}">${pasCommence ? "Dans " + l : l}</button>`).join("")}</div>
+        <div class="field"><label for="pz-date">${pasCommence ? "Commencer le" : "Reprendre le"}</label><input class="input" type="date" id="pz-date" min="${isoJour(today)}" value="${isoJour(date)}"></div>
+        ${role === "patient" && !pasCommence ? `
+        <div class="field"><label>Raison (pour votre kiné, facultatif)</label>
+          <div class="chips" id="pz-motif">${MOTIFS.map(m => `<button class="chip" type="button" data-m="${m}" aria-pressed="false">${m}</button>`).join("")}</div>
+          <input class="input" id="pz-txt" maxlength="200" placeholder="Une précision ? (facultatif)" style="margin-top:8px">
+        </div>
+        <p class="hint">Votre kiné sera prévenu par un message.</p>` : ""}
+        <div class="plan-preview" id="pz-prev" style="padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);font-size:var(--fs-sm);color:var(--ink-2)"></div>
+      </div>`,
+    foot: `${pz ? `<button class="btn" type="button" id="pz-now">${icon("play")}${pasCommence ? "Commencer aujourd'hui" : "Reprendre aujourd'hui"}</button>` : `<button class="btn" type="button" data-close>Annuler</button>`}<button class="btn primary" type="button" id="pz-ok">${icon("check")}Enregistrer</button>`
+  });
+  const $s = q => s.el.querySelector(q);
+  const render = () => {
+    const plan = replanDates(prog, jours, date);
+    $s("#pz-date").value = isoJour(date);
+    s.el.querySelectorAll("[data-n]").forEach(b => b.setAttribute("aria-pressed", String(isoJour(plus(+b.dataset.n)) === isoJour(date))));
+    $s("#pz-prev").innerHTML = plan.length
+      ? `<strong>${plan.length} séance${plan.length > 1 ? "s" : ""} restante${plan.length > 1 ? "s" : ""}</strong> : la première ${esc(fmtDate(plan[0].date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}, la dernière ${esc(fmtDate(plan[plan.length - 1].date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}.`
+      : "Aucune séance restante.";
+  };
+  s.el.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { date = plus(+b.dataset.n); render(); });
+  $s("#pz-date").onchange = e => { if(e.target.value){ const [y, m, d] = e.target.value.split("-").map(Number); const x = new Date(y, m - 1, d); date = x < today ? today : x; } render(); };
+  s.el.querySelectorAll("[data-m]").forEach(b => b.onclick = () => {
+    motif = motif === b.dataset.m ? "" : b.dataset.m;
+    s.el.querySelectorAll("[data-m]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.m === motif)));
+  });
+  const save = async (quand, btn) => {
+    btn.disabled = true;
+    const noms = JOURS.filter(j => jours.includes(j[0])).map(j => j[2].toLowerCase());
+    const changes = replanDates(prog, jours, quand).map(({ seance, date: d }) => ({
+      id: seance.id, datePrevue: d.toISOString(), datePrevueTexte: d.toLocaleDateString("fr-FR"), joursProgramme: noms
+    }));
+    try{ await onSave(changes, { date: quand, motif, precision: ($s("#pz-txt")?.value || "").trim(), debut: pasCommence, reprise: !!pz && isoJour(quand) === isoJour(today) }); s.close(); }
+    catch(err){ btn.disabled = false; toast("Enregistrement impossible. Vérifiez votre connexion.", { type:"err" }); }
+  };
+  $s("#pz-ok").onclick = () => save(date, $s("#pz-ok"));
+  if($s("#pz-now")) $s("#pz-now").onclick = () => save(today, $s("#pz-now"));
+  render();
 }
 
 /** Fenêtre de choix des jours. onSave(changes) reçoit la liste à enregistrer. */

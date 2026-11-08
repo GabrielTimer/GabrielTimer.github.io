@@ -24,6 +24,9 @@ export function derniereActivite(prog, patient){
   if(garder === "toujours") return null;
   let t = Math.max(Number(garder) || 0, DEBUT_REGLE);
   (prog.seances || []).forEach(s => { t = Math.max(t, s.dateValidation || 0, s.updatedAt || 0, s.createdAt || 0); });
+  /* En pause ou pas encore commencé (prochaine séance dans le futur) : l'inactivité ne compte qu'à partir de la reprise */
+  const prochaine = Math.min(...(prog.seances || []).filter(s => !s.terminee && s.datePrevue).map(s => new Date(s.datePrevue).getTime()).filter(Number.isFinite));
+  if(Number.isFinite(prochaine)) t = Math.max(t, Math.min(Date.now(), prochaine));
   return t;
 }
 

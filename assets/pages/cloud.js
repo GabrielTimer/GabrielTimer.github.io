@@ -5,7 +5,7 @@ import {
   openSheet, loadingHTML, emptyHTML, errorHTML, groupProgrammes, fmtRelDay, fmtShortDate, evaFace, evaColor,
   plural, ressentiLabel, kineHint, modePatient, byWeek, fmtNum
 } from "../app.js";
-import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet } from "../programmes-view.js";
+import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet, pauseSheet, replanDates, joursDuProgramme } from "../programmes-view.js";
 import * as V from "../variantes.js";
 import { compareNoms } from "../noms.js";
 import { nomAffiche } from "../noms.js";
@@ -132,6 +132,26 @@ async function patientView(ctx){
       const s = all().find(x => x.id === b.dataset.id);
       if(!s) return;
       if(b.dataset.act === "lancer") P.launchSeance(s, { cle:ctx.cle, apercu:ctx.apercu });
+      if(b.dataset.act === "decaler"){
+        const prog = data.programmes.find(p => p.seances.some(x => x.id === s.id));
+        if(!prog) return;
+        const plan = replanDates(prog, joursDuProgramme(prog));
+        const ok = await confirmDialog({ title:"Décaler mes séances ?", message:`Plutôt que de la rater, cette séance et les suivantes sont replacées à partir d'aujourd'hui, sur vos jours habituels. La dernière séance sera le ${plan.length ? plan[plan.length - 1].date.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" }) : "—"}.`, confirm:"Décaler" });
+        if(!ok) return;
+        if(ctx.apercu){ toast("Aperçu : rien n'est modifié."); return; }
+        const JN = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+        const noms = [1, 2, 3, 4, 5, 6, 0].filter(j => joursDuProgramme(prog).includes(j)).map(j => JN[j]);
+        const changes = plan.map(({ seance, date }) => ({ id: seance.id, datePrevue: date.toISOString(), datePrevueTexte: date.toLocaleDateString("fr-FR"), joursProgramme: noms }));
+        try{
+          const C = await import("../cloud.js");
+          await C.replanSeances(ctx.cle, changes);
+          changes.forEach(c => { const x = data.seances.find(y => y.id === c.id); if(x) Object.assign(x, c); });
+          Object.assign(data, groupProgrammes(data.seances));
+          toast("Séances décalées : rien n'est perdu.", { type:"ok" });
+          render();
+        }catch(err){ toast("Enregistrement impossible. Vérifiez votre connexion.", { type:"err" }); }
+        return;
+      }
       if(b.dataset.act === "valider"){
         const ok = await confirmDialog({ title:"Valider cette séance ?", message:"Utilisez cette option si vous avez fait la séance sans le minuteur, par exemple au cabinet.", confirm:"Oui, je l'ai faite" });
         if(ok) location.href = `/fin.html?cle=${encodeURIComponent(ctx.cle)}&s=${encodeURIComponent(s.id)}${ctx.apercu ? "&apercu=1" : ""}`;
@@ -149,6 +169,22 @@ async function patientView(ctx){
             changes.forEach(c => { const x = data.seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
             Object.assign(data, groupProgrammes(data.seances));
             toast("Vos jours sont enregistrés. Votre kiné verra le nouveau planning.", { type:"ok" });
+            render();
+          }});
+        }
+        if(b.dataset.pact === "pause"){
+          pauseSheet(prog, { role:"patient", onSave: async (changes, info) => {
+            if(ctx.apercu){ toast("Aperçu : rien n'est modifié."); return; }
+            const C = await import("../cloud.js");
+            await C.replanSeances(ctx.cle, changes);
+            changes.forEach(c => { const x = data.seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
+            Object.assign(data, groupProgrammes(data.seances));
+            const quand = info.date.toLocaleDateString("fr-FR", { weekday:"long", day:"numeric", month:"long" });
+            const texte = info.debut ? `Je commencerai mon programme « ${prog.nom} » le ${quand}.`
+              : info.reprise ? `Je reprends mon programme « ${prog.nom} » aujourd'hui.`
+              : `Je mets mon programme « ${prog.nom} » en pause. Reprise prévue le ${quand}.${info.motif ? `\nRaison : ${info.motif.toLowerCase()}.` : ""}${info.precision ? `\n${info.precision}` : ""}`;
+            C.addMessage(ctx.cle, { sujet: info.debut ? "Début du programme" : info.reprise ? "Reprise du programme" : "Programme en pause", texte }).catch(() => {});
+            toast(info.debut ? "Date de début enregistrée." : info.reprise ? "C'est reparti !" : "Programme en pause. Votre kiné est prévenu.", { type:"ok" });
             render();
           }});
         }
@@ -440,6 +476,14 @@ async function kineView(param){
         const act = b.dataset.pact;
         const first = prog.seances[0];
         if(act === "pdf") openProgrammePdf(prog, patient.nom);
+        if(act === "pause"){
+          pauseSheet(prog, { role:"kine", onSave: async (changes, info) => {
+            await C.replanSeances(patient.cle, changes);
+            changes.forEach(c => { const x = seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
+            toast(info.debut ? "Date de début enregistrée." : info.reprise ? "Programme repris aujourd'hui." : "Programme en pause : les séances sont décalées.", { type:"ok" });
+            render();
+          }});
+        }
         if(act === "jours"){
           changeDaysSheet(prog, { role:"kine", onSave: async changes => {
             await C.replanSeances(patient.cle, changes);
