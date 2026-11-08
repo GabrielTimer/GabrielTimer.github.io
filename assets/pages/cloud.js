@@ -1,7 +1,7 @@
 /* Programmes : vue patient (« Mes programmes ») et fiche patient côté kiné */
 
 import {
-  $, $$, esc, icon, pic, params, store, readPatientContext, mountShell, registerSW, toast, confirmDialog, promptDialog,
+  $, $$, esc, icon, params, store, readPatientContext, mountShell, registerSW, toast, confirmDialog, promptDialog,
   openSheet, loadingHTML, emptyHTML, errorHTML, groupProgrammes, fmtRelDay, fmtShortDate, evaFace, evaColor,
   plural, ressentiLabel, kineHint, modePatient, byWeek, fmtNum
 } from "../app.js";
@@ -118,9 +118,9 @@ async function patientView(ctx){
       <section class="section">
         <div class="section-title">Sur cet appareil</div>
         <div class="list">
-          <a class="list-item" href="/reglages.html#rappels"><span class="li-ico">${pic("bell")}</span><span class="li-main"><span class="li-title">Rappels de séance</span><span class="li-sub" id="rp-sub">${esc(rpTxt || "Activer ou couper les notifications, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>
-          <a class="list-item" href="/historique.html"><span class="li-ico">${pic("history")}</span><span class="li-main"><span class="li-title">Historique</span><span class="li-sub">Les séances faites sur ce téléphone</span></span><span class="li-end">${icon("chevron")}</span></a>
-          <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${pic("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Pour refaire une séance quand vous voulez</span></span><span class="li-end">${icon("chevron")}</span></a>
+          <a class="list-item" href="/reglages.html#rappels"><span class="li-ico">${icon("bell")}</span><span class="li-main"><span class="li-title">Rappels de séance</span><span class="li-sub" id="rp-sub">${esc(rpTxt || "Activer ou couper les notifications, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>
+          <a class="list-item" href="/historique.html"><span class="li-ico">${icon("history")}</span><span class="li-main"><span class="li-title">Historique</span><span class="li-sub">Les séances faites sur ce téléphone</span></span><span class="li-end">${icon("chevron")}</span></a>
+          <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Pour refaire une séance quand vous voulez</span></span><span class="li-end">${icon("chevron")}</span></a>
         </div>
       </section>`;
     bindPatient();
@@ -223,7 +223,7 @@ async function kineView(param){
     if(!bilans.length) return `<div class="panel">${emptyHTML({ ico:"stethoscope", title:"Aucun bilan", text:"Faites le bilan d'entrée : schéma de douleur, tests validés, mesures, résumé pour Maiia et PDF.", action:`<a class="btn primary" href="${bilanURL()}">${icon("stethoscope")}Faire le bilan d'entrée</a>` })}</div>`;
     return `<div class="list">${bilans.map(b => `
       <div class="list-item bilan-item">
-        <span class="li-ico">${pic("stethoscope")}</span>
+        <span class="li-ico">${icon("stethoscope")}</span>
         <a class="li-main" href="${bilanURL(b.id)}" style="color:inherit;text-decoration:none">
           <span class="li-title">${esc(BT[b.type] || "Bilan")} · ${esc(fmtISO(b.date))}</span>
           <span class="li-sub">${esc(b.motif || "")}</span>
@@ -530,10 +530,10 @@ async function kineView(param){
     const s = openSheet({
       title:"Plus d'options",
       body:`<div class="list">
-        <button class="list-item" type="button" id="mo-moi"><span class="li-ico">${pic("phone")}</span><span class="li-main"><span class="li-title">Utiliser cet appareil comme ce patient</span><span class="li-sub">Mode patient réel (rappels, séances enregistrées). Retour à l'espace kiné dans Réglages.</span></span></button>
-        <button class="list-item" type="button" id="mo-print"><span class="li-ico">${pic("print")}</span><span class="li-main"><span class="li-title">Imprimer une carte d'accès</span><span class="li-sub">Avec le QR code, à remettre au patient</span></span></button>
-        <button class="list-item" type="button" id="mo-renew"><span class="li-ico">${pic("key")}</span><span class="li-main"><span class="li-title">Générer un nouveau code d'accès</span><span class="li-sub">L'ancien lien ne fonctionnera plus</span></span></button>
-        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${pic("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>
+        <button class="list-item" type="button" id="mo-moi"><span class="li-ico">${icon("phone")}</span><span class="li-main"><span class="li-title">Utiliser cet appareil comme ce patient</span><span class="li-sub">Mode patient réel (rappels, séances enregistrées). Retour à l'espace kiné dans Réglages.</span></span></button>
+        <button class="list-item" type="button" id="mo-print"><span class="li-ico">${icon("print")}</span><span class="li-main"><span class="li-title">Imprimer une carte d'accès</span><span class="li-sub">Avec le QR code, à remettre au patient</span></span></button>
+        <button class="list-item" type="button" id="mo-renew"><span class="li-ico">${icon("key")}</span><span class="li-main"><span class="li-title">Générer un nouveau code d'accès</span><span class="li-sub">L'ancien lien ne fonctionnera plus</span></span></button>
+        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${icon("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>
       </div>`
     });
     s.el.querySelector("#mo-moi").onclick = async () => {

@@ -44,7 +44,7 @@
 <body>
 <main class="page wide" id="app"></main>
 <script type="module">
-import { $, $$, esc, icon, pic, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
+import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
 import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden, choisirOptions } from "/assets/modeles.js";
@@ -117,8 +117,8 @@ app.innerHTML = `
   <div class="small muted" id="count" style="margin-bottom:10px"></div>
   <div id="list">${loadingHTML()}</div>
   <section class="mo-more"><div class="list">
-    <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${pic("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Enregistrées sur cet appareil</span></span><span class="li-end">${icon("chevron")}</span></a>
-    <a class="list-item" href="/programmescourse.html"><span class="li-ico">${pic("run")}</span><span class="li-main"><span class="li-title">Reprise de course</span><span class="li-sub">Générateur de programme progressif</span></span><span class="li-end">${icon("chevron")}</span></a>
+    <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Enregistrées sur cet appareil</span></span><span class="li-end">${icon("chevron")}</span></a>
+    <a class="list-item" href="/programmescourse.html"><span class="li-ico">${icon("run")}</span><span class="li-main"><span class="li-title">Reprise de course</span><span class="li-sub">Générateur de programme progressif</span></span><span class="li-end">${icon("chevron")}</span></a>
   </div></section>`;
 
 let mine = [];

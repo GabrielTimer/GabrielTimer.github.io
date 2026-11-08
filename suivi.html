@@ -41,7 +41,7 @@
 <body>
 <main class="page no-nav" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
-import { $, $$, esc, icon, pic, params, readPatientContext, mountShell, registerSW, emptyHTML, errorHTML, toast, confirmDialog, fmtShortDate } from "/assets/app.js";
+import { $, $$, esc, icon, params, readPatientContext, mountShell, registerSW, emptyHTML, errorHTML, toast, confirmDialog, fmtShortDate } from "/assets/app.js";
 import { computeScore } from "/assets/questionnaires.js";
 registerSW();
 const app = $("#app");
@@ -57,7 +57,7 @@ mountShell({ role:"none", back: home, apercu:ctx.apercu && !pour });
 const qid = params.get("q");
 const done = (title, text) => {
   app.innerHTML = `<section class="sv" style="padding-top:8vh;text-align:center">
-    <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${pic("check")}</div></div>
+    <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${icon("check")}</div></div>
     <h1>${esc(title)}</h1><p class="muted">${esc(text)}</p>
     <a class="btn primary big block" href="${home}">${icon(pour || essai ? "back" : "home")}${pour ? "Retour à la fiche" : essai ? "Retour aux questionnaires" : "Retour à l'accueil"}</a></section>`;
 };

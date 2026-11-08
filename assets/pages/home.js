@@ -1,7 +1,7 @@
 /* Accueil : patient, kiné ou première visite */
 
 import {
-  $, esc, icon, pic, appMarkHTML, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
+  $, esc, icon, appMarkHTML, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
   fmtDate, fmtRelDay, fmtDuree, prenom, sessionDuration, startOfDay, daysFromToday, evaFace, evaColor,
   plural, loadingHTML, emptyHTML, errorHTML, exoImageHTML, normCode, fmtCode, KINE, byWeek, evaTrend,
   ressentiLabel, forgetPatient, logoSrc
@@ -130,8 +130,8 @@ function showAnnonce(){
 
 function horairesHTML(h){
   const st = Hor.etat(h);
-  return `<div class="list-item hor"><span class="li-ico">${pic("clock")}</span><span class="li-main">
-    <span class="li-title">${pic("clock")}Horaires</span>
+  return `<div class="list-item hor"><span class="li-ico">${icon("clock")}</span><span class="li-main">
+    <span class="li-title">${icon("clock")}Horaires</span>
     <span class="hor-etat ${st.cls}">${esc(st.texte)}</span>
     ${Hor.tableauHTML(h)}
   </span></div>`;
@@ -145,7 +145,7 @@ function showCabinet(){
   const tel = String(c.telephone || "").trim();
   const adr = String(c.adresse || "").trim();
   const hor = Hor.renseignes(c.horaires);
-  const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${pic(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+  const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
   box.innerHTML = `
     <section class="section">
       <div class="section-title">Le cabinet</div>
@@ -338,11 +338,11 @@ async function renderPatient(ctx){
     ${seulesHTML}
     <section class="section">
       <div class="list">
-        <a class="list-item" href="/cloud.html"><span class="li-ico">${pic("calendar")}</span><span class="li-main"><span class="li-title">Mes programmes</span><span class="li-sub">Toutes les séances, semaine par semaine</span></span><span class="li-end">${icon("chevron")}</span></a>
-        <a class="list-item" href="/progression.html"><span class="li-ico">${pic("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
-        <a class="list-item" href="/respir/index.html"><span class="li-ico">${pic("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
-        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${pic("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
-        <button class="list-item" type="button" id="ecrire"><span class="li-ico">${pic("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
+        <a class="list-item" href="/cloud.html"><span class="li-ico">${icon("calendar")}</span><span class="li-main"><span class="li-title">Mes programmes</span><span class="li-sub">Toutes les séances, semaine par semaine</span></span><span class="li-end">${icon("chevron")}</span></a>
+        <a class="list-item" href="/progression.html"><span class="li-ico">${icon("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
+        <a class="list-item" href="/respir/index.html"><span class="li-ico">${icon("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
+        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
+        <button class="list-item" type="button" id="ecrire"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
       </div>
     </section>
     <div id="cabinet"></div>
@@ -384,17 +384,17 @@ async function renderKine(user){
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(KINE.nom))}</h1></div>
     <div id="inbox-banner"></div>
     <div class="tiles">
-      <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${pic("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
-      <a data-tile="messages" class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${pic("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
-      <a data-tile="creer" class="tile" href="/config.html?nouveau=1"><span class="t-ico">${pic("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
-      <a data-tile="patients" class="tile" href="/patients.html"><span class="t-ico">${pic("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
-      <a data-tile="libre" class="tile" href="/config.html?libre=1"><span class="t-ico">${pic("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
-      <a data-tile="modeles" class="tile" href="/programmes_admin.html"><span class="t-ico">${pic("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
-      <a data-tile="exercices" class="tile" href="/exercises/glossary.html"><span class="t-ico">${pic("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
-      <a data-tile="course" class="tile" href="/programmescourse.html"><span class="t-ico">${pic("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
-      <a data-tile="ressources" class="tile" href="/ressources.html"><span class="t-ico">${pic("body")}</span><strong>Ressources</strong><span class="t-sub">Territoires nerveux, tests, questionnaires</span></a>
-      <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${pic("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
-      <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${pic("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
+      <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
+      <a data-tile="messages" class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
+      <a data-tile="creer" class="tile" href="/config.html?nouveau=1"><span class="t-ico">${icon("edit")}</span><strong>Créer un programme</strong><span class="t-sub">Pour un patient</span></a>
+      <a data-tile="patients" class="tile" href="/patients.html"><span class="t-ico">${icon("users")}</span><strong>Mes patients</strong><span class="t-sub">Suivi et alertes</span></a>
+      <a data-tile="libre" class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
+      <a data-tile="modeles" class="tile" href="/programmes_admin.html"><span class="t-ico">${icon("layers")}</span><strong>Modèles</strong><span class="t-sub">Pathologies, post-op, prévention</span></a>
+      <a data-tile="exercices" class="tile" href="/exercises/glossary.html"><span class="t-ico">${icon("book")}</span><strong>Exercices</strong><span class="t-sub">Bibliothèque complète</span></a>
+      <a data-tile="course" class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
+      <a data-tile="ressources" class="tile" href="/ressources.html"><span class="t-ico">${icon("body")}</span><strong>Ressources</strong><span class="t-sub">Territoires nerveux, tests, questionnaires</span></a>
+      <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
+      <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, sauvegarde, aide</span></a>
     </div>
     <section class="section" id="jour-sec" hidden><div class="section-title">Aujourd'hui<span class="badge" id="jour-n"></span></div><div id="jour"></div></section>
     <section class="section" id="evol-sec" hidden><div class="section-title">À faire évoluer<span class="badge" id="evol-n"></span></div><div id="evol"></div></section>
@@ -434,7 +434,7 @@ async function renderKine(user){
     if(unread.length){
       const who = [...new Set(unread.map(i => i.patient.nom))];
       $("#inbox-banner").innerHTML = `<a class="inbox-banner" href="/messages.html">
-        <span class="t-ico">${pic("inbox")}</span>
+        <span class="t-ico">${icon("inbox")}</span>
         <span class="li-main"><strong>${unread.length} message${unread.length > 1 ? "s" : ""} non lu${unread.length > 1 ? "s" : ""}</strong>
         <span class="small">De ${esc(who.slice(0, 3).join(", "))}${who.length > 3 ? ` et ${who.length - 3} autre${who.length > 4 ? "s" : ""}` : ""}</span></span>
         <span class="btn sm primary">Lire</span></a>`;
@@ -505,9 +505,9 @@ async function homeSuivi(ctx, patient, seances, actif){
   box.innerHTML = `
     ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}
     ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
-      <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${pic(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
+      <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
-      <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${pic(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
+      <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
 }
 
 
@@ -593,7 +593,7 @@ async function afficherAujourdhui(C, patients, sums){
   document.getElementById("jour-n").textContent = items.length || "";
   const max = 8, html = it => `
     <a class="list-item" href="${it.href}">
-      <span class="li-ico" style="color:${it.couleur}">${pic(it.ico)}</span>
+      <span class="li-ico" style="color:${it.couleur}">${icon(it.ico)}</span>
       <span class="li-main"><span class="li-title">${esc(nomAffiche(parCle[it.cle]?.nom || ""))} · ${esc(it.titre)}</span><span class="li-sub">${esc(it.sub)}</span></span>
       <span class="li-end">${icon("chevron")}</span>
     </a>`;
@@ -618,7 +618,7 @@ async function afficherEvolutions(C, sums){
     document.getElementById("evol-n").textContent = items.length || "";
     box.innerHTML = `<div class="list">${items.map(({ sm, prog, p }, i) => `
       <button class="list-item" type="button" data-evi="${i}">
-        <span class="li-ico" style="color:${p.type === "alleger" ? "var(--warn)" : p.type === "monter" ? "var(--ok)" : "var(--lagon-strong)"}">${pic(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}</span>
+        <span class="li-ico" style="color:${p.type === "alleger" ? "var(--warn)" : p.type === "monter" ? "var(--ok)" : "var(--lagon-strong)"}">${icon(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}</span>
         <span class="li-main"><span class="li-title">${esc(sm.patient.nom)} · ${esc(p.titre)}</span><span class="li-sub">${esc(prog.nom)} — ${esc(E.changementTexte(p) || p.raison)}</span></span>
         <span class="li-end">${icon("chevron")}</span>
       </button>`).join("")}</div>`;

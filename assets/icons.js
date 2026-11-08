@@ -96,20 +96,3 @@ export function icon(name, cls = ""){
 }
 
 export const ICON_NAMES = Object.keys(P);
-
-/* ---------- Icônes illustrées (images couleur, /assets/ic/NOM.webp) ----------
-   Utilisées dans les pastilles de liste (.li-ico), la barre de navigation et les titres de rubriques.
-   Les boutons et petits pictos gardent les icônes au trait (qui changent de couleur). */
-const PIC = new Set(["home","calendar","chart","settings","users","plus","book","layers","wrench",
-  "play","pause","next","repeat","rest","clock","dumbbell","heart","target",
-  "call","pin","message","mail","bell","stethoscope","body","file","camera",
-  "star","sparkle","share","download","print","qr","lock","folder","video",
-  "wind","run","trash","list","history","link","info","key","textSize",
-  "moon","sun","user","checkCircle","search","alert","flag","inbox","trophy"]);
-const PIC_ALIAS = { phone:"call", calendarPlus:"calendar", trendUp:"chart", starFill:"star", image:"camera", pdf:"file", upload:"share", check:"checkCircle", userPlus:"user", edit:"file", zap:"play", grid:"layers", filter:"search", send:"mail", reply:"message" };
-
-/** Icône illustrée si elle existe, sinon l'icône au trait. */
-export function pic(name, cls = ""){
-  const n = PIC.has(name) ? name : PIC_ALIAS[name];
-  return n ? `<img class="ic-pic ${cls}" src="/assets/ic/${n}.webp" alt="" width="48" height="48" decoding="async" draggable="false">` : icon(name, cls);
-}

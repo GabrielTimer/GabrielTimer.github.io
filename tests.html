@@ -29,7 +29,7 @@
 <body>
 <main class="page wide" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
-import { $, $$, esc, icon, pic, mountShell, registerSW, store, debounce, plural } from "/assets/app.js";
+import { $, $$, esc, icon, mountShell, registerSW, store, debounce, plural } from "/assets/app.js";
 import { SPECIALITES } from "/assets/classement.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
@@ -83,7 +83,7 @@ function render(){
   $("#count").textContent = plural(list.length, "test");
   $("#list").innerHTML = list.length ? list.map((t, i) => `
     <button class="ts-row" type="button" data-i="${all.indexOf(t)}">
-      <span class="ts-ico">${pic(t.kind === "fonctionnel" ? "clock" : "stethoscope")}</span>
+      <span class="ts-ico">${icon(t.kind === "fonctionnel" ? "clock" : "stethoscope")}</span>
       <span class="ts-main">
         <span class="ts-title">${esc(t.nom)}${t.g?.v ? `<span class="badge lagon">${icon("video")}vidéo</span>` : ""}</span>
         <span class="ts-sub">${t.kind === "clinique" ? `${esc(t.region)} · ${esc(t.hyp.join(", "))}` : `Test fonctionnel${t.unite ? ` (${esc(t.unite)})` : ""}${t.motifs?.length ? ` · ${esc(t.motifs.slice(0, 3).join(", ").toLowerCase())}` : ""}`}</span>

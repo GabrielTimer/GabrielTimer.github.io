@@ -38,7 +38,7 @@
 <body>
 <main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
-import { $, $$, esc, icon, pic, params, store, readPatientContext, kineHint, mountShell, registerSW, emptyHTML, errorHTML, openSheet, toast, confirmDialog, KINE } from "/assets/app.js";
+import { $, $$, esc, icon, params, store, readPatientContext, kineHint, mountShell, registerSW, emptyHTML, errorHTML, openSheet, toast, confirmDialog, KINE } from "/assets/app.js";
 import { CONSEILS_FOURNIS, conseilHTML, mergeConseils } from "/assets/conseils-data.js";
 registerSW();
 const app = $("#app");
@@ -56,7 +56,7 @@ const resolve = id => perso.find(c => c.remplace === id && !c.masque) || perso.f
 
 function article(c, back){
   return `<article class="article">
-    <div class="a-ico">${pic(c.ico || "book")}</div>
+    <div class="a-ico">${icon(c.ico || "book")}</div>
     <h1>${esc(c.titre)}</h1>
     ${c.resume ? `<p class="lead">${esc(c.resume)}</p>` : ""}
     <div class="body">${conseilHTML(c.texte)}</div>
@@ -82,7 +82,7 @@ async function patientView(){
     <div class="page-head"><h1>Conseils de votre kiné</h1><p class="lead">Des fiches courtes à lire tranquillement, choisies pour vous.</p></div>
     ${mine.length ? `<div class="cs-grid">${mine.map(c => `
       <a class="cs-card" href="/conseils.html?id=${encodeURIComponent(p.conseils.find(x => resolve(x) === c))}">
-        <span class="li-ico">${pic(c.ico || "book")}</span><h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
+        <span class="li-ico">${icon(c.ico || "book")}</span><h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
       </a>`).join("")}</div>` : `<div class="panel">${emptyHTML({ ico:"book", title:"Pas encore de fiche", text:"Votre kiné pourra vous en proposer selon vos besoins." })}</div>`}`;
 }
 
@@ -103,7 +103,7 @@ async function kineView(){
         <p class="lead">Joignez-les à un patient depuis sa fiche ou lors de l'envoi d'un programme. Il les retrouve sur son accueil.</p></div>
       <div class="cs-grid">${all.map(c => `
         <div class="cs-card">
-          <span class="li-ico">${pic(c.ico || "book")}</span>
+          <span class="li-ico">${icon(c.ico || "book")}</span>
           <h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
           <div class="row wrap" style="--gap:6px">${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
           <div class="cs-act">
