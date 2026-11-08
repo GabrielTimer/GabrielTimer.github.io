@@ -156,3 +156,28 @@
 .hor-row > span:first-child{ color:var(--ink-2); }
 .hor-row > span:last-child{ text-align:right; font-variant-numeric:tabular-nums; }
 .hor-row.ferme > span:last-child{ color:var(--ink-3); }
+
+/* Tableau des horaires (accueil patient et page publique) */
+.hor-etat{ padding:4px 10px; border-radius:999px; background:var(--surface-2); }
+.hor-etat.ouvert{ background:color-mix(in srgb, var(--ok) 14%, transparent); }
+.hor-etat.domicile{ background:color-mix(in srgb, var(--sun-strong, #A15C00) 14%, transparent); }
+.hor-tab{ display:flex; flex-direction:column; margin:0 -8px; }
+.hd-row{ display:grid; grid-template-columns:minmax(78px, 104px) 1fr; gap:10px; align-items:center; padding:8px; border-radius:var(--r-sm); }
+.hd-row + .hd-row{ border-top:1px solid var(--line); }
+.hd-row.auj{ background:var(--lagon-soft); border-top-color:transparent; }
+.hd-row.auj + .hd-row{ border-top-color:transparent; }
+.hd{ display:flex; flex-direction:column; line-height:1.2; color:var(--ink-2); }
+.hd-row.auj .hd{ color:var(--lagon-strong); font-weight:700; }
+.hd small{ font-size:var(--fs-xs); font-weight:600; }
+.hd-c{ display:none; }
+.hd-slots{ display:flex; flex-wrap:wrap; gap:6px; }
+.hs{ display:inline-flex; align-items:center; gap:6px; padding:3px 9px; border-radius:8px; background:var(--surface-2); font-variant-numeric:tabular-nums; font-size:var(--fs-sm); white-space:nowrap; font-weight:600; }
+.hs.domicile{ background:color-mix(in srgb, var(--sun-strong, #A15C00) 13%, transparent); color:var(--sun-strong, #A15C00); }
+.hs em{ font-style:normal; font-weight:500; font-size:var(--fs-xs); }
+.hs.ferme{ background:transparent; color:var(--ink-3); font-weight:500; padding-left:0; }
+.hor-note{ margin:10px 0 0; font-size:var(--fs-sm); color:var(--ink-2); }
+@media (max-width:380px){ .hd-l{ display:none; } .hd-c{ display:inline; } .hd-row{ grid-template-columns:62px 1fr; } }
+.hs svg{ width:14px; height:14px; flex:none; }
+.hd-slots{ display:grid; grid-template-columns:repeat(2, max-content); }
+.hor-leg{ display:flex; align-items:center; gap:8px; margin:10px 0 0; font-size:var(--fs-xs); color:var(--ink-2); }
+.hor-leg .hs{ padding:3px 6px; }

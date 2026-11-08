@@ -129,13 +129,11 @@ function showAnnonce(){
 }
 
 function horairesHTML(h){
-  const st = Hor.etat(h), note = Hor.normaliser(h).note.trim();
-  const rows = Hor.lignes(h).map(l => `<div class="hor-row${l.texte === "Fermé" ? " ferme" : ""}"><span>${esc(l.jours)}</span><span>${esc(l.texte)}</span></div>`).join("");
+  const st = Hor.etat(h);
   return `<div class="list-item hor"><span class="li-ico">${icon("clock")}</span><span class="li-main">
     <span class="li-title">Horaires</span>
     <span class="hor-etat ${st.cls}">${esc(st.texte)}</span>
-    <span class="hor-grid">${rows}</span>
-    ${note ? `<span class="li-sub" style="margin-top:6px">${esc(note).replace(/\n/g, "<br>")}</span>` : ""}
+    ${Hor.tableauHTML(h)}
   </span></div>`;
 }
 

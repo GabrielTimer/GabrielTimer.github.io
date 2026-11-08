@@ -8,6 +8,8 @@
    }
    ========================================================= */
 
+import { icon } from "./icons.js";
+
 export const JOURS = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
 /** Ordre d'affichage : lundi → dimanche */
 export const ORDRE = [1, 2, 3, 4, 5, 6, 0];
@@ -67,4 +69,24 @@ export function lignes(h){
     out.push({ debut:i, fin:i, texte, domicile: n.jours[i].some(c => actif(c) && c.lieu === "domicile") });
   });
   return out.map(l => ({ ...l, jours: l.debut === l.fin ? JOURS[l.debut] : `${JOURS[l.debut]} – ${JOURS[l.fin]}` }));
+}
+
+/* ---------- Affichage commun (accueil patient et page publique du cabinet) ---------- */
+const escH = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+const COURT = ["Dim.", "Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam."];
+
+/** Tableau des horaires : un jour par ligne (aujourd'hui mis en avant), un créneau par pastille. */
+export function tableauHTML(h, d = new Date()){
+  const n = normaliser(h), auj = d.getDay();
+  const jours = ORDRE.map(i => {
+    const c = n.jours[i].filter(actif);
+    const slots = c.length
+      ? c.map(x => `<span class="hs ${x.lieu}"${x.lieu === "domicile" ? ' title="Soins à domicile"' : ""}>${x.lieu === "domicile" ? icon("home") : ""}${escH(hm(x.de))} – ${escH(hm(x.a))}</span>`).join("")
+      : `<span class="hs ferme">Fermé</span>`;
+    return `<div class="hd-row${i === auj ? " auj" : ""}${c.length ? "" : " ferme"}"><span class="hd"><span class="hd-l">${JOURS[i]}</span><span class="hd-c">${COURT[i]}</span>${i === auj ? `<small>Aujourd'hui</small>` : ""}</span><span class="hd-slots">${slots}</span></div>`;
+  }).join("");
+  const note = n.note.trim();
+  const dom = n.jours.some(j => j.some(c => actif(c) && c.lieu === "domicile"));
+  const legende = dom ? `<p class="hor-leg"><span class="hs domicile">${icon("home")}</span>Soins à domicile : cabinet fermé, laissez un message</p>` : "";
+  return `<div class="hor-tab">${jours}</div>${legende}${note ? `<p class="hor-note">${escH(note).replace(/\n/g, "<br>")}</p>` : ""}`;
 }

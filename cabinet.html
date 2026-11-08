@@ -25,7 +25,10 @@
   .cab-foot{ text-align:center; font-size:var(--fs-sm); color:var(--ink-3); }
   .cab .panel h2{ font-size:var(--fs-lg); display:flex; align-items:center; gap:10px; margin:0 0 10px; }
   .cab .panel h2 svg{ width:22px; height:22px; color:var(--lagon); }
-  .cab .hor-grid{ font-size:var(--fs-md, 1rem); gap:6px; }
+  .cab-call span{ display:flex; flex-direction:column; align-items:flex-start; line-height:1.15; }
+  .cab-call small{ font-size:var(--fs-sm); font-weight:600; opacity:.9; white-space:nowrap; }
+  .cab-head .hor-etat{ margin:8px 0 0; }
+  .cab .hor-etat{ font-size:var(--fs-sm); }
 </style>
 </head>
 <body>
@@ -50,14 +53,13 @@ function render(){
     </header>
     ${a ? `<div class="notice annonce">${icon("bell")}<span>${esc(a.texte).replace(/\n/g, "<br>")}</span></div>` : ""}
     <div class="cab-actions">
-      ${tel ? `<a class="btn primary big" href="tel:${esc(tel.replace(/[^\d+]/g, ""))}">${icon("call")}Appeler le ${esc(tel)}</a>` : ""}
+      ${tel ? `<a class="btn primary big cab-call" href="tel:${esc(tel.replace(/[^\d+]/g, ""))}">${icon("call")}<span><b>Appeler</b><small>${esc(tel)}</small></span></a>` : ""}
       ${adr ? `<a class="btn big" href="${esc(maps)}" target="_blank" rel="noopener">${icon("pin")}Itinéraire</a>` : ""}
     </div>
     ${hor ? `
     <section class="panel">
       <h2>${icon("clock")}Horaires</h2>
-      <div class="hor-grid">${H.lignes(c.horaires).map(l => `<div class="hor-row${l.texte === "Fermé" ? " ferme" : ""}"><span>${esc(l.jours)}</span><span>${esc(l.texte)}</span></div>`).join("")}</div>
-      ${note ? `<p class="muted small" style="margin-top:10px">${esc(note).replace(/\n/g, "<br>")}</p>` : ""}
+      ${H.tableauHTML(c.horaires)}
     </section>` : ""}
     ${adr ? `
     <section class="panel">
