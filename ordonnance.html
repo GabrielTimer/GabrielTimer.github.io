@@ -19,31 +19,38 @@
   .tools .spacer{ flex:1; }
   .tools .hint{ width:100%; margin:0; }
   #pick{ min-width:220px; }
-  .sheet-a4{ width:min(100% - 24px, 210mm); min-height:270mm; margin:20px auto 60px; background:#fff; color:#14303A; padding:18mm 18mm 16mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:11pt; line-height:1.5; display:flex; flex-direction:column; }
-  .or-head{ display:flex; justify-content:space-between; gap:16px; align-items:flex-start; padding-bottom:12px; border-bottom:1.5px solid #138FA6; }
-  .or-id{ display:flex; gap:12px; align-items:flex-start; }
-  .or-id img{ width:48px; height:48px; object-fit:contain; }
-  .or-id strong{ display:block; font-size:13pt; color:#0B6E80; }
-  .or-id .or-num{ font-size:9.5pt; color:#47616B; margin-top:4px; }
-  .or-cab{ text-align:right; font-size:9.5pt; color:#47616B; white-space:pre-line; }
-  .or-date{ text-align:right; margin:22px 0 18px; }
-  .or-pat{ display:flex; flex-wrap:wrap; gap:8px 26px; margin-bottom:22px; }
-  .or-pat label{ display:flex; align-items:baseline; gap:8px; flex:1 1 200px; font-weight:600; }
-  .or-pat input{ flex:1; min-width:0; border:0; border-bottom:1.5px dotted #9FB6BC; background:transparent; font:inherit; font-weight:400; color:inherit; padding:2px 4px; }
-  .or-pat input:focus{ outline:none; border-bottom-color:#138FA6; background:#F2F8F9; }
+  .sheet-a4{ width:min(100% - 24px, 210mm); min-height:270mm; margin:20px auto 60px; background:#fff; color:#17323C; padding:16mm 18mm 12mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:13pt; line-height:1.55; display:flex; flex-direction:column; }
+  .or-head{ display:flex; gap:18px; align-items:center; }
+  .or-head img{ width:68px; height:68px; object-fit:contain; flex:none; }
+  .or-head strong{ display:block; font-size:19pt; line-height:1.2; color:#0B6E80; letter-spacing:.01em; }
+  .or-head .or-titre{ display:block; font-size:12.5pt; color:#3A5862; margin-top:2px; }
+  .or-num{ display:flex; flex-wrap:wrap; gap:2px 22px; font-size:10.5pt; color:#5B747C; margin-top:6px; }
+  .or-num b{ font-weight:600; color:#17323C; }
+  .or-rule{ height:3px; margin:14px 0 0; border-radius:2px; background:linear-gradient(90deg, #138FA6, #8FD0DB 70%, transparent); }
+  .or-date{ text-align:right; margin:20px 0 0; font-size:12.5pt; }
+  .or-title{ text-align:center; margin:18px 0 20px; font-size:15pt; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:#0B6E80; }
+  .or-pat{ display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; padding:12px 18px 14px; border-radius:10px; background:#F1F7F8; border:1px solid #DCE9EC; margin-bottom:26px; }
+  .or-pat label{ display:flex; flex-direction:column; gap:2px; font-size:9.5pt; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
+  .or-pat input{ border:0; border-bottom:1.5px solid transparent; background:transparent; font:inherit; font-size:15pt; letter-spacing:0; text-transform:none; font-weight:600; color:#17323C; padding:1px 0; min-width:0; }
+  .or-pat input::placeholder{ color:#A9BEC3; font-weight:400; }
+  .or-pat input:focus{ outline:none; border-bottom-color:#138FA6; }
   .or-pat .nom input{ text-transform:uppercase; }
-  .or-presc{ flex:1; min-height:110mm; white-space:pre-wrap; padding:6px; border-radius:4px; }
-  .or-presc:focus{ outline:2px dashed #9FB6BC; outline-offset:4px; }
-  .or-presc:empty::before{ content:attr(data-ph); color:#9FB6BC; }
-  .or-sign{ margin:18px 0 0 auto; width:min(48%, 80mm); text-align:center; }
-  .or-sign .space{ height:60px; }
+  .or-presc{ flex:1; min-height:95mm; white-space:pre-wrap; font-size:14.5pt; line-height:1.75; padding:2px 0 2px 18px; border-left:3px solid #BFE3E9; }
+  .or-presc:focus, .or-presc:focus-visible{ outline:none; box-shadow:none; border-left-color:#138FA6; }
+  .or-presc:empty::before{ content:attr(data-ph); color:#A9BEC3; }
+  .or-sign{ margin:22px 0 0 auto; width:min(50%, 85mm); text-align:center; font-size:12.5pt; }
+  .or-sign small{ display:block; font-size:9.5pt; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
+  .or-sign .space{ height:62px; }
+  .or-foot{ margin-top:22px; padding-top:9px; border-top:1px solid #DCE9EC; text-align:center; font-size:10pt; color:#5B747C; }
   @media print{
     @page{ size:A4; margin:14mm; }
     body{ background:#fff; }
     .tools{ display:none; }
     .sheet-a4{ width:auto; min-height:calc(297mm - 28mm); margin:0; padding:0; box-shadow:none; border-radius:0; }
     .or-presc:empty::before{ content:""; }
-    .or-pat input{ border-bottom-color:#14303A; background:transparent; }
+    .or-presc, .or-presc:focus{ outline:none !important; box-shadow:none !important; border-left-color:#BFE3E9; }
+    .or-pat, .or-rule{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .or-pat input::placeholder{ color:transparent; }
   }
 </style>
 </head>
@@ -60,16 +67,19 @@
 </div>
 <div class="sheet-a4" id="doc">
   <div class="or-head">
-    <div class="or-id"><img id="o-logo" alt=""><div><strong id="o-nom"></strong><span id="o-titre"></span><div class="or-num" id="o-num"></div></div></div>
-    <div class="or-cab" id="o-cab"></div>
+    <img id="o-logo" alt="">
+    <div><strong id="o-nom"></strong><span class="or-titre" id="o-titre"></span><div class="or-num" id="o-num"></div></div>
   </div>
+  <div class="or-rule"></div>
   <p class="or-date" id="o-date"></p>
+  <p class="or-title">Ordonnance</p>
   <div class="or-pat">
-    <label class="nom">Nom :<input id="p-nom" type="text" autocomplete="off" spellcheck="false"></label>
-    <label>Prénom :<input id="p-prenom" type="text" autocomplete="off" spellcheck="false"></label>
+    <label class="nom">Nom<input id="p-nom" type="text" autocomplete="off" spellcheck="false" placeholder="NOM"></label>
+    <label>Prénom<input id="p-prenom" type="text" autocomplete="off" spellcheck="false" placeholder="Prénom"></label>
   </div>
   <div class="or-presc" id="presc" contenteditable="true" data-ph="Prescription : touchez ici pour écrire…"></div>
-  <div class="or-sign"><div class="space"></div><span id="o-sign"></span></div>
+  <div class="or-sign"><small>Signature</small><div class="space"></div><span id="o-sign"></span></div>
+  <div class="or-foot" id="o-cab"></div>
 </div>
 <script type="module">
 import { $, esc, icon, params, settings, logoSrc, KINE, toast, confirmDialog } from "/assets/app.js";
@@ -91,8 +101,8 @@ function entete(){
   $("#o-logo").src = logoSrc();
   $("#o-nom").textContent = c.nom || KINE.nom;
   $("#o-titre").textContent = c.titre || KINE.titre;
-  $("#o-num").innerHTML = [c.rpps && `N° RPPS : ${esc(c.rpps)}`, c.am && `N° AM : ${esc(c.am)}`].filter(Boolean).join("<br>");
-  $("#o-cab").textContent = [c.adresse, c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("\n");
+  $("#o-num").innerHTML = [c.rpps && `<span>N° RPPS <b>${esc(c.rpps)}</b></span>`, c.am && `<span>N° AM <b>${esc(c.am)}</b></span>`].filter(Boolean).join("");
+  $("#o-cab").textContent = [String(c.adresse || "").replace(/\s*\n\s*/g, ", "), c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("  ·  ");
   $("#o-sign").textContent = c.nom || KINE.nom;
   const prov = (c.rpps && c.rpps === PROVISOIRES.rpps) || (c.am && c.am === PROVISOIRES.am);
   $("#hint").innerHTML = prov
@@ -165,41 +175,51 @@ function verif(){
   if(!prescription()){ toast("La prescription est vide.", { type:"err" }); $("#presc").focus(); return false; }
   return true;
 }
-$("#print").onclick = () => { if(verif()) print(); };
+$("#print").onclick = () => { if(!verif()) return; document.activeElement?.blur(); print(); };
 
 /* ---------- Word : document .doc (ouvert et modifiable dans Word, Pages ou LibreOffice) ---------- */
 $("#word").onclick = () => {
   const c = settings.cabinet || {};
   const br = s => esc(s).replace(/\n/g, "<br>");
-  const ligne = "……………………………";
   const nom = $("#p-nom").value.trim().toLocaleUpperCase("fr"), prenom = $("#p-prenom").value.trim();
   const presc = prescription();
+  const logo = new URL(logoSrc(), location.href).href;
+  const cabLigne = [String(c.adresse || "").replace(/\s*\n\s*/g, ", "), c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("  ·  ");
+  const nums = [c.rpps && `N° RPPS <b style="color:#17323C">${esc(c.rpps)}</b>`, c.am && `N° AM <b style="color:#17323C">${esc(c.am)}</b>`].filter(Boolean).join("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
   const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
 <head><meta charset="utf-8"><title>Ordonnance</title>
 <!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom></w:WordDocument></xml><![endif]-->
 <style>
-@page Section1{ size:21cm 29.7cm; margin:1.6cm 1.8cm 1.6cm 1.8cm; }
+@page Section1{ size:21cm 29.7cm; margin:1.5cm 1.8cm 1.3cm 1.8cm; }
 div.Section1{ page:Section1; }
-body{ font-family:Calibri, Arial, sans-serif; font-size:11pt; color:#14303A; }
-p{ margin:0 0 6pt; }
-.nom{ font-size:14pt; font-weight:bold; color:#0B6E80; margin:0; }
-.petit{ font-size:9.5pt; color:#47616B; }
+body{ font-family:Calibri, Arial, sans-serif; font-size:13pt; color:#17323C; }
+p{ margin:0; }
+.petit{ font-size:9.5pt; letter-spacing:1pt; text-transform:uppercase; color:#5B747C; font-weight:bold; }
 </style></head>
 <body><div class="Section1">
-<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-bottom:1.5pt solid #138FA6">
-<tr><td valign="top" style="padding-bottom:8pt">
-<p class="nom">${esc(c.nom || KINE.nom)}</p>
-<p style="margin:0">${esc(c.titre || KINE.titre)}</p>
-<p class="petit" style="margin:4pt 0 0">${[c.rpps && `N° RPPS : ${esc(c.rpps)}`, c.am && `N° AM : ${esc(c.am)}`].filter(Boolean).join("<br>")}</p>
-</td><td valign="top" align="right" style="padding-bottom:8pt">
-<p class="petit" style="margin:0;text-align:right">${br([c.adresse, c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("\n"))}</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr>
+<td width="72" valign="middle" style="padding-right:8pt"><img src="${esc(logo)}" width="64" height="64" alt=""></td>
+<td valign="middle">
+<p style="font-size:19pt;font-weight:bold;color:#0B6E80">${esc(c.nom || KINE.nom)}</p>
+<p style="font-size:12.5pt;color:#3A5862">${esc(c.titre || KINE.titre)}</p>
+<p style="font-size:10.5pt;color:#5B747C;margin-top:4pt">${nums}</p>
 </td></tr></table>
-<p style="text-align:right;margin:22pt 0 18pt">${esc(dateTexte())}</p>
-<p style="margin:0 0 20pt"><b>Nom :</b> ${esc(nom) || ligne}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Prénom :</b> ${esc(prenom) || ligne}</p>
-<p style="min-height:12cm">${presc ? br(presc) : "&nbsp;"}</p>
-${"<p>&nbsp;</p>".repeat(presc ? 10 : 14)}
-<p>&nbsp;</p><p>&nbsp;</p>
-<p style="text-align:right;margin-top:40pt">${esc(c.nom || KINE.nom)}</p>
+<p style="border-bottom:2.25pt solid #138FA6;margin:10pt 0 0;font-size:2pt">&nbsp;</p>
+<p style="text-align:right;margin:16pt 0 0;font-size:12.5pt">${esc(dateTexte())}</p>
+<p style="text-align:center;margin:16pt 0 16pt;font-size:15pt;font-weight:bold;letter-spacing:4pt;color:#0B6E80">ORDONNANCE</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#F1F7F8;border:1pt solid #DCE9EC"><tr>
+<td width="50%" style="padding:9pt 14pt 10pt"><p class="petit">Nom</p><p style="font-size:15pt;font-weight:bold">${esc(nom) || "&nbsp;"}</p></td>
+<td width="50%" style="padding:9pt 14pt 10pt"><p class="petit">Prénom</p><p style="font-size:15pt;font-weight:bold">${esc(prenom) || "&nbsp;"}</p></td>
+</tr></table>
+<p style="margin:0">&nbsp;</p>
+<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr>
+<td style="border-left:2.25pt solid #BFE3E9;padding:2pt 0 2pt 14pt;font-size:14.5pt;line-height:175%;height:9cm" valign="top">${presc ? br(presc) : "&nbsp;"}${"<br>&nbsp;".repeat(Math.max(1, 8 - presc.split("\n").length))}</td>
+</tr></table>
+<p style="margin:0">&nbsp;</p>
+<table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%">&nbsp;</td>
+<td width="50%" align="center" valign="top"><p class="petit" style="text-align:center">Signature</p><p>&nbsp;</p><p>&nbsp;</p><p style="text-align:center;font-size:12.5pt">${esc(c.nom || KINE.nom)}</p></td></tr></table>
+<p style="margin:0">&nbsp;</p>
+<p style="border-top:1pt solid #DCE9EC;padding-top:6pt;text-align:center;font-size:10pt;color:#5B747C">${esc(cabLigne)}</p>
 </div></body></html>`;
   const blob = new Blob(["﻿", html], { type:"application/msword" });
   const slug = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
