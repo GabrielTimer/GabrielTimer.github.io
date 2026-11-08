@@ -2,7 +2,7 @@
    Horaires du cabinet (Réglages du cabinet → Horaires)
    ---------------------------------------------------------
    settings.cabinet.horaires = {
-     jours: [ dimanche, lundi, …, samedi ]   (index = Date.getDay())
+     jours: { "0": dimanche, "1": lundi, …, "6": samedi }   (clé = Date.getDay() ; objet et non liste : Firebase refuse les listes de listes)
             chaque jour : [ { lieu:"cabinet"|"domicile"|"ferme", de:"08:00", a:"12:00" }, … ] (2 créneaux : matin, après-midi)
      note: "Fermé les jours fériés…"
    }
@@ -17,10 +17,10 @@ const vide = () => [{ lieu:"ferme", de:"", a:"" }, { lieu:"ferme", de:"", a:"" }
 
 /** Horaires complets (7 jours × 2 créneaux), même si rien n'est encore saisi. */
 export function normaliser(h){
-  const jours = Array.isArray(h?.jours) ? h.jours : [];
+  const jours = h?.jours && typeof h.jours === "object" ? h.jours : {};
   return {
     jours: [0, 1, 2, 3, 4, 5, 6].map(i => {
-      const j = Array.isArray(jours[i]) ? jours[i] : [];
+      const j = Array.isArray(jours[i]) ? jours[i] : Array.isArray(jours[String(i)]) ? jours[String(i)] : [];
       return vide().map((v, k) => ({ ...v, ...(j[k] || {}) }));
     }),
     note: String(h?.note || "")

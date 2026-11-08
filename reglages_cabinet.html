@@ -430,10 +430,10 @@ async function save(){
   const ids = new Set(); cats.forEach(c => { while(ids.has(c.id)) c.id += "_"; ids.add(c.id); });
   const patch = {
     cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), rpps: val("c-rpps").trim(), am: val("c-am").trim(),
-      horaires: { jours: [0, 1, 2, 3, 4, 5, 6].map(i => [0, 1].map(k => {
+      horaires: { jours: Object.fromEntries([0, 1, 2, 3, 4, 5, 6].map(i => [String(i), [0, 1].map(k => {
         const lieu = val(`h-${i}-${k}-lieu`), de = val(`h-${i}-${k}-de`), a = val(`h-${i}-${k}-a`);
         return lieu === "ferme" || !de || !a ? { lieu:"ferme", de:"", a:"" } : { lieu, de: de < a ? de : a, a: de < a ? a : de };
-      })), note: val("h-note").trim() },
+      })])), note: val("h-note").trim() },
       logo: logo || "" },
     messages: {
       invitation: val("m-inv").trim() || DEFAULTS.messages.invitation,
