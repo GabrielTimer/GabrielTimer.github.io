@@ -22828,5 +22828,441 @@ export const MODELES_BASE = [
 "conseil_kine": "Étirement doux, en respirant calmement."
 }
 ]
+},
+{
+"id": "cab_abdos_perinee_post_partum_1",
+"nom": "Abdos profonds et périnée (post-partum sportive)",
+"niveau": 1,
+"categorie": "prevention",
+"zoneLabel": "Abdominaux et périnée",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "POSTPARTUM_01",
+"source": "CABINET",
+"nom": "Respiration et activation du transverse",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Inspirez par le nez en laissant le ventre se gonfler.",
+"Soufflez longuement par la bouche en serrant le périnée et en rentrant le bas du ventre, comme pour fermer un jean serré.",
+"Relâchez complètement avant la respiration suivante."
+],
+"position": "Allongée sur le dos, genoux pliés",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirez par le nez en laissant le ventre se gonfler.<br>Soufflez longuement par la bouche en serrant le périnée et en rentrant le bas du ventre, comme pour fermer un jean serré.<br>Relâchez complètement avant la respiration suivante.",
+"reps": 2,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Le ventre rentre à l'expiration, il ne doit jamais pousser vers l'extérieur."
+},
+{
+"id": "PERINEE_LENT",
+"source": "CABINET",
+"nom": "Contractions lentes du périnée",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Serrez et remontez le périnée vers l'intérieur, sans serrer les fesses ni bloquer la respiration.",
+"Tenez la contraction pendant tout le décompte en respirant calmement.",
+"Relâchez entièrement pendant le repos."
+],
+"position": "Allongée sur le dos, genoux pliés",
+"youtube": "",
+"type": "timer",
+"conseil": "Serrez et remontez le périnée vers l'intérieur, sans serrer les fesses ni bloquer la respiration.<br>Tenez la contraction pendant tout le décompte en respirant calmement.<br>Relâchez entièrement pendant le repos.",
+"reps": 6,
+"ex": 8,
+"repos": 8,
+"conseil_kine": "Si la contraction lâche avant la fin, réduisez la durée tenue : la qualité compte plus que le temps."
+},
+{
+"id": "POSTPARTUM_10",
+"source": "CABINET",
+"nom": "Dead bug complet",
+"image": "/exercises/images/post-partum/dead-bug-complet.webp",
+"consignes": [
+"Bras tendus vers le plafond, genoux à 90° au-dessus des hanches.",
+"En soufflant, allongez un bras en arrière et la jambe opposée vers l'avant, sans décoller le bas du dos.",
+"Revenez et changez de côté, en alternant lentement."
+],
+"position": "Allongée sur le dos",
+"youtube": "",
+"type": "timer",
+"conseil": "Bras tendus vers le plafond, genoux à 90° au-dessus des hanches.<br>En soufflant, allongez un bras en arrière et la jambe opposée vers l'avant, sans décoller le bas du dos.<br>Revenez et changez de côté, en alternant lentement.",
+"reps": 4,
+"ex": 35,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez. Le bas du dos reste collé au sol."
+},
+{
+"id": "POSTPARTUM_11",
+"source": "CABINET",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+"consignes": [
+"Une jambe tendue dans l'axe de la cuisse, l'autre pied au sol.",
+"En soufflant, montez le bassin bien droit, sans qu'il penche d'un côté.",
+"Redescendez lentement. Changez de jambe à chaque série."
+],
+"position": "Allongée sur le dos, genoux pliés",
+"youtube": "",
+"type": "timer",
+"conseil": "Une jambe tendue dans l'axe de la cuisse, l'autre pied au sol.<br>En soufflant, montez le bassin bien droit, sans qu'il penche d'un côté.<br>Redescendez lentement. Changez de jambe à chaque série.",
+"reps": 4,
+"ex": 35,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez. 2 séries par jambe."
+},
+{
+"id": "POSTPARTUM_13",
+"source": "CABINET",
+"nom": "Bird dog complet",
+"image": "/exercises/images/post-partum/bird-dog-complet.webp",
+"consignes": [
+"À quatre pattes, dos plat, mains sous les épaules et genoux sous les hanches.",
+"En soufflant, allongez un bras devant et la jambe opposée derrière, sans bouger le bassin.",
+"Revenez et changez de côté, en alternant lentement."
+],
+"position": "À quatre pattes",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, dos plat, mains sous les épaules et genoux sous les hanches.<br>En soufflant, allongez un bras devant et la jambe opposée derrière, sans bouger le bassin.<br>Revenez et changez de côté, en alternant lentement.",
+"reps": 4,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez. Imaginez un verre d'eau posé sur le bas du dos."
+},
+{
+"id": "POSTPARTUM_15",
+"source": "CABINET",
+"nom": "Planche latérale sur les genoux",
+"image": "/exercises/images/post-partum/side-plank-genoux.webp",
+"consignes": [
+"Appui sur l'avant-bras, coude sous l'épaule, genoux pliés.",
+"Montez le bassin pour aligner tête, bassin et genoux.",
+"Tenez en respirant calmement. Changez de côté à chaque série."
+],
+"position": "Allongée sur le côté",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras, coude sous l'épaule, genoux pliés.<br>Montez le bassin pour aligner tête, bassin et genoux.<br>Tenez en respirant calmement. Changez de côté à chaque série.",
+"reps": 4,
+"ex": 25,
+"repos": 15,
+"conseil_kine": "Gardez le périnée et le bas du ventre légèrement engagés pendant tout le maintien. 2 séries par côté."
+},
+{
+"id": "PERINEE_RAPIDE",
+"source": "CABINET",
+"nom": "Contractions rapides du périnée",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Serrez le périnée fort et vite, puis relâchez complètement.",
+"Enchaînez à votre rythme pendant tout le décompte, une contraction par seconde environ.",
+"Le relâchement est aussi important que la contraction."
+],
+"position": "Allongée sur le dos, genoux pliés",
+"youtube": "",
+"type": "timer",
+"conseil": "Serrez le périnée fort et vite, puis relâchez complètement.<br>Enchaînez à votre rythme pendant tout le décompte, une contraction par seconde environ.<br>Le relâchement est aussi important que la contraction.",
+"reps": 3,
+"ex": 15,
+"repos": 15,
+"conseil_kine": "Ce sont les contractions réflexes qui protègent des fuites quand on tousse, saute ou court."
+}
+]
+},
+{
+"id": "cab_abdos_perinee_post_partum_2",
+"nom": "Abdos profonds et périnée (post-partum sportive)",
+"niveau": 2,
+"categorie": "prevention",
+"zoneLabel": "Abdominaux et périnée",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "POSTPARTUM_01",
+"source": "CABINET",
+"nom": "Respiration et activation du transverse",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Inspirez par le nez en laissant le ventre se gonfler.",
+"Soufflez longuement en serrant le périnée et en rentrant le bas du ventre.",
+"Relâchez complètement avant la respiration suivante."
+],
+"position": "Allongée sur le dos, genoux pliés",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirez par le nez en laissant le ventre se gonfler.<br>Soufflez longuement en serrant le périnée et en rentrant le bas du ventre.<br>Relâchez complètement avant la respiration suivante.",
+"reps": 2,
+"ex": 40,
+"repos": 10,
+"conseil_kine": "Mise en route : le ventre rentre à l'expiration, il ne pousse jamais vers l'extérieur."
+},
+{
+"id": "POSTPARTUM_19",
+"source": "CABINET",
+"nom": "Dead bug à l'élastique",
+"image": "/exercises/images/post-partum/dead-bug-elastique.webp",
+"consignes": [
+"Tenez un élastique tendu, bras vers le plafond, genoux à 90°.",
+"En soufflant, allongez une jambe vers l'avant en gardant la tension de l'élastique et le bas du dos au sol.",
+"Revenez et changez de jambe, en alternant lentement."
+],
+"position": "Allongée sur le dos",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenez un élastique tendu, bras vers le plafond, genoux à 90°.<br>En soufflant, allongez une jambe vers l'avant en gardant la tension de l'élastique et le bas du dos au sol.<br>Revenez et changez de jambe, en alternant lentement.",
+"reps": 4,
+"ex": 40,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez.",
+"materiel": "Élastique"
+},
+{
+"id": "POSTPARTUM_12",
+"source": "CABINET",
+"nom": "Pallof press",
+"image": "/exercises/images/post-partum/pallof-press.webp",
+"consignes": [
+"Debout de profil par rapport à l'attache de l'élastique, mains contre le sternum.",
+"En soufflant, tendez les bras devant vous sans laisser le buste tourner.",
+"Ramenez lentement. Changez de côté à chaque série."
+],
+"position": "Debout, pieds largeur de bassin",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout de profil par rapport à l'attache de l'élastique, mains contre le sternum.<br>En soufflant, tendez les bras devant vous sans laisser le buste tourner.<br>Ramenez lentement. Changez de côté à chaque série.",
+"reps": 4,
+"ex": 40,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez. 2 séries par côté.",
+"materiel": "Élastique"
+},
+{
+"id": "POSTPARTUM_20",
+"source": "CABINET",
+"nom": "Planche latérale jambes tendues",
+"image": "/exercises/images/post-partum/side-plank-jambes.webp",
+"consignes": [
+"Appui sur l'avant-bras et le bord des pieds, coude sous l'épaule.",
+"Montez le bassin pour aligner tête, bassin et pieds.",
+"Tenez en respirant calmement. Changez de côté à chaque série."
+],
+"position": "Allongée sur le côté",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras et le bord des pieds, coude sous l'épaule.<br>Montez le bassin pour aligner tête, bassin et pieds.<br>Tenez en respirant calmement. Changez de côté à chaque série.",
+"reps": 4,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Périnée et bas du ventre légèrement engagés pendant tout le maintien. Si c'est trop dur, reposez le genou du dessous. 2 séries par côté."
+},
+{
+"id": "POSTPARTUM_21",
+"source": "CABINET",
+"nom": "Squat tempo",
+"image": "/exercises/images/post-partum/squat-tempo.webp",
+"consignes": [
+"Pieds largeur d'épaules, poids sur les talons.",
+"Descendez en 3 secondes, fesses vers l'arrière, dos droit.",
+"Remontez en soufflant et en serrant le périnée."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Pieds largeur d'épaules, poids sur les talons.<br>Descendez en 3 secondes, fesses vers l'arrière, dos droit.<br>Remontez en soufflant et en serrant le périnée.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Expirez et verrouillez le périnée à chaque remontée : c'est le geste à garder pour soulever une charge au quotidien."
+},
+{
+"id": "POSTPARTUM_18",
+"source": "CABINET",
+"nom": "Bear hover (genoux décollés)",
+"image": "/exercises/images/post-partum/bear-hover.webp",
+"consignes": [
+"À quatre pattes, orteils repliés, dos plat.",
+"En soufflant, décollez les genoux de 2 à 3 cm du sol.",
+"Tenez en respirant calmement, sans que le ventre ne bombe."
+],
+"position": "À quatre pattes",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, orteils repliés, dos plat.<br>En soufflant, décollez les genoux de 2 à 3 cm du sol.<br>Tenez en respirant calmement, sans que le ventre ne bombe.",
+"reps": 3,
+"ex": 25,
+"repos": 20,
+"conseil_kine": "Si le ventre bombe ou pousse vers le bas, reposez les genoux et réduisez la durée."
+},
+{
+"id": "PERINEE_DEBOUT",
+"source": "CABINET",
+"nom": "Périnée debout : lentes puis rapides",
+"image": "/exercises/images/post-partum/sit-to-stand.png",
+"consignes": [
+"Debout, serrez et remontez le périnée, tenez 5 secondes en respirant, relâchez.",
+"Puis enchaînez 5 contractions rapides.",
+"Recommencez jusqu'à la fin du décompte."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, serrez et remontez le périnée, tenez 5 secondes en respirant, relâchez.<br>Puis enchaînez 5 contractions rapides.<br>Recommencez jusqu'à la fin du décompte.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Debout, le périnée travaille contre la pesanteur : c'est l'étape avant les sauts et la course."
+}
+]
+},
+{
+"id": "cab_abdos_perinee_post_partum_3",
+"nom": "Abdos profonds et périnée (post-partum sportive)",
+"niveau": 3,
+"categorie": "prevention",
+"zoneLabel": "Abdominaux et périnée",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "POSTPARTUM_22",
+"source": "CABINET",
+"nom": "Bird dog avec pause",
+"image": "/exercises/images/post-partum/bird-dog-complet.webp",
+"consignes": [
+"À quatre pattes, dos plat.",
+"Allongez un bras et la jambe opposée, tenez 3 secondes en haut.",
+"Ramenez coude et genou sous le ventre, puis repartez. Changez de côté à chaque série."
+],
+"position": "À quatre pattes",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, dos plat.<br>Allongez un bras et la jambe opposée, tenez 3 secondes en haut.<br>Ramenez coude et genou sous le ventre, puis repartez. Changez de côté à chaque série.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Mise en route. Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez."
+},
+{
+"id": "POSTPARTUM_24",
+"source": "CABINET",
+"nom": "Bear crawl",
+"image": "/exercises/images/post-partum/bear-crawl.webp",
+"consignes": [
+"Position bear hover : genoux décollés de 2 à 3 cm, dos plat.",
+"Avancez main droite et pied gauche ensemble, puis l'inverse, à petits pas.",
+"Reculez de la même façon, sans que le bassin ne bascule."
+],
+"position": "À quatre pattes",
+"youtube": "",
+"type": "timer",
+"conseil": "Position bear hover : genoux décollés de 2 à 3 cm, dos plat.<br>Avancez main droite et pied gauche ensemble, puis l'inverse, à petits pas.<br>Reculez de la même façon, sans que le bassin ne bascule.",
+"reps": 4,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Respirez en continu, périnée et bas du ventre engagés. Si le ventre bombe, raccourcissez la durée."
+},
+{
+"id": "POSTPARTUM_23",
+"source": "CABINET",
+"nom": "Fente arrière contrôlée",
+"image": "/exercises/images/post-partum/fente-arriere.webp",
+"consignes": [
+"Debout, reculez une jambe et descendez le genou arrière vers le sol.",
+"Gardez le buste droit et le genou avant au-dessus du pied.",
+"Remontez en soufflant et en serrant le périnée. Changez de jambe à chaque série."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, reculez une jambe et descendez le genou arrière vers le sol.<br>Gardez le buste droit et le genou avant au-dessus du pied.<br>Remontez en soufflant et en serrant le périnée. Changez de jambe à chaque série.",
+"reps": 4,
+"ex": 40,
+"repos": 15,
+"conseil_kine": "Avant chaque effort : soufflez en serrant le périnée (comme pour retenir un gaz et l'urine) et en rentrant le bas du ventre, puis bougez. 2 séries par jambe."
+},
+{
+"id": "POSTPARTUM_20",
+"source": "CABINET",
+"nom": "Planche latérale jambes tendues",
+"image": "/exercises/images/post-partum/side-plank-jambes.webp",
+"consignes": [
+"Appui sur l'avant-bras et le bord des pieds.",
+"Montez le bassin pour aligner tête, bassin et pieds.",
+"Pour corser : décollez la jambe du dessus de quelques centimètres. Changez de côté à chaque série."
+],
+"position": "Allongée sur le côté",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras et le bord des pieds.<br>Montez le bassin pour aligner tête, bassin et pieds.<br>Pour corser : décollez la jambe du dessus de quelques centimètres. Changez de côté à chaque série.",
+"reps": 4,
+"ex": 35,
+"repos": 15,
+"conseil_kine": "Périnée et bas du ventre engagés pendant tout le maintien. 2 séries par côté."
+},
+{
+"id": "POSTPARTUM_25",
+"source": "CABINET",
+"nom": "Port de charge asymétrique",
+"image": "/exercises/images/post-partum/carry-asymetrique.webp",
+"consignes": [
+"Une charge dans une seule main (kettlebell, sac lesté ou pack d'eau).",
+"Marchez en restant bien droite, sans pencher du côté de la charge.",
+"Changez de main à chaque série."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Une charge dans une seule main (kettlebell, sac lesté ou pack d'eau).<br>Marchez en restant bien droite, sans pencher du côté de la charge.<br>Changez de main à chaque série.",
+"reps": 4,
+"ex": 40,
+"repos": 15,
+"conseil_kine": "Soufflez en serrant le périnée au moment de soulever et de reposer la charge. 2 séries par main.",
+"materiel": "Charge de 6 à 10 kg"
+},
+{
+"id": "POSTPARTUM_27",
+"source": "CABINET",
+"nom": "Step up dynamique",
+"image": "/exercises/images/post-partum/step-up-dynamique.webp",
+"consignes": [
+"Face à une marche ou un banc stable.",
+"Montez d'une jambe en poussant fort, genou opposé qui monte devant.",
+"Redescendez en contrôle et enchaînez. Changez de jambe à chaque série."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Face à une marche ou un banc stable.<br>Montez d'une jambe en poussant fort, genou opposé qui monte devant.<br>Redescendez en contrôle et enchaînez. Changez de jambe à chaque série.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Préparation à l'impact : verrouillez le périnée à chaque poussée. Au moindre signe de fuite ou de pesanteur, ralentissez.",
+"materiel": "Marche ou banc stable"
+},
+{
+"id": "PERINEE_IMPACT",
+"source": "CABINET",
+"nom": "Périnée réflexe : toux et petits sauts",
+"image": "/exercises/images/post-partum/sit-to-stand.png",
+"consignes": [
+"Debout, serrez le périnée juste avant de tousser fort, 3 fois.",
+"Puis faites de petits sauts sur place en serrant le périnée à chaque réception.",
+"Arrêtez dès que vous sentez une fuite ou une pesanteur."
+],
+"position": "Debout",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, serrez le périnée juste avant de tousser fort, 3 fois.<br>Puis faites de petits sauts sur place en serrant le périnée à chaque réception.<br>Arrêtez dès que vous sentez une fuite ou une pesanteur.",
+"reps": 3,
+"ex": 20,
+"repos": 15,
+"conseil_kine": "Objectif : un périnée qui se verrouille tout seul avant l'impact. En cas de fuite, revenez aux contractions rapides et parlez-en à votre kiné."
+}
+]
 }
 ];
