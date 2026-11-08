@@ -20,6 +20,9 @@ export const DEFAULTS = {
     email: KINE.email,
     telephone: "05 64 72 40 15",
     adresse: "1 avenue de la coopération\n86200 Loudun",
+    /* Numéros d'ordonnance : PROVISOIRES, à remplacer par les vrais (Réglages du cabinet) */
+    rpps: "10101234567",
+    am: "86 1 23456 7",
     logo: null
   },
   messages: {

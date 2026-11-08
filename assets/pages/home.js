@@ -8,6 +8,7 @@ import {
 } from "../app.js";
 import { currentAnnonce, loadSettings, settings as reglages } from "../settings.js";
 import { exerciseImage } from "../library.js";
+import * as Hor from "../horaires.js";
 import * as V from "../variantes.js";
 import { nomAffiche } from "../noms.js";
 import * as Installer from "../installer.js";
@@ -127,6 +128,17 @@ function showAnnonce(){
   box.innerHTML = a ? `<div class="notice annonce" style="margin-bottom:16px">${icon("bell")}<span>${esc(a.texte).replace(/\n/g, "<br>")}</span></div>` : "";
 }
 
+function horairesHTML(h){
+  const st = Hor.etat(h), note = Hor.normaliser(h).note.trim();
+  const rows = Hor.lignes(h).map(l => `<div class="hor-row${l.texte === "Fermé" ? " ferme" : ""}"><span>${esc(l.jours)}</span><span>${esc(l.texte)}</span></div>`).join("");
+  return `<div class="list-item hor"><span class="li-ico">${icon("clock")}</span><span class="li-main">
+    <span class="li-title">Horaires</span>
+    <span class="hor-etat ${st.cls}">${esc(st.texte)}</span>
+    <span class="hor-grid">${rows}</span>
+    ${note ? `<span class="li-sub" style="margin-top:6px">${esc(note).replace(/\n/g, "<br>")}</span>` : ""}
+  </span></div>`;
+}
+
 /* Coordonnées du cabinet (Outils → Réglages du cabinet), en bas de l'accueil patient */
 function showCabinet(){
   const box = document.getElementById("cabinet");
@@ -134,13 +146,15 @@ function showCabinet(){
   const c = reglages.cabinet || {};
   const tel = String(c.telephone || "").trim();
   const adr = String(c.adresse || "").trim();
-  if(!tel && !adr){ box.innerHTML = ""; return; }
+  const hor = Hor.renseignes(c.horaires);
+  if(!tel && !adr && !hor){ box.innerHTML = ""; return; }
   const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
   box.innerHTML = `
     <section class="section">
       <div class="section-title">Le cabinet</div>
       <div class="list">
         ${tel ? item("tel:" + tel.replace(/[^\d+]/g, ""), "call", esc(tel), "Appeler le cabinet") : ""}
+        ${hor ? horairesHTML(c.horaires) : ""}
         ${adr ? item("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adr.replace(/\s*\n\s*/g, ", ")), "pin", esc(adr).replace(/\n/g, "<br>"), "Voir sur la carte, itinéraire", true) : ""}
       </div>
     </section>`;

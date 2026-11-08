@@ -33,6 +33,16 @@
   .rc-save .btn{ min-width:240px; }
   .rc-save .state{ font-size:var(--fs-sm); color:var(--ink-3); }
   @media (max-width:600px){ .rc-save .state{ display:none; } .rc-save .btn{ flex:1; min-width:0; } }
+  .rc-h{ display:flex; flex-direction:column; gap:10px; }
+  .rc-hj{ display:grid; grid-template-columns:96px 1fr 1fr; gap:8px 12px; align-items:center; padding:8px 0; border-top:1px solid var(--line); }
+  .rc-hj:first-child{ border-top:0; }
+  .rc-hj > b{ font-size:var(--fs-sm); }
+  .rc-hc{ display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+  .rc-hc select{ flex:1 1 130px; min-width:0; }
+  .rc-hc input{ width:96px; flex:none; }
+  .rc-hc.ferme input{ opacity:.35; }
+  .rc-hc.domicile select{ color:var(--sun-strong, #A15C00); font-weight:700; }
+  @media (max-width:640px){ .rc-hj{ grid-template-columns:1fr; } }
   .rc-rule{ font-family:var(--mono); font-size:var(--fs-xs); background:var(--surface-2); padding:10px 12px; border-radius:var(--r-sm); white-space:pre; overflow:auto; }
 </style>
 </head>
@@ -41,6 +51,7 @@
 <script type="module">
 import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, openSheet, accessLink, prenom } from "/assets/app.js";
 import { settings, DEFAULTS, saveSettings, loadSettings, fillTemplate, logoSrc } from "/assets/settings.js";
+import * as H from "/assets/horaires.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -50,6 +61,7 @@ const app = $("#app");
 
 await loadSettings({ force:true });
 const R = structuredClone(settings);   // brouillon en cours de modification
+R.cabinet.horaires = H.normaliser(R.cabinet.horaires);
 let dirty = false;
 let logo = R.cabinet.logo || null;
 
@@ -114,6 +126,7 @@ async function initDossiers(){
 }
 
 function render(){
+  R.cabinet.horaires = H.normaliser(R.cabinet.horaires);
   const A = R.messages.annonce;
   app.innerHTML = `
   <div class="page-head"><h1>Réglages du cabinet</h1><p class="lead">Tout ce qui se modifie sans toucher au code. Les changements s'appliquent sur tous vos appareils et chez vos patients.</p></div>
@@ -137,8 +150,29 @@ function render(){
         ${field("c-email", "E-mail de contact", R.cabinet.email, { type:"email", hint:"Les patients vous écrivent à cette adresse." })}
         ${field("c-tel", "Téléphone", R.cabinet.telephone, { type:"tel" })}
         ${area("c-adr", "Adresse", R.cabinet.adresse, { rows:2 })}
+        ${field("c-rpps", "N° RPPS", R.cabinet.rpps, { attrs:'inputmode="numeric"', hint:"Imprimé sur les ordonnances." })}
+        ${field("c-am", "N° Assurance Maladie", R.cabinet.am, { hint:"Imprimé sur les ordonnances." })}
       </div>
-      <p class="hint" style="margin-top:10px">L'adresse e-mail de <strong>connexion</strong> à l'espace kiné ne change pas ici : elle est liée à votre compte Firebase.</p>
+      <p class="hint" style="margin-top:10px">${icon("link")} Page publique du cabinet (à mettre sur Google Maps) : <a href="/cabinet.html" target="_blank" rel="noopener">gabrieltimer.github.io/cabinet.html</a></p>
+      <p class="hint" style="margin-top:6px">L'adresse e-mail de <strong>connexion</strong> à l'espace kiné ne change pas ici : elle est liée à votre compte Firebase.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("clock")}Horaires</h2>
+      <p class="muted">Affichés aux patients, dans la rubrique « Le cabinet » de leur accueil, avec l'état du moment (ouvert, en soins à domicile, fermé). Pour chaque demi-journée, choisissez où vous êtes et les heures.</p>
+      <div class="rc-h" id="hor">${H.ORDRE.map(i => `
+        <div class="rc-hj"><b>${H.JOURS[i]}</b>${R.cabinet.horaires.jours[i].map((c, k) => `
+          <div class="rc-hc ${esc(c.lieu)}" data-hc="${i}-${k}">
+            <select class="input" id="h-${i}-${k}-lieu" aria-label="${H.JOURS[i]} ${k ? "après-midi" : "matin"}">${Object.entries(H.LIEUX).map(([v, l]) => `<option value="${v}" ${c.lieu === v ? "selected" : ""}>${k ? "Après-midi" : "Matin"} : ${l.toLowerCase()}</option>`).join("")}</select>
+            <input class="input" type="time" id="h-${i}-${k}-de" value="${esc(c.de)}" aria-label="De">
+            <input class="input" type="time" id="h-${i}-${k}-a" value="${esc(c.a)}" aria-label="À">
+          </div>`).join("")}
+        </div>`).join("")}
+      </div>
+      <div class="row wrap" style="--gap:8px;margin:12px 0">
+        <button class="btn sm" type="button" id="h-copy">${icon("copy")}Copier le lundi du mardi au vendredi</button>
+      </div>
+      ${area("h-note", "Remarque (facultatif)", R.cabinet.horaires.note, { rows:2, ph:"Sur rendez-vous uniquement. Fermé les jours fériés." })}
     </section>
 
     <section class="panel">
@@ -274,6 +308,22 @@ function render(){
   $("#bk-last").textContent = last ? `Dernière sauvegarde depuis cet appareil : ${new Date(Number(last)).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}.` : "Conseil : faites une sauvegarde une fois par mois.";
 
   app.addEventListener("input", e => { if(!e.target.closest("#backup")) setDirty(true); preview(); });
+  /* Horaires : grise les heures d'une demi-journée fermée, et propose des heures par défaut */
+  $("#hor").addEventListener("change", e => {
+    const box = e.target.closest("[data-hc]"); if(!box || e.target.tagName !== "SELECT") return;
+    const [i, k] = box.dataset.hc.split("-"), lieu = e.target.value;
+    box.className = "rc-hc " + lieu;
+    const de = $(`#h-${i}-${k}-de`), a = $(`#h-${i}-${k}-a`);
+    if(lieu !== "ferme" && !de.value && !a.value){ de.value = k === "0" ? "08:00" : "14:00"; a.value = k === "0" ? "12:00" : "19:00"; }
+    setDirty(true);
+  });
+  $("#h-copy").onclick = () => {
+    [2, 3, 4, 5].forEach(i => [0, 1].forEach(k => {
+      ["lieu", "de", "a"].forEach(f => { $(`#h-${i}-${k}-${f}`).value = $(`#h-1-${k}-${f}`).value; });
+      $(`[data-hc="${i}-${k}"]`).className = "rc-hc " + $(`#h-1-${k}-lieu`).value;
+    }));
+    setDirty(true); toast("Horaires du lundi copiés du mardi au vendredi.");
+  };
   app.addEventListener("change", e => { if(e.target.matches("input[type=checkbox], input[type=date]")) setDirty(true); });
   $$("[data-var]").forEach(b => b.onclick = () => {
     const t = $("#m-inv"), v = `{${b.dataset.var}}`;
@@ -379,7 +429,12 @@ async function save(){
   if(!cats.some(c => c.id === "autre")) cats.push({ id:"autre", label:"Autres", one:"Autre" });
   const ids = new Set(); cats.forEach(c => { while(ids.has(c.id)) c.id += "_"; ids.add(c.id); });
   const patch = {
-    cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), logo: logo || "" },
+    cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), rpps: val("c-rpps").trim(), am: val("c-am").trim(),
+      horaires: { jours: [0, 1, 2, 3, 4, 5, 6].map(i => [0, 1].map(k => {
+        const lieu = val(`h-${i}-${k}-lieu`), de = val(`h-${i}-${k}-de`), a = val(`h-${i}-${k}-a`);
+        return lieu === "ferme" || !de || !a ? { lieu:"ferme", de:"", a:"" } : { lieu, de: de < a ? de : a, a: de < a ? a : de };
+      })), note: val("h-note").trim() },
+      logo: logo || "" },
     messages: {
       invitation: val("m-inv").trim() || DEFAULTS.messages.invitation,
       encouragements: val("m-enc").split("\n").map(s => s.trim()).filter(Boolean),

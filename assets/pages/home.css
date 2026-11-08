@@ -143,3 +143,16 @@
 .tiles-edit-bar span{ flex:1; min-width:120px; font-size:var(--fs-sm, .9rem); color:var(--ink-2, inherit); }
 .tiles-edit-bar.show{ max-height:120px; opacity:1; margin:0 0 10px; padding:8px 12px; border-color:var(--line); box-shadow:0 6px 20px rgba(0,0,0,.08); }
 @media (prefers-reduced-motion:reduce){ .tiles.editing [data-tile]{ animation:none; outline:2px dashed var(--lagon); outline-offset:-4px; } }
+
+/* Horaires du cabinet (accueil patient) */
+.list-item.hor{ align-items:flex-start; }
+.hor-etat{ display:inline-flex; align-items:center; gap:6px; margin:4px 0 8px; font-size:var(--fs-sm); font-weight:700; }
+.hor-etat::before{ content:""; width:8px; height:8px; border-radius:50%; background:currentColor; }
+.hor-etat.ouvert{ color:var(--ok); }
+.hor-etat.domicile{ color:var(--sun-strong, #A15C00); }
+.hor-etat.ferme{ color:var(--ink-3); }
+.hor-grid{ display:grid; gap:3px; font-size:var(--fs-sm); }
+.hor-row{ display:flex; justify-content:space-between; gap:12px; }
+.hor-row > span:first-child{ color:var(--ink-2); }
+.hor-row > span:last-child{ text-align:right; font-variant-numeric:tabular-nums; }
+.hor-row.ferme > span:last-child{ color:var(--ink-3); }
