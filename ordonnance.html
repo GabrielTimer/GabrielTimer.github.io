@@ -29,9 +29,9 @@
   .or-rule{ height:3px; margin:14px 0 0; border-radius:2px; background:linear-gradient(90deg, #138FA6, #8FD0DB 70%, transparent); }
   .or-date{ text-align:right; margin:20px 0 0; font-size:12.5pt; }
   .or-title{ text-align:center; margin:18px 0 20px; font-size:15pt; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:#0B6E80; }
-  .or-pat{ display:grid; grid-template-columns:1fr 1fr; gap:6px 22px; padding:12px 18px 14px; border-radius:10px; background:#F1F7F8; border:1px solid #DCE9EC; margin-bottom:26px; }
+  .or-pat{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:6px 22px; padding:12px 18px 14px; border-radius:10px; background:#F1F7F8; border:1px solid #DCE9EC; margin-bottom:26px; }
   .or-pat label{ display:flex; flex-direction:column; gap:2px; font-size:9.5pt; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
-  .or-pat input{ border:0; border-bottom:1.5px solid transparent; background:transparent; font:inherit; font-size:15pt; letter-spacing:0; text-transform:none; font-weight:600; color:#17323C; padding:1px 0; min-width:0; }
+  .or-pat input{ width:100%; box-sizing:border-box; border:0; border-bottom:1.5px solid transparent; background:transparent; font:inherit; font-size:15pt; letter-spacing:0; text-transform:none; font-weight:600; color:#17323C; padding:1px 0; min-width:0; }
   .or-pat input::placeholder{ color:#A9BEC3; font-weight:400; }
   .or-pat input:focus{ outline:none; border-bottom-color:#138FA6; }
   .or-pat .nom input{ text-transform:uppercase; }
@@ -42,6 +42,37 @@
   .or-sign small{ display:block; font-size:9.5pt; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
   .or-sign .space{ height:62px; }
   .or-foot{ margin-top:22px; padding-top:9px; border-top:1px solid #DCE9EC; text-align:center; font-size:10pt; color:#5B747C; }
+  html, body{ overflow-x:hidden; }
+  .sheet-a4 *{ min-width:0; overflow-wrap:anywhere; }
+  /* Smartphone : même ordonnance, en plus compact (l'impression et le Word restent en A4) */
+  @media screen and (max-width:720px){
+    .tools{ position:static; gap:8px; padding:10px 12px; }
+    .tools .field{ flex:1 1 140px; }
+    #pick{ min-width:0; width:100%; }
+    .tools .btn{ flex:1 1 auto; }
+    .tools #back{ flex:0 0 auto; margin-right:auto; }
+    .tools .field:has(#pick){ flex:1 1 100%; order:1; }
+    .tools .field:has(#date){ order:2; }
+    .tools #clear{ order:3; } .tools #word{ order:4; } .tools #print{ order:5; } .tools .hint{ order:6; }
+    .tools .spacer{ display:none; }
+    .sheet-a4{ width:calc(100% - 16px); min-height:0; margin:10px auto 40px; padding:20px 16px 14px; font-size:15px; }
+    .or-head{ gap:12px; align-items:flex-start; }
+    .or-head img{ width:46px; height:46px; }
+    .or-head strong{ font-size:20px; }
+    .or-head .or-titre{ font-size:14px; }
+    .or-num{ font-size:12.5px; gap:0 14px; }
+    .or-rule{ margin-top:12px; }
+    .or-date{ font-size:14.5px; margin-top:14px; }
+    .or-title{ font-size:17px; letter-spacing:.24em; margin:14px 0 16px; }
+    .or-pat{ gap:6px 14px; padding:10px 12px 12px; margin-bottom:20px; }
+    .or-pat label{ font-size:11px; }
+    .or-pat input{ font-size:17px; }
+    .or-presc{ min-height:220px; font-size:17px; padding-left:12px; }
+    .or-sign{ width:60%; font-size:14.5px; }
+    .or-sign small{ font-size:11px; }
+    .or-sign .space{ height:40px; }
+    .or-foot{ font-size:12px; }
+  }
   @media print{
     @page{ size:A4; margin:14mm; }
     body{ background:#fff; }
@@ -102,7 +133,7 @@ function entete(){
   $("#o-nom").textContent = c.nom || KINE.nom;
   $("#o-titre").textContent = c.titre || KINE.titre;
   $("#o-num").innerHTML = [c.rpps && `<span>N° RPPS <b>${esc(c.rpps)}</b></span>`, c.am && `<span>N° AM <b>${esc(c.am)}</b></span>`].filter(Boolean).join("");
-  $("#o-cab").textContent = [String(c.adresse || "").replace(/\s*\n\s*/g, ", "), c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("  ·  ");
+  $("#o-cab").innerHTML = [...String(c.adresse || "").split(/\s*\n\s*/).filter(Boolean), c.telephone && `Tél. ${c.telephone}`].filter(Boolean).map(x => `<span style="white-space:nowrap">${esc(x)}</span>`).join(" · ");
   $("#o-sign").textContent = c.nom || KINE.nom;
   const prov = (c.rpps && c.rpps === PROVISOIRES.rpps) || (c.am && c.am === PROVISOIRES.am);
   $("#hint").innerHTML = prov
