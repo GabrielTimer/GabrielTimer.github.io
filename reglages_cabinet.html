@@ -158,6 +158,7 @@ function render(){
         ${field("c-rpps", "N° RPPS", R.cabinet.rpps, { attrs:'inputmode="numeric"', hint:"Imprimé sur les ordonnances." })}
         ${field("c-am", "N° Assurance Maladie", R.cabinet.am, { hint:"Imprimé sur les ordonnances." })}
       </div>
+      <div style="margin-top:14px">${area("c-msg", "Message en haut de la page publique", R.cabinet.message, { rows:3, hint:"Bien visible en haut de la page du cabinet. {telephone} est remplacé par le numéro. Laissez vide pour ne rien afficher." })}</div>
       <p class="hint" style="margin-top:10px">${icon("link")} Page publique du cabinet (à mettre sur Google Maps) : <a href="/cabinet.html" target="_blank" rel="noopener">gabrieltimer.github.io/cabinet.html</a></p>
       <p class="hint" style="margin-top:6px">L'adresse e-mail de <strong>connexion</strong> à l'espace kiné ne change pas ici : elle est liée à votre compte Firebase.</p>
     </section>
@@ -505,7 +506,7 @@ async function save(){
   if(!cats.some(c => c.id === "autre")) cats.push({ id:"autre", label:"Autres", one:"Autre" });
   const ids = new Set(); cats.forEach(c => { while(ids.has(c.id)) c.id += "_"; ids.add(c.id); });
   const patch = {
-    cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), rpps: val("c-rpps").trim(), am: val("c-am").trim(),
+    cabinet: { nom: val("c-nom").trim() || DEFAULTS.cabinet.nom, titre: val("c-titre").trim(), sousTitre: val("c-sous").trim(), email: val("c-email").trim(), telephone: val("c-tel").trim(), adresse: val("c-adr").trim(), message: val("c-msg").trim(), rpps: val("c-rpps").trim(), am: val("c-am").trim(),
       horaires: { jours: Object.fromEntries([0, 1, 2, 3, 4, 5, 6].map(i => [String(i), [0, 1].map(k => {
         const lieu = val(`h-${i}-${k}-lieu`), de = val(`h-${i}-${k}-de`), a = val(`h-${i}-${k}-a`);
         return lieu === "ferme" || !de || !a ? { lieu:"ferme", de:"", a:"" } : { lieu, de: de < a ? de : a, a: de < a ? a : de };

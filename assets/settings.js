@@ -21,6 +21,8 @@ export const DEFAULTS = {
     telephone: "05 64 72 40 15",
     adresse: "1 avenue de la coopération\n86200 Loudun",
     /* Numéros d'ordonnance : PROVISOIRES, à remplacer par les vrais (Réglages du cabinet) */
+    /* Bandeau en haut de la page publique du cabinet ({telephone} est remplacé par le numéro) */
+    message: "Demande de rendez-vous, renseignement ou soins à domicile : appelez le cabinet au {telephone}.\nSi je suis en soins, laissez un message avec votre nom et votre numéro : je vous rappelle rapidement.",
     rpps: "10101234567",
     am: "86 1 23456 7",
     logo: null
