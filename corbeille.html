@@ -15,7 +15,7 @@
 <body>
 <main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
-import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, emptyHTML, errorHTML, plural, fmtShortDate } from "/assets/app.js";
+import { $, $$, esc, icon, pic, mountShell, registerSW, toast, confirmDialog, emptyHTML, errorHTML, plural, fmtShortDate } from "/assets/app.js";
 import { JOURS_CORBEILLE } from "/assets/inactivite.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
@@ -47,7 +47,7 @@ function render(){
       const reste = Math.max(0, JOURS_CORBEILLE - Math.floor((Date.now() - g.deletedAt) / 86400000));
       const faites = g.seances.filter(s => s.terminee).length;
       return `<div class="list-item" style="flex-wrap:wrap">
-        <span class="li-ico">${icon("trash")}</span>
+        <span class="li-ico">${pic("trash")}</span>
         <span class="li-main"><span class="li-title">${esc(g.nom)}</span>
           <span class="li-sub">${esc(nomDe(g.cle))} · ${faites} sur ${plural(g.seances.length, "séance")} faites · ${g.raison === "inactivite" ? "inutilisé 4 semaines" : "supprimé par vous"} le ${esc(fmtShortDate(g.deletedAt))} · effacé dans ${plural(reste, "jour")}</span></span>
         <span class="row" style="--gap:8px">

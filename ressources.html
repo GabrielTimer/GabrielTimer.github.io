@@ -16,13 +16,13 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, icon, mountShell, registerSW } from "/assets/app.js";
+import { $, icon, pic, mountShell, registerSW } from "/assets/app.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
 mountShell({ role:"kine", active:"", back:"history" });
 
-const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${pic(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
   <div class="page-head"><h1>Ressources</h1><p class="lead">À consulter pendant ou en dehors du bilan.</p></div>

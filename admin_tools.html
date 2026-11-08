@@ -19,14 +19,14 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, esc, icon, mountShell, registerSW, toast, confirmDialog, kineHint } from "/assets/app.js";
+import { $, esc, icon, pic, mountShell, registerSW, toast, confirmDialog, kineHint } from "/assets/app.js";
 const { requireKine } = await import("/assets/kine.js");
 const user = await requireKine();
 registerSW();
 mountShell({ role:"kine", active:"" });
 const C = await import("/assets/cloud.js");
 
-const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${pic(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
   <div class="page-head"><h1>Outils</h1></div>

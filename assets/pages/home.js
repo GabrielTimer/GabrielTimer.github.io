@@ -1,7 +1,7 @@
 /* Accueil : patient, kiné ou première visite */
 
 import {
-  $, esc, icon, appMarkHTML, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
+  $, esc, icon, pic, appMarkHTML, h, params, store, kineHint, readPatientContext, mountShell, registerSW, toast,
   fmtDate, fmtRelDay, fmtDuree, prenom, sessionDuration, startOfDay, daysFromToday, evaFace, evaColor,
   plural, loadingHTML, emptyHTML, errorHTML, exoImageHTML, normCode, fmtCode, KINE, byWeek, evaTrend,
   ressentiLabel, forgetPatient, logoSrc
@@ -130,8 +130,8 @@ function showAnnonce(){
 
 function horairesHTML(h){
   const st = Hor.etat(h);
-  return `<div class="list-item hor"><span class="li-ico">${icon("clock")}</span><span class="li-main">
-    <span class="li-title">${icon("clock")}Horaires</span>
+  return `<div class="list-item hor"><span class="li-ico">${pic("clock")}</span><span class="li-main">
+    <span class="li-title">${pic("clock")}Horaires</span>
     <span class="hor-etat ${st.cls}">${esc(st.texte)}</span>
     ${Hor.tableauHTML(h)}
   </span></div>`;
@@ -145,7 +145,7 @@ function showCabinet(){
   const tel = String(c.telephone || "").trim();
   const adr = String(c.adresse || "").trim();
   const hor = Hor.renseignes(c.horaires);
-  const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+  const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${pic(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
   box.innerHTML = `
     <section class="section">
       <div class="section-title">Le cabinet</div>
@@ -338,11 +338,11 @@ async function renderPatient(ctx){
     ${seulesHTML}
     <section class="section">
       <div class="list">
-        <a class="list-item" href="/cloud.html"><span class="li-ico">${icon("calendar")}</span><span class="li-main"><span class="li-title">Mes programmes</span><span class="li-sub">Toutes les séances, semaine par semaine</span></span><span class="li-end">${icon("chevron")}</span></a>
-        <a class="list-item" href="/progression.html"><span class="li-ico">${icon("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
-        <a class="list-item" href="/respir/index.html"><span class="li-ico">${icon("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
-        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
-        <button class="list-item" type="button" id="ecrire"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
+        <a class="list-item" href="/cloud.html"><span class="li-ico">${pic("calendar")}</span><span class="li-main"><span class="li-title">Mes programmes</span><span class="li-sub">Toutes les séances, semaine par semaine</span></span><span class="li-end">${icon("chevron")}</span></a>
+        <a class="list-item" href="/progression.html"><span class="li-ico">${pic("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
+        <a class="list-item" href="/respir/index.html"><span class="li-ico">${pic("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
+        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${pic("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
+        <button class="list-item" type="button" id="ecrire"><span class="li-ico">${pic("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
       </div>
     </section>
     <div id="cabinet"></div>
@@ -507,7 +507,7 @@ async function homeSuivi(ctx, patient, seances, actif){
     ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
       <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
-      <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
+      <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${pic(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
 }
 
 

@@ -1,7 +1,7 @@
 /* Historique et séances favorites enregistrés sur l'appareil */
 
 import {
-  $, $$, esc, icon, store, readPatientContext, kineHint, mountShell, registerSW, localProgs, emptyHTML,
+  $, $$, esc, icon, pic, store, readPatientContext, kineHint, mountShell, registerSW, localProgs, emptyHTML,
   confirmDialog, toast, evaColor, ressentiLabel, sessionDuration, fmtDuree, plural, setRunProgram, fmtShortDate
 } from "../app.js";
 
@@ -42,7 +42,7 @@ function renderHistorique(){
         return `
         <details class="prog">
           <summary class="h-sum"><div class="h-sum-in">
-            <span class="li-ico">${icon("history")}</span>
+            <span class="li-ico">${pic("history")}</span>
             <span style="flex:1;min-width:0"><strong style="display:block">${esc(nom)}</strong><span class="small muted">${plural(items.length, "séance")}, dernière le ${esc(items[0].date ? String(items[0].date).split(" ")[0] : "")}</span></span>
             ${moy !== null ? evaDot(moy) : ""}
             <span class="chev" style="color:var(--ink-3)">${icon("down")}</span>
@@ -90,7 +90,7 @@ function renderFavoris(){
     ${!list.length ? `<div class="panel">${emptyHTML({ ico:"star", title:"Aucune séance favorite", text: isKine ? "Enregistrez une séance depuis l'écran de création avec « Garder en favori »." : "Depuis l'historique, touchez l'étoile pour garder une séance." })}</div>` : `
     <div class="list">${list.map(p => `
       <div class="list-item" style="flex-wrap:wrap">
-        <span class="li-ico">${icon("star")}</span>
+        <span class="li-ico">${pic("star")}</span>
         <span class="li-main" style="flex:1 1 170px"><span class="li-title">${esc(p.nom && p.nom !== "undefined" ? p.nom : "Séance")}</span><span class="li-sub">${plural((p.data?.exercices || []).length, "exercice")}, ${esc(fmtDuree(sessionDuration(p.data)))}${p.date ? `, enregistrée le ${esc(p.date)}` : ""}</span></span>
         <span class="row" style="--gap:6px;margin-left:auto">
           <button class="btn sm primary" type="button" data-run="${p._i}">${icon("play")}Lancer</button>

@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.12.5";
+const VERSION = "gt-2.13.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -12,7 +12,7 @@ const PRECACHE = [
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js", "/assets/noms.js", "/assets/dossiers.js", "/assets/bilan-photos.js",
-  "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/rappels.js", "/assets/variantes.js", "/assets/installer.js", "/assets/mode-seance.js", "/assets/tests-catalogue.js", "/assets/inactivite.js", "/assets/chart.js", "/assets/programmes-view.js", "/assets/tiles-reorder.js", "/assets/horaires.js",
+  "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/rappels.js", "/assets/variantes.js", "/assets/installer.js", "/assets/mode-seance.js", "/assets/tests-catalogue.js", "/assets/inactivite.js", "/assets/chart.js", "/assets/programmes-view.js", "/assets/tiles-reorder.js", "/assets/horaires.js", "/assets/ic/home.webp", "/assets/ic/calendar.webp", "/assets/ic/chart.webp", "/assets/ic/settings.webp", "/assets/ic/users.webp", "/assets/ic/plus.webp", "/assets/ic/book.webp", "/assets/ic/layers.webp",
   "/assets/pages/home.css", "/assets/pages/home.js", "/assets/pages/cloud.js", "/assets/pages/timer.css",
   "/assets/pages/timer.js", "/assets/pages/fin.js", "/assets/pages/progression.js", "/assets/pages/local.js",
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"

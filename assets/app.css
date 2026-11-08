@@ -776,3 +776,12 @@ a.chip{ text-decoration:none; }
   .list-item.bilan-item .li-title{ white-space:normal; }
   .list-item.bilan-item .li-end{ width:100%; justify-content:space-between; padding-left:58px; }
 }
+
+/* Icônes illustrées (assets/ic/*.webp, voir pic() dans icons.js) */
+.ic-pic{ display:block; flex:none; object-fit:contain; user-select:none; -webkit-user-drag:none; }
+.li-ico .ic-pic{ width:32px; height:32px; }
+.nav-ico .ic-pic{ width:26px; height:26px; transition:filter .2s, opacity .2s; }
+.nav-link:not([aria-current="page"]) .nav-ico .ic-pic{ filter:grayscale(1); opacity:.55; }
+.nav-link:hover .nav-ico .ic-pic{ filter:none; opacity:1; }
+.panel h2 .ic-pic, .section-title .ic-pic{ width:28px; height:28px; }
+.li-title .ic-pic{ width:24px; height:24px; }

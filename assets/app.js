@@ -2,12 +2,12 @@
    Outils communs à toutes les pages
    ========================================================= */
 
-import { icon } from "./icons.js";
+import { icon, pic } from "./icons.js";
 import { variante } from "./variantes.js";
 import { KINE, SITE_URL } from "./config.js";
 import { settings, logoSrc } from "./settings.js";
 
-export { icon, KINE, SITE_URL, settings, logoSrc };
+export { icon, pic, KINE, SITE_URL, settings, logoSrc };
 export { APP_NAME } from "./config.js";
 import { APP_NAME as _APP } from "./config.js";
 
@@ -551,9 +551,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     body.classList.add("has-nav");
     const foot = role === "kine"
       ? `<div class="nav-foot">
-          <a class="nav-link" href="/messages.html" ${active === "messages" ? 'aria-current="page"' : ""}><span class="nav-ico">${icon("inbox")}</span><span>Messages</span><span class="inbox-badge inline" data-inbox-badge hidden></span></a>
-          <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${icon("wrench")}</span><span>Outils</span></a>
-          <a class="nav-link" href="/aide.html"><span class="nav-ico">${icon("info")}</span><span>Aide</span></a>
+          <a class="nav-link" href="/messages.html" ${active === "messages" ? 'aria-current="page"' : ""}><span class="nav-ico">${pic("inbox")}</span><span>Messages</span><span class="inbox-badge inline" data-inbox-badge hidden></span></a>
+          <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${pic("wrench")}</span><span>Outils</span></a>
+          <a class="nav-link" href="/aide.html"><span class="nav-ico">${pic("info")}</span><span>Aide</span></a>
           <div class="nav-app">${appMarkHTML()}</div>
         </div>`
       : `<div class="nav-foot">
@@ -561,7 +561,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
-      ${items.map(it => `<a class="nav-link" href="${it.href}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
+      ${items.map(it => `<a class="nav-link" href="${it.href}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${pic(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
     body.appendChild(nav);
