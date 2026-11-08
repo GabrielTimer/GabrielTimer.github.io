@@ -131,7 +131,7 @@ function showAnnonce(){
 function horairesHTML(h){
   const st = Hor.etat(h);
   return `<div class="list-item hor"><span class="li-ico">${icon("clock")}</span><span class="li-main">
-    <span class="li-title">Horaires</span>
+    <span class="li-title">${icon("clock")}Horaires</span>
     <span class="hor-etat ${st.cls}">${esc(st.texte)}</span>
     ${Hor.tableauHTML(h)}
   </span></div>`;

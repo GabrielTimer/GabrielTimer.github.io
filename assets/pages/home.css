@@ -181,3 +181,20 @@
 .hd-slots{ display:grid; grid-template-columns:repeat(2, max-content); }
 .hor-leg{ display:flex; align-items:center; gap:8px; margin:10px 0 0; font-size:var(--fs-xs); color:var(--ink-2); }
 .hor-leg .hs{ padding:3px 6px; }
+
+/* Horaires : correctifs d'affichage (accueil patient, écrans étroits) */
+.hd-row{ border-radius:0; }
+.hd-row.auj{ border-radius:var(--r-sm); }
+.hor-tab{ container-type:inline-size; }
+.list-item.hor{ display:block; }
+.list-item.hor > .li-ico{ display:none; }
+.list-item.hor .li-title{ display:flex; align-items:center; gap:8px; }
+.list-item.hor .li-title svg{ width:20px; height:20px; color:var(--lagon); }
+@container (max-width:360px){
+  .hd-row{ grid-template-columns:auto minmax(0, 1fr); gap:12px; }
+  .hd-l{ display:none; } .hd-c{ display:inline; }
+}
+@container (max-width:290px){
+  .hd-slots{ grid-template-columns:max-content; }
+}
+.list-item.hor .li-main{ display:block; }
