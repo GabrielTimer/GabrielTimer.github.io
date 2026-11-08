@@ -533,7 +533,7 @@ async function kineView(param){
         <button class="list-item" type="button" id="mo-moi"><span class="li-ico">${pic("phone")}</span><span class="li-main"><span class="li-title">Utiliser cet appareil comme ce patient</span><span class="li-sub">Mode patient réel (rappels, séances enregistrées). Retour à l'espace kiné dans Réglages.</span></span></button>
         <button class="list-item" type="button" id="mo-print"><span class="li-ico">${pic("print")}</span><span class="li-main"><span class="li-title">Imprimer une carte d'accès</span><span class="li-sub">Avec le QR code, à remettre au patient</span></span></button>
         <button class="list-item" type="button" id="mo-renew"><span class="li-ico">${pic("key")}</span><span class="li-main"><span class="li-title">Générer un nouveau code d'accès</span><span class="li-sub">L'ancien lien ne fonctionnera plus</span></span></button>
-        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${icon("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>
+        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${pic("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>
       </div>`
     });
     s.el.querySelector("#mo-moi").onclick = async () => {

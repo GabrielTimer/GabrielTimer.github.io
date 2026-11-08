@@ -3,7 +3,7 @@
    ========================================================= */
 
 import {
-  $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, promptDialog, openSheet,
+  $, $$, esc, icon, pic, params, store, mountShell, registerSW, toast, confirmDialog, promptDialog, openSheet,
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
   emptyHTML, byWeek, settings
 } from "../app.js";
@@ -1066,7 +1066,7 @@ async function sentSheet(p, count){
   const s = openSheet({
     title:"C'est envoyé",
     body:`<div class="stack" style="--gap:12px;align-items:center;text-align:center;padding:10px 0">
-      <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${icon("check")}</div></div>
+      <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${pic("check")}</div></div>
       <p><strong>${esc(p.nom)}</strong> a reçu ${count > 1 ? `un programme de ${count} séances` : "une nouvelle séance"}. Elle apparaît déjà dans son application.</p>
       <p class="small muted">Si c'est son premier programme, envoyez-lui son lien d'accès.</p></div>`,
     foot:`<button class="btn" type="button" id="ss-new">${icon("plus")}Nouvelle séance</button><button class="btn" type="button" id="ss-acc">${icon("qr")}Lien d'accès</button><a class="btn primary" href="/cloud.html?patient=${encodeURIComponent(p.cle)}">${icon("user")}Voir la fiche</a>`

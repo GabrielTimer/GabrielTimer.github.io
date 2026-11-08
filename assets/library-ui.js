@@ -1,6 +1,6 @@
 /* Composant « bibliothèque d'exercices » : recherche, filtres, fiche détaillée */
 
-import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
+import { $, $$, esc, icon, pic, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
@@ -158,7 +158,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     $("[data-count]", root).textContent = `${list.length} exercice${list.length > 1 ? "s" : ""}`;
     const res = $("[data-results]", root);
     res.innerHTML = list.length ? list.slice(0, state.limit).map(card).join("")
-      : `<div class="empty"><div class="e-ico">${icon("search")}</div><h3>Aucun exercice</h3><p>Essayez un autre mot ou retirez un filtre.</p></div>`;
+      : `<div class="empty"><div class="e-ico">${pic("search")}</div><h3>Aucun exercice</h3><p>Essayez un autre mot ou retirez un filtre.</p></div>`;
     $("[data-more]", root).hidden = list.length <= state.limit;
     $$("[data-add]", res).forEach(b => b.onclick = () => {
       const e = find(b.dataset.add);

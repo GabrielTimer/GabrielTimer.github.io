@@ -106,7 +106,7 @@ const PIC = new Set(["home","calendar","chart","settings","users","plus","book",
   "star","sparkle","share","download","print","qr","lock","folder","video",
   "wind","run","trash","list","history","link","info","key","textSize",
   "moon","sun","user","checkCircle","search","alert","flag","inbox","trophy"]);
-const PIC_ALIAS = { phone:"call", calendarPlus:"calendar", trendUp:"chart", starFill:"star", image:"camera", pdf:"file", upload:"share", check:"checkCircle" };
+const PIC_ALIAS = { phone:"call", calendarPlus:"calendar", trendUp:"chart", starFill:"star", image:"camera", pdf:"file", upload:"share", check:"checkCircle", userPlus:"user", edit:"file", zap:"play", grid:"layers", filter:"search", send:"mail", reply:"message" };
 
 /** Icône illustrée si elle existe, sinon l'icône au trait. */
 export function pic(name, cls = ""){

@@ -786,3 +786,8 @@ a.chip{ text-decoration:none; }
 .panel h2 .ic-pic, .section-title .ic-pic{ width:28px; height:28px; }
 .li-title .ic-pic{ width:24px; height:24px; }
 .empty .e-ico .ic-pic{ width:40px; height:40px; }
+.t-ico .ic-pic{ width:32px; height:32px; }
+.tile.main .t-ico:has(.ic-pic){ background:rgba(255,255,255,.92); }
+.inbox-banner .t-ico:has(.ic-pic){ background:var(--surface); }
+.ts-ico .ic-pic{ width:28px; height:28px; }
+.a-ico .ic-pic{ width:40px; height:40px; }

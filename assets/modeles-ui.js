@@ -3,7 +3,7 @@
    (panneau « Modèles » à côté de la bibliothèque d'exercices)
    ========================================================= */
 
-import { $, $$, esc, icon, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
+import { $, $$, esc, icon, pic, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
 import { norm } from "./library.js";
 import { ZONES } from "./classement.js";
 import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
@@ -77,7 +77,7 @@ export async function mountModelPicker(root, { onPick, lieu = null } = {}){
     $("[data-count]", root).textContent = plural(groups.length, "modèle");
     const res = $("[data-results]", root);
     if(!groups.length){
-      res.innerHTML = `<div class="empty"><div class="e-ico">${icon("layers")}</div><h3>Aucun modèle</h3><p>Essayez un autre mot, ou créez vos modèles dans la page Modèles.</p></div>`;
+      res.innerHTML = `<div class="empty"><div class="e-ico">${pic("layers")}</div><h3>Aucun modèle</h3><p>Essayez un autre mot, ou créez vos modèles dans la page Modèles.</p></div>`;
       return;
     }
     res.innerHTML = groups.map(g => {
