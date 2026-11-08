@@ -785,3 +785,4 @@ a.chip{ text-decoration:none; }
 .nav-link:hover .nav-ico .ic-pic{ filter:none; opacity:1; }
 .panel h2 .ic-pic, .section-title .ic-pic{ width:28px; height:28px; }
 .li-title .ic-pic{ width:24px; height:24px; }
+.empty .e-ico .ic-pic{ width:40px; height:40px; }

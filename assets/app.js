@@ -599,7 +599,7 @@ export function loadingHTML(text = "Chargement…"){
 }
 
 export function emptyHTML({ ico = "info", title = "", text = "", action = "" } = {}){
-  return `<div class="empty"><div class="e-ico">${icon(ico)}</div>${title ? `<h3>${esc(title)}</h3>` : ""}${text ? `<p>${esc(text)}</p>` : ""}${action}</div>`;
+  return `<div class="empty"><div class="e-ico">${pic(ico)}</div>${title ? `<h3>${esc(title)}</h3>` : ""}${text ? `<p>${esc(text)}</p>` : ""}${action}</div>`;
 }
 
 export function errorHTML(err, retry = true){

@@ -103,8 +103,10 @@ export const ICON_NAMES = Object.keys(P);
 const PIC = new Set(["home","calendar","chart","settings","users","plus","book","layers","wrench",
   "play","pause","next","repeat","rest","clock","dumbbell","heart","target",
   "call","pin","message","mail","bell","stethoscope","body","file","camera",
-  "star","sparkle","share","download","print","qr","lock","folder","video"]);
-const PIC_ALIAS = { phone:"call", calendarPlus:"calendar", inbox:"mail", trendUp:"chart", starFill:"star", user:"users", run:"dumbbell", image:"camera", pdf:"file", key:"lock", upload:"share", history:"clock" };
+  "star","sparkle","share","download","print","qr","lock","folder","video",
+  "wind","run","trash","list","history","link","info","key","textSize",
+  "moon","sun","user","checkCircle","search","alert","flag","inbox","trophy"]);
+const PIC_ALIAS = { phone:"call", calendarPlus:"calendar", trendUp:"chart", starFill:"star", image:"camera", pdf:"file", upload:"share", check:"checkCircle" };
 
 /** Icône illustrée si elle existe, sinon l'icône au trait. */
 export function pic(name, cls = ""){
