@@ -127,6 +127,25 @@ function showAnnonce(){
   box.innerHTML = a ? `<div class="notice annonce" style="margin-bottom:16px">${icon("bell")}<span>${esc(a.texte).replace(/\n/g, "<br>")}</span></div>` : "";
 }
 
+/* Coordonnées du cabinet (Outils → Réglages du cabinet), en bas de l'accueil patient */
+function showCabinet(){
+  const box = document.getElementById("cabinet");
+  if(!box) return;
+  const c = reglages.cabinet || {};
+  const tel = String(c.telephone || "").trim();
+  const adr = String(c.adresse || "").trim();
+  if(!tel && !adr){ box.innerHTML = ""; return; }
+  const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+  box.innerHTML = `
+    <section class="section">
+      <div class="section-title">Le cabinet</div>
+      <div class="list">
+        ${tel ? item("tel:" + tel.replace(/[^\d+]/g, ""), "call", esc(tel), "Appeler le cabinet") : ""}
+        ${adr ? item("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adr.replace(/\s*\n\s*/g, ", ")), "pin", esc(adr).replace(/\n/g, "<br>"), "Voir sur la carte, itinéraire", true) : ""}
+      </div>
+    </section>`;
+}
+
 async function renderPatient(ctx){
   mountShell({ role:"patient", active:"accueil", apercu:ctx.apercu });
   secretLogo(...document.querySelectorAll(".brand"));
@@ -314,9 +333,11 @@ async function renderPatient(ctx){
         <button class="list-item" type="button" id="ecrire"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
       </div>
     </section>
+    <div id="cabinet"></div>
     <footer class="app-foot">${appMarkHTML()}</footer>`;
   showAnnonce();
-  loadSettings({ force:true }).then(showAnnonce);
+  showCabinet();
+  loadSettings({ force:true }).then(() => { showAnnonce(); showCabinet(); });
   if(!ctx.apercu) messagesDuKine(ctx, patient).catch(e => console.warn("Messages :", e));
   homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
 
