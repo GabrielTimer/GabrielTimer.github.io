@@ -145,7 +145,6 @@ function showCabinet(){
   const tel = String(c.telephone || "").trim();
   const adr = String(c.adresse || "").trim();
   const hor = Hor.renseignes(c.horaires);
-  if(!tel && !adr && !hor){ box.innerHTML = ""; return; }
   const item = (href, ico, title, sub, ext) => `<a class="list-item" href="${esc(href)}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
   box.innerHTML = `
     <section class="section">
@@ -154,6 +153,7 @@ function showCabinet(){
         ${tel ? item("tel:" + tel.replace(/[^\d+]/g, ""), "call", esc(tel), "Appeler le cabinet") : ""}
         ${hor ? horairesHTML(c.horaires) : ""}
         ${adr ? item("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adr.replace(/\s*\n\s*/g, ", ")), "pin", esc(adr).replace(/\n/g, "<br>"), "Voir sur la carte, itinéraire", true) : ""}
+        ${item("/cabinet.html", "home", "Page du cabinet", "Coordonnées, horaires et photos, à partager à vos proches", true)}
       </div>
     </section>`;
 }
