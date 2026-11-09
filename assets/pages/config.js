@@ -104,6 +104,7 @@ async function init(){
       editSeance.siblings = all;
       editSeance.label = (all.find(x => x.id === s.id) || {}).label || s.nom;
       S = { ...blank(), nom: s.data.nom || s.programmeNom || s.nom || "", series: s.data.series || 1, exercices: (s.data.exercices || []).map(normExo), patient: edit.cle };
+      editSeance.avant = empreinte();   // pour savoir, à l'enregistrement, si les exercices ont changé
       mode = { kind:"edit-seance", ref:edit };
     }else if(edit.type === "favori"){
       const d = store.get("gt_draft", {});
@@ -203,7 +204,7 @@ function mountView(){
           </div>
           <p class="hint" id="lieu-hint"></p>
           <div id="lieu-warn"></div>
-          <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-modele" ? "Nom du modèle, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
+          <textarea class="title-input" id="nom" rows="1" placeholder="${mode.kind === "edit-modele" ? "Nom du modèle, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">${esc(S.nom)}</textarea>
           <div class="cfg-summary">
             <span id="sum-dur">${icon("clock")}</span>
             <span id="sum-n">${icon("dumbbell")}</span>
@@ -230,7 +231,12 @@ function mountView(){
       </aside>
     </div>`;
 
-  $("#nom").addEventListener("input", e => { S.nom = e.target.value; persist(); renderSend(false); });
+  /* Titre sur plusieurs lignes si besoin (téléphone), sans retour à la ligne saisi */
+  const nomEl = $("#nom");
+  const ajusterNom = () => { nomEl.style.height = "auto"; nomEl.style.height = nomEl.scrollHeight + "px"; };
+  nomEl.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); nomEl.blur(); } });
+  nomEl.addEventListener("input", e => { if(/\n/.test(nomEl.value)) nomEl.value = nomEl.value.replace(/\s*\n\s*/g, " "); S.nom = nomEl.value; ajusterNom(); persist(); renderSend(false); });
+  requestAnimationFrame(ajusterNom); window.addEventListener("resize", ajusterNom);
   $$("[data-lieu]").forEach(b => b.onclick = () => changerLieu(b.dataset.lieu));
   renderLieuWarn();
   $("#series").addEventListener("input", e => { S.series = clamp(+e.target.value, 1, 20); persist(); renderSummary(); });
@@ -735,11 +741,11 @@ async function applyModele(m){
     S.series = prog.series || 1;
     S.nom = prog.nom;
     if(prog.origine) S.origine = prog.origine; else delete S.origine;   // modèle et niveau d'origine (faire évoluer)
-    $("#nom").value = S.nom;
+    $("#nom").value = S.nom; $("#nom").dispatchEvent(new Event("input"));
     $("#series").value = S.series;
   }else{
     S.exercices.push(...exos);
-    if(!S.nom.trim()){ S.nom = prog.nom; $("#nom").value = S.nom; }
+    if(!S.nom.trim()){ S.nom = prog.nom; $("#nom").value = S.nom; $("#nom").dispatchEvent(new Event("input")); }
   }
   persist(); renderExos(); renderSend(false);
   sideLib?.then(l => l.refresh());
@@ -1161,11 +1167,74 @@ function saveAsFav(){
   toast("Gardée dans vos séances favorites.", { type:"ok", action:{ label:"Voir", run:() => location.href = "/mes_programmes.html" } });
 }
 
+/* ---------- Programme d'un patient venu d'un modèle : reporter la modification dans le modèle ? ---------- */
+
+/** Exercices et dosage, sans ce qui est propre au patient (consigne personnelle, progression). */
+function exosModele(exos){
+  return exos.map(e => { const { conseil_kine, evol, series, charge, unite, vitesse, ...x } = e; return x; });
+}
+function empreinte(){ return JSON.stringify({ s: S.series, e: exosModele(S.exercices) }); }
+
+/** Le modèle d'origine de la séance modifiée (enregistré, sinon retrouvé par le nom du programme). */
+async function modeleDOrigine(){
+  const s = editSeance;
+  if(!s) return null;
+  const M = await import("../modeles.js");
+  const { origineDe } = await import("../faire-evoluer.js");
+  const own = (await C.listModeles().catch(() => [])).map(r => M.normModele(r));
+  const remplaces = new Set(own.map(m => m.remplace).filter(Boolean));
+  const tous = [...own, ...M.BUILTIN.filter(b => !M.isBuiltinHidden(b.id))];
+  const visibles = tous.filter(m => m.mine || !remplaces.has(m.id));
+  const o = origineDe({ nom: s.programmeNom || s.data?.nom || "", seances: s.siblings || [s] }, visibles);
+  let m = o?.modele || null;
+  if(!m && s.origine?.modeleId) m = tous.find(x => String(x.id) === String(s.origine.modeleId)) || null;
+  if(!m) return null;
+  /* Modèle fourni déjà remplacé par votre version : c'est votre version qu'on modifie */
+  if(!m.mine) m = own.find(x => x.remplace === m.id) || m;
+  return m;
+}
+
+/** Demande s'il faut aussi modifier le modèle. Renvoie true si le modèle a été mis à jour. */
+async function proposerMajModele(data){
+  if(!editSeance || empreinte() === editSeance.avant) return false;
+  let m = null;
+  try{ m = await modeleDOrigine(); }catch(e){ console.warn("Modèle d'origine :", e); }
+  if(!m) return false;
+  /* Modèle à options (ex. nerfs) : le programme ne garde que les exercices des options cochées */
+  if(m.options){
+    toast(`Modèle « ${m.titre} » non modifié : il a des options (${m.options.titre.toLowerCase()}). Modifiez-le depuis la page Modèles si besoin.`, { duration:6000 });
+    return false;
+  }
+  const choix = await new Promise(resolve => {
+    let done = false;
+    const q = openSheet({
+      title:"Modifier aussi le modèle ?",
+      body:`<p>Ce programme vient du modèle <strong>« ${esc(m.titre)} »</strong>.</p>
+        <p class="muted">Voulez-vous garder ces modifications dans le modèle, pour les prochains patients ? Les programmes déjà envoyés aux autres patients ne changent pas.</p>
+        ${m.mine ? "" : `<p class="small faint">C'est un modèle fourni avec l'application : vos modifications deviennent « Ma version », et vous pourrez revenir à l'original depuis la page Modèles.</p>`}`,
+      foot:`<button class="btn" type="button" data-c="non">Seulement pour ce patient</button><button class="btn primary" type="button" data-c="oui">${icon("check")}Modifier aussi le modèle</button>`,
+      onClose: () => { if(!done) resolve("non"); }
+    });
+    q.el.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { done = true; resolve(b.dataset.c); q.close(); });
+  });
+  if(choix !== "oui") return false;
+  const base = {
+    nom: m.nom, categorie: m.categorie, zoneLabel: m.zoneLabel, niveau: m.niveau || null,
+    cover: m.cover || null, series: data.series, exercices: exosModele(data.exercices)
+  };
+  if(m.mine) await C.saveModele({ ...base, id: m.id, createdAt: m.createdAt || undefined, remplace: m.remplace || undefined, ...(m.raw?.pdf ? { pdf: m.raw.pdf } : {}) });
+  else await C.saveModele({ ...base, remplace: m.id });
+  return true;
+}
+
 async function saveEditSeance(){
   const btn = $("#save-edit");
   btn.disabled = true;
   try{
     const data = build();
+    let modeleMaj = false;
+    try{ modeleMaj = await proposerMajModele(data); }
+    catch(err){ console.error(err); toast("Le modèle n'a pas pu être modifié : " + (err.message || err), { type:"err", duration:7000 }); }
     const targets = [editSeance];
     if($("#apply-all")?.checked) targets.push(...editSeance.siblings.filter(x => x.id !== editSeance.id && !x.terminee));
     for(const s of targets){
@@ -1177,8 +1246,8 @@ async function saveEditSeance(){
       await C.saveSeance(mode.ref.cle, { ...rest, programmeNom: rest.programmeNom ? (targets.length > 1 ? data.nom : rest.programmeNom) : rest.programmeNom, data:{ ...d, categorie: s.data?.categorie || "kine" } });
     }
     store.del("gt_edit");
-    toast(targets.length > 1 ? `${targets.length} séances mises à jour.` : "Séance mise à jour.", { type:"ok" });
-    setTimeout(() => location.href = `/cloud.html?patient=${encodeURIComponent(mode.ref.cle)}`, 700);
+    toast((targets.length > 1 ? `${targets.length} séances mises à jour.` : "Séance mise à jour.") + (modeleMaj ? " Modèle modifié aussi." : ""), { type:"ok" });
+    setTimeout(() => location.href = `/cloud.html?patient=${encodeURIComponent(mode.ref.cle)}`, modeleMaj ? 1400 : 700);
   }catch(err){
     btn.disabled = false;
     toast("Enregistrement impossible : " + (err.message || err), { type:"err" });
