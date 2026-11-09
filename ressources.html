@@ -25,13 +25,31 @@ mountShell({ role:"kine", active:"", back:"history" });
 const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
-  <div class="page-head"><h1>Ressources</h1><p class="lead">À consulter pendant ou en dehors du bilan.</p></div>
-  <div class="list">
-    ${link("/nerfs.html", "body", "Territoires nerveux", "Dermatomes, nerfs périphériques, racines, muscles et réflexes")}
-    ${link("/tests.html", "stethoscope", "Tests cliniques et fonctionnels", "Technique, valeurs diagnostiques, vidéo")}
-    ${link("/questionnaires.html", "list", "Questionnaires", "Oswestry, QuickDASH, KOOS… score automatique")}
-    ${link("/conseils.html", "book", "Fiches conseils", "Courtes fiches à transmettre aux patients")}
-  </div>`;
+  <div class="page-head"><h1>Ressources</h1><p class="lead">Tout ce qui sert au bilan et aux patients. Les réglages sont dans Outils.</p></div>
+  <section class="section">
+    <div class="section-title">Bilan et examen</div>
+    <div class="list">
+      ${link("/tests.html", "stethoscope", "Tests cliniques et fonctionnels", "Technique, valeurs diagnostiques, vidéo")}
+      ${link("/nerfs.html", "body", "Territoires nerveux", "Dermatomes, nerfs périphériques, racines, muscles et réflexes")}
+      ${link("/questionnaires.html", "list", "Questionnaires", "Oswestry, QuickDASH, KOOS… remplis par le patient, score automatique")}
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-title">Programmes</div>
+    <div class="list">
+      ${link("/programmes_admin.html", "layers", "Modèles", "Pathologies, post-opératoire, prévention, par niveau")}
+      ${link("/programmescourse.html", "run", "Reprise de course", "Générer un programme progressif course et marche")}
+      ${link("/respir/index.html", "wind", "Respiration guidée", "RespiR")}
+      ${link("/mes_programmes.html", "star", "Séances favorites", "Enregistrées sur cet appareil")}
+    </div>
+  </section>
+  <section class="section">
+    <div class="section-title">Pour les patients</div>
+    <div class="list">
+      ${link("/conseils.html", "book", "Fiches conseils", "Courtes fiches à transmettre aux patients")}
+      ${link("/ordonnance.html", "file", "Ordonnance", "Ordonnance pré-remplie, datée du jour : Word, impression ou PDF")}
+    </div>
+  </section>`;
 </script>
 </body>
 </html>

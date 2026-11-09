@@ -172,7 +172,7 @@ export async function mountKineSuivi(box, patient, C){
               <span class="sv-val num">${last ? esc(fmtScore(last.score, q)) : "–"}</span>
               <button class="icon-btn sm" type="button" data-s="q-detail" data-id="${esc(id)}" aria-label="Détail">${icon("chevron")}</button>
             </div>`; }).join("")}</div>`
-          : `<p class="muted small">Proposez un questionnaire validé (Oswestry, QuickDASH…) : le patient le remplit sur son téléphone et le score s'affiche ici.${questionnaires.length ? "" : ` Préparez d'abord vos questionnaires dans <a href="/questionnaires.html">Outils, Questionnaires</a>.`}</p>`}
+          : `<p class="muted small">Proposez un questionnaire validé (Oswestry, QuickDASH…) : le patient le remplit sur son téléphone et le score s'affiche ici.${questionnaires.length ? "" : ` Préparez d'abord vos questionnaires dans <a href="/questionnaires.html">Ressources, Questionnaires</a>.`}</p>`}
         </section>
 
         <section class="panel">

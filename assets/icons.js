@@ -66,6 +66,7 @@ const P = {
   download:'<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5"/><path d="M5 20h14"/>',
   eye:'<path d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z"/><circle cx="12" cy="12" r="3"/>',
   zap:'<path d="M13 3 4.5 13.5H12L11 21l8.5-10.5H12Z"/>',
+  library:'<rect x="3.5" y="4" width="4" height="16" rx="1"/><rect x="9" y="6" width="4" height="14" rx="1"/><path d="m15.2 7.4 3.7-1 3.6 13.4-3.7 1Z"/><path d="M3.5 8h4M9 10h4"/>',
   cabinet:'<path d="M4 21V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v16"/><path d="M2.5 21h19"/><path d="M12 7.5v5M9.5 10h5"/><path d="M10 21v-4h4v4"/>',
   stethoscope:'<path d="M6 3v6a4 4 0 0 0 8 0V3"/><path d="M10 13v2a5 5 0 0 0 10 0v-2"/><circle cx="20" cy="11" r="2"/>',
   body:'<circle cx="12" cy="4.5" r="2"/><path d="M5 8.5l7 1 7-1M12 9.5v5M9 21l3-6.5 3 6.5"/>',

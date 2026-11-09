@@ -4,7 +4,7 @@
    Texte simple : "## Titre" pour un intertitre, "- " pour une
    liste, une ligne vide entre deux paragraphes.
    Le kiné peut les copier pour en faire sa propre version
-   (Outils > Fiches conseils).
+   (Ressources > Fiches conseils).
    ========================================================= */
 
 export const CONSEILS_FOURNIS = [

@@ -112,4 +112,4 @@ Cette version demande de **republier les règles** : copiez tout le contenu de [
 
 Cette version ajoute les objectifs du patient, les questionnaires, les notes de séance, les fiches conseils, le compte rendu pour le médecin et les statistiques. Elle demande de **republier les règles** : copiez tout le contenu de [`firestore.rules`](firestore.rules) dans Firebase (Firestore Database, onglet Règles), puis **Publier**.
 
-Pour les questionnaires, partez des modèles (Outils, Questionnaires) et collez les textes de vos versions officielles : voir la page Aide.
+Pour les questionnaires, partez des modèles (Ressources, Questionnaires) et collez les textes de vos versions officielles : voir la page Aide.
