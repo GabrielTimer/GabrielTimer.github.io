@@ -32,7 +32,18 @@
   .article .body li{ margin:6px 0; }
   .article .sign{ margin-top:26px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-3); font-size:var(--fs-sm); }
   .ed-help{ font-size:var(--fs-xs); color:var(--ink-3); }
-  @media print{ .article .a-ico{ display:none; } .article .body{ font-size:12pt; } }
+  /* Affiche (« L'info kiné du mois ») : l'image est la fiche */
+  .article .a-affiche{ display:block; width:100%; max-width:520px; height:auto; margin:0 auto 22px; border-radius:var(--r-md); box-shadow:0 1px 3px rgba(0,0,0,.08); border:1px solid var(--line); background:#fff; }
+  .article .a-serie{ font-size:var(--fs-xs); font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--lagon-strong); margin-bottom:6px; }
+  .article details.a-texte{ margin-top:6px; }
+  .article details.a-texte summary{ cursor:pointer; color:var(--ink-2); font-size:var(--fs-sm); margin-bottom:10px; }
+  .cs-card .cs-thumb{ width:100%; aspect-ratio:1/1; object-fit:cover; object-position:top; border-radius:10px; border:1px solid var(--line); background:#fff; }
+  @media print{
+    .article .a-ico{ display:none; } .article .body{ font-size:12pt; }
+    /* Affiche : une page A4, rien d'autre */
+    .has-affiche .a-affiche{ max-width:100%; max-height:26cm; width:auto; margin:0 auto; border:0; box-shadow:none; border-radius:0; page-break-inside:avoid; }
+    .has-affiche h1, .has-affiche .lead, .has-affiche .a-serie, .has-affiche .a-texte, .has-affiche .sign{ display:none !important; }
+  }
 </style>
 </head>
 <body>
@@ -55,6 +66,15 @@ try{ perso = await C.listConseils(); }catch(e){ perso = []; }
 const resolve = id => perso.find(c => c.remplace === id && !c.masque) || perso.find(c => c.id === id && !c.masque) || CONSEILS_FOURNIS.find(c => c.id === id) || null;
 
 function article(c, back){
+  if(c.affiche) return `<article class="article has-affiche">
+    <img class="a-affiche" src="${esc(c.affiche)}" alt="${esc(c.titre)}">
+    ${c.serie ? `<div class="a-serie">${esc(c.serie)}</div>` : ""}
+    <h1>${esc(c.titre)}</h1>
+    ${c.resume ? `<p class="lead">${esc(c.resume)}</p>` : ""}
+    <details class="a-texte"><summary>Lire le texte de l'affiche</summary><div class="body">${conseilHTML(c.texte)}</div></details>
+    <p class="sign">${esc(KINE.nom)}, ${esc(KINE.titre)}. Ces conseils sont généraux : suivez en priorité les indications de votre kiné.</p>
+    <div class="btn-row no-print" style="margin-top:18px"><a class="btn" href="${back}">${icon("back")}Toutes les fiches</a><button class="btn ghost" type="button" onclick="print()">${icon("print")}Imprimer</button></div>
+  </article>`;
   return `<article class="article">
     <div class="a-ico">${icon(c.ico || "book")}</div>
     <h1>${esc(c.titre)}</h1>
@@ -82,13 +102,13 @@ async function patientView(){
     <div class="page-head"><h1>Conseils de votre kiné</h1><p class="lead">Des fiches courtes à lire tranquillement, choisies pour vous.</p></div>
     ${mine.length ? `<div class="cs-grid">${mine.map(c => `
       <a class="cs-card" href="/conseils.html?id=${encodeURIComponent(p.conseils.find(x => resolve(x) === c))}">
-        <span class="li-ico">${icon(c.ico || "book")}</span><h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
+        ${c.affiche ? `<img class="cs-thumb" src="${esc(c.affiche)}" alt="" loading="lazy">` : `<span class="li-ico">${icon(c.ico || "book")}</span>`}<h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
       </a>`).join("")}</div>` : `<div class="panel">${emptyHTML({ ico:"book", title:"Pas encore de fiche", text:"Votre kiné pourra vous en proposer selon vos besoins." })}</div>`}`;
 }
 
 /* ---------- Kiné ---------- */
 async function kineView(){
-  mountShell({ role:"kine", active:"" , back:"/admin_tools.html" });
+  mountShell({ role:"kine", active:"" , back:"/ressources.html" });
   app.classList.add("wide");
   const id = params.get("id");
   if(id){
@@ -103,9 +123,9 @@ async function kineView(){
         <p class="lead">Joignez-les à un patient depuis sa fiche ou lors de l'envoi d'un programme. Il les retrouve sur son accueil.</p></div>
       <div class="cs-grid">${all.map(c => `
         <div class="cs-card">
-          <span class="li-ico">${icon(c.ico || "book")}</span>
+          ${c.affiche ? `<img class="cs-thumb" src="${esc(c.affiche)}" alt="" loading="lazy">` : `<span class="li-ico">${icon(c.ico || "book")}</span>`}
           <h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
-          <div class="row wrap" style="--gap:6px">${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
+          <div class="row wrap" style="--gap:6px">${c.serie ? `<span class="badge lagon">${esc(c.serie)}</span>` : ""}${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
           <div class="cs-act">
             <a class="btn sm" href="/conseils.html?id=${encodeURIComponent(c.id)}">${icon("eye")}Lire</a>
             <button class="btn sm" type="button" data-edit="${esc(c.id)}">${icon("edit")}Modifier</button>
@@ -144,6 +164,7 @@ async function kineView(){
       const titre = s.el.querySelector("#ed-t").value.trim();
       if(!titre){ s.el.querySelector("#ed-t").focus(); return; }
       const fiche = { titre, resume:s.el.querySelector("#ed-r").value.trim(), texte:s.el.querySelector("#ed-x").value, ico };
+      if(base.affiche){ fiche.affiche = base.affiche; if(base.serie) fiche.serie = base.serie; }
       if(c && !c.fourni) fiche.id = c.id;
       if(c?.remplace) fiche.remplace = c.remplace;
       if(c?.fourni) fiche.remplace = c.id;

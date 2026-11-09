@@ -8,6 +8,132 @@
    ========================================================= */
 
 export const CONSEILS_FOURNIS = [
+  /* Affiches « L'info kiné du mois » : l'image est la fiche, le texte la reprend (lecture à l'écran, accessibilité) */
+  {
+    id: "c-info-arthrose",
+    titre: "L'arthrose n'aime pas l'inactivité",
+    resume: "Bouger est un traitement : moins de douleur, plus de mobilité, plus d'autonomie.",
+    ico: "heart",
+    affiche: "/images/conseils/arthrose.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Bouger est un traitement.
+
+- Moins de douleur
+- Plus de mobilité
+- Plus d'autonomie
+
+L'activité physique est l'un des traitements les plus efficaces contre l'arthrose.
+
+## Quelques idées
+- Marche, vélo, natation, aquagym
+- Renforcement musculaire adapté`
+  },
+  {
+    id: "c-info-course-genoux",
+    titre: "Courir n'use pas les genoux",
+    resume: "Une progression adaptée protège davantage qu'elle n'abîme.",
+    ico: "run",
+    affiche: "/images/conseils/course-genoux.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Une progression adaptée protège davantage qu'elle n'abîme.
+
+- Santé cardiovasculaire
+- Contrôle du poids
+- Renforcement musculaire
+
+De nombreuses études montrent que la course à pied n'augmente pas le risque d'arthrose du genou, même à long terme.
+
+## Les clés
+- Progression, renforcement, souplesse, récupération`
+  },
+  {
+    id: "c-info-equilibre",
+    titre: "L'équilibre se travaille à tout âge",
+    resume: "La prévention commence avant la première chute.",
+    ico: "target",
+    affiche: "/images/conseils/equilibre.jpg",
+    serie: "L'info kiné du mois",
+    texte: `La prévention commence avant la première chute.
+
+- Plus de stabilité
+- Plus de confiance
+- Plus d'autonomie
+
+L'activité physique adaptée améliore l'équilibre, la force musculaire et la coordination. Elle réduit le risque de chute et préserve l'autonomie.
+
+## À travailler
+- Équilibre, renforcement, coordination, mobilité`
+  },
+  {
+    id: "c-info-chaque-mouvement",
+    titre: "Chaque mouvement compte",
+    resume: "L'activité physique agit sur tout votre corps, à tout âge.",
+    ico: "heart",
+    affiche: "/images/conseils/chaque-mouvement.jpg",
+    serie: "L'info kiné du mois",
+    texte: `L'activité physique agit sur tout votre corps.
+
+- Santé physique
+- Santé mentale
+- Autonomie
+
+Pas besoin d'en faire beaucoup. Pas besoin d'être sportif. Chaque mouvement compte, à tout âge.
+
+## Quelques idées
+- Marche, vélo, jardinage, natation, renforcement musculaire`
+  },
+  {
+    id: "c-info-dos-solide",
+    titre: "Votre dos est plus solide que vous ne le pensez",
+    resume: "Bouger est souvent la meilleure solution.",
+    ico: "body",
+    affiche: "/images/conseils/dos-solide.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Bouger est souvent la meilleure solution.
+
+- Moins de douleur
+- Plus de confiance
+- Plus d'autonomie
+
+L'activité physique est l'un des traitements les plus efficaces contre les douleurs de dos.
+
+## Quelques idées
+- Marche, renforcement, étirements, mobilité`
+  },
+  {
+    id: "c-info-sommeil",
+    titre: "Mieux dormir, c'est souvent moins souffrir",
+    resume: "Le sommeil fait partie du traitement de la douleur.",
+    ico: "moon",
+    affiche: "/images/conseils/sommeil.jpg",
+    serie: "L'info kiné du mois",
+    texte: `- Meilleure récupération
+- Moins de fatigue
+- Meilleure gestion de la douleur
+
+Le sommeil joue un rôle essentiel dans la guérison, la régulation de la douleur et le bien-être général. Des habitudes de sommeil de qualité font partie du traitement.
+
+## Les leviers
+- Routine, environnement, activité physique, gestion du stress`
+  },
+  {
+    id: "c-info-tendon",
+    titre: "Le tendon a besoin de charge",
+    resume: "Le repos complet n'est généralement pas la solution.",
+    ico: "dumbbell",
+    affiche: "/images/conseils/tendon.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Le repos complet n'est généralement pas la solution.
+
+- Plus de résistance
+- Plus de capacité
+- Retour progressif aux activités
+
+L'activité physique adaptée permet au tendon de retrouver progressivement sa capacité à supporter les contraintes du quotidien et du sport.
+
+## Les clés
+- Marche, renforcement, exercices progressifs, reprise adaptée`
+  },
   {
     id: "c-bouger-mal-dos",
     titre: "Mal de dos : bouger pour guérir",
