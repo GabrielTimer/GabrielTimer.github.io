@@ -377,12 +377,35 @@ async function renderPatient(ctx){
    Accueil kiné
    ========================================================= */
 
+/* Rappel de sauvegarde : plus de 30 jours sans « Tout sauvegarder » (Réglages du cabinet → Sauvegarde).
+   « Plus tard » le cache 7 jours sur cet appareil. */
+const SAUVEGARDE_JOURS = 30;
+function rappelSauvegarde(){
+  const show = () => {
+    const box = document.getElementById("backup-banner");
+    if(!box) return;
+    const last = Math.max(Number(store.get("gt_last_backup", 0)) || 0, Number(reglages.sauvegarde?.derniere || 0));
+    const jours = last ? Math.floor((Date.now() - last) / 86400000) : null;
+    const snooze = Number(store.get("gt_backup_snooze", 0)) || 0;
+    if((jours !== null && jours < SAUVEGARDE_JOURS) || Date.now() < snooze){ box.innerHTML = ""; return; }
+    box.innerHTML = `<div class="inbox-banner backup-banner">
+      <span class="t-ico">${icon("download")}</span>
+      <span class="li-main"><strong>${jours === null ? "Aucune sauvegarde enregistrée" : `Dernière sauvegarde il y a ${jours} jours`}</strong>
+      <span class="small">Gardez une copie de vos données sur l'ordinateur ou une clé USB.</span></span>
+      <span style="display:flex;gap:8px;flex:none"><a class="btn sm primary" href="/reglages_cabinet.html#backup">Sauvegarder</a><button class="btn sm" type="button" id="bk-later">Plus tard</button></span></div>`;
+    box.querySelector("#bk-later").onclick = () => { store.set("gt_backup_snooze", Date.now() + 7 * 86400000); box.innerHTML = ""; };
+  };
+  show();
+  loadSettings({ force:true }).then(show).catch(() => {});
+}
+
 async function renderKine(user){
   mountShell({ role:"kine", active:"accueil" });
   app.classList.add("wide");
   app.innerHTML = `
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(KINE.nom))}</h1></div>
     <div id="inbox-banner"></div>
+    <div id="backup-banner"></div>
     <div class="tiles">
       <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
       <a data-tile="messages" class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
@@ -414,6 +437,7 @@ async function renderKine(user){
     // Ordre changé sur un autre appareil : reprise des réglages à jour
     loadSettings({ force: true }).then(st => { const ids = st?.accueil?.tuiles; if(ids?.length) ctl?.refresh(ids); }).catch(() => {});
   }).catch(() => {});
+  rappelSauvegarde();
   const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
     const p = await newPatientSheet();

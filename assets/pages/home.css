@@ -198,3 +198,6 @@
   .hd-slots{ grid-template-columns:max-content; }
 }
 .list-item.hor .li-main{ display:block; }
+.backup-banner{ flex-wrap:wrap; }
+.backup-banner .li-main{ min-width:180px; }
+.backup-banner .small{ white-space:normal; }

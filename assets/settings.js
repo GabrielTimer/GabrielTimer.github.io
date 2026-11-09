@@ -57,7 +57,8 @@ export const DEFAULTS = {
   },
   masques: { exercices: [], modeles: [], reaffiches: [] },
   favoris: { exercices: [] },
-  accueil: { tuiles: [] }   // ordre des tuiles de l'accueil kiné (même ordre sur tous les appareils)
+  accueil: { tuiles: [] },   // ordre des tuiles de l'accueil kiné (même ordre sur tous les appareils)
+  sauvegarde: { derniere: 0 } // date de la dernière sauvegarde des données (rappel sur l'accueil kiné)
 };
 
 const isObj = v => v && typeof v === "object" && !Array.isArray(v);
