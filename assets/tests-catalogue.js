@@ -41,7 +41,12 @@ const SPEC_HYP = {
   RCD:["Rhumatologie"], TF:["Rhumatologie", "Orthopédie"], SSC:["Rhumatologie", "Orthopédie"], SA:["Rhumatologie"], INS:["Traumatologie", "Sport"],
   RAD:["Rhumatologie"], STE:["Rhumatologie", "Gériatrie et chutes"], CEF:["Rhumatologie"], ATFL:["Traumatologie", "Sport"], ACH:["Rhumatologie", "Sport"],
   CFA:["Orthopédie", "Sport"], GTPS:["Rhumatologie"], EPI:["Rhumatologie", "Sport"], EPT:["Rhumatologie", "Sport"],
-  CC:["Rhumatologie", "Orthopédie"], DQ:["Rhumatologie"], RHZ:["Rhumatologie"], VPPB:["Vestibulaire"], HYPO:["Vestibulaire"]
+  CC:["Rhumatologie", "Orthopédie"], DQ:["Rhumatologie"], RHZ:["Rhumatologie"], VPPB:["Vestibulaire"], HYPO:["Vestibulaire"],
+  COL:["Traumatologie", "Sport"], MYE:["Neurologie", "Rhumatologie"], TFCC:["Traumatologie", "Sport"],
+  MEC:["Rhumatologie", "Prévention et posture"], COS:["Rhumatologie", "Respiratoire"], TAS:["Gériatrie et chutes", "Rhumatologie"],
+  PAR:["Rhumatologie"], COR:["Cardio et reconditionnement"],
+  MYO:["Rhumatologie"], ART:["Rhumatologie"], DDR:["Rhumatologie"], DDNR:["Rhumatologie"],
+  CEN:["Neurologie"], CER:["Neurologie"], PRO:["Neurologie", "Gériatrie et chutes"]
 };
 
 /** Tests fonctionnels recommandés pour un bilan : motifs cochés + zones douloureuses. Renvoie un Set d'id. */

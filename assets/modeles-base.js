@@ -4862,6 +4862,27 @@ export const MODELES_BASE = [
 "ex": 40,
 "repos": 20,
 "conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
+},
+{
+"id": "SPORT_05",
+"source": "CABINET",
+"nom": "Déplacements latéraux entre plots",
+"image": "",
+"consignes": [
+"Deux plots écartés de 4 à 5 m",
+"Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
+"Toucher le plot de la main avant de repartir",
+"Ne pas croiser les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux plots écartés de 4 à 5 m<br>Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas<br>Toucher le plot de la main avant de repartir<br>Ne pas croiser les pieds",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Tenez-vous près d'un appui stable.",
+"materiel": "2 plots"
 }
 ],
 "lieu": "CABINET"
@@ -5967,6 +5988,47 @@ export const MODELES_BASE = [
 "reps": 1,
 "ex": 300,
 "repos": 0
+},
+{
+"id": "SPORT_02",
+"source": "CABINET",
+"nom": "Squat sauté (squat jump)",
+"image": "",
+"consignes": [
+"Debout, pieds à largeur des épaules",
+"Descendre en squat, puis sauter le plus haut possible",
+"Réception sur l'avant des pieds, genoux souples et dans l'axe",
+"Se stabiliser 1 s avant le saut suivant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, pieds à largeur des épaules<br>Descendre en squat, puis sauter le plus haut possible<br>Réception sur l'avant des pieds, genoux souples et dans l'axe<br>Se stabiliser 1 s avant le saut suivant",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12)."
+},
+{
+"id": "SPORT_05",
+"source": "CABINET",
+"nom": "Déplacements latéraux entre plots",
+"image": "",
+"consignes": [
+"Deux plots écartés de 4 à 5 m",
+"Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
+"Toucher le plot de la main avant de repartir",
+"Ne pas croiser les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux plots écartés de 4 à 5 m<br>Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas<br>Toucher le plot de la main avant de repartir<br>Ne pas croiser les pieds",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Pendant le temps d'effort, faites des répétitions lentes et contrôlées (environ 10 à 12).",
+"materiel": "2 plots"
 }
 ],
 "lieu": "CABINET"
@@ -8169,6 +8231,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "CHAISE_01",
+"source": "CABINET",
+"nom": "Extension lombaire à 45°, bras croisés",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
+"Bras croisés sur la poitrine",
+"Descendre le buste en pliant les hanches, dos droit",
+"Remonter jusqu'à l'alignement jambes-buste, sans cambrer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins<br>Bras croisés sur la poitrine<br>Descendre le buste en pliant les hanches, dos droit<br>Remonter jusqu'à l'alignement jambes-buste, sans cambrer",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Chaise romaine"
 }
 ]
 },
@@ -10486,6 +10569,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -10747,6 +10851,27 @@ export const MODELES_BASE = [
 "ex": 2,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "BARRE_08",
+"source": "CABINET",
+"nom": "Hip thrust barre",
+"image": "",
+"consignes": [
+"Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
+"Pieds à plat, genoux pliés à 90° en haut",
+"Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux",
+"Redescendre sans poser les fesses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches<br>Pieds à plat, genoux pliés à 90° en haut<br>Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux<br>Redescendre sans poser les fesses",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "",
+"materiel": "Barre de squat, Mousse de barre, Disques, Banc"
 }
 ]
 },
@@ -11203,6 +11328,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -11333,6 +11479,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "PLAQUE_02",
+"source": "CABINET",
+"nom": "Demi-squat statique sur plaque vibrante",
+"image": "",
+"consignes": [
+"Mains sur le guidon, pieds à largeur de bassin",
+"Descendre en demi-squat, fesses en arrière",
+"Tenir la position pendant la vibration",
+"Remonter doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur le guidon, pieds à largeur de bassin<br>Descendre en demi-squat, fesses en arrière<br>Tenir la position pendant la vibration<br>Remonter doucement",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "",
+"materiel": "Plaque vibrante"
 }
 ]
 },
@@ -11462,6 +11629,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "",
+"materiel": "Barre de squat, Rack, Disques, Banc"
 }
 ]
 },
@@ -11720,6 +11908,27 @@ export const MODELES_BASE = [
 "ex": 1,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "SPORT_08",
+"source": "CABINET",
+"nom": "Descente de marche excentrique (step-down)",
+"image": "",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+"Effleurer le sol du talon sans s'y appuyer",
+"Remonter et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied<br>Effleurer le sol du talon sans s'y appuyer<br>Remonter et recommencer",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": "",
+"materiel": "Marche ou step"
 }
 ]
 },
@@ -11848,6 +12057,27 @@ export const MODELES_BASE = [
 "ex": 1,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "BARRE_03",
+"source": "CABINET",
+"nom": "Squat tempo (descente 3 s, pause en bas)",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes",
+"Descendre en 3 s en comptant",
+"Tenir 2 s en bas, sans rebondir",
+"Remonter en 1 s"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes<br>Descendre en 3 s en comptant<br>Tenir 2 s en bas, sans rebondir<br>Remonter en 1 s",
+"reps": 3,
+"ex": 45,
+"repos": 90,
+"conseil_kine": "",
+"materiel": "Barre de squat, Rack, Disques"
 }
 ]
 },
@@ -12431,6 +12661,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 15,
 "conseil_kine": ""
+},
+{
+"id": "BARRE_09",
+"source": "CABINET",
+"nom": "Montées sur pointes debout, barre sur les trapèzes",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes, pieds à largeur de bassin",
+"Monter lentement sur la pointe des pieds",
+"Tenir 1 s en haut",
+"Redescendre en 3 s"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes, pieds à largeur de bassin<br>Monter lentement sur la pointe des pieds<br>Tenir 1 s en haut<br>Redescendre en 3 s",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Barre de squat, Rack, Disques"
 }
 ]
 },
@@ -12891,6 +13142,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "VELO_05",
+"source": "CABINET",
+"nom": "Va-et-vient de demi-tours de pédale (amplitude du genou)",
+"image": "/exercises/images/velo/va-et-vient-genou-f.webp",
+"consignes": [
+"Siège un peu reculé, résistance nulle",
+"Faire un demi-tour de pédale en avant puis revenir en arrière",
+"Aller un peu plus loin à chaque fois jusqu'à faire le tour complet",
+"Avancer le siège d'un cran quand le tour complet est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Siège un peu reculé, résistance nulle<br>Faire un demi-tour de pédale en avant puis revenir en arrière<br>Aller un peu plus loin à chaque fois jusqu'à faire le tour complet<br>Avancer le siège d'un cran quand le tour complet est facile",
+"reps": 3,
+"ex": 60,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -13149,6 +13421,48 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 45,
 "conseil_kine": ""
+},
+{
+"id": "SPORT_08",
+"source": "CABINET",
+"nom": "Descente de marche excentrique (step-down)",
+"image": "",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+"Effleurer le sol du talon sans s'y appuyer",
+"Remonter et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied<br>Effleurer le sol du talon sans s'y appuyer<br>Remonter et recommencer",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": "",
+"materiel": "Marche ou step"
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "",
+"materiel": "Barre de squat, Rack, Disques, Banc"
 }
 ]
 },
@@ -13279,6 +13593,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "VELO_05",
+"source": "CABINET",
+"nom": "Va-et-vient de demi-tours de pédale (amplitude du genou)",
+"image": "/exercises/images/velo/va-et-vient-genou-f.webp",
+"consignes": [
+"Siège un peu reculé, résistance nulle",
+"Faire un demi-tour de pédale en avant puis revenir en arrière",
+"Aller un peu plus loin à chaque fois jusqu'à faire le tour complet",
+"Avancer le siège d'un cran quand le tour complet est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Siège un peu reculé, résistance nulle<br>Faire un demi-tour de pédale en avant puis revenir en arrière<br>Aller un peu plus loin à chaque fois jusqu'à faire le tour complet<br>Avancer le siège d'un cran quand le tour complet est facile",
+"reps": 3,
+"ex": 60,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -13409,6 +13744,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -13520,23 +13876,25 @@ export const MODELES_BASE = [
 "conseil_kine": ""
 },
 {
-"id": "velo",
+"id": "VELO_07",
 "source": "CABINET",
-"nom": "Vélo",
-"image": "/exercises/images/cabinet/velo.png",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
 "consignes": [
-"Pédaler à rythme régulier",
-"Garder les épaules relâchées",
-"Respirer calmement"
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
 ],
 "position": "",
 "youtube": "",
 "type": "timer",
-"conseil": "Pédaler à rythme régulier<br>Garder les épaules relâchées<br>Respirer calmement",
-"reps": 10,
-"ex": 45,
-"repos": 15,
-"conseil_kine": ""
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -13778,6 +14136,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 45,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -13890,23 +14269,25 @@ export const MODELES_BASE = [
 "conseil_kine": ""
 },
 {
-"id": "velo",
+"id": "VELO_07",
 "source": "CABINET",
-"nom": "Vélo",
-"image": "/exercises/images/cabinet/velo.png",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
 "consignes": [
-"Pédaler à rythme régulier",
-"Garder les épaules relâchées",
-"Respirer calmement"
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
 ],
 "position": "",
 "youtube": "",
 "type": "timer",
-"conseil": "Pédaler à rythme régulier<br>Garder les épaules relâchées<br>Respirer calmement",
-"reps": 10,
-"ex": 45,
-"repos": 15,
-"conseil_kine": ""
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -14389,6 +14770,48 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Chaise stable"
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -14461,26 +14884,6 @@ export const MODELES_BASE = [
 "conseil_kine": ""
 },
 {
-"id": "CHEVILLE_05",
-"source": "CABINET",
-"nom": "Montées sur pointes de pieds",
-"image": "/exercises/images/cheville/pointepieds.png",
-"consignes": [
-"Monter sur la pointe des pieds",
-"Marquer un court maintien en haut",
-"Redescendre lentement",
-"S'aider du mur pour l'équilibre si besoin"
-],
-"position": "",
-"youtube": "",
-"type": "timer",
-"conseil": "Monter sur la pointe des pieds<br>Marquer un court maintien en haut<br>Redescendre lentement<br>S'aider du mur pour l'équilibre si besoin",
-"reps": 15,
-"ex": 1,
-"repos": 10,
-"conseil_kine": ""
-},
-{
 "id": "GENOU_15",
 "source": "CABINET",
 "nom": "Montée de marche latérale",
@@ -14519,6 +14922,48 @@ export const MODELES_BASE = [
 "ex": 60,
 "repos": 30,
 "conseil_kine": ""
+},
+{
+"id": "GERIA_03",
+"source": "CABINET",
+"nom": "Équilibre yeux fermés près d'une chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
+"Pieds écartés à largeur de bassin, trouver l'équilibre",
+"Fermer les yeux et tenir",
+"Rapprocher les pieds quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher<br>Pieds écartés à largeur de bassin, trouver l'équilibre<br>Fermer les yeux et tenir<br>Rapprocher les pieds quand c'est facile",
+"reps": 3,
+"ex": 20,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Chaise stable"
+},
+{
+"id": "GERIA_01",
+"source": "CABINET",
+"nom": "Marche avec obstacles",
+"image": "",
+"consignes": [
+"Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
+"Marcher en enjambant chaque obstacle, genou bien levé",
+"Regarder devant soi, pas seulement ses pieds",
+"Faire demi-tour lentement et revenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas<br>Marcher en enjambant chaque obstacle, genou bien levé<br>Regarder devant soi, pas seulement ses pieds<br>Faire demi-tour lentement et revenir",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Petits obstacles, Couloir"
 }
 ]
 },
@@ -14649,6 +15094,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 15,
 "conseil_kine": ""
+},
+{
+"id": "GERIA_02",
+"source": "CABINET",
+"nom": "Ramasser un objet au sol",
+"image": "",
+"consignes": [
+"Debout, une main sur le dossier d'une chaise stable",
+"Un objet léger posé au sol à côté du pied",
+"Plier les genoux et les hanches pour descendre, dos droit, et attraper l'objet",
+"Remonter en poussant sur les jambes, puis reposer l'objet"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main sur le dossier d'une chaise stable<br>Un objet léger posé au sol à côté du pied<br>Plier les genoux et les hanches pour descendre, dos droit, et attraper l'objet<br>Remonter en poussant sur les jambes, puis reposer l'objet",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": "",
+"materiel": "Chaise stable, Objet léger"
 }
 ]
 },
@@ -15153,6 +15619,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -15264,6 +15751,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "VELO_07",
+"source": "CABINET",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -15375,6 +15883,27 @@ export const MODELES_BASE = [
 "ex": 60,
 "repos": 30,
 "conseil_kine": ""
+},
+{
+"id": "VELO_08",
+"source": "CABINET",
+"nom": "Fractionné et double tâche à vélo",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Alterner 30 s plus vite et 1 min doux",
+"Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant",
+"Garder le dos contre le dossier",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Alterner 30 s plus vite et 1 min doux<br>Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant<br>Garder le dos contre le dossier<br>Finir par 2 min de pédalage doux",
+"reps": 6,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -15466,6 +15995,27 @@ export const MODELES_BASE = [
 "ex": 2,
 "repos": 10,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -15578,6 +16128,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 15,
 "conseil_kine": ""
+},
+{
+"id": "VELO_07",
+"source": "CABINET",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -15668,6 +16239,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 60,
 "conseil_kine": ""
+},
+{
+"id": "GERIA_01",
+"source": "CABINET",
+"nom": "Marche avec obstacles",
+"image": "",
+"consignes": [
+"Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
+"Marcher en enjambant chaque obstacle, genou bien levé",
+"Regarder devant soi, pas seulement ses pieds",
+"Faire demi-tour lentement et revenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas<br>Marcher en enjambant chaque obstacle, genou bien levé<br>Regarder devant soi, pas seulement ses pieds<br>Faire demi-tour lentement et revenir",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Petits obstacles, Couloir"
 }
 ]
 },
@@ -15779,6 +16371,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "VELO_06",
+"source": "CABINET",
+"nom": "Pédalage jambe atteinte maintenue par une sangle",
+"image": "/exercises/images/velo/pedalage-sangle-f.webp",
+"consignes": [
+"Pied atteint fixé sur la pédale par la sangle",
+"Résistance faible",
+"Pédaler en pensant à pousser avec la jambe atteinte",
+"Le kiné vérifie que le genou reste dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pied atteint fixé sur la pédale par la sangle<br>Résistance faible<br>Pédaler en pensant à pousser avec la jambe atteinte<br>Le kiné vérifie que le genou reste dans l'axe",
+"reps": 3,
+"ex": 120,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé, Sangle de pédale"
 }
 ]
 },
@@ -15890,6 +16503,48 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "VELO_01",
+"source": "CABINET",
+"nom": "Monter et descendre du vélo semi-allongé",
+"image": "/exercises/images/velo/monter-velo-f.webp",
+"consignes": [
+"Se placer à côté du vélo, une main sur la poignée latérale",
+"Enjamber le cadre bas, puis s'asseoir au fond du siège",
+"Placer un pied puis l'autre sur les pédales",
+"Pour descendre : pieds au sol, main sur la poignée, se lever puis enjamber"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se placer à côté du vélo, une main sur la poignée latérale<br>Enjamber le cadre bas, puis s'asseoir au fond du siège<br>Placer un pied puis l'autre sur les pédales<br>Pour descendre : pieds au sol, main sur la poignée, se lever puis enjamber",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "VELO_06",
+"source": "CABINET",
+"nom": "Pédalage jambe atteinte maintenue par une sangle",
+"image": "/exercises/images/velo/pedalage-sangle-f.webp",
+"consignes": [
+"Pied atteint fixé sur la pédale par la sangle",
+"Résistance faible",
+"Pédaler en pensant à pousser avec la jambe atteinte",
+"Le kiné vérifie que le genou reste dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pied atteint fixé sur la pédale par la sangle<br>Résistance faible<br>Pédaler en pensant à pousser avec la jambe atteinte<br>Le kiné vérifie que le genou reste dans l'axe",
+"reps": 3,
+"ex": 120,
+"repos": 60,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé, Sangle de pédale"
 }
 ]
 },
@@ -16092,6 +16747,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -16203,6 +16879,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 20,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -16425,6 +17122,27 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": ""
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -16535,6 +17253,27 @@ export const MODELES_BASE = [
 "ex": 5,
 "repos": 5,
 "conseil_kine": ""
+},
+{
+"id": "VELO_07",
+"source": "CABINET",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "",
+"materiel": "Vélo semi-allongé"
 }
 ]
 },
@@ -23262,6 +24001,9763 @@ export const MODELES_BASE = [
 "ex": 20,
 "repos": 15,
 "conseil_kine": "Objectif : un périnée qui se verrouille tout seul avant l'impact. En cas de fuite, revenez aux contractions rapides et parlez-en à votre kiné."
+}
+]
+},
+{
+"id": "cab_vestibulaire_1",
+"nom": "Rééducation vestibulaire",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VEST_01",
+"source": "CABINET",
+"nom": "Stabilisation du regard horizontale, assis",
+"image": "",
+"consignes": [
+"Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux",
+"Fixer la lettre et tourner la tête de droite à gauche, petits mouvements",
+"La lettre doit rester nette : ralentir si elle devient floue",
+"Augmenter la vitesse quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux<br>Fixer la lettre et tourner la tête de droite à gauche, petits mouvements<br>La lettre doit rester nette : ralentir si elle devient floue<br>Augmenter la vitesse quand c'est facile",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise, Carte avec une lettre"
+},
+{
+"id": "VEST_02",
+"source": "CABINET",
+"nom": "Stabilisation du regard verticale, assis",
+"image": "",
+"consignes": [
+"Assis, carte avec une lettre à bras tendu, à hauteur des yeux",
+"Fixer la lettre et faire « oui » de la tête, petits mouvements",
+"Garder la lettre nette pendant tout le mouvement",
+"Augmenter la vitesse progressivement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, carte avec une lettre à bras tendu, à hauteur des yeux<br>Fixer la lettre et faire « oui » de la tête, petits mouvements<br>Garder la lettre nette pendant tout le mouvement<br>Augmenter la vitesse progressivement",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise, Carte avec une lettre"
+},
+{
+"id": "VEST_04",
+"source": "CABINET",
+"nom": "Poursuite d'une cible des yeux",
+"image": "",
+"consignes": [
+"Assis, tête immobile, tenir un stylo à bras tendu",
+"Déplacer lentement le stylo de droite à gauche et le suivre des yeux",
+"Puis de haut en bas, puis en diagonale",
+"La tête ne bouge pas, seuls les yeux suivent"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, tête immobile, tenir un stylo à bras tendu<br>Déplacer lentement le stylo de droite à gauche et le suivre des yeux<br>Puis de haut en bas, puis en diagonale<br>La tête ne bouge pas, seuls les yeux suivent",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise, Stylo"
+},
+{
+"id": "VEST_05",
+"source": "CABINET",
+"nom": "Saccades entre deux cibles",
+"image": "",
+"consignes": [
+"Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm",
+"Tête immobile : passer le regard vite d'une cible à l'autre",
+"Puis tourner la tête vers la cible juste après les yeux",
+"Faire aussi avec des cibles l'une au-dessus de l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm<br>Tête immobile : passer le regard vite d'une cible à l'autre<br>Puis tourner la tête vers la cible juste après les yeux<br>Faire aussi avec des cibles l'une au-dessus de l'autre",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise, Deux cibles au mur"
+},
+{
+"id": "CHEV_003",
+"source": "CABINET",
+"nom": "Équilibre bipodal yeux ouverts",
+"image": "/exercises/images/cheville/equilibre-bipodal.webp",
+"consignes": [
+"Regarder devant soi",
+"Répartir le poids sur les deux pieds",
+"Rester stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Regarder devant soi<br>Répartir le poids sur les deux pieds<br>Rester stable",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+}
+]
+},
+{
+"id": "cab_vestibulaire_2",
+"nom": "Rééducation vestibulaire",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VEST_03",
+"source": "CABINET",
+"nom": "Stabilisation du regard debout",
+"image": "",
+"consignes": [
+"Debout près d'un mur, pieds écartés à largeur de bassin",
+"Fixer une lettre collée au mur à hauteur des yeux",
+"Tourner la tête de droite à gauche puis de haut en bas en gardant la lettre nette",
+"Rapprocher les pieds quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un mur, pieds écartés à largeur de bassin<br>Fixer une lettre collée au mur à hauteur des yeux<br>Tourner la tête de droite à gauche puis de haut en bas en gardant la lettre nette<br>Rapprocher les pieds quand c'est facile",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Mur, Lettre collée au mur"
+},
+{
+"id": "VEST_05",
+"source": "CABINET",
+"nom": "Saccades entre deux cibles",
+"image": "",
+"consignes": [
+"Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm",
+"Tête immobile : passer le regard vite d'une cible à l'autre",
+"Puis tourner la tête vers la cible juste après les yeux",
+"Faire aussi avec des cibles l'une au-dessus de l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm<br>Tête immobile : passer le regard vite d'une cible à l'autre<br>Puis tourner la tête vers la cible juste après les yeux<br>Faire aussi avec des cibles l'une au-dessus de l'autre",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise, Deux cibles au mur"
+},
+{
+"id": "VEST_06",
+"source": "CABINET",
+"nom": "Marche en tournant la tête",
+"image": "",
+"consignes": [
+"Marcher dans un couloir, le long d'un mur",
+"Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer",
+"Regarder un objet de chaque côté (cadre, porte)",
+"Faire ensuite en levant et baissant la tête"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher dans un couloir, le long d'un mur<br>Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer<br>Regarder un objet de chaque côté (cadre, porte)<br>Faire ensuite en levant et baissant la tête",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Couloir, Mur à portée de main"
+},
+{
+"id": "GERIA_03",
+"source": "CABINET",
+"nom": "Équilibre yeux fermés près d'une chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
+"Pieds écartés à largeur de bassin, trouver l'équilibre",
+"Fermer les yeux et tenir",
+"Rapprocher les pieds quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher<br>Pieds écartés à largeur de bassin, trouver l'équilibre<br>Fermer les yeux et tenir<br>Rapprocher les pieds quand c'est facile",
+"reps": 3,
+"ex": 20,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Chaise stable"
+},
+{
+"id": "CHEVILLE_12",
+"source": "CABINET",
+"nom": "Marche talon-pointe",
+"image": "/exercises/images/cheville/marche-talon-pointe.webp",
+"consignes": [
+"Debout, près d'un mur ou d'un plan de travail par sécurité",
+"Poser un pied devant l'autre, talon contre la pointe du pied arrière",
+"Avancer ainsi lentement sur une ligne droite pendant 30 secondes",
+"Regard devant soi, bras écartés pour l'équilibre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, près d'un mur ou d'un plan de travail par sécurité<br>Poser un pied devant l'autre, talon contre la pointe du pied arrière<br>Avancer ainsi lentement sur une ligne droite pendant 30 secondes<br>Regard devant soi, bras écartés pour l'équilibre",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+}
+]
+},
+{
+"id": "cab_vestibulaire_3",
+"nom": "Rééducation vestibulaire",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VEST_07",
+"source": "CABINET",
+"nom": "Équilibre pieds joints, yeux fermés, sur mousse",
+"image": "",
+"consignes": [
+"Debout dans l'angle d'une pièce, une chaise devant soi",
+"Monter sur un coussin de mousse, pieds joints",
+"Trouver l'équilibre, puis fermer les yeux",
+"Tenir le temps indiqué ; rouvrir les yeux si l'on perd l'équilibre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout dans l'angle d'une pièce, une chaise devant soi<br>Monter sur un coussin de mousse, pieds joints<br>Trouver l'équilibre, puis fermer les yeux<br>Tenir le temps indiqué ; rouvrir les yeux si l'on perd l'équilibre",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Coussin de mousse, Angle de mur, Chaise"
+},
+{
+"id": "VEST_06",
+"source": "CABINET",
+"nom": "Marche en tournant la tête",
+"image": "",
+"consignes": [
+"Marcher dans un couloir, le long d'un mur",
+"Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer",
+"Regarder un objet de chaque côté (cadre, porte)",
+"Faire ensuite en levant et baissant la tête"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher dans un couloir, le long d'un mur<br>Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer<br>Regarder un objet de chaque côté (cadre, porte)<br>Faire ensuite en levant et baissant la tête",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui.",
+"materiel": "Couloir, Mur à portée de main"
+},
+{
+"id": "CHEV_009",
+"source": "CABINET",
+"nom": "Équilibre sur coussin",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Garder le tronc stable",
+"Regarder devant soi",
+"Contrôler les oscillations"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le tronc stable<br>Regarder devant soi<br>Contrôler les oscillations",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+},
+{
+"id": "NEURO_11",
+"source": "CABINET",
+"nom": "Marche en double tâche",
+"image": "/exercises/images/neuro/marche-double-tache.webp",
+"consignes": [
+"Marcher normalement dans un couloir",
+"En même temps, porter un plateau avec un verre",
+"Ou compter à rebours de 3 en 3",
+"Garder un pas régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher normalement dans un couloir<br>En même temps, porter un plateau avec un verre<br>Ou compter à rebours de 3 en 3<br>Garder un pas régulier",
+"reps": 3,
+"ex": 60,
+"repos": 30,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+},
+{
+"id": "CHEV_006",
+"source": "CABINET",
+"nom": "Équilibre unipodal avec mouvements bras",
+"image": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
+"consignes": [
+"Lever les bras lentement",
+"Garder l’équilibre",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Lever les bras lentement<br>Garder l’équilibre<br>Respirer calmement",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+},
+{
+"id": "NEURO_10",
+"source": "CABINET",
+"nom": "Demi-tour en plusieurs pas",
+"image": "/exercises/images/neuro/demi-tour.webp",
+"consignes": [
+"Debout près d'un appui",
+"Faire demi-tour en plusieurs petits pas en dessinant un arc",
+"Ne pas pivoter sur un seul pied",
+"Tourner dans les deux sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un appui<br>Faire demi-tour en plusieurs petits pas en dessinant un arc<br>Ne pas pivoter sur un seul pied<br>Tourner dans les deux sens",
+"reps": 6,
+"ex": 3,
+"repos": 20,
+"conseil_kine": "Un vertige léger et bref est attendu ; arrêter s'il dure ou en cas de nausées. Toujours près d'un appui."
+}
+]
+},
+{
+"id": "cab_vppb_1",
+"nom": "VPPB (après manœuvre)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VEST_08",
+"source": "CABINET",
+"nom": "Exercices de Brandt-Daroff",
+"image": "",
+"consignes": [
+"Assis au milieu du lit, jambes pendantes",
+"Tourner la tête de 45° vers la gauche, puis se coucher vite sur le côté droit",
+"Rester 30 s (ou jusqu'à la fin du vertige), puis se rasseoir 30 s",
+"Recommencer en tournant la tête à droite et en se couchant à gauche"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au milieu du lit, jambes pendantes<br>Tourner la tête de 45° vers la gauche, puis se coucher vite sur le côté droit<br>Rester 30 s (ou jusqu'à la fin du vertige), puis se rasseoir 30 s<br>Recommencer en tournant la tête à droite et en se couchant à gauche",
+"reps": 5,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Brandt-Daroff seulement si le vertige positionnel persiste après la manœuvre. Se lever lentement.",
+"materiel": "Lit"
+},
+{
+"id": "VEST_01",
+"source": "CABINET",
+"nom": "Stabilisation du regard horizontale, assis",
+"image": "",
+"consignes": [
+"Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux",
+"Fixer la lettre et tourner la tête de droite à gauche, petits mouvements",
+"La lettre doit rester nette : ralentir si elle devient floue",
+"Augmenter la vitesse quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux<br>Fixer la lettre et tourner la tête de droite à gauche, petits mouvements<br>La lettre doit rester nette : ralentir si elle devient floue<br>Augmenter la vitesse quand c'est facile",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Brandt-Daroff seulement si le vertige positionnel persiste après la manœuvre. Se lever lentement.",
+"materiel": "Chaise, Carte avec une lettre"
+},
+{
+"id": "VEST_04",
+"source": "CABINET",
+"nom": "Poursuite d'une cible des yeux",
+"image": "",
+"consignes": [
+"Assis, tête immobile, tenir un stylo à bras tendu",
+"Déplacer lentement le stylo de droite à gauche et le suivre des yeux",
+"Puis de haut en bas, puis en diagonale",
+"La tête ne bouge pas, seuls les yeux suivent"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, tête immobile, tenir un stylo à bras tendu<br>Déplacer lentement le stylo de droite à gauche et le suivre des yeux<br>Puis de haut en bas, puis en diagonale<br>La tête ne bouge pas, seuls les yeux suivent",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Brandt-Daroff seulement si le vertige positionnel persiste après la manœuvre. Se lever lentement.",
+"materiel": "Chaise, Stylo"
+},
+{
+"id": "CHEV_003",
+"source": "CABINET",
+"nom": "Équilibre bipodal yeux ouverts",
+"image": "/exercises/images/cheville/equilibre-bipodal.webp",
+"consignes": [
+"Regarder devant soi",
+"Répartir le poids sur les deux pieds",
+"Rester stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Regarder devant soi<br>Répartir le poids sur les deux pieds<br>Rester stable",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Brandt-Daroff seulement si le vertige positionnel persiste après la manœuvre. Se lever lentement."
+},
+{
+"id": "GERIA_03",
+"source": "CABINET",
+"nom": "Équilibre yeux fermés près d'une chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
+"Pieds écartés à largeur de bassin, trouver l'équilibre",
+"Fermer les yeux et tenir",
+"Rapprocher les pieds quand c'est facile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher<br>Pieds écartés à largeur de bassin, trouver l'équilibre<br>Fermer les yeux et tenir<br>Rapprocher les pieds quand c'est facile",
+"reps": 3,
+"ex": 20,
+"repos": 30,
+"conseil_kine": "Brandt-Daroff seulement si le vertige positionnel persiste après la manœuvre. Se lever lentement.",
+"materiel": "Chaise stable"
+}
+]
+},
+{
+"id": "cab_rehabilitation_respiratoire_1",
+"nom": "Réhabilitation respiratoire (BPCO)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "RESPI_01",
+"source": "CABINET",
+"nom": "Respiration abdomino-diaphragmatique, allongé",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
+"Inspirer par le nez en laissant le ventre se gonfler sous la main",
+"Expirer lentement par la bouche, le ventre redescend",
+"La main sur la poitrine bouge peu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine<br>Inspirer par le nez en laissant le ventre se gonfler sous la main<br>Expirer lentement par la bouche, le ventre redescend<br>La main sur la poitrine bouge peu",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Tapis ou lit"
+},
+{
+"id": "RESPI_02",
+"source": "CABINET",
+"nom": "Expiration lèvres pincées",
+"image": "",
+"consignes": [
+"Assis, épaules relâchées",
+"Inspirer par le nez en comptant jusqu'à 2",
+"Expirer lentement lèvres pincées, comme pour souffler une bougie sans l'éteindre, en comptant jusqu'à 4",
+"Utiliser cette respiration à l'effort (escaliers, marche)"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, épaules relâchées<br>Inspirer par le nez en comptant jusqu'à 2<br>Expirer lentement lèvres pincées, comme pour souffler une bougie sans l'éteindre, en comptant jusqu'à 4<br>Utiliser cette respiration à l'effort (escaliers, marche)",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Chaise"
+},
+{
+"id": "RESPI_03",
+"source": "CABINET",
+"nom": "Expansion costale avec les bras",
+"image": "",
+"consignes": [
+"Assis, mains posées sur les côtés des côtes",
+"Inspirer par le nez en poussant les côtes dans les mains",
+"Lever les bras sur le côté en fin d'inspiration",
+"Expirer lentement en redescendant les bras"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, mains posées sur les côtés des côtes<br>Inspirer par le nez en poussant les côtes dans les mains<br>Lever les bras sur le côté en fin d'inspiration<br>Expirer lentement en redescendant les bras",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Chaise"
+},
+{
+"id": "RESPI_08",
+"source": "CABINET",
+"nom": "Position de récupération, penché en avant",
+"image": "",
+"consignes": [
+"Assis, avant-bras posés sur les cuisses ou sur une table",
+"Relâcher les épaules et la nuque",
+"Respirer lèvres pincées jusqu'au retour au calme",
+"Debout : dos appuyé contre un mur, pieds un peu en avant, mains sur les cuisses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posés sur les cuisses ou sur une table<br>Relâcher les épaules et la nuque<br>Respirer lèvres pincées jusqu'au retour au calme<br>Debout : dos appuyé contre un mur, pieds un peu en avant, mains sur les cuisses",
+"reps": 1,
+"ex": 120,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Chaise, Table"
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "FAUT_POST_05",
+"source": "CABINET",
+"nom": "Tirage élastique assis",
+"image": "/exercises/images/fauteuil/FAUT_POST_05.png",
+"consignes": [
+"Garder le dos droit",
+"Tirer les coudes vers l’arrière",
+"Rapprocher les omoplates",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le dos droit<br>Tirer les coudes vers l’arrière<br>Rapprocher les omoplates<br>Revenir lentement",
+"reps": 10,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+}
+]
+},
+{
+"id": "cab_rehabilitation_respiratoire_2",
+"nom": "Réhabilitation respiratoire (BPCO)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "RESPI_02",
+"source": "CABINET",
+"nom": "Expiration lèvres pincées",
+"image": "",
+"consignes": [
+"Assis, épaules relâchées",
+"Inspirer par le nez en comptant jusqu'à 2",
+"Expirer lentement lèvres pincées, comme pour souffler une bougie sans l'éteindre, en comptant jusqu'à 4",
+"Utiliser cette respiration à l'effort (escaliers, marche)"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, épaules relâchées<br>Inspirer par le nez en comptant jusqu'à 2<br>Expirer lentement lèvres pincées, comme pour souffler une bougie sans l'éteindre, en comptant jusqu'à 4<br>Utiliser cette respiration à l'effort (escaliers, marche)",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Chaise"
+},
+{
+"id": "RESPI_07",
+"source": "CABINET",
+"nom": "Entraîneur inspiratoire",
+"image": "",
+"consignes": [
+"Assis droit, pince-nez si besoin, embout entre les lèvres",
+"Inspirer fort et vite à travers l'appareil, réglé par le kiné",
+"Expirer lentement et calmement",
+"Faire 30 inspirations, en pause si besoin, 2 fois par jour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit, pince-nez si besoin, embout entre les lèvres<br>Inspirer fort et vite à travers l'appareil, réglé par le kiné<br>Expirer lentement et calmement<br>Faire 30 inspirations, en pause si besoin, 2 fois par jour",
+"reps": 1,
+"ex": 180,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Entraîneur inspiratoire (type Threshold)"
+},
+{
+"id": "VELO_07",
+"source": "CABINET",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "HANCHE_12",
+"source": "CABINET",
+"nom": "Assis-debout d'une chaise",
+"image": "/exercises/images/hanche/assis-debout-chaise.webp",
+"consignes": [
+"Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux",
+"Croiser les bras sur la poitrine",
+"Se pencher en avant puis se lever sans s'aider des mains",
+"Se rasseoir lentement en contrôlant la descente"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux<br>Croiser les bras sur la poitrine<br>Se pencher en avant puis se lever sans s'aider des mains<br>Se rasseoir lentement en contrôlant la descente",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+},
+{
+"id": "EPAULE_08",
+"source": "CABINET",
+"nom": "Tirage bras tendus avec élastique",
+"image": "/exercises/images/epaule/Tiragebrastendus_elastique.png",
+"consignes": [
+"Se tenir debout face au point d’ancrage",
+"Garder les bras tendus le long du corps",
+"Tirer l’élastique vers l’arrière en rapprochant légèrement les omoplates",
+"Maintenir le tronc droit et les épaules basses",
+"Revenir lentement à la position de départ"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se tenir debout face au point d’ancrage<br>Garder les bras tendus le long du corps<br>Tirer l’élastique vers l’arrière en rapprochant légèrement les omoplates<br>Maintenir le tronc droit et les épaules basses<br>Revenir lentement à la position de départ",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Chaise stable"
+}
+]
+},
+{
+"id": "cab_rehabilitation_respiratoire_3",
+"nom": "Réhabilitation respiratoire (BPCO)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "RESPI_07",
+"source": "CABINET",
+"nom": "Entraîneur inspiratoire",
+"image": "",
+"consignes": [
+"Assis droit, pince-nez si besoin, embout entre les lèvres",
+"Inspirer fort et vite à travers l'appareil, réglé par le kiné",
+"Expirer lentement et calmement",
+"Faire 30 inspirations, en pause si besoin, 2 fois par jour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit, pince-nez si besoin, embout entre les lèvres<br>Inspirer fort et vite à travers l'appareil, réglé par le kiné<br>Expirer lentement et calmement<br>Faire 30 inspirations, en pause si besoin, 2 fois par jour",
+"reps": 1,
+"ex": 180,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Entraîneur inspiratoire (type Threshold)"
+},
+{
+"id": "VELO_08",
+"source": "CABINET",
+"nom": "Fractionné et double tâche à vélo",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Alterner 30 s plus vite et 1 min doux",
+"Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant",
+"Garder le dos contre le dossier",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Alterner 30 s plus vite et 1 min doux<br>Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant<br>Garder le dos contre le dossier<br>Finir par 2 min de pédalage doux",
+"reps": 6,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "cardio_tapismarche",
+"source": "CABINET",
+"nom": "Marche sur tapis",
+"image": "/exercises/images/cabinet/tapismarche.png",
+"consignes": [
+"Marcher à allure confortable",
+"Regarder devant soi",
+"Se tenir droit",
+"Utiliser les rampes si nécessaire"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher à allure confortable<br>Regarder devant soi<br>Se tenir droit<br>Utiliser les rampes si nécessaire",
+"reps": 1,
+"ex": 300,
+"repos": 30,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort. Arrêter en cas de malaise ou de douleur thoracique."
+}
+]
+},
+{
+"id": "cab_desencombrement_bronchique_1",
+"nom": "Désencombrement bronchique",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "RESPI_01",
+"source": "CABINET",
+"nom": "Respiration abdomino-diaphragmatique, allongé",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
+"Inspirer par le nez en laissant le ventre se gonfler sous la main",
+"Expirer lentement par la bouche, le ventre redescend",
+"La main sur la poitrine bouge peu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine<br>Inspirer par le nez en laissant le ventre se gonfler sous la main<br>Expirer lentement par la bouche, le ventre redescend<br>La main sur la poitrine bouge peu",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Ne pas tousser à répétition : huff d'abord, une toux seulement quand le mucus est remonté.",
+"materiel": "Tapis ou lit"
+},
+{
+"id": "RESPI_03",
+"source": "CABINET",
+"nom": "Expansion costale avec les bras",
+"image": "",
+"consignes": [
+"Assis, mains posées sur les côtés des côtes",
+"Inspirer par le nez en poussant les côtes dans les mains",
+"Lever les bras sur le côté en fin d'inspiration",
+"Expirer lentement en redescendant les bras"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, mains posées sur les côtés des côtes<br>Inspirer par le nez en poussant les côtes dans les mains<br>Lever les bras sur le côté en fin d'inspiration<br>Expirer lentement en redescendant les bras",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Ne pas tousser à répétition : huff d'abord, une toux seulement quand le mucus est remonté.",
+"materiel": "Chaise"
+},
+{
+"id": "RESPI_04",
+"source": "CABINET",
+"nom": "Expiration lente prolongée couché sur le côté (ELTGOL)",
+"image": "",
+"consignes": [
+"Couché sur le côté où les poumons sont encombrés, un coussin sous la tête",
+"Inspirer normalement par le nez",
+"Expirer très lentement, bouche ouverte, jusqu'au bout de l'air",
+"Après quelques cycles, faire un huff pour remonter les sécrétions"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Couché sur le côté où les poumons sont encombrés, un coussin sous la tête<br>Inspirer normalement par le nez<br>Expirer très lentement, bouche ouverte, jusqu'au bout de l'air<br>Après quelques cycles, faire un huff pour remonter les sécrétions",
+"reps": 3,
+"ex": 60,
+"repos": 30,
+"conseil_kine": "Ne pas tousser à répétition : huff d'abord, une toux seulement quand le mucus est remonté.",
+"materiel": "Lit ou table"
+},
+{
+"id": "RESPI_05",
+"source": "CABINET",
+"nom": "Huff et toux dirigée",
+"image": "",
+"consignes": [
+"Assis, buste légèrement penché en avant",
+"Faire 2 ou 3 respirations calmes",
+"Inspirer à moitié puis expirer fort, bouche ouverte, comme pour faire de la buée sur une vitre",
+"Quand le mucus est remonté, tousser une fois pour le cracher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, buste légèrement penché en avant<br>Faire 2 ou 3 respirations calmes<br>Inspirer à moitié puis expirer fort, bouche ouverte, comme pour faire de la buée sur une vitre<br>Quand le mucus est remonté, tousser une fois pour le cracher",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Ne pas tousser à répétition : huff d'abord, une toux seulement quand le mucus est remonté.",
+"materiel": "Chaise, Mouchoirs"
+},
+{
+"id": "RESPI_08",
+"source": "CABINET",
+"nom": "Position de récupération, penché en avant",
+"image": "",
+"consignes": [
+"Assis, avant-bras posés sur les cuisses ou sur une table",
+"Relâcher les épaules et la nuque",
+"Respirer lèvres pincées jusqu'au retour au calme",
+"Debout : dos appuyé contre un mur, pieds un peu en avant, mains sur les cuisses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posés sur les cuisses ou sur une table<br>Relâcher les épaules et la nuque<br>Respirer lèvres pincées jusqu'au retour au calme<br>Debout : dos appuyé contre un mur, pieds un peu en avant, mains sur les cuisses",
+"reps": 1,
+"ex": 120,
+"repos": 0,
+"conseil_kine": "Ne pas tousser à répétition : huff d'abord, une toux seulement quand le mucus est remonté.",
+"materiel": "Chaise, Table"
+}
+]
+},
+{
+"id": "cab_respiratoire_post_operatoire_1",
+"nom": "Kiné respiratoire après une opération",
+"niveau": 1,
+"categorie": "postop",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "RESPI_06",
+"source": "CABINET",
+"nom": "Spiromètre incitatif",
+"image": "",
+"consignes": [
+"Assis droit, le spiromètre tenu bien vertical",
+"Expirer normalement, puis serrer l'embout entre les lèvres",
+"Inspirer lentement et profondément pour faire monter la bille et la garder en haut 3 s",
+"Lâcher l'embout et expirer doucement ; souffler 1 min entre deux essais"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit, le spiromètre tenu bien vertical<br>Expirer normalement, puis serrer l'embout entre les lèvres<br>Inspirer lentement et profondément pour faire monter la bille et la garder en haut 3 s<br>Lâcher l'embout et expirer doucement ; souffler 1 min entre deux essais",
+"reps": 10,
+"ex": 10,
+"repos": 30,
+"conseil_kine": "Toutes les heures dans la journée. Tenir un coussin contre la cicatrice pour tousser.",
+"materiel": "Spiromètre incitatif"
+},
+{
+"id": "RESPI_03",
+"source": "CABINET",
+"nom": "Expansion costale avec les bras",
+"image": "",
+"consignes": [
+"Assis, mains posées sur les côtés des côtes",
+"Inspirer par le nez en poussant les côtes dans les mains",
+"Lever les bras sur le côté en fin d'inspiration",
+"Expirer lentement en redescendant les bras"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, mains posées sur les côtés des côtes<br>Inspirer par le nez en poussant les côtes dans les mains<br>Lever les bras sur le côté en fin d'inspiration<br>Expirer lentement en redescendant les bras",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Toutes les heures dans la journée. Tenir un coussin contre la cicatrice pour tousser.",
+"materiel": "Chaise"
+},
+{
+"id": "RESPI_01",
+"source": "CABINET",
+"nom": "Respiration abdomino-diaphragmatique, allongé",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
+"Inspirer par le nez en laissant le ventre se gonfler sous la main",
+"Expirer lentement par la bouche, le ventre redescend",
+"La main sur la poitrine bouge peu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine<br>Inspirer par le nez en laissant le ventre se gonfler sous la main<br>Expirer lentement par la bouche, le ventre redescend<br>La main sur la poitrine bouge peu",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Toutes les heures dans la journée. Tenir un coussin contre la cicatrice pour tousser.",
+"materiel": "Tapis ou lit"
+},
+{
+"id": "RESPI_05",
+"source": "CABINET",
+"nom": "Huff et toux dirigée",
+"image": "",
+"consignes": [
+"Assis, buste légèrement penché en avant",
+"Faire 2 ou 3 respirations calmes",
+"Inspirer à moitié puis expirer fort, bouche ouverte, comme pour faire de la buée sur une vitre",
+"Quand le mucus est remonté, tousser une fois pour le cracher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, buste légèrement penché en avant<br>Faire 2 ou 3 respirations calmes<br>Inspirer à moitié puis expirer fort, bouche ouverte, comme pour faire de la buée sur une vitre<br>Quand le mucus est remonté, tousser une fois pour le cracher",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Toutes les heures dans la journée. Tenir un coussin contre la cicatrice pour tousser.",
+"materiel": "Chaise, Mouchoirs"
+},
+{
+"id": "CHEV_001",
+"source": "CABINET",
+"nom": "Mobilité cheville flexion extension",
+"image": "/exercises/images/cheville/mobilite-flexion-extension.webp",
+"consignes": [
+"Faire des mouvements lents",
+"Ne pas provoquer de douleur importante",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Faire des mouvements lents<br>Ne pas provoquer de douleur importante<br>Respirer calmement",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Toutes les heures dans la journée. Tenir un coussin contre la cicatrice pour tousser."
+}
+]
+},
+{
+"id": "cab_retour_au_sport_mi_1",
+"nom": "Retour au sport (membre inférieur)",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "SPORT_08",
+"source": "CABINET",
+"nom": "Descente de marche excentrique (step-down)",
+"image": "",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+"Effleurer le sol du talon sans s'y appuyer",
+"Remonter et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied<br>Effleurer le sol du talon sans s'y appuyer<br>Remonter et recommencer",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition.",
+"materiel": "Marche ou step"
+},
+{
+"id": "BARRE_07",
+"source": "CABINET",
+"nom": "Split squat bulgare, pied arrière sur banc",
+"image": "",
+"consignes": [
+"Dos à un banc, le dessus du pied arrière posé sur le banc",
+"Barre sur les trapèzes (ou haltères)",
+"Descendre en pliant le genou avant, buste légèrement penché",
+"Remonter en poussant dans le talon avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dos à un banc, le dessus du pied arrière posé sur le banc<br>Barre sur les trapèzes (ou haltères)<br>Descendre en pliant le genou avant, buste légèrement penché<br>Remonter en poussant dans le talon avant",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "CHAISE_08",
+"source": "CABINET",
+"nom": "Nordic hamstring assisté sur chaise romaine",
+"image": "",
+"consignes": [
+"À genoux sur le coussin, chevilles bloquées sous les rouleaux",
+"Corps aligné des genoux aux épaules, bras devant",
+"Descendre vers l'avant le plus lentement possible",
+"Se rattraper avec les mains et remonter en s'aidant des mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur le coussin, chevilles bloquées sous les rouleaux<br>Corps aligné des genoux aux épaules, bras devant<br>Descendre vers l'avant le plus lentement possible<br>Se rattraper avec les mains et remonter en s'aidant des mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "CHEV_012",
+"source": "CABINET",
+"nom": "Réceptions unipodales contrôlées",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Amortir doucement",
+"Aligner genou et pied",
+"Stabiliser rapidement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Amortir doucement<br>Aligner genou et pied<br>Stabiliser rapidement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "GENOU_06",
+"source": "CABINET",
+"nom": "Équilibre unipodal avec réception",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"consignes": [
+"Fléchir légèrement le genou",
+"Maintenir l’équilibre",
+"Contrôler la réception de balle"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fléchir légèrement le genou<br>Maintenir l’équilibre<br>Contrôler la réception de balle",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Force et contrôle avant de sauter : genou dans l'axe du pied à chaque répétition."
+}
+]
+},
+{
+"id": "cab_retour_au_sport_mi_2",
+"nom": "Retour au sport (membre inférieur)",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "SPORT_02",
+"source": "CABINET",
+"nom": "Squat sauté (squat jump)",
+"image": "",
+"consignes": [
+"Debout, pieds à largeur des épaules",
+"Descendre en squat, puis sauter le plus haut possible",
+"Réception sur l'avant des pieds, genoux souples et dans l'axe",
+"Se stabiliser 1 s avant le saut suivant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, pieds à largeur des épaules<br>Descendre en squat, puis sauter le plus haut possible<br>Réception sur l'avant des pieds, genoux souples et dans l'axe<br>Se stabiliser 1 s avant le saut suivant",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain."
+},
+{
+"id": "SPORT_01",
+"source": "CABINET",
+"nom": "Sauts latéraux du patineur (skater jumps)",
+"image": "",
+"consignes": [
+"Debout sur la jambe droite, genou légèrement fléchi",
+"Sauter sur le côté pour atterrir sur la jambe gauche",
+"Amortir la réception, genou dans l'axe du pied, et tenir 1 s",
+"Repartir de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur la jambe droite, genou légèrement fléchi<br>Sauter sur le côté pour atterrir sur la jambe gauche<br>Amortir la réception, genou dans l'axe du pied, et tenir 1 s<br>Repartir de l'autre côté",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain."
+},
+{
+"id": "SPORT_05",
+"source": "CABINET",
+"nom": "Déplacements latéraux entre plots",
+"image": "",
+"consignes": [
+"Deux plots écartés de 4 à 5 m",
+"Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
+"Toucher le plot de la main avant de repartir",
+"Ne pas croiser les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux plots écartés de 4 à 5 m<br>Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas<br>Toucher le plot de la main avant de repartir<br>Ne pas croiser les pieds",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain.",
+"materiel": "2 plots"
+},
+{
+"id": "SPORT_06",
+"source": "CABINET",
+"nom": "Carioca (pas croisés latéraux)",
+"image": "",
+"consignes": [
+"Se déplacer sur le côté",
+"Croiser un pied devant puis derrière l'autre en alternance",
+"Laisser les hanches tourner, les épaules restent face à l'avant",
+"Revenir dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se déplacer sur le côté<br>Croiser un pied devant puis derrière l'autre en alternance<br>Laisser les hanches tourner, les épaules restent face à l'avant<br>Revenir dans l'autre sens",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain."
+},
+{
+"id": "BARRE_03",
+"source": "CABINET",
+"nom": "Squat tempo (descente 3 s, pause en bas)",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes",
+"Descendre en 3 s en comptant",
+"Tenir 2 s en bas, sans rebondir",
+"Remonter en 1 s"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes<br>Descendre en 3 s en comptant<br>Tenir 2 s en bas, sans rebondir<br>Remonter en 1 s",
+"reps": 3,
+"ex": 45,
+"repos": 90,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "CHEV_010",
+"source": "CABINET",
+"nom": "Sauts latéraux unipodaux",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Amortir les réceptions",
+"Rester gainé",
+"Contrôler le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Amortir les réceptions<br>Rester gainé<br>Contrôler le genou",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pliométrie : réceptions silencieuses et amorties. Arrêter si le genou gonfle le lendemain."
+}
+]
+},
+{
+"id": "cab_retour_au_sport_mi_3",
+"nom": "Retour au sport (membre inférieur)",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "SPORT_03",
+"source": "CABINET",
+"nom": "Drop jump (descente puis rebond)",
+"image": "",
+"consignes": [
+"Debout sur une box de 20 à 30 cm",
+"Se laisser tomber devant la box (ne pas sauter)",
+"Réception sur les deux pieds, genoux dans l'axe, et rebondir aussitôt vers le haut",
+"Recevoir à nouveau en amortissant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une box de 20 à 30 cm<br>Se laisser tomber devant la box (ne pas sauter)<br>Réception sur les deux pieds, genoux dans l'axe, et rebondir aussitôt vers le haut<br>Recevoir à nouveau en amortissant",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
+"materiel": "Box ou marche solide (20-30 cm)"
+},
+{
+"id": "SPORT_04",
+"source": "CABINET",
+"nom": "Fentes sautées",
+"image": "",
+"consignes": [
+"Position de fente, genou arrière près du sol",
+"Sauter et inverser les jambes en l'air",
+"Retomber en fente, genou avant au-dessus du pied",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de fente, genou arrière près du sol<br>Sauter et inverser les jambes en l'air<br>Retomber en fente, genou avant au-dessus du pied<br>Garder le buste droit",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné."
+},
+{
+"id": "SPORT_09",
+"source": "CABINET",
+"nom": "Sauts sur une jambe en avant (hop)",
+"image": "",
+"consignes": [
+"Debout sur une jambe derrière une ligne",
+"Sauter le plus loin possible en avant sur la même jambe",
+"Tenir la réception 2 s sans poser l'autre pied",
+"Comparer les distances des deux jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une jambe derrière une ligne<br>Sauter le plus loin possible en avant sur la même jambe<br>Tenir la réception 2 s sans poser l'autre pied<br>Comparer les distances des deux jambes",
+"reps": 3,
+"ex": 20,
+"repos": 90,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
+"materiel": "Ligne au sol, Mètre"
+},
+{
+"id": "SPORT_10",
+"source": "CABINET",
+"nom": "Sprint court avec arrêt",
+"image": "",
+"consignes": [
+"Sprinter sur 5 à 10 m",
+"Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
+"S'arrêter en équilibre, pieds écartés",
+"Revenir en marchant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sprinter sur 5 à 10 m<br>Freiner en 2 ou 3 pas, bassin bas, genoux fléchis<br>S'arrêter en équilibre, pieds écartés<br>Revenir en marchant",
+"reps": 5,
+"ex": 10,
+"repos": 60,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
+"materiel": "Espace de 15 m, Plots"
+},
+{
+"id": "CHEV_011",
+"source": "CABINET",
+"nom": "Course légère avec changements direction",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Commencer lentement",
+"Rester fluide",
+"Éviter les douleurs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Commencer lentement<br>Rester fluide<br>Éviter les douleurs",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné."
+},
+{
+"id": "SPORT_07",
+"source": "CABINET",
+"nom": "Nordic hamstring",
+"image": "",
+"consignes": [
+"À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
+"Corps aligné des genoux aux épaules",
+"Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses",
+"Se rattraper avec les mains, puis remonter en poussant sur les mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)<br>Corps aligné des genoux aux épaules<br>Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses<br>Se rattraper avec les mains, puis remonter en poussant sur les mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
+"materiel": "Tapis, Partenaire ou point d'ancrage pour les chevilles"
+}
+]
+},
+{
+"id": "cab_lca_conservateur_1",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_07",
+"source": "CABINET",
+"nom": "Contraction statique du quadriceps",
+"image": "/exercises/images/genou/quadriceps-statique.webp",
+"consignes": [
+"Allongé ou assis jambes tendues, une serviette roulée sous le genou",
+"Écraser la serviette avec l'arrière du genou en serrant la cuisse",
+"Tirer la pointe du pied vers soi",
+"Tenir 6 secondes puis relâcher complètement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé ou assis jambes tendues, une serviette roulée sous le genou<br>Écraser la serviette avec l'arrière du genou en serrant la cuisse<br>Tirer la pointe du pied vers soi<br>Tenir 6 secondes puis relâcher complètement",
+"reps": 10,
+"ex": 6,
+"repos": 6,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "GENOU_08",
+"source": "CABINET",
+"nom": "Élévation de la jambe tendue",
+"image": "/exercises/images/genou/elevation-jambe-tendue.webp",
+"consignes": [
+"Allongé sur le dos, l'autre genou plié pied au sol",
+"Serrer la cuisse de la jambe tendue, pointe du pied vers soi",
+"Monter la jambe tendue jusqu'à la hauteur du genou opposé",
+"Redescendre lentement sans poser"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, l'autre genou plié pied au sol<br>Serrer la cuisse de la jambe tendue, pointe du pied vers soi<br>Monter la jambe tendue jusqu'à la hauteur du genou opposé<br>Redescendre lentement sans poser",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "GENOU_09",
+"source": "CABINET",
+"nom": "Extension terminale du genou à l'élastique",
+"image": "/exercises/images/genou/extension-terminale-elastique.webp",
+"consignes": [
+"Debout, un élastique fixé devant soi passé derrière le genou",
+"Genou légèrement fléchi au départ",
+"Tendre complètement le genou en repoussant l'élastique vers l'arrière",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, un élastique fixé devant soi passé derrière le genou<br>Genou légèrement fléchi au départ<br>Tendre complètement le genou en repoussant l'élastique vers l'arrière<br>Revenir lentement",
+"reps": 15,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "GENOU_10",
+"source": "CABINET",
+"nom": "Flexion du genou assis",
+"image": "/exercises/images/genou/flexion-genou-assis.webp",
+"consignes": [
+"Assis sur une chaise, pied à plat",
+"Faire glisser le pied vers l'arrière sous la chaise pour plier le genou au maximum",
+"Tenir 5 secondes en légère tension",
+"Revenir pied devant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis sur une chaise, pied à plat<br>Faire glisser le pied vers l'arrière sous la chaise pour plier le genou au maximum<br>Tenir 5 secondes en légère tension<br>Revenir pied devant",
+"reps": 15,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "HANCHE_01",
+"source": "CABINET",
+"nom": "Abduction de hanche couché sur le côté",
+"image": "/exercises/images/hanche/abduction-couche.webp",
+"consignes": [
+"Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue",
+"Pointe du pied vers l'avant, talon légèrement en arrière",
+"Monter la jambe du dessus d'environ 30 cm",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue<br>Pointe du pied vers l'avant, talon légèrement en arrière<br>Monter la jambe du dessus d'environ 30 cm<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "CHEV_003",
+"source": "CABINET",
+"nom": "Équilibre bipodal yeux ouverts",
+"image": "/exercises/images/cheville/equilibre-bipodal.webp",
+"consignes": [
+"Regarder devant soi",
+"Répartir le poids sur les deux pieds",
+"Rester stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Regarder devant soi<br>Répartir le poids sur les deux pieds<br>Rester stable",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Vélo semi-allongé"
+}
+]
+},
+{
+"id": "cab_lca_conservateur_2",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_13",
+"source": "CABINET",
+"nom": "Chaise contre le mur",
+"image": "/exercises/images/genou/chaise-mur.webp",
+"consignes": [
+"Dos plaqué contre un mur, pieds à 40 cm du mur",
+"Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°",
+"Genoux au-dessus des chevilles",
+"Tenir en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dos plaqué contre un mur, pieds à 40 cm du mur<br>Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°<br>Genoux au-dessus des chevilles<br>Tenir en respirant",
+"reps": 4,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "GENOU_18",
+"source": "CABINET",
+"nom": "Pont ischio-jambiers talons sur une chaise",
+"image": "/exercises/images/genou/pont-ischio-chaise.webp",
+"consignes": [
+"Allongé sur le dos, talons posés sur l'assise d'une chaise, genoux légèrement fléchis",
+"Bras le long du corps, paumes au sol",
+"Monter le bassin en poussant dans les talons jusqu'à aligner épaules, hanches et genoux",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, talons posés sur l'assise d'une chaise, genoux légèrement fléchis<br>Bras le long du corps, paumes au sol<br>Monter le bassin en poussant dans les talons jusqu'à aligner épaules, hanches et genoux<br>Redescendre lentement en 2 secondes",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "HANCHE_06",
+"source": "CABINET",
+"nom": "Abduction de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/abduction-debout-elastique.webp",
+"consignes": [
+"Debout, une main en appui sur une chaise, élastique autour des deux chevilles",
+"Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi",
+"Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur une chaise, élastique autour des deux chevilles<br>Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi<br>Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+}
+]
+},
+{
+"id": "cab_lca_conservateur_3",
+"nom": "Rupture du LCA (sans opération)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "SPORT_08",
+"source": "CABINET",
+"nom": "Descente de marche excentrique (step-down)",
+"image": "",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+"Effleurer le sol du talon sans s'y appuyer",
+"Remonter et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied<br>Effleurer le sol du talon sans s'y appuyer<br>Remonter et recommencer",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Marche ou step"
+},
+{
+"id": "BARRE_06",
+"source": "CABINET",
+"nom": "Fente arrière barre sur les trapèzes",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes, pieds à largeur de bassin",
+"Reculer un pied et descendre le genou arrière vers le sol",
+"Genou avant au-dessus du pied, buste droit",
+"Revenir en poussant sur le pied avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes, pieds à largeur de bassin<br>Reculer un pied et descendre le genou arrière vers le sol<br>Genou avant au-dessus du pied, buste droit<br>Revenir en poussant sur le pied avant",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "GENOU_04",
+"source": "CABINET",
+"nom": "Équilibre unipodal avec balle",
+"image": "/exercises/images/genou/equilibre-balle-1.png",
+"consignes": [
+"Garder l’équilibre sur une jambe",
+"Contrôler les mouvements",
+"Regarder devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder l’équilibre sur une jambe<br>Contrôler les mouvements<br>Regarder devant soi",
+"reps": 1,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "CHEV_012",
+"source": "CABINET",
+"nom": "Réceptions unipodales contrôlées",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Amortir doucement",
+"Aligner genou et pied",
+"Stabiliser rapidement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Amortir doucement<br>Aligner genou et pied<br>Stabiliser rapidement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné."
+},
+{
+"id": "CHAISE_08",
+"source": "CABINET",
+"nom": "Nordic hamstring assisté sur chaise romaine",
+"image": "",
+"consignes": [
+"À genoux sur le coussin, chevilles bloquées sous les rouleaux",
+"Corps aligné des genoux aux épaules, bras devant",
+"Descendre vers l'avant le plus lentement possible",
+"Se rattraper avec les mains et remonter en s'aidant des mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur le coussin, chevilles bloquées sous les rouleaux<br>Corps aligné des genoux aux épaules, bras devant<br>Descendre vers l'avant le plus lentement possible<br>Se rattraper avec les mains et remonter en s'aidant des mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Genou dans l'axe du pied à chaque répétition. Pas de pivot ni de saut avant l'accord du kiné.",
+"materiel": "Chaise romaine"
+}
+]
+},
+{
+"id": "cab_menisque_1",
+"nom": "Lésion méniscale",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_07",
+"source": "CABINET",
+"nom": "Contraction statique du quadriceps",
+"image": "/exercises/images/genou/quadriceps-statique.webp",
+"consignes": [
+"Allongé ou assis jambes tendues, une serviette roulée sous le genou",
+"Écraser la serviette avec l'arrière du genou en serrant la cuisse",
+"Tirer la pointe du pied vers soi",
+"Tenir 6 secondes puis relâcher complètement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé ou assis jambes tendues, une serviette roulée sous le genou<br>Écraser la serviette avec l'arrière du genou en serrant la cuisse<br>Tirer la pointe du pied vers soi<br>Tenir 6 secondes puis relâcher complètement",
+"reps": 10,
+"ex": 6,
+"repos": 6,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_08",
+"source": "CABINET",
+"nom": "Élévation de la jambe tendue",
+"image": "/exercises/images/genou/elevation-jambe-tendue.webp",
+"consignes": [
+"Allongé sur le dos, l'autre genou plié pied au sol",
+"Serrer la cuisse de la jambe tendue, pointe du pied vers soi",
+"Monter la jambe tendue jusqu'à la hauteur du genou opposé",
+"Redescendre lentement sans poser"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, l'autre genou plié pied au sol<br>Serrer la cuisse de la jambe tendue, pointe du pied vers soi<br>Monter la jambe tendue jusqu'à la hauteur du genou opposé<br>Redescendre lentement sans poser",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_20",
+"source": "CABINET",
+"nom": "Extension isométrique du genou assis",
+"image": "/exercises/images/genou/extension-isometrique-assis.webp",
+"consignes": [
+"Assis au bord d'une chaise, un élastique autour de la cheville attaché au pied arrière de la chaise",
+"Jambe à demi tendue, genou légèrement plié, pied décollé du sol",
+"Pousser la jambe vers l'avant contre l'élastique sans bouger, comme pour tendre le genou",
+"Tenir 45 secondes, puis relâcher 1 minute"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, un élastique autour de la cheville attaché au pied arrière de la chaise<br>Jambe à demi tendue, genou légèrement plié, pied décollé du sol<br>Pousser la jambe vers l'avant contre l'élastique sans bouger, comme pour tendre le genou<br>Tenir 45 secondes, puis relâcher 1 minute",
+"reps": 5,
+"ex": 45,
+"repos": 60,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_10",
+"source": "CABINET",
+"nom": "Flexion du genou assis",
+"image": "/exercises/images/genou/flexion-genou-assis.webp",
+"consignes": [
+"Assis sur une chaise, pied à plat",
+"Faire glisser le pied vers l'arrière sous la chaise pour plier le genou au maximum",
+"Tenir 5 secondes en légère tension",
+"Revenir pied devant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis sur une chaise, pied à plat<br>Faire glisser le pied vers l'arrière sous la chaise pour plier le genou au maximum<br>Tenir 5 secondes en légère tension<br>Revenir pied devant",
+"reps": 15,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "VELO_04",
+"source": "CABINET",
+"nom": "Pédalage arrière",
+"image": "",
+"consignes": [
+"Résistance faible",
+"Pédaler en arrière, lentement",
+"Garder le dos contre le dossier",
+"Alterner 1 min arrière, 1 min avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Résistance faible<br>Pédaler en arrière, lentement<br>Garder le dos contre le dossier<br>Alterner 1 min arrière, 1 min avant",
+"reps": 2,
+"ex": 60,
+"repos": 30,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "HANCHE_01",
+"source": "CABINET",
+"nom": "Abduction de hanche couché sur le côté",
+"image": "/exercises/images/hanche/abduction-couche.webp",
+"consignes": [
+"Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue",
+"Pointe du pied vers l'avant, talon légèrement en arrière",
+"Monter la jambe du dessus d'environ 30 cm",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue<br>Pointe du pied vers l'avant, talon légèrement en arrière<br>Monter la jambe du dessus d'environ 30 cm<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+}
+]
+},
+{
+"id": "cab_menisque_2",
+"nom": "Lésion méniscale",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_09",
+"source": "CABINET",
+"nom": "Extension terminale du genou à l'élastique",
+"image": "/exercises/images/genou/extension-terminale-elastique.webp",
+"consignes": [
+"Debout, un élastique fixé devant soi passé derrière le genou",
+"Genou légèrement fléchi au départ",
+"Tendre complètement le genou en repoussant l'élastique vers l'arrière",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, un élastique fixé devant soi passé derrière le genou<br>Genou légèrement fléchi au départ<br>Tendre complètement le genou en repoussant l'élastique vers l'arrière<br>Revenir lentement",
+"reps": 15,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_13",
+"source": "CABINET",
+"nom": "Chaise contre le mur",
+"image": "/exercises/images/genou/chaise-mur.webp",
+"consignes": [
+"Dos plaqué contre un mur, pieds à 40 cm du mur",
+"Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°",
+"Genoux au-dessus des chevilles",
+"Tenir en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dos plaqué contre un mur, pieds à 40 cm du mur<br>Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°<br>Genoux au-dessus des chevilles<br>Tenir en respirant",
+"reps": 4,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "HANCHE_06",
+"source": "CABINET",
+"nom": "Abduction de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/abduction-debout-elastique.webp",
+"consignes": [
+"Debout, une main en appui sur une chaise, élastique autour des deux chevilles",
+"Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi",
+"Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur une chaise, élastique autour des deux chevilles<br>Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi<br>Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "PLAQUE_02",
+"source": "CABINET",
+"nom": "Demi-squat statique sur plaque vibrante",
+"image": "",
+"consignes": [
+"Mains sur le guidon, pieds à largeur de bassin",
+"Descendre en demi-squat, fesses en arrière",
+"Tenir la position pendant la vibration",
+"Remonter doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur le guidon, pieds à largeur de bassin<br>Descendre en demi-squat, fesses en arrière<br>Tenir la position pendant la vibration<br>Remonter doucement",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10.",
+"materiel": "Plaque vibrante"
+}
+]
+},
+{
+"id": "cab_menisque_3",
+"nom": "Lésion méniscale",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_01",
+"source": "CABINET",
+"nom": "Squat avec élastique",
+"image": "/exercises/images/genou/squat-elastique.png",
+"consignes": [
+"Garder le dos droit",
+"Pousser légèrement contre l’élastique",
+"Maintenir les genoux alignés"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le dos droit<br>Pousser légèrement contre l’élastique<br>Maintenir les genoux alignés",
+"reps": 20,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_11",
+"source": "CABINET",
+"nom": "Descente de marche contrôlée",
+"image": "/exercises/images/genou/descente-marche.webp",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre lentement l'autre talon vers le sol en pliant le genou d'appui",
+"Le genou reste dans l'axe du pied",
+"Effleurer le sol du talon puis remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre lentement l'autre talon vers le sol en pliant le genou d'appui<br>Le genou reste dans l'axe du pied<br>Effleurer le sol du talon puis remonter",
+"reps": 10,
+"ex": 4,
+"repos": 30,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "HANCHE_08",
+"source": "CABINET",
+"nom": "Fente avant",
+"image": "/exercises/images/hanche/fente-avant.webp",
+"consignes": [
+"Debout, faire un grand pas en avant",
+"Descendre le genou arrière vers le sol en gardant le buste droit",
+"S'arrêter quand les deux genoux sont à peu près à 90°",
+"Pousser sur le talon avant pour remonter, puis changer de jambe"
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, faire un grand pas en avant<br>Descendre le genou arrière vers le sol en gardant le buste droit<br>S'arrêter quand les deux genoux sont à peu près à 90°<br>Pousser sur le talon avant pour remonter, puis changer de jambe",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "GENOU_04",
+"source": "CABINET",
+"nom": "Équilibre unipodal avec balle",
+"image": "/exercises/images/genou/equilibre-balle-1.png",
+"consignes": [
+"Garder l’équilibre sur une jambe",
+"Contrôler les mouvements",
+"Regarder devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder l’équilibre sur une jambe<br>Contrôler les mouvements<br>Regarder devant soi",
+"reps": 1,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "CHEV_006",
+"source": "CABINET",
+"nom": "Équilibre unipodal avec mouvements bras",
+"image": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
+"consignes": [
+"Lever les bras lentement",
+"Garder l’équilibre",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Lever les bras lentement<br>Garder l’équilibre<br>Respirer calmement",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de squat profond ni de rotation genou fléchi en charge au début. Douleur au plus 3/10."
+}
+]
+},
+{
+"id": "cab_instabilite_epaule_1",
+"nom": "Instabilité d'épaule",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "EPAULE_04",
+"source": "CABINET",
+"nom": "Isométrique rotation externe contre mur",
+"image": "/exercises/images/epaule/REisoepaule.png",
+"consignes": [
+"Pousser doucement contre le mur",
+"Maintenir sans douleur",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pousser doucement contre le mur<br>Maintenir sans douleur<br>Respirer calmement",
+"reps": 10,
+"ex": 30,
+"repos": 40,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_CAPS_07",
+"source": "CABINET",
+"nom": "Rotation externe isométrique contre mur",
+"image": "/exercises/images/epaule/REisoepaule.png",
+"consignes": [
+"Placer le coude contre le corps",
+"Pousser doucement contre le mur",
+"Maintenir sans douleur",
+"Relâcher progressivement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Placer le coude contre le corps<br>Pousser doucement contre le mur<br>Maintenir sans douleur<br>Relâcher progressivement",
+"reps": 8,
+"ex": 25,
+"repos": 20,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_11",
+"source": "CABINET",
+"nom": "Pompe scapulaire contre le mur",
+"image": "/exercises/images/epaule/pompe-scapulaire-mur.webp",
+"consignes": [
+"Face au mur, mains à plat à hauteur d'épaules, bras tendus",
+"Rapprocher les omoplates sans plier les coudes",
+"Puis pousser le mur pour écarter les omoplates au maximum",
+"Corps gainé"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face au mur, mains à plat à hauteur d'épaules, bras tendus<br>Rapprocher les omoplates sans plier les coudes<br>Puis pousser le mur pour écarter les omoplates au maximum<br>Corps gainé",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "CERV_07",
+"source": "CABINET",
+"nom": "Rapprochement des omoplates assis",
+"image": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+"consignes": [
+"Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°",
+"Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière",
+"Tenir 3 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°<br>Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière<br>Tenir 3 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_19",
+"source": "CABINET",
+"nom": "Transfert d'appui à quatre pattes",
+"image": "/exercises/images/epaule/transfert-appui-quatre-pattes.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"Repousser légèrement le sol pour écarter les omoplates",
+"Déplacer lentement le poids du corps vers l'avant, l'arrière et les côtés",
+"Garder le dos plat et les coudes tendus sans les verrouiller"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>Repousser légèrement le sol pour écarter les omoplates<br>Déplacer lentement le poids du corps vers l'avant, l'arrière et les côtés<br>Garder le dos plat et les coudes tendus sans les verrouiller",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+}
+]
+},
+{
+"id": "cab_instabilite_epaule_2",
+"nom": "Instabilité d'épaule",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "EPAULE_02",
+"source": "CABINET",
+"nom": "Rotation externe élastique coude au corps",
+"image": "/exercises/images/epaule/REepaule_elastique.png",
+"consignes": [
+"Garder le coude collé au corps",
+"Tourner lentement vers l’extérieur",
+"Contrôler le retour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le coude collé au corps<br>Tourner lentement vers l’extérieur<br>Contrôler le retour",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_09",
+"source": "CABINET",
+"nom": "Rotation interne avec élastique",
+"image": "/exercises/images/epaule/Rotationinterne_elastique.png",
+"consignes": [
+"Se placer de côté par rapport au point d’ancrage",
+"Garder le coude collé au corps à 90°",
+"Ramener la main vers le ventre en tirant sur l’élastique",
+"Maintenir le poignet dans l’axe de l’avant-bras",
+"Revenir lentement à la position de départ"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se placer de côté par rapport au point d’ancrage<br>Garder le coude collé au corps à 90°<br>Ramener la main vers le ventre en tirant sur l’élastique<br>Maintenir le poignet dans l’axe de l’avant-bras<br>Revenir lentement à la position de départ",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_13",
+"source": "CABINET",
+"nom": "Rotation externe couché sur le côté",
+"image": "/exercises/images/epaule/rotation-externe-couche.webp",
+"consignes": [
+"Allongé sur le côté, serviette roulée entre le coude et le corps",
+"Coude plié à 90°, haltère léger dans la main du dessus",
+"Tourner l'avant-bras vers le plafond en gardant le coude collé",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, serviette roulée entre le coude et le corps<br>Coude plié à 90°, haltère léger dans la main du dessus<br>Tourner l'avant-bras vers le plafond en gardant le coude collé<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_15",
+"source": "CABINET",
+"nom": "Écarté arrière à l'élastique",
+"image": "/exercises/images/epaule/ecarte-arriere-elastique.webp",
+"consignes": [
+"Debout, bras tendus devant soi à hauteur des épaules, un élastique tenu à deux mains",
+"Écarter les bras sur les côtés en serrant les omoplates",
+"Arrêter quand l'élastique touche la poitrine",
+"Revenir lentement en contrôlant l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, bras tendus devant soi à hauteur des épaules, un élastique tenu à deux mains<br>Écarter les bras sur les côtés en serrant les omoplates<br>Arrêter quand l'élastique touche la poitrine<br>Revenir lentement en contrôlant l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_10",
+"source": "CABINET",
+"nom": "Élévation des bras en Y à plat ventre",
+"image": "/exercises/images/epaule/y-ventre.webp",
+"consignes": [
+"Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut",
+"Serrer les omoplates vers le bas",
+"Décoller les bras de quelques centimètres",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut<br>Serrer les omoplates vers le bas<br>Décoller les bras de quelques centimètres<br>Redescendre lentement",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_08",
+"source": "CABINET",
+"nom": "Tirage bras tendus avec élastique",
+"image": "/exercises/images/epaule/Tiragebrastendus_elastique.png",
+"consignes": [
+"Se tenir debout face au point d’ancrage",
+"Garder les bras tendus le long du corps",
+"Tirer l’élastique vers l’arrière en rapprochant légèrement les omoplates",
+"Maintenir le tronc droit et les épaules basses",
+"Revenir lentement à la position de départ"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se tenir debout face au point d’ancrage<br>Garder les bras tendus le long du corps<br>Tirer l’élastique vers l’arrière en rapprochant légèrement les omoplates<br>Maintenir le tronc droit et les épaules basses<br>Revenir lentement à la position de départ",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+}
+]
+},
+{
+"id": "cab_instabilite_epaule_3",
+"nom": "Instabilité d'épaule",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "EPAULE_18",
+"source": "CABINET",
+"nom": "Rotation externe à 90° à l'élastique",
+"image": "/exercises/images/epaule/rotation-externe-90.webp",
+"consignes": [
+"Face à l'ancrage, bras écarté à hauteur d'épaule, coude plié à 90°, avant-bras vers l'avant",
+"Tenir l'élastique, coude immobile à hauteur d'épaule",
+"Pivoter l'avant-bras vers le haut jusqu'à la verticale en 2 secondes",
+"Revenir lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face à l'ancrage, bras écarté à hauteur d'épaule, coude plié à 90°, avant-bras vers l'avant<br>Tenir l'élastique, coude immobile à hauteur d'épaule<br>Pivoter l'avant-bras vers le haut jusqu'à la verticale en 2 secondes<br>Revenir lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_05",
+"source": "CABINET",
+"nom": "Diagonale Kabat avec élastique",
+"image": "/exercises/images/epaule/diagonalekabat_elastique.png",
+"consignes": [
+"Partir de la hanche opposée",
+"Tirer l’élastique en diagonale vers le haut",
+"Terminer bras tendu au-dessus de l’épaule",
+"Contrôler lentement le retour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Partir de la hanche opposée<br>Tirer l’élastique en diagonale vers le haut<br>Terminer bras tendu au-dessus de l’épaule<br>Contrôler lentement le retour",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "GAINAGE_20",
+"source": "CABINET",
+"nom": "Planche toucher épaule",
+"image": "/exercises/images/gainage/planche-toucher-epaule.webp",
+"consignes": [
+"Position de planche bras tendus",
+"Toucher l'épaule opposée",
+"Limiter les mouvements du bassin",
+"Alterner les côtés"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de planche bras tendus<br>Toucher l'épaule opposée<br>Limiter les mouvements du bassin<br>Alterner les côtés",
+"reps": 20,
+"ex": 1,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "EPAULE_06",
+"source": "CABINET",
+"nom": "Antépulsion épaule avec élastique",
+"image": "/exercises/images/epaule/antepulsionepaule_epaule.png",
+"consignes": [
+"Tenir l’élastique bras tendu devant soi",
+"Lever le bras à hauteur de l’épaule",
+"Garder le coude tendu sans verrouiller",
+"Contrôler lentement le retour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir l’élastique bras tendu devant soi<br>Lever le bras à hauteur de l’épaule<br>Garder le coude tendu sans verrouiller<br>Contrôler lentement le retour",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "PLAQUE_09",
+"source": "CABINET",
+"nom": "Pompes mains sur la plaque",
+"image": "",
+"consignes": [
+"Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol",
+"Coudes légèrement fléchis, jamais verrouillés",
+"Descendre la poitrine vers la plaque puis remonter",
+"Garder le corps gainé"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol<br>Coudes légèrement fléchis, jamais verrouillés<br>Descendre la poitrine vers la plaque puis remonter<br>Garder le corps gainé",
+"reps": 3,
+"ex": 20,
+"repos": 45,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée.",
+"materiel": "Plaque vibrante, Tapis"
+}
+]
+},
+{
+"id": "cab_cfa_1",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GAINAGE_04",
+"source": "CABINET",
+"nom": "Pont fessier",
+"image": "/exercises/images/post-partum/pont-fessier.png",
+"consignes": [
+"Allongé sur le dos",
+"Pieds à plat au sol",
+"Soulever progressivement le bassin",
+"Aligner épaules bassin genoux",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Pieds à plat au sol<br>Soulever progressivement le bassin<br>Aligner épaules bassin genoux<br>Redescendre lentement",
+"reps": 24,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "HANCHE_01",
+"source": "CABINET",
+"nom": "Abduction de hanche couché sur le côté",
+"image": "/exercises/images/hanche/abduction-couche.webp",
+"consignes": [
+"Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue",
+"Pointe du pied vers l'avant, talon légèrement en arrière",
+"Monter la jambe du dessus d'environ 30 cm",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue<br>Pointe du pied vers l'avant, talon légèrement en arrière<br>Monter la jambe du dessus d'environ 30 cm<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "PUBALGIE_B02",
+"source": "CABINET",
+"nom": "Clamshell",
+"image": "/exercises/images/pubalgie/clamshell.png",
+"consignes": [
+"Garder les pieds collés",
+"Ouvrir le genou supérieur",
+"Ne pas tourner le bassin",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder les pieds collés<br>Ouvrir le genou supérieur<br>Ne pas tourner le bassin<br>Redescendre lentement",
+"reps": 30,
+"ex": 1,
+"repos": 30,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GAINAGE_01",
+"source": "CABINET",
+"nom": "Aspiration abdominale (transverse)",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Allonger sur le dos, genoux fléchis",
+"Inspirer calmement par le nez",
+"Expirer lentement par la bouche",
+"Rentrer doucement le nombril vers la colonne",
+"Maintenir la contraction sans bloquer la respiration"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allonger sur le dos, genoux fléchis<br>Inspirer calmement par le nez<br>Expirer lentement par la bouche<br>Rentrer doucement le nombril vers la colonne<br>Maintenir la contraction sans bloquer la respiration",
+"reps": 10,
+"ex": 4,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "LOMB_09",
+"source": "CABINET",
+"nom": "Bascule du bassin allongé",
+"image": "/exercises/images/dos/bascule-bassin.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat écartés largeur de bassin",
+"Plaquer doucement le bas du dos au sol en basculant le pubis vers le nombril",
+"Puis creuser légèrement le bas du dos dans l'autre sens",
+"Alterner lentement les deux positions"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat écartés largeur de bassin<br>Plaquer doucement le bas du dos au sol en basculant le pubis vers le nombril<br>Puis creuser légèrement le bas du dos dans l'autre sens<br>Alterner lentement les deux positions",
+"reps": 10,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "HANCHE_03",
+"source": "CABINET",
+"nom": "Étirement du psoas en fente",
+"image": "/exercises/images/hanche/etirement-psoas.webp",
+"consignes": [
+"Un genou au sol sur un coussin, l'autre pied devant, genou à 90°",
+"Rentrer le bassin (basculer le pubis vers le haut)",
+"Avancer légèrement le bassin jusqu'à sentir l'étirement à l'avant de la hanche arrière",
+"Buste droit, respirer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Un genou au sol sur un coussin, l'autre pied devant, genou à 90°<br>Rentrer le bassin (basculer le pubis vers le haut)<br>Avancer légèrement le bassin jusqu'à sentir l'étirement à l'avant de la hanche arrière<br>Buste droit, respirer",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+}
+]
+},
+{
+"id": "cab_cfa_2",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "HANCHE_06",
+"source": "CABINET",
+"nom": "Abduction de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/abduction-debout-elastique.webp",
+"consignes": [
+"Debout, une main en appui sur une chaise, élastique autour des deux chevilles",
+"Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi",
+"Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur une chaise, élastique autour des deux chevilles<br>Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi<br>Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "HANCHE_10",
+"source": "CABINET",
+"nom": "Extension de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/extension-debout-elastique.webp",
+"consignes": [
+"Debout face à une chaise, les deux mains posées sur le dossier, élastique autour des deux chevilles",
+"Se grandir, ventre légèrement rentré, genou d'appui légèrement fléchi",
+"Tendre la jambe vers l'arrière en 2 secondes sans cambrer le dos",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout face à une chaise, les deux mains posées sur le dossier, élastique autour des deux chevilles<br>Se grandir, ventre légèrement rentré, genou d'appui légèrement fléchi<br>Tendre la jambe vers l'arrière en 2 secondes sans cambrer le dos<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GAINAGE_11",
+"source": "CABINET",
+"nom": "Pont fessier avec maintien",
+"image": "/exercises/images/post-partum/pont-fessier.png",
+"consignes": [
+"Monter le bassin",
+"Maintenir 5 secondes",
+"Contracter les fessiers",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Monter le bassin<br>Maintenir 5 secondes<br>Contracter les fessiers<br>Redescendre lentement",
+"reps": 10,
+"ex": 5,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GAINAGE_09",
+"source": "CABINET",
+"nom": "Bird Dog simplifié",
+"image": "/exercises/images/post-partum/bird-dog-bras.png",
+"consignes": [
+"Position à quatre pattes",
+"Lever un bras puis revenir",
+"Lever ensuite une jambe",
+"Maintenir le tronc stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position à quatre pattes<br>Lever un bras puis revenir<br>Lever ensuite une jambe<br>Maintenir le tronc stable",
+"reps": 20,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+}
+]
+},
+{
+"id": "cab_cfa_3",
+"nom": "Conflit fémoro-acétabulaire",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "BARRE_08",
+"source": "CABINET",
+"nom": "Hip thrust barre",
+"image": "",
+"consignes": [
+"Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
+"Pieds à plat, genoux pliés à 90° en haut",
+"Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux",
+"Redescendre sans poser les fesses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches<br>Pieds à plat, genoux pliés à 90° en haut<br>Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux<br>Redescendre sans poser les fesses",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur.",
+"materiel": "Barre de squat, Mousse de barre, Disques, Banc"
+},
+{
+"id": "HANCHE_08",
+"source": "CABINET",
+"nom": "Fente avant",
+"image": "/exercises/images/hanche/fente-avant.webp",
+"consignes": [
+"Debout, faire un grand pas en avant",
+"Descendre le genou arrière vers le sol en gardant le buste droit",
+"S'arrêter quand les deux genoux sont à peu près à 90°",
+"Pousser sur le talon avant pour remonter, puis changer de jambe"
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, faire un grand pas en avant<br>Descendre le genou arrière vers le sol en gardant le buste droit<br>S'arrêter quand les deux genoux sont à peu près à 90°<br>Pousser sur le talon avant pour remonter, puis changer de jambe",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GAINAGE_16",
+"source": "CABINET",
+"nom": "Planche latérale genoux",
+"image": "/exercises/images/post-partum/side-plank-genoux.webp",
+"consignes": [
+"Appui sur l'avant-bras",
+"Genoux fléchis",
+"Décoller le bassin",
+"Maintenir l'alignement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras<br>Genoux fléchis<br>Décoller le bassin<br>Maintenir l'alignement",
+"reps": 3,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "GAINAGE_19",
+"source": "CABINET",
+"nom": "Pont unipodal",
+"image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+"consignes": [
+"Position de pont fessier",
+"Lever une jambe",
+"Monter le bassin",
+"Maintenir l'alignement",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de pont fessier<br>Lever une jambe<br>Monter le bassin<br>Maintenir l'alignement<br>Redescendre lentement",
+"reps": 20,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+},
+{
+"id": "BARRE_05",
+"source": "CABINET",
+"nom": "Soulevé de terre roumain",
+"image": "",
+"consignes": [
+"Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+"Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+"Descendre jusqu'à mi-tibias, dos droit",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue devant les cuisses, mains à largeur d'épaules<br>Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière<br>Descendre jusqu'à mi-tibias, dos droit<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "GENOU_05",
+"source": "CABINET",
+"nom": "Squat latéral avec élastique",
+"image": "/exercises/images/genou/squat-lat-elastique.png",
+"consignes": [
+"Pousser contre l’élastique",
+"Garder les pieds parallèles",
+"Contrôler le mouvement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pousser contre l’élastique<br>Garder les pieds parallèles<br>Contrôler le mouvement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Éviter les flexions de hanche profondes avec rotation (assis bas, genou vers la poitrine) si elles réveillent la douleur."
+}
+]
+},
+{
+"id": "cab_golf_elbow_1",
+"nom": "Épitrochléite (golf elbow)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Coude",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "COUDE_04",
+"source": "CABINET",
+"nom": "Étirement des fléchisseurs du poignet",
+"image": "/exercises/images/coude/COUDE_04.webp",
+"consignes": [
+"Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu, paume vers l'avant.",
+"Relevez le poignet, doigts vers le haut.",
+"Avec l'autre main, ramenez doucement la paume et les doigts vers vous.",
+"Tenez 15 secondes en sentant l'étirement sous l'avant-bras, puis relâchez."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu, paume vers l'avant.<br>Relevez le poignet, doigts vers le haut.<br>Avec l'autre main, ramenez doucement la paume et les doigts vers vous.<br>Tenez 15 secondes en sentant l'étirement sous l'avant-bras, puis relâchez.",
+"reps": 5,
+"ex": 15,
+"repos": 10,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_01",
+"source": "CABINET",
+"nom": "Étirement des extenseurs du poignet",
+"image": "/exercises/images/coude/COUDE_01.webp",
+"consignes": [
+"Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.",
+"Pliez le poignet vers le bas, paume tournée vers vous.",
+"Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.",
+"Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu.<br>Pliez le poignet vers le bas, paume tournée vers vous.<br>Avec l'autre main, ramenez doucement le dos de la main et les doigts vers vous.<br>Tenez 15 secondes en sentant l'étirement sur le dessus de l'avant-bras, puis relâchez.",
+"reps": 5,
+"ex": 15,
+"repos": 10,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "MAIN_05",
+"source": "CABINET",
+"nom": "Flexion-extension du poignet",
+"image": "/exercises/images/main/flexion-extension-poignet.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol",
+"Laisser tomber la main vers le bas lentement",
+"Remonter la main vers le haut le plus loin possible sans douleur",
+"Enchaîner lentement, avant-bras immobile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol<br>Laisser tomber la main vers le bas lentement<br>Remonter la main vers le haut le plus loin possible sans douleur<br>Enchaîner lentement, avant-bras immobile",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+}
+]
+},
+{
+"id": "cab_golf_elbow_2",
+"nom": "Épitrochléite (golf elbow)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Coude",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "COUDE_05",
+"source": "CABINET",
+"nom": "Renforcement excentrique des fléchisseurs du poignet",
+"image": "/exercises/images/coude/COUDE_05.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table, paume vers le haut, le poignet dépassant du bord.",
+"Tenez le poids (bouteille d'eau ou haltère), poignet plié vers vous.",
+"Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.",
+"Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.",
+"Faites 10 descentes par série."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table, paume vers le haut, le poignet dépassant du bord.<br>Tenez le poids (bouteille d'eau ou haltère), poignet plié vers vous.<br>Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.<br>Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.<br>Faites 10 descentes par série.",
+"reps": 3,
+"ex": 60,
+"repos": 45,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_03",
+"source": "CABINET",
+"nom": "Renforcement en pronation et supination",
+"image": "/exercises/images/coude/COUDE_03.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table, coude plié à 90°.",
+"Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
+"Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.",
+"Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.",
+"Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table, coude plié à 90°.<br>Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.<br>Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.<br>Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.<br>Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès.",
+"reps": 3,
+"ex": 60,
+"repos": 45,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_04",
+"source": "CABINET",
+"nom": "Étirement des fléchisseurs du poignet",
+"image": "/exercises/images/coude/COUDE_04.webp",
+"consignes": [
+"Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu, paume vers l'avant.",
+"Relevez le poignet, doigts vers le haut.",
+"Avec l'autre main, ramenez doucement la paume et les doigts vers vous.",
+"Tenez 15 secondes en sentant l'étirement sous l'avant-bras, puis relâchez."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout ou assis, tendez le bras devant vous à hauteur d'épaule, coude tendu, paume vers l'avant.<br>Relevez le poignet, doigts vers le haut.<br>Avec l'autre main, ramenez doucement la paume et les doigts vers vous.<br>Tenez 15 secondes en sentant l'étirement sous l'avant-bras, puis relâchez.",
+"reps": 5,
+"ex": 15,
+"repos": 10,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "MAIN_06",
+"source": "CABINET",
+"nom": "Pince pouce-doigts avec pâte",
+"image": "/exercises/images/main/pince-pate.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index",
+"Pincer la pâte en 2 secondes",
+"Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire",
+"Garder le pouce bien arrondi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index<br>Pincer la pâte en 2 secondes<br>Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire<br>Garder le pouce bien arrondi",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+}
+]
+},
+{
+"id": "cab_golf_elbow_3",
+"nom": "Épitrochléite (golf elbow)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Coude",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "COUDE_05",
+"source": "CABINET",
+"nom": "Renforcement excentrique des fléchisseurs du poignet",
+"image": "/exercises/images/coude/COUDE_05.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table, paume vers le haut, le poignet dépassant du bord.",
+"Tenez le poids (bouteille d'eau ou haltère), poignet plié vers vous.",
+"Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.",
+"Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.",
+"Faites 10 descentes par série."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table, paume vers le haut, le poignet dépassant du bord.<br>Tenez le poids (bouteille d'eau ou haltère), poignet plié vers vous.<br>Laissez descendre le poignet en retenant la descente, à la vitesse indiquée.<br>Remontez le poignet en vous aidant de l'autre main, sans forcer avec le bras qui travaille.<br>Faites 10 descentes par série.",
+"reps": 3,
+"ex": 60,
+"repos": 45,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_03",
+"source": "CABINET",
+"nom": "Renforcement en pronation et supination",
+"image": "/exercises/images/coude/COUDE_03.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table, coude plié à 90°.",
+"Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
+"Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.",
+"Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.",
+"Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table, coude plié à 90°.<br>Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.<br>Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.<br>Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.<br>Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès.",
+"reps": 3,
+"ex": 60,
+"repos": 45,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_07",
+"source": "CABINET",
+"nom": "Flexion du coude avec haltère",
+"image": "/exercises/images/coude/flexion-coude-haltere.webp",
+"consignes": [
+"Assis, dos droit, bras le long du corps, haltère dans la main paume vers l'avant",
+"Coude collé au corps",
+"Plier le coude en 2 secondes pour monter l'haltère vers l'épaule",
+"Redescendre lentement en 3 secondes jusqu'au bras tendu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, dos droit, bras le long du corps, haltère dans la main paume vers l'avant<br>Coude collé au corps<br>Plier le coude en 2 secondes pour monter l'haltère vers l'épaule<br>Redescendre lentement en 3 secondes jusqu'au bras tendu",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+},
+{
+"id": "COUDE_06",
+"source": "CABINET",
+"nom": "Déviation radiale avec un marteau",
+"image": "/exercises/images/coude/deviation-radiale-marteau.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, pouce vers le haut, poignet dépassant du bord",
+"Tenir un marteau par le manche",
+"Lever la tête du marteau vers le plafond en pliant le poignet côté pouce",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, pouce vers le haut, poignet dépassant du bord<br>Tenir un marteau par le manche<br>Lever la tête du marteau vers le plafond en pliant le poignet côté pouce<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Douleur au plus 3/10 pendant l'exercice, revenue au calme le lendemain."
+}
+]
+},
+{
+"id": "cab_de_quervain_1",
+"nom": "Tendinite de De Quervain",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "MAIN_01",
+"source": "CABINET",
+"nom": "Glissements des tendons des doigts",
+"image": "/exercises/images/main/glissements-tendineux.webp",
+"consignes": [
+"Main tendue, doigts droits",
+"Faire successivement : crochet, poing fermé, doigts à plat pliés, poing droit",
+"Revenir à la main tendue entre chaque position",
+"Mouvements lents"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main tendue, doigts droits<br>Faire successivement : crochet, poing fermé, doigts à plat pliés, poing droit<br>Revenir à la main tendue entre chaque position<br>Mouvements lents",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_04",
+"source": "CABINET",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/main/opposition-pouce.webp",
+"consignes": [
+"Main ouverte, paume vers soi",
+"Toucher le bout de l'index avec le bout du pouce en formant un O",
+"Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire",
+"Refaire le chemin dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main ouverte, paume vers soi<br>Toucher le bout de l'index avec le bout du pouce en formant un O<br>Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire<br>Refaire le chemin dans l'autre sens",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_05",
+"source": "CABINET",
+"nom": "Flexion-extension du poignet",
+"image": "/exercises/images/main/flexion-extension-poignet.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol",
+"Laisser tomber la main vers le bas lentement",
+"Remonter la main vers le haut le plus loin possible sans douleur",
+"Enchaîner lentement, avant-bras immobile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol<br>Laisser tomber la main vers le bas lentement<br>Remonter la main vers le haut le plus loin possible sans douleur<br>Enchaîner lentement, avant-bras immobile",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+}
+]
+},
+{
+"id": "cab_de_quervain_2",
+"nom": "Tendinite de De Quervain",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "COUDE_06",
+"source": "CABINET",
+"nom": "Déviation radiale avec un marteau",
+"image": "/exercises/images/coude/deviation-radiale-marteau.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, pouce vers le haut, poignet dépassant du bord",
+"Tenir un marteau par le manche",
+"Lever la tête du marteau vers le plafond en pliant le poignet côté pouce",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, pouce vers le haut, poignet dépassant du bord<br>Tenir un marteau par le manche<br>Lever la tête du marteau vers le plafond en pliant le poignet côté pouce<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_03",
+"source": "CABINET",
+"nom": "Écartement des doigts à l'élastique",
+"image": "/exercises/images/main/ecartement-doigts.webp",
+"consignes": [
+"Placer un élastique autour des cinq doigts réunis, au niveau des ongles",
+"Ouvrir les doigts en écartant au maximum contre l'élastique",
+"Tenir 2 secondes",
+"Refermer lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Placer un élastique autour des cinq doigts réunis, au niveau des ongles<br>Ouvrir les doigts en écartant au maximum contre l'élastique<br>Tenir 2 secondes<br>Refermer lentement",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "COUDE_03",
+"source": "CABINET",
+"nom": "Renforcement en pronation et supination",
+"image": "/exercises/images/coude/COUDE_03.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table, coude plié à 90°.",
+"Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.",
+"Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.",
+"Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.",
+"Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès."
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table, coude plié à 90°.<br>Tenez le poids (bouteille d'eau ou haltère) pouce vers le haut.<br>Tournez lentement le poignet pour poser le poids d'un côté, puis revenez pouce vers le haut.<br>Tournez ensuite de l'autre côté, puis revenez. Faites 10 allers-retours par série.<br>Progression : coude à 90°, puis coude plus tendu, puis coude tendu, selon vos progrès.",
+"reps": 3,
+"ex": 60,
+"repos": 45,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_06",
+"source": "CABINET",
+"nom": "Pince pouce-doigts avec pâte",
+"image": "/exercises/images/main/pince-pate.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index",
+"Pincer la pâte en 2 secondes",
+"Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire",
+"Garder le pouce bien arrondi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index<br>Pincer la pâte en 2 secondes<br>Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire<br>Garder le pouce bien arrondi",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+},
+{
+"id": "MAIN_04",
+"source": "CABINET",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/main/opposition-pouce.webp",
+"consignes": [
+"Main ouverte, paume vers soi",
+"Toucher le bout de l'index avec le bout du pouce en formant un O",
+"Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire",
+"Refaire le chemin dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main ouverte, paume vers soi<br>Toucher le bout de l'index avec le bout du pouce en formant un O<br>Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire<br>Refaire le chemin dans l'autre sens",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Éviter de forcer pouce plié avec le poignet penché vers le petit doigt. Attelle si prescrite."
+}
+]
+},
+{
+"id": "cab_rhizarthrose_1",
+"nom": "Rhizarthrose",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "MAIN_04",
+"source": "CABINET",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/main/opposition-pouce.webp",
+"consignes": [
+"Main ouverte, paume vers soi",
+"Toucher le bout de l'index avec le bout du pouce en formant un O",
+"Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire",
+"Refaire le chemin dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main ouverte, paume vers soi<br>Toucher le bout de l'index avec le bout du pouce en formant un O<br>Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire<br>Refaire le chemin dans l'autre sens",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_01",
+"source": "CABINET",
+"nom": "Glissements des tendons des doigts",
+"image": "/exercises/images/main/glissements-tendineux.webp",
+"consignes": [
+"Main tendue, doigts droits",
+"Faire successivement : crochet, poing fermé, doigts à plat pliés, poing droit",
+"Revenir à la main tendue entre chaque position",
+"Mouvements lents"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main tendue, doigts droits<br>Faire successivement : crochet, poing fermé, doigts à plat pliés, poing droit<br>Revenir à la main tendue entre chaque position<br>Mouvements lents",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_05",
+"source": "CABINET",
+"nom": "Flexion-extension du poignet",
+"image": "/exercises/images/main/flexion-extension-poignet.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol",
+"Laisser tomber la main vers le bas lentement",
+"Remonter la main vers le haut le plus loin possible sans douleur",
+"Enchaîner lentement, avant-bras immobile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol<br>Laisser tomber la main vers le bas lentement<br>Remonter la main vers le haut le plus loin possible sans douleur<br>Enchaîner lentement, avant-bras immobile",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_03",
+"source": "CABINET",
+"nom": "Écartement des doigts à l'élastique",
+"image": "/exercises/images/main/ecartement-doigts.webp",
+"consignes": [
+"Placer un élastique autour des cinq doigts réunis, au niveau des ongles",
+"Ouvrir les doigts en écartant au maximum contre l'élastique",
+"Tenir 2 secondes",
+"Refermer lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Placer un élastique autour des cinq doigts réunis, au niveau des ongles<br>Ouvrir les doigts en écartant au maximum contre l'élastique<br>Tenir 2 secondes<br>Refermer lentement",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+}
+]
+},
+{
+"id": "cab_rhizarthrose_2",
+"nom": "Rhizarthrose",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Poignet et main",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "MAIN_03",
+"source": "CABINET",
+"nom": "Écartement des doigts à l'élastique",
+"image": "/exercises/images/main/ecartement-doigts.webp",
+"consignes": [
+"Placer un élastique autour des cinq doigts réunis, au niveau des ongles",
+"Ouvrir les doigts en écartant au maximum contre l'élastique",
+"Tenir 2 secondes",
+"Refermer lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Placer un élastique autour des cinq doigts réunis, au niveau des ongles<br>Ouvrir les doigts en écartant au maximum contre l'élastique<br>Tenir 2 secondes<br>Refermer lentement",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_06",
+"source": "CABINET",
+"nom": "Pince pouce-doigts avec pâte",
+"image": "/exercises/images/main/pince-pate.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index",
+"Pincer la pâte en 2 secondes",
+"Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire",
+"Garder le pouce bien arrondi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, une boule de pâte entre le pouce et l'index<br>Pincer la pâte en 2 secondes<br>Relâcher, puis recommencer avec le majeur, l'annulaire et l'auriculaire<br>Garder le pouce bien arrondi",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_04",
+"source": "CABINET",
+"nom": "Opposition du pouce",
+"image": "/exercises/images/main/opposition-pouce.webp",
+"consignes": [
+"Main ouverte, paume vers soi",
+"Toucher le bout de l'index avec le bout du pouce en formant un O",
+"Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire",
+"Refaire le chemin dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main ouverte, paume vers soi<br>Toucher le bout de l'index avec le bout du pouce en formant un O<br>Ouvrir la main puis toucher le majeur, l'annulaire et l'auriculaire<br>Refaire le chemin dans l'autre sens",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+},
+{
+"id": "MAIN_05",
+"source": "CABINET",
+"nom": "Flexion-extension du poignet",
+"image": "/exercises/images/main/flexion-extension-poignet.webp",
+"consignes": [
+"Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol",
+"Laisser tomber la main vers le bas lentement",
+"Remonter la main vers le haut le plus loin possible sans douleur",
+"Enchaîner lentement, avant-bras immobile"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur une table, la main dépassant du bord, paume vers le sol<br>Laisser tomber la main vers le bas lentement<br>Remonter la main vers le haut le plus loin possible sans douleur<br>Enchaîner lentement, avant-bras immobile",
+"reps": 15,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Mouvements doux, sans serrer fort entre le pouce et l'index. Orthèse si prescrite."
+}
+]
+},
+{
+"id": "cab_osteoporose_1",
+"nom": "Ostéoporose",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_POST_01",
+"source": "CABINET",
+"nom": "Auto-grandissement simple",
+"image": "/exercises/images/fauteuil/FAUT_POST_01.png",
+"consignes": [
+"S’asseoir au fond du fauteuil",
+"Grandir la colonne vers le haut",
+"Relâcher les épaules",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "S’asseoir au fond du fauteuil<br>Grandir la colonne vers le haut<br>Relâcher les épaules<br>Respirer calmement",
+"reps": 5,
+"ex": 5,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Chaise stable"
+},
+{
+"id": "HANCHE_12",
+"source": "CABINET",
+"nom": "Assis-debout d'une chaise",
+"image": "/exercises/images/hanche/assis-debout-chaise.webp",
+"consignes": [
+"Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux",
+"Croiser les bras sur la poitrine",
+"Se pencher en avant puis se lever sans s'aider des mains",
+"Se rasseoir lentement en contrôlant la descente"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux<br>Croiser les bras sur la poitrine<br>Se pencher en avant puis se lever sans s'aider des mains<br>Se rasseoir lentement en contrôlant la descente",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+},
+{
+"id": "LOMB_03",
+"source": "CABINET",
+"nom": "Extension du dos à plat ventre",
+"image": "/exercises/images/dos/extension-ventre.webp",
+"consignes": [
+"Allongé à plat ventre, mains à plat sous les épaules",
+"Tendre les bras pour soulever le buste, le bassin reste au sol",
+"Relâcher les fessiers et le dos",
+"Redescendre doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé à plat ventre, mains à plat sous les épaules<br>Tendre les bras pour soulever le buste, le bassin reste au sol<br>Relâcher les fessiers et le dos<br>Redescendre doucement",
+"reps": 10,
+"ex": 2,
+"repos": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+},
+{
+"id": "CERV_07",
+"source": "CABINET",
+"nom": "Rapprochement des omoplates assis",
+"image": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+"consignes": [
+"Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°",
+"Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière",
+"Tenir 3 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°<br>Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière<br>Tenir 3 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+},
+{
+"id": "PLAQUE_01",
+"source": "CABINET",
+"nom": "Debout statique sur plaque vibrante",
+"image": "",
+"consignes": [
+"Monter sur la plaque, pieds à largeur de bassin, mains sur le guidon",
+"Genoux légèrement fléchis, poids réparti sur tout le pied",
+"Rester détendu pendant la vibration",
+"Descendre lentement à la fin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Monter sur la plaque, pieds à largeur de bassin, mains sur le guidon<br>Genoux légèrement fléchis, poids réparti sur tout le pied<br>Rester détendu pendant la vibration<br>Descendre lentement à la fin",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Plaque vibrante"
+}
+]
+},
+{
+"id": "cab_osteoporose_2",
+"nom": "Ostéoporose",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHAISE_01",
+"source": "CABINET",
+"nom": "Extension lombaire à 45°, bras croisés",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
+"Bras croisés sur la poitrine",
+"Descendre le buste en pliant les hanches, dos droit",
+"Remonter jusqu'à l'alignement jambes-buste, sans cambrer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins<br>Bras croisés sur la poitrine<br>Descendre le buste en pliant les hanches, dos droit<br>Remonter jusqu'à l'alignement jambes-buste, sans cambrer",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "PLAQUE_02",
+"source": "CABINET",
+"nom": "Demi-squat statique sur plaque vibrante",
+"image": "",
+"consignes": [
+"Mains sur le guidon, pieds à largeur de bassin",
+"Descendre en demi-squat, fesses en arrière",
+"Tenir la position pendant la vibration",
+"Remonter doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur le guidon, pieds à largeur de bassin<br>Descendre en demi-squat, fesses en arrière<br>Tenir la position pendant la vibration<br>Remonter doucement",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Plaque vibrante"
+},
+{
+"id": "GERIA_02",
+"source": "CABINET",
+"nom": "Ramasser un objet au sol",
+"image": "",
+"consignes": [
+"Debout, une main sur le dossier d'une chaise stable",
+"Un objet léger posé au sol à côté du pied",
+"Plier les genoux et les hanches pour descendre, dos droit, et attraper l'objet",
+"Remonter en poussant sur les jambes, puis reposer l'objet"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main sur le dossier d'une chaise stable<br>Un objet léger posé au sol à côté du pied<br>Plier les genoux et les hanches pour descendre, dos droit, et attraper l'objet<br>Remonter en poussant sur les jambes, puis reposer l'objet",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Chaise stable, Objet léger"
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+},
+{
+"id": "EPAULE_10",
+"source": "CABINET",
+"nom": "Élévation des bras en Y à plat ventre",
+"image": "/exercises/images/epaule/y-ventre.webp",
+"consignes": [
+"Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut",
+"Serrer les omoplates vers le bas",
+"Décoller les bras de quelques centimètres",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut<br>Serrer les omoplates vers le bas<br>Décoller les bras de quelques centimètres<br>Redescendre lentement",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+}
+]
+},
+{
+"id": "cab_osteoporose_3",
+"nom": "Ostéoporose",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHAISE_04",
+"source": "CABINET",
+"nom": "Extension lombaire mains derrière la tête",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, bassin au bord des coussins",
+"Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)",
+"Descendre lentement, dos droit",
+"Remonter jusqu'à l'alignement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, bassin au bord des coussins<br>Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)<br>Descendre lentement, dos droit<br>Remonter jusqu'à l'alignement",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "PLAQUE_03",
+"source": "CABINET",
+"nom": "Squat dynamique lent sur plaque vibrante",
+"image": "",
+"consignes": [
+"Sur la plaque, sans tenir le guidon (mains prêtes)",
+"Descendre en 3 s en demi-squat",
+"Remonter en 2 s sans tendre complètement les genoux",
+"Enchaîner pendant la vibration"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la plaque, sans tenir le guidon (mains prêtes)<br>Descendre en 3 s en demi-squat<br>Remonter en 2 s sans tendre complètement les genoux<br>Enchaîner pendant la vibration",
+"reps": 3,
+"ex": 40,
+"repos": 45,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Plaque vibrante"
+},
+{
+"id": "BARRE_06",
+"source": "CABINET",
+"nom": "Fente arrière barre sur les trapèzes",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes, pieds à largeur de bassin",
+"Reculer un pied et descendre le genou arrière vers le sol",
+"Genou avant au-dessus du pied, buste droit",
+"Revenir en poussant sur le pied avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes, pieds à largeur de bassin<br>Reculer un pied et descendre le genou arrière vers le sol<br>Genou avant au-dessus du pied, buste droit<br>Revenir en poussant sur le pied avant",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "GERIA_01",
+"source": "CABINET",
+"nom": "Marche avec obstacles",
+"image": "",
+"consignes": [
+"Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
+"Marcher en enjambant chaque obstacle, genou bien levé",
+"Regarder devant soi, pas seulement ses pieds",
+"Faire demi-tour lentement et revenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas<br>Marcher en enjambant chaque obstacle, genou bien levé<br>Regarder devant soi, pas seulement ses pieds<br>Faire demi-tour lentement et revenir",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications.",
+"materiel": "Petits obstacles, Couloir"
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids). Plaque vibrante : vérifier les contre-indications."
+}
+]
+},
+{
+"id": "cab_lombalgie_chronique_1",
+"nom": "Lombalgie chronique (reconditionnement)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHAISE_02",
+"source": "CABINET",
+"nom": "Maintien isométrique corps aligné",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, bassin au bord des coussins",
+"Monter jusqu'à l'alignement jambes-buste",
+"Tenir la position, bras croisés, en respirant",
+"Redescendre lentement à la fin du temps"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, bassin au bord des coussins<br>Monter jusqu'à l'alignement jambes-buste<br>Tenir la position, bras croisés, en respirant<br>Redescendre lentement à la fin du temps",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "CHAISE_01",
+"source": "CABINET",
+"nom": "Extension lombaire à 45°, bras croisés",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
+"Bras croisés sur la poitrine",
+"Descendre le buste en pliant les hanches, dos droit",
+"Remonter jusqu'à l'alignement jambes-buste, sans cambrer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins<br>Bras croisés sur la poitrine<br>Descendre le buste en pliant les hanches, dos droit<br>Remonter jusqu'à l'alignement jambes-buste, sans cambrer",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "GAINAGE_04",
+"source": "CABINET",
+"nom": "Pont fessier",
+"image": "/exercises/images/post-partum/pont-fessier.png",
+"consignes": [
+"Allongé sur le dos",
+"Pieds à plat au sol",
+"Soulever progressivement le bassin",
+"Aligner épaules bassin genoux",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Pieds à plat au sol<br>Soulever progressivement le bassin<br>Aligner épaules bassin genoux<br>Redescendre lentement",
+"reps": 24,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h."
+},
+{
+"id": "LOMB_07",
+"source": "CABINET",
+"nom": "Charnière de hanche au bâton",
+"image": "/exercises/images/dos/charniere-baton.webp",
+"consignes": [
+"Debout, un bâton tenu dans le dos touchant la tête, le haut du dos et le sacrum",
+"Genoux légèrement fléchis",
+"Pencher le buste en reculant les fesses, sans que le bâton ne quitte les trois points",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, un bâton tenu dans le dos touchant la tête, le haut du dos et le sacrum<br>Genoux légèrement fléchis<br>Pencher le buste en reculant les fesses, sans que le bâton ne quitte les trois points<br>Remonter en serrant les fessiers",
+"reps": 10,
+"ex": 3,
+"repos": 30,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h."
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "GAINAGE_09",
+"source": "CABINET",
+"nom": "Bird Dog simplifié",
+"image": "/exercises/images/post-partum/bird-dog-bras.png",
+"consignes": [
+"Position à quatre pattes",
+"Lever un bras puis revenir",
+"Lever ensuite une jambe",
+"Maintenir le tronc stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position à quatre pattes<br>Lever un bras puis revenir<br>Lever ensuite une jambe<br>Maintenir le tronc stable",
+"reps": 20,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h."
+}
+]
+},
+{
+"id": "cab_lombalgie_chronique_2",
+"nom": "Lombalgie chronique (reconditionnement)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHAISE_03",
+"source": "CABINET",
+"nom": "Extension de hanche dos rond",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi",
+"Garder le dos rond pendant tout le mouvement",
+"Remonter en serrant les fessiers",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi<br>Garder le dos rond pendant tout le mouvement<br>Remonter en serrant les fessiers<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "CHAISE_04",
+"source": "CABINET",
+"nom": "Extension lombaire mains derrière la tête",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, bassin au bord des coussins",
+"Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)",
+"Descendre lentement, dos droit",
+"Remonter jusqu'à l'alignement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, bassin au bord des coussins<br>Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)<br>Descendre lentement, dos droit<br>Remonter jusqu'à l'alignement",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "BARRE_04",
+"source": "CABINET",
+"nom": "Good morning barre sur les trapèzes",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis",
+"Pencher le buste en avant en poussant les fesses en arrière, dos droit",
+"Descendre jusqu'à sentir l'étirement derrière les cuisses",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis<br>Pencher le buste en avant en poussant les fesses en arrière, dos droit<br>Descendre jusqu'à sentir l'étirement derrière les cuisses<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "BARRE_08",
+"source": "CABINET",
+"nom": "Hip thrust barre",
+"image": "",
+"consignes": [
+"Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
+"Pieds à plat, genoux pliés à 90° en haut",
+"Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux",
+"Redescendre sans poser les fesses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches<br>Pieds à plat, genoux pliés à 90° en haut<br>Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux<br>Redescendre sans poser les fesses",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Barre de squat, Mousse de barre, Disques, Banc"
+},
+{
+"id": "GAINAGE_16",
+"source": "CABINET",
+"nom": "Planche latérale genoux",
+"image": "/exercises/images/post-partum/side-plank-genoux.webp",
+"consignes": [
+"Appui sur l'avant-bras",
+"Genoux fléchis",
+"Décoller le bassin",
+"Maintenir l'alignement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras<br>Genoux fléchis<br>Décoller le bassin<br>Maintenir l'alignement",
+"reps": 3,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h."
+},
+{
+"id": "PLAQUE_08",
+"source": "CABINET",
+"nom": "Planche, avant-bras sur la plaque",
+"image": "",
+"consignes": [
+"Avant-bras posés sur la plaque, pieds au sol derrière",
+"Corps aligné des épaules aux chevilles",
+"Tenir en respirant pendant la vibration",
+"Poser les genoux pour finir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avant-bras posés sur la plaque, pieds au sol derrière<br>Corps aligné des épaules aux chevilles<br>Tenir en respirant pendant la vibration<br>Poser les genoux pour finir",
+"reps": 3,
+"ex": 20,
+"repos": 45,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Plaque vibrante, Tapis"
+}
+]
+},
+{
+"id": "cab_lombalgie_chronique_3",
+"nom": "Lombalgie chronique (reconditionnement)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHAISE_06",
+"source": "CABINET",
+"nom": "Extension lombaire avec disque contre la poitrine",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, tenir un disque contre la poitrine",
+"Descendre lentement, dos droit",
+"Remonter jusqu'à l'alignement",
+"Augmenter la charge par petites étapes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, tenir un disque contre la poitrine<br>Descendre lentement, dos droit<br>Remonter jusqu'à l'alignement<br>Augmenter la charge par petites étapes",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine, Disque de 2,5 à 10 kg"
+},
+{
+"id": "CHAISE_07",
+"source": "CABINET",
+"nom": "Flexion latérale couché sur le côté",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, couché sur le côté, hanche sur le coussin, pieds calés",
+"Bras croisés sur la poitrine",
+"Descendre le buste sur le côté, puis remonter jusqu'à l'alignement",
+"Changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, couché sur le côté, hanche sur le coussin, pieds calés<br>Bras croisés sur la poitrine<br>Descendre le buste sur le côté, puis remonter jusqu'à l'alignement<br>Changer de côté",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "BARRE_05",
+"source": "CABINET",
+"nom": "Soulevé de terre roumain",
+"image": "",
+"consignes": [
+"Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+"Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+"Descendre jusqu'à mi-tibias, dos droit",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue devant les cuisses, mains à largeur d'épaules<br>Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière<br>Descendre jusqu'à mi-tibias, dos droit<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "BARRE_10",
+"source": "CABINET",
+"nom": "Rowing barre buste penché",
+"image": "",
+"consignes": [
+"Debout, barre tenue mains en pronation, genoux fléchis",
+"Pencher le buste à 45°, dos droit",
+"Tirer la barre vers le nombril en serrant les omoplates",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue mains en pronation, genoux fléchis<br>Pencher le buste à 45°, dos droit<br>Tirer la barre vers le nombril en serrant les omoplates<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "GAINAGE_18",
+"source": "CABINET",
+"nom": "Pallof Press",
+"image": "/exercises/images/post-partum/pallof-press.webp",
+"consignes": [
+"Se placer de profil à l'élastique",
+"Pousser les bras devant soi",
+"Résister à la rotation",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se placer de profil à l'élastique<br>Pousser les bras devant soi<br>Résister à la rotation<br>Revenir lentement",
+"reps": 24,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Une douleur modérée et stable pendant l'effort est acceptable ; elle doit revenir à son niveau habituel dans les 24 h."
+}
+]
+},
+{
+"id": "cab_reconditionnement_1",
+"nom": "Reconditionnement à l'effort",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "HANCHE_12",
+"source": "CABINET",
+"nom": "Assis-debout d'une chaise",
+"image": "/exercises/images/hanche/assis-debout-chaise.webp",
+"consignes": [
+"Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux",
+"Croiser les bras sur la poitrine",
+"Se pencher en avant puis se lever sans s'aider des mains",
+"Se rasseoir lentement en contrôlant la descente"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux<br>Croiser les bras sur la poitrine<br>Se pencher en avant puis se lever sans s'aider des mains<br>Se rasseoir lentement en contrôlant la descente",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "FAUT_POST_05",
+"source": "CABINET",
+"nom": "Tirage élastique assis",
+"image": "/exercises/images/fauteuil/FAUT_POST_05.png",
+"consignes": [
+"Garder le dos droit",
+"Tirer les coudes vers l’arrière",
+"Rapprocher les omoplates",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le dos droit<br>Tirer les coudes vers l’arrière<br>Rapprocher les omoplates<br>Revenir lentement",
+"reps": 10,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "PLAQUE_02",
+"source": "CABINET",
+"nom": "Demi-squat statique sur plaque vibrante",
+"image": "",
+"consignes": [
+"Mains sur le guidon, pieds à largeur de bassin",
+"Descendre en demi-squat, fesses en arrière",
+"Tenir la position pendant la vibration",
+"Remonter doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur le guidon, pieds à largeur de bassin<br>Descendre en demi-squat, fesses en arrière<br>Tenir la position pendant la vibration<br>Remonter doucement",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Plaque vibrante"
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Chaise stable"
+},
+{
+"id": "cardio_tapismarche",
+"source": "CABINET",
+"nom": "Marche sur tapis",
+"image": "/exercises/images/cabinet/tapismarche.png",
+"consignes": [
+"Marcher à allure confortable",
+"Regarder devant soi",
+"Se tenir droit",
+"Utiliser les rampes si nécessaire"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher à allure confortable<br>Regarder devant soi<br>Se tenir droit<br>Utiliser les rampes si nécessaire",
+"reps": 1,
+"ex": 300,
+"repos": 30,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+}
+]
+},
+{
+"id": "cab_reconditionnement_2",
+"nom": "Reconditionnement à l'effort",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VELO_07",
+"source": "CABINET",
+"nom": "Endurance à résistance progressive",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+"Rester à un effort où l'on peut encore parler sans être essoufflé",
+"Garder le même rythme de pédalage",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min<br>Rester à un effort où l'on peut encore parler sans être essoufflé<br>Garder le même rythme de pédalage<br>Finir par 2 min de pédalage doux",
+"reps": 1,
+"ex": 900,
+"repos": 0,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "BARRE_01",
+"source": "CABINET",
+"nom": "Squat sur box",
+"image": "",
+"consignes": [
+"Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+"Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+"Ne pas s'affaler : effleurer et remonter",
+"Pousser dans tout le pied pour se relever"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)<br>Pousser les fesses en arrière et descendre jusqu'à toucher le banc<br>Ne pas s'affaler : effleurer et remonter<br>Pousser dans tout le pied pour se relever",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "PLAQUE_10",
+"source": "CABINET",
+"nom": "Rowing aux sangles en demi-squat",
+"image": "",
+"consignes": [
+"Sur la plaque, une poignée de sangle dans chaque main",
+"Demi-squat, buste droit",
+"Tirer les poignées vers les côtes en serrant les omoplates",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la plaque, une poignée de sangle dans chaque main<br>Demi-squat, buste droit<br>Tirer les poignées vers les côtes en serrant les omoplates<br>Relâcher lentement",
+"reps": 3,
+"ex": 30,
+"repos": 45,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Plaque vibrante, Sangles élastiques de la plaque"
+},
+{
+"id": "CHAISE_01",
+"source": "CABINET",
+"nom": "Extension lombaire à 45°, bras croisés",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
+"Bras croisés sur la poitrine",
+"Descendre le buste en pliant les hanches, dos droit",
+"Remonter jusqu'à l'alignement jambes-buste, sans cambrer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins<br>Bras croisés sur la poitrine<br>Descendre le buste en pliant les hanches, dos droit<br>Remonter jusqu'à l'alignement jambes-buste, sans cambrer",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+}
+]
+},
+{
+"id": "cab_reconditionnement_3",
+"nom": "Reconditionnement à l'effort",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "VELO_08",
+"source": "CABINET",
+"nom": "Fractionné et double tâche à vélo",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Alterner 30 s plus vite et 1 min doux",
+"Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant",
+"Garder le dos contre le dossier",
+"Finir par 2 min de pédalage doux"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Alterner 30 s plus vite et 1 min doux<br>Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant<br>Garder le dos contre le dossier<br>Finir par 2 min de pédalage doux",
+"reps": 6,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Vélo semi-allongé"
+},
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "BARRE_05",
+"source": "CABINET",
+"nom": "Soulevé de terre roumain",
+"image": "",
+"consignes": [
+"Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+"Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+"Descendre jusqu'à mi-tibias, dos droit",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue devant les cuisses, mains à largeur d'épaules<br>Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière<br>Descendre jusqu'à mi-tibias, dos droit<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "PLAQUE_09",
+"source": "CABINET",
+"nom": "Pompes mains sur la plaque",
+"image": "",
+"consignes": [
+"Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol",
+"Coudes légèrement fléchis, jamais verrouillés",
+"Descendre la poitrine vers la plaque puis remonter",
+"Garder le corps gainé"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol<br>Coudes légèrement fléchis, jamais verrouillés<br>Descendre la poitrine vers la plaque puis remonter<br>Garder le corps gainé",
+"reps": 3,
+"ex": 20,
+"repos": 45,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Plaque vibrante, Tapis"
+},
+{
+"id": "BARRE_10",
+"source": "CABINET",
+"nom": "Rowing barre buste penché",
+"image": "",
+"consignes": [
+"Debout, barre tenue mains en pronation, genoux fléchis",
+"Pencher le buste à 45°, dos droit",
+"Tirer la barre vers le nombril en serrant les omoplates",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue mains en pronation, genoux fléchis<br>Pencher le buste à 45°, dos droit<br>Tirer la barre vers le nombril en serrant les omoplates<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "GAINAGE_15",
+"source": "CABINET",
+"nom": "Planche ventrale",
+"image": "/exercises/images/tronc/Gainage_Ventral.png",
+"consignes": [
+"Appui sur les avant-bras",
+"Corps aligné",
+"Contracter le transverse",
+"Respirer normalement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur les avant-bras<br>Corps aligné<br>Contracter le transverse<br>Respirer normalement",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+}
+]
+},
+{
+"id": "cab_tendinopathie_rotulienne_1",
+"nom": "Tendinopathie rotulienne",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_20",
+"source": "CABINET",
+"nom": "Extension isométrique du genou assis",
+"image": "/exercises/images/genou/extension-isometrique-assis.webp",
+"consignes": [
+"Assis au bord d'une chaise, un élastique autour de la cheville attaché au pied arrière de la chaise",
+"Jambe à demi tendue, genou légèrement plié, pied décollé du sol",
+"Pousser la jambe vers l'avant contre l'élastique sans bouger, comme pour tendre le genou",
+"Tenir 45 secondes, puis relâcher 1 minute"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, un élastique autour de la cheville attaché au pied arrière de la chaise<br>Jambe à demi tendue, genou légèrement plié, pied décollé du sol<br>Pousser la jambe vers l'avant contre l'élastique sans bouger, comme pour tendre le genou<br>Tenir 45 secondes, puis relâcher 1 minute",
+"reps": 5,
+"ex": 45,
+"repos": 60,
+"conseil_kine": "Isométriques pour calmer la douleur : 5 × 45 s, douleur au plus 3/10."
+},
+{
+"id": "GENOU_13",
+"source": "CABINET",
+"nom": "Chaise contre le mur",
+"image": "/exercises/images/genou/chaise-mur.webp",
+"consignes": [
+"Dos plaqué contre un mur, pieds à 40 cm du mur",
+"Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°",
+"Genoux au-dessus des chevilles",
+"Tenir en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dos plaqué contre un mur, pieds à 40 cm du mur<br>Descendre jusqu'à ce que les genoux soient pliés à environ 60 à 90°<br>Genoux au-dessus des chevilles<br>Tenir en respirant",
+"reps": 5,
+"ex": 45,
+"repos": 60,
+"conseil_kine": "Isométriques pour calmer la douleur : 5 × 45 s, douleur au plus 3/10."
+},
+{
+"id": "GENOU_14",
+"source": "CABINET",
+"nom": "Étirement du quadriceps debout",
+"image": "/exercises/images/genou/etirement-quadriceps.webp",
+"consignes": [
+"Debout, une main en appui sur un mur ou une chaise",
+"Plier un genou et attraper la cheville avec la main du même côté",
+"Rapprocher le talon de la fesse, genoux côte à côte",
+"Rentrer légèrement le bassin pour sentir l'étirement à l'avant de la cuisse"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur un mur ou une chaise<br>Plier un genou et attraper la cheville avec la main du même côté<br>Rapprocher le talon de la fesse, genoux côte à côte<br>Rentrer légèrement le bassin pour sentir l'étirement à l'avant de la cuisse",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Isométriques pour calmer la douleur : 5 × 45 s, douleur au plus 3/10."
+},
+{
+"id": "HANCHE_01",
+"source": "CABINET",
+"nom": "Abduction de hanche couché sur le côté",
+"image": "/exercises/images/hanche/abduction-couche.webp",
+"consignes": [
+"Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue",
+"Pointe du pied vers l'avant, talon légèrement en arrière",
+"Monter la jambe du dessus d'environ 30 cm",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, jambe du dessous pliée, jambe du dessus tendue<br>Pointe du pied vers l'avant, talon légèrement en arrière<br>Monter la jambe du dessus d'environ 30 cm<br>Redescendre lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Isométriques pour calmer la douleur : 5 × 45 s, douleur au plus 3/10."
+},
+{
+"id": "CHEVILLE_09",
+"source": "CABINET",
+"nom": "Étirement du mollet contre un mur",
+"image": "/exercises/images/cheville/etirement-mollet.webp",
+"consignes": [
+"Face au mur, mains à plat sur le mur",
+"Une jambe tendue en arrière, talon au sol, pied droit",
+"Plier le genou avant et avancer le bassin",
+"Sentir l'étirement dans le mollet arrière, tenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face au mur, mains à plat sur le mur<br>Une jambe tendue en arrière, talon au sol, pied droit<br>Plier le genou avant et avancer le bassin<br>Sentir l'étirement dans le mollet arrière, tenir",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Isométriques pour calmer la douleur : 5 × 45 s, douleur au plus 3/10."
+}
+]
+},
+{
+"id": "cab_tendinopathie_rotulienne_2",
+"nom": "Tendinopathie rotulienne",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GENOU_19",
+"source": "CABINET",
+"nom": "Squat sur plan incliné",
+"image": "/exercises/images/genou/squat-plan-incline.webp",
+"consignes": [
+"Debout sur une planche inclinée, talons plus hauts que les orteils, pieds écartés largeur de hanches",
+"Bras tendus devant soi pour l'équilibre, dos droit",
+"Fléchir les genoux lentement en 3 secondes jusqu'à environ 60°, genoux dans l'axe des pieds",
+"Remonter en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une planche inclinée, talons plus hauts que les orteils, pieds écartés largeur de hanches<br>Bras tendus devant soi pour l'équilibre, dos droit<br>Fléchir les genoux lentement en 3 secondes jusqu'à environ 60°, genoux dans l'axe des pieds<br>Remonter en 2 secondes",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Travail lent et lourd : 3 s de descente, 3 s de montée. Douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "SPORT_08",
+"source": "CABINET",
+"nom": "Descente de marche excentrique (step-down)",
+"image": "",
+"consignes": [
+"Debout sur une marche, sur une jambe",
+"Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+"Effleurer le sol du talon sans s'y appuyer",
+"Remonter et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une marche, sur une jambe<br>Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied<br>Effleurer le sol du talon sans s'y appuyer<br>Remonter et recommencer",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": "Travail lent et lourd : 3 s de descente, 3 s de montée. Douleur au plus 3/10, pas pire le lendemain.",
+"materiel": "Marche ou step"
+},
+{
+"id": "BARRE_03",
+"source": "CABINET",
+"nom": "Squat tempo (descente 3 s, pause en bas)",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes",
+"Descendre en 3 s en comptant",
+"Tenir 2 s en bas, sans rebondir",
+"Remonter en 1 s"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes<br>Descendre en 3 s en comptant<br>Tenir 2 s en bas, sans rebondir<br>Remonter en 1 s",
+"reps": 3,
+"ex": 45,
+"repos": 90,
+"conseil_kine": "Travail lent et lourd : 3 s de descente, 3 s de montée. Douleur au plus 3/10, pas pire le lendemain.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "GENOU_15",
+"source": "CABINET",
+"nom": "Montée de marche latérale",
+"image": "/exercises/images/genou/step-up-lateral.webp",
+"consignes": [
+"Debout à côté d'une marche, de profil",
+"Poser le pied proche sur la marche",
+"Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre",
+"Redescendre lentement en contrôlant le genou"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout à côté d'une marche, de profil<br>Poser le pied proche sur la marche<br>Monter en poussant sur ce pied jusqu'à tendre la jambe, l'autre pied ne fait que suivre<br>Redescendre lentement en contrôlant le genou",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Travail lent et lourd : 3 s de descente, 3 s de montée. Douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "HANCHE_06",
+"source": "CABINET",
+"nom": "Abduction de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/abduction-debout-elastique.webp",
+"consignes": [
+"Debout, une main en appui sur une chaise, élastique autour des deux chevilles",
+"Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi",
+"Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur une chaise, élastique autour des deux chevilles<br>Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi<br>Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Travail lent et lourd : 3 s de descente, 3 s de montée. Douleur au plus 3/10, pas pire le lendemain."
+}
+]
+},
+{
+"id": "cab_tendinopathie_rotulienne_3",
+"nom": "Tendinopathie rotulienne",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "BARRE_07",
+"source": "CABINET",
+"nom": "Split squat bulgare, pied arrière sur banc",
+"image": "",
+"consignes": [
+"Dos à un banc, le dessus du pied arrière posé sur le banc",
+"Barre sur les trapèzes (ou haltères)",
+"Descendre en pliant le genou avant, buste légèrement penché",
+"Remonter en poussant dans le talon avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dos à un banc, le dessus du pied arrière posé sur le banc<br>Barre sur les trapèzes (ou haltères)<br>Descendre en pliant le genou avant, buste légèrement penché<br>Remonter en poussant dans le talon avant",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Retour aux sauts progressivement, seulement si le tendon ne réagit pas le lendemain.",
+"materiel": "Barre de squat, Rack, Disques, Banc"
+},
+{
+"id": "SPORT_02",
+"source": "CABINET",
+"nom": "Squat sauté (squat jump)",
+"image": "",
+"consignes": [
+"Debout, pieds à largeur des épaules",
+"Descendre en squat, puis sauter le plus haut possible",
+"Réception sur l'avant des pieds, genoux souples et dans l'axe",
+"Se stabiliser 1 s avant le saut suivant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, pieds à largeur des épaules<br>Descendre en squat, puis sauter le plus haut possible<br>Réception sur l'avant des pieds, genoux souples et dans l'axe<br>Se stabiliser 1 s avant le saut suivant",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Retour aux sauts progressivement, seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "SPORT_01",
+"source": "CABINET",
+"nom": "Sauts latéraux du patineur (skater jumps)",
+"image": "",
+"consignes": [
+"Debout sur la jambe droite, genou légèrement fléchi",
+"Sauter sur le côté pour atterrir sur la jambe gauche",
+"Amortir la réception, genou dans l'axe du pied, et tenir 1 s",
+"Repartir de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur la jambe droite, genou légèrement fléchi<br>Sauter sur le côté pour atterrir sur la jambe gauche<br>Amortir la réception, genou dans l'axe du pied, et tenir 1 s<br>Repartir de l'autre côté",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Retour aux sauts progressivement, seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "BARRE_02",
+"source": "CABINET",
+"nom": "Squat barre sur les trapèzes (back squat)",
+"image": "",
+"consignes": [
+"Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+"Sortir du rack en deux pas, pieds à largeur d'épaules",
+"Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+"Remonter en poussant dans le sol, genoux dans l'axe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre posée sur les trapèzes, mains un peu plus larges que les épaules<br>Sortir du rack en deux pas, pieds à largeur d'épaules<br>Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible<br>Remonter en poussant dans le sol, genoux dans l'axe",
+"reps": 3,
+"ex": 40,
+"repos": 90,
+"conseil_kine": "Retour aux sauts progressivement, seulement si le tendon ne réagit pas le lendemain.",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "CHEV_008",
+"source": "CABINET",
+"nom": "Sauts sur place légers",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Amortir doucement",
+"Garder les genoux souples",
+"Rester léger sur les appuis"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Amortir doucement<br>Garder les genoux souples<br>Rester léger sur les appuis",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Retour aux sauts progressivement, seulement si le tendon ne réagit pas le lendemain."
+}
+]
+},
+{
+"id": "cab_ischio_jambiers_1",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GAINAGE_04",
+"source": "CABINET",
+"nom": "Pont fessier",
+"image": "/exercises/images/post-partum/pont-fessier.png",
+"consignes": [
+"Allongé sur le dos",
+"Pieds à plat au sol",
+"Soulever progressivement le bassin",
+"Aligner épaules bassin genoux",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Pieds à plat au sol<br>Soulever progressivement le bassin<br>Aligner épaules bassin genoux<br>Redescendre lentement",
+"reps": 24,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "GENOU_16",
+"source": "CABINET",
+"nom": "Flexion de genou debout",
+"image": "/exercises/images/genou/flexion-debout.webp",
+"consignes": [
+"Debout face à une chaise, mains sur le dossier",
+"Plier un genou pour amener le talon vers la fesse",
+"Garder les deux genoux côte à côte",
+"Redescendre lentement le pied au sol"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout face à une chaise, mains sur le dossier<br>Plier un genou pour amener le talon vers la fesse<br>Garder les deux genoux côte à côte<br>Redescendre lentement le pied au sol",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "GENOU_18",
+"source": "CABINET",
+"nom": "Pont ischio-jambiers talons sur une chaise",
+"image": "/exercises/images/genou/pont-ischio-chaise.webp",
+"consignes": [
+"Allongé sur le dos, talons posés sur l'assise d'une chaise, genoux légèrement fléchis",
+"Bras le long du corps, paumes au sol",
+"Monter le bassin en poussant dans les talons jusqu'à aligner épaules, hanches et genoux",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, talons posés sur l'assise d'une chaise, genoux légèrement fléchis<br>Bras le long du corps, paumes au sol<br>Monter le bassin en poussant dans les talons jusqu'à aligner épaules, hanches et genoux<br>Redescendre lentement en 2 secondes",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "LOMB_06",
+"source": "CABINET",
+"nom": "Glissement du nerf sciatique assis",
+"image": "/exercises/images/dos/glissement-sciatique.webp",
+"consignes": [
+"Assis sur une chaise, dos droit",
+"Tendre le genou en relevant la tête vers le plafond",
+"Puis plier le genou en baissant la tête",
+"Mouvement fluide, sans tenir la position"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis sur une chaise, dos droit<br>Tendre le genou en relevant la tête vers le plafond<br>Puis plier le genou en baissant la tête<br>Mouvement fluide, sans tenir la position",
+"reps": 10,
+"ex": 2,
+"repos": 3,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "VELO_03",
+"source": "CABINET",
+"nom": "Pédalage doux d'échauffement",
+"image": "/exercises/images/velo/pedalage-doux-f.webp",
+"consignes": [
+"Assis au fond du siège, dos contre le dossier",
+"Résistance faible",
+"Pédaler régulièrement, sans forcer",
+"On doit pouvoir parler facilement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du siège, dos contre le dossier<br>Résistance faible<br>Pédaler régulièrement, sans forcer<br>On doit pouvoir parler facilement",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10.",
+"materiel": "Vélo semi-allongé"
+}
+]
+},
+{
+"id": "cab_ischio_jambiers_2",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "GAINAGE_19",
+"source": "CABINET",
+"nom": "Pont unipodal",
+"image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+"consignes": [
+"Position de pont fessier",
+"Lever une jambe",
+"Monter le bassin",
+"Maintenir l'alignement",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de pont fessier<br>Lever une jambe<br>Monter le bassin<br>Maintenir l'alignement<br>Redescendre lentement",
+"reps": 20,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Renforcement progressif, d'abord lent puis en allongement (excentrique)."
+},
+{
+"id": "BARRE_05",
+"source": "CABINET",
+"nom": "Soulevé de terre roumain",
+"image": "",
+"consignes": [
+"Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+"Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+"Descendre jusqu'à mi-tibias, dos droit",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue devant les cuisses, mains à largeur d'épaules<br>Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière<br>Descendre jusqu'à mi-tibias, dos droit<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Renforcement progressif, d'abord lent puis en allongement (excentrique).",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "CHAISE_03",
+"source": "CABINET",
+"nom": "Extension de hanche dos rond",
+"image": "",
+"consignes": [
+"Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi",
+"Garder le dos rond pendant tout le mouvement",
+"Remonter en serrant les fessiers",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi<br>Garder le dos rond pendant tout le mouvement<br>Remonter en serrant les fessiers<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Renforcement progressif, d'abord lent puis en allongement (excentrique).",
+"materiel": "Chaise romaine"
+},
+{
+"id": "BARRE_04",
+"source": "CABINET",
+"nom": "Good morning barre sur les trapèzes",
+"image": "",
+"consignes": [
+"Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis",
+"Pencher le buste en avant en poussant les fesses en arrière, dos droit",
+"Descendre jusqu'à sentir l'étirement derrière les cuisses",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis<br>Pencher le buste en avant en poussant les fesses en arrière, dos droit<br>Descendre jusqu'à sentir l'étirement derrière les cuisses<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Renforcement progressif, d'abord lent puis en allongement (excentrique).",
+"materiel": "Barre de squat, Rack, Disques"
+},
+{
+"id": "HANCHE_10",
+"source": "CABINET",
+"nom": "Extension de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/extension-debout-elastique.webp",
+"consignes": [
+"Debout face à une chaise, les deux mains posées sur le dossier, élastique autour des deux chevilles",
+"Se grandir, ventre légèrement rentré, genou d'appui légèrement fléchi",
+"Tendre la jambe vers l'arrière en 2 secondes sans cambrer le dos",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout face à une chaise, les deux mains posées sur le dossier, élastique autour des deux chevilles<br>Se grandir, ventre légèrement rentré, genou d'appui légèrement fléchi<br>Tendre la jambe vers l'arrière en 2 secondes sans cambrer le dos<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Renforcement progressif, d'abord lent puis en allongement (excentrique)."
+}
+]
+},
+{
+"id": "cab_ischio_jambiers_3",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "SPORT_07",
+"source": "CABINET",
+"nom": "Nordic hamstring",
+"image": "",
+"consignes": [
+"À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
+"Corps aligné des genoux aux épaules",
+"Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses",
+"Se rattraper avec les mains, puis remonter en poussant sur les mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)<br>Corps aligné des genoux aux épaules<br>Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses<br>Se rattraper avec les mains, puis remonter en poussant sur les mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère.",
+"materiel": "Tapis, Partenaire ou point d'ancrage pour les chevilles"
+},
+{
+"id": "CHAISE_08",
+"source": "CABINET",
+"nom": "Nordic hamstring assisté sur chaise romaine",
+"image": "",
+"consignes": [
+"À genoux sur le coussin, chevilles bloquées sous les rouleaux",
+"Corps aligné des genoux aux épaules, bras devant",
+"Descendre vers l'avant le plus lentement possible",
+"Se rattraper avec les mains et remonter en s'aidant des mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur le coussin, chevilles bloquées sous les rouleaux<br>Corps aligné des genoux aux épaules, bras devant<br>Descendre vers l'avant le plus lentement possible<br>Se rattraper avec les mains et remonter en s'aidant des mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère.",
+"materiel": "Chaise romaine"
+},
+{
+"id": "BARRE_05",
+"source": "CABINET",
+"nom": "Soulevé de terre roumain",
+"image": "",
+"consignes": [
+"Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+"Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+"Descendre jusqu'à mi-tibias, dos droit",
+"Remonter en serrant les fessiers"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, barre tenue devant les cuisses, mains à largeur d'épaules<br>Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière<br>Descendre jusqu'à mi-tibias, dos droit<br>Remonter en serrant les fessiers",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère.",
+"materiel": "Barre de squat, Disques"
+},
+{
+"id": "SPORT_10",
+"source": "CABINET",
+"nom": "Sprint court avec arrêt",
+"image": "",
+"consignes": [
+"Sprinter sur 5 à 10 m",
+"Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
+"S'arrêter en équilibre, pieds écartés",
+"Revenir en marchant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sprinter sur 5 à 10 m<br>Freiner en 2 ou 3 pas, bassin bas, genoux fléchis<br>S'arrêter en équilibre, pieds écartés<br>Revenir en marchant",
+"reps": 5,
+"ex": 10,
+"repos": 60,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère.",
+"materiel": "Espace de 15 m, Plots"
+},
+{
+"id": "SPORT_06",
+"source": "CABINET",
+"nom": "Carioca (pas croisés latéraux)",
+"image": "",
+"consignes": [
+"Se déplacer sur le côté",
+"Croiser un pied devant puis derrière l'autre en alternance",
+"Laisser les hanches tourner, les épaules restent face à l'avant",
+"Revenir dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se déplacer sur le côté<br>Croiser un pied devant puis derrière l'autre en alternance<br>Laisser les hanches tourner, les épaules restent face à l'avant<br>Revenir dans l'autre sens",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère."
+},
+{
+"id": "BARRE_08",
+"source": "CABINET",
+"nom": "Hip thrust barre",
+"image": "",
+"consignes": [
+"Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
+"Pieds à plat, genoux pliés à 90° en haut",
+"Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux",
+"Redescendre sans poser les fesses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches<br>Pieds à plat, genoux pliés à 90° en haut<br>Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux<br>Redescendre sans poser les fesses",
+"reps": 3,
+"ex": 40,
+"repos": 75,
+"conseil_kine": "Course et nordic : seulement si aucune douleur à la course légère.",
+"materiel": "Barre de squat, Mousse de barre, Disques, Banc"
+}
+]
+},
+{
+"id": "cab_pubalgie_1",
+"nom": "Pubalgie",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "PUBALGIE_01",
+"source": "CABINET",
+"nom": "Serrage Ballon Genoux",
+"image": "/exercises/images/pubalgie/serrage-ballon-genoux.png",
+"consignes": [
+"Allongé sur le dos",
+"Placer un ballon entre les genoux",
+"Serrer progressivement",
+"Maintenir la contraction",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Placer un ballon entre les genoux<br>Serrer progressivement<br>Maintenir la contraction<br>Relâcher lentement",
+"reps": 5,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3.",
+"materiel": "Ballon"
+},
+{
+"id": "PUBALGIE_02",
+"source": "CABINET",
+"nom": "Serrage Ballon Jambes Tendues",
+"image": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
+"consignes": [
+"Allongé sur le dos jambes tendues",
+"Placer le ballon entre les chevilles",
+"Serrer progressivement",
+"Maintenir la contraction",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos jambes tendues<br>Placer le ballon entre les chevilles<br>Serrer progressivement<br>Maintenir la contraction<br>Relâcher lentement",
+"reps": 5,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3.",
+"materiel": "Ballon"
+},
+{
+"id": "PUBALGIE_03",
+"source": "CABINET",
+"nom": "Pont Fessier",
+"image": "/exercises/images/pubalgie/pont_fessier.png",
+"consignes": [
+"Allongé sur le dos",
+"Genoux fléchis",
+"Monter le bassin",
+"Aligner épaules-bassin-genoux",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Genoux fléchis<br>Monter le bassin<br>Aligner épaules-bassin-genoux<br>Redescendre lentement",
+"reps": 36,
+"ex": 1,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "PUBALGIE_B02",
+"source": "CABINET",
+"nom": "Clamshell",
+"image": "/exercises/images/pubalgie/clamshell.png",
+"consignes": [
+"Garder les pieds collés",
+"Ouvrir le genou supérieur",
+"Ne pas tourner le bassin",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder les pieds collés<br>Ouvrir le genou supérieur<br>Ne pas tourner le bassin<br>Redescendre lentement",
+"reps": 30,
+"ex": 1,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "PUBALGIE_B01",
+"source": "CABINET",
+"nom": "Bird Dog",
+"image": "/exercises/images/pubalgie/Bird-dog.png",
+"consignes": [
+"Position quadrupédique",
+"Tendre bras et jambe opposés",
+"Garder le bassin stable",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position quadrupédique<br>Tendre bras et jambe opposés<br>Garder le bassin stable<br>Revenir lentement",
+"reps": 20,
+"ex": 2,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "GAINAGE_01",
+"source": "CABINET",
+"nom": "Aspiration abdominale (transverse)",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Allonger sur le dos, genoux fléchis",
+"Inspirer calmement par le nez",
+"Expirer lentement par la bouche",
+"Rentrer doucement le nombril vers la colonne",
+"Maintenir la contraction sans bloquer la respiration"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allonger sur le dos, genoux fléchis<br>Inspirer calmement par le nez<br>Expirer lentement par la bouche<br>Rentrer doucement le nombril vers la colonne<br>Maintenir la contraction sans bloquer la respiration",
+"reps": 10,
+"ex": 4,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "cab_pubalgie_2",
+"nom": "Pubalgie",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "PUBALGIE_B06",
+"source": "CABINET",
+"nom": "Serrage ballon jambes tendues",
+"image": "/exercises/images/pubalgie/serrage-ballon_jambestendues.png",
+"consignes": [
+"Presser le ballon entre les chevilles",
+"Maintenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Presser le ballon entre les chevilles<br>Maintenir 5 secondes<br>Relâcher lentement",
+"reps": 10,
+"ex": 5,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "PUBALGIE_B03",
+"source": "CABINET",
+"nom": "Gainage ventral",
+"image": "/exercises/images/pubalgie/Gainage_Ventral.png",
+"consignes": [
+"Aligner épaules, bassin et chevilles",
+"Contracter les abdominaux",
+"Respirer normalement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Aligner épaules, bassin et chevilles<br>Contracter les abdominaux<br>Respirer normalement",
+"reps": 3,
+"ex": 20,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "PUBALGIE_B04",
+"source": "CABINET",
+"nom": "Gainage latéral genoux",
+"image": "/exercises/images/pubalgie/gainage-lat-genoux.png",
+"consignes": [
+"Aligner épaules, bassin et genoux",
+"Monter le bassin",
+"Maintenir sans rotation"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Aligner épaules, bassin et genoux<br>Monter le bassin<br>Maintenir sans rotation",
+"reps": 3,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "PUBALGIE_B08",
+"source": "CABINET",
+"nom": "Équilibre avec balle au mur",
+"image": "/exercises/images/pubalgie/equilibre-balle-1.png",
+"consignes": [
+"Tenir sur une jambe",
+"Lancer et rattraper la balle",
+"Regarder devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir sur une jambe<br>Lancer et rattraper la balle<br>Regarder devant soi",
+"reps": 2,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "GAINAGE_19",
+"source": "CABINET",
+"nom": "Pont unipodal",
+"image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+"consignes": [
+"Position de pont fessier",
+"Lever une jambe",
+"Monter le bassin",
+"Maintenir l'alignement",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de pont fessier<br>Lever une jambe<br>Monter le bassin<br>Maintenir l'alignement<br>Redescendre lentement",
+"reps": 20,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "HANCHE_06",
+"source": "CABINET",
+"nom": "Abduction de hanche debout à l'élastique",
+"image": "/exercises/images/hanche/abduction-debout-elastique.webp",
+"consignes": [
+"Debout, une main en appui sur une chaise, élastique autour des deux chevilles",
+"Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi",
+"Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant",
+"Revenir lentement en 2 secondes sans relâcher l'élastique"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, une main en appui sur une chaise, élastique autour des deux chevilles<br>Se grandir, bassin bien horizontal, genou d'appui légèrement fléchi<br>Écarter la jambe tendue sur le côté en 2 secondes, pointe du pied vers l'avant<br>Revenir lentement en 2 secondes sans relâcher l'élastique",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "cab_pubalgie_3",
+"nom": "Pubalgie",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "HANCHE_05",
+"source": "CABINET",
+"nom": "Gainage des adducteurs sur banc",
+"image": "/exercises/images/hanche/copenhague-genou.webp",
+"consignes": [
+"Allongé sur le côté, avant-bras au sol, coude sous l'épaule",
+"Intérieur du genou du dessus posé sur un banc",
+"Soulever le bassin en serrant la jambe contre le banc",
+"Corps aligné, tenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le côté, avant-bras au sol, coude sous l'épaule<br>Intérieur du genou du dessus posé sur un banc<br>Soulever le bassin en serrant la jambe contre le banc<br>Corps aligné, tenir",
+"reps": 3,
+"ex": 20,
+"repos": 45,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3.",
+"materiel": "Banc"
+},
+{
+"id": "GAINAGE_18",
+"source": "CABINET",
+"nom": "Pallof Press",
+"image": "/exercises/images/post-partum/pallof-press.webp",
+"consignes": [
+"Se placer de profil à l'élastique",
+"Pousser les bras devant soi",
+"Résister à la rotation",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se placer de profil à l'élastique<br>Pousser les bras devant soi<br>Résister à la rotation<br>Revenir lentement",
+"reps": 24,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "HANCHE_08",
+"source": "CABINET",
+"nom": "Fente avant",
+"image": "/exercises/images/hanche/fente-avant.webp",
+"consignes": [
+"Debout, faire un grand pas en avant",
+"Descendre le genou arrière vers le sol en gardant le buste droit",
+"S'arrêter quand les deux genoux sont à peu près à 90°",
+"Pousser sur le talon avant pour remonter, puis changer de jambe"
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, faire un grand pas en avant<br>Descendre le genou arrière vers le sol en gardant le buste droit<br>S'arrêter quand les deux genoux sont à peu près à 90°<br>Pousser sur le talon avant pour remonter, puis changer de jambe",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "SPORT_05",
+"source": "CABINET",
+"nom": "Déplacements latéraux entre plots",
+"image": "",
+"consignes": [
+"Deux plots écartés de 4 à 5 m",
+"Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
+"Toucher le plot de la main avant de repartir",
+"Ne pas croiser les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux plots écartés de 4 à 5 m<br>Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas<br>Toucher le plot de la main avant de repartir<br>Ne pas croiser les pieds",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3.",
+"materiel": "2 plots"
+},
+{
+"id": "SPORT_06",
+"source": "CABINET",
+"nom": "Carioca (pas croisés latéraux)",
+"image": "",
+"consignes": [
+"Se déplacer sur le côté",
+"Croiser un pied devant puis derrière l'autre en alternance",
+"Laisser les hanches tourner, les épaules restent face à l'avant",
+"Revenir dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se déplacer sur le côté<br>Croiser un pied devant puis derrière l'autre en alternance<br>Laisser les hanches tourner, les épaules restent face à l'avant<br>Revenir dans l'autre sens",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "GENOU_05",
+"source": "CABINET",
+"nom": "Squat latéral avec élastique",
+"image": "/exercises/images/genou/squat-lat-elastique.png",
+"consignes": [
+"Pousser contre l’élastique",
+"Garder les pieds parallèles",
+"Contrôler le mouvement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pousser contre l’élastique<br>Garder les pieds parallèles<br>Contrôler le mouvement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "cab_motricite_enfant_1",
+"nom": "Motricité de l'enfant",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "PEDIA_03",
+"source": "CABINET",
+"nom": "Le flamant rose",
+"image": "",
+"consignes": [
+"Debout, mains sur les hanches",
+"Lever un pied et le poser contre l'autre genou, comme un flamant",
+"Tenir le plus longtemps possible, on compte ensemble",
+"Changer de jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les hanches<br>Lever un pied et le poser contre l'autre genou, comme un flamant<br>Tenir le plus longtemps possible, on compte ensemble<br>Changer de jambe",
+"reps": 3,
+"ex": 20,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué."
+},
+{
+"id": "PEDIA_04",
+"source": "CABINET",
+"nom": "Lancer et attraper un ballon",
+"image": "",
+"consignes": [
+"Face à un adulte, à 2 ou 3 m",
+"Lancer le ballon à deux mains",
+"L'attraper en tendant les bras, puis en le ramenant contre soi",
+"Reculer d'un pas à chaque réussite"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face à un adulte, à 2 ou 3 m<br>Lancer le ballon à deux mains<br>L'attraper en tendant les bras, puis en le ramenant contre soi<br>Reculer d'un pas à chaque réussite",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Ballon"
+},
+{
+"id": "PEDIA_06",
+"source": "CABINET",
+"nom": "Ramper comme un soldat",
+"image": "",
+"consignes": [
+"À plat ventre sur un tapis",
+"Avancer en tirant sur les avant-bras et en poussant avec les jambes",
+"Bras et jambe opposés travaillent ensemble",
+"Passer sous une table ou un tunnel"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À plat ventre sur un tapis<br>Avancer en tirant sur les avant-bras et en poussant avec les jambes<br>Bras et jambe opposés travaillent ensemble<br>Passer sous une table ou un tunnel",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Tapis, Table ou tunnel"
+},
+{
+"id": "PEDIA_05",
+"source": "CABINET",
+"nom": "L'avion à plat ventre",
+"image": "",
+"consignes": [
+"Allongé sur le ventre, bras tendus sur le côté comme des ailes",
+"Lever la tête, les bras et les jambes en même temps",
+"Regarder le sol pour garder la nuque longue",
+"Tenir en faisant « l'avion », puis se reposer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le ventre, bras tendus sur le côté comme des ailes<br>Lever la tête, les bras et les jambes en même temps<br>Regarder le sol pour garder la nuque longue<br>Tenir en faisant « l'avion », puis se reposer",
+"reps": 3,
+"ex": 15,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Tapis"
+}
+]
+},
+{
+"id": "cab_motricite_enfant_2",
+"nom": "Motricité de l'enfant",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "PEDIA_01",
+"source": "CABINET",
+"nom": "La marche du crabe",
+"image": "",
+"consignes": [
+"Assis par terre, mains derrière soi, pieds à plat",
+"Lever les fesses du sol",
+"Avancer et reculer à quatre pattes « sur le dos », comme un crabe",
+"Garder les fesses en l'air"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis par terre, mains derrière soi, pieds à plat<br>Lever les fesses du sol<br>Avancer et reculer à quatre pattes « sur le dos », comme un crabe<br>Garder les fesses en l'air",
+"reps": 3,
+"ex": 20,
+"repos": 30,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Tapis ou sol propre"
+},
+{
+"id": "PEDIA_02",
+"source": "CABINET",
+"nom": "La marelle à cloche-pied",
+"image": "",
+"consignes": [
+"Dessiner ou poser une marelle au sol",
+"Sauter à cloche-pied dans les cases simples, à deux pieds dans les doubles",
+"Ne pas marcher sur les traits",
+"Changer de pied à chaque partie"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Dessiner ou poser une marelle au sol<br>Sauter à cloche-pied dans les cases simples, à deux pieds dans les doubles<br>Ne pas marcher sur les traits<br>Changer de pied à chaque partie",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Craie ou ruban adhésif"
+},
+{
+"id": "PEDIA_04",
+"source": "CABINET",
+"nom": "Lancer et attraper un ballon",
+"image": "",
+"consignes": [
+"Face à un adulte, à 2 ou 3 m",
+"Lancer le ballon à deux mains",
+"L'attraper en tendant les bras, puis en le ramenant contre soi",
+"Reculer d'un pas à chaque réussite"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face à un adulte, à 2 ou 3 m<br>Lancer le ballon à deux mains<br>L'attraper en tendant les bras, puis en le ramenant contre soi<br>Reculer d'un pas à chaque réussite",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Ballon"
+},
+{
+"id": "PEDIA_05",
+"source": "CABINET",
+"nom": "L'avion à plat ventre",
+"image": "",
+"consignes": [
+"Allongé sur le ventre, bras tendus sur le côté comme des ailes",
+"Lever la tête, les bras et les jambes en même temps",
+"Regarder le sol pour garder la nuque longue",
+"Tenir en faisant « l'avion », puis se reposer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le ventre, bras tendus sur le côté comme des ailes<br>Lever la tête, les bras et les jambes en même temps<br>Regarder le sol pour garder la nuque longue<br>Tenir en faisant « l'avion », puis se reposer",
+"reps": 3,
+"ex": 15,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué.",
+"materiel": "Tapis"
+},
+{
+"id": "CHEV_008",
+"source": "CABINET",
+"nom": "Sauts sur place légers",
+"image": "/images/placeholders/cheville.webp",
+"consignes": [
+"Amortir doucement",
+"Garder les genoux souples",
+"Rester léger sur les appuis"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Amortir doucement<br>Garder les genoux souples<br>Rester léger sur les appuis",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Sous forme de jeu, avec un adulte. S'arrêter dès que l'enfant est fatigué."
+}
+]
+},
+{
+"id": "cab_lymphoedeme_bras_1",
+"nom": "Lymphœdème du bras (après cancer du sein)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "ONCO_04",
+"source": "CABINET",
+"nom": "Respiration ample avec les bras",
+"image": "",
+"consignes": [
+"Assis ou allongé, bras le long du corps",
+"Inspirer par le nez en gonflant le ventre et en levant les bras",
+"Expirer lentement par la bouche en redescendant les bras",
+"Garder un rythme lent"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis ou allongé, bras le long du corps<br>Inspirer par le nez en gonflant le ventre et en levant les bras<br>Expirer lentement par la bouche en redescendant les bras<br>Garder un rythme lent",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Chaise ou lit"
+},
+{
+"id": "ONCO_01",
+"source": "CABINET",
+"nom": "Pompage doigts et poignet, bras surélevé",
+"image": "",
+"consignes": [
+"Allongé, le bras posé sur des coussins, la main plus haute que le coude",
+"Ouvrir grand la main puis serrer le poing, lentement",
+"Puis plier et tendre le poignet",
+"Respirer calmement pendant tout l'exercice"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé, le bras posé sur des coussins, la main plus haute que le coude<br>Ouvrir grand la main puis serrer le poing, lentement<br>Puis plier et tendre le poignet<br>Respirer calmement pendant tout l'exercice",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Coussins"
+},
+{
+"id": "ONCO_02",
+"source": "CABINET",
+"nom": "Flexion-extension du coude, bras surélevé",
+"image": "",
+"consignes": [
+"Allongé, le bras posé sur des coussins plus haut que le cœur",
+"Plier le coude pour amener la main vers l'épaule",
+"Tendre le coude lentement",
+"Garder la main ouverte et détendue"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé, le bras posé sur des coussins plus haut que le cœur<br>Plier le coude pour amener la main vers l'épaule<br>Tendre le coude lentement<br>Garder la main ouverte et détendue",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Coussins"
+},
+{
+"id": "ONCO_03",
+"source": "CABINET",
+"nom": "Élévation du bras, allongé",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)",
+"Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
+"Aller un peu plus loin jour après jour",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)<br>Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur<br>Aller un peu plus loin jour après jour<br>Redescendre lentement",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Tapis ou lit, Bâton (facultatif)"
+},
+{
+"id": "CERV_07",
+"source": "CABINET",
+"nom": "Rapprochement des omoplates assis",
+"image": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+"consignes": [
+"Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°",
+"Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière",
+"Tenir 3 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°<br>Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière<br>Tenir 3 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+}
+]
+},
+{
+"id": "cab_lymphoedeme_bras_2",
+"nom": "Lymphœdème du bras (après cancer du sein)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "ONCO_04",
+"source": "CABINET",
+"nom": "Respiration ample avec les bras",
+"image": "",
+"consignes": [
+"Assis ou allongé, bras le long du corps",
+"Inspirer par le nez en gonflant le ventre et en levant les bras",
+"Expirer lentement par la bouche en redescendant les bras",
+"Garder un rythme lent"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis ou allongé, bras le long du corps<br>Inspirer par le nez en gonflant le ventre et en levant les bras<br>Expirer lentement par la bouche en redescendant les bras<br>Garder un rythme lent",
+"reps": 3,
+"ex": 60,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Chaise ou lit"
+},
+{
+"id": "ONCO_03",
+"source": "CABINET",
+"nom": "Élévation du bras, allongé",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)",
+"Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
+"Aller un peu plus loin jour après jour",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)<br>Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur<br>Aller un peu plus loin jour après jour<br>Redescendre lentement",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup.",
+"materiel": "Tapis ou lit, Bâton (facultatif)"
+},
+{
+"id": "EPAULE_03",
+"source": "CABINET",
+"nom": "Wall slide",
+"image": "/exercises/images/epaule/wallslideflexionepaule.png",
+"consignes": [
+"Glisser les bras contre le mur",
+"Monter lentement",
+"Garder les épaules basses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Glisser les bras contre le mur<br>Monter lentement<br>Garder les épaules basses",
+"reps": 10,
+"ex": 30,
+"repos": 30,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "EPAULE_CAPS_06",
+"source": "CABINET",
+"nom": "Tirage élastique léger",
+"image": "/exercises/images/epaule/tirage_elastique.png",
+"consignes": [
+"Garder le dos droit",
+"Tirer les coudes vers l’arrière",
+"Rapprocher légèrement les omoplates",
+"Contrôler le retour"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Garder le dos droit<br>Tirer les coudes vers l’arrière<br>Rapprocher légèrement les omoplates<br>Contrôler le retour",
+"reps": 12,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "EPAULE_16",
+"source": "CABINET",
+"nom": "Étirement des pectoraux dans l'encadrement de porte",
+"image": "/exercises/images/epaule/etirement-pectoraux-porte.webp",
+"consignes": [
+"Debout dans l'encadrement d'une porte, bras tendu à hauteur d'épaule, paume posée à plat sur le montant (variante : avant-bras posé, coude plié à 90°)",
+"Faire un petit pas en avant avec la jambe du même côté",
+"Tourner légèrement le buste à l'opposé jusqu'à sentir l'étirement dans la poitrine",
+"Tenir puis changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout dans l'encadrement d'une porte, bras tendu à hauteur d'épaule, paume posée à plat sur le montant (variante : avant-bras posé, coude plié à 90°)<br>Faire un petit pas en avant avec la jambe du même côté<br>Tourner légèrement le buste à l'opposé jusqu'à sentir l'étirement dans la poitrine<br>Tenir puis changer de côté",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "EPAULE_11",
+"source": "CABINET",
+"nom": "Pompe scapulaire contre le mur",
+"image": "/exercises/images/epaule/pompe-scapulaire-mur.webp",
+"consignes": [
+"Face au mur, mains à plat à hauteur d'épaules, bras tendus",
+"Rapprocher les omoplates sans plier les coudes",
+"Puis pousser le mur pour écarter les omoplates au maximum",
+"Corps gainé"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face au mur, mains à plat à hauteur d'épaules, bras tendus<br>Rapprocher les omoplates sans plier les coudes<br>Puis pousser le mur pour écarter les omoplates au maximum<br>Corps gainé",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+}
+]
+},
+{
+"id": "cab_atm_1",
+"nom": "Mâchoire (ATM)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CERV_10",
+"source": "CABINET",
+"nom": "Ouverture contrôlée de la mâchoire",
+"image": "/exercises/images/cervicales/ouverture-machoire.webp",
+"consignes": [
+"Assis face à un miroir, dos droit",
+"Placer la pointe de la langue sur le palais, derrière les dents du haut",
+"Ouvrir lentement la bouche en gardant la langue au palais, sans dévier la mâchoire",
+"Refermer lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis face à un miroir, dos droit<br>Placer la pointe de la langue sur le palais, derrière les dents du haut<br>Ouvrir lentement la bouche en gardant la langue au palais, sans dévier la mâchoire<br>Refermer lentement",
+"reps": 10,
+"ex": 2,
+"repos": 2,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos.",
+"materiel": "Miroir"
+},
+{
+"id": "CERV_01",
+"source": "CABINET",
+"nom": "Rentrer le menton",
+"image": "/exercises/images/cervicales/rentrer-menton.webp",
+"consignes": [
+"Assis bien droit, regard à l'horizontale",
+"Reculer la tête en arrière comme pour faire un double menton",
+"Le regard reste horizontal",
+"Tenir 3 secondes puis relâcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis bien droit, regard à l'horizontale<br>Reculer la tête en arrière comme pour faire un double menton<br>Le regard reste horizontal<br>Tenir 3 secondes puis relâcher",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "CERV_03",
+"source": "CABINET",
+"nom": "Étirement du trapèze",
+"image": "/exercises/images/cervicales/etirement-trapeze.webp",
+"consignes": [
+"Assis, tenir le bord de la chaise avec la main droite",
+"Pencher la tête vers la gauche, oreille vers l'épaule",
+"Avec la main gauche, accompagner doucement la tête",
+"Tenir en respirant, puis changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, tenir le bord de la chaise avec la main droite<br>Pencher la tête vers la gauche, oreille vers l'épaule<br>Avec la main gauche, accompagner doucement la tête<br>Tenir en respirant, puis changer de côté",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "CERV_06",
+"source": "CABINET",
+"nom": "Étirement de l'élévateur de la scapula",
+"image": "/exercises/images/cervicales/etirement-elevateur.webp",
+"consignes": [
+"Assis droit, tenir l'assise de la chaise d'une main pour garder l'épaule basse",
+"Tourner la tête de 45° du côté opposé puis regarder vers l'aisselle",
+"Poser l'autre main sur l'arrière de la tête et l'accompagner doucement vers le bas",
+"Tenir en respirant, puis changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit, tenir l'assise de la chaise d'une main pour garder l'épaule basse<br>Tourner la tête de 45° du côté opposé puis regarder vers l'aisselle<br>Poser l'autre main sur l'arrière de la tête et l'accompagner doucement vers le bas<br>Tenir en respirant, puis changer de côté",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "CERV_07",
+"source": "CABINET",
+"nom": "Rapprochement des omoplates assis",
+"image": "/exercises/images/cervicales/rapprochement-omoplates.webp",
+"consignes": [
+"Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°",
+"Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière",
+"Tenir 3 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis droit au bord de la chaise, bras le long du corps, coudes pliés à 90°<br>Serrer les omoplates l'une vers l'autre et vers le bas, coudes vers l'arrière<br>Tenir 3 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+}
+]
+},
+{
+"id": "base_rehabilitation_respiratoire_1",
+"nom": "Réhabilitation respiratoire (BPCO)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "646",
+"source": "HEP",
+"nom": "Respiration lèvres pincées",
+"image": "/exercises/images/HEP/pursed-lip-breathing.jpg",
+"consignes": [
+"Inspirez par le nez en gonflant le ventre pendant 4 secondes.",
+"Soufflez lentement par la bouche, lèvres pincées, en comptant jusqu'à 8."
+],
+"position": "Assis ou debout, détendu",
+"youtube": "http://www.youtube.com/embed/HJWkdyYINb4",
+"type": "timer",
+"conseil": "Inspirez par le nez en gonflant le ventre pendant 4 secondes.<br>Soufflez lentement par la bouche, lèvres pincées, en comptant jusqu'à 8.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "489",
+"source": "HEP",
+"nom": "Respiration profonde avec mouvements des bras",
+"image": "/exercises/images/HEP/deep-breathing-arm-movements.jpg",
+"consignes": [
+"Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.",
+"Soufflez lentement par la bouche en redescendant les bras."
+],
+"position": "Assis ou debout, bras le long du corps",
+"youtube": "http://www.youtube.com/embed/O-WKIJJN_7Q",
+"type": "timer",
+"conseil": "Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.<br>Soufflez lentement par la bouche en redescendant les bras.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "476",
+"source": "HEP",
+"nom": "Ouverture latérale du thorax",
+"image": "/exercises/images/HEP/1504796375-corner-chest-stretch.jpg",
+"consignes": [
+"Posez une main sur chaque mur, à hauteur d'épaule.",
+"Un pied en avant.",
+"Penchez-vous vers l'angle jusqu'à sentir l'étirement dans la poitrine.",
+"Changez la hauteur des mains pour étirer différentes zones."
+],
+"position": "Debout face à un angle de mur",
+"youtube": "http://www.youtube.com/embed/QkNXMOSBvMo",
+"type": "timer",
+"conseil": "Posez une main sur chaque mur, à hauteur d'épaule.<br>Un pied en avant.<br>Penchez-vous vers l'angle jusqu'à sentir l'étirement dans la poitrine.<br>Changez la hauteur des mains pour étirer différentes zones.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+}
+]
+},
+{
+"id": "base_rehabilitation_respiratoire_2",
+"nom": "Réhabilitation respiratoire (BPCO)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Respiratoire",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "646",
+"source": "HEP",
+"nom": "Respiration lèvres pincées",
+"image": "/exercises/images/HEP/pursed-lip-breathing.jpg",
+"consignes": [
+"Inspirez par le nez en gonflant le ventre pendant 4 secondes.",
+"Soufflez lentement par la bouche, lèvres pincées, en comptant jusqu'à 8."
+],
+"position": "Assis ou debout, détendu",
+"youtube": "http://www.youtube.com/embed/HJWkdyYINb4",
+"type": "timer",
+"conseil": "Inspirez par le nez en gonflant le ventre pendant 4 secondes.<br>Soufflez lentement par la bouche, lèvres pincées, en comptant jusqu'à 8.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "470",
+"source": "HEP",
+"nom": "Marche sur place",
+"image": "/exercises/images/HEP/1504795664-marching-in-place.jpg",
+"consignes": [
+"Montez un genou à environ 90°, ou aussi haut que possible sans douleur.",
+"Alternez les jambes comme si vous marchiez sur place."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/HW4eU6SMA6Q",
+"type": "timer",
+"conseil": "Montez un genou à environ 90°, ou aussi haut que possible sans douleur.<br>Alternez les jambes comme si vous marchiez sur place.",
+"reps": 1,
+"ex": 300,
+"repos": 0,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "540",
+"source": "HEP",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
+"consignes": [
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
+"type": "timer",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+},
+{
+"id": "518",
+"source": "HEP",
+"nom": "Ouverture de la poitrine avec rotation du tronc",
+"image": "/exercises/images/HEP/chest-stretch-trunk-rotation.jpg",
+"consignes": [
+"Bras tendus devant vous, paumes jointes.",
+"Ouvrez le bras du dessus vers l'arrière en tournant le tronc, le regard suit la main.",
+"Gardez les genoux l'un sur l'autre.",
+"Respirez profondément, puis revenez."
+],
+"position": "Allongé sur le côté, genoux pliés",
+"youtube": "http://www.youtube.com/embed/W3S4JNnXrJU",
+"type": "timer",
+"conseil": "Bras tendus devant vous, paumes jointes.<br>Ouvrez le bras du dessus vers l'arrière en tournant le tronc, le regard suit la main.<br>Gardez les genoux l'un sur l'autre.<br>Respirez profondément, puis revenez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Effort à un niveau où l'on peut encore parler. Lèvres pincées à l'effort."
+}
+]
+},
+{
+"id": "base_atm_1",
+"nom": "Mâchoire (ATM)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "355",
+"source": "HEP",
+"nom": "Exercice pour la mâchoire (ATM) 1",
+"image": "/exercises/images/HEP/1414152045-tmj-exercise-1.jpg",
+"consignes": [
+"Posez la paume sur le côté de la mâchoire.",
+"Poussez la mâchoire contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes, puis faites l'autre côté."
+],
+"position": "Assis, dents légèrement desserrées",
+"youtube": "http://www.youtube.com/embed/oEGm0poB060",
+"type": "timer",
+"conseil": "Posez la paume sur le côté de la mâchoire.<br>Poussez la mâchoire contre la main, sans bouger.<br>Maintenez 3 à 5 secondes, puis faites l'autre côté.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "356",
+"source": "HEP",
+"nom": "Exercice pour la mâchoire (ATM) 2",
+"image": "/exercises/images/HEP/1414152106-tmj-exercise-2.jpg",
+"consignes": [
+"Posez deux doigts sur les dents du bas.",
+"Essayez de fermer la bouche contre les doigts, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis, bouche légèrement ouverte",
+"youtube": "http://www.youtube.com/embed/cDJe-OaqCGc",
+"type": "timer",
+"conseil": "Posez deux doigts sur les dents du bas.<br>Essayez de fermer la bouche contre les doigts, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "357",
+"source": "HEP",
+"nom": "Exercice pour la mâchoire (ATM) 3",
+"image": "/exercises/images/HEP/1414152144-tmj-exercise-3.jpg",
+"consignes": [
+"Posez la main sur le menton.",
+"Poussez le menton vers l'avant contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis, dents légèrement desserrées",
+"youtube": "http://www.youtube.com/embed/W0EpoFlfSCY",
+"type": "timer",
+"conseil": "Posez la main sur le menton.<br>Poussez le menton vers l'avant contre la main, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "658",
+"source": "HEP",
+"nom": "Exercice pour la mâchoire (ATM) 4",
+"image": "/exercises/images/HEP/TMJ-exercise-4.jpg",
+"consignes": [
+"Posez la paume sous le menton.",
+"Essayez d'ouvrir la bouche contre la main, sans bouger.",
+"Maintenez 3 à 5 secondes."
+],
+"position": "Assis, dents légèrement desserrées",
+"youtube": "http://www.youtube.com/embed/UDIqYTKJKIs",
+"type": "timer",
+"conseil": "Posez la paume sous le menton.<br>Essayez d'ouvrir la bouche contre la main, sans bouger.<br>Maintenez 3 à 5 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "659",
+"source": "HEP",
+"nom": "Massage de la mâchoire (ATM)",
+"image": "/exercises/images/HEP/TMJ-massage.jpg",
+"consignes": [
+"Posez les doigts sur les muscles de la mâchoire, devant les oreilles.",
+"Massez par petits cercles avec une pression douce."
+],
+"position": "Assis, bouche légèrement ouverte",
+"youtube": "http://www.youtube.com/embed/AMftP0v6t_Y",
+"type": "timer",
+"conseil": "Posez les doigts sur les muscles de la mâchoire, devant les oreilles.<br>Massez par petits cercles avec une pression douce.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+},
+{
+"id": "137",
+"source": "HEP",
+"nom": "Rentrée du menton, assis",
+"image": "/exercises/images/HEP/1407867305-chin-tucks-sitting.jpg",
+"consignes": [
+"Posez un doigt sur le menton.",
+"Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NWUbMPN8vfg",
+"type": "timer",
+"conseil": "Posez un doigt sur le menton.<br>Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Ouverture sans claquement ni douleur, devant un miroir. Langue au palais au repos."
+}
+]
+},
+{
+"id": "base_paralysie_faciale_1",
+"nom": "Paralysie faciale",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cervicales",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "519",
+"source": "HEP",
+"nom": "Froncement des sourcils",
+"image": "/exercises/images/HEP/eyebrow-furrowing.jpg",
+"consignes": [
+"Froncez les sourcils comme si vous étiez contrarié.",
+"Aidez le côté faible avec un doigt si besoin.",
+"Relâchez."
+],
+"position": "Assis devant un miroir, visage détendu",
+"youtube": "http://www.youtube.com/embed/qFNKwUHcKfg",
+"type": "timer",
+"conseil": "Froncez les sourcils comme si vous étiez contrarié.<br>Aidez le côté faible avec un doigt si besoin.<br>Relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Devant un miroir, mouvements lents et symétriques. Ne pas forcer le côté sain."
+},
+{
+"id": "520",
+"source": "HEP",
+"nom": "Élévation des sourcils",
+"image": "/exercises/images/HEP/eyebrow-lift.jpg",
+"consignes": [
+"Levez les sourcils comme si vous étiez surpris.",
+"Aidez le côté faible avec un doigt si besoin.",
+"Relâchez."
+],
+"position": "Assis devant un miroir, visage détendu",
+"youtube": "http://www.youtube.com/embed/jBtDCeCfXp8",
+"type": "timer",
+"conseil": "Levez les sourcils comme si vous étiez surpris.<br>Aidez le côté faible avec un doigt si besoin.<br>Relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Devant un miroir, mouvements lents et symétriques. Ne pas forcer le côté sain."
+},
+{
+"id": "524",
+"source": "HEP",
+"nom": "Sourire lèvres fermées",
+"image": "/exercises/images/HEP/lip-smiling.jpg",
+"consignes": [
+"Souriez largement en montrant les dents.",
+"Aidez le côté faible en tirant le coin de la lèvre vers le haut et l'extérieur avec un doigt si besoin.",
+"Relâchez."
+],
+"position": "Assis devant un miroir, visage détendu",
+"youtube": "http://www.youtube.com/embed/6okQNR5V5ls",
+"type": "timer",
+"conseil": "Souriez largement en montrant les dents.<br>Aidez le côté faible en tirant le coin de la lèvre vers le haut et l'extérieur avec un doigt si besoin.<br>Relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Devant un miroir, mouvements lents et symétriques. Ne pas forcer le côté sain."
+},
+{
+"id": "525",
+"source": "HEP",
+"nom": "Dilatation des narines",
+"image": "/exercises/images/HEP/nose-flaring.jpg",
+"consignes": [
+"Écartez les narines le plus possible.",
+"Aidez le côté faible avec un doigt si besoin.",
+"Relâchez."
+],
+"position": "Assis devant un miroir, visage détendu",
+"youtube": "http://www.youtube.com/embed/lBmCghSSieE",
+"type": "timer",
+"conseil": "Écartez les narines le plus possible.<br>Aidez le côté faible avec un doigt si besoin.<br>Relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Devant un miroir, mouvements lents et symétriques. Ne pas forcer le côté sain."
+}
+]
+},
+{
+"id": "base_tendinopathie_rotulienne_1",
+"nom": "Tendinopathie rotulienne",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "85",
+"source": "HEP",
+"nom": "Contraction isométrique du quadriceps",
+"image": "/exercises/images/HEP/1407678757-quad-sets2.jpg",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Écrasez la serviette avec l'arrière du genou en contractant la cuisse.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou allongé, jambe tendue, serviette roulée sous le genou",
+"youtube": "http://www.youtube.com/embed/QPuDqtYk3Xo",
+"type": "timer",
+"conseil": "Tirez la pointe du pied vers vous.<br>Écrasez la serviette avec l'arrière du genou en contractant la cuisse.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 5,
+"ex": 45,
+"repos": 30,
+"conseil_kine": "Contractions longues pour calmer la douleur, au plus 3/10."
+},
+{
+"id": "99",
+"source": "HEP",
+"nom": "Extension du genou, assis",
+"image": "/exercises/images/HEP/1408192464-seated-knee-extension.jpg",
+"consignes": [
+"Tirez la pointe du pied vers vous.",
+"Tendez complètement le genou.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/GlFdeqRiW8U",
+"type": "timer",
+"conseil": "Tirez la pointe du pied vers vous.<br>Tendez complètement le genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Contractions longues pour calmer la douleur, au plus 3/10."
+},
+{
+"id": "439",
+"source": "HEP",
+"nom": "Étirement du quadriceps, debout",
+"image": "/exercises/images/HEP/1490601091-standing-quad-stretch.jpg",
+"consignes": [
+"Pliez le genou et attrapez la cheville derrière vous.",
+"Ramenez doucement le talon vers la fesse, genoux côte à côte.",
+"Maintenez 30 secondes."
+],
+"position": "Debout, une main sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/9nnqmB6RSyU",
+"type": "timer",
+"conseil": "Pliez le genou et attrapez la cheville derrière vous.<br>Ramenez doucement le talon vers la fesse, genoux côte à côte.<br>Maintenez 30 secondes.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Contractions longues pour calmer la douleur, au plus 3/10."
+},
+{
+"id": "174",
+"source": "HEP",
+"nom": "Étirement du mollet debout (étirement du coureur)",
+"image": "/exercises/images/HEP/1407677511-calf-stretch-standing.jpg",
+"consignes": [
+"Mains contre le mur.",
+"Jambe arrière tendue, talon bien au sol.",
+"Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.",
+"Maintenez 30 secondes."
+],
+"position": "Debout face à un mur, un pied devant l'autre",
+"youtube": "http://www.youtube.com/embed/7P81LL4Vws4",
+"type": "timer",
+"conseil": "Mains contre le mur.<br>Jambe arrière tendue, talon bien au sol.<br>Fléchissez le genou avant et avancez le bassin jusqu'à sentir l'étirement dans le mollet arrière.<br>Maintenez 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Contractions longues pour calmer la douleur, au plus 3/10."
+},
+{
+"id": "74",
+"source": "HEP",
+"nom": "Abduction de hanche, allongé sur le côté",
+"image": "/exercises/images/HEP/1407678107-hip-abduction-side-lying2.jpg",
+"consignes": [
+"Pliez la jambe du dessous pour être stable.",
+"Gardez le corps aligné et le bassin bien de profil.",
+"Tirez la pointe du pied vers vous, genou tendu.",
+"Montez la jambe d'environ 30 cm en menant avec le talon, puis redescendez lentement."
+],
+"position": "Allongé sur le côté, jambe à travailler au-dessus",
+"youtube": "http://www.youtube.com/embed/MyaMRYSoEbY",
+"type": "timer",
+"conseil": "Pliez la jambe du dessous pour être stable.<br>Gardez le corps aligné et le bassin bien de profil.<br>Tirez la pointe du pied vers vous, genou tendu.<br>Montez la jambe d'environ 30 cm en menant avec le talon, puis redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Contractions longues pour calmer la douleur, au plus 3/10."
+}
+]
+},
+{
+"id": "base_tendinopathie_rotulienne_2",
+"nom": "Tendinopathie rotulienne",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Descentes lentes : douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "403",
+"source": "HEP",
+"nom": "Descente de marche (step down)",
+"image": "/exercises/images/HEP/1435246052-step-downs2.jpg",
+"consignes": [
+"La jambe à travailler reste sur la marche.",
+"Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.",
+"Remontez en poussant sur la jambe d'appui."
+],
+"position": "Debout sur une marche, en vous tenant",
+"youtube": "http://www.youtube.com/embed/CBM8AxFj8tg",
+"type": "timer",
+"conseil": "La jambe à travailler reste sur la marche.<br>Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.<br>Remontez en poussant sur la jambe d'appui.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Descentes lentes : douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Descentes lentes : douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "436",
+"source": "HEP",
+"nom": "Squat avec ballon entre les genoux (vaste médial)",
+"image": "/exercises/images/HEP/1477662955-vmo-squat-with-ball.jpg",
+"consignes": [
+"Serrez le ballon.",
+"Descendez en squat en reculant les fesses, genoux dans l'axe des pieds.",
+"Remontez en gardant la pression sur le ballon."
+],
+"position": "Debout, un ballon entre les genoux",
+"youtube": "http://www.youtube.com/embed/t-e_7cO0lHo",
+"type": "timer",
+"conseil": "Serrez le ballon.<br>Descendez en squat en reculant les fesses, genoux dans l'axe des pieds.<br>Remontez en gardant la pression sur le ballon.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Descentes lentes : douleur au plus 3/10, pas pire le lendemain."
+},
+{
+"id": "296",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction de hanche avec élastique, debout",
+"image": "/exercises/images/HEP/1409075120-hip-abduction-with-band.jpg",
+"conseil": "Tenez-vous si besoin.<br>Dos droit, genou tendu.<br>Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.<br>Revenez lentement.",
+"consignes": [
+"Tenez-vous si besoin.",
+"Dos droit, genou tendu.",
+"Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.",
+"Revenez lentement."
+],
+"position": "Debout, élastique autour des deux chevilles",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/n5eZKkC3mJk",
+"vimeo": "https://vimeo.com/104455689",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Descentes lentes : douleur au plus 3/10, pas pire le lendemain."
+}
+]
+},
+{
+"id": "base_tendinopathie_rotulienne_3",
+"nom": "Tendinopathie rotulienne",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Sauts seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Sauts seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "93",
+"source": "HEP",
+"nom": "Squat sur une jambe",
+"image": "/exercises/images/HEP/1407678680-one-legged-squats.jpg",
+"consignes": [
+"L'autre pied décollé devant vous.",
+"Pliez le genou d'appui en reculant les fesses, comme pour vous asseoir.",
+"Genou dans l'axe du pied, sans rentrer vers l'intérieur.",
+"Remontez en poussant sur le pied."
+],
+"position": "Debout sur une jambe, à côté d'un support",
+"youtube": "http://www.youtube.com/embed/1KKdvc0e9JY",
+"type": "timer",
+"conseil": "L'autre pied décollé devant vous.<br>Pliez le genou d'appui en reculant les fesses, comme pour vous asseoir.<br>Genou dans l'axe du pied, sans rentrer vers l'intérieur.<br>Remontez en poussant sur le pied.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Sauts seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "704",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts sur place légers",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
+"conseil": "Debout, pieds écartés de la largeur du bassin.<br>Faites de petits sauts sur place, sur l'avant des pieds.<br>Amortissez chaque réception en gardant les genoux souples.<br>Restez léger et silencieux sur vos appuis.",
+"consignes": [
+"Debout, pieds écartés de la largeur du bassin.",
+"Faites de petits sauts sur place, sur l'avant des pieds.",
+"Amortissez chaque réception en gardant les genoux souples.",
+"Restez léger et silencieux sur vos appuis."
+],
+"position": "Debout, pieds écartés de la largeur du bassin, genoux légèrement fléchis.",
+"precautions": [
+"Commencez par des séries courtes. Pas de douleur au-delà de 3/10 pendant ou le lendemain."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3,
+"conseil_kine": "Sauts seulement si le tendon ne réagit pas le lendemain."
+},
+{
+"id": "697",
+"source": "HEP",
+"nom": "Marche en fente sur la pointe des pieds",
+"image": "/exercises/images/HEP/walking-sneaky-lunges.jpg",
+"consignes": [
+"Restez sur la pointe des pieds.",
+"Marchez en faisant des fentes, genou arrière vers le sol, talons toujours décollés."
+],
+"position": "Debout, sur la pointe des pieds",
+"youtube": "http://www.youtube.com/embed/bgsakfgrp5U",
+"type": "timer",
+"conseil": "Restez sur la pointe des pieds.<br>Marchez en faisant des fentes, genou arrière vers le sol, talons toujours décollés.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Sauts seulement si le tendon ne réagit pas le lendemain."
+}
+]
+},
+{
+"id": "base_ischio_jambiers_1",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "86",
+"source": "HEP",
+"nom": "Contraction des ischio-jambiers",
+"image": "/exercises/images/HEP/1407678037-hamstring-sets2.jpg",
+"consignes": [
+"Enfoncez le talon dans le sol ou le lit, comme pour le tirer vers vous.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis ou allongé, la jambe à travailler pliée",
+"youtube": "http://www.youtube.com/embed/1r1bmLh8SuY",
+"type": "timer",
+"conseil": "Enfoncez le talon dans le sol ou le lit, comme pour le tirer vers vous.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "665",
+"source": "HEP",
+"type": "timer",
+"nom": "Contraction des ischio-jambiers, assis",
+"image": "/exercises/images/HEP/seated-hamstring-sets3.jpg",
+"conseil": "Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"consignes": [
+"Enfoncez le talon dans le sol comme pour le tirer vers vous, sans bouger.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, talon posé au sol devant vous",
+"precautions": [
+"Éviter les mouvements brusques. Respecter une douleur inférieure à 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/6kM68u8fyCY",
+"ex": 30,
+"repos": 15,
+"reps": 2,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "79",
+"source": "HEP",
+"nom": "Flexion du genou (ischio-jambiers), sur le ventre",
+"image": "/exercises/images/HEP/1407677794-hamstring-curls-prone2.jpg",
+"consignes": [
+"Pliez le genou pour amener le talon vers la fesse.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le ventre, jambes tendues",
+"youtube": "http://www.youtube.com/embed/3TNRivlxAC8",
+"type": "timer",
+"conseil": "Pliez le genou pour amener le talon vers la fesse.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+},
+{
+"id": "67",
+"source": "HEP",
+"nom": "Glissement neural du nerf sciatique",
+"image": "/exercises/images/HEP/1408191588-sciatic-nerve-glide.jpg",
+"consignes": [
+"Tenez l'arrière d'une cuisse, hanche à 90°.",
+"Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.",
+"Pliez de nouveau le genou en relâchant le pied.",
+"Mouvements doux, sans provoquer de douleur ni de fourmillements durables."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/0gnme9jTkJ8",
+"type": "timer",
+"conseil": "Tenez l'arrière d'une cuisse, hanche à 90°.<br>Tendez le genou en tirant la pointe du pied vers vous, jusqu'à une légère tension.<br>Pliez de nouveau le genou en relâchant le pied.<br>Mouvements doux, sans provoquer de douleur ni de fourmillements durables.",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Pas d'étirement forcé ni de sprint au début. Douleur au plus 2/10."
+}
+]
+},
+{
+"id": "base_ischio_jambiers_2",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "71",
+"source": "HEP",
+"nom": "Pont fessier sur une jambe",
+"image": "/exercises/images/HEP/1408867114-single-leg-bridging.jpg",
+"consignes": [
+"Décollez un pied et tendez la jambe.",
+"Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/4oy24jTjJ5o",
+"type": "timer",
+"conseil": "Décollez un pied et tendez la jambe.<br>Soulevez le bassin en poussant sur le pied au sol, jusqu'à aligner épaules et genou.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Renforcement progressif, d'abord lent."
+},
+{
+"id": "427",
+"source": "HEP",
+"nom": "Flexion du genou avec poids, sur le ventre",
+"image": "/exercises/images/HEP/1477662115-hamstring-curl-pron-weight.jpg",
+"consignes": [
+"Pliez le genou pour amener le talon vers la fesse.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le ventre, lests aux chevilles",
+"youtube": "http://www.youtube.com/embed/n8NZYgWcZ3U",
+"type": "timer",
+"conseil": "Pliez le genou pour amener le talon vers la fesse.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Renforcement progressif, d'abord lent."
+},
+{
+"id": "414",
+"source": "HEP",
+"nom": "Flexion du genou (ischio-jambiers), debout",
+"image": "/exercises/images/HEP/1473427400-hamstring-curls-standing.jpg",
+"consignes": [
+"Tronc droit, cuisse immobile.",
+"Pliez le genou pour amener le talon vers la fesse.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur un meuble stable",
+"youtube": "http://www.youtube.com/embed/4dij_2E1ej4",
+"type": "timer",
+"conseil": "Tronc droit, cuisse immobile.<br>Pliez le genou pour amener le talon vers la fesse.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Renforcement progressif, d'abord lent."
+},
+{
+"id": "312",
+"source": "HEP",
+"nom": "Ramassage d'objet sur une jambe (golfeur)",
+"image": "/exercises/images/HEP/1409588976-golfers-lift2.jpg",
+"consignes": [
+"Dos droit.",
+"Penchez-vous vers l'avant depuis les hanches en tendant la jambe libre vers l'arrière (comme un golfeur qui ramasse sa balle).",
+"Allez toucher le sol ou un objet bas avec la main.",
+"Maintenez 1 à 2 secondes et revenez lentement."
+],
+"position": "Debout sur une jambe, appui sur une canne ou un manche",
+"youtube": "http://www.youtube.com/embed/BRc7eGAHXbc",
+"type": "timer",
+"conseil": "Dos droit.<br>Penchez-vous vers l'avant depuis les hanches en tendant la jambe libre vers l'arrière (comme un golfeur qui ramasse sa balle).<br>Allez toucher le sol ou un objet bas avec la main.<br>Maintenez 1 à 2 secondes et revenez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Renforcement progressif, d'abord lent."
+},
+{
+"id": "68",
+"source": "HEP",
+"nom": "Étirement des ischio-jambiers avec une sangle, allongé",
+"image": "/exercises/images/HEP/1408868706-supine-hamstring-stretch-with-strap.jpg",
+"consignes": [
+"Pliez l'autre jambe, pied à plat, pour protéger le dos.",
+"Montez la jambe tendue en tirant doucement sur la sangle.",
+"Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes."
+],
+"position": "Allongé sur le dos, une sangle autour du pied",
+"youtube": "http://www.youtube.com/embed/oDzhSppZSU0",
+"type": "timer",
+"conseil": "Pliez l'autre jambe, pied à plat, pour protéger le dos.<br>Montez la jambe tendue en tirant doucement sur la sangle.<br>Arrêtez quand vous sentez l'étirement derrière la cuisse et maintenez 30 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Renforcement progressif, d'abord lent."
+}
+]
+},
+{
+"id": "base_ischio_jambiers_3",
+"nom": "Lésion des ischio-jambiers",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "464",
+"source": "HEP",
+"nom": "Ramassage d'objet sur une jambe avec poids (golfeur)",
+"image": "/exercises/images/HEP/1501427157-golfers-lift-with-weight.jpg",
+"consignes": [
+"Dos droit.",
+"Penchez-vous vers l'avant depuis la hanche en tendant la jambe libre vers l'arrière.",
+"Descendez le poids vers le sol, bassin bien de face.",
+"Remontez lentement."
+],
+"position": "Debout sur une jambe, un poids dans la main opposée",
+"youtube": "http://www.youtube.com/embed/zvZFIUzY3eQ",
+"type": "timer",
+"conseil": "Dos droit.<br>Penchez-vous vers l'avant depuis la hanche en tendant la jambe libre vers l'arrière.<br>Descendez le poids vers le sol, bassin bien de face.<br>Remontez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Course seulement si aucune douleur à la course légère."
+},
+{
+"id": "291",
+"source": "HEP",
+"nom": "Pont sur une jambe sur swiss ball avec enroulement",
+"image": "/exercises/images/HEP/1409074840-roll-up-on-bridge-single-leg.jpg",
+"consignes": [
+"Soulevez le bassin.",
+"Ramenez le ballon vers vous en pliant le genou, avec le talon.",
+"Repoussez-le en tendant la jambe, bassin toujours décollé."
+],
+"position": "Allongé sur le dos, un talon posé sur le swiss ball, l'autre jambe en l'air",
+"youtube": "http://www.youtube.com/embed/aiU39o5oBjk",
+"type": "timer",
+"conseil": "Soulevez le bassin.<br>Ramenez le ballon vers vous en pliant le genou, avec le talon.<br>Repoussez-le en tendant la jambe, bassin toujours décollé.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Course seulement si aucune douleur à la course légère."
+},
+{
+"id": "266",
+"source": "HEP",
+"nom": "Pont sur swiss ball avec enroulement",
+"image": "/exercises/images/HEP/1409068097-bridge-with-roll.jpg",
+"consignes": [
+"Soulevez le bassin.",
+"Pliez les genoux en ramenant le ballon vers les fesses avec les talons.",
+"Retendez les jambes en repoussant le ballon, bassin toujours décollé."
+],
+"position": "Allongé sur le dos, talons posés sur le swiss ball, jambes tendues",
+"youtube": "http://www.youtube.com/embed/uwOP3LMRV1w",
+"type": "timer",
+"conseil": "Soulevez le bassin.<br>Pliez les genoux en ramenant le ballon vers les fesses avec les talons.<br>Retendez les jambes en repoussant le ballon, bassin toujours décollé.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Course seulement si aucune douleur à la course légère."
+},
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Course seulement si aucune douleur à la course légère."
+},
+{
+"id": "707",
+"source": "HEP",
+"type": "timer",
+"nom": "Course avec changements de direction",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
+"conseil": "Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.<br>Courez de l'un à l'autre en changeant de direction à chaque repère.<br>Ralentissez avant chaque virage, posez bien le pied et repartez.<br>Commencez lentement, puis accélérez si tout va bien.",
+"consignes": [
+"Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.",
+"Courez de l'un à l'autre en changeant de direction à chaque repère.",
+"Ralentissez avant chaque virage, posez bien le pied et repartez.",
+"Commencez lentement, puis accélérez si tout va bien."
+],
+"position": "Dehors ou dans un grand espace dégagé, sol non glissant.",
+"precautions": [
+"Uniquement après une course en ligne droite sans douleur. Chaussures de sport",
+"sol sec."
+],
+"materiel": [
+"Repères au sol"
+],
+"ex": 60,
+"repos": 60,
+"reps": 3,
+"conseil_kine": "Course seulement si aucune douleur à la course légère."
+}
+]
+},
+{
+"id": "base_osteoporose_1",
+"nom": "Ostéoporose",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "137",
+"source": "HEP",
+"nom": "Rentrée du menton, assis",
+"image": "/exercises/images/HEP/1407867305-chin-tucks-sitting.jpg",
+"consignes": [
+"Posez un doigt sur le menton.",
+"Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, dos droit",
+"youtube": "http://www.youtube.com/embed/NWUbMPN8vfg",
+"type": "timer",
+"conseil": "Posez un doigt sur le menton.<br>Reculez lentement le menton sans baisser la tête, comme pour faire un double menton.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "208",
+"source": "HEP",
+"nom": "Appui sur les coudes, sur le ventre (sphinx)",
+"image": "/exercises/images/HEP/1408183542-prone-props.jpg",
+"consignes": [
+"Coudes sous les épaules, bassin au sol.",
+"Relâchez le dos et laissez-le se creuser doucement.",
+"Maintenez en respirant calmement."
+],
+"position": "Allongé sur le ventre, en appui sur les avant-bras",
+"youtube": "http://www.youtube.com/embed/LlrZONaPhC0",
+"type": "timer",
+"conseil": "Coudes sous les épaules, bassin au sol.<br>Relâchez le dos et laissez-le se creuser doucement.<br>Maintenez en respirant calmement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "413",
+"source": "HEP",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"type": "timer",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "349",
+"source": "HEP",
+"nom": "Passage assis-debout",
+"image": "/exercises/images/HEP/1414151598-sit-to-stand.jpg",
+"consignes": [
+"Reculez légèrement les pieds sous la chaise.",
+"Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.",
+"Poussez sur les jambes pour vous lever.",
+"Rasseyez-vous lentement en contrôlant."
+],
+"position": "Assis au bord d'une chaise, pieds écartés largeur d'épaules",
+"youtube": "http://www.youtube.com/embed/7XwlJL4PoUw",
+"type": "timer",
+"conseil": "Reculez légèrement les pieds sous la chaise.<br>Penchez le tronc vers l'avant jusqu'à ce que les fesses décollent.<br>Poussez sur les jambes pour vous lever.<br>Rasseyez-vous lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "189",
+"source": "HEP",
+"nom": "Montées sur pointes, debout",
+"image": "/exercises/images/HEP/1407950640-heel-raises.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Montez sur la pointe des pieds le plus haut possible.",
+"Redescendez lentement."
+],
+"position": "Debout, mains sur une chaise ou un comptoir",
+"youtube": "http://www.youtube.com/embed/M9_-9PX4apA",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Montez sur la pointe des pieds le plus haut possible.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "22",
+"source": "HEP",
+"nom": "Équilibre pieds joints (Romberg)",
+"image": "/exercises/images/HEP/1426346646-rhomberg-stance_new.jpg",
+"consignes": [
+"Tenez-vous droit, pieds joints, bras le long du corps.",
+"Ne vous tenez au support qu'en cas de besoin.",
+"Maintenez 10 à 15 secondes."
+],
+"position": "Debout, pieds joints, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/BP-xr9ymGiw",
+"type": "timer",
+"conseil": "Tenez-vous droit, pieds joints, bras le long du corps.<br>Ne vous tenez au support qu'en cas de besoin.<br>Maintenez 10 à 15 secondes.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+}
+]
+},
+{
+"id": "base_osteoporose_2",
+"nom": "Ostéoporose",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "92",
+"source": "HEP",
+"nom": "Squat sur une chaise (assis-debout)",
+"image": "/exercises/images/HEP/1408867522-squats-at-chair.jpg",
+"consignes": [
+"Pieds écartés largeur d'épaules.",
+"Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.",
+"Remontez sans vous asseoir complètement."
+],
+"position": "Debout devant une chaise",
+"youtube": "http://www.youtube.com/embed/YZJ0GLkYdDc",
+"type": "timer",
+"conseil": "Pieds écartés largeur d'épaules.<br>Descendez en reculant les fesses jusqu'à toucher légèrement la chaise.<br>Remontez sans vous asseoir complètement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "206",
+"source": "HEP",
+"nom": "Élévation des bras, sur le ventre",
+"image": "/exercises/images/HEP/1408039535-prone-arm-raise.jpg",
+"consignes": [
+"Front posé ou nuque dans l'alignement.",
+"Décollez doucement un bras tendu du sol.",
+"Reposez-le lentement, puis faites l'autre bras."
+],
+"position": "Allongé sur le ventre, bras tendus devant vous",
+"youtube": "http://www.youtube.com/embed/Ga6MEtgIU1c",
+"type": "timer",
+"conseil": "Front posé ou nuque dans l'alignement.<br>Décollez doucement un bras tendu du sol.<br>Reposez-le lentement, puis faites l'autre bras.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "210",
+"source": "HEP",
+"nom": "Superman sur le ventre",
+"image": "/exercises/images/HEP/1426346527-prone-superman.jpg",
+"consignes": [
+"Décollez en même temps les deux bras et les deux jambes du sol.",
+"Regard vers le sol, cou dans l'alignement.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le ventre, bras tendus devant vous",
+"youtube": "http://www.youtube.com/embed/hCXdp4ejAVs",
+"type": "timer",
+"conseil": "Décollez en même temps les deux bras et les deux jambes du sol.<br>Regard vers le sol, cou dans l'alignement.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "96",
+"source": "HEP",
+"nom": "Abduction de hanche, debout",
+"image": "/exercises/images/HEP/1407678354-hip-abduction-standing.jpg",
+"consignes": [
+"Tronc droit et immobile.",
+"Genou tendu, pointe du pied vers vous.",
+"Écartez la jambe sur le côté en menant avec le talon.",
+"Revenez lentement."
+],
+"position": "Debout, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/qSEFfZQRQkw",
+"type": "timer",
+"conseil": "Tronc droit et immobile.<br>Genou tendu, pointe du pied vers vous.<br>Écartez la jambe sur le côté en menant avec le talon.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "509",
+"source": "HEP",
+"nom": "Marche funambule (tandem)",
+"image": "/exercises/images/HEP/tandem-walk.jpg",
+"consignes": [
+"Marchez en posant chaque pied juste devant l'autre, talon contre orteils.",
+"Regardez droit devant vous, pas vos pieds."
+],
+"position": "Debout, près d'un mur",
+"youtube": "http://www.youtube.com/embed/IOOsT-VCFE0",
+"type": "timer",
+"conseil": "Marchez en posant chaque pied juste devant l'autre, talon contre orteils.<br>Regardez droit devant vous, pas vos pieds.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+}
+]
+},
+{
+"id": "base_osteoporose_3",
+"nom": "Ostéoporose",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "404",
+"source": "HEP",
+"nom": "Montée de marche (step up)",
+"image": "/exercises/images/HEP/1435246086-step-ups.jpg",
+"consignes": [
+"Posez le pied de la jambe à travailler sur la marche.",
+"Montez en poussant sur ce pied.",
+"Redescendez lentement en contrôlant."
+],
+"position": "Debout devant une marche, en vous tenant si besoin",
+"youtube": "http://www.youtube.com/embed/NJgrsRcYi2c",
+"type": "timer",
+"conseil": "Posez le pied de la jambe à travailler sur la marche.<br>Montez en poussant sur ce pied.<br>Redescendez lentement en contrôlant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "461",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe avec rotation et poids",
+"image": "/exercises/images/HEP/1501426633-single-leg-stance-with-twist-and-a-weight.jpg",
+"conseil": "Tournez le haut du corps d'un côté puis de l'autre.<br>Gardez le bassin face à l'avant.",
+"consignes": [
+"Tournez le haut du corps d'un côté puis de l'autre.",
+"Gardez le bassin face à l'avant."
+],
+"position": "Debout sur une jambe, un poids tenu à deux mains devant vous",
+"precautions": [
+"Respectez une douleur inférieure à 3/10."
+],
+"materiel": [
+"Corps entier"
+],
+"youtube": "http://www.youtube.com/embed/AliSb_ibTpY",
+"vimeo": "https://vimeo.com/227322116",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "540",
+"source": "HEP",
+"nom": "Rowing avec élastique, debout",
+"image": "/exercises/images/HEP/standing-rows.jpg",
+"consignes": [
+"Un pied légèrement devant l'autre, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, épaules basses.",
+"Revenez lentement."
+],
+"position": "Debout, élastique fixé devant vous à hauteur de taille",
+"youtube": "http://www.youtube.com/embed/NRosM0Qoq2o",
+"type": "timer",
+"conseil": "Un pied légèrement devant l'autre, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, épaules basses.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+},
+{
+"id": "698",
+"source": "HEP",
+"nom": "Équilibre sur une jambe avec atteintes",
+"image": "/exercises/images/HEP/single-leg-balance-reach.jpg",
+"consignes": [
+"Tenez en équilibre sur une jambe.",
+"Penchez-vous pour aller toucher la chaise avec la main, puis revenez.",
+"Changez de direction ou éloignez la chaise pour augmenter la difficulté."
+],
+"position": "Debout sur une jambe, une chaise devant vous",
+"youtube": "http://www.youtube.com/embed/9GxsaPybN_I",
+"type": "timer",
+"conseil": "Tenez en équilibre sur une jambe.<br>Penchez-vous pour aller toucher la chaise avec la main, puis revenez.<br>Changez de direction ou éloignez la chaise pour augmenter la difficulté.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Pas d'enroulement du dos en charge (pas de crunch, pas de flexion avant avec poids)."
+}
+]
+},
+{
+"id": "base_lymphoedeme_bras_1",
+"nom": "Lymphœdème du bras (après cancer du sein)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "489",
+"source": "HEP",
+"nom": "Respiration profonde avec mouvements des bras",
+"image": "/exercises/images/HEP/deep-breathing-arm-movements.jpg",
+"consignes": [
+"Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.",
+"Soufflez lentement par la bouche en redescendant les bras."
+],
+"position": "Assis ou debout, bras le long du corps",
+"youtube": "http://www.youtube.com/embed/O-WKIJJN_7Q",
+"type": "timer",
+"conseil": "Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.<br>Soufflez lentement par la bouche en redescendant les bras.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "620",
+"source": "HEP",
+"nom": "Pianotage doigts et pouce",
+"image": "/exercises/images/HEP/finger-thumb-taps.jpg",
+"consignes": [
+"Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+"Rouvrez bien la main entre chaque touche."
+],
+"position": "Main ouverte, doigts écartés",
+"youtube": "http://www.youtube.com/embed/JNh5l5yuLKQ",
+"type": "timer",
+"conseil": "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.<br>Rouvrez bien la main entre chaque touche.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "56",
+"source": "HEP",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"type": "timer",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "322",
+"source": "HEP",
+"nom": "Flexion d'épaule passive avec bâton, allongé",
+"image": "/exercises/images/HEP/1409592671-shoulder-supine-flexion-prom-with-stick.jpg",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton au-dessus de la tête.",
+"Allez jusqu'à un étirement confortable, puis revenez doucement."
+],
+"position": "Allongé sur le dos, un bâton tenu à deux mains",
+"youtube": "http://www.youtube.com/embed/FMOuwmQzj6w",
+"type": "timer",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton au-dessus de la tête.<br>Allez jusqu'à un étirement confortable, puis revenez doucement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "413",
+"source": "HEP",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"type": "timer",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+}
+]
+},
+{
+"id": "base_lymphoedeme_bras_2",
+"nom": "Lymphœdème du bras (après cancer du sein)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "489",
+"source": "HEP",
+"nom": "Respiration profonde avec mouvements des bras",
+"image": "/exercises/images/HEP/deep-breathing-arm-movements.jpg",
+"consignes": [
+"Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.",
+"Soufflez lentement par la bouche en redescendant les bras."
+],
+"position": "Assis ou debout, bras le long du corps",
+"youtube": "http://www.youtube.com/embed/O-WKIJJN_7Q",
+"type": "timer",
+"conseil": "Inspirez profondément par le nez en montant les bras sur les côtés, au-dessus de la tête.<br>Soufflez lentement par la bouche en redescendant les bras.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "105",
+"source": "HEP",
+"nom": "Flexion d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409592168-shoulder-flexion-prom-with-stick.jpg",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton vers l'avant et le haut.",
+"Allez jusqu'à un étirement confortable, puis redescendez doucement."
+],
+"position": "Debout, un bâton tenu à deux mains devant vous",
+"youtube": "http://www.youtube.com/embed/b3yK9oLbnpU",
+"type": "timer",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton vers l'avant et le haut.<br>Allez jusqu'à un étirement confortable, puis redescendez doucement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "477",
+"source": "HEP",
+"nom": "Glissement des bras au mur (wall slide)",
+"image": "/exercises/images/HEP/1504796621-wall-slide.jpg",
+"consignes": [
+"Une serviette sous la main aide à glisser.",
+"Faites glisser la main vers le haut, aussi loin que possible sans douleur.",
+"Redescendez lentement."
+],
+"position": "Debout face à un mur, main posée dessus, pouce vers le haut",
+"youtube": "http://www.youtube.com/embed/aotIoBYYLfw",
+"type": "timer",
+"conseil": "Une serviette sous la main aide à glisser.<br>Faites glisser la main vers le haut, aussi loin que possible sans douleur.<br>Redescendez lentement.",
+"reps": 2,
+"ex": 45,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "557",
+"source": "HEP",
+"nom": "Étirement des pectoraux dans un encadrement de porte",
+"image": "/exercises/images/HEP/pec-stretch-doorway.jpg",
+"consignes": [
+"Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.",
+"Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.",
+"Maintenez."
+],
+"position": "Debout dans un encadrement de porte",
+"youtube": "http://www.youtube.com/embed/sJK-_Fmr5Fg",
+"type": "timer",
+"conseil": "Posez l'avant-bras sur le montant, coude plié à 90° à hauteur d'épaule.<br>Avancez doucement d'un pas jusqu'à sentir l'étirement dans la poitrine.<br>Maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "226",
+"source": "HEP",
+"type": "timer",
+"nom": "Rowing avec élastique, assis",
+"image": "/exercises/images/HEP/1408193039-seated-rows.jpg",
+"conseil": "Une extrémité dans chaque main, dos droit.<br>Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.<br>Revenez lentement.",
+"consignes": [
+"Une extrémité dans chaque main, dos droit.",
+"Tirez les coudes vers l'arrière, le long du corps, en serrant les omoplates.",
+"Revenez lentement."
+],
+"position": "Assis au sol ou sur une chaise, élastique autour des pieds",
+"precautions": [
+"Respecter une douleur inférieure à 3/10. Ne pas faire d'impulsions pendant les glissements."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/Uv0dmnlDUaw",
+"vimeo": "https://vimeo.com/101044571",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+},
+{
+"id": "413",
+"source": "HEP",
+"nom": "Serrage des omoplates",
+"image": "/exercises/images/HEP/1472133268-shoulder-squeezes2.jpg",
+"consignes": [
+"Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.",
+"Maintenez quelques secondes, puis relâchez."
+],
+"position": "Assis ou debout, bras détendus",
+"youtube": "http://www.youtube.com/embed/XUA7kQ9RkLA",
+"type": "timer",
+"conseil": "Serrez les omoplates vers l'arrière et vers le bas, comme pour pincer un crayon entre elles.<br>Maintenez quelques secondes, puis relâchez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Manchon de compression si prescrit. Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup."
+}
+]
+},
+{
+"id": "cab_epine_calcaneenne_1",
+"nom": "Épine calcanéenne",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Cheville et pied",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHEVILLE_09",
+"source": "CABINET",
+"nom": "Étirement du mollet contre un mur",
+"image": "/exercises/images/cheville/etirement-mollet.webp",
+"consignes": [
+"Face au mur, mains à plat sur le mur",
+"Une jambe tendue en arrière, talon au sol, pied droit",
+"Plier le genou avant et avancer le bassin",
+"Sentir l'étirement dans le mollet arrière, tenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face au mur, mains à plat sur le mur<br>Une jambe tendue en arrière, talon au sol, pied droit<br>Plier le genou avant et avancer le bassin<br>Sentir l'étirement dans le mollet arrière, tenir",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEVILLE_11",
+"source": "CABINET",
+"nom": "Ramassage de serviette avec les orteils",
+"image": "/exercises/images/cheville/serviette-orteils.webp",
+"consignes": [
+"Assis sur une chaise, pied à plat sur une serviette posée au sol",
+"Le talon reste au sol",
+"Froisser la serviette en la ramenant vers soi avec les orteils",
+"Étaler à nouveau la serviette et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis sur une chaise, pied à plat sur une serviette posée au sol<br>Le talon reste au sol<br>Froisser la serviette en la ramenant vers soi avec les orteils<br>Étaler à nouveau la serviette et recommencer",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEVILLE_08",
+"source": "CABINET",
+"nom": "Pied court",
+"image": "/exercises/images/cheville/pied-court.webp",
+"consignes": [
+"Assis, pied à plat au sol",
+"Raccourcir le pied en rapprochant la base du gros orteil du talon",
+"Les orteils restent détendus et à plat",
+"Tenir 5 secondes puis relâcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, pied à plat au sol<br>Raccourcir le pied en rapprochant la base du gros orteil du talon<br>Les orteils restent détendus et à plat<br>Tenir 5 secondes puis relâcher",
+"reps": 10,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEV_002",
+"source": "CABINET",
+"nom": "Cercles de cheville assis",
+"image": "/exercises/images/cheville/cercles-cheville.webp",
+"consignes": [
+"Faire des cercles amples",
+"Garder le genou stable",
+"Changer de sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Faire des cercles amples<br>Garder le genou stable<br>Changer de sens",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "NEURO_14",
+"source": "CABINET",
+"nom": "Étirement du mollet à la sangle",
+"image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+"consignes": [
+"Assise au sol ou sur un lit, jambe tendue devant soi",
+"Passer une sangle sous l'avant-pied",
+"Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+"Tenir 30 secondes en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au sol ou sur un lit, jambe tendue devant soi<br>Passer une sangle sous l'avant-pied<br>Tirer doucement la sangle vers soi avec les deux mains, dos droit<br>Tenir 30 secondes en respirant",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+}
+]
+},
+{
+"id": "cab_epine_calcaneenne_2",
+"nom": "Épine calcanéenne",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Cheville et pied",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CHEVILLE_05",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds",
+"image": "/exercises/images/cheville/pointepieds.png",
+"consignes": [
+"Monter sur la pointe des pieds",
+"Marquer un court maintien en haut",
+"Redescendre lentement",
+"S'aider du mur pour l'équilibre si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Monter sur la pointe des pieds<br>Marquer un court maintien en haut<br>Redescendre lentement<br>S'aider du mur pour l'équilibre si besoin",
+"reps": 15,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEVILLE_08",
+"source": "CABINET",
+"nom": "Pied court",
+"image": "/exercises/images/cheville/pied-court.webp",
+"consignes": [
+"Assis, pied à plat au sol",
+"Raccourcir le pied en rapprochant la base du gros orteil du talon",
+"Les orteils restent détendus et à plat",
+"Tenir 5 secondes puis relâcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, pied à plat au sol<br>Raccourcir le pied en rapprochant la base du gros orteil du talon<br>Les orteils restent détendus et à plat<br>Tenir 5 secondes puis relâcher",
+"reps": 10,
+"ex": 5,
+"repos": 5,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEV_005",
+"source": "CABINET",
+"nom": "Équilibre unipodal simple",
+"image": "/exercises/images/cheville/equilibre-unipodal.webp",
+"consignes": [
+"Fixer un point devant soi",
+"Garder le bassin stable",
+"Éviter les mouvements brusques"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fixer un point devant soi<br>Garder le bassin stable<br>Éviter les mouvements brusques",
+"reps": 10,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "CHEVILLE_09",
+"source": "CABINET",
+"nom": "Étirement du mollet contre un mur",
+"image": "/exercises/images/cheville/etirement-mollet.webp",
+"consignes": [
+"Face au mur, mains à plat sur le mur",
+"Une jambe tendue en arrière, talon au sol, pied droit",
+"Plier le genou avant et avancer le bassin",
+"Sentir l'étirement dans le mollet arrière, tenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Face au mur, mains à plat sur le mur<br>Une jambe tendue en arrière, talon au sol, pied droit<br>Plier le genou avant et avancer le bassin<br>Sentir l'étirement dans le mollet arrière, tenir",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti."
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Étirer le fascia aussi le matin avant les premiers pas. Chaussage amorti.",
+"materiel": "Chaise stable"
+}
+]
+},
+{
+"id": "cab_cruralgie_1",
+"nom": "Cruralgie",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LOMB_04",
+"source": "CABINET",
+"nom": "Genoux vers la poitrine",
+"image": "/exercises/images/dos/genoux-poitrine.webp",
+"consignes": [
+"Allongé sur le dos",
+"Ramener les deux genoux vers la poitrine en les tenant avec les mains",
+"Laisser le bas du dos s'arrondir doucement",
+"Tenir en respirant calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Ramener les deux genoux vers la poitrine en les tenant avec les mains<br>Laisser le bas du dos s'arrondir doucement<br>Tenir en respirant calmement",
+"reps": 3,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "LOMB_09",
+"source": "CABINET",
+"nom": "Bascule du bassin allongé",
+"image": "/exercises/images/dos/bascule-bassin.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat écartés largeur de bassin",
+"Plaquer doucement le bas du dos au sol en basculant le pubis vers le nombril",
+"Puis creuser légèrement le bas du dos dans l'autre sens",
+"Alterner lentement les deux positions"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat écartés largeur de bassin<br>Plaquer doucement le bas du dos au sol en basculant le pubis vers le nombril<br>Puis creuser légèrement le bas du dos dans l'autre sens<br>Alterner lentement les deux positions",
+"reps": 10,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "LOMB_05",
+"source": "CABINET",
+"nom": "Rotation du dos allongé",
+"image": "/exercises/images/dos/rotation-lombaire.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés et serrés, pieds au sol, bras écartés",
+"Laisser descendre les genoux d'un côté",
+"Les épaules restent au sol",
+"Revenir au centre puis aller de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés et serrés, pieds au sol, bras écartés<br>Laisser descendre les genoux d'un côté<br>Les épaules restent au sol<br>Revenir au centre puis aller de l'autre côté",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "GAINAGE_01",
+"source": "CABINET",
+"nom": "Aspiration abdominale (transverse)",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Allonger sur le dos, genoux fléchis",
+"Inspirer calmement par le nez",
+"Expirer lentement par la bouche",
+"Rentrer doucement le nombril vers la colonne",
+"Maintenir la contraction sans bloquer la respiration"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allonger sur le dos, genoux fléchis<br>Inspirer calmement par le nez<br>Expirer lentement par la bouche<br>Rentrer doucement le nombril vers la colonne<br>Maintenir la contraction sans bloquer la respiration",
+"reps": 10,
+"ex": 4,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "GAINAGE_06",
+"source": "CABINET",
+"nom": "Respiration diaphragmatique",
+"image": "/exercises/images/post-partum/respiration-transverse.png",
+"consignes": [
+"Inspirer par le nez",
+"Gonfler doucement le ventre",
+"Expirer lentement par la bouche",
+"Relâcher les épaules"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirer par le nez<br>Gonfler doucement le ventre<br>Expirer lentement par la bouche<br>Relâcher les épaules",
+"reps": 10,
+"ex": 2,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+}
+]
+},
+{
+"id": "cab_cruralgie_2",
+"nom": "Cruralgie",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Dos",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LOMB_02",
+"source": "CABINET",
+"nom": "Dos rond, dos creux",
+"image": "/exercises/images/dos/chat-vache.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"En expirant, arrondir le dos en rentrant le menton",
+"En inspirant, creuser doucement le dos en regardant devant",
+"Enchaîner lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>En expirant, arrondir le dos en rentrant le menton<br>En inspirant, creuser doucement le dos en regardant devant<br>Enchaîner lentement",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "GAINAGE_04",
+"source": "CABINET",
+"nom": "Pont fessier",
+"image": "/exercises/images/post-partum/pont-fessier.png",
+"consignes": [
+"Allongé sur le dos",
+"Pieds à plat au sol",
+"Soulever progressivement le bassin",
+"Aligner épaules bassin genoux",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos<br>Pieds à plat au sol<br>Soulever progressivement le bassin<br>Aligner épaules bassin genoux<br>Redescendre lentement",
+"reps": 24,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "GAINAGE_09",
+"source": "CABINET",
+"nom": "Bird Dog simplifié",
+"image": "/exercises/images/post-partum/bird-dog-bras.png",
+"consignes": [
+"Position à quatre pattes",
+"Lever un bras puis revenir",
+"Lever ensuite une jambe",
+"Maintenir le tronc stable"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position à quatre pattes<br>Lever un bras puis revenir<br>Lever ensuite une jambe<br>Maintenir le tronc stable",
+"reps": 20,
+"ex": 1,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "HANCHE_12",
+"source": "CABINET",
+"nom": "Assis-debout d'une chaise",
+"image": "/exercises/images/hanche/assis-debout-chaise.webp",
+"consignes": [
+"Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux",
+"Croiser les bras sur la poitrine",
+"Se pencher en avant puis se lever sans s'aider des mains",
+"Se rasseoir lentement en contrôlant la descente"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise, pieds à plat écartés largeur de hanches, légèrement en arrière des genoux<br>Croiser les bras sur la poitrine<br>Se pencher en avant puis se lever sans s'aider des mains<br>Se rasseoir lentement en contrôlant la descente",
+"reps": 10,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "GAINAGE_10",
+"source": "CABINET",
+"nom": "Planche genoux",
+"image": "/exercises/images/gainage/planche-genoux.webp",
+"consignes": [
+"Appui sur les avant-bras",
+"Genoux au sol",
+"Aligner épaules bassin genoux",
+"Rentrer légèrement le nombril"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur les avant-bras<br>Genoux au sol<br>Aligner épaules bassin genoux<br>Rentrer légèrement le nombril",
+"reps": 3,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Rester dans des positions qui soulagent la cuisse. Mise en tension du nerf très douce, sans réveiller la douleur."
+},
+{
+"id": "HANCHE_03",
+"source": "CABINET",
+"nom": "Étirement du psoas en fente",
+"image": "/exercises/images/hanche/etirement-psoas.webp",
+"consignes": [
+"Un genou au sol sur un coussin, l'autre pied devant, genou à 90°",
+"Rentrer le bassin (basculer le pubis vers le haut)",
+"Avancer légèrement le bassin jusqu'à sentir l'étirement à l'avant de la hanche arrière",
+"Buste droit, respirer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Un genou au sol sur un coussin, l'autre pied devant, genou à 90°<br>Rentrer le bassin (basculer le pubis vers le haut)<br>Avancer légèrement le bassin jusqu'à sentir l'étirement à l'avant de la hanche arrière<br>Buste droit, respirer",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Étirement doux du devant de la hanche : arrêter si la douleur descend dans la cuisse."
+}
+]
+},
+{
+"id": "base_pubalgie_1",
+"nom": "Pubalgie",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "677",
+"source": "HEP",
+"nom": "Adduction isométrique de hanche, assis (ballon entre les genoux)",
+"image": "/exercises/images/HEP/seated-iso-hip-add.jpg",
+"consignes": [
+"Serrez le ballon entre les genoux.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Assis sur une chaise, ballon ou coussin entre les genoux",
+"youtube": "http://www.youtube.com/embed/8VnhRr0EgTs",
+"type": "timer",
+"conseil": "Serrez le ballon entre les genoux.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "88",
+"source": "HEP",
+"nom": "Adduction isométrique de hanche, allongé genoux fléchis",
+"image": "/exercises/images/HEP/1407678404-hip-adduction-hook-lying-isometric2.jpg",
+"consignes": [
+"Pieds à plat.",
+"Serrez le coussin ou le ballon entre les genoux.",
+"Maintenez 3 à 5 secondes, puis relâchez."
+],
+"position": "Allongé sur le dos, genoux pliés, coussin entre les genoux",
+"youtube": "http://www.youtube.com/embed/g9uIxiUyyvY",
+"type": "timer",
+"conseil": "Pieds à plat.<br>Serrez le coussin ou le ballon entre les genoux.<br>Maintenez 3 à 5 secondes, puis relâchez.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "70",
+"source": "HEP",
+"nom": "Pont fessier",
+"image": "/exercises/images/HEP/1407677268-bridging2.jpg",
+"consignes": [
+"Bras le long du corps.",
+"Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.",
+"Redescendez doucement."
+],
+"position": "Allongé sur le dos, genoux pliés, pieds à plat",
+"youtube": "http://www.youtube.com/embed/8CMrEkhrtlw",
+"type": "timer",
+"conseil": "Bras le long du corps.<br>Serrez les fessiers et soulevez le bassin jusqu'à former une ligne droite des épaules aux genoux.<br>Redescendez doucement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "267",
+"source": "HEP",
+"nom": "Clamshell (ouverture du genou), allongé sur le côté",
+"image": "/exercises/images/HEP/1409068220-clam-shell-side-lying.jpg",
+"consignes": [
+"Hanches l'une au-dessus de l'autre, pieds joints.",
+"Écartez le genou du dessus vers le plafond, sans faire basculer le bassin en arrière.",
+"Redescendez lentement."
+],
+"position": "Allongé sur le côté, genoux pliés",
+"youtube": "http://www.youtube.com/embed/Gj_gwbQCMr8",
+"type": "timer",
+"conseil": "Hanches l'une au-dessus de l'autre, pieds joints.<br>Écartez le genou du dessus vers le plafond, sans faire basculer le bassin en arrière.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "432",
+"source": "HEP",
+"nom": "Activation du transverse de l'abdomen",
+"image": "/exercises/images/HEP/1477662600-ta-recruitment.jpg",
+"consignes": [
+"Posez deux doigts à l'intérieur des os du bassin, à l'avant.",
+"Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.",
+"Maintenez en respirant normalement, puis relâchez."
+],
+"position": "Allongé sur le dos, genoux pliés",
+"youtube": "http://www.youtube.com/embed/QQoVcC-0Gds",
+"type": "timer",
+"conseil": "Posez deux doigts à l'intérieur des os du bassin, à l'avant.<br>Rentrez doucement le bas du ventre, comme pour remonter le nombril vers la colonne : vous sentez le muscle se tendre sous les doigts.<br>Maintenez en respirant normalement, puis relâchez.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "428",
+"source": "HEP",
+"nom": "Planche adaptée (sur les genoux)",
+"image": "/exercises/images/HEP/1477662192-modified-plank.jpg",
+"consignes": [
+"Posez les avant-bras au sol, coudes sous les épaules.",
+"Reculez les genoux pour aligner dos et cuisses.",
+"Serrez les fessiers et le ventre, dos plat.",
+"Maintenez en respirant."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/PgbS9r1yY7g",
+"type": "timer",
+"conseil": "Posez les avant-bras au sol, coudes sous les épaules.<br>Reculez les genoux pour aligner dos et cuisses.<br>Serrez les fessiers et le ventre, dos plat.<br>Maintenez en respirant.",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "base_pubalgie_2",
+"nom": "Pubalgie",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "297",
+"source": "HEP",
+"nom": "Adduction de hanche avec élastique, debout",
+"image": "/exercises/images/HEP/1409075164-standing-hip-adduction-with-band2.jpg",
+"consignes": [
+"Debout, fixez l'élastique à un point bas sur le côté et passez-le autour de la cheville la plus proche du point d'attache.",
+"Gardez le dos droit et la jambe tendue.",
+"Ramenez la jambe vers l'intérieur, devant l'autre jambe, contre la résistance de l'élastique.",
+"Revenez lentement."
+],
+"position": "Debout, élastique à la cheville",
+"youtube": "http://www.youtube.com/embed/harRRMkkCJU",
+"type": "timer",
+"conseil": "Debout, fixez l'élastique à un point bas sur le côté et passez-le autour de la cheville la plus proche du point d'attache.<br>Gardez le dos droit et la jambe tendue.<br>Ramenez la jambe vers l'intérieur, devant l'autre jambe, contre la résistance de l'élastique.<br>Revenez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "75",
+"source": "HEP",
+"nom": "Adduction de hanche, allongé sur le côté",
+"image": "/exercises/images/HEP/1407678439-hip-adduction-side-lying.jpg",
+"consignes": [
+"Pliez la jambe du dessus et posez le pied devant ou derrière l'autre jambe.",
+"Tirez la pointe du pied vers vous, genou tendu.",
+"Montez la jambe du dessous de 10 à 15 cm, puis redescendez lentement."
+],
+"position": "Allongé sur le côté, jambe à travailler en dessous",
+"youtube": "http://www.youtube.com/embed/fJOyrKGEy7Q",
+"type": "timer",
+"conseil": "Pliez la jambe du dessus et posez le pied devant ou derrière l'autre jambe.<br>Tirez la pointe du pied vers vous, genou tendu.<br>Montez la jambe du dessous de 10 à 15 cm, puis redescendez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "214",
+"source": "HEP",
+"nom": "Bras et jambe opposés à quatre pattes (bird dog)",
+"image": "/exercises/images/HEP/1421406091-quadruped-opposite-arm-leg-extension.jpg",
+"consignes": [
+"Dos droit, bassin stable.",
+"Tendez un bras vers l'avant et la jambe opposée vers l'arrière.",
+"Revenez lentement, puis alternez."
+],
+"position": "À quatre pattes",
+"youtube": "http://www.youtube.com/embed/B1LH2_6A-n4",
+"type": "timer",
+"conseil": "Dos droit, bassin stable.<br>Tendez un bras vers l'avant et la jambe opposée vers l'arrière.<br>Revenez lentement, puis alternez.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "429",
+"source": "HEP",
+"nom": "Planche latérale adaptée",
+"image": "/exercises/images/HEP/1477662296-modified-side-plank.jpg",
+"consignes": [
+"Coude sous l'épaule.",
+"Montez le bassin pour aligner épaules, hanches et genoux.",
+"Serrez les fessiers et maintenez 15 à 30 secondes."
+],
+"position": "Allongé sur le côté, appui sur l'avant-bras, genoux pliés",
+"youtube": "http://www.youtube.com/embed/yjcZlw5VDVg",
+"type": "timer",
+"conseil": "Coude sous l'épaule.<br>Montez le bassin pour aligner épaules, hanches et genoux.<br>Serrez les fessiers et maintenez 15 à 30 secondes.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "296",
+"source": "HEP",
+"type": "timer",
+"nom": "Abduction de hanche avec élastique, debout",
+"image": "/exercises/images/HEP/1409075120-hip-abduction-with-band.jpg",
+"conseil": "Tenez-vous si besoin.<br>Dos droit, genou tendu.<br>Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.<br>Revenez lentement.",
+"consignes": [
+"Tenez-vous si besoin.",
+"Dos droit, genou tendu.",
+"Écartez une jambe sur le côté contre l'élastique, maintenez 1 à 2 secondes.",
+"Revenez lentement."
+],
+"position": "Debout, élastique autour des deux chevilles",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Élastique"
+],
+"youtube": "http://www.youtube.com/embed/n5eZKkC3mJk",
+"vimeo": "https://vimeo.com/104455689",
+"ex": 40,
+"repos": 15,
+"reps": 3,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "243",
+"source": "HEP",
+"nom": "Équilibre sur une jambe",
+"image": "/exercises/images/HEP/1408867034-single-leg-balance.jpg",
+"consignes": [
+"Levez un pied et tenez en équilibre sur l'autre jambe.",
+"Ne vous tenez au support qu'en cas de besoin."
+],
+"position": "Debout, à côté d'un mur ou d'une chaise",
+"youtube": "http://www.youtube.com/embed/fcfYm3EiWu4",
+"type": "timer",
+"conseil": "Levez un pied et tenez en équilibre sur l'autre jambe.<br>Ne vous tenez au support qu'en cas de besoin.",
+"reps": 3,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "base_pubalgie_3",
+"nom": "Pubalgie",
+"niveau": 3,
+"categorie": "sport",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "708",
+"source": "HEP",
+"type": "timer",
+"nom": "Pallof press avec élastique",
+"image": "/exercises/images/post-partum/pallof-press.webp",
+"conseil": "Attachez l'élastique à hauteur de poitrine (poignée de porte fermée).<br>Placez-vous de profil, mains jointes contre la poitrine.<br>Poussez les mains droit devant vous sans laisser le tronc tourner.<br>Tenez 2 secondes, puis ramenez lentement les mains.",
+"consignes": [
+"Attachez l'élastique à hauteur de poitrine (poignée de porte fermée).",
+"Placez-vous de profil, mains jointes contre la poitrine.",
+"Poussez les mains droit devant vous sans laisser le tronc tourner.",
+"Tenez 2 secondes, puis ramenez lentement les mains."
+],
+"position": "Debout de profil par rapport au point d'attache, pieds écartés, genoux légèrement fléchis.",
+"precautions": [
+"Le tronc ne doit pas tourner. Faites les deux côtés."
+],
+"materiel": [
+"Élastique"
+],
+"ex": 40,
+"repos": 20,
+"reps": 2,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "241",
+"source": "HEP",
+"nom": "Planche latérale",
+"image": "/exercises/images/HEP/1426413501-side-planks_new.jpg",
+"consignes": [
+"Coude sous l'épaule, jambes tendues.",
+"Décollez le bassin pour aligner épaules, hanches et pieds.",
+"Maintenez."
+],
+"position": "Allongé sur le côté, en appui sur l'avant-bras",
+"youtube": "http://www.youtube.com/embed/ZEtqBumNKeo",
+"type": "timer",
+"conseil": "Coude sous l'épaule, jambes tendues.<br>Décollez le bassin pour aligner épaules, hanches et pieds.<br>Maintenez.",
+"reps": 5,
+"ex": 10,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "505",
+"source": "HEP",
+"nom": "Pas chassés avec élastique",
+"image": "/exercises/images/HEP/side-step-band.jpg",
+"consignes": [
+"Fléchissez légèrement les genoux (mini-squat).",
+"Faites des pas sur le côté en gardant l'élastique tendu.",
+"Hanches et pieds restent tournés vers l'avant."
+],
+"position": "Debout, élastique au-dessus des genoux",
+"youtube": "http://www.youtube.com/embed/C5G4QO0oNDg",
+"type": "timer",
+"conseil": "Fléchissez légèrement les genoux (mini-squat).<br>Faites des pas sur le côté en gardant l'élastique tendu.<br>Hanches et pieds restent tournés vers l'avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "463",
+"source": "HEP",
+"nom": "Étirement en fente latérale",
+"image": "/exercises/images/HEP/1501427027-side-lunge-stretch.jpg",
+"consignes": [
+"Mains sur les hanches si besoin.",
+"Pliez un genou en déplaçant le poids du corps de ce côté, l'autre jambe tendue.",
+"Maintenez quand vous sentez l'étirement à l'intérieur de la cuisse tendue."
+],
+"position": "Debout, pieds largement écartés",
+"youtube": "http://www.youtube.com/embed/avJk5F84TM4",
+"type": "timer",
+"conseil": "Mains sur les hanches si besoin.<br>Pliez un genou en déplaçant le poids du corps de ce côté, l'autre jambe tendue.<br>Maintenez quand vous sentez l'étirement à l'intérieur de la cuisse tendue.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+},
+{
+"id": "707",
+"source": "HEP",
+"type": "timer",
+"nom": "Course avec changements de direction",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
+"conseil": "Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.<br>Courez de l'un à l'autre en changeant de direction à chaque repère.<br>Ralentissez avant chaque virage, posez bien le pied et repartez.<br>Commencez lentement, puis accélérez si tout va bien.",
+"consignes": [
+"Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.",
+"Courez de l'un à l'autre en changeant de direction à chaque repère.",
+"Ralentissez avant chaque virage, posez bien le pied et repartez.",
+"Commencez lentement, puis accélérez si tout va bien."
+],
+"position": "Dehors ou dans un grand espace dégagé, sol non glissant.",
+"precautions": [
+"Uniquement après une course en ligne droite sans douleur. Chaussures de sport",
+"sol sec."
+],
+"materiel": [
+"Repères au sol"
+],
+"ex": 60,
+"repos": 60,
+"reps": 3,
+"conseil_kine": "Pas de douleur pendant les serrages. Pas de frappe ni de sprint avant le niveau 3."
+}
+]
+},
+{
+"id": "base_retour_au_sport_mi_1",
+"nom": "Retour au sport (membre inférieur)",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "91",
+"source": "HEP",
+"type": "timer",
+"nom": "Squats",
+"image": "/exercises/images/HEP/1408867442-squats.jpg",
+"conseil": "Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.<br>Genoux dans l'axe des pieds.<br>Remontez en poussant sur les talons.",
+"consignes": [
+"Descendez en reculant les fesses, comme pour vous asseoir, poitrine haute.",
+"Genoux dans l'axe des pieds.",
+"Remontez en poussant sur les talons."
+],
+"position": "Debout, pieds écartés largeur de hanches",
+"precautions": [
+"Eviter les mouvements brusques."
+],
+"materiel": [
+"Aucun"
+],
+"youtube": "http://www.youtube.com/embed/bSj_DLUABqg",
+"vimeo": "https://vimeo.com/104194147",
+"ex": 45,
+"repos": 20,
+"reps": 3,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "90",
+"source": "HEP",
+"nom": "Fentes",
+"image": "/exercises/images/HEP/1407678566-lunges.jpg",
+"consignes": [
+"Dos droit, genou avant au-dessus de la cheville.",
+"Descendez le genou arrière vers le sol.",
+"Remontez lentement en poussant sur le pied avant."
+],
+"position": "Debout, un pied devant l'autre (grand pas)",
+"youtube": "http://www.youtube.com/embed/we7wQmllvoQ",
+"type": "timer",
+"conseil": "Dos droit, genou avant au-dessus de la cheville.<br>Descendez le genou arrière vers le sol.<br>Remontez lentement en poussant sur le pied avant.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "93",
+"source": "HEP",
+"nom": "Squat sur une jambe",
+"image": "/exercises/images/HEP/1407678680-one-legged-squats.jpg",
+"consignes": [
+"L'autre pied décollé devant vous.",
+"Pliez le genou d'appui en reculant les fesses, comme pour vous asseoir.",
+"Genou dans l'axe du pied, sans rentrer vers l'intérieur.",
+"Remontez en poussant sur le pied."
+],
+"position": "Debout sur une jambe, à côté d'un support",
+"youtube": "http://www.youtube.com/embed/1KKdvc0e9JY",
+"type": "timer",
+"conseil": "L'autre pied décollé devant vous.<br>Pliez le genou d'appui en reculant les fesses, comme pour vous asseoir.<br>Genou dans l'axe du pied, sans rentrer vers l'intérieur.<br>Remontez en poussant sur le pied.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "403",
+"source": "HEP",
+"nom": "Descente de marche (step down)",
+"image": "/exercises/images/HEP/1435246052-step-downs2.jpg",
+"consignes": [
+"La jambe à travailler reste sur la marche.",
+"Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.",
+"Remontez en poussant sur la jambe d'appui."
+],
+"position": "Debout sur une marche, en vous tenant",
+"youtube": "http://www.youtube.com/embed/CBM8AxFj8tg",
+"type": "timer",
+"conseil": "La jambe à travailler reste sur la marche.<br>Descendez lentement l'autre pied vers le sol en pliant le genou d'appui, sans le poser.<br>Remontez en poussant sur la jambe d'appui.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "172",
+"source": "HEP",
+"nom": "Montées sur pointes sur une marche, sur une jambe",
+"image": "/exercises/images/HEP/1407677372-calf-raises-single-leg-on-step.jpg",
+"consignes": [
+"Placez l'avant du pied sur le bord de la marche, l'autre pied décollé.",
+"Gardez le corps droit.",
+"Montez sur la pointe du pied le plus haut possible.",
+"Redescendez lentement le talon sous le niveau de la marche."
+],
+"position": "Debout sur une marche, sur une jambe, en vous tenant",
+"youtube": "http://www.youtube.com/embed/649RHmjb4Hw",
+"type": "timer",
+"conseil": "Placez l'avant du pied sur le bord de la marche, l'autre pied décollé.<br>Gardez le corps droit.<br>Montez sur la pointe du pied le plus haut possible.<br>Redescendez lentement le talon sous le niveau de la marche.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+},
+{
+"id": "709",
+"source": "HEP",
+"type": "timer",
+"nom": "Équilibre sur une jambe en lançant une balle",
+"image": "/exercises/images/genou/equilibre-balle-2.png",
+"conseil": "Tenez-vous sur une jambe, genou légèrement fléchi.<br>Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.<br>Gardez le bassin horizontal et le genou au-dessus du pied.",
+"consignes": [
+"Tenez-vous sur une jambe, genou légèrement fléchi.",
+"Lancez une balle contre un mur et rattrapez-la sans poser l'autre pied.",
+"Gardez le bassin horizontal et le genou au-dessus du pied."
+],
+"position": "Debout sur une jambe, à 1 à 2 mètres d'un mur, une balle dans les mains.",
+"precautions": [
+"Gardez un appui proche (chaise",
+"mur) au début."
+],
+"materiel": [
+"Balle"
+],
+"ex": 40,
+"repos": 20,
+"reps": 2,
+"conseil_kine": "Force et contrôle : genou dans l'axe du pied à chaque répétition."
+}
+]
+},
+{
+"id": "base_retour_au_sport_mi_2",
+"nom": "Retour au sport (membre inférieur)",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "704",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts sur place légers",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
+"conseil": "Debout, pieds écartés de la largeur du bassin.<br>Faites de petits sauts sur place, sur l'avant des pieds.<br>Amortissez chaque réception en gardant les genoux souples.<br>Restez léger et silencieux sur vos appuis.",
+"consignes": [
+"Debout, pieds écartés de la largeur du bassin.",
+"Faites de petits sauts sur place, sur l'avant des pieds.",
+"Amortissez chaque réception en gardant les genoux souples.",
+"Restez léger et silencieux sur vos appuis."
+],
+"position": "Debout, pieds écartés de la largeur du bassin, genoux légèrement fléchis.",
+"precautions": [
+"Commencez par des séries courtes. Pas de douleur au-delà de 3/10 pendant ou le lendemain."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+},
+{
+"id": "705",
+"source": "HEP",
+"type": "timer",
+"nom": "Sauts latéraux sur une jambe",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
+"conseil": "Debout sur une jambe, genou légèrement fléchi.<br>Sautez de côté sur la même jambe, puis revenez.<br>Amortissez chaque réception et stabilisez-vous une seconde.<br>Gardez le genou bien aligné au-dessus du pied.",
+"consignes": [
+"Debout sur une jambe, genou légèrement fléchi.",
+"Sautez de côté sur la même jambe, puis revenez.",
+"Amortissez chaque réception et stabilisez-vous une seconde.",
+"Gardez le genou bien aligné au-dessus du pied."
+],
+"position": "Debout sur une jambe, l'autre pied décollé du sol, près d'un mur ou d'une chaise si besoin.",
+"precautions": [
+"Seulement si les sauts sur deux pieds sont faciles et sans douleur. Le genou ne doit pas rentrer vers l'intérieur."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 30,
+"repos": 30,
+"reps": 3,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+},
+{
+"id": "706",
+"source": "HEP",
+"type": "timer",
+"nom": "Réceptions sur une jambe",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
+"conseil": "Debout sur deux pieds.<br>Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.<br>Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.<br>Tenez la position stable 2 secondes, puis recommencez.",
+"consignes": [
+"Debout sur deux pieds.",
+"Faites un petit saut vers l'avant et réceptionnez-vous sur une seule jambe.",
+"Amortissez en pliant la hanche et le genou, le genou au-dessus du pied.",
+"Tenez la position stable 2 secondes, puis recommencez."
+],
+"position": "Debout, pieds joints, avec un repère au sol devant vous.",
+"precautions": [
+"Réception silencieuse et contrôlée. Arrêtez si le genou part vers l'intérieur ou si la douleur dépasse 3/10."
+],
+"materiel": [
+"Aucun"
+],
+"ex": 40,
+"repos": 30,
+"reps": 3,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+},
+{
+"id": "707",
+"source": "HEP",
+"type": "timer",
+"nom": "Course avec changements de direction",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
+"conseil": "Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.<br>Courez de l'un à l'autre en changeant de direction à chaque repère.<br>Ralentissez avant chaque virage, posez bien le pied et repartez.<br>Commencez lentement, puis accélérez si tout va bien.",
+"consignes": [
+"Placez 3 ou 4 repères au sol (bouteilles, chaussures) à quelques mètres.",
+"Courez de l'un à l'autre en changeant de direction à chaque repère.",
+"Ralentissez avant chaque virage, posez bien le pied et repartez.",
+"Commencez lentement, puis accélérez si tout va bien."
+],
+"position": "Dehors ou dans un grand espace dégagé, sol non glissant.",
+"precautions": [
+"Uniquement après une course en ligne droite sans douleur. Chaussures de sport",
+"sol sec."
+],
+"materiel": [
+"Repères au sol"
+],
+"ex": 60,
+"repos": 60,
+"reps": 3,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+},
+{
+"id": "697",
+"source": "HEP",
+"nom": "Marche en fente sur la pointe des pieds",
+"image": "/exercises/images/HEP/walking-sneaky-lunges.jpg",
+"consignes": [
+"Restez sur la pointe des pieds.",
+"Marchez en faisant des fentes, genou arrière vers le sol, talons toujours décollés."
+],
+"position": "Debout, sur la pointe des pieds",
+"youtube": "http://www.youtube.com/embed/bgsakfgrp5U",
+"type": "timer",
+"conseil": "Restez sur la pointe des pieds.<br>Marchez en faisant des fentes, genou arrière vers le sol, talons toujours décollés.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+},
+{
+"id": "692",
+"source": "HEP",
+"nom": "Fentes sur la pointe des pieds",
+"image": "/exercises/images/HEP/sneaky-lunges.jpg",
+"consignes": [
+"Talons décollés.",
+"Descendez le genou arrière vers le sol en gardant les talons en l'air.",
+"Remontez lentement."
+],
+"position": "Debout, un pied devant l'autre, sur la pointe des pieds",
+"youtube": "http://www.youtube.com/embed/ezjJinaPRgw",
+"type": "timer",
+"conseil": "Talons décollés.<br>Descendez le genou arrière vers le sol en gardant les talons en l'air.<br>Remontez lentement.",
+"reps": 2,
+"ex": 30,
+"repos": 10,
+"conseil_kine": "Sauts et changements de direction seulement après accord du kiné."
+}
+]
+},
+{
+"id": "cab_ligamentoplastie_du_lca_5",
+"nom": "Ligamentoplastie du LCA",
+"niveau": 5,
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "SPORT_03",
+"source": "CABINET",
+"nom": "Drop jump (descente puis rebond)",
+"image": "",
+"consignes": [
+"Debout sur une box de 20 à 30 cm",
+"Se laisser tomber devant la box (ne pas sauter)",
+"Réception sur les deux pieds, genoux dans l'axe, et rebondir aussitôt vers le haut",
+"Recevoir à nouveau en amortissant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une box de 20 à 30 cm<br>Se laisser tomber devant la box (ne pas sauter)<br>Réception sur les deux pieds, genoux dans l'axe, et rebondir aussitôt vers le haut<br>Recevoir à nouveau en amortissant",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien.",
+"materiel": "Box ou marche solide (20-30 cm)"
+},
+{
+"id": "SPORT_09",
+"source": "CABINET",
+"nom": "Sauts sur une jambe en avant (hop)",
+"image": "",
+"consignes": [
+"Debout sur une jambe derrière une ligne",
+"Sauter le plus loin possible en avant sur la même jambe",
+"Tenir la réception 2 s sans poser l'autre pied",
+"Comparer les distances des deux jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout sur une jambe derrière une ligne<br>Sauter le plus loin possible en avant sur la même jambe<br>Tenir la réception 2 s sans poser l'autre pied<br>Comparer les distances des deux jambes",
+"reps": 3,
+"ex": 20,
+"repos": 90,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien.",
+"materiel": "Ligne au sol, Mètre"
+},
+{
+"id": "SPORT_10",
+"source": "CABINET",
+"nom": "Sprint court avec arrêt",
+"image": "",
+"consignes": [
+"Sprinter sur 5 à 10 m",
+"Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
+"S'arrêter en équilibre, pieds écartés",
+"Revenir en marchant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Sprinter sur 5 à 10 m<br>Freiner en 2 ou 3 pas, bassin bas, genoux fléchis<br>S'arrêter en équilibre, pieds écartés<br>Revenir en marchant",
+"reps": 5,
+"ex": 10,
+"repos": 60,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien.",
+"materiel": "Espace de 15 m, Plots"
+},
+{
+"id": "SPORT_04",
+"source": "CABINET",
+"nom": "Fentes sautées",
+"image": "",
+"consignes": [
+"Position de fente, genou arrière près du sol",
+"Sauter et inverser les jambes en l'air",
+"Retomber en fente, genou avant au-dessus du pied",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de fente, genou arrière près du sol<br>Sauter et inverser les jambes en l'air<br>Retomber en fente, genou avant au-dessus du pied<br>Garder le buste droit",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien."
+},
+{
+"id": "SPORT_07",
+"source": "CABINET",
+"nom": "Nordic hamstring",
+"image": "",
+"consignes": [
+"À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
+"Corps aligné des genoux aux épaules",
+"Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses",
+"Se rattraper avec les mains, puis remonter en poussant sur les mains"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)<br>Corps aligné des genoux aux épaules<br>Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses<br>Se rattraper avec les mains, puis remonter en poussant sur les mains",
+"reps": 3,
+"ex": 30,
+"repos": 90,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien.",
+"materiel": "Tapis, Partenaire ou point d'ancrage pour les chevilles"
+},
+{
+"id": "SPORT_06",
+"source": "CABINET",
+"nom": "Carioca (pas croisés latéraux)",
+"image": "",
+"consignes": [
+"Se déplacer sur le côté",
+"Croiser un pied devant puis derrière l'autre en alternance",
+"Laisser les hanches tourner, les épaules restent face à l'avant",
+"Revenir dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Se déplacer sur le côté<br>Croiser un pied devant puis derrière l'autre en alternance<br>Laisser les hanches tourner, les épaules restent face à l'avant<br>Revenir dans l'autre sens",
+"reps": 4,
+"ex": 20,
+"repos": 40,
+"conseil_kine": "Retour au terrain : seulement après les tests de reprise validés avec le kiné et le chirurgien."
 }
 ]
 }

@@ -692,5 +692,40 @@ if(fromProgram){
 renderModes(); renderDurations(); renderSound(); renderPause();
 })();
 </script>
+<!-- Mode séance : tablette prêtée au patient, on ne quitte pas la respiration guidée sans le code du kiné -->
+<style>
+  dialog.sheet{ border:0; border-radius:20px; padding:0; width:min(420px,92vw); font:inherit; color:#1d2b36; background:#fff; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  dialog.sheet::backdrop{ background:rgba(10,20,30,.55); }
+  dialog.sheet .sheet-head{ display:flex; align-items:center; justify-content:space-between; padding:18px 20px 0; }
+  dialog.sheet .sheet-head h2{ margin:0; font-size:1.25rem; }
+  dialog.sheet .icon-btn{ border:0; background:none; width:40px; height:40px; cursor:pointer; }
+  dialog.sheet .icon-btn svg{ width:22px; height:22px; }
+  dialog.sheet .sheet-body{ padding:14px 20px; }
+  dialog.sheet .sheet-foot{ display:flex; gap:10px; justify-content:flex-end; padding:0 20px 20px; }
+  dialog.sheet .input{ width:100%; box-sizing:border-box; padding:12px; border:1.5px solid #c9d3da; border-radius:12px; font:inherit; }
+  dialog.sheet .btn{ min-height:48px; padding:0 18px; border-radius:12px; border:1.5px solid #c9d3da; background:#fff; font:inherit; font-weight:600; cursor:pointer; }
+  dialog.sheet .btn.primary{ background:#1f6f8b; border-color:#1f6f8b; color:#fff; }
+  dialog.sheet .muted{ color:#5b6b77; }
+</style>
+<script type="module">
+import * as MS from "/assets/mode-seance.js";
+const q = new URLSearchParams(location.search);
+const fromProgram = !!q.get("fromProgram");
+/* Activé seulement pour une séance lancée par le kiné (ou si la séance verrouillée est déjà en cours) */
+if(MS.actif() || fromProgram){
+  const on = await MS.demarrer({}).catch(() => false);
+  if(on){
+    /* Retour vers la séance (minuteur) : permis, le minuteur garde le verrou. Sortie de la séance : code du kiné. */
+    const sortir = async (dest) => {
+      if(/\/timer\.html/.test(dest)){ location.href = dest; return; }
+      if(await MS.quitter("Saisissez le code du kiné pour quitter la respiration guidée.")) location.href = dest;
+    };
+    const dest = () => fromProgram ? "/timer.html?resume=1" : "/index.html";
+    const back = document.getElementById("back"), end = document.getElementById("endMain");
+    if(back) back.onclick = e => { e.preventDefault(); sortir(dest()); };
+    if(end) end.onclick = e => { e.preventDefault(); sortir(dest()); };
+  }
+}
+</script>
 </body>
 </html>

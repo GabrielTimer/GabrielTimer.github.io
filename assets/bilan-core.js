@@ -33,7 +33,7 @@ export async function loadClinic(){
   await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
   await loadScript("/bilan-kine/entretien.js").catch(() => {});
   await loadScript("/bilan-kine/traitements.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, MOTIF_REG: typeof MOTIF_REG !== 'undefined' ? MOTIF_REG : { "Vertiges":"vertiges" }, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
@@ -129,13 +129,21 @@ export const regionSources = r => [...new Set(r.T.map(t => t[4]).concat(r.src ||
 
 /* ---------- Entretien guidé : régions concernées et orientation ---------- */
 
-/** Régions du bilan : zones douloureuses reliées à une région + « Vertiges » coché dans le motif. */
+/** Régions du bilan : zones douloureuses reliées à une région + régions ouvertes par le motif
+    (Vertiges, Neurologie, Mâchoire, Dorsalgie : voir MOTIF_REG dans data.js). */
 export function bilanRegions(S){
   const out = [];
   Object.keys(S.pain || {}).forEach(n => { const r = regionOf(n); if(r && !out.includes(r)) out.push(r); });
-  if((S.c?.patho || []).includes("Vertiges") && K.REG.vertiges && !out.includes("vertiges")) out.push("vertiges");
+  (S.c?.patho || []).forEach(m => { const r = (K.MOTIF_REG || {})[m]; if(r && K.REG[r] && !out.includes(r)) out.push(r); });
   return out;
 }
+/** Zones « virtuelles » à tester : régions ouvertes par le motif sans zone notée sur le schéma (nom = REG[région].n). */
+export function pseudoZones(S){
+  const notees = Object.keys(S.pain || {}).map(regionOf);
+  return bilanRegions(S).filter(r => !notees.includes(r)).map(r => K.REG[r].n);
+}
+/** Noms des zones virtuelles possibles (pour relire un bilan enregistré). */
+export const nomsVirtuels = () => Object.values(K.MOTIF_REG || {}).map(r => K.REG[r]?.n).filter(Boolean);
 /** Zones du schéma rattachées à une région (pour les drapeaux rouges et les tests). */
 export function zonesOfRegion(S, reg){
   const z = Object.keys(S.pain || {}).filter(n => regionOf(n) === reg);
@@ -231,7 +239,7 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
   const neuro = neuroSummary(S.neuro || {});
   if(neuro.length) add("Examen neurologique", neuro.map(l => { const i = l.indexOf(" : "); return [l.slice(0, i), l.slice(i + 3)]; }));
 
-  Object.keys(S.pain || {}).filter(regionOf).concat(S.cl?.Vertiges ? ["Vertiges"] : []).forEach(n => {
+  Object.keys(S.pain || {}).filter(regionOf).concat(nomsVirtuels().filter(n => S.cl?.[n] && !(n in (S.pain || {})))).forEach(n => {
     const r = K.REG[regionOf(n) || "vertiges"], c = zoneRead(S, n);
     const rf = c.s.filter(x => r.RF.includes(x));
     const tests = r.T.filter(t => c.t[t[0]]).map(t => t[0] + (c.t[t[0]] > 0 ? " positif (LR+ " + f1(t[2]) + ")" : " négatif (LR− " + f1(t[3]) + ")"));

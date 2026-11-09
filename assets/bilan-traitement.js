@@ -73,6 +73,7 @@ export function proposition(S, K, B){
   const regs = B.bilanRegions(S);
   const motifs = S.c?.patho || [];
   const axes = [], eviter = [], avis = [], modeles = [], autres = [], pathos = [];
+  let stop = false;
 
   hyps.forEach(h => {
     const t = TX.HYP[h.reg + ":" + h.k];
@@ -83,6 +84,7 @@ export function proposition(S, K, B){
     if(post) modeles.push(...(t.postop || []));
     modeles.push(...(t.modeles || []));
     if(t.patho) pathos.push(t.patho);
+    if(t.stop) stop = true;
   });
   motifs.forEach(m => {
     const t = TX.MOTIF[m];
@@ -97,20 +99,34 @@ export function proposition(S, K, B){
     autres.push(...(r.modeles || []));
   });
 
+  /* Zone notée sans région (cuisse, jambe, bras, tête…) : modèles de la région voisine */
+  const voisines = [];
+  if(!modeles.length && !autres.length){
+    Object.keys(S.pain || {}).forEach(n => {
+      const z = String(n).replace(/ [DG]$/, "");
+      const k = (PROCHE.find(([re]) => re.test(z)) || [])[1];
+      if(k && TX.REGION[k] && !voisines.includes(k)) voisines.push(k);
+    });
+    voisines.forEach(k => autres.push(...(TX.REGION[k].modeles || [])));
+  }
+
   /* Profil : axes communs */
   if(p.irrit === "Élevée") axes.push(...(TX.PROFIL.irritHaute || []));
   if(p.phase === "Chronique") axes.push(...(TX.PROFIL.chronique || []));
   if((S.q?.jaunes || []).length >= 2) axes.push(...(TX.PROFIL.jaunes || []));
   const rf = Object.values(S.cl || {}).some(c => (c.s || []).length);
-  const zones = uniq(regs.map(r => TX.REGION[r]?.zone));
+  const zones = stop ? [] : uniq([...regs, ...voisines].map(r => TX.REGION[r]?.zone));
 
   return {
     hyps, profil:p, post, rf, rfTexte: TX.PROFIL.rf,
     axes: uniq(axes), eviter: uniq(eviter), avis: uniq(avis),
-    modeles: uniq(modeles), autres: uniq(autres).filter(n => !modeles.includes(n)),
-    pathos: uniq(pathos), zones
+    modeles: stop ? [] : uniq(modeles), autres: stop ? [] : uniq(autres).filter(n => !modeles.includes(n)),
+    pathos: stop ? [] : uniq(pathos), zones, stop
   };
 }
+
+/* Zones du schéma sans région de bilan → région la plus proche pour proposer un modèle */
+const PROCHE = [[/^Cuisse post/, "genou"], [/^Cuisse/, "genou"], [/^(Jambe|Mollet)/, "chev"], [/^Bras/, "epaule"], [/^(Tête|Occiput)/, "cerv"], [/^Abdomen/, "lombes"]];
 
 /* ---------- Modèles ---------- */
 

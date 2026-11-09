@@ -342,7 +342,8 @@ async function renderPatient(ctx){
         <a class="list-item" href="/cloud.html"><span class="li-ico">${icon("calendar")}</span><span class="li-main"><span class="li-title">Mes programmes</span><span class="li-sub">Toutes les séances, semaine par semaine</span></span><span class="li-end">${icon("chevron")}</span></a>
         <a class="list-item" href="/progression.html"><span class="li-ico">${icon("chart")}</span><span class="li-main"><span class="li-title">Ma progression</span><span class="li-sub">Évolution de la douleur et régularité</span></span><span class="li-end">${icon("chevron")}</span></a>
         <a class="list-item" href="/respir/index.html"><span class="li-ico">${icon("wind")}</span><span class="li-main"><span class="li-title">Respiration guidée</span><span class="li-sub">Pour se détendre, à utiliser librement</span></span><span class="li-end">${icon("chevron")}</span></a>
-        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
+        ${futures ? `<button class="list-item" type="button" id="agenda"><span class="li-ico">${icon("calendarPlus")}</span><span class="li-main"><span class="li-title">Ajouter à mon agenda</span><span class="li-sub">${plural(futures, "séance")} avec un rappel</span></span><span class="li-end">${icon("chevron")}</span></button>
+        <button class="list-item" type="button" id="gagenda"><span class="li-ico">${icon("calendar")}</span><span class="li-main"><span class="li-title">Ajouter à Google Agenda</span><span class="li-sub">les jours de séance, jusqu'à la fin du programme</span></span><span class="li-end">${icon("chevron")}</span></button>` : ""}
         <button class="list-item" type="button" id="ecrire"><span class="li-ico">${icon("mail")}</span><span class="li-main"><span class="li-title">Écrire à mon kiné</span><span class="li-sub">Une question, une remarque : ${esc(KINE.nom)} la retrouvera dans l'application</span></span><span class="li-end">${icon("chevron")}</span></button>
       </div>
     </section>
@@ -368,6 +369,11 @@ async function renderPatient(ctx){
     const s = seules.find(x => x.id === b.dataset.seule);
     P.launchSeance(s, { cle:ctx.cle, apercu:ctx.apercu });
   }));
+  $("#gagenda")?.addEventListener("click", () => {
+    const g = P.googleCalendarUrl(seances);
+    if(!g){ toast("Aucune séance à venir.", { type:"info" }); return; }
+    window.open(g.url, "_blank", "noopener");
+  });
   $("#agenda")?.addEventListener("click", () => {
     const n = P.downloadCalendar(seances);
     toast(n ? `${plural(n, "séance")} ajoutée${n > 1 ? "s" : ""} au fichier agenda. Ouvrez-le pour l'importer.` : "Aucune séance à venir.", { type: n ? "ok" : "info" });

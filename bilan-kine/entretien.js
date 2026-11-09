@@ -95,13 +95,49 @@ REGQ: {
     ["nuit", "Réveils la nuit avec fourmillements, soulagés en secouant la main", { CC:2 }],
     ["radial", "Douleur au bord du pouce, côté poignet", { DQ:2 }],
     ["bebe", "Port d'un nourrisson, période post-partum", { DQ:1 }],
-    ["pince", "Douleur à la base du pouce pour pincer, ouvrir un bocal", { RHZ:2 }]
+    ["pince", "Douleur à la base du pouce pour pincer, ouvrir un bocal", { RHZ:2 }],
+    ["ulnaire", "Douleur du poignet côté petit doigt", { TFCC:2 }],
+    ["rotation", "Douleur pour tourner la main (clé, tournevis) ou s'appuyer sur la main", { TFCC:1 }],
+    ["claquement", "Claquement ou ressaut dans le poignet", { TFCC:1 }],
+    ["chute-main", "Chute sur la main en arrière", {}]
   ],
   vertiges: [
     ["couche", "Vertige rotatoire en se couchant ou en se tournant au lit", { VPPB:2 }],
     ["bref", "Crises brèves, moins d'une minute", { VPPB:2 }],
     ["continu", "Vertige continu plusieurs jours, après un épisode viral", { HYPO:2 }],
     ["tete", "Instabilité aggravée par les mouvements rapides de la tête", { HYPO:1 }]
+  ],
+  dors: [
+    ["posture", "Douleur liée à la posture (assis longtemps, écran), mieux en bougeant", { MEC:2 }],
+    ["respir", "Douleur à l'inspiration profonde, à la toux ou en se tournant", { COS:2 }],
+    ["cote", "Douleur qui fait le tour sur une côte", { COS:1 }],
+    ["brutal", "Douleur apparue brutalement, sans vrai traumatisme ou après un effort léger", { TAS:2 }],
+    ["osteo", "Ostéoporose connue, plus de 65 ans ou corticoïdes au long cours", { TAS:2 }],
+    ["allonge", "Impossible de s'allonger à plat à cause de la douleur", { TAS:1 }]
+  ],
+  thorax: [
+    ["appui", "Douleur précise, réveillée en appuyant sur la paroi ou sur une côte", { PAR:2 }],
+    ["mouvement", "Douleur aux mouvements du tronc ou des bras", { PAR:1 }],
+    ["effort", "Douleur ou oppression à l'effort, calmée au repos", { COR:2 }],
+    ["irradie", "Douleur qui irradie au bras, à la mâchoire ou au dos", { COR:2 }],
+    ["vasc", "Maladie cardiaque ou vasculaire connue", { COR:1 }],
+    ["peur", "Le patient pense que cela vient du cœur", { COR:1 }]
+  ],
+  atm: [
+    ["mastic", "Douleur en mâchant ou en parlant longtemps", { MYO:1, ART:1 }],
+    ["joue", "Douleur dans la joue ou la tempe, réveillée par la palpation", { MYO:2 }],
+    ["devant", "Douleur juste devant l'oreille", { ART:2 }],
+    ["clic", "Claquement de la mâchoire à l'ouverture ou à la fermeture", { DDR:2 }],
+    ["bloque", "Mâchoire déjà bloquée, impossible d'ouvrir grand", { DDNR:2 }],
+    ["serre", "Serre ou grince des dents (jour ou nuit)", { MYO:1 }]
+  ],
+  neuro: [
+    ["raideur", "Raideur des jambes, jambes qui « accrochent »", { CEN:2 }],
+    ["maladresse", "Maladresse des gestes fins, écriture qui se dégrade", { CEN:1, CER:1 }],
+    ["tremble", "Tremblement quand le geste approche du but", { CER:2 }],
+    ["ivre", "Marche « comme ivre », écartée, même les yeux ouverts", { CER:2 }],
+    ["noir", "Déséquilibre dans le noir ou en fermant les yeux", { PRO:2 }],
+    ["pieds", "Fourmillements ou engourdissement des pieds", { PRO:1 }]
   ]
 }
 };

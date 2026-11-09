@@ -16,7 +16,8 @@ export const ZONES = ["Cervicales", "Épaule", "Coude", "Poignet et main", "Dos"
 const CAT_VERS_ZONE = {
   "gainage": "Tronc", "post-partum": "Tronc", "pubalgie": "Hanche", "adducteurs": "Hanche", "fessiers": "Hanche",
   "lombalgie": "Dos", "cheville": "Cheville et pied", "pied": "Cheville et pied", "main": "Poignet et main", "poignet": "Poignet et main",
-  "cou": "Cervicales", "nuque": "Cervicales", "rachis": "Dos", "abdominaux": "Tronc", "perinee": "Tronc", "perinee ": "Tronc", "neurologie": "Corps entier"
+  "cou": "Cervicales", "nuque": "Cervicales", "rachis": "Dos", "abdominaux": "Tronc", "perinee": "Tronc", "perinee ": "Tronc", "neurologie": "Corps entier",
+  "vestibulaire": "Corps entier"
 };
 const CAT_VERS_TYPE = {
   "gainage": "Gainage", "equilibre": "Équilibre et proprioception", "proprioception": "Équilibre et proprioception",
@@ -37,7 +38,8 @@ export const SPECIALITES = [
   "Oncologie et lymphœdème", "Prévention et posture"
 ];
 const O = "Orthopédie", T = "Traumatologie", R = "Rhumatologie", N = "Neurologie", VE = "Vestibulaire", RE = "Respiratoire",
-  CA = "Cardio et reconditionnement", G = "Gériatrie et chutes", PE = "Périnée et post-partum", SP = "Sport", PR = "Prévention et posture", RF = "Remise en forme";
+  CA = "Cardio et reconditionnement", G = "Gériatrie et chutes", PE = "Périnée et post-partum", SP = "Sport", PR = "Prévention et posture", RF = "Remise en forme",
+  PD = "Pédiatrie", ON = "Oncologie et lymphœdème";
 
 /* Spécialités de chaque pathologie principale */
 const SPECS_PATHO = {
@@ -54,7 +56,8 @@ const SPECS_PATHO = {
   "Paralysie faciale":[N], "Arthrose (générale)":[R, G], "Prévention des chutes / équilibre":[G], "AVC / hémiplégie":[N],
   "Maladie de Parkinson":[N], "Sclérose en plaques":[N], "SLA (maladie de Charcot)":[N], "Charcot-Marie-Tooth":[N],
   "Vertiges / vestibulaire":[VE], "Respiratoire (BPCO, asthme…)":[RE], "Post-opératoire":[O], "Ostéoporose":[R, G],
-  "Déconditionnement / reprise":[RF, CA]
+  "Déconditionnement / reprise":[RF, CA], "Lésion des ischio-jambiers":[T, SP], "Retour au sport":[SP],
+  "Lymphœdème / après cancer":[ON], "Développement moteur de l'enfant":[PD]
 };
 /* Spécialités déduites du type d'exercice */
 const SPECS_TYPE = { "Respiration":[RE], "Cardio":[CA], "Au fauteuil (seniors)":[G] };
@@ -109,10 +112,14 @@ export const PATHOLOGIES = [
   ["SLA (maladie de Charcot)", "", /\bsla\b|sclerose laterale|maladie de charcot/],
   ["Charcot-Marie-Tooth", "", /charcot-?marie|\bcmt\b/],
   ["Vertiges / vestibulaire", "", /vertig|vestibul|\bbppv\b|\bvppb\b/],
-  ["Respiratoire (BPCO, asthme…)", "", /respirat|bpco|asthme|hyperventil|dyspnee|thoraci/],
+  ["Respiratoire (BPCO, asthme…)", "", /respirat|bpco|asthme|hyperventil|dyspnee|thoraci|bronch|encombr/],
   ["Post-opératoire", "", /post-?op|chirurgi|reparation/],
   ["Ostéoporose", "", /osteopor/],
-  ["Déconditionnement / reprise", "", /deconditionn|reconditionn|remise en forme|gym adaptee|reprise|sedentar/]
+  ["Déconditionnement / reprise", "", /deconditionn|reconditionn|remise en forme|gym adaptee|reprise|sedentar/],
+  ["Lésion des ischio-jambiers", "Genou", /ischio-?jambiers? \(lesion|lesion des ischio|dechirure.*ischio|claquage.*ischio|ischio.*(lesion|dechirure|claquage)/],
+  ["Retour au sport", "", /retour au sport|reprise du sport|pliometr/],
+  ["Lymphœdème / après cancer", "", /lymph|cancer|oncolog|mastectom|curage/],
+  ["Développement moteur de l'enfant", "", /enfant|pediatr|developpement moteur/]
 ].map(([nom, zone, re]) => ({ nom, zone, re }));
 
 /** Ajoute à un exercice de la bibliothèque : e.zone, e.types[], e.pathos[] (noms des pathologies principales), e.specs[] (spécialités). */
@@ -132,6 +139,8 @@ export function classer(e){
   types.forEach(t => (SPECS_TYPE[t] || []).forEach(x => specs.add(x)));
   if(cat === "neurologie") specs.add(N);
   if(cat === "post-partum" || /^perinee/.test(cat)) specs.add(PE);
+  /* Exercices du cabinet avec le gros matériel (chaise romaine, barre, plaque vibrante, vélo semi-allongé) */
+  if(e.source === "CABINET" && e.raw?.au_cabinet) types.add("Au cabinet");
   /* Spécialités ajoutées à la main sur l'exercice (éditeur) */
   (Array.isArray(e.specialites) ? e.specialites : []).forEach(x => { if(SPECIALITES.includes(x)) specs.add(x); });
   e.zone = zone;

@@ -8,6 +8,7 @@
      modeles : noms des modèles à proposer (tels qu'affichés dans Modèles)
      postop  : modèles à proposer seulement après une opération
      patho   : pathologie de la bibliothèque pour composer un programme sur mesure
+     stop    : true = avis médical d'abord, aucun programme proposé
    REGION : zone de la bibliothèque + modèles de la région (proposés en second).
    MOTIF  : modèles et pathologie selon le motif coché au début du bilan.
    PROFIL : axes ajoutés selon le profil (irritabilité, chronicité, drapeaux jaunes).
@@ -138,6 +139,75 @@ HYP: {
     eviter: ["Exercices d'habituation seuls à la place de la manœuvre"],
     modeles: ["VPPB (après manœuvre)"], patho: "Vertiges / vestibulaire"
   },
+  "genou:COL": {
+    axes: ["Protection relative courte (attelle articulée si laxité importante)", "Récupération des amplitudes, renforcement du quadriceps", "Reprise progressive des appuis et des changements de direction"],
+    avis: "Laxité nette en extension (0°) : lésion associée possible (croisés, coque), avis médical.",
+    modeles: ["Gonarthrose", "Rupture du LCA (sans opération)"], patho: "Entorse du genou (LLI/LLE)"
+  },
+  "cerv:MYE": {
+    axes: ["Orientation médicale avant toute rééducation", "Pas de manipulation cervicale", "Éducation sur les signes d'aggravation (marche, mains)"],
+    eviter: ["Manipulations et tractions cervicales"],
+    avis: "Myélopathie cervicale suspectée : avis médical rapide (IRM, avis chirurgical).",
+    modeles: [], stop: true
+  },
+  "main:TFCC": {
+    axes: ["Repos relatif et orthèse de poignet (ou bracelet) si douloureux", "Renforcement progressif des stabilisateurs du poignet et de l'avant-bras", "Adaptation des gestes en rotation et en appui"],
+    avis: "Instabilité de l'articulation radio-ulnaire distale ou douleur persistante : avis chirurgical (imagerie).",
+    modeles: ["Canal carpien"], patho: "Fracture du poignet"
+  },
+  "dors:MEC": {
+    axes: ["Mobilité thoracique et exercices posturaux", "Renforcement des muscles du haut du dos", "Ergonomie du poste et pauses actives"],
+    modeles: ["Dos au travail", "Cervicalgie"], patho: "Scoliose / posture"
+  },
+  "dors:COS": {
+    axes: ["Mobilisation costale et thoracique", "Respiration ample, mobilité en rotation"],
+    modeles: ["Dos au travail"], patho: "Scoliose / posture"
+  },
+  "dors:TAS": {
+    axes: ["Antalgie et position de confort, sans flexion du tronc en charge", "Reprise de la marche, puis renforcement des extenseurs du dos", "Prévention des chutes"],
+    eviter: ["Flexion du tronc en charge (soulever penché, crunch)", "Manipulations vertébrales"],
+    avis: "Tassement suspecté : avis médical et imagerie, bilan d'ostéoporose.",
+    modeles: ["Ostéoporose", "Prévention des chutes"], patho: "Ostéoporose"
+  },
+  "thorax:PAR": {
+    axes: ["Éducation : douleur de la paroi, rassurer une fois le cœur écarté", "Mobilité thoracique et respiration", "Renforcement progressif du haut du corps"],
+    modeles: ["Réhabilitation respiratoire (BPCO)"], patho: "Respiratoire (BPCO, asthme…)"
+  },
+  "thorax:COR": {
+    axes: ["Pas de rééducation avant avis médical"],
+    avis: "Origine cardiaque possible : avis médical ; en cas de douleur au repos, prolongée ou avec malaise, appeler le 15.",
+    modeles: [], stop: true
+  },
+  "atm:MYO": {
+    axes: ["Éducation : repos de la mâchoire, langue au palais, éviter de serrer", "Massage et étirements des masticateurs", "Gestion du stress et du sommeil"],
+    modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées"
+  },
+  "atm:ART": {
+    axes: ["Alimentation molle temporairement, éviter les grandes ouvertures", "Exercices d'ouverture contrôlée sans douleur", "Thérapie manuelle de l'ATM"],
+    modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées"
+  },
+  "atm:DDR": {
+    axes: ["Ouverture contrôlée en ligne droite devant un miroir", "Éducation : le claquement indolore n'est pas grave"],
+    modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées"
+  },
+  "atm:DDNR": {
+    axes: ["Mobilisations de l'ATM pour gagner l'ouverture", "Exercices d'ouverture progressifs"],
+    avis: "Blocage récent ou persistant : avis dentaire ou maxillo-facial.",
+    modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées"
+  },
+  "neuro:CEN": {
+    axes: ["Travail de la marche et de l'équilibre", "Étirements des muscles spastiques, renforcement fonctionnel", "Transferts et autonomie"],
+    avis: "Signe central d'apparition récente : avis médical.",
+    modeles: ["Hémiplégie (AVC)", "Sclérose en plaques"], patho: "AVC / hémiplégie"
+  },
+  "neuro:CER": {
+    axes: ["Coordination et précision des gestes", "Équilibre et marche avec repères visuels", "Exercices lents et répétés"],
+    modeles: ["Sclérose en plaques", "Prévention des chutes"], patho: "Sclérose en plaques"
+  },
+  "neuro:PRO": {
+    axes: ["Équilibre avec contrôle visuel, puis yeux fermés près d'un appui", "Sensibilité des pieds, chaussage", "Prévention des chutes"],
+    modeles: ["Charcot-Marie-Tooth", "Prévention des chutes"], patho: "Prévention des chutes / équilibre"
+  },
   "vertiges:HYPO": {
     axes: ["Rééducation vestibulaire : stabilisation du regard", "Habituation aux mouvements de tête", "Équilibre et marche"],
     modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire"
@@ -145,27 +215,34 @@ HYP: {
 },
 
 REGION: {
-  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
+  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)", "Tendinopathie rotulienne", "Lésion des ischio-jambiers", "Retour au sport (membre inférieur)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
   epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
-  lombes: { zone: "Dos", modeles: ["Lombalgie", "Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
-  cerv: { zone: "Cervicales", modeles: ["Cervicalgie", "Névralgie cervico-brachiale"] },
+  lombes: { zone: "Dos", modeles: ["Lombalgie", "Lombalgie chronique (reconditionnement)", "Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
+  cerv: { zone: "Cervicales", modeles: ["Cervicalgie", "Névralgie cervico-brachiale", "Mâchoire (ATM)"] },
   chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire", "Épine calcanéenne"] },
-  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire"], postop: ["Prothèse totale de hanche (PTH)"] },
+  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire", "Pubalgie"], postop: ["Prothèse totale de hanche (PTH)"] },
   coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)", "Épitrochléite (golf elbow)"] },
   main: { zone: "Poignet et main", modeles: ["Canal carpien", "Tendinite de De Quervain", "Rhizarthrose"] },
-  vertiges: { zone: "Corps entier", modeles: ["Rééducation vestibulaire", "VPPB (après manœuvre)"] }
+  vertiges: { zone: "Corps entier", modeles: ["Rééducation vestibulaire", "VPPB (après manœuvre)"] },
+  dors: { zone: "Dos", modeles: ["Dos au travail", "Ostéoporose", "Lombalgie chronique (reconditionnement)"] },
+  thorax: { zone: "Tronc", modeles: ["Réhabilitation respiratoire (BPCO)"] },
+  atm: { zone: "Cervicales", modeles: ["Mâchoire (ATM)"] },
+  neuro: { zone: "Corps entier", modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] }
 },
 
 MOTIF: {
-  "Lombalgie": { modeles: ["Lombalgie"], patho: "Lombalgie" },
+  "Lombalgie": { modeles: ["Lombalgie", "Lombalgie chronique (reconditionnement)"], patho: "Lombalgie" },
   "Cervicalgie": { modeles: ["Cervicalgie"], patho: "Cervicalgie" },
   "Sciatique": { modeles: ["Sciatique", "Hernie discale", "Sciatique et hernie discale"], patho: "Sciatique / radiculalgie" },
   "Trouble de l’équilibre": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
-  "Chutes / personne âgée": { modeles: ["Prévention des chutes"], patho: "Prévention des chutes / équilibre" },
+  "Chutes / personne âgée": { modeles: ["Prévention des chutes", "Ostéoporose"], patho: "Prévention des chutes / équilibre" },
   "Neurologie (AVC, Parkinson, SEP…)": { modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] },
   "Vertiges": { modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire" },
-  "Respiratoire": { patho: "Respiratoire (BPCO, asthme…)" },
-  "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)"] }
+  "Respiratoire": { modeles: ["Réhabilitation respiratoire (BPCO)", "Désencombrement bronchique", "Kiné respiratoire après une opération"], patho: "Respiratoire (BPCO, asthme…)" },
+  "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort"] },
+  "Mâchoire (ATM)": { modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées" },
+  "Dorsalgie": { modeles: ["Dos au travail"], patho: "Scoliose / posture" },
+  "Reprise du sport": { modeles: ["Retour au sport (membre inférieur)", "Lésion des ischio-jambiers", "Pubalgie"] }
 },
 
 PROFIL: {

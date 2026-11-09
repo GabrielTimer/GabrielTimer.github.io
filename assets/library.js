@@ -126,6 +126,7 @@ function fromCabinet(x){
     materiel: toList(x.materiel),
     muscles: toList(x.muscles_cibles),
     tags: toList(x.tags),
+    specialites: toList(x.specialites),
     conseil_posture: toList(x.conseil_posture),
     erreurs_frequentes: toList(x.erreurs_frequentes),
     respiration: toList(x.respiration),

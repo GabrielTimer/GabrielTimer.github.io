@@ -138,7 +138,7 @@ function mesures(S, quoi){
 function testsCliniques(S){
   const tests = [], rf = [], rfm = [];
   if(!S) return { tests, rf, rfm };
-  Object.keys(S.pain || {}).filter(B.regionOf).concat(S.cl?.Vertiges ? ["Vertiges"] : []).forEach(n => {
+  Object.keys(S.pain || {}).filter(B.regionOf).concat(B.nomsVirtuels().filter(n => S.cl?.[n] && !(n in (S.pain || {})))).forEach(n => {
     const r = K.REG[B.regionOf(n) || "vertiges"], c = S.cl?.[n];
     if(!r || !c) return;
     r.T.forEach(x => { if(c.t?.[x[0]]) tests.push({ zone:n, test:x[0], pos:c.t[x[0]] > 0, lrp:x[2], lrm:x[3] }); });

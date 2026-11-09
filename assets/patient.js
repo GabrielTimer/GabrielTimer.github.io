@@ -100,6 +100,31 @@ export function downloadCalendar(seances, { heure = 18 } = {}){
   return futures.length;
 }
 
+/* ---------- Google Agenda : un événement répété aux jours des séances ----------
+   Google Agenda n'importe pas plusieurs dates par lien : on crée un événement hebdomadaire
+   sur les jours de la semaine où des séances sont prévues, jusqu'à la dernière séance. */
+const JOURS_RRULE = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+export function googleCalendarUrl(seances, { heure = 18 } = {}){
+  const futures = seances.filter(s => !s.terminee && s.datePrevue && new Date(s.datePrevue) >= startOfDay(new Date()))
+    .sort((a, b) => new Date(a.datePrevue) - new Date(b.datePrevue));
+  if(!futures.length) return null;
+  const premiere = new Date(futures[0].datePrevue), derniere = new Date(futures.at(-1).datePrevue);
+  const minutes = Math.max(10, Math.round(sessionDuration(futures[0].data) / 60) + 5);
+  const h = String(heure).padStart(2, "0");
+  const fin = new Date(premiere); fin.setHours(heure, minutes, 0, 0);
+  const dates = `${icsDate(premiere)}T${h}0000/${icsDate(fin)}T${String(fin.getHours()).padStart(2, "0")}${String(fin.getMinutes()).padStart(2, "0")}00`;
+  const jours = [...new Set(futures.map(s => JOURS_RRULE[new Date(s.datePrevue).getDay()]))];
+  const p = new URLSearchParams({
+    action: "TEMPLATE",
+    text: "Exercices kiné – " + (futures[0].programmeNom || futures[0].data?.nom || "Séance"),
+    dates,
+    details: "Ouvrir l'application pour faire la séance : " + SITE_URL,
+    ctz: Intl.DateTimeFormat().resolvedOptions().timeZone || "Europe/Paris"
+  });
+  if(futures.length > 1) p.set("recur", `RRULE:FREQ=WEEKLY;BYDAY=${jours.join(",")};UNTIL=${icsDate(derniere)}T235959Z`);
+  return { url: "https://calendar.google.com/calendar/render?" + p.toString(), n: futures.length, jours: jours.length };
+}
+
 /* ---------- Bilan envoyé au kiné ---------- */
 
 /**

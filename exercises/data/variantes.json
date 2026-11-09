@@ -1193,5 +1193,30 @@
   "defaut": "/exercises/images/tronc/Superman.png",
   "f": "/exercises/images/tronc/Superman-f.webp",
   "h": "/exercises/images/tronc/Superman.png"
+ },
+ "/exercises/images/velo/pedalage-doux-f.webp": {
+  "defaut": "/exercises/images/velo/pedalage-doux-f.webp",
+  "f": "/exercises/images/velo/pedalage-doux-f.webp",
+  "h": "/exercises/images/velo/pedalage-doux-h.webp"
+ },
+ "/exercises/images/velo/monter-velo-f.webp": {
+  "defaut": "/exercises/images/velo/monter-velo-f.webp",
+  "f": "/exercises/images/velo/monter-velo-f.webp",
+  "h": "/exercises/images/velo/monter-velo-h.webp"
+ },
+ "/exercises/images/velo/pedalage-sangle-f.webp": {
+  "defaut": "/exercises/images/velo/pedalage-sangle-f.webp",
+  "f": "/exercises/images/velo/pedalage-sangle-f.webp",
+  "h": "/exercises/images/velo/pedalage-sangle-h.webp"
+ },
+ "/exercises/images/velo/va-et-vient-genou-f.webp": {
+  "defaut": "/exercises/images/velo/va-et-vient-genou-f.webp",
+  "f": "/exercises/images/velo/va-et-vient-genou-f.webp",
+  "h": "/exercises/images/velo/va-et-vient-genou-h.webp"
+ },
+ "/exercises/images/velo/reglage-siege-f.webp": {
+  "defaut": "/exercises/images/velo/reglage-siege-f.webp",
+  "f": "/exercises/images/velo/reglage-siege-f.webp",
+  "h": "/exercises/images/velo/reglage-siege-h.webp"
  }
 }

@@ -80,10 +80,10 @@ export function mountGuide(app, ctx){
   const regions = () => B.bilanRegions(S);
   const zonesTestees = () => {
     const z = Object.keys(S.pain).filter(n => B.regionOf(n));
-    if(regions().includes("vertiges")) z.push("Vertiges");
+    B.pseudoZones(S).forEach(n => { if(!z.includes(n)) z.push(n); });
     return z;
   };
-  const regOfZone = n => n === "Vertiges" ? "vertiges" : B.regionOf(n);
+  const regOfZone = n => B.regionOf(n);
 
   /* ---------- Étapes ---------- */
 
@@ -144,7 +144,7 @@ export function mountGuide(app, ctx){
 
     cible(){
       const regs = regions();
-      if(!regs.length) return `<h2 class="g-h">Questions ciblées</h2><p class="g-hint">Pas de questions ciblées pour l'instant : notez une zone (genou, épaule, dos, nuque, cheville, hanche, coude, main) ou cochez « Vertiges » dans le motif.</p>`;
+      if(!regs.length) return `<h2 class="g-h">Questions ciblées</h2><p class="g-hint">Pas de questions ciblées pour l'instant : notez une zone (genou, épaule, dos, nuque, cheville, hanche, coude, main, dorsales, thorax) ou cochez « Vertiges », « Neurologie », « Mâchoire (ATM) » ou « Dorsalgie » dans le motif.</p>`;
       return `<h2 class="g-h">Questions ciblées</h2>` + regs.map(reg => {
         const r = K.REG[reg], qs = K.ENT.REGQ[reg] || [];
         const zs = B.zonesOfRegion(S, reg);
@@ -189,7 +189,7 @@ export function mountGuide(app, ctx){
         };
         const ori = o.filter(h => h.score > 0);
         return `<section class="g-card">
-          <h3>${esc(n === "Vertiges" ? "Vertiges" : n)} <span class="badge lagon">${esc(r.n)}</span></h3>
+          <h3>${esc(n)} <span class="badge lagon">${esc(r.n)}</span></h3>
           ${ori.length ? `<p class="g-ori">${icon("target")}<span>D'après l'entretien : <strong>${ori.map(h => esc(h.label)).join(", ")}</strong></span></p>` : `<p class="g-hint">Pas d'orientation particulière d'après l'entretien : tous les tests sont proposés.</p>`}
           ${top.length ? `<div class="g-qt">${Object.keys(avant).length ? "À refaire (faits au dernier bilan) et prioritaires" : "À faire en priorité"}</div>${top.map(row).join("")}` : ""}
           ${rest.length ? (top.length ? `<details class="g-more"><summary>Autres tests (${rest.length})</summary>${rest.map(row).join("")}</details>` : rest.map(row).join("")) : ""}
@@ -207,7 +207,7 @@ export function mountGuide(app, ctx){
       const regs = regions();
       const hyps = regs.map(reg => {
         const r = K.REG[reg], o = B.orientation(S, reg);
-        const zs = B.zonesOfRegion(S, reg).concat(reg === "vertiges" ? ["Vertiges"] : []);
+        const zs = B.zonesOfRegion(S, reg);
         return `<div class="g-q"><div class="g-qt">${esc(r.n)}</div><div class="g-chips">${o.map(h => {
           const pos = r.T.filter(t => t[1].includes(h.k) && zs.some(z => (S.cl[z]?.t || {})[t[0]] === 1)).map(t => t[0]);
           const lab = h.label + (h.score ? ` · ${h.pour.length} indice${h.pour.length > 1 ? "s" : ""}` : "") + (pos.length ? ` · test + : ${pos.join(", ")}` : "");
@@ -250,8 +250,10 @@ export function mountGuide(app, ctx){
       const best = groupes[0] || autres[0] || null;
       const proche = !groupes.length && !!autres.length;
       const reste = [...groupes, ...autres].filter(g => g !== best);
-      /* Sur mesure composé d'office, à côté du modèle */
-      if(ui.lib && !ui.gen){
+      /* Sur mesure composé d'office, à côté du modèle ; recomposé si l'hypothèse, la zone, le lieu ou le niveau changent */
+      const cleGen = JSON.stringify([P.pathos, P.zones, lieu, p.niveau, P.post]);
+      if(ui.genCle !== cleGen){ ui.gen = null; ui.genCle = cleGen; }
+      if(ui.lib && !ui.gen && !P.stop){
         ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post });
       }
       const gen = ui.gen;
@@ -294,7 +296,7 @@ export function mountGuide(app, ctx){
           <div class="g-duo">
             <div class="g-pick">
               <div class="g-tag">${icon("layers")}Modèle existant${proche ? ` <span class="g-multi">le plus proche pour la région</span>` : ""}</div>
-              ${best ? carte(best, 0, "p") : `<div class="g-model"><p class="g-hint" style="margin:0">Pas de modèle ${lieu === "HEP" ? "maison" : "cabinet"} pour cette région. Le programme sur mesure est à côté.</p></div>`}
+              ${best ? carte(best, 0, "p") : `<div class="g-model"><p class="g-hint" style="margin:0">${P.stop ? "Avis médical d'abord : pas de programme proposé pour cette hypothèse." : `Pas de modèle ${lieu === "HEP" ? "maison" : "cabinet"} pour cette région. Le programme sur mesure est à côté.`}</p></div>`}
             </div>
             <div class="g-pick">
               <div class="g-tag">${icon("sparkle")}Sur mesure</div>
@@ -304,6 +306,7 @@ export function mountGuide(app, ctx){
                 <button type="button" class="btn" data-gact="gen">${icon("repeat")}Autre proposition</button>
                 <button type="button" class="btn primary" data-gact="genuse">${icon("check")}Utiliser ce programme</button>
               </div>`
+              : P.stop ? `<div class="g-model"><p class="g-hint" style="margin:0">Avis médical d'abord.</p></div>`
               : ui.lib ? `<div class="g-model"><p class="g-hint" style="margin:0">Pas assez d'exercices trouvés dans la bibliothèque pour cette zone.</p><button type="button" class="btn" data-gact="gen">${icon("repeat")}Réessayer</button></div>`
               : `<div class="g-model"><p class="g-hint" style="margin:0">${icon("clock")} Composition…</p></div>`}
             </div>

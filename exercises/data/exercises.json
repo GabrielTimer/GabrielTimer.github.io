@@ -7329,6 +7329,12 @@
     "zones": [
       "Hanche",
       "Fessiers"
+    ],
+    "consignes": [
+      "Garder les pieds collés",
+      "Ouvrir le genou supérieur",
+      "Ne pas tourner le bassin",
+      "Redescendre lentement"
     ]
   },
   {
@@ -7365,6 +7371,12 @@
       "Abdomen",
       "Lombaires",
       "Bassin"
+    ],
+    "consignes": [
+      "Position quadrupédique",
+      "Tendre bras et jambe opposés",
+      "Garder le bassin stable",
+      "Revenir lentement"
     ]
   },
   {
@@ -16512,5 +16524,5282 @@
     "zones": [
       "Corps entier"
     ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux",
+      "Fixer la lettre et tourner la tête de droite à gauche, petits mouvements",
+      "La lettre doit rester nette : ralentir si elle devient floue",
+      "Augmenter la vitesse quand c'est facile"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Bouger les yeux avec la tête",
+      "Aller trop vite jusqu'à ne plus lire la lettre"
+    ],
+    "ex": 30,
+    "exercise_mode": "mobilite",
+    "id": "VEST_01",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Carte avec une lettre"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Stabilisation du regard horizontale, assis",
+    "objectif": "Stabiliser le regard pendant les mouvements de tête",
+    "objectifs": [
+      "Stabiliser le regard pendant les mouvements de tête"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Regard"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Debout",
+      "Lettre sur un fond rayé"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, carte avec une lettre à bras tendu, à hauteur des yeux",
+      "Fixer la lettre et faire « oui » de la tête, petits mouvements",
+      "Garder la lettre nette pendant tout le mouvement",
+      "Augmenter la vitesse progressivement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Mouvements de tête trop amples"
+    ],
+    "ex": 30,
+    "exercise_mode": "mobilite",
+    "id": "VEST_02",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Carte avec une lettre"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Stabilisation du regard verticale, assis",
+    "objectif": "Stabiliser le regard pendant les mouvements de tête",
+    "objectifs": [
+      "Stabiliser le regard pendant les mouvements de tête"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Regard"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Debout"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout près d'un mur, pieds écartés à largeur de bassin",
+      "Fixer une lettre collée au mur à hauteur des yeux",
+      "Tourner la tête de droite à gauche puis de haut en bas en gardant la lettre nette",
+      "Rapprocher les pieds quand c'est facile"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "VEST_03",
+    "image": "",
+    "materiel": [
+      "Mur",
+      "Lettre collée au mur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Stabilisation du regard debout",
+    "objectif": "Stabiliser le regard en équilibre debout",
+    "objectifs": [
+      "Stabiliser le regard en équilibre debout"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute",
+      "Rester à portée d'appui (mur, plan de travail)"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pieds joints",
+      "Pieds en ligne",
+      "En marchant vers la lettre"
+    ],
+    "version_facile": [
+      "Assis"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, tête immobile, tenir un stylo à bras tendu",
+      "Déplacer lentement le stylo de droite à gauche et le suivre des yeux",
+      "Puis de haut en bas, puis en diagonale",
+      "La tête ne bouge pas, seuls les yeux suivent"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Tourner la tête avec la cible"
+    ],
+    "ex": 30,
+    "exercise_mode": "mobilite",
+    "id": "VEST_04",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Stylo"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Poursuite d'une cible des yeux",
+    "objectif": "Améliorer le contrôle des mouvements des yeux",
+    "objectifs": [
+      "Améliorer le contrôle des mouvements des yeux"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Yeux"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm",
+      "Tête immobile : passer le regard vite d'une cible à l'autre",
+      "Puis tourner la tête vers la cible juste après les yeux",
+      "Faire aussi avec des cibles l'une au-dessus de l'autre"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "mobilite",
+    "id": "VEST_05",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Deux cibles au mur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Saccades entre deux cibles",
+    "objectif": "Améliorer le contrôle des mouvements des yeux et de la tête",
+    "objectifs": [
+      "Améliorer le contrôle des mouvements des yeux et de la tête"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Yeux"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Debout",
+      "Cibles plus écartées"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Marcher dans un couloir, le long d'un mur",
+      "Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer",
+      "Regarder un objet de chaque côté (cadre, porte)",
+      "Faire ensuite en levant et baissant la tête"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [
+      "S'arrêter pour tourner la tête"
+    ],
+    "ex": 45,
+    "exercise_mode": "equilibre",
+    "id": "VEST_06",
+    "image": "",
+    "materiel": [
+      "Couloir",
+      "Mur à portée de main"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche en tournant la tête",
+    "objectif": "Garder l'équilibre en marchant malgré les mouvements de tête",
+    "objectifs": [
+      "Garder l'équilibre en marchant malgré les mouvements de tête"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB",
+      "Prévention des chutes"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute",
+      "Toujours près d'un mur ou d'une personne"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Marcher plus vite",
+      "Compter à voix haute"
+    ],
+    "version_facile": [
+      "Tourner la tête seulement tous les 6 pas"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout dans l'angle d'une pièce, une chaise devant soi",
+      "Monter sur un coussin de mousse, pieds joints",
+      "Trouver l'équilibre, puis fermer les yeux",
+      "Tenir le temps indiqué ; rouvrir les yeux si l'on perd l'équilibre"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "VEST_07",
+    "image": "",
+    "materiel": [
+      "Coussin de mousse",
+      "Angle de mur",
+      "Chaise"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Équilibre pieds joints, yeux fermés, sur mousse",
+    "objectif": "Apprendre à s'équilibrer avec l'oreille interne seule",
+    "objectifs": [
+      "Apprendre à s'équilibrer avec l'oreille interne seule"
+    ],
+    "pathologies": [
+      "Vertiges / vestibulaire",
+      "Névrite vestibulaire",
+      "VPPB",
+      "Prévention des chutes"
+    ],
+    "precautions": [
+      "Un léger vertige pendant l'exercice est normal ; il doit passer en quelques minutes",
+      "Arrêter en cas de nausées fortes, de malaise ou de chute",
+      "Faire d'abord au cabinet ; une personne à côté à la maison"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Tête qui tourne lentement",
+      "Pieds en ligne"
+    ],
+    "version_facile": [
+      "Yeux ouverts",
+      "Pieds écartés"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Vestibulaire",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au milieu du lit, jambes pendantes",
+      "Tourner la tête de 45° vers la gauche, puis se coucher vite sur le côté droit",
+      "Rester 30 s (ou jusqu'à la fin du vertige), puis se rasseoir 30 s",
+      "Recommencer en tournant la tête à droite et en se couchant à gauche"
+    ],
+    "contre_indications": [
+      "Problème de cervicales qui empêche de tourner la tête"
+    ],
+    "difficulte_percue": 2,
+    "duree": "5 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "mobilite",
+    "id": "VEST_08",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Exercices de Brandt-Daroff",
+    "objectif": "Habituer l'oreille interne pour diminuer les vertiges positionnels",
+    "objectifs": [
+      "Habituer l'oreille interne pour diminuer les vertiges positionnels"
+    ],
+    "pathologies": [
+      "VPPB",
+      "Vertiges / vestibulaire"
+    ],
+    "precautions": [
+      "Seulement si le kiné l'a conseillé",
+      "Ne pas se lever tout de suite après : rester assis 1 min",
+      "Le vertige pendant l'exercice est attendu"
+    ],
+    "repos": 30,
+    "reps": 5,
+    "respiration": [],
+    "tags": [
+      "Vestibulaire",
+      "VPPB"
+    ],
+    "timer_config": {
+      "cycles": 5,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
+      "Inspirer par le nez en laissant le ventre se gonfler sous la main",
+      "Expirer lentement par la bouche, le ventre redescend",
+      "La main sur la poitrine bouge peu"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Gonfler la poitrine et hausser les épaules"
+    ],
+    "ex": 60,
+    "exercise_mode": "respiration",
+    "id": "RESPI_01",
+    "image": "",
+    "materiel": [
+      "Tapis ou lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Respiration abdomino-diaphragmatique, allongé",
+    "objectif": "Mieux utiliser le diaphragme et respirer plus calmement",
+    "objectifs": [
+      "Mieux utiliser le diaphragme et respirer plus calmement"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Stress / anxiété"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [
+      "Expiration deux fois plus longue que l'inspiration"
+    ],
+    "tags": [
+      "Respiration",
+      "Diaphragme"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Assis",
+      "Debout",
+      "En marchant"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, épaules relâchées",
+      "Inspirer par le nez en comptant jusqu'à 2",
+      "Expirer lentement lèvres pincées, comme pour souffler une bougie sans l'éteindre, en comptant jusqu'à 4",
+      "Utiliser cette respiration à l'effort (escaliers, marche)"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Souffler fort",
+      "Forcer l'inspiration"
+    ],
+    "ex": 60,
+    "exercise_mode": "respiration",
+    "id": "RESPI_02",
+    "image": "",
+    "materiel": [
+      "Chaise"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Expiration lèvres pincées",
+    "objectif": "Diminuer l'essoufflement",
+    "objectifs": [
+      "Diminuer l'essoufflement"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [
+      "Inspirer 2 temps, expirer 4 temps"
+    ],
+    "tags": [
+      "Respiration",
+      "BPCO"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, mains posées sur les côtés des côtes",
+      "Inspirer par le nez en poussant les côtes dans les mains",
+      "Lever les bras sur le côté en fin d'inspiration",
+      "Expirer lentement en redescendant les bras"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Hausser les épaules"
+    ],
+    "ex": 45,
+    "exercise_mode": "respiration",
+    "id": "RESPI_03",
+    "image": "",
+    "materiel": [
+      "Chaise"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Expansion costale avec les bras",
+    "objectif": "Ouvrir la cage thoracique et ventiler la base des poumons",
+    "objectifs": [
+      "Ouvrir la cage thoracique et ventiler la base des poumons"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Post-opératoire"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Thorax"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sans lever les bras"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Couché sur le côté où les poumons sont encombrés, un coussin sous la tête",
+      "Inspirer normalement par le nez",
+      "Expirer très lentement, bouche ouverte, jusqu'au bout de l'air",
+      "Après quelques cycles, faire un huff pour remonter les sécrétions"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Expirer trop vite",
+      "Pincer les lèvres"
+    ],
+    "ex": 60,
+    "exercise_mode": "respiration",
+    "id": "RESPI_04",
+    "image": "",
+    "materiel": [
+      "Lit ou table"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Expiration lente prolongée couché sur le côté (ELTGOL)",
+    "objectif": "Désencombrer les bronches",
+    "objectifs": [
+      "Désencombrer les bronches"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Encombrement bronchique",
+      "Bronchectasies"
+    ],
+    "precautions": [
+      "Technique à apprendre d'abord avec le kiné",
+      "Arrêter si essoufflement important"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Désencombrement"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, buste légèrement penché en avant",
+      "Faire 2 ou 3 respirations calmes",
+      "Inspirer à moitié puis expirer fort, bouche ouverte, comme pour faire de la buée sur une vitre",
+      "Quand le mucus est remonté, tousser une fois pour le cracher"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Tousser plusieurs fois de suite"
+    ],
+    "ex": 45,
+    "exercise_mode": "respiration",
+    "id": "RESPI_05",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Mouchoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Huff et toux dirigée",
+    "objectif": "Évacuer les sécrétions sans s'épuiser",
+    "objectifs": [
+      "Évacuer les sécrétions sans s'épuiser"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Encombrement bronchique",
+      "Post-opératoire"
+    ],
+    "precautions": [
+      "Pas de toux répétées qui fatiguent",
+      "Après une chirurgie du thorax ou de l'abdomen, tenir un coussin contre la cicatrice"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Désencombrement"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis droit, le spiromètre tenu bien vertical",
+      "Expirer normalement, puis serrer l'embout entre les lèvres",
+      "Inspirer lentement et profondément pour faire monter la bille et la garder en haut 3 s",
+      "Lâcher l'embout et expirer doucement ; souffler 1 min entre deux essais"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "10 × 10 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Inspirer trop vite"
+    ],
+    "ex": 10,
+    "exercise_mode": "respiration",
+    "id": "RESPI_06",
+    "image": "",
+    "materiel": [
+      "Spiromètre incitatif"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Spiromètre incitatif",
+    "objectif": "Garder les poumons bien ventilés, surtout après une opération",
+    "objectifs": [
+      "Garder les poumons bien ventilés, surtout après une opération"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Post-opératoire"
+    ],
+    "precautions": [
+      "Arrêter en cas de vertige ou de picotements : respirer normalement quelques instants"
+    ],
+    "repos": 30,
+    "reps": 10,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Post-opératoire"
+    ],
+    "timer_config": {
+      "cycles": 10,
+      "maintien": 10,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis droit, pince-nez si besoin, embout entre les lèvres",
+      "Inspirer fort et vite à travers l'appareil, réglé par le kiné",
+      "Expirer lentement et calmement",
+      "Faire 30 inspirations, en pause si besoin, 2 fois par jour"
+    ],
+    "contre_indications": [
+      "Pneumothorax récent",
+      "Chirurgie récente des poumons ou de l'oreille",
+      "Crise d'asthme en cours"
+    ],
+    "difficulte_percue": 3,
+    "duree": "1 × 180 s, repos 0 s",
+    "erreurs_frequentes": [],
+    "ex": 180,
+    "exercise_mode": "renforcement",
+    "id": "RESPI_07",
+    "image": "",
+    "materiel": [
+      "Entraîneur inspiratoire (type Threshold)"
+    ],
+    "muscles_cibles": [
+      "Diaphragme",
+      "Muscles inspiratoires"
+    ],
+    "niveau": 2,
+    "nom": "Entraîneur inspiratoire",
+    "objectif": "Renforcer les muscles inspiratoires",
+    "objectifs": [
+      "Renforcer les muscles inspiratoires"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Réglage de la résistance par le kiné (environ 30 à 50 % de la force maximale)"
+    ],
+    "repos": 0,
+    "reps": 1,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Renforcement"
+    ],
+    "timer_config": {
+      "cycles": 1,
+      "maintien": 180,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, avant-bras posés sur les cuisses ou sur une table",
+      "Relâcher les épaules et la nuque",
+      "Respirer lèvres pincées jusqu'au retour au calme",
+      "Debout : dos appuyé contre un mur, pieds un peu en avant, mains sur les cuisses"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "1 × 120 s, repos 0 s",
+    "erreurs_frequentes": [],
+    "ex": 120,
+    "exercise_mode": "respiration",
+    "id": "RESPI_08",
+    "image": "",
+    "materiel": [
+      "Chaise",
+      "Table"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Position de récupération, penché en avant",
+    "objectif": "Récupérer vite d'un essoufflement",
+    "objectifs": [
+      "Récupérer vite d'un essoufflement"
+    ],
+    "pathologies": [
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [],
+    "repos": 0,
+    "reps": 1,
+    "respiration": [],
+    "tags": [
+      "Respiration",
+      "Essoufflement"
+    ],
+    "timer_config": {
+      "cycles": 1,
+      "maintien": 120,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout sur la jambe droite, genou légèrement fléchi",
+      "Sauter sur le côté pour atterrir sur la jambe gauche",
+      "Amortir la réception, genou dans l'axe du pied, et tenir 1 s",
+      "Repartir de l'autre côté"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Genou qui rentre vers l'intérieur à la réception",
+      "Réception bruyante"
+    ],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_01",
+    "image": "",
+    "materiel": [
+      "Aucun"
+    ],
+    "muscles_cibles": [
+      "Fessiers",
+      "Quadriceps",
+      "Mollets"
+    ],
+    "niveau": 3,
+    "nom": "Sauts latéraux du patineur (skater jumps)",
+    "objectif": "Préparer les changements de direction",
+    "objectifs": [
+      "Préparer les changements de direction"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Entorse / instabilité de cheville",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Pliométrie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Enchaîner sans pause",
+      "Saut plus long"
+    ],
+    "version_facile": [
+      "Petit pas chassé sans saut"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, pieds à largeur des épaules",
+      "Descendre en squat, puis sauter le plus haut possible",
+      "Réception sur l'avant des pieds, genoux souples et dans l'axe",
+      "Se stabiliser 1 s avant le saut suivant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Réception jambes tendues",
+      "Genoux en dedans"
+    ],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_02",
+    "image": "",
+    "materiel": [
+      "Aucun"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers",
+      "Mollets"
+    ],
+    "niveau": 3,
+    "nom": "Squat sauté (squat jump)",
+    "objectif": "Développer l'explosivité et la réception",
+    "objectifs": [
+      "Développer l'explosivité et la réception"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Pliométrie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Enchaîner les sauts"
+    ],
+    "version_facile": [
+      "Montées sur pointes rapides"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout sur une box de 20 à 30 cm",
+      "Se laisser tomber devant la box (ne pas sauter)",
+      "Réception sur les deux pieds, genoux dans l'axe, et rebondir aussitôt vers le haut",
+      "Recevoir à nouveau en amortissant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Genoux qui rentrent",
+      "Contact au sol trop long"
+    ],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_03",
+    "image": "",
+    "materiel": [
+      "Box ou marche solide (20-30 cm)"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Mollets",
+      "Fessiers"
+    ],
+    "niveau": 4,
+    "nom": "Drop jump (descente puis rebond)",
+    "objectif": "Travailler le contrôle à l'impact",
+    "objectifs": [
+      "Travailler le contrôle à l'impact"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Seulement après accord du kiné (phase de retour au sport)"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Pliométrie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Réception sans rebond"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Position de fente, genou arrière près du sol",
+      "Sauter et inverser les jambes en l'air",
+      "Retomber en fente, genou avant au-dessus du pied",
+      "Garder le buste droit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Genou avant qui dépasse en dedans"
+    ],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_04",
+    "image": "",
+    "materiel": [
+      "Aucun"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 4,
+    "nom": "Fentes sautées",
+    "objectif": "Puissance et contrôle en fente",
+    "objectifs": [
+      "Puissance et contrôle en fente"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Pliométrie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Fentes alternées sans saut"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Deux plots écartés de 4 à 5 m",
+      "Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
+      "Toucher le plot de la main avant de repartir",
+      "Ne pas croiser les pieds"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "4 × 20 s, repos 40 s",
+    "erreurs_frequentes": [
+      "Se redresser",
+      "Pieds qui se croisent"
+    ],
+    "ex": 20,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_05",
+    "image": "",
+    "materiel": [
+      "2 plots"
+    ],
+    "muscles_cibles": [
+      "Fessiers",
+      "Adducteurs",
+      "Mollets"
+    ],
+    "niveau": 3,
+    "nom": "Déplacements latéraux entre plots",
+    "objectif": "Préparer les déplacements latéraux du sport",
+    "objectifs": [
+      "Préparer les déplacements latéraux du sport"
+    ],
+    "pathologies": [
+      "Entorse / instabilité de cheville",
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 40,
+    "reps": 4,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Agilité"
+    ],
+    "timer_config": {
+      "cycles": 4,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Avec élastique autour des chevilles"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Se déplacer sur le côté",
+      "Croiser un pied devant puis derrière l'autre en alternance",
+      "Laisser les hanches tourner, les épaules restent face à l'avant",
+      "Revenir dans l'autre sens"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "4 × 20 s, repos 40 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_06",
+    "image": "",
+    "materiel": [
+      "Aucun"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Carioca (pas croisés latéraux)",
+    "objectif": "Coordination et rotations de hanche",
+    "objectifs": [
+      "Coordination et rotations de hanche"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 40,
+    "reps": 4,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Agilité"
+    ],
+    "timer_config": {
+      "cycles": 4,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Plus vite, genou haut au croisé avant"
+    ],
+    "version_facile": [
+      "Lentement en marchant"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
+      "Corps aligné des genoux aux épaules",
+      "Se pencher en avant le plus lentement possible en freinant avec l'arrière des cuisses",
+      "Se rattraper avec les mains, puis remonter en poussant sur les mains"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Casser au niveau des hanches"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "SPORT_07",
+    "image": "",
+    "materiel": [
+      "Tapis",
+      "Partenaire ou point d'ancrage pour les chevilles"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers"
+    ],
+    "niveau": 4,
+    "nom": "Nordic hamstring",
+    "objectif": "Renforcer les ischio-jambiers en excentrique",
+    "objectifs": [
+      "Renforcer les ischio-jambiers en excentrique"
+    ],
+    "pathologies": [
+      "Lésion des ischio-jambiers",
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Pas en phase aiguë d'une lésion des ischio-jambiers",
+      "Courbatures attendues les premiers jours"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Excentrique"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Descente partielle",
+      "Avec un élastique qui aide"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout sur une marche, sur une jambe",
+      "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
+      "Effleurer le sol du talon sans s'y appuyer",
+      "Remonter et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [
+      "Genou qui part vers l'intérieur",
+      "Bassin qui penche"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "SPORT_08",
+    "image": "",
+    "materiel": [
+      "Marche ou step"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Moyen fessier"
+    ],
+    "niveau": 2,
+    "nom": "Descente de marche excentrique (step-down)",
+    "objectif": "Contrôle du genou en descente",
+    "objectifs": [
+      "Contrôle du genou en descente"
+    ],
+    "pathologies": [
+      "Syndrome fémoro-patellaire",
+      "Tendinopathie rotulienne",
+      "Ligament croisé (LCA)"
+    ],
+    "precautions": [],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Genou"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Marche plus haute",
+      "Gilet lesté"
+    ],
+    "version_facile": [
+      "Marche plus basse"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout sur une jambe derrière une ligne",
+      "Sauter le plus loin possible en avant sur la même jambe",
+      "Tenir la réception 2 s sans poser l'autre pied",
+      "Comparer les distances des deux jambes"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 20 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Réception déséquilibrée",
+      "Genou en dedans"
+    ],
+    "ex": 20,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_09",
+    "image": "",
+    "materiel": [
+      "Ligne au sol",
+      "Mètre"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers",
+      "Mollets"
+    ],
+    "niveau": 4,
+    "nom": "Sauts sur une jambe en avant (hop)",
+    "objectif": "Évaluer et entraîner la puissance d'une jambe",
+    "objectifs": [
+      "Évaluer et entraîner la puissance d'une jambe"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Seulement après accord du kiné"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Pliométrie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "3 sauts enchaînés",
+      "Sauts en croisé"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Sprinter sur 5 à 10 m",
+      "Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
+      "S'arrêter en équilibre, pieds écartés",
+      "Revenir en marchant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "5 × 10 s, repos 60 s",
+    "erreurs_frequentes": [
+      "S'arrêter jambes tendues"
+    ],
+    "ex": 10,
+    "exercise_mode": "dynamique",
+    "id": "SPORT_10",
+    "image": "",
+    "materiel": [
+      "Espace de 15 m",
+      "Plots"
+    ],
+    "muscles_cibles": [],
+    "niveau": 4,
+    "nom": "Sprint court avec arrêt",
+    "objectif": "Préparer les décélérations du sport",
+    "objectifs": [
+      "Préparer les décélérations du sport"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 5,
+    "respiration": [],
+    "tags": [
+      "Sport",
+      "Course"
+    ],
+    "timer_config": {
+      "cycles": 5,
+      "maintien": 10,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Arrêt puis changement de direction"
+    ],
+    "version_facile": [
+      "Course à 50 %"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
+      "Marcher en enjambant chaque obstacle, genou bien levé",
+      "Regarder devant soi, pas seulement ses pieds",
+      "Faire demi-tour lentement et revenir"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Traîner les pieds"
+    ],
+    "ex": 60,
+    "exercise_mode": "equilibre",
+    "id": "GERIA_01",
+    "image": "",
+    "materiel": [
+      "Petits obstacles",
+      "Couloir"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche avec obstacles",
+    "objectif": "Lever les pieds et ne plus trébucher",
+    "objectifs": [
+      "Lever les pieds et ne plus trébucher"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Maladie de Parkinson"
+    ],
+    "precautions": [
+      "Près d'un mur ou avec quelqu'un à côté"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Senior",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Obstacles plus hauts",
+      "En comptant à voix haute"
+    ],
+    "version_facile": [
+      "Obstacles plus bas"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, une main sur le dossier d'une chaise stable",
+      "Un objet léger posé au sol à côté du pied",
+      "Plier les genoux et les hanches pour descendre, dos droit, et attraper l'objet",
+      "Remonter en poussant sur les jambes, puis reposer l'objet"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Se pencher en arrondissant le dos"
+    ],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "GERIA_02",
+    "image": "",
+    "materiel": [
+      "Chaise stable",
+      "Objet léger"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Ramasser un objet au sol",
+    "objectif": "Ramasser un objet sans risque de chute",
+    "objectifs": [
+      "Ramasser un objet sans risque de chute"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Ostéoporose"
+    ],
+    "precautions": [
+      "Remonter lentement pour éviter la tête qui tourne"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Senior",
+      "Vie quotidienne"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Objet posé sur une marche"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
+      "Pieds écartés à largeur de bassin, trouver l'équilibre",
+      "Fermer les yeux et tenir",
+      "Rapprocher les pieds quand c'est facile"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 20 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "equilibre",
+    "id": "GERIA_03",
+    "image": "",
+    "materiel": [
+      "Chaise stable"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Équilibre yeux fermés près d'une chaise",
+    "objectif": "Garder l'équilibre sans la vue",
+    "objectifs": [
+      "Garder l'équilibre sans la vue"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Vertiges / vestibulaire"
+    ],
+    "precautions": [
+      "Rattraper le dossier dès qu'on vacille",
+      "Quelqu'un à côté au début"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Senior",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pieds joints",
+      "Pied devant l'autre"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout derrière une chaise, mains sur le dossier",
+      "Monter lentement sur la pointe des pieds",
+      "Tenir 2 s en haut",
+      "Redescendre doucement sur les talons"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "GERIA_04",
+    "image": "",
+    "materiel": [
+      "Chaise stable"
+    ],
+    "muscles_cibles": [
+      "Mollets"
+    ],
+    "niveau": 1,
+    "nom": "Montées sur pointes de pieds à la chaise",
+    "objectif": "Renforcer les mollets pour mieux marcher",
+    "objectifs": [
+      "Renforcer les mollets pour mieux marcher"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Ostéoporose"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Senior",
+      "Mollets"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Une main seulement",
+      "Sur une jambe"
+    ],
+    "version_facile": [
+      "Petite hauteur"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis par terre, mains derrière soi, pieds à plat",
+      "Lever les fesses du sol",
+      "Avancer et reculer à quatre pattes « sur le dos », comme un crabe",
+      "Garder les fesses en l'air"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 20 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "renforcement",
+    "id": "PEDIA_01",
+    "image": "",
+    "materiel": [
+      "Tapis ou sol propre"
+    ],
+    "muscles_cibles": [
+      "Épaules",
+      "Fessiers",
+      "Gainage"
+    ],
+    "niveau": 2,
+    "nom": "La marche du crabe",
+    "objectif": "Force des bras et du tronc en jouant",
+    "objectifs": [
+      "Force des bras et du tronc en jouant"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Jeu"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Course de crabes"
+    ],
+    "version_facile": [
+      "Rester en place, fesses levées"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Dessiner ou poser une marelle au sol",
+      "Sauter à cloche-pied dans les cases simples, à deux pieds dans les doubles",
+      "Ne pas marcher sur les traits",
+      "Changer de pied à chaque partie"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "PEDIA_02",
+    "image": "",
+    "materiel": [
+      "Craie ou ruban adhésif"
+    ],
+    "muscles_cibles": [
+      "Mollets",
+      "Quadriceps"
+    ],
+    "niveau": 2,
+    "nom": "La marelle à cloche-pied",
+    "objectif": "Équilibre et coordination en sautant",
+    "objectifs": [
+      "Équilibre et coordination en sautant"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Jeu"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "À deux pieds partout"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les hanches",
+      "Lever un pied et le poser contre l'autre genou, comme un flamant",
+      "Tenir le plus longtemps possible, on compte ensemble",
+      "Changer de jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 20 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "equilibre",
+    "id": "PEDIA_03",
+    "image": "",
+    "materiel": [
+      "Aucun"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Le flamant rose",
+    "objectif": "Équilibre sur une jambe",
+    "objectifs": [
+      "Équilibre sur une jambe"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Yeux fermés",
+      "Sur un coussin"
+    ],
+    "version_facile": [
+      "Pied posé contre la cheville"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Face à un adulte, à 2 ou 3 m",
+      "Lancer le ballon à deux mains",
+      "L'attraper en tendant les bras, puis en le ramenant contre soi",
+      "Reculer d'un pas à chaque réussite"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "dynamique",
+    "id": "PEDIA_04",
+    "image": "",
+    "materiel": [
+      "Ballon"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Lancer et attraper un ballon",
+    "objectif": "Coordination yeux-mains",
+    "objectifs": [
+      "Coordination yeux-mains"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Jeu"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Sur une jambe",
+      "Petite balle",
+      "Lancer d'une main"
+    ],
+    "version_facile": [
+      "Gros ballon, de près"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le ventre, bras tendus sur le côté comme des ailes",
+      "Lever la tête, les bras et les jambes en même temps",
+      "Regarder le sol pour garder la nuque longue",
+      "Tenir en faisant « l'avion », puis se reposer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 15 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 15,
+    "exercise_mode": "renforcement",
+    "id": "PEDIA_05",
+    "image": "",
+    "materiel": [
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Muscles du dos",
+      "Fessiers"
+    ],
+    "niveau": 1,
+    "nom": "L'avion à plat ventre",
+    "objectif": "Renforcer le dos en jouant",
+    "objectifs": [
+      "Renforcer le dos en jouant"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant",
+      "Scoliose / posture"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 15,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Bras seuls ou jambes seules"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "À plat ventre sur un tapis",
+      "Avancer en tirant sur les avant-bras et en poussant avec les jambes",
+      "Bras et jambe opposés travaillent ensemble",
+      "Passer sous une table ou un tunnel"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "PEDIA_06",
+    "image": "",
+    "materiel": [
+      "Tapis",
+      "Table ou tunnel"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Ramper comme un soldat",
+    "objectif": "Coordination bras-jambes opposés",
+    "objectifs": [
+      "Coordination bras-jambes opposés"
+    ],
+    "pathologies": [
+      "Développement moteur de l'enfant"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pédiatrie",
+      "Coordination"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "À quatre pattes ensuite",
+      "Parcours"
+    ],
+    "version_facile": [
+      "Courte distance"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Pédiatrie"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Poignet et main",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé, le bras posé sur des coussins, la main plus haute que le coude",
+      "Ouvrir grand la main puis serrer le poing, lentement",
+      "Puis plier et tendre le poignet",
+      "Respirer calmement pendant tout l'exercice"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "ONCO_01",
+    "image": "",
+    "materiel": [
+      "Coussins"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pompage doigts et poignet, bras surélevé",
+    "objectif": "Aider le retour de la lymphe",
+    "objectifs": [
+      "Aider le retour de la lymphe"
+    ],
+    "pathologies": [
+      "Lymphœdème",
+      "Après cancer du sein"
+    ],
+    "precautions": [
+      "Porter le manchon de compression si le médecin l'a prescrit",
+      "Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lymphœdème",
+      "Main"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Oncologie et lymphœdème"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé, le bras posé sur des coussins plus haut que le cœur",
+      "Plier le coude pour amener la main vers l'épaule",
+      "Tendre le coude lentement",
+      "Garder la main ouverte et détendue"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "ONCO_02",
+    "image": "",
+    "materiel": [
+      "Coussins"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Flexion-extension du coude, bras surélevé",
+    "objectif": "Aider le retour de la lymphe",
+    "objectifs": [
+      "Aider le retour de la lymphe"
+    ],
+    "pathologies": [
+      "Lymphœdème",
+      "Après cancer du sein"
+    ],
+    "precautions": [
+      "Porter le manchon de compression si le médecin l'a prescrit",
+      "Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lymphœdème",
+      "Coude"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Oncologie et lymphœdème"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)",
+      "Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
+      "Aller un peu plus loin jour après jour",
+      "Redescendre lentement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Forcer dans la douleur",
+      "Cambrer le bas du dos"
+    ],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "ONCO_03",
+    "image": "",
+    "materiel": [
+      "Tapis ou lit",
+      "Bâton (facultatif)"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Élévation du bras, allongé",
+    "objectif": "Retrouver l'amplitude de l'épaule",
+    "objectifs": [
+      "Retrouver l'amplitude de l'épaule"
+    ],
+    "pathologies": [
+      "Lymphœdème",
+      "Après cancer du sein",
+      "Capsulite rétractile"
+    ],
+    "precautions": [
+      "Porter le manchon de compression si le médecin l'a prescrit",
+      "Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup",
+      "Après une chirurgie : respecter les consignes du chirurgien sur l'amplitude"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lymphœdème",
+      "Épaule"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Oncologie et lymphœdème"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Respiration",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis ou allongé, bras le long du corps",
+      "Inspirer par le nez en gonflant le ventre et en levant les bras",
+      "Expirer lentement par la bouche en redescendant les bras",
+      "Garder un rythme lent"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "respiration",
+    "id": "ONCO_04",
+    "image": "",
+    "materiel": [
+      "Chaise ou lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Respiration ample avec les bras",
+    "objectif": "La respiration profonde aide le drainage lymphatique",
+    "objectifs": [
+      "La respiration profonde aide le drainage lymphatique"
+    ],
+    "pathologies": [
+      "Lymphœdème",
+      "Après cancer du sein",
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [
+      "Porter le manchon de compression si le médecin l'a prescrit",
+      "Consulter vite si le bras devient rouge, chaud ou gonfle d'un coup"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lymphœdème",
+      "Respiration"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Oncologie et lymphœdème"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
+      "Bras croisés sur la poitrine",
+      "Descendre le buste en pliant les hanches, dos droit",
+      "Remonter jusqu'à l'alignement jambes-buste, sans cambrer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Remonter au-delà de l'alignement (hyperextension)"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_01",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Fessiers",
+      "Ischio-jambiers"
+    ],
+    "niveau": 1,
+    "nom": "Extension lombaire à 45°, bras croisés",
+    "objectif": "Renforcer les muscles du dos",
+    "objectifs": [
+      "Renforcer les muscles du dos"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Mains derrière la tête"
+    ],
+    "version_facile": [
+      "Amplitude réduite"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, bassin au bord des coussins",
+      "Monter jusqu'à l'alignement jambes-buste",
+      "Tenir la position, bras croisés, en respirant",
+      "Redescendre lentement à la fin du temps"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Bloquer la respiration",
+      "Cambrer"
+    ],
+    "ex": 30,
+    "exercise_mode": "isometrique",
+    "id": "CHAISE_02",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Fessiers"
+    ],
+    "niveau": 1,
+    "nom": "Maintien isométrique corps aligné",
+    "objectif": "Endurance des muscles du dos",
+    "objectifs": [
+      "Endurance des muscles du dos"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Gainage"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Tenir 45 s"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi",
+      "Garder le dos rond pendant tout le mouvement",
+      "Remonter en serrant les fessiers",
+      "Redescendre lentement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tirer avec les lombaires"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_03",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Fessiers",
+      "Ischio-jambiers"
+    ],
+    "niveau": 2,
+    "nom": "Extension de hanche dos rond",
+    "objectif": "Renforcer fessiers et ischio-jambiers en protégeant le dos",
+    "objectifs": [
+      "Renforcer fessiers et ischio-jambiers en protégeant le dos"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise",
+      "Tendinopathie du moyen fessier"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, bassin au bord des coussins",
+      "Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)",
+      "Descendre lentement, dos droit",
+      "Remonter jusqu'à l'alignement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tirer la tête vers l'avant"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_04",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Extension lombaire mains derrière la tête",
+    "objectif": "Renforcer le dos avec plus de charge",
+    "objectifs": [
+      "Renforcer le dos avec plus de charge"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Bras croisés"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, bras croisés",
+      "Remonter jusqu'à l'alignement",
+      "En haut, tourner le buste d'un côté puis revenir au centre",
+      "Redescendre, puis tourner de l'autre côté à la remontée suivante"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tourner pendant la remontée"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_05",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Obliques"
+    ],
+    "niveau": 2,
+    "nom": "Extension lombaire avec rotation en haut",
+    "objectif": "Renforcer le dos en rotation",
+    "objectifs": [
+      "Renforcer le dos en rotation"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Bassin juste au bord des coussins (pas le ventre dessus) : la flexion se fait à la hanche"
+    ],
+    "consignes": [
+      "Sur la chaise romaine, tenir un disque contre la poitrine",
+      "Descendre lentement, dos droit",
+      "Remonter jusqu'à l'alignement",
+      "Augmenter la charge par petites étapes"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Remonter avec un élan"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_06",
+    "image": "",
+    "materiel": [
+      "Chaise romaine",
+      "Disque de 2,5 à 10 kg"
+    ],
+    "muscles_cibles": [
+      "Érecteurs du rachis",
+      "Fessiers"
+    ],
+    "niveau": 3,
+    "nom": "Extension lombaire avec disque contre la poitrine",
+    "objectif": "Renforcer le dos en charge",
+    "objectifs": [
+      "Renforcer le dos en charge"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups",
+      "Pas de douleur pendant ni le lendemain"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Mains derrière la tête sans charge"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Tronc",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Sur la chaise romaine, couché sur le côté, hanche sur le coussin, pieds calés",
+      "Bras croisés sur la poitrine",
+      "Descendre le buste sur le côté, puis remonter jusqu'à l'alignement",
+      "Changer de côté"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tourner le buste vers le sol"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_07",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Carré des lombes",
+      "Obliques"
+    ],
+    "niveau": 3,
+    "nom": "Flexion latérale couché sur le côté",
+    "objectif": "Renforcer les côtés du tronc",
+    "objectifs": [
+      "Renforcer les côtés du tronc"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les coussins à hauteur du haut des cuisses",
+      "Mouvement lent, sans à-coups"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Tronc"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "À genoux sur le coussin, chevilles bloquées sous les rouleaux",
+      "Corps aligné des genoux aux épaules, bras devant",
+      "Descendre vers l'avant le plus lentement possible",
+      "Se rattraper avec les mains et remonter en s'aidant des mains"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Plier aux hanches"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "CHAISE_08",
+    "image": "",
+    "materiel": [
+      "Chaise romaine"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers"
+    ],
+    "niveau": 3,
+    "nom": "Nordic hamstring assisté sur chaise romaine",
+    "objectif": "Renforcer les ischio-jambiers en excentrique",
+    "objectifs": [
+      "Renforcer les ischio-jambiers en excentrique"
+    ],
+    "pathologies": [
+      "Lésion des ischio-jambiers",
+      "Ligament croisé (LCA)",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Pas en phase aiguë d'une lésion des ischio-jambiers"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Sport"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Descente partielle"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "specialites": [
+      "Sport"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
+      "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
+      "Ne pas s'affaler : effleurer et remonter",
+      "Pousser dans tout le pied pour se relever"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Genoux qui rentrent",
+      "Talons qui décollent"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_01",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques",
+      "Banc"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 1,
+    "nom": "Squat sur box",
+    "objectif": "Apprendre le squat en sécurité",
+    "objectifs": [
+      "Apprendre le squat en sécurité"
+    ],
+    "pathologies": [
+      "Gonarthrose / prothèse de genou",
+      "Ligament croisé (LCA)",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Squat"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Banc plus bas",
+      "Plus de charge"
+    ],
+    "version_facile": [
+      "Sans barre",
+      "Banc plus haut"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
+      "Sortir du rack en deux pas, pieds à largeur d'épaules",
+      "Descendre en poussant les fesses en arrière, cuisses au moins parallèles si possible",
+      "Remonter en poussant dans le sol, genoux dans l'axe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Dos qui s'arrondit en bas",
+      "Genoux en dedans"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_02",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers",
+      "Érecteurs du rachis"
+    ],
+    "niveau": 2,
+    "nom": "Squat barre sur les trapèzes (back squat)",
+    "objectif": "Renforcer les jambes en charge",
+    "objectifs": [
+      "Renforcer les jambes en charge"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Gonarthrose / prothèse de genou",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Squat"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Squat sur box"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Barre sur les trapèzes",
+      "Descendre en 3 s en comptant",
+      "Tenir 2 s en bas, sans rebondir",
+      "Remonter en 1 s"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 45 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Rebondir en bas"
+    ],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_03",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 3,
+    "nom": "Squat tempo (descente 3 s, pause en bas)",
+    "objectif": "Contrôle et force du genou",
+    "objectifs": [
+      "Contrôle et force du genou"
+    ],
+    "pathologies": [
+      "Tendinopathie rotulienne",
+      "Ligament croisé (LCA)",
+      "Syndrome fémoro-patellaire"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Squat"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis",
+      "Pencher le buste en avant en poussant les fesses en arrière, dos droit",
+      "Descendre jusqu'à sentir l'étirement derrière les cuisses",
+      "Remonter en serrant les fessiers"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Arrondir le dos",
+      "Plier trop les genoux"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_04",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers",
+      "Fessiers",
+      "Érecteurs du rachis"
+    ],
+    "niveau": 2,
+    "nom": "Good morning barre sur les trapèzes",
+    "objectif": "Charnière de hanche en charge",
+    "objectifs": [
+      "Charnière de hanche en charge"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Lésion des ischio-jambiers",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Ischio-jambiers"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Avec un bâton"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre collée aux jambes",
+      "Dos neutre"
+    ],
+    "consignes": [
+      "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
+      "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
+      "Descendre jusqu'à mi-tibias, dos droit",
+      "Remonter en serrant les fessiers"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Barre qui s'éloigne des jambes",
+      "Dos rond"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_05",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers",
+      "Fessiers",
+      "Érecteurs du rachis"
+    ],
+    "niveau": 2,
+    "nom": "Soulevé de terre roumain",
+    "objectif": "Renforcer la chaîne postérieure",
+    "objectifs": [
+      "Renforcer la chaîne postérieure"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Lésion des ischio-jambiers",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Ischio-jambiers"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Barre sur les trapèzes, pieds à largeur de bassin",
+      "Reculer un pied et descendre le genou arrière vers le sol",
+      "Genou avant au-dessus du pied, buste droit",
+      "Revenir en poussant sur le pied avant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Genou avant qui rentre"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_06",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Fente arrière barre sur les trapèzes",
+    "objectif": "Force et équilibre en fente",
+    "objectifs": [
+      "Force et équilibre en fente"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Syndrome fémoro-patellaire",
+      "Coxarthrose / prothèse de hanche"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Fente"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sans barre, mains sur les hanches"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Dos à un banc, le dessus du pied arrière posé sur le banc",
+      "Barre sur les trapèzes (ou haltères)",
+      "Descendre en pliant le genou avant, buste légèrement penché",
+      "Remonter en poussant dans le talon avant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 40 s, repos 90 s",
+    "erreurs_frequentes": [
+      "Genou avant en dedans",
+      "Pied avant trop près du banc"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_07",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques",
+      "Banc"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 3,
+    "nom": "Split squat bulgare, pied arrière sur banc",
+    "objectif": "Renforcer une jambe à la fois",
+    "objectifs": [
+      "Renforcer une jambe à la fois"
+    ],
+    "pathologies": [
+      "Ligament croisé (LCA)",
+      "Tendinopathie rotulienne",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Fente"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sans charge"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Menton rentré, regard vers les genoux"
+    ],
+    "consignes": [
+      "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
+      "Pieds à plat, genoux pliés à 90° en haut",
+      "Monter le bassin en serrant les fessiers jusqu'à l'alignement épaules-genoux",
+      "Redescendre sans poser les fesses"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Cambrer en haut"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_08",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Mousse de barre",
+      "Disques",
+      "Banc"
+    ],
+    "muscles_cibles": [
+      "Fessiers",
+      "Ischio-jambiers"
+    ],
+    "niveau": 2,
+    "nom": "Hip thrust barre",
+    "objectif": "Renforcer les fessiers",
+    "objectifs": [
+      "Renforcer les fessiers"
+    ],
+    "pathologies": [
+      "Tendinopathie du moyen fessier",
+      "Lombalgie",
+      "Ligament croisé (LCA)"
+    ],
+    "precautions": [],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sans barre"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Barre sur les trapèzes, jamais sur la nuque",
+      "Dos neutre, genoux dans l'axe des pieds"
+    ],
+    "consignes": [
+      "Barre sur les trapèzes, pieds à largeur de bassin",
+      "Monter lentement sur la pointe des pieds",
+      "Tenir 1 s en haut",
+      "Redescendre en 3 s"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Rebondir"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_09",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Rack",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Mollets"
+    ],
+    "niveau": 2,
+    "nom": "Montées sur pointes debout, barre sur les trapèzes",
+    "objectif": "Renforcer les mollets en charge",
+    "objectifs": [
+      "Renforcer les mollets en charge"
+    ],
+    "pathologies": [
+      "Tendinopathie d'Achille",
+      "Entorse / instabilité de cheville",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Régler les sécurités du rack juste sous la position basse",
+      "Charge choisie avec le kiné"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Mollets"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Avant-pieds sur un disque"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos neutre, nuque dans l'axe"
+    ],
+    "consignes": [
+      "Debout, barre tenue mains en pronation, genoux fléchis",
+      "Pencher le buste à 45°, dos droit",
+      "Tirer la barre vers le nombril en serrant les omoplates",
+      "Redescendre lentement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Tirer avec les bras seuls",
+      "Dos rond"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "BARRE_10",
+    "image": "",
+    "materiel": [
+      "Barre de squat",
+      "Disques"
+    ],
+    "muscles_cibles": [
+      "Dorsaux",
+      "Rhomboïdes",
+      "Érecteurs du rachis"
+    ],
+    "niveau": 2,
+    "nom": "Rowing barre buste penché",
+    "objectif": "Renforcer le haut du dos",
+    "objectifs": [
+      "Renforcer le haut du dos"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Scoliose / posture",
+      "Cervicalgie"
+    ],
+    "precautions": [],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Dos"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Monter sur la plaque, pieds à largeur de bassin, mains sur le guidon",
+      "Genoux légèrement fléchis, poids réparti sur tout le pied",
+      "Rester détendu pendant la vibration",
+      "Descendre lentement à la fin"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "statique",
+    "id": "PLAQUE_01",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Debout statique sur plaque vibrante",
+    "objectif": "S'habituer à la vibration",
+    "objectifs": [
+      "S'habituer à la vibration"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Démarrer à faible intensité"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Mains sur le guidon, pieds à largeur de bassin",
+      "Descendre en demi-squat, fesses en arrière",
+      "Tenir la position pendant la vibration",
+      "Remonter doucement"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "isometrique",
+    "id": "PLAQUE_02",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 1,
+    "nom": "Demi-squat statique sur plaque vibrante",
+    "objectif": "Renforcer les cuisses",
+    "objectifs": [
+      "Renforcer les cuisses"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Gonarthrose / prothèse de genou"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Sur la plaque, sans tenir le guidon (mains prêtes)",
+      "Descendre en 3 s en demi-squat",
+      "Remonter en 2 s sans tendre complètement les genoux",
+      "Enchaîner pendant la vibration"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_03",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Squat dynamique lent sur plaque vibrante",
+    "objectif": "Renforcer les jambes",
+    "objectifs": [
+      "Renforcer les jambes"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Mains sur le guidon, genoux légèrement fléchis",
+      "Monter sur la pointe des pieds",
+      "Redescendre lentement",
+      "Enchaîner pendant la vibration"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_04",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [
+      "Mollets"
+    ],
+    "niveau": 2,
+    "nom": "Montées sur pointes sur plaque vibrante",
+    "objectif": "Renforcer les mollets",
+    "objectifs": [
+      "Renforcer les mollets"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Tendinopathie d'Achille"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Pied avant sur la plaque, pied arrière au sol derrière",
+      "Mains sur le guidon",
+      "Descendre en fente, genou avant au-dessus du pied, et tenir",
+      "Changer de jambe"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Genou avant qui rentre"
+    ],
+    "ex": 30,
+    "exercise_mode": "isometrique",
+    "id": "PLAQUE_05",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Fente statique, pied avant sur la plaque",
+    "objectif": "Renforcer une jambe à la fois",
+    "objectifs": [
+      "Renforcer une jambe à la fois"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Ligament croisé (LCA)"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Mains légèrement posées sur le guidon",
+      "Lever un pied, genou d'appui légèrement fléchi",
+      "Tenir en lâchant progressivement le guidon",
+      "Changer de jambe"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 20 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "equilibre",
+    "id": "PLAQUE_06",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Équilibre sur une jambe sur plaque vibrante",
+    "objectif": "Équilibre et proprioception",
+    "objectifs": [
+      "Équilibre et proprioception"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Entorse / instabilité de cheville"
+    ],
+    "precautions": [
+      "Garder une main prête à rattraper le guidon"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos au sol, pieds posés sur la plaque, genoux pliés",
+      "Monter le bassin en serrant les fessiers",
+      "Tenir ou monter-descendre lentement pendant la vibration",
+      "Redescendre doucement"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_07",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Fessiers",
+      "Ischio-jambiers"
+    ],
+    "niveau": 1,
+    "nom": "Pont fessier, pieds sur la plaque",
+    "objectif": "Renforcer les fessiers",
+    "objectifs": [
+      "Renforcer les fessiers"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Lombalgie"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Tronc",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avant-bras posés sur la plaque, pieds au sol derrière",
+      "Corps aligné des épaules aux chevilles",
+      "Tenir en respirant pendant la vibration",
+      "Poser les genoux pour finir"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 4,
+    "duree": "3 × 20 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "gainage",
+    "id": "PLAQUE_08",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Transverse",
+      "Grand droit"
+    ],
+    "niveau": 3,
+    "nom": "Planche, avant-bras sur la plaque",
+    "objectif": "Gainage avec vibration",
+    "objectifs": [
+      "Gainage avec vibration"
+    ],
+    "pathologies": [
+      "Lombalgie",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Genoux au sol"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol",
+      "Coudes légèrement fléchis, jamais verrouillés",
+      "Descendre la poitrine vers la plaque puis remonter",
+      "Garder le corps gainé"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 4,
+    "duree": "3 × 20 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 20,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_09",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Dentelé antérieur"
+    ],
+    "niveau": 3,
+    "nom": "Pompes mains sur la plaque",
+    "objectif": "Renforcer bras et épaules",
+    "objectifs": [
+      "Renforcer bras et épaules"
+    ],
+    "pathologies": [
+      "Déconditionnement / reprise",
+      "Instabilité / luxation d'épaule"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 20,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Genoux au sol",
+      "Position tenue sans descendre"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Sur la plaque, une poignée de sangle dans chaque main",
+      "Demi-squat, buste droit",
+      "Tirer les poignées vers les côtes en serrant les omoplates",
+      "Relâcher lentement"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_10",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Sangles élastiques de la plaque"
+    ],
+    "muscles_cibles": [
+      "Dorsaux",
+      "Rhomboïdes",
+      "Quadriceps"
+    ],
+    "niveau": 2,
+    "nom": "Rowing aux sangles en demi-squat",
+    "objectif": "Renforcer le dos et les jambes",
+    "objectifs": [
+      "Renforcer le dos et les jambes"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise",
+      "Cervicalgie"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Genoux toujours légèrement fléchis, jamais verrouillés (la vibration ne doit pas monter à la tête)"
+    ],
+    "consignes": [
+      "Sur la plaque, une poignée de sangle dans chaque main, bras le long du corps",
+      "Coudes collés au corps, plier les coudes pour monter les mains",
+      "Redescendre lentement",
+      "Garder les genoux légèrement fléchis"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "PLAQUE_11",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Sangles élastiques de la plaque"
+    ],
+    "muscles_cibles": [
+      "Biceps"
+    ],
+    "niveau": 2,
+    "nom": "Curl biceps aux sangles",
+    "objectif": "Renforcer les bras",
+    "objectifs": [
+      "Renforcer les bras"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au sol, talons posés sur la plaque, jambes tendues",
+      "Se pencher en avant dos droit jusqu'à sentir l'étirement",
+      "Tenir pendant la vibration en respirant",
+      "Revenir doucement"
+    ],
+    "contre_indications": [
+      "Pacemaker ou implant électronique",
+      "Grossesse",
+      "Thrombose récente",
+      "Prothèse ou chirurgie récente",
+      "Épilepsie",
+      "Calculs rénaux ou biliaires",
+      "Décollement de rétine"
+    ],
+    "difficulte_percue": 2,
+    "duree": "2 × 30 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "etirement",
+    "id": "PLAQUE_12",
+    "image": "",
+    "materiel": [
+      "Plaque vibrante",
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Mollets",
+      "Ischio-jambiers"
+    ],
+    "niveau": 1,
+    "nom": "Étirement mollets et ischio-jambiers, assis sur la plaque",
+    "objectif": "Étirer l'arrière des jambes",
+    "objectifs": [
+      "Étirer l'arrière des jambes"
+    ],
+    "pathologies": [
+      "Ostéoporose",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 2,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Plaque vibrante"
+    ],
+    "timer_config": {
+      "cycles": 2,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Se placer à côté du vélo, une main sur la poignée latérale",
+      "Enjamber le cadre bas, puis s'asseoir au fond du siège",
+      "Placer un pied puis l'autre sur les pédales",
+      "Pour descendre : pieds au sol, main sur la poignée, se lever puis enjamber"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "VELO_01",
+    "image": "/exercises/images/velo/monter-velo-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Monter et descendre du vélo semi-allongé",
+    "objectif": "Accéder au vélo en sécurité",
+    "objectifs": [
+      "Accéder au vélo en sécurité"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)",
+      "Senior"
+    ],
+    "precautions": [
+      "Le kiné reste à côté les premières fois"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Assis, tirer le levier sous le siège",
+      "Avancer ou reculer le siège sur le rail",
+      "Pédale au plus loin : le genou doit rester légèrement fléchi",
+      "Relâcher le levier et vérifier que le siège est bloqué"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "1 × 60 s, repos 0 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "mobilite",
+    "id": "VELO_02",
+    "image": "/exercises/images/velo/reglage-siege-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Réglage du siège du vélo semi-allongé",
+    "objectif": "Pédaler dans une position sûre",
+    "objectifs": [
+      "Pédaler dans une position sûre"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [],
+    "repos": 0,
+    "reps": 1,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo"
+    ],
+    "timer_config": {
+      "cycles": 1,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Assis au fond du siège, dos contre le dossier",
+      "Résistance faible",
+      "Pédaler régulièrement, sans forcer",
+      "On doit pouvoir parler facilement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "1 × 300 s, repos 0 s",
+    "erreurs_frequentes": [],
+    "ex": 300,
+    "exercise_mode": "dynamique",
+    "id": "VELO_03",
+    "image": "/exercises/images/velo/pedalage-doux-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pédalage doux d'échauffement",
+    "objectif": "Échauffement articulaire et cardio doux",
+    "objectifs": [
+      "Échauffement articulaire et cardio doux"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)",
+      "Gonarthrose / prothèse de genou",
+      "Coxarthrose / prothèse de hanche"
+    ],
+    "precautions": [],
+    "repos": 0,
+    "reps": 1,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo",
+      "Cardio"
+    ],
+    "timer_config": {
+      "cycles": 1,
+      "maintien": 300,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Résistance faible",
+      "Pédaler en arrière, lentement",
+      "Garder le dos contre le dossier",
+      "Alterner 1 min arrière, 1 min avant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "2 × 60 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "VELO_04",
+    "image": "",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pédalage arrière",
+    "objectif": "Mobiliser le genou et varier le travail musculaire",
+    "objectifs": [
+      "Mobiliser le genou et varier le travail musculaire"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)",
+      "Gonarthrose / prothèse de genou"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 2,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo"
+    ],
+    "timer_config": {
+      "cycles": 2,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Siège un peu reculé, résistance nulle",
+      "Faire un demi-tour de pédale en avant puis revenir en arrière",
+      "Aller un peu plus loin à chaque fois jusqu'à faire le tour complet",
+      "Avancer le siège d'un cran quand le tour complet est facile"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "mobilite",
+    "id": "VELO_05",
+    "image": "/exercises/images/velo/va-et-vient-genou-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Va-et-vient de demi-tours de pédale (amplitude du genou)",
+    "objectif": "Gagner la flexion du genou opéré",
+    "objectifs": [
+      "Gagner la flexion du genou opéré"
+    ],
+    "pathologies": [
+      "Gonarthrose / prothèse de genou",
+      "Post-opératoire",
+      "Ligament croisé (LCA)"
+    ],
+    "precautions": [
+      "Tiraillement acceptable, pas de vraie douleur"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo",
+      "Genou"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Pied atteint fixé sur la pédale par la sangle",
+      "Résistance faible",
+      "Pédaler en pensant à pousser avec la jambe atteinte",
+      "Le kiné vérifie que le genou reste dans l'axe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 120 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 120,
+    "exercise_mode": "dynamique",
+    "id": "VELO_06",
+    "image": "/exercises/images/velo/pedalage-sangle-f.webp",
+    "materiel": [
+      "Vélo semi-allongé",
+      "Sangle de pédale"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pédalage jambe atteinte maintenue par une sangle",
+    "objectif": "Faire travailler la jambe atteinte",
+    "objectifs": [
+      "Faire travailler la jambe atteinte"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo",
+      "Neurologie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 120,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true,
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Après 3 min d'échauffement, augmenter la résistance d'un cran toutes les 2 min",
+      "Rester à un effort où l'on peut encore parler sans être essoufflé",
+      "Garder le même rythme de pédalage",
+      "Finir par 2 min de pédalage doux"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "1 × 900 s, repos 0 s",
+    "erreurs_frequentes": [],
+    "ex": 900,
+    "exercise_mode": "dynamique",
+    "id": "VELO_07",
+    "image": "/exercises/images/velo/pedalage-doux-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Endurance à résistance progressive",
+    "objectif": "Améliorer l'endurance",
+    "objectifs": [
+      "Améliorer l'endurance"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [
+      "Arrêter en cas de douleur thoracique, de malaise ou d'essoufflement inhabituel"
+    ],
+    "repos": 0,
+    "reps": 1,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo",
+      "Cardio"
+    ],
+    "timer_config": {
+      "cycles": 1,
+      "maintien": 900,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [
+      "Dos bien calé contre le dossier",
+      "Genou légèrement fléchi quand la pédale est au plus loin"
+    ],
+    "consignes": [
+      "Alterner 30 s plus vite et 1 min doux",
+      "Variante double tâche : compter à rebours de 3 en 3 ou répondre à des questions en pédalant",
+      "Garder le dos contre le dossier",
+      "Finir par 2 min de pédalage doux"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "6 × 30 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "dynamique",
+    "id": "VELO_08",
+    "image": "/exercises/images/velo/pedalage-doux-f.webp",
+    "materiel": [
+      "Vélo semi-allongé"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Fractionné et double tâche à vélo",
+    "objectif": "Cardio et attention en même temps",
+    "objectifs": [
+      "Cardio et attention en même temps"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise",
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [
+      "Arrêter en cas de douleur thoracique, de malaise ou d'essoufflement inhabituel"
+    ],
+    "repos": 60,
+    "reps": 6,
+    "respiration": [],
+    "tags": [
+      "Cabinet",
+      "Vélo",
+      "Cardio"
+    ],
+    "timer_config": {
+      "cycles": 6,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Double tâche seule, sans accélérer"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "au_cabinet": true
   }
 ]
