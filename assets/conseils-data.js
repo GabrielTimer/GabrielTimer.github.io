@@ -135,6 +135,41 @@ L'activité physique adaptée permet au tendon de retrouver progressivement sa c
 - Marche, renforcement, exercices progressifs, reprise adaptée`
   },
   {
+    id: "c-info-tabac",
+    titre: "Arrêter le tabac",
+    resume: "Un grand pas pour votre santé, à tout âge.",
+    ico: "wind",
+    affiche: "/images/conseils/tabac.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Un grand pas pour votre santé, à tout âge !
+
+- Respiration plus facile
+- Meilleure endurance
+- Cœur en meilleure santé
+- Moins de risques de maladies
+
+Arrêter de fumer, c'est aussi améliorer votre qualité de vie au quotidien.
+
+## Des solutions existent
+Conseils, accompagnement, aides… Parlez-en à votre kinésithérapeute.`
+  },
+  {
+    id: "c-info-cicatrice",
+    titre: "Entretenir une cicatrice",
+    resume: "Une cicatrice bien soignée, c'est une peau plus souple et moins gênante.",
+    ico: "heart",
+    affiche: "/images/conseils/cicatrice.jpg",
+    serie: "L'info kiné du mois",
+    texte: `Une cicatrice bien soignée, c'est une peau plus souple et moins gênante.
+
+- Hydrater régulièrement, avec une crème ou une huile adaptée.
+- Masser en douceur, par petits mouvements circulaires, pendant quelques minutes, 1 à 2 fois par jour.
+- Protéger du soleil avec une crème SPF 50+ pendant au moins 1 an.
+- Surveiller l'évolution : en cas de rougeur persistante, de douleur ou de gonflement, parlez-en à votre kinésithérapeute.
+
+Une bonne prise en charge limite les adhérences, assouplit la peau et améliore l'aspect de la cicatrice.`
+  },
+  {
     id: "c-bouger-mal-dos",
     titre: "Mal de dos : bouger pour guérir",
     resume: "Pourquoi rester actif aide le dos à récupérer, et comment s'y prendre.",
