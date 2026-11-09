@@ -1218,5 +1218,15 @@
   "defaut": "/exercises/images/velo/reglage-siege-f.webp",
   "f": "/exercises/images/velo/reglage-siege-f.webp",
   "h": "/exercises/images/velo/reglage-siege-h.webp"
+ },
+ "/exercises/images/vestibulaire/regard-horizontal-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/regard-horizontal-f.webp",
+  "f": "/exercises/images/vestibulaire/regard-horizontal-f.webp",
+  "h": "/exercises/images/vestibulaire/regard-horizontal-h.webp"
+ },
+ "/exercises/images/vestibulaire/regard-vertical-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/regard-vertical-f.webp",
+  "f": "/exercises/images/vestibulaire/regard-vertical-f.webp",
+  "h": "/exercises/images/vestibulaire/regard-vertical-h.webp"
  }
 }

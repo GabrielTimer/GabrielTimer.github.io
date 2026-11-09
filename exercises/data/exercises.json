@@ -16547,7 +16547,7 @@
     "ex": 30,
     "exercise_mode": "mobilite",
     "id": "VEST_01",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/regard-horizontal-f.webp",
     "materiel": [
       "Chaise",
       "Carte avec une lettre"
@@ -16589,8 +16589,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -16613,7 +16612,7 @@
     "ex": 30,
     "exercise_mode": "mobilite",
     "id": "VEST_02",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/regard-vertical-f.webp",
     "materiel": [
       "Chaise",
       "Carte avec une lettre"
@@ -16654,8 +16653,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

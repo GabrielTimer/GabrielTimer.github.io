@@ -24017,7 +24017,7 @@ export const MODELES_BASE = [
 "id": "VEST_01",
 "source": "CABINET",
 "nom": "Stabilisation du regard horizontale, assis",
-"image": "",
+"image": "/exercises/images/vestibulaire/regard-horizontal-f.webp",
 "consignes": [
 "Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux",
 "Fixer la lettre et tourner la tête de droite à gauche, petits mouvements",
@@ -24038,7 +24038,7 @@ export const MODELES_BASE = [
 "id": "VEST_02",
 "source": "CABINET",
 "nom": "Stabilisation du regard verticale, assis",
-"image": "",
+"image": "/exercises/images/vestibulaire/regard-vertical-f.webp",
 "consignes": [
 "Assis, carte avec une lettre à bras tendu, à hauteur des yeux",
 "Fixer la lettre et faire « oui » de la tête, petits mouvements",
@@ -24417,7 +24417,7 @@ export const MODELES_BASE = [
 "id": "VEST_01",
 "source": "CABINET",
 "nom": "Stabilisation du regard horizontale, assis",
-"image": "",
+"image": "/exercises/images/vestibulaire/regard-horizontal-f.webp",
 "consignes": [
 "Assis, tenir une carte avec une lettre à bras tendu, à hauteur des yeux",
 "Fixer la lettre et tourner la tête de droite à gauche, petits mouvements",
