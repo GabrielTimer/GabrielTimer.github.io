@@ -106,6 +106,7 @@ export function noteHTML(n, { actions = true, long = false } = {}){
  * C : module cloud ; patient : fiche (modifiée sur place) ; onPatient(patch) : après mise à jour.
  */
 export async function mountKineSuivi(box, patient, C){
+  const MAR = await import("./marches.js");
   let suivis = [], questionnaires = [], notes = [], perso = [];
   let err = null;
   box.innerHTML = `<div class="loading"><div class="spinner"></div><span>Chargement du suivi…</span></div>`;
@@ -174,6 +175,8 @@ export async function mountKineSuivi(box, patient, C){
             </div>`; }).join("")}</div>`
           : `<p class="muted small">Proposez un questionnaire validé (Oswestry, QuickDASH…) : le patient le remplit sur son téléphone et le score s'affiche ici.${questionnaires.length ? "" : ` Préparez d'abord vos questionnaires dans <a href="/questionnaires.html">Ressources, Questionnaires</a>.`}</p>`}
         </section>
+
+        ${MAR.panelKineHTML(MAR.marchesDe(suivis), patient.marche || {})}
 
         <section class="panel">
           <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("book", "ic-inline lagon")} Fiches conseils</h2><button class="btn sm" type="button" data-s="c-edit">${icon("edit")}Choisir</button></div>
@@ -275,6 +278,12 @@ export async function mountKineSuivi(box, patient, C){
   document.addEventListener("kine:note-du-jour", () => noteSheet());
 
   const actions = {
+    "mar-reglage": () => MAR.reglageSheet(patient.marche || {}, r => savePatient({ marche: r })),
+    "mar-del": async id => {
+      if(!await confirmDialog({ title:"Supprimer cette sortie ?", message:"Elle disparaît aussi du carnet du patient.", confirm:"Supprimer", danger:true })) return;
+      try{ await C.deleteSuivi(patient.cle, id); suivis = suivis.filter(x => x.id !== id); render(); toast("Sortie supprimée.", { type:"ok" }); }
+      catch(err){ toast("Suppression impossible : " + (err.message || err), { type:"err" }); }
+    },
     "obj-add": () => goalSheet(),
     "obj-edit": id => goalSheet((patient.objectifs || []).find(g => g.id === id)),
     "q-add": () => {

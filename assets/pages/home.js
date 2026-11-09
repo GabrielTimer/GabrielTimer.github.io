@@ -543,7 +543,11 @@ async function homeSuivi(ctx, patient, seances, actif){
   const streak = S.streakMessage(S.weekStreak(actif ? actif.seances : seances));
   const resolve = id => perso.find(c => c.remplace === id) || perso.find(c => c.id === id) || CONSEILS_FOURNIS.find(c => c.id === id);
   const fiches = (patient.conseils || []).map(id => ({ id, c: resolve(id) })).filter(x => x.c);
+  /* Carnet de marches : activé par le kiné dans la fiche patient */
+  const M = patient.marche?.actif ? await import("../marches.js") : null;
+  let marches = M ? M.marchesDe(suivis) : [];
   box.innerHTML = `
+    ${M ? `<div id="mar-box">${M.sectionHTML(marches, patient.marche)}</div>` : ""}
     ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}
     ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
       <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
@@ -558,6 +562,23 @@ async function homeSuivi(ctx, patient, seances, actif){
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
       <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
 
+  if(M){
+    const lierMarche = () => {
+      box.querySelector('[data-marche="add"]')?.addEventListener("click", () => M.saisir({
+        derniere: marches[0] || null,
+        onSave: async m => {
+          if(ctx.apercu){ toast("Aperçu : la sortie n'est pas enregistrée."); return null; }
+          const id = await C.addSuivi(ctx.cle, m);
+          const nouvelle = { ...m, id, date: Date.now() };
+          marches = M.marchesDe([...marches, nouvelle]);
+          box.querySelector("#mar-box").innerHTML = M.sectionHTML(marches, patient.marche);
+          lierMarche();
+          return { lignes: M.encouragement(nouvelle, marches, Number(patient.marche.objectif) || 0) };
+        }
+      }));
+    };
+    lierMarche();
+  }
   box.querySelectorAll("[data-qpdf]").forEach(b => b.addEventListener("click", async () => {
     const r = remplis[Number(b.dataset.qpdf)];
     const q = questionnaires.find(x => x.id === r.qid) || await C.getQuestionnaire(r.qid).catch(() => null);

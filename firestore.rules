@@ -10,7 +10,7 @@ rules_version = '2';
 //   lister ou de deviner les autres patients.
 // - Un patient ne peut modifier que la validation de ses séances (fait / EVA / ressenti)
 //   et les jours de ses séances à venir. Il peut ajouter ses réponses aux objectifs
-//   et questionnaires, et écrire des messages à son kiné, sans pouvoir les modifier ensuite.
+//   et questionnaires, noter ses marches, et écrire des messages à son kiné, sans pouvoir les modifier ensuite.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -134,12 +134,17 @@ service cloud.firestore {
         && (!("jours" in d) || (d.jours is map && d.jours.keys().hasOnly(["1", "2", "3", "4", "5", "6", "7"])));
     }
 
-    // Une réponse de patient : type connu, taille raisonnable
+    // Une réponse de patient : type connu, taille raisonnable.
+    // Carnet de marches (type « marche ») : jour (AAAA-MM-JJ), durée en minutes et/ou distance en km, ressenti.
     function isSuivi() {
       let d = request.resource.data;
-      return d.keys().hasOnly(["type", "date", "notes", "qid", "nom", "reponses", "score", "unite", "sousScores"])
-        && d.type in ["objectifs", "questionnaire"]
+      return d.keys().hasOnly(["type", "date", "notes", "qid", "nom", "reponses", "score", "unite", "sousScores", "jour", "minutes", "km", "ressenti"])
+        && d.type in ["objectifs", "questionnaire", "marche"]
         && d.date is int
+        && (!("jour" in d) || (d.jour is string && d.jour.size() == 10))
+        && (!("minutes" in d) || (d.minutes is number && d.minutes > 0 && d.minutes <= 600))
+        && (!("km" in d) || (d.km is number && d.km > 0 && d.km <= 100))
+        && (!("ressenti" in d) || (d.ressenti is string && d.ressenti.size() <= 30))
         && (!("reponses" in d) || (d.reponses is list && d.reponses.size() <= 120))
         && (!("score" in d) || d.score is number);
     }
