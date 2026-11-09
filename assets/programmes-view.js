@@ -90,7 +90,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
   const actions = role === "kine" ? `
       ${daysBtn}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
-      <button class="btn sm" type="button" data-pact="lieu">${icon(prog.cabinet ? "home" : "lock")}${prog.cabinet ? "Envoyer au patient" : "Réserver au cabinet"}</button>
+      <button class="btn sm" type="button" data-pact="lieu">${icon(prog.cabinet ? "home" : "cabinet")}${prog.cabinet ? "Envoyer au patient" : "Réserver au cabinet"}</button>
       <button class="btn sm" type="button" data-pact="copier">${icon("copy")}Copier pour un patient</button>
       ${!isCourse ? `<button class="btn sm" type="button" data-pact="modele">${icon("layers")}Enregistrer comme modèle</button>` : ""}
       <button class="btn sm danger" type="button" data-pact="supprimer">${icon("trash")}Supprimer</button>`
@@ -105,7 +105,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
         <div class="prog-title">
           <h2>${isCourse ? icon("run", "ic-inline lagon") + " " : ""}${esc(prog.nom)}</h2>
           ${prog.termine ? `<span class="badge ok">${icon("check")}Terminé</span>` : ""}
-          ${role === "kine" && prog.cabinet ? `<span class="badge lagon" title="Invisible dans l'application du patient">${icon("lock")}Au cabinet</span>` : ""}
+          ${role === "kine" && prog.cabinet ? `<span class="badge lagon" title="Invisible dans l'application du patient">${icon("cabinet")}Au cabinet</span>` : ""}
         </div>
         <div class="prog-meta">
           <span>${icon("checkCircle")}${prog.faites} sur ${prog.total} séances</span>

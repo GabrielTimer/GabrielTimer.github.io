@@ -199,7 +199,7 @@ function mountView(){
         <div class="panel cfg-head">
           <span class="cfg-mode badge lagon" style="align-self:flex-start">${esc(titleText())}</span>
           <div class="segmented" role="group" aria-label="Type de programme" id="lieu">
-            ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "home" : "dumbbell")}${esc(v)}</button>`).join("")}
+            ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "home" : "cabinet")}${esc(v)}</button>`).join("")}
           </div>
           <p class="hint" id="lieu-hint"></p>
           <div id="lieu-warn"></div>
