@@ -55,10 +55,11 @@ const home = pour ? `/cloud.html?patient=${encodeURIComponent(pour)}` : essai ? 
 mountShell({ role:"none", back: home, apercu:ctx.apercu && !pour });
 
 const qid = params.get("q");
-const done = (title, text) => {
+const done = (title, text, extra = "") => {
   app.innerHTML = `<section class="sv" style="padding-top:8vh;text-align:center">
     <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${icon("check")}</div></div>
     <h1>${esc(title)}</h1><p class="muted">${esc(text)}</p>
+    ${extra}
     <a class="btn primary big block" href="${home}">${icon(pour || essai ? "back" : "home")}${pour ? "Retour à la fiche" : essai ? "Retour aux questionnaires" : "Retour à l'accueil"}</a></section>`;
 };
 const save = async suivi => {
@@ -115,7 +116,21 @@ async function questionnaire(){
     if(missing && !await confirmDialog({ title:"Envoyer vos réponses ?", message:`${missing} question${missing > 1 ? "s sont restées" : " est restée"} sans réponse.`, confirm:"Envoyer", cancel:"Revenir" })) return;
     const { score, sousScores } = computeScore(q, rep);
     const ok = await save({ type:"questionnaire", qid:q.id, nom:q.nom, reponses:rep, ...(score !== null ? { score } : {}), ...(sousScores ? { sousScores } : {}), unite:q.unite || null });
-    if(ok) done("Merci !", essai ? `Score calculé : ${score === null ? "non calculable" : score}.` : "Vos réponses sont transmises à votre kiné. Il en discutera avec vous.");
+    if(!ok) return;
+    /* PDF des réponses (questions + réponses, sans score) : à montrer à un autre professionnel de santé */
+    const quand = new Date();
+    done("Merci !", essai ? `Score calculé : ${score === null ? "non calculable" : score}.` : "Vos réponses sont transmises à votre kiné. Il en discutera avec vous.",
+      essai ? "" : `<button class="btn big block" type="button" id="pdf-rep" style="margin-bottom:12px">${icon("print")}Imprimer ou enregistrer mes réponses</button>
+      <p class="small muted" style="margin:-4px 0 18px">Un PDF avec les questions et vos réponses, à montrer à votre médecin ou à un autre soignant si vous le souhaitez.</p>`);
+    $("#pdf-rep")?.addEventListener("click", async e => {
+      const b = e.currentTarget; b.disabled = true;
+      try{
+        const Q = await import("/assets/questionnaire-pdf.js");
+        const nom = pour ? "" : String(localStorage.getItem("gt_patient_nom") || "").replace(/^"|"$/g, "");
+        await Q.partagerPdf(await Q.questionnairePdf(q, rep, { patient:nom, date:quand }), q.nom);
+      }catch(err){ toast(err.message || "Le PDF n'a pas pu être créé.", { type:"err" }); }
+      finally{ b.disabled = false; }
+    });
   };
   intro();
 }
