@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#F4F8F9">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="stylesheet" href="/assets/app.css">
+<link rel="stylesheet" href="/assets/pages/home.css">
 <style>
   /* Mode salle d'attente : les affiches en plein écran, l'une après l'autre.
      Écran en largeur (télé, tablette couchée) : coordonnées du cabinet à côté. */
@@ -24,8 +25,18 @@
   .sa-side .titre{ margin:0; font-size:2.6vh; color:#47616B; }
   .sa-side .tel{ font-size:4vh; font-weight:800; color:#0B6E80; }
   .sa-side .etat{ font-size:2.4vh; font-weight:700; }
-  .sa-side .hor{ font-size:2.2vh; color:#47616B; line-height:1.5; }
-  .sa-side .hor table{ border-collapse:collapse; } .sa-side .hor td{ padding:.2vh 1.4vw .2vh 0; }
+  /* Horaires : même tableau que la page du cabinet, à l'échelle de l'écran */
+  .sa-side .hor{ font-size:2.1vh; color:#47616B; line-height:1.3; background:#fff; border:1px solid #D5E2E5; border-radius:1.6vh; padding:1.2vh 1.2vw; }
+  .sa-side .hor-tab{ margin:0; }
+  .sa-side .hd-row{ grid-template-columns:14vh 1fr; gap:1.2vw; padding:.75vh .8vw; border-radius:1vh; }
+  .sa-side .hd small{ font-size:1.5vh; }
+  .sa-side .hd-slots{ gap:.6vh .6vw; }
+  .sa-side .hs{ font-size:2vh; padding:.35vh .8vw; border-radius:.8vh; gap:.5vw; }
+  .sa-side .hs svg{ width:2vh; height:2vh; }
+  .sa-side .hor-leg, .sa-side .hor-note{ font-size:1.7vh; margin-top:1vh; }
+  .sa-side .etat{ display:inline-flex; align-self:flex-start; padding:.9vh 1.2vw; border-radius:1.4vh; background:#E3F3F6; line-height:1.3; color:#0B6E80; }
+  .sa-side .etat.ferme{ background:#F1F4F5; color:#47616B; }
+  .sa-side .etat.domicile{ background:#FBEEDC; color:#8A4E00; }
   .sa-dots{ position:fixed; bottom:1.6vh; left:50%; transform:translateX(-50%); display:flex; gap:.8vh; }
   .sa-dots i{ width:1vh; height:1vh; border-radius:50%; background:#C5D6DA; transition:background .4s, transform .4s; }
   .sa-dots i.on{ background:#138FA6; transform:scale(1.3); }
