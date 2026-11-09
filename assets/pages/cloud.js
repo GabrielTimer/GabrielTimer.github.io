@@ -152,6 +152,13 @@ async function patientView(ctx){
         }catch(err){ toast("Enregistrement impossible. Vérifiez votre connexion.", { type:"err" }); }
         return;
       }
+      if(b.dataset.act === "valider" && (s.data?.exercices || []).some(e => e.marche || e.id === "MARCHE")){
+        /* Marche faite sans l'appli : validation directe (durée, douleur, ressenti) */
+        const { setRunProgram } = await import("../app.js");
+        setRunProgram({ ...s.data, nom: s.data?.nom || s.programmeNom || s.nom || "Marche" });
+        location.href = `/fin.html?cle=${encodeURIComponent(ctx.cle)}&s=${encodeURIComponent(s.id)}&marche=1${ctx.apercu ? "&apercu=1" : ""}`;
+        return;
+      }
       if(b.dataset.act === "valider"){
         const ok = await confirmDialog({ title:"Valider cette séance ?", message:"Utilisez cette option si vous avez fait la séance sans le minuteur, par exemple au cabinet.", confirm:"Oui, je l'ai faite" });
         if(ok) location.href = `/fin.html?cle=${encodeURIComponent(ctx.cle)}&s=${encodeURIComponent(s.id)}${ctx.apercu ? "&apercu=1" : ""}`;

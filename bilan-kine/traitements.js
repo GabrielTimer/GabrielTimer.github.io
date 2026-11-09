@@ -239,7 +239,7 @@ MOTIF: {
   "Neurologie (AVC, Parkinson, SEP…)": { modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] },
   "Vertiges": { modeles: ["Rééducation vestibulaire"], patho: "Vertiges / vestibulaire" },
   "Respiratoire": { modeles: ["Réhabilitation respiratoire (BPCO)", "Désencombrement bronchique", "Kiné respiratoire après une opération"], patho: "Respiratoire (BPCO, asthme…)" },
-  "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort"] },
+  "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort", "Programme marche"] },
   "Mâchoire (ATM)": { modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées" },
   "Dorsalgie": { modeles: ["Dos au travail"], patho: "Scoliose / posture" },
   "Reprise du sport": { modeles: ["Retour au sport (membre inférieur)", "Lésion des ischio-jambiers", "Pubalgie"] }
