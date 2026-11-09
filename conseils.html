@@ -51,6 +51,26 @@
 <script type="module">
 import { $, $$, esc, icon, params, store, readPatientContext, kineHint, mountShell, registerSW, emptyHTML, errorHTML, openSheet, toast, confirmDialog, KINE } from "/assets/app.js";
 import { CONSEILS_FOURNIS, conseilHTML, mergeConseils } from "/assets/conseils-data.js";
+import * as IM from "/assets/info-mois.js";
+
+/* Image d'affiche : 1400 px de haut au plus, JPEG, moins de 600 Ko (limite Firebase : 1 Mo par fiche) */
+async function reduireAffiche(file){
+  const url = URL.createObjectURL(file);
+  const img = await new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = ko; i.src = url; });
+  URL.revokeObjectURL(url);
+  const cv = document.createElement("canvas"), ctx = cv.getContext("2d");
+  let side = 1400, q = .84, out = "";
+  for(let k = 0; k < 8; k++){
+    const r = Math.min(1, side / Math.max(img.naturalWidth, img.naturalHeight));
+    cv.width = Math.round(img.naturalWidth * r); cv.height = Math.round(img.naturalHeight * r);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(img, 0, 0, cv.width, cv.height);
+    out = cv.toDataURL("image/jpeg", q);
+    if(out.length * .75 <= 600 * 1024) break;
+    if(q > .62) q -= .08; else side = Math.round(side * .85);
+  }
+  return out;
+}
 registerSW();
 const app = $("#app");
 const ctx = readPatientContext();
@@ -71,7 +91,7 @@ function article(c, back){
     ${c.serie ? `<div class="a-serie">${esc(c.serie)}</div>` : ""}
     <h1>${esc(c.titre)}</h1>
     ${c.resume ? `<p class="lead">${esc(c.resume)}</p>` : ""}
-    <details class="a-texte"><summary>Lire le texte de l'affiche</summary><div class="body">${conseilHTML(c.texte)}</div></details>
+    ${String(c.texte || "").trim() ? `<details class="a-texte"><summary>Lire le texte de l'affiche</summary><div class="body">${conseilHTML(c.texte)}</div></details>` : ""}
     <p class="sign">${esc(KINE.nom)}, ${esc(KINE.titre)}. Ces conseils sont généraux : suivez en priorité les indications de votre kiné.</p>
     <div class="btn-row no-print" style="margin-top:18px"><a class="btn" href="${back}">${icon("back")}Toutes les fiches</a><button class="btn ghost" type="button" onclick="print()">${icon("print")}Imprimer</button></div>
   </article>`;
@@ -125,7 +145,7 @@ async function kineView(){
         <div class="cs-card">
           ${c.affiche ? `<img class="cs-thumb" src="${esc(c.affiche)}" alt="" loading="lazy">` : `<span class="li-ico">${icon(c.ico || "book")}</span>`}
           <h2>${esc(c.titre)}</h2><p>${esc(c.resume || "")}</p>
-          <div class="row wrap" style="--gap:6px">${c.serie ? `<span class="badge lagon">${esc(c.serie)}</span>` : ""}${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
+          <div class="row wrap" style="--gap:6px">${c.serie ? `<span class="badge lagon">${esc(c.serie)}</span>` : ""}${c.moisAuto ? `<span class="badge sun">${icon("calendar")}${esc(IM.MOIS[c.moisAuto - 1])}</span>` : ""}${c.fourni ? `<span class="badge">Fournie</span>` : c.remplace ? `<span class="badge lagon">Votre version</span>` : `<span class="badge lagon">Personnelle</span>`}</div>
           <div class="cs-act">
             <a class="btn sm" href="/conseils.html?id=${encodeURIComponent(c.id)}">${icon("eye")}Lire</a>
             <button class="btn sm" type="button" data-edit="${esc(c.id)}">${icon("edit")}Modifier</button>
@@ -145,6 +165,7 @@ async function kineView(){
   const editor = (c) => {
     const base = c || { titre:"", resume:"", texte:"", ico:"book" };
     let ico = base.ico || "book";
+    let affiche = base.affiche || "";
     const s = openSheet({
       title: c ? "Modifier la fiche" : "Nouvelle fiche",
       wide: true,
@@ -153,18 +174,46 @@ async function kineView(){
         <div class="field"><label for="ed-t">Titre</label><input class="input" id="ed-t" value="${esc(base.titre)}" required maxlength="80"></div>
         <div class="field"><label for="ed-r">Résumé (une phrase)</label><input class="input" id="ed-r" value="${esc(base.resume || "")}" maxlength="160"></div>
         <div class="field"><span class="label">Icône</span><div class="chips" id="ed-i">${ICONS.map(i => `<button class="chip" type="button" data-i="${i}" aria-pressed="${i === ico}" aria-label="${i}">${icon(i)}</button>`).join("")}</div></div>
-        <div class="field"><label for="ed-x">Texte</label><textarea class="textarea" id="ed-x" style="min-height:300px">${esc(base.texte || "")}</textarea>
+        <div class="field"><span class="label">Affiche <span class="faint">(facultatif)</span></span>
+          <div class="row wrap" style="--gap:12px;align-items:flex-start">
+            <img id="ed-a-img" alt="" style="width:110px;aspect-ratio:3/4;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);background:#fff" ${affiche ? `src="${esc(affiche)}"` : "hidden"}>
+            <div class="stack" style="--gap:8px">
+              <label class="btn sm">${icon("camera")}<span id="ed-a-lab">${affiche ? "Changer l'image" : "Ajouter une image"}</span><input type="file" id="ed-a" accept="image/*" hidden></label>
+              <button class="btn sm ghost" type="button" id="ed-a-del" ${affiche ? "" : "hidden"}>${icon("trash")}Retirer l'affiche</button>
+            </div>
+          </div>
+          <span class="ed-help">Photo ou image d'une affiche (campagne de prévention, affiche reçue au cabinet…). Une affiche reçue en PDF : faites-en une capture d'écran. Elle remplace l'icône et s'imprime seule sur une page.</span></div>
+        <div class="field"><label for="ed-m">Mois de campagne <span class="faint">(facultatif)</span></label>
+          <select class="select" id="ed-m"><option value="">Aucun</option>${IM.MOIS.map((m, i) => `<option value="${i + 1}" ${Number(base.moisAuto) === i + 1 ? "selected" : ""}>${m}</option>`).join("")}</select>
+          <span class="ed-help">Avec une affiche : elle devient d'elle-même l'info kiné du mois ce mois-là (ex. Octobre rose → octobre), si l'info du mois est activée.</span></div>
+        <div class="field"><label for="ed-x">Texte <span class="faint" id="ed-x-opt" ${affiche ? "" : "hidden"}>(facultatif avec une affiche)</span></label><textarea class="textarea" id="ed-x" style="min-height:300px">${esc(base.texte || "")}</textarea>
           <span class="ed-help">Écrivez simplement. Une ligne qui commence par « ## » devient un intertitre, une ligne qui commence par « - » devient un élément de liste. Laissez une ligne vide entre deux paragraphes.</span></div>
       </form>`,
       foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="submit" form="ed">${icon("check")}Enregistrer</button>`
     });
+    const majAffiche = () => {
+      const im = s.el.querySelector("#ed-a-img");
+      im.hidden = !affiche; if(affiche) im.src = affiche;
+      s.el.querySelector("#ed-a-del").hidden = !affiche;
+      s.el.querySelector("#ed-a-lab").textContent = affiche ? "Changer l'image" : "Ajouter une image";
+      s.el.querySelector("#ed-x-opt").hidden = !affiche;
+    };
+    s.el.querySelector("#ed-a").addEventListener("change", async e => {
+      const f = e.target.files?.[0]; if(!f) return;
+      try{ affiche = await reduireAffiche(f); majAffiche(); }
+      catch(err){ toast("Cette image n'a pas pu être lue. Essayez une photo ou une capture d'écran (JPG, PNG).", { type:"err" }); }
+      e.target.value = "";
+    });
+    s.el.querySelector("#ed-a-del").onclick = () => { affiche = ""; majAffiche(); };
     s.el.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { ico = b.dataset.i; s.el.querySelectorAll("[data-i]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); });
     s.el.querySelector("#ed").addEventListener("submit", async e => {
       e.preventDefault();
       const titre = s.el.querySelector("#ed-t").value.trim();
       if(!titre){ s.el.querySelector("#ed-t").focus(); return; }
       const fiche = { titre, resume:s.el.querySelector("#ed-r").value.trim(), texte:s.el.querySelector("#ed-x").value, ico };
-      if(base.affiche){ fiche.affiche = base.affiche; if(base.serie) fiche.serie = base.serie; }
+      fiche.affiche = affiche || null;
+      fiche.serie = affiche ? (base.serie || null) : null;
+      fiche.moisAuto = Number(s.el.querySelector("#ed-m").value) || null;
       if(c && !c.fourni) fiche.id = c.id;
       if(c?.remplace) fiche.remplace = c.remplace;
       if(c?.fourni) fiche.remplace = c.id;

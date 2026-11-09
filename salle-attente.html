@@ -47,7 +47,9 @@ const box = $("#sa");
 let perso = [];
 try{ perso = await (await import("/assets/cloud.js")).listConseils(); }catch(e){ perso = []; }
 await loadSettings({ force:true }).catch(() => {});
-const liste = affiches(perso);
+/* Affiches de campagne (Octobre rose…) : seulement pendant leur mois */
+const moisActuel = new Date().getMonth() + 1;
+const liste = affiches(perso).filter(c => !c.moisAuto || Number(c.moisAuto) === moisActuel);
 
 if(!liste.length){
   box.innerHTML = `<p class="sa-empty">Aucune affiche pour l'instant. Ajoutez-en dans Ressources → Fiches conseils.</p>`;

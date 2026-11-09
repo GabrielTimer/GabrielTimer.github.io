@@ -5,7 +5,9 @@
    Chaque mois, une affiche apparaît sur l'accueil de tous les patients :
    soit celle choisie dans Réglages du cabinet, soit la suivante dans
    l'ordre (rotation automatique, une par mois).
-   Réglage : settings.infoMois = { active, choix }  (choix = "" → rotation)
+   Une affiche avec un mois de campagne (moisAuto 1-12, ex. Octobre rose → 10)
+   passe d'elle-même ce mois-là, avant la rotation.
+   Réglage : settings.infoMois = { active, choix }  (choix = "" → automatique)
    ========================================================= */
 
 import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
@@ -18,12 +20,17 @@ export function affiches(perso = []){
 /** Identifiant à donner au patient (la fiche d'origine si c'est votre version). */
 export const idFiche = c => c.remplace || c.id;
 
-/** Affiche de la rotation pour un mois donné (une par mois, dans l'ordre). */
+/** Affiche automatique d'un mois : affiche de campagne de ce mois, sinon rotation (une par mois, dans l'ordre). */
 export function rotation(liste, date = new Date()){
   if(!liste.length) return null;
+  const campagne = liste.find(c => Number(c.moisAuto) === date.getMonth() + 1);
+  if(campagne) return campagne;
+  const tour = liste.filter(c => !c.moisAuto);   // les affiches de campagne ne tournent pas le reste de l'année
+  const l = tour.length ? tour : liste;
   const n = date.getFullYear() * 12 + date.getMonth();
-  return liste[n % liste.length];
+  return l[n % l.length];
 }
+export const MOIS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
 
 /** Affiche du mois selon le réglage, ou null si désactivée. */
 export function afficheDuMois(liste, reglage = {}, date = new Date()){
