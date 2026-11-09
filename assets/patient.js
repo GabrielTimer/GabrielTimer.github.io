@@ -53,14 +53,6 @@ export function launchSeance(seance, { cle = null, apercu = false, from = null }
   if(cle && seance.id) { q.set("cle", cle); q.set("s", seance.id); }
   if(apercu) q.set("apercu", "1");
   if(from) q.set("from", from);   // « fiche » : séance au cabinet lancée par le kiné, retour à la fiche
-  /* Marche : le patient marche sans l'appli ; page d'aide au départ, puis validation au retour */
-  if(exos.some(e => e.marche || e.id === "MARCHE") && from !== "fiche"){
-    const niv = Number(seance.origine?.niveau) || 0;
-    if(niv) q.set("niveau", niv);
-    q.set("n", String((Number(seance.semaine) || 1) * 10 + (Number(seance.ordre) || 1)));
-    location.href = "/marche.html?" + q.toString();
-    return;
-  }
   location.href = "/timer.html?" + q.toString();
 }
 

@@ -198,7 +198,7 @@ function surveiller(){
   window.addEventListener("storage", e => { if(e.key === CLE_CHOIX || e.key === CLE_CHOIX_PATIENT) appliquer(); });
 }
 
-if(typeof document !== "undefined" && !/\/(impression|program_pdf|coursepdf|timer|marche)\.html$/.test(location.pathname)){
+if(typeof document !== "undefined" && !/\/(impression|program_pdf|coursepdf|timer)\.html$/.test(location.pathname)){
   if(document.body) surveiller();
   else document.addEventListener("DOMContentLoaded", surveiller, { once:true });
 }

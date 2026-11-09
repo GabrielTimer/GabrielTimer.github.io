@@ -1279,7 +1279,7 @@ function metaFieldsHTML(meta){
         <input class="input" id="m-zone" list="m-zones" value="${esc(meta.zoneLabel || "")}" placeholder="Ex. Genou">
         <datalist id="m-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist></div>
       <div class="field"><label for="m-niv">Niveau</label>
-        <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.niveaux().map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}${Number(meta.niveau) > Math.max(0, ...MOD.niveaux().map(n => n.n)) ? `<option value="${Number(meta.niveau)}" selected>Niveau ${Number(meta.niveau)}</option>` : ""}</select></div>
+        <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.niveaux().map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}</select></div>
     </div>
     <span class="hint">Pour proposer plusieurs niveaux d'un même modèle, gardez exactement le même nom et changez seulement le niveau.</span>`;
 }

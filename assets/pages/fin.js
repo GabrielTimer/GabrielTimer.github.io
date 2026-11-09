@@ -5,7 +5,6 @@ import {
   localProgs, toast, vibrate, session, KINE, prenom, store, settings
 } from "../app.js";
 import * as MS from "../mode-seance.js";
-import { estMarche, exoDe, planDuJour, APRES, choisir } from "../marche.js";
 
 const app = $("#app");
 if(MS.actif()) MS.demarrer();
@@ -17,10 +16,6 @@ const from = params.get("from");
 const duree = Number(params.get("duree")) || 0;
 const cloud = !!(cle && sid);
 const messages = settings.messages.encouragements?.length ? settings.messages.encouragements : ["Excellent travail."];
-/* Programme marche : le patient a marché sans l'appli (ou avec le minuteur) et valide au retour */
-const marche = estMarche(prog);
-const planMarche = marche ? planDuJour(exoDe(prog), prog.series) : null;
-let minutesMarche = marche ? (duree ? Math.max(1, Math.round(duree / 60)) : planMarche.total) : 0;
 
 let eva = null;
 let ressenti = null;
@@ -28,26 +23,14 @@ let ressenti = null;
 app.innerHTML = `
   <header class="fin-head">
     <div class="medal">${icon("check")}</div>
-    <h1>${marche ? "Marche terminée" : "Séance terminée"}</h1>
-    <p class="muted">${esc(marche ? choisir(APRES, Math.floor(Math.random() * 100)) : messages[Math.floor(Math.random() * messages.length)])}</p>
-    ${marche ? "" : `<div class="fin-stats">
+    <h1>Séance terminée</h1>
+    <p class="muted">${esc(messages[Math.floor(Math.random() * messages.length)])}</p>
+    <div class="fin-stats">
       ${duree ? `<span class="badge lagon">${icon("clock")}${esc(fmtDuree(duree))}</span>` : ""}
       <span class="badge lagon">${icon("dumbbell")}${plural((prog.exercices || []).length, "exercice")}</span>
       ${Number(prog.series) > 1 ? `<span class="badge lagon">${icon("repeat")}${plural(Number(prog.series), "tour")}</span>` : ""}
-    </div>`}
-  </header>
-
-  ${marche ? `
-  <section class="panel raised">
-    <div class="q-title" id="mm-q">Combien de temps avez-vous marché ?</div>
-    <p class="q-sub">Prévu aujourd'hui : ${esc(planMarche.texte)}. Indiquez le temps de marche réel, pauses non comprises.</p>
-    <div class="eva-top" style="justify-content:center">
-      <button class="btn" type="button" id="mm-minus" aria-label="Moins">${icon("minus")}</button>
-      <div class="eva-val" id="mm-val" style="min-width:4.5em;text-align:center">${minutesMarche}<small> min</small></div>
-      <button class="btn" type="button" id="mm-plus" aria-label="Plus">${icon("plus")}</button>
     </div>
-    <p class="q-sub center" id="mm-txt" style="margin:10px 0 0"></p>
-  </section>` : ""}
+  </header>
 
   ${apercu ? `<div class="notice warn">${icon("eye")}<span>Aperçu : rien ne sera enregistré dans le dossier du patient.</span></div>` : ""}
 
@@ -70,7 +53,7 @@ app.innerHTML = `
   </section>
 
   <section class="panel">
-    <div class="q-title">${marche ? "Et cette marche, c'était…" : "Et la séance, c'était…"}</div>
+    <div class="q-title">Et la séance, c'était…</div>
     <p class="q-sub">Pour aider votre kiné à ajuster le programme.</p>
     <div class="chips ressenti" role="group" aria-label="Difficulté de la séance">
       ${RESSENTIS.map(r => `<button class="chip" type="button" aria-pressed="false" data-r="${r.id}">${esc(r.label)}</button>`).join("")}
@@ -84,7 +67,7 @@ app.innerHTML = `
     <textarea class="textarea" id="msg" maxlength="1000" placeholder="Votre commentaire"></textarea>
   </section>` : ""}
 
-  <button class="btn primary big block" type="button" id="save" disabled>${icon("check")}${marche ? "Enregistrer ma marche" : "Enregistrer ma séance"}</button>
+  <button class="btn primary big block" type="button" id="save" disabled>${icon("check")}Enregistrer ma séance</button>
   <p class="center small faint" id="save-hint">Indiquez votre douleur pour enregistrer.</p>
 `;
 
@@ -103,21 +86,6 @@ if(cloud){
 }
 
 const range = $("#range"), face = $("#face"), val = $("#val"), lab = $("#lab"), save = $("#save");
-if(marche){
-  const majMarche = () => {
-    $("#mm-val").innerHTML = `${minutesMarche}<small> min</small>`;
-    const r = minutesMarche / Math.max(1, planMarche.total);
-    $("#mm-txt").textContent = r >= 1.05 ? "Plus que prévu : bravo ! Pensez quand même à garder une allure confortable."
-      : r >= .95 ? "Objectif du jour atteint. Bravo !"
-      : r >= .5 ? "C'est déjà très bien. Chaque minute compte."
-      : "Un début, c'est déjà beaucoup. La prochaine fois sera un peu plus facile.";
-  };
-  const pas = () => minutesMarche >= 30 ? 5 : 1;
-  $("#mm-minus").onclick = () => { minutesMarche = Math.max(1, minutesMarche - pas()); majMarche(); };
-  $("#mm-plus").onclick = () => { minutesMarche = Math.min(300, minutesMarche + pas()); majMarche(); };
-  majMarche();
-}
-
 const preload = [0,1,2,3,4,5].map(i => { const im = new Image(); im.src = `/images/eva/${i}.png`; return im; });
 
 function setEva(v){
@@ -162,7 +130,7 @@ save.addEventListener("click", async () => {
     dateISO: new Date().toISOString(),
     categorie: prog.categorie || "kine",
     ressenti,
-    data: { ...prog, eva, ...(marche ? { minutesMarche } : {}) }
+    data: { ...prog, eva }
   });
 
   let programmeTermine = false;
@@ -170,7 +138,7 @@ save.addEventListener("click", async () => {
   if(cloud && !apercu){
     try{
       const C = await import("../cloud.js");
-      const r = await withTimeout(C.validateSeance(cle, sid, { eva, ressenti, commentaire, dureeReelle: marche ? minutesMarche * 60 : (duree || null) }), 8000);
+      const r = await withTimeout(C.validateSeance(cle, sid, { eva, ressenti, commentaire, dureeReelle:duree || null }), 8000);
       if(r === "timeout") offline = true; else programmeTermine = r.programmeTermine;
     }catch(err){
       console.error(err);

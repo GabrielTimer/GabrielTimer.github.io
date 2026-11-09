@@ -24,7 +24,6 @@ function sessionRow(s, { role, next }){
   if(s.terminee){
     const parts = [];
     if(s.dateValidation) parts.push("faite le " + fmtShortDate(s.dateValidation));
-    if(s.dureeReelle && (s.data?.exercices || []).some(e => e.marche || e.id === "MARCHE")) parts.push(`${Math.round(s.dureeReelle / 60)} min de marche`);
     sub = (s.datePrevue ? sub + ", " : "") + parts.join(", ");
   }
   const eva = s.terminee && s.eva !== undefined && s.eva !== null && s.eva !== ""

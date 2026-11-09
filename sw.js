@@ -1,20 +1,20 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.25.0";
+const VERSION = "gt-2.24.2";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
 const MEDIA_MAX = 600;   // nombre d'images gardées au plus
 
 const PRECACHE = [
-  "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/marche.html", "/progression.html", "/suivi.html", "/conseils.html",
+  "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/progression.html", "/suivi.html", "/conseils.html",
   "/assets/suivi.js", "/assets/messages.js", "/assets/smileys.js", "/assets/bodychart.js", "/assets/nerfs-data.js", "/assets/nerfs-ui.js", "/assets/evolution.js", "/assets/questionnaires.js", "/assets/conseils-data.js",
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
   "/assets/app.css", "/assets/app.js", "/assets/icons.js", "/assets/config.js", "/assets/cloud.js", "/assets/noms.js", "/assets/dossiers.js", "/assets/bilan-photos.js",
   "/assets/patient.js", "/assets/library.js", "/assets/classement.js", "/assets/settings.js", "/assets/rappels.js", "/assets/variantes.js", "/assets/installer.js", "/assets/mode-seance.js", "/assets/tests-catalogue.js", "/assets/inactivite.js", "/assets/chart.js", "/assets/programmes-view.js", "/assets/tiles-reorder.js", "/assets/horaires.js",
   "/assets/pages/home.css", "/assets/pages/home.js", "/assets/pages/cloud.js", "/assets/pages/timer.css",
-  "/assets/pages/timer.js", "/assets/pages/fin.js", "/assets/pages/marche.js", "/assets/marche.js", "/assets/pages/progression.js", "/assets/pages/local.js",
+  "/assets/pages/timer.js", "/assets/pages/fin.js", "/assets/pages/progression.js", "/assets/pages/local.js",
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"
 ];
 
