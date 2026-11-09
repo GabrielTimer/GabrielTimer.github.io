@@ -63,6 +63,8 @@ registerSW();
 mountShell({ role:"kine", active:"", back:"/admin_tools.html", title:"Réglages du cabinet" });
 const C = await import("/assets/cloud.js");
 const app = $("#app");
+const IM = await import("/assets/info-mois.js");
+const AFF = IM.affiches(await C.listConseils().catch(() => []));
 
 await loadSettings({ force:true });
 const R = structuredClone(settings);   // brouillon en cours de modification
@@ -186,6 +188,19 @@ function render(){
       <p class="muted">Affichées sur la <a href="/cabinet.html" target="_blank" rel="noopener">page publique du cabinet</a>, dans cet ordre. Chaque photo est enregistrée dès qu'elle est ajoutée (inutile de toucher « Enregistrer »). Évitez les patients et les documents visibles.</p>
       <div class="rc-ph" id="ph-list"><div class="loading"><div class="spinner"></div></div></div>
       <label class="btn soft ee-file" id="ph-add">${icon("upload")}<span>Ajouter des photos</span><input type="file" id="ph-file" accept="image/*" multiple hidden></label>
+    </section>
+
+    <section class="panel" id="info-mois">
+      <h2>${icon("library")}L'info kiné du mois</h2>
+      <p class="muted">Une affiche de vos fiches conseils sur l'accueil de tous vos patients, qui change chaque mois. Ajoutez des affiches dans Ressources → Fiches conseils.</p>
+      <label class="rc-switch" style="margin-bottom:12px"><input type="checkbox" id="im-on" ${R.infoMois?.active !== false ? "checked" : ""}>Afficher l'info du mois chez les patients</label>
+      <div class="field"><label for="im-choix">Affiche de ${esc(IM.NOM_MOIS())}</label>
+        <select class="select" id="im-choix">
+          <option value="">Automatique, une nouvelle chaque mois${AFF.length ? ` (ce mois-ci : ${esc(IM.rotation(AFF)?.titre || "")})` : ""}</option>
+          ${AFF.map(c => `<option value="${esc(IM.idFiche(c))}" ${R.infoMois?.choix === IM.idFiche(c) ? "selected" : ""}>${esc(c.titre)}</option>`).join("")}
+        </select>
+        <span class="hint">Choisir une affiche la garde tant que vous ne remettez pas « Automatique ».</span></div>
+      <p class="hint" style="margin-top:10px">${icon("eye", "ic-inline")} Au cabinet : <a href="/salle-attente.html" target="_blank" rel="noopener">mode salle d'attente</a>, les affiches en plein écran, l'une après l'autre.</p>
     </section>
 
     <section class="panel">
@@ -320,7 +335,7 @@ function render(){
   initPhotos();
   const last = Math.max(Number(localStorage.getItem("gt_last_backup") || 0), Number(settings.sauvegarde?.derniere || 0));
   $("#bk-last").textContent = last ? `Dernière sauvegarde : ${new Date(last).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}. Conseil : une fois par mois.` : "Conseil : faites une sauvegarde une fois par mois.";
-  if(location.hash === "#backup") requestAnimationFrame(() => $("#backup")?.scrollIntoView({ block:"start" }));
+  if(location.hash.length > 1) requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block:"start" }));
 
   app.addEventListener("input", e => { if(!e.target.closest("#backup")) setDirty(true); preview(); });
   /* Horaires : grise les heures d'une demi-journée fermée, et propose des heures par défaut */
@@ -522,6 +537,7 @@ async function save(){
     exercice: { reps: int("e-reps", 1, 200, 10), ex: int("e-ex", 1, 7200, 30), repos: int("e-repos", 0, 7200, 10) },
     alertes: { douleur: int("al-douleur", 1, 10, 7), hausse: int("al-hausse", 1, 10, 2), retard: int("al-retard", 1, 30, 2), joursSans: int("al-jours", 1, 90, 10) },
     evolution: { jours: int("ev-jours", 7, 42, 14), minSeances: int("ev-min", 1, 20, 4), evaMax: int("ev-eva", 0, 10, 3), hausse: int("ev-hausse", 1, 10, 2), tropDur: int("ev-dur", 1, 10, 2) },
+    infoMois: { active: $("#im-on").checked, choix: val("im-choix") },
     listes: { categories: cats, niveaux: R.listes.niveaux.map((n, i) => ({ ...n, n: i + 1 })), zones: val("z-list").split("\n").map(s => s.trim()).filter(Boolean) }
   };
   if(!patch.messages.encouragements.length) patch.messages.encouragements = DEFAULTS.messages.encouragements;

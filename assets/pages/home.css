@@ -201,3 +201,10 @@
 .backup-banner{ flex-wrap:wrap; }
 .backup-banner .li-main{ min-width:180px; }
 .backup-banner .small{ white-space:normal; }
+/* L'info kiné du mois (accueil patient) */
+.info-mois{ display:flex; gap:14px; align-items:stretch; padding:12px; border-radius:var(--r-lg); background:var(--surface); border:1px solid var(--line); color:inherit; text-decoration:none; }
+.info-mois:hover{ border-color:var(--lagon); }
+.info-mois img{ width:92px; aspect-ratio:3/4; object-fit:cover; object-position:top; border-radius:10px; border:1px solid var(--line); background:#fff; flex:none; }
+.info-mois .li-main{ display:flex; flex-direction:column; gap:4px; min-width:0; justify-content:center; }
+.info-mois .li-title{ font-weight:800; font-size:var(--fs-lg); line-height:1.2; }
+.info-mois .li-sub{ color:var(--ink-2); font-size:var(--fs-sm); }

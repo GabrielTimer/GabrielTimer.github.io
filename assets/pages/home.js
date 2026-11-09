@@ -518,10 +518,13 @@ async function homeSuivi(ctx, patient, seances, actif){
   const { CONSEILS_FOURNIS } = await import("../conseils-data.js");
   const C = await import("../cloud.js");
   const needQ = (patient.questionnaires || []).length > 0;
-  const [suivis, perso] = await Promise.all([
+  const [suivis, perso, IM] = await Promise.all([
     C.listSuivis(ctx.cle).catch(() => []),
-    (patient.conseils || []).length ? C.listConseils().catch(() => []) : []
+    C.listConseils().catch(() => []),
+    import("../info-mois.js")
   ]);
+  /* L'info kiné du mois (Réglages du cabinet) */
+  const duMois = IM.afficheDuMois(IM.affiches(perso), reglages.infoMois);
   /* Questionnaires déjà remplis : le patient peut réimprimer ses réponses (sans score) */
   const remplis = suivis.filter(x => x.type === "questionnaire" && Array.isArray(x.reponses)).sort((a, b) => (b.date || 0) - (a.date || 0));
   const questionnaires = needQ || remplis.length ? await C.listQuestionnaires().catch(() => []) : [];
@@ -533,6 +536,11 @@ async function homeSuivi(ctx, patient, seances, actif){
     ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}
     ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
       <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
+    ${duMois ? `<section class="section"><div class="section-title">L'info kiné de ${esc(IM.NOM_MOIS())}</div>
+      <a class="info-mois" href="/conseils.html?id=${encodeURIComponent(IM.idFiche(duMois))}">
+        <img src="${esc(duMois.affiche)}" alt="" loading="lazy">
+        <span class="li-main"><span class="li-title">${esc(duMois.titre)}</span><span class="li-sub">${esc(duMois.resume || "")}</span><span class="btn sm" style="align-self:flex-start;margin-top:8px">${icon("eye")}Voir l'affiche</span></span>
+      </a></section>` : ""}
     ${remplis.length ? `<section class="section"><div class="section-title">Mes questionnaires remplis</div>
       <div class="list">${remplis.slice(0, 6).map((r, i) => `<button class="list-item" type="button" data-qpdf="${i}" style="width:100%;text-align:left;font:inherit;color:inherit;border:0;cursor:pointer"><span class="li-ico">${icon("list")}</span><span class="li-main"><span class="li-title">${esc(r.nom || questionnaires.find(q => q.id === r.qid)?.nom || "Questionnaire")}</span><span class="li-sub">Rempli le ${esc(new Date(r.date).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }))} · imprimer mes réponses</span></span><span class="li-end">${icon("print")}</span></button>`).join("")}</div>
       <p class="small muted" style="margin-top:8px">Un PDF avec votre score, les questions et vos réponses, à montrer à un autre soignant si vous le souhaitez.</p></section>` : ""}

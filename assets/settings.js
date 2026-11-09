@@ -58,7 +58,8 @@ export const DEFAULTS = {
   masques: { exercices: [], modeles: [], reaffiches: [] },
   favoris: { exercices: [] },
   accueil: { tuiles: [] },   // ordre des tuiles de l'accueil kiné (même ordre sur tous les appareils)
-  sauvegarde: { derniere: 0 } // date de la dernière sauvegarde des données (rappel sur l'accueil kiné)
+  sauvegarde: { derniere: 0 }, // date de la dernière sauvegarde des données (rappel sur l'accueil kiné)
+  infoMois: { active: true, choix: "" } // affiche du mois sur l'accueil patient ("" = rotation automatique)
 };
 
 const isObj = v => v && typeof v === "object" && !Array.isArray(v);

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Salle d'attente – L'info kiné du mois</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F4F8F9">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  /* Mode salle d'attente : les affiches en plein écran, l'une après l'autre.
+     Écran en largeur (télé, tablette couchée) : coordonnées du cabinet à côté. */
+  html, body{ height:100%; margin:0; background:#F4F8F9; overflow:hidden; }
+  .sa{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; gap:4vw; padding:3vh 3vw; box-sizing:border-box; cursor:none; }
+  .sa.ui{ cursor:default; }
+  .sa-stage{ position:relative; height:94vh; aspect-ratio:900/1355; max-width:94vw; }
+  .sa-stage img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:0; transition:opacity 1.2s ease; background:#fff; border-radius:1.2vh; box-shadow:0 1vh 4vh rgba(11,40,50,.12); }
+  .sa-stage img.on{ opacity:1; }
+  .sa-side{ display:none; flex-direction:column; gap:2.2vh; max-width:34vw; color:var(--ink, #14303A); }
+  @media (min-aspect-ratio: 5/4){ .sa-side{ display:flex; } }
+  .sa-side .logo{ width:9vh; height:9vh; object-fit:contain; border-radius:1.5vh; background:#fff; border:1px solid #D5E2E5; }
+  .sa-side h1{ margin:0; font-size:5vh; line-height:1.1; }
+  .sa-side .titre{ margin:0; font-size:2.6vh; color:#47616B; }
+  .sa-side .tel{ font-size:4vh; font-weight:800; color:#0B6E80; }
+  .sa-side .etat{ font-size:2.4vh; font-weight:700; }
+  .sa-side .hor{ font-size:2.2vh; color:#47616B; line-height:1.5; }
+  .sa-side .hor table{ border-collapse:collapse; } .sa-side .hor td{ padding:.2vh 1.4vw .2vh 0; }
+  .sa-dots{ position:fixed; bottom:1.6vh; left:50%; transform:translateX(-50%); display:flex; gap:.8vh; }
+  .sa-dots i{ width:1vh; height:1vh; border-radius:50%; background:#C5D6DA; transition:background .4s, transform .4s; }
+  .sa-dots i.on{ background:#138FA6; transform:scale(1.3); }
+  .sa-bar{ position:fixed; top:1.5vh; right:1.5vh; display:flex; gap:8px; opacity:0; transition:opacity .3s; pointer-events:none; }
+  .sa.ui .sa-bar{ opacity:1; pointer-events:auto; }
+  .sa-empty{ text-align:center; color:#47616B; font-size:2.6vh; max-width:60ch; }
+</style>
+</head>
+<body>
+<main class="sa" id="sa"><div class="loading"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, esc, icon } from "/assets/app.js";
+import { settings, loadSettings, logoSrc } from "/assets/settings.js";
+import * as H from "/assets/horaires.js";
+import { affiches, afficheDuMois } from "/assets/info-mois.js";
+
+const DUREE = 20000;   // 20 secondes par affiche
+const box = $("#sa");
+let perso = [];
+try{ perso = await (await import("/assets/cloud.js")).listConseils(); }catch(e){ perso = []; }
+await loadSettings({ force:true }).catch(() => {});
+const liste = affiches(perso);
+
+if(!liste.length){
+  box.innerHTML = `<p class="sa-empty">Aucune affiche pour l'instant. Ajoutez-en dans Ressources → Fiches conseils.</p>`;
+}else{
+  /* Ordre : à partir de l'affiche du mois, puis les suivantes */
+  box.innerHTML = `
+    <div class="sa-stage">${liste.map((c, i) => `<img src="${esc(c.affiche)}" alt="${esc(c.titre)}" ${i ? 'loading="lazy"' : ""}>`).join("")}</div>
+    <aside class="sa-side" id="side"></aside>
+    <div class="sa-dots">${liste.map(() => "<i></i>").join("")}</div>
+    <div class="sa-bar">
+      <button class="btn sm" type="button" id="prev" aria-label="Affiche précédente">${icon("back")}</button>
+      <button class="btn sm" type="button" id="pause">${icon("pause")}Pause</button>
+      <button class="btn sm" type="button" id="next" aria-label="Affiche suivante">${icon("chevron")}</button>
+      <button class="btn sm primary" type="button" id="fs">${icon("maximize")}Plein écran</button>
+    </div>`;
+  const imgs = [...box.querySelectorAll(".sa-stage img")], dots = [...box.querySelectorAll(".sa-dots i")];
+  let cur = -1, timer = null, enPause = false;
+  const montrer = i => {
+    cur = (i + liste.length) % liste.length;
+    imgs.forEach((im, k) => im.classList.toggle("on", k === cur));
+    dots.forEach((d, k) => d.classList.toggle("on", k === cur));
+    const suiv = imgs[(cur + 1) % imgs.length]; if(suiv.loading === "lazy") suiv.loading = "eager";
+  };
+  const lancer = () => { clearInterval(timer); if(!enPause) timer = setInterval(() => montrer(cur + 1), DUREE); };
+  const duMois = afficheDuMois(liste, { active:true, choix: settings.infoMois?.choix || "" });
+  montrer(Math.max(0, liste.indexOf(duMois))); lancer();
+
+  /* Coordonnées du cabinet (écran en largeur), mises à jour chaque minute */
+  const side = () => {
+    const c = settings.cabinet || {};
+    const st = H.etat(c.horaires);
+    $("#side").innerHTML = `
+      <img class="logo" src="${esc(logoSrc())}" alt="">
+      <div><h1>${esc(c.nom || "")}</h1><p class="titre">${esc(c.titre || "")}</p></div>
+      ${c.telephone ? `<div class="tel">${esc(c.telephone)}</div>` : ""}
+      ${H.renseignes(c.horaires) ? `<div class="etat ${st.cls}">${esc(st.texte)}</div><div class="hor">${H.tableauHTML(c.horaires)}</div>` : ""}`;
+  };
+  side(); setInterval(side, 60000);
+
+  /* Commandes : apparaissent au toucher ou au mouvement de la souris */
+  let uiT = null;
+  const ui = () => { box.classList.add("ui"); clearTimeout(uiT); uiT = setTimeout(() => box.classList.remove("ui"), 3500); };
+  addEventListener("pointermove", ui); addEventListener("pointerdown", ui);
+  $("#prev").onclick = () => { montrer(cur - 1); lancer(); };
+  $("#next").onclick = () => { montrer(cur + 1); lancer(); };
+  $("#pause").onclick = e => { enPause = !enPause; e.currentTarget.innerHTML = enPause ? `${icon("play")}Reprendre` : `${icon("pause")}Pause`; lancer(); };
+  $("#fs").onclick = () => { const d = document; (d.fullscreenElement ? d.exitFullscreen() : d.documentElement.requestFullscreen?.())?.catch?.(() => {}); };
+  addEventListener("keydown", e => { if(e.key === "ArrowRight"){ montrer(cur + 1); lancer(); } if(e.key === "ArrowLeft"){ montrer(cur - 1); lancer(); } });
+
+  /* L'écran ne se met pas en veille */
+  let lock = null;
+  const garderAllume = async () => { try{ lock = await navigator.wakeLock?.request("screen"); }catch(e){} };
+  garderAllume();
+  document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible") garderAllume(); });
+  /* Recharge chaque nuit (nouvelles affiches, nouveau mois) */
+  setTimeout(() => location.reload(), 6 * 3600 * 1000);
+}
+</script>
+</body>
+</html>

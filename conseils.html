@@ -120,7 +120,7 @@ async function kineView(){
     const all = mergeConseils(perso);
     app.innerHTML = `
       <div class="page-head"><h1>Fiches conseils</h1><button class="btn primary" type="button" id="new">${icon("plus")}Nouvelle fiche</button>
-        <p class="lead">Joignez-les à un patient depuis sa fiche ou lors de l'envoi d'un programme. Il les retrouve sur son accueil.</p></div>
+        <p class="lead">Joignez-les à un patient depuis sa fiche ou lors de l'envoi d'un programme. Il les retrouve sur son accueil. Les affiches passent aussi en « info kiné du mois » (<a href="/reglages_cabinet.html#info-mois">réglage</a>) et en <a href="/salle-attente.html" target="_blank" rel="noopener">mode salle d'attente</a>.</p></div>
       <div class="cs-grid">${all.map(c => `
         <div class="cs-card">
           ${c.affiche ? `<img class="cs-thumb" src="${esc(c.affiche)}" alt="" loading="lazy">` : `<span class="li-ico">${icon(c.ico || "book")}</span>`}
