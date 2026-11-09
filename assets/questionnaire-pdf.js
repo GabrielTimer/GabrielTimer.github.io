@@ -107,9 +107,16 @@ export async function questionnairePdf(q, rep, { patient = "", date = new Date()
   return { blob: d.output("blob"), nom: `${slug(q.nom) || "questionnaire"}-${iso}.pdf` };
 }
 
-/** Partage (menu du téléphone : imprimer, enregistrer, envoyer…) ou, à défaut, téléchargement. */
+/** Ordinateur : nouvel onglet. Téléphone : menu de partage (imprimer, enregistrer, envoyer…). Sinon téléchargement. */
 export async function partagerPdf({ blob, nom }, titre = "Mes réponses"){
   const file = typeof File !== "undefined" ? new File([blob], nom, { type:"application/pdf" }) : null;
+  /* Ordinateur : le PDF s'ouvre dans un nouvel onglet, prêt à imprimer */
+  if(!matchMedia("(pointer: coarse)").matches){
+    const url = URL.createObjectURL(file || blob);
+    const w = window.open(url, "_blank");
+    if(w){ setTimeout(() => URL.revokeObjectURL(url), 60000); return "onglet"; }
+    URL.revokeObjectURL(url);
+  }
   if(file && navigator.canShare?.({ files:[file] })){
     try{ await navigator.share({ files:[file], title:titre }); return "partage"; }
     catch(e){ if(e?.name === "AbortError") return "annule"; }

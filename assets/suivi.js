@@ -311,7 +311,7 @@ export async function mountKineSuivi(box, patient, C){
           ${res.length ? `<table class="tbl"><thead><tr><th>Date</th><th>Score</th>${res.some(r => r.sousScores) ? "<th>Détail</th>" : ""}<th></th></tr></thead><tbody>${res.map((r, k) => {
             const prev = res[k + 1];
             const delta = prev && r.score !== undefined && prev.score !== undefined ? Math.round((r.score - prev.score) * 10) / 10 : null;
-            return `<tr><td>${esc(fmtShortDate(r.date))}</td><td class="num"><strong>${esc(fmtScore(r.score, q))}</strong>${delta ? ` <span class="faint">(${delta > 0 ? "+" : ""}${String(delta).replace(".", ",")})</span>` : ""}</td>${r.sousScores ? `<td class="small">${Object.entries(r.sousScores).map(([k2, v]) => `${esc(k2)} ${v === null ? "–" : String(v).replace(".", ",")}`).join(" ; ")}</td>` : (res.some(x => x.sousScores) ? "<td></td>" : "")}<td style="width:40px"><button class="icon-btn sm danger" type="button" data-qdel="${esc(r.id)}" aria-label="Supprimer cette réponse" title="Supprimer cette réponse">${icon("trash")}</button></td></tr>`; }).join("")}</tbody></table>`
+            return `<tr><td>${esc(fmtShortDate(r.date))}</td><td class="num"><strong>${esc(fmtScore(r.score, q))}</strong>${delta ? ` <span class="faint">(${delta > 0 ? "+" : ""}${String(delta).replace(".", ",")})</span>` : ""}</td>${r.sousScores ? `<td class="small">${Object.entries(r.sousScores).map(([k2, v]) => `${esc(k2)} ${v === null ? "–" : String(v).replace(".", ",")}`).join(" ; ")}</td>` : (res.some(x => x.sousScores) ? "<td></td>" : "")}<td style="width:84px;white-space:nowrap"><button class="icon-btn sm" type="button" data-qprint="${esc(r.id)}" aria-label="Imprimer ce questionnaire" title="Imprimer (questions, réponses et score)">${icon("print")}</button><button class="icon-btn sm danger" type="button" data-qdel="${esc(r.id)}" aria-label="Supprimer cette réponse" title="Supprimer cette réponse">${icon("trash")}</button></td></tr>`; }).join("")}</tbody></table>`
           : `<p class="muted">Pas encore de réponse.</p>`}
           <a class="btn" href="/suivi.html?q=${encodeURIComponent(id)}&pour=${encodeURIComponent(patient.cle)}">${icon("edit")}Remplir avec le patient, ici</a>
         </div>`,
@@ -327,6 +327,18 @@ export async function mountKineSuivi(box, patient, C){
           if(ids.length === 1 && suivis.some(x => x.type === "questionnaire" && x.qid === id)) actions["q-detail"](id);
         }catch(err){ console.error(err); toast("Suppression impossible. Réessayez.", { type:"err" }); }
       };
+      /* Impression : questions, réponses du patient et score (même feuille que côté patient) */
+      s.el.querySelectorAll("[data-qprint]").forEach(b => b.addEventListener("click", async () => {
+        const r = res.find(x => x.id === b.dataset.qprint);
+        const def = q.items?.length ? q : await C.getQuestionnaire(id).catch(() => null);
+        if(!def?.items?.length || !Array.isArray(r?.reponses)){ toast("Les réponses détaillées de ce questionnaire ne sont pas disponibles.", { type:"err" }); return; }
+        b.disabled = true;
+        try{
+          const Q = await import("./questionnaire-pdf.js");
+          await Q.partagerPdf(await Q.questionnairePdf(def, r.reponses, { patient: patient.nom || "", date: new Date(r.date), score: r.score ?? null, sousScores: r.sousScores || null }), `${def.nom} – ${patient.nom || ""}`);
+        }catch(err){ toast(err.message || "Le PDF n'a pas pu être créé.", { type:"err" }); }
+        finally{ b.disabled = false; }
+      }));
       s.el.querySelectorAll("[data-qdel]").forEach(b => b.addEventListener("click", async () => {
         const r = res.find(x => x.id === b.dataset.qdel);
         if(!await confirmDialog({ title:"Supprimer cette réponse ?", message:`${q.nom} du ${fmtShortDate(r.date)} (score ${fmtScore(r.score, q)}) sera définitivement supprimé.`, confirm:"Supprimer", danger:true })) return;
