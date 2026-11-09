@@ -535,7 +535,7 @@ async function homeSuivi(ctx, patient, seances, actif){
       <div class="list">${todo.map(t => `<a class="list-item" href="${t.href}"><span class="li-ico" style="background:var(--soleil-soft);color:var(--soleil-strong)">${icon(t.ico)}</span><span class="li-main"><span class="li-title">${esc(t.titre)}</span><span class="li-sub">${esc(t.sous)}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}
     ${remplis.length ? `<section class="section"><div class="section-title">Mes questionnaires remplis</div>
       <div class="list">${remplis.slice(0, 6).map((r, i) => `<button class="list-item" type="button" data-qpdf="${i}" style="width:100%;text-align:left;font:inherit;color:inherit;border:0;cursor:pointer"><span class="li-ico">${icon("list")}</span><span class="li-main"><span class="li-title">${esc(r.nom || questionnaires.find(q => q.id === r.qid)?.nom || "Questionnaire")}</span><span class="li-sub">Rempli le ${esc(new Date(r.date).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" }))} · imprimer mes réponses</span></span><span class="li-end">${icon("print")}</span></button>`).join("")}</div>
-      <p class="small muted" style="margin-top:8px">Un PDF avec les questions et vos réponses, à montrer à un autre soignant si vous le souhaitez.</p></section>` : ""}
+      <p class="small muted" style="margin-top:8px">Un PDF avec votre score, les questions et vos réponses, à montrer à un autre soignant si vous le souhaitez.</p></section>` : ""}
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
       <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
 
@@ -546,7 +546,7 @@ async function homeSuivi(ctx, patient, seances, actif){
     b.disabled = true;
     try{
       const Q = await import("../questionnaire-pdf.js");
-      await Q.partagerPdf(await Q.questionnairePdf(q, r.reponses, { patient: patient.nom || "", date: new Date(r.date) }), q.nom);
+      await Q.partagerPdf(await Q.questionnairePdf(q, r.reponses, { patient: patient.nom || "", date: new Date(r.date), score: r.score ?? null, sousScores: r.sousScores || null }), q.nom);
     }catch(err){ toast(err.message || "Le PDF n'a pas pu être créé.", { type:"err" }); }
     finally{ b.disabled = false; }
   }));

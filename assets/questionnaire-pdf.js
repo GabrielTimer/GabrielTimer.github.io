@@ -1,12 +1,13 @@
 /* =========================================================
    Questionnaire rempli → PDF pour le patient
    ---------------------------------------------------------
-   Questions et réponses choisies, sans score ni analyse :
+   Score brut, questions et réponses choisies, sans interprétation :
    le patient peut le montrer à un autre professionnel de santé.
    Partage (iPhone / Android : imprimer, enregistrer, envoyer) ou téléchargement.
    ========================================================= */
 
 import { KINE, settings } from "./app.js";
+import { fmtScore } from "./questionnaires.js";
 
 const JSPDF = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
 let jspdf = null;
@@ -24,7 +25,7 @@ const t = s => String(s ?? "").replace(/[^\x00-\xFF]/g, ch => MAP[ch] ?? "");
 const slug = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase();
 
 /** Construit le PDF : { blob, nom }. q = questionnaire, rep = valeurs choisies (null = sans réponse). */
-export async function questionnairePdf(q, rep, { patient = "", date = new Date() } = {}){
+export async function questionnairePdf(q, rep, { patient = "", date = new Date(), score = null, sousScores = null } = {}){
   await charger();
   const { jsPDF } = window.jspdf;
   const d = new jsPDF({ unit:"mm", format:"a4", compress:true });
@@ -54,6 +55,24 @@ export async function questionnairePdf(q, rep, { patient = "", date = new Date()
   const quand = date.toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
   d.text(t([patient ? `Rempli par ${patient}` : "", `le ${quand}`].filter(Boolean).join(", ")), M, y);
   y += 9;
+
+  /* Score brut (et sous-scores), sans interprétation */
+  const sous = Object.entries(sousScores || {}).filter(([, v]) => v !== null && v !== undefined);
+  if((score !== null && score !== undefined) || sous.length){
+    const lignes = [];
+    if(score !== null && score !== undefined) lignes.push(["Score", fmtScore(score, q)]);
+    sous.forEach(([k, v]) => lignes.push([k, fmtScore(v, q)]));
+    const h = lignes.length * 6 + 5;
+    d.setFillColor(244, 248, 249); d.setDrawColor(...LINE); d.roundedRect(M, y, CW, h, 2.5, 2.5, "FD");
+    let sy = y + 7;
+    lignes.forEach(([k, v], i) => {
+      d.setFont("helvetica", "bold"); d.setFontSize(i === 0 && k === "Score" ? 11 : 10); d.setTextColor(...INK2);
+      d.text(t(k), M + 4, sy);
+      d.setTextColor(...INK); d.text(t(v), W - M - 4, sy, { align:"right" });
+      sy += 6;
+    });
+    y += h + 8;
+  }
 
   /* Questions et réponses */
   let section = null;

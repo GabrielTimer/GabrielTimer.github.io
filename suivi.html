@@ -121,13 +121,13 @@ async function questionnaire(){
     const quand = new Date();
     done("Merci !", essai ? `Score calculé : ${score === null ? "non calculable" : score}.` : "Vos réponses sont transmises à votre kiné. Il en discutera avec vous.",
       essai ? "" : `<button class="btn big block" type="button" id="pdf-rep" style="margin-bottom:12px">${icon("print")}Imprimer ou enregistrer mes réponses</button>
-      <p class="small muted" style="margin:-4px 0 18px">Un PDF avec les questions et vos réponses, à montrer à votre médecin ou à un autre soignant si vous le souhaitez.</p>`);
+      <p class="small muted" style="margin:-4px 0 18px">Un PDF avec votre score, les questions et vos réponses, à montrer à votre médecin ou à un autre soignant si vous le souhaitez.</p>`);
     $("#pdf-rep")?.addEventListener("click", async e => {
       const b = e.currentTarget; b.disabled = true;
       try{
         const Q = await import("/assets/questionnaire-pdf.js");
         const nom = pour ? "" : String(localStorage.getItem("gt_patient_nom") || "").replace(/^"|"$/g, "");
-        await Q.partagerPdf(await Q.questionnairePdf(q, rep, { patient:nom, date:quand }), q.nom);
+        await Q.partagerPdf(await Q.questionnairePdf(q, rep, { patient:nom, date:quand, score, sousScores }), q.nom);
       }catch(err){ toast(err.message || "Le PDF n'a pas pu être créé.", { type:"err" }); }
       finally{ b.disabled = false; }
     });
