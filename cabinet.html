@@ -105,7 +105,7 @@ function render(){
       <p style="margin:0 0 12px">${esc(adr).replace(/\n/g, "<br>")}</p>
       <iframe class="cab-map" title="Plan d'accès" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(adrLigne)}&output=embed"></iframe>
     </section>` : ""}
-    <p class="cab-foot">${esc(c.nom)}${c.titre ? " · " + esc(c.titre) : ""}</p>`;
+    <p class="cab-foot">${esc(c.nom)}${c.titre ? " · " + esc(c.titre) : ""}<br><a href="/confidentialite.html">Données personnelles</a></p>`;
   brancherRetour();
 }
 /* ---------- Photos (Réglages du cabinet → Photos) ---------- */

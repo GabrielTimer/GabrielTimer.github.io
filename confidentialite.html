@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Confidentialité et données personnelles – ApiKiné</title>
+<meta name="description" content="Comment l'application ApiKiné utilise et protège vos données personnelles et de santé.">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  /* Page publique : informations RGPD pour les patients. Coordonnées reprises de Réglages du cabinet. */
+  .conf{ width:min(100% - 2*var(--gutter, 16px), 720px); margin:0 auto; padding:28px 0 48px; display:flex; flex-direction:column; gap:16px; }
+  .conf h1{ margin:0; font-size:clamp(1.4rem, 5vw, 1.9rem); line-height:1.15; }
+  .conf .lead{ margin:6px 0 0; color:var(--ink-2); }
+  .conf .panel h2{ font-size:var(--fs-lg); display:flex; align-items:center; gap:10px; margin:0 0 10px; }
+  .conf .panel h2 svg{ width:22px; height:22px; color:var(--lagon); flex:none; }
+  .conf .panel p{ margin:0 0 10px; line-height:1.5; }
+  .conf .panel p:last-child, .conf .panel ul:last-child{ margin-bottom:0; }
+  .conf .panel ul{ margin:0 0 10px; padding-left:1.2em; line-height:1.5; }
+  .conf .panel li{ margin-bottom:4px; }
+  .conf-retour{ align-self:flex-start; }
+  .conf-foot{ text-align:center; font-size:var(--fs-sm); color:var(--ink-3); }
+</style>
+</head>
+<body>
+<main class="conf" id="conf"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, esc, icon } from "/assets/app.js";
+import { settings, loadSettings } from "/assets/settings.js";
+
+/* Dans l'appli installée, pas de bouton précédent : on en propose un. */
+const dansAppli = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const MAJ = "9 novembre 2026";
+
+function render(){
+  const c = settings.cabinet || {};
+  const nom = esc(c.nom || "votre kinésithérapeute");
+  const email = String(c.email || "").trim();
+  const adr = String(c.adresse || "").trim();
+  const mail = email ? `<a href="mailto:${esc(email)}">${esc(email)}</a>` : "l'adresse e-mail du cabinet";
+  $("#conf").innerHTML = `
+    ${dansAppli || history.length > 1 ? `<button class="btn conf-retour" type="button" id="retour">${icon("back")}Retour</button>` : ""}
+    <header>
+      <h1>Vos données personnelles</h1>
+      <p class="lead">Comment l'application utilise et protège vos informations. Mise à jour le ${MAJ}.</p>
+    </header>
+
+    <section class="panel">
+      <h2>${icon("user")}Qui est responsable de vos données</h2>
+      <p><strong>${nom}</strong>${c.titre ? ", " + esc(c.titre).toLowerCase() : ""}${adr ? `<br>${esc(adr).replace(/\n/g, "<br>")}` : ""}<br>Contact : ${mail}</p>
+      <p>Cette application est un outil de votre kinésithérapeute pour vous accompagner dans votre rééducation. Elle fait partie de votre prise en charge.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("file")}Quelles données</h2>
+      <ul>
+        <li>votre nom et votre lien d'accès personnel ;</li>
+        <li>vos programmes d'exercices et les séances que vous réalisez ;</li>
+        <li>ce que vous indiquez dans l'application : douleur, difficulté, commentaires, réponses aux questionnaires, objectifs, messages ;</li>
+        <li>les éléments de suivi notés par votre kinésithérapeute (bilans, notes de séance).</li>
+      </ul>
+      <p>Certaines de ces informations sont des données de santé. Elles sont couvertes par le secret professionnel.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("info")}Pourquoi</h2>
+      <p>Uniquement pour votre rééducation : vous guider dans vos exercices, suivre vos progrès et adapter votre programme. Ces données sont utilisées dans le cadre de vos soins (article 9.2.h du RGPD).</p>
+      <p>Il n'y a <strong>ni publicité, ni revente, ni partage</strong> à des fins commerciales.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("users")}Qui peut les voir</h2>
+      <p>Votre kinésithérapeute et, si besoin pour la continuité de vos soins, ses <strong>remplaçants et associés</strong>, tous tenus au secret professionnel. Personne d'autre.</p>
+      <p>Votre lien d'accès est personnel : ne le partagez pas.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("lock")}Où elles sont stockées</h2>
+      <p>Les données sont hébergées par Google Cloud (service Firebase), dans des centres de données situés dans l'Union européenne (Belgique et Pays-Bas). Les échanges sont chiffrés.</p>
+      <p>Une partie (vos séances, vos réglages) est aussi gardée sur votre téléphone pour que l'application fonctionne sans connexion. Supprimer l'application de votre téléphone efface cette copie.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("clock")}Combien de temps</h2>
+      <p>Vos données font partie de votre dossier de kinésithérapie. Elles sont conservées <strong>20 ans</strong> après votre dernière séance, comme le dossier médical, puis supprimées.</p>
+    </section>
+
+    <section class="panel">
+      <h2>${icon("check")}Vos droits</h2>
+      <p>Vous pouvez à tout moment demander à <strong>consulter</strong>, <strong>corriger</strong> ou <strong>supprimer</strong> vos données, ou vous opposer à l'utilisation de l'application. Il suffit d'écrire à ${mail}. Une réponse vous sera faite dans un délai d'un mois.</p>
+      <p>Les informations qui doivent légalement rester dans votre dossier de soins sont conservées pendant la durée prévue ; tout le reste est effacé.</p>
+      <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez vous adresser à la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).</p>
+    </section>
+
+    <p class="conf-foot">${nom}${c.titre ? " · " + esc(c.titre) : ""}</p>`;
+  $("#retour")?.addEventListener("click", () => {
+    if(history.length > 1){ history.back(); return; }
+    location.href = "/index.html";
+  });
+}
+render();
+loadSettings({ force:true }).then(render).catch(() => {});
+</script>
+</body>
+</html>

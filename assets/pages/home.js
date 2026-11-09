@@ -78,7 +78,7 @@ function renderWelcome(){
         </form>
       </div>
       <p class="center small faint">Vos données restent privées : seul votre kiné et vous y avez accès.</p>
-      <footer class="app-foot" style="margin-top:4px">${appMarkHTML("lg")}<span>L'application de suivi de votre kiné</span></footer>
+      <footer class="app-foot" style="margin-top:4px">${appMarkHTML("lg")}<span>L'application de suivi de votre kiné</span><a class="small" href="/confidentialite.html">Vos données personnelles</a></footer>
     </section>`;
   secretLogo($("#logo"));
 
@@ -154,6 +154,7 @@ function showCabinet(){
         ${hor ? horairesHTML(c.horaires) : ""}
         ${adr ? item("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(adr.replace(/\s*\n\s*/g, ", ")), "pin", esc(adr).replace(/\n/g, "<br>"), "Voir sur la carte, itinéraire", true) : ""}
         ${item("/cabinet.html", "home", "Page du cabinet", "Coordonnées, horaires et photos, à partager à vos proches", true)}
+        ${item("/confidentialite.html", "lock", "Vos données personnelles", "Ce qui est enregistré, qui y a accès, vos droits")}
       </div>
     </section>`;
 }
