@@ -26,13 +26,13 @@ registerSW();
 mountShell({ role:"kine", active:"" });
 const C = await import("/assets/cloud.js");
 
-const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+const link = (href, ico, title, sub, ext) => `<a class="list-item" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
   <div class="page-head"><h1>Outils</h1></div>
   <div class="list">
     ${link("/reglages_cabinet.html", "settings", "Réglages du cabinet", "Nom, logo, textes, annonce, alertes, listes, sauvegarde")}
-    ${link("/cabinet.html", "link", "Page publique du cabinet", "Coordonnées, horaires, plan : le lien à mettre sur Google Maps")}
+    ${link("/cabinet.html", "link", "Page publique du cabinet", "Coordonnées, horaires, plan : le lien à mettre sur Google Maps", true)}
     ${link("/ordonnance.html", "file", "Ordonnance", "Ordonnance pré-remplie, datée du jour : Word, impression ou PDF")}
     ${link("/aide.html", "info", "Aide", "Comment tout faire depuis le site")}
     ${link("/messages.html", "inbox", "Messages des patients", "Questions, bilans et commentaires de séance, au même endroit")}

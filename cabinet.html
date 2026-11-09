@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/assets/pages/home.css">
 <style>
   /* Page publique du cabinet (lien à mettre sur la fiche Google Maps).
-     Page indépendante : aucun lien vers l'application. Tout vient de Réglages du cabinet : nom, profession, logo, téléphone, adresse, horaires, annonce. */
+     Page indépendante : aucun lien vers l'application (sauf le bouton « Retour », visible seulement dans l'appli installée). Tout vient de Réglages du cabinet : nom, profession, logo, téléphone, adresse, horaires, annonce. */
   .cab{ width:min(100% - 2*var(--gutter, 16px), 720px); margin:0 auto; padding:28px 0 48px; display:flex; flex-direction:column; gap:18px; }
   .cab-head{ display:flex; gap:16px; align-items:center; }
   .cab-head img{ width:72px; height:72px; object-fit:contain; border-radius:var(--r-md); background:#fff; border:1px solid var(--line); flex:none; }
@@ -40,6 +40,7 @@
   .cab-msg{ display:flex; gap:14px; align-items:flex-start; padding:16px 18px; border-radius:var(--r-lg, 18px); background:var(--warn-soft); border:2px solid var(--warn); color:var(--ink); font-size:var(--fs-md, 1rem); line-height:1.45; font-weight:600; text-decoration:none; }
   .cab-msg svg{ width:28px; height:28px; flex:none; margin-top:1px; color:var(--warn); }
   .cab-msg b{ white-space:nowrap; color:var(--warn); font-weight:800; }
+  .cab-retour{ align-self:flex-start; }
   .cab-foot{ text-align:center; font-size:var(--fs-sm); color:var(--ink-3); }
   .cab .panel h2{ font-size:var(--fs-lg); display:flex; align-items:center; gap:10px; margin:0 0 10px; }
   .cab .panel h2 svg{ width:22px; height:22px; color:var(--lagon); }
@@ -57,6 +58,19 @@ import { $, esc, icon } from "/assets/app.js";
 import { settings, loadSettings, currentAnnonce, logoSrc } from "/assets/settings.js";
 import * as H from "/assets/horaires.js";
 
+/* Ouverte depuis l'application installée (écran d'accueil du téléphone) : pas de barre de navigation,
+   donc un bouton pour revenir. Invisible pour les visiteurs venus de Google Maps (navigateur normal). */
+const dansAppli = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const retourHTML = () => dansAppli ? `<button class="btn cab-retour" type="button" id="retour">${icon("back")}Retour à l'application</button>` : "";
+function brancherRetour(){
+  const b = $("#retour"); if(!b) return;
+  b.onclick = () => {
+    if(window.opener){ window.close(); return; }
+    if(history.length > 1){ history.back(); return; }
+    location.href = "/index.html";
+  };
+}
+
 function render(){
   const c = settings.cabinet || {};
   const tel = String(c.telephone || "").trim(), adr = String(c.adresse || "").trim();
@@ -68,6 +82,7 @@ function render(){
   const msg = String(c.message ?? "").trim();
   const msgHTML = msg ? esc(msg).replace(/ ([:;!?])/g, "\u00a0$1").replace(/\{telephone\}/g, tel ? `<b>${esc(tel)}</b>` : "le cabinet").replace(/\n/g, "<br>") : "";
   $("#cab").innerHTML = `
+    ${retourHTML()}
     ${msg ? (tel ? `<a class="cab-msg" href="tel:${esc(tel.replace(/[^\d+]/g, ""))}">${icon("call")}<span>${msgHTML}</span></a>` : `<div class="cab-msg">${icon("info")}<span>${msgHTML}</span></div>`) : ""}
     <header class="cab-head">
       <img src="${esc(logoSrc())}" alt="">
@@ -91,6 +106,7 @@ function render(){
       <iframe class="cab-map" title="Plan d'accès" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(adrLigne)}&output=embed"></iframe>
     </section>` : ""}
     <p class="cab-foot">${esc(c.nom)}${c.titre ? " · " + esc(c.titre) : ""}</p>`;
+  brancherRetour();
 }
 /* ---------- Photos (Réglages du cabinet → Photos) ---------- */
 let photos = [];
