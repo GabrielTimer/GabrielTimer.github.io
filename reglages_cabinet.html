@@ -59,6 +59,8 @@ import { settings, DEFAULTS, saveSettings, loadSettings, fillTemplate, logoSrc }
 import * as H from "/assets/horaires.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
+{ const C0 = await import("/assets/cloud.js");
+  if(!C0.estTitulaire()){ document.getElementById("app").innerHTML = `<div class="page-head"><h1>Réservé au titulaire</h1><p class="lead">Les réglages du cabinet sont gérés par le titulaire du cabinet.</p></div><a class="btn" href="/index.html">Retour à l'accueil</a>`; throw new Error("reserve"); } }
 registerSW();
 mountShell({ role:"kine", active:"", back:"/admin_tools.html", title:"Réglages du cabinet" });
 const C = await import("/assets/cloud.js");
@@ -93,8 +95,16 @@ async function initComptes(){
     try{ comptes = await C.getComptes(); }catch(e){ box.innerHTML = `<p class="small muted">Liste indisponible (connexion ?).</p>`; return; }
     box.innerHTML = comptes.length ? comptes.map(c => `<div class="list-item"><span class="li-ico">${icon("user")}</span>
       <span class="li-main"><span class="li-title">${esc(c.nom || c.email)}</span><span class="li-sub">${esc(c.email)}${c.depuis ? ` · depuis le ${esc(quand(c.depuis))}` : ""}</span></span>
-      <span class="li-end"><button class="btn sm ghost" type="button" data-cp-del="${esc(c.email)}">${icon("trash")}Retirer</button></span></div>`).join("")
+      <span class="li-end" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+        <label class="rc-switch small" style="margin:0"><input type="checkbox" data-cp-voit="${esc(c.email)}" ${c.voitMesPatients ? "checked" : ""}>Voit mes patients</label>
+        <button class="btn sm ghost" type="button" data-cp-del="${esc(c.email)}">${icon("trash")}Retirer</button></span></div>`).join("")
       : `<p class="small muted">Aucun autre compte : vous êtes seul à accéder à l'espace kiné.</p>`;
+    box.querySelectorAll("[data-cp-voit]").forEach(cb => cb.onchange = async () => {
+      try{
+        await C.setVoitMesPatients(cb.dataset.cpVoit, cb.checked);
+        toast(cb.checked ? `${cb.dataset.cpVoit} peut suivre vos patients (sans votre messagerie ni vos notes).` : `${cb.dataset.cpVoit} ne voit plus vos patients.`, { type:"ok", duration:6000 });
+      }catch(e){ cb.checked = !cb.checked; toast("Impossible de modifier : " + (e.message || e), { type:"err" }); }
+    });
     box.querySelectorAll("[data-cp-del]").forEach(b => b.onclick = async () => {
       if(!await confirmDialog({ title:"Retirer l'accès ?", message:`${b.dataset.cpDel} ne pourra plus ouvrir l'espace kiné.`, confirm:"Retirer", danger:true })) return;
       try{ await C.retirerCompte(b.dataset.cpDel); toast("Accès retiré.", { type:"ok" }); afficher(); }
@@ -331,7 +341,8 @@ function render(){
 
     ${C.isOwnerUser(C.auth.currentUser) ? `<section class="panel" id="comptes">
       <h2>${icon("users")}Comptes autorisés</h2>
-      <p class="muted">Remplaçant, associé : donnez-lui accès à l'espace kiné (patients, programmes, bilans, messages). Il reçoit un e-mail pour choisir son mot de passe, puis se connecte sur la page de connexion habituelle. Retirez-le à son départ : l'accès est coupé tout de suite.</p>
+      <p class="muted">Remplaçant, associé : il a son propre espace kiné, avec <strong>ses</strong> patients et <strong>sa</strong> messagerie. Il ne voit pas les vôtres, vous ne voyez pas les siens. Il reçoit un e-mail pour choisir son mot de passe, puis se connecte sur la page de connexion habituelle. Retirez-le à son départ : l'accès est coupé tout de suite.</p>
+      <p class="muted">Pendant vos congés, cochez « Voit mes patients » : il peut suivre vos patients (programmes, bilans, séances), mais jamais votre messagerie ni vos notes de séance. Les statistiques, la corbeille et ces réglages restent à vous seul.</p>
       <div id="cp-list" class="list" style="margin-bottom:12px"></div>
       <div class="row wrap" style="--gap:10px;align-items:flex-end">
         <div class="field" style="flex:1 1 200px;margin:0"><label for="cp-nom">Nom</label><input class="input" id="cp-nom" placeholder="Ex. Julie Martin, remplaçante"></div>

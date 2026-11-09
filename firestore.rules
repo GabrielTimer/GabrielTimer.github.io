@@ -15,21 +15,40 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Titulaire du cabinet : seul à pouvoir donner ou retirer l'accès à d'autres comptes
+    // ---------- Qui est qui ----------
+    // Titulaire du cabinet : accès complet, seul à gérer les comptes, les réglages,
+    // les statistiques et la corbeille.
+    function owner() { return "kine.laveau@gmail.com"; }
     function isOwner() {
       return request.auth != null
-        && request.auth.token.email in ["kine.laveau@gmail.com"];
+        && request.auth.token.email in [owner()];
     }
+    function moi() { return request.auth.token.email.lower(); }
+    function acces() { return get(/databases/$(database)/documents/acces/comptes).data; }
 
-    // Kiné : le titulaire, ou un compte autorisé par lui (remplaçant, associé)
-    // dans Réglages du cabinet → Comptes autorisés (document acces/comptes).
-    function isKine() {
-      return isOwner()
-        || (request.auth != null && request.auth.token.email is string
-            && request.auth.token.email_verified == true      // adresse prouvée : personne ne peut se faire passer pour lui
-            && exists(/databases/$(database)/documents/acces/comptes)
-            && request.auth.token.email.lower() in get(/databases/$(database)/documents/acces/comptes).data.emails);
+    // Compte autorisé par le titulaire (remplaçant, associé) : Réglages du cabinet → Comptes autorisés.
+    // Il a SES patients (champ kine = son e-mail) et sa messagerie.
+    function isAutorise() {
+      return request.auth != null && request.auth.token.email is string
+        && request.auth.token.email_verified == true      // adresse prouvée : personne ne peut se faire passer pour lui
+        && exists(/databases/$(database)/documents/acces/comptes)
+        && moi() in acces().emails;
     }
+    function isKine() { return isOwner() || isAutorise(); }
+
+    // Compte à qui le titulaire ouvre ses patients (sans sa messagerie ni ses notes)
+    function delegue() { return isAutorise() && moi() in acces().get("delegues", []); }
+
+    // Kiné d'un patient (sans champ : le titulaire)
+    function kineDe(data) { return data.get("kine", owner()); }
+    function patientDe(cle) { return get(/databases/$(database)/documents/patients/$(cle)).data; }
+    // Voir et suivre le patient (programmes, bilans, fiche)
+    function peutVoir(data) { return isOwner() || (isAutorise() && (kineDe(data) == moi() || (delegue() && kineDe(data) == owner()))); }
+    function peutCle(cle) { return isOwner() || (isAutorise() && peutVoir(patientDe(cle))); }
+    // Messagerie et notes privées : le kiné du patient seulement
+    function sienCle(cle) { return isOwner() || (isAutorise() && kineDe(patientDe(cle)) == moi()); }
+    // Requêtes de liste (le champ kine doit être filtré dans la requête)
+    function listeOk() { return isOwner() || (isAutorise() && (resource.data.kine == moi() || (delegue() && resource.data.kine == owner()))); }
 
     // Champs qu'un patient a le droit de modifier sur une séance
     function isValidation() {
@@ -54,35 +73,38 @@ service cloud.firestore {
 
     match /patients/{cle} {
       allow get: if true;                 // seulement si on connaît le code exact
-      allow list, create, update, delete: if isKine();
+      allow list: if listeOk();
+      allow create: if isOwner() || (isAutorise() && request.resource.data.kine == moi());
+      allow update: if isOwner() || (isAutorise() && peutVoir(resource.data) && kineDe(request.resource.data) == kineDe(resource.data));
+      allow delete: if isOwner() || (isAutorise() && kineDe(resource.data) == moi());
 
       match /seances/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
-        allow create, delete: if isKine();
-        allow update: if isKine() || isValidation() || isReplanning();
+        allow create, delete: if peutCle(cle);
+        allow update: if peutCle(cle) || isValidation() || isReplanning();
       }
 
       // Messages du patient au kiné (copie dans ApiKiné)
       match /messages/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
-        allow create: if isKine() || isMessage();
-        allow delete: if isKine();
+        allow create: if sienCle(cle) || isMessage();
+        allow delete: if sienCle(cle);
         // Le patient peut seulement marquer comme lu un message reçu de son kiné
-        allow update: if isKine() || (resource.data.de == "kine"
+        allow update: if sienCle(cle) || (resource.data.de == "kine"
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["lu"]));
       }
 
       // Rappels de séance : abonnement aux notifications du téléphone du patient
       match /rappels/{id} {
         allow read, delete: if true;      // le chemin contient déjà le code secret
-        allow create, update: if isKine() || isRappel();
+        allow create, update: if peutCle(cle) || isRappel();
       }
 
       // Objectifs notés et questionnaires remplis par le patient
       match /suivis/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
-        allow create: if isKine() || isSuivi();
-        allow update, delete: if isKine();
+        allow create: if peutCle(cle) || isSuivi();
+        allow update, delete: if peutCle(cle);
       }
     }
 
@@ -124,28 +146,32 @@ service cloud.firestore {
 
     // Coordonnées, note privée et notes de séance : réservées au kiné
     match /fiches/{cle} {
-      allow read, write: if isKine();
+      allow get, write: if peutCle(cle);
+      allow list: if listeOk();
+      // Notes de séance : privées, le kiné du patient seulement
       match /notes/{id} {
-        allow read, write: if isKine();
+        allow read, write: if sienCle(cle);
       }
     }
 
-    // Vue d'ensemble des suivis et des notes (statistiques, sauvegarde)
+    // Vues d'ensemble (tableau de bord, statistiques, sauvegarde) : le titulaire.
+    // Les autres comptes lisent patient par patient (règles ci-dessus).
     match /{path=**}/suivis/{id} {
-      allow read: if isKine();
+      allow read: if isOwner();
     }
     match /{path=**}/notes/{id} {
-      allow read: if isKine();
+      allow read: if isOwner();
     }
     match /{path=**}/messages/{id} {
-      allow read: if isKine();
+      allow read: if isOwner();
     }
-    // Corbeille des programmes supprimés (30 jours), réservée au kiné
+    // Corbeille des programmes supprimés (30 jours) : gérée par le titulaire
     match /corbeille/{id} {
-      allow read, write: if isKine();
+      allow create: if isKine();
+      allow read, update, delete: if isOwner();
     }
     match /{path=**}/rappels/{id} {
-      allow read: if isKine();
+      allow read: if isOwner();
     }
 
     // Questionnaires et fiches conseils : lus par les patients, écrits par le kiné
@@ -160,12 +186,15 @@ service cloud.firestore {
 
     // Vue d'ensemble de toutes les séances (tableau de bord du kiné)
     match /{path=**}/seances/{id} {
-      allow read: if isKine();
+      allow read: if isOwner();
     }
 
-    // Bilans kiné : jamais lisibles par les patients
+    // Bilans kiné : jamais lisibles par les patients ; champ kine comme le patient
     match /bilans/{id} {
-      allow read, write: if isKine();
+      allow get: if isOwner() || (isAutorise() && peutVoir(resource.data));
+      allow list: if listeOk();
+      allow create, update: if isOwner() || (isAutorise() && (request.resource.data.kine == moi() || (delegue() && request.resource.data.kine == owner())));
+      allow delete: if isOwner() || (isAutorise() && peutVoir(resource.data));
     }
 
     // Programmes modèles du cabinet
@@ -178,10 +207,10 @@ service cloud.firestore {
       allow read, write: if isKine();
     }
 
-    // Réglages du cabinet (nom, annonce, listes…) : lus par tous, modifiés par le kiné
+    // Réglages du cabinet (nom, annonce, listes…) : lus par tous, modifiés par le titulaire
     match /reglages/{id} {
       allow read: if true;
-      allow write: if isKine();
+      allow write: if isOwner();
     }
 
     // Comptes autorisés : lus par les kinés, modifiés par le titulaire seul
@@ -192,7 +221,7 @@ service cloud.firestore {
 
     // Ancienne collection (avant migration) : réservée au kiné
     match /programmes/{id} {
-      allow read, write: if isKine();
+      allow read, write: if isOwner();
     }
   }
 }

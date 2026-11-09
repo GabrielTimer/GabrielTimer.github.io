@@ -111,7 +111,7 @@ export async function mountKineSuivi(box, patient, C){
   box.innerHTML = `<div class="loading"><div class="spinner"></div><span>Chargement du suivi…</span></div>`;
   try{
     [suivis, questionnaires, notes, perso] = await Promise.all([
-      C.listSuivis(patient.cle), C.listQuestionnaires(), C.listNotes(patient.cle), C.listConseils().catch(() => [])
+      C.listSuivis(patient.cle), C.listQuestionnaires(), C.estSien(patient) ? C.listNotes(patient.cle).catch(() => []) : [], C.listConseils().catch(() => [])
     ]);
   }catch(e){ err = e; }
 
@@ -181,11 +181,12 @@ export async function mountKineSuivi(box, patient, C){
           : `<p class="muted small">Aucune fiche pour l'instant. Choisissez celles à lui transmettre : il les retrouvera sur son accueil.</p>`}
         </section>
 
-        <section class="panel">
+        ${!C.estSien(patient) ? `<section class="panel"><div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("lock", "ic-inline lagon")} Notes de séance</h2></div>
+          <p class="muted small">Réservées à son kiné.</p></section>` : `<section class="panel">
           <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("lock", "ic-inline lagon")} Notes de séance</h2><button class="btn sm primary" type="button" data-s="n-add">${icon("plus")}Séance du jour</button></div>
           ${notes.length ? `<div class="notes">${notes.slice(0, 6).map(n => noteHTML(n)).join("")}${notes.length > 6 ? `<button class="btn sm ghost" type="button" data-s="n-all">Voir les ${notes.length} notes</button>` : ""}</div>`
           : `<p class="muted small">Notes datées, visibles par vous seul : ce qui a été fait au cabinet, les réactions, la suite prévue.</p>`}
-        </section>
+        </section>`}
       </div>`;
     bind();
   };

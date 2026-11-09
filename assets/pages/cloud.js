@@ -245,7 +245,7 @@ async function kineView(param){
     const [ss, bb, mm] = await Promise.all([
       C.listSeances(patient.cle),
       loadBilans().catch(err => { console.warn("Bilans :", err); bilansErr = err; return []; }),
-      (typeof C.listMessages === "function" ? C.listMessages(patient.cle) : Promise.resolve([])).catch(err => { console.warn("Messages :", err); return []; })
+      (C.estSien(patient) ? C.listMessages(patient.cle) : Promise.resolve([])).catch(err => { console.warn("Messages :", err); return []; })
     ]);
     seances = ss.filter(s => s.data && Array.isArray(s.data.exercices));
     bilans = bb;
@@ -314,6 +314,7 @@ async function kineView(param){
           <span class="avatar">${esc(initials)}</span>
           <div class="pt-id">
             <h1>${esc(nomAffiche(patient.nom))}</h1>
+            ${patient.duTitulaire ? `<span class="badge lagon" title="Vous le suivez pendant le remplacement : sa messagerie et ses notes restent à son kiné">${icon("users")}Patient de ${esc(C.OWNER_NOM || "votre titulaire")}</span>` : ""}
             <div class="pt-contact">
               ${patient.telephone ? `<a href="tel:${esc(patient.telephone)}">${icon("phone")}${esc(patient.telephone)}</a>` : ""}
               ${patient.email ? `<a href="mailto:${esc(patient.email)}">${icon("mail")}${esc(patient.email)}</a>` : ""}
@@ -347,7 +348,8 @@ async function kineView(param){
           <div id="chart"></div>
         </section>
         <section class="panel">
-          ${(() => {
+          ${!C.estSien(patient) ? `<div class="panel-head"><h2 style="font-size:var(--fs-lg)">Messages et ressentis</h2></div>
+            <p class="muted small">${icon("lock", "ic-inline")} La messagerie de ce patient est réservée à son kiné.</p>` : (() => {
             const box = M.buildInbox({ patients:[patient], messages, seances });
             const nonLus = box.filter(i => !i.lu);
             const feed = [
@@ -590,8 +592,8 @@ async function kineView(param){
       body:`<div class="list">
         <button class="list-item" type="button" id="mo-moi"><span class="li-ico">${icon("phone")}</span><span class="li-main"><span class="li-title">Utiliser cet appareil comme ce patient</span><span class="li-sub">Mode patient réel (rappels, séances enregistrées). Retour à l'espace kiné dans Réglages.</span></span></button>
         <button class="list-item" type="button" id="mo-print"><span class="li-ico">${icon("print")}</span><span class="li-main"><span class="li-title">Imprimer une carte d'accès</span><span class="li-sub">Avec le QR code, à remettre au patient</span></span></button>
-        <button class="list-item" type="button" id="mo-renew"><span class="li-ico">${icon("key")}</span><span class="li-main"><span class="li-title">Générer un nouveau code d'accès</span><span class="li-sub">L'ancien lien ne fonctionnera plus</span></span></button>
-        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${icon("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>
+        ${!C.estSien(patient) ? "" : `<button class="list-item" type="button" id="mo-renew"><span class="li-ico">${icon("key")}</span><span class="li-main"><span class="li-title">Générer un nouveau code d'accès</span><span class="li-sub">L'ancien lien ne fonctionnera plus</span></span></button>
+        <button class="list-item" type="button" id="mo-del"><span class="li-ico" style="background:var(--danger-soft);color:var(--danger)">${icon("trash")}</span><span class="li-main"><span class="li-title" style="color:var(--danger)">Supprimer le patient</span><span class="li-sub">Avec tous ses programmes</span></span></button>`}
       </div>`
     });
     s.el.querySelector("#mo-moi").onclick = async () => {
@@ -600,15 +602,15 @@ async function kineView(param){
       if(ok) modePatient.activer(patient.cle);
     };
     s.el.querySelector("#mo-print").onclick = () => { s.close(); UI.printAccessCard(patient); };
-    s.el.querySelector("#mo-renew").onclick = async () => {
+    s.el.querySelector("#mo-renew") && (s.el.querySelector("#mo-renew").onclick = async () => {
       s.close();
       const ok = await confirmDialog({ title:"Nouveau code d'accès ?", message:`Le lien actuel de ${patient.nom} cessera de fonctionner. Il faudra lui envoyer le nouveau.`, confirm:"Générer" });
       if(!ok) return;
       const n = await C.renewAccessCode(patient.cle);
       toast("Nouveau code créé.", { type:"ok" });
       location.replace(`/cloud.html?patient=${n}&acces=1`);
-    };
-    s.el.querySelector("#mo-del").onclick = async () => {
+    });
+    s.el.querySelector("#mo-del") && (s.el.querySelector("#mo-del").onclick = async () => {
       s.close();
       const nom = await promptDialog({ title:"Supprimer le patient", label:`Pour confirmer, tapez le nom : ${patient.nom}`, confirm:"Supprimer définitivement" });
       if(nom === null) return;
@@ -616,7 +618,7 @@ async function kineView(param){
       await C.deletePatient(patient.cle);
       toast("Patient supprimé.", { type:"ok" });
       setTimeout(() => location.replace("/patients.html"), 600);
-    };
+    });
   };
 
   app.innerHTML = loadingHTML();

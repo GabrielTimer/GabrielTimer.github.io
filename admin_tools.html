@@ -26,7 +26,10 @@ registerSW();
 mountShell({ role:"kine", active:"" });
 const C = await import("/assets/cloud.js");
 
-const link = (href, ico, title, sub, ext) => `<a class="list-item" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
+/* Réglages du cabinet, statistiques, corbeille : le titulaire seulement */
+const TIT = C.estTitulaire();
+const RESERVE = ["/reglages_cabinet.html", "/stats.html", "/corbeille.html", "/cabinet.html"];
+const link = (href, ico, title, sub, ext) => !TIT && RESERVE.includes(href) ? "" : `<a class="list-item" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
   <div class="page-head"><h1>Outils</h1></div>

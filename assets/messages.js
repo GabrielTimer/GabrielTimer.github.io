@@ -53,7 +53,8 @@ export async function loadInbox(C){
     C.listAllMessages().catch(err => { console.warn("Messages :", err); return null; }),
     C.listAllSeances()
   ]);
-  const items = buildInbox({ patients, messages: messages || [], seances });
+  /* Ma messagerie : mes patients seulement (pas ceux d'un autre kiné que je suis en remplacement) */
+  const items = buildInbox({ patients: patients.filter(C.estSien), messages: messages || [], seances });
   setUnreadCache(items.filter(i => !i.lu).length);
   return { items, patients, rulesMissing: messages === null };
 }

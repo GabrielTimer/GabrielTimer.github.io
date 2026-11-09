@@ -117,6 +117,12 @@ export function loadSettings({ force = false } = {}){
 /** Enregistre une partie des réglages : saveSettings({ cabinet:{ nom:"…" } }). */
 export async function saveSettings(patch){
   const C = await import("./cloud.js");
+  /* Réglages du cabinet : le titulaire seul. Pour un autre compte, le changement reste sur cet appareil. */
+  if(!C.estTitulaire()){
+    const raw = merge(merge({}, readCache() || {}), patch);
+    writeCache(raw); replaceSettings(raw);
+    return settings;
+  }
   const current = await C.getReglages().catch(() => null);
   const raw = merge(merge({}, current || readCache() || {}), patch);
   await C.saveReglages(raw);

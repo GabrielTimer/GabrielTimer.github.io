@@ -404,7 +404,7 @@ async function renderKine(user){
   mountShell({ role:"kine", active:"accueil" });
   app.classList.add("wide");
   app.innerHTML = `
-    <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1>Bonjour ${esc(prenom(KINE.nom))}</h1></div>
+    <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1 id="hello-nom">Bonjour ${esc(prenom(KINE.nom))}</h1></div>
     <div id="inbox-banner"></div>
     <div id="backup-banner"></div>
     <div class="tiles">
@@ -438,7 +438,12 @@ async function renderKine(user){
     // Ordre changé sur un autre appareil : reprise des réglages à jour
     loadSettings({ force: true }).then(st => { const ids = st?.accueil?.tuiles; if(ids?.length) ctl?.refresh(ids); }).catch(() => {});
   }).catch(() => {});
-  rappelSauvegarde();
+  /* Compte du titulaire ou compte autorisé (remplaçant, associé) */
+  import("../cloud.js").then(C => {
+    if(C.estTitulaire()){ C.migrerKine().catch(e => console.warn("Migration :", e)); rappelSauvegarde(); return; }
+    const h = document.getElementById("hello-nom"); if(h) h.textContent = "Bonjour " + prenom(C.monNom());
+    document.querySelectorAll('[data-tile="outils"] .t-sub').forEach(x => { x.textContent = "Affichage, aide"; });
+  });
   const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
     const p = await newPatientSheet();
@@ -451,7 +456,7 @@ async function renderKine(user){
     const M = await import("../messages.js");
     const [patients, seances, messages] = await Promise.all([C.listPatients(), C.listAllSeances(), C.listAllMessages().catch(() => [])]);
     const sums = K.summarizeAll(patients, seances);
-    const inbox = M.buildInbox({ patients, messages, seances });
+    const inbox = M.buildInbox({ patients: patients.filter(C.estSien), messages, seances });
     const unread = inbox.filter(i => !i.lu);
     M.setUnreadCache(unread.length);
     /* Retour sur l'accueil (bouton précédent) : remettre le chiffre à jour */

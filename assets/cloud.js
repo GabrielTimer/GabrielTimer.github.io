@@ -23,7 +23,7 @@ import {
   createUserWithEmailAndPassword, sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import { FIREBASE_CONFIG, ADMIN_EMAILS } from "./config.js";
+import { FIREBASE_CONFIG, ADMIN_EMAILS, KINE } from "./config.js";
 import { updateSessionExercise } from "./library.js";
 import { compareNoms } from "./noms.js";
 
@@ -52,6 +52,22 @@ export function isOwnerUser(user){
 }
 /* Synchrone : le titulaire, ou un compte autorisé déjà vérifié pendant cette visite */
 const autorises = new Set();
+let MON_ACCES = null;   // document acces/comptes lu à la connexion (comptes autorisés)
+
+/* ---------- Chaque kiné ses patients ----------
+   patients/{cle}.kine = e-mail du kiné du patient (absent = le titulaire).
+   Le titulaire peut ouvrir ses patients à un compte (« délégué ») : il les voit
+   et les suit, sans la messagerie ni les notes de séance. */
+export const OWNER = String(ADMIN_EMAILS[0] || "").toLowerCase();
+export const moi = () => String(auth.currentUser?.email || "").toLowerCase();
+export const estTitulaire = () => isOwnerUser(auth.currentUser);
+export const estDelegue = () => !estTitulaire() && (MON_ACCES?.delegues || []).includes(moi());
+export const kineDe = p => String(p?.kine || OWNER).toLowerCase();
+/** Patient dont je suis le kiné (messagerie, notes privées, suppression). */
+export const estSien = p => kineDe(p) === moi();
+/** Nom du compte connecté (accueil) : le titulaire, ou le nom donné dans Comptes autorisés. */
+export const monNom = () => estTitulaire() ? "" : ((MON_ACCES?.comptes || []).find(c => c.email === moi())?.nom || moi());
+export const OWNER_NOM = String(KINE.nom || "").split(/\s+/)[0] || "le titulaire";
 export function isKineUser(user){
   return isOwnerUser(user) || !!(user?.email && autorises.has(user.email.toLowerCase()));
 }
@@ -59,11 +75,12 @@ export function isKineUser(user){
 async function verifierKine(user){
   if(!user?.email) return false;
   if(isOwnerUser(user)) return true;
+  if(autorises.has(user.email.toLowerCase()) && MON_ACCES) return true;
   if(!user.emailVerified) return false;   // les règles exigent une adresse vérifiée
   try{
     const snap = await getDoc(doc(db, "acces", "comptes"));   // refusé par les règles si le compte n'est pas autorisé
     const ok = (snap.data()?.emails || []).includes(user.email.toLowerCase());
-    if(ok) autorises.add(user.email.toLowerCase());
+    if(ok){ autorises.add(user.email.toLowerCase()); MON_ACCES = snap.data(); }
     return ok;
   }catch(e){ return false; }
 }
@@ -74,6 +91,26 @@ export async function currentKine(){
   return await verifierKine(user) ? user : null;
 }
 
+/* ---------- Migration : chaque patient existant appartient au titulaire ----------
+   Une seule fois, au premier passage du titulaire : ajoute kine = titulaire aux
+   patients, fiches et bilans qui n'ont pas encore ce champ. */
+export async function migrerKine(){
+  if(!estTitulaire()) return 0;
+  try{ if(localStorage.getItem("gt_migration_kine") === "2") return 0; }catch(e){}
+  let n = 0;
+  for(const name of ["patients", "fiches", "bilans"]){
+    const snap = await getDocs(collection(db, name));
+    const a = snap.docs.filter(d => !d.data().kine);
+    for(let i = 0; i < a.length; i += 400){
+      const b = writeBatch(db);
+      a.slice(i, i + 400).forEach(d => b.set(d.ref, { kine: OWNER }, { merge: true }));
+      await b.commit(); n += Math.min(400, a.length - i);
+    }
+  }
+  try{ localStorage.setItem("gt_migration_kine", "2"); }catch(e){}
+  return n;
+}
+
 /* ---------- Comptes autorisés (titulaire seulement) ---------- */
 
 export async function getComptes(){
@@ -81,7 +118,18 @@ export async function getComptes(){
   return snap.exists() ? (snap.data().comptes || []) : [];
 }
 async function setComptes(comptes){
-  await setDoc(doc(db, "acces", "comptes"), clean({ comptes, emails: comptes.map(c => c.email), updatedAt: Date.now() }));
+  await setDoc(doc(db, "acces", "comptes"), clean({
+    comptes, emails: comptes.map(c => c.email),
+    delegues: comptes.filter(c => c.voitMesPatients).map(c => c.email),   // voient les patients du titulaire
+    updatedAt: Date.now()
+  }), { merge: true });
+}
+/** Ouvre (ou ferme) les patients du titulaire à un compte autorisé. */
+export async function setVoitMesPatients(email, oui){
+  const comptes = await getComptes();
+  const c = comptes.find(x => x.email === String(email).toLowerCase()); if(!c) return;
+  c.voitMesPatients = !!oui;
+  await setComptes(comptes);
 }
 /**
  * Donne l'accès à un compte : crée le compte de connexion s'il n'existe pas
@@ -196,22 +244,56 @@ export async function getPatient(cle, { fiche = false } = {}){
   return p;
 }
 
+/**
+ * Mes patients. Titulaire : les siens (pas ceux des autres kinés).
+ * Autre compte : les siens, plus ceux du titulaire s'il les lui a ouverts (duTitulaire: true).
+ */
+let patientsCache = null;
 export async function listPatients(){
-  const [snap, fiches] = await Promise.all([
-    getDocs(collection(db, "patients")),
-    getDocs(collection(db, "fiches")).catch(() => ({ docs: [] }))
-  ]);
-  const byCle = new Map(fiches.docs.map(d => [d.id, d.data()]));
-  return snap.docs.map(d => ({ cle: d.id, ...d.data(), ...(byCle.get(d.id) || {}) }))
-    .sort(compareNoms);
+  const run = async () => {
+    let pDocs, fDocs;
+    if(estTitulaire()){
+      const [snap, fiches] = await Promise.all([getDocs(collection(db, "patients")), getDocs(collection(db, "fiches")).catch(() => ({ docs: [] }))]);
+      pDocs = snap.docs; fDocs = fiches.docs;
+    }else{
+      const kines = [moi(), ...(estDelegue() ? [OWNER] : [])];
+      const res = await Promise.all(kines.flatMap(k => [
+        getDocs(query(collection(db, "patients"), where("kine", "==", k))),
+        getDocs(query(collection(db, "fiches"), where("kine", "==", k))).catch(() => ({ docs: [] }))
+      ]));
+      pDocs = res.filter((_, i) => i % 2 === 0).flatMap(r => r.docs);
+      fDocs = res.filter((_, i) => i % 2 === 1).flatMap(r => r.docs);
+    }
+    const byCle = new Map(fDocs.map(d => [d.id, d.data()]));
+    return pDocs.map(d => ({ cle: d.id, ...d.data(), ...(byCle.get(d.id) || {}) }))
+      .filter(p => estTitulaire() ? estSien(p) : true)
+      .map(p => ({ ...p, duTitulaire: !estTitulaire() && kineDe(p) === OWNER }))
+      .sort(compareNoms);
+  };
+  /* Plusieurs appels à la suite (tableau de bord) : une seule lecture */
+  if(!patientsCache || Date.now() - patientsCache.t > 5000) patientsCache = { t: Date.now(), p: run() };
+  try{ return await patientsCache.p; }catch(e){ patientsCache = null; throw e; }
+}
+const mesCles = async ({ messagerie = false } = {}) =>
+  new Set((await listPatients()).filter(p => !messagerie || estSien(p)).map(p => p.cle));
+/* Lecture patient par patient (comptes autres que le titulaire : pas de vue d'ensemble) */
+async function parPatient(fn){
+  const ps = await listPatients();
+  const out = [];
+  for(let i = 0; i < ps.length; i += 8){
+    const part = await Promise.all(ps.slice(i, i + 8).map(p => fn(p).catch(() => [])));
+    part.forEach(x => out.push(...x));
+  }
+  return out;
 }
 
 export async function createPatient({ nom, telephone = "", email = "", note = "", legacyId = "", genre = "" }){
   const cle = newAccessCode();
   const now = Date.now();
-  const pub = { nom: String(nom).trim(), patientId: slugPatient(nom), createdAt: now, updatedAt: now };
+  const pub = { nom: String(nom).trim(), patientId: slugPatient(nom), kine: moi() || OWNER, createdAt: now, updatedAt: now };
   if(genre === "h" || genre === "f"){ pub.genre = genre; pub.genreMaj = now; }
-  const priv = { telephone, email, note, legacyId: legacyId || null, updatedAt: now };
+  const priv = { telephone, email, note, legacyId: legacyId || null, kine: pub.kine, updatedAt: now };
+  patientsCache = null;
   await setDoc(doc(db, "patients", cle), clean(pub));
   await setDoc(doc(db, "fiches", cle), clean(priv));
   return { cle, ...pub, ...priv };
@@ -293,8 +375,9 @@ export async function getSeance(cle, id){
 
 /** Toutes les séances de tous les patients (kiné uniquement). */
 export async function listAllSeances(){
-  const snap = await getDocs(collectionGroup(db, "seances"));
-  return snap.docs.map(d => mapSeance(d, d.ref.parent.parent?.id));
+  if(!estTitulaire()) return parPatient(p => listSeances(p.cle));
+  const [snap, cles] = await Promise.all([getDocs(collectionGroup(db, "seances")), mesCles()]);
+  return snap.docs.map(d => mapSeance(d, d.ref.parent.parent?.id)).filter(s => cles.has(s.cle));
 }
 
 export async function saveSeance(cle, seance){
@@ -348,6 +431,7 @@ export async function mettreEnCorbeille(cle, programmeId, { raison = "kine" } = 
   return seances.length;
 }
 export async function listCorbeille(){
+  if(!estTitulaire()) return [];
   const snap = await getDocs(collection(db, "corbeille"));
   return snap.docs.map(d => ({ ...d.data(), id: d.id }));
 }
@@ -384,8 +468,15 @@ export async function validateSeance(cle, id, { eva = null, ressenti = null, com
    resume (texte), zones, motif, createdAt, updatedAt }.
    Collection à part : les patients lisent patients/{code}, jamais celle-ci. */
 
+/* Les requêtes des comptes autres que le titulaire doivent filtrer sur le kiné du patient */
+async function kineDuPatient(cle){ return kineDe(await getPatient(cle).catch(() => null)); }
+async function bilanQuery(cle){
+  return estTitulaire()
+    ? query(collection(db, "bilans"), where("cle", "==", cle))
+    : query(collection(db, "bilans"), where("cle", "==", cle), where("kine", "==", await kineDuPatient(cle)));
+}
 async function bilanDocs(cle){
-  try{ return (await getDocs(query(collection(db, "bilans"), where("cle", "==", cle)))).docs; }
+  try{ return (await getDocs(await bilanQuery(cle))).docs; }
   catch(e){ return []; }
 }
 
@@ -396,15 +487,20 @@ function mapBilan(d){
 }
 
 export async function listBilans(cle){
-  const snap = await getDocs(query(collection(db, "bilans"), where("cle", "==", cle)));
+  const snap = await getDocs(await bilanQuery(cle));
   return snap.docs.map(mapBilan)
     .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.createdAt || 0) - (a.createdAt || 0));
 }
 
 /** Tous les bilans du cabinet (tableau de bord du kiné). */
 export async function listAllBilans(){
-  const snap = await getDocs(collection(db, "bilans"));
-  return snap.docs.map(mapBilan);
+  if(!estTitulaire()){
+    const kines = [moi(), ...(estDelegue() ? [OWNER] : [])];
+    const res = await Promise.all(kines.map(k => getDocs(query(collection(db, "bilans"), where("kine", "==", k)))));
+    return res.flatMap(r => r.docs).map(mapBilan);
+  }
+  const [snap, cles] = await Promise.all([getDocs(collection(db, "bilans")), mesCles()]);
+  return snap.docs.map(mapBilan).filter(b => cles.has(b.cle));
 }
 
 export async function getBilan(id){
@@ -416,7 +512,8 @@ export async function saveBilan(bilan){
   const id = bilan.id || newId();
   const now = Date.now();
   const { etat, ...rest } = bilan;
-  await setDoc(doc(db, "bilans", id), clean({ ...rest, id, etat: JSON.stringify(etat || {}), createdAt: bilan.createdAt || now, updatedAt: now }));
+  const kine = bilan.kine || (bilan.cle ? await kineDuPatient(bilan.cle) : (moi() || OWNER));
+  await setDoc(doc(db, "bilans", id), clean({ ...rest, id, kine, etat: JSON.stringify(etat || {}), createdAt: bilan.createdAt || now, updatedAt: now }));
   return id;
 }
 
@@ -488,7 +585,10 @@ export async function propagateExerciseEdit(before, after){
     return changed ? { ...data, exercices } : null;
   };
   const ops = [];
-  const [seances, modeles] = await Promise.all([getDocs(collectionGroup(db, "seances")), getDocs(collection(db, "modeles"))]);
+  const [seances, modeles] = await Promise.all([
+    estTitulaire() ? getDocs(collectionGroup(db, "seances")) : { docs: [] },
+    getDocs(collection(db, "modeles"))
+  ]);
   let nS = 0, nM = 0;
   seances.docs.forEach(d => {
     const raw = d.data();
@@ -564,8 +664,9 @@ export async function listSuivis(cle){
 }
 
 export async function listAllSuivis(){
-  const snap = await getDocs(collectionGroup(db, "suivis"));
-  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id }));
+  if(!estTitulaire()) return parPatient(p => listSuivis(p.cle));
+  const [snap, cles] = await Promise.all([getDocs(collectionGroup(db, "suivis")), mesCles()]);
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id })).filter(x => cles.has(x.cle));
 }
 
 export async function addSuivi(cle, suivi){
@@ -593,9 +694,15 @@ export async function listMessages(cle){
   return snap.docs.map(d => ({ ...d.data(), id: d.id, cle })).sort((a, b) => (b.date || 0) - (a.date || 0));
 }
 
+/** Ma messagerie : les messages de MES patients seulement (jamais ceux d'un autre kiné). */
 export async function listAllMessages(){
-  const snap = await getDocs(collectionGroup(db, "messages"));
-  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id })).sort((a, b) => (b.date || 0) - (a.date || 0));
+  if(!estTitulaire()){
+    const ps = (await listPatients()).filter(estSien);
+    const all = (await Promise.all(ps.map(p => listMessages(p.cle).catch(() => [])))).flat();
+    return all.sort((a, b) => (b.date || 0) - (a.date || 0));
+  }
+  const [snap, cles] = await Promise.all([getDocs(collectionGroup(db, "messages")), mesCles({ messagerie:true })]);
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id })).filter(m => cles.has(m.cle)).sort((a, b) => (b.date || 0) - (a.date || 0));
 }
 
 export async function setMessageLu(cle, id, lu = true){

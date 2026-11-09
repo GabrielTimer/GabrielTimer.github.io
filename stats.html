@@ -38,6 +38,8 @@ import { $, esc, icon, mountShell, registerSW, errorHTML, emptyHTML, fmtNum, sta
 import { fmtScore } from "/assets/questionnaires.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
+{ const C0 = await import("/assets/cloud.js");
+  if(!C0.estTitulaire()){ document.getElementById("app").innerHTML = `<div class="page-head"><h1>Réservé au titulaire</h1><p class="lead">Les statistiques du cabinet sont gérés par le titulaire du cabinet.</p></div><a class="btn" href="/index.html">Retour à l'accueil</a>`; throw new Error("reserve"); } }
 registerSW();
 mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
 const C = await import("/assets/cloud.js");
