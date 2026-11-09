@@ -15,9 +15,20 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isKine() {
+    // Titulaire du cabinet : seul à pouvoir donner ou retirer l'accès à d'autres comptes
+    function isOwner() {
       return request.auth != null
         && request.auth.token.email in ["kine.laveau@gmail.com"];
+    }
+
+    // Kiné : le titulaire, ou un compte autorisé par lui (remplaçant, associé)
+    // dans Réglages du cabinet → Comptes autorisés (document acces/comptes).
+    function isKine() {
+      return isOwner()
+        || (request.auth != null && request.auth.token.email is string
+            && request.auth.token.email_verified == true      // adresse prouvée : personne ne peut se faire passer pour lui
+            && exists(/databases/$(database)/documents/acces/comptes)
+            && request.auth.token.email.lower() in get(/databases/$(database)/documents/acces/comptes).data.emails);
     }
 
     // Champs qu'un patient a le droit de modifier sur une séance
@@ -171,6 +182,12 @@ service cloud.firestore {
     match /reglages/{id} {
       allow read: if true;
       allow write: if isKine();
+    }
+
+    // Comptes autorisés : lus par les kinés, modifiés par le titulaire seul
+    match /acces/{id} {
+      allow read: if isKine();
+      allow write: if isOwner();
     }
 
     // Ancienne collection (avant migration) : réservée au kiné

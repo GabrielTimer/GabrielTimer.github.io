@@ -19,7 +19,8 @@ import {
   collection, collectionGroup, doc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, query, where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
-  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail,
+  createUserWithEmailAndPassword, sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import { FIREBASE_CONFIG, ADMIN_EMAILS } from "./config.js";
@@ -45,19 +46,82 @@ const authReady = new Promise(resolve => {
   const stop = onAuthStateChanged(auth, user => { stop(); resolve(user); });
 });
 
-export function isKineUser(user){
+/** Titulaire du cabinet (adresse inscrite dans config.js et dans les règles). */
+export function isOwnerUser(user){
   return !!(user && user.email && ADMIN_EMAILS.map(e => e.toLowerCase()).includes(user.email.toLowerCase()));
+}
+/* Synchrone : le titulaire, ou un compte autorisé déjà vérifié pendant cette visite */
+const autorises = new Set();
+export function isKineUser(user){
+  return isOwnerUser(user) || !!(user?.email && autorises.has(user.email.toLowerCase()));
+}
+/** Titulaire, ou compte présent dans acces/comptes (remplaçant, associé). */
+async function verifierKine(user){
+  if(!user?.email) return false;
+  if(isOwnerUser(user)) return true;
+  if(!user.emailVerified) return false;   // les règles exigent une adresse vérifiée
+  try{
+    const snap = await getDoc(doc(db, "acces", "comptes"));   // refusé par les règles si le compte n'est pas autorisé
+    const ok = (snap.data()?.emails || []).includes(user.email.toLowerCase());
+    if(ok) autorises.add(user.email.toLowerCase());
+    return ok;
+  }catch(e){ return false; }
 }
 
 /** Renvoie l'utilisateur kiné connecté, ou null. */
 export async function currentKine(){
-  const user = await authReady;
-  return isKineUser(auth.currentUser || user) ? (auth.currentUser || user) : null;
+  const user = auth.currentUser || await authReady;
+  return await verifierKine(user) ? user : null;
+}
+
+/* ---------- Comptes autorisés (titulaire seulement) ---------- */
+
+export async function getComptes(){
+  const snap = await getDoc(doc(db, "acces", "comptes"));
+  return snap.exists() ? (snap.data().comptes || []) : [];
+}
+async function setComptes(comptes){
+  await setDoc(doc(db, "acces", "comptes"), clean({ comptes, emails: comptes.map(c => c.email), updatedAt: Date.now() }));
+}
+/**
+ * Donne l'accès à un compte : crée le compte de connexion s'il n'existe pas
+ * (sans déconnecter le titulaire), puis envoie un e-mail pour choisir le mot de passe.
+ */
+export async function ajouterCompte({ email, nom = "" }){
+  email = String(email || "").trim().toLowerCase();
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) throw new Error("Adresse e-mail invalide.");
+  const comptes = await getComptes();
+  if(!comptes.some(c => c.email === email)) comptes.push({ email, nom: String(nom || "").trim(), depuis: Date.now() });
+  await setComptes(comptes);
+  /* Compte de connexion créé dans une instance à part, pour ne pas changer l'utilisateur connecté */
+  const second = getAuth(initializeApp(FIREBASE_CONFIG, "creation-" + Date.now()));
+  let cree = false;
+  try{
+    const mdp = Array.from(crypto.getRandomValues(new Uint8Array(18)), b => b.toString(36)).join("") + "A1!";
+    await createUserWithEmailAndPassword(second, email, mdp);
+    cree = true;
+  }catch(e){
+    if(e?.code !== "auth/email-already-in-use") console.warn("Création du compte :", e?.code || e);
+  }finally{ try{ await signOut(second); }catch(e){} }
+  await sendPasswordResetEmail(auth, email);
+  return { cree };
+}
+export async function retirerCompte(email){
+  const comptes = (await getComptes()).filter(c => c.email !== String(email).toLowerCase());
+  await setComptes(comptes);
 }
 
 export async function loginKine(email, password){
   const cred = await signInWithEmailAndPassword(auth, email.trim(), password);
-  if(!isKineUser(cred.user)){
+  /* Compte autorisé (remplaçant…) dont l'adresse n'est pas encore vérifiée : on envoie le lien */
+  if(!isOwnerUser(cred.user) && !cred.user.emailVerified){
+    try{ await sendEmailVerification(cred.user); }catch(e){}
+    await signOut(auth);
+    const err = new Error("Première connexion : un e-mail de vérification vient de vous être envoyé. Cliquez sur le lien qu'il contient, puis reconnectez-vous.");
+    err.code = "app/verify-email";
+    throw err;
+  }
+  if(!await verifierKine(cred.user)){
     await signOut(auth);
     const err = new Error("Ce compte n'a pas accès à l'espace kiné.");
     err.code = "app/not-kine";

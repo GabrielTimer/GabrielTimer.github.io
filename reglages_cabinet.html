@@ -84,6 +84,38 @@ const area = (id, label, value, { rows = 4, hint = "", ph = "" } = {}) => `
   <div class="field"><label for="${id}">${esc(label)}</label><textarea class="textarea" id="${id}" rows="${rows}" placeholder="${esc(ph)}">${esc(value ?? "")}</textarea>${hint ? `<span class="hint">${esc(hint)}</span>` : ""}</div>`;
 const num = (id, label, value, min, max, hint = "") => field(id, label, value, { type:"number", hint, attrs:`min="${min}" max="${max}" inputmode="numeric"` });
 
+/* ---------- Comptes autorisés (titulaire seulement) ---------- */
+async function initComptes(){
+  const box = $("#cp-list"); if(!box) return;
+  const quand = t => new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+  const afficher = async () => {
+    let comptes = [];
+    try{ comptes = await C.getComptes(); }catch(e){ box.innerHTML = `<p class="small muted">Liste indisponible (connexion ?).</p>`; return; }
+    box.innerHTML = comptes.length ? comptes.map(c => `<div class="list-item"><span class="li-ico">${icon("user")}</span>
+      <span class="li-main"><span class="li-title">${esc(c.nom || c.email)}</span><span class="li-sub">${esc(c.email)}${c.depuis ? ` · depuis le ${esc(quand(c.depuis))}` : ""}</span></span>
+      <span class="li-end"><button class="btn sm ghost" type="button" data-cp-del="${esc(c.email)}">${icon("trash")}Retirer</button></span></div>`).join("")
+      : `<p class="small muted">Aucun autre compte : vous êtes seul à accéder à l'espace kiné.</p>`;
+    box.querySelectorAll("[data-cp-del]").forEach(b => b.onclick = async () => {
+      if(!await confirmDialog({ title:"Retirer l'accès ?", message:`${b.dataset.cpDel} ne pourra plus ouvrir l'espace kiné.`, confirm:"Retirer", danger:true })) return;
+      try{ await C.retirerCompte(b.dataset.cpDel); toast("Accès retiré.", { type:"ok" }); afficher(); }
+      catch(e){ toast("Impossible de retirer l'accès : " + (e.message || e), { type:"err" }); }
+    });
+  };
+  afficher();
+  $("#cp-add").onclick = async e => {
+    const email = $("#cp-mail").value.trim(), nom = $("#cp-nom").value.trim();
+    if(!email){ $("#cp-mail").focus(); return; }
+    const b = e.currentTarget; b.disabled = true;
+    try{
+      await C.ajouterCompte({ email, nom });
+      $("#cp-mail").value = ""; $("#cp-nom").value = "";
+      toast(`Accès donné. ${email} va recevoir un e-mail pour choisir son mot de passe (pensez aux courriers indésirables).`, { type:"ok", duration:8000 });
+      afficher();
+    }catch(err){ toast(err.message || "Impossible de donner l'accès.", { type:"err" }); }
+    finally{ b.disabled = false; }
+  };
+}
+
 async function initModeSeance(){
   const MS = await import("/assets/mode-seance.js");
   const box = $("#ms");
@@ -297,6 +329,18 @@ function render(){
       <p class="hint" style="margin-top:10px">Au premier enregistrement après avoir rouvert le navigateur, Chrome peut demander de confirmer l'accès au dossier : choisissez « Autoriser à chaque visite » pour ne plus avoir la question.</p>
     </section>
 
+    ${C.isOwnerUser(C.auth.currentUser) ? `<section class="panel" id="comptes">
+      <h2>${icon("users")}Comptes autorisés</h2>
+      <p class="muted">Remplaçant, associé : donnez-lui accès à l'espace kiné (patients, programmes, bilans, messages). Il reçoit un e-mail pour choisir son mot de passe, puis se connecte sur la page de connexion habituelle. Retirez-le à son départ : l'accès est coupé tout de suite.</p>
+      <div id="cp-list" class="list" style="margin-bottom:12px"></div>
+      <div class="row wrap" style="--gap:10px;align-items:flex-end">
+        <div class="field" style="flex:1 1 200px;margin:0"><label for="cp-nom">Nom</label><input class="input" id="cp-nom" placeholder="Ex. Julie Martin, remplaçante"></div>
+        <div class="field" style="flex:1 1 220px;margin:0"><label for="cp-mail">E-mail</label><input class="input" id="cp-mail" type="email" inputmode="email" autocomplete="off" placeholder="adresse@exemple.fr"></div>
+        <button class="btn primary" type="button" id="cp-add">${icon("plus")}Donner l'accès</button>
+      </div>
+      <p class="hint" style="margin-top:10px">Seul votre compte (${esc(C.auth.currentUser?.email || "")}) peut voir et modifier cette liste.</p>
+    </section>` : ""}
+
     <section class="panel" id="ms">
       <h2>${icon("lock")}Mode séance (tablette prêtée au patient)</h2>
       <p class="muted">Quand une séance est lancée depuis cet appareil en mode kiné, elle s'ouvre en plein écran, sans accès à vos patients ni à vos messages. Le bouton Retour ne quitte pas la séance. Pour l'arrêter ou revenir à l'espace kiné, il faut votre code (<strong>7777</strong> par défaut). Réglage propre à cet appareil, enregistré tout de suite.</p>
@@ -331,13 +375,14 @@ function render(){
 
   renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
   initModeSeance();
+  initComptes();
   initDossiers();
   initPhotos();
   const last = Math.max(Number(localStorage.getItem("gt_last_backup") || 0), Number(settings.sauvegarde?.derniere || 0));
   $("#bk-last").textContent = last ? `Dernière sauvegarde : ${new Date(last).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}. Conseil : une fois par mois.` : "Conseil : faites une sauvegarde une fois par mois.";
   if(location.hash.length > 1) requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block:"start" }));
 
-  app.addEventListener("input", e => { if(!e.target.closest("#backup")) setDirty(true); preview(); });
+  app.addEventListener("input", e => { if(!e.target.closest("#backup, #comptes")) setDirty(true); preview(); });
   /* Horaires : grise les heures d'une demi-journée fermée, et propose des heures par défaut */
   $("#hor").addEventListener("change", e => {
     const box = e.target.closest("[data-hc]"); if(!box || e.target.tagName !== "SELECT") return;
