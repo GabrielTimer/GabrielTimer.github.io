@@ -22,15 +22,15 @@
   .sheet-a4{ width:min(100% - 24px, 210mm); min-height:270mm; margin:20px auto 60px; background:#fff; color:#17323C; padding:16mm 18mm 12mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:13pt; line-height:1.55; display:flex; flex-direction:column; }
   .or-head{ display:flex; gap:18px; align-items:center; }
   .or-head img{ width:68px; height:68px; object-fit:contain; flex:none; }
-  .or-head strong{ display:block; font-size:19pt; line-height:1.2; color:#0B6E80; letter-spacing:.01em; }
-  .or-head .or-titre{ display:block; font-size:12.5pt; color:#3A5862; margin-top:2px; }
-  .or-num{ display:flex; flex-wrap:wrap; gap:2px 22px; font-size:10.5pt; color:#5B747C; margin-top:6px; }
+  .or-head strong{ display:block; font-size:22pt; line-height:1.2; color:#0B6E80; letter-spacing:.01em; }
+  .or-head .or-titre{ display:block; font-size:14.5pt; color:#3A5862; margin-top:2px; }
+  .or-num{ display:flex; flex-wrap:wrap; gap:2px 22px; font-size:12.5pt; color:#5B747C; margin-top:6px; }
   .or-num b{ font-weight:600; color:#17323C; }
   .or-rule{ height:3px; margin:14px 0 0; border-radius:2px; background:linear-gradient(90deg, #138FA6, #8FD0DB 70%, transparent); }
-  .or-date{ text-align:right; margin:20px 0 0; font-size:12.5pt; }
-  .or-title{ text-align:center; margin:18px 0 20px; font-size:15pt; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:#0B6E80; }
+  .or-date{ text-align:right; margin:20px 0 0; font-size:14pt; }
+  .or-title{ text-align:center; margin:18px 0 20px; font-size:17pt; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:#0B6E80; }
   .or-pat{ display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1fr); gap:6px 22px; padding:12px 18px 14px; border-radius:10px; background:#F1F7F8; border:1px solid #DCE9EC; margin-bottom:26px; }
-  .or-pat label{ display:flex; flex-direction:column; gap:2px; font-size:9.5pt; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
+  .or-pat label{ display:flex; flex-direction:column; gap:2px; font-size:11pt; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
   .or-pat input{ width:100%; box-sizing:border-box; border:0; border-bottom:1.5px solid transparent; background:transparent; font:inherit; font-size:15pt; letter-spacing:0; text-transform:none; font-weight:600; color:#17323C; padding:1px 0; min-width:0; }
   .or-pat input::placeholder{ color:#A9BEC3; font-weight:400; }
   .or-pat input:focus{ outline:none; border-bottom-color:#138FA6; }
@@ -38,10 +38,10 @@
   .or-presc{ flex:1; min-height:95mm; white-space:pre-wrap; font-size:14.5pt; line-height:1.75; padding:2px 0 2px 18px; border-left:3px solid #BFE3E9; }
   .or-presc:focus, .or-presc:focus-visible{ outline:none; box-shadow:none; border-left-color:#138FA6; }
   .or-presc:empty::before{ content:attr(data-ph); color:#A9BEC3; }
-  .or-sign{ margin:22px 0 0 auto; width:min(50%, 85mm); text-align:center; font-size:12.5pt; }
-  .or-sign small{ display:block; font-size:9.5pt; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
+  .or-sign{ margin:22px 0 0 auto; width:min(50%, 85mm); text-align:center; font-size:14.5pt; }
+  .or-sign small{ display:block; font-size:11pt; letter-spacing:.08em; text-transform:uppercase; color:#5B747C; }
   .or-sign .space{ height:62px; }
-  .or-foot{ margin-top:22px; padding-top:9px; border-top:1px solid #DCE9EC; text-align:center; font-size:10pt; color:#5B747C; }
+  .or-foot{ margin-top:22px; padding-top:9px; border-top:1px solid #DCE9EC; text-align:center; font-size:12pt; color:#5B747C; }
   html, body{ overflow-x:hidden; }
   .sheet-a4 *{ min-width:0; overflow-wrap:anywhere; }
   /* Smartphone : même ordonnance, en plus compact (l'impression et le Word restent en A4) */
@@ -58,20 +58,20 @@
     .sheet-a4{ width:calc(100% - 16px); min-height:0; margin:10px auto 40px; padding:20px 16px 14px; font-size:15px; }
     .or-head{ gap:12px; align-items:flex-start; }
     .or-head img{ width:46px; height:46px; }
-    .or-head strong{ font-size:20px; }
-    .or-head .or-titre{ font-size:14px; }
-    .or-num{ font-size:12.5px; gap:0 14px; }
+    .or-head strong{ font-size:23px; }
+    .or-head .or-titre{ font-size:16px; }
+    .or-num{ font-size:14.5px; gap:0 14px; }
     .or-rule{ margin-top:12px; }
-    .or-date{ font-size:14.5px; margin-top:14px; }
-    .or-title{ font-size:17px; letter-spacing:.24em; margin:14px 0 16px; }
+    .or-date{ font-size:16px; margin-top:14px; }
+    .or-title{ font-size:19px; letter-spacing:.24em; margin:14px 0 16px; }
     .or-pat{ gap:6px 14px; padding:10px 12px 12px; margin-bottom:20px; }
-    .or-pat label{ font-size:11px; }
+    .or-pat label{ font-size:12.5px; }
     .or-pat input{ font-size:17px; }
     .or-presc{ min-height:220px; font-size:17px; padding-left:12px; }
-    .or-sign{ width:60%; font-size:14.5px; }
-    .or-sign small{ font-size:11px; }
+    .or-sign{ width:60%; font-size:16px; }
+    .or-sign small{ font-size:12.5px; }
     .or-sign .space{ height:40px; }
-    .or-foot{ font-size:12px; }
+    .or-foot{ font-size:14px; }
   }
   @media print{
     @page{ size:A4; margin:14mm; }
@@ -225,19 +225,19 @@ $("#word").onclick = () => {
 div.Section1{ page:Section1; }
 body{ font-family:Calibri, Arial, sans-serif; font-size:13pt; color:#17323C; }
 p{ margin:0; }
-.petit{ font-size:9.5pt; letter-spacing:1pt; text-transform:uppercase; color:#5B747C; font-weight:bold; }
+.petit{ font-size:11pt; letter-spacing:1pt; text-transform:uppercase; color:#5B747C; font-weight:bold; }
 </style></head>
 <body><div class="Section1">
 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr>
 <td width="72" valign="middle" style="padding-right:8pt"><img src="${esc(logo)}" width="64" height="64" alt=""></td>
 <td valign="middle">
-<p style="font-size:19pt;font-weight:bold;color:#0B6E80">${esc(c.nom || KINE.nom)}</p>
-<p style="font-size:12.5pt;color:#3A5862">${esc(c.titre || KINE.titre)}</p>
-<p style="font-size:10.5pt;color:#5B747C;margin-top:4pt">${nums}</p>
+<p style="font-size:22pt;font-weight:bold;color:#0B6E80">${esc(c.nom || KINE.nom)}</p>
+<p style="font-size:14.5pt;color:#3A5862">${esc(c.titre || KINE.titre)}</p>
+<p style="font-size:12.5pt;color:#5B747C;margin-top:4pt">${nums}</p>
 </td></tr></table>
 <p style="border-bottom:2.25pt solid #138FA6;margin:10pt 0 0;font-size:2pt">&nbsp;</p>
-<p style="text-align:right;margin:16pt 0 0;font-size:12.5pt">${esc(dateTexte())}</p>
-<p style="text-align:center;margin:16pt 0 16pt;font-size:15pt;font-weight:bold;letter-spacing:4pt;color:#0B6E80">ORDONNANCE</p>
+<p style="text-align:right;margin:16pt 0 0;font-size:14pt">${esc(dateTexte())}</p>
+<p style="text-align:center;margin:16pt 0 16pt;font-size:17pt;font-weight:bold;letter-spacing:4pt;color:#0B6E80">ORDONNANCE</p>
 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:#F1F7F8;border:1pt solid #DCE9EC"><tr>
 <td width="50%" style="padding:9pt 14pt 10pt"><p class="petit">Nom</p><p style="font-size:15pt;font-weight:bold">${esc(nom) || "&nbsp;"}</p></td>
 <td width="50%" style="padding:9pt 14pt 10pt"><p class="petit">Prénom</p><p style="font-size:15pt;font-weight:bold">${esc(prenom) || "&nbsp;"}</p></td>
@@ -248,9 +248,9 @@ p{ margin:0; }
 </tr></table>
 <p style="margin:0">&nbsp;</p>
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%">&nbsp;</td>
-<td width="50%" align="center" valign="top"><p class="petit" style="text-align:center">Signature</p><p>&nbsp;</p><p>&nbsp;</p><p style="text-align:center;font-size:12.5pt">${esc(c.nom || KINE.nom)}</p></td></tr></table>
+<td width="50%" align="center" valign="top"><p class="petit" style="text-align:center">Signature</p><p>&nbsp;</p><p>&nbsp;</p><p style="text-align:center;font-size:14.5pt">${esc(c.nom || KINE.nom)}</p></td></tr></table>
 <p style="margin:0">&nbsp;</p>
-<p style="border-top:1pt solid #DCE9EC;padding-top:6pt;text-align:center;font-size:10pt;color:#5B747C">${esc(cabLigne)}</p>
+<p style="border-top:1pt solid #DCE9EC;padding-top:6pt;text-align:center;font-size:12pt;color:#5B747C">${esc(cabLigne)}</p>
 </div></body></html>`;
   const blob = new Blob(["﻿", html], { type:"application/msword" });
   const slug = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
