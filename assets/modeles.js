@@ -147,4 +147,8 @@ export async function choisirOptions(m){
   });
 }
 
-export const asProgram = m => ({ nom: m.titre, series: m.series, exercices: m.exercices.map(e => ({ type:"timer", ...e })) });
+/** Origine d'un programme créé depuis un modèle (pour le faire évoluer ensuite au bon niveau). */
+export const origineModele = m => m?.id == null ? null : { modeleId: String(m.id), nom: m.nom, niveau: m.niveau || null, ...(m.choix ? { choix: m.choix } : {}) };
+
+export const asProgram = m => { const o = origineModele(m);
+  return { nom: m.titre, series: m.series, exercices: m.exercices.map(e => ({ type:"timer", ...e })), ...(o ? { origine: o } : {}) }; };

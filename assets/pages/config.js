@@ -734,6 +734,7 @@ async function applyModele(m){
     S.exercices = exos;
     S.series = prog.series || 1;
     S.nom = prog.nom;
+    if(prog.origine) S.origine = prog.origine; else delete S.origine;   // modèle et niveau d'origine (faire évoluer)
     $("#nom").value = S.nom;
     $("#series").value = S.series;
   }else{
