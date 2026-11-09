@@ -33,7 +33,7 @@ export async function loadClinic(){
   await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
   await loadScript("/bilan-kine/entretien.js").catch(() => {});
   await loadScript("/bilan-kine/traitements.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, MOTIF_REG: typeof MOTIF_REG !== 'undefined' ? MOTIF_REG : { "Vertiges":"vertiges" }, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, MOTIF_REG: typeof MOTIF_REG !== 'undefined' ? MOTIF_REG : { 'Vertiges':'vertiges' }, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
