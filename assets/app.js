@@ -301,6 +301,9 @@ export function sessionDuration(prog){
 }
 
 /** Regroupe les séances d'un patient par programme. */
+/** Séance réservée au cabinet : faite avec le kiné, jamais montrée au patient (ni rappels ni alertes de retard). */
+export const estCabinet = s => s?.cabinet === true;
+
 export function groupProgrammes(seances){
   const groupes = new Map();
   const seules = [];
@@ -324,6 +327,7 @@ export function groupProgrammes(seances){
       id: premier.programmeId,
       nom: premier.programmeNom || premier.data?.nom || "Programme",
       categorie: premier.categorie || premier.data?.categorie || "kine",
+      cabinet: list.every(s => s.cabinet === true),
       seances: list,
       total: list.length,
       faites,

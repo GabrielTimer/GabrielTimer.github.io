@@ -3,14 +3,15 @@
    ========================================================= */
 
 import { getPatient, listSeances, addMessage } from "./cloud.js";
-import { store, groupProgrammes, setRunProgram, KINE, SITE_URL, startOfDay, sessionDuration, evaTrend, fmtNum, openSheet, toast, esc, icon } from "./app.js";
+import { store, estCabinet, groupProgrammes, setRunProgram, KINE, SITE_URL, startOfDay, sessionDuration, evaTrend, fmtNum, openSheet, toast, esc, icon } from "./app.js";
 
 /** Charge la fiche et les séances du patient. */
 export async function loadPatient(cle){
   const [patient, seances] = await Promise.all([getPatient(cle), listSeances(cle)]);
   if(!patient) return null;
   store.set("gt_patient_nom", patient.nom || "");
-  const usable = seances.filter(s => s.data && Array.isArray(s.data.exercices));
+  /* Les séances « au cabinet » restent dans la fiche du kiné : invisibles ici (aussi en « Vue patient ») */
+  const usable = seances.filter(s => s.data && Array.isArray(s.data.exercices) && !estCabinet(s));
   return { patient, seances: usable, ...groupProgrammes(usable) };
 }
 
@@ -39,7 +40,7 @@ export function regularity(seances){
 }
 
 /** Lance une séance : respiration guidée ou minuteur. */
-export function launchSeance(seance, { cle = null, apercu = false } = {}){
+export function launchSeance(seance, { cle = null, apercu = false, from = null } = {}){
   const data = { ...seance.data, nom: seance.data?.nom || seance.programmeNom || seance.nom || "Séance" };
   const exos = data.exercices || [];
   const resp = { RESP_DEBUTER:"beginner", RESP_APAISER:"calm", RESP_EQUILIBRER:"balance" };
@@ -51,6 +52,7 @@ export function launchSeance(seance, { cle = null, apercu = false } = {}){
   const q = new URLSearchParams();
   if(cle && seance.id) { q.set("cle", cle); q.set("s", seance.id); }
   if(apercu) q.set("apercu", "1");
+  if(from) q.set("from", from);   // « fiche » : séance au cabinet lancée par le kiné, retour à la fiche
   location.href = "/timer.html?" + q.toString();
 }
 

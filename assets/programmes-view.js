@@ -35,7 +35,9 @@ function sessionRow(s, { role, next }){
   let actions = "";
   if(role === "kine"){
     actions = `
-      <button class="btn sm" type="button" data-act="tester" data-id="${esc(s.id)}">${icon("play")}Tester</button>
+      ${s.cabinet === true
+        ? `<button class="btn sm ${st === "next" ? "primary" : ""}" type="button" data-act="faire" data-id="${esc(s.id)}">${icon("play")}${s.terminee ? "Refaire" : "Faire la séance"}</button>`
+        : `<button class="btn sm" type="button" data-act="tester" data-id="${esc(s.id)}">${icon("play")}Tester</button>`}
       <button class="icon-btn sm" type="button" data-act="modifier" data-id="${esc(s.id)}" aria-label="Modifier la séance ${esc(s.label || "")}">${icon("edit")}</button>
       ${!s.terminee ? `<button class="icon-btn sm" type="button" data-act="valider" data-id="${esc(s.id)}" aria-label="Marquer comme faite">${icon("checkCircle")}</button>` : ""}
       <button class="icon-btn sm danger" type="button" data-act="supprimer" data-id="${esc(s.id)}" aria-label="Supprimer la séance ${esc(s.label || "")}">${icon("trash")}</button>`;
@@ -88,6 +90,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
   const actions = role === "kine" ? `
       ${daysBtn}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
+      <button class="btn sm" type="button" data-pact="lieu">${icon(prog.cabinet ? "home" : "lock")}${prog.cabinet ? "Envoyer au patient" : "Réserver au cabinet"}</button>
       <button class="btn sm" type="button" data-pact="copier">${icon("copy")}Copier pour un patient</button>
       ${!isCourse ? `<button class="btn sm" type="button" data-pact="modele">${icon("layers")}Enregistrer comme modèle</button>` : ""}
       <button class="btn sm danger" type="button" data-pact="supprimer">${icon("trash")}Supprimer</button>`
@@ -102,6 +105,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
         <div class="prog-title">
           <h2>${isCourse ? icon("run", "ic-inline lagon") + " " : ""}${esc(prog.nom)}</h2>
           ${prog.termine ? `<span class="badge ok">${icon("check")}Terminé</span>` : ""}
+          ${role === "kine" && prog.cabinet ? `<span class="badge lagon" title="Invisible dans l'application du patient">${icon("lock")}Au cabinet</span>` : ""}
         </div>
         <div class="prog-meta">
           <span>${icon("checkCircle")}${prog.faites} sur ${prog.total} séances</span>
@@ -132,7 +136,7 @@ export function seulesHTML(seules, { role = "patient" } = {}){
       <div class="prog-head"><div class="prog-title"><h2>Séances ponctuelles</h2></div>
       <p class="small muted">${role === "kine" ? "Séances envoyées hors programme." : "À faire quand vous le souhaitez."}</p></div>
       ${seules.map(s => {
-        const row = sessionRow({ ...s, label: s.data?.nom || s.nom || "Séance" }, { role, next:null });
+        const row = sessionRow({ ...s, label: (s.data?.nom || s.nom || "Séance") + (role === "kine" && s.cabinet === true ? " · au cabinet" : "") }, { role, next:null });
         const meta = `${fmtDuree(sessionDuration(s.data))}, ${plural((s.data?.exercices || []).length, "exercice")}`;
         return row.replace(/<div class="s-sub">[^<]*<\/div>/, `<div class="s-sub">${esc(meta)}${s.terminee && s.dateValidation ? ", faite le " + esc(fmtShortDate(s.dateValidation)) : ""}</div>`);
       }).join("")}

@@ -3,7 +3,7 @@
    ========================================================= */
 
 import { currentKine } from "./cloud.js";
-import { groupProgrammes, startOfDay, evaTrend, kineHint, settings } from "./app.js";
+import { groupProgrammes, estCabinet, startOfDay, evaTrend, kineHint, settings } from "./app.js";
 import { etatSuppression, resteTexte } from "./inactivite.js";
 
 /** À appeler en haut de chaque page réservée au kiné. */
@@ -23,7 +23,8 @@ const DAY = 86400000;
 /** Résumé de suivi d'un patient : progression, douleur, alertes. */
 export function summarize(patient, seances){
   const { programmes, seules } = groupProgrammes(seances);
-  const actif = programmes.find(p => !p.termine) || null;
+  /* Programme en cours, retard, inactivité : seulement ce que le patient fait chez lui */
+  const actif = programmes.find(p => !p.termine && !p.cabinet) || null;
   const today = startOfDay(new Date());
   const valides = seances.filter(s => s.terminee && s.dateValidation).sort((a, b) => a.dateValidation - b.dateValidation);
   const derniere = valides[valides.length - 1] || null;
@@ -55,7 +56,7 @@ export function summarize(patient, seances){
     alertes.push({ niveau:"info", ico:"message", texte:"Nouveau commentaire" });
   }
   /* Programme sans activité depuis 3 semaines : bientôt à la corbeille */
-  const bientot = programmes.filter(p => !p.termine).map(p => ({ p, e: etatSuppression(p, patient) })).filter(x => x.e.alerte).sort((a, b) => a.e.reste - b.e.reste)[0];
+  const bientot = programmes.filter(p => !p.termine && !p.cabinet).map(p => ({ p, e: etatSuppression(p, patient) })).filter(x => x.e.alerte).sort((a, b) => a.e.reste - b.e.reste)[0];
   if(bientot){
     alertes.push({ niveau:"warn", ico:"trash", texte:`Programme inutilisé : corbeille ${resteTexte(bientot.e.reste)}` });
   }

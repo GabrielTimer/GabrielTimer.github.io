@@ -154,7 +154,8 @@ save.addEventListener("click", async () => {
 
 function done({ programmeTermine, offline }){
   if(programmeTermine) confetti();
-  const next = programmeTermine ? "/progression.html?bravo=1"
+  const next = from === "fiche" && cle ? `/cloud.html?patient=${encodeURIComponent(cle)}`
+    : programmeTermine ? "/progression.html?bravo=1"
     : from === "config" ? "/config.html"
     : from === "favoris" ? "/mes_programmes.html"
     : "/index.html";
@@ -171,9 +172,9 @@ function done({ programmeTermine, offline }){
         ? "Vous avez réalisé toutes les séances prévues. Découvrez votre progression et envoyez votre bilan à votre kiné."
         : offline ? "Vous êtes hors connexion : la séance sera transmise automatiquement dès le retour du réseau."
         : cloud && !apercu ? "Votre kiné peut voir votre séance et votre ressenti." : "Votre séance est ajoutée à l'historique de cet appareil."}</p>
-      <a class="btn primary big block" href="${next}">${programmeTermine ? icon("chart") + "Voir ma progression" : icon("home") + "Retour à l'accueil"}</a>
+      <a class="btn primary big block" href="${next}">${from === "fiche" ? icon("user") + "Retour à la fiche" : programmeTermine ? icon("chart") + "Voir ma progression" : icon("home") + "Retour à l'accueil"}</a>
     </section>`;
-  if(!programmeTermine && !offline) setTimeout(() => { location.href = next; }, 2600);
+  if((!programmeTermine || from === "fiche") && !offline) setTimeout(() => { location.href = next; }, 2600);
 }
 
 function confetti(){

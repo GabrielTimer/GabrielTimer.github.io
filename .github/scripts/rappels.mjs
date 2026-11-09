@@ -71,7 +71,7 @@ const seancesCache = new Map();
 const seancesDe = async cle => {
   if(!seancesCache.has(cle)){
     const snap = await db.collection(`patients/${cle}/seances`).get();
-    seancesCache.set(cle, snap.docs.map(d => d.data()));
+    seancesCache.set(cle, snap.docs.map(d => d.data()).filter(s => s.cabinet !== true));   // séances au cabinet : faites avec le kiné, pas de rappel
   }
   return seancesCache.get(cle);
 };

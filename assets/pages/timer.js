@@ -458,7 +458,7 @@ $("#quit").onclick = async () => {
   if(!ok){ if(wasRunning) start(); return; }
   session.del("gt_timer_state");
   MS.terminer();
-  location.href = ctx.from === "config" ? "/config.html" : ctx.from === "favoris" ? "/mes_programmes.html" : ctx.cle ? "/index.html" : "/index.html";
+  location.href = ctx.from === "fiche" && ctx.cle ? `/cloud.html?patient=${encodeURIComponent(ctx.cle)}` : ctx.from === "config" ? "/config.html" : ctx.from === "favoris" ? "/mes_programmes.html" : ctx.cle ? "/index.html" : "/index.html";
 };
 document.addEventListener("keydown", e => {
   if(document.querySelector("dialog[open]")) return;

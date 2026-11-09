@@ -201,6 +201,7 @@ function mountView(){
           <div class="segmented" role="group" aria-label="Type de programme" id="lieu">
             ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "home" : "dumbbell")}${esc(v)}</button>`).join("")}
           </div>
+          <p class="hint" id="lieu-hint"></p>
           <div id="lieu-warn"></div>
           <input class="title-input" id="nom" value="${esc(S.nom)}" placeholder="${mode.kind === "edit-modele" ? "Nom du modèle, ex. Entorse de cheville" : "Nom de la séance, ex. Lombalgie phase 1"}" aria-label="Nom" maxlength="80">
           <div class="cfg-summary">
@@ -629,6 +630,11 @@ function majLieu(){
 }
 /** Ancienne séance qui mélange HEP et cabinet : on le signale, avec un bouton pour corriger. */
 function renderLieuWarn(){
+  const h = $("#lieu-hint");
+  if(h) h.innerHTML = mode.kind !== "new" ? "" : S.lieu === "CABINET"
+    ? `${icon("lock", "ic-inline")} <strong>Invisible pour le patient.</strong> Rangé dans sa fiche : vous lancez les séances avec lui au cabinet. Pas de rappel, pas d'alerte de retard.`
+    : `${icon("home", "ic-inline")} Le patient le reçoit dans son application et le fait chez lui.`;
+  updatePrimary();
   const box = $("#lieu-warn"); if(!box) return;
   const hors = S.exercices.filter(e => horsLieu(e));
   box.innerHTML = hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} ${S.lieu === "HEP" ? "du cabinet" : "de la base HEP"} dans ce programme ${S.lieu === "HEP" ? "à la maison" : "au cabinet"}.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "";
@@ -972,7 +978,9 @@ function updatePrimary(){
   const p = patients.find(x => x.cle === S.patient);
   const ready = !!S.patient && S.exercices.length && (S.type === "unique" || S.jours.length === S.parSemaine);
   b.disabled = !ready;
-  b.innerHTML = `${icon("share")}${p ? `Envoyer à ${esc(prenom(p.nom))}` : "Choisissez un patient pour envoyer"}`;
+  b.innerHTML = S.lieu === "CABINET"
+    ? `${icon("lock")}${p ? `Enregistrer dans la fiche de ${esc(prenom(p.nom))}` : "Choisissez un patient"}`
+    : `${icon("share")}${p ? `Envoyer à ${esc(prenom(p.nom))}` : "Choisissez un patient pour envoyer"}`;
 }
 
 async function send(){
@@ -987,10 +995,11 @@ async function send(){
   {
     C.updatePatient(p.cle, { genre: data.illus, genreMaj: now }).then(() => { p.genre = data.illus; p.genreMaj = now; }).catch(e => console.warn("Genre :", e));
   }
+  const cab = S.lieu === "CABINET" ? { cabinet:true } : {};   // programme au cabinet : invisible côté patient
   try{
     let count = 1;
     if(S.type === "unique"){
-      await C.saveSeance(p.cle, { nom:data.nom, actif:true, createdAt:now, auteur:"gabriel", patientId:p.patientId, categorie:"kine", data: applyEvol(data) });
+      await C.saveSeance(p.cle, { nom:data.nom, actif:true, createdAt:now, auteur:"gabriel", patientId:p.patientId, categorie:"kine", ...cab, data: applyEvol(data) });
     }else{
       const dates = planDates();
       const programmeId = C.newId();
@@ -1007,6 +1016,7 @@ async function send(){
           semaine, ordre:perWeek[semaine], categorie:"kine", dateDebut:S.debut,
           datePrevue:d.toISOString(), datePrevueTexte:d.toLocaleDateString("fr-FR"), terminee:false,
           ...(S.origine ? { origine:S.origine } : {}),
+          ...cab,
           data:{ ...data, categorie:"kine" }
         };
       });
@@ -1021,7 +1031,7 @@ async function send(){
       p.conseils = merged;
     }
     store.del(STATE_KEY);
-    sentSheet(p, count);
+    sentSheet(p, count, !!cab.cabinet);
   }catch(err){
     console.error(err);
     toast("L'envoi n'a pas abouti : " + (err.message || err), { type:"err" });
@@ -1061,8 +1071,20 @@ async function pickConseils(){
   };
 }
 
-async function sentSheet(p, count){
+async function sentSheet(p, count, cabinet = false){
   const { accessSheet } = await import("../kine-ui.js");
+  if(cabinet){
+    const s = openSheet({
+      title:"C'est enregistré",
+      body:`<div class="stack" style="--gap:12px;align-items:center;text-align:center;padding:10px 0">
+        <div class="empty" style="padding:0"><div class="e-ico" style="background:var(--ok-soft);color:var(--ok)">${icon("lock")}</div></div>
+        <p>${count > 1 ? `Le programme de ${count} séances` : "La séance"} est dans la fiche de <strong>${esc(p.nom)}</strong>, rubrique Programmes, avec l'étiquette « Au cabinet ».</p>
+        <p class="small muted">${esc(prenom(p.nom))} ne le voit pas dans son application. Au cabinet, touchez « Faire la séance » sur la fiche.</p></div>`,
+      foot:`<button class="btn" type="button" id="ss-new">${icon("plus")}Nouvelle séance</button><a class="btn primary" href="/cloud.html?patient=${encodeURIComponent(p.cle)}">${icon("user")}Voir la fiche</a>`
+    });
+    s.el.querySelector("#ss-new").onclick = () => { location.href = "/config.html?nouveau=1&patient=" + encodeURIComponent(p.cle); };
+    return;
+  }
   const s = openSheet({
     title:"C'est envoyé",
     body:`<div class="stack" style="--gap:12px;align-items:center;text-align:center;padding:10px 0">

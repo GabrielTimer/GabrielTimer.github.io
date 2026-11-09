@@ -58,7 +58,7 @@ for(const pd of patients.docs){
       console.log(`::notice::Préavis : ${patient.nom || cle} — « ${nom} » (${jours} j, retrait dans ${J_SUPPR - jours} j)`);
       if(SIMU) continue;
       preavis[pid] = t; preavisChange = true;
-      if(!keys?.publicKey) continue;
+      if(!keys?.publicKey || list.every(s => s.cabinet === true)) continue;   // programme au cabinet : le patient ne le voit pas, pas de message
       const subs = await pd.ref.collection("rappels").get();
       for(const sd of subs.docs){
         const r = sd.data();

@@ -3,7 +3,7 @@
 import {
   $, $$, esc, icon, params, store, readPatientContext, mountShell, registerSW, toast, confirmDialog, promptDialog,
   openSheet, loadingHTML, emptyHTML, errorHTML, groupProgrammes, fmtRelDay, fmtShortDate, evaFace, evaColor,
-  plural, ressentiLabel, kineHint, modePatient, byWeek, fmtNum
+  plural, ressentiLabel, kineHint, modePatient, byWeek, fmtNum, prenom
 } from "../app.js";
 import { programmeHTML, seulesHTML, openProgrammePdf, openSeancePdf, changeDaysSheet, pauseSheet, replanDates, joursDuProgramme } from "../programmes-view.js";
 import * as V from "../variantes.js";
@@ -452,6 +452,8 @@ async function kineView(param){
       if(!s) return;
       const act = b.dataset.act;
       if(act === "tester") P.launchSeance(s, { cle:patient.cle, apercu:true });
+      /* Séance au cabinet : faite avec le patient, enregistrée dans sa fiche (douleur, ressenti) */
+      if(act === "faire") P.launchSeance(s, { cle:patient.cle, from:"fiche" });
       if(act === "modifier"){
         store.set("gt_edit", { type:"seance", cle:patient.cle, id:s.id });
         location.href = "/config.html?edit=1";
@@ -476,6 +478,18 @@ async function kineView(param){
         const act = b.dataset.pact;
         const first = prog.seances[0];
         if(act === "pdf") openProgrammePdf(prog, patient.nom);
+        if(act === "lieu"){
+          const versCabinet = !prog.cabinet;
+          const ok = await confirmDialog(versCabinet
+            ? { title:"Réserver au cabinet ?", message:`« ${prog.nom} » disparaît de l'application de ${prenom(patient.nom)} : plus de rappels ni d'alertes de retard. Vous le faites avec lui au cabinet (« Faire la séance »).`, confirm:"Réserver au cabinet" }
+            : { title:"Envoyer au patient ?", message:`« ${prog.nom} » apparaît dans l'application de ${prenom(patient.nom)}, qui le fera chez lui (rappels compris).`, confirm:"Envoyer" });
+          if(!ok) return;
+          const changes = prog.seances.map(s => ({ id:s.id, cabinet:versCabinet }));
+          await C.replanSeances(patient.cle, changes);
+          changes.forEach(c => { const x = seances.find(s => s.id === c.id); if(x) x.cabinet = c.cabinet; });
+          toast(versCabinet ? "Programme réservé au cabinet." : "Programme visible par le patient.", { type:"ok" });
+          render();
+        }
         if(act === "pause"){
           pauseSheet(prog, { role:"kine", onSave: async (changes, info) => {
             await C.replanSeances(patient.cle, changes);
