@@ -1253,5 +1253,20 @@
   "defaut": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
   "f": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
   "h": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-h.webp"
+ },
+ "/exercises/images/pompes/pompe-mur-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-mur-f.webp",
+  "f": "/exercises/images/pompes/pompe-mur-f.webp",
+  "h": "/exercises/images/pompes/pompe-mur-h.webp"
+ },
+ "/exercises/images/pompes/pompe-inclinee-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-inclinee-f.webp",
+  "f": "/exercises/images/pompes/pompe-inclinee-f.webp",
+  "h": "/exercises/images/pompes/pompe-inclinee-h.webp"
+ },
+ "/exercises/images/pompes/pompe-genoux-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-genoux-f.webp",
+  "f": "/exercises/images/pompes/pompe-genoux-f.webp",
+  "h": "/exercises/images/pompes/pompe-genoux-h.webp"
  }
 }

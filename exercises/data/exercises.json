@@ -21817,7 +21817,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "POMPE_01",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-mur-f.webp",
     "materiel": [
       "Mur"
     ],
@@ -21863,8 +21863,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -21888,7 +21887,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "POMPE_02",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-inclinee-f.webp",
     "materiel": [
       "Banc ou table stable"
     ],
@@ -21936,8 +21935,7 @@
       "Support plus haut"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -21961,7 +21959,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "POMPE_03",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-genoux-f.webp",
     "materiel": [
       "Tapis"
     ],
@@ -22009,8 +22007,7 @@
       "Pompe inclinée"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

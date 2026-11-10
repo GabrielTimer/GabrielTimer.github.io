@@ -26604,7 +26604,7 @@ export const MODELES_BASE = [
 "id": "POMPE_02",
 "source": "CABINET",
 "nom": "Pompe inclinée, mains sur un banc",
-"image": "",
+"image": "/exercises/images/pompes/pompe-inclinee-f.webp",
 "consignes": [
 "Mains sur le bord d'un banc ou d'une table stable, à largeur d'épaules",
 "Corps aligné des épaules aux talons",
@@ -28840,7 +28840,7 @@ export const MODELES_BASE = [
 "id": "POMPE_01",
 "source": "CABINET",
 "nom": "Pompe contre le mur",
-"image": "",
+"image": "/exercises/images/pompes/pompe-mur-f.webp",
 "consignes": [
 "Debout face à un mur, à un grand pas",
 "Mains à plat sur le mur à hauteur et largeur d'épaules",
@@ -28996,7 +28996,7 @@ export const MODELES_BASE = [
 "id": "POMPE_03",
 "source": "CABINET",
 "nom": "Pompe sur les genoux",
-"image": "",
+"image": "/exercises/images/pompes/pompe-genoux-f.webp",
 "consignes": [
 "À genoux sur un tapis, mains au sol un peu plus larges que les épaules",
 "Corps aligné des genoux aux épaules",
