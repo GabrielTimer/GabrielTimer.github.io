@@ -1228,5 +1228,30 @@
   "defaut": "/exercises/images/vestibulaire/regard-vertical-f.webp",
   "f": "/exercises/images/vestibulaire/regard-vertical-f.webp",
   "h": "/exercises/images/vestibulaire/regard-vertical-h.webp"
+ },
+ "/exercises/images/vestibulaire/regard-debout-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/regard-debout-f.webp",
+  "f": "/exercises/images/vestibulaire/regard-debout-f.webp",
+  "h": "/exercises/images/vestibulaire/regard-debout-h.webp"
+ },
+ "/exercises/images/vestibulaire/poursuite-cible-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/poursuite-cible-f.webp",
+  "f": "/exercises/images/vestibulaire/poursuite-cible-f.webp",
+  "h": "/exercises/images/vestibulaire/poursuite-cible-h.webp"
+ },
+ "/exercises/images/vestibulaire/saccades-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/saccades-f.webp",
+  "f": "/exercises/images/vestibulaire/saccades-f.webp",
+  "h": "/exercises/images/vestibulaire/saccades-h.webp"
+ },
+ "/exercises/images/vestibulaire/marche-tete-tournee-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/marche-tete-tournee-f.webp",
+  "f": "/exercises/images/vestibulaire/marche-tete-tournee-f.webp",
+  "h": "/exercises/images/vestibulaire/marche-tete-tournee-h.webp"
+ },
+ "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
+  "f": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
+  "h": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-h.webp"
  }
 }

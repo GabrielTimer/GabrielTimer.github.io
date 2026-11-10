@@ -16674,7 +16674,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "VEST_03",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/regard-debout-f.webp",
     "materiel": [
       "Mur",
       "Lettre collée au mur"
@@ -16720,8 +16720,7 @@
       "Assis"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -16744,7 +16743,7 @@
     "ex": 30,
     "exercise_mode": "mobilite",
     "id": "VEST_04",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/poursuite-cible-f.webp",
     "materiel": [
       "Chaise",
       "Stylo"
@@ -16783,8 +16782,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -16805,7 +16803,7 @@
     "ex": 30,
     "exercise_mode": "mobilite",
     "id": "VEST_05",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/saccades-f.webp",
     "materiel": [
       "Chaise",
       "Deux cibles au mur"
@@ -16847,8 +16845,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -16871,7 +16868,7 @@
     "ex": 45,
     "exercise_mode": "equilibre",
     "id": "VEST_06",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/marche-tete-tournee-f.webp",
     "materiel": [
       "Couloir",
       "Mur à portée de main"
@@ -16917,8 +16914,7 @@
       "Tourner la tête seulement tous les 6 pas"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -16939,7 +16935,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "VEST_07",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
     "materiel": [
       "Coussin de mousse",
       "Angle de mur",
@@ -16987,8 +16983,7 @@
       "Pieds écartés"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

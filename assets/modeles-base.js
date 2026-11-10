@@ -24059,7 +24059,7 @@ export const MODELES_BASE = [
 "id": "VEST_04",
 "source": "CABINET",
 "nom": "Poursuite d'une cible des yeux",
-"image": "",
+"image": "/exercises/images/vestibulaire/poursuite-cible-f.webp",
 "consignes": [
 "Assis, tête immobile, tenir un stylo à bras tendu",
 "Déplacer lentement le stylo de droite à gauche et le suivre des yeux",
@@ -24080,7 +24080,7 @@ export const MODELES_BASE = [
 "id": "VEST_05",
 "source": "CABINET",
 "nom": "Saccades entre deux cibles",
-"image": "",
+"image": "/exercises/images/vestibulaire/saccades-f.webp",
 "consignes": [
 "Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm",
 "Tête immobile : passer le regard vite d'une cible à l'autre",
@@ -24131,7 +24131,7 @@ export const MODELES_BASE = [
 "id": "VEST_03",
 "source": "CABINET",
 "nom": "Stabilisation du regard debout",
-"image": "",
+"image": "/exercises/images/vestibulaire/regard-debout-f.webp",
 "consignes": [
 "Debout près d'un mur, pieds écartés à largeur de bassin",
 "Fixer une lettre collée au mur à hauteur des yeux",
@@ -24152,7 +24152,7 @@ export const MODELES_BASE = [
 "id": "VEST_05",
 "source": "CABINET",
 "nom": "Saccades entre deux cibles",
-"image": "",
+"image": "/exercises/images/vestibulaire/saccades-f.webp",
 "consignes": [
 "Assis, deux cibles au mur à hauteur des yeux, écartées d'environ 50 cm",
 "Tête immobile : passer le regard vite d'une cible à l'autre",
@@ -24173,7 +24173,7 @@ export const MODELES_BASE = [
 "id": "VEST_06",
 "source": "CABINET",
 "nom": "Marche en tournant la tête",
-"image": "",
+"image": "/exercises/images/vestibulaire/marche-tete-tournee-f.webp",
 "consignes": [
 "Marcher dans un couloir, le long d'un mur",
 "Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer",
@@ -24265,7 +24265,7 @@ export const MODELES_BASE = [
 "id": "VEST_07",
 "source": "CABINET",
 "nom": "Équilibre pieds joints, yeux fermés, sur mousse",
-"image": "",
+"image": "/exercises/images/vestibulaire/equilibre-mousse-yeux-fermes-f.webp",
 "consignes": [
 "Debout dans l'angle d'une pièce, une chaise devant soi",
 "Monter sur un coussin de mousse, pieds joints",
@@ -24286,7 +24286,7 @@ export const MODELES_BASE = [
 "id": "VEST_06",
 "source": "CABINET",
 "nom": "Marche en tournant la tête",
-"image": "",
+"image": "/exercises/images/vestibulaire/marche-tete-tournee-f.webp",
 "consignes": [
 "Marcher dans un couloir, le long d'un mur",
 "Tous les 3 pas, tourner la tête à droite puis à gauche en continuant d'avancer",
@@ -24438,7 +24438,7 @@ export const MODELES_BASE = [
 "id": "VEST_04",
 "source": "CABINET",
 "nom": "Poursuite d'une cible des yeux",
-"image": "",
+"image": "/exercises/images/vestibulaire/poursuite-cible-f.webp",
 "consignes": [
 "Assis, tête immobile, tenir un stylo à bras tendu",
 "Déplacer lentement le stylo de droite à gauche et le suivre des yeux",
