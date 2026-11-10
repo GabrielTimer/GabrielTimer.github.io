@@ -25529,6 +25529,27 @@ export const MODELES_BASE = [
 "repos": 90,
 "conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
 "materiel": "Tapis, Partenaire ou point d'ancrage pour les chevilles"
+},
+{
+"id": "POMPE_05",
+"source": "CABINET",
+"nom": "Pompe pieds surélevés",
+"image": "",
+"consignes": [
+"Pieds posés sur un banc, mains au sol",
+"Corps aligné, ventre serré",
+"Descendre la poitrine vers le sol",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Pieds posés sur un banc, mains au sol<br>Corps aligné, ventre serré<br>Descendre la poitrine vers le sol<br>Pousser pour remonter",
+"reps": 3,
+"ex": 30,
+"repos": 75,
+"conseil_kine": "Phase de retour au terrain : seulement après les tests de reprise validés avec le kiné.",
+"materiel": "Banc, Tapis"
 }
 ]
 },
@@ -26578,6 +26599,27 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 30,
 "conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée."
+},
+{
+"id": "POMPE_02",
+"source": "CABINET",
+"nom": "Pompe inclinée, mains sur un banc",
+"image": "",
+"consignes": [
+"Mains sur le bord d'un banc ou d'une table stable, à largeur d'épaules",
+"Corps aligné des épaules aux talons",
+"Descendre la poitrine vers le banc, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains sur le bord d'un banc ou d'une table stable, à largeur d'épaules<br>Corps aligné des épaules aux talons<br>Descendre la poitrine vers le banc, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée.",
+"materiel": "Banc ou table stable"
 }
 ]
 },
@@ -26710,6 +26752,27 @@ export const MODELES_BASE = [
 "repos": 45,
 "conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée.",
 "materiel": "Plaque vibrante, Tapis"
+},
+{
+"id": "POMPE_04",
+"source": "CABINET",
+"nom": "Pompe classique",
+"image": "",
+"consignes": [
+"Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
+"Corps aligné des épaules aux talons, ventre serré",
+"Descendre jusqu'à frôler le sol, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds<br>Corps aligné des épaules aux talons, ventre serré<br>Descendre jusqu'à frôler le sol, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Éviter la position bras levé et tourné en arrière (armé) tant que le kiné ne l'a pas autorisée.",
+"materiel": "Tapis"
 }
 ]
 },
@@ -28772,6 +28835,27 @@ export const MODELES_BASE = [
 "ex": 300,
 "repos": 30,
 "conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "POMPE_01",
+"source": "CABINET",
+"nom": "Pompe contre le mur",
+"image": "",
+"consignes": [
+"Debout face à un mur, à un grand pas",
+"Mains à plat sur le mur à hauteur et largeur d'épaules",
+"Plier les coudes pour approcher la poitrine du mur, corps droit",
+"Pousser pour revenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout face à un mur, à un grand pas<br>Mains à plat sur le mur à hauteur et largeur d'épaules<br>Plier les coudes pour approcher la poitrine du mur, corps droit<br>Pousser pour revenir",
+"reps": 3,
+"ex": 40,
+"repos": 45,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Mur"
 }
 ]
 },
@@ -28907,6 +28991,48 @@ export const MODELES_BASE = [
 "ex": 3,
 "repos": 3,
 "conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "POMPE_03",
+"source": "CABINET",
+"nom": "Pompe sur les genoux",
+"image": "",
+"consignes": [
+"À genoux sur un tapis, mains au sol un peu plus larges que les épaules",
+"Corps aligné des genoux aux épaules",
+"Descendre la poitrine vers le sol, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, mains au sol un peu plus larges que les épaules<br>Corps aligné des genoux aux épaules<br>Descendre la poitrine vers le sol, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Tapis"
+},
+{
+"id": "DIPS_01",
+"source": "CABINET",
+"nom": "Dips sur une chaise, genoux pliés",
+"image": "",
+"consignes": [
+"Assis au bord d'une chaise stable calée contre un mur, mains de chaque côté des fesses",
+"Avancer les fesses devant la chaise, pieds à plat, genoux pliés à 90°",
+"Plier les coudes vers l'arrière pour descendre, dos près de la chaise",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord d'une chaise stable calée contre un mur, mains de chaque côté des fesses<br>Avancer les fesses devant la chaise, pieds à plat, genoux pliés à 90°<br>Plier les coudes vers l'arrière pour descendre, dos près de la chaise<br>Pousser pour remonter",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Chaise stable"
 }
 ]
 },
@@ -29043,6 +29169,48 @@ export const MODELES_BASE = [
 "ex": 30,
 "repos": 10,
 "conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien."
+},
+{
+"id": "POMPE_04",
+"source": "CABINET",
+"nom": "Pompe classique",
+"image": "",
+"consignes": [
+"Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
+"Corps aligné des épaules aux talons, ventre serré",
+"Descendre jusqu'à frôler le sol, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds<br>Corps aligné des épaules aux talons, ventre serré<br>Descendre jusqu'à frôler le sol, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 40,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Tapis"
+},
+{
+"id": "DIPS_02",
+"source": "CABINET",
+"nom": "Dips sur une chaise, jambes tendues",
+"image": "",
+"consignes": [
+"Mains au bord d'une chaise stable, fesses devant la chaise",
+"Jambes tendues, talons au sol",
+"Descendre en pliant les coudes vers l'arrière",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains au bord d'une chaise stable, fesses devant la chaise<br>Jambes tendues, talons au sol<br>Descendre en pliant les coudes vers l'arrière<br>Pousser pour remonter",
+"reps": 3,
+"ex": 30,
+"repos": 60,
+"conseil_kine": "Effort modéré : on doit pouvoir parler. Augmenter la charge d'une séance à l'autre si tout va bien.",
+"materiel": "Chaise stable"
 }
 ]
 },
