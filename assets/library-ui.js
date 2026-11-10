@@ -7,6 +7,20 @@ import { ZONES, TYPES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "
 
 const PAGE = 30;
 
+/* Filtres de la bibliothèque : chacun est un tiroir à cases à cocher dans le panneau « Filtres » */
+const FACETS = [
+  { k:"source", label:"Source", ph:"Toutes les sources" },
+  { k:"spec",   label:"Spécialité", ph:"Toutes les spécialités" },
+  { k:"cat",    label:"Zone du corps", ph:"Toutes les zones" },
+  { k:"patho",  label:"Pathologie", ph:"Toutes les pathologies", search:true },
+  { k:"type",   label:"Type d'exercice", ph:"Tous les types" },
+  { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
+];
+const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["CABINET", "Cabinet"], ["HEP", "Base HEP"]];
+const NIVEAUX = [["1", "Niveau 1"], ["2", "Niveau 2"], ["3", "Niveau 3"], ["4", "Niveau 4 et +"]];
+const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
+const openSecs = new Set();   /* tiroirs ouverts, gardés tant que la page reste ouverte */
+
 /**
  * Monte la bibliothèque dans un conteneur.
  * opts : { onAdd(exo), layout:"list"|"grid", addLabel, persistKey }
@@ -15,117 +29,200 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   /* lieu() → "HEP" ou "CABINET" : seuls les exercices de cette source (et ceux créés par le kiné) sont proposés */
   const okLieu = e => { const l = lieu?.(); return !l || e.source === l || e.source === "PERSO"; };
   const saved = store.get(persistKey, {}) || {};
-  const state = { spec: SPECIALITES.includes(saved.spec) ? saved.spec : "", q: saved.q || "", cat: ZONES.includes(saved.cat) ? saved.cat : "", patho: saved.patho || "", type: saved.type || "", source: saved.source || "", niveau: saved.niveau || "", limit: PAGE };
+  /* Anciennes préférences (un seul choix par filtre) reprises en listes */
+  const src0 = asList(saved.source);
+  const state = {
+    q: saved.q || "", limit: PAGE,
+    masques: !!saved.masques || src0.includes("HIDDEN"),
+    source: src0.filter(v => v !== "HIDDEN"),
+    spec: asList(saved.spec).filter(x => SPECIALITES.includes(x)),
+    cat: asList(saved.cat).filter(x => ZONES.includes(x)),
+    patho: asList(saved.patho), type: asList(saved.type), niveau: asList(saved.niveau)
+  };
 
   root.innerHTML = `
     <div class="lib">
       <div class="lib-tools">
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
+          <button class="btn lib-filter-btn" type="button" data-filters aria-haspopup="dialog">${icon("filter")}<span class="lbl">Filtres</span><span class="lib-filter-n" data-fn hidden></span></button>
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
-        <div class="row wrap" style="--gap:8px">
-          <select class="select sm-select" data-source aria-label="Source"><option value="">Toutes les sources</option><option value="FAV">★ Mes favoris</option><option value="PERSO">Mes exercices</option><option value="CABINET">Cabinet</option><option value="HEP">Base HEP</option><option value="HIDDEN">Exercices masqués</option></select>
-          <select class="select sm-select" data-patho aria-label="Pathologie"></select>
-          <select class="select sm-select" data-type aria-label="Type d'exercice"></select>
-          <select class="select sm-select" data-niveau aria-label="Niveau"><option value="">Tous niveaux</option><option value="1">Niveau 1</option><option value="2">Niveau 2</option><option value="3">Niveau 3</option><option value="4">Niveau 4 et +</option></select>
-        </div>
-        <div class="lib-zones"><span class="lib-zones-lbl">Spécialité</span><div class="chips scroll" data-specs role="group" aria-label="Spécialité"></div></div>
-        <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" data-cats role="group" aria-label="Zone du corps"></div></div>
+        <div class="lib-active" data-active hidden></div>
       </div>
       <div class="lib-count small muted" data-count></div>
       <div class="lib-results ${layout === "grid" ? "grid" : ""}" data-results><div class="loading"><div class="spinner"></div><span>Chargement des exercices…</span></div></div>
       <div class="center" style="padding:12px 0"><button class="btn" type="button" data-more hidden>Afficher plus</button></div>
     </div>`;
 
-  $("[data-source]", root).value = state.source;
-  $("[data-niveau]", root).value = state.niveau;
-
   const all = await loadLibrary();
-  all.forEach(e => { if(!("zone" in e)) classer(e); });
-  let counts = {}, cats = [], specCounts = {};
-  const dansSpec = e => !state.spec || e.specs.includes(state.spec);
-  const countCats = () => {
-    all.forEach(e => classer(e));
-    counts = {}; specCounts = {};
-    all.forEach(e => { if(!isHidden(exerciseKey(e)) && okLieu(e)) e.specs.forEach(x => specCounts[x] = (specCounts[x] || 0) + 1); });
-    all.filter(e => dansSpec(e) && okLieu(e)).forEach(e => { if(e.zone) counts[e.zone] = (counts[e.zone] || 0) + 1; });
-    cats = ZONES.filter(z => counts[z]);
-    renderSelects();
-  };
-  /* Listes Pathologie et Type : seulement ce qui existe, avec le nombre d'exercices */
-  /* Les pathologies proposées dépendent de la zone choisie ; les types, de la zone et de la pathologie */
-  function renderSelects(){
-    const visibles = all.filter(e => !isHidden(exerciseKey(e)) && dansSpec(e) && okLieu(e));
-    const dansZone = state.cat ? visibles.filter(e => e.zone === state.cat) : visibles;
-    const pc = {}, tc = {};
-    dansZone.forEach(e => e.pathos.forEach(p => pc[p] = (pc[p] || 0) + 1));
-    /* Dans une zone : seulement ses pathologies (et les pathologies générales qui la concernent vraiment) */
-    const propres = p => (!state.spec || specialitesDe(p.nom).includes(state.spec)) && (!state.cat || p.zone === state.cat || (!p.zone && pc[p.nom] >= 3));
-    if(state.patho && !(pc[state.patho] && propres(PATHOLOGIES.find(p => p.nom === state.patho) || {}))) state.patho = "";
-    (state.patho ? dansZone.filter(e => e.pathos.includes(state.patho)) : dansZone).forEach(e => e.types.forEach(t => tc[t] = (tc[t] || 0) + 1));
-    if(state.type && !tc[state.type]) state.type = "";
-    const dispo = PATHOLOGIES.filter(p => pc[p.nom] && propres(p));
-    if(state.cat){
-      $("[data-patho]", root).innerHTML = `<option value="">${dispo.length ? `Pathologies : ${esc(state.cat.toLowerCase())}` : "Aucune pathologie"}</option>` +
-        dispo.sort((a, b) => (!!b.zone - !!a.zone) || pc[b.nom] - pc[a.nom]).map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("");
-    }else{
-      const byZone = new Map();
-      dispo.forEach(p => { const z = p.zone || "Général"; if(!byZone.has(z)) byZone.set(z, []); byZone.get(z).push(p); });
-      const order = [...ZONES, "Général"];
-      $("[data-patho]", root).innerHTML = `<option value="">Toutes pathologies</option>` +
-        [...byZone.entries()].sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0])).map(([z, list]) =>
-          `<optgroup label="${esc(z)}">${list.map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("")}</optgroup>`).join("");
-    }
-    $("[data-type]", root).innerHTML = `<option value="">Tous types</option>` + TYPES.filter(t => tc[t]).map(t => `<option value="${esc(t)}">${esc(t)} (${tc[t]})</option>`).join("");
-    $("[data-patho]", root).value = state.patho;
-    $("[data-type]", root).value = state.type;
-    $("[data-patho]", root).classList.toggle("on", !!state.patho);
-    $("[data-type]", root).classList.toggle("on", !!state.type);
-  }
-  countCats();
-  /* Après création, correction ou suppression d'un exercice */
-  const changed = (e, info = {}) => {
-    countCats(); renderSpecs(); renderCats(); renderResults();
-    if(info.created){
-      exerciseSheet(e, { onAdd, addLabel, onEdited: changed });
-    }
-  };
+  all.forEach(e => classer(e));
 
-  const save = () => store.set(persistKey, { spec: state.spec, q: state.q, cat: state.cat, patho: state.patho, type: state.type, source: state.source, niveau: state.niveau });
+  const save = () => store.set(persistKey, { q: state.q, masques: state.masques, source: state.source, spec: state.spec, cat: state.cat, patho: state.patho, type: state.type, niveau: state.niveau });
 
-  const renderSpecs = () => {
-    $("[data-specs]", root).innerHTML =
-      `<button class="chip" type="button" data-spec="" aria-pressed="${!state.spec}">Toutes</button>` +
-      SPECIALITES.filter(x => specCounts[x]).map(x => `<button class="chip" type="button" data-spec="${esc(x)}" aria-pressed="${state.spec === x}">${esc(x)}<span class="count">${specCounts[x]}</span></button>`).join("");
-    $$("[data-spec]", root).forEach(b => b.onclick = () => {
-      state.spec = b.dataset.spec; state.limit = PAGE;
-      countCats();
-      if(state.cat && !counts[state.cat]) state.cat = "";
-      renderSelects(); save(); renderSpecs(); renderCats(); renderResults();
-    });
+  const match = (e, k, vals) => {
+    if(!vals.length) return true;
+    switch(k){
+      case "source": return vals.some(v => v === "FAV" ? isFavorite(exerciseKey(e)) : e.source === v);
+      case "spec":   return vals.some(v => e.specs.includes(v));
+      case "cat":    return vals.includes(e.zone);
+      case "patho":  return vals.some(v => e.pathos.includes(v));
+      case "type":   return vals.some(v => e.types.includes(v));
+      case "niveau": return vals.some(v => v === "4" ? e.niveau >= 4 : e.niveau === Number(v));
+    }
+    return true;
   };
-  const renderCats = () => {
-    $("[data-cats]", root).innerHTML =
-      `<button class="chip" type="button" data-cat="" aria-pressed="${!state.cat}">Toutes zones</button>` +
-      cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(c)}<span class="count">${counts[c]}</span></button>`).join("");
-    $$("[data-cat]", root).forEach(b => b.onclick = () => { state.cat = b.dataset.cat; state.limit = PAGE; renderSelects(); save(); renderCats(); renderResults(); });
-  };
+  const base = () => all.filter(e => (state.masques ? isHidden(exerciseKey(e)) : !isHidden(exerciseKey(e))) && okLieu(e));
+  /* Exercices qui passent tous les filtres sauf « skip » (sert à compter les choix d'un tiroir) */
+  const passe = (e, skip) => FACETS.every(f => f.k === skip || match(e, f.k, state[f.k]));
 
   const filtered = () => {
-    let list = state.source === "HIDDEN" ? all.filter(e => isHidden(exerciseKey(e))) : all.filter(e => !isHidden(exerciseKey(e)));
-    if(state.source === "FAV") list = list.filter(e => isFavorite(exerciseKey(e)));
-    else if(state.source && state.source !== "HIDDEN") list = list.filter(e => e.source === state.source);
-    list = list.filter(okLieu);
-    if(state.spec) list = list.filter(e => e.specs.includes(state.spec));
-    if(state.cat) list = list.filter(e => e.zone === state.cat);
-    if(state.patho) list = list.filter(e => e.pathos.includes(state.patho));
-    if(state.type) list = list.filter(e => e.types.includes(state.type));
-    if(state.niveau) list = list.filter(e => state.niveau === "4" ? e.niveau >= 4 : e.niveau === Number(state.niveau));
+    let list = base().filter(e => passe(e));
     list = searchLibrary(list, state.q);
     /* Favoris en tête quand on ne cherche rien de précis */
     if(!state.q) list = [...list.filter(e => isFavorite(exerciseKey(e))), ...list.filter(e => !isFavorite(exerciseKey(e)))];
     return list;
+  };
+
+  /* Choix proposés dans un tiroir, avec le nombre d'exercices qu'ils donneraient */
+  const options = (k, pool) => {
+    const list = pool.filter(e => passe(e, k));
+    const n = {};
+    const add = v => n[v] = (n[v] || 0) + 1;
+    let opts;
+    if(k === "source"){
+      const l = lieu?.();
+      list.forEach(e => { add(e.source); if(isFavorite(exerciseKey(e))) add("FAV"); });
+      opts = SOURCES.filter(([v]) => !l || !(v === "HEP" || v === "CABINET") || v === l).map(([v, label]) => ({ v, label }));
+    }else if(k === "spec"){
+      list.forEach(e => e.specs.forEach(add));
+      opts = SPECIALITES.map(v => ({ v, label:v }));
+    }else if(k === "cat"){
+      list.forEach(e => e.zone && add(e.zone));
+      opts = ZONES.map(v => ({ v, label:v }));
+    }else if(k === "type"){
+      list.forEach(e => e.types.forEach(add));
+      opts = TYPES.map(v => ({ v, label:v }));
+    }else if(k === "niveau"){
+      list.forEach(e => add(e.niveau >= 4 ? "4" : String(e.niveau)));
+      opts = NIVEAUX.map(([v, label]) => ({ v, label }));
+    }else{
+      list.forEach(e => e.pathos.forEach(add));
+      /* Zones choisies : seulement leurs pathologies (et les pathologies générales qui les concernent vraiment) */
+      const propre = p => (!state.spec.length || specialitesDe(p.nom).some(x => state.spec.includes(x))) && (!state.cat.length || state.cat.includes(p.zone) || (!p.zone && n[p.nom] >= 3));
+      const order = [...ZONES, "Général"];
+      opts = PATHOLOGIES.filter(p => state.patho.includes(p.nom) || (n[p.nom] && propre(p)))
+        .map(p => ({ v:p.nom, label:p.nom, group: state.cat.length === 1 ? "" : (p.zone || "Général") }))
+        .sort((a, b) => (order.indexOf(a.group) - order.indexOf(b.group)) || ((n[b.v] || 0) - (n[a.v] || 0)));
+    }
+    return opts.map(o => ({ ...o, n: n[o.v] || 0 })).filter(o => o.n || state[k].includes(o.v));
+  };
+  const labelOf = (k, v) => k === "source" ? (SOURCES.find(s => s[0] === v)?.[1] || v) : k === "niveau" ? (NIVEAUX.find(s => s[0] === v)?.[1] || v) : v;
+  const nbChoix = () => FACETS.reduce((t, f) => t + state[f.k].length, 0) + (state.masques ? 1 : 0);
+
+  /* Pastilles des filtres actifs sous la recherche (un clic les retire) */
+  const renderActive = () => {
+    const n = nbChoix();
+    const fn = $("[data-fn]", root);
+    fn.hidden = !n; fn.textContent = n;
+    $("[data-filters]", root).classList.toggle("on", !!n);
+    const box = $("[data-active]", root);
+    box.hidden = !n;
+    if(!n){ box.innerHTML = ""; return; }
+    box.innerHTML = FACETS.flatMap(f => state[f.k].map(v =>
+        `<button class="chip on lib-active-chip" type="button" data-rm="${esc(f.k)}" data-v="${esc(v)}" aria-label="Retirer le filtre ${esc(labelOf(f.k, v))}">${esc(labelOf(f.k, v))}${icon("close")}</button>`)).join("") +
+      (state.masques ? `<button class="chip on lib-active-chip" type="button" data-rm="masques" aria-label="Retirer le filtre Exercices masqués">Exercices masqués${icon("close")}</button>` : "") +
+      `<button class="link-btn small" type="button" data-clear>Tout effacer</button>`;
+    $$("[data-rm]", box).forEach(b => b.onclick = () => {
+      const k = b.dataset.rm;
+      if(k === "masques") state.masques = false; else state[k] = state[k].filter(v => v !== b.dataset.v);
+      update();
+    });
+    $("[data-clear]", box).onclick = () => { clearAll(); update(); };
+  };
+  const clearAll = () => { FACETS.forEach(f => state[f.k] = []); state.masques = false; };
+
+  /* ---------- Panneau « Filtres » ---------- */
+  let drawer = null;
+  const fq = {};   /* recherche tapée dans un tiroir (pathologies) */
+  const resume = (f) => {
+    const v = state[f.k];
+    if(!v.length) return `<span class="fdr-ph">${esc(f.ph)}</span>`;
+    const txt = v.map(x => labelOf(f.k, x)).join(", ");
+    return `<span class="fdr-val">${esc(v.length > 2 ? `${v.length} choisis` : txt)}</span>`;
+  };
+  const renderOpts = (sec, f, pool) => {
+    const box = sec.querySelector("[data-opts]");
+    const top = box.scrollTop;
+    const q = norm(fq[f.k] || "");
+    const opts = options(f.k, pool).filter(o => !q || norm(o.label).includes(q));
+    let g = null;
+    box.innerHTML = opts.length ? opts.map(o => {
+      const head = o.group && o.group !== g ? `<div class="fdr-group">${esc(g = o.group)}</div>` : "";
+      return head + `<label class="fdr-opt"><input type="checkbox" value="${esc(o.v)}" ${state[f.k].includes(o.v) ? "checked" : ""}><span class="fdr-lbl">${esc(o.label)}</span><span class="fdr-c">${o.n}</span></label>`;
+    }).join("") : `<p class="small muted fdr-none">${q ? "Aucun résultat pour cette recherche." : "Aucun choix avec les autres filtres."}</p>`;
+    box.scrollTop = top;
+    sec.querySelector("[data-sum]").innerHTML = resume(f);
+    sec.classList.toggle("on", !!state[f.k].length);
+  };
+  const renderDrawer = () => {
+    if(!drawer) return;
+    const qs = new Set(searchLibrary(base(), state.q));
+    const pool = base().filter(e => qs.has(e));
+    FACETS.forEach(f => renderOpts(drawer.el.querySelector(`[data-sec="${f.k}"]`), f, pool));
+    drawer.el.querySelector("[data-masques]").checked = state.masques;
+    drawer.el.querySelector("[data-reset]").disabled = !nbChoix();
+    drawer.el.querySelector("[data-done]").textContent = (n => `Voir ${n} exercice${n > 1 ? "s" : ""}`)(filtered().length);
+  };
+  const openDrawer = () => {
+    drawer = openSheet({
+      title: "Filtres",
+      body: `<p class="small muted fdr-intro">Affinez la liste selon vos besoins. Vous pouvez cocher plusieurs choix dans chaque tiroir.</p>
+        <div class="fdr">${FACETS.map(f => `
+          <details class="fdr-sec" data-sec="${f.k}" ${openSecs.has(f.k) ? "open" : ""}>
+            <summary><span class="fdr-t">${esc(f.label)}</span><span class="fdr-box"><span data-sum></span>${icon("down")}</span></summary>
+            <div class="fdr-panel">
+              ${f.search ? `<label class="input-icon fdr-search"><span class="sr-only">Rechercher une ${esc(f.label.toLowerCase())}</span>${icon("search")}<input class="input" type="search" data-fq="${f.k}" placeholder="Rechercher" autocomplete="off" value="${esc(fq[f.k] || "")}"></label>` : ""}
+              <div class="fdr-opts" data-opts role="group" aria-label="${esc(f.label)}"></div>
+            </div>
+          </details>`).join("")}
+          <label class="check fdr-masques"><input type="checkbox" data-masques>Afficher seulement les exercices masqués</label>
+        </div>`,
+      foot: `<button class="btn" type="button" data-reset>${icon("repeat")}Réinitialiser</button><button class="btn primary" type="button" data-done>Terminer</button>`,
+      onClose: () => { drawer = null; }
+    });
+    const el = drawer.el;
+    el.classList.add("drawer");
+    $$("details", el).forEach(d => d.addEventListener("toggle", () => { d.open ? openSecs.add(d.dataset.sec) : openSecs.delete(d.dataset.sec); }));
+    el.addEventListener("change", ev => {
+      const t = ev.target;
+      if(t.matches("[data-masques]")){ state.masques = t.checked; update(); return; }
+      const sec = t.closest("[data-sec]");
+      if(!sec || t.type !== "checkbox") return;
+      const k = sec.dataset.sec;
+      state[k] = t.checked ? [...new Set([...state[k], t.value])] : state[k].filter(v => v !== t.value);
+      update();
+    });
+    $$("[data-fq]", el).forEach(i => i.addEventListener("input", () => {
+      fq[i.dataset.fq] = i.value;
+      const f = FACETS.find(x => x.k === i.dataset.fq);
+      const qs = new Set(searchLibrary(base(), state.q));
+      renderOpts(i.closest("[data-sec]"), f, base().filter(e => qs.has(e)));
+    }));
+    el.querySelector("[data-reset]").onclick = () => { clearAll(); update(); };
+    el.querySelector("[data-done]").onclick = () => drawer?.close();
+    renderDrawer();
+  };
+
+  const update = () => { state.limit = PAGE; save(); renderActive(); renderResults(); renderDrawer(); };
+
+  /* Après création, correction ou suppression d'un exercice */
+  const changed = (e, info = {}) => {
+    all.forEach(x => classer(x));
+    renderActive(); renderResults(); renderDrawer();
+    if(info.created){
+      exerciseSheet(e, { onAdd, addLabel, onEdited: changed });
+    }
   };
 
   const inBadge = e => {
@@ -170,30 +267,25 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         if(img){ img.querySelector(".in-badge")?.remove(); img.insertAdjacentHTML("beforeend", inBadge(e)); }
       }
     });
-    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: changed, onTagged: renderResults }); });
+    $$("[data-open]", res).forEach(b => b.onclick = () => { const e = find(b.dataset.open); if(e) exerciseSheet(e, { onAdd, addLabel, onEdited: changed, onTagged: () => { renderResults(); renderDrawer(); } }); });
   };
 
-  $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); }, 140));
-  $("[data-source]", root).onchange = ev => { state.source = ev.target.value; state.limit = PAGE; save(); renderResults(); };
-  $("[data-patho]", root).onchange = ev => { state.patho = ev.target.value; state.limit = PAGE; renderSelects(); save(); renderResults(); };
-  $("[data-type]", root).onchange = ev => { state.type = ev.target.value; state.limit = PAGE; ev.target.classList.toggle("on", !!state.type); save(); renderResults(); };
-  $("[data-niveau]", root).onchange = ev => { state.niveau = ev.target.value; state.limit = PAGE; save(); renderResults(); };
+  $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); renderDrawer(); }, 140));
+  $("[data-filters]", root).onclick = openDrawer;
   $("[data-more]", root).onclick = () => { state.limit += PAGE; renderResults(); };
   $("[data-create]", root).onclick = async () => {
     const { openExerciseEditor } = await import("./exercise-editor.js");
     openExerciseEditor(null, { onSaved: changed });
   };
 
-  renderSpecs(); renderCats();
-  renderResults();
   /* Sources proposées selon le lieu du programme */
-  const majSources = () => {
+  const relieu = () => {
     const l = lieu?.();
-    $$("[data-source] option", root).forEach(o => { o.hidden = !!l && (o.value === "HEP" || o.value === "CABINET") && o.value !== l; });
-    if(l && (state.source === "HEP" || state.source === "CABINET") && state.source !== l){ state.source = ""; $("[data-source]", root).value = ""; }
+    if(l) state.source = state.source.filter(v => !(v === "HEP" || v === "CABINET") || v === l);
+    state.limit = PAGE; renderActive(); renderResults(); renderDrawer();
   };
-  majSources();
-  const relieu = () => { majSources(); countCats(); if(state.cat && !counts[state.cat]) state.cat = ""; if(state.spec && !specCounts[state.spec]) state.spec = ""; renderSpecs(); renderCats(); state.limit = PAGE; renderResults(); };
+  renderActive();
+  renderResults();
   if(lieu) relieu();
   return { focus: () => $("[data-q]", root).focus(), refresh: renderResults, relieu };
 }

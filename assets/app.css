@@ -776,3 +776,60 @@ a.chip{ text-decoration:none; }
   .list-item.bilan-item .li-title{ white-space:normal; }
   .list-item.bilan-item .li-end{ width:100%; justify-content:space-between; padding-left:58px; }
 }
+
+/* =========================================================
+   Bibliothèque : bouton « Filtres » et panneau à tiroirs
+   ========================================================= */
+.lib-filter-btn{ flex:none; position:relative; }
+.lib-filter-btn.on{ border-color:var(--lagon); background:var(--lagon-soft); color:var(--lagon-strong); }
+.lib-filter-n{ display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 6px; border-radius:999px; background:var(--lagon); color:var(--on-lagon); font-size:var(--fs-xs); font-weight:800; }
+.lib-filter-n[hidden]{ display:none; }
+@media (max-width:520px){ .lib-filter-btn .lbl{ display:none; } .lib-filter-btn{ padding:0 12px; } }
+.lib-active{ display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.lib-active[hidden]{ display:none; }
+.lib-active-chip{ min-height:32px; padding:4px 8px 4px 12px; font-size:var(--fs-sm); gap:6px; }
+.lib-active-chip svg{ width:14px; height:14px; opacity:.8; }
+.lib-active .link-btn{ margin-left:4px; }
+
+/* Panneau latéral à droite sur ordinateur et tablette, feuille du bas sur téléphone */
+@media (min-width:641px){
+  dialog.sheet.drawer{ margin:0 0 0 auto; width:min(100%,440px); height:100vh; height:100dvh; max-height:none; border-radius:var(--r-xl) 0 0 var(--r-xl); }
+  dialog.sheet.drawer[open]{ animation:drawerIn .22s ease-out; }
+}
+@media (max-width:640px){ dialog.sheet.drawer{ height:90vh; height:90dvh; } }
+@keyframes drawerIn{ from{ transform:translateX(40px); opacity:.4; } }
+.fdr-intro{ margin:-4px 0 14px; }
+.fdr{ display:flex; flex-direction:column; gap:14px; }
+.fdr-sec > summary{ list-style:none; cursor:pointer; display:flex; flex-direction:column; gap:6px; }
+.fdr-sec > summary::-webkit-details-marker{ display:none; }
+.fdr-t{ font-weight:700; }
+.fdr-box{ display:flex; align-items:center; gap:10px; min-height:48px; padding:8px 14px 8px 16px; border:1px solid var(--line-strong); border-radius:999px; background:var(--surface); }
+.fdr-box > span{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.fdr-box svg{ width:18px; height:18px; flex:none; color:var(--ink-2); transition:transform .18s; }
+.fdr-sec[open] .fdr-box{ border-color:var(--lagon); box-shadow:0 0 0 1px var(--lagon); }
+.fdr-sec[open] .fdr-box svg{ transform:rotate(180deg); }
+.fdr-sec.on .fdr-box{ border-color:var(--lagon); background:var(--lagon-soft); }
+.fdr-sec > summary:focus-visible{ outline:none; }
+.fdr-sec > summary:focus-visible .fdr-box{ box-shadow:var(--focus); }
+.fdr-ph{ color:var(--ink-3); }
+.fdr-val{ color:var(--lagon-strong); font-weight:700; }
+.fdr-panel{ margin-top:6px; padding:8px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); box-shadow:var(--shadow-1); }
+.fdr-search{ display:block; margin-bottom:6px; }
+.fdr-search .input{ width:100%; }
+.fdr-search .input{ min-height:42px; border-radius:999px; }
+.fdr-opts{ max-height:300px; overflow-y:auto; overscroll-behavior:contain; }
+.fdr-opt{ display:flex; align-items:center; gap:12px; min-height:44px; padding:4px 8px; border-radius:var(--r-sm); cursor:pointer; }
+.fdr-opt:hover{ background:var(--surface-2); }
+.fdr-opt input{ width:20px; height:20px; accent-color:var(--lagon); flex:none; margin:0; }
+.fdr-lbl{ flex:1; min-width:0; }
+.fdr-c{ flex:none; min-width:26px; padding:1px 8px; border-radius:999px; background:var(--surface-3); color:var(--ink-2); font-size:var(--fs-xs); font-weight:700; text-align:center; }
+.fdr-opt input:checked ~ .fdr-lbl{ font-weight:700; }
+.fdr-group{ padding:10px 8px 4px; font-size:var(--fs-xs); font-weight:700; color:var(--ink-3); text-transform:uppercase; letter-spacing:.04em; }
+.fdr-none{ padding:8px; margin:0; }
+.fdr-masques{ margin-top:2px; font-size:var(--fs-sm); color:var(--ink-2); }
+.lib-active{ flex-basis:100%; }
+dialog.sheet.drawer .sheet-foot .btn{ white-space:nowrap; padding-inline:12px; }
+/* Panneau étroit de l'éditeur de séance : boutons courts pour laisser la place à la recherche */
+.cfg-lib .lib-create .lbl{ display:none; }
+.cfg-lib .lib-create .lbl-short{ display:inline; }
+.cfg-lib .lib-filter-btn .lbl{ display:none; }
