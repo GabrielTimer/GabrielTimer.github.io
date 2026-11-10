@@ -5,9 +5,9 @@
 import { icon } from "./icons.js";
 import { variante } from "./variantes.js";
 import { KINE, SITE_URL } from "./config.js";
-import { settings, logoSrc } from "./settings.js";
+import { settings, logoSrc, docLogoSrc } from "./settings.js";
 
-export { icon, KINE, SITE_URL, settings, logoSrc };
+export { icon, KINE, SITE_URL, settings, logoSrc, docLogoSrc };
 export { APP_NAME } from "./config.js";
 import { APP_NAME as _APP } from "./config.js";
 

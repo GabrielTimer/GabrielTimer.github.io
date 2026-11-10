@@ -18,7 +18,7 @@
   .tools .hint{ width:100%; margin:0; }
   .sheet-a4{ width:min(100% - 24px, 210mm); margin:20px auto 60px; background:#fff; color:#14303A; padding:16mm 16mm 14mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:12pt; line-height:1.5; }
   .cp-head{ display:flex; gap:12px; align-items:center; border-bottom:2.5px solid #138FA6; padding-bottom:10px; margin-bottom:14px; }
-  .cp-head img{ width:42px; height:42px; object-fit:contain; }
+  .cp-head img{ width:56px; height:56px; object-fit:contain; border-radius:50%; flex:none; }
   .cp-head .who{ flex:1; font-size:10pt; color:#47616B; }
   .cp-head .who strong{ display:block; font-size:12pt; color:#0B6E80; }
   .cp-head .coord{ text-align:right; font-size:9.5pt; color:#47616B; white-space:pre-line; }
@@ -60,7 +60,7 @@
 </div>
 <div class="sheet-a4" id="doc"><div class="loading"><div class="spinner"></div><span>Préparation de la fiche…</span></div></div>
 <script type="module">
-import { $, esc, icon, params, settings, logoSrc, KINE, toast } from "/assets/app.js";
+import { $, esc, icon, params, settings, logoSrc, docLogoSrc, KINE, toast } from "/assets/app.js";
 import { nomAffiche } from "/assets/noms.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
@@ -114,7 +114,7 @@ const cab = settings.cabinet || {};
 const coord = [cab.telephone ? "Tél. " + cab.telephone : "", cab.email || KINE.email].filter(Boolean).join("\n");
 const li = a => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
 $("#doc").innerHTML = `
-  <div class="cp-head"><img src="${esc(logoSrc())}" alt=""><div class="who"><strong>${esc(KINE.nom)}</strong>${esc(KINE.titre)}</div><div class="coord">${esc(coord)}</div></div>
+  <div class="cp-head"><img src="${esc(docLogoSrc())}" alt=""><div class="who"><strong>${esc(KINE.nom)}</strong>${esc(KINE.titre)}</div><div class="coord">${esc(coord)}</div></div>
   <div id="corps" contenteditable="true" spellcheck="true">
     <h1>Vos conseils</h1>
     <p class="sub">${esc(nom)}${bl ? ` · bilan du ${esc(B.fmtISOLong(bl.date))}` : ""}</p>

@@ -21,7 +21,7 @@
   #pick{ min-width:220px; }
   .sheet-a4{ width:min(100% - 24px, 210mm); min-height:270mm; margin:20px auto 60px; background:#fff; color:#17323C; padding:16mm 18mm 12mm; box-shadow:var(--shadow-2); border-radius:6px; font-size:13pt; line-height:1.55; display:flex; flex-direction:column; }
   .or-head{ display:flex; gap:18px; align-items:center; }
-  .or-head img{ width:68px; height:68px; object-fit:contain; flex:none; }
+  .or-head img{ width:92px; height:92px; object-fit:contain; flex:none; border-radius:50%; }
   .or-head strong{ display:block; font-size:22pt; line-height:1.2; color:#0B6E80; letter-spacing:.01em; }
   .or-head .or-titre{ display:block; font-size:14.5pt; color:#3A5862; margin-top:2px; }
   .or-num{ display:flex; flex-wrap:wrap; gap:2px 22px; font-size:12.5pt; color:#5B747C; margin-top:6px; }
@@ -113,7 +113,7 @@
   <div class="or-foot" id="o-cab"></div>
 </div>
 <script type="module">
-import { $, esc, icon, params, settings, logoSrc, KINE, toast, confirmDialog } from "/assets/app.js";
+import { $, esc, icon, params, settings, logoSrc, docLogoSrc, KINE, toast, confirmDialog } from "/assets/app.js";
 import { loadSettings } from "/assets/settings.js";
 import { nomDeFamille } from "/assets/noms.js";
 const { requireKine } = await import("/assets/kine.js");
@@ -129,7 +129,7 @@ $("#clear").innerHTML = icon("trash") + $("#clear").textContent;
 const PROVISOIRES = { rpps:"10101234567", am:"86 1 23456 7" };
 function entete(){
   const c = settings.cabinet || {};
-  $("#o-logo").src = logoSrc();
+  $("#o-logo").src = docLogoSrc();
   $("#o-nom").textContent = c.nom || KINE.nom;
   $("#o-titre").textContent = c.titre || KINE.titre;
   $("#o-num").innerHTML = [c.rpps && `<span>N° RPPS <b>${esc(c.rpps)}</b></span>`, c.am && `<span>N° AM <b>${esc(c.am)}</b></span>`].filter(Boolean).join("");
@@ -214,7 +214,7 @@ $("#word").onclick = () => {
   const br = s => esc(s).replace(/\n/g, "<br>");
   const nom = $("#p-nom").value.trim().toLocaleUpperCase("fr"), prenom = $("#p-prenom").value.trim();
   const presc = prescription();
-  const logo = new URL(logoSrc(), location.href).href;
+  const logo = new URL(docLogoSrc(), location.href).href;
   const cabLigne = [String(c.adresse || "").replace(/\s*\n\s*/g, ", "), c.telephone && `Tél. ${c.telephone}`].filter(Boolean).join("  ·  ");
   const nums = [c.rpps && `N° RPPS <b style="color:#17323C">${esc(c.rpps)}</b>`, c.am && `N° AM <b style="color:#17323C">${esc(c.am)}</b>`].filter(Boolean).join("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
   const html = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
@@ -229,7 +229,7 @@ p{ margin:0; }
 </style></head>
 <body><div class="Section1">
 <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse"><tr>
-<td width="72" valign="middle" style="padding-right:8pt"><img src="${esc(logo)}" width="64" height="64" alt=""></td>
+<td width="92" valign="middle" style="padding-right:8pt"><img src="${esc(logo)}" width="84" height="84" alt=""></td>
 <td valign="middle">
 <p style="font-size:22pt;font-weight:bold;color:#0B6E80">${esc(c.nom || KINE.nom)}</p>
 <p style="font-size:14.5pt;color:#3A5862">${esc(c.titre || KINE.titre)}</p>

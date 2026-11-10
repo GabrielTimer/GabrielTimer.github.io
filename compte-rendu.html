@@ -17,7 +17,7 @@
   .sheet-a4 h2{ font-size:11.5pt; margin:18px 0 8px; padding-bottom:4px; border-bottom:1.5px solid #138FA6; color:#0B6E80; letter-spacing:.01em; }
   .hd{ display:flex; gap:14px; align-items:flex-start; justify-content:space-between; border-bottom:2.5px solid #138FA6; padding-bottom:12px; margin-bottom:14px; }
   .hd .who{ display:flex; gap:12px; align-items:center; }
-  .hd img{ width:46px; height:46px; object-fit:contain; }
+  .hd img{ width:60px; height:60px; object-fit:contain; border-radius:50%; flex:none; }
   .hd .coord{ text-align:right; font-size:9pt; color:#47616B; white-space:pre-line; }
   .meta{ display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:6px; }
   .meta div{ background:#EEF6F7; border-radius:6px; padding:6px 10px; }
@@ -56,7 +56,7 @@
 </div>
 <div class="sheet-a4" id="doc"><div class="loading"><div class="spinner"></div><span>Préparation du compte rendu…</span></div></div>
 <script type="module">
-import { $, esc, icon, params, settings, logoSrc, KINE, fmtShortDate, fmtDate, groupProgrammes, byWeek, evaTrend, ressentiLabel, fmtNum } from "/assets/app.js";
+import { $, esc, icon, params, settings, logoSrc, docLogoSrc, KINE, fmtShortDate, fmtDate, groupProgrammes, byWeek, evaTrend, ressentiLabel, fmtNum } from "/assets/app.js";
 import { fmtScore } from "/assets/questionnaires.js";
 import { nomAffiche } from "/assets/noms.js";
 const { requireKine } = await import("/assets/kine.js");
@@ -107,7 +107,7 @@ const evol = (a, b, sens) => { const dlt = Math.round((b - a) * 10) / 10; if(!dl
 
 $("#doc").innerHTML = `
   <div class="hd">
-    <div class="who"><img src="${esc(logoSrc())}" alt=""><div><strong style="font-size:12pt">${esc(KINE.nom)}</strong><br><span class="muted">${esc(KINE.titre)}</span></div></div>
+    <div class="who"><img src="${esc(docLogoSrc())}" alt=""><div><strong style="font-size:12pt">${esc(KINE.nom)}</strong><br><span class="muted">${esc(KINE.titre)}</span></div></div>
     <div class="coord">${esc(coord)}</div>
   </div>
   <h1>Compte rendu de rééducation</h1>

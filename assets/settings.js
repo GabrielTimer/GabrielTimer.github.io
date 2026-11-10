@@ -137,6 +137,8 @@ export function fillTemplate(text, vars){
 }
 
 export const logoSrc = () => settings.cabinet.logo || "/logo.png";
+/* Logo rond « Masseur-Kinésithérapeute » des documents officiels (ordonnance, courriers, comptes rendus, bilans) */
+export const docLogoSrc = () => "/images/logo-kine.png";
 
 /** Annonce à afficher aux patients aujourd'hui, ou null. */
 export function currentAnnonce(){

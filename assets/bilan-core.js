@@ -6,7 +6,7 @@
    on les modifie sans toucher au code de l'application.
    ========================================================= */
 
-import { esc, icon, toast, openSheet, KINE, settings, logoSrc } from "./app.js";
+import { esc, icon, toast, openSheet, KINE, settings, logoSrc, docLogoSrc } from "./app.js";
 import { neuroSummary } from "./nerfs-data.js";
 import { lignesPlan } from "./bilan-traitement.js";
 import { silhouettePNG, vuesUtiles, evaHex } from "./bilan-recap.js";
@@ -355,13 +355,13 @@ async function construirePdf(S, patient, opts, Q){
   const ensure = h => { if(y + h > H - 20){ d.addPage(); y = M; } };
 
   /* En-tête : logo, praticien, coordonnées */
-  const logo = Q.sansImages ? null : await imageData(logoSrc(), Q.logo);
+  const logo = Q.sansImages ? null : await imageData(docLogoSrc(), Q.logo);
   let x0 = M;
-  if(logo){ const h = 14, w = Math.min(28, h * logo.ratio); d.addImage(logo.data, "PNG", M, y, w, h, "logo", "FAST"); x0 = M + w + 4; }
+  if(logo){ const h = 18, w = Math.min(28, h * logo.ratio); d.addImage(logo.data, "PNG", M, y, w, h, "logo", "FAST"); x0 = M + w + 4; }
   d.setFont("helvetica", "bold"); d.setFontSize(12); d.setTextColor(...INK);
-  d.text(t(KINE.nom), x0, y + 5.5);
+  d.text(t(KINE.nom), x0, y + 7.5);
   d.setFont("helvetica", "normal"); d.setFontSize(9); d.setTextColor(...INK2);
-  d.text(t(KINE.titre), x0, y + 10.5);
+  d.text(t(KINE.titre), x0, y + 12.5);
   const coord = [settings.cabinet?.adresse, settings.cabinet?.telephone, settings.cabinet?.email || KINE.email].filter(Boolean).join("\n");
   if(coord){ d.setFontSize(8.5); d.text(t(coord).split("\n"), W - M, y + 4, { align:"right", lineHeightFactor:1.35 }); }
   y += 20;
