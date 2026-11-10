@@ -22031,7 +22031,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "POMPE_04",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-classique-f.webp",
     "materiel": [
       "Tapis"
     ],
@@ -22080,8 +22080,7 @@
       "Sur les genoux"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -22105,7 +22104,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "POMPE_05",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-pieds-sureleves-f.webp",
     "materiel": [
       "Banc",
       "Tapis"
@@ -22151,8 +22150,7 @@
       "Pompe classique"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -22175,7 +22173,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "POMPE_06",
-    "image": "",
+    "image": "/exercises/images/pompes/pompe-prise-serree-f.webp",
     "materiel": [
       "Tapis"
     ],
@@ -22218,8 +22216,7 @@
       "Sur les genoux"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

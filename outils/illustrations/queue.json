@@ -1,35 +1,5 @@
 [
  [
-  "POMPE_01",
-  "pompes/pompe-mur",
-  "Exercice : pompe contre un mur, debout à un grand pas du mur, mains à plat sur le mur à hauteur d'épaules, coudes pliés, poitrine près du mur, corps droit. Flèche bleue horizontale. Vue de profil."
- ],
- [
-  "POMPE_02",
-  "pompes/pompe-inclinee",
-  "Exercice : pompe inclinée, mains sur le bord d'un banc noir, corps aligné des épaules aux talons, coudes pliés à 45°, poitrine qui descend vers le banc. Flèche bleue. Vue de profil."
- ],
- [
-  "POMPE_03",
-  "pompes/pompe-genoux",
-  "Exercice : pompe sur les genoux sur un tapis bleu, mains au sol, corps aligné des genoux aux épaules, coudes pliés, poitrine proche du sol. Flèche bleue verticale. Vue de profil."
- ],
- [
-  "POMPE_04",
-  "pompes/pompe-classique",
-  "Exercice : pompe classique sur un tapis bleu, sur la pointe des pieds, corps parfaitement aligné, poitrine qui frôle le sol, coudes à 45°. Flèche bleue verticale. Vue de profil."
- ],
- [
-  "POMPE_05",
-  "pompes/pompe-pieds-sureleves",
-  "Exercice : pompe pieds surélevés, pieds posés sur un banc noir, mains au sol sur un tapis bleu, corps aligné, coudes pliés. Flèche bleue verticale. Vue de profil."
- ],
- [
-  "POMPE_06",
-  "pompes/pompe-prise-serree",
-  "Exercice : pompe prise serrée, mains rapprochées sous les épaules, coudes collés au corps pendant la descente, sur la pointe des pieds. Flèche bleue verticale. Vue de profil."
- ],
- [
   "DIPS_01",
   "dips/dips-chaise-genoux-plies",
   "Exercice : dips sur une chaise en bois à assise bleue calée contre un mur : mains au bord de l'assise de chaque côté, fesses devant la chaise, pieds à plat, genoux pliés à 90°, coudes pliés vers l'arrière. Flèche bleue verticale. Vue de profil."

@@ -1268,5 +1268,20 @@
   "defaut": "/exercises/images/pompes/pompe-genoux-f.webp",
   "f": "/exercises/images/pompes/pompe-genoux-f.webp",
   "h": "/exercises/images/pompes/pompe-genoux-h.webp"
+ },
+ "/exercises/images/pompes/pompe-classique-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-classique-f.webp",
+  "f": "/exercises/images/pompes/pompe-classique-f.webp",
+  "h": "/exercises/images/pompes/pompe-classique-h.webp"
+ },
+ "/exercises/images/pompes/pompe-pieds-sureleves-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-pieds-sureleves-f.webp",
+  "f": "/exercises/images/pompes/pompe-pieds-sureleves-f.webp",
+  "h": "/exercises/images/pompes/pompe-pieds-sureleves-h.webp"
+ },
+ "/exercises/images/pompes/pompe-prise-serree-f.webp": {
+  "defaut": "/exercises/images/pompes/pompe-prise-serree-f.webp",
+  "f": "/exercises/images/pompes/pompe-prise-serree-f.webp",
+  "h": "/exercises/images/pompes/pompe-prise-serree-h.webp"
  }
 }

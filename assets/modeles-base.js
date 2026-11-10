@@ -25534,7 +25534,7 @@ export const MODELES_BASE = [
 "id": "POMPE_05",
 "source": "CABINET",
 "nom": "Pompe pieds surélevés",
-"image": "",
+"image": "/exercises/images/pompes/pompe-pieds-sureleves-f.webp",
 "consignes": [
 "Pieds posés sur un banc, mains au sol",
 "Corps aligné, ventre serré",
@@ -26757,7 +26757,7 @@ export const MODELES_BASE = [
 "id": "POMPE_04",
 "source": "CABINET",
 "nom": "Pompe classique",
-"image": "",
+"image": "/exercises/images/pompes/pompe-classique-f.webp",
 "consignes": [
 "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
 "Corps aligné des épaules aux talons, ventre serré",
@@ -29174,7 +29174,7 @@ export const MODELES_BASE = [
 "id": "POMPE_04",
 "source": "CABINET",
 "nom": "Pompe classique",
-"image": "",
+"image": "/exercises/images/pompes/pompe-classique-f.webp",
 "consignes": [
 "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
 "Corps aligné des épaules aux talons, ventre serré",
