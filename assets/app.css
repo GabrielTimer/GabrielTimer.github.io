@@ -867,3 +867,39 @@ dialog.sheet.drawer .sheet-foot .btn{ white-space:nowrap; padding-inline:12px; }
 .mcover.mc-small .mc-tile{ border-radius:3px; box-shadow:none; }
 .mcover.mc-small .mc-more{ font-size:11px; border-width:1px; }
 .mcover.mc-small[data-n="3"]{ grid-template-columns:1fr 1fr; }
+
+/* =========================================================
+   Recherche globale (espace kiné)
+   ========================================================= */
+.nav-search{ display:none; }
+@media (min-width:960px){
+  .nav-search{ display:flex; align-items:center; gap:10px; margin:0 0 10px; padding:0 12px; min-height:42px; border:1px solid var(--line); border-radius:999px;
+    background:var(--surface-2); color:var(--ink-3); font:inherit; font-size:var(--fs-sm); cursor:pointer; text-align:left; }
+  .nav-search:hover{ border-color:var(--line-strong); color:var(--ink-2); }
+  .nav-search svg{ width:18px; height:18px; flex:none; }
+  .nav-search span{ flex:1; }
+  .nav-search kbd{ font-family:var(--mono); font-size:11px; padding:1px 6px; border:1px solid var(--line); border-radius:6px; background:var(--surface); color:var(--ink-3); }
+  .has-nav .search-btn{ display:none; }
+}
+dialog.sheet.gsearch{ width:min(100%,680px); }
+@media (min-width:641px){ dialog.sheet.gsearch{ margin:8vh auto auto; max-height:80vh; max-height:80dvh; } }
+@media (max-width:640px){ dialog.sheet.gsearch{ height:94vh; height:94dvh; } }
+.gsearch .sheet-body{ padding-top:14px; }
+.gs-field{ display:block; position:sticky; top:-14px; z-index:1; background:var(--surface); padding:0 0 10px; }
+.gs-field .input{ width:100%; min-height:50px; font-size:var(--fs-md); border-radius:999px; }
+.gs-field > svg{ top:25px; }
+.gs-hint{ margin:4px 4px 14px; }
+.gs-group{ margin-top:12px; }
+.gs-group h3{ font-size:var(--fs-xs); font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:.04em; margin:0 6px 4px; }
+.gs-item{ display:flex; align-items:center; gap:12px; width:100%; min-height:52px; padding:6px 10px; border:0; border-radius:var(--r-md); background:none; color:var(--ink); font:inherit; text-align:left; cursor:pointer; }
+.gs-item.on, .gs-more.on{ background:var(--lagon-soft); }
+.gs-item > svg{ width:18px; height:18px; color:var(--ink-3); flex:none; }
+.gs-ico{ display:grid; place-items:center; width:42px; height:42px; border-radius:var(--r-sm); background:var(--surface-2); color:var(--lagon-strong); flex:none; }
+.gs-ico svg{ width:20px; height:20px; }
+.gs-thumb{ width:42px; height:42px; object-fit:contain; background:#fff; border:1px solid var(--line); border-radius:var(--r-sm); flex:none; }
+.gs-item .mcover.mc-small{ width:42px; height:42px; }
+.gs-main{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.gs-title{ font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.gs-sub{ font-size:var(--fs-sm); color:var(--ink-3); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.gs-more{ display:inline-flex; align-items:center; gap:4px; margin:2px 0 0 10px; padding:6px 10px; border:0; border-radius:var(--r-sm); background:none; color:var(--lagon-strong); font:inherit; font-weight:700; font-size:var(--fs-sm); cursor:pointer; }
+.gs-more svg{ width:16px; height:16px; }

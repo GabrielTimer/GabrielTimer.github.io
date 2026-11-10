@@ -551,7 +551,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   const kineBtn = role === "patient" && !apercu && modePatient.get() && kineHint.connecte()
     ? `<button class="icon-btn kine-btn" type="button" data-mode-kine aria-label="Revenir à l'espace kiné" title="Revenir à l'espace kiné">${icon("stethoscope")}<span class="kine-btn-lbl">Espace kiné</span></button>`
     : "";
-  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${inboxBtn}${themeBtn}</div></header>`);
+  const searchBtn = role === "kine" && !apercu
+    ? `<button class="icon-btn search-btn" type="button" data-gsearch aria-label="Rechercher" title="Rechercher">${icon("search")}</button>` : "";
+  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${searchBtn}${inboxBtn}${themeBtn}</div></header>`);
 
   if(apercu){
     body.prepend(h(`<div class="apercu-band">${icon("eye")}<span>Aperçu : vous voyez l'application comme votre patient</span><button type="button" data-leave-apercu>Quitter</button></div>`));
@@ -577,6 +579,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
+      ${role === "kine" && !apercu ? `<button class="nav-search" type="button" data-gsearch>${icon("search")}<span>Rechercher…</span><kbd>Ctrl K</kbd></button>` : ""}
       ${items.map(it => `<a class="nav-link" href="${navHref(it)}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
@@ -586,6 +589,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   }
   if(role === "kine" && !apercu){
     import("./messages.js").then(m => m.refreshUnread()).catch(() => {});
+    /* Recherche globale : champ du menu, loupe du haut, Ctrl+K */
+    document.querySelectorAll("[data-gsearch]").forEach(b => b.addEventListener("click", () => import("./global-search.js").then(m => m.openGlobalSearch())));
+    import("./global-search.js").then(m => m.installSearchShortcut()).catch(() => {});
   }
 
   topbar.querySelector("[data-mode-kine]")?.addEventListener("click", () => modePatient.revenirKine());
