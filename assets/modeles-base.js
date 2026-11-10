@@ -14927,7 +14927,7 @@ export const MODELES_BASE = [
 "id": "GERIA_03",
 "source": "CABINET",
 "nom": "Équilibre yeux fermés près d'une chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
 "Pieds écartés à largeur de bassin, trouver l'équilibre",
@@ -14948,7 +14948,7 @@ export const MODELES_BASE = [
 "id": "GERIA_01",
 "source": "CABINET",
 "nom": "Marche avec obstacles",
-"image": "",
+"image": "/exercises/images/geriatrie/marche-obstacles-f.webp",
 "consignes": [
 "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
 "Marcher en enjambant chaque obstacle, genou bien levé",
@@ -15099,7 +15099,7 @@ export const MODELES_BASE = [
 "id": "GERIA_02",
 "source": "CABINET",
 "nom": "Ramasser un objet au sol",
-"image": "",
+"image": "/exercises/images/geriatrie/ramasser-objet-f.webp",
 "consignes": [
 "Debout, une main sur le dossier d'une chaise stable",
 "Un objet léger posé au sol à côté du pied",
@@ -16244,7 +16244,7 @@ export const MODELES_BASE = [
 "id": "GERIA_01",
 "source": "CABINET",
 "nom": "Marche avec obstacles",
-"image": "",
+"image": "/exercises/images/geriatrie/marche-obstacles-f.webp",
 "consignes": [
 "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
 "Marcher en enjambant chaque obstacle, genou bien levé",
@@ -24194,7 +24194,7 @@ export const MODELES_BASE = [
 "id": "GERIA_03",
 "source": "CABINET",
 "nom": "Équilibre yeux fermés près d'une chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
 "Pieds écartés à largeur de bassin, trouver l'équilibre",
@@ -24478,7 +24478,7 @@ export const MODELES_BASE = [
 "id": "GERIA_03",
 "source": "CABINET",
 "nom": "Équilibre yeux fermés près d'une chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise stable, mains au-dessus du dossier sans le toucher",
 "Pieds écartés à largeur de bassin, trouver l'équilibre",
@@ -28082,7 +28082,7 @@ export const MODELES_BASE = [
 "id": "GERIA_02",
 "source": "CABINET",
 "nom": "Ramasser un objet au sol",
-"image": "",
+"image": "/exercises/images/geriatrie/ramasser-objet-f.webp",
 "consignes": [
 "Debout, une main sur le dossier d'une chaise stable",
 "Un objet léger posé au sol à côté du pied",
@@ -28258,7 +28258,7 @@ export const MODELES_BASE = [
 "id": "GERIA_01",
 "source": "CABINET",
 "nom": "Marche avec obstacles",
-"image": "",
+"image": "/exercises/images/geriatrie/marche-obstacles-f.webp",
 "consignes": [
 "Poser au sol 4 à 5 petits obstacles (livres, bâtons) tous les 2 pas",
 "Marcher en enjambant chaque obstacle, genou bien levé",

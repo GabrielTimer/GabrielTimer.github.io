@@ -18252,7 +18252,7 @@
     "ex": 60,
     "exercise_mode": "equilibre",
     "id": "GERIA_01",
-    "image": "",
+    "image": "/exercises/images/geriatrie/marche-obstacles-f.webp",
     "materiel": [
       "Petits obstacles",
       "Couloir"
@@ -18295,8 +18295,7 @@
       "Obstacles plus bas"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -18319,7 +18318,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "GERIA_02",
-    "image": "",
+    "image": "/exercises/images/geriatrie/ramasser-objet-f.webp",
     "materiel": [
       "Chaise stable",
       "Objet léger"
@@ -18362,8 +18361,7 @@
       "Objet posé sur une marche"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -18384,7 +18382,7 @@
     "ex": 20,
     "exercise_mode": "equilibre",
     "id": "GERIA_03",
-    "image": "",
+    "image": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
     "materiel": [
       "Chaise stable"
     ],
@@ -18425,8 +18423,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

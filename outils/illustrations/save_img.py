@@ -7,6 +7,9 @@ d=os.path.join(R,'exercises/images',os.path.dirname(name)); os.makedirs(d,exist_
 paths={}
 for src,suf in ((h,'h'),(f,'f')):
     im=Image.open(src).convert('RGB')
+    from PIL import ImageChops
+    bb=ImageChops.difference(im,Image.new('RGB',im.size,'white')).point(lambda v:255 if v>30 else 0).getbbox()
+    if bb: im=im.crop((max(0,bb[0]-24),max(0,bb[1]-24),min(im.width,bb[2]+24),min(im.height,bb[3]+24)))
     p=f'/exercises/images/{name}-{suf}.webp'; im.save(R+p,'WEBP',quality=82,method=6); paths[suf]=p
     print(p, os.path.getsize(R+p), im.size)
 base=paths['f']

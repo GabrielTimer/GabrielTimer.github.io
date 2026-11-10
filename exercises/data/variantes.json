@@ -1308,5 +1308,20 @@
   "defaut": "/exercises/images/dips/dips-barres-f.webp",
   "f": "/exercises/images/dips/dips-barres-f.webp",
   "h": "/exercises/images/dips/dips-barres-h.webp"
+ },
+ "/exercises/images/geriatrie/marche-obstacles-f.webp": {
+  "defaut": "/exercises/images/geriatrie/marche-obstacles-f.webp",
+  "f": "/exercises/images/geriatrie/marche-obstacles-f.webp",
+  "h": "/exercises/images/geriatrie/marche-obstacles-h.webp"
+ },
+ "/exercises/images/geriatrie/ramasser-objet-f.webp": {
+  "defaut": "/exercises/images/geriatrie/ramasser-objet-f.webp",
+  "f": "/exercises/images/geriatrie/ramasser-objet-f.webp",
+  "h": "/exercises/images/geriatrie/ramasser-objet-h.webp"
+ },
+ "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp": {
+  "defaut": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
+  "f": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
+  "h": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-h.webp"
  }
 }
