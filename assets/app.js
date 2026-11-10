@@ -507,7 +507,8 @@ const NAV = {
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
     { id:"patients", label:"Patients", href:"/patients.html", ico:"users" },
     { id:"creer", label:"Créer", href:"/config.html?nouveau=1", ico:"plus" },
-    { id:"bibliotheque", label:"Exercices", href:"/programmes_admin.html", ico:"book" }
+    { id:"bibliotheque", label:"Exercices", href:"/programmes_admin.html", ico:"book" },
+    { id:"messages", label:"Messages", href:"/messages.html", ico:"inbox" }
   ]
 };
 
@@ -569,7 +570,6 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     body.classList.add("has-nav");
     const foot = role === "kine"
       ? `<div class="nav-foot">
-          <a class="nav-link" href="/messages.html" ${active === "messages" ? 'aria-current="page"' : ""}><span class="nav-ico">${icon("inbox")}</span><span>Messages</span><span class="inbox-badge inline" data-inbox-badge hidden></span></a>
           <a class="nav-link" href="/admin_tools.html"><span class="nav-ico">${icon("wrench")}</span><span>Outils</span></a>
           <a class="nav-link" href="/aide.html"><span class="nav-ico">${icon("info")}</span><span>Aide</span></a>
           <div class="nav-app">${appMarkHTML()}</div>
@@ -580,7 +580,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
       ${role === "kine" && !apercu ? `<button class="nav-search" type="button" data-gsearch>${icon("search")}<span>Rechercher…</span><kbd>Ctrl K</kbd></button>` : ""}
-      ${items.map(it => `<a class="nav-link" href="${navHref(it)}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
+      ${items.map(it => it.id === "messages"
+        ? `<a class="nav-link nav-msg" href="${navHref(it)}" data-inbox-link aria-label="Messages des patients" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}<span class="inbox-badge" data-inbox-badge hidden></span></span><span>${it.label}</span></a>`
+        : `<a class="nav-link" href="${navHref(it)}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
     body.appendChild(nav);

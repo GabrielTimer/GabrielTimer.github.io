@@ -720,6 +720,9 @@ a.chip{ text-decoration:none; }
 .inbox-badge[hidden]{ display:none; }
 .inbox-badge.inline{ position:static; margin-left:auto; box-shadow:none; }
 @media (min-width:960px){ .has-nav .inbox-btn{ display:none; } }
+/* Pastille sur l'onglet Messages de la barre du bas */
+.nav-msg .nav-ico{ position:relative; }
+.nav-msg .inbox-badge{ top:-4px; right:2px; }
 
 /* Bibliothèque : zones du corps sur plusieurs lignes en plein écran,
    badges des cartes qui ne débordent plus */

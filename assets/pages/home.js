@@ -415,7 +415,6 @@ async function renderKine(user){
     <div id="backup-banner"></div>
     <div class="tiles">
       <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
-      <a data-tile="messages" class="tile tile-msg" href="/messages.html" data-inbox-link aria-label="Messages des patients"><span class="t-ico">${icon("inbox")}</span><span class="inbox-badge" data-inbox-badge hidden></span><strong>Messagerie</strong><span class="t-sub">Messages des patients</span></a>
       <a data-tile="libre" class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
       <a data-tile="course" class="tile" href="/programmescourse.html"><span class="t-ico">${icon("run")}</span><strong>Reprise de course</strong><span class="t-sub">Générateur</span></a>
       <a data-tile="ressources" class="tile" href="/ressources.html"><span class="t-ico">${icon("library")}</span><strong>Ressources</strong><span class="t-sub">Tests, nerfs, questionnaires, modèles, fiches</span></a>
