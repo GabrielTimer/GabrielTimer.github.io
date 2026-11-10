@@ -21794,5 +21794,777 @@
     "zones": [],
     "zones_corporelles": [],
     "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout face à un mur, à un grand pas",
+      "Mains à plat sur le mur à hauteur et largeur d'épaules",
+      "Plier les coudes pour approcher la poitrine du mur, corps droit",
+      "Pousser pour revenir"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Bassin qui s'affaisse ou fesses trop hautes",
+      "Coudes écartés à 90° du corps (les garder à environ 45°)"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_01",
+    "image": "",
+    "materiel": [
+      "Mur"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Deltoïde antérieur",
+      "Dentelé antérieur",
+      "Gainage"
+    ],
+    "niveau": 1,
+    "nom": "Pompe contre le mur",
+    "objectif": "Débuter les pompes sans charge importante",
+    "objectifs": [
+      "Débuter les pompes sans charge importante"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Instabilité / luxation d'épaule",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Épaule"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pieds plus loin du mur"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains sur le bord d'un banc ou d'une table stable, à largeur d'épaules",
+      "Corps aligné des épaules aux talons",
+      "Descendre la poitrine vers le banc, coudes à 45°",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Bassin qui s'affaisse ou fesses trop hautes",
+      "Coudes écartés à 90° du corps (les garder à environ 45°)"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_02",
+    "image": "",
+    "materiel": [
+      "Banc ou table stable"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Deltoïde antérieur",
+      "Dentelé antérieur",
+      "Gainage"
+    ],
+    "niveau": 2,
+    "nom": "Pompe inclinée, mains sur un banc",
+    "objectif": "Progression vers la pompe au sol",
+    "objectifs": [
+      "Progression vers la pompe au sol"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Instabilité / luxation d'épaule",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Épaule"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Support plus bas"
+    ],
+    "version_facile": [
+      "Support plus haut"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "À genoux sur un tapis, mains au sol un peu plus larges que les épaules",
+      "Corps aligné des genoux aux épaules",
+      "Descendre la poitrine vers le sol, coudes à 45°",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Bassin qui s'affaisse ou fesses trop hautes",
+      "Coudes écartés à 90° du corps (les garder à environ 45°)"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_03",
+    "image": "",
+    "materiel": [
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Deltoïde antérieur",
+      "Dentelé antérieur",
+      "Gainage"
+    ],
+    "niveau": 2,
+    "nom": "Pompe sur les genoux",
+    "objectif": "Renforcer le haut du corps",
+    "objectifs": [
+      "Renforcer le haut du corps"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Instabilité / luxation d'épaule",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Épaule"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pompe classique"
+    ],
+    "version_facile": [
+      "Pompe inclinée"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
+      "Corps aligné des épaules aux talons, ventre serré",
+      "Descendre jusqu'à frôler le sol, coudes à 45°",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 40 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Bassin qui s'affaisse ou fesses trop hautes",
+      "Coudes écartés à 90° du corps (les garder à environ 45°)"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_04",
+    "image": "",
+    "materiel": [
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Deltoïde antérieur",
+      "Dentelé antérieur",
+      "Gainage"
+    ],
+    "niveau": 3,
+    "nom": "Pompe classique",
+    "objectif": "Force du haut du corps et gainage",
+    "objectifs": [
+      "Force du haut du corps et gainage"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Instabilité / luxation d'épaule",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Épaule"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pieds surélevés",
+      "Descente en 3 s"
+    ],
+    "version_facile": [
+      "Sur les genoux"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Pieds posés sur un banc, mains au sol",
+      "Corps aligné, ventre serré",
+      "Descendre la poitrine vers le sol",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Bassin qui s'affaisse ou fesses trop hautes",
+      "Coudes écartés à 90° du corps (les garder à environ 45°)"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_05",
+    "image": "",
+    "materiel": [
+      "Banc",
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Pectoraux",
+      "Triceps",
+      "Deltoïde antérieur",
+      "Dentelé antérieur",
+      "Gainage"
+    ],
+    "niveau": 4,
+    "nom": "Pompe pieds surélevés",
+    "objectif": "Pompe plus difficile, plus de travail des épaules",
+    "objectifs": [
+      "Pompe plus difficile, plus de travail des épaules"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Sport"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Pompe classique"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains au sol sous les épaules, rapprochées",
+      "Coudes qui frôlent le corps en descendant",
+      "Corps aligné, ventre serré",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 75 s",
+    "erreurs_frequentes": [
+      "Coudes qui s'écartent"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "POMPE_06",
+    "image": "",
+    "materiel": [
+      "Tapis"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux"
+    ],
+    "niveau": 4,
+    "nom": "Pompe prise serrée (triceps)",
+    "objectif": "Renforcer les triceps",
+    "objectifs": [
+      "Renforcer les triceps"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Corps gainé : ne pas creuser le bas du dos",
+      "Douleur d'épaule : rester à un niveau sans douleur",
+      "Douleur du poignet : poings fermés ou poignées"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Pompe",
+      "Triceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sur les genoux"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au bord d'une chaise stable calée contre un mur, mains de chaque côté des fesses",
+      "Avancer les fesses devant la chaise, pieds à plat, genoux pliés à 90°",
+      "Plier les coudes vers l'arrière pour descendre, dos près de la chaise",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [
+      "Instabilité antérieure de l'épaule",
+      "Douleur acromio-claviculaire"
+    ],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Coudes qui s'écartent",
+      "Épaules qui montent"
+    ],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DIPS_01",
+    "image": "",
+    "materiel": [
+      "Chaise stable"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux"
+    ],
+    "niveau": 2,
+    "nom": "Dips sur une chaise, genoux pliés",
+    "objectif": "Renforcer les triceps",
+    "objectifs": [
+      "Renforcer les triceps"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Épaules basses, loin des oreilles",
+      "Ne pas descendre plus bas que les coudes à 90°",
+      "Arrêter si douleur à l'avant de l'épaule"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Dips",
+      "Triceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains au bord d'une chaise stable, fesses devant la chaise",
+      "Jambes tendues, talons au sol",
+      "Descendre en pliant les coudes vers l'arrière",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [
+      "Instabilité antérieure de l'épaule",
+      "Douleur acromio-claviculaire"
+    ],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DIPS_02",
+    "image": "",
+    "materiel": [
+      "Chaise stable"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux"
+    ],
+    "niveau": 3,
+    "nom": "Dips sur une chaise, jambes tendues",
+    "objectif": "Renforcer les triceps avec plus de charge",
+    "objectifs": [
+      "Renforcer les triceps avec plus de charge"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Épaules basses, loin des oreilles",
+      "Ne pas descendre plus bas que les coudes à 90°",
+      "Arrêter si douleur à l'avant de l'épaule"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Dips",
+      "Triceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Genoux pliés"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mains au bord d'un banc, talons posés sur un second banc devant",
+      "Fesses dans le vide, jambes tendues",
+      "Descendre en pliant les coudes vers l'arrière",
+      "Pousser pour remonter"
+    ],
+    "contre_indications": [
+      "Instabilité antérieure de l'épaule",
+      "Douleur acromio-claviculaire"
+    ],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 75 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DIPS_03",
+    "image": "",
+    "materiel": [
+      "2 bancs"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux"
+    ],
+    "niveau": 4,
+    "nom": "Dips pieds surélevés entre deux bancs",
+    "objectif": "Dips plus difficiles",
+    "objectifs": [
+      "Dips plus difficiles"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Épaules basses, loin des oreilles",
+      "Ne pas descendre plus bas que les coudes à 90°",
+      "Arrêter si douleur à l'avant de l'épaule"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Dips",
+      "Triceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Jambes tendues au sol"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Entre deux barres parallèles basses, mains sur les barres",
+      "Pieds posés au sol devant pour aider",
+      "Descendre en pliant les coudes, buste légèrement penché",
+      "Pousser sur les mains en aidant le moins possible avec les jambes"
+    ],
+    "contre_indications": [
+      "Instabilité antérieure de l'épaule",
+      "Douleur acromio-claviculaire"
+    ],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 75 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DIPS_04",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux",
+      "Deltoïde antérieur"
+    ],
+    "niveau": 3,
+    "nom": "Dips aux barres parallèles, pieds en appui",
+    "objectif": "Apprendre les dips aux barres",
+    "objectifs": [
+      "Apprendre les dips aux barres"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Épaules basses, loin des oreilles",
+      "Ne pas descendre plus bas que les coudes à 90°",
+      "Arrêter si douleur à l'avant de l'épaule"
+    ],
+    "repos": 75,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Dips",
+      "Cabinet"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Bras tendus sur les barres, jambes pliées derrière",
+      "Descendre jusqu'aux coudes à 90°, buste légèrement penché",
+      "Épaules basses",
+      "Pousser pour remonter bras tendus"
+    ],
+    "contre_indications": [
+      "Instabilité antérieure de l'épaule",
+      "Douleur acromio-claviculaire"
+    ],
+    "difficulte_percue": 5,
+    "duree": "3 × 30 s, repos 90 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DIPS_05",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux",
+      "Deltoïde antérieur"
+    ],
+    "niveau": 5,
+    "nom": "Dips aux barres parallèles",
+    "objectif": "Force maximale des triceps et pectoraux",
+    "objectifs": [
+      "Force maximale des triceps et pectoraux"
+    ],
+    "pathologies": [
+      "Renforcement du haut du corps",
+      "Retour au sport"
+    ],
+    "precautions": [
+      "Épaules basses, loin des oreilles",
+      "Ne pas descendre plus bas que les coudes à 90°",
+      "Arrêter si douleur à l'avant de l'épaule"
+    ],
+    "repos": 90,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Dips",
+      "Sport"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Pieds en appui"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "au_cabinet": true
   }
 ]

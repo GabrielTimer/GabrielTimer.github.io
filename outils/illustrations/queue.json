@@ -1,78 +1,412 @@
 [
-["VEST_03","vestibulaire/regard-debout","Exercice : stabilisation du regard debout, vue de trois quarts. La personne est debout près d'un mur, pieds écartés à largeur de bassin, et regarde une feuille avec une grande lettre « E » collée au mur à hauteur des yeux, en tournant la tête de droite à gauche. Une double flèche bleue courbe horizontale au-dessus de la tête."],
-["VEST_04","vestibulaire/poursuite-cible","Exercice : poursuite d'une cible des yeux, assis sur une chaise en bois à assise bleue, vue de trois quarts face. La personne tient un stylo à bras tendu devant elle et le déplace lentement sur le côté ; la tête reste immobile et seuls les yeux suivent le stylo. Une flèche bleue horizontale en pointillés montre le trajet du stylo."],
-["VEST_05","vestibulaire/saccades","Exercice : saccades, assis sur une chaise en bois à assise bleue face à un mur, vue de profil. Deux petites cibles rondes rouges sont collées au mur à hauteur des yeux, écartées d'environ 50 cm ; une double flèche bleue entre les deux cibles montre le regard qui passe vite de l'une à l'autre, la tête immobile."],
-["VEST_06","vestibulaire/marche-tete-tournee","Exercice : marche en tournant la tête, vue de profil. La personne marche le long d'un mur, la tête tournée sur le côté pour regarder un cadre accroché au mur, tout en continuant d'avancer (une jambe devant l'autre, en plein pas). Une flèche bleue droite au sol vers l'avant et une double flèche bleue courbe au-dessus de la tête."],
-["VEST_07","vestibulaire/equilibre-mousse-yeux-fermes","Exercice : équilibre debout pieds joints sur un coussin de mousse bleu épais posé au sol, les yeux fermés, bras le long du corps, dans l'angle d'une pièce (deux murs derrière), une chaise stable devant la personne à portée de main. Vue de trois quarts face. Petites lignes bleues courtes autour des chevilles pour montrer le maintien de l'équilibre."],
-["VEST_08","vestibulaire/brandt-daroff","Exercice de Brandt-Daroff : la personne est allongée sur le côté sur un lit, la tête tournée de 45° vers le plafond, après s'être couchée depuis la position assise au bord du lit. Une flèche bleue courbe part du haut (position assise) vers la position couchée sur le côté."],
-["GERIA_01","geriatrie/marche-obstacles","Exercice : marche avec obstacles, vue de profil. La personne enjambe un petit obstacle posé au sol (un livre épais) en levant bien le genou ; deux autres livres sont posés plus loin sur le sol. Une flèche bleue courbe au-dessus du pied montre l'enjambement."],
-["GERIA_02","geriatrie/ramasser-objet","Exercice : ramasser un objet au sol, vue de profil. La personne se tient d'une main au dossier d'une chaise stable (chaise en bois à assise bleue), plie les genoux et les hanches, le dos droit, et attrape une petite balle posée au sol à côté de son pied. Une flèche bleue verticale montre la descente et la remontée."],
-["GERIA_03","geriatrie/equilibre-yeux-fermes-chaise","Exercice : équilibre debout derrière une chaise stable (chaise en bois à assise bleue), pieds joints, les yeux fermés, les mains juste au-dessus du dossier sans le toucher, prêtes à le saisir. Vue de face."],
-["GERIA_04","geriatrie/pointes-chaise","Exercice : montées sur la pointe des pieds derrière une chaise stable (chaise en bois à assise bleue), mains posées sur le dossier, vue de profil, talons nettement décollés du sol. Une flèche bleue verticale près des talons montre la montée."],
-["RESPI_01","respiratoire/respiration-abdominale-allonge","Exercice : respiration abdomino-diaphragmatique, allongé sur le dos sur un tapis bleu, genoux pliés pieds au sol, une main posée sur le ventre et une main sur la poitrine. Vue de profil. Une flèche bleue verticale au-dessus du ventre montre le ventre qui se gonfle."],
-["RESPI_02","respiratoire/levres-pincees","Exercice : expiration lèvres pincées, assis sur une chaise en bois à assise bleue, épaules relâchées, mains sur les cuisses, vue de profil. Les lèvres sont pincées comme pour souffler une bougie ; de petites lignes bleues ondulées sortent de la bouche pour montrer l'air expiré doucement."],
-["RESPI_03","respiratoire/expansion-costale","Exercice : expansion costale, assis sur une chaise en bois à assise bleue, vue de face. Les mains sont posées sur les côtés des côtes ; deux flèches bleues horizontales vers l'extérieur de chaque côté du thorax montrent les côtes qui s'écartent à l'inspiration."],
-["RESPI_04","respiratoire/eltgol","Exercice : expiration lente prolongée, couché sur le côté sur une table de massage, un coussin sous la tête, bras du dessus le long du corps, genoux légèrement pliés, bouche entrouverte. Vue de face. Lignes bleues ondulées sortant de la bouche pour l'expiration lente."],
-["RESPI_05","respiratoire/huff","Exercice : huff (expiration forcée bouche ouverte), assis sur une chaise en bois à assise bleue, buste légèrement penché en avant, une main tenant un mouchoir près de la bouche, bouche grande ouverte. Vue de profil. Flèche bleue courte sortant de la bouche."],
-["RESPI_06","respiratoire/spirometre","Exercice : spiromètre incitatif, assis droit sur une chaise en bois à assise bleue, tenant à deux mains un spiromètre incitatif transparent (cylindre avec une bille bleue et un tuyau avec embout dans la bouche). Vue de trois quarts. Flèche bleue verticale près de la bille qui monte."],
-["RESPI_07","respiratoire/entraineur-inspiratoire","Exercice : entraîneur inspiratoire, assis droit sur une chaise en bois à assise bleue, tenant un petit appareil d'entraînement inspiratoire (tube avec embout) dans la bouche, pince-nez sur le nez. Vue de profil. Flèche bleue entrant par l'embout pour l'inspiration."],
-["RESPI_08","respiratoire/position-recuperation","Exercice : position de récupération, assis sur une chaise en bois à assise bleue, penché en avant, avant-bras posés sur les cuisses, épaules relâchées, tête détendue. Vue de profil. Lignes bleues ondulées sortant des lèvres pincées."],
-["ONCO_01","oncologie/pompage-main-bras-sureleve","Exercice : allongé sur le dos sur un lit, le bras posé sur deux coussins empilés, la main plus haute que le coude ; la main s'ouvre et se ferme. Vue de profil. Petites flèches bleues autour des doigts pour l'ouverture-fermeture."],
-["ONCO_02","oncologie/coude-bras-sureleve","Exercice : allongé sur le dos sur un lit, le bras posé sur deux coussins empilés plus haut que le cœur ; le coude se plie pour amener la main vers l'épaule. Vue de profil. Flèche bleue courbe autour du coude."],
-["ONCO_03","oncologie/elevation-bras-allonge","Exercice : allongé sur le dos sur un tapis bleu, genoux pliés, mains jointes tenant un bâton, bras qui montent tendus au-dessus de la tête. Vue de profil. Grande flèche bleue courbe montrant l'élévation des bras."],
-["ONCO_04","oncologie/respiration-bras","Exercice : assis sur une chaise en bois à assise bleue, vue de face, bras levés sur les côtés en V pendant une grande inspiration, ventre gonflé. Flèches bleues courbes montrant les bras qui montent."],
-["PEDIA_01","pediatrie/marche-crabe","Exercice pour enfant mais dessiné avec les mêmes personnages adultes : marche du crabe, assis au sol, mains derrière soi et pieds à plat, fesses levées, corps « table » ; vue de profil. Flèche bleue horizontale montrant le déplacement."],
-["PEDIA_02","pediatrie/marelle","Exercice : marelle à cloche-pied, la personne saute sur un pied dans une case d'une marelle dessinée à la craie au sol (cases blanches au sol, sans chiffres). Vue de trois quarts. Flèche bleue courbe pour le saut."],
-["PEDIA_03","pediatrie/flamant","Exercice : le flamant, debout sur une jambe, l'autre pied posé contre le genou de la jambe d'appui, mains sur les hanches. Vue de face."],
-["PEDIA_04","pediatrie/lancer-attraper","Exercice : lancer et attraper un ballon, debout, bras tendus devant pour attraper un ballon bleu en l'air. Vue de profil. Flèche bleue courbe montrant la trajectoire du ballon."],
-["PEDIA_05","pediatrie/avion-ventre","Exercice : l'avion, allongé sur le ventre sur un tapis bleu, bras tendus sur les côtés comme des ailes, tête, bras et jambes légèrement décollés du sol, regard vers le sol. Vue de profil. Petites flèches bleues vers le haut."],
-["PEDIA_06","pediatrie/ramper","Exercice : ramper, à plat ventre sur un tapis bleu, avancer en tirant sur un avant-bras et en poussant avec la jambe opposée. Vue de profil. Flèche bleue horizontale vers l'avant."],
-["SPORT_01","sport/skater-jumps","Exercice : saut latéral du patineur, la personne vient d'atterrir sur une seule jambe, genou fléchi dans l'axe du pied, l'autre jambe croisée en arrière, buste penché, bras qui balancent. Vue de face. Flèche bleue courbe latérale pour le saut."],
-["SPORT_02","sport/squat-jump","Exercice : squat sauté, la personne est en l'air au sommet du saut, corps tendu, bras au-dessus de la tête ; une silhouette bleue claire en position de squat en dessous montre le départ. Vue de profil. Flèche bleue verticale vers le haut."],
-["SPORT_03","sport/drop-jump","Exercice : drop jump, une box noire de 30 cm ; la personne vient d'atterrir devant la box sur les deux pieds, genoux fléchis dans l'axe, bras en arrière, prête à rebondir. Vue de profil. Flèche bleue de la box vers le sol puis vers le haut."],
-["SPORT_04","sport/fentes-sautees","Exercice : fentes sautées, la personne en l'air en train d'inverser les jambes entre deux fentes, buste droit. Vue de profil. Flèches bleues courbes pour l'inversion des jambes."],
-["SPORT_05","sport/deplacements-lateraux-plots","Exercice : déplacements latéraux en pas chassés entre deux plots orange au sol, bassin bas, genoux fléchis, pieds écartés. Vue de face. Double flèche bleue horizontale entre les plots."],
-["SPORT_06","sport/carioca","Exercice : carioca, pas croisés latéraux, un pied croisé devant l'autre, hanches tournées, épaules face à l'avant. Vue de face. Flèche bleue horizontale montrant le déplacement sur le côté."],
-["SPORT_07","sport/nordic-hamstring","Exercice : nordic hamstring, à genoux sur un tapis bleu, chevilles bloquées sous un rouleau de mousse fixé, corps aligné des genoux aux épaules, penché vers l'avant à environ 45°, bras prêts devant la poitrine. Vue de profil. Flèche bleue courbe vers l'avant et le bas."],
-["SPORT_08","sport/step-down","Exercice : descente de marche excentrique, debout sur une jambe sur un step noir, l'autre talon qui descend lentement vers le sol devant le step, genou d'appui fléchi dans l'axe du pied. Vue de face. Flèche bleue verticale vers le bas près du talon. Petite croix rouge (×) sur le genou d'appui."],
-["SPORT_09","sport/hop","Exercice : saut sur une jambe en avant, la personne atterrit sur une seule jambe, genou fléchi et stable, derrière une ligne bleue au sol ; l'autre pied ne touche pas le sol. Vue de profil. Flèche bleue courbe du saut. Petite croix rouge (×) sur le genou de la jambe d'appui."],
-["SPORT_10","sport/sprint-arret","Exercice : arrêt après un sprint, la personne freine en position basse, pieds écartés, genoux fléchis, buste légèrement en arrière, à côté d'un plot orange. Vue de profil. Flèche bleue horizontale qui se termine par un trait d'arrêt."],
-["CHAISE_01","chaise-romaine/extension-lombaire","Exercice sur chaise romaine (banc noir incliné à 45°, coussins de hanches réglables, rouleaux sous les chevilles, plateau de pieds) : patient de profil, bassin juste au bord des coussins (le ventre n'est pas sur les coussins), bras croisés sur la poitrine, corps aligné jambes-buste en position haute ; silhouette bleue claire du buste penché vers le bas pour la position de départ. Flèche bleue courbe de la flexion de hanche vers le haut."],
-["CHAISE_02","chaise-romaine/maintien-isometrique","Exercice sur chaise romaine (banc noir incliné à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin juste au bord des coussins, bras croisés sur la poitrine, corps parfaitement aligné des chevilles à la tête, position tenue. Pas de flèche de mouvement, juste un petit sablier bleu à côté."],
-["CHAISE_03","chaise-romaine/extension-hanche-dos-rond","Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, dos légèrement arrondi, bras croisés, remontée par les fessiers. Flèche bleue courbe vers le haut au niveau de la hanche."],
-["CHAISE_04","chaise-romaine/extension-mains-tete","Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, mains derrière la tête coudes écartés, corps aligné en position haute. Flèche bleue courbe vers le haut."],
-["CHAISE_05","chaise-romaine/extension-rotation","Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient en position haute alignée, bras croisés, le buste tourné d'un côté. Vue de trois quarts. Flèche bleue courbe de rotation autour du buste."],
-["CHAISE_06","chaise-romaine/extension-disque","Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, tenant un disque de musculation noir contre la poitrine, corps aligné en position haute. Flèche bleue courbe vers le haut."],
-["CHAISE_07","chaise-romaine/flexion-laterale","Exercice sur chaise romaine (banc noir à 45°) : patient couché sur le côté, hanche posée sur le coussin, pieds calés sous les rouleaux, bras croisés, buste aligné qui remonte sur le côté. Vue de face. Flèche bleue courbe vers le haut sur le côté. Petite croix rouge (×) sur le flanc qui travaille (côté du haut)."],
-["CHAISE_08","chaise-romaine/nordic-assiste","Exercice sur chaise romaine : à genoux sur le coussin, chevilles bloquées sous les rouleaux, corps aligné des genoux aux épaules, penché vers l'avant à 45°, bras tendus devant prêts à se rattraper. Vue de profil. Flèche bleue courbe vers l'avant et le bas."],
-["BARRE_01","barre/squat-box","Exercice : squat sur box, barre de squat longue avec mousse bleue posée sur les trapèzes (jamais sur la nuque), mains sur la barre, fesses qui effleurent un banc noir derrière, dos neutre, genoux dans l'axe des pieds. Vue de profil. Flèche bleue verticale descente/montée."],
-["BARRE_02","barre/back-squat","Exercice : back squat dans un rack (deux supports réglables noirs), barre longue avec mousse bleue sur les trapèzes, disques noirs aux extrémités, cuisses parallèles au sol, dos neutre, genoux dans l'axe des pieds. Vue de profil. Flèche bleue verticale."],
-["BARRE_03","barre/squat-tempo","Exercice : squat tempo, barre longue avec mousse bleue sur les trapèzes et disques noirs, position basse tenue (cuisses parallèles), dos neutre ; un petit chronomètre bleu « 3 s » à côté remplacé par une icône d'horloge sans texte. Vue de profil. Flèche bleue verticale lente en pointillés."],
-["BARRE_04","barre/good-morning","Exercice : good morning, barre longue avec mousse bleue sur les trapèzes, genoux légèrement fléchis, buste penché en avant à environ 60° dos parfaitement droit, fesses en arrière. Vue de profil. Flèche bleue courbe autour de la hanche."],
-["BARRE_05","barre/souleve-terre-roumain","Exercice : soulevé de terre roumain, barre longue avec disques noirs tenue à deux mains devant les cuisses, descendue à mi-tibias, genoux légèrement fléchis, dos droit, fesses en arrière. Vue de profil. Flèche bleue verticale le long des jambes."],
-["BARRE_06","barre/fente-arriere","Exercice : fente arrière, barre longue avec mousse bleue sur les trapèzes, une jambe reculée genou arrière près du sol, genou avant au-dessus du pied, buste droit. Vue de profil. Flèche bleue verticale. Petite croix rouge (×) sur le genou avant."],
-["BARRE_07","barre/split-squat-bulgare","Exercice : split squat bulgare, dos à un banc noir, le dessus du pied arrière posé sur le banc, barre longue avec mousse bleue sur les trapèzes, genou avant fléchi au-dessus du pied. Vue de profil. Flèche bleue verticale. Petite croix rouge (×) sur le genou avant."],
-["BARRE_08","barre/hip-thrust","Exercice : hip thrust, haut du dos appuyé sur un banc noir, barre longue avec mousse bleue posée sur les hanches et disques noirs, pieds à plat, bassin monté à l'alignement épaules-genoux, genoux à 90°. Vue de profil. Flèche bleue verticale vers le haut au niveau du bassin."],
-["BARRE_09","barre/pointes-barre","Exercice : montées sur la pointe des pieds debout, barre longue avec mousse bleue sur les trapèzes, talons nettement décollés du sol, corps droit. Vue de profil. Flèche bleue verticale près des talons."],
-["BARRE_10","barre/rowing-barre","Exercice : rowing barre buste penché, debout genoux fléchis, buste penché à 45° dos droit, barre longue avec disques noirs tirée vers le nombril, coudes en arrière. Vue de profil. Flèche bleue verticale près des bras."],
-["PLAQUE_01","plaque-vibrante/debout-statique","Exercice sur plaque vibrante (plateau noir au sol, colonne grise, guidon rouge, deux sangles élastiques noires à poignées fixées sous le guidon) : debout sur le plateau, pieds écartés, mains sur le guidon, genoux légèrement fléchis. Petites ondes grises sous le plateau pour la vibration. Vue de profil."],
-["PLAQUE_02","plaque-vibrante/demi-squat","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : demi-squat tenu sur le plateau, fesses en arrière, mains sur le guidon. Petites ondes grises sous le plateau. Vue de profil."],
-["PLAQUE_03","plaque-vibrante/squat-lent","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : squat lent sans tenir le guidon, bras devant, genoux fléchis jamais tendus. Petites ondes grises sous le plateau. Vue de profil. Flèche bleue verticale."],
-["PLAQUE_04","plaque-vibrante/pointes","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : montée sur la pointe des pieds, mains sur le guidon, genoux légèrement fléchis, talons décollés. Ondes grises sous le plateau. Vue de profil. Flèche bleue près des talons."],
-["PLAQUE_05","plaque-vibrante/fente","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : fente statique, pied avant sur le plateau, pied arrière au sol derrière, mains sur le guidon, genou avant au-dessus du pied. Ondes grises sous le plateau. Vue de profil. Petite croix rouge (×) sur le genou avant."],
-["PLAQUE_06","plaque-vibrante/unipodal","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : debout sur une jambe sur le plateau, genou d'appui légèrement fléchi, une main posée légèrement sur le guidon, l'autre pied levé derrière. Ondes grises sous le plateau. Vue de profil. Petite croix rouge (×) sur la jambe d'appui."],
-["PLAQUE_07","plaque-vibrante/pont-fessier","Exercice : pont fessier, allongé sur le dos sur un tapis bleu, pieds posés sur le plateau noir d'une plaque vibrante (colonne grise et guidon rouge au-dessus des pieds), bassin levé. Ondes grises sous le plateau. Vue de profil. Flèche bleue verticale au niveau du bassin."],
-["PLAQUE_08","plaque-vibrante/planche","Exercice : planche, avant-bras posés sur le plateau noir d'une plaque vibrante, pieds au sol sur un tapis bleu, corps aligné des épaules aux chevilles. Ondes grises sous le plateau. Vue de profil."],
-["PLAQUE_09","plaque-vibrante/pompes","Exercice : pompes mains sur le plateau noir d'une plaque vibrante, pieds au sol, corps gainé, coudes légèrement fléchis. Ondes grises sous le plateau. Vue de profil. Flèche bleue verticale."],
-["PLAQUE_10","plaque-vibrante/rowing-sangles","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge, deux sangles élastiques noires à poignées fixées sous le guidon) : debout en demi-squat sur le plateau, tirant les poignées des sangles vers les côtes, coudes en arrière. Ondes grises sous le plateau. Vue de profil."],
-["PLAQUE_11","plaque-vibrante/curl-sangles","Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge, deux sangles élastiques noires à poignées) : debout sur le plateau, genoux légèrement fléchis, coudes collés au corps, mains qui montent vers les épaules en tirant sur les sangles. Ondes grises sous le plateau. Vue de face."],
-["PLAQUE_12","plaque-vibrante/etirement-assis","Exercice : assis au sol sur un tapis bleu, talons posés sur le plateau noir d'une plaque vibrante, jambes tendues, buste penché en avant dos droit, mains vers les chevilles. Ondes grises sous le plateau. Vue de profil."],
-["VELO_04","velo/pedalage-arriere","Exercice : pédalage EN ARRIÈRE sur un vélo semi-allongé (gris et noir, siège large avec dossier haut, poignées latérales sous le siège, pédalier devant). Personne assise au fond du siège, dos contre le dossier, mains sur les poignées, vue de profil, la personne regarde vers la DROITE. La flèche bleue circulaire autour du pédalier tourne dans le sens INVERSE des aiguilles d'une montre (sens antihoraire vu de ce côté), pointe de flèche bien visible."],
-["REDO_VELO_03","velo/pedalage-doux","Exercice : pédalage doux sur un vélo semi-allongé (gris et noir, siège large avec dossier haut, poignées latérales sous le siège, pédalier devant, siège réglable sur rail). Assis au fond du siège, dos bien calé contre le dossier, mains sur les poignées latérales, pieds sur les pédales, la jambe la plus en avant a le genou légèrement fléchi. Les deux pieds sont visibles sur les pédales. Flèche bleue circulaire autour du pédalier dans le sens du pédalage. Vue de profil."],
-["REDO_VELO_01","velo/monter-velo","Exercice : monter sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales sous le siège) : debout à côté du vélo, une main sur la poignée latérale, une jambe qui enjambe le cadre bas vers la pédale, l'autre pied au sol. Flèche bleue courbe pour le passage de la jambe. Vue de profil."],
-["REDO_VELO_02","velo/reglage-siege","Exercice : réglage du siège d'un vélo semi-allongé (gris et noir, dossier haut) : assis au fond du siège, une main tire le levier de réglage sous le siège, un pied sur la pédale la plus éloignée avec le genou presque tendu (légèrement fléchi). Double flèche bleue horizontale le long du rail sous le siège. Vue de profil."],
-["REDO_VELO_05","velo/va-et-vient-genou","Exercice : sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales), assis au fond du siège, va-et-vient d'un demi-tour de pédale pour plier le genou : double flèche bleue courbe en arc aller-retour devant le pédalier. Petite croix rouge (×) sur le genou de la jambe la plus proche. Vue de profil."],
-["REDO_VELO_06","velo/pedalage-sangle","Exercice : pédalage sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales), le pied le plus proche maintenu sur la pédale par une sangle noire bien visible ; flèche bleue circulaire autour du pédalier ; petite croix rouge (×) sur la cuisse de cette jambe. Vue de profil."],
-["REDO_VEST_01","vestibulaire/regard-horizontal","Exercice : stabilisation du regard, assis sur une chaise en bois à assise bleue, vue de trois quarts face ; la personne tient à bras tendu une petite carte blanche avec une grande lettre noire « E » et la regarde en tournant la tête de droite à gauche. Double flèche bleue courbe horizontale au-dessus de la tête."],
-["REDO_VEST_02","vestibulaire/regard-vertical","Exercice : stabilisation du regard, assis sur une chaise en bois à assise bleue, vue de profil ; la personne tient à bras tendu une petite carte blanche avec une grande lettre noire « E » et la regarde en hochant la tête de haut en bas. Double flèche bleue courbe verticale devant le front."]
+ [
+  "POMPE_01",
+  "pompes/pompe-mur",
+  "Exercice : pompe contre un mur, debout à un grand pas du mur, mains à plat sur le mur à hauteur d'épaules, coudes pliés, poitrine près du mur, corps droit. Flèche bleue horizontale. Vue de profil."
+ ],
+ [
+  "POMPE_02",
+  "pompes/pompe-inclinee",
+  "Exercice : pompe inclinée, mains sur le bord d'un banc noir, corps aligné des épaules aux talons, coudes pliés à 45°, poitrine qui descend vers le banc. Flèche bleue. Vue de profil."
+ ],
+ [
+  "POMPE_03",
+  "pompes/pompe-genoux",
+  "Exercice : pompe sur les genoux sur un tapis bleu, mains au sol, corps aligné des genoux aux épaules, coudes pliés, poitrine proche du sol. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "POMPE_04",
+  "pompes/pompe-classique",
+  "Exercice : pompe classique sur un tapis bleu, sur la pointe des pieds, corps parfaitement aligné, poitrine qui frôle le sol, coudes à 45°. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "POMPE_05",
+  "pompes/pompe-pieds-sureleves",
+  "Exercice : pompe pieds surélevés, pieds posés sur un banc noir, mains au sol sur un tapis bleu, corps aligné, coudes pliés. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "POMPE_06",
+  "pompes/pompe-prise-serree",
+  "Exercice : pompe prise serrée, mains rapprochées sous les épaules, coudes collés au corps pendant la descente, sur la pointe des pieds. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "DIPS_01",
+  "dips/dips-chaise-genoux-plies",
+  "Exercice : dips sur une chaise en bois à assise bleue calée contre un mur : mains au bord de l'assise de chaque côté, fesses devant la chaise, pieds à plat, genoux pliés à 90°, coudes pliés vers l'arrière. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "DIPS_02",
+  "dips/dips-chaise-jambes-tendues",
+  "Exercice : dips sur une chaise en bois à assise bleue : mains au bord de l'assise, fesses devant la chaise, jambes tendues talons au sol, coudes pliés vers l'arrière. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "DIPS_03",
+  "dips/dips-pieds-sureleves",
+  "Exercice : dips entre deux bancs noirs : mains au bord d'un banc derrière, talons posés sur un second banc devant, jambes tendues, fesses dans le vide, coudes pliés. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "DIPS_04",
+  "dips/dips-barres-pieds-appui",
+  "Exercice : dips aux barres parallèles basses : mains sur les barres, pieds posés au sol devant pour aider, coudes pliés, buste légèrement penché. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "DIPS_05",
+  "dips/dips-barres",
+  "Exercice : dips aux barres parallèles : corps suspendu, bras sur les barres, jambes pliées derrière, coudes pliés à 90°, buste légèrement penché, épaules basses. Flèche bleue verticale. Vue de profil."
+ ],
+ [
+  "VEST_08",
+  "vestibulaire/brandt-daroff",
+  "Exercice de Brandt-Daroff : la personne est allongée sur le côté sur un lit, la tête tournée de 45° vers le plafond, après s'être couchée depuis la position assise au bord du lit. Une flèche bleue courbe part du haut (position assise) vers la position couchée sur le côté."
+ ],
+ [
+  "GERIA_01",
+  "geriatrie/marche-obstacles",
+  "Exercice : marche avec obstacles, vue de profil. La personne enjambe un petit obstacle posé au sol (un livre épais) en levant bien le genou ; deux autres livres sont posés plus loin sur le sol. Une flèche bleue courbe au-dessus du pied montre l'enjambement."
+ ],
+ [
+  "GERIA_02",
+  "geriatrie/ramasser-objet",
+  "Exercice : ramasser un objet au sol, vue de profil. La personne se tient d'une main au dossier d'une chaise stable (chaise en bois à assise bleue), plie les genoux et les hanches, le dos droit, et attrape une petite balle posée au sol à côté de son pied. Une flèche bleue verticale montre la descente et la remontée."
+ ],
+ [
+  "GERIA_03",
+  "geriatrie/equilibre-yeux-fermes-chaise",
+  "Exercice : équilibre debout derrière une chaise stable (chaise en bois à assise bleue), pieds joints, les yeux fermés, les mains juste au-dessus du dossier sans le toucher, prêtes à le saisir. Vue de face."
+ ],
+ [
+  "GERIA_04",
+  "geriatrie/pointes-chaise",
+  "Exercice : montées sur la pointe des pieds derrière une chaise stable (chaise en bois à assise bleue), mains posées sur le dossier, vue de profil, talons nettement décollés du sol. Une flèche bleue verticale près des talons montre la montée."
+ ],
+ [
+  "RESPI_01",
+  "respiratoire/respiration-abdominale-allonge",
+  "Exercice : respiration abdomino-diaphragmatique, allongé sur le dos sur un tapis bleu, genoux pliés pieds au sol, une main posée sur le ventre et une main sur la poitrine. Vue de profil. Une flèche bleue verticale au-dessus du ventre montre le ventre qui se gonfle."
+ ],
+ [
+  "RESPI_02",
+  "respiratoire/levres-pincees",
+  "Exercice : expiration lèvres pincées, assis sur une chaise en bois à assise bleue, épaules relâchées, mains sur les cuisses, vue de profil. Les lèvres sont pincées comme pour souffler une bougie ; de petites lignes bleues ondulées sortent de la bouche pour montrer l'air expiré doucement."
+ ],
+ [
+  "RESPI_03",
+  "respiratoire/expansion-costale",
+  "Exercice : expansion costale, assis sur une chaise en bois à assise bleue, vue de face. Les mains sont posées sur les côtés des côtes ; deux flèches bleues horizontales vers l'extérieur de chaque côté du thorax montrent les côtes qui s'écartent à l'inspiration."
+ ],
+ [
+  "RESPI_04",
+  "respiratoire/eltgol",
+  "Exercice : expiration lente prolongée, couché sur le côté sur une table de massage, un coussin sous la tête, bras du dessus le long du corps, genoux légèrement pliés, bouche entrouverte. Vue de face. Lignes bleues ondulées sortant de la bouche pour l'expiration lente."
+ ],
+ [
+  "RESPI_05",
+  "respiratoire/huff",
+  "Exercice : huff (expiration forcée bouche ouverte), assis sur une chaise en bois à assise bleue, buste légèrement penché en avant, une main tenant un mouchoir près de la bouche, bouche grande ouverte. Vue de profil. Flèche bleue courte sortant de la bouche."
+ ],
+ [
+  "RESPI_06",
+  "respiratoire/spirometre",
+  "Exercice : spiromètre incitatif, assis droit sur une chaise en bois à assise bleue, tenant à deux mains un spiromètre incitatif transparent (cylindre avec une bille bleue et un tuyau avec embout dans la bouche). Vue de trois quarts. Flèche bleue verticale près de la bille qui monte."
+ ],
+ [
+  "RESPI_07",
+  "respiratoire/entraineur-inspiratoire",
+  "Exercice : entraîneur inspiratoire, assis droit sur une chaise en bois à assise bleue, tenant un petit appareil d'entraînement inspiratoire (tube avec embout) dans la bouche, pince-nez sur le nez. Vue de profil. Flèche bleue entrant par l'embout pour l'inspiration."
+ ],
+ [
+  "RESPI_08",
+  "respiratoire/position-recuperation",
+  "Exercice : position de récupération, assis sur une chaise en bois à assise bleue, penché en avant, avant-bras posés sur les cuisses, épaules relâchées, tête détendue. Vue de profil. Lignes bleues ondulées sortant des lèvres pincées."
+ ],
+ [
+  "ONCO_01",
+  "oncologie/pompage-main-bras-sureleve",
+  "Exercice : allongé sur le dos sur un lit, le bras posé sur deux coussins empilés, la main plus haute que le coude ; la main s'ouvre et se ferme. Vue de profil. Petites flèches bleues autour des doigts pour l'ouverture-fermeture."
+ ],
+ [
+  "ONCO_02",
+  "oncologie/coude-bras-sureleve",
+  "Exercice : allongé sur le dos sur un lit, le bras posé sur deux coussins empilés plus haut que le cœur ; le coude se plie pour amener la main vers l'épaule. Vue de profil. Flèche bleue courbe autour du coude."
+ ],
+ [
+  "ONCO_03",
+  "oncologie/elevation-bras-allonge",
+  "Exercice : allongé sur le dos sur un tapis bleu, genoux pliés, mains jointes tenant un bâton, bras qui montent tendus au-dessus de la tête. Vue de profil. Grande flèche bleue courbe montrant l'élévation des bras."
+ ],
+ [
+  "ONCO_04",
+  "oncologie/respiration-bras",
+  "Exercice : assis sur une chaise en bois à assise bleue, vue de face, bras levés sur les côtés en V pendant une grande inspiration, ventre gonflé. Flèches bleues courbes montrant les bras qui montent."
+ ],
+ [
+  "PEDIA_01",
+  "pediatrie/marche-crabe",
+  "Exercice pour enfant mais dessiné avec les mêmes personnages adultes : marche du crabe, assis au sol, mains derrière soi et pieds à plat, fesses levées, corps « table » ; vue de profil. Flèche bleue horizontale montrant le déplacement."
+ ],
+ [
+  "PEDIA_02",
+  "pediatrie/marelle",
+  "Exercice : marelle à cloche-pied, la personne saute sur un pied dans une case d'une marelle dessinée à la craie au sol (cases blanches au sol, sans chiffres). Vue de trois quarts. Flèche bleue courbe pour le saut."
+ ],
+ [
+  "PEDIA_03",
+  "pediatrie/flamant",
+  "Exercice : le flamant, debout sur une jambe, l'autre pied posé contre le genou de la jambe d'appui, mains sur les hanches. Vue de face."
+ ],
+ [
+  "PEDIA_04",
+  "pediatrie/lancer-attraper",
+  "Exercice : lancer et attraper un ballon, debout, bras tendus devant pour attraper un ballon bleu en l'air. Vue de profil. Flèche bleue courbe montrant la trajectoire du ballon."
+ ],
+ [
+  "PEDIA_05",
+  "pediatrie/avion-ventre",
+  "Exercice : l'avion, allongé sur le ventre sur un tapis bleu, bras tendus sur les côtés comme des ailes, tête, bras et jambes légèrement décollés du sol, regard vers le sol. Vue de profil. Petites flèches bleues vers le haut."
+ ],
+ [
+  "PEDIA_06",
+  "pediatrie/ramper",
+  "Exercice : ramper, à plat ventre sur un tapis bleu, avancer en tirant sur un avant-bras et en poussant avec la jambe opposée. Vue de profil. Flèche bleue horizontale vers l'avant."
+ ],
+ [
+  "SPORT_01",
+  "sport/skater-jumps",
+  "Exercice : saut latéral du patineur, la personne vient d'atterrir sur une seule jambe, genou fléchi dans l'axe du pied, l'autre jambe croisée en arrière, buste penché, bras qui balancent. Vue de face. Flèche bleue courbe latérale pour le saut."
+ ],
+ [
+  "SPORT_02",
+  "sport/squat-jump",
+  "Exercice : squat sauté, la personne est en l'air au sommet du saut, corps tendu, bras au-dessus de la tête ; une silhouette bleue claire en position de squat en dessous montre le départ. Vue de profil. Flèche bleue verticale vers le haut."
+ ],
+ [
+  "SPORT_03",
+  "sport/drop-jump",
+  "Exercice : drop jump, une box noire de 30 cm ; la personne vient d'atterrir devant la box sur les deux pieds, genoux fléchis dans l'axe, bras en arrière, prête à rebondir. Vue de profil. Flèche bleue de la box vers le sol puis vers le haut."
+ ],
+ [
+  "SPORT_04",
+  "sport/fentes-sautees",
+  "Exercice : fentes sautées, la personne en l'air en train d'inverser les jambes entre deux fentes, buste droit. Vue de profil. Flèches bleues courbes pour l'inversion des jambes."
+ ],
+ [
+  "SPORT_05",
+  "sport/deplacements-lateraux-plots",
+  "Exercice : déplacements latéraux en pas chassés entre deux plots orange au sol, bassin bas, genoux fléchis, pieds écartés. Vue de face. Double flèche bleue horizontale entre les plots."
+ ],
+ [
+  "SPORT_06",
+  "sport/carioca",
+  "Exercice : carioca, pas croisés latéraux, un pied croisé devant l'autre, hanches tournées, épaules face à l'avant. Vue de face. Flèche bleue horizontale montrant le déplacement sur le côté."
+ ],
+ [
+  "SPORT_07",
+  "sport/nordic-hamstring",
+  "Exercice : nordic hamstring, à genoux sur un tapis bleu, chevilles bloquées sous un rouleau de mousse fixé, corps aligné des genoux aux épaules, penché vers l'avant à environ 45°, bras prêts devant la poitrine. Vue de profil. Flèche bleue courbe vers l'avant et le bas."
+ ],
+ [
+  "SPORT_08",
+  "sport/step-down",
+  "Exercice : descente de marche excentrique, debout sur une jambe sur un step noir, l'autre talon qui descend lentement vers le sol devant le step, genou d'appui fléchi dans l'axe du pied. Vue de face. Flèche bleue verticale vers le bas près du talon. Petite croix rouge (×) sur le genou d'appui."
+ ],
+ [
+  "SPORT_09",
+  "sport/hop",
+  "Exercice : saut sur une jambe en avant, la personne atterrit sur une seule jambe, genou fléchi et stable, derrière une ligne bleue au sol ; l'autre pied ne touche pas le sol. Vue de profil. Flèche bleue courbe du saut. Petite croix rouge (×) sur le genou de la jambe d'appui."
+ ],
+ [
+  "SPORT_10",
+  "sport/sprint-arret",
+  "Exercice : arrêt après un sprint, la personne freine en position basse, pieds écartés, genoux fléchis, buste légèrement en arrière, à côté d'un plot orange. Vue de profil. Flèche bleue horizontale qui se termine par un trait d'arrêt."
+ ],
+ [
+  "CHAISE_01",
+  "chaise-romaine/extension-lombaire",
+  "Exercice sur chaise romaine (banc noir incliné à 45°, coussins de hanches réglables, rouleaux sous les chevilles, plateau de pieds) : patient de profil, bassin juste au bord des coussins (le ventre n'est pas sur les coussins), bras croisés sur la poitrine, corps aligné jambes-buste en position haute ; silhouette bleue claire du buste penché vers le bas pour la position de départ. Flèche bleue courbe de la flexion de hanche vers le haut."
+ ],
+ [
+  "CHAISE_02",
+  "chaise-romaine/maintien-isometrique",
+  "Exercice sur chaise romaine (banc noir incliné à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin juste au bord des coussins, bras croisés sur la poitrine, corps parfaitement aligné des chevilles à la tête, position tenue. Pas de flèche de mouvement, juste un petit sablier bleu à côté."
+ ],
+ [
+  "CHAISE_03",
+  "chaise-romaine/extension-hanche-dos-rond",
+  "Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, dos légèrement arrondi, bras croisés, remontée par les fessiers. Flèche bleue courbe vers le haut au niveau de la hanche."
+ ],
+ [
+  "CHAISE_04",
+  "chaise-romaine/extension-mains-tete",
+  "Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, mains derrière la tête coudes écartés, corps aligné en position haute. Flèche bleue courbe vers le haut."
+ ],
+ [
+  "CHAISE_05",
+  "chaise-romaine/extension-rotation",
+  "Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient en position haute alignée, bras croisés, le buste tourné d'un côté. Vue de trois quarts. Flèche bleue courbe de rotation autour du buste."
+ ],
+ [
+  "CHAISE_06",
+  "chaise-romaine/extension-disque",
+  "Exercice sur chaise romaine (banc noir à 45°, coussins de hanches, rouleaux sous les chevilles) : patient de profil, bassin au bord des coussins, tenant un disque de musculation noir contre la poitrine, corps aligné en position haute. Flèche bleue courbe vers le haut."
+ ],
+ [
+  "CHAISE_07",
+  "chaise-romaine/flexion-laterale",
+  "Exercice sur chaise romaine (banc noir à 45°) : patient couché sur le côté, hanche posée sur le coussin, pieds calés sous les rouleaux, bras croisés, buste aligné qui remonte sur le côté. Vue de face. Flèche bleue courbe vers le haut sur le côté. Petite croix rouge (×) sur le flanc qui travaille (côté du haut)."
+ ],
+ [
+  "CHAISE_08",
+  "chaise-romaine/nordic-assiste",
+  "Exercice sur chaise romaine : à genoux sur le coussin, chevilles bloquées sous les rouleaux, corps aligné des genoux aux épaules, penché vers l'avant à 45°, bras tendus devant prêts à se rattraper. Vue de profil. Flèche bleue courbe vers l'avant et le bas."
+ ],
+ [
+  "BARRE_01",
+  "barre/squat-box",
+  "Exercice : squat sur box, barre de squat longue avec mousse bleue posée sur les trapèzes (jamais sur la nuque), mains sur la barre, fesses qui effleurent un banc noir derrière, dos neutre, genoux dans l'axe des pieds. Vue de profil. Flèche bleue verticale descente/montée."
+ ],
+ [
+  "BARRE_02",
+  "barre/back-squat",
+  "Exercice : back squat dans un rack (deux supports réglables noirs), barre longue avec mousse bleue sur les trapèzes, disques noirs aux extrémités, cuisses parallèles au sol, dos neutre, genoux dans l'axe des pieds. Vue de profil. Flèche bleue verticale."
+ ],
+ [
+  "BARRE_03",
+  "barre/squat-tempo",
+  "Exercice : squat tempo, barre longue avec mousse bleue sur les trapèzes et disques noirs, position basse tenue (cuisses parallèles), dos neutre ; un petit chronomètre bleu « 3 s » à côté remplacé par une icône d'horloge sans texte. Vue de profil. Flèche bleue verticale lente en pointillés."
+ ],
+ [
+  "BARRE_04",
+  "barre/good-morning",
+  "Exercice : good morning, barre longue avec mousse bleue sur les trapèzes, genoux légèrement fléchis, buste penché en avant à environ 60° dos parfaitement droit, fesses en arrière. Vue de profil. Flèche bleue courbe autour de la hanche."
+ ],
+ [
+  "BARRE_05",
+  "barre/souleve-terre-roumain",
+  "Exercice : soulevé de terre roumain, barre longue avec disques noirs tenue à deux mains devant les cuisses, descendue à mi-tibias, genoux légèrement fléchis, dos droit, fesses en arrière. Vue de profil. Flèche bleue verticale le long des jambes."
+ ],
+ [
+  "BARRE_06",
+  "barre/fente-arriere",
+  "Exercice : fente arrière, barre longue avec mousse bleue sur les trapèzes, une jambe reculée genou arrière près du sol, genou avant au-dessus du pied, buste droit. Vue de profil. Flèche bleue verticale. Petite croix rouge (×) sur le genou avant."
+ ],
+ [
+  "BARRE_07",
+  "barre/split-squat-bulgare",
+  "Exercice : split squat bulgare, dos à un banc noir, le dessus du pied arrière posé sur le banc, barre longue avec mousse bleue sur les trapèzes, genou avant fléchi au-dessus du pied. Vue de profil. Flèche bleue verticale. Petite croix rouge (×) sur le genou avant."
+ ],
+ [
+  "BARRE_08",
+  "barre/hip-thrust",
+  "Exercice : hip thrust, haut du dos appuyé sur un banc noir, barre longue avec mousse bleue posée sur les hanches et disques noirs, pieds à plat, bassin monté à l'alignement épaules-genoux, genoux à 90°. Vue de profil. Flèche bleue verticale vers le haut au niveau du bassin."
+ ],
+ [
+  "BARRE_09",
+  "barre/pointes-barre",
+  "Exercice : montées sur la pointe des pieds debout, barre longue avec mousse bleue sur les trapèzes, talons nettement décollés du sol, corps droit. Vue de profil. Flèche bleue verticale près des talons."
+ ],
+ [
+  "BARRE_10",
+  "barre/rowing-barre",
+  "Exercice : rowing barre buste penché, debout genoux fléchis, buste penché à 45° dos droit, barre longue avec disques noirs tirée vers le nombril, coudes en arrière. Vue de profil. Flèche bleue verticale près des bras."
+ ],
+ [
+  "PLAQUE_01",
+  "plaque-vibrante/debout-statique",
+  "Exercice sur plaque vibrante (plateau noir au sol, colonne grise, guidon rouge, deux sangles élastiques noires à poignées fixées sous le guidon) : debout sur le plateau, pieds écartés, mains sur le guidon, genoux légèrement fléchis. Petites ondes grises sous le plateau pour la vibration. Vue de profil."
+ ],
+ [
+  "PLAQUE_02",
+  "plaque-vibrante/demi-squat",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : demi-squat tenu sur le plateau, fesses en arrière, mains sur le guidon. Petites ondes grises sous le plateau. Vue de profil."
+ ],
+ [
+  "PLAQUE_03",
+  "plaque-vibrante/squat-lent",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : squat lent sans tenir le guidon, bras devant, genoux fléchis jamais tendus. Petites ondes grises sous le plateau. Vue de profil. Flèche bleue verticale."
+ ],
+ [
+  "PLAQUE_04",
+  "plaque-vibrante/pointes",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : montée sur la pointe des pieds, mains sur le guidon, genoux légèrement fléchis, talons décollés. Ondes grises sous le plateau. Vue de profil. Flèche bleue près des talons."
+ ],
+ [
+  "PLAQUE_05",
+  "plaque-vibrante/fente",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : fente statique, pied avant sur le plateau, pied arrière au sol derrière, mains sur le guidon, genou avant au-dessus du pied. Ondes grises sous le plateau. Vue de profil. Petite croix rouge (×) sur le genou avant."
+ ],
+ [
+  "PLAQUE_06",
+  "plaque-vibrante/unipodal",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge) : debout sur une jambe sur le plateau, genou d'appui légèrement fléchi, une main posée légèrement sur le guidon, l'autre pied levé derrière. Ondes grises sous le plateau. Vue de profil. Petite croix rouge (×) sur la jambe d'appui."
+ ],
+ [
+  "PLAQUE_07",
+  "plaque-vibrante/pont-fessier",
+  "Exercice : pont fessier, allongé sur le dos sur un tapis bleu, pieds posés sur le plateau noir d'une plaque vibrante (colonne grise et guidon rouge au-dessus des pieds), bassin levé. Ondes grises sous le plateau. Vue de profil. Flèche bleue verticale au niveau du bassin."
+ ],
+ [
+  "PLAQUE_08",
+  "plaque-vibrante/planche",
+  "Exercice : planche, avant-bras posés sur le plateau noir d'une plaque vibrante, pieds au sol sur un tapis bleu, corps aligné des épaules aux chevilles. Ondes grises sous le plateau. Vue de profil."
+ ],
+ [
+  "PLAQUE_09",
+  "plaque-vibrante/pompes",
+  "Exercice : pompes mains sur le plateau noir d'une plaque vibrante, pieds au sol, corps gainé, coudes légèrement fléchis. Ondes grises sous le plateau. Vue de profil. Flèche bleue verticale."
+ ],
+ [
+  "PLAQUE_10",
+  "plaque-vibrante/rowing-sangles",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge, deux sangles élastiques noires à poignées fixées sous le guidon) : debout en demi-squat sur le plateau, tirant les poignées des sangles vers les côtes, coudes en arrière. Ondes grises sous le plateau. Vue de profil."
+ ],
+ [
+  "PLAQUE_11",
+  "plaque-vibrante/curl-sangles",
+  "Exercice sur plaque vibrante (plateau noir, colonne grise, guidon rouge, deux sangles élastiques noires à poignées) : debout sur le plateau, genoux légèrement fléchis, coudes collés au corps, mains qui montent vers les épaules en tirant sur les sangles. Ondes grises sous le plateau. Vue de face."
+ ],
+ [
+  "PLAQUE_12",
+  "plaque-vibrante/etirement-assis",
+  "Exercice : assis au sol sur un tapis bleu, talons posés sur le plateau noir d'une plaque vibrante, jambes tendues, buste penché en avant dos droit, mains vers les chevilles. Ondes grises sous le plateau. Vue de profil."
+ ],
+ [
+  "VELO_04",
+  "velo/pedalage-arriere",
+  "Exercice : pédalage EN ARRIÈRE sur un vélo semi-allongé (gris et noir, siège large avec dossier haut, poignées latérales sous le siège, pédalier devant). Personne assise au fond du siège, dos contre le dossier, mains sur les poignées, vue de profil, la personne regarde vers la DROITE. La flèche bleue circulaire autour du pédalier tourne dans le sens INVERSE des aiguilles d'une montre (sens antihoraire vu de ce côté), pointe de flèche bien visible."
+ ],
+ [
+  "REDO_VELO_03",
+  "velo/pedalage-doux",
+  "Exercice : pédalage doux sur un vélo semi-allongé (gris et noir, siège large avec dossier haut, poignées latérales sous le siège, pédalier devant, siège réglable sur rail). Assis au fond du siège, dos bien calé contre le dossier, mains sur les poignées latérales, pieds sur les pédales, la jambe la plus en avant a le genou légèrement fléchi. Les deux pieds sont visibles sur les pédales. Flèche bleue circulaire autour du pédalier dans le sens du pédalage. Vue de profil."
+ ],
+ [
+  "REDO_VELO_01",
+  "velo/monter-velo",
+  "Exercice : monter sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales sous le siège) : debout à côté du vélo, une main sur la poignée latérale, une jambe qui enjambe le cadre bas vers la pédale, l'autre pied au sol. Flèche bleue courbe pour le passage de la jambe. Vue de profil."
+ ],
+ [
+  "REDO_VELO_02",
+  "velo/reglage-siege",
+  "Exercice : réglage du siège d'un vélo semi-allongé (gris et noir, dossier haut) : assis au fond du siège, une main tire le levier de réglage sous le siège, un pied sur la pédale la plus éloignée avec le genou presque tendu (légèrement fléchi). Double flèche bleue horizontale le long du rail sous le siège. Vue de profil."
+ ],
+ [
+  "REDO_VELO_05",
+  "velo/va-et-vient-genou",
+  "Exercice : sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales), assis au fond du siège, va-et-vient d'un demi-tour de pédale pour plier le genou : double flèche bleue courbe en arc aller-retour devant le pédalier. Petite croix rouge (×) sur le genou de la jambe la plus proche. Vue de profil."
+ ],
+ [
+  "REDO_VELO_06",
+  "velo/pedalage-sangle",
+  "Exercice : pédalage sur un vélo semi-allongé (gris et noir, dossier haut, poignées latérales), le pied le plus proche maintenu sur la pédale par une sangle noire bien visible ; flèche bleue circulaire autour du pédalier ; petite croix rouge (×) sur la cuisse de cette jambe. Vue de profil."
+ ],
+ [
+  "REDO_VEST_01",
+  "vestibulaire/regard-horizontal",
+  "Exercice : stabilisation du regard, assis sur une chaise en bois à assise bleue, vue de trois quarts face ; la personne tient à bras tendu une petite carte blanche avec une grande lettre noire « E » et la regarde en tournant la tête de droite à gauche. Double flèche bleue courbe horizontale au-dessus de la tête."
+ ],
+ [
+  "REDO_VEST_02",
+  "vestibulaire/regard-vertical",
+  "Exercice : stabilisation du regard, assis sur une chaise en bois à assise bleue, vue de profil ; la personne tient à bras tendu une petite carte blanche avec une grande lettre noire « E » et la regarde en hochant la tête de haut en bas. Double flèche bleue courbe verticale devant le front."
+ ]
 ]
