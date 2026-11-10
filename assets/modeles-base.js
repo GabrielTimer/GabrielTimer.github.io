@@ -29017,7 +29017,7 @@ export const MODELES_BASE = [
 "id": "DIPS_01",
 "source": "CABINET",
 "nom": "Dips sur une chaise, genoux pliés",
-"image": "",
+"image": "/exercises/images/dips/dips-chaise-genoux-plies-f.webp",
 "consignes": [
 "Assis au bord d'une chaise stable calée contre un mur, mains de chaque côté des fesses",
 "Avancer les fesses devant la chaise, pieds à plat, genoux pliés à 90°",
@@ -29195,7 +29195,7 @@ export const MODELES_BASE = [
 "id": "DIPS_02",
 "source": "CABINET",
 "nom": "Dips sur une chaise, jambes tendues",
-"image": "",
+"image": "/exercises/images/dips/dips-chaise-jambes-tendues-f.webp",
 "consignes": [
 "Mains au bord d'une chaise stable, fesses devant la chaise",
 "Jambes tendues, talons au sol",

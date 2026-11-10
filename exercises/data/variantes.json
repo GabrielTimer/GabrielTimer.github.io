@@ -1283,5 +1283,30 @@
   "defaut": "/exercises/images/pompes/pompe-prise-serree-f.webp",
   "f": "/exercises/images/pompes/pompe-prise-serree-f.webp",
   "h": "/exercises/images/pompes/pompe-prise-serree-h.webp"
+ },
+ "/exercises/images/dips/dips-chaise-genoux-plies-f.webp": {
+  "defaut": "/exercises/images/dips/dips-chaise-genoux-plies-f.webp",
+  "f": "/exercises/images/dips/dips-chaise-genoux-plies-f.webp",
+  "h": "/exercises/images/dips/dips-chaise-genoux-plies-h.webp"
+ },
+ "/exercises/images/dips/dips-chaise-jambes-tendues-f.webp": {
+  "defaut": "/exercises/images/dips/dips-chaise-jambes-tendues-f.webp",
+  "f": "/exercises/images/dips/dips-chaise-jambes-tendues-f.webp",
+  "h": "/exercises/images/dips/dips-chaise-jambes-tendues-h.webp"
+ },
+ "/exercises/images/dips/dips-pieds-sureleves-f.webp": {
+  "defaut": "/exercises/images/dips/dips-pieds-sureleves-f.webp",
+  "f": "/exercises/images/dips/dips-pieds-sureleves-f.webp",
+  "h": "/exercises/images/dips/dips-pieds-sureleves-h.webp"
+ },
+ "/exercises/images/dips/dips-barres-pieds-appui-f.webp": {
+  "defaut": "/exercises/images/dips/dips-barres-pieds-appui-f.webp",
+  "f": "/exercises/images/dips/dips-barres-pieds-appui-f.webp",
+  "h": "/exercises/images/dips/dips-barres-pieds-appui-h.webp"
+ },
+ "/exercises/images/dips/dips-barres-f.webp": {
+  "defaut": "/exercises/images/dips/dips-barres-f.webp",
+  "f": "/exercises/images/dips/dips-barres-f.webp",
+  "h": "/exercises/images/dips/dips-barres-h.webp"
  }
 }
