@@ -710,7 +710,6 @@ a.chip{ text-decoration:none; }
 @media print{ .app-foot,.nav-app{ display:none; } }
 
 /* ---------- Pastille des messages non lus (kiné) ---------- */
-.inbox-btn{ position:relative; }
 .inbox-badge{
   position:absolute; top:2px; right:2px;
   min-width:18px; height:18px; padding:0 5px; border-radius:999px;
@@ -719,7 +718,6 @@ a.chip{ text-decoration:none; }
 }
 .inbox-badge[hidden]{ display:none; }
 .inbox-badge.inline{ position:static; margin-left:auto; box-shadow:none; }
-@media (min-width:960px){ .has-nav .inbox-btn{ display:none; } }
 /* Pastille sur l'onglet Messages de la barre du bas */
 .nav-msg .nav-ico{ position:relative; }
 .nav-msg .inbox-badge{ top:-4px; right:2px; }

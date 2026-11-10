@@ -544,9 +544,6 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     : (title ? `<div class="topbar-title">${esc(title)}</div>` : brand);
 
   const themeBtn = `<button class="icon-btn" type="button" data-theme-toggle aria-label="Changer de thème">${icon(isDark() ? "sun" : "moon")}</button>`;
-  const inboxBtn = role === "kine" && !apercu
-    ? `<a class="icon-btn inbox-btn" href="/messages.html" data-inbox-link aria-label="Messages des patients" title="Messages des patients">${icon("inbox")}<span class="inbox-badge" data-inbox-badge hidden></span></a>`
-    : "";
   /* Visible seulement sur un appareil où le kiné est connecté et qu'il a passé en mode patient.
      Les vrais patients ne le voient jamais. Sur téléphone : icône seule, pour ne pas couper le nom. */
   const kineBtn = role === "patient" && !apercu && modePatient.get() && kineHint.connecte()
@@ -554,7 +551,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     : "";
   const searchBtn = role === "kine" && !apercu
     ? `<button class="icon-btn search-btn" type="button" data-gsearch aria-label="Rechercher" title="Rechercher">${icon("search")}</button>` : "";
-  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${searchBtn}${inboxBtn}${themeBtn}</div></header>`);
+  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${searchBtn}${themeBtn}</div></header>`);
 
   if(apercu){
     body.prepend(h(`<div class="apercu-band">${icon("eye")}<span>Aperçu : vous voyez l'application comme votre patient</span><button type="button" data-leave-apercu>Quitter</button></div>`));
