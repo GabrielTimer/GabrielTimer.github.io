@@ -17,7 +17,7 @@
      Page indépendante : aucun lien vers l'application (sauf le bouton « Retour », visible seulement dans l'appli installée). Tout vient de Réglages du cabinet : nom, profession, logo, téléphone, adresse, horaires, annonce. */
   .cab{ width:min(100% - 2*var(--gutter, 16px), 720px); margin:0 auto; padding:28px 0 48px; display:flex; flex-direction:column; gap:18px; }
   .cab-head{ display:flex; gap:16px; align-items:center; }
-  .cab-head img{ width:72px; height:72px; object-fit:contain; border-radius:var(--r-md); background:#fff; border:1px solid var(--line); flex:none; }
+  .cab-head img{ width:88px; height:88px; object-fit:contain; border-radius:50%; flex:none; filter:drop-shadow(0 2px 6px rgba(20,48,58,.15)); }
   .cab-head h1{ margin:0; font-size:clamp(1.4rem, 5vw, 2rem); line-height:1.15; }
   .cab-head p{ margin:4px 0 0; color:var(--ink-2); }
   .cab-actions{ display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; }
@@ -55,7 +55,7 @@
 <main class="cab" id="cab"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
 <script type="module">
 import { $, esc, icon } from "/assets/app.js";
-import { settings, loadSettings, currentAnnonce, logoSrc } from "/assets/settings.js";
+import { settings, loadSettings, currentAnnonce, logoSrc, docLogoSrc } from "/assets/settings.js";
 import * as H from "/assets/horaires.js";
 
 /* Ouverte depuis l'application installée (écran d'accueil du téléphone) : pas de barre de navigation,
@@ -85,7 +85,7 @@ function render(){
     ${retourHTML()}
     ${msg ? (tel ? `<a class="cab-msg" href="tel:${esc(tel.replace(/[^\d+]/g, ""))}">${icon("call")}<span>${msgHTML}</span></a>` : `<div class="cab-msg">${icon("info")}<span>${msgHTML}</span></div>`) : ""}
     <header class="cab-head">
-      <img src="${esc(logoSrc())}" alt="">
+      <img src="${esc(docLogoSrc())}" alt="Masseur-Kinésithérapeute">
       <div><h1>${esc(c.nom)}</h1><p>${esc(c.titre || "")}</p>${hor ? `<span class="hor-etat ${st.cls}">${esc(st.texte)}</span>` : ""}</div>
     </header>
     ${a ? `<div class="notice annonce">${icon("bell")}<span>${esc(a.texte).replace(/\n/g, "<br>")}</span></div>` : ""}
