@@ -507,10 +507,22 @@ const NAV = {
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
     { id:"patients", label:"Patients", href:"/patients.html", ico:"users" },
     { id:"creer", label:"Créer", href:"/config.html?nouveau=1", ico:"plus" },
-    { id:"bibliotheque", label:"Exercices", href:"/exercises/glossary.html", ico:"book" },
-    { id:"outils", label:"Modèles", href:"/programmes_admin.html", ico:"layers" }
+    { id:"bibliotheque", label:"Exercices", href:"/programmes_admin.html", ico:"book" }
   ]
 };
+
+/* « Exercices » rouvre le dernier onglet utilisé : Modèles, Bibliothèque ou Historique */
+export const EXO_TABS = [
+  { id:"modeles", label:"Modèles", href:"/programmes_admin.html", ico:"layers" },
+  { id:"bibliotheque", label:"Bibliothèque", href:"/exercises/glossary.html", ico:"book" },
+  { id:"historique", label:"Historique", href:"/exercises/historique.html", ico:"history" }
+];
+const navHref = it => it.id === "bibliotheque" ? (EXO_TABS.find(t => t.id === store.get("gt_exo_tab"))?.href || it.href) : it.href;
+/** Onglets en haut des pages Exercices (comme un sous-menu). */
+export function exoTabsHTML(active){
+  store.set("gt_exo_tab", active);
+  return `<nav class="exo-tabs" aria-label="Exercices">${EXO_TABS.map(t => `<a href="${t.href}" ${t.id === active ? 'aria-current="page"' : ""}>${icon(t.ico)}<span>${esc(t.label)}</span></a>`).join("")}</nav>`;
+}
 
 /**
  * Installe la barre du haut et la navigation.
@@ -565,7 +577,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
         </div>`;
     const nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
-      ${items.map(it => `<a class="nav-link" href="${it.href}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
+      ${items.map(it => `<a class="nav-link" href="${navHref(it)}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
     body.appendChild(nav);

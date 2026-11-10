@@ -4,6 +4,7 @@ import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, f
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
+import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "./filter-drawer.js";
 
 const PAGE = 30;
 
@@ -19,7 +20,6 @@ const FACETS = [
 const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["CABINET", "Cabinet"], ["HEP", "Base HEP"]];
 const NIVEAUX = [["1", "Niveau 1"], ["2", "Niveau 2"], ["3", "Niveau 3"], ["4", "Niveau 4 et +"]];
 const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
-const openSecs = new Set();   /* tiroirs ouverts, gardés tant que la page reste ouverte */
 
 /**
  * Monte la bibliothèque dans un conteneur.
@@ -45,7 +45,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <div class="lib-tools">
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
-          <button class="btn lib-filter-btn" type="button" data-filters aria-haspopup="dialog">${icon("filter")}<span class="lbl">Filtres</span><span class="lib-filter-n" data-fn hidden></span></button>
+          ${filterButtonHTML()}
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="lib-active" data-active hidden></div>
@@ -118,101 +118,22 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     return opts.map(o => ({ ...o, n: n[o.v] || 0 })).filter(o => o.n || state[k].includes(o.v));
   };
   const labelOf = (k, v) => k === "source" ? (SOURCES.find(s => s[0] === v)?.[1] || v) : k === "niveau" ? (NIVEAUX.find(s => s[0] === v)?.[1] || v) : v;
-  const nbChoix = () => FACETS.reduce((t, f) => t + state[f.k].length, 0) + (state.masques ? 1 : 0);
-
-  /* Pastilles des filtres actifs sous la recherche (un clic les retire) */
-  const renderActive = () => {
-    const n = nbChoix();
-    const fn = $("[data-fn]", root);
-    fn.hidden = !n; fn.textContent = n;
-    $("[data-filters]", root).classList.toggle("on", !!n);
-    const box = $("[data-active]", root);
-    box.hidden = !n;
-    if(!n){ box.innerHTML = ""; return; }
-    box.innerHTML = FACETS.flatMap(f => state[f.k].map(v =>
-        `<button class="chip on lib-active-chip" type="button" data-rm="${esc(f.k)}" data-v="${esc(v)}" aria-label="Retirer le filtre ${esc(labelOf(f.k, v))}">${esc(labelOf(f.k, v))}${icon("close")}</button>`)).join("") +
-      (state.masques ? `<button class="chip on lib-active-chip" type="button" data-rm="masques" aria-label="Retirer le filtre Exercices masqués">Exercices masqués${icon("close")}</button>` : "") +
-      `<button class="link-btn small" type="button" data-clear>Tout effacer</button>`;
-    $$("[data-rm]", box).forEach(b => b.onclick = () => {
-      const k = b.dataset.rm;
-      if(k === "masques") state.masques = false; else state[k] = state[k].filter(v => v !== b.dataset.v);
-      update();
-    });
-    $("[data-clear]", box).onclick = () => { clearAll(); update(); };
-  };
-  const clearAll = () => { FACETS.forEach(f => state[f.k] = []); state.masques = false; };
 
   /* ---------- Panneau « Filtres » ---------- */
+  let pool = null;   /* exercices visibles qui correspondent à la recherche (pour compter les choix) */
+  const cfg = {
+    facets: FACETS, state, labelOf,
+    toggles: [{ k:"masques", label:"Afficher seulement les exercices masqués", chip:"Exercices masqués" }],
+    options: k => options(k, pool || (pool = (() => { const qs = new Set(searchLibrary(base(), state.q)); return base().filter(e => qs.has(e)); })())),
+    total: () => filtered().length,
+    unit: ["exercice", "exercices"],
+    onChange: () => update()
+  };
   let drawer = null;
-  const fq = {};   /* recherche tapée dans un tiroir (pathologies) */
-  const resume = (f) => {
-    const v = state[f.k];
-    if(!v.length) return `<span class="fdr-ph">${esc(f.ph)}</span>`;
-    const txt = v.map(x => labelOf(f.k, x)).join(", ");
-    return `<span class="fdr-val">${esc(v.length > 2 ? `${v.length} choisis` : txt)}</span>`;
-  };
-  const renderOpts = (sec, f, pool) => {
-    const box = sec.querySelector("[data-opts]");
-    const top = box.scrollTop;
-    const q = norm(fq[f.k] || "");
-    const opts = options(f.k, pool).filter(o => !q || norm(o.label).includes(q));
-    let g = null;
-    box.innerHTML = opts.length ? opts.map(o => {
-      const head = o.group && o.group !== g ? `<div class="fdr-group">${esc(g = o.group)}</div>` : "";
-      return head + `<label class="fdr-opt"><input type="checkbox" value="${esc(o.v)}" ${state[f.k].includes(o.v) ? "checked" : ""}><span class="fdr-lbl">${esc(o.label)}</span><span class="fdr-c">${o.n}</span></label>`;
-    }).join("") : `<p class="small muted fdr-none">${q ? "Aucun résultat pour cette recherche." : "Aucun choix avec les autres filtres."}</p>`;
-    box.scrollTop = top;
-    sec.querySelector("[data-sum]").innerHTML = resume(f);
-    sec.classList.toggle("on", !!state[f.k].length);
-  };
-  const renderDrawer = () => {
-    if(!drawer) return;
-    const qs = new Set(searchLibrary(base(), state.q));
-    const pool = base().filter(e => qs.has(e));
-    FACETS.forEach(f => renderOpts(drawer.el.querySelector(`[data-sec="${f.k}"]`), f, pool));
-    drawer.el.querySelector("[data-masques]").checked = state.masques;
-    drawer.el.querySelector("[data-reset]").disabled = !nbChoix();
-    drawer.el.querySelector("[data-done]").textContent = (n => `Voir ${n} exercice${n > 1 ? "s" : ""}`)(filtered().length);
-  };
-  const openDrawer = () => {
-    drawer = openSheet({
-      title: "Filtres",
-      body: `<p class="small muted fdr-intro">Affinez la liste selon vos besoins. Vous pouvez cocher plusieurs choix dans chaque tiroir.</p>
-        <div class="fdr">${FACETS.map(f => `
-          <details class="fdr-sec" data-sec="${f.k}" ${openSecs.has(f.k) ? "open" : ""}>
-            <summary><span class="fdr-t">${esc(f.label)}</span><span class="fdr-box"><span data-sum></span>${icon("down")}</span></summary>
-            <div class="fdr-panel">
-              ${f.search ? `<label class="input-icon fdr-search"><span class="sr-only">Rechercher une ${esc(f.label.toLowerCase())}</span>${icon("search")}<input class="input" type="search" data-fq="${f.k}" placeholder="Rechercher" autocomplete="off" value="${esc(fq[f.k] || "")}"></label>` : ""}
-              <div class="fdr-opts" data-opts role="group" aria-label="${esc(f.label)}"></div>
-            </div>
-          </details>`).join("")}
-          <label class="check fdr-masques"><input type="checkbox" data-masques>Afficher seulement les exercices masqués</label>
-        </div>`,
-      foot: `<button class="btn" type="button" data-reset>${icon("repeat")}Réinitialiser</button><button class="btn primary" type="button" data-done>Terminer</button>`,
-      onClose: () => { drawer = null; }
-    });
-    const el = drawer.el;
-    el.classList.add("drawer");
-    $$("details", el).forEach(d => d.addEventListener("toggle", () => { d.open ? openSecs.add(d.dataset.sec) : openSecs.delete(d.dataset.sec); }));
-    el.addEventListener("change", ev => {
-      const t = ev.target;
-      if(t.matches("[data-masques]")){ state.masques = t.checked; update(); return; }
-      const sec = t.closest("[data-sec]");
-      if(!sec || t.type !== "checkbox") return;
-      const k = sec.dataset.sec;
-      state[k] = t.checked ? [...new Set([...state[k], t.value])] : state[k].filter(v => v !== t.value);
-      update();
-    });
-    $$("[data-fq]", el).forEach(i => i.addEventListener("input", () => {
-      fq[i.dataset.fq] = i.value;
-      const f = FACETS.find(x => x.k === i.dataset.fq);
-      const qs = new Set(searchLibrary(base(), state.q));
-      renderOpts(i.closest("[data-sec]"), f, base().filter(e => qs.has(e)));
-    }));
-    el.querySelector("[data-reset]").onclick = () => { clearAll(); update(); };
-    el.querySelector("[data-done]").onclick = () => drawer?.close();
-    renderDrawer();
-  };
+  const renderActive = () => renderActifs(cfg, $("[data-active]", root), $("[data-filters]", root));
+  const renderDrawer = () => { pool = null; drawer?.refresh(); };
+  const openDrawer = () => { pool = null; drawer = openFilterDrawer(cfg); };
+  const clearAll = () => effacerFiltres(cfg);
 
   const update = () => { state.limit = PAGE; save(); renderActive(); renderResults(); renderDrawer(); };
 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Historique des programmes</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<style>
+  .hi-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+  .hi-card{ position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; }
+  .hi-cover{ aspect-ratio:16/9; background:#fff; border:0; padding:0; cursor:pointer; overflow:hidden; display:block; width:100%; }
+  .hi-cover img,.hi-cover .ph-img{ width:100%; height:100%; object-fit:contain; }
+  .hi-badge{ position:absolute; top:10px; left:10px; }
+  .hi-body{ padding:14px 16px 4px; display:flex; flex-direction:column; gap:4px; flex:1; }
+  .hi-body h2{ font-size:var(--fs-lg); }
+  .hi-actions{ display:flex; gap:8px; padding:12px 16px 16px; }
+  .hi-actions .btn.primary{ flex:1; }
+  .hi-month{ font-size:var(--fs-sm); font-weight:800; color:var(--ink-3); text-transform:uppercase; letter-spacing:.04em; margin:22px 0 10px; }
+  .hi-month:first-child{ margin-top:0; }
+  .hi-tools{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  .hi-tools .input-icon{ flex:1 1 280px; }
+  .hi-exos{ display:flex; flex-direction:column; gap:10px; }
+  .hi-exo{ display:flex; gap:12px; align-items:center; }
+  .hi-exo img,.hi-exo .ph-img{ width:72px; height:56px; object-fit:contain; background:#fff; border-radius:var(--r-sm); border:1px solid var(--line); flex:none; }
+</style>
+</head>
+<body>
+<main class="page wide" id="app"></main>
+<script type="module">
+import { $, $$, esc, icon, store, mountShell, registerSW, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, fmtDate, fmtDuree, plural, debounce, exoTabsHTML } from "/assets/app.js";
+import { norm } from "/assets/library.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"bibliotheque" });
+const C = await import("/assets/cloud.js");
+const app = $("#app");
+
+const KEY = "gt_histo_filters";
+const F = { q:"", lieu:"", ...(store.get(KEY, {}) || {}) };
+const save = () => store.set(KEY, F);
+
+app.innerHTML = `
+  <div class="page-head exo-head"><h1>Exercices</h1><a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Créer un programme</a></div>
+  ${exoTabsHTML("historique")}
+  <p class="lead exo-lead">Tous les programmes envoyés à vos patients, du plus récent au plus ancien. « Réutiliser » repart de ce programme pour un autre patient.</p>
+  <div class="hi-tools">
+    <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Patient, programme, exercice…" autocomplete="off" value="${esc(F.q)}"></label>
+    <div class="segmented" id="lieux" role="group" aria-label="Maison ou cabinet">
+      <button type="button" data-lieu="">Tous</button><button type="button" data-lieu="HEP">À la maison</button><button type="button" data-lieu="CABINET">Au cabinet</button>
+    </div>
+  </div>
+  <div class="small muted" id="count" style="margin-bottom:10px"></div>
+  <div id="list">${loadingHTML("Chargement des programmes…")}</div>`;
+
+let progs = [];
+
+/* Un programme = toutes les séances qui partagent le même programmeId (ou une séance unique) */
+function grouper(seances, patients){
+  const noms = new Map(patients.map(p => [p.cle, p.nom || ""]));
+  const map = new Map();
+  seances.forEach(s => {
+    const key = `${s.cle}|${s.programmeId || s.id}`;
+    if(!map.has(key)) map.set(key, []);
+    map.get(key).push(s);
+  });
+  return [...map.values()].map(list => {
+    list.sort((a, b) => (a.semaine || 0) - (b.semaine || 0) || (a.ordre || 0) - (b.ordre || 0));
+    const s = list[0];
+    const data = s.data || {};
+    return {
+      key: `${s.cle}|${s.programmeId || s.id}`,
+      cle: s.cle,
+      patient: noms.get(s.cle) || "Patient",
+      nom: s.programmeNom || data.nom || s.nom || "Programme",
+      date: Math.min(...list.map(x => x.createdAt || x.updatedAt || Date.now())),
+      cabinet: !!s.cabinet,
+      seances: list.length,
+      faites: list.filter(x => x.terminee).length,
+      data
+    };
+  }).filter(p => (p.data.exercices || []).length).sort((a, b) => b.date - a.date);
+}
+
+const okQ = p => {
+  if(!F.q) return true;
+  const hay = norm([p.nom, p.patient, ...(p.data.exercices || []).map(e => e.nom)].join(" "));
+  return norm(F.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w));
+};
+const visibles = () => progs.filter(p => okQ(p) && (!F.lieu || (F.lieu === "CABINET") === p.cabinet));
+
+const reutiliser = p => {
+  store.set("gt_draft", { nom: p.nom, series: p.data.series || 1, exercices: p.data.exercices || [] });
+  location.href = "/config.html?draft=1";
+};
+const fiche = p => `/cloud.html?patient=${encodeURIComponent(p.cle)}`;
+
+function detail(p){
+  const exos = p.data.exercices || [];
+  const s = openSheet({
+    title: p.nom,
+    wide: true,
+    body: `
+      <div class="row wrap" style="--gap:6px;margin-bottom:14px">
+        <span class="badge lagon">${icon("user")}${esc(p.patient)}</span>
+        <span class="badge">Envoyé le ${esc(fmtDate(p.date, { day:"numeric", month:"long", year:"numeric" }))}</span>
+        <span class="badge">${p.cabinet ? "Au cabinet" : "À la maison"}</span>
+        ${p.seances > 1 ? `<span class="badge">${plural(p.seances, "séance")}, ${p.faites} faite${p.faites > 1 ? "s" : ""}</span>` : ""}
+      </div>
+      <div class="hi-exos">${exos.map((e, i) => `<div class="hi-exo">${exoImageHTML(e.image, "")}<div><strong>${i + 1}. ${esc(e.nom)}</strong><div class="small muted">${e.reps} × ${esc(fmtDuree(e.ex))}, repos ${esc(fmtDuree(e.repos))}</div></div></div>`).join("")}</div>`,
+    foot: `<a class="btn" href="${fiche(p)}">${icon("user")}Fiche du patient</a><button class="btn primary" type="button" data-reuse>${icon("copy")}Réutiliser</button>`
+  });
+  s.el.querySelector("[data-reuse]").onclick = () => reutiliser(p);
+}
+
+function render(){
+  $$("[data-lieu]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lieu === F.lieu)));
+  const list = visibles();
+  $("#count").textContent = list.length ? plural(list.length, "programme") : "";
+  if(!list.length){
+    $("#list").innerHTML = `<div class="panel">${emptyHTML(progs.length
+      ? { ico:"search", title:"Aucun programme", text:"Essayez un autre mot ou retirez le filtre." }
+      : { ico:"history", title:"Aucun programme envoyé", text:"Les programmes que vous envoyez à vos patients apparaîtront ici.", action:`<a class="btn primary" href="/config.html?nouveau=1">${icon("plus")}Créer un programme</a>` })}</div>`;
+    return;
+  }
+  /* Regroupés par mois d'envoi */
+  let mois = null, html = "", open = false;
+  list.forEach(p => {
+    const m = fmtDate(p.date, { month:"long", year:"numeric" });
+    if(m !== mois){ if(open) html += `</div>`; html += `<h2 class="hi-month">${esc(m)}</h2><div class="hi-grid">`; mois = m; open = true; }
+    const e0 = (p.data.exercices || [])[0] || {};
+    html += `
+      <article class="hi-card">
+        ${p.cabinet ? `<span class="badge hi-badge">${icon("dumbbell")}Au cabinet</span>` : ""}
+        <button class="hi-cover" type="button" data-see="${esc(p.key)}" aria-label="Voir ${esc(p.nom)}">${exoImageHTML(e0.image, "")}</button>
+        <div class="hi-body">
+          <span class="small faint" style="font-weight:700">${esc(p.patient)}</span>
+          <h2>${esc(p.nom)}</h2>
+          <span class="small muted">${plural((p.data.exercices || []).length, "exercice")}${p.seances > 1 ? `, ${plural(p.seances, "séance")} (${p.faites} faite${p.faites > 1 ? "s" : ""})` : ""}</span>
+          <span class="small faint">${esc(fmtDate(p.date, { day:"numeric", month:"short", year:"numeric" }))}</span>
+        </div>
+        <div class="hi-actions">
+          <button class="btn primary" type="button" data-reuse="${esc(p.key)}">${icon("copy")}Réutiliser</button>
+          <a class="btn" href="${fiche(p)}" aria-label="Fiche de ${esc(p.patient)}" title="Fiche du patient">${icon("user")}</a>
+        </div>
+      </article>`;
+  });
+  if(open) html += `</div>`;
+  $("#list").innerHTML = html;
+  const byKey = new Map(list.map(p => [p.key, p]));
+  $$("[data-see]").forEach(b => b.onclick = () => detail(byKey.get(b.dataset.see)));
+  $$("[data-reuse]").forEach(b => b.onclick = () => reutiliser(byKey.get(b.dataset.reuse)));
+}
+
+$("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
+$$("[data-lieu]").forEach(b => b.onclick = () => { F.lieu = b.dataset.lieu; save(); render(); });
+
+try{
+  const [seances, patients] = await Promise.all([C.listAllSeances(), C.listPatients()]);
+  progs = grouper(seances, patients);
+  render();
+}catch(err){
+  console.error(err);
+  $("#list").innerHTML = errorHTML(err);
+}
+</script>
+</body>
+</html>

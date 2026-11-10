@@ -833,3 +833,17 @@ dialog.sheet.drawer .sheet-foot .btn{ white-space:nowrap; padding-inline:12px; }
 .cfg-lib .lib-create .lbl{ display:none; }
 .cfg-lib .lib-create .lbl-short{ display:inline; }
 .cfg-lib .lib-filter-btn .lbl{ display:none; }
+
+/* Onglets des pages Exercices : Modèles, Bibliothèque, Historique */
+.exo-head{ display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.exo-tabs{ display:flex; gap:4px; border-bottom:1px solid var(--line); margin:0 0 16px; overflow-x:auto; scrollbar-width:none; }
+.exo-tabs::-webkit-scrollbar{ display:none; }
+.exo-tabs a{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px 12px; color:var(--ink-2); font-weight:700; text-decoration:none; border-bottom:3px solid transparent; margin-bottom:-1px; white-space:nowrap; }
+.exo-tabs a svg{ width:18px; height:18px; }
+.exo-tabs a:hover{ color:var(--ink); }
+.exo-tabs a[aria-current="page"]{ color:var(--lagon-strong); border-bottom-color:var(--lagon); }
+.exo-lead{ margin:-4px 0 14px; color:var(--ink-2); }
+@media (max-width:520px){ .exo-tabs a{ flex:1; justify-content:center; padding-inline:8px; } .exo-lead{ display:none; } }
+.lib-mine-btn[aria-pressed="true"]{ border-color:var(--lagon); background:var(--lagon-soft); color:var(--lagon-strong); }
+@media (max-width:520px){ .lib-mine-btn .lbl{ display:none; } .lib-mine-btn{ padding:0 12px; } }
+@media (max-width:520px){ .exo-tabs a svg{ display:none; } }

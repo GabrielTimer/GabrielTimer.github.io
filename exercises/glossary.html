@@ -19,18 +19,22 @@
 </head>
 <body>
 <main class="page wide" id="app">
-  <div class="page-head"><h1>Exercices</h1><p class="lead">Toute la bibliothèque, en français. Touchez un exercice pour voir ses consignes, ou ajoutez-le à la séance en préparation. « Créer » ajoute vos propres exercices.</p></div>
+  <div class="page-head exo-head"><h1>Exercices</h1><a class="btn primary" href="/config.html?nouveau=1">Créer un programme</a></div>
+  <div id="tabs"></div>
+  <p class="lead exo-lead">Toute la bibliothèque, en français. Touchez un exercice pour voir ses consignes, ou ajoutez-le à la séance en préparation. « Créer un exercice » ajoute vos propres exercices.</p>
   <div id="lib"></div>
 </main>
 <a class="btn primary cart" id="cart" href="/config.html?continue=1" hidden></a>
 <script type="module">
-import { $, icon, store, mountShell, registerSW, toast } from "/assets/app.js";
+import { $, icon, store, mountShell, registerSW, toast, exoTabsHTML } from "/assets/app.js";
 import { mountLibrary } from "/assets/library-ui.js";
 import { toProgramExercise } from "/assets/library.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
 mountShell({ role:"kine", active:"bibliotheque" });
+$("#tabs").outerHTML = exoTabsHTML("bibliotheque");
+document.querySelector(".exo-head .btn").innerHTML = icon("plus") + "Créer un programme";
 
 const KEY = "gt_config_state";
 const cart = $("#cart");

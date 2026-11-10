@@ -44,16 +44,17 @@
 <body>
 <main class="page wide" id="app"></main>
 <script type="module">
-import { $, $$, esc, icon, store, params, mountShell, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
+import { $, $$, esc, icon, store, params, mountShell, exoTabsHTML, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
 import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, asProgram, catLabel, niveauLabel, isBuiltinHidden, choisirOptions } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 import { ZONES, PATHOLOGIES as PATHOS, SPECIALITES, specialitesDe } from "/assets/classement.js";
+import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "/assets/filter-drawer.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
-mountShell({ role:"kine", active:"outils" });
+mountShell({ role:"kine", active:"bibliotheque" });
 const C = await import("/assets/cloud.js");
 const app = $("#app");
 
@@ -61,7 +62,23 @@ const app = $("#app");
 /* Libellé du bouton de niveau (avec le numéro de copie s'il y a plusieurs versions au même niveau) */
 const levelButton = m => `${m.niveau ? niveauLabel(m.niveau) : "Sans niveau"}${m.doublon ? ` (${m.doublon})` : ""}`;
 const KEY = "gt_modeles_filters";
-const F = { q:"", spec:"", lieu:"", cat:"", zone:"", patho:"", niveau:"", source:"", ...(store.get(KEY, {}) || {}) };
+const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
+const F = (() => {
+  const s = store.get(KEY, {}) || {};
+  /* Anciennes préférences (un seul choix par filtre) reprises en listes */
+  return { q: s.q || "", mine: !!s.mine || s.source === "mine", masques: !!s.masques || s.source === "masques",
+    lieu: asList(s.lieu), cat: asList(s.cat), zone: asList(s.zone), spec: asList(s.spec), patho: asList(s.patho), niveau: asList(s.niveau) };
+})();
+const FACETS = [
+  { k:"lieu", label:"Maison ou cabinet", ph:"Maison et cabinet" },
+  { k:"cat", label:"Catégorie", ph:"Toutes les catégories" },
+  { k:"zone", label:"Zone du corps", ph:"Toutes les zones" },
+  { k:"spec", label:"Spécialité", ph:"Toutes les spécialités" },
+  { k:"patho", label:"Pathologie", ph:"Toutes les pathologies", search:true },
+  { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
+];
+const LIEUX = [["HEP", "À la maison"], ["CABINET", "Au cabinet"]];
+const toutEffacer = () => { F.q = ""; F.mine = false; FACETS.forEach(f => F[f.k] = []); F.masques = false; };
 /* Zone du corps et pathologie d'un modèle, déduites de sa zone et de son nom */
 const ZN = ZONES.map(z => [z, norm(z)]);
 const zoneOf = m => {
@@ -84,35 +101,28 @@ const specsOf = m => {
   if(/chute|equilibre/.test(norm(m.nom))) s.add("Gériatrie et chutes");
   return SPECIALITES.filter(x => s.has(x));
 };
-if(params.get("cat")) F.cat = params.get("cat");
+if(params.get("cat")) F.cat = [params.get("cat")];
 /* Retour après l'enregistrement d'un modèle : tous les filtres sont retirés pour qu'il soit visible */
 const nouveau = params.get("nouveau");
-if(nouveau) Object.assign(F, { q:"", spec:"", lieu:"", cat:"", zone:"", patho:"", niveau:"", source:"" });
+if(nouveau) toutEffacer();
 if(params.get("zone")){
   const z = params.get("zone");
   const b = BUILTIN.find(m => m.raw.zone === z);
-  F.zone = b ? zoneOf(b) : (ZONES.find(x => norm(x) === norm(z.replace(/_/g, " "))) || "");
+  F.zone = asList(b ? zoneOf(b) : (ZONES.find(x => norm(x) === norm(z.replace(/_/g, " "))) || ""));
 }
 const save = () => store.set(KEY, F);
 
 app.innerHTML = `
-  <div class="page-head mo-head">
-    <div><h1>Modèles</h1><p class="lead">Programmes prêts à l'emploi et vos séances types : pathologies, post-opératoire, prévention… Choisissez un modèle et un niveau, puis adaptez-le pour un patient.</p></div>
-    <a class="btn primary" id="new" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a>
-  </div>
-  <div class="mo-tools">
-    <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
-    <div class="segmented" id="lieux" role="group" aria-label="Maison ou cabinet" style="align-self:flex-start">
-      <button type="button" data-lieu="">Tous</button><button type="button" data-lieu="HEP">${icon("home")}À la maison</button><button type="button" data-lieu="CABINET">${icon("dumbbell")}Au cabinet</button>
+  <div class="page-head exo-head"><h1>Exercices</h1><a class="btn primary" id="new" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a></div>
+  ${exoTabsHTML("modeles")}
+  <p class="lead exo-lead">Programmes prêts à l'emploi et vos séances types. Choisissez un modèle et un niveau, puis adaptez-le pour un patient.</p>
+  <div class="mo-tools lib-tools">
+    <div class="lib-search-row">
+      <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
+      ${filterButtonHTML()}
+      <button class="btn lib-mine-btn" type="button" id="mine" aria-pressed="${F.mine}" title="Seulement mes modèles">${icon("folder")}<span class="lbl">Mes modèles</span></button>
     </div>
-    <div class="chips scroll" id="cats" role="group" aria-label="Catégorie"></div>
-    <div class="lib-zones"><span class="lib-zones-lbl">Zone du corps</span><div class="chips scroll" id="zones" role="group" aria-label="Zone du corps"></div></div>
-    <div class="mo-selects">
-      <select class="select" id="spec" aria-label="Spécialité"></select>
-      <select class="select" id="patho" aria-label="Pathologie"></select>
-      <select class="select" id="niveau" aria-label="Niveau"><option value="">Tous niveaux</option>${niveaux().map(n => `<option value="${n.n}">${esc(n.label)}</option>`).join("")}</select>
-      <select class="select" id="source" aria-label="Origine"><option value="">Tous modèles</option><option value="mine">Mes modèles</option><option value="builtin">Fournis avec l'application</option><option value="masques">Modèles fournis masqués</option></select>
-    </div>
+    <div class="lib-active" id="actifs" hidden></div>
   </div>
   <div class="small muted" id="count" style="margin-bottom:10px"></div>
   <div id="list">${loadingHTML()}</div>
@@ -127,8 +137,8 @@ const chosen = new Map(); // groupe → id du niveau affiché
    (sauf avec le filtre « Modèles fournis masqués »). */
 const all = () => {
   const replaced = new Set(mine.map(m => m.remplace).filter(Boolean));
-  const builtins = BUILTIN.filter(b => !replaced.has(b.id) && (F.source === "masques" ? isBuiltinHidden(b.id) : !isBuiltinHidden(b.id)));
-  return F.source === "masques" ? builtins : [...mine, ...builtins];
+  const builtins = BUILTIN.filter(b => !replaced.has(b.id) && (F.masques ? isBuiltinHidden(b.id) : !isBuiltinHidden(b.id)));
+  return F.masques ? builtins : [...mine, ...builtins];
 };
 
 /* ---------- Actions ---------- */
@@ -206,70 +216,83 @@ function detail(m, group){
 }
 
 /* ---------- Affichage ---------- */
-function matches(m){
-  if(F.lieu && m.lieu && m.lieu !== F.lieu && m.lieu !== "MIXTE") return false;
-  if(F.cat && m.categorie !== F.cat) return false;
-  if(F.zone && zoneOf(m) !== F.zone) return false;
-  if(F.spec && !specsOf(m).includes(F.spec)) return false;
-  if(F.patho && !pathosOf(m).includes(F.patho)) return false;
-  if(F.niveau && m.niveau !== Number(F.niveau)) return false;
-  if(F.source === "mine" && !m.mine) return false;
-  if(F.source === "builtin" && m.mine) return false;
-  if(F.q){
-    const hay = norm([m.nom, m.titre, catLabel(m.categorie), m.zoneLabel, ...m.exercices.map(e => e.nom)].join(" "));
-    if(!norm(F.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w))) return false;
+const matchF = (m, k, v) => {
+  if(!v.length) return true;
+  switch(k){
+    case "lieu":   return !m.lieu || m.lieu === "MIXTE" || v.includes(m.lieu);
+    case "cat":    return v.includes(m.categorie);
+    case "zone":   return v.includes(zoneOf(m));
+    case "spec":   return specsOf(m).some(x => v.includes(x));
+    case "patho":  return pathosOf(m).some(x => v.includes(x));
+    case "niveau": return v.includes(String(m.niveau || ""));
   }
   return true;
-}
+};
+const okQ = m => {
+  if(!F.q) return true;
+  const hay = norm([m.nom, m.titre, catLabel(m.categorie), m.zoneLabel, ...m.exercices.map(e => e.nom)].join(" "));
+  return norm(F.q).split(/\s+/).filter(Boolean).every(w => hay.includes(w));
+};
+/* Modèle qui passe tous les filtres (sauf « skip », pour compter les choix d'un tiroir) */
+const passe = (m, skip) => (!F.mine || m.mine) && okQ(m) && FACETS.every(f => f.k === skip || matchF(m, f.k, F[f.k]));
+function matches(m){ return passe(m); }
 
-function renderFilters(){
-  $$("[data-lieu]").forEach(b => { b.setAttribute("aria-pressed", String(b.dataset.lieu === F.lieu)); b.onclick = () => { F.lieu = b.dataset.lieu; save(); renderFilters(); render(); }; });
-  const counts = {};
-  const okL = m => !F.lieu || !m.lieu || m.lieu === F.lieu || m.lieu === "MIXTE";
-  const dansLieu = all().filter(okL);
-  dansLieu.forEach(m => { counts[m.categorie] = (counts[m.categorie] || 0) + 1; });
-  $("#cats").innerHTML = `<button class="chip" type="button" data-c="" aria-pressed="${!F.cat}">Tous<span class="count">${dansLieu.length}</span></button>` +
-    categories().filter(c => counts[c.id] || c.id === F.cat).map(c => `<button class="chip" type="button" data-c="${c.id}" aria-pressed="${F.cat === c.id}">${esc(c.label)}<span class="count">${counts[c.id] || 0}</span></button>`).join("");
-  $$("[data-c]").forEach(b => b.onclick = () => { F.cat = b.dataset.c; save(); renderFilters(); render(); });
-  /* Zones : celles des modèles de la catégorie choisie */
-  const base = dansLieu.filter(m => !F.cat || m.categorie === F.cat);
-  const zc = {};
-  base.forEach(m => { const z = zoneOf(m); if(z) zc[z] = (zc[z] || 0) + 1; });
-  const zlist = [...ZONES.filter(z => zc[z]), ...Object.keys(zc).filter(z => !ZONES.includes(z)).sort()];
-  if(F.zone && !zc[F.zone]) F.zone = "";
-  $("#zones").innerHTML = `<button class="chip" type="button" data-z="" aria-pressed="${!F.zone}">Toutes zones</button>` +
-    zlist.map(z => `<button class="chip" type="button" data-z="${esc(z)}" aria-pressed="${F.zone === z}">${esc(z)}<span class="count">${zc[z]}</span></button>`).join("");
-  $$("[data-z]").forEach(b => b.onclick = () => { F.zone = b.dataset.z; save(); renderFilters(); render(); });
-  /* Pathologies : seulement celles de la catégorie et de la zone choisies */
-  const pc = {};
-  base.filter(m => !F.zone || zoneOf(m) === F.zone).forEach(m => pathosOf(m).forEach(p => pc[p] = (pc[p] || 0) + 1));
-  if(F.patho && !pc[F.patho]) F.patho = "";
-  const sc = {};
-  base.forEach(m => specsOf(m).forEach(x => sc[x] = (sc[x] || 0) + 1));
-  if(F.spec && !sc[F.spec]) F.spec = "";
-  $("#spec").innerHTML = `<option value="">Toutes spécialités</option>` + SPECIALITES.filter(x => sc[x]).map(x => `<option value="${esc(x)}">${esc(x)} (${sc[x]})</option>`).join("");
-  $("#spec").value = F.spec || ""; $("#spec").classList.toggle("on", !!F.spec);
-  const plist = PATHOS.filter(p => pc[p.nom]);
-  $("#patho").innerHTML = `<option value="">${plist.length ? "Toutes pathologies" : "Aucune pathologie"}</option>` + plist.map(p => `<option value="${esc(p.nom)}">${esc(p.nom)} (${pc[p.nom]})</option>`).join("");
-  $("#patho").value = F.patho;
-  $("#patho").classList.toggle("on", !!F.patho);
-  $("#niveau").value = F.niveau;
-  $("#source").value = F.source;
+/* Choix d'un tiroir, avec le nombre de modèles qu'ils donneraient */
+function options(k){
+  const pool = all().filter(m => passe(m, k));
+  const n = {};
+  const add = v => { if(v) n[v] = (n[v] || 0) + 1; };
+  let opts;
+  if(k === "lieu"){
+    pool.forEach(m => LIEUX.forEach(([v]) => { if(!m.lieu || m.lieu === "MIXTE" || m.lieu === v) add(v); }));
+    opts = LIEUX.map(([v, label]) => ({ v, label }));
+  }else if(k === "cat"){
+    pool.forEach(m => add(m.categorie));
+    opts = categories().map(c => ({ v:c.id, label:c.label }));
+  }else if(k === "zone"){
+    pool.forEach(m => add(zoneOf(m)));
+    opts = [...ZONES, ...Object.keys(n).filter(z => !ZONES.includes(z)).sort()].map(v => ({ v, label:v }));
+  }else if(k === "spec"){
+    pool.forEach(m => specsOf(m).forEach(add));
+    opts = SPECIALITES.map(v => ({ v, label:v }));
+  }else if(k === "niveau"){
+    pool.forEach(m => add(String(m.niveau || "")));
+    opts = niveaux().map(x => ({ v:String(x.n), label:x.label }));
+  }else{
+    pool.forEach(m => pathosOf(m).forEach(add));
+    const order = [...ZONES, "Général"];
+    opts = PATHOS.filter(p => n[p.nom] || F.patho.includes(p.nom))
+      .map(p => ({ v:p.nom, label:p.nom, group: F.zone.length === 1 ? "" : (p.zone || "Général") }))
+      .sort((a, b) => (order.indexOf(a.group) - order.indexOf(b.group)) || ((n[b.v] || 0) - (n[a.v] || 0)));
+  }
+  return opts.map(o => ({ ...o, n: n[o.v] || 0 })).filter(o => o.n || F[k].includes(o.v));
 }
+const labelOf = (k, v) => k === "lieu" ? (LIEUX.find(x => x[0] === v)?.[1] || v) : k === "cat" ? catLabel(v) : k === "niveau" ? niveauLabel(Number(v)) : v;
+let drawer = null;
+const cfg = {
+  facets: FACETS, state: F, labelOf, options,
+  toggles: [{ k:"masques", label:"Afficher seulement les modèles fournis masqués", chip:"Modèles masqués" }],
+  total: () => all().filter(matches).length,
+  unit: ["modèle", "modèles"],
+  onChange: () => update()
+};
+function renderFilters(){
+  renderActifs(cfg, $("#actifs"), $("[data-filters]"));
+  $("#mine").setAttribute("aria-pressed", String(F.mine));
+  drawer?.refresh();
+}
+const update = () => { save(); renderFilters(); render(); };
 
 function render(){
   const visible = all().filter(matches);
   const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
-  const filtres = F.q || F.spec || F.lieu || F.cat || F.zone || F.patho || F.niveau || F.source;
-  $("#count").innerHTML = (groups.length ? esc(`${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}`) : "")
-    + (filtres ? ` <button class="ee-link" type="button" id="clear-f">Filtres actifs : tout afficher</button>` : "");
-  $("#clear-f")?.addEventListener("click", () => { Object.assign(F, { q:"", spec:"", lieu:"", cat:"", zone:"", patho:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
+  $("#count").innerHTML = groups.length ? esc(`${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}`) : "";
   if(!groups.length){
-    const filtered = F.q || F.cat || F.zone || F.patho || F.niveau || F.source;
+    const filtered = F.q || F.mine || F.masques || FACETS.some(f => F[f.k].length);
     $("#list").innerHTML = `<div class="panel">${emptyHTML(filtered
       ? { ico:"search", title:"Aucun modèle", text:"Essayez un autre mot ou retirez un filtre.", action:`<button class="btn" type="button" id="reset">Retirer les filtres</button>` }
       : { ico:"layers", title:"Aucun modèle", text:"Créez votre premier modèle.", action:`<a class="btn primary" href="/config.html?modele=new">${icon("plus")}Nouveau modèle</a>` })}</div>`;
-    $("#reset")?.addEventListener("click", () => { Object.assign(F, { q:"", spec:"", lieu:"", cat:"", zone:"", patho:"", niveau:"", source:"" }); $("#q").value = ""; save(); renderFilters(); render(); });
+    $("#reset")?.addEventListener("click", () => { toutEffacer(); $("#q").value = ""; update(); });
     return;
   }
   $("#list").innerHTML = `<div class="mo-grid">${groups.map(g => {
@@ -302,14 +325,12 @@ function render(){
     const cur = g.items.find(x => x.id === chosen.get(g.key)) || g.items[0];
     detail(cur, g);
   });
-  $("#new").href = `/config.html?modele=new${F.cat ? `&cat=${encodeURIComponent(F.cat)}` : ""}`;
+  $("#new").href = `/config.html?modele=new${F.cat.length === 1 ? `&cat=${encodeURIComponent(F.cat[0])}` : ""}`;
 }
 
-$("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); }, 140));
-$("#spec").onchange = e => { F.spec = e.target.value; save(); renderFilters(); render(); };
-$("#patho").onchange = e => { F.patho = e.target.value; e.target.classList.toggle("on", !!F.patho); save(); render(); };
-$("#niveau").onchange = e => { F.niveau = e.target.value; save(); render(); };
-$("#source").onchange = e => { F.source = e.target.value; save(); renderFilters(); render(); };
+$("#q").addEventListener("input", debounce(e => { F.q = e.target.value.trim(); save(); render(); drawer?.refresh(); }, 140));
+$("[data-filters]").onclick = () => { drawer = openFilterDrawer(cfg); };
+$("#mine").onclick = () => { F.mine = !F.mine; update(); };
 
 renderFilters();
 try{
