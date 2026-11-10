@@ -7,6 +7,7 @@ import { PATHOLOGIES } from "./pathologies.js";
 import { MODELES_BASE } from "./modeles-base.js";
 import { norm } from "./library.js";
 import { settings } from "./settings.js";
+import { esc, icon, exoImageHTML } from "./app.js";
 
 /* Listes modifiables dans Outils → Réglages du cabinet */
 export const categories = () => settings.listes.categories;
@@ -77,6 +78,24 @@ export const BUILTIN = [...MODELES_BASE, ...PATHOLOGIES].map(p => normModele(p, 
 export const isBuiltinHidden = id => settings.masques.modeles.includes(id);
 
 export const coverOf = m => m.cover || m.exercices?.[0]?.image || null;
+
+/* Image d'un modèle (ou d'un programme) : mosaïque de ses exercices sur fond lagon,
+   pour le distinguer d'un coup d'œil d'un exercice seul.
+   small : vignette carrée des listes (4 images au plus, sans bandeau). */
+export function modelCoverHTML(m, { small = false, label = "" } = {}){
+  const exos = m.exercices || [];
+  const imgs = [...new Set(exos.map(e => e.image).filter(Boolean))];
+  if(!imgs.length && m.cover) imgs.push(m.cover);
+  const max = small ? 4 : 4;
+  const shown = imgs.slice(0, imgs.length > max ? max - 1 : max);
+  const reste = exos.length - shown.length;
+  const tiles = shown.map(src => `<span class="mc-tile">${exoImageHTML(src, "")}</span>`);
+  if(imgs.length > max || (reste > 0 && shown.length < max && shown.length > 1)) tiles.push(`<span class="mc-tile mc-more">+${Math.max(1, reste)}</span>`);
+  if(!tiles.length) tiles.push(`<span class="mc-tile">${exoImageHTML(null)}</span>`);
+  const n = Math.min(tiles.length, 4);
+  const tag = small ? "" : `<span class="mc-tag">${icon("layers")}${esc(label || "Modèle")}</span>`;
+  return `<span class="mcover ${small ? "mc-small" : ""}" data-n="${n}">${tiles.slice(0, 4).join("")}${tag}</span>`;
+}
 
 /** Regroupe les niveaux d'un même modèle (même nom, même catégorie). */
 export function groupModeles(list){

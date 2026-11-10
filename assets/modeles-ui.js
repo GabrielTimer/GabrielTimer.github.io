@@ -6,7 +6,7 @@
 import { $, $$, esc, icon, store, openSheet, exoImageHTML, sessionDuration, fmtDuree, plural, debounce } from "./app.js";
 import { norm } from "./library.js";
 import { ZONES } from "./classement.js";
-import { categories, BUILTIN, normModele, groupModeles, coverOf, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
+import { categories, BUILTIN, normModele, groupModeles, coverOf, modelCoverHTML, catLabel, niveauLabel, isBuiltinHidden } from "./modeles.js";
 
 let cache = null;
 /** Tous les modèles visibles : les vôtres + ceux fournis (sauf masqués ou remplacés). */
@@ -86,7 +86,7 @@ export async function mountModelPicker(root, { onPick, lieu = null } = {}){
       return `
         <div class="mp-row">
           <button class="lib-row-main" type="button" data-see="${esc(g.key)}">
-            ${exoImageHTML(coverOf(cur), "", "li-thumb")}
+            ${modelCoverHTML(cur, { small:true })}
             <span class="li-main"><span class="li-title">${esc(g.nom)}</span>
               <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.lieu === "MIXTE" ? ` · <strong style="color:var(--danger)">Mixte maison + cabinet</strong>` : !lieu?.() && cur.lieu ? ` · ${cur.lieu === "HEP" ? "À la maison" : "Au cabinet"}` : ""}</span></span>
           </button>

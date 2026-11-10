@@ -35,6 +35,7 @@
 <script type="module">
 import { $, $$, esc, icon, store, mountShell, registerSW, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, fmtDate, fmtDuree, plural, debounce, exoTabsHTML } from "/assets/app.js";
 import { norm } from "/assets/library.js";
+import { modelCoverHTML } from "/assets/modeles.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
@@ -134,11 +135,10 @@ function render(){
   list.forEach(p => {
     const m = fmtDate(p.date, { month:"long", year:"numeric" });
     if(m !== mois){ if(open) html += `</div>`; html += `<h2 class="hi-month">${esc(m)}</h2><div class="hi-grid">`; mois = m; open = true; }
-    const e0 = (p.data.exercices || [])[0] || {};
     html += `
       <article class="hi-card">
         ${p.cabinet ? `<span class="badge hi-badge">${icon("dumbbell")}Au cabinet</span>` : ""}
-        <button class="hi-cover" type="button" data-see="${esc(p.key)}" aria-label="Voir ${esc(p.nom)}">${exoImageHTML(e0.image, "")}</button>
+        <button class="hi-cover" type="button" data-see="${esc(p.key)}" aria-label="Voir ${esc(p.nom)}">${modelCoverHTML(p.data, { label:"Programme" })}</button>
         <div class="hi-body">
           <span class="small faint" style="font-weight:700">${esc(p.patient)}</span>
           <h2>${esc(p.nom)}</h2>

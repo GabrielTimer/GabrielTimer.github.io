@@ -847,3 +847,23 @@ dialog.sheet.drawer .sheet-foot .btn{ white-space:nowrap; padding-inline:12px; }
 .lib-mine-btn[aria-pressed="true"]{ border-color:var(--lagon); background:var(--lagon-soft); color:var(--lagon-strong); }
 @media (max-width:520px){ .lib-mine-btn .lbl{ display:none; } .lib-mine-btn{ padding:0 12px; } }
 @media (max-width:520px){ .exo-tabs a svg{ display:none; } }
+
+/* Image des modèles et des programmes : mosaïque d'exercices sur fond lagon
+   (un exercice seul garde son image simple sur fond blanc) */
+.mcover{ position:relative; display:grid; width:100%; height:100%; gap:6px; padding:10px; box-sizing:border-box;
+  background:linear-gradient(135deg, var(--lagon-strong), var(--lagon)); grid-template-columns:1fr; grid-template-rows:1fr; }
+.mcover[data-n="2"]{ grid-template-columns:1fr 1fr; }
+.mcover[data-n="3"]{ grid-template-columns:1.25fr 1fr; grid-template-rows:1fr 1fr; }
+.mcover[data-n="3"] > .mc-tile:first-child{ grid-row:span 2; }
+.mcover[data-n="4"]{ grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; }
+.mc-tile{ display:grid; place-items:center; min-width:0; min-height:0; overflow:hidden; background:#fff; border-radius:10px; box-shadow:0 1px 3px rgba(0,0,0,.18); }
+.mcover .mc-tile img, .mcover .mc-tile .exo-img{ width:100%; height:100%; object-fit:contain; object-position:center; }
+.mcover .mc-tile .ph-img{ width:100%; height:100%; border:0; border-radius:0; }
+.mc-more{ background:rgba(255,255,255,.22); color:#fff; font-weight:800; font-size:var(--fs-lg); box-shadow:none; border:2px dashed rgba(255,255,255,.6); }
+.mc-tag{ position:absolute; left:6px; top:6px; display:inline-flex; align-items:center; gap:5px; padding:3px 10px 3px 8px; border-radius:999px;
+  background:rgba(8,40,48,.78); color:#fff; font-size:var(--fs-xs); font-weight:700; }
+.mc-tag svg{ width:14px; height:14px; }
+.mcover.mc-small{ width:52px; height:52px; flex:none; padding:3px; gap:2px; border-radius:var(--r-sm); }
+.mcover.mc-small .mc-tile{ border-radius:3px; box-shadow:none; }
+.mcover.mc-small .mc-more{ font-size:11px; border-width:1px; }
+.mcover.mc-small[data-n="3"]{ grid-template-columns:1fr 1fr; }
