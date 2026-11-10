@@ -1323,5 +1323,10 @@
   "defaut": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
   "f": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
   "h": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-h.webp"
+ },
+ "/exercises/images/geriatrie/pointes-chaise-f.webp": {
+  "defaut": "/exercises/images/geriatrie/pointes-chaise-f.webp",
+  "f": "/exercises/images/geriatrie/pointes-chaise-f.webp",
+  "h": "/exercises/images/geriatrie/pointes-chaise-h.webp"
  }
 }

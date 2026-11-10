@@ -18444,7 +18444,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "GERIA_04",
-    "image": "",
+    "image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
     "materiel": [
       "Chaise stable"
     ],
@@ -18486,8 +18486,7 @@
       "Petite hauteur"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

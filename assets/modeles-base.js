@@ -14775,7 +14775,7 @@ export const MODELES_BASE = [
 "id": "GERIA_04",
 "source": "CABINET",
 "nom": "Montées sur pointes de pieds à la chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise, mains sur le dossier",
 "Monter lentement sur la pointe des pieds",
@@ -24750,7 +24750,7 @@ export const MODELES_BASE = [
 "id": "GERIA_04",
 "source": "CABINET",
 "nom": "Montées sur pointes de pieds à la chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise, mains sur le dossier",
 "Monter lentement sur la pointe des pieds",
@@ -27927,7 +27927,7 @@ export const MODELES_BASE = [
 "id": "GERIA_04",
 "source": "CABINET",
 "nom": "Montées sur pointes de pieds à la chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise, mains sur le dossier",
 "Monter lentement sur la pointe des pieds",
@@ -28799,7 +28799,7 @@ export const MODELES_BASE = [
 "id": "GERIA_04",
 "source": "CABINET",
 "nom": "Montées sur pointes de pieds à la chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise, mains sur le dossier",
 "Monter lentement sur la pointe des pieds",
@@ -32846,7 +32846,7 @@ export const MODELES_BASE = [
 "id": "GERIA_04",
 "source": "CABINET",
 "nom": "Montées sur pointes de pieds à la chaise",
-"image": "",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
 "consignes": [
 "Debout derrière une chaise, mains sur le dossier",
 "Monter lentement sur la pointe des pieds",
