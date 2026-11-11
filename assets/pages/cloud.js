@@ -299,7 +299,8 @@ async function kineView(param){
     const sum = K.summarize(patient, seances);
     const { programmes, seules } = sum;
     const actif = sum.actif;
-    const reg = P.regularity(actif ? actif.seances : seances);
+    const tous = P.enCours(programmes);   // tous les programmes en cours, pas seulement le premier
+    const reg = P.regularity(tous ? tous.seances : seances);
     const tr = sum.trend;
     const valides = seances.filter(s => s.terminee && s.dateValidation).sort((a, b) => a.dateValidation - b.dateValidation);
     programmes.forEach(p => byWeek(p.seances));
@@ -336,7 +337,7 @@ async function kineView(param){
       </section>
 
       <section class="section kpis four">
-        <div class="kpi"><span class="k-val">${actif ? `${actif.faites}<span class="faint" style="font-size:.7em">/${actif.total}</span>` : seances.filter(s => s.terminee).length}</span><span class="k-lab">séances faites${actif ? " (programme en cours)" : ""}</span></div>
+        <div class="kpi"><span class="k-val">${tous ? `${tous.faites}<span class="faint" style="font-size:.7em">/${tous.total}</span>` : seances.filter(s => s.terminee).length}</span><span class="k-lab">séances faites${tous ? (tous.n > 1 ? ` (${tous.n} programmes en cours)` : " (programme en cours)") : ""}</span></div>
         <div class="kpi"><span class="k-val">${reg === null ? "–" : reg + "<span style='font-size:.6em'>%</span>"}</span><span class="k-lab">de régularité</span></div>
         <div class="kpi"><span class="k-val">${sum.lastEva === null ? "–" : `<img src="${evaFace(sum.lastEva)}" alt="">${sum.lastEva}`}${tr ? (tr.dir === "down" ? `<span style="color:var(--ok)">${icon("trendDown")}</span>` : tr.dir === "up" ? `<span style="color:var(--danger)">${icon("trendUp")}</span>` : "") : ""}</span><span class="k-lab">dernière douleur</span></div>
         <div class="kpi"><span class="k-val" style="font-size:1.15rem;font-family:var(--font)">${sum.derniere ? esc(fmtRelDay(sum.derniere.dateValidation)) : "Jamais"}</span><span class="k-lab">dernière séance</span></div>

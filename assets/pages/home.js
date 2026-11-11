@@ -264,7 +264,8 @@ async function renderPatient(ctx){
   }
 
   /* Chiffres clés */
-  const reg = P.regularity(actif ? actif.seances : seances);
+  const tous = P.enCours(programmes);   // tous les programmes en cours, pas seulement le premier
+  const reg = P.regularity(tous ? tous.seances : seances);
   const evas = actif ? actif.evas : (programmes[0]?.evas || []);
   const lastEva = evas.length ? evas[evas.length - 1] : null;
   const tr = evaTrend(evas);
@@ -272,7 +273,7 @@ async function renderPatient(ctx){
 
   const kpis = `
     <div class="kpis">
-      <div class="kpi"><span class="k-val">${actif ? `${actif.faites}<span class="faint" style="font-size:.7em">/${actif.total}</span>` : seances.filter(s => s.terminee).length}</span><span class="k-lab">séances faites</span></div>
+      <div class="kpi"><span class="k-val">${tous ? `${tous.faites}<span class="faint" style="font-size:.7em">/${tous.total}</span>` : seances.filter(s => s.terminee).length}</span><span class="k-lab">séances faites</span></div>
       <div class="kpi"><span class="k-val">${reg === null ? "–" : reg + "<span style='font-size:.6em'>%</span>"}</span><span class="k-lab">de régularité</span></div>
       <div class="kpi"><span class="k-val">${lastEva === null ? "–" : `<img src="${evaFace(lastEva)}" alt="">${lastEva}`}${trendIco}</span><span class="k-lab">douleur récente</span></div>
     </div>`;
@@ -353,7 +354,7 @@ async function renderPatient(ctx){
   showCabinet();
   loadSettings({ force:true }).then(() => { showAnnonce(); showCabinet(); });
   if(!ctx.apercu) messagesDuKine(ctx, patient).catch(e => console.warn("Messages :", e));
-  homeSuivi(ctx, patient, seances, actif).catch(e => console.warn("Suivi :", e));
+  homeSuivi(ctx, patient, seances, tous).catch(e => console.warn("Suivi :", e));
 
   $("#start")?.addEventListener("click", () => P.launchSeance(next.seance, { cle:ctx.cle, apercu:ctx.apercu }));
   $("#rp-later")?.addEventListener("click", () => { store.set("gt_rappel_vu", 1); $("#rp-invite")?.remove(); });
@@ -517,7 +518,7 @@ function initials(nom){
 main();
 
 /* ---------- À faire, encouragements et fiches conseils (accueil patient) ---------- */
-async function homeSuivi(ctx, patient, seances, actif){
+async function homeSuivi(ctx, patient, seances, tous){
   const box = document.getElementById("sv-home");
   if(!box) return;
   const S = await import("../suivi.js");
@@ -535,7 +536,7 @@ async function homeSuivi(ctx, patient, seances, actif){
   const remplis = suivis.filter(x => x.type === "questionnaire" && Array.isArray(x.reponses)).sort((a, b) => (b.date || 0) - (a.date || 0));
   const questionnaires = needQ || remplis.length ? await C.listQuestionnaires().catch(() => []) : [];
   const todo = S.todoList(patient, suivis, questionnaires);
-  const streak = S.streakMessage(S.weekStreak(actif ? actif.seances : seances));
+  const streak = S.streakMessage(S.weekStreak(tous ? tous.seances : seances));
   const resolve = id => perso.find(c => c.remplace === id) || perso.find(c => c.id === id) || CONSEILS_FOURNIS.find(c => c.id === id);
   const fiches = (patient.conseils || []).map(id => ({ id, c: resolve(id) })).filter(x => x.c);
   /* Carnet de marches : activé par le kiné dans la fiche patient */

@@ -31,6 +31,19 @@ export function lateCount(seances){
   return seances.filter(s => !s.terminee && s.datePrevue && new Date(s.datePrevue) < today).length;
 }
 
+/** Tous les programmes en cours réunis (un patient peut en suivre plusieurs en même temps).
+ *  Les programmes « au cabinet » sont laissés de côté. */
+export function enCours(programmes){
+  const actifs = programmes.filter(p => !p.termine && !p.cabinet);
+  if(!actifs.length) return null;
+  return {
+    n: actifs.length,
+    seances: actifs.flatMap(p => p.seances),
+    faites: actifs.reduce((a, p) => a + p.faites, 0),
+    total: actifs.reduce((a, p) => a + p.total, 0)
+  };
+}
+
 /** Régularité : séances faites parmi celles qui sont déjà passées.
  *  Une séance du jour (ou à venir) ne compte que si elle est déjà faite :
  *  on ne pénalise pas le patient pour une séance qu'il a encore le temps de faire. */
