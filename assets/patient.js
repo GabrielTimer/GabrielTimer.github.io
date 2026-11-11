@@ -31,10 +31,12 @@ export function lateCount(seances){
   return seances.filter(s => !s.terminee && s.datePrevue && new Date(s.datePrevue) < today).length;
 }
 
-/** Régularité : séances faites parmi celles qui étaient prévues jusqu'à aujourd'hui. */
+/** Régularité : séances faites parmi celles qui sont déjà passées.
+ *  Une séance du jour (ou à venir) ne compte que si elle est déjà faite :
+ *  on ne pénalise pas le patient pour une séance qu'il a encore le temps de faire. */
 export function regularity(seances){
-  const end = new Date(); end.setHours(23, 59, 59, 999);
-  const due = seances.filter(s => s.datePrevue && new Date(s.datePrevue) <= end);
+  const today = startOfDay(new Date());
+  const due = seances.filter(s => s.datePrevue && (s.terminee || new Date(s.datePrevue) < today));
   if(!due.length) return null;
   return Math.round(due.filter(s => s.terminee).length * 100 / due.length);
 }
