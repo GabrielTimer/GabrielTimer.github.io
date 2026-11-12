@@ -1,0 +1,53 @@
+# Sauvegarde automatique chiffrée de toutes les données, chaque dimanche vers 3 h (heure de Paris),
+# envoyée dans le dépôt PRIVÉ GabrielTimer/apikine-sauvegardes (les 26 dernières sont gardées).
+# Secrets nécessaires (Settings → Secrets and variables → Actions) :
+#   FIREBASE_SERVICE_ACCOUNT  (déjà là)
+#   SAUVEGARDE_MOT_DE_PASSE   mot de passe de chiffrement : le noter en lieu sûr, il sert à restaurer
+#   SAUVEGARDE_TOKEN          jeton GitHub avec accès en écriture au dépôt privé apikine-sauvegardes
+# Voir MISE-EN-SERVICE.md, « Sauvegarde automatique ».
+name: Sauvegarde automatique
+
+on:
+  schedule:
+    - cron: "23 2 * * 0"
+  workflow_dispatch:
+
+concurrency:
+  group: sauvegarde
+  cancel-in-progress: false
+
+jobs:
+  sauvegarde:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save --no-audit --no-fund firebase-admin@12
+      - name: Sauvegarde chiffrée
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          SAUVEGARDE_MOT_DE_PASSE: ${{ secrets.SAUVEGARDE_MOT_DE_PASSE }}
+        run: node .github/scripts/sauvegarde.mjs "$RUNNER_TEMP/sortie"
+      - name: Envoi dans le dépôt privé
+        env:
+          TOKEN: ${{ secrets.SAUVEGARDE_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then echo "::error::Secret SAUVEGARDE_TOKEN absent : voir MISE-EN-SERVICE.md."; exit 1; fi
+          cd "$RUNNER_TEMP"
+          if ! git clone --quiet --depth 1 "https://x-access-token:${TOKEN}@github.com/GabrielTimer/apikine-sauvegardes.git" depot 2>/dev/null; then
+            echo "::error::Accès impossible au dépôt privé GabrielTimer/apikine-sauvegardes : vérifiez qu'il existe et que le jeton SAUVEGARDE_TOKEN est valide (il expire : voir sa date)."; exit 1
+          fi
+          cd depot
+          git checkout -q -B main
+          cp ../sortie/*.apikine .
+          ls -1 sauvegarde-kine-*.apikine | sort | head -n -26 | xargs -r git rm -q --
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "Sauvegarde du $(date +%F)" || { echo "Rien de nouveau."; exit 0; }
+          git push -q origin main
+          echo "::notice::Sauvegarde envoyée dans le dépôt privé ($(ls -1 sauvegarde-kine-*.apikine | wc -l) gardées)."

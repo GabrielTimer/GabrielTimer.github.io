@@ -102,6 +102,22 @@ Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de doul
 
 Le fichier `firestore.rules` est publié automatiquement dans Firebase à chaque modification sur la branche `main` (onglet **Actions** de GitHub, « Publier les règles Firebase »). Il faut pour cela le secret GitHub `FIREBASE_SERVICE_ACCOUNT` (Settings → Secrets and variables → Actions), qui contient la clé de compte de service téléchargée dans Firebase (Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). En cas de clé perdue ou compromise : supprimez-la dans Google Cloud (IAM → Comptes de service → Clés), puis générez-en une nouvelle et remplacez le secret.
 
+## Sauvegarde automatique (chaque dimanche)
+
+Chaque dimanche vers 3 h, toutes les données (patients, séances, bilans, messages, notes, questionnaires, modèles, exercices, réglages) sont sauvegardées, **chiffrées** avec votre mot de passe, dans un dépôt GitHub **privé**. Les 26 dernières (6 mois) sont gardées. Les photos des bilans n'en font pas partie : elles restent sur la tablette.
+
+**À faire une fois (5 minutes, sur ordinateur) :**
+1. **Dépôt privé** : sur GitHub, **+** → **New repository**, nom `apikine-sauvegardes`, cochez **Private**, puis **Create repository**.
+2. **Jeton d'accès** : photo de profil → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**. Nom « Sauvegarde ApiKiné », expiration la plus longue proposée, **Only select repositories** → `apikine-sauvegardes`, **Permissions** → **Contents : Read and write**. Copiez le jeton affiché.
+3. **Secrets** : dans le dépôt du site (GabrielTimer.github.io) → **Settings** → **Secrets and variables** → **Actions** → **New repository secret** :
+   - `SAUVEGARDE_TOKEN` : le jeton copié ;
+   - `SAUVEGARDE_MOT_DE_PASSE` : un mot de passe de 12 caractères au moins, **noté en lieu sûr** (sans lui, la sauvegarde est illisible, même pour vous).
+4. **Premier essai** : onglet **Actions** → **Sauvegarde automatique** → **Run workflow**. Au bout d'une minute, un fichier `sauvegarde-kine-….apikine` apparaît dans `apikine-sauvegardes`.
+
+**Restaurer** : téléchargez le fichier voulu depuis `apikine-sauvegardes` (bouton **Download raw file**), puis **Réglages du cabinet → Sauvegarde → Restaurer une sauvegarde…** et saisissez le mot de passe.
+
+**Jeton expiré** : GitHub vous prévient par e-mail ; l'action « Sauvegarde automatique » échoue en rouge. Générez un nouveau jeton (étape 2) et remplacez le secret `SAUVEGARDE_TOKEN`.
+
 ## Version 2.29 : messagerie protégée des autres comptes
 
 Le code donné au patient (lien, QR code, carte) est maintenant différent de l'identifiant de son dossier. Un compte autorisé qui suit vos patients (« Voit mes patients ») voit l'identifiant, jamais le code : il ne peut pas lire vos messages, même en contournant l'application.
