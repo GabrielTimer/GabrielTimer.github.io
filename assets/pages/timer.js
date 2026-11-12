@@ -4,7 +4,7 @@
 
 import {
   $, esc, icon, params, store, session, getRunProgram, setRunProgram, fmtClock, fmtDuree,
-  openSheet, confirmDialog, exoImageHTML, safeRich, vibrate, plural
+  openSheet, confirmDialog, exoImageHTML, safeRich, vibrate, plural, toast
 } from "../app.js";
 import { exerciseImage, exerciseSteps, videoEmbed } from "../library.js";
 import * as V from "../variantes.js";
@@ -381,6 +381,21 @@ function render(full){
   el.totalbar.style.setProperty("--p", (finished ? 100 : Math.round(done * 100 / (activeTotal || 1))) + "%");
   el.totaltxt.textContent = finished ? "Terminé" : `${fmtDuree(activeTotal - done)} restantes`;
 }
+
+/* Bouton « Enchaîner » : même réglage que dans Réglages */
+const autoBtn = $("#auto");
+function renderAuto(){
+  autoBtn.innerHTML = icon("repeat") + "<span>Enchaîner</span>";
+  autoBtn.setAttribute("aria-pressed", String(pref.auto));
+  autoBtn.setAttribute("aria-label", pref.auto ? "Enchaînement automatique activé" : "Enchaînement automatique désactivé");
+}
+renderAuto();
+autoBtn.onclick = () => {
+  pref.auto = !pref.auto;
+  store.set("gt_autonext", pref.auto ? 1 : 0);
+  renderAuto();
+  toast(pref.auto ? "Les exercices s'enchaînent tout seuls." : "Vous appuierez pour lancer chaque exercice.", { duration:2400 });
+};
 
 function renderSound(){
   el.sound.innerHTML = icon(pref.sound ? "sound" : "mute");

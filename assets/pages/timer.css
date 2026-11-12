@@ -109,6 +109,9 @@
   background:var(--t-btn); color:var(--t-btn-fg); font-weight:700;
 }
 .t-info svg{ width:20px; height:20px; }
+.t-auto{ opacity:.6; transition:opacity .2s, background .2s, color .2s; }
+.t-auto[aria-pressed="true"]{ opacity:1; background:var(--t-main); color:var(--t-main-fg); }
+@media (max-width:420px){ .t-auto span{ display:none; } .t-auto{ padding:0 13px; } }
 .t-total{ flex:1; display:flex; align-items:center; gap:10px; font-size:var(--fs-sm); color:var(--t-soft); font-weight:700; }
 .t-total .bar{ flex:1; background:color-mix(in srgb,var(--t-fg) 14%,transparent); }
 .t-total .bar > i{ background:var(--t-ring); }
