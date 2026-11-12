@@ -529,6 +529,47 @@ export function exoTabsHTML(active){
  * Installe la barre du haut et la navigation.
  * opts : { role:"patient"|"kine"|"none", active, title, back, actions }
  */
+/* ---------- Cadenas de l'espace kiné ----------
+   Fermé (tablette prêtée à un patient) : toutes les pages de l'espace kiné, dans tous
+   les onglets, sont cachées derrière un écran neutre ; il faut le code du kiné pour rouvrir.
+   Se ferme d'un appui sur le cadenas, et tout seul au lancement d'une séance en mode séance. */
+const VERROU = "gt_verrou";   // localStorage : { t, url } ; absent = ouvert
+export const verrou = {
+  actif: () => !!store.get(VERROU),
+  fermer(url = ""){ store.set(VERROU, { t: Date.now(), url }); },
+  ouvrir(){ store.del(VERROU); }
+};
+export function ecranVerrou(){
+  if(document.getElementById("verrou-ecran")) return;
+  const v = store.get(VERROU) || {};
+  const el = h(`<div id="verrou-ecran" role="dialog" aria-modal="true" aria-label="Espace kiné verrouillé" style="position:fixed;inset:0;z-index:150;background:var(--bg,#fff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center">
+      <style>#verrou-ecran .vi svg{width:64px;height:64px}</style><div class="vi" style="color:var(--muted,#667)">${icon("lock")}</div>
+      <h1 style="margin:0">Espace kiné verrouillé</h1>
+      <p class="muted">Rendez la tablette à votre kiné.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:8px">
+        ${v.url ? `<a class="btn big" href="${esc(v.url)}">${icon("play")}Reprendre la séance</a>` : ""}
+        <button class="btn big primary" type="button" data-deverrouiller>${icon("lockOpen")}Déverrouiller</button>
+      </div>
+    </div>`);
+  document.body.appendChild(el);
+  document.documentElement.style.overflow = "hidden";
+  el.querySelector("[data-deverrouiller]").onclick = async () => {
+    const { verifierPin } = await import("./mode-seance.js");
+    if(!(await verifierPin("Saisissez le code du kiné pour déverrouiller."))) return;
+    verrou.ouvrir();
+    el.remove();
+    document.documentElement.style.overflow = "";
+    document.querySelectorAll("[data-verrou]").forEach(b => { b.innerHTML = icon("lockOpen"); });
+  };
+}
+/* Un autre onglet ferme le cadenas : celui-ci se ferme aussi */
+let veilleVerrou = false;
+function surveillerVerrou(){
+  if(veilleVerrou) return; veilleVerrou = true;
+  addEventListener("storage", e => { if(e.key === VERROU && e.newValue) ecranVerrou(); });
+  document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible" && verrou.actif()) ecranVerrou(); });
+}
+
 export function mountShell({ role = "none", active = "", title = "", back = null, actions = "", apercu = false } = {}){
   const body = document.body;
   if(!document.title.includes(_APP)) document.title = document.title ? `${document.title} – ${_APP}` : _APP;
@@ -551,7 +592,9 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     : "";
   const searchBtn = role === "kine" && !apercu
     ? `<button class="icon-btn search-btn" type="button" data-gsearch aria-label="Rechercher" title="Rechercher">${icon("search")}</button>` : "";
-  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${searchBtn}${themeBtn}</div></header>`);
+  const lockBtn = role === "kine" && !apercu
+    ? `<button class="icon-btn" type="button" data-verrou aria-label="Verrouiller l'espace kiné (tablette prêtée)" title="Verrouiller l'espace kiné">${icon("lockOpen")}</button>` : "";
+  const topbar = h(`<header class="topbar">${left}<div class="spacer"></div><div class="topbar-actions">${actions}${kineBtn}${searchBtn}${lockBtn}${themeBtn}</div></header>`);
 
   if(apercu){
     body.prepend(h(`<div class="apercu-band">${icon("eye")}<span>Aperçu : vous voyez l'application comme votre patient</span><button type="button" data-leave-apercu>Quitter</button></div>`));
@@ -593,6 +636,11 @@ export function mountShell({ role = "none", active = "", title = "", back = null
     import("./global-search.js").then(m => m.installSearchShortcut()).catch(() => {});
   }
 
+  if(role === "kine" && !apercu){
+    topbar.querySelector("[data-verrou]")?.addEventListener("click", () => { verrou.fermer(); ecranVerrou(); });
+    surveillerVerrou();
+    if(verrou.actif()) ecranVerrou();
+  }
   topbar.querySelector("[data-mode-kine]")?.addEventListener("click", () => modePatient.revenirKine());
   topbar.querySelector("[data-theme-toggle]").onclick = e => {
     toggleTheme();
