@@ -474,12 +474,12 @@ export function confirmDialog({ title = "Confirmer", message = "", confirm = "Co
   });
 }
 
-export function promptDialog({ title = "", label = "", value = "", placeholder = "", confirm = "Valider", multiline = false } = {}){
+export function promptDialog({ title = "", label = "", value = "", placeholder = "", confirm = "Valider", multiline = false, type = "text" } = {}){
   return new Promise(resolve => {
     let answered = false;
     const field = multiline
       ? `<textarea class="textarea" id="pd-in" placeholder="${esc(placeholder)}">${esc(value)}</textarea>`
-      : `<input class="input" id="pd-in" value="${esc(value)}" placeholder="${esc(placeholder)}">`;
+      : `<input class="input" id="pd-in" type="${esc(type)}" autocomplete="off" value="${esc(value)}" placeholder="${esc(placeholder)}">`;
     const s = openSheet({
       title,
       body: `<div class="field">${label ? `<label for="pd-in">${esc(label)}</label>` : ""}${field}</div>`,

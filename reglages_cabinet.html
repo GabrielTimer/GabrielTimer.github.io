@@ -54,7 +54,7 @@
 <body>
 <main class="page" id="app"></main>
 <script type="module">
-import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, openSheet, accessLink, prenom } from "/assets/app.js";
+import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog, promptDialog, openSheet, accessLink, prenom } from "/assets/app.js";
 import { settings, DEFAULTS, saveSettings, loadSettings, fillTemplate, logoSrc } from "/assets/settings.js";
 import * as H from "/assets/horaires.js";
 const { requireKine } = await import("/assets/kine.js");
@@ -404,7 +404,7 @@ function render(){
         <button class="btn primary" type="button" id="bk-all">${icon("download")}Tout sauvegarder</button>
         <button class="btn" type="button" id="bk-dl">${icon("download")}Données seulement</button>
         <button class="btn" type="button" id="bk-site">${icon("folder")}Site seulement</button>
-        <label class="btn ee-file">${icon("upload")}<span>Restaurer une sauvegarde…</span><input type="file" id="bk-up" accept="application/json,.json" hidden></label>
+        <label class="btn ee-file">${icon("upload")}<span>Restaurer une sauvegarde…</span><input type="file" id="bk-up" accept="application/json,.json,.apikine" hidden></label>
       </div>
       <p class="hint" style="margin-top:10px">Pour enregistrer directement sur une clé USB, réglez votre navigateur pour qu'il demande où enregistrer chaque téléchargement (Paramètres → Téléchargements), puis choisissez la clé. Le fichier de données contient des données de santé : gardez-le en lieu sûr.</p>
       <p class="hint" style="margin-top:6px" id="bk-last"></p>
@@ -674,11 +674,37 @@ function downloadSite(){
   toast("Téléchargement du site lancé (environ 150 Mo, cela peut prendre une minute).", { type:"ok", duration:6000 });
 }
 
+/* Déchiffre une sauvegarde automatique (voir .github/scripts/sauvegarde.mjs : gzip puis AES-256-GCM,
+   clé PBKDF2-SHA256 tirée du mot de passe). Renvoie la sauvegarde, ou null. */
+async function dechiffrerSauvegarde(env){
+  const b64 = v => Uint8Array.from(atob(v), c => c.charCodeAt(0));
+  for(let essai = 0; essai < 3; essai++){
+    const mdp = await promptDialog({ title:"Sauvegarde chiffrée", label: essai ? "Mot de passe incorrect. Réessayez :" : "Mot de passe de la sauvegarde automatique", type:"password", confirm:"Déchiffrer" });
+    if(mdp === null) return null;
+    try{
+      const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(mdp), "PBKDF2", false, ["deriveKey"]);
+      const cle = await crypto.subtle.deriveKey({ name:"PBKDF2", hash: env.kdf?.hash || "SHA-256", salt: b64(env.salt), iterations: env.kdf?.iterations || 600000 }, base, { name:"AES-GCM", length:256 }, false, ["decrypt"]);
+      const gz = await crypto.subtle.decrypt({ name:"AES-GCM", iv: b64(env.iv) }, cle, b64(env.data));
+      const flux = new Blob([gz]).stream().pipeThrough(new DecompressionStream("gzip"));
+      return JSON.parse(await new Response(flux).text());
+    }catch(e){
+      if(typeof DecompressionStream === "undefined"){ toast("Ce navigateur est trop ancien pour ouvrir une sauvegarde chiffrée : mettez-le à jour.", { type:"err" }); return null; }
+    }
+  }
+  toast("Mot de passe incorrect : rien n'a été restauré.", { type:"err" });
+  return null;
+}
+
 async function restoreBackup(ev){
   const f = ev.target.files?.[0]; ev.target.value = "";
   if(!f) return;
   let data;
   try{ data = JSON.parse(await f.text()); }catch(e){ toast("Ce fichier n'est pas lisible.", { type:"err" }); return; }
+  if(data?.format === "apikine-sauvegarde-chiffree"){
+    /* Sauvegarde automatique (dépôt privé apikine-sauvegardes) : chiffrée avec votre mot de passe */
+    data = await dechiffrerSauvegarde(data);
+    if(!data) return;
+  }
   if(data?.format !== "gabrieltimer-sauvegarde"){ toast("Ce fichier n'est pas une sauvegarde de l'application.", { type:"err" }); return; }
   const parts = [
     ["patients", "Patients, coordonnées et codes d'accès", ["patients", "fiches", "codes"]],
