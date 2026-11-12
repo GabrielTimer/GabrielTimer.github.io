@@ -4,7 +4,7 @@
 
 import { openSheet, esc, icon, toast, accessLink, fmtCode, KINE, prenom, settings, logoSrc } from "./app.js";
 import { fillTemplate } from "./settings.js";
-import { createPatient, listPatients } from "./cloud.js";
+import { createPatient, listPatients, codeAcces, lienEnvoye } from "./cloud.js";
 import { qrSVG } from "./qr.js";
 
 /** Fenêtre « Nouveau patient ». Résout avec le patient créé, ou null. */
@@ -75,15 +75,29 @@ export function newPatientSheet(){
 
 /** Message d'invitation envoyé au patient (modifiable dans Outils → Réglages du cabinet). */
 export function invitationText(patient){
+  const code = patient.code || patient.cle;
   return fillTemplate(settings.messages.invitation, {
-    prenom: prenom(patient.nom), nom: patient.nom, lien: accessLink(patient.cle),
-    code: fmtCode(patient.cle), kine: KINE.nom, titre: KINE.titre, telephone: settings.cabinet.telephone || ""
+    prenom: prenom(patient.nom), nom: patient.nom, lien: accessLink(code),
+    code: fmtCode(code), kine: KINE.nom, titre: KINE.titre, telephone: settings.cabinet.telephone || ""
   });
 }
 
+/** Code à donner au patient (différent de son identifiant depuis la version 2.29). */
+async function avecCode(patient){
+  if(patient.code) return patient;
+  try{ return { ...patient, code: await codeAcces(patient.cle, patient) }; }
+  catch(e){
+    toast(patient.duTitulaire ? "Le lien de ce patient est géré par son kiné." : "Code d'accès introuvable (connexion ?).", { type:"err" });
+    return null;
+  }
+}
+
 /** Fenêtre d'accès patient : lien, QR code, envoi. */
-export function accessSheet(patient){
-  const link = accessLink(patient.cle);
+export async function accessSheet(patient){
+  patient = await avecCode(patient);
+  if(!patient) return null;
+  if(patient.nouveauLien) lienEnvoye(patient.cle).catch(() => {});
+  const link = accessLink(patient.code);
   const text = invitationText(patient);
   const tel = (patient.telephone || "").replace(/[^\d+]/g, "");
   const s = openSheet({
@@ -94,7 +108,7 @@ export function accessSheet(patient){
           <div class="qr-box">${qrSVG(link, { size:240, label:"QR code d'accès patient" })}</div>
           <div class="stack" style="--gap:6px">
             <p><strong>Faites scanner ce QR code</strong> avec l'appareil photo du téléphone du patient. Ses exercices s'ouvrent directement.</p>
-            <p class="small muted">Code d'accès : <span class="num"><strong>${esc(fmtCode(patient.cle))}</strong></span></p>
+            <p class="small muted">Code d'accès : <span class="num"><strong>${esc(fmtCode(patient.code))}</strong></span></p>
           </div>
         </div>
         <div class="field">
@@ -128,9 +142,11 @@ export function accessSheet(patient){
 }
 
 /** Carte imprimable à remettre au patient (format carte de visite ×2). */
-export function printAccessCard(patient){
-  const link = accessLink(patient.cle);
-  const w = window.open("", "_blank");
+export async function printAccessCard(patient){
+  const w = window.open("", "_blank");   // ouverte tout de suite (sinon bloquée par le navigateur)
+  patient = await avecCode(patient);
+  if(!patient){ w?.close(); return; }
+  const link = accessLink(patient.code);
   if(!w){ toast("Autorisez les fenêtres pour imprimer.", { type:"err" }); return; }
   const card = `
     <div class="card">
@@ -139,7 +155,7 @@ export function printAccessCard(patient){
         <div class="brand"><img src="${/^data:/.test(logoSrc()) ? logoSrc() : location.origin + logoSrc()}" alt=""><div><b>${esc(KINE.nom)}</b><br><span>${esc(KINE.titre)}</span></div></div>
         <p class="who">${esc(patient.nom)}</p>
         <p>Scannez ce code avec l'appareil photo de votre téléphone pour retrouver vos exercices dans l'application ApiKiné.</p>
-        <p class="code">Code : <b>${esc(fmtCode(patient.cle))}</b></p>
+        <p class="code">Code : <b>${esc(fmtCode(patient.code))}</b></p>
       </div>
     </div>`;
   w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Carte d'accès – ${esc(patient.nom)}</title>

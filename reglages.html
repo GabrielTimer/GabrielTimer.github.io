@@ -107,7 +107,7 @@ $("#app").innerHTML = `
   ${ctx.cle && !ctx.apercu && !isKine ? `
   <div class="section-title section">Mon accès</div>
   <div class="panel stack" style="--gap:12px">
-    <p>Code d'accès de cet appareil : <strong class="num">${esc(fmtCode(ctx.cle))}</strong></p>
+    <p>Code d'accès de cet appareil : <strong class="num">${esc(fmtCode((store.get("gt_code")?.cle === ctx.cle && store.get("gt_code").code) || ctx.cle))}</strong></p>
     <p class="small muted">Si vous changez de téléphone, utilisez le même lien ou ce code.</p>
     <div><button class="btn danger" type="button" id="forget">${icon("logout")}Déconnecter cet appareil</button></div>
   </div>` : ""}

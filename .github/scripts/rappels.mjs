@@ -51,7 +51,13 @@ if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0)
     .filter(d => { const m = d.data(); return m.de === "kine" && !m.notifie && !m.lu && Date.now() - (m.date || 0) < 3 * 864e5; });
   let n = 0;
   for(const d of msgs){
-    const pref = d.ref.parent.parent;
+    /* Messagerie rangée sous le code du patient (codes/{code}) : ses rappels sont dans son dossier */
+    let pref = d.ref.parent.parent;
+    if(pref.parent.id === "codes"){
+      const cle = (await pref.get()).data()?.cle;
+      if(!cle){ await d.ref.update({ notifie: true }); continue; }
+      pref = db.doc(`patients/${cle}`);
+    }
     const subs = await pref.collection("rappels").get();
     for(const sd of subs.docs){
       const r = sd.data();

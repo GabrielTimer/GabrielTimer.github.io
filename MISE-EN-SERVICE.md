@@ -102,6 +102,16 @@ Dans la fiche d'un patient, le bouton **Bilan** ouvre le bilan : schéma de doul
 
 Le fichier `firestore.rules` est publié automatiquement dans Firebase à chaque modification sur la branche `main` (onglet **Actions** de GitHub, « Publier les règles Firebase »). Il faut pour cela le secret GitHub `FIREBASE_SERVICE_ACCOUNT` (Settings → Secrets and variables → Actions), qui contient la clé de compte de service téléchargée dans Firebase (Paramètres du projet → Comptes de service → Générer une nouvelle clé privée). En cas de clé perdue ou compromise : supprimez-la dans Google Cloud (IAM → Comptes de service → Clés), puis générez-en une nouvelle et remplacez le secret.
 
+## Version 2.29 : messagerie protégée des autres comptes
+
+Le code donné au patient (lien, QR code, carte) est maintenant différent de l'identifiant de son dossier. Un compte autorisé qui suit vos patients (« Voit mes patients ») voit l'identifiant, jamais le code : il ne peut pas lire vos messages, même en contournant l'application.
+
+- **Nouveaux patients** : protégés automatiquement.
+- **Patients existants** : leur lien actuel continue de fonctionner, avec la messagerie d'avant. Ils sont protégés dès que vous leur donnez un nouveau code (fiche → Plus → Générer un nouveau code d'accès) ; leurs messages suivent. Un rappel « Envoyez-lui le nouveau lien » s'affiche dans la fiche tant que vous n'avez pas ouvert « Accès patient ».
+- **Comptes autorisés** : en cochant « Voit mes patients », l'application propose de protéger d'abord les patients à l'ancien lien. En décochant ou en retirant un compte qui a suivi vos patients, elle propose de changer leurs codes pour lui couper tout accès (il faudra renvoyer les liens).
+- **Règles Firebase** : publiées automatiquement (onglet Actions, « Publier les règles Firebase »). Si ce n'est pas le cas, recopiez [`firestore.rules`](firestore.rules) dans Firebase puis **Publier**. Tant que les règles ne sont pas à jour, les nouveaux patients sont créés à l'ancienne : rien ne casse.
+- **Sauvegarde** : les codes d'accès et les messages en font partie ; la restauration propose aussi « Messages, notes de séance et questionnaires ».
+
 ## Version 2.5 : messages des patients
 
 Les messages que les patients vous envoient depuis l'application (« Écrire à mon kiné », bilans de programme, commentaires de séance) sont gardés dans l'application, page **Messages**, avec une pastille pour les non lus. L'e-mail continue d'arriver comme avant.

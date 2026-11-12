@@ -325,6 +325,7 @@ async function kineView(param){
           </div>
         </div>
         ${sum.alertes.length ? `<div class="chips" style="margin-top:14px">${sum.alertes.map(a => `<span class="badge ${a.niveau === "danger" ? "danger" : a.niveau === "warn" ? "warn" : a.niveau === "ok" ? "ok" : "lagon"}">${icon(a.ico)}${esc(a.texte)}</span>`).join("")}</div>` : ""}
+        ${patient.nouveauLien && C.estSien(patient) ? `<div class="notice warn" style="margin-top:14px">${icon("key")}<span style="flex:1">Son code d'accès a changé : son ancien lien ne fonctionne plus. Envoyez-lui le nouveau.</span><button class="btn sm primary" type="button" id="nouveau-lien">Envoyer le lien</button></div>` : ""}
         <div class="pt-actions">
           <a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Nouveau programme</a>
           <button class="btn soft" type="button" id="note-jour">${icon("edit")}Séance du jour</button>
@@ -404,6 +405,8 @@ async function kineView(param){
 
   const bind = (sum) => {
     $("#acces").onclick = () => UI.accessSheet(patient);
+    const nl = $("#nouveau-lien");
+    if(nl) nl.onclick = async () => { await UI.accessSheet(patient); patient.nouveauLien = null; nl.closest(".notice")?.remove(); };
     $("#note-jour").onclick = () => {
       document.dispatchEvent(new CustomEvent("kine:note-du-jour"));
     };
@@ -625,5 +628,5 @@ async function kineView(param){
   app.innerHTML = loadingHTML();
   try{ await load(); }catch(err){ app.innerHTML = errorHTML(err); return; }
   render();
-  if(params.get("acces")) UI.accessSheet(patient);
+  if(params.get("acces")) UI.accessSheet(patient).then(r => { if(r) document.getElementById("nouveau-lien")?.closest(".notice")?.remove(); });
 }

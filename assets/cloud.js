@@ -129,6 +129,7 @@ export async function setVoitMesPatients(email, oui){
   const comptes = await getComptes();
   const c = comptes.find(x => x.email === String(email).toLowerCase()); if(!c) return;
   c.voitMesPatients = !!oui;
+  if(oui) c.aVuMesPatients = true;   // gardé ensuite : il connaît les dossiers de vos patients
   await setComptes(comptes);
 }
 /**
@@ -287,16 +288,81 @@ async function parPatient(fn){
   return out;
 }
 
+/* ---------- Code d'accès du patient et messagerie ----------
+   Depuis la version 2.29, le code donné au patient (lien, QR code, carte) est
+   différent de l'identifiant du dossier (cle) :
+     codes/{code}              → { cle, kine } : le patient retrouve son dossier
+     codes/{code}/messages/{id} → la messagerie avec son kiné
+   Un compte autorisé qui suit vos patients connaît leur cle, jamais leur code :
+   il ne peut donc pas lire vos messages, même en contournant l'application.
+   Patients plus anciens (sans document codes, champ codeV2 absent) : code = cle,
+   messages dans patients/{cle}/messages, jusqu'au prochain « Nouveau code d'accès ». */
+const codesCache = new Map();   // cle → code
+const CODE_LOCAL = "gt_code";   // appareil du patient : { code, cle }
+function codeLocal(cle){
+  try{ const v = JSON.parse(localStorage.getItem(CODE_LOCAL) || "null"); return v && v.cle === cle && v.code ? v.code : null; }catch(e){ return null; }
+}
+
+/**
+ * Côté patient : code reçu (lien) ou tapé → identifiant du dossier, ou null s'il n'existe pas.
+ * Mémorise le code sur l'appareil pour la messagerie.
+ */
+export async function ouvrirCode(code){
+  code = String(code || "").toUpperCase();
+  const c = await getDoc(doc(db, "codes", code));
+  if(c.exists() && c.data().cle){
+    try{ localStorage.setItem(CODE_LOCAL, JSON.stringify({ code, cle: c.data().cle })); }catch(e){}
+    return c.data().cle;
+  }
+  const p = await getDoc(doc(db, "patients", code));
+  return p.exists() ? code : null;
+}
+
+/** Code d'accès à donner au patient (lien, QR, carte). Ancien patient : sa cle. */
+export async function codeAcces(cle, patient = null){
+  if(!cle) return null;
+  if(codesCache.has(cle)) return codesCache.get(cle);
+  const local = codeLocal(cle);
+  if(local) return local;
+  const p = patient || (await getDoc(doc(db, "patients", cle))).data() || {};
+  if(!p.codeV2){ codesCache.set(cle, cle); return cle; }
+  const snap = await getDocs(query(collection(db, "codes"), where("cle", "==", cle), where("kine", "==", kineDe(p))));
+  const code = snap.docs[0]?.id;
+  if(!code) throw new Error("Code d'accès introuvable.");
+  codesCache.set(cle, code);
+  return code;
+}
+
+/** Les patients qui ont encore un ancien lien (messagerie non protégée des autres comptes). */
+export const ancienLien = p => !p?.codeV2;
+
+/** Où sont rangés les messages de ce patient. */
+async function boite(cle){
+  const code = await codeAcces(cle);
+  return code && code !== cle ? collection(db, "codes", code, "messages") : collection(db, "patients", cle, "messages");
+}
+
 export async function createPatient({ nom, telephone = "", email = "", note = "", legacyId = "", genre = "" }){
   const cle = newAccessCode();
+  const code = newAccessCode();
   const now = Date.now();
-  const pub = { nom: String(nom).trim(), patientId: slugPatient(nom), kine: moi() || OWNER, createdAt: now, updatedAt: now };
+  const pub = { nom: String(nom).trim(), patientId: slugPatient(nom), kine: moi() || OWNER, codeV2: true, createdAt: now, updatedAt: now };
   if(genre === "h" || genre === "f"){ pub.genre = genre; pub.genreMaj = now; }
   const priv = { telephone, email, note, legacyId: legacyId || null, kine: pub.kine, updatedAt: now };
   patientsCache = null;
   await setDoc(doc(db, "patients", cle), clean(pub));
   await setDoc(doc(db, "fiches", cle), clean(priv));
-  return { cle, ...pub, ...priv };
+  try{
+    await setDoc(doc(db, "codes", code), { cle, kine: pub.kine, createdAt: now });
+  }catch(e){
+    /* Règles Firebase pas encore à jour : patient créé à l'ancienne (code = identifiant) */
+    console.warn("Code d'accès séparé impossible :", e?.code || e);
+    await setDoc(doc(db, "patients", cle), { codeV2: false }, { merge: true });
+    codesCache.set(cle, cle);
+    return { cle, code: cle, ...pub, codeV2: false, ...priv };
+  }
+  codesCache.set(cle, code);
+  return { cle, code, ...pub, ...priv };
 }
 
 export async function updatePatient(cle, patch){
@@ -314,46 +380,106 @@ async function subDocs(root, cle, name){
 }
 
 export async function deletePatient(cle){
-  for(const [root, name] of SUBS){
+  const patient = (await getDoc(doc(db, "patients", cle))).data() || {};
+  const code = await codeAcces(cle, patient).catch(() => cle);
+  const erreurs = [];
+  const efface = p => p.catch(e => { erreurs.push(e); });
+  if(code !== cle){
+    const msgs = await getDocs(collection(db, "codes", code, "messages")).catch(() => ({ docs: [] }));
+    await efface(batchDelete(msgs.docs.map(d => d.ref)));
+  }
+  for(const [root, name] of [...SUBS, ["patients", "rappels"]]){
     const docs = await subDocs(root, cle, name);
-    await batchDelete(docs.map(d => d.ref)).catch(() => {});
+    await efface(batchDelete(docs.map(d => d.ref)));
   }
   const seances = await listSeances(cle);
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
   const bilans = await bilanDocs(cle);
-  await batchDelete(bilans.map(d => d.ref)).catch(() => {});
-  await deleteDoc(doc(db, "fiches", cle)).catch(() => {});
+  await efface(batchDelete(bilans.map(d => d.ref)));
+  if(code !== cle) await efface(deleteDoc(doc(db, "codes", code)));
+  await efface(deleteDoc(doc(db, "fiches", cle)));
   await deleteDoc(doc(db, "patients", cle));
+  codesCache.delete(cle);
+  patientsCache = null;
+  if(erreurs.length) console.warn("Suppression du patient : éléments non effacés", erreurs);
+  return { incomplet: erreurs.length > 0 };
 }
 
-/** Change le code d'accès d'un patient (l'ancien lien cesse de fonctionner). */
+/**
+ * Change le code d'accès d'un patient : l'ancien lien cesse de fonctionner, et l'identifiant
+ * du dossier change aussi (un compte qui le connaissait n'y a plus accès).
+ * Ancien patient : sa messagerie passe sous le nouveau code (protégée des autres comptes).
+ * Tout est d'abord copié ; l'ancien dossier n'est effacé que si la copie a réussi.
+ */
 export async function renewAccessCode(cle){
   const patient = await getPatient(cle, { fiche: true });
   if(!patient) throw new Error("Patient introuvable");
+  const ancienCode = await codeAcces(cle, patient);
   const seances = await listSeances(cle);
   const nouveau = newAccessCode();
-  const { cle: _old, ...data } = patient;
+  const nouveauCode = newAccessCode();
+  const { cle: _old, code: _code, duTitulaire: _dt, ...data } = patient;
   const { pub, priv } = split(data);
-  await setDoc(doc(db, "patients", nouveau), clean({ ...pub, updatedAt: Date.now() }));
-  await setDoc(doc(db, "fiches", nouveau), clean(priv));
-  await batchWrite(seances.map(s => {
-    const { id, cle: _c, firebaseId, ...rest } = s;
-    return [doc(db, "patients", nouveau, "seances", id), { ...rest, cle: nouveau }];
-  }));
-  await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
+  const kine = kineDe(patient);
+  const anciensMsg = await getDocs(await boite(cle)).catch(() => ({ docs: [] }));
+  const copies = [];   // ce qui a été écrit, pour annuler si la copie échoue
+  try{
+    await setDoc(doc(db, "patients", nouveau), clean({ ...pub, codeV2: true, nouveauLien: Date.now(), updatedAt: Date.now() }));
+    copies.push(doc(db, "patients", nouveau));
+    await setDoc(doc(db, "fiches", nouveau), clean({ ...priv, kine, updatedAt: Date.now() }));
+    copies.push(doc(db, "fiches", nouveau));
+    await setDoc(doc(db, "codes", nouveauCode), { cle: nouveau, kine, createdAt: Date.now() });
+    copies.push(doc(db, "codes", nouveauCode));
+    const seancesW = seances.map(s => {
+      const { id, cle: _c, firebaseId, ...rest } = s;
+      return [doc(db, "patients", nouveau, "seances", id), { ...rest, cle: nouveau }];
+    });
+    await batchWrite(seancesW); copies.push(...seancesW.map(w => w[0]));
+    const msgW = anciensMsg.docs.map(d => [doc(db, "codes", nouveauCode, "messages", d.id), d.data()]);
+    await batchWrite(msgW); copies.push(...msgW.map(w => w[0]));
+    for(const [root, name] of [["patients", "suivis"], ["fiches", "notes"], ["patients", "rappels"]]){
+      const docs = await subDocs(root, cle, name);
+      const w = docs.map(d => [doc(db, root, nouveau, name, d.id), d.data()]);
+      await batchWrite(w); copies.push(...w.map(x => x[0]));
+    }
+  }catch(e){
+    /* Copie incomplète : on efface la copie, l'ancien dossier reste intact */
+    await batchDelete([...copies].reverse()).catch(() => {});
+    throw new Error("Le changement de code n'a pas pu se faire (connexion ?). Le dossier et l'ancien lien sont inchangés.");
+  }
+  /* Bilans : rattachés au nouveau dossier */
   const bilans = await bilanDocs(cle);
   await batchWrite(bilans.map(d => [d.ref, { ...d.data(), cle: nouveau }])).catch(() => {});
-  for(const [root, name] of SUBS){
+  /* Effacement de l'ancien dossier et de l'ancien code */
+  await batchDelete(anciensMsg.docs.map(d => d.ref)).catch(() => {});
+  for(const [root, name] of [["patients", "suivis"], ["fiches", "notes"], ["patients", "rappels"], ["patients", "messages"]]){
     const docs = await subDocs(root, cle, name);
-    if(!docs.length) continue;
-    try{
-      await batchWrite(docs.map(d => [doc(db, root, nouveau, name, d.id), d.data()]));
-      await batchDelete(docs.map(d => d.ref));
-    }catch(e){ /* on garde l'original plutôt que de perdre des données */ }
+    await batchDelete(docs.map(d => d.ref)).catch(() => {});
   }
+  await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
+  if(ancienCode && ancienCode !== cle) await deleteDoc(doc(db, "codes", ancienCode)).catch(() => {});
   await deleteDoc(doc(db, "fiches", cle)).catch(() => {});
   await deleteDoc(doc(db, "patients", cle));
+  codesCache.delete(cle);
+  codesCache.set(nouveau, nouveauCode);
+  patientsCache = null;
   return nouveau;
+}
+
+/** Nouveau code pour plusieurs patients (par exemple quand un remplaçant s'en va). */
+export async function renouvelerCodes(cles, onProgress = () => {}){
+  const faits = [], erreurs = [];
+  for(let i = 0; i < cles.length; i++){
+    onProgress(i, cles.length);
+    try{ faits.push(await renewAccessCode(cles[i])); }catch(e){ erreurs.push(cles[i]); }
+  }
+  onProgress(cles.length, cles.length);
+  return { faits, erreurs };
+}
+
+/** Le kiné a ouvert la fenêtre d'accès après un changement de code : rappel effacé. */
+export async function lienEnvoye(cle){
+  await setDoc(doc(db, "patients", cle), { nouveauLien: null }, { merge: true });
 }
 
 /* ---------- Séances ---------- */
@@ -680,18 +806,33 @@ export async function deleteSuivi(cle, id){
 }
 
 /* ---------- Messages du patient (copie dans ApiKiné) ----------
-   patients/{code}/messages/{id} : { type:"message"|"bilan", sujet, texte, date, lu } */
+   codes/{code}/messages/{id} (ancien patient : patients/{cle}/messages/{id}) :
+   { type:"message"|"bilan", sujet, texte, date, lu } — voir « Code d'accès » plus haut. */
 
 export async function addMessage(cle, { type = "message", sujet = "", texte = "", de = null }){
   const id = newId();
   /* de: "kine" → message du kiné au patient (lu = lu par le patient) ; sinon message du patient */
-  await setDoc(doc(db, "patients", cle, "messages", id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false, ...(de === "kine" ? { de:"kine" } : {}) }));
+  await setDoc(doc(await boite(cle), id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false, ...(de === "kine" ? { de:"kine" } : {}) }));
   return id;
 }
 
 export async function listMessages(cle){
-  const snap = await getDocs(collection(db, "patients", cle, "messages"));
+  const snap = await getDocs(await boite(cle));
   return snap.docs.map(d => ({ ...d.data(), id: d.id, cle })).sort((a, b) => (b.date || 0) - (a.date || 0));
+}
+
+/** Codes d'accès (titulaire) : code → cle, pour retrouver le patient d'un message. */
+async function tousLesCodes(){
+  const snap = await getDocs(collection(db, "codes")).catch(() => ({ docs: [] }));
+  const parCode = new Map();
+  snap.docs.forEach(d => { const c = d.data(); if(c.cle){ parCode.set(d.id, c.cle); } });
+  return parCode;
+}
+/** Patient d'un message lu « en vrac » (vue d'ensemble) */
+function cleDuMessage(d, parCode){
+  const parent = d.ref.parent.parent;
+  if(!parent) return null;
+  return parent.parent.id === "codes" ? (parCode.get(parent.id) || null) : parent.id;
 }
 
 /** Ma messagerie : les messages de MES patients seulement (jamais ceux d'un autre kiné). */
@@ -701,16 +842,16 @@ export async function listAllMessages(){
     const all = (await Promise.all(ps.map(p => listMessages(p.cle).catch(() => [])))).flat();
     return all.sort((a, b) => (b.date || 0) - (a.date || 0));
   }
-  const [snap, cles] = await Promise.all([getDocs(collectionGroup(db, "messages")), mesCles({ messagerie:true })]);
-  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: d.ref.parent.parent?.id })).filter(m => cles.has(m.cle)).sort((a, b) => (b.date || 0) - (a.date || 0));
+  const [snap, cles, parCode] = await Promise.all([getDocs(collectionGroup(db, "messages")), mesCles({ messagerie:true }), tousLesCodes()]);
+  return snap.docs.map(d => ({ ...d.data(), id: d.id, cle: cleDuMessage(d, parCode) })).filter(m => cles.has(m.cle)).sort((a, b) => (b.date || 0) - (a.date || 0));
 }
 
 export async function setMessageLu(cle, id, lu = true){
-  await setDoc(doc(db, "patients", cle, "messages", id), { lu }, { merge: true });
+  await setDoc(doc(await boite(cle), id), { lu }, { merge: true });
 }
 
 export async function deleteMessage(cle, id){
-  await deleteDoc(doc(db, "patients", cle, "messages", id));
+  await deleteDoc(doc(await boite(cle), id));
 }
 
 /** Commentaire laissé en fin de séance : marqué comme lu par le kiné. */
@@ -785,6 +926,7 @@ export async function exportAll(onProgress = () => {}){
     out.collections[name] = snap.docs.map(d => ({ id: d.id, data: d.data() }));
   };
   for(const name of ["patients", "fiches", "modeles", "exercices", "reglages"]) await grab(name);
+  await grab("codes").catch(() => { out.collections.codes = []; });   // codes d'accès des patients (messagerie)
   await grab("bilans").catch(() => { out.collections.bilans = []; });
   await grab("questionnaires").catch(() => { out.collections.questionnaires = []; });
   await grab("conseils").catch(() => { out.collections.conseils = []; });
@@ -792,8 +934,11 @@ export async function exportAll(onProgress = () => {}){
   const suivis = await getDocs(collectionGroup(db, "suivis")).catch(() => ({ docs: [] }));
   out.collections.suivis = suivis.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
   onProgress("messages");
-  const messages = await getDocs(collectionGroup(db, "messages")).catch(() => ({ docs: [] }));
-  out.collections.messages = messages.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
+  const [messages, parCode] = await Promise.all([getDocs(collectionGroup(db, "messages")).catch(() => ({ docs: [] })), tousLesCodes()]);
+  out.collections.messages = messages.docs.map(d => {
+    const code = d.ref.parent.parent?.parent.id === "codes" ? d.ref.parent.parent.id : null;
+    return { id: d.id, cle: cleDuMessage(d, parCode), ...(code ? { code } : {}), data: d.data() };
+  });
   onProgress("notes");
   const notes = await getDocs(collectionGroup(db, "notes")).catch(() => ({ docs: [] }));
   out.collections.notes = notes.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
@@ -813,7 +958,7 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   const want = name => !only || only.includes(name);
   const ops = [];
   const count = {};
-  ["patients", "fiches", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils"].forEach(name => {
+  ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils"].forEach(name => {
     if(!want(name)) return;
     (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
   });
@@ -833,8 +978,8 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   }
   if(want("messages")){
     (backup.collections.messages || []).forEach(d => {
-      if(!d.cle) return;
-      ops.push([doc(db, "patients", d.cle, "messages", d.id), d.data]);
+      if(!d.cle && !d.code) return;
+      ops.push([d.code ? doc(db, "codes", d.code, "messages", d.id) : doc(db, "patients", d.cle, "messages", d.id), d.data]);
       count.messages = (count.messages || 0) + 1;
     });
   }
