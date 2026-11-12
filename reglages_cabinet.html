@@ -87,6 +87,28 @@ const area = (id, label, value, { rows = 4, hint = "", ph = "" } = {}) => `
 const num = (id, label, value, min, max, hint = "") => field(id, label, value, { type:"number", hint, attrs:`min="${min}" max="${max}" inputmode="numeric"` });
 
 /* ---------- Comptes autorisés (titulaire seulement) ---------- */
+
+/* Un compte qui a suivi vos patients connaît l'identifiant de leurs dossiers : même retiré,
+   il pourrait encore lire leurs séances. Changer leurs codes lui coupe tout accès. */
+async function changerCodes(patients){
+  toast(`Nouveaux codes : 0 / ${patients.length}…`, { duration: 600000 });
+  const { faits, erreurs } = await C.renouvelerCodes(patients.map(p => p.cle), (i, n) => {
+    const el = document.querySelector(".toasts .toast:last-child .t-msg"); if(el) el.textContent = `Nouveaux codes : ${i} / ${n}…`;
+  });
+  document.querySelectorAll(".toasts .toast").forEach(x => { if(/^Nouveaux codes :/.test(x.textContent)) x.remove(); });
+  toast(erreurs.length
+    ? `${faits.length} code${faits.length > 1 ? "s" : ""} changé${faits.length > 1 ? "s" : ""}, ${erreurs.length} impossible${erreurs.length > 1 ? "s" : ""} (connexion ?) : réessayez plus tard.`
+    : `${faits.length} code${faits.length > 1 ? "s" : ""} changé${faits.length > 1 ? "s" : ""}. Envoyez à chacun son nouveau lien : un rappel s'affiche dans sa fiche.`, { type: erreurs.length ? "err" : "ok", duration: 10000 });
+}
+async function proposerNouveauxCodes(compte){
+  if(!compte?.aVuMesPatients && !compte?.voitMesPatients) return;
+  const mes = (await C.listPatients()).filter(p => C.estSien(p));
+  if(!mes.length) return;
+  if(await confirmDialog({ title:"Couper complètement son accès ?", message:`${compte.nom || compte.email} a suivi vos patients : il connaît l'identifiant de leurs dossiers et pourrait encore lire leurs séances et questionnaires (pas vos messages). Pour lui couper tout accès, donnez un nouveau code à vos ${mes.length} patient${mes.length > 1 ? "s" : ""}. Il faudra ensuite renvoyer son lien à chacun.`, confirm:"Changer les codes", cancel:"Plus tard" })){
+    await changerCodes(mes);
+  }
+}
+
 async function initComptes(){
   const box = $("#cp-list"); if(!box) return;
   const quand = t => new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
@@ -101,13 +123,21 @@ async function initComptes(){
       : `<p class="small muted">Aucun autre compte : vous êtes seul à accéder à l'espace kiné.</p>`;
     box.querySelectorAll("[data-cp-voit]").forEach(cb => cb.onchange = async () => {
       try{
+        if(cb.checked){
+          /* Patients à l'ancien lien : leur messagerie serait lisible par ce compte */
+          const anciens = (await C.listPatients()).filter(p => C.estSien(p) && C.ancienLien(p));
+          if(anciens.length && await confirmDialog({ title:"Protéger d'abord vos messages ?", message:`${anciens.length} patient${anciens.length > 1 ? "s ont" : " a"} encore un lien d'avant la version 2.29 : ce compte pourrait lire vos messages avec ${anciens.length > 1 ? "eux" : "lui"}. Leur donner un nouveau code maintenant protège votre messagerie, mais il faudra leur renvoyer leur lien (rappel dans chaque fiche).`, confirm:"Nouveaux codes", cancel:"Continuer sans" })){
+            await changerCodes(anciens);
+          }
+        }
         await C.setVoitMesPatients(cb.dataset.cpVoit, cb.checked);
+        if(!cb.checked) await proposerNouveauxCodes(comptes.find(c => c.email === cb.dataset.cpVoit));
         toast(cb.checked ? `${cb.dataset.cpVoit} peut suivre vos patients (sans votre messagerie ni vos notes).` : `${cb.dataset.cpVoit} ne voit plus vos patients.`, { type:"ok", duration:6000 });
       }catch(e){ cb.checked = !cb.checked; toast("Impossible de modifier : " + (e.message || e), { type:"err" }); }
     });
     box.querySelectorAll("[data-cp-del]").forEach(b => b.onclick = async () => {
       if(!await confirmDialog({ title:"Retirer l'accès ?", message:`${b.dataset.cpDel} ne pourra plus ouvrir l'espace kiné.`, confirm:"Retirer", danger:true })) return;
-      try{ await C.retirerCompte(b.dataset.cpDel); toast("Accès retiré.", { type:"ok" }); afficher(); }
+      try{ await C.retirerCompte(b.dataset.cpDel); toast("Accès retiré.", { type:"ok" }); await proposerNouveauxCodes(comptes.find(c => c.email === b.dataset.cpDel)); afficher(); }
       catch(e){ toast("Impossible de retirer l'accès : " + (e.message || e), { type:"err" }); }
     });
   };
@@ -651,8 +681,9 @@ async function restoreBackup(ev){
   try{ data = JSON.parse(await f.text()); }catch(e){ toast("Ce fichier n'est pas lisible.", { type:"err" }); return; }
   if(data?.format !== "gabrieltimer-sauvegarde"){ toast("Ce fichier n'est pas une sauvegarde de l'application.", { type:"err" }); return; }
   const parts = [
-    ["patients", "Patients et leurs coordonnées", ["patients", "fiches"]],
+    ["patients", "Patients, coordonnées et codes d'accès", ["patients", "fiches", "codes"]],
     ["seances", "Séances des patients", ["seances"]],
+    ["suivis", "Messages, notes de séance et questionnaires", ["messages", "notes", "suivis"]],
     ["bilans", "Bilans kiné", ["bilans"]],
     ["modeles", "Modèles", ["modeles"]],
     ["exercices", "Exercices créés et corrections", ["exercices"]],

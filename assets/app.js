@@ -156,7 +156,7 @@ export function readPatientContext(){
 }
 
 export function forgetPatient(){
-  store.del("gt_cle", "gt_patient_nom", "gt_patient_cache");
+  store.del("gt_cle", "gt_code", "gt_code_vu", "gt_patient_nom", "gt_patient_cache");
 }
 
 export function leaveApercu(){

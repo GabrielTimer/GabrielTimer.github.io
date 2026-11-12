@@ -84,7 +84,7 @@ service cloud.firestore {
         allow update: if peutCle(cle) || isValidation() || isReplanning();
       }
 
-      // Messages du patient au kiné (copie dans ApiKiné)
+      // Messages du patient au kiné : patients créés avant la version 2.29 (voir codes/ plus bas)
       match /messages/{id} {
         allow read: if true;              // le chemin contient déjà le code secret
         allow create: if sienCle(cle) || isMessage();
@@ -105,6 +105,32 @@ service cloud.firestore {
         allow read: if true;              // le chemin contient déjà le code secret
         allow create: if peutCle(cle) || isSuivi();
         allow update, delete: if peutCle(cle);
+      }
+    }
+
+    // ---------- Code d'accès du patient et messagerie (version 2.29) ----------
+    // Le code donné au patient (lien, QR, carte) est différent de l'identifiant du dossier.
+    // Les comptes autorisés qui suivent vos patients voient l'identifiant, jamais le code :
+    // ils ne peuvent donc pas lire la messagerie, rangée sous le code.
+    function codeDe(code) { return get(/databases/$(database)/documents/codes/$(code)).data; }
+    // Messagerie : le titulaire, ou le kiné du patient (jamais un compte qui le suit seulement)
+    function sienCode(code) { return isOwner() || (isAutorise() && codeDe(code).kine == moi() && kineDe(patientDe(codeDe(code).cle)) == moi()); }
+
+    match /codes/{code} {
+      allow get: if true;                 // le patient retrouve son dossier avec son code
+      allow list: if isOwner() || (isAutorise() && resource.data.kine == moi());
+      allow create: if isOwner() || (isAutorise() && request.resource.data.kine == moi()
+        && kineDe(patientDe(request.resource.data.cle)) == moi());
+      allow update: if isOwner();
+      allow delete: if isOwner() || (isAutorise() && resource.data.kine == moi());
+
+      match /messages/{id} {
+        allow read: if true;              // le chemin contient le code secret du patient
+        allow create: if sienCode(code)
+          || (exists(/databases/$(database)/documents/codes/$(code)) && isMessage());
+        allow delete: if sienCode(code);
+        allow update: if sienCode(code) || (resource.data.de == "kine"
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["lu"]));
       }
     }
 

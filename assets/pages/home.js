@@ -104,10 +104,10 @@ function renderWelcome(){
     if(c.length !== 12){ msg.textContent = "Le code comporte 12 caractères."; input.focus(); return; }
     msg.textContent = "Vérification…";
     try{
-      const { getPatient } = await import("../cloud.js");
-      const p = await getPatient(c);
-      if(!p){ msg.textContent = "Ce code ne correspond à aucun dossier. Vérifiez-le ou demandez-le à votre kiné."; return; }
-      store.set("gt_cle", c);
+      const { ouvrirCode } = await import("../cloud.js");
+      const cle = await ouvrirCode(c);
+      if(!cle){ msg.textContent = "Ce code ne correspond à aucun dossier. Vérifiez-le ou demandez-le à votre kiné."; return; }
+      store.set("gt_cle", cle);
       store.del("currentPatient");
       location.replace("/index.html");
     }catch(err){
@@ -159,7 +159,24 @@ function showCabinet(){
     </section>`;
 }
 
+/* Lien reçu (version 2.29) : le code du patient est différent de l'identifiant de son dossier.
+   Une seule vérification par lien ; renvoie l'identifiant du dossier s'il a changé. */
+async function resoudreAcces(cle){
+  const v = store.get("gt_code");
+  if(v && v.cle === cle) return null;               // déjà fait
+  if(store.get("gt_code_vu") === cle) return null;  // ancien lien, déjà vérifié
+  const { ouvrirCode } = await import("../cloud.js");
+  const vraie = await ouvrirCode(cle);
+  if(vraie && vraie !== cle){ store.set("gt_cle", vraie); return vraie; }
+  if(vraie === cle) store.set("gt_code_vu", cle);
+  return null;
+}
+
 async function renderPatient(ctx){
+  if(!ctx.apercu){
+    try{ const vraie = await resoudreAcces(ctx.cle); if(vraie) ctx = { ...ctx, cle: vraie }; }
+    catch(e){ console.warn("Code d'accès :", e); }   // hors ligne : on réessaiera
+  }
   mountShell({ role:"patient", active:"accueil", apercu:ctx.apercu });
   secretLogo(...document.querySelectorAll(".brand"));
   const cachedName = store.get("gt_patient_nom", "");
