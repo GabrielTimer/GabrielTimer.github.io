@@ -12,7 +12,7 @@
    Réglable dans Réglages du cabinet (activé par défaut).
    ========================================================= */
 
-import { store, session, kineHint, openSheet, esc, icon, toast } from "./app.js";
+import { store, session, kineHint, openSheet, esc, icon, toast, verrou } from "./app.js";
 
 const FLAG = "gt_mode_seance";          // sessionStorage : séance verrouillée en cours
 const PIN = "gt_pin_seance";            // localStorage : empreinte du code
@@ -119,6 +119,7 @@ export async function demarrer({ apercu = false } = {}){
     if(!kineHint.get() || !reglage.actifParDefaut()) return false;
     session.set(FLAG, 1);
   }
+  verrou.fermer(location.href);   // l'espace kiné reste fermé, même dans un autre onglet
   verrouiller();
   return true;
 }
@@ -159,6 +160,7 @@ export async function quitter(texte){
 /** Fin du mode séance sans code (appelé après vérification). */
 export function terminer(){
   session.del(FLAG);
+  verrou.ouvrir();
   document.body.classList.remove("mode-seance");
   try{ if(document.fullscreenElement) document.exitFullscreen(); }catch(e){}
 }

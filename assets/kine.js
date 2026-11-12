@@ -3,7 +3,7 @@
    ========================================================= */
 
 import { currentKine } from "./cloud.js";
-import { groupProgrammes, estCabinet, startOfDay, evaTrend, kineHint, settings } from "./app.js";
+import { groupProgrammes, estCabinet, startOfDay, evaTrend, kineHint, settings, verrou, ecranVerrou } from "./app.js";
 import { etatSuppression, resteTexte } from "./inactivite.js";
 
 /** À appeler en haut de chaque page réservée au kiné. */
@@ -15,6 +15,7 @@ export async function requireKine(){
     throw new Error("redirect");
   }
   kineHint.set(true);
+  if(verrou.actif()) ecranVerrou();   // cadenas fermé : tablette prêtée à un patient
   return user;
 }
 
