@@ -3,7 +3,10 @@
 // - 4 semaines sans activité : le programme part dans la corbeille (collection « corbeille ») ;
 // - corbeille de plus de 30 jours : effacée.
 // Même règle que assets/inactivite.js (programmes terminés non concernés ; « Garder » et « Ne jamais supprimer » respectés).
+// Programmes « au cabinet » : jamais retirés (le patient ne les fait pas chez lui).
 // SIMULATION=1 : affiche seulement ce qui serait fait.
+// Confidentialité : le dépôt est public, donc les journaux de GitHub aussi.
+// Ne jamais y écrire de nom de patient, de code d'accès ni de nom de programme : seulement des nombres.
 import admin from "firebase-admin";
 import webpush from "web-push";
 
@@ -33,6 +36,7 @@ for(const pd of patients.docs){
   let preavisChange = false;
   for(const [pid, list] of progs){
     if(list.every(s => s.terminee)) continue;                       // programme terminé : conservé
+    if(list.every(s => s.cabinet === true)) continue;               // programme au cabinet : conservé
     const garder = patient.garderProgrammes?.[pid];
     if(garder === "toujours") continue;
     let t = Math.max(Number(garder) || 0, DEBUT_REGLE);
@@ -43,7 +47,6 @@ for(const pd of patients.docs){
     const jours = Math.floor((now - t) / DAY);
     const nom = list[0].programmeNom || list[0].data?.nom || "Programme";
     if(jours >= J_SUPPR){
-      console.log(`::notice::Corbeille : ${patient.nom || cle} — « ${nom} » (${jours} j sans activité)`);
       corbeille++;
       if(SIMU) continue;
       const batch = db.batch();
@@ -55,10 +58,9 @@ for(const pd of patients.docs){
       delete preavis[pid]; preavisChange = true;
     }else if(jours >= J_ALERTE && preavis[pid] !== t){
       alertes++;
-      console.log(`::notice::Préavis : ${patient.nom || cle} — « ${nom} » (${jours} j, retrait dans ${J_SUPPR - jours} j)`);
       if(SIMU) continue;
       preavis[pid] = t; preavisChange = true;
-      if(!keys?.publicKey || list.every(s => s.cabinet === true)) continue;   // programme au cabinet : le patient ne le voit pas, pas de message
+      if(!keys?.publicKey) continue;
       const subs = await pd.ref.collection("rappels").get();
       for(const sd of subs.docs){
         const r = sd.data();
