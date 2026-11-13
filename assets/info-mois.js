@@ -14,7 +14,7 @@ import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
 
 /** Affiches disponibles, dans l'ordre de la rotation. */
 export function affiches(perso = []){
-  return mergeConseils(perso).filter(c => c.affiche && !c.masque);
+  return mergeConseils(perso).filter(c => c.affiche && !c.masque && !c.fichePatho);   // les fiches par pathologie ne tournent pas
 }
 
 /** Identifiant à donner au patient (la fiche d'origine si c'est votre version). */

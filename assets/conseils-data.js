@@ -7,6 +7,8 @@
    (Ressources > Fiches conseils).
    ========================================================= */
 
+import { FICHES_PATHO } from "./fiches-patho.js";
+
 export const CONSEILS_FOURNIS = [
   /* Affiches « L'info kiné du mois » : l'image est la fiche, le texte la reprend (lecture à l'écran, accessibilité) */
   {
@@ -330,7 +332,9 @@ Trop long, trop difficile, des jours qui ne vous arrangent pas ? Dites-le à vot
 - Lors d'un pic de douleur ou de stress.
 
 La respiration guidée de l'application (RespiR) vous accompagne avec une bille qui monte et descend : suivez-la simplement des yeux.`
-  }
+  },
+  /* Fiches conseils par pathologie, jointes d'office avec leur modèle */
+  ...FICHES_PATHO
 ];
 
 /* ---------- Petit format de texte → HTML ---------- */
