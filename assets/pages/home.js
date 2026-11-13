@@ -463,10 +463,11 @@ async function renderKine(user){
     const h = document.getElementById("hello-nom"); if(h) h.textContent = "Bonjour " + prenom(C.monNom());
     document.querySelectorAll('[data-tile="outils"] .t-sub').forEach(x => { x.textContent = "Affichage, aide"; });
   });
-  const { newPatientSheet, accessSheet } = await import("../kine-ui.js");
+  const { newPatientSheet } = await import("../kine-ui.js");
   $("#t-new").onclick = async () => {
     const p = await newPatientSheet();
-    if(p){ accessSheet(p); }
+    // Ouvre directement la fiche du patient (avec la fenêtre d'accès), pour enchaîner bilan ou programme
+    if(p){ location.href = `/cloud.html?patient=${encodeURIComponent(p.cle)}&acces=1`; }
   };
 
   try{
