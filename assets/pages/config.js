@@ -2,6 +2,7 @@
    Créer / modifier une séance ou un programme (kiné)
    ========================================================= */
 
+import { fichesDuModele } from "../fiches-patho.js";
 import {
   $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, promptDialog, openSheet,
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
@@ -119,6 +120,7 @@ async function init(){
     const d = store.get("gt_draft");
     S = { ...blank(), nom: d.nom || "", series: d.series || 1, exercices: (d.exercices || []).map(normExo) };
     if(d.origine) S.origine = d.origine;   // modèle et niveau d'origine (pour faire évoluer le programme)
+    if(d.origine?.nom) S.conseils = fichesDuModele(d.origine.nom);   // fiche conseils de la pathologie, jointe d'office
     if(d.semaines && d.semaines > 1){
       S.type = "programme"; S.semaines = d.semaines; S.parSemaine = d.seancesParSemaine || 3;
       S.jours = d.jours && d.jours.length === S.parSemaine ? d.jours : DEFAULT_JOURS[S.parSemaine] || [1, 3, 5];
@@ -747,9 +749,19 @@ async function applyModele(m){
     S.exercices.push(...exos);
     if(!S.nom.trim()){ S.nom = prog.nom; $("#nom").value = S.nom; $("#nom").dispatchEvent(new Event("input")); }
   }
+  /* Fiche conseils de la pathologie : jointe d'office (décochable dans « Fiches conseils à joindre ») */
+  let ficheAjoutee = false;
+  if(mode.kind !== "edit-modele"){
+    try{
+      const ids = fichesDuModele(m.nom || String(m.titre || "").split(",")[0]);
+      const avant = new Set(S.conseils || []);
+      const neufs = ids.filter(id => !avant.has(id));
+      if(neufs.length){ S.conseils = [...avant, ...neufs]; ficheAjoutee = true; renderConseils(); }
+    }catch(e){ console.warn("Fiche conseils du modèle :", e); }
+  }
   persist(); renderExos(); renderSend(false);
   sideLib?.then(l => l.refresh());
-  toast(how === "remplacer" ? `Modèle « ${m.titre} » chargé : adaptez-le puis envoyez-le.` : `${plural(exos.length, "exercice")} ajouté${exos.length > 1 ? "s" : ""}.`, { type:"ok" });
+  toast((how === "remplacer" ? `Modèle « ${m.titre} » chargé : adaptez-le puis envoyez-le.` : `${plural(exos.length, "exercice")} ajouté${exos.length > 1 ? "s" : ""}.`) + (ficheAjoutee ? " Sa fiche conseils est jointe." : ""), { type:"ok" });
   if(!matchMedia("(min-width:1100px)").matches) $("#exos")?.scrollIntoView({ behavior:"smooth", block:"start" });
 }
 const countIn = e => S.exercices.filter(x => String(x.id) === String(e.id) && (x.source || "CABINET") === e.source).length;
