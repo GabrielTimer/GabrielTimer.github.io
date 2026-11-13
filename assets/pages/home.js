@@ -439,12 +439,12 @@ async function renderKine(user){
       <a data-tile="respir" class="tile" href="/respir/index.html"><span class="t-ico">${icon("wind")}</span><strong>Respiration</strong><span class="t-sub">RespiR</span></a>
       <a data-tile="outils" class="tile" href="/admin_tools.html"><span class="t-ico">${icon("settings")}</span><strong>Outils et réglages</strong><span class="t-sub">Cabinet, statistiques, corbeille, aide</span></a>
     </div>
-    <section class="section" id="jour-sec" hidden><div class="section-title">Aujourd'hui<span class="badge" id="jour-n"></span></div><div id="jour"></div></section>
-    <section class="section" id="evol-sec" hidden><div class="section-title">À faire évoluer<span class="badge" id="evol-n"></span></div><div id="evol"></div></section>
     <div class="kine-cols section">
       <section><div class="section-title">À surveiller</div><div id="watch">${loadingHTML()}</div></section>
       <section><div class="section-title">Activité récente</div><div id="activity">${loadingHTML()}</div></section>
     </div>
+    <section class="section" id="jour-sec" hidden><div class="section-title">Aujourd'hui<span class="badge" id="jour-n"></span></div><div id="jour"></div></section>
+    <section class="section" id="evol-sec" hidden><div class="section-title">À faire évoluer<span class="badge" id="evol-n"></span></div><div id="evol"></div></section>
     <footer class="app-foot">${appMarkHTML()}</footer>`;
 
   import("../tiles-reorder.js").then(R => {
