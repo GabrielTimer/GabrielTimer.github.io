@@ -49,8 +49,8 @@ app.innerHTML = `
   <div class="tools">
     <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher un patient" autocomplete="off"></label>
     <select class="select" id="sort" aria-label="Trier">
+      <option value="nom" selected>Par nom</option>
       <option value="score">À surveiller d'abord</option>
-      <option value="nom">Par nom</option>
       <option value="recent">Activité récente</option>
     </select>
   </div>
