@@ -616,11 +616,8 @@ async function kineView(param){
     });
     s.el.querySelector("#mo-del") && (s.el.querySelector("#mo-del").onclick = async () => {
       s.close();
-      const nom = await promptDialog({ title:"Supprimer le patient", label:`Pour confirmer, tapez le nom : ${nomAffiche(patient.nom)}`, confirm:"Supprimer définitivement" });
-      if(nom === null) return;
-      // Peu importe l'ordre des mots, les majuscules ou les accents (« Test 2 » = « 2 TEST »)
-      const mots = v => String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[\s_]+/).filter(Boolean).sort().join(" ");
-      if(mots(nom) !== mots(patient.nom)){ toast("Le nom ne correspond pas. Rien n'a été supprimé.", { type:"err" }); return; }
+      const ok = await confirmDialog({ title:`Supprimer ${patient.nom} ?`, message:"Le dossier, tous ses programmes, séances, bilans et messages seront définitivement effacés. Impossible de revenir en arrière.", confirm:"Supprimer définitivement", cancel:"Annuler", danger:true });
+      if(!ok) return;
       try{
         const r = await C.deletePatient(patient.cle);
         toast(r?.incomplet ? "Patient supprimé (quelques éléments n'ont pas pu être effacés)." : "Patient supprimé.", { type:"ok" });
