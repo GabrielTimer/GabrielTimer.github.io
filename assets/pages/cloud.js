@@ -354,10 +354,13 @@ async function kineView(param){
             <p class="muted small">${icon("lock", "ic-inline")} La messagerie de ce patient est réservée à son kiné.</p>` : (() => {
             const box = M.buildInbox({ patients:[patient], messages, seances });
             const nonLus = box.filter(i => !i.lu);
-            const feed = [
+            const feedTout = [
               ...messages.map(m => ({ date:m.date || 0, msg:m, lu: m.de === "kine" || !!m.lu })),
               ...valides.filter(s => s.commentaire || s.ressenti).map(s => ({ date:s.dateValidation, s, lu: !box.some(i => i.kind === "commentaire" && i.id === s.id && !i.lu) }))
-            ].sort((a, b) => b.date - a.date).slice(0, 8);
+            ].sort((a, b) => b.date - a.date);
+            /* Les 3 derniers, plus les non lus plus anciens ; le reste dans « Tout voir » */
+            const feed = feedTout.filter((f, i) => i < 3 || !f.lu).slice(0, 6);
+            const caches = feedTout.length - feed.length;
             return `<div class="panel-head" style="flex-wrap:wrap"><h2 style="font-size:var(--fs-lg)">Messages et ressentis</h2>
               <button class="btn sm" type="button" id="msg-ecrire">${icon("send")}Écrire</button>
               <a class="btn sm ghost" href="/messages.html?patient=${encodeURIComponent(patient.cle)}">Tout voir</a>
@@ -370,7 +373,7 @@ async function kineView(param){
               <div class="${f.lu ? "" : "is-new"}">
                 <div class="m-meta">${esc(fmtShortDate(f.s.dateValidation))}, ${esc(f.s.label || f.s.nom || "séance")}${f.s.ressenti ? ` : ${esc(ressentiLabel(f.s.ressenti).toLowerCase())}` : ""}${f.s.eva !== undefined && f.s.eva !== null ? `, douleur ${esc(f.s.eva)}/10` : ""}${f.lu ? "" : ` <span class="badge danger">Nouveau</span>`}</div>
                 ${f.s.commentaire ? `<div class="quote">${esc(f.s.commentaire)}</div>` : ""}
-              </div>`).join("")}</div>` : `<p class="muted small">Le patient n'a pas encore laissé de message.</p>`}`;
+              </div>`).join("")}</div>${caches > 0 ? `<a class="btn sm ghost msg-more" href="/messages.html?patient=${encodeURIComponent(patient.cle)}">${caches} message${caches > 1 ? "s" : ""} plus ancien${caches > 1 ? "s" : ""}</a>` : ""}` : `<p class="muted small">Le patient n'a pas encore laissé de message.</p>`}`;
           })()}
         </section>
       </div>
@@ -412,6 +415,7 @@ async function kineView(param){
     };
     $("#apercu").onclick = () => window.open(`/index.html?apercu=${patient.cle}`, "_blank");
     $("#edit").onclick = editPatient;
+    $$(".msg-list .quote").forEach(q => q.addEventListener("click", () => q.classList.toggle("open")));   // un clic déplie le message
     $("#msg-ecrire")?.addEventListener("click", () => M.ecrireAuPatient(C, patient, { onSent: m => { messages.unshift(m); render(); } }));
     $("#msg-lu")?.addEventListener("click", async e => {
       e.currentTarget.disabled = true;
