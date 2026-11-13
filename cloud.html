@@ -26,7 +26,13 @@
   @media (min-width:700px){ .kpis.four{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
   .cols{ display:grid; gap:16px; }
   @media (min-width:1000px){ .cols{ grid-template-columns:1.4fr 1fr; align-items:start; } }
-  .msg-list{ display:flex; flex-direction:column; gap:12px; }
+  .msg-list{ display:flex; flex-direction:column; gap:8px; }
+  /* Historique compact : 2 lignes par message, un clic déplie */
+  .msg-list .quote{ font-size:var(--fs-sm); padding:6px 10px; margin-top:3px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; cursor:pointer; }
+  .msg-list .quote.open{ display:block; -webkit-line-clamp:unset; }
+  .msg-list .quote.pre{ white-space:normal; }
+  .msg-list .quote.pre.open{ white-space:pre-wrap; }
+  .msg-more{ margin-top:8px; }
   .msg-list .m-meta{ font-size:var(--fs-xs); color:var(--ink-3); font-weight:700; }
   .msg-list .is-new .quote{ border-left-color:var(--danger); background:var(--danger-soft, var(--surface-2)); }
   .msg-list .m-meta .badge{ font-size:.68rem; padding:1px 7px; vertical-align:1px; }
