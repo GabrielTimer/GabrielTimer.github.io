@@ -616,12 +616,19 @@ async function kineView(param){
     });
     s.el.querySelector("#mo-del") && (s.el.querySelector("#mo-del").onclick = async () => {
       s.close();
-      const nom = await promptDialog({ title:"Supprimer le patient", label:`Pour confirmer, tapez le nom : ${patient.nom}`, confirm:"Supprimer définitivement" });
+      const nom = await promptDialog({ title:"Supprimer le patient", label:`Pour confirmer, tapez le nom : ${nomAffiche(patient.nom)}`, confirm:"Supprimer définitivement" });
       if(nom === null) return;
-      if(nom.trim().toLowerCase() !== String(patient.nom).trim().toLowerCase()){ toast("Le nom ne correspond pas. Rien n'a été supprimé.", { type:"err" }); return; }
-      await C.deletePatient(patient.cle);
-      toast("Patient supprimé.", { type:"ok" });
-      setTimeout(() => location.replace("/patients.html"), 600);
+      // Peu importe l'ordre des mots, les majuscules ou les accents (« Test 2 » = « 2 TEST »)
+      const mots = v => String(v || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[\s_]+/).filter(Boolean).sort().join(" ");
+      if(mots(nom) !== mots(patient.nom)){ toast("Le nom ne correspond pas. Rien n'a été supprimé.", { type:"err" }); return; }
+      try{
+        const r = await C.deletePatient(patient.cle);
+        toast(r?.incomplet ? "Patient supprimé (quelques éléments n'ont pas pu être effacés)." : "Patient supprimé.", { type:"ok" });
+        setTimeout(() => location.replace("/patients.html"), 600);
+      }catch(err){
+        console.error(err);
+        toast("Suppression impossible : " + (err.message || err), { type:"err", duration:8000 });
+      }
     });
   };
 
