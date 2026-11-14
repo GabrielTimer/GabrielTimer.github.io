@@ -45,8 +45,8 @@ const MOTIFS=[
 ["Traumatologie",[
  ["Fracture"],["Entorse"],["Tendinopathie"],["Lésion musculaire (déchirure, claquage)",null,null,["Reprise du sport"]]]],
 ["Neurologie",[
- ["AVC / hémiplégie","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],["Maladie de Parkinson","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],
- ["Sclérose en plaques","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],["SLA (maladie de Charcot)","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],
+ ["AVC / hémiplégie","neuro","CEN",["Neurologie (AVC, Parkinson, SEP…)"]],["Maladie de Parkinson","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],
+ ["Sclérose en plaques","neuro","CEN",["Neurologie (AVC, Parkinson, SEP…)"]],["SLA (maladie de Charcot)","neuro","CEN",["Neurologie (AVC, Parkinson, SEP…)"]],
  ["Charcot-Marie-Tooth / neuropathie","neuro","PRO",["Neurologie (AVC, Parkinson, SEP…)"]],["Paralysie faciale"],["Neurologie (AVC, Parkinson, SEP…)","neuro"]]],
 ["Équilibre, vertiges, chutes",[
  ["Vertiges","vertiges"],["VPPB (vertige positionnel)","vertiges","VPPB",["Vertiges"]],["Déficit vestibulaire (névrite…)","vertiges","HYPO",["Vertiges"]],

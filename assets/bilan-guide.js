@@ -41,9 +41,15 @@ export function mountGuide(app, ctx){
   const { S, K, B, BC, TC, patient } = ctx;
   const prevS = () => ctx.opts().prev || null;
   const suivi = () => S.type !== "initial" && !!prevS();
-  const ST = () => suivi() ? STEPS_SUIVI : STEPS;
+  /* Bilan rapide (par défaut) : on saute les étapes sans objet pour le motif. Approfondi (S.approf) : tout. */
+  const ST = () => {
+    if(suivi()) return STEPS_SUIVI;
+    if(S.approf) return STEPS;
+    const regs = B.bilanRegions(S), douleur = regs.length > 0 || Object.keys(S.pain || {}).length > 0;
+    return STEPS.filter(([k]) => (k !== "cible" || regs.length) && (k !== "douleur" || douleur));
+  };
   S.q = S.q || {}; S.c = S.c || {}; S.f = S.f || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
-  const ui = { mq: "", mopen: new Set(), step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
+  const ui = { key: S.gstep, hypAuto: false, mq: "", mopen: new Set(), step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
     modeles: null, lib: null, choix: {}, gen: null, seed: 1, loading: false };
   if(ui.step < 0) ui.step = 0;
 
@@ -135,7 +141,7 @@ export function mountGuide(app, ctx){
               <div class="g-q"><div class="g-qt">Type de douleur<span class="g-multi">plusieurs choix</span></div>
                 <div class="g-chips">${K.TYPES.map(t => `<button type="button" class="g-chip" data-gptype="${esc(t)}" aria-pressed="${has(p.types, t)}">${esc(t)}</button>`).join("")}</div></div>
               <button type="button" class="btn ghost sm" data-grm>${icon("trash")}Retirer ${esc(n)}</button>`
-            : `<p class="g-hint">${suivi() && z.length ? "Zones reprises du dernier bilan : touchez chacune pour noter la douleur d'aujourd'hui." : z.length ? "Touchez une zone pour la modifier, ou une autre zone pour l'ajouter." : "Touchez la zone douloureuse sur le schéma."}</p>`}
+            : `${!z.length && regions().length ? `<p class="g-ori">${icon("target")}<span>Motif : <strong>${regions().map(r => esc(K.REG[r].n)).join(", ")}</strong>. Touchez la zone et le côté sur le schéma, ou passez à la suite : les questions et tests de cette région seront proposés.</span></p>` : ""}<p class="g-hint">${suivi() && z.length ? "Zones reprises du dernier bilan : touchez chacune pour noter la douleur d'aujourd'hui." : z.length ? "Touchez une zone pour la modifier, ou une autre zone pour l'ajouter." : "Touchez la zone douloureuse sur le schéma."}</p>`}
             ${z.length ? `<div class="g-qt" style="margin-top:18px">Zones notées</div><div class="g-chips">${z.map(([zn, q]) => `<button type="button" class="g-chip" data-gpick="${esc(zn)}" aria-pressed="${zn === n}"><span class="eva-pill" style="--c:${evaColor(q.eva)}"><i></i>${esc(zn)} · ${q.eva}${prevS()?.pain?.[zn] ? ` <span class="faint">(avant ${esc(prevS().pain[zn].eva)})</span>` : ""}</span></button>`).join("")}</div>` : ""}
           </div>
         </div>`;
@@ -172,7 +178,8 @@ export function mountGuide(app, ctx){
       const regs = regions();
       if(!regs.length) return `<h2 class="g-h">Questions ciblées</h2><p class="g-hint">Pas de questions ciblées pour l'instant : notez une zone (genou, épaule, dos, nuque, cheville, hanche, coude, main, dorsales, thorax) ou cochez « Vertiges », « Neurologie », « Mâchoire (ATM) » ou « Dorsalgie » dans le motif.</p>`;
       return `<h2 class="g-h">Questions ciblées</h2>` + regs.map(reg => {
-        const r = K.REG[reg], qs = K.ENT.REGQ[reg] || [];
+        /* Bilan rapide après une opération : les questions d'orientation diagnostique ne servent pas, seuls les drapeaux rouges restent */
+        const r = K.REG[reg], qs = !S.approf && TX.isPostOp(S) ? [] : (K.ENT.REGQ[reg] || []);
         const zs = B.zonesOfRegion(S, reg);
         const rfOn = r.RF.filter(x => zs.some(z => has(B.zoneState(S, z).s, x)));
         return `<section class="g-card">
@@ -195,7 +202,11 @@ export function mountGuide(app, ctx){
       const zs = zonesTestees();
       const reco = TC.tfRecommandes(S);
       const tfAvant = prevS()?.f || {};
-      const tf = (K.TF || []).filter(t => reco.has(t[0]) || (S.f[t[0]] ?? "") !== "" || String(tfAvant[t[0]] ?? "") !== "");
+      const ordre = [...reco], rang = t => { const i = ordre.indexOf(t[0]); return i < 0 ? 99 : i; };
+      const tfVu = t => reco.has(t[0]) || (S.f[t[0]] ?? "") !== "" || String(tfAvant[t[0]] ?? "") !== "";
+      const tf = (K.TF || []).filter(tfVu).sort((a, b) => rang(a) - rang(b));
+      const tfAutres = S.approf ? (K.TF || []).filter(t => !tfVu(t)) : [];
+      const postop = TX.isPostOp(S) || (S.c.patho || []).some(m => /Fracture/.test(m));
       const cliniques = zs.map(n => {
         const reg = regOfZone(n), r = K.REG[reg];
         if(!r) return "";
@@ -216,21 +227,31 @@ export function mountGuide(app, ctx){
         const ori = o.filter(h => h.score > 0);
         return `<section class="g-card">
           <h3>${esc(n)} <span class="badge lagon">${esc(r.n)}</span></h3>
-          ${ori.length ? `<p class="g-ori">${icon("target")}<span>D'après l'entretien : <strong>${ori.map(h => esc(h.label)).join(", ")}</strong></span></p>` : `<p class="g-hint">Pas d'orientation particulière d'après l'entretien : tous les tests sont proposés.</p>`}
+          ${ori.length ? `<p class="g-ori">${icon("target")}<span>D'après le motif et l'entretien : <strong>${ori.map(h => esc(h.label)).join(", ")}</strong></span></p>` : postop && !S.approf ? `<p class="g-hint">Après une opération ou une fracture : amplitudes, force, œdème, cicatrice et tests fonctionnels ci-dessous suffisent en général.</p>` : `<p class="g-hint">Pas d'hypothèse particulière d'après le motif et l'entretien.</p>`}
           ${top.length ? `<div class="g-qt">${Object.keys(avant).length ? "À refaire (faits au dernier bilan) et prioritaires" : "À faire en priorité"}</div>${top.map(row).join("")}` : ""}
-          ${rest.length ? (top.length ? `<details class="g-more"><summary>Autres tests (${rest.length})</summary>${rest.map(row).join("")}</details>` : rest.map(row).join("")) : ""}
+          ${rest.length ? (top.length || (!S.approf && !Object.keys(avant).length)
+            ? `<details class="g-more" ${!top.length && rest.some(t => c.t[t[0]]) ? "open" : ""}><summary>${top.length ? "Autres tests" : postop ? "Tests spécifiques (en général inutiles après une opération ou une fracture récente)" : "Tests de dépistage (facultatifs)"} (${rest.length})</summary>${rest.map(row).join("")}</details>`
+            : rest.map(row).join("")) : ""}
         </section>`;
       }).join("");
       return `<h2 class="g-h">Tests</h2>
         ${cliniques || `<p class="g-hint">Pas de tests cliniques pour les zones notées.</p>`}
-        ${tf.length ? `<section class="g-card"><h3>Tests fonctionnels conseillés</h3>
+        ${tf.length || tfAutres.length ? `<section class="g-card"><h3>Tests fonctionnels conseillés</h3>
           <p class="g-hint">Remplissez seulement ceux réalisés. Touchez le nom pour le protocole et la vidéo.</p>
-          <div class="mes-grid">${tf.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})${String(tfAvant[k] ?? "") !== "" ? ` · avant ${esc(tfAvant[k])}` : ""}</span></label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div>
-        </section>` : ""}`;
+          <div class="mes-grid">${tf.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})${String(tfAvant[k] ?? "") !== "" ? ` · avant ${esc(tfAvant[k])}` : ""}</span></label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("") || `<p class="g-hint">Aucun test fonctionnel particulier pour ce motif.</p>`}</div>
+          ${tfAutres.length ? `<details class="g-more"><summary>Autres tests fonctionnels (${tfAutres.length})</summary><div class="mes-grid">${tfAutres.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div></details>` : ""}
+        </section>` : ""}
+        ${!S.approf ? `<p class="g-hint">Bilan rapide : seuls les tests utiles pour le motif sont proposés. Bouton « Rapide » en haut pour passer en bilan approfondi.</p>` : ""}`;
     },
 
     synthese(){
       const regs = regions();
+      /* Hypothèse la plus probable (motif + entretien + tests) cochée d'office, une fois */
+      if(!ui.hypAuto && !(S.c.hyp || []).length){
+        const auto = regs.map(reg => B.orientation(S, reg)[0]).filter(h => h && h.score > 0).map(h => h.label);
+        if(auto.length){ S.c.hyp = auto; changed(); }
+      }
+      ui.hypAuto = true;
       const hyps = regs.map(reg => {
         const r = K.REG[reg], o = B.orientation(S, reg);
         const zs = B.zonesOfRegion(S, reg);
@@ -372,13 +393,15 @@ export function mountGuide(app, ctx){
   /* ---------- Rendu ---------- */
 
   function render(){
-    if(ui.step >= ST().length) ui.step = ST().length - 1;
-    const k = ST()[ui.step][0];
+    const L = ST(), ki = L.findIndex(s => s[0] === ui.key);
+    ui.step = ki >= 0 ? ki : Math.min(ui.step, L.length - 1);
+    const k = L[ui.step][0];
+    ui.key = k;
     S.gstep = k;
     root.innerHTML = `
       <div class="g-top">
         <div class="g-id"><strong>${esc(B.typeLabel(S.type))}</strong><span>${esc(nomAffiche(patient.nom))}</span><span id="st" class="save-st"></span></div>
-        <div class="row" style="--gap:8px"><button class="btn sm" type="button" data-gact="photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
+        <div class="row" style="--gap:8px">${suivi() ? "" : `<button class="btn sm ${S.approf ? "primary" : ""}" type="button" data-gapprof aria-pressed="${!!S.approf}" title="Rapide : seulement ce qui sert pour le motif. Approfondi : toutes les étapes et tous les tests.">${icon(S.approf ? "layers" : "sparkle")}${S.approf ? "Approfondi" : "Rapide"}</button>`}<button class="btn sm" type="button" data-gact="photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
         <button class="btn sm" type="button" data-gact="full">${icon("list")}Vue complète</button></div>
       </div>
       <nav class="g-steps" aria-label="Étapes du bilan">${ST().map(([sk, l], i) => `<button type="button" data-gstep="${i}" aria-current="${i === ui.step ? "step" : "false"}" class="${stepDone(sk) ? "done" : ""}"><b>${stepDone(sk) && i !== ui.step ? icon("check") : i + 1}</b><span>${esc(l)}</span></button>`).join("")}</nav>
@@ -410,6 +433,7 @@ export function mountGuide(app, ctx){
 
   const go = i => {
     ui.step = Math.max(0, Math.min(ST().length - 1, i));
+    ui.key = ST()[ui.step][0];
     render();
     window.scrollTo({ top:0, behavior:"smooth" });
     changed();
@@ -432,8 +456,17 @@ export function mountGuide(app, ctx){
 
     if(d.gnav){ go(ui.step + Number(d.gnav)); return; }
     if(d.gstep){ go(+d.gstep); return; }
-    if(d.gtype){ S.type = d.gtype; ui.step = Math.max(0, ST().findIndex(x => x[0] === S.gstep)); changed(); refresh(); return; }
-    if(d.gc){ toggle(S.c[d.gc] = S.c[d.gc] || [], d.v); changed(); refresh(); return; }
+    if(d.gtype){ S.type = d.gtype; ui.step = Math.max(0, ST().findIndex(x => x[0] === S.gstep)); ui.key = ST()[ui.step][0]; changed(); refresh(); return; }
+    if(d.gapprof !== undefined){ S.approf = !S.approf; changed(); refresh(); toast(S.approf ? "Bilan approfondi : toutes les étapes et tous les tests" : "Bilan rapide : seulement ce qui sert pour le motif"); return; }
+    if(d.gc){
+      const on = toggle(S.c[d.gc] = S.c[d.gc] || [], d.v);
+      /* Le motif répond d'office à « Comment est-ce arrivé ? » (modifiable à l'étape Histoire) */
+      if(d.gc === "patho" && on && !S.q.debut){
+        if(/^Post-op|Après une opération|^Post-opératoire$/.test(d.v)) S.q.debut = "Après une opération";
+        else if(/Entorse|Fracture|Luxation|Coup du lapin|Lésion musculaire/.test(d.v)) S.q.debut = "Traumatisme / accident";
+      }
+      changed(); refresh(); return;
+    }
     if(d.gm){ toggle(S.q[d.gm] = Array.isArray(S.q[d.gm]) ? S.q[d.gm] : [], d.v); changed(); refresh(); return; }
     if(d.g1){ S.q[d.g1] === d.v ? delete S.q[d.g1] : (S.q[d.g1] = d.v); changed(); refresh(); return; }
     if(d.yn){ S.q[d.yn] === d.v ? delete S.q[d.yn] : (S.q[d.yn] = d.v); changed(); refresh(); return; }

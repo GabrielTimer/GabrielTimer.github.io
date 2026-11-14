@@ -51,11 +51,44 @@ const SPEC_HYP = {
   CEN:["Neurologie"], CER:["Neurologie"], PRO:["Neurologie", "Gériatrie et chutes"]
 };
 
-/** Tests fonctionnels recommandés pour un bilan : motifs cochés + zones douloureuses. Renvoie un Set d'id. */
+/* Motif précis → tests fonctionnels utiles (2 à 4, du plus utile au moins utile).
+   Un motif précis absent de cette liste passe par ses motifs parents (TF_TAGS). [] = aucun test fonctionnel. */
+const TF_MOTIF = {
+  "Lombalgie":[], "Lombalgie chronique":[], "Lumbago (lombalgie aiguë)":[], "Sciatique":[], "Hernie discale":[], "Cruralgie":[],
+  "Canal lombaire étroit":["tf_6mwt", "tf_tug"], "Cervicalgie":[], "Névralgie cervico-brachiale":["tf_grip"], "Céphalées":[], "Coup du lapin (whiplash)":[],
+  "Dorsalgie":[], "Scoliose / posture":[], "Tassement vertébral":["tf_tug", "tf_sls"],
+  "Épaule douloureuse (coiffe, conflit)":[], "Rupture de la coiffe":[], "Capsulite rétractile":[], "Instabilité / luxation d’épaule":[], "Fracture de l’épaule (humérus, clavicule)":[],
+  "Épicondylalgie (tennis elbow)":["tf_grip"], "Épitrochléite (golf elbow)":["tf_grip"], "Canal carpien":["tf_grip"], "Tendinite de De Quervain":["tf_grip"],
+  "Rhizarthrose":["tf_grip"], "Douleur du poignet côté petit doigt (TFCC)":["tf_grip"], "Fracture du poignet":["tf_grip"], "Doigt (entorse, fracture, tendon)":["tf_grip"],
+  "Coxarthrose":["tf_30sts", "tf_tug", "tf_6mwt"], "Tendinopathie du moyen fessier":["tf_sls", "tf_30sts"], "Conflit fémoro-acétabulaire":["tf_ybal"], "Pubalgie":["tf_ybal", "tf_ybalasym"],
+  "Gonalgie":["tf_30sts"], "Gonarthrose":["tf_30sts", "tf_tug", "tf_6mwt"], "Syndrome fémoro-patellaire":["tf_ybal", "tf_5sts"],
+  "Entorse du genou / LCA":["tf_ybal", "tf_hop", "tf_triplehop"], "Entorse d’un ligament collatéral (LLI / LLE)":["tf_ybal", "tf_sls"],
+  "Lésion méniscale":["tf_ybal", "tf_5sts"], "Tendinopathie rotulienne":["tf_ybal", "tf_hop"],
+  "Entorse de cheville":["tf_sls", "tf_ybal", "tf_wblt"], "Tendinopathie d’Achille":["tf_wblt", "tf_sls"], "Fasciite / épine calcanéenne":["tf_wblt"],
+  "Fracture de cheville ou du pied":["tf_wblt", "tf_sls", "tf_tug"],
+  "Post-op : prothèse de hanche":["tf_tug", "tf_30sts", "tf_10mwt"], "Post-op : prothèse de genou":["tf_tug", "tf_30sts", "tf_10mwt"],
+  "Post-op : ligamentoplastie du LCA":["tf_ybal", "tf_hop", "tf_triplehop"], "Post-op : épaule (coiffe, stabilisation)":[], "Post-op : rachis":["tf_tug", "tf_6mwt"],
+  "Post-op : main, poignet":["tf_grip"], "Post-op : cheville, pied":["tf_wblt", "tf_sls", "tf_tug"],
+  "AVC / hémiplégie":["tf_10mwt", "tf_tug", "tf_berg", "tf_6mwt"], "Maladie de Parkinson":["tf_tug", "tf_10mwt", "tf_minibest", "tf_5sts"],
+  "Sclérose en plaques":["tf_10mwt", "tf_6mwt", "tf_berg"], "SLA (maladie de Charcot)":["tf_10mwt", "tf_tug", "tf_grip"],
+  "Charcot-Marie-Tooth / neuropathie":["tf_10mwt", "tf_sls", "tf_berg"], "Paralysie faciale":[],
+  "Vertiges":["tf_dgi", "tf_sls"], "VPPB (vertige positionnel)":["tf_dgi"], "Déficit vestibulaire (névrite…)":["tf_dgi", "tf_minibest", "tf_sls"],
+  "Trouble de l’équilibre":["tf_tug", "tf_berg", "tf_sls", "tf_minibest"], "Chutes / personne âgée":["tf_tug", "tf_30sts", "tf_sls", "tf_10mwt"],
+  "Ostéoporose":["tf_tug", "tf_30sts", "tf_sls"],
+  "Respiratoire":["tf_6mwt", "tf_30sts"], "BPCO / réhabilitation respiratoire":["tf_6mwt", "tf_30sts"], "Encombrement bronchique":[], "Respiratoire après une opération":["tf_30sts"],
+  "Douleur thoracique":[], "Remise en forme / reconditionnement":["tf_6mwt", "tf_30sts"],
+  "Mâchoire (ATM)":[], "Lymphœdème / après cancer du sein":["tf_grip"], "Douleur chronique / fibromyalgie":["tf_6mwt", "tf_30sts"],
+  "Périnée / post-partum":[], "Enfant (développement moteur)":[]
+};
+
+/** Tests fonctionnels recommandés pour un bilan : motifs cochés + zones douloureuses. Renvoie un Set d'id (dans l'ordre d'utilité). */
 export function tfRecommandes(S){
-  const motifs = new Set(eff(S?.c?.patho));
+  const choisis = S?.c?.patho || [];
+  const precis = choisis.filter(m => TF_MOTIF[m]);
+  const out = new Set(precis.flatMap(m => TF_MOTIF[m]));
+  /* Motifs généraux (et motifs précis non listés) : règles par motif parent */
+  const motifs = new Set(eff(choisis.filter(m => !TF_MOTIF[m])));
   const zones = Object.keys(S?.pain || {}).map(z => z.replace(/ [DG]$/, ""));
-  const out = new Set();
   for(const [id, t] of Object.entries(TF_TAGS)){
     const parMotif = t.m.some(m => motifs.has(m));
     const parZone = !!t.z && zones.some(z => t.z.test(z));
