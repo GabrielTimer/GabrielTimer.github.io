@@ -94,9 +94,14 @@ const opts = () => { const p = prevBilan(); return p ? { prev:p.etat, prevDate:p
 const secHTML = (key, { text = true, label = null } = {}) => {
   const [, title, chips] = K.sec(key);
   const on = S.c[key] || [];
+  const chip = c => `<button class="chip" type="button" data-chip="${esc(key)}" data-val="${esc(c)}" aria-pressed="${on.includes(c)}">${esc(c)}</button>`;
+  /* Motifs : rangés par groupe */
+  const corps = key === "patho" && K.MOTIFS?.length
+    ? K.MOTIFS.map(([g, l]) => `<div class="muted" style="font-weight:700;margin:10px 0 6px">${esc(g)}</div><div class="chips">${l.map(x => chip(x[0])).join("")}</div>`).join("")
+    : `<div class="chips">${chips.map(chip).join("")}</div>`;
   return `<div class="sec">
     <div class="sub">${esc(label || title)}</div>
-    <div class="chips">${chips.map(c => `<button class="chip" type="button" data-chip="${esc(key)}" data-val="${esc(c)}" aria-pressed="${on.includes(c)}">${esc(c)}</button>`).join("")}</div>
+    ${corps}
     ${text ? `<textarea class="textarea" data-f="${esc(key)}" placeholder="Précisions…" rows="2">${esc(S.f[key] || "")}</textarea>` : ""}
   </div>`;
 };

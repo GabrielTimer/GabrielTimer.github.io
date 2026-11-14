@@ -43,7 +43,7 @@ export function mountGuide(app, ctx){
   const suivi = () => S.type !== "initial" && !!prevS();
   const ST = () => suivi() ? STEPS_SUIVI : STEPS;
   S.q = S.q || {}; S.c = S.c || {}; S.f = S.f || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
-  const ui = { step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
+  const ui = { mq: "", mopen: new Set(), step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
     modeles: null, lib: null, choix: {}, gen: null, seed: 1, loading: false };
   if(ui.step < 0) ui.step = 0;
 
@@ -60,6 +60,32 @@ export function mountGuide(app, ctx){
 
   const chipsMulti = (key, opts, store = "c") => `<div class="g-chips">${opts.map(o =>
     `<button type="button" class="g-chip" data-${store === "c" ? "gc" : "gm"}="${esc(key)}" data-v="${esc(o)}" aria-pressed="${has(store === "c" ? S.c[key] : S.q[key], o)}">${esc(o)}</button>`).join("")}</div>`;
+
+  /* ---------- Motifs : recherche, choisis, fréquents, puis par groupe ---------- */
+  const sansAccent = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const chipMotif = m => `<button type="button" class="g-chip" data-gc="patho" data-v="${esc(m)}" aria-pressed="${has(S.c.patho, m)}">${esc(m)}</button>`;
+  function motifsListe(){
+    const q = sansAccent(ui.mq).trim();
+    if(q){
+      const mots = q.split(/\s+/);
+      const res = K.MOTIFS.flatMap(([g, l]) => l.map(x => [x[0], g])).filter(([m, g]) => mots.every(w => sansAccent(m + " " + g).includes(w)));
+      return res.length ? `<div class="g-chips">${res.map(([m]) => chipMotif(m)).join("")}</div>`
+        : `<p class="g-hint">Aucun motif ne correspond. Choisissez le plus proche dans les groupes (effacez la recherche).</p>`;
+    }
+    const choisis = S.c.patho || [];
+    return `${K.MOTIFS_FREQUENTS?.length ? `<div class="g-grp-t">Les plus fréquents</div><div class="g-chips">${K.MOTIFS_FREQUENTS.map(chipMotif).join("")}</div>` : ""}
+      ${K.MOTIFS.map(([g, l]) => {
+        const n = l.filter(x => choisis.includes(x[0])).length;
+        return `<details class="g-grp" data-grp="${esc(g)}" ${n || ui.mopen.has(g) ? "open" : ""}><summary>${esc(g)}${n ? ` <span class="g-auto">${n}</span>` : ""}</summary><div class="g-chips">${l.map(x => chipMotif(x[0])).join("")}</div></details>`;
+      }).join("")}`;
+  }
+  function motifsHTML(){
+    const choisis = S.c.patho || [];
+    return `${choisis.length ? `<div class="g-grp-t">Choisi${choisis.length > 1 ? "s" : ""}</div><div class="g-chips">${choisis.map(chipMotif).join("")}</div>` : ""}
+      <input class="input g-search" type="search" data-gmq placeholder="Rechercher un motif (épaule, prothèse, vertige, entorse…)" value="${esc(ui.mq)}" autocomplete="off">
+      <div id="g-motifs">${motifsListe()}</div>
+      <p class="g-hint">Le motif précis oriente les questions, les tests et le traitement proposés : choisissez le plus précis possible.</p>`;
+  }
 
   function question([id, , q, opts, multi]){
     const v = S.q[id];
@@ -92,7 +118,7 @@ export function mountGuide(app, ctx){
       return `<h2 class="g-h">${suivi() ? "Bilan de suivi" : "Pourquoi venez-vous ?"}</h2>${suivi() ? `<p class="g-hint">Pré-rempli d'après le bilan du ${esc(B.fmtISO(ctx.opts().prevDate))} : on ne note que ce qui a changé.</p>` : ""}
         <div class="g-q"><div class="g-qt">Type de bilan</div>
           <div class="g-chips">${B.BTYPES.map(([v, l]) => `<button type="button" class="g-chip" data-gtype="${v}" aria-pressed="${S.type === v}">${esc(l)}</button>`).join("")}</div></div>
-        <div class="g-q"><div class="g-qt">Motif<span class="g-multi">plusieurs choix</span></div>${chipsMulti("patho", K.sec("patho")[2])}</div>`;
+        <div class="g-q"><div class="g-qt">Motif<span class="g-multi">plusieurs choix</span></div>${K.MOTIFS?.length ? motifsHTML() : chipsMulti("patho", K.sec("patho")[2])}</div>`;
     },
 
     zones(){
@@ -510,8 +536,19 @@ export function mountGuide(app, ctx){
     if(act === "send"){ B.sendSheet(S, patient, ctx.opts()); ctx.save(); return; }
   });
 
+  root.addEventListener("toggle", e => {
+    const g = e.target?.dataset?.grp;
+    if(g){ if(e.target.open) ui.mopen.add(g); else ui.mopen.delete(g); }
+  }, true);
+
   root.addEventListener("input", e => {
     e.stopPropagation();
+    if(e.target.dataset && "gmq" in e.target.dataset){
+      ui.mq = e.target.value;
+      const box = root.querySelector("#g-motifs");
+      if(box) box.innerHTML = motifsListe();
+      return;
+    }
     const k = e.target.dataset?.gf;
     if(!k) return;
     S.f[k] = e.target.value;

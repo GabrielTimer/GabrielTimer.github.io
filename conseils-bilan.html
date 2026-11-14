@@ -91,7 +91,7 @@ document.title = `Conseils – ${nom}`;
 /* Blocs de conseils : hypothèses retenues (ou orientées), sinon motif, sinon généraux */
 let blocs = [];
 try{ blocs = T.hypotheses(S, K, B).map(h => CPD.HYP[`${h.reg}:${h.k}`]).filter(Boolean); }catch(e){ console.warn(e); }
-if(!blocs.length) blocs = (S.c?.patho || []).map(m => CPD.MOTIF[m]).filter(Boolean);
+if(!blocs.length) blocs = (typeof motifsEffectifs === "function" ? motifsEffectifs(S.c?.patho || []) : (S.c?.patho || [])).map(m => CPD.MOTIF[m]).filter(Boolean);
 if(!blocs.length) blocs = [CPD.COMMUN.generic];
 blocs = blocs.slice(0, 2);
 const uniq = a => [...new Set(a)];

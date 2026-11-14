@@ -11,7 +11,7 @@
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
 const uniq = a => [...new Set(a.filter(Boolean))];
 
-export const isPostOp = S => (S.c?.patho || []).includes("Post-opératoire") || S.q?.debut === "Après une opération";
+export const isPostOp = S => (S.c?.patho || []).some(m => m === "Post-opératoire" || /^Post-op/.test(m)) || S.q?.debut === "Après une opération";
 
 /* ---------- Profil ---------- */
 
@@ -71,7 +71,7 @@ export function proposition(S, K, B){
   const p = profil(S);
   const post = isPostOp(S);
   const regs = B.bilanRegions(S);
-  const motifs = S.c?.patho || [];
+  const motifs = B.motifs ? B.motifs(S) : (S.c?.patho || []);
   const axes = [], eviter = [], avis = [], modeles = [], autres = [], pathos = [];
   let stop = false;
 

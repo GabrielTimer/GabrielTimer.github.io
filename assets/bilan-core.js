@@ -33,7 +33,7 @@ export async function loadClinic(){
   await loadScript("/bilan-kine/fonctionnels.js").catch(() => {});
   await loadScript("/bilan-kine/entretien.js").catch(() => {});
   await loadScript("/bilan-kine/traitements.js").catch(() => {});
-  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, MOTIF_REG: typeof MOTIF_REG !== 'undefined' ? MOTIF_REG : { 'Vertiges':'vertiges' }, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
+  K = new Function("return { MES, SEC, TYPES, Z, R, MAPPING, SRC, PROM, REG, MOTIF_REG: typeof MOTIF_REG !== 'undefined' ? MOTIF_REG : { 'Vertiges':'vertiges' }, MOTIFS: typeof MOTIFS !== 'undefined' ? MOTIFS : [], MOTIFS_FREQUENTS: typeof MOTIFS_FREQUENTS !== 'undefined' ? MOTIFS_FREQUENTS : [], MOTIF_INFO: typeof MOTIF_INFO !== 'undefined' ? MOTIF_INFO : {}, GUIDE: typeof GUIDE !== 'undefined' ? GUIDE : {}, TF: typeof TF !== 'undefined' ? TF : [], GUIDE_TF: typeof GUIDE_TF !== 'undefined' ? GUIDE_TF : {}, ENT: typeof ENT !== 'undefined' ? ENT : { G:[], REGQ:{} }, TX: typeof TX !== 'undefined' ? TX : null }")();
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
@@ -134,8 +134,13 @@ export const regionSources = r => [...new Set(r.T.map(t => t[4]).concat(r.src ||
 export function bilanRegions(S){
   const out = [];
   Object.keys(S.pain || {}).forEach(n => { const r = regionOf(n); if(r && !out.includes(r)) out.push(r); });
-  (S.c?.patho || []).forEach(m => { const r = (K.MOTIF_REG || {})[m]; if(r && K.REG[r] && !out.includes(r)) out.push(r); });
+  motifs(S).forEach(m => { const r = (K.MOTIF_REG || {})[m]; if(r && K.REG[r] && !out.includes(r)) out.push(r); });
   return out;
+}
+/** Motifs cochés + motifs parents (ex. « Post-op : prothèse de genou » → aussi « Post-opératoire ») : base de tous les filtres. */
+export function motifs(S){
+  const list = S?.c?.patho || [];
+  return typeof globalThis.motifsEffectifs === "function" ? globalThis.motifsEffectifs(list) : list.slice();
 }
 /** Zones « virtuelles » à tester : régions ouvertes par le motif sans zone notée sur le schéma (nom = REG[région].n). */
 export function pseudoZones(S){
@@ -158,6 +163,11 @@ export function orientation(S, reg){
   qs.forEach(([id, q, hint]) => {
     if(S.q?.[reg + ":" + id] !== "Oui") return;
     Object.entries(hint || {}).forEach(([k, w]) => { if(sc[k]){ sc[k].score += w; sc[k].pour.push(q); } });
+  });
+  /* Le motif précis oriente d'office (ex. « Gonarthrose » → hypothèse Gonarthrose du genou) */
+  (S.c?.patho || []).forEach(m => {
+    const i = K.MOTIF_INFO?.[m];
+    if(i && i.r === reg && i.h && sc[i.h]){ sc[i.h].score += 3; sc[i.h].pour.push("Motif : " + m); }
   });
   return Object.values(sc).sort((a, b) => b.score - a.score);
 }

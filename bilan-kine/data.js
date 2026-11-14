@@ -10,8 +10,62 @@
 const ID=[["code","Code patient (initiales + année, sans nom)"],["nom","Nom"],["prenom","Prénom"],["naiss","Date de naissance"],["prof","Profession"]];
 // Mesures : [id, libellé, MID, sens(1 = plus haut est mieux)] ; MID 0 = pas de seuil retenu
 const MES=[["m_nprs","NPRS (0-10)",2,-1],["m_psfs","PSFS (0-10)",2,1],["m_odi","Oswestry (%)",11,-1],["m_ndi","NDI (%)",0,-1],["m_qdash","QuickDASH (%)",8,-1],["m_lefs","LEFS (/80)",9,1]];
+/* ---------- Motifs du bilan, rangés par groupe ----------
+   [nom, région ouverte même sans zone sur le schéma, hypothèse orientée d'office, motifs « parents » (alias)]
+   Les alias gardent valables les règles écrites pour les motifs généraux (Post-opératoire, Entorse, Tendinopathie,
+   Fracture, Gonalgie, Respiratoire…) : tests fonctionnels conseillés, modèles, fiches conseils. */
+const MOTIFS=[
+["Rachis",[
+ ["Lombalgie","lombes"],["Lombalgie chronique","lombes",null,["Lombalgie"]],["Lumbago (lombalgie aiguë)","lombes",null,["Lombalgie"]],
+ ["Sciatique","lombes","RAD"],["Hernie discale","lombes","RAD",["Sciatique"]],["Cruralgie","lombes","RAD"],["Canal lombaire étroit","lombes","STE",["Lombalgie"]],
+ ["Cervicalgie","cerv"],["Névralgie cervico-brachiale","cerv","RAD",["Cervicalgie"]],["Céphalées","cerv","CEF",["Cervicalgie"]],["Coup du lapin (whiplash)","cerv",null,["Cervicalgie"]],
+ ["Dorsalgie","dors","MEC"],["Scoliose / posture","dors","MEC",["Dorsalgie"]],["Tassement vertébral","dors","TAS",["Dorsalgie"]]]],
+["Épaule",[
+ ["Épaule douloureuse (coiffe, conflit)","epaule","RCD",["Tendinopathie"]],["Rupture de la coiffe","epaule","TF"],["Capsulite rétractile","epaule"],
+ ["Instabilité / luxation d’épaule","epaule","INS"],["Fracture de l’épaule (humérus, clavicule)","epaule",null,["Fracture"]]]],
+["Coude, poignet, main",[
+ ["Épicondylalgie (tennis elbow)","coude","EPI",["Tendinopathie"]],["Épitrochléite (golf elbow)","coude","EPT",["Tendinopathie"]],
+ ["Canal carpien","main","CC"],["Tendinite de De Quervain","main","DQ",["Tendinopathie"]],["Rhizarthrose","main","RHZ"],
+ ["Douleur du poignet côté petit doigt (TFCC)","main","TFCC"],["Fracture du poignet","main",null,["Fracture"]],["Doigt (entorse, fracture, tendon)","main"]]],
+["Hanche",[
+ ["Coxarthrose","hanche","OA"],["Tendinopathie du moyen fessier","hanche","GTPS",["Tendinopathie"]],["Conflit fémoro-acétabulaire","hanche","CFA"],
+ ["Pubalgie","hanche",null,["Reprise du sport"]]]],
+["Genou",[
+ ["Gonalgie","genou"],["Gonarthrose","genou","OA",["Gonalgie"]],["Syndrome fémoro-patellaire","genou","SFP",["Gonalgie"]],
+ ["Entorse du genou / LCA","genou","LCA",["Entorse","Gonalgie"]],["Entorse d’un ligament collatéral (LLI / LLE)","genou","COL",["Entorse","Gonalgie"]],
+ ["Lésion méniscale","genou","MEN",["Gonalgie"]],["Tendinopathie rotulienne","genou",null,["Tendinopathie","Gonalgie"]]]],
+["Cheville, pied",[
+ ["Entorse de cheville","chev","ATFL",["Entorse"]],["Tendinopathie d’Achille","chev","ACH",["Tendinopathie"]],
+ ["Fasciite / épine calcanéenne","chev"],["Fracture de cheville ou du pied","chev",null,["Fracture"]]]],
+["Après une opération",[
+ ["Post-op : prothèse de hanche","hanche",null,["Post-opératoire"]],["Post-op : prothèse de genou","genou",null,["Post-opératoire"]],
+ ["Post-op : ligamentoplastie du LCA","genou",null,["Post-opératoire"]],["Post-op : épaule (coiffe, stabilisation)","epaule",null,["Post-opératoire"]],
+ ["Post-op : rachis","lombes",null,["Post-opératoire"]],["Post-op : main, poignet","main",null,["Post-opératoire"]],
+ ["Post-op : cheville, pied","chev",null,["Post-opératoire"]],["Post-opératoire"]]],
+["Traumatologie",[
+ ["Fracture"],["Entorse"],["Tendinopathie"],["Lésion musculaire (déchirure, claquage)",null,null,["Reprise du sport"]]]],
+["Neurologie",[
+ ["AVC / hémiplégie","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],["Maladie de Parkinson","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],
+ ["Sclérose en plaques","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],["SLA (maladie de Charcot)","neuro",null,["Neurologie (AVC, Parkinson, SEP…)"]],
+ ["Charcot-Marie-Tooth / neuropathie","neuro","PRO",["Neurologie (AVC, Parkinson, SEP…)"]],["Paralysie faciale"],["Neurologie (AVC, Parkinson, SEP…)","neuro"]]],
+["Équilibre, vertiges, chutes",[
+ ["Vertiges","vertiges"],["VPPB (vertige positionnel)","vertiges","VPPB",["Vertiges"]],["Déficit vestibulaire (névrite…)","vertiges","HYPO",["Vertiges"]],
+ ["Trouble de l’équilibre"],["Chutes / personne âgée"],["Ostéoporose",null,null,["Chutes / personne âgée"]]]],
+["Respiratoire, cardio",[
+ ["Respiratoire"],["BPCO / réhabilitation respiratoire",null,null,["Respiratoire"]],["Encombrement bronchique",null,null,["Respiratoire"]],
+ ["Respiratoire après une opération",null,null,["Respiratoire"]],["Douleur thoracique","thorax"],
+ ["Remise en forme / reconditionnement"]]],
+["Autres",[
+ ["Mâchoire (ATM)","atm"],["Lymphœdème / après cancer du sein"],["Douleur chronique / fibromyalgie"],["Périnée / post-partum"],
+ ["Enfant (développement moteur)"],["Reprise du sport"]]]
+];
+/* Motifs les plus courants, en tête de la liste */
+const MOTIFS_FREQUENTS=["Lombalgie","Cervicalgie","Sciatique","Épaule douloureuse (coiffe, conflit)","Gonarthrose","Entorse de cheville","Post-op : prothèse de genou","Post-op : prothèse de hanche","Chutes / personne âgée","Vertiges"];
+const MOTIF_INFO={}; MOTIFS.forEach(([g,l])=>l.forEach(([n,r,h,a])=>{MOTIF_INFO[n]={g,r:r||null,h:h||null,a:a||[]};}));
+/** Motifs cochés + leurs motifs parents (alias), sans doublon : sert à toutes les règles du bilan. */
+function motifsEffectifs(list){const out=[];(list||[]).forEach(m=>{[m,...((MOTIF_INFO[m]||{}).a||[])].forEach(x=>{if(!out.includes(x))out.push(x);});});return out;}
 const SEC=[
-["patho","Pathologie / motif",["Lombalgie","Cervicalgie","Dorsalgie","Sciatique","Gonalgie","Entorse","Tendinopathie","Post-opératoire","Fracture","Trouble de l’équilibre","Chutes / personne âgée","Neurologie (AVC, Parkinson, SEP…)","Vertiges","Respiratoire","Reprise du sport","Remise en forme / reconditionnement","Mâchoire (ATM)"]],
+["patho","Pathologie / motif",MOTIFS.flatMap(([,l])=>l.map(x=>x[0]))],
 ["atcd","Antécédents",["HTA","Diabète","Cardiopathie","Chirurgie","Traumatisme","Asthme","Grossesse","Ostéoporose","Cancer"]],
 ["medic","Médication",["Anticoagulants","AINS","Antalgiques","Corticoïdes","Myorelaxants","Aucune"]],
 ["obs","Bilan observationnel",["Boiterie","Attitude antalgique","Raideur","Œdème","Contracture","Amplitude limitée","Force diminuée","Troubles sensitifs"]],
@@ -26,11 +80,11 @@ dos:{mid:[["Occiput",80,8,40,48,20],["Cervicales",91,58,18,22,7],["Dorsales",68,
 side:[["Épaule",44,80,24,28,12],["Bras",40,110,22,52,9],["Avant-bras",36,164,20,50,9],["Main",32,216,20,32,9],["Fessier",64,182,35,36,12],["Cuisse post.",64,220,35,68,12],["Creux poplité",66,290,31,28,12],["Mollet",67,320,28,66,10],["Talon/pied",62,388,34,22,9]],L:"G"}};
 const R={D:"G",G:"D"};
 // Nom de zone du schéma -> clé de région dans REG
-const MAPPING=[[/^(Genou|Creux)/,"genou"],[/^Épaule/,"epaule"],[/^Lombaires$/,"lombes"],[/^(Cervicales|Cou)/,"cerv"],[/^(Pied|Talon)/,"chev"],[/^(Hanche|Fessier)/,"hanche"],[/^Avant-bras/,"coude"],[/^Main/,"main"],[/^Dorsales$/,"dors"],[/^Thorax$/,"thorax"],
+const MAPPING=[[/^Coude$/,"coude"],[/^Cheville \/ pied$/,"chev"],[/^Poignet et main$/,"main"],[/^(Genou|Creux)/,"genou"],[/^Épaule/,"epaule"],[/^Lombaires$/,"lombes"],[/^(Cervicales|Cou)/,"cerv"],[/^(Pied|Talon)/,"chev"],[/^(Hanche|Fessier)/,"hanche"],[/^Avant-bras/,"coude"],[/^Main/,"main"],[/^Dorsales$/,"dors"],[/^Thorax$/,"thorax"],
   /* zones « virtuelles » des régions ouvertes par le motif (voir MOTIF_REG) */
   [/^Vertiges$/,"vertiges"],[/^Neurologie$/,"neuro"],[/^Mâchoire \(ATM\)$/,"atm"]];
 // Motif du bilan -> région ouverte même sans zone sur le schéma (nom de zone virtuelle = REG[région].n)
-const MOTIF_REG={"Vertiges":"vertiges","Neurologie (AVC, Parkinson, SEP…)":"neuro","Mâchoire (ATM)":"atm","Dorsalgie":"dors"};
+const MOTIF_REG=Object.fromEntries(Object.entries(MOTIF_INFO).filter(([,i])=>i.r).map(([n,i])=>[n,i.r]));
 // ===== DONNÉES PROBANTES — test : [nom, hypothèses, LR+, LR−, source, précision] =====
 // LR calculés depuis Se/Sp poolées quand l’étude ne les donne pas : LR+ = Se/(1−Sp) ; LR− = (1−Se)/Sp
 const SRC={

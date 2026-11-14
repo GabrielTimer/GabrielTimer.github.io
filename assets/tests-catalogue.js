@@ -14,6 +14,8 @@ import { youtubeId } from "./library.js";
 const EQ = "Trouble de l’équilibre", NEU = "Neurologie (AVC, Parkinson, SEP…)", CH = "Chutes / personne âgée",
   VE = "Vertiges", RE = "Respiratoire", SP = "Reprise du sport", PO = "Post-opératoire", EN = "Entorse",
   GO = "Gonalgie", TE = "Tendinopathie", FR = "Fracture";
+/* Motifs cochés + motifs parents (alias définis dans bilan-kine/data.js) */
+const eff = l => typeof globalThis.motifsEffectifs === "function" ? globalThis.motifsEffectifs(l || []) : (l || []);
 export const MOTIFS_EN_PLUS = [NEU, CH, VE, RE, SP];   // ajoutés à la liste des motifs du bilan
 
 const ZG = /^(Genou|Creux|Cuisse)/, ZC = /^(Pied|Talon|Jambe|Mollet)/, ZM = /^(Main|Avant-bras|Bras)/, ZMI = /^(Hanche|Fessier|Cuisse|Genou|Creux|Jambe|Mollet|Pied|Talon)/;
@@ -51,7 +53,7 @@ const SPEC_HYP = {
 
 /** Tests fonctionnels recommandés pour un bilan : motifs cochés + zones douloureuses. Renvoie un Set d'id. */
 export function tfRecommandes(S){
-  const motifs = new Set(S?.c?.patho || []);
+  const motifs = new Set(eff(S?.c?.patho));
   const zones = Object.keys(S?.pain || {}).map(z => z.replace(/ [DG]$/, ""));
   const out = new Set();
   for(const [id, t] of Object.entries(TF_TAGS)){
@@ -139,7 +141,7 @@ const Q_ZONES = [
 export function questionnairesConseilles(S){
   const out = [];
   const add = l => l.forEach(k => { if(!out.includes(k)) out.push(k); });
-  const motifs = S?.c?.patho || [];
+  const motifs = eff(S?.c?.patho);
   const zones = Object.keys(S?.pain || {}).map(z => z.replace(/ [DG]$/, ""));
   zones.forEach(z => Q_ZONES.forEach(([re, l]) => { if(re.test(z)) add(l); }));
   motifs.forEach(m => add(Q_MOTIFS[m] || []));
