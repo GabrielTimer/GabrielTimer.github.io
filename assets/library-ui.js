@@ -3,7 +3,7 @@
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
-import { ZONES, TYPES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
+import { ZONES, TYPES, AIDES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
 import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "./filter-drawer.js";
 
 const PAGE = 30;
@@ -15,6 +15,7 @@ const FACETS = [
   { k:"cat",    label:"Zone du corps", ph:"Toutes les zones" },
   { k:"patho",  label:"Pathologie", ph:"Toutes les pathologies", search:true },
   { k:"type",   label:"Type d'exercice", ph:"Tous les types" },
+  { k:"aide",   label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
 const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["CABINET", "Cabinet"], ["HEP", "Base HEP"]];
@@ -37,7 +38,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     source: src0.filter(v => v !== "HIDDEN"),
     spec: asList(saved.spec).filter(x => SPECIALITES.includes(x)),
     cat: asList(saved.cat).filter(x => ZONES.includes(x)),
-    patho: asList(saved.patho), type: asList(saved.type), niveau: asList(saved.niveau)
+    patho: asList(saved.patho), type: asList(saved.type), aide: asList(saved.aide).filter(x => AIDES.includes(x)), niveau: asList(saved.niveau)
   };
 
   root.innerHTML = `
@@ -58,7 +59,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   const all = await loadLibrary();
   all.forEach(e => classer(e));
 
-  const save = () => store.set(persistKey, { q: state.q, masques: state.masques, source: state.source, spec: state.spec, cat: state.cat, patho: state.patho, type: state.type, niveau: state.niveau });
+  const save = () => store.set(persistKey, { q: state.q, masques: state.masques, source: state.source, spec: state.spec, cat: state.cat, patho: state.patho, type: state.type, aide: state.aide, niveau: state.niveau });
 
   const match = (e, k, vals) => {
     if(!vals.length) return true;
@@ -68,6 +69,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       case "cat":    return vals.includes(e.zone);
       case "patho":  return vals.some(v => e.pathos.includes(v));
       case "type":   return vals.some(v => e.types.includes(v));
+      case "aide":   return vals.some(v => (e.aides || []).includes(v));
       case "niveau": return vals.some(v => v === "4" ? e.niveau >= 4 : e.niveau === Number(v));
     }
     return true;
@@ -103,6 +105,9 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     }else if(k === "type"){
       list.forEach(e => e.types.forEach(add));
       opts = TYPES.map(v => ({ v, label:v }));
+    }else if(k === "aide"){
+      list.forEach(e => (e.aides || []).forEach(add));
+      opts = AIDES.map(v => ({ v, label:v }));
     }else if(k === "niveau"){
       list.forEach(e => add(e.niveau >= 4 ? "4" : String(e.niveau)));
       opts = NIVEAUX.map(([v, label]) => ({ v, label }));

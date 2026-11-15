@@ -29,6 +29,9 @@ const MODE_VERS_TYPE = {
   "equilibre": "Équilibre et proprioception", "gainage": "Gainage", "respiration": "Respiration", "isometrique": "Isométrique",
   "statique": "Isométrique", "pnf": "Étirement"
 };
+/* Aide à la marche du patient pour laquelle l'exercice est prévu (de la moins autonome à la plus autonome) */
+export const AIDES = ["Alité", "Au fauteuil", "Barres parallèles", "Déambulateur", "2 cannes", "1 canne", "Sans aide"];
+
 export const TYPES = ["Renforcement", "Étirement", "Mobilité", "Gainage", "Équilibre et proprioception", "Isométrique", "Respiration", "Cardio", "Contrôle moteur", "Au fauteuil (seniors)", "Ludique", "Au cabinet"];
 
 /* Spécialités, dans l'ordre d'affichage */
@@ -143,6 +146,9 @@ export function classer(e){
   if(e.source === "CABINET" && e.raw?.au_cabinet) types.add("Au cabinet");
   /* Spécialités ajoutées à la main sur l'exercice (éditeur) */
   (Array.isArray(e.specialites) ? e.specialites : []).forEach(x => { if(SPECIALITES.includes(x)) specs.add(x); });
+  /* Aide à la marche (champ « aide_marche » des exercices, modifiable dans l'éditeur) */
+  e.aides = AIDES.filter(a => (Array.isArray(e.aides) ? e.aides : []).includes(a));
+  if(e.aides.includes("Au fauteuil")) types.add("Au fauteuil (seniors)");
   e.zone = zone;
   e.types = [...types];
   e.pathos = pathos;

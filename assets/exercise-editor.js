@@ -4,6 +4,7 @@
    ========================================================= */
 
 import { esc, icon, openSheet, toast, confirmDialog, exoImageHTML, settings } from "./app.js";
+import { AIDES } from "./classement.js";
 import { applyEdit, exerciseKey, EDITABLE, fromCustom, addToLibrary, removeFromLibrary, loadLibrary, youtubeId, PERSO } from "./library.js";
 
 const lines = v => String(v || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
@@ -139,6 +140,10 @@ export async function openExerciseEditor(e, { onSaved = () => {} } = {}){
 
         ${text("tags", "Mots-clés", (base.tags || []).join(", "), { ph: "Ex. sport, debout, sans matériel", hint: "Séparez par des virgules. Ils servent à retrouver l'exercice dans la recherche." })}
         ${text("pathologies", "Indications", (base.pathologies || []).join(", "), { ph: "Ex. Lombalgie, LCA", hint: "Séparez par des virgules" })}
+        <div class="field"><span class="label">Aide à la marche du patient</span>
+          <div class="row wrap" style="--gap:6px 14px">${AIDES.map(a => `<label class="row" style="--gap:6px;align-items:center"><input type="checkbox" data-aide value="${esc(a)}" ${(base.aides || []).includes(a) ? "checked" : ""} style="width:18px;height:18px">${esc(a)}</label>`).join("")}</div>
+          <span class="hint">Pour retrouver l'exercice avec le filtre « Aide à la marche » de la bibliothèque.</span>
+        </div>
         ${text("materiel", "Matériel", (base.materiel || []).join(", "), { ph: "Ex. Élastique, tapis", hint: "Séparez par des virgules" })}
         ${text("muscles", "Muscles", (base.muscles || []).join(", "), { ph: "Ex. Grand fessier, ischio-jambiers" })}
         ${text("video", "Lien vidéo", videoValue(base), { type: "url", ph: "YouTube, Vimeo ou autre lien", hint: "Les vidéos YouTube et Vimeo s'affichent directement dans l'application." })}
@@ -200,6 +205,7 @@ export async function openExerciseEditor(e, { onSaved = () => {} } = {}){
     tags: items(val("tags")),
     pathologies: items(val("pathologies")),
     materiel: items(val("materiel")),
+    aides: [...form.querySelectorAll("[data-aide]:checked")].map(x => x.value),
     muscles: items(val("muscles")),
     image: image || null,
     ...parseVideo(val("video")),

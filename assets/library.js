@@ -127,6 +127,7 @@ function fromCabinet(x){
     muscles: toList(x.muscles_cibles),
     tags: toList(x.tags),
     specialites: toList(x.specialites),
+    aides: toList(x.aide_marche),
     conseil_posture: toList(x.conseil_posture),
     erreurs_frequentes: toList(x.erreurs_frequentes),
     respiration: toList(x.respiration),
@@ -169,6 +170,7 @@ function fromHep(x){
     muscles: toList(x.muscles_principaux),
     tags: toList(x.tags_fr),
     specialites: toList(x.specialites),
+    aides: toList(x.aide_marche),
     conseil_posture: [], erreurs_frequentes: [], respiration: [], version_facile: [],
     version_avancee: (() => {
       const p = String(x.progression || "");
@@ -193,7 +195,7 @@ export const EDITABLE = [
   "nom", "consignes", "position", "description", "conseil_posture", "erreurs_frequentes",
   "precautions", "contreIndications", "version_facile", "version_avancee", "materiel", "niveau",
   "categorie", "mode", "tags", "pathologies", "muscles", "image", "youtube", "vimeo", "videos",
-  "ex", "repos", "reps"
+  "ex", "repos", "reps", "aides"
 ];
 
 /** Correspondance bibliothèque → exercice enregistré dans une séance (réglages ex/repos/reps exclus :
@@ -222,7 +224,7 @@ export function fromCustom(id, f = {}){
     position: f.position || "",
     precautions: list(f.precautions), contreIndications: list(f.contreIndications),
     objectifs: list(f.objectifs), pathologies: list(f.pathologies), materiel: list(f.materiel),
-    muscles: list(f.muscles), tags: list(f.tags),
+    muscles: list(f.muscles), tags: list(f.tags), aides: list(f.aides),
     conseil_posture: list(f.conseil_posture), erreurs_frequentes: list(f.erreurs_frequentes), respiration: list(f.respiration),
     version_facile: list(f.version_facile), version_avancee: list(f.version_avancee),
     videos: Array.isArray(f.videos) ? f.videos : [], youtube: f.youtube || "", vimeo: f.vimeo || "",
@@ -262,7 +264,7 @@ function snapshot(e){
 
 function indexSearch(e){
   classer(e);
-  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.zone, e.mode, ...e.types, e.source === "PERSO" ? "mes exercices perso" : "", ...e.pathologies, ...e.pathos, ...e.objectifs, ...e.tags, ...e.materiel, ...e.muscles].join(" "));
+  e.search = norm([e.nom, e.nomOriginal, e.categorie, e.zone, e.mode, ...e.types, e.source === "PERSO" ? "mes exercices perso" : "", ...e.pathologies, ...e.pathos, ...e.objectifs, ...e.tags, ...(e.aides || []), ...e.materiel, ...e.muscles].join(" "));
 }
 
 /** Applique une correction (ou la retire si fields est null) à un exercice de la bibliothèque. */

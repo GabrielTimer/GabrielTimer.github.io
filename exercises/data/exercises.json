@@ -56,7 +56,10 @@
     "objectifs": [
       "posture"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Au fauteuil"
+    ]
   },
   {
     "id": "FAUT_POST_02",
@@ -115,7 +118,10 @@
     "objectifs": [
       "posture"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Au fauteuil"
+    ]
   },
   {
     "id": "FAUT_POST_03",
@@ -175,7 +181,10 @@
     "objectifs": [
       "posture cervicale"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Au fauteuil"
+    ]
   },
   {
     "id": "FAUT_POST_04",
@@ -234,7 +243,10 @@
     "objectifs": [
       "respiration"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Au fauteuil"
+    ]
   },
   {
     "id": "FAUT_POST_05",
@@ -294,7 +306,10 @@
     "objectifs": [
       "renforcement dos"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Au fauteuil"
+    ]
   },
   {
     "id": "lombalgie1_ex1",
@@ -14887,6 +14902,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "aide_marche": [
+      "Alité"
     ]
   },
   {
@@ -14975,6 +14993,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "aide_marche": [
+      "Alité"
     ]
   },
   {
@@ -15067,6 +15088,10 @@
     "zones": [
       "Jambes",
       "Tronc"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil"
     ]
   },
   {
@@ -15155,6 +15180,9 @@
     ],
     "zones": [
       "Jambes"
+    ],
+    "aide_marche": [
+      "Sans aide"
     ]
   },
   {
@@ -15239,6 +15267,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "aide_marche": [
+      "Sans aide"
     ]
   },
   {
@@ -15324,6 +15355,9 @@
     ],
     "zones": [
       "Bras"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -15409,6 +15443,9 @@
     ],
     "zones": [
       "Jambes"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -15495,6 +15532,9 @@
     "zones": [
       "Épaule",
       "Bras"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -15579,6 +15619,9 @@
     ],
     "zones": [
       "Main"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -15662,6 +15705,10 @@
     ],
     "zones": [
       "Jambes"
+    ],
+    "aide_marche": [
+      "Sans aide",
+      "1 canne"
     ]
   },
   {
@@ -15745,6 +15792,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "aide_marche": [
+      "Sans aide"
     ]
   },
   {
@@ -15829,6 +15879,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -15916,6 +15969,9 @@
     ],
     "zones": [
       "Cheville et pied"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -16002,6 +16058,10 @@
     ],
     "zones": [
       "Cheville et pied"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil"
     ]
   },
   {
@@ -16087,6 +16147,9 @@
     ],
     "zones": [
       "Épaule"
+    ],
+    "aide_marche": [
+      "Alité"
     ]
   },
   {
@@ -16173,6 +16236,9 @@
     "zones": [
       "Épaule",
       "Bras"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -16261,6 +16327,10 @@
     "zones": [
       "Hanche",
       "Genou"
+    ],
+    "aide_marche": [
+      "Sans aide",
+      "Déambulateur"
     ]
   },
   {
@@ -16348,6 +16418,9 @@
     "zones": [
       "Tronc",
       "Dos"
+    ],
+    "aide_marche": [
+      "Au fauteuil"
     ]
   },
   {
@@ -16434,6 +16507,9 @@
     "zones": [
       "Dos",
       "Cervicales"
+    ],
+    "aide_marche": [
+      "Sans aide"
     ]
   },
   {
@@ -16523,6 +16599,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "aide_marche": [
+      "Sans aide"
     ]
   },
   {
@@ -18295,7 +18374,11 @@
       "Obstacles plus bas"
     ],
     "zones": [],
-    "zones_corporelles": []
+    "zones_corporelles": [],
+    "aide_marche": [
+      "Sans aide",
+      "1 canne"
+    ]
   },
   {
     "audio_cues": [],
@@ -18361,7 +18444,10 @@
       "Objet posé sur une marche"
     ],
     "zones": [],
-    "zones_corporelles": []
+    "zones_corporelles": [],
+    "aide_marche": [
+      "Sans aide"
+    ]
   },
   {
     "audio_cues": [],
@@ -18423,7 +18509,10 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": []
+    "zones_corporelles": [],
+    "aide_marche": [
+      "Sans aide"
+    ]
   },
   {
     "audio_cues": [],
@@ -18486,7 +18575,11 @@
       "Petite hauteur"
     ],
     "zones": [],
-    "zones_corporelles": []
+    "zones_corporelles": [],
+    "aide_marche": [
+      "Sans aide",
+      "Déambulateur"
+    ]
   },
   {
     "audio_cues": [],
@@ -22550,6 +22643,4607 @@
     ],
     "zones": [],
     "zones_corporelles": [],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, jambes tendues",
+      "Tirer les pointes de pied vers soi",
+      "Puis les pousser vers le bas",
+      "Rythme régulier, en respirant calmement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 15 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "LIT_01",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [
+      "Tibial antérieur",
+      "Mollets"
+    ],
+    "niveau": 1,
+    "nom": "Pompage des chevilles au lit",
+    "objectif": "Activer la circulation et garder des chevilles souples",
+    "objectifs": [
+      "Activer la circulation et garder des chevilles souples"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Senior",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Mollet rouge, chaud, gonflé ou douloureux : prévenir le médecin"
+    ],
+    "repos": 15,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Circulation"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Un pied après l'autre"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, petit coussin roulé sous le genou",
+      "Tirer la pointe du pied vers soi",
+      "Écraser le coussin en tendant le genou, tenir 5 s",
+      "Relâcher complètement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Bloquer sa respiration"
+    ],
+    "ex": 40,
+    "exercise_mode": "isometrique",
+    "id": "LIT_02",
+    "image": "",
+    "materiel": [
+      "Lit",
+      "Petit coussin ou serviette roulée"
+    ],
+    "muscles_cibles": [
+      "Quadriceps"
+    ],
+    "niveau": 1,
+    "nom": "Écraser le coussin sous le genou",
+    "objectif": "Réveiller et renforcer le quadriceps",
+    "objectifs": [
+      "Réveiller et renforcer le quadriceps"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "Senior"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, jambes tendues",
+      "Plier le genou en faisant glisser le talon sur le lit",
+      "Aller jusqu'où c'est confortable",
+      "Revenir lentement jambe tendue"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "LIT_03",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Glisser le talon vers les fesses",
+    "objectif": "Garder la souplesse du genou et de la hanche",
+    "objectifs": [
+      "Garder la souplesse du genou et de la hanche"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "Senior"
+    ],
+    "precautions": [
+      "Prothèse de hanche : ne pas dépasser l'angle autorisé par le chirurgien"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Mobilité"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Une serviette sous le talon pour mieux glisser"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, jambes tendues",
+      "Écarter une jambe sur le côté en la faisant glisser",
+      "Genou et pointe du pied vers le plafond",
+      "Ramener la jambe sans dépasser le milieu"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [
+      "Laisser le pied tourner vers l'extérieur"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "LIT_04",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [
+      "Moyen fessier"
+    ],
+    "niveau": 1,
+    "nom": "Écarter la jambe en glissant sur le lit",
+    "objectif": "Renforcer le moyen fessier pour la marche",
+    "objectifs": [
+      "Renforcer le moyen fessier pour la marche"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Senior",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Prothèse de hanche : ne jamais croiser les jambes"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Hanche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat",
+      "Serrer les fesses et décoller le bassin",
+      "Tenir 3 s en haut",
+      "Redescendre doucement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "LIT_05",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [
+      "Grand fessier",
+      "Ischio-jambiers"
+    ],
+    "niveau": 2,
+    "nom": "Pont fessier au lit",
+    "objectif": "Renforcer les fessiers et faciliter les soins au lit",
+    "objectifs": [
+      "Renforcer les fessiers et faciliter les soins au lit"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de genou",
+      "Senior",
+      "Déconditionnement / reprise",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Fessiers"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Sur une jambe"
+    ],
+    "version_facile": [
+      "Décoller le bassin de quelques centimètres seulement"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat",
+      "Coussin entre les genoux",
+      "Serrer le coussin 5 s",
+      "Relâcher"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "isometrique",
+    "id": "LIT_06",
+    "image": "",
+    "materiel": [
+      "Lit",
+      "Coussin"
+    ],
+    "muscles_cibles": [
+      "Adducteurs"
+    ],
+    "niveau": 1,
+    "nom": "Serrer un coussin entre les genoux",
+    "objectif": "Renforcer l'intérieur des cuisses",
+    "objectifs": [
+      "Renforcer l'intérieur des cuisses"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Senior",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Adducteurs"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, une petite bouteille d'eau dans chaque main",
+      "Coudes pliés le long du corps",
+      "Pousser les bouteilles vers le plafond, bras tendus",
+      "Redescendre lentement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "LIT_07",
+    "image": "",
+    "materiel": [
+      "Lit",
+      "2 petites bouteilles d'eau (0,5 l)"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Pectoraux",
+      "Deltoïdes"
+    ],
+    "niveau": 1,
+    "nom": "Pousser vers le plafond avec deux bouteilles",
+    "objectif": "Garder la force des bras pour se relever et utiliser une aide à la marche",
+    "objectifs": [
+      "Garder la force des bras pour se relever et utiliser une aide à la marche"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Senior",
+      "Déconditionnement / reprise",
+      "SLA (maladie de Charcot)"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Bras"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Bouteilles de 1 l"
+    ],
+    "version_facile": [
+      "Sans bouteille"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Dos",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat",
+      "Laisser tomber doucement les deux genoux d'un côté",
+      "Revenir au centre",
+      "Puis de l'autre côté, épaules posées"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 15 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "LIT_08",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Bascule des genoux d'un côté à l'autre",
+    "objectif": "Assouplir le dos et préparer le retournement",
+    "objectifs": [
+      "Assouplir le dos et préparer le retournement"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Senior",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie"
+    ],
+    "precautions": [
+      "Prothèse de hanche récente : petite amplitude seulement"
+    ],
+    "repos": 15,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Mobilité"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, une jambe pliée pied à plat",
+      "Autre jambe tendue, pointe vers soi",
+      "Lever la jambe tendue à la hauteur de l'autre genou, tenir 3 s",
+      "Redescendre lentement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Plier le genou en montant",
+      "Creuser le dos"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "LIT_09",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Psoas"
+    ],
+    "niveau": 2,
+    "nom": "Lever la jambe tendue au lit",
+    "objectif": "Renforcer la cuisse pour se lever et marcher",
+    "objectifs": [
+      "Renforcer la cuisse pour se lever et marcher"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "Déconditionnement / reprise",
+      "Senior"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, jambes tendues",
+      "Plier un genou en glissant le talon pendant que l'autre jambe se tend",
+      "Alterner comme un pédalage lent",
+      "Garder les talons sur le lit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "LIT_10",
+    "image": "",
+    "materiel": [
+      "Lit"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pédalage alterné au lit",
+    "objectif": "Entretenir la coordination des jambes",
+    "objectifs": [
+      "Entretenir la coordination des jambes"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Senior",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Coordination"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Allongé sur le dos, genoux pliés, pieds à plat",
+      "Mains à plat sur le matelas ou sur la potence",
+      "Décoller les fesses en poussant sur les pieds",
+      "Se déplacer vers la tête du lit, petit à petit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "LIT_11",
+    "image": "",
+    "materiel": [
+      "Lit",
+      "Potence (si disponible)"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Se remonter dans le lit",
+    "objectif": "Se replacer seul dans le lit",
+    "objectifs": [
+      "Se replacer seul dans le lit"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Senior",
+      "Post-opératoire",
+      "Sclérose en plaques",
+      "AVC / hémiplégie"
+    ],
+    "precautions": [
+      "Tête de lit à plat si possible"
+    ],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Lit",
+      "Autonomie"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au fond du fauteuil, pieds à plat",
+      "Talons posés au sol",
+      "Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+      "Reposer doucement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_01",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Tibial antérieur",
+      "Releveurs des orteils"
+    ],
+    "niveau": 1,
+    "nom": "Relever les pointes de pied assis",
+    "objectif": "Renforcer les releveurs du pied pour ne plus accrocher",
+    "objectifs": [
+      "Renforcer les releveurs du pied pour ne plus accrocher"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Prévention des chutes",
+      "Senior"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Pied tombant"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Petit poids posé sur l'avant-pied"
+    ],
+    "version_facile": [
+      "Un pied après l'autre"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au bord du fauteuil, pieds à plat",
+      "Monter les talons en restant sur les pointes",
+      "Reposer les talons, puis relever les pointes",
+      "Enchaîner en rythme"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_02",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Mollets",
+      "Tibial antérieur"
+    ],
+    "niveau": 1,
+    "nom": "Talons puis pointes assis",
+    "objectif": "Muscler mollets et releveurs, aider la circulation",
+    "objectifs": [
+      "Muscler mollets et releveurs, aider la circulation"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Prévention des chutes",
+      "Senior",
+      "Maladie de Parkinson",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Cheville"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Mains appuyées sur les genoux pour ajouter du poids"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, élastique en boucle autour des deux avant-pieds",
+      "Talons posés au sol, pieds serrés",
+      "Tourner un pied vers l'extérieur contre l'élastique",
+      "Revenir lentement, puis l'autre pied"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Tourner tout le genou au lieu du pied"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_03",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Élastique en boucle"
+    ],
+    "muscles_cibles": [
+      "Fibulaires (péroniers)"
+    ],
+    "niveau": 2,
+    "nom": "Tourner le pied vers l'extérieur contre l'élastique",
+    "objectif": "Renforcer les muscles qui stabilisent la cheville (fibulaires)",
+    "objectifs": [
+      "Renforcer les muscles qui stabilisent la cheville (fibulaires)"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Entorse chronique cheville",
+      "Prévention des chutes"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Cheville",
+      "Élastique"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Sans élastique"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, pied nu posé sur une serviette étalée au sol",
+      "Talon fixe",
+      "Ramener la serviette sous le pied en pliant les orteils",
+      "Étaler la serviette et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_04",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Serviette"
+    ],
+    "muscles_cibles": [
+      "Muscles intrinsèques du pied"
+    ],
+    "niveau": 1,
+    "nom": "Froisser une serviette avec les orteils",
+    "objectif": "Muscler les petits muscles du pied",
+    "objectifs": [
+      "Muscler les petits muscles du pied"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Prévention des chutes",
+      "Senior",
+      "Pied plat"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Pied"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Poser un petit poids au bout de la serviette"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, pied nu sur une balle (à picots si possible)",
+      "Rouler la balle des orteils au talon",
+      "Appuyer un peu plus fort là où c'est agréable",
+      "Changer de pied"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "2 × 60 s, repos 15 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "mobilite",
+    "id": "FAUT_05",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Balle à picots ou balle de tennis"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Rouler une balle sous le pied",
+    "objectif": "Réveiller la sensibilité de la plante du pied",
+    "objectifs": [
+      "Réveiller la sensibilité de la plante du pied"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Senior",
+      "Prévention des chutes",
+      "Fasciite plantaire"
+    ],
+    "precautions": [
+      "Plaie ou peau fragile sous le pied : ne pas faire",
+      "Diabète : vérifier ses pieds après l'exercice"
+    ],
+    "repos": 15,
+    "reps": 2,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Pied",
+      "Sensibilité"
+    ],
+    "timer_config": {
+      "cycles": 2,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au fond du fauteuil, dos contre le dossier",
+      "Tendre un genou, pointe du pied vers soi",
+      "Tenir 3 s jambe tendue",
+      "Reposer lentement, puis l'autre jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_06",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Quadriceps"
+    ],
+    "niveau": 1,
+    "nom": "Tendre le genou assis",
+    "objectif": "Renforcer les cuisses pour se lever et marcher",
+    "objectifs": [
+      "Renforcer les cuisses pour se lever et marcher"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Prothèse de genou",
+      "Post-opératoire",
+      "Charcot-Marie-Tooth",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Lest de 0,5 à 2 kg à la cheville"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au bord du fauteuil, dos droit",
+      "Lever un genou, puis l'autre, comme pour marcher",
+      "Balancer les bras en même temps",
+      "Garder un rythme régulier"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "dynamique",
+    "id": "FAUT_07",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Psoas",
+      "Quadriceps"
+    ],
+    "niveau": 1,
+    "nom": "Marche assise, genoux levés",
+    "objectif": "Travailler la levée de la jambe et l'endurance",
+    "objectifs": [
+      "Travailler la levée de la jambe et l'endurance"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth",
+      "Déconditionnement / reprise",
+      "AVC / hémiplégie"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Marche",
+      "Cardio"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Compter à voix haute",
+      "Lever plus haut et plus vite"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, élastique en boucle au-dessus des genoux",
+      "Pieds à plat, écartés de la largeur du bassin",
+      "Écarter les genoux contre l'élastique, tenir 2 s",
+      "Revenir doucement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_08",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Élastique en boucle"
+    ],
+    "muscles_cibles": [
+      "Moyen fessier"
+    ],
+    "niveau": 1,
+    "nom": "Écarter les genoux contre l'élastique",
+    "objectif": "Renforcer les fessiers pour l'équilibre",
+    "objectifs": [
+      "Renforcer les fessiers pour l'équilibre"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Prothèse de hanche",
+      "Déconditionnement / reprise",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Fessiers",
+      "Élastique"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, un ballon ou un coussin entre les genoux",
+      "Serrer 5 s",
+      "Relâcher sans laisser tomber le ballon",
+      "Garder le dos droit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "isometrique",
+    "id": "FAUT_09",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Ballon souple ou coussin"
+    ],
+    "muscles_cibles": [
+      "Adducteurs"
+    ],
+    "niveau": 1,
+    "nom": "Serrer un ballon entre les genoux assis",
+    "objectif": "Renforcer l'intérieur des cuisses",
+    "objectifs": [
+      "Renforcer l'intérieur des cuisses"
+    ],
+    "pathologies": [
+      "Senior",
+      "Déconditionnement / reprise",
+      "Post-opératoire"
+    ],
+    "precautions": [],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Adducteurs"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "coude",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au fond du fauteuil, mains sur les accoudoirs",
+      "Pieds à plat au sol",
+      "Pousser sur les mains pour décoller les fesses, tenir 2 s",
+      "Se reposer doucement"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_10",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Triceps",
+      "Grand dorsal"
+    ],
+    "niveau": 2,
+    "nom": "Soulever les fesses en poussant sur les accoudoirs",
+    "objectif": "Muscler les bras pour se lever et s'appuyer sur l'aide à la marche",
+    "objectifs": [
+      "Muscler les bras pour se lever et s'appuyer sur l'aide à la marche"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Senior",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Sclérose en plaques",
+      "SLA (maladie de Charcot)",
+      "AVC / hémiplégie"
+    ],
+    "precautions": [
+      "Fauteuil stable, qui ne glisse pas"
+    ],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Bras",
+      "Transferts"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Pieds décollés du sol"
+    ],
+    "version_facile": [
+      "S'aider davantage des jambes"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Mini-pédalier posé au sol devant le fauteuil",
+      "Fauteuil calé contre un mur pour ne pas reculer",
+      "Pédaler à un rythme régulier",
+      "On doit pouvoir parler en pédalant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "2 × 5 min, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 300,
+    "exercise_mode": "dynamique",
+    "id": "FAUT_11",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Mini-pédalier"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pédalier devant le fauteuil",
+    "objectif": "Entretenir l'endurance et la souplesse des jambes",
+    "objectifs": [
+      "Entretenir l'endurance et la souplesse des jambes"
+    ],
+    "pathologies": [
+      "Senior",
+      "Déconditionnement / reprise",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth",
+      "Perte d'autonomie",
+      "Respiratoire (BPCO, asthme…)"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 2,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Cardio",
+      "Endurance"
+    ],
+    "timer_config": {
+      "cycles": 2,
+      "maintien": 300,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Augmenter la résistance",
+      "Pédaler en arrière"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avancer les fesses au bord du fauteuil",
+      "Pieds à plat, un peu en arrière des genoux",
+      "Pencher le buste en avant jusqu'à ce que les fesses s'allègent",
+      "Revenir s'asseoir droit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Pousser avec le dos vers l'arrière",
+      "Pieds trop en avant"
+    ],
+    "ex": 40,
+    "exercise_mode": "mobilite",
+    "id": "FAUT_12",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Se pencher en avant, nez au-dessus des orteils",
+    "objectif": "Apprendre le bon mouvement pour se lever",
+    "objectifs": [
+      "Apprendre le bon mouvement pour se lever"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Maladie de Parkinson",
+      "Perte d'autonomie",
+      "AVC / hémiplégie",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Transferts",
+      "Lever"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Fesses au bord du fauteuil, pieds en arrière des genoux",
+      "Mains sur les accoudoirs, buste penché en avant",
+      "Pousser sur les jambes et les mains pour se lever",
+      "Se rasseoir lentement en touchant le fauteuil avec les mollets avant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "FAUT_13",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Se lever du fauteuil et se rasseoir",
+    "objectif": "Se lever seul, en sécurité",
+    "objectifs": [
+      "Se lever seul, en sécurité"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth",
+      "Perte d'autonomie",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Aide à la marche à portée de main",
+      "Quelqu'un à côté au début"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Transferts",
+      "Lever"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Sans les mains, bras croisés"
+    ],
+    "version_facile": [
+      "Rehausser l'assise avec un coussin ferme"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Epaule",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, dos droit, bâton tenu à deux mains",
+      "Monter le bâton au-dessus de la tête en inspirant",
+      "Redescendre en soufflant",
+      "Garder les épaules basses"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 20 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "FAUT_14",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Bâton ou manche à balai"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Lever les bras avec un bâton assis",
+    "objectif": "Garder des épaules souples et se redresser",
+    "objectifs": [
+      "Garder des épaules souples et se redresser"
+    ],
+    "pathologies": [
+      "Senior",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Perte d'autonomie",
+      "Ostéoporose"
+    ],
+    "precautions": [
+      "Ne pas forcer dans la douleur d'épaule"
+    ],
+    "repos": 20,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Épaules",
+      "Posture"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Tronc",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis au bord du fauteuil, pieds à plat",
+      "Objet posé sur une table à côté, un peu plus loin que le bras",
+      "Aller le chercher en penchant le buste, puis le ramener",
+      "Recommencer de l'autre côté"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "equilibre",
+    "id": "FAUT_15",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs",
+      "Table",
+      "Petits objets"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Attraper un objet loin sur le côté",
+    "objectif": "Améliorer l'équilibre assis",
+    "objectifs": [
+      "Améliorer l'équilibre assis"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Maladie de Parkinson"
+    ],
+    "precautions": [
+      "Fauteuil stable, freins serrés si fauteuil roulant"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Objet posé plus loin ou plus bas"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Assis, une jambe tendue, talon posé au sol",
+      "Dessiner de grands cercles avec la pointe du pied",
+      "Dans un sens puis dans l'autre",
+      "Changer de jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "2 × 45 s, repos 15 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "mobilite",
+    "id": "FAUT_16",
+    "image": "",
+    "materiel": [
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Cercles de chevilles assis",
+    "objectif": "Assouplir les chevilles",
+    "objectifs": [
+      "Assouplir les chevilles"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Senior",
+      "Entorse chronique cheville",
+      "Perte d'autonomie"
+    ],
+    "precautions": [],
+    "repos": 15,
+    "reps": 2,
+    "respiration": [],
+    "tags": [
+      "Assis",
+      "Cheville",
+      "Mobilité"
+    ],
+    "timer_config": {
+      "cycles": 2,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Au fauteuil",
+      "Alité"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Déambulateur placé juste devant soi, freins serrés",
+      "Avancer les fesses au bord, pieds en arrière des genoux",
+      "Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+      "Une fois debout, poser une main puis l'autre sur les poignées"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tirer sur le déambulateur : il bascule vers soi"
+    ],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_01",
+    "image": "",
+    "materiel": [
+      "Déambulateur",
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Se lever du fauteuil avec le déambulateur",
+    "objectif": "Se lever en sécurité avec son déambulateur",
+    "objectifs": [
+      "Se lever en sécurité avec son déambulateur"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Transferts",
+      "Lever"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Reculer jusqu'à sentir le fauteuil derrière les mollets",
+      "Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
+      "Pencher le buste en avant",
+      "S'asseoir lentement, sans se laisser tomber"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [
+      "S'asseoir trop tôt, avant de sentir le fauteuil"
+    ],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_02",
+    "image": "",
+    "materiel": [
+      "Déambulateur",
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "S'asseoir dans le fauteuil avec le déambulateur",
+    "objectif": "S'asseoir en contrôlant la descente",
+    "objectifs": [
+      "S'asseoir en contrôlant la descente"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Transferts"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Pieds écartés de la largeur du bassin",
+      "Se grandir, regard devant soi",
+      "Respirer calmement, rester debout le temps prévu"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "statique",
+    "id": "DEAMB_03",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Tenir debout au déambulateur",
+    "objectif": "Retrouver de l'endurance debout",
+    "objectifs": [
+      "Retrouver de l'endurance debout"
+    ],
+    "pathologies": [
+      "Perte d'autonomie",
+      "Senior",
+      "Post-opératoire",
+      "SLA (maladie de Charcot)",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois",
+      "Fauteuil juste derrière soi"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Station debout"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Rester debout plus longtemps"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Déplacer doucement le poids du corps sur la jambe droite",
+      "Puis sur la jambe gauche",
+      "Garder le buste droit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "equilibre",
+    "id": "DEAMB_04",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+    "objectif": "Oser s'appuyer sur chaque jambe",
+    "objectifs": [
+      "Oser s'appuyer sur chaque jambe"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Prévention des chutes",
+      "Senior",
+      "Sclérose en plaques"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois",
+      "Après une opération : respecter l'appui autorisé"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Monter lentement sur la pointe des pieds",
+      "Tenir 2 s en haut",
+      "Redescendre doucement sur les talons"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_05",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Mollets"
+    ],
+    "niveau": 1,
+    "nom": "Montées sur la pointe des pieds au déambulateur",
+    "objectif": "Renforcer les mollets pour mieux pousser à la marche",
+    "objectifs": [
+      "Renforcer les mollets pour mieux pousser à la marche"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Prévention des chutes",
+      "Senior",
+      "Sclérose en plaques",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Mollets"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Cheville",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Relever les pointes de pied en restant sur les talons",
+      "Petit mouvement, fesses qui ne partent pas en arrière",
+      "Reposer doucement les pieds"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_06",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Tibial antérieur"
+    ],
+    "niveau": 2,
+    "nom": "Relever les pointes de pied au déambulateur",
+    "objectif": "Renforcer les releveurs du pied debout",
+    "objectifs": [
+      "Renforcer les releveurs du pied debout"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "AVC / hémiplégie",
+      "Sclérose en plaques",
+      "Prévention des chutes"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois",
+      "Fauteuil juste derrière soi"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Pied tombant"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Un pied après l'autre"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Plier un peu les genoux, comme pour s'asseoir",
+      "Garder le dos droit et les talons au sol",
+      "Remonter en poussant sur les jambes"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [
+      "Genoux qui rentrent vers l'intérieur"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_07",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Mini-flexions des genoux au déambulateur",
+    "objectif": "Renforcer les cuisses",
+    "objectifs": [
+      "Renforcer les cuisses"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "Déconditionnement / reprise",
+      "Charcot-Marie-Tooth",
+      "Sclérose en plaques"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Quadriceps"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Lever un genou puis l'autre, comme pour marcher",
+      "Bien décoller le pied du sol",
+      "Garder un rythme régulier"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "dynamique",
+    "id": "DEAMB_08",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Psoas",
+      "Releveurs du pied"
+    ],
+    "niveau": 1,
+    "nom": "Marche sur place au déambulateur",
+    "objectif": "Apprendre à bien lever le pied en marchant",
+    "objectifs": [
+      "Apprendre à bien lever le pied en marchant"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Prévention des chutes",
+      "Senior",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Lever les genoux plus haut"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Écarter une jambe tendue sur le côté",
+      "Pointe du pied vers l'avant, buste droit",
+      "Revenir doucement, puis l'autre jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [
+      "Pencher le buste du côté opposé"
+    ],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_09",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Moyen fessier"
+    ],
+    "niveau": 1,
+    "nom": "Écarter la jambe sur le côté au déambulateur",
+    "objectif": "Renforcer le moyen fessier pour la stabilité",
+    "objectifs": [
+      "Renforcer le moyen fessier pour la stabilité"
+    ],
+    "pathologies": [
+      "Prothèse de hanche",
+      "Post-opératoire",
+      "Senior",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Hanche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Emmener une jambe tendue vers l'arrière",
+      "Serrer la fesse, sans creuser le dos",
+      "Revenir doucement, puis l'autre jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_10",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Grand fessier"
+    ],
+    "niveau": 1,
+    "nom": "Jambe tendue en arrière au déambulateur",
+    "objectif": "Renforcer le grand fessier pour la marche",
+    "objectifs": [
+      "Renforcer le grand fessier pour la marche"
+    ],
+    "pathologies": [
+      "Prothèse de hanche",
+      "Post-opératoire",
+      "Senior",
+      "Prévention des chutes",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Hanche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Plier un genou en amenant le talon vers la fesse",
+      "Garder les genoux côte à côte",
+      "Reposer doucement, puis l'autre jambe"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "renforcement",
+    "id": "DEAMB_11",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [
+      "Ischio-jambiers"
+    ],
+    "niveau": 1,
+    "nom": "Talon vers la fesse au déambulateur",
+    "objectif": "Renforcer l'arrière de la cuisse",
+    "objectifs": [
+      "Renforcer l'arrière de la cuisse"
+    ],
+    "pathologies": [
+      "Prothèse de genou",
+      "Post-opératoire",
+      "Senior",
+      "Déconditionnement / reprise",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Genou"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avancer le déambulateur d'un petit pas devant soi",
+      "Avancer la jambe la plus faible dans le cadre",
+      "Puis la jambe la plus forte, à côté de l'autre",
+      "Rester bien dans le cadre, regard devant soi"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Pousser le déambulateur trop loin devant",
+      "Marcher penché en avant"
+    ],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "DEAMB_12",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Marcher avec le déambulateur",
+    "objectif": "Marcher en sécurité avec son déambulateur",
+    "objectifs": [
+      "Marcher en sécurité avec son déambulateur"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Perte d'autonomie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Pas trop loin du déambulateur",
+      "Rollator : freins à portée de main",
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Marcher plus longtemps",
+      "Couloir puis extérieur"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Tourner le déambulateur petit à petit",
+      "Suivre avec de petits pas, sans croiser les pieds",
+      "Ne jamais pivoter sur un seul pied",
+      "Prendre son temps, s'arrêter si besoin"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Pivoter sur un pied",
+      "Lâcher le déambulateur"
+    ],
+    "ex": 45,
+    "exercise_mode": "equilibre",
+    "id": "DEAMB_13",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Faire demi-tour avec le déambulateur",
+    "objectif": "Tourner sans perdre l'équilibre",
+    "objectifs": [
+      "Tourner sans perdre l'équilibre"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Demi-tour"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées",
+      "Déplacer le déambulateur un peu sur le côté",
+      "Faire un pas de côté avec un pied, puis rapprocher l'autre",
+      "Revenir dans l'autre sens"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 40 s, repos 40 s",
+    "erreurs_frequentes": [
+      "Croiser les pieds"
+    ],
+    "ex": 40,
+    "exercise_mode": "dynamique",
+    "id": "DEAMB_14",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Pas de côté avec le déambulateur",
+    "objectif": "Se déplacer dans les endroits étroits",
+    "objectifs": [
+      "Se déplacer dans les endroits étroits"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Prothèse de hanche"
+    ],
+    "precautions": [
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 40,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Marche latérale"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Rapprocher les pieds l'un contre l'autre",
+      "Tenir sans bouger",
+      "Si c'est facile : lâcher une main, puis l'autre"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "DEAMB_15",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Équilibre pieds serrés au déambulateur",
+    "objectif": "Améliorer l'équilibre debout",
+    "objectifs": [
+      "Améliorer l'équilibre debout"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Senior",
+      "Charcot-Marie-Tooth",
+      "Sclérose en plaques",
+      "Maladie de Parkinson"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois",
+      "Fauteuil juste derrière soi"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Lâcher les deux mains au-dessus des poignées"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout, mains sur les poignées, freins serrés",
+      "Placer un pied devant l'autre, talon contre la pointe",
+      "Tenir en gardant le regard devant soi",
+      "Changer de pied devant"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "DEAMB_16",
+    "image": "",
+    "materiel": [
+      "Déambulateur"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Pied devant l'autre au déambulateur",
+    "objectif": "Travailler l'équilibre sur une base étroite",
+    "objectifs": [
+      "Travailler l'équilibre sur une base étroite"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Charcot-Marie-Tooth",
+      "Sclérose en plaques",
+      "Senior"
+    ],
+    "precautions": [
+      "Rollator : freins serrés pendant tout l'exercice",
+      "Quelqu'un à côté les premières fois",
+      "Fauteuil juste derrière soi"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Déambulateur",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Pieds décalés seulement de moitié"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Marcher avec le rollator le temps prévu",
+      "S'arrêter, serrer les deux freins",
+      "Se retourner et s'asseoir sur le siège du rollator",
+      "Se reposer, puis repartir"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 3 min, repos 120 s",
+    "erreurs_frequentes": [],
+    "ex": 180,
+    "exercise_mode": "dynamique",
+    "id": "DEAMB_17",
+    "image": "",
+    "materiel": [
+      "Rollator (déambulateur à roulettes avec siège)"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche avec pauses assises sur le rollator",
+    "objectif": "Marcher plus loin en s'accordant des pauses",
+    "objectifs": [
+      "Marcher plus loin en s'accordant des pauses"
+    ],
+    "pathologies": [
+      "Senior",
+      "Déconditionnement / reprise",
+      "Sclérose en plaques",
+      "Respiratoire (BPCO, asthme…)",
+      "Maladie de Parkinson",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Toujours serrer les freins avant de s'asseoir",
+      "Rollator posé sur un sol plat"
+    ],
+    "repos": 120,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Rollator",
+      "Endurance",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 180,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Allonger le temps de marche, raccourcir les pauses"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Déambulateur"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
+      "Fesses au bord du fauteuil, buste penché en avant",
+      "Se lever en poussant sur l'accoudoir et sur les cannes",
+      "Debout, passer une canne dans l'autre main avant de marcher"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "CANNES_01",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises",
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Se lever et s'asseoir avec deux cannes",
+    "objectif": "Se lever et s'asseoir en sécurité avec ses cannes",
+    "objectifs": [
+      "Se lever et s'asseoir en sécurité avec ses cannes"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Senior",
+      "Prévention des chutes"
+    ],
+    "precautions": [
+      "Pour s'asseoir : sentir le fauteuil derrière les mollets, reprendre les cannes dans une main"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Transferts"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avancer les deux cannes ensemble, un peu devant",
+      "Avancer la jambe opérée entre les cannes",
+      "Puis avancer la jambe saine à côté",
+      "Appuyer sur les poignées pour soulager la jambe opérée"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Mettre la jambe saine devant les cannes"
+    ],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNES_02",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Marche en 3 temps avec deux cannes",
+    "objectif": "Marcher en soulageant la jambe opérée",
+    "objectifs": [
+      "Marcher en soulageant la jambe opérée"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Entorse / instabilité de cheville"
+    ],
+    "precautions": [
+      "Respecter l'appui autorisé par le chirurgien"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Marche",
+      "Appui partiel"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avancer la canne droite",
+      "Avancer le pied gauche",
+      "Avancer la canne gauche",
+      "Avancer le pied droit, et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNES_03",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Marche en 4 temps avec deux cannes",
+    "objectif": "Marcher lentement avec un maximum de stabilité",
+    "objectifs": [
+      "Marcher lentement avec un maximum de stabilité"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "Sclérose en plaques",
+      "Maladie de Parkinson",
+      "Charcot-Marie-Tooth",
+      "AVC / hémiplégie"
+    ],
+    "precautions": [
+      "Quelqu'un à côté les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Marche",
+      "Coordination"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Avancer en même temps la canne droite et le pied gauche",
+      "Puis la canne gauche et le pied droit",
+      "Comme une marche normale, bras et jambes opposés",
+      "Garder un rythme régulier"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNES_04",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche en 2 temps avec deux cannes",
+    "objectif": "Marcher plus vite et plus naturellement",
+    "objectifs": [
+      "Marcher plus vite et plus naturellement"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth",
+      "Senior"
+    ],
+    "precautions": [
+      "Passer à cette marche quand la marche en 3 ou 4 temps est sûre"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Une main sur la rampe, les cannes dans l'autre main",
+      "Monter d'abord la jambe saine sur la marche",
+      "Puis la jambe opérée et la canne",
+      "Une marche à la fois"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Monter la jambe opérée en premier"
+    ],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNES_05",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises",
+      "Escalier avec rampe"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Monter l'escalier avec les cannes",
+    "objectif": "Monter l'escalier en sécurité",
+    "objectifs": [
+      "Monter l'escalier en sécurité"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Senior"
+    ],
+    "precautions": [
+      "Quelqu'un juste derrière soi les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Escalier"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes",
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Une main sur la rampe, les cannes dans l'autre main",
+      "Poser d'abord la canne sur la marche du dessous",
+      "Descendre la jambe opérée",
+      "Puis la jambe saine, une marche à la fois"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Descendre la jambe saine en premier"
+    ],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNES_06",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises",
+      "Escalier avec rampe"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Descendre l'escalier avec les cannes",
+    "objectif": "Descendre l'escalier en sécurité",
+    "objectifs": [
+      "Descendre l'escalier en sécurité"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Senior"
+    ],
+    "precautions": [
+      "Quelqu'un juste devant soi les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Escalier"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes",
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout entre les deux cannes, pieds écartés",
+      "Déplacer doucement le poids sur la jambe opérée",
+      "Tenir 3 s, puis revenir au centre",
+      "Augmenter l'appui petit à petit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 40 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 40,
+    "exercise_mode": "equilibre",
+    "id": "CANNES_07",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Transfert d'appui sur la jambe opérée entre les cannes",
+    "objectif": "Réhabituer la jambe opérée à porter le poids",
+    "objectifs": [
+      "Réhabituer la jambe opérée à porter le poids"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Entorse / instabilité de cheville"
+    ],
+    "precautions": [
+      "Respecter l'appui autorisé par le chirurgien"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Appui"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 40,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Tourner en faisant de petits pas",
+      "Déplacer les cannes avec les pieds",
+      "Ne pas pivoter sur la jambe opérée",
+      "Prendre son temps"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Pivoter sur un pied"
+    ],
+    "ex": 45,
+    "exercise_mode": "equilibre",
+    "id": "CANNES_08",
+    "image": "",
+    "materiel": [
+      "2 cannes anglaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Faire demi-tour avec deux cannes",
+    "objectif": "Tourner sans se déséquilibrer",
+    "objectifs": [
+      "Tourner sans se déséquilibrer"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Senior",
+      "Prévention des chutes"
+    ],
+    "precautions": [
+      "Prothèse de hanche : tourner du côté opéré pour ne pas croiser la jambe"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Cannes",
+      "Demi-tour"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "2 cannes"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Tenir la canne du côté sain",
+      "Avancer la canne",
+      "Avancer la jambe atteinte",
+      "Puis la jambe saine, et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Tenir la canne du côté atteint"
+    ],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNE_01",
+    "image": "",
+    "materiel": [
+      "Canne simple"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Marche en 3 temps avec une canne",
+    "objectif": "Marcher en sécurité avec une canne",
+    "objectifs": [
+      "Marcher en sécurité avec une canne"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Gonarthrose / prothèse de genou",
+      "Coxarthrose / prothèse de hanche",
+      "Senior",
+      "Prévention des chutes"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Tenir la canne du côté sain",
+      "Avancer en même temps la canne et la jambe atteinte",
+      "Puis avancer la jambe saine",
+      "Garder un rythme régulier"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNE_02",
+    "image": "",
+    "materiel": [
+      "Canne simple"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche en 2 temps avec une canne",
+    "objectif": "Marcher plus naturellement avec une canne",
+    "objectifs": [
+      "Marcher plus naturellement avec une canne"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Gonarthrose / prothèse de genou",
+      "Coxarthrose / prothèse de hanche",
+      "Senior",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Une main sur la rampe, la canne dans l'autre main",
+      "Monter d'abord la jambe saine",
+      "Puis la jambe atteinte et la canne",
+      "Une marche à la fois"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNE_03",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "Escalier avec rampe"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Monter l'escalier avec une canne",
+    "objectif": "Monter l'escalier en sécurité",
+    "objectifs": [
+      "Monter l'escalier en sécurité"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Gonarthrose / prothèse de genou",
+      "Senior"
+    ],
+    "precautions": [
+      "Quelqu'un juste derrière soi les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Escalier"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Une main sur la rampe, la canne dans l'autre main",
+      "Poser d'abord la canne sur la marche du dessous",
+      "Descendre la jambe atteinte",
+      "Puis la jambe saine, une marche à la fois"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "CANNE_04",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "Escalier avec rampe"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Descendre l'escalier avec une canne",
+    "objectif": "Descendre l'escalier en sécurité",
+    "objectifs": [
+      "Descendre l'escalier en sécurité"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Gonarthrose / prothèse de genou",
+      "Senior"
+    ],
+    "precautions": [
+      "Quelqu'un juste devant soi les premières fois"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Escalier"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout près d'un plan de travail, canne du côté sain",
+      "Porter le poids sur la jambe atteinte",
+      "Décoller le pied sain quelques secondes",
+      "Reposer le pied et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "CANNE_05",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "Plan de travail"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Tenir sur la jambe atteinte avec la canne",
+    "objectif": "Renforcer l'appui sur la jambe atteinte",
+    "objectifs": [
+      "Renforcer l'appui sur la jambe atteinte"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Prévention des chutes",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Respecter l'appui autorisé après une opération"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Tenir plus longtemps"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Canne accrochée à l'accoudoir, à portée de main",
+      "Pousser sur les deux accoudoirs pour se lever",
+      "Une fois debout et stable, prendre la canne",
+      "Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [
+      "Pousser sur la canne pour se lever : elle peut glisser"
+    ],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "CANNE_06",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "Fauteuil à accoudoirs"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Se lever et s'asseoir avec une canne",
+    "objectif": "Se lever sans s'appuyer sur la canne",
+    "objectifs": [
+      "Se lever sans s'appuyer sur la canne"
+    ],
+    "pathologies": [
+      "Senior",
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Maladie de Parkinson"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Transferts"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
+      "Canne du côté sain",
+      "Avancer la canne, enjamber avec la jambe atteinte",
+      "Puis avec la jambe saine, en levant bien les pieds"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "equilibre",
+    "id": "CANNE_07",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "Petits obstacles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Enjamber de petits obstacles avec une canne",
+    "objectif": "Lever les pieds et franchir un seuil ou un trottoir",
+    "objectifs": [
+      "Lever les pieds et franchir un seuil ou un trottoir"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth",
+      "Maladie de Parkinson",
+      "Senior"
+    ],
+    "precautions": [
+      "Près d'un mur ou avec quelqu'un à côté"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Obstacles"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [
+      "Obstacles plus bas"
+    ],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ],
+    "cote_marque": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Deux chaises posées à 2 m l'une de l'autre",
+      "Marcher avec la canne en dessinant un huit autour",
+      "Tourner avec de petits pas",
+      "Dans un sens puis dans l'autre"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 4,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "equilibre",
+    "id": "CANNE_08",
+    "image": "",
+    "materiel": [
+      "Canne simple",
+      "2 chaises"
+    ],
+    "muscles_cibles": [],
+    "niveau": 3,
+    "nom": "Marche en huit autour de deux chaises avec une canne",
+    "objectif": "Tourner et changer de direction en marchant",
+    "objectifs": [
+      "Tourner et changer de direction en marchant"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Senior"
+    ],
+    "precautions": [
+      "Sol dégagé, sans tapis"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Canne",
+      "Demi-tour",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "1 canne"
+    ]
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout entre les barres, une main sur chaque barre",
+      "Avancer une main, puis le pied opposé",
+      "Puis l'autre main et l'autre pied",
+      "Regard devant soi, pas dans les pieds"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "PARAL_01",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Marche entre les barres parallèles",
+    "objectif": "Reprendre la marche avec un appui sûr",
+    "objectifs": [
+      "Reprendre la marche avec un appui sûr"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Sclérose en plaques",
+      "Charcot-Marie-Tooth",
+      "Perte d'autonomie",
+      "Senior"
+    ],
+    "precautions": [
+      "Kiné à côté"
+    ],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Marche"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Glisser les mains au lieu de les serrer",
+      "Une seule main"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "De profil entre les barres, mains sur une barre",
+      "Faire un pas de côté, puis rapprocher l'autre pied",
+      "Garder les pointes de pied vers l'avant",
+      "Revenir dans l'autre sens"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 2,
+    "duree": "3 × 45 s, repos 45 s",
+    "erreurs_frequentes": [
+      "Croiser les pieds"
+    ],
+    "ex": 45,
+    "exercise_mode": "dynamique",
+    "id": "PARAL_02",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 1,
+    "nom": "Pas de côté entre les barres parallèles",
+    "objectif": "Renforcer les fessiers et le déplacement latéral",
+    "objectifs": [
+      "Renforcer les fessiers et le déplacement latéral"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prévention des chutes",
+      "Senior"
+    ],
+    "precautions": [],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Marche latérale"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout entre les barres, une main sur chaque barre",
+      "Reculer un pied, en posant d'abord la pointe",
+      "Puis l'autre pied",
+      "Petits pas, buste droit"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 45 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "dynamique",
+    "id": "PARAL_03",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Marche arrière entre les barres parallèles",
+    "objectif": "Apprendre à reculer sans tomber",
+    "objectifs": [
+      "Apprendre à reculer sans tomber"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Sclérose en plaques",
+      "Senior"
+    ],
+    "precautions": [
+      "Kiné derrière"
+    ],
+    "repos": 45,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout entre les barres, pieds écartés",
+      "Lâcher une main, puis l'autre, mains au-dessus des barres",
+      "Tenir sans bouger",
+      "Puis pieds serrés, ou un pied devant l'autre"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "PARAL_04",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Équilibre entre les barres parallèles",
+    "objectif": "Améliorer l'équilibre debout",
+    "objectifs": [
+      "Améliorer l'équilibre debout"
+    ],
+    "pathologies": [
+      "Prévention des chutes",
+      "Charcot-Marie-Tooth",
+      "Sclérose en plaques",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Senior"
+    ],
+    "precautions": [],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Équilibre"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Yeux fermés",
+      "Sur un coussin d'équilibre"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Corps entier",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Poser des petits obstacles au sol entre les barres",
+      "Mains sur les barres",
+      "Enjamber chaque obstacle en levant bien le genou",
+      "Faire demi-tour et revenir"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 60 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 60,
+    "exercise_mode": "dynamique",
+    "id": "PARAL_05",
+    "image": "",
+    "materiel": [
+      "Barres parallèles",
+      "Petits obstacles ou haies basses"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Enjamber des obstacles entre les barres parallèles",
+    "objectif": "Lever le pied et ne plus accrocher",
+    "objectifs": [
+      "Lever le pied et ne plus accrocher"
+    ],
+    "pathologies": [
+      "Charcot-Marie-Tooth",
+      "AVC / hémiplégie",
+      "Maladie de Parkinson",
+      "Prévention des chutes",
+      "Sclérose en plaques"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Obstacles"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 60,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Obstacles plus hauts",
+      "Une seule main"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Genou",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Marche (step) posée entre les barres, mains sur les barres",
+      "Monter avec la jambe atteinte, puis l'autre",
+      "Redescendre en commençant par la jambe saine",
+      "Recommencer en rythme"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 45 s, repos 60 s",
+    "erreurs_frequentes": [],
+    "ex": 45,
+    "exercise_mode": "renforcement",
+    "id": "PARAL_06",
+    "image": "",
+    "materiel": [
+      "Barres parallèles",
+      "Step"
+    ],
+    "muscles_cibles": [
+      "Quadriceps",
+      "Fessiers"
+    ],
+    "niveau": 2,
+    "nom": "Monter et descendre d'une marche entre les barres",
+    "objectif": "Préparer la montée des escaliers et des trottoirs",
+    "objectifs": [
+      "Préparer la montée des escaliers et des trottoirs"
+    ],
+    "pathologies": [
+      "Post-opératoire",
+      "Prothèse de genou",
+      "Prothèse de hanche",
+      "AVC / hémiplégie",
+      "Charcot-Marie-Tooth",
+      "Déconditionnement / reprise"
+    ],
+    "precautions": [],
+    "repos": 60,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Step"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 45,
+      "mode": "dynamique"
+    },
+    "type": "timer",
+    "type_contraction": "dynamique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Step plus haut"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "cote_marque": true,
+    "au_cabinet": true
+  },
+  {
+    "audio_cues": [],
+    "benefices": [],
+    "categorie": "Hanche",
+    "coaching_court": [],
+    "conseil_posture": [],
+    "consignes": [
+      "Debout entre les barres, une main sur chaque barre",
+      "Porter le poids sur la jambe atteinte",
+      "Décoller le pied sain quelques secondes",
+      "Reposer et recommencer"
+    ],
+    "contre_indications": [],
+    "difficulte_percue": 3,
+    "duree": "3 × 30 s, repos 30 s",
+    "erreurs_frequentes": [],
+    "ex": 30,
+    "exercise_mode": "equilibre",
+    "id": "PARAL_07",
+    "image": "",
+    "materiel": [
+      "Barres parallèles"
+    ],
+    "muscles_cibles": [],
+    "niveau": 2,
+    "nom": "Appui sur la jambe atteinte entre les barres",
+    "objectif": "Renforcer l'appui sur la jambe atteinte",
+    "objectifs": [
+      "Renforcer l'appui sur la jambe atteinte"
+    ],
+    "pathologies": [
+      "AVC / hémiplégie",
+      "Post-opératoire",
+      "Prothèse de hanche",
+      "Prothèse de genou",
+      "Charcot-Marie-Tooth"
+    ],
+    "precautions": [
+      "Respecter l'appui autorisé après une opération"
+    ],
+    "repos": 30,
+    "reps": 3,
+    "respiration": [],
+    "tags": [
+      "Barres parallèles",
+      "Appui"
+    ],
+    "timer_config": {
+      "cycles": 3,
+      "maintien": 30,
+      "mode": "statique"
+    },
+    "type": "timer",
+    "type_contraction": "statique",
+    "validation_medicale": false,
+    "version_avancee": [
+      "Une seule main"
+    ],
+    "version_facile": [],
+    "zones": [],
+    "zones_corporelles": [],
+    "sans_image": true,
+    "aide_marche": [
+      "Barres parallèles"
+    ],
+    "cote_marque": true,
     "au_cabinet": true
   }
 ]
