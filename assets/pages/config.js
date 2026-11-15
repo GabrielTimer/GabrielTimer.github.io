@@ -90,7 +90,7 @@ async function init(){
       id: m && !copie && !remplace ? m.id : null,
       remplace: remplace || (!copie ? m?.remplace : null) || null,
       categorie: m?.categorie || params.get("cat") || "pathologie",
-      zoneLabel: m?.zoneLabel || "", niveau, cover: m?.cover || null, createdAt: m && !copie && !remplace ? m.createdAt : null
+      zoneLabel: m?.zoneLabel || "", niveau, aide: params.get("aide") || m?.aide || null, cover: m?.cover || null, createdAt: m && !copie && !remplace ? m.createdAt : null
     } };
     return true;
   }
@@ -1119,7 +1119,7 @@ async function sentSheet(p, count, cabinet = false){
 async function saveAsModel(){
   if(!S.exercices.length){ toast("Ajoutez au moins un exercice.", { type:"err" }); return; }
   MOD = MOD || await import("../modeles.js");
-  const meta = { categorie:"pathologie", zoneLabel:"", niveau:null };
+  const meta = { categorie:"pathologie", zoneLabel:"", niveau:null, aide:null };
   const sh = openSheet({
     title:"Enregistrer comme modèle",
     body:`<div class="stack" style="--gap:14px">
@@ -1141,7 +1141,7 @@ async function saveAsModel(){
       let existing = null;
       try{
         existing = (await C.listModeles()).map(r => MOD.normModele(r))
-          .find(m => m.mine && !m.remplace && m.categorie === meta.categorie && (m.niveau || null) === (meta.niveau || null) && norm(m.nom) === norm(finalNom)) || null;
+          .find(m => m.mine && !m.remplace && m.categorie === meta.categorie && (m.niveau || null) === (meta.niveau || null) && (m.aide || null) === (meta.aide || null) && norm(m.nom) === norm(finalNom)) || null;
       }catch(e){}
       let replaceId = null;
       if(existing){
@@ -1231,7 +1231,7 @@ async function proposerMajModele(data){
   });
   if(choix !== "oui") return false;
   const base = {
-    nom: m.nom, categorie: m.categorie, zoneLabel: m.zoneLabel, niveau: m.niveau || null,
+    nom: m.nom, categorie: m.categorie, zoneLabel: m.zoneLabel, niveau: m.niveau || null, aide: m.aide || null,
     cover: m.cover || null, series: data.series, exercices: exosModele(data.exercices)
   };
   if(m.mine) await C.saveModele({ ...base, id: m.id, createdAt: m.createdAt || undefined, remplace: m.remplace || undefined, ...(m.raw?.pdf ? { pdf: m.raw.pdf } : {}) });
@@ -1292,8 +1292,10 @@ function metaFieldsHTML(meta){
         <datalist id="m-zones">${zones.map(z => `<option value="${esc(z)}">`).join("")}</datalist></div>
       <div class="field"><label for="m-niv">Niveau</label>
         <select class="select" id="m-niv"><option value="">Sans niveau</option>${MOD.niveaux().map(n => `<option value="${n.n}" ${n.n === Number(meta.niveau) ? "selected" : ""}>${n.label} (${esc(n.sub)})</option>`).join("")}</select></div>
+      <div class="field"><label for="m-aide">Aide à la marche du patient</label>
+        <select class="select" id="m-aide"><option value="">Sans aide (modèle standard)</option>${MOD.AIDES_MODELE.map(a => `<option value="${esc(a)}" ${a === meta.aide ? "selected" : ""}>${esc(a)}</option>`).join("")}</select></div>
     </div>
-    <span class="hint">Pour proposer plusieurs niveaux d'un même modèle, gardez exactement le même nom et changez seulement le niveau.</span>`;
+    <span class="hint">Pour proposer plusieurs niveaux ou plusieurs aides à la marche d'un même modèle, gardez exactement le même nom et changez seulement le niveau ou l'aide.</span>`;
 }
 
 function readMeta(root){
@@ -1302,7 +1304,8 @@ function readMeta(root){
   return {
     categorie: root.querySelector("#m-cat").value,
     zoneLabel: known || zone,
-    niveau: Number(root.querySelector("#m-niv").value) || null
+    niveau: Number(root.querySelector("#m-niv").value) || null,
+    aide: root.querySelector("#m-aide").value || null
   };
 }
 
@@ -1362,7 +1365,7 @@ async function saveModeleForm(){
     const data = build();
     P.id = await C.saveModele({
       id: P.id || undefined, nom: P.niveau ? splitName(data.nom).base : data.nom,
-      categorie: P.categorie, zoneLabel: P.zoneLabel, niveau: P.niveau,
+      categorie: P.categorie, zoneLabel: P.zoneLabel, niveau: P.niveau, aide: P.aide || null,
       cover: P.cover || null, series: data.series, exercices: data.exercices, createdAt: P.createdAt || undefined,
       remplace: P.remplace || undefined
     });

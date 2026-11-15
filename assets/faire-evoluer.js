@@ -41,7 +41,7 @@ export function origineDe(prog, modeles){
   /* Ancien modèle maison « Sciatique et hernie discale » (7 nov. 2026) : séparé en « Sciatique » et « Hernie discale » */
   if(lieu === "HEP" && norm(base) === norm("Sciatique et hernie discale")) base = "Sciatique";
   const cands = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
-  const m = cands.find(x => x.lieu === lieu) || cands[0] || null;
+  const m = cands.find(x => x.lieu === lieu && !x.aide) || cands.find(x => x.lieu === lieu) || cands[0] || null;
   return { modele: m, niveau, base, choix: choixDuNom(m, prog.nom) };
 }
 
@@ -52,8 +52,10 @@ function lieuProg(prog){
 }
 
 /** Modèle du même nom au niveau voulu (même lieu de préférence). */
-function auNiveau(modeles, base, niveau, lieu){
-  const c = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
+function auNiveau(modeles, base, niveau, lieu, aide = null){
+  /* Même aide à la marche que le programme actuel (un patient en déambulateur reste sur les modèles « déambulateur ») */
+  const tous = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
+  const c = tous.filter(m => (m.aide || null) === (aide || null));
   /* Même lieu (maison / cabinet) : une progression ne change pas de lieu */
   return lieu ? (c.find(m => m.lieu === lieu) || c.find(m => m.lieu === "MIXTE" || !m.lieu) || null) : (c[0] || null);
 }
@@ -114,7 +116,7 @@ function niveauVoisin(prog, modeles, sens){
   const o = origineDe(prog, modeles);
   const series = Number(prog.seances.find(s => !s.terminee)?.data?.series || prog.seances[0]?.data?.series || 1);
   if(o.niveau){
-    const c = auNiveau(modeles, o.base, o.niveau + sens, o.modele?.lieu || lieuProg(prog));
+    const c = auNiveau(modeles, o.base, o.niveau + sens, o.modele?.lieu || lieuProg(prog), o.modele?.aide);
     if(c) return { cible: filtrerOptions(c, o.choix), series: null };
   }
   if(sens > 0) return { cible: null, series: Math.min(series + 1, 5) };
@@ -123,7 +125,7 @@ function niveauVoisin(prog, modeles, sens){
 
 function suivant(prog, modeles){
   const o = origineDe(prog, modeles);
-  return o.niveau ? filtrerOptions(auNiveau(modeles, o.base, o.niveau + 1, o.modele?.lieu || lieuProg(prog)), o.choix) : null;
+  return o.niveau ? filtrerOptions(auNiveau(modeles, o.base, o.niveau + 1, o.modele?.lieu || lieuProg(prog), o.modele?.aide), o.choix) : null;
 }
 
 /** Texte court du changement proposé. */

@@ -283,12 +283,16 @@ export function mountGuide(app, ctx){
       const groupes = ui.modeles ? TX.modelesPour(P.modeles, ui.modeles, lieu) : [];
       const autres = ui.modeles ? TX.modelesPour(P.autres, ui.modeles, lieu) : [];
       const carte = (g, gi, zone) => {
-        const m = g.items.find(x => x.id === ui.choix[g.nom]) || TX.choisirNiveau(g.items, p.niveau);
+        const m = g.items.find(x => x.id === ui.choix[g.nom]) || TX.choisirModele(g.items, p.niveau, p.aide);
+        const aides = [...new Set(g.items.map(x => x.aide || ""))];
+        const memeAide = g.items.filter(x => (x.aide || "") === (m.aide || ""));
+        const pAide = p.aide && p.aide !== "Sans aide" ? p.aide : "";
+        const lAides = aides.length > 1 ? `<div class="g-chips g-lv">${aides.map(a => { const c = g.items.filter(x => (x.aide || "") === a); const x = c.find(y => y.niveau === m.niveau) || c[0]; return `<button type="button" class="g-chip" data-gmodlv="${esc(g.nom)}" data-v="${esc(x.id)}" aria-pressed="${a === (m.aide || "")}">${esc(a || "Sans aide")}${a === pAide ? `<span class="g-auto">proposé</span>` : ""}</button>`; }).join("")}</div>` : "";
         const imgs = m.exercices.slice(0, 5).map(e => exerciseImage(e)).filter(Boolean);
         const pris = t.prog?.nom === m.titre;
         return `<div class="g-model ${pris ? "pris" : ""}">
           <div class="g-mtop"><strong>${esc(g.nom)}</strong>${m.mine ? `<span class="badge">votre modèle</span>` : ""}${pris ? `<span class="badge ok">${icon("check")}choisi</span>` : ""}</div>
-          <div class="g-chips g-lv">${g.items.map(x => `<button type="button" class="g-chip" data-gmodlv="${esc(g.nom)}" data-v="${esc(x.id)}" aria-pressed="${x.id === m.id}">${esc(x.niveau ? "Niveau " + x.niveau : "Sans niveau")}${x.doublon ? ` (${x.doublon})` : ""}${x.niveau === p.niveau ? `<span class="g-auto">proposé</span>` : ""}</button>`).join("")}</div>
+          ${lAides}<div class="g-chips g-lv">${memeAide.map(x => `<button type="button" class="g-chip" data-gmodlv="${esc(g.nom)}" data-v="${esc(x.id)}" aria-pressed="${x.id === m.id}">${esc(x.niveau ? "Niveau " + x.niveau : "Sans niveau")}${x.doublon ? ` (${x.doublon})` : ""}${x.niveau === p.niveau ? `<span class="g-auto">proposé</span>` : ""}</button>`).join("")}</div>
           <div class="g-thumbs">${imgs.map(src => `<img src="${esc(src)}" alt="" loading="lazy">`).join("")}<span class="g-nb">${m.exercices.length} exercices</span></div>
           <button type="button" class="btn primary" data-gusemod="${esc(zone)}" data-i="${gi}" data-id="${esc(m.id)}">${icon("check")}Utiliser ce modèle</button>
         </div>`;
@@ -298,10 +302,10 @@ export function mountGuide(app, ctx){
       const proche = !groupes.length && !!autres.length;
       const reste = [...groupes, ...autres].filter(g => g !== best);
       /* Sur mesure composé d'office, à côté du modèle ; recomposé si l'hypothèse, la zone, le lieu ou le niveau changent */
-      const cleGen = JSON.stringify([P.pathos, P.zones, lieu, p.niveau, P.post]);
+      const cleGen = JSON.stringify([P.pathos, P.zones, lieu, p.niveau, P.post, p.aide]);
       if(ui.genCle !== cleGen){ ui.gen = null; ui.genCle = cleGen; }
       if(ui.lib && !ui.gen && !P.stop){
-        ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post });
+        ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post, aide:p.aide });
       }
       const gen = ui.gen;
       const titreSM = (P.hyps[0]?.label || P.pathos[0] || "Programme") + " · sur mesure";
@@ -337,6 +341,7 @@ export function mountGuide(app, ctx){
           <h3>Programme d'exercices</h3>
           <div class="g-q"><div class="g-qt">Où ?</div><div class="g-chips">${[["HEP", "À la maison · peu de matériel"], ["CABINET", "Au cabinet · tout le matériel"]].map(([v, l]) => `<button type="button" class="g-chip" data-gtx="lieu" data-v="${v}" aria-pressed="${lieu === v}">${l}</button>`).join("")}</div></div>
           <div class="g-q"><div class="g-qt">Niveau de départ</div>${opt("niveau", [1, 2, 3], p.niveau, a.niveau, v => "Niveau " + v)}</div>
+          <div class="g-q"><div class="g-qt">Aide à la marche</div>${opt("aide", ["Sans aide", "1 canne", "2 cannes", "Déambulateur", "Au fauteuil", "Alité"], p.aide, p.aideAuto)}</div>
           ${t.prog ? `<p class="g-ori">${icon("check")}<span>Programme choisi : <strong>${esc(t.prog.nom)}</strong></span></p>` : ""}
           ${!ui.modeles ? `<p class="g-hint">${icon("clock")} Recherche des modèles et de la bibliothèque…</p>` : `
           <div class="g-qt">Deux propositions<span class="g-multi">choisissez, puis ajustez dans l'éditeur</span></div>
@@ -501,7 +506,7 @@ export function mountGuide(app, ctx){
       const num = ["freq", "sem", "reeval", "niveau"].includes(d.gtx);
       const v = num ? +d.v : d.v;
       S.tx[d.gtx] = S.tx[d.gtx] === v && d.gtx !== "lieu" ? null : v;
-      if(d.gtx === "niveau" || d.gtx === "lieu"){ ui.choix = {}; ui.gen = null; }
+      if(d.gtx === "niveau" || d.gtx === "lieu" || d.gtx === "aide"){ ui.choix = {}; ui.gen = null; }
       changed(); refresh(); return;
     }
     if(d.gdec){
@@ -529,7 +534,7 @@ export function mountGuide(app, ctx){
     if(act === "gen" && ui.lib){
       const P = TX.proposition(S, K, B), p = P.profil;
       ui.seed++;
-      ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu:p.lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post });
+      ui.gen = TX.composer(ui.lib.list, { pathos:P.pathos, zones:P.zones, lieu:p.lieu, niveau:p.niveau, seed:ui.seed, visible:ui.lib.visible, postop:P.post, aide:p.aide });
       refresh(); return;
     }
     if(act === "genuse" && ui.gen?.length){

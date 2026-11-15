@@ -58,7 +58,11 @@
     ],
     "zones": [],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -120,7 +124,11 @@
     ],
     "zones": [],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -183,7 +191,11 @@
     ],
     "zones": [],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -245,7 +257,12 @@
     ],
     "zones": [],
     "aide_marche": [
-      "Au fauteuil"
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -308,7 +325,11 @@
     ],
     "zones": [],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -10485,7 +10506,15 @@
     "objectifs": [
       "Garder la souplesse des doigts"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
   },
   {
     "id": "MAIN_02",
@@ -10553,7 +10582,15 @@
     "objectifs": [
       "Renforcer la force de préhension"
     ],
-    "zones": []
+    "zones": [],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
+    ]
   },
   {
     "id": "HANCHE_06",
@@ -12627,6 +12664,14 @@
     "zones": [
       "Main",
       "Doigts"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -12717,6 +12762,14 @@
     "zones": [
       "Main",
       "Pouce"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -13592,6 +13645,14 @@
     ],
     "zones": [
       "Poignet"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -13685,6 +13746,14 @@
     "zones": [
       "Main",
       "Pouce"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -13779,6 +13848,14 @@
       "Poignet",
       "Main",
       "Bras"
+    ],
+    "aide_marche": [
+      "Alité",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -15357,7 +15434,11 @@
       "Bras"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -15445,7 +15526,11 @@
       "Jambes"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -15534,7 +15619,8 @@
       "Bras"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur"
     ]
   },
   {
@@ -15621,7 +15707,11 @@
       "Main"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -15971,7 +16061,11 @@
       "Cheville et pied"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -16061,7 +16155,11 @@
     ],
     "aide_marche": [
       "Alité",
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -16420,7 +16518,11 @@
       "Dos"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -18578,7 +18680,8 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Sans aide",
-      "Déambulateur"
+      "Déambulateur",
+      "1 canne"
     ]
   },
   {
@@ -24381,7 +24484,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -24449,7 +24556,10 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ]
   },
   {
@@ -24511,8 +24621,12 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
+      "Alité",
       "Au fauteuil",
-      "Alité"
+      "Déambulateur",
+      "2 cannes",
+      "1 canne",
+      "Sans aide"
     ]
   },
   {
@@ -26839,7 +26953,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "au_cabinet": true
   },
@@ -26904,7 +27022,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "au_cabinet": true
   },
@@ -26969,7 +27091,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "au_cabinet": true
   },
@@ -27036,7 +27162,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "au_cabinet": true
   },
@@ -27103,7 +27233,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "au_cabinet": true
   },
@@ -27173,7 +27307,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "cote_marque": true,
     "au_cabinet": true
@@ -27241,7 +27379,11 @@
     "zones_corporelles": [],
     "sans_image": true,
     "aide_marche": [
-      "Barres parallèles"
+      "Barres parallèles",
+      "Au fauteuil",
+      "Déambulateur",
+      "2 cannes",
+      "1 canne"
     ],
     "cote_marque": true,
     "au_cabinet": true

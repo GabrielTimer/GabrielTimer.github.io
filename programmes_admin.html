@@ -31,6 +31,7 @@
   .mo-levels{ display:flex; gap:6px; flex-wrap:wrap; margin-top:2px; }
   .mo-levels button{ border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px; padding:4px 11px; font:inherit; font-size:var(--fs-sm); font-weight:700; cursor:pointer; }
   .mo-levels button[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:#fff; }
+  .mo-levels.mo-aides button[aria-pressed="true"]{ background:var(--ink-2); border-color:var(--ink-2); }
   .mo-actions{ display:flex; gap:8px; padding:12px 16px 16px; }
   .mo-actions .btn.primary{ flex:1; }
   .mo-exos{ display:flex; flex-direction:column; gap:10px; }
@@ -47,7 +48,7 @@
 import { $, $$, esc, icon, store, params, mountShell, exoTabsHTML, registerSW, toast, confirmDialog, openSheet, loadingHTML, emptyHTML, errorHTML, exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, debounce } from "/assets/app.js";
 import { norm } from "/assets/library.js";
 import { evolTexte } from "/assets/evolution.js";
-import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, modelCoverHTML, asProgram, catLabel, niveauLabel, isBuiltinHidden, choisirOptions } from "/assets/modeles.js";
+import { categories, niveaux, BUILTIN, normModele, groupModeles, coverOf, modelCoverHTML, asProgram, catLabel, niveauLabel, isBuiltinHidden, choisirOptions, levelRowsHTML, AIDES_MODELE } from "/assets/modeles.js";
 import { toggleInList } from "/assets/settings.js";
 import { ZONES, PATHOLOGIES as PATHOS, SPECIALITES, specialitesDe } from "/assets/classement.js";
 import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "/assets/filter-drawer.js";
@@ -67,7 +68,7 @@ const F = (() => {
   const s = store.get(KEY, {}) || {};
   /* Anciennes préférences (un seul choix par filtre) reprises en listes */
   return { q: s.q || "", mine: !!s.mine || s.source === "mine", masques: !!s.masques || s.source === "masques",
-    lieu: asList(s.lieu), cat: asList(s.cat), zone: asList(s.zone), spec: asList(s.spec), patho: asList(s.patho), niveau: asList(s.niveau) };
+    lieu: asList(s.lieu), cat: asList(s.cat), zone: asList(s.zone), spec: asList(s.spec), patho: asList(s.patho), aide: asList(s.aide), niveau: asList(s.niveau) };
 })();
 const FACETS = [
   { k:"lieu", label:"Maison ou cabinet", ph:"Maison et cabinet" },
@@ -75,6 +76,7 @@ const FACETS = [
   { k:"zone", label:"Zone du corps", ph:"Toutes les zones" },
   { k:"spec", label:"Spécialité", ph:"Toutes les spécialités" },
   { k:"patho", label:"Pathologie", ph:"Toutes les pathologies", search:true },
+  { k:"aide", label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
 const LIEUX = [["HEP", "À la maison"], ["CABINET", "Au cabinet"]];
@@ -157,7 +159,7 @@ const pdfIt = async m => {
 const noteOf = e => e.conseil_kine || (e.consignes?.length ? "" : String(e.conseil || "").replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, ""));
 
 function detail(m, group){
-  const levels = group.items.map(x => x.niveau).filter(Boolean);
+  const levels = group.items.filter(x => (x.aide || "") === (m.aide || "")).map(x => x.niveau).filter(Boolean);
   const next = Math.max(0, ...levels, m.niveau || 0) + 1;
   const s = openSheet({
     title: m.titre,
@@ -166,6 +168,7 @@ function detail(m, group){
       <div class="row wrap" style="--gap:6px;margin-bottom:14px">
         <span class="badge lagon">${esc(catLabel(m.categorie))}</span>
         ${m.zoneLabel ? `<span class="badge">${esc(m.zoneLabel)}</span>` : ""}
+        ${m.aide ? `<span class="badge">${esc(m.aide)}</span>` : ""}
         ${m.niveau ? `<span class="badge">${esc(niveauLabel(m.niveau))}</span>` : ""}
         <span class="badge">${plural(m.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(m)))}${m.series > 1 ? `, ${m.series} tours` : ""}</span>
         ${m.mine ? `<span class="badge sun">${icon("star")}${m.remplace ? "Ma version" : "Mon modèle"}</span>` : `<span class="badge">Fourni avec l'application</span>`}
@@ -203,7 +206,7 @@ function detail(m, group){
         toast(hide ? `« ${m.titre} » est masqué. Filtre « Modèles fournis masqués » pour le retrouver.` : `« ${m.titre} » est de nouveau visible.`, { type:"ok", duration:5000 });
       }catch(err){ console.error(err); toast("Enregistrement impossible. Vérifiez la règle « reglages » dans Firebase (voir Aide).", { type:"err", duration:7000 }); }
     }
-    if(a === "level") location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}&niveau=${next}`;
+    if(a === "level") location.href = `/config.html?modele=new&from=${encodeURIComponent(m.id)}&niveau=${next}${m.aide ? `&aide=${encodeURIComponent(m.aide)}` : ""}`;
     if(a === "del"){
       if(!await confirmDialog(m.remplace
         ? { title:"Revenir à la version d'origine ?", message:"Votre version est supprimée et le modèle fourni avec l'application réapparaît.", confirm:"Revenir à l'original" }
@@ -224,6 +227,7 @@ const matchF = (m, k, v) => {
     case "zone":   return v.includes(zoneOf(m));
     case "spec":   return specsOf(m).some(x => v.includes(x));
     case "patho":  return pathosOf(m).some(x => v.includes(x));
+    case "aide":   return v.includes(m.aide || "Sans aide");
     case "niveau": return v.includes(String(m.niveau || ""));
   }
   return true;
@@ -255,6 +259,9 @@ function options(k){
   }else if(k === "spec"){
     pool.forEach(m => specsOf(m).forEach(add));
     opts = SPECIALITES.map(v => ({ v, label:v }));
+  }else if(k === "aide"){
+    pool.forEach(m => add(m.aide || "Sans aide"));
+    opts = ["Sans aide", ...AIDES_MODELE].map(v => ({ v, label:v }));
   }else if(k === "niveau"){
     pool.forEach(m => add(String(m.niveau || "")));
     opts = niveaux().map(x => ({ v:String(x.n), label:x.label }));
@@ -305,7 +312,7 @@ function render(){
         <div class="mo-body">
           <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · À la maison" : cur.lieu === "CABINET" ? " · Au cabinet" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
           <h2>${esc(g.nom)}</h2>
-          ${showLevels ? `<div class="mo-levels" role="group" aria-label="Niveau">${g.items.map(x => `<button type="button" data-lv="${esc(g.key)}" data-id="${esc(x.id)}" aria-pressed="${x === cur}">${esc(levelButton(x))}</button>`).join("")}</div>` : ""}
+          ${showLevels ? levelRowsHTML(g, cur) : ""}
           <span class="small muted">${cur.options ? `${plural(cur.exercices.filter(e => !e.opt).length, "exercice")} + 1 par ${esc(cur.options.titre.toLowerCase().includes("nerf") ? "nerf choisi" : "choix")}` : `${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}`}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
         </div>
         <div class="mo-actions">

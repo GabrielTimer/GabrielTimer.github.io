@@ -13899,6 +13899,554 @@ export const MODELES_BASE = [
 ]
 },
 {
+"id": "cab_prothese_totale_de_genou_ptg_alite",
+"nom": "Prothèse totale de genou (PTG)",
+"niveau": 1,
+"aide": "Alité",
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LIT_01",
+"source": "CABINET",
+"nom": "Pompage des chevilles au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Tirer les pointes de pied vers soi",
+"Puis les pousser vers le bas",
+"Rythme régulier, en respirant calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Tirer les pointes de pied vers soi<br>Puis les pousser vers le bas<br>Rythme régulier, en respirant calmement",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "LIT_02",
+"source": "CABINET",
+"nom": "Écraser le coussin sous le genou",
+"image": "",
+"consignes": [
+"Allongé sur le dos, petit coussin roulé sous le genou",
+"Tirer la pointe du pied vers soi",
+"Écraser le coussin en tendant le genou, tenir 5 s",
+"Relâcher complètement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, petit coussin roulé sous le genou<br>Tirer la pointe du pied vers soi<br>Écraser le coussin en tendant le genou, tenir 5 s<br>Relâcher complètement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_03",
+"source": "CABINET",
+"nom": "Glisser le talon vers les fesses",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Plier le genou en faisant glisser le talon sur le lit",
+"Aller jusqu'où c'est confortable",
+"Revenir lentement jambe tendue"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Plier le genou en faisant glisser le talon sur le lit<br>Aller jusqu'où c'est confortable<br>Revenir lentement jambe tendue",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_09",
+"source": "CABINET",
+"nom": "Lever la jambe tendue au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, une jambe pliée pied à plat",
+"Autre jambe tendue, pointe vers soi",
+"Lever la jambe tendue à la hauteur de l'autre genou, tenir 3 s",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, une jambe pliée pied à plat<br>Autre jambe tendue, pointe vers soi<br>Lever la jambe tendue à la hauteur de l'autre genou, tenir 3 s<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "LIT_05",
+"source": "CABINET",
+"nom": "Pont fessier au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Serrer les fesses et décoller le bassin",
+"Tenir 3 s en haut",
+"Redescendre doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Serrer les fesses et décoller le bassin<br>Tenir 3 s en haut<br>Redescendre doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_genou_ptg_deambulateur",
+"nom": "Prothèse totale de genou (PTG)",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_02",
+"source": "CABINET",
+"nom": "S'asseoir dans le fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Reculer jusqu'à sentir le fauteuil derrière les mollets",
+"Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
+"Pencher le buste en avant",
+"S'asseoir lentement, sans se laisser tomber"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Reculer jusqu'à sentir le fauteuil derrière les mollets<br>Lâcher une poignée et attraper l'accoudoir, puis l'autre main<br>Pencher le buste en avant<br>S'asseoir lentement, sans se laisser tomber",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_04",
+"source": "CABINET",
+"nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Déplacer doucement le poids du corps sur la jambe droite",
+"Puis sur la jambe gauche",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Déplacer doucement le poids du corps sur la jambe droite<br>Puis sur la jambe gauche<br>Garder le buste droit",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_07",
+"source": "CABINET",
+"nom": "Mini-flexions des genoux au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Plier un peu les genoux, comme pour s'asseoir",
+"Garder le dos droit et les talons au sol",
+"Remonter en poussant sur les jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Plier un peu les genoux, comme pour s'asseoir<br>Garder le dos droit et les talons au sol<br>Remonter en poussant sur les jambes",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_11",
+"source": "CABINET",
+"nom": "Talon vers la fesse au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Plier un genou en amenant le talon vers la fesse",
+"Garder les genoux côte à côte",
+"Reposer doucement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Plier un genou en amenant le talon vers la fesse<br>Garder les genoux côte à côte<br>Reposer doucement, puis l'autre jambe",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_genou_ptg_2_cannes",
+"nom": "Prothèse totale de genou (PTG)",
+"niveau": 1,
+"aide": "2 cannes",
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNES_01",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec deux cannes",
+"image": "",
+"consignes": [
+"Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
+"Fesses au bord du fauteuil, buste penché en avant",
+"Se lever en poussant sur l'accoudoir et sur les cannes",
+"Debout, passer une canne dans l'autre main avant de marcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir<br>Fesses au bord du fauteuil, buste penché en avant<br>Se lever en poussant sur l'accoudoir et sur les cannes<br>Debout, passer une canne dans l'autre main avant de marcher",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_07",
+"source": "CABINET",
+"nom": "Transfert d'appui sur la jambe opérée entre les cannes",
+"image": "",
+"consignes": [
+"Debout entre les deux cannes, pieds écartés",
+"Déplacer doucement le poids sur la jambe opérée",
+"Tenir 3 s, puis revenir au centre",
+"Augmenter l'appui petit à petit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout entre les deux cannes, pieds écartés<br>Déplacer doucement le poids sur la jambe opérée<br>Tenir 3 s, puis revenir au centre<br>Augmenter l'appui petit à petit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_02",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec deux cannes",
+"image": "",
+"consignes": [
+"Avancer les deux cannes ensemble, un peu devant",
+"Avancer la jambe opérée entre les cannes",
+"Puis avancer la jambe saine à côté",
+"Appuyer sur les poignées pour soulager la jambe opérée"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les deux cannes ensemble, un peu devant<br>Avancer la jambe opérée entre les cannes<br>Puis avancer la jambe saine à côté<br>Appuyer sur les poignées pour soulager la jambe opérée",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_05",
+"source": "CABINET",
+"nom": "Monter l'escalier avec les cannes",
+"image": "",
+"consignes": [
+"Une main sur la rampe, les cannes dans l'autre main",
+"Monter d'abord la jambe saine sur la marche",
+"Puis la jambe opérée et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, les cannes dans l'autre main<br>Monter d'abord la jambe saine sur la marche<br>Puis la jambe opérée et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_06",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec les cannes",
+"image": "",
+"consignes": [
+"Une main sur la rampe, les cannes dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe opérée",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, les cannes dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe opérée<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_genou_ptg_1_canne",
+"nom": "Prothèse totale de genou (PTG)",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "postop",
+"zoneLabel": "Genou",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_01",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer la canne",
+"Avancer la jambe atteinte",
+"Puis la jambe saine, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer la canne<br>Avancer la jambe atteinte<br>Puis la jambe saine, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_03",
+"source": "CABINET",
+"nom": "Monter l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Monter d'abord la jambe saine",
+"Puis la jambe atteinte et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Monter d'abord la jambe saine<br>Puis la jambe atteinte et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_04",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe atteinte",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe atteinte<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "PARAL_06",
+"source": "CABINET",
+"nom": "Monter et descendre d'une marche entre les barres",
+"image": "",
+"consignes": [
+"Marche (step) posée entre les barres, mains sur les barres",
+"Monter avec la jambe atteinte, puis l'autre",
+"Redescendre en commençant par la jambe saine",
+"Recommencer en rythme"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marche (step) posée entre les barres, mains sur les barres<br>Monter avec la jambe atteinte, puis l'autre<br>Redescendre en commençant par la jambe saine<br>Recommencer en rythme",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
 "id": "cab_prothese_totale_de_hanche_pth_1",
 "nom": "Prothèse totale de hanche (PTH)",
 "niveau": 1,
@@ -14288,6 +14836,574 @@ export const MODELES_BASE = [
 "repos": 0,
 "conseil_kine": "",
 "materiel": "Vélo semi-allongé"
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_hanche_pth_alite",
+"nom": "Prothèse totale de hanche (PTH)",
+"niveau": 1,
+"aide": "Alité",
+"categorie": "postop",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LIT_01",
+"source": "CABINET",
+"nom": "Pompage des chevilles au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Tirer les pointes de pied vers soi",
+"Puis les pousser vers le bas",
+"Rythme régulier, en respirant calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Tirer les pointes de pied vers soi<br>Puis les pousser vers le bas<br>Rythme régulier, en respirant calmement",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "LIT_02",
+"source": "CABINET",
+"nom": "Écraser le coussin sous le genou",
+"image": "",
+"consignes": [
+"Allongé sur le dos, petit coussin roulé sous le genou",
+"Tirer la pointe du pied vers soi",
+"Écraser le coussin en tendant le genou, tenir 5 s",
+"Relâcher complètement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, petit coussin roulé sous le genou<br>Tirer la pointe du pied vers soi<br>Écraser le coussin en tendant le genou, tenir 5 s<br>Relâcher complètement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_03",
+"source": "CABINET",
+"nom": "Glisser le talon vers les fesses",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Plier le genou en faisant glisser le talon sur le lit",
+"Aller jusqu'où c'est confortable",
+"Revenir lentement jambe tendue"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Plier le genou en faisant glisser le talon sur le lit<br>Aller jusqu'où c'est confortable<br>Revenir lentement jambe tendue",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_04",
+"source": "CABINET",
+"nom": "Écarter la jambe en glissant sur le lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Écarter une jambe sur le côté en la faisant glisser",
+"Genou et pointe du pied vers le plafond",
+"Ramener la jambe sans dépasser le milieu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Écarter une jambe sur le côté en la faisant glisser<br>Genou et pointe du pied vers le plafond<br>Ramener la jambe sans dépasser le milieu",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_05",
+"source": "CABINET",
+"nom": "Pont fessier au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Serrer les fesses et décoller le bassin",
+"Tenir 3 s en haut",
+"Redescendre doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Serrer les fesses et décoller le bassin<br>Tenir 3 s en haut<br>Redescendre doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "LIT_06",
+"source": "CABINET",
+"nom": "Serrer un coussin entre les genoux",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Coussin entre les genoux",
+"Serrer le coussin 5 s",
+"Relâcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Coussin entre les genoux<br>Serrer le coussin 5 s<br>Relâcher",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_hanche_pth_deambulateur",
+"nom": "Prothèse totale de hanche (PTH)",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "postop",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_02",
+"source": "CABINET",
+"nom": "S'asseoir dans le fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Reculer jusqu'à sentir le fauteuil derrière les mollets",
+"Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
+"Pencher le buste en avant",
+"S'asseoir lentement, sans se laisser tomber"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Reculer jusqu'à sentir le fauteuil derrière les mollets<br>Lâcher une poignée et attraper l'accoudoir, puis l'autre main<br>Pencher le buste en avant<br>S'asseoir lentement, sans se laisser tomber",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_04",
+"source": "CABINET",
+"nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Déplacer doucement le poids du corps sur la jambe droite",
+"Puis sur la jambe gauche",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Déplacer doucement le poids du corps sur la jambe droite<br>Puis sur la jambe gauche<br>Garder le buste droit",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_09",
+"source": "CABINET",
+"nom": "Écarter la jambe sur le côté au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Écarter une jambe tendue sur le côté",
+"Pointe du pied vers l'avant, buste droit",
+"Revenir doucement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Écarter une jambe tendue sur le côté<br>Pointe du pied vers l'avant, buste droit<br>Revenir doucement, puis l'autre jambe",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_10",
+"source": "CABINET",
+"nom": "Jambe tendue en arrière au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Emmener une jambe tendue vers l'arrière",
+"Serrer la fesse, sans creuser le dos",
+"Revenir doucement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Emmener une jambe tendue vers l'arrière<br>Serrer la fesse, sans creuser le dos<br>Revenir doucement, puis l'autre jambe",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_11",
+"source": "CABINET",
+"nom": "Talon vers la fesse au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Plier un genou en amenant le talon vers la fesse",
+"Garder les genoux côte à côte",
+"Reposer doucement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Plier un genou en amenant le talon vers la fesse<br>Garder les genoux côte à côte<br>Reposer doucement, puis l'autre jambe",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_hanche_pth_2_cannes",
+"nom": "Prothèse totale de hanche (PTH)",
+"niveau": 1,
+"aide": "2 cannes",
+"categorie": "postop",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNES_01",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec deux cannes",
+"image": "",
+"consignes": [
+"Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
+"Fesses au bord du fauteuil, buste penché en avant",
+"Se lever en poussant sur l'accoudoir et sur les cannes",
+"Debout, passer une canne dans l'autre main avant de marcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir<br>Fesses au bord du fauteuil, buste penché en avant<br>Se lever en poussant sur l'accoudoir et sur les cannes<br>Debout, passer une canne dans l'autre main avant de marcher",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_08",
+"source": "CABINET",
+"nom": "Écarter les genoux contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle au-dessus des genoux",
+"Pieds à plat, écartés de la largeur du bassin",
+"Écarter les genoux contre l'élastique, tenir 2 s",
+"Revenir doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle au-dessus des genoux<br>Pieds à plat, écartés de la largeur du bassin<br>Écarter les genoux contre l'élastique, tenir 2 s<br>Revenir doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_07",
+"source": "CABINET",
+"nom": "Transfert d'appui sur la jambe opérée entre les cannes",
+"image": "",
+"consignes": [
+"Debout entre les deux cannes, pieds écartés",
+"Déplacer doucement le poids sur la jambe opérée",
+"Tenir 3 s, puis revenir au centre",
+"Augmenter l'appui petit à petit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout entre les deux cannes, pieds écartés<br>Déplacer doucement le poids sur la jambe opérée<br>Tenir 3 s, puis revenir au centre<br>Augmenter l'appui petit à petit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_02",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec deux cannes",
+"image": "",
+"consignes": [
+"Avancer les deux cannes ensemble, un peu devant",
+"Avancer la jambe opérée entre les cannes",
+"Puis avancer la jambe saine à côté",
+"Appuyer sur les poignées pour soulager la jambe opérée"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les deux cannes ensemble, un peu devant<br>Avancer la jambe opérée entre les cannes<br>Puis avancer la jambe saine à côté<br>Appuyer sur les poignées pour soulager la jambe opérée",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_08",
+"source": "CABINET",
+"nom": "Faire demi-tour avec deux cannes",
+"image": "",
+"consignes": [
+"Tourner en faisant de petits pas",
+"Déplacer les cannes avec les pieds",
+"Ne pas pivoter sur la jambe opérée",
+"Prendre son temps"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tourner en faisant de petits pas<br>Déplacer les cannes avec les pieds<br>Ne pas pivoter sur la jambe opérée<br>Prendre son temps",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_05",
+"source": "CABINET",
+"nom": "Monter l'escalier avec les cannes",
+"image": "",
+"consignes": [
+"Une main sur la rampe, les cannes dans l'autre main",
+"Monter d'abord la jambe saine sur la marche",
+"Puis la jambe opérée et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, les cannes dans l'autre main<br>Monter d'abord la jambe saine sur la marche<br>Puis la jambe opérée et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_06",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec les cannes",
+"image": "",
+"consignes": [
+"Une main sur la rampe, les cannes dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe opérée",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, les cannes dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe opérée<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prothese_totale_de_hanche_pth_1_canne",
+"nom": "Prothèse totale de hanche (PTH)",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "postop",
+"zoneLabel": "Hanche",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_08",
+"source": "CABINET",
+"nom": "Écarter les genoux contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle au-dessus des genoux",
+"Pieds à plat, écartés de la largeur du bassin",
+"Écarter les genoux contre l'élastique, tenir 2 s",
+"Revenir doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle au-dessus des genoux<br>Pieds à plat, écartés de la largeur du bassin<br>Écarter les genoux contre l'élastique, tenir 2 s<br>Revenir doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_01",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer la canne",
+"Avancer la jambe atteinte",
+"Puis la jambe saine, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer la canne<br>Avancer la jambe atteinte<br>Puis la jambe saine, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_03",
+"source": "CABINET",
+"nom": "Monter l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Monter d'abord la jambe saine",
+"Puis la jambe atteinte et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Monter d'abord la jambe saine<br>Puis la jambe atteinte et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_04",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe atteinte",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe atteinte<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
 }
 ]
 },
@@ -15119,6 +16235,483 @@ export const MODELES_BASE = [
 ]
 },
 {
+"id": "cab_prevention_des_chutes_au_fauteuil",
+"nom": "Prévention des chutes",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "prevention",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_12",
+"source": "CABINET",
+"nom": "Se pencher en avant, nez au-dessus des orteils",
+"image": "",
+"consignes": [
+"Avancer les fesses au bord du fauteuil",
+"Pieds à plat, un peu en arrière des genoux",
+"Pencher le buste en avant jusqu'à ce que les fesses s'allègent",
+"Revenir s'asseoir droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les fesses au bord du fauteuil<br>Pieds à plat, un peu en arrière des genoux<br>Pencher le buste en avant jusqu'à ce que les fesses s'allègent<br>Revenir s'asseoir droit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_13",
+"source": "CABINET",
+"nom": "Se lever du fauteuil et se rasseoir",
+"image": "",
+"consignes": [
+"Fesses au bord du fauteuil, pieds en arrière des genoux",
+"Mains sur les accoudoirs, buste penché en avant",
+"Pousser sur les jambes et les mains pour se lever",
+"Se rasseoir lentement en touchant le fauteuil avec les mollets avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fesses au bord du fauteuil, pieds en arrière des genoux<br>Mains sur les accoudoirs, buste penché en avant<br>Pousser sur les jambes et les mains pour se lever<br>Se rasseoir lentement en touchant le fauteuil avec les mollets avant",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_02",
+"source": "CABINET",
+"nom": "Talons puis pointes assis",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, pieds à plat",
+"Monter les talons en restant sur les pointes",
+"Reposer les talons, puis relever les pointes",
+"Enchaîner en rythme"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, pieds à plat<br>Monter les talons en restant sur les pointes<br>Reposer les talons, puis relever les pointes<br>Enchaîner en rythme",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_07",
+"source": "CABINET",
+"nom": "Marche assise, genoux levés",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, dos droit",
+"Lever un genou, puis l'autre, comme pour marcher",
+"Balancer les bras en même temps",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, dos droit<br>Lever un genou, puis l'autre, comme pour marcher<br>Balancer les bras en même temps<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_15",
+"source": "CABINET",
+"nom": "Attraper un objet loin sur le côté",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, pieds à plat",
+"Objet posé sur une table à côté, un peu plus loin que le bras",
+"Aller le chercher en penchant le buste, puis le ramener",
+"Recommencer de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, pieds à plat<br>Objet posé sur une table à côté, un peu plus loin que le bras<br>Aller le chercher en penchant le buste, puis le ramener<br>Recommencer de l'autre côté",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_11",
+"source": "CABINET",
+"nom": "Pédalier devant le fauteuil",
+"image": "",
+"consignes": [
+"Mini-pédalier posé au sol devant le fauteuil",
+"Fauteuil calé contre un mur pour ne pas reculer",
+"Pédaler à un rythme régulier",
+"On doit pouvoir parler en pédalant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mini-pédalier posé au sol devant le fauteuil<br>Fauteuil calé contre un mur pour ne pas reculer<br>Pédaler à un rythme régulier<br>On doit pouvoir parler en pédalant",
+"reps": 2,
+"ex": 300,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prevention_des_chutes_deambulateur",
+"nom": "Prévention des chutes",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "prevention",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_02",
+"source": "CABINET",
+"nom": "S'asseoir dans le fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Reculer jusqu'à sentir le fauteuil derrière les mollets",
+"Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
+"Pencher le buste en avant",
+"S'asseoir lentement, sans se laisser tomber"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Reculer jusqu'à sentir le fauteuil derrière les mollets<br>Lâcher une poignée et attraper l'accoudoir, puis l'autre main<br>Pencher le buste en avant<br>S'asseoir lentement, sans se laisser tomber",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_05",
+"source": "CABINET",
+"nom": "Montées sur la pointe des pieds au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_07",
+"source": "CABINET",
+"nom": "Mini-flexions des genoux au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Plier un peu les genoux, comme pour s'asseoir",
+"Garder le dos droit et les talons au sol",
+"Remonter en poussant sur les jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Plier un peu les genoux, comme pour s'asseoir<br>Garder le dos droit et les talons au sol<br>Remonter en poussant sur les jambes",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_08",
+"source": "CABINET",
+"nom": "Marche sur place au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Lever un genou puis l'autre, comme pour marcher",
+"Bien décoller le pied du sol",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Lever un genou puis l'autre, comme pour marcher<br>Bien décoller le pied du sol<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_15",
+"source": "CABINET",
+"nom": "Équilibre pieds serrés au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Rapprocher les pieds l'un contre l'autre",
+"Tenir sans bouger",
+"Si c'est facile : lâcher une main, puis l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Rapprocher les pieds l'un contre l'autre<br>Tenir sans bouger<br>Si c'est facile : lâcher une main, puis l'autre",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_13",
+"source": "CABINET",
+"nom": "Faire demi-tour avec le déambulateur",
+"image": "",
+"consignes": [
+"Tourner le déambulateur petit à petit",
+"Suivre avec de petits pas, sans croiser les pieds",
+"Ne jamais pivoter sur un seul pied",
+"Prendre son temps, s'arrêter si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tourner le déambulateur petit à petit<br>Suivre avec de petits pas, sans croiser les pieds<br>Ne jamais pivoter sur un seul pied<br>Prendre son temps, s'arrêter si besoin",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_prevention_des_chutes_1_canne",
+"nom": "Prévention des chutes",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "prevention",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Chaise stable"
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_07",
+"source": "CABINET",
+"nom": "Enjamber de petits obstacles avec une canne",
+"image": "",
+"consignes": [
+"Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
+"Canne du côté sain",
+"Avancer la canne, enjamber avec la jambe atteinte",
+"Puis avec la jambe saine, en levant bien les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)<br>Canne du côté sain<br>Avancer la canne, enjamber avec la jambe atteinte<br>Puis avec la jambe saine, en levant bien les pieds",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_08",
+"source": "CABINET",
+"nom": "Marche en huit autour de deux chaises avec une canne",
+"image": "",
+"consignes": [
+"Deux chaises posées à 2 m l'une de l'autre",
+"Marcher avec la canne en dessinant un huit autour",
+"Tourner avec de petits pas",
+"Dans un sens puis dans l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux chaises posées à 2 m l'une de l'autre<br>Marcher avec la canne en dessinant un huit autour<br>Tourner avec de petits pas<br>Dans un sens puis dans l'autre",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_03",
+"source": "CABINET",
+"nom": "Monter l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Monter d'abord la jambe saine",
+"Puis la jambe atteinte et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Monter d'abord la jambe saine<br>Puis la jambe atteinte et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_04",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe atteinte",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe atteinte<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
 "id": "cab_dos_au_travail_1",
 "nom": "Dos au travail",
 "niveau": 1,
@@ -15908,6 +17501,462 @@ export const MODELES_BASE = [
 ]
 },
 {
+"id": "cab_maladie_de_parkinson_au_fauteuil",
+"nom": "Maladie de Parkinson",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_12",
+"source": "CABINET",
+"nom": "Se pencher en avant, nez au-dessus des orteils",
+"image": "",
+"consignes": [
+"Avancer les fesses au bord du fauteuil",
+"Pieds à plat, un peu en arrière des genoux",
+"Pencher le buste en avant jusqu'à ce que les fesses s'allègent",
+"Revenir s'asseoir droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les fesses au bord du fauteuil<br>Pieds à plat, un peu en arrière des genoux<br>Pencher le buste en avant jusqu'à ce que les fesses s'allègent<br>Revenir s'asseoir droit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_13",
+"source": "CABINET",
+"nom": "Se lever du fauteuil et se rasseoir",
+"image": "",
+"consignes": [
+"Fesses au bord du fauteuil, pieds en arrière des genoux",
+"Mains sur les accoudoirs, buste penché en avant",
+"Pousser sur les jambes et les mains pour se lever",
+"Se rasseoir lentement en touchant le fauteuil avec les mollets avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fesses au bord du fauteuil, pieds en arrière des genoux<br>Mains sur les accoudoirs, buste penché en avant<br>Pousser sur les jambes et les mains pour se lever<br>Se rasseoir lentement en touchant le fauteuil avec les mollets avant",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_18",
+"source": "CABINET",
+"nom": "Rotation du tronc assis",
+"image": "/exercises/images/neuro/rotation-tronc-assis.webp",
+"consignes": [
+"Assise au milieu de la chaise, pieds à plat",
+"Croiser les bras sur la poitrine",
+"Tourner lentement les épaules et la tête d'un côté, le bassin reste face à l'avant",
+"Revenir au centre puis tourner de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au milieu de la chaise, pieds à plat<br>Croiser les bras sur la poitrine<br>Tourner lentement les épaules et la tête d'un côté, le bassin reste face à l'avant<br>Revenir au centre puis tourner de l'autre côté",
+"reps": 10,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_14",
+"source": "CABINET",
+"nom": "Lever les bras avec un bâton assis",
+"image": "",
+"consignes": [
+"Assis, dos droit, bâton tenu à deux mains",
+"Monter le bâton au-dessus de la tête en inspirant",
+"Redescendre en soufflant",
+"Garder les épaules basses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, dos droit, bâton tenu à deux mains<br>Monter le bâton au-dessus de la tête en inspirant<br>Redescendre en soufflant<br>Garder les épaules basses",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_07",
+"source": "CABINET",
+"nom": "Marche assise, genoux levés",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, dos droit",
+"Lever un genou, puis l'autre, comme pour marcher",
+"Balancer les bras en même temps",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, dos droit<br>Lever un genou, puis l'autre, comme pour marcher<br>Balancer les bras en même temps<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_07",
+"source": "CABINET",
+"nom": "Tapotement des pieds assis",
+"image": "/exercises/images/neuro/tapotement-pieds.webp",
+"consignes": [
+"Assis, pieds à plat",
+"Taper alternativement la pointe du pied droit puis du gauche au sol",
+"Garder un rythme régulier",
+"Accélérer progressivement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, pieds à plat<br>Taper alternativement la pointe du pied droit puis du gauche au sol<br>Garder un rythme régulier<br>Accélérer progressivement",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_11",
+"source": "CABINET",
+"nom": "Pédalier devant le fauteuil",
+"image": "",
+"consignes": [
+"Mini-pédalier posé au sol devant le fauteuil",
+"Fauteuil calé contre un mur pour ne pas reculer",
+"Pédaler à un rythme régulier",
+"On doit pouvoir parler en pédalant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mini-pédalier posé au sol devant le fauteuil<br>Fauteuil calé contre un mur pour ne pas reculer<br>Pédaler à un rythme régulier<br>On doit pouvoir parler en pédalant",
+"reps": 2,
+"ex": 300,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_maladie_de_parkinson_deambulateur",
+"nom": "Maladie de Parkinson",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_02",
+"source": "CABINET",
+"nom": "S'asseoir dans le fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Reculer jusqu'à sentir le fauteuil derrière les mollets",
+"Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
+"Pencher le buste en avant",
+"S'asseoir lentement, sans se laisser tomber"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Reculer jusqu'à sentir le fauteuil derrière les mollets<br>Lâcher une poignée et attraper l'accoudoir, puis l'autre main<br>Pencher le buste en avant<br>S'asseoir lentement, sans se laisser tomber",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_08",
+"source": "CABINET",
+"nom": "Marche sur place au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Lever un genou puis l'autre, comme pour marcher",
+"Bien décoller le pied du sol",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Lever un genou puis l'autre, comme pour marcher<br>Bien décoller le pied du sol<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_13",
+"source": "CABINET",
+"nom": "Faire demi-tour avec le déambulateur",
+"image": "",
+"consignes": [
+"Tourner le déambulateur petit à petit",
+"Suivre avec de petits pas, sans croiser les pieds",
+"Ne jamais pivoter sur un seul pied",
+"Prendre son temps, s'arrêter si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tourner le déambulateur petit à petit<br>Suivre avec de petits pas, sans croiser les pieds<br>Ne jamais pivoter sur un seul pied<br>Prendre son temps, s'arrêter si besoin",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_14",
+"source": "CABINET",
+"nom": "Pas de côté avec le déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées",
+"Déplacer le déambulateur un peu sur le côté",
+"Faire un pas de côté avec un pied, puis rapprocher l'autre",
+"Revenir dans l'autre sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées<br>Déplacer le déambulateur un peu sur le côté<br>Faire un pas de côté avec un pied, puis rapprocher l'autre<br>Revenir dans l'autre sens",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_18",
+"source": "CABINET",
+"nom": "Rotation du tronc assis",
+"image": "/exercises/images/neuro/rotation-tronc-assis.webp",
+"consignes": [
+"Assise au milieu de la chaise, pieds à plat",
+"Croiser les bras sur la poitrine",
+"Tourner lentement les épaules et la tête d'un côté, le bassin reste face à l'avant",
+"Revenir au centre puis tourner de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au milieu de la chaise, pieds à plat<br>Croiser les bras sur la poitrine<br>Tourner lentement les épaules et la tête d'un côté, le bassin reste face à l'avant<br>Revenir au centre puis tourner de l'autre côté",
+"reps": 10,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_14",
+"source": "CABINET",
+"nom": "Lever les bras avec un bâton assis",
+"image": "",
+"consignes": [
+"Assis, dos droit, bâton tenu à deux mains",
+"Monter le bâton au-dessus de la tête en inspirant",
+"Redescendre en soufflant",
+"Garder les épaules basses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, dos droit, bâton tenu à deux mains<br>Monter le bâton au-dessus de la tête en inspirant<br>Redescendre en soufflant<br>Garder les épaules basses",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_maladie_de_parkinson_1_canne",
+"nom": "Maladie de Parkinson",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_01",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer la canne",
+"Avancer la jambe atteinte",
+"Puis la jambe saine, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer la canne<br>Avancer la jambe atteinte<br>Puis la jambe saine, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_08",
+"source": "CABINET",
+"nom": "Marche en huit autour de deux chaises avec une canne",
+"image": "",
+"consignes": [
+"Deux chaises posées à 2 m l'une de l'autre",
+"Marcher avec la canne en dessinant un huit autour",
+"Tourner avec de petits pas",
+"Dans un sens puis dans l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux chaises posées à 2 m l'une de l'autre<br>Marcher avec la canne en dessinant un huit autour<br>Tourner avec de petits pas<br>Dans un sens puis dans l'autre",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_10",
+"source": "CABINET",
+"nom": "Demi-tour en plusieurs pas",
+"image": "/exercises/images/neuro/demi-tour.webp",
+"consignes": [
+"Debout près d'un appui",
+"Faire demi-tour en plusieurs petits pas en dessinant un arc",
+"Ne pas pivoter sur un seul pied",
+"Tourner dans les deux sens"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un appui<br>Faire demi-tour en plusieurs petits pas en dessinant un arc<br>Ne pas pivoter sur un seul pied<br>Tourner dans les deux sens",
+"reps": 6,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_07",
+"source": "CABINET",
+"nom": "Enjamber de petits obstacles avec une canne",
+"image": "",
+"consignes": [
+"Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
+"Canne du côté sain",
+"Avancer la canne, enjamber avec la jambe atteinte",
+"Puis avec la jambe saine, en levant bien les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)<br>Canne du côté sain<br>Avancer la canne, enjamber avec la jambe atteinte<br>Puis avec la jambe saine, en levant bien les pieds",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_14",
+"source": "CABINET",
+"nom": "Lever les bras avec un bâton assis",
+"image": "",
+"consignes": [
+"Assis, dos droit, bâton tenu à deux mains",
+"Monter le bâton au-dessus de la tête en inspirant",
+"Redescendre en soufflant",
+"Garder les épaules basses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, dos droit, bâton tenu à deux mains<br>Monter le bâton au-dessus de la tête en inspirant<br>Redescendre en soufflant<br>Garder les épaules basses",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
 "id": "cab_sclerose_en_plaques_1",
 "nom": "Sclérose en plaques",
 "niveau": 1,
@@ -16260,6 +18309,575 @@ export const MODELES_BASE = [
 "repos": 60,
 "conseil_kine": "",
 "materiel": "Petits obstacles, Couloir"
+}
+]
+},
+{
+"id": "cab_sclerose_en_plaques_au_fauteuil",
+"nom": "Sclérose en plaques",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "NEURO_14",
+"source": "CABINET",
+"nom": "Étirement du mollet à la sangle",
+"image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+"consignes": [
+"Assise au sol ou sur un lit, jambe tendue devant soi",
+"Passer une sangle sous l'avant-pied",
+"Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+"Tenir 30 secondes en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au sol ou sur un lit, jambe tendue devant soi<br>Passer une sangle sous l'avant-pied<br>Tirer doucement la sangle vers soi avec les deux mains, dos droit<br>Tenir 30 secondes en respirant",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_08",
+"source": "CABINET",
+"nom": "Écarter les genoux contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle au-dessus des genoux",
+"Pieds à plat, écartés de la largeur du bassin",
+"Écarter les genoux contre l'élastique, tenir 2 s",
+"Revenir doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle au-dessus des genoux<br>Pieds à plat, écartés de la largeur du bassin<br>Écarter les genoux contre l'élastique, tenir 2 s<br>Revenir doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_10",
+"source": "CABINET",
+"nom": "Soulever les fesses en poussant sur les accoudoirs",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, mains sur les accoudoirs",
+"Pieds à plat au sol",
+"Pousser sur les mains pour décoller les fesses, tenir 2 s",
+"Se reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, mains sur les accoudoirs<br>Pieds à plat au sol<br>Pousser sur les mains pour décoller les fesses, tenir 2 s<br>Se reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_15",
+"source": "CABINET",
+"nom": "Attraper un objet loin sur le côté",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, pieds à plat",
+"Objet posé sur une table à côté, un peu plus loin que le bras",
+"Aller le chercher en penchant le buste, puis le ramener",
+"Recommencer de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, pieds à plat<br>Objet posé sur une table à côté, un peu plus loin que le bras<br>Aller le chercher en penchant le buste, puis le ramener<br>Recommencer de l'autre côté",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_11",
+"source": "CABINET",
+"nom": "Pédalier devant le fauteuil",
+"image": "",
+"consignes": [
+"Mini-pédalier posé au sol devant le fauteuil",
+"Fauteuil calé contre un mur pour ne pas reculer",
+"Pédaler à un rythme régulier",
+"On doit pouvoir parler en pédalant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mini-pédalier posé au sol devant le fauteuil<br>Fauteuil calé contre un mur pour ne pas reculer<br>Pédaler à un rythme régulier<br>On doit pouvoir parler en pédalant",
+"reps": 2,
+"ex": 300,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sclerose_en_plaques_deambulateur",
+"nom": "Sclérose en plaques",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_04",
+"source": "CABINET",
+"nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Déplacer doucement le poids du corps sur la jambe droite",
+"Puis sur la jambe gauche",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Déplacer doucement le poids du corps sur la jambe droite<br>Puis sur la jambe gauche<br>Garder le buste droit",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_07",
+"source": "CABINET",
+"nom": "Mini-flexions des genoux au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Plier un peu les genoux, comme pour s'asseoir",
+"Garder le dos droit et les talons au sol",
+"Remonter en poussant sur les jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Plier un peu les genoux, comme pour s'asseoir<br>Garder le dos droit et les talons au sol<br>Remonter en poussant sur les jambes",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_08",
+"source": "CABINET",
+"nom": "Marche sur place au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Lever un genou puis l'autre, comme pour marcher",
+"Bien décoller le pied du sol",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Lever un genou puis l'autre, comme pour marcher<br>Bien décoller le pied du sol<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_15",
+"source": "CABINET",
+"nom": "Équilibre pieds serrés au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Rapprocher les pieds l'un contre l'autre",
+"Tenir sans bouger",
+"Si c'est facile : lâcher une main, puis l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Rapprocher les pieds l'un contre l'autre<br>Tenir sans bouger<br>Si c'est facile : lâcher une main, puis l'autre",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_17",
+"source": "CABINET",
+"nom": "Marche avec pauses assises sur le rollator",
+"image": "",
+"consignes": [
+"Marcher avec le rollator le temps prévu",
+"S'arrêter, serrer les deux freins",
+"Se retourner et s'asseoir sur le siège du rollator",
+"Se reposer, puis repartir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marcher avec le rollator le temps prévu<br>S'arrêter, serrer les deux freins<br>Se retourner et s'asseoir sur le siège du rollator<br>Se reposer, puis repartir",
+"reps": 3,
+"ex": 180,
+"repos": 120,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sclerose_en_plaques_2_cannes",
+"nom": "Sclérose en plaques",
+"niveau": 1,
+"aide": "2 cannes",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNES_01",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec deux cannes",
+"image": "",
+"consignes": [
+"Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
+"Fesses au bord du fauteuil, buste penché en avant",
+"Se lever en poussant sur l'accoudoir et sur les cannes",
+"Debout, passer une canne dans l'autre main avant de marcher"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir<br>Fesses au bord du fauteuil, buste penché en avant<br>Se lever en poussant sur l'accoudoir et sur les cannes<br>Debout, passer une canne dans l'autre main avant de marcher",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_03",
+"source": "CABINET",
+"nom": "Marche en 4 temps avec deux cannes",
+"image": "",
+"consignes": [
+"Avancer la canne droite",
+"Avancer le pied gauche",
+"Avancer la canne gauche",
+"Avancer le pied droit, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer la canne droite<br>Avancer le pied gauche<br>Avancer la canne gauche<br>Avancer le pied droit, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_04",
+"source": "CABINET",
+"nom": "Marche en 2 temps avec deux cannes",
+"image": "",
+"consignes": [
+"Avancer en même temps la canne droite et le pied gauche",
+"Puis la canne gauche et le pied droit",
+"Comme une marche normale, bras et jambes opposés",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer en même temps la canne droite et le pied gauche<br>Puis la canne gauche et le pied droit<br>Comme une marche normale, bras et jambes opposés<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNES_08",
+"source": "CABINET",
+"nom": "Faire demi-tour avec deux cannes",
+"image": "",
+"consignes": [
+"Tourner en faisant de petits pas",
+"Déplacer les cannes avec les pieds",
+"Ne pas pivoter sur la jambe opérée",
+"Prendre son temps"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tourner en faisant de petits pas<br>Déplacer les cannes avec les pieds<br>Ne pas pivoter sur la jambe opérée<br>Prendre son temps",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sclerose_en_plaques_1_canne",
+"nom": "Sclérose en plaques",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_03",
+"source": "CABINET",
+"nom": "Tourner le pied vers l'extérieur contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle autour des deux avant-pieds",
+"Talons posés au sol, pieds serrés",
+"Tourner un pied vers l'extérieur contre l'élastique",
+"Revenir lentement, puis l'autre pied"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle autour des deux avant-pieds<br>Talons posés au sol, pieds serrés<br>Tourner un pied vers l'extérieur contre l'élastique<br>Revenir lentement, puis l'autre pied",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Chaise stable"
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_02",
+"source": "CABINET",
+"nom": "Marche en 2 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer en même temps la canne et la jambe atteinte",
+"Puis avancer la jambe saine",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer en même temps la canne et la jambe atteinte<br>Puis avancer la jambe saine<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_08",
+"source": "CABINET",
+"nom": "Marche en huit autour de deux chaises avec une canne",
+"image": "",
+"consignes": [
+"Deux chaises posées à 2 m l'une de l'autre",
+"Marcher avec la canne en dessinant un huit autour",
+"Tourner avec de petits pas",
+"Dans un sens puis dans l'autre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Deux chaises posées à 2 m l'une de l'autre<br>Marcher avec la canne en dessinant un huit autour<br>Tourner avec de petits pas<br>Dans un sens puis dans l'autre",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
 }
 ]
 },
@@ -16660,6 +19278,634 @@ export const MODELES_BASE = [
 ]
 },
 {
+"id": "cab_hemiplegie_avc_alite",
+"nom": "Hémiplégie (AVC)",
+"niveau": 1,
+"aide": "Alité",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "NEURO_01",
+"source": "CABINET",
+"nom": "Retournement dans le lit",
+"image": "/exercises/images/neuro/retournement-lit.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Tendre les bras joints vers le plafond",
+"Tourner la tête puis lancer les bras et les genoux du côté où l'on se tourne",
+"Revenir sur le dos et recommencer de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Tendre les bras joints vers le plafond<br>Tourner la tête puis lancer les bras et les genoux du côté où l'on se tourne<br>Revenir sur le dos et recommencer de l'autre côté",
+"reps": 5,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_02",
+"source": "CABINET",
+"nom": "Passage couché-assis au bord du lit",
+"image": "/exercises/images/neuro/couche-assis-lit.webp",
+"consignes": [
+"Couchée sur le côté au bord du lit, genoux pliés",
+"Laisser descendre les jambes hors du lit",
+"Pousser sur le coude puis sur la main pour redresser le buste",
+"S'asseoir, pieds à plat au sol, et rester quelques secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Couchée sur le côté au bord du lit, genoux pliés<br>Laisser descendre les jambes hors du lit<br>Pousser sur le coude puis sur la main pour redresser le buste<br>S'asseoir, pieds à plat au sol, et rester quelques secondes",
+"reps": 5,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_02",
+"source": "CABINET",
+"nom": "Écraser le coussin sous le genou",
+"image": "",
+"consignes": [
+"Allongé sur le dos, petit coussin roulé sous le genou",
+"Tirer la pointe du pied vers soi",
+"Écraser le coussin en tendant le genou, tenir 5 s",
+"Relâcher complètement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, petit coussin roulé sous le genou<br>Tirer la pointe du pied vers soi<br>Écraser le coussin en tendant le genou, tenir 5 s<br>Relâcher complètement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_03",
+"source": "CABINET",
+"nom": "Glisser le talon vers les fesses",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Plier le genou en faisant glisser le talon sur le lit",
+"Aller jusqu'où c'est confortable",
+"Revenir lentement jambe tendue"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Plier le genou en faisant glisser le talon sur le lit<br>Aller jusqu'où c'est confortable<br>Revenir lentement jambe tendue",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_05",
+"source": "CABINET",
+"nom": "Pont fessier au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Serrer les fesses et décoller le bassin",
+"Tenir 3 s en haut",
+"Redescendre doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Serrer les fesses et décoller le bassin<br>Tenir 3 s en haut<br>Redescendre doucement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "LIT_08",
+"source": "CABINET",
+"nom": "Bascule des genoux d'un côté à l'autre",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Laisser tomber doucement les deux genoux d'un côté",
+"Revenir au centre",
+"Puis de l'autre côté, épaules posées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Laisser tomber doucement les deux genoux d'un côté<br>Revenir au centre<br>Puis de l'autre côté, épaules posées",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_15",
+"source": "CABINET",
+"nom": "Élévation des bras mains jointes allongé",
+"image": "/exercises/images/neuro/elevation-bras-mains-jointes.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés",
+"Croiser les doigts des deux mains, la main valide aide l'autre",
+"Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés<br>Croiser les doigts des deux mains, la main valide aide l'autre<br>Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur<br>Redescendre lentement",
+"reps": 10,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_hemiplegie_avc_au_fauteuil",
+"nom": "Hémiplégie (AVC)",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "NEURO_03",
+"source": "CABINET",
+"nom": "Transfert lit-fauteuil",
+"image": "/exercises/images/neuro/transfert-lit-fauteuil.webp",
+"consignes": [
+"Assis au bord du lit, fauteuil placé à côté, en angle",
+"Avancer les fesses, pieds en arrière des genoux",
+"Prendre appui sur l'accoudoir le plus éloigné, se pencher en avant et se lever à moitié",
+"Pivoter sur les pieds et s'asseoir lentement dans le fauteuil"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du lit, fauteuil placé à côté, en angle<br>Avancer les fesses, pieds en arrière des genoux<br>Prendre appui sur l'accoudoir le plus éloigné, se pencher en avant et se lever à moitié<br>Pivoter sur les pieds et s'asseoir lentement dans le fauteuil",
+"reps": 5,
+"ex": 3,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_16",
+"source": "CABINET",
+"nom": "Appui sur le bras atteint assis",
+"image": "/exercises/images/neuro/appui-bras-assis.webp",
+"consignes": [
+"Assise au bord du lit, pieds à plat",
+"Poser la main à plat sur le lit, à côté de la hanche, doigts écartés, coude tendu",
+"Pencher doucement le buste vers ce côté pour mettre du poids sur le bras",
+"Tenir 10 secondes puis revenir au centre"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au bord du lit, pieds à plat<br>Poser la main à plat sur le lit, à côté de la hanche, doigts écartés, coude tendu<br>Pencher doucement le buste vers ce côté pour mettre du poids sur le bras<br>Tenir 10 secondes puis revenir au centre",
+"reps": 6,
+"ex": 10,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_12",
+"source": "CABINET",
+"nom": "Équilibre assis, bras tendus",
+"image": "/exercises/images/neuro/equilibre-assis.webp",
+"consignes": [
+"Assise au milieu de la chaise, sans dossier",
+"Tendre un bras pour aller chercher loin devant puis sur le côté",
+"Revenir au centre",
+"Alterner les bras"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au milieu de la chaise, sans dossier<br>Tendre un bras pour aller chercher loin devant puis sur le côté<br>Revenir au centre<br>Alterner les bras",
+"reps": 8,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_08",
+"source": "CABINET",
+"nom": "Glissement de l'avant-bras sur la table",
+"image": "/exercises/images/neuro/glissement-table.webp",
+"consignes": [
+"Assise face à une table, avant-bras posé sur une serviette",
+"Faire glisser la main vers l'avant en tendant le bras",
+"Revenir lentement",
+"Aider avec l'autre main si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise face à une table, avant-bras posé sur une serviette<br>Faire glisser la main vers l'avant en tendant le bras<br>Revenir lentement<br>Aider avec l'autre main si besoin",
+"reps": 10,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_12",
+"source": "CABINET",
+"nom": "Se pencher en avant, nez au-dessus des orteils",
+"image": "",
+"consignes": [
+"Avancer les fesses au bord du fauteuil",
+"Pieds à plat, un peu en arrière des genoux",
+"Pencher le buste en avant jusqu'à ce que les fesses s'allègent",
+"Revenir s'asseoir droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les fesses au bord du fauteuil<br>Pieds à plat, un peu en arrière des genoux<br>Pencher le buste en avant jusqu'à ce que les fesses s'allègent<br>Revenir s'asseoir droit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_13",
+"source": "CABINET",
+"nom": "Se lever du fauteuil et se rasseoir",
+"image": "",
+"consignes": [
+"Fesses au bord du fauteuil, pieds en arrière des genoux",
+"Mains sur les accoudoirs, buste penché en avant",
+"Pousser sur les jambes et les mains pour se lever",
+"Se rasseoir lentement en touchant le fauteuil avec les mollets avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fesses au bord du fauteuil, pieds en arrière des genoux<br>Mains sur les accoudoirs, buste penché en avant<br>Pousser sur les jambes et les mains pour se lever<br>Se rasseoir lentement en touchant le fauteuil avec les mollets avant",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "PARAL_01",
+"source": "CABINET",
+"nom": "Marche entre les barres parallèles",
+"image": "",
+"consignes": [
+"Debout entre les barres, une main sur chaque barre",
+"Avancer une main, puis le pied opposé",
+"Puis l'autre main et l'autre pied",
+"Regard devant soi, pas dans les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout entre les barres, une main sur chaque barre<br>Avancer une main, puis le pied opposé<br>Puis l'autre main et l'autre pied<br>Regard devant soi, pas dans les pieds",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_hemiplegie_avc_deambulateur",
+"nom": "Hémiplégie (AVC)",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_04",
+"source": "CABINET",
+"nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Déplacer doucement le poids du corps sur la jambe droite",
+"Puis sur la jambe gauche",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Déplacer doucement le poids du corps sur la jambe droite<br>Puis sur la jambe gauche<br>Garder le buste droit",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_09",
+"source": "CABINET",
+"nom": "Écarter la jambe sur le côté au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Écarter une jambe tendue sur le côté",
+"Pointe du pied vers l'avant, buste droit",
+"Revenir doucement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Écarter une jambe tendue sur le côté<br>Pointe du pied vers l'avant, buste droit<br>Revenir doucement, puis l'autre jambe",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "PARAL_07",
+"source": "CABINET",
+"nom": "Appui sur la jambe atteinte entre les barres",
+"image": "",
+"consignes": [
+"Debout entre les barres, une main sur chaque barre",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout entre les barres, une main sur chaque barre<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_13",
+"source": "CABINET",
+"nom": "Faire demi-tour avec le déambulateur",
+"image": "",
+"consignes": [
+"Tourner le déambulateur petit à petit",
+"Suivre avec de petits pas, sans croiser les pieds",
+"Ne jamais pivoter sur un seul pied",
+"Prendre son temps, s'arrêter si besoin"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tourner le déambulateur petit à petit<br>Suivre avec de petits pas, sans croiser les pieds<br>Ne jamais pivoter sur un seul pied<br>Prendre son temps, s'arrêter si besoin",
+"reps": 3,
+"ex": 45,
+"repos": 45,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_hemiplegie_avc_1_canne",
+"nom": "Hémiplégie (AVC)",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "CANNE_06",
+"source": "CABINET",
+"nom": "Se lever et s'asseoir avec une canne",
+"image": "",
+"consignes": [
+"Canne accrochée à l'accoudoir, à portée de main",
+"Pousser sur les deux accoudoirs pour se lever",
+"Une fois debout et stable, prendre la canne",
+"Pour s'asseoir : poser la canne, mains sur les accoudoirs"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Canne accrochée à l'accoudoir, à portée de main<br>Pousser sur les deux accoudoirs pour se lever<br>Une fois debout et stable, prendre la canne<br>Pour s'asseoir : poser la canne, mains sur les accoudoirs",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_01",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer la canne",
+"Avancer la jambe atteinte",
+"Puis la jambe saine, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer la canne<br>Avancer la jambe atteinte<br>Puis la jambe saine, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_02",
+"source": "CABINET",
+"nom": "Marche en 2 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer en même temps la canne et la jambe atteinte",
+"Puis avancer la jambe saine",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer en même temps la canne et la jambe atteinte<br>Puis avancer la jambe saine<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_03",
+"source": "CABINET",
+"nom": "Monter l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Monter d'abord la jambe saine",
+"Puis la jambe atteinte et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Monter d'abord la jambe saine<br>Puis la jambe atteinte et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_04",
+"source": "CABINET",
+"nom": "Descendre l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Poser d'abord la canne sur la marche du dessous",
+"Descendre la jambe atteinte",
+"Puis la jambe saine, une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Poser d'abord la canne sur la marche du dessous<br>Descendre la jambe atteinte<br>Puis la jambe saine, une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "PARAL_06",
+"source": "CABINET",
+"nom": "Monter et descendre d'une marche entre les barres",
+"image": "",
+"consignes": [
+"Marche (step) posée entre les barres, mains sur les barres",
+"Monter avec la jambe atteinte, puis l'autre",
+"Redescendre en commençant par la jambe saine",
+"Recommencer en rythme"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Marche (step) posée entre les barres, mains sur les barres<br>Monter avec la jambe atteinte, puis l'autre<br>Redescendre en commençant par la jambe saine<br>Recommencer en rythme",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
 "id": "cab_sla_maladie_de_charcot_1",
 "nom": "SLA (maladie de Charcot)",
 "niveau": 1,
@@ -17010,6 +20256,402 @@ export const MODELES_BASE = [
 "reps": 10,
 "ex": 3,
 "repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sla_maladie_de_charcot_alite",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 1,
+"aide": "Alité",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_POST_04",
+"source": "CABINET",
+"nom": "Respiration diaphragmatique",
+"image": "/exercises/images/fauteuil/FAUT_POST_04.png",
+"consignes": [
+"Inspirer par le nez",
+"Gonfler doucement le ventre",
+"Expirer lentement par la bouche",
+"Relâcher les épaules"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirer par le nez<br>Gonfler doucement le ventre<br>Expirer lentement par la bouche<br>Relâcher les épaules",
+"reps": 5,
+"ex": 2,
+"repos": 10,
+"conseil_kine": ""
+},
+{
+"id": "LIT_01",
+"source": "CABINET",
+"nom": "Pompage des chevilles au lit",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Tirer les pointes de pied vers soi",
+"Puis les pousser vers le bas",
+"Rythme régulier, en respirant calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Tirer les pointes de pied vers soi<br>Puis les pousser vers le bas<br>Rythme régulier, en respirant calmement",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "LIT_03",
+"source": "CABINET",
+"nom": "Glisser le talon vers les fesses",
+"image": "",
+"consignes": [
+"Allongé sur le dos, jambes tendues",
+"Plier le genou en faisant glisser le talon sur le lit",
+"Aller jusqu'où c'est confortable",
+"Revenir lentement jambe tendue"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, jambes tendues<br>Plier le genou en faisant glisser le talon sur le lit<br>Aller jusqu'où c'est confortable<br>Revenir lentement jambe tendue",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "LIT_08",
+"source": "CABINET",
+"nom": "Bascule des genoux d'un côté à l'autre",
+"image": "",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Laisser tomber doucement les deux genoux d'un côté",
+"Revenir au centre",
+"Puis de l'autre côté, épaules posées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Laisser tomber doucement les deux genoux d'un côté<br>Revenir au centre<br>Puis de l'autre côté, épaules posées",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "LIT_07",
+"source": "CABINET",
+"nom": "Pousser vers le plafond avec deux bouteilles",
+"image": "",
+"consignes": [
+"Allongé sur le dos, une petite bouteille d'eau dans chaque main",
+"Coudes pliés le long du corps",
+"Pousser les bouteilles vers le plafond, bras tendus",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, une petite bouteille d'eau dans chaque main<br>Coudes pliés le long du corps<br>Pousser les bouteilles vers le plafond, bras tendus<br>Redescendre lentement",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "NEURO_01",
+"source": "CABINET",
+"nom": "Retournement dans le lit",
+"image": "/exercises/images/neuro/retournement-lit.webp",
+"consignes": [
+"Allongé sur le dos, genoux pliés, pieds à plat",
+"Tendre les bras joints vers le plafond",
+"Tourner la tête puis lancer les bras et les genoux du côté où l'on se tourne",
+"Revenir sur le dos et recommencer de l'autre côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé sur le dos, genoux pliés, pieds à plat<br>Tendre les bras joints vers le plafond<br>Tourner la tête puis lancer les bras et les genoux du côté où l'on se tourne<br>Revenir sur le dos et recommencer de l'autre côté",
+"reps": 5,
+"ex": 3,
+"repos": 20,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sla_maladie_de_charcot_au_fauteuil",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_POST_04",
+"source": "CABINET",
+"nom": "Respiration diaphragmatique",
+"image": "/exercises/images/fauteuil/FAUT_POST_04.png",
+"consignes": [
+"Inspirer par le nez",
+"Gonfler doucement le ventre",
+"Expirer lentement par la bouche",
+"Relâcher les épaules"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirer par le nez<br>Gonfler doucement le ventre<br>Expirer lentement par la bouche<br>Relâcher les épaules",
+"reps": 5,
+"ex": 2,
+"repos": 10,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_POST_01",
+"source": "CABINET",
+"nom": "Auto-grandissement simple",
+"image": "/exercises/images/fauteuil/FAUT_POST_01.png",
+"consignes": [
+"S’asseoir au fond du fauteuil",
+"Grandir la colonne vers le haut",
+"Relâcher les épaules",
+"Respirer calmement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "S’asseoir au fond du fauteuil<br>Grandir la colonne vers le haut<br>Relâcher les épaules<br>Respirer calmement",
+"reps": 5,
+"ex": 5,
+"repos": 10,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_14",
+"source": "CABINET",
+"nom": "Lever les bras avec un bâton assis",
+"image": "",
+"consignes": [
+"Assis, dos droit, bâton tenu à deux mains",
+"Monter le bâton au-dessus de la tête en inspirant",
+"Redescendre en soufflant",
+"Garder les épaules basses"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, dos droit, bâton tenu à deux mains<br>Monter le bâton au-dessus de la tête en inspirant<br>Redescendre en soufflant<br>Garder les épaules basses",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_16",
+"source": "CABINET",
+"nom": "Cercles de chevilles assis",
+"image": "",
+"consignes": [
+"Assis, une jambe tendue, talon posé au sol",
+"Dessiner de grands cercles avec la pointe du pied",
+"Dans un sens puis dans l'autre",
+"Changer de jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, une jambe tendue, talon posé au sol<br>Dessiner de grands cercles avec la pointe du pied<br>Dans un sens puis dans l'autre<br>Changer de jambe",
+"reps": 2,
+"ex": 45,
+"repos": 15,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_12",
+"source": "CABINET",
+"nom": "Se pencher en avant, nez au-dessus des orteils",
+"image": "",
+"consignes": [
+"Avancer les fesses au bord du fauteuil",
+"Pieds à plat, un peu en arrière des genoux",
+"Pencher le buste en avant jusqu'à ce que les fesses s'allègent",
+"Revenir s'asseoir droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer les fesses au bord du fauteuil<br>Pieds à plat, un peu en arrière des genoux<br>Pencher le buste en avant jusqu'à ce que les fesses s'allègent<br>Revenir s'asseoir droit",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_sla_maladie_de_charcot_deambulateur",
+"nom": "SLA (maladie de Charcot)",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_POST_04",
+"source": "CABINET",
+"nom": "Respiration diaphragmatique",
+"image": "/exercises/images/fauteuil/FAUT_POST_04.png",
+"consignes": [
+"Inspirer par le nez",
+"Gonfler doucement le ventre",
+"Expirer lentement par la bouche",
+"Relâcher les épaules"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Inspirer par le nez<br>Gonfler doucement le ventre<br>Expirer lentement par la bouche<br>Relâcher les épaules",
+"reps": 5,
+"ex": 2,
+"repos": 10,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_01",
+"source": "CABINET",
+"nom": "Se lever du fauteuil avec le déambulateur",
+"image": "",
+"consignes": [
+"Déambulateur placé juste devant soi, freins serrés",
+"Avancer les fesses au bord, pieds en arrière des genoux",
+"Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur",
+"Une fois debout, poser une main puis l'autre sur les poignées"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Déambulateur placé juste devant soi, freins serrés<br>Avancer les fesses au bord, pieds en arrière des genoux<br>Pousser sur les accoudoirs pour se lever, sans tirer sur le déambulateur<br>Une fois debout, poser une main puis l'autre sur les poignées",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_03",
+"source": "CABINET",
+"nom": "Tenir debout au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Pieds écartés de la largeur du bassin",
+"Se grandir, regard devant soi",
+"Respirer calmement, rester debout le temps prévu"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Pieds écartés de la largeur du bassin<br>Se grandir, regard devant soi<br>Respirer calmement, rester debout le temps prévu",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_04",
+"source": "CABINET",
+"nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Déplacer doucement le poids du corps sur la jambe droite",
+"Puis sur la jambe gauche",
+"Garder le buste droit"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Déplacer doucement le poids du corps sur la jambe droite<br>Puis sur la jambe gauche<br>Garder le buste droit",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
 "conseil_kine": ""
 }
 ]
@@ -17383,6 +21025,503 @@ export const MODELES_BASE = [
 "reps": 10,
 "ex": 3,
 "repos": 3,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_charcot_marie_tooth_au_fauteuil",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 1,
+"aide": "Au fauteuil",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "NEURO_14",
+"source": "CABINET",
+"nom": "Étirement du mollet à la sangle",
+"image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+"consignes": [
+"Assise au sol ou sur un lit, jambe tendue devant soi",
+"Passer une sangle sous l'avant-pied",
+"Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+"Tenir 30 secondes en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au sol ou sur un lit, jambe tendue devant soi<br>Passer une sangle sous l'avant-pied<br>Tirer doucement la sangle vers soi avec les deux mains, dos droit<br>Tenir 30 secondes en respirant",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_03",
+"source": "CABINET",
+"nom": "Tourner le pied vers l'extérieur contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle autour des deux avant-pieds",
+"Talons posés au sol, pieds serrés",
+"Tourner un pied vers l'extérieur contre l'élastique",
+"Revenir lentement, puis l'autre pied"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle autour des deux avant-pieds<br>Talons posés au sol, pieds serrés<br>Tourner un pied vers l'extérieur contre l'élastique<br>Revenir lentement, puis l'autre pied",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_04",
+"source": "CABINET",
+"nom": "Froisser une serviette avec les orteils",
+"image": "",
+"consignes": [
+"Assis, pied nu posé sur une serviette étalée au sol",
+"Talon fixe",
+"Ramener la serviette sous le pied en pliant les orteils",
+"Étaler la serviette et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, pied nu posé sur une serviette étalée au sol<br>Talon fixe<br>Ramener la serviette sous le pied en pliant les orteils<br>Étaler la serviette et recommencer",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_06",
+"source": "CABINET",
+"nom": "Tendre le genou assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, dos contre le dossier",
+"Tendre un genou, pointe du pied vers soi",
+"Tenir 3 s jambe tendue",
+"Reposer lentement, puis l'autre jambe"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, dos contre le dossier<br>Tendre un genou, pointe du pied vers soi<br>Tenir 3 s jambe tendue<br>Reposer lentement, puis l'autre jambe",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_07",
+"source": "CABINET",
+"nom": "Marche assise, genoux levés",
+"image": "",
+"consignes": [
+"Assis au bord du fauteuil, dos droit",
+"Lever un genou, puis l'autre, comme pour marcher",
+"Balancer les bras en même temps",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au bord du fauteuil, dos droit<br>Lever un genou, puis l'autre, comme pour marcher<br>Balancer les bras en même temps<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 45,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "MAIN_02",
+"source": "CABINET",
+"nom": "Serrer une balle",
+"image": "/exercises/images/main/serrer-balle.webp",
+"consignes": [
+"Assis, avant-bras posé sur la table",
+"Serrer la balle souple dans la main",
+"Tenir 5 secondes",
+"Relâcher lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, avant-bras posé sur la table<br>Serrer la balle souple dans la main<br>Tenir 5 secondes<br>Relâcher lentement",
+"reps": 12,
+"ex": 5,
+"repos": 5,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_13",
+"source": "CABINET",
+"nom": "Se lever du fauteuil et se rasseoir",
+"image": "",
+"consignes": [
+"Fesses au bord du fauteuil, pieds en arrière des genoux",
+"Mains sur les accoudoirs, buste penché en avant",
+"Pousser sur les jambes et les mains pour se lever",
+"Se rasseoir lentement en touchant le fauteuil avec les mollets avant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Fesses au bord du fauteuil, pieds en arrière des genoux<br>Mains sur les accoudoirs, buste penché en avant<br>Pousser sur les jambes et les mains pour se lever<br>Se rasseoir lentement en touchant le fauteuil avec les mollets avant",
+"reps": 3,
+"ex": 45,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_charcot_marie_tooth_deambulateur",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 1,
+"aide": "Déambulateur",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "FAUT_01",
+"source": "CABINET",
+"nom": "Relever les pointes de pied assis",
+"image": "",
+"consignes": [
+"Assis au fond du fauteuil, pieds à plat",
+"Talons posés au sol",
+"Relever les deux pointes de pied le plus haut possible, tenir 2 s",
+"Reposer doucement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis au fond du fauteuil, pieds à plat<br>Talons posés au sol<br>Relever les deux pointes de pied le plus haut possible, tenir 2 s<br>Reposer doucement",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_03",
+"source": "CABINET",
+"nom": "Tourner le pied vers l'extérieur contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle autour des deux avant-pieds",
+"Talons posés au sol, pieds serrés",
+"Tourner un pied vers l'extérieur contre l'élastique",
+"Revenir lentement, puis l'autre pied"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle autour des deux avant-pieds<br>Talons posés au sol, pieds serrés<br>Tourner un pied vers l'extérieur contre l'élastique<br>Revenir lentement, puis l'autre pied",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_04",
+"source": "CABINET",
+"nom": "Froisser une serviette avec les orteils",
+"image": "",
+"consignes": [
+"Assis, pied nu posé sur une serviette étalée au sol",
+"Talon fixe",
+"Ramener la serviette sous le pied en pliant les orteils",
+"Étaler la serviette et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, pied nu posé sur une serviette étalée au sol<br>Talon fixe<br>Ramener la serviette sous le pied en pliant les orteils<br>Étaler la serviette et recommencer",
+"reps": 3,
+"ex": 45,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_06",
+"source": "CABINET",
+"nom": "Relever les pointes de pied au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Relever les pointes de pied en restant sur les talons",
+"Petit mouvement, fesses qui ne partent pas en arrière",
+"Reposer doucement les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Relever les pointes de pied en restant sur les talons<br>Petit mouvement, fesses qui ne partent pas en arrière<br>Reposer doucement les pieds",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_08",
+"source": "CABINET",
+"nom": "Marche sur place au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Lever un genou puis l'autre, comme pour marcher",
+"Bien décoller le pied du sol",
+"Garder un rythme régulier"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Lever un genou puis l'autre, comme pour marcher<br>Bien décoller le pied du sol<br>Garder un rythme régulier",
+"reps": 3,
+"ex": 40,
+"repos": 40,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_05",
+"source": "CABINET",
+"nom": "Montées sur la pointe des pieds au déambulateur",
+"image": "",
+"consignes": [
+"Debout, mains sur les poignées, freins serrés",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout, mains sur les poignées, freins serrés<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "DEAMB_12",
+"source": "CABINET",
+"nom": "Marcher avec le déambulateur",
+"image": "",
+"consignes": [
+"Avancer le déambulateur d'un petit pas devant soi",
+"Avancer la jambe la plus faible dans le cadre",
+"Puis la jambe la plus forte, à côté de l'autre",
+"Rester bien dans le cadre, regard devant soi"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Avancer le déambulateur d'un petit pas devant soi<br>Avancer la jambe la plus faible dans le cadre<br>Puis la jambe la plus forte, à côté de l'autre<br>Rester bien dans le cadre, regard devant soi",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "PARAL_05",
+"source": "CABINET",
+"nom": "Enjamber des obstacles entre les barres parallèles",
+"image": "",
+"consignes": [
+"Poser des petits obstacles au sol entre les barres",
+"Mains sur les barres",
+"Enjamber chaque obstacle en levant bien le genou",
+"Faire demi-tour et revenir"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser des petits obstacles au sol entre les barres<br>Mains sur les barres<br>Enjamber chaque obstacle en levant bien le genou<br>Faire demi-tour et revenir",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+}
+]
+},
+{
+"id": "cab_charcot_marie_tooth_1_canne",
+"nom": "Charcot-Marie-Tooth",
+"niveau": 1,
+"aide": "1 canne",
+"categorie": "pathologie",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "NEURO_14",
+"source": "CABINET",
+"nom": "Étirement du mollet à la sangle",
+"image": "/exercises/images/neuro/etirement-mollet-sangle.webp",
+"consignes": [
+"Assise au sol ou sur un lit, jambe tendue devant soi",
+"Passer une sangle sous l'avant-pied",
+"Tirer doucement la sangle vers soi avec les deux mains, dos droit",
+"Tenir 30 secondes en respirant"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assise au sol ou sur un lit, jambe tendue devant soi<br>Passer une sangle sous l'avant-pied<br>Tirer doucement la sangle vers soi avec les deux mains, dos droit<br>Tenir 30 secondes en respirant",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": ""
+},
+{
+"id": "FAUT_03",
+"source": "CABINET",
+"nom": "Tourner le pied vers l'extérieur contre l'élastique",
+"image": "",
+"consignes": [
+"Assis, élastique en boucle autour des deux avant-pieds",
+"Talons posés au sol, pieds serrés",
+"Tourner un pied vers l'extérieur contre l'élastique",
+"Revenir lentement, puis l'autre pied"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Assis, élastique en boucle autour des deux avant-pieds<br>Talons posés au sol, pieds serrés<br>Tourner un pied vers l'extérieur contre l'élastique<br>Revenir lentement, puis l'autre pied",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_05",
+"source": "CABINET",
+"nom": "Tenir sur la jambe atteinte avec la canne",
+"image": "",
+"consignes": [
+"Debout près d'un plan de travail, canne du côté sain",
+"Porter le poids sur la jambe atteinte",
+"Décoller le pied sain quelques secondes",
+"Reposer le pied et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout près d'un plan de travail, canne du côté sain<br>Porter le poids sur la jambe atteinte<br>Décoller le pied sain quelques secondes<br>Reposer le pied et recommencer",
+"reps": 3,
+"ex": 30,
+"repos": 30,
+"conseil_kine": ""
+},
+{
+"id": "GERIA_04",
+"source": "CABINET",
+"nom": "Montées sur pointes de pieds à la chaise",
+"image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
+"consignes": [
+"Debout derrière une chaise, mains sur le dossier",
+"Monter lentement sur la pointe des pieds",
+"Tenir 2 s en haut",
+"Redescendre doucement sur les talons"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Debout derrière une chaise, mains sur le dossier<br>Monter lentement sur la pointe des pieds<br>Tenir 2 s en haut<br>Redescendre doucement sur les talons",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "",
+"materiel": "Chaise stable"
+},
+{
+"id": "CANNE_07",
+"source": "CABINET",
+"nom": "Enjamber de petits obstacles avec une canne",
+"image": "",
+"consignes": [
+"Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
+"Canne du côté sain",
+"Avancer la canne, enjamber avec la jambe atteinte",
+"Puis avec la jambe saine, en levant bien les pieds"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)<br>Canne du côté sain<br>Avancer la canne, enjamber avec la jambe atteinte<br>Puis avec la jambe saine, en levant bien les pieds",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_01",
+"source": "CABINET",
+"nom": "Marche en 3 temps avec une canne",
+"image": "",
+"consignes": [
+"Tenir la canne du côté sain",
+"Avancer la canne",
+"Avancer la jambe atteinte",
+"Puis la jambe saine, et recommencer"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir la canne du côté sain<br>Avancer la canne<br>Avancer la jambe atteinte<br>Puis la jambe saine, et recommencer",
+"reps": 3,
+"ex": 60,
+"repos": 60,
+"conseil_kine": ""
+},
+{
+"id": "CANNE_03",
+"source": "CABINET",
+"nom": "Monter l'escalier avec une canne",
+"image": "",
+"consignes": [
+"Une main sur la rampe, la canne dans l'autre main",
+"Monter d'abord la jambe saine",
+"Puis la jambe atteinte et la canne",
+"Une marche à la fois"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une main sur la rampe, la canne dans l'autre main<br>Monter d'abord la jambe saine<br>Puis la jambe atteinte et la canne<br>Une marche à la fois",
+"reps": 3,
+"ex": 60,
+"repos": 60,
 "conseil_kine": ""
 }
 ]

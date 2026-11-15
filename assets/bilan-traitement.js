@@ -42,7 +42,9 @@ export function profil(S){
     auto: a,
     phase: t.phase ?? a.phase, irrit: t.irrit ?? a.irrit, niveau: t.niveau ?? a.niveau,
     freq: t.freq ?? a.freq, sem: t.sem ?? a.sem, reeval: t.reeval ?? a.reeval,
-    lieu: t.lieu || "HEP"
+    lieu: t.lieu || "HEP",
+    /* Aide à la marche : choisie à l'étape Traitement, sinon celle de l'entretien */
+    aide: t.aide ?? S.q?.aide ?? "Sans aide", aideAuto: S.q?.aide || "Sans aide"
   };
 }
 
@@ -148,6 +150,17 @@ export function choisirNiveau(items, niveau){
   return dessous || items[0];
 }
 
+/** Le modèle de l'aide à la marche du patient (sinon le modèle standard), au niveau le plus proche. */
+const ORDRE_AIDES = ["Alité", "Au fauteuil", "Barres parallèles", "Déambulateur", "2 cannes", "1 canne", "Sans aide"];
+export function choisirModele(items, niveau, aide){
+  /* Pas de modèle pour cette aide : l'aide la plus proche (à égalité, la moins autonome, plus prudente) */
+  const rang = a => ORDRE_AIDES.indexOf(a || "Sans aide");
+  const cible = rang(aide || "Sans aide");
+  const dist = m => Math.abs(rang(m.aide) - cible) * 2 + (rang(m.aide) > cible ? 1 : 0);
+  const best = Math.min(...items.map(dist));
+  return choisirNiveau(items.filter(m => dist(m) === best), niveau);
+}
+
 /* ---------- Programme sur mesure (bibliothèque) ---------- */
 
 const QUOTAS = {
@@ -165,7 +178,7 @@ function rng(seed){ let x = (seed * 9301 + 49297) % 233280 || 1; return () => (x
  * répartis par type selon le niveau (protection → charge progressive).
  * lib : bibliothèque classée (e.zone, e.types, e.pathos) ; visible(e) : exercice non masqué.
  */
-export function composer(lib, { pathos = [], zones = [], lieu = "HEP", niveau = 2, seed = 1, n = 6, visible = () => true, postop = false }){
+export function composer(lib, { pathos = [], zones = [], lieu = "HEP", niveau = 2, seed = 1, n = 6, visible = () => true, postop = false, aide = null }){
   const src = lieu === "CABINET" ? "CABINET" : "HEP";
   /* Hors post-opératoire : pas d'exercices de marche avec aides ni propres aux suites d'opération */
   const postOnly = e => /b[ée]quille|d[ée]ambulateur|canne|post-?op/i.test(e.nom || "") || ((e.pathos || []).includes("Post-opératoire") && !(e.pathos || []).some(p => pathos.includes(p)));
@@ -174,7 +187,10 @@ export function composer(lib, { pathos = [], zones = [], lieu = "HEP", niveau = 
   /* À la maison : très peu de matériel (élastique, chaise, serviette, bâton, petit poids…).
      Pas de swiss ball, poulie, enrouleur, barre souple, plateau ou disque d'équilibre. */
   const lourd = e => /swiss|ballon suisse|balle suisse|poulie|pulley|enrouleur|barre souple|barre r[ée]sistive|disque|bosu|plateau|trampoline/i.test(`${e.nom || ""} ${[].concat(e.materiel || []).join(" ")}`);
-  const ok = lib.filter(e => e.source === src && e.image && visible(e) && !eau(e) && (postop || !postOnly(e)) && (src !== "HEP" || !lourd(e)));
+  /* Patient avec une aide à la marche (ou au fauteuil, alité) : seulement les exercices prévus pour cette aide */
+  const avecAide = aide && aide !== "Sans aide";
+  const okAide = e => !avecAide || (e.aides || []).includes(aide);
+  const ok = lib.filter(e => e.source === src && e.image && visible(e) && !eau(e) && okAide(e) && (postop || avecAide || !postOnly(e)) && (src !== "HEP" || !lourd(e)));
   const rand = rng(seed);
   const score = e => {
     let s = 0;
@@ -185,6 +201,7 @@ export function composer(lib, { pathos = [], zones = [], lieu = "HEP", niveau = 
   };
   let pool = ok.filter(e => e.pathos?.some(p => pathos.includes(p)) || zones.includes(e.zone));
   if(pool.length < n) pool = pool.concat(ok.filter(e => !pool.includes(e) && zones.includes(e.zone)));
+  if(avecAide && pool.length < n) pool = pool.concat(ok.filter(e => !pool.includes(e)));
   pool = pool.map(e => ({ e, s: score(e) })).sort((a, b) => b.s - a.s).map(x => x.e);
 
   const pris = [], noms = new Set();

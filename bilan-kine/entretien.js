@@ -28,6 +28,7 @@ G: [
   ["travail", "vie", "Travail", ["Non concerné / retraité", "Travaille normalement", "Poste aménagé", "Arrêt de travail"]],
   ["metier", "vie", "Type d'activité professionnelle", ["Sédentaire / bureau", "Physique / port de charges", "Debout prolongé", "Gestes répétitifs", "Conduite"], true],
   ["sport", "vie", "Activité physique", ["Aucune", "Marche / loisir", "Sport régulier", "Compétition"]],
+  ["aide", "vie", "Aide à la marche", ["Sans aide", "1 canne", "2 cannes", "Déambulateur", "Au fauteuil", "Alité"]],
   ["jaunes", "vie", "Drapeaux jaunes (croyances, vécu)", ["Peur de bouger / d'aggraver", "Pense que c'est grave", "Stress / anxiété", "Moral bas", "Conflit ou insatisfaction au travail", "Attend un traitement passif"], true]
 ],
 

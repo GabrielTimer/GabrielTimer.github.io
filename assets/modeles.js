@@ -8,6 +8,13 @@ import { MODELES_BASE } from "./modeles-base.js";
 import { norm } from "./library.js";
 import { settings } from "./settings.js";
 import { esc, icon, exoImageHTML } from "./app.js";
+import { AIDES } from "./classement.js";
+
+/* Aide à la marche d'un modèle (en plus du niveau) : « Déambulateur », « Au fauteuil »…
+   Sans aide indiquée = modèle standard (patient sans aide). */
+export const AIDES_MODELE = AIDES.filter(a => a !== "Sans aide");
+export const aideOrdre = m => m?.aide ? AIDES.indexOf(m.aide) : AIDES.length;
+const aideTitre = a => a ? ` (${a.toLowerCase()})` : "";
 
 /* Listes modifiables dans Outils → Réglages du cabinet */
 export const categories = () => settings.listes.categories;
@@ -59,13 +66,14 @@ export function normModele(raw, { builtin = false } = {}){
   let categorie = meta.categorie || raw.categorie || (raw.type === "pathologie" || builtin ? "pathologie" : "autre");
   if(!categories().some(c => c.id === categorie)) categorie = "autre";
   const zoneLabel = meta.zoneLabel || raw.zoneLabel || "";
+  const aide = AIDES_MODELE.includes(raw.aide) ? raw.aide : null;
   return {
     lieu: lieuDesExercices(exercices),
     id: raw.id, raw, builtin, mine: !builtin,
-    nom: base, niveau, categorie, zoneLabel, zoneKey: norm(zoneLabel),
+    nom: base, niveau, aide, categorie, zoneLabel, zoneKey: norm(zoneLabel),
     cover: raw.cover || null, pdf: raw.pdf || null,
     series, exercices,
-    titre: niveau ? `${base}, ${niveauLabel(niveau).toLowerCase()}` : base,
+    titre: niveau ? `${base}${aideTitre(aide)}, ${niveauLabel(niveau).toLowerCase()}` : `${base}${aideTitre(aide)}`,
     remplace: raw.remplace || null,
     options: raw.options || null,
     createdAt: raw.createdAt || null
@@ -110,10 +118,11 @@ export function groupModeles(list){
   });
   const out = [...groups.values()];
   out.forEach(g => {
-    g.items.sort((a, b) => ((a.niveau || 0) - (b.niveau || 0)) || ((b.createdAt || 0) - (a.createdAt || 0)));
+    /* Standard d'abord, puis par aide à la marche (de la plus autonome à la moins autonome), puis par niveau */
+    g.items.sort((a, b) => (aideOrdre(b) - aideOrdre(a)) || ((a.niveau || 0) - (b.niveau || 0)) || ((b.createdAt || 0) - (a.createdAt || 0)));
     /* Plusieurs versions au même niveau : « Niveau 1 », « Niveau 1 (2) »… */
     const seen = {};
-    g.items.forEach(x => { const k = x.niveau || 0; seen[k] = (seen[k] || 0) + 1; x.doublon = seen[k] > 1 ? seen[k] : 0; });
+    g.items.forEach(x => { const k = (x.aide || "") + "|" + (x.niveau || 0); seen[k] = (seen[k] || 0) + 1; x.doublon = seen[k] > 1 ? seen[k] : 0; });
     g.zoneLabel = g.items.find(x => x.zoneLabel)?.zoneLabel || "";
   });
   return out;
@@ -131,7 +140,7 @@ export function filtrerOptions(m, choix){
   const lab = ch.map(c => c.court || c.l).join(", ");
   return { ...m, choix: ch.map(c => c.k),
     exercices: m.exercices.filter(e => !e.opt || choix.includes(e.opt)),
-    titre: m.niveau ? `${m.nom} (${lab}), ${niveauLabel(m.niveau).toLowerCase()}` : `${m.nom} (${lab})` };
+    titre: m.niveau ? `${m.nom} (${lab}${m.aide ? ", " + m.aide.toLowerCase() : ""}), ${niveauLabel(m.niveau).toLowerCase()}` : `${m.nom} (${lab})` };
 }
 /** Retrouve les options d'après le nom d'un programme : « … (médian, radial), niveau 2 » → ["median","radial"]. */
 export function choixDuNom(m, nomProgramme){
@@ -167,7 +176,23 @@ export async function choisirOptions(m){
 }
 
 /** Origine d'un programme créé depuis un modèle (pour le faire évoluer ensuite au bon niveau). */
-export const origineModele = m => m?.id == null ? null : { modeleId: String(m.id), nom: m.nom, niveau: m.niveau || null, ...(m.choix ? { choix: m.choix } : {}) };
+export const origineModele = m => m?.id == null ? null : { modeleId: String(m.id), nom: m.nom, niveau: m.niveau || null, ...(m.aide ? { aide: m.aide } : {}), ...(m.choix ? { choix: m.choix } : {}) };
 
 export const asProgram = m => { const o = origineModele(m);
   return { nom: m.titre, series: m.series, exercices: m.exercices.map(e => ({ type:"timer", ...e })), ...(o ? { origine: o } : {}) }; };
+
+/**
+ * Boutons d'un groupe de modèles : aide à la marche (si le groupe en a), puis niveaux de l'aide choisie.
+ * attr : nom de l'attribut data- (« lv ») ; key : clé du groupe ; cur : modèle affiché.
+ * Chaque bouton porte data-<attr>=key et data-id=<id du modèle>.
+ */
+export function levelRowsHTML(g, cur, { attr = "lv", key = g.key, cls = "mo-levels" } = {}){
+  const btn = (x, label, on) => `<button type="button" data-${attr}="${esc(key)}" data-id="${esc(x.id)}" aria-pressed="${on}">${esc(label)}</button>`;
+  const aides = [...new Set(g.items.map(x => x.aide || ""))];
+  const memeAide = g.items.filter(x => (x.aide || "") === (cur.aide || ""));
+  const niveaux = memeAide.length > 1 || cur.niveau ? `<div class="${cls}" role="group" aria-label="Niveau">${memeAide.map(x => btn(x, levelButton(x), x === cur)).join("")}</div>` : "";
+  if(aides.length < 2) return niveaux;
+  /* Pour chaque aide : le modèle du niveau le plus proche de celui affiché */
+  const proche = a => { const c = g.items.filter(x => (x.aide || "") === a); return c.find(x => x.niveau === cur.niveau) || c[0]; };
+  return `<div class="${cls} mo-aides" role="group" aria-label="Aide à la marche">${aides.map(a => btn(proche(a), a || "Sans aide", a === (cur.aide || ""))).join("")}</div>${niveaux}`;
+}
