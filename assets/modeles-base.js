@@ -2947,6 +2947,465 @@ export const MODELES_BASE = [
 "lieu": "HEP"
 },
 {
+"id": "base_algoneurodystrophie_syndrome_epaule_main_1",
+"nom": "Algoneurodystrophie (syndrome épaule-main)",
+"niveau": 1,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "546",
+"source": "HEP",
+"nom": "Respiration abdominale, allongé",
+"image": "/exercises/images/HEP/diaphragmatic-breathing-.jpg",
+"consignes": [
+"Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.",
+"Soufflez lentement par la bouche en laissant le ventre redescendre."
+],
+"position": "Allongé confortablement, une main sur la poitrine, l'autre sur le ventre",
+"youtube": "http://www.youtube.com/embed/tmh5xfSZhBk",
+"type": "timer",
+"conseil": "Inspirez lentement par le nez en gonflant le ventre : seule la main du ventre se soulève.<br>Soufflez lentement par la bouche en laissant le ventre redescendre.",
+"reps": 3,
+"ex": 60,
+"repos": 10,
+"conseil_kine": "Pour calmer la douleur et détendre le bras : à faire aussi avant les autres exercices."
+},
+{
+"id": "622",
+"source": "HEP",
+"nom": "Massage de la paume",
+"image": "/exercises/images/HEP/palm-massage.jpg",
+"consignes": [
+"Avec le pouce de l'autre main, faites de petits cercles dans la paume.",
+"Pression légère, en couvrant toute la paume."
+],
+"position": "Main posée devant vous, paume vers le haut",
+"youtube": "http://www.youtube.com/embed/Tn7e5ogiPT4",
+"type": "timer",
+"conseil": "Avec le pouce de l'autre main, faites de petits cercles dans la paume.<br>Pression légère, en couvrant toute la paume.",
+"reps": 2,
+"ex": 60,
+"repos": 15,
+"conseil_kine": "Désensibilisation : commencez par un effleurement très léger, puis appuyez un peu plus chaque jour selon la tolérance."
+},
+{
+"id": "618",
+"source": "HEP",
+"nom": "Massage des doigts",
+"image": "/exercises/images/HEP/finger-massage.jpg",
+"consignes": [
+"Massez chaque doigt de l'extrémité vers la paume.",
+"Pression douce et confortable."
+],
+"position": "Main détendue, doigts tendus",
+"youtube": "http://www.youtube.com/embed/VejXiA8CAhY",
+"type": "timer",
+"conseil": "Massez chaque doigt de l'extrémité vers la paume.<br>Pression douce et confortable.",
+"reps": 2,
+"ex": 60,
+"repos": 15,
+"conseil_kine": "Main surélevée (posée sur un coussin) si elle est gonflée. Massage doux, de l'extrémité vers la paume."
+},
+{
+"id": "110",
+"source": "HEP",
+"nom": "Pendulaire d'épaule avant-arrière",
+"image": "/exercises/images/HEP/1409591409-shoulder-swings-front-to-back.jpg",
+"consignes": [
+"Laissez pendre le bras douloureux, détendu.",
+"Balancez le corps d'avant en arrière pour que le bras se balance tout seul."
+],
+"position": "Debout, penché en avant, main valide appuyée sur une table",
+"youtube": "http://www.youtube.com/embed/Rlgg3hZFKxI",
+"type": "timer",
+"conseil": "Laissez pendre le bras douloureux, détendu.<br>Balancez le corps d'avant en arrière pour que le bras se balance tout seul.",
+"reps": 2,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "235",
+"source": "HEP",
+"nom": "Glissement sur table : flexion d'épaule",
+"image": "/exercises/images/HEP/1408201168-shoulder-flexion-table-slide.jpg",
+"consignes": [
+"Une serviette sous la main aide à glisser.",
+"Faites glisser le bras vers l'avant en penchant le tronc.",
+"Revenez lentement."
+],
+"position": "Assis face à une table, bras posé dessus, pouce vers le haut",
+"youtube": "http://www.youtube.com/embed/aQMOojsHXD4",
+"type": "timer",
+"conseil": "Une serviette sous la main aide à glisser.<br>Faites glisser le bras vers l'avant en penchant le tronc.<br>Revenez lentement.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain. Petite amplitude au début."
+},
+{
+"id": "54",
+"source": "HEP",
+"nom": "Mobilité du pouce",
+"image": "/exercises/images/HEP/1424525678-thumb-range-of-motion.jpg",
+"consignes": [
+"Ouvrez bien la main en tendant les doigts.",
+"Touchez avec le pouce l'extrémité de chaque doigt, un par un."
+],
+"position": "Main détendue",
+"youtube": "http://www.youtube.com/embed/qPFQQnetqRI",
+"type": "timer",
+"conseil": "Ouvrez bien la main en tendant les doigts.<br>Touchez avec le pouce l'extrémité de chaque doigt, un par un.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Mouvement lent, sans forcer. Si un doigt ne va pas jusqu'au pouce, allez seulement jusqu'où c'est confortable."
+},
+{
+"id": "263",
+"source": "HEP",
+"nom": "Pronation et supination",
+"image": "/exercises/images/HEP/1408881217-wrist-supination-pronation.jpg",
+"consignes": [
+"Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.",
+"Le coude reste immobile."
+],
+"position": "Assis ou debout, coude plié à 90° collé au corps",
+"youtube": "http://www.youtube.com/embed/VBBQa7ZbU18",
+"type": "timer",
+"conseil": "Tournez l'avant-bras pour amener la paume vers le haut, puis vers le bas.<br>Le coude reste immobile.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+}
+]
+},
+{
+"id": "base_algoneurodystrophie_syndrome_epaule_main_2",
+"nom": "Algoneurodystrophie (syndrome épaule-main)",
+"niveau": 2,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "105",
+"source": "HEP",
+"nom": "Flexion d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409592168-shoulder-flexion-prom-with-stick.jpg",
+"consignes": [
+"Le bras douloureux reste détendu.",
+"Avec le bras valide, montez le bâton vers l'avant et le haut.",
+"Allez jusqu'à un étirement confortable, puis redescendez doucement."
+],
+"position": "Debout, un bâton tenu à deux mains devant vous",
+"youtube": "http://www.youtube.com/embed/b3yK9oLbnpU",
+"type": "timer",
+"conseil": "Le bras douloureux reste détendu.<br>Avec le bras valide, montez le bâton vers l'avant et le haut.<br>Allez jusqu'à un étirement confortable, puis redescendez doucement.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "107",
+"source": "HEP",
+"nom": "Rotation externe d'épaule avec bâton (passive ou aidée)",
+"image": "/exercises/images/HEP/1409592073-shoulder-external-rotation2.jpg",
+"consignes": [
+"Coude du côté douloureux plié à 90°, collé au corps, main détendue sur le bâton.",
+"Avec l'autre main, poussez le bâton pour faire tourner l'avant-bras douloureux vers l'extérieur.",
+"Allez jusqu'à un étirement confortable, puis revenez."
+],
+"position": "Debout ou allongé, un bâton tenu à deux mains",
+"youtube": "http://www.youtube.com/embed/9baME663oPs",
+"type": "timer",
+"conseil": "Coude du côté douloureux plié à 90°, collé au corps, main détendue sur le bâton.<br>Avec l'autre main, poussez le bâton pour faire tourner l'avant-bras douloureux vers l'extérieur.<br>Allez jusqu'à un étirement confortable, puis revenez.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "477",
+"source": "HEP",
+"nom": "Glissement des bras au mur (wall slide)",
+"image": "/exercises/images/HEP/1504796621-wall-slide.jpg",
+"consignes": [
+"Une serviette sous la main aide à glisser.",
+"Faites glisser la main vers le haut, aussi loin que possible sans douleur.",
+"Redescendez lentement."
+],
+"position": "Debout face à un mur, main posée dessus, pouce vers le haut",
+"youtube": "http://www.youtube.com/embed/aotIoBYYLfw",
+"type": "timer",
+"conseil": "Une serviette sous la main aide à glisser.<br>Faites glisser la main vers le haut, aussi loin que possible sans douleur.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Montez un peu plus haut chaque semaine, sans douleur."
+},
+{
+"id": "59",
+"source": "HEP",
+"nom": "Étirement des fléchisseurs du poignet, coude tendu",
+"image": "/exercises/images/HEP/1408880877-wrist-flexor-stretches-with-elbow-extended.jpg",
+"consignes": [
+"Avec l'autre main, ramenez doucement les doigts vers le bas.",
+"Maintenez quand vous sentez l'étirement sous l'avant-bras."
+],
+"position": "Debout ou assis, bras tendu devant vous, paume vers le haut",
+"youtube": "http://www.youtube.com/embed/9tNzUmYm_6I",
+"type": "timer",
+"conseil": "Avec l'autre main, ramenez doucement les doigts vers le bas.<br>Maintenez quand vous sentez l'étirement sous l'avant-bras.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Étirement doux : une légère tension, jamais une douleur."
+},
+{
+"id": "619",
+"source": "HEP",
+"nom": "Étirement des doigts en extension",
+"image": "/exercises/images/HEP/finger-extension-stretch.jpg",
+"consignes": [
+"Avec l'autre main, ramenez doucement les doigts vers l'arrière.",
+"Arrêtez à un étirement confortable et maintenez."
+],
+"position": "Main posée devant vous, paume vers le bas",
+"youtube": "http://www.youtube.com/embed/4BGcwaHY-T0",
+"type": "timer",
+"conseil": "Avec l'autre main, ramenez doucement les doigts vers l'arrière.<br>Arrêtez à un étirement confortable et maintenez.",
+"reps": 3,
+"ex": 30,
+"repos": 15,
+"conseil_kine": "Étirement doux : une légère tension, jamais une douleur."
+},
+{
+"id": "186",
+"source": "HEP",
+"nom": "Étirement des doigts",
+"image": "/exercises/images/HEP/1407867747-finger-stretches.jpg",
+"consignes": [
+"Pliez les doigts au niveau des articulations du milieu, en gardant les jointures de la main droites, puis redressez.",
+"Pliez ensuite les dernières phalanges, puis redressez.",
+"Aidez-vous de l'autre main pour bloquer les autres articulations si besoin."
+],
+"position": "Coude posé sur une table",
+"youtube": "http://www.youtube.com/embed/iSZ8yNgLCBw",
+"type": "timer",
+"conseil": "Pliez les doigts au niveau des articulations du milieu, en gardant les jointures de la main droites, puis redressez.<br>Pliez ensuite les dernières phalanges, puis redressez.<br>Aidez-vous de l'autre main pour bloquer les autres articulations si besoin.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "620",
+"source": "HEP",
+"nom": "Pianotage doigts et pouce",
+"image": "/exercises/images/HEP/finger-thumb-taps.jpg",
+"consignes": [
+"Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.",
+"Rouvrez bien la main entre chaque touche."
+],
+"position": "Main ouverte, doigts écartés",
+"youtube": "http://www.youtube.com/embed/JNh5l5yuLKQ",
+"type": "timer",
+"conseil": "Touchez l'extrémité du pouce avec chaque doigt, l'un après l'autre.<br>Rouvrez bien la main entre chaque touche.",
+"reps": 3,
+"ex": 45,
+"repos": 15,
+"conseil_kine": "Ouvrez bien la main entre chaque touche."
+},
+{
+"id": "56",
+"source": "HEP",
+"nom": "Serrage d'une balle (main et poignet)",
+"image": "/exercises/images/HEP/1407676103-ball-squeeze2.jpg",
+"consignes": [
+"Serrez la balle.",
+"Relâchez lentement."
+],
+"position": "Assis ou debout, une balle souple dans la main",
+"youtube": "http://www.youtube.com/embed/LuOSXyaD1-k",
+"type": "timer",
+"conseil": "Serrez la balle.<br>Relâchez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Balle très souple. Serrez doucement, sans douleur."
+}
+]
+},
+{
+"id": "base_algoneurodystrophie_syndrome_epaule_main_3",
+"nom": "Algoneurodystrophie (syndrome épaule-main)",
+"niveau": 3,
+"categorie": "pathologie",
+"zoneLabel": "Épaule",
+"series": 1,
+"lieu": "HEP",
+"exercices": [
+{
+"id": "113",
+"source": "HEP",
+"nom": "Flexion d'épaule avec élastique, debout",
+"image": "/exercises/images/HEP/1414151674-standing-shoulder-flexion-with-resistive-band2.jpg",
+"consignes": [
+"Bras tendu, pouce vers le haut.",
+"Montez le bras vers l'avant jusqu'à l'horizontale.",
+"Redescendez lentement."
+],
+"position": "Debout, élastique bloqué sous le pied du côté travaillé",
+"youtube": "http://www.youtube.com/embed/UC0DT1QjbLo",
+"type": "timer",
+"conseil": "Bras tendu, pouce vers le haut.<br>Montez le bras vers l'avant jusqu'à l'horizontale.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Élastique léger. Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "233",
+"source": "HEP",
+"nom": "Rotation externe d'épaule avec élastique, coudes au corps",
+"image": "/exercises/images/HEP/1408200125-shoulder-external-rotation-resistive-band.jpg",
+"consignes": [
+"Debout, tenez l'élastique devant vous, pouces vers le haut.",
+"Coudes pliés à 90° et collés au corps.",
+"Écartez les mains vers l'extérieur en gardant les coudes au corps et les poignets droits.",
+"Revenez lentement."
+],
+"position": "Debout, coudes au corps",
+"youtube": "http://www.youtube.com/embed/PwolIP1CUkE",
+"type": "timer",
+"conseil": "Debout, tenez l'élastique devant vous, pouces vers le haut.<br>Coudes pliés à 90° et collés au corps.<br>Écartez les mains vers l'extérieur en gardant les coudes au corps et les poignets droits.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Élastique léger. Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "142",
+"source": "HEP",
+"nom": "Poussée du dentelé antérieur avec élastique",
+"image": "/exercises/images/HEP/1408194340-serratus-stretches-resistive-band.jpg",
+"consignes": [
+"Tenez une extrémité dans chaque main, devant vous.",
+"Bras tendus, poussez les mains vers l'avant en avançant les épaules.",
+"Revenez lentement."
+],
+"position": "Debout, élastique passé dans le dos sous les épaules",
+"youtube": "http://www.youtube.com/embed/DvvY-YTDdVQ",
+"type": "timer",
+"conseil": "Tenez une extrémité dans chaque main, devant vous.<br>Bras tendus, poussez les mains vers l'avant en avançant les épaules.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Élastique léger. Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "437",
+"source": "HEP",
+"nom": "Extension du poignet avec élastique",
+"image": "/exercises/images/HEP/1477663062-wrist-extension-with-band.jpg",
+"consignes": [
+"Avant-bras sur la cuisse, paume vers le bas.",
+"Relevez le poignet contre l'élastique.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, élastique bloqué sous le pied",
+"youtube": "http://www.youtube.com/embed/7eLzaWZgLHU",
+"type": "timer",
+"conseil": "Avant-bras sur la cuisse, paume vers le bas.<br>Relevez le poignet contre l'élastique.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Élastique léger. Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "438",
+"source": "HEP",
+"nom": "Flexion du poignet avec élastique",
+"image": "/exercises/images/HEP/1477663142-wrist-flexion-with-band.jpg",
+"consignes": [
+"Avant-bras sur la cuisse, paume vers le haut.",
+"Pliez le poignet vers le haut contre l'élastique.",
+"Redescendez lentement."
+],
+"position": "Assis sur une chaise, élastique bloqué sous le pied",
+"youtube": "http://www.youtube.com/embed/M-9qcdlJPG0",
+"type": "timer",
+"conseil": "Avant-bras sur la cuisse, paume vers le haut.<br>Pliez le poignet vers le haut contre l'élastique.<br>Redescendez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Élastique léger. Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "55",
+"source": "HEP",
+"nom": "Renforcement des doigts avec élastique",
+"image": "/exercises/images/HEP/1407677743-finger-strengthening-with-band2.jpg",
+"consignes": [
+"Placez l'élastique autour de l'extrémité des doigts et du pouce.",
+"Écartez les doigts contre l'élastique.",
+"Revenez lentement."
+],
+"position": "Coude posé sur une table, élastique autour des doigts",
+"youtube": "http://www.youtube.com/embed/liw3wTIDfio",
+"type": "timer",
+"conseil": "Placez l'élastique autour de l'extrémité des doigts et du pouce.<br>Écartez les doigts contre l'élastique.<br>Revenez lentement.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Sans douleur : la douleur ne doit pas être plus forte après l'exercice ni le lendemain."
+},
+{
+"id": "433",
+"source": "HEP",
+"nom": "Torsion de serviette en extension du poignet",
+"image": "/exercises/images/HEP/1477662688-towel-twist-with-wrist-extension.jpg",
+"consignes": [
+"Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.",
+"Changez de sens."
+],
+"position": "Assis ou debout, serviette roulée tenue à deux mains devant vous",
+"youtube": "http://www.youtube.com/embed/jcDYlCgMiEs",
+"type": "timer",
+"conseil": "Tordez la serviette comme pour l'essorer, les poignets se relevant vers le haut.<br>Changez de sens.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Servez-vous aussi de la main dans les gestes du quotidien (s'habiller, cuisiner…), progressivement."
+},
+{
+"id": "48",
+"source": "HEP",
+"nom": "Pronation et supination avec poids",
+"image": "/exercises/images/HEP/1408868640-supination-pronation-with-weight.jpg",
+"consignes": [
+"Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.",
+"Le coude reste immobile."
+],
+"position": "Assis, coude plié à 90° collé au corps, un marteau tenu par le manche",
+"youtube": "http://www.youtube.com/embed/M6nV-Sxy1g8",
+"type": "timer",
+"conseil": "Tournez lentement l'avant-bras paume vers le haut, puis paume vers le bas.<br>Le coude reste immobile.",
+"reps": 3,
+"ex": 40,
+"repos": 30,
+"conseil_kine": "Commencez sans poids ou avec un objet léger, puis tenez le marteau plus loin du manche pour augmenter l'effort."
+}
+]
+},
+{
 "id": "base_picondylite_tennis_elbow_1",
 "nom": "Épicondylite (tennis elbow)",
 "niveau": 1,
