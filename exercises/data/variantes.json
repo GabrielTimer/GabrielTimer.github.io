@@ -1423,5 +1423,55 @@
   "defaut": "/exercises/images/pediatrie/ramper-f.webp",
   "f": "/exercises/images/pediatrie/ramper-f.webp",
   "h": "/exercises/images/pediatrie/ramper-h.webp"
+ },
+ "/exercises/images/sport/skater-jumps-f.webp": {
+  "defaut": "/exercises/images/sport/skater-jumps-f.webp",
+  "f": "/exercises/images/sport/skater-jumps-f.webp",
+  "h": "/exercises/images/sport/skater-jumps-h.webp"
+ },
+ "/exercises/images/sport/squat-jump-f.webp": {
+  "defaut": "/exercises/images/sport/squat-jump-f.webp",
+  "f": "/exercises/images/sport/squat-jump-f.webp",
+  "h": "/exercises/images/sport/squat-jump-h.webp"
+ },
+ "/exercises/images/sport/drop-jump-f.webp": {
+  "defaut": "/exercises/images/sport/drop-jump-f.webp",
+  "f": "/exercises/images/sport/drop-jump-f.webp",
+  "h": "/exercises/images/sport/drop-jump-h.webp"
+ },
+ "/exercises/images/sport/fentes-sautees-f.webp": {
+  "defaut": "/exercises/images/sport/fentes-sautees-f.webp",
+  "f": "/exercises/images/sport/fentes-sautees-f.webp",
+  "h": "/exercises/images/sport/fentes-sautees-h.webp"
+ },
+ "/exercises/images/sport/deplacements-lateraux-plots-f.webp": {
+  "defaut": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
+  "f": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
+  "h": "/exercises/images/sport/deplacements-lateraux-plots-h.webp"
+ },
+ "/exercises/images/sport/carioca-f.webp": {
+  "defaut": "/exercises/images/sport/carioca-f.webp",
+  "f": "/exercises/images/sport/carioca-f.webp",
+  "h": "/exercises/images/sport/carioca-h.webp"
+ },
+ "/exercises/images/sport/nordic-hamstring-f.webp": {
+  "defaut": "/exercises/images/sport/nordic-hamstring-f.webp",
+  "f": "/exercises/images/sport/nordic-hamstring-f.webp",
+  "h": "/exercises/images/sport/nordic-hamstring-h.webp"
+ },
+ "/exercises/images/sport/step-down-f.webp": {
+  "defaut": "/exercises/images/sport/step-down-f.webp",
+  "f": "/exercises/images/sport/step-down-f.webp",
+  "h": "/exercises/images/sport/step-down-h.webp"
+ },
+ "/exercises/images/sport/hop-f.webp": {
+  "defaut": "/exercises/images/sport/hop-f.webp",
+  "f": "/exercises/images/sport/hop-f.webp",
+  "h": "/exercises/images/sport/hop-h.webp"
+ },
+ "/exercises/images/sport/sprint-arret-f.webp": {
+  "defaut": "/exercises/images/sport/sprint-arret-f.webp",
+  "f": "/exercises/images/sport/sprint-arret-f.webp",
+  "h": "/exercises/images/sport/sprint-arret-h.webp"
  }
 }

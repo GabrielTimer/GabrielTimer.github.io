@@ -17732,7 +17732,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "SPORT_01",
-    "image": "",
+    "image": "/exercises/images/sport/skater-jumps-f.webp",
     "materiel": [
       "Aucun"
     ],
@@ -17777,7 +17777,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -17804,7 +17803,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "SPORT_02",
-    "image": "",
+    "image": "/exercises/images/sport/squat-jump-f.webp",
     "materiel": [
       "Aucun"
     ],
@@ -17847,7 +17846,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -17874,7 +17872,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "SPORT_03",
-    "image": "",
+    "image": "/exercises/images/sport/drop-jump-f.webp",
     "materiel": [
       "Box ou marche solide (20-30 cm)"
     ],
@@ -17917,7 +17915,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -17943,7 +17940,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "SPORT_04",
-    "image": "",
+    "image": "/exercises/images/sport/fentes-sautees-f.webp",
     "materiel": [
       "Aucun"
     ],
@@ -17983,7 +17980,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ],
@@ -18011,7 +18007,7 @@
     "ex": 20,
     "exercise_mode": "dynamique",
     "id": "SPORT_05",
-    "image": "",
+    "image": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
     "materiel": [
       "2 plots"
     ],
@@ -18053,7 +18049,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -18077,7 +18072,7 @@
     "ex": 20,
     "exercise_mode": "dynamique",
     "id": "SPORT_06",
-    "image": "",
+    "image": "/exercises/images/sport/carioca-f.webp",
     "materiel": [
       "Aucun"
     ],
@@ -18116,7 +18111,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -18142,7 +18136,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "SPORT_07",
-    "image": "",
+    "image": "/exercises/images/sport/nordic-hamstring-f.webp",
     "materiel": [
       "Tapis",
       "Partenaire ou point d'ancrage pour les chevilles"
@@ -18187,7 +18181,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]
@@ -18214,7 +18207,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "SPORT_08",
-    "image": "",
+    "image": "/exercises/images/sport/step-down-f.webp",
     "materiel": [
       "Marche ou step"
     ],
@@ -18258,7 +18251,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ],
@@ -18286,7 +18278,7 @@
     "ex": 20,
     "exercise_mode": "dynamique",
     "id": "SPORT_09",
-    "image": "",
+    "image": "/exercises/images/sport/hop-f.webp",
     "materiel": [
       "Ligne au sol",
       "Mètre"
@@ -18331,7 +18323,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ],
@@ -18358,7 +18349,7 @@
     "ex": 10,
     "exercise_mode": "dynamique",
     "id": "SPORT_10",
-    "image": "",
+    "image": "/exercises/images/sport/sprint-arret-f.webp",
     "materiel": [
       "Espace de 15 m",
       "Plots"
@@ -18398,7 +18389,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ]

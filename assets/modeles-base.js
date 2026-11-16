@@ -5326,7 +5326,7 @@ export const MODELES_BASE = [
 "id": "SPORT_05",
 "source": "CABINET",
 "nom": "Déplacements latéraux entre plots",
-"image": "",
+"image": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
 "consignes": [
 "Deux plots écartés de 4 à 5 m",
 "Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
@@ -6452,7 +6452,7 @@ export const MODELES_BASE = [
 "id": "SPORT_02",
 "source": "CABINET",
 "nom": "Squat sauté (squat jump)",
-"image": "",
+"image": "/exercises/images/sport/squat-jump-f.webp",
 "consignes": [
 "Debout, pieds à largeur des épaules",
 "Descendre en squat, puis sauter le plus haut possible",
@@ -6472,7 +6472,7 @@ export const MODELES_BASE = [
 "id": "SPORT_05",
 "source": "CABINET",
 "nom": "Déplacements latéraux entre plots",
-"image": "",
+"image": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
 "consignes": [
 "Deux plots écartés de 4 à 5 m",
 "Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
@@ -12372,7 +12372,7 @@ export const MODELES_BASE = [
 "id": "SPORT_08",
 "source": "CABINET",
 "nom": "Descente de marche excentrique (step-down)",
-"image": "",
+"image": "/exercises/images/sport/step-down-f.webp",
 "consignes": [
 "Debout sur une marche, sur une jambe",
 "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
@@ -13885,7 +13885,7 @@ export const MODELES_BASE = [
 "id": "SPORT_08",
 "source": "CABINET",
 "nom": "Descente de marche excentrique (step-down)",
-"image": "",
+"image": "/exercises/images/sport/step-down-f.webp",
 "consignes": [
 "Debout sur une marche, sur une jambe",
 "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
@@ -29765,7 +29765,7 @@ export const MODELES_BASE = [
 "id": "SPORT_08",
 "source": "CABINET",
 "nom": "Descente de marche excentrique (step-down)",
-"image": "",
+"image": "/exercises/images/sport/step-down-f.webp",
 "consignes": [
 "Debout sur une marche, sur une jambe",
 "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
@@ -29877,7 +29877,7 @@ export const MODELES_BASE = [
 "id": "SPORT_02",
 "source": "CABINET",
 "nom": "Squat sauté (squat jump)",
-"image": "",
+"image": "/exercises/images/sport/squat-jump-f.webp",
 "consignes": [
 "Debout, pieds à largeur des épaules",
 "Descendre en squat, puis sauter le plus haut possible",
@@ -29897,7 +29897,7 @@ export const MODELES_BASE = [
 "id": "SPORT_01",
 "source": "CABINET",
 "nom": "Sauts latéraux du patineur (skater jumps)",
-"image": "",
+"image": "/exercises/images/sport/skater-jumps-f.webp",
 "consignes": [
 "Debout sur la jambe droite, genou légèrement fléchi",
 "Sauter sur le côté pour atterrir sur la jambe gauche",
@@ -29917,7 +29917,7 @@ export const MODELES_BASE = [
 "id": "SPORT_05",
 "source": "CABINET",
 "nom": "Déplacements latéraux entre plots",
-"image": "",
+"image": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
 "consignes": [
 "Deux plots écartés de 4 à 5 m",
 "Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
@@ -29938,7 +29938,7 @@ export const MODELES_BASE = [
 "id": "SPORT_06",
 "source": "CABINET",
 "nom": "Carioca (pas croisés latéraux)",
-"image": "",
+"image": "/exercises/images/sport/carioca-f.webp",
 "consignes": [
 "Se déplacer sur le côté",
 "Croiser un pied devant puis derrière l'autre en alternance",
@@ -30009,7 +30009,7 @@ export const MODELES_BASE = [
 "id": "SPORT_03",
 "source": "CABINET",
 "nom": "Drop jump (descente puis rebond)",
-"image": "",
+"image": "/exercises/images/sport/drop-jump-f.webp",
 "consignes": [
 "Debout sur une box de 20 à 30 cm",
 "Se laisser tomber devant la box (ne pas sauter)",
@@ -30030,7 +30030,7 @@ export const MODELES_BASE = [
 "id": "SPORT_04",
 "source": "CABINET",
 "nom": "Fentes sautées",
-"image": "",
+"image": "/exercises/images/sport/fentes-sautees-f.webp",
 "consignes": [
 "Position de fente, genou arrière près du sol",
 "Sauter et inverser les jambes en l'air",
@@ -30050,7 +30050,7 @@ export const MODELES_BASE = [
 "id": "SPORT_09",
 "source": "CABINET",
 "nom": "Sauts sur une jambe en avant (hop)",
-"image": "",
+"image": "/exercises/images/sport/hop-f.webp",
 "consignes": [
 "Debout sur une jambe derrière une ligne",
 "Sauter le plus loin possible en avant sur la même jambe",
@@ -30071,7 +30071,7 @@ export const MODELES_BASE = [
 "id": "SPORT_10",
 "source": "CABINET",
 "nom": "Sprint court avec arrêt",
-"image": "",
+"image": "/exercises/images/sport/sprint-arret-f.webp",
 "consignes": [
 "Sprinter sur 5 à 10 m",
 "Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
@@ -30111,7 +30111,7 @@ export const MODELES_BASE = [
 "id": "SPORT_07",
 "source": "CABINET",
 "nom": "Nordic hamstring",
-"image": "",
+"image": "/exercises/images/sport/nordic-hamstring-f.webp",
 "consignes": [
 "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
 "Corps aligné des genoux aux épaules",
@@ -30467,7 +30467,7 @@ export const MODELES_BASE = [
 "id": "SPORT_08",
 "source": "CABINET",
 "nom": "Descente de marche excentrique (step-down)",
-"image": "",
+"image": "/exercises/images/sport/step-down-f.webp",
 "consignes": [
 "Debout sur une marche, sur une jambe",
 "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
@@ -33956,7 +33956,7 @@ export const MODELES_BASE = [
 "id": "SPORT_08",
 "source": "CABINET",
 "nom": "Descente de marche excentrique (step-down)",
-"image": "",
+"image": "/exercises/images/sport/step-down-f.webp",
 "consignes": [
 "Debout sur une marche, sur une jambe",
 "Descendre l'autre talon vers le sol en 3 s, genou d'appui dans l'axe du pied",
@@ -34070,7 +34070,7 @@ export const MODELES_BASE = [
 "id": "SPORT_02",
 "source": "CABINET",
 "nom": "Squat sauté (squat jump)",
-"image": "",
+"image": "/exercises/images/sport/squat-jump-f.webp",
 "consignes": [
 "Debout, pieds à largeur des épaules",
 "Descendre en squat, puis sauter le plus haut possible",
@@ -34090,7 +34090,7 @@ export const MODELES_BASE = [
 "id": "SPORT_01",
 "source": "CABINET",
 "nom": "Sauts latéraux du patineur (skater jumps)",
-"image": "",
+"image": "/exercises/images/sport/skater-jumps-f.webp",
 "consignes": [
 "Debout sur la jambe droite, genou légèrement fléchi",
 "Sauter sur le côté pour atterrir sur la jambe gauche",
@@ -34389,7 +34389,7 @@ export const MODELES_BASE = [
 "id": "SPORT_07",
 "source": "CABINET",
 "nom": "Nordic hamstring",
-"image": "",
+"image": "/exercises/images/sport/nordic-hamstring-f.webp",
 "consignes": [
 "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
 "Corps aligné des genoux aux épaules",
@@ -34452,7 +34452,7 @@ export const MODELES_BASE = [
 "id": "SPORT_10",
 "source": "CABINET",
 "nom": "Sprint court avec arrêt",
-"image": "",
+"image": "/exercises/images/sport/sprint-arret-f.webp",
 "consignes": [
 "Sprinter sur 5 à 10 m",
 "Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
@@ -34473,7 +34473,7 @@ export const MODELES_BASE = [
 "id": "SPORT_06",
 "source": "CABINET",
 "nom": "Carioca (pas croisés latéraux)",
-"image": "",
+"image": "/exercises/images/sport/carioca-f.webp",
 "consignes": [
 "Se déplacer sur le côté",
 "Croiser un pied devant puis derrière l'autre en alternance",
@@ -34851,7 +34851,7 @@ export const MODELES_BASE = [
 "id": "SPORT_05",
 "source": "CABINET",
 "nom": "Déplacements latéraux entre plots",
-"image": "",
+"image": "/exercises/images/sport/deplacements-lateraux-plots-f.webp",
 "consignes": [
 "Deux plots écartés de 4 à 5 m",
 "Se déplacer en pas chassés rapides d'un plot à l'autre, bassin bas",
@@ -34872,7 +34872,7 @@ export const MODELES_BASE = [
 "id": "SPORT_06",
 "source": "CABINET",
 "nom": "Carioca (pas croisés latéraux)",
-"image": "",
+"image": "/exercises/images/sport/carioca-f.webp",
 "consignes": [
 "Se déplacer sur le côté",
 "Croiser un pied devant puis derrière l'autre en alternance",
@@ -38405,7 +38405,7 @@ export const MODELES_BASE = [
 "id": "SPORT_03",
 "source": "CABINET",
 "nom": "Drop jump (descente puis rebond)",
-"image": "",
+"image": "/exercises/images/sport/drop-jump-f.webp",
 "consignes": [
 "Debout sur une box de 20 à 30 cm",
 "Se laisser tomber devant la box (ne pas sauter)",
@@ -38426,7 +38426,7 @@ export const MODELES_BASE = [
 "id": "SPORT_09",
 "source": "CABINET",
 "nom": "Sauts sur une jambe en avant (hop)",
-"image": "",
+"image": "/exercises/images/sport/hop-f.webp",
 "consignes": [
 "Debout sur une jambe derrière une ligne",
 "Sauter le plus loin possible en avant sur la même jambe",
@@ -38447,7 +38447,7 @@ export const MODELES_BASE = [
 "id": "SPORT_10",
 "source": "CABINET",
 "nom": "Sprint court avec arrêt",
-"image": "",
+"image": "/exercises/images/sport/sprint-arret-f.webp",
 "consignes": [
 "Sprinter sur 5 à 10 m",
 "Freiner en 2 ou 3 pas, bassin bas, genoux fléchis",
@@ -38468,7 +38468,7 @@ export const MODELES_BASE = [
 "id": "SPORT_04",
 "source": "CABINET",
 "nom": "Fentes sautées",
-"image": "",
+"image": "/exercises/images/sport/fentes-sautees-f.webp",
 "consignes": [
 "Position de fente, genou arrière près du sol",
 "Sauter et inverser les jambes en l'air",
@@ -38488,7 +38488,7 @@ export const MODELES_BASE = [
 "id": "SPORT_07",
 "source": "CABINET",
 "nom": "Nordic hamstring",
-"image": "",
+"image": "/exercises/images/sport/nordic-hamstring-f.webp",
 "consignes": [
 "À genoux sur un tapis, chevilles tenues par un partenaire (ou calées)",
 "Corps aligné des genoux aux épaules",
@@ -38509,7 +38509,7 @@ export const MODELES_BASE = [
 "id": "SPORT_06",
 "source": "CABINET",
 "nom": "Carioca (pas croisés latéraux)",
-"image": "",
+"image": "/exercises/images/sport/carioca-f.webp",
 "consignes": [
 "Se déplacer sur le côté",
 "Croiser un pied devant puis derrière l'autre en alternance",
