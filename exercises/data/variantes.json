@@ -1373,5 +1373,25 @@
   "defaut": "/exercises/images/respiratoire/position-recuperation-f.webp",
   "f": "/exercises/images/respiratoire/position-recuperation-f.webp",
   "h": "/exercises/images/respiratoire/position-recuperation-h.webp"
+ },
+ "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp": {
+  "defaut": "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp",
+  "f": "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp",
+  "h": "/exercises/images/oncologie/pompage-main-bras-sureleve-h.webp"
+ },
+ "/exercises/images/oncologie/coude-bras-sureleve-f.webp": {
+  "defaut": "/exercises/images/oncologie/coude-bras-sureleve-f.webp",
+  "f": "/exercises/images/oncologie/coude-bras-sureleve-f.webp",
+  "h": "/exercises/images/oncologie/coude-bras-sureleve-h.webp"
+ },
+ "/exercises/images/oncologie/elevation-bras-allonge-f.webp": {
+  "defaut": "/exercises/images/oncologie/elevation-bras-allonge-f.webp",
+  "f": "/exercises/images/oncologie/elevation-bras-allonge-f.webp",
+  "h": "/exercises/images/oncologie/elevation-bras-allonge-h.webp"
+ },
+ "/exercises/images/oncologie/respiration-bras-f.webp": {
+  "defaut": "/exercises/images/oncologie/respiration-bras-f.webp",
+  "f": "/exercises/images/oncologie/respiration-bras-f.webp",
+  "h": "/exercises/images/oncologie/respiration-bras-h.webp"
  }
 }

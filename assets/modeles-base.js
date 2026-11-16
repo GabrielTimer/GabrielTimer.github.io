@@ -35130,7 +35130,7 @@ export const MODELES_BASE = [
 "id": "ONCO_04",
 "source": "CABINET",
 "nom": "Respiration ample avec les bras",
-"image": "",
+"image": "/exercises/images/oncologie/respiration-bras-f.webp",
 "consignes": [
 "Assis ou allongé, bras le long du corps",
 "Inspirer par le nez en gonflant le ventre et en levant les bras",
@@ -35151,7 +35151,7 @@ export const MODELES_BASE = [
 "id": "ONCO_01",
 "source": "CABINET",
 "nom": "Pompage doigts et poignet, bras surélevé",
-"image": "",
+"image": "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp",
 "consignes": [
 "Allongé, le bras posé sur des coussins, la main plus haute que le coude",
 "Ouvrir grand la main puis serrer le poing, lentement",
@@ -35172,7 +35172,7 @@ export const MODELES_BASE = [
 "id": "ONCO_02",
 "source": "CABINET",
 "nom": "Flexion-extension du coude, bras surélevé",
-"image": "",
+"image": "/exercises/images/oncologie/coude-bras-sureleve-f.webp",
 "consignes": [
 "Allongé, le bras posé sur des coussins plus haut que le cœur",
 "Plier le coude pour amener la main vers l'épaule",
@@ -35193,7 +35193,7 @@ export const MODELES_BASE = [
 "id": "ONCO_03",
 "source": "CABINET",
 "nom": "Élévation du bras, allongé",
-"image": "",
+"image": "/exercises/images/oncologie/elevation-bras-allonge-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)",
 "Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",
@@ -35245,7 +35245,7 @@ export const MODELES_BASE = [
 "id": "ONCO_04",
 "source": "CABINET",
 "nom": "Respiration ample avec les bras",
-"image": "",
+"image": "/exercises/images/oncologie/respiration-bras-f.webp",
 "consignes": [
 "Assis ou allongé, bras le long du corps",
 "Inspirer par le nez en gonflant le ventre et en levant les bras",
@@ -35266,7 +35266,7 @@ export const MODELES_BASE = [
 "id": "ONCO_03",
 "source": "CABINET",
 "nom": "Élévation du bras, allongé",
-"image": "",
+"image": "/exercises/images/oncologie/elevation-bras-allonge-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, mains jointes (ou un bâton tenu à deux mains)",
 "Monter les bras tendus vers le plafond puis au-dessus de la tête, sans douleur",

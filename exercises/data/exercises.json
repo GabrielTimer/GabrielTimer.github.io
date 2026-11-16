@@ -19078,7 +19078,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "ONCO_01",
-    "image": "",
+    "image": "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp",
     "materiel": [
       "Coussins"
     ],
@@ -19116,7 +19116,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Oncologie et lymphœdème"
     ]
@@ -19140,7 +19139,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "ONCO_02",
-    "image": "",
+    "image": "/exercises/images/oncologie/coude-bras-sureleve-f.webp",
     "materiel": [
       "Coussins"
     ],
@@ -19178,7 +19177,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Oncologie et lymphœdème"
     ]
@@ -19205,7 +19203,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "ONCO_03",
-    "image": "",
+    "image": "/exercises/images/oncologie/elevation-bras-allonge-f.webp",
     "materiel": [
       "Tapis ou lit",
       "Bâton (facultatif)"
@@ -19246,7 +19244,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Oncologie et lymphœdème"
     ]
@@ -19270,7 +19267,7 @@
     "ex": 60,
     "exercise_mode": "respiration",
     "id": "ONCO_04",
-    "image": "",
+    "image": "/exercises/images/oncologie/respiration-bras-f.webp",
     "materiel": [
       "Chaise ou lit"
     ],
@@ -19309,7 +19306,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Oncologie et lymphœdème"
     ]
