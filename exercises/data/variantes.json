@@ -1333,5 +1333,45 @@
   "defaut": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
   "f": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
   "h": "/exercises/images/vestibulaire/brandt-daroff-h.webp"
+ },
+ "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp": {
+  "defaut": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
+  "f": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
+  "h": "/exercises/images/respiratoire/respiration-abdominale-allonge-h.webp"
+ },
+ "/exercises/images/respiratoire/levres-pincees-f.webp": {
+  "defaut": "/exercises/images/respiratoire/levres-pincees-f.webp",
+  "f": "/exercises/images/respiratoire/levres-pincees-f.webp",
+  "h": "/exercises/images/respiratoire/levres-pincees-h.webp"
+ },
+ "/exercises/images/respiratoire/expansion-costale-f.webp": {
+  "defaut": "/exercises/images/respiratoire/expansion-costale-f.webp",
+  "f": "/exercises/images/respiratoire/expansion-costale-f.webp",
+  "h": "/exercises/images/respiratoire/expansion-costale-h.webp"
+ },
+ "/exercises/images/respiratoire/eltgol-f.webp": {
+  "defaut": "/exercises/images/respiratoire/eltgol-f.webp",
+  "f": "/exercises/images/respiratoire/eltgol-f.webp",
+  "h": "/exercises/images/respiratoire/eltgol-h.webp"
+ },
+ "/exercises/images/respiratoire/huff-f.webp": {
+  "defaut": "/exercises/images/respiratoire/huff-f.webp",
+  "f": "/exercises/images/respiratoire/huff-f.webp",
+  "h": "/exercises/images/respiratoire/huff-h.webp"
+ },
+ "/exercises/images/respiratoire/spirometre-f.webp": {
+  "defaut": "/exercises/images/respiratoire/spirometre-f.webp",
+  "f": "/exercises/images/respiratoire/spirometre-f.webp",
+  "h": "/exercises/images/respiratoire/spirometre-h.webp"
+ },
+ "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp": {
+  "defaut": "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp",
+  "f": "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp",
+  "h": "/exercises/images/respiratoire/entraineur-inspiratoire-h.webp"
+ },
+ "/exercises/images/respiratoire/position-recuperation-f.webp": {
+  "defaut": "/exercises/images/respiratoire/position-recuperation-f.webp",
+  "f": "/exercises/images/respiratoire/position-recuperation-f.webp",
+  "h": "/exercises/images/respiratoire/position-recuperation-h.webp"
  }
 }

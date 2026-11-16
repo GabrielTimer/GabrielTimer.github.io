@@ -29108,7 +29108,7 @@ export const MODELES_BASE = [
 "id": "RESPI_01",
 "source": "CABINET",
 "nom": "Respiration abdomino-diaphragmatique, allongé",
-"image": "",
+"image": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
 "Inspirer par le nez en laissant le ventre se gonfler sous la main",
@@ -29129,7 +29129,7 @@ export const MODELES_BASE = [
 "id": "RESPI_02",
 "source": "CABINET",
 "nom": "Expiration lèvres pincées",
-"image": "",
+"image": "/exercises/images/respiratoire/levres-pincees-f.webp",
 "consignes": [
 "Assis, épaules relâchées",
 "Inspirer par le nez en comptant jusqu'à 2",
@@ -29150,7 +29150,7 @@ export const MODELES_BASE = [
 "id": "RESPI_03",
 "source": "CABINET",
 "nom": "Expansion costale avec les bras",
-"image": "",
+"image": "/exercises/images/respiratoire/expansion-costale-f.webp",
 "consignes": [
 "Assis, mains posées sur les côtés des côtes",
 "Inspirer par le nez en poussant les côtes dans les mains",
@@ -29171,7 +29171,7 @@ export const MODELES_BASE = [
 "id": "RESPI_08",
 "source": "CABINET",
 "nom": "Position de récupération, penché en avant",
-"image": "",
+"image": "/exercises/images/respiratoire/position-recuperation-f.webp",
 "consignes": [
 "Assis, avant-bras posés sur les cuisses ou sur une table",
 "Relâcher les épaules et la nuque",
@@ -29244,7 +29244,7 @@ export const MODELES_BASE = [
 "id": "RESPI_02",
 "source": "CABINET",
 "nom": "Expiration lèvres pincées",
-"image": "",
+"image": "/exercises/images/respiratoire/levres-pincees-f.webp",
 "consignes": [
 "Assis, épaules relâchées",
 "Inspirer par le nez en comptant jusqu'à 2",
@@ -29265,7 +29265,7 @@ export const MODELES_BASE = [
 "id": "RESPI_07",
 "source": "CABINET",
 "nom": "Entraîneur inspiratoire",
-"image": "",
+"image": "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp",
 "consignes": [
 "Assis droit, pince-nez si besoin, embout entre les lèvres",
 "Inspirer fort et vite à travers l'appareil, réglé par le kiné",
@@ -29380,7 +29380,7 @@ export const MODELES_BASE = [
 "id": "RESPI_07",
 "source": "CABINET",
 "nom": "Entraîneur inspiratoire",
-"image": "",
+"image": "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp",
 "consignes": [
 "Assis droit, pince-nez si besoin, embout entre les lèvres",
 "Inspirer fort et vite à travers l'appareil, réglé par le kiné",
@@ -29514,7 +29514,7 @@ export const MODELES_BASE = [
 "id": "RESPI_01",
 "source": "CABINET",
 "nom": "Respiration abdomino-diaphragmatique, allongé",
-"image": "",
+"image": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
 "Inspirer par le nez en laissant le ventre se gonfler sous la main",
@@ -29535,7 +29535,7 @@ export const MODELES_BASE = [
 "id": "RESPI_03",
 "source": "CABINET",
 "nom": "Expansion costale avec les bras",
-"image": "",
+"image": "/exercises/images/respiratoire/expansion-costale-f.webp",
 "consignes": [
 "Assis, mains posées sur les côtés des côtes",
 "Inspirer par le nez en poussant les côtes dans les mains",
@@ -29556,7 +29556,7 @@ export const MODELES_BASE = [
 "id": "RESPI_04",
 "source": "CABINET",
 "nom": "Expiration lente prolongée couché sur le côté (ELTGOL)",
-"image": "",
+"image": "/exercises/images/respiratoire/eltgol-f.webp",
 "consignes": [
 "Couché sur le côté où les poumons sont encombrés, un coussin sous la tête",
 "Inspirer normalement par le nez",
@@ -29577,7 +29577,7 @@ export const MODELES_BASE = [
 "id": "RESPI_05",
 "source": "CABINET",
 "nom": "Huff et toux dirigée",
-"image": "",
+"image": "/exercises/images/respiratoire/huff-f.webp",
 "consignes": [
 "Assis, buste légèrement penché en avant",
 "Faire 2 ou 3 respirations calmes",
@@ -29598,7 +29598,7 @@ export const MODELES_BASE = [
 "id": "RESPI_08",
 "source": "CABINET",
 "nom": "Position de récupération, penché en avant",
-"image": "",
+"image": "/exercises/images/respiratoire/position-recuperation-f.webp",
 "consignes": [
 "Assis, avant-bras posés sur les cuisses ou sur une table",
 "Relâcher les épaules et la nuque",
@@ -29630,7 +29630,7 @@ export const MODELES_BASE = [
 "id": "RESPI_06",
 "source": "CABINET",
 "nom": "Spiromètre incitatif",
-"image": "",
+"image": "/exercises/images/respiratoire/spirometre-f.webp",
 "consignes": [
 "Assis droit, le spiromètre tenu bien vertical",
 "Expirer normalement, puis serrer l'embout entre les lèvres",
@@ -29651,7 +29651,7 @@ export const MODELES_BASE = [
 "id": "RESPI_03",
 "source": "CABINET",
 "nom": "Expansion costale avec les bras",
-"image": "",
+"image": "/exercises/images/respiratoire/expansion-costale-f.webp",
 "consignes": [
 "Assis, mains posées sur les côtés des côtes",
 "Inspirer par le nez en poussant les côtes dans les mains",
@@ -29672,7 +29672,7 @@ export const MODELES_BASE = [
 "id": "RESPI_01",
 "source": "CABINET",
 "nom": "Respiration abdomino-diaphragmatique, allongé",
-"image": "",
+"image": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, une main sur le ventre, une sur la poitrine",
 "Inspirer par le nez en laissant le ventre se gonfler sous la main",
@@ -29693,7 +29693,7 @@ export const MODELES_BASE = [
 "id": "RESPI_05",
 "source": "CABINET",
 "nom": "Huff et toux dirigée",
-"image": "",
+"image": "/exercises/images/respiratoire/huff-f.webp",
 "consignes": [
 "Assis, buste légèrement penché en avant",
 "Faire 2 ou 3 respirations calmes",

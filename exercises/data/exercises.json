@@ -17248,7 +17248,7 @@
     "ex": 60,
     "exercise_mode": "respiration",
     "id": "RESPI_01",
-    "image": "",
+    "image": "/exercises/images/respiratoire/respiration-abdominale-allonge-f.webp",
     "materiel": [
       "Tapis ou lit"
     ],
@@ -17288,8 +17288,7 @@
     ],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17313,7 +17312,7 @@
     "ex": 60,
     "exercise_mode": "respiration",
     "id": "RESPI_02",
-    "image": "",
+    "image": "/exercises/images/respiratoire/levres-pincees-f.webp",
     "materiel": [
       "Chaise"
     ],
@@ -17348,8 +17347,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17372,7 +17370,7 @@
     "ex": 45,
     "exercise_mode": "respiration",
     "id": "RESPI_03",
-    "image": "",
+    "image": "/exercises/images/respiratoire/expansion-costale-f.webp",
     "materiel": [
       "Chaise"
     ],
@@ -17408,8 +17406,7 @@
       "Sans lever les bras"
     ],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17433,7 +17430,7 @@
     "ex": 60,
     "exercise_mode": "respiration",
     "id": "RESPI_04",
-    "image": "",
+    "image": "/exercises/images/respiratoire/eltgol-f.webp",
     "materiel": [
       "Lit ou table"
     ],
@@ -17471,8 +17468,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17495,7 +17491,7 @@
     "ex": 45,
     "exercise_mode": "respiration",
     "id": "RESPI_05",
-    "image": "",
+    "image": "/exercises/images/respiratoire/huff-f.webp",
     "materiel": [
       "Chaise",
       "Mouchoirs"
@@ -17534,8 +17530,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17558,7 +17553,7 @@
     "ex": 10,
     "exercise_mode": "respiration",
     "id": "RESPI_06",
-    "image": "",
+    "image": "/exercises/images/respiratoire/spirometre-f.webp",
     "materiel": [
       "Spiromètre incitatif"
     ],
@@ -17594,8 +17589,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17620,7 +17614,7 @@
     "ex": 180,
     "exercise_mode": "renforcement",
     "id": "RESPI_07",
-    "image": "",
+    "image": "/exercises/images/respiratoire/entraineur-inspiratoire-f.webp",
     "materiel": [
       "Entraîneur inspiratoire (type Threshold)"
     ],
@@ -17659,8 +17653,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
@@ -17681,7 +17674,7 @@
     "ex": 120,
     "exercise_mode": "respiration",
     "id": "RESPI_08",
-    "image": "",
+    "image": "/exercises/images/respiratoire/position-recuperation-f.webp",
     "materiel": [
       "Chaise",
       "Table"
@@ -17715,8 +17708,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],
