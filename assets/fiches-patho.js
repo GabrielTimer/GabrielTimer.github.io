@@ -722,6 +722,19 @@ export const FICHES_PATHO = [
       "Sciatique et hernie discale"
     ],
     "texte": "La hernie peut se résorber d'elle-même.\n\n## De quoi s'agit-il ?\nUn disque du bas du dos fait saillie et irrite le nerf sciatique. La douleur descend dans la jambe ; le plus souvent, elle diminue avec le temps.\n\n## Mes bons réflexes\n- Rester actif : Continuez vos activités, sans forcer.\n- Trouver les bonnes positions : Repérez les positions qui soulagent la jambe.\n- Bouger en douceur : Faites les exercices doux conseillés.\n- Éviter le repos au lit : Rester allongé longtemps retarde la guérison.\n\n## À retenir\n- Beaucoup de hernies diminuent en quelques mois.\n- Le mouvement doux aide le nerf à se calmer.\n- L'opération n'est nécessaire que rarement.\n\n## Consultez sans attendre si\n- la jambe devient faible ou le pied tombe\n- des troubles pour uriner ou aller à la selle apparaissent\n- une perte de sensibilité entre les cuisses apparaît"
+  },
+  {
+    "id": "c-fiche-algoneurodystrophie",
+    "titre": "Algoneurodystrophie (syndrome épaule-main)",
+    "resume": "Douleur, raideur et gonflement de l'épaule et/ou de la main, avec parfois une grande sensibilité.",
+    "ico": "book",
+    "affiche": "/images/conseils/fiches/algoneurodystrophie.jpg",
+    "serie": "Fiche conseils patient",
+    "fichePatho": true,
+    "modeles": [
+      "Algoneurodystrophie (syndrome épaule-main)"
+    ],
+    "texte": "Douleur, raideur et gonflement de l'épaule et/ou de la main, avec parfois une grande sensibilité.\n\n## De quoi s'agit-il ?\nC'est une réaction anormale du système nerveux après une douleur, une immobilisation ou un traumatisme (fracture, chirurgie…). Elle entraîne une douleur importante, une raideur et un gonflement de l'épaule et/ou de la main.\n\n## Mes bons réflexes\n- Mobiliser régulièrement : Bougez doucement l'épaule, le coude et la main, sans forcer.\n- Apaiser la douleur : Utilisez de la chaleur (tiède), si elle soulage, selon les conseils de votre kiné.\n- Gagner en mobilité : Réalisez les exercices proposés par votre kiné pour retrouver peu à peu les mouvements.\n- Entretenir la main : Faites des exercices doux de prise et de coordination (balle souple, pâte à modeler…).\n\n## À retenir\n- Bouger régulièrement, même si c'est inconfortable.\n- La récupération est progressive, souvent sur plusieurs mois.\n- Un accompagnement adapté par votre kiné est essentiel pour limiter la raideur et retrouver la fonction.\n\n## Consultez sans attendre si\n- la douleur s'aggrave fortement\n- le gonflement augmente\n- les mouvements deviennent de plus en plus limités"
   }
 ];
 
