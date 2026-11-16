@@ -21366,7 +21366,7 @@
     "ex": 30,
     "exercise_mode": "etirement",
     "id": "PLAQUE_12",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/etirement-assis-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Tapis"
@@ -21406,7 +21406,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {

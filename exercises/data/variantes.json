@@ -1618,5 +1618,10 @@
   "defaut": "/exercises/images/plaque-vibrante/curl-sangles-f.webp",
   "f": "/exercises/images/plaque-vibrante/curl-sangles-f.webp",
   "h": "/exercises/images/plaque-vibrante/curl-sangles-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/etirement-assis-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/etirement-assis-f.webp",
+  "f": "/exercises/images/plaque-vibrante/etirement-assis-f.webp",
+  "h": "/exercises/images/plaque-vibrante/etirement-assis-h.webp"
  }
 }
