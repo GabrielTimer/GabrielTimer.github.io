@@ -82,10 +82,12 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
   const trTxt = tr ? (tr.dir === "down" ? `${icon("trendDown")}Douleur en baisse` : tr.dir === "up" ? `${icon("trendUp")}Douleur en hausse` : `${icon("trendFlat")}Douleur stable`) : "";
   const isCourse = prog.categorie === "course";
 
-  const canMove = !prog.termine && prog.seances.some(x => !x.terminee && x.datePrevue);
+  const dated = !prog.termine && prog.seances.some(x => !x.terminee && x.datePrevue);
+  /* Le kiné peut aussi changer le rythme d'un programme en accès libre (et lui redonner des jours) */
+  const canMove = dated || (role === "kine" && !prog.termine);
   const pz = etatPause(prog);
   const daysBtn = canMove ? `<button class="btn sm" type="button" data-pact="jours">${icon("calendar")}${role === "kine" ? "Changer les jours" : "Changer mes jours"}</button>
-      <button class="btn sm" type="button" data-pact="pause">${icon(pz ? "play" : "pause")}${pz ? (pz.debut ? "Changer la date de début" : "Changer la reprise") : "Pause ou report"}</button>` : "";
+      ${dated ? `<button class="btn sm" type="button" data-pact="pause">${icon(pz ? "play" : "pause")}${pz ? (pz.debut ? "Changer la date de début" : "Changer la reprise") : "Pause ou report"}</button>` : ""}` : "";
   const pauseHTML = pz ? `<div class="notice" style="margin:10px 0">${icon(pz.debut ? "calendar" : "pause")}<span>${pz.debut ? "Programme qui commence" : "Programme en pause, reprise"} <strong>${esc(fmtDate(pz.date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}</strong>. ${role === "kine" ? "Les séances ne comptent pas en retard d'ici là." : "Aucune séance n'est en retard d'ici là."}</span></div>` : "";
   const actions = role === "kine" ? `
       ${daysBtn}
@@ -109,7 +111,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
         </div>
         <div class="prog-meta">
           <span>${icon("checkCircle")}${prog.faites} sur ${prog.total} séances</span>
-          ${prog.debut ? `<span>${icon("calendar")}${esc(fmtShortDate(prog.debut))} au ${esc(fmtShortDate(prog.fin || prog.debut))}</span>` : ""}
+          ${prog.libre ? `<span>${icon("calendar")}Accès libre, sans jours fixes</span>` : prog.debut ? `<span>${icon("calendar")}${esc(fmtShortDate(prog.debut))} au ${esc(fmtShortDate(prog.fin || prog.debut))}</span>` : ""}
           ${trTxt ? `<span>${trTxt}</span>` : ""}
         </div>
         <div class="spine" aria-label="${prog.faites} séances faites sur ${prog.total}">${spine}</div>
@@ -278,37 +280,91 @@ export function pauseSheet(prog, { role = "patient", onSave }){
   render();
 }
 
-/** Fenêtre de choix des jours. onSave(changes) reçoit la liste à enregistrer. */
+/** Rythme actuel : nombre de séances par semaine (celui enregistré au dernier changement, sinon la semaine la plus remplie). */
+export function rythmeDuProgramme(prog){
+  const r = prog.seances.find(s => !s.terminee && s.parSemaine)?.parSemaine;
+  if(r) return r;
+  return Math.max(1, ...byWeek(prog.seances.slice()).map(w => w.seances.length));
+}
+
+/** Séances restantes replacées avec un nouveau rythme : dates, et semaines renumérotées (n séances au plus par semaine). */
+export function replanRythme(prog, jours, n){
+  const plan = replanDates(prog, jours);
+  if(!plan.length) return [];
+  const lundi = d => { const x = startOfDay(d); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  /* Référence : la dernière séance faite (sa semaine et sa date) ; sinon la première séance replacée */
+  const faites = prog.seances.filter(s => s.terminee);
+  const quand = s => new Date(s.dateValidation || s.datePrevue || Date.now());
+  const ref = faites.slice().sort((a, b) => quand(a) - quand(b)).pop();
+  const m0 = ref ? lundi(quand(ref)) : lundi(plan[0].date);
+  const sem0 = ref ? (Number(ref.semaine) || 1) : Math.min(...plan.map(p => Number(p.seance.semaine) || 1));
+  const count = {};
+  faites.forEach(s => { const w = Number(s.semaine) || 1; count[w] = (count[w] || 0) + 1; });
+  let decal = 0;
+  return plan.map(({ seance, date }) => {
+    let w = sem0 + Math.round((lundi(date) - m0) / (7 * DAY_MS)) + decal;
+    while((count[w] || 0) >= n){ w++; decal++; }
+    count[w] = (count[w] || 0) + 1;
+    return { seance, date, semaine: w, ordre: count[w] };
+  });
+}
+
+/** Fenêtre de choix des jours. onSave(changes) reçoit la liste à enregistrer.
+    Kiné : il peut aussi changer le nombre de séances par semaine, ou passer en accès libre (sans dates). */
 export function changeDaysSheet(prog, { role = "patient", rappelTxt = "", onSave }){
-  const weeks = byWeek(prog.seances.slice());
-  const n = Math.max(1, ...weeks.map(w => w.seances.length));
+  const kine = role === "kine";
+  const n0 = rythmeDuProgramme(prog);
+  let n = n0;
+  let libre = !!prog.libre;
   const current = Array.from(new Set(prog.seances.filter(s => !s.terminee && s.datePrevue).map(s => new Date(s.datePrevue).getDay())));
   let jours = current.length === n ? current : [];
+  const restantes = prog.seances.filter(s => !s.terminee).length;
   const s = openSheet({
-    title: role === "kine" ? "Changer les jours" : "Changer mes jours",
+    title: kine ? "Changer les jours" : "Changer mes jours",
     body: `
       <div class="stack" style="--gap:16px">
-        <p>${role === "kine" ? "Choisissez" : "Choisissez les jours qui vous conviennent le mieux :"} <strong>${n} jour${n > 1 ? "s" : ""} par semaine</strong>.</p>
-        <div class="days" id="cd-days">${JOURS.map(([v, l, full]) => `<button type="button" data-day="${v}" aria-pressed="${jours.includes(v)}" aria-label="${full}">${l}</button>`).join("")}</div>
-        <p class="hint" id="cd-hint"></p>
+        ${kine ? `<div class="field"><span class="label">Séances par semaine</span>
+          <div class="chips" id="cd-n">${[1, 2, 3, 4, 5, 6, 7].map(v => `<button class="chip" type="button" data-n="${v}">${v}</button>`).join("")}<button class="chip" type="button" data-libre>Accès libre</button></div>
+        </div>` : ""}
+        <div id="cd-jours" class="stack" style="--gap:16px">
+          <p id="cd-lead"></p>
+          <div class="days" id="cd-days">${JOURS.map(([v, l, full]) => `<button type="button" data-day="${v}" aria-pressed="${jours.includes(v)}" aria-label="${full}">${l}</button>`).join("")}</div>
+          <p class="hint" id="cd-hint"></p>
+        </div>
         <div class="plan-preview" id="cd-prev" style="padding:12px 14px;border-radius:var(--r-md);background:var(--surface-2);font-size:var(--fs-sm);color:var(--ink-2)"></div>
-        ${role === "kine" ? "" : `<a class="list-item" href="/reglages.html#rappels" style="border:1px solid var(--line);border-radius:var(--r-md)"><span class="li-ico">${icon("bell")}</span><span class="li-main"><span class="li-title">Rappel le jour de la séance</span><span class="li-sub">${esc(rappelTxt || "Activer ou couper la notification, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>`}
+        ${kine ? "" : `<a class="list-item" href="/reglages.html#rappels" style="border:1px solid var(--line);border-radius:var(--r-md)"><span class="li-ico">${icon("bell")}</span><span class="li-main"><span class="li-title">Rappel le jour de la séance</span><span class="li-sub">${esc(rappelTxt || "Activer ou couper la notification, choisir l'heure")}</span></span><span class="li-end">${icon("chevron")}</span></a>`}
       </div>`,
     foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="cd-ok">${icon("check")}Enregistrer</button>`
   });
   const render = () => {
+    s.el.querySelectorAll("[data-n]").forEach(b => b.setAttribute("aria-pressed", String(!libre && +b.dataset.n === n)));
+    s.el.querySelector("[data-libre]")?.setAttribute("aria-pressed", String(libre));
+    s.el.querySelector("#cd-jours").hidden = libre;
+    s.el.querySelector("#cd-lead").innerHTML = `${kine ? "Choisissez" : "Choisissez les jours qui vous conviennent le mieux :"} <strong>${n} jour${n > 1 ? "s" : ""} par semaine</strong>.`;
     s.el.querySelectorAll("[data-day]").forEach(b => b.setAttribute("aria-pressed", String(jours.includes(+b.dataset.day))));
-    const ok = jours.length === n;
+    const ok = libre || jours.length === n;
     s.el.querySelector("#cd-ok").disabled = !ok;
     const hint = s.el.querySelector("#cd-hint");
     hint.textContent = ok ? "" : `Sélectionnez ${n} jour${n > 1 ? "s" : ""} (${jours.length} choisi${jours.length > 1 ? "s" : ""}).`;
     hint.style.color = ok ? "" : "var(--danger)";
     const prev = s.el.querySelector("#cd-prev");
+    if(libre){
+      prev.innerHTML = `<strong>${restantes} séance${restantes > 1 ? "s" : ""} en accès libre</strong> : plus de date prévue. Le patient les fait quand il veut, dans l'ordre, sans rappel ni retard.`;
+      return;
+    }
     if(!ok){ prev.textContent = "Les séances restantes seront replacées à partir d'aujourd'hui."; return; }
     const plan = replanDates(prog, jours);
+    if(!plan.length){ prev.textContent = "Aucune séance restante."; return; }
     const next = plan.slice(0, 3).map(x => fmtDate(x.date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase());
     prev.innerHTML = `<strong>${plan.length} séance${plan.length > 1 ? "s" : ""} à venir</strong> : ${esc(next.join(", "))}${plan.length > 3 ? "…" : ""}<br>Dernière séance le ${esc(fmtDate(plan[plan.length - 1].date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}.`;
   };
+  s.el.querySelectorAll("[data-n]").forEach(b => b.onclick = () => {
+    n = +b.dataset.n; libre = false;
+    if(jours.length > n) jours = jours.slice(0, n);
+    render();
+  });
+  const bl = s.el.querySelector("[data-libre]");
+  if(bl) bl.onclick = () => { libre = true; render(); };
   s.el.querySelectorAll("[data-day]").forEach(b => b.onclick = () => {
     const v = +b.dataset.day;
     if(jours.includes(v)) jours = jours.filter(x => x !== v);
@@ -320,11 +376,18 @@ export function changeDaysSheet(prog, { role = "patient", rappelTxt = "", onSave
   s.el.querySelector("#cd-ok").onclick = async () => {
     const btn = s.el.querySelector("#cd-ok");
     btn.disabled = true;
-    const noms = JOURS.filter(j => jours.includes(j[0])).map(j => j[2].toLowerCase());
-    const changes = replanDates(prog, jours).map(({ seance, date }) => ({
-      id: seance.id, datePrevue: date.toISOString(), datePrevueTexte: date.toLocaleDateString("fr-FR"), joursProgramme: noms
-    }));
-    try{ await onSave(changes); s.close(); }
+    let changes;
+    if(libre){
+      changes = prog.seances.filter(x => !x.terminee).map(x => ({ id: x.id, datePrevue: null, datePrevueTexte: "", joursProgramme: [] }));
+    }else{
+      const noms = JOURS.filter(j => jours.includes(j[0])).map(j => j[2].toLowerCase());
+      changes = kine && (n !== n0 || prog.libre)
+        ? replanRythme(prog, jours, n).map(({ seance, date, semaine, ordre }) => ({
+            id: seance.id, datePrevue: date.toISOString(), datePrevueTexte: date.toLocaleDateString("fr-FR"), joursProgramme: noms, semaine, ordre, parSemaine: n }))
+        : replanDates(prog, jours).map(({ seance, date }) => ({
+            id: seance.id, datePrevue: date.toISOString(), datePrevueTexte: date.toLocaleDateString("fr-FR"), joursProgramme: noms }));
+    }
+    try{ await onSave(changes, { libre, n }); s.close(); }
     catch(err){ btn.disabled = false; toast("Enregistrement impossible. Vérifiez votre connexion.", { type:"err" }); }
   };
   render();

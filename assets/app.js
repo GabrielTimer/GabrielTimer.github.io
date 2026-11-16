@@ -304,6 +304,15 @@ export function sessionDuration(prog){
 /** Séance réservée au cabinet : faite avec le kiné, jamais montrée au patient (ni rappels ni alertes de retard). */
 export const estCabinet = s => s?.cabinet === true;
 
+/** Ordre des séances d'un programme : semaine, puis date (ou rang si l'une n'a pas de date, en accès libre). */
+export function ordreSeances(a, b){
+  const w = (Number(a.semaine) || 1) - (Number(b.semaine) || 1);
+  if(w) return w;
+  if(a.datePrevue && b.datePrevue) return new Date(a.datePrevue) - new Date(b.datePrevue);
+  if(a.terminee !== b.terminee) return a.terminee ? -1 : 1;
+  return (a.ordre || 0) - (b.ordre || 0);
+}
+
 export function groupProgrammes(seances){
   const groupes = new Map();
   const seules = [];
@@ -316,7 +325,7 @@ export function groupProgrammes(seances){
     }
   });
   const programmes = Array.from(groupes.values()).map(list => {
-    list.sort((a, b) => new Date(a.datePrevue || 0) - new Date(b.datePrevue || 0) || (a.semaine || 0) - (b.semaine || 0));
+    list.sort(ordreSeances);
     const faites = list.filter(s => s.terminee).length;
     const premier = list[0];
     const evas = list.filter(s => s.terminee && s.eva !== null && s.eva !== undefined && s.eva !== "")
@@ -333,6 +342,8 @@ export function groupProgrammes(seances){
       faites,
       pct: list.length ? Math.round(faites * 100 / list.length) : 0,
       termine: faites === list.length,
+      /* Accès libre : plus aucune date pour les séances restantes (le patient les fait quand il veut) */
+      libre: faites < list.length && list.every(s => s.terminee || !s.datePrevue),
       evas,
       prochaine,
       debut: premier.datePrevue || premier.dateDebut || null,
@@ -355,7 +366,7 @@ export function byWeek(seances){
   });
   const letters = "ABCDEFG";
   return Array.from(weeks.entries()).sort((a, b) => a[0] - b[0]).map(([w, list]) => {
-    list.sort((a, b) => new Date(a.datePrevue || 0) - new Date(b.datePrevue || 0));
+    list.sort(ordreSeances);
     list.forEach((s, i) => { s.label = s.categorie === "course" && s.nom ? s.nom : `S${w}${letters[i] || i + 1}`; });
     return { semaine: w, seances: list, faites: list.filter(s => s.terminee).length };
   });

@@ -509,10 +509,10 @@ async function kineView(param){
           }});
         }
         if(act === "jours"){
-          changeDaysSheet(prog, { role:"kine", onSave: async changes => {
+          changeDaysSheet(prog, { role:"kine", onSave: async (changes, info = {}) => {
             await C.replanSeances(patient.cle, changes);
             changes.forEach(c => { const x = seances.find(s => s.id === c.id); if(x) Object.assign(x, c); });
-            toast("Planning mis à jour.", { type:"ok" });
+            toast(info.libre ? "Programme en accès libre : plus de jours fixes." : "Planning mis à jour.", { type:"ok" });
             render();
           }});
         }
