@@ -14523,7 +14523,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -14655,7 +14655,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -14787,7 +14787,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -16747,7 +16747,7 @@ export const MODELES_BASE = [
 "id": "FAUT_02",
 "source": "CABINET",
 "nom": "Talons puis pointes assis",
-"image": "",
+"image": "/exercises/images/aide-marche/talons-pointes-assis-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, pieds à plat",
 "Monter les talons en restant sur les pointes",
@@ -16767,7 +16767,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -16787,7 +16787,7 @@ export const MODELES_BASE = [
 "id": "FAUT_07",
 "source": "CABINET",
 "nom": "Marche assise, genoux levés",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-assise-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, dos droit",
 "Lever un genou, puis l'autre, comme pour marcher",
@@ -18053,7 +18053,7 @@ export const MODELES_BASE = [
 "id": "FAUT_07",
 "source": "CABINET",
 "nom": "Marche assise, genoux levés",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-assise-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, dos droit",
 "Lever un genou, puis l'autre, comme pour marcher",
@@ -18805,7 +18805,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -18825,7 +18825,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -18957,7 +18957,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -19109,7 +19109,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -19129,7 +19129,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -19241,7 +19241,7 @@ export const MODELES_BASE = [
 "id": "FAUT_03",
 "source": "CABINET",
 "nom": "Tourner le pied vers l'extérieur contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
 "consignes": [
 "Assis, élastique en boucle autour des deux avant-pieds",
 "Talons posés au sol, pieds serrés",
@@ -19982,7 +19982,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -20094,7 +20094,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -20945,7 +20945,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -21017,7 +21017,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -21522,7 +21522,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -21542,7 +21542,7 @@ export const MODELES_BASE = [
 "id": "FAUT_03",
 "source": "CABINET",
 "nom": "Tourner le pied vers l'extérieur contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
 "consignes": [
 "Assis, élastique en boucle autour des deux avant-pieds",
 "Talons posés au sol, pieds serrés",
@@ -21562,7 +21562,7 @@ export const MODELES_BASE = [
 "id": "FAUT_04",
 "source": "CABINET",
 "nom": "Froisser une serviette avec les orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/serviette-orteils-f.webp",
 "consignes": [
 "Assis, pied nu posé sur une serviette étalée au sol",
 "Talon fixe",
@@ -21582,7 +21582,7 @@ export const MODELES_BASE = [
 "id": "FAUT_06",
 "source": "CABINET",
 "nom": "Tendre le genou assis",
-"image": "",
+"image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, dos contre le dossier",
 "Tendre un genou, pointe du pied vers soi",
@@ -21602,7 +21602,7 @@ export const MODELES_BASE = [
 "id": "FAUT_07",
 "source": "CABINET",
 "nom": "Marche assise, genoux levés",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-assise-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, dos droit",
 "Lever un genou, puis l'autre, comme pour marcher",
@@ -21674,7 +21674,7 @@ export const MODELES_BASE = [
 "id": "FAUT_01",
 "source": "CABINET",
 "nom": "Relever les pointes de pied assis",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, pieds à plat",
 "Talons posés au sol",
@@ -21694,7 +21694,7 @@ export const MODELES_BASE = [
 "id": "FAUT_03",
 "source": "CABINET",
 "nom": "Tourner le pied vers l'extérieur contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
 "consignes": [
 "Assis, élastique en boucle autour des deux avant-pieds",
 "Talons posés au sol, pieds serrés",
@@ -21714,7 +21714,7 @@ export const MODELES_BASE = [
 "id": "FAUT_04",
 "source": "CABINET",
 "nom": "Froisser une serviette avec les orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/serviette-orteils-f.webp",
 "consignes": [
 "Assis, pied nu posé sur une serviette étalée au sol",
 "Talon fixe",
@@ -21866,7 +21866,7 @@ export const MODELES_BASE = [
 "id": "FAUT_03",
 "source": "CABINET",
 "nom": "Tourner le pied vers l'extérieur contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
 "consignes": [
 "Assis, élastique en boucle autour des deux avant-pieds",
 "Talons posés au sol, pieds serrés",

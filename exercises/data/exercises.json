@@ -23435,7 +23435,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "FAUT_01",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -23480,7 +23480,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23507,7 +23506,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "FAUT_02",
-    "image": "",
+    "image": "/exercises/images/aide-marche/talons-pointes-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -23550,7 +23549,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23579,7 +23577,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "FAUT_03",
-    "image": "",
+    "image": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Élastique en boucle"
@@ -23621,7 +23619,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23649,7 +23646,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "FAUT_04",
-    "image": "",
+    "image": "/exercises/images/aide-marche/serviette-orteils-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Serviette"
@@ -23691,7 +23688,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23719,7 +23715,7 @@
     "ex": 60,
     "exercise_mode": "mobilite",
     "id": "FAUT_05",
-    "image": "",
+    "image": "/exercises/images/aide-marche/balle-sous-pied-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Balle à picots ou balle de tennis"
@@ -23761,7 +23757,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23789,7 +23784,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "FAUT_06",
-    "image": "",
+    "image": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -23833,7 +23828,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23860,7 +23854,7 @@
     "ex": 45,
     "exercise_mode": "dynamique",
     "id": "FAUT_07",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-assise-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -23907,7 +23901,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",

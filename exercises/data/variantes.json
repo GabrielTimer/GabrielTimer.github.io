@@ -1683,5 +1683,40 @@
   "defaut": "/exercises/images/aide-marche/se-remonter-lit-f.webp",
   "f": "/exercises/images/aide-marche/se-remonter-lit-f.webp",
   "h": "/exercises/images/aide-marche/se-remonter-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/pointes-pieds-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
+  "f": "/exercises/images/aide-marche/pointes-pieds-assis-f.webp",
+  "h": "/exercises/images/aide-marche/pointes-pieds-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/talons-pointes-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/talons-pointes-assis-f.webp",
+  "f": "/exercises/images/aide-marche/talons-pointes-assis-f.webp",
+  "h": "/exercises/images/aide-marche/talons-pointes-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/eversion-elastique-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
+  "f": "/exercises/images/aide-marche/eversion-elastique-assis-f.webp",
+  "h": "/exercises/images/aide-marche/eversion-elastique-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/serviette-orteils-f.webp": {
+  "defaut": "/exercises/images/aide-marche/serviette-orteils-f.webp",
+  "f": "/exercises/images/aide-marche/serviette-orteils-f.webp",
+  "h": "/exercises/images/aide-marche/serviette-orteils-h.webp"
+ },
+ "/exercises/images/aide-marche/balle-sous-pied-f.webp": {
+  "defaut": "/exercises/images/aide-marche/balle-sous-pied-f.webp",
+  "f": "/exercises/images/aide-marche/balle-sous-pied-f.webp",
+  "h": "/exercises/images/aide-marche/balle-sous-pied-h.webp"
+ },
+ "/exercises/images/aide-marche/tendre-genou-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
+  "f": "/exercises/images/aide-marche/tendre-genou-assis-f.webp",
+  "h": "/exercises/images/aide-marche/tendre-genou-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-assise-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-assise-f.webp",
+  "f": "/exercises/images/aide-marche/marche-assise-f.webp",
+  "h": "/exercises/images/aide-marche/marche-assise-h.webp"
  }
 }
