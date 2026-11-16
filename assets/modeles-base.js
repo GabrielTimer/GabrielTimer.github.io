@@ -34922,7 +34922,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_03",
 "source": "CABINET",
 "nom": "Le flamant rose",
-"image": "",
+"image": "/exercises/images/pediatrie/flamant-f.webp",
 "consignes": [
 "Debout, mains sur les hanches",
 "Lever un pied et le poser contre l'autre genou, comme un flamant",
@@ -34942,7 +34942,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_04",
 "source": "CABINET",
 "nom": "Lancer et attraper un ballon",
-"image": "",
+"image": "/exercises/images/pediatrie/lancer-attraper-f.webp",
 "consignes": [
 "Face à un adulte, à 2 ou 3 m",
 "Lancer le ballon à deux mains",
@@ -34963,7 +34963,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_06",
 "source": "CABINET",
 "nom": "Ramper comme un soldat",
-"image": "",
+"image": "/exercises/images/pediatrie/ramper-f.webp",
 "consignes": [
 "À plat ventre sur un tapis",
 "Avancer en tirant sur les avant-bras et en poussant avec les jambes",
@@ -34984,7 +34984,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_05",
 "source": "CABINET",
 "nom": "L'avion à plat ventre",
-"image": "",
+"image": "/exercises/images/pediatrie/avion-ventre-f.webp",
 "consignes": [
 "Allongé sur le ventre, bras tendus sur le côté comme des ailes",
 "Lever la tête, les bras et les jambes en même temps",
@@ -35016,7 +35016,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_01",
 "source": "CABINET",
 "nom": "La marche du crabe",
-"image": "",
+"image": "/exercises/images/pediatrie/marche-crabe-f.webp",
 "consignes": [
 "Assis par terre, mains derrière soi, pieds à plat",
 "Lever les fesses du sol",
@@ -35037,7 +35037,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_02",
 "source": "CABINET",
 "nom": "La marelle à cloche-pied",
-"image": "",
+"image": "/exercises/images/pediatrie/marelle-f.webp",
 "consignes": [
 "Dessiner ou poser une marelle au sol",
 "Sauter à cloche-pied dans les cases simples, à deux pieds dans les doubles",
@@ -35058,7 +35058,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_04",
 "source": "CABINET",
 "nom": "Lancer et attraper un ballon",
-"image": "",
+"image": "/exercises/images/pediatrie/lancer-attraper-f.webp",
 "consignes": [
 "Face à un adulte, à 2 ou 3 m",
 "Lancer le ballon à deux mains",
@@ -35079,7 +35079,7 @@ export const MODELES_BASE = [
 "id": "PEDIA_05",
 "source": "CABINET",
 "nom": "L'avion à plat ventre",
-"image": "",
+"image": "/exercises/images/pediatrie/avion-ventre-f.webp",
 "consignes": [
 "Allongé sur le ventre, bras tendus sur le côté comme des ailes",
 "Lever la tête, les bras et les jambes en même temps",

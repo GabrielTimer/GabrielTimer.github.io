@@ -18694,7 +18694,7 @@
     "ex": 20,
     "exercise_mode": "renforcement",
     "id": "PEDIA_01",
-    "image": "",
+    "image": "/exercises/images/pediatrie/marche-crabe-f.webp",
     "materiel": [
       "Tapis ou sol propre"
     ],
@@ -18736,7 +18736,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]
@@ -18760,7 +18759,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "PEDIA_02",
-    "image": "",
+    "image": "/exercises/images/pediatrie/marelle-f.webp",
     "materiel": [
       "Craie ou ruban adhésif"
     ],
@@ -18799,7 +18798,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]
@@ -18823,7 +18821,7 @@
     "ex": 20,
     "exercise_mode": "equilibre",
     "id": "PEDIA_03",
-    "image": "",
+    "image": "/exercises/images/pediatrie/flamant-f.webp",
     "materiel": [
       "Aucun"
     ],
@@ -18862,7 +18860,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]
@@ -18886,7 +18883,7 @@
     "ex": 45,
     "exercise_mode": "dynamique",
     "id": "PEDIA_04",
-    "image": "",
+    "image": "/exercises/images/pediatrie/lancer-attraper-f.webp",
     "materiel": [
       "Ballon"
     ],
@@ -18926,7 +18923,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]
@@ -18950,7 +18946,7 @@
     "ex": 15,
     "exercise_mode": "renforcement",
     "id": "PEDIA_05",
-    "image": "",
+    "image": "/exercises/images/pediatrie/avion-ventre-f.webp",
     "materiel": [
       "Tapis"
     ],
@@ -18990,7 +18986,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]
@@ -19014,7 +19009,7 @@
     "ex": 30,
     "exercise_mode": "dynamique",
     "id": "PEDIA_06",
-    "image": "",
+    "image": "/exercises/images/pediatrie/ramper-f.webp",
     "materiel": [
       "Tapis",
       "Table ou tunnel"
@@ -19054,7 +19049,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Pédiatrie"
     ]

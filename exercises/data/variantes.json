@@ -1393,5 +1393,35 @@
   "defaut": "/exercises/images/oncologie/respiration-bras-f.webp",
   "f": "/exercises/images/oncologie/respiration-bras-f.webp",
   "h": "/exercises/images/oncologie/respiration-bras-h.webp"
+ },
+ "/exercises/images/pediatrie/marche-crabe-f.webp": {
+  "defaut": "/exercises/images/pediatrie/marche-crabe-f.webp",
+  "f": "/exercises/images/pediatrie/marche-crabe-f.webp",
+  "h": "/exercises/images/pediatrie/marche-crabe-h.webp"
+ },
+ "/exercises/images/pediatrie/marelle-f.webp": {
+  "defaut": "/exercises/images/pediatrie/marelle-f.webp",
+  "f": "/exercises/images/pediatrie/marelle-f.webp",
+  "h": "/exercises/images/pediatrie/marelle-h.webp"
+ },
+ "/exercises/images/pediatrie/flamant-f.webp": {
+  "defaut": "/exercises/images/pediatrie/flamant-f.webp",
+  "f": "/exercises/images/pediatrie/flamant-f.webp",
+  "h": "/exercises/images/pediatrie/flamant-h.webp"
+ },
+ "/exercises/images/pediatrie/lancer-attraper-f.webp": {
+  "defaut": "/exercises/images/pediatrie/lancer-attraper-f.webp",
+  "f": "/exercises/images/pediatrie/lancer-attraper-f.webp",
+  "h": "/exercises/images/pediatrie/lancer-attraper-h.webp"
+ },
+ "/exercises/images/pediatrie/avion-ventre-f.webp": {
+  "defaut": "/exercises/images/pediatrie/avion-ventre-f.webp",
+  "f": "/exercises/images/pediatrie/avion-ventre-f.webp",
+  "h": "/exercises/images/pediatrie/avion-ventre-h.webp"
+ },
+ "/exercises/images/pediatrie/ramper-f.webp": {
+  "defaut": "/exercises/images/pediatrie/ramper-f.webp",
+  "f": "/exercises/images/pediatrie/ramper-f.webp",
+  "h": "/exercises/images/pediatrie/ramper-h.webp"
  }
 }
