@@ -52,7 +52,7 @@ app.innerHTML = `
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel" id="ressenti-box">
     <div class="q-title">Et la séance, c'était…</div>
     <p class="q-sub">Pour aider votre kiné à ajuster le programme.</p>
     <div class="chips ressenti" role="group" aria-label="Difficulté de la séance">
@@ -104,14 +104,30 @@ function setEva(v){
     vibrate(30);
   }
 }
-range.addEventListener("input", () => setEva(Number(range.value)));
-range.addEventListener("pointerdown", () => { if(eva === null) setEva(Number(range.value)); });
-$("#minus").onclick = () => setEva(eva === null ? 0 : eva - 1);
-$("#plus").onclick = () => setEva(eva === null ? 1 : eva + 1);
+/* Défilement automatique vers la question suivante après chaque réponse,
+   pour que le patient voie le bouton d'enregistrement. */
+const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let tScroll = null;
+function allerA(el, block = "start"){
+  if(!el) return;
+  clearTimeout(tScroll);
+  tScroll = setTimeout(() => el.scrollIntoView({ behavior: reduit ? "auto" : "smooth", block }), 450);
+}
+function apresEva(){ allerA($("#ressenti-box")); }
+function apresRessenti(){
+  allerA($("#msg-box") || save, $("#msg-box") ? "start" : "center");
+  save.classList.remove("pulse"); void save.offsetWidth; save.classList.add("pulse");
+}
+range.addEventListener("input", () => { clearTimeout(tScroll); setEva(Number(range.value)); });
+range.addEventListener("pointerdown", () => { clearTimeout(tScroll); if(eva === null) setEva(Number(range.value)); });
+range.addEventListener("change", apresEva);
+$("#minus").onclick = () => { setEva(eva === null ? 0 : eva - 1); apresEva(); };
+$("#plus").onclick = () => { setEva(eva === null ? 1 : eva + 1); apresEva(); };
 
 $$("[data-r]").forEach(b => b.addEventListener("click", () => {
   ressenti = ressenti === b.dataset.r ? null : b.dataset.r;
   $$("[data-r]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.r === ressenti)));
+  if(ressenti) apresRessenti();
 }));
 
 const withTimeout = (p, ms) => Promise.race([p, new Promise(r => setTimeout(() => r("timeout"), ms))]);
