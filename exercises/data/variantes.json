@@ -1638,5 +1638,50 @@
   "defaut": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
   "f": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
   "h": "/exercises/images/aide-marche/coussin-sous-genou-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/glisser-talon-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
+  "f": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
+  "h": "/exercises/images/aide-marche/glisser-talon-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/ecarter-jambe-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/ecarter-jambe-lit-f.webp",
+  "f": "/exercises/images/aide-marche/ecarter-jambe-lit-f.webp",
+  "h": "/exercises/images/aide-marche/ecarter-jambe-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/pont-fessier-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
+  "f": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
+  "h": "/exercises/images/aide-marche/pont-fessier-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/coussin-genoux-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/coussin-genoux-lit-f.webp",
+  "f": "/exercises/images/aide-marche/coussin-genoux-lit-f.webp",
+  "h": "/exercises/images/aide-marche/coussin-genoux-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/bouteilles-plafond-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/bouteilles-plafond-lit-f.webp",
+  "f": "/exercises/images/aide-marche/bouteilles-plafond-lit-f.webp",
+  "h": "/exercises/images/aide-marche/bouteilles-plafond-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/bascule-genoux-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/bascule-genoux-lit-f.webp",
+  "f": "/exercises/images/aide-marche/bascule-genoux-lit-f.webp",
+  "h": "/exercises/images/aide-marche/bascule-genoux-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/jambe-tendue-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/jambe-tendue-lit-f.webp",
+  "f": "/exercises/images/aide-marche/jambe-tendue-lit-f.webp",
+  "h": "/exercises/images/aide-marche/jambe-tendue-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/pedalage-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pedalage-lit-f.webp",
+  "f": "/exercises/images/aide-marche/pedalage-lit-f.webp",
+  "h": "/exercises/images/aide-marche/pedalage-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/se-remonter-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/se-remonter-lit-f.webp",
+  "f": "/exercises/images/aide-marche/se-remonter-lit-f.webp",
+  "h": "/exercises/images/aide-marche/se-remonter-lit-h.webp"
  }
 }

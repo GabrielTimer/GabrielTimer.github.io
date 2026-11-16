@@ -22843,7 +22843,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "LIT_03",
-    "image": "",
+    "image": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -22885,7 +22885,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ],
@@ -22912,7 +22911,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "LIT_04",
-    "image": "",
+    "image": "/exercises/images/aide-marche/ecarter-jambe-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -22954,7 +22953,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ],
@@ -22979,7 +22977,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "LIT_05",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -23025,7 +23023,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -23049,7 +23046,7 @@
     "ex": 40,
     "exercise_mode": "isometrique",
     "id": "LIT_06",
-    "image": "",
+    "image": "/exercises/images/aide-marche/coussin-genoux-lit-f.webp",
     "materiel": [
       "Lit",
       "Coussin"
@@ -23089,7 +23086,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -23113,7 +23109,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "LIT_07",
-    "image": "",
+    "image": "/exercises/images/aide-marche/bouteilles-plafond-lit-f.webp",
     "materiel": [
       "Lit",
       "2 petites bouteilles d'eau (0,5 l)"
@@ -23160,7 +23156,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -23184,7 +23179,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "LIT_08",
-    "image": "",
+    "image": "/exercises/images/aide-marche/bascule-genoux-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -23224,7 +23219,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -23251,7 +23245,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "LIT_09",
-    "image": "",
+    "image": "/exercises/images/aide-marche/jambe-tendue-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -23292,7 +23286,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ],
@@ -23317,7 +23310,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "LIT_10",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pedalage-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -23355,7 +23348,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -23379,7 +23371,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "LIT_11",
-    "image": "",
+    "image": "/exercises/images/aide-marche/se-remonter-lit-f.webp",
     "materiel": [
       "Lit",
       "Potence (si disponible)"
@@ -23420,7 +23412,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]

@@ -14411,7 +14411,7 @@ export const MODELES_BASE = [
 "id": "LIT_03",
 "source": "CABINET",
 "nom": "Glisser le talon vers les fesses",
-"image": "",
+"image": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Plier le genou en faisant glisser le talon sur le lit",
@@ -14431,7 +14431,7 @@ export const MODELES_BASE = [
 "id": "LIT_09",
 "source": "CABINET",
 "nom": "Lever la jambe tendue au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/jambe-tendue-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, une jambe pliée pied à plat",
 "Autre jambe tendue, pointe vers soi",
@@ -14451,7 +14451,7 @@ export const MODELES_BASE = [
 "id": "LIT_05",
 "source": "CABINET",
 "nom": "Pont fessier au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Serrer les fesses et décoller le bassin",
@@ -15352,7 +15352,7 @@ export const MODELES_BASE = [
 "id": "LIT_03",
 "source": "CABINET",
 "nom": "Glisser le talon vers les fesses",
-"image": "",
+"image": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Plier le genou en faisant glisser le talon sur le lit",
@@ -15372,7 +15372,7 @@ export const MODELES_BASE = [
 "id": "LIT_04",
 "source": "CABINET",
 "nom": "Écarter la jambe en glissant sur le lit",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-jambe-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Écarter une jambe sur le côté en la faisant glisser",
@@ -15392,7 +15392,7 @@ export const MODELES_BASE = [
 "id": "LIT_05",
 "source": "CABINET",
 "nom": "Pont fessier au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Serrer les fesses et décoller le bassin",
@@ -15412,7 +15412,7 @@ export const MODELES_BASE = [
 "id": "LIT_06",
 "source": "CABINET",
 "nom": "Serrer un coussin entre les genoux",
-"image": "",
+"image": "/exercises/images/aide-marche/coussin-genoux-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Coussin entre les genoux",
@@ -19810,7 +19810,7 @@ export const MODELES_BASE = [
 "id": "LIT_03",
 "source": "CABINET",
 "nom": "Glisser le talon vers les fesses",
-"image": "",
+"image": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Plier le genou en faisant glisser le talon sur le lit",
@@ -19830,7 +19830,7 @@ export const MODELES_BASE = [
 "id": "LIT_05",
 "source": "CABINET",
 "nom": "Pont fessier au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pont-fessier-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Serrer les fesses et décoller le bassin",
@@ -19850,7 +19850,7 @@ export const MODELES_BASE = [
 "id": "LIT_08",
 "source": "CABINET",
 "nom": "Bascule des genoux d'un côté à l'autre",
-"image": "",
+"image": "/exercises/images/aide-marche/bascule-genoux-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Laisser tomber doucement les deux genoux d'un côté",
@@ -20773,7 +20773,7 @@ export const MODELES_BASE = [
 "id": "LIT_03",
 "source": "CABINET",
 "nom": "Glisser le talon vers les fesses",
-"image": "",
+"image": "/exercises/images/aide-marche/glisser-talon-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Plier le genou en faisant glisser le talon sur le lit",
@@ -20793,7 +20793,7 @@ export const MODELES_BASE = [
 "id": "LIT_08",
 "source": "CABINET",
 "nom": "Bascule des genoux d'un côté à l'autre",
-"image": "",
+"image": "/exercises/images/aide-marche/bascule-genoux-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, genoux pliés, pieds à plat",
 "Laisser tomber doucement les deux genoux d'un côté",
@@ -20813,7 +20813,7 @@ export const MODELES_BASE = [
 "id": "LIT_07",
 "source": "CABINET",
 "nom": "Pousser vers le plafond avec deux bouteilles",
-"image": "",
+"image": "/exercises/images/aide-marche/bouteilles-plafond-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, une petite bouteille d'eau dans chaque main",
 "Coudes pliés le long du corps",
