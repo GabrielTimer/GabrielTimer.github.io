@@ -1473,5 +1473,45 @@
   "defaut": "/exercises/images/sport/sprint-arret-f.webp",
   "f": "/exercises/images/sport/sprint-arret-f.webp",
   "h": "/exercises/images/sport/sprint-arret-h.webp"
+ },
+ "/exercises/images/chaise-romaine/extension-lombaire-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
+  "f": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
+  "h": "/exercises/images/chaise-romaine/extension-lombaire-h.webp"
+ },
+ "/exercises/images/chaise-romaine/maintien-isometrique-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/maintien-isometrique-f.webp",
+  "f": "/exercises/images/chaise-romaine/maintien-isometrique-f.webp",
+  "h": "/exercises/images/chaise-romaine/maintien-isometrique-h.webp"
+ },
+ "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp",
+  "f": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp",
+  "h": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-h.webp"
+ },
+ "/exercises/images/chaise-romaine/extension-mains-tete-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/extension-mains-tete-f.webp",
+  "f": "/exercises/images/chaise-romaine/extension-mains-tete-f.webp",
+  "h": "/exercises/images/chaise-romaine/extension-mains-tete-h.webp"
+ },
+ "/exercises/images/chaise-romaine/extension-rotation-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/extension-rotation-f.webp",
+  "f": "/exercises/images/chaise-romaine/extension-rotation-f.webp",
+  "h": "/exercises/images/chaise-romaine/extension-rotation-h.webp"
+ },
+ "/exercises/images/chaise-romaine/extension-disque-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/extension-disque-f.webp",
+  "f": "/exercises/images/chaise-romaine/extension-disque-f.webp",
+  "h": "/exercises/images/chaise-romaine/extension-disque-h.webp"
+ },
+ "/exercises/images/chaise-romaine/flexion-laterale-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/flexion-laterale-f.webp",
+  "f": "/exercises/images/chaise-romaine/flexion-laterale-f.webp",
+  "h": "/exercises/images/chaise-romaine/flexion-laterale-h.webp"
+ },
+ "/exercises/images/chaise-romaine/nordic-assiste-f.webp": {
+  "defaut": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
+  "f": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
+  "h": "/exercises/images/chaise-romaine/nordic-assiste-h.webp"
  }
 }

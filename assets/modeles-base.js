@@ -8695,7 +8695,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_01",
 "source": "CABINET",
 "nom": "Extension lombaire à 45°, bras croisés",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
 "consignes": [
 "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
 "Bras croisés sur la poitrine",
@@ -29807,7 +29807,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_08",
 "source": "CABINET",
 "nom": "Nordic hamstring assisté sur chaise romaine",
-"image": "",
+"image": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
 "consignes": [
 "À genoux sur le coussin, chevilles bloquées sous les rouleaux",
 "Corps aligné des genoux aux épaules, bras devant",
@@ -30547,7 +30547,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_08",
 "source": "CABINET",
 "nom": "Nordic hamstring assisté sur chaise romaine",
-"image": "",
+"image": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
 "consignes": [
 "À genoux sur le coussin, chevilles bloquées sous les rouleaux",
 "Corps aligné des genoux aux épaules, bras devant",
@@ -32638,7 +32638,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_01",
 "source": "CABINET",
 "nom": "Extension lombaire à 45°, bras croisés",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
 "consignes": [
 "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
 "Bras croisés sur la poitrine",
@@ -32772,7 +32772,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_04",
 "source": "CABINET",
 "nom": "Extension lombaire mains derrière la tête",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-mains-tete-f.webp",
 "consignes": [
 "Sur la chaise romaine, bassin au bord des coussins",
 "Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)",
@@ -32908,7 +32908,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_02",
 "source": "CABINET",
 "nom": "Maintien isométrique corps aligné",
-"image": "",
+"image": "/exercises/images/chaise-romaine/maintien-isometrique-f.webp",
 "consignes": [
 "Sur la chaise romaine, bassin au bord des coussins",
 "Monter jusqu'à l'alignement jambes-buste",
@@ -32929,7 +32929,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_01",
 "source": "CABINET",
 "nom": "Extension lombaire à 45°, bras croisés",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
 "consignes": [
 "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
 "Bras croisés sur la poitrine",
@@ -33043,7 +33043,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_03",
 "source": "CABINET",
 "nom": "Extension de hanche dos rond",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp",
 "consignes": [
 "Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi",
 "Garder le dos rond pendant tout le mouvement",
@@ -33064,7 +33064,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_04",
 "source": "CABINET",
 "nom": "Extension lombaire mains derrière la tête",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-mains-tete-f.webp",
 "consignes": [
 "Sur la chaise romaine, bassin au bord des coussins",
 "Mains derrière la tête, coudes écartés (ne pas tirer sur la nuque)",
@@ -33179,7 +33179,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_06",
 "source": "CABINET",
 "nom": "Extension lombaire avec disque contre la poitrine",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-disque-f.webp",
 "consignes": [
 "Sur la chaise romaine, tenir un disque contre la poitrine",
 "Descendre lentement, dos droit",
@@ -33200,7 +33200,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_07",
 "source": "CABINET",
 "nom": "Flexion latérale couché sur le côté",
-"image": "",
+"image": "/exercises/images/chaise-romaine/flexion-laterale-f.webp",
 "consignes": [
 "Sur la chaise romaine, couché sur le côté, hanche sur le coussin, pieds calés",
 "Bras croisés sur la poitrine",
@@ -33533,7 +33533,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_01",
 "source": "CABINET",
 "nom": "Extension lombaire à 45°, bras croisés",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
 "consignes": [
 "Sur la chaise romaine, chevilles sous les rouleaux, bassin au bord des coussins",
 "Bras croisés sur la poitrine",
@@ -34316,7 +34316,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_03",
 "source": "CABINET",
 "nom": "Extension de hanche dos rond",
-"image": "",
+"image": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp",
 "consignes": [
 "Sur la chaise romaine, bassin au bord des coussins, dos légèrement arrondi",
 "Garder le dos rond pendant tout le mouvement",
@@ -34410,7 +34410,7 @@ export const MODELES_BASE = [
 "id": "CHAISE_08",
 "source": "CABINET",
 "nom": "Nordic hamstring assisté sur chaise romaine",
-"image": "",
+"image": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
 "consignes": [
 "À genoux sur le coussin, chevilles bloquées sous les rouleaux",
 "Corps aligné des genoux aux épaules, bras devant",

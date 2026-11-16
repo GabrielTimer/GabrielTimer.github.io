@@ -19317,7 +19317,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "CHAISE_01",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/extension-lombaire-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19363,7 +19363,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19390,7 +19389,7 @@
     "ex": 30,
     "exercise_mode": "isometrique",
     "id": "CHAISE_02",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/maintien-isometrique-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19433,7 +19432,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19459,7 +19457,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "CHAISE_03",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/extension-hanche-dos-rond-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19501,7 +19499,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19527,7 +19524,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "CHAISE_04",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/extension-mains-tete-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19570,7 +19567,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19596,7 +19592,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "CHAISE_05",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/extension-rotation-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19637,7 +19633,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19663,7 +19658,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "CHAISE_06",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/extension-disque-f.webp",
     "materiel": [
       "Chaise romaine",
       "Disque de 2,5 à 10 kg"
@@ -19708,7 +19703,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19732,7 +19726,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "CHAISE_07",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/flexion-laterale-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19773,7 +19767,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true,
     "cote_marque": true
   },
@@ -19798,7 +19791,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "CHAISE_08",
-    "image": "",
+    "image": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
     "materiel": [
       "Chaise romaine"
     ],
@@ -19840,7 +19833,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "specialites": [
       "Sport"
     ],
