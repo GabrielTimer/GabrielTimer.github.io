@@ -1563,5 +1563,60 @@
   "defaut": "/exercises/images/barre/rowing-barre-f.webp",
   "f": "/exercises/images/barre/rowing-barre-f.webp",
   "h": "/exercises/images/barre/rowing-barre-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/debout-statique-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/debout-statique-f.webp",
+  "f": "/exercises/images/plaque-vibrante/debout-statique-f.webp",
+  "h": "/exercises/images/plaque-vibrante/debout-statique-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/demi-squat-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
+  "f": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
+  "h": "/exercises/images/plaque-vibrante/demi-squat-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/squat-lent-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/squat-lent-f.webp",
+  "f": "/exercises/images/plaque-vibrante/squat-lent-f.webp",
+  "h": "/exercises/images/plaque-vibrante/squat-lent-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/pointes-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/pointes-f.webp",
+  "f": "/exercises/images/plaque-vibrante/pointes-f.webp",
+  "h": "/exercises/images/plaque-vibrante/pointes-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/fente-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/fente-f.webp",
+  "f": "/exercises/images/plaque-vibrante/fente-f.webp",
+  "h": "/exercises/images/plaque-vibrante/fente-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/unipodal-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/unipodal-f.webp",
+  "f": "/exercises/images/plaque-vibrante/unipodal-f.webp",
+  "h": "/exercises/images/plaque-vibrante/unipodal-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/pont-fessier-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/pont-fessier-f.webp",
+  "f": "/exercises/images/plaque-vibrante/pont-fessier-f.webp",
+  "h": "/exercises/images/plaque-vibrante/pont-fessier-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/planche-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/planche-f.webp",
+  "f": "/exercises/images/plaque-vibrante/planche-f.webp",
+  "h": "/exercises/images/plaque-vibrante/planche-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/pompes-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/pompes-f.webp",
+  "f": "/exercises/images/plaque-vibrante/pompes-f.webp",
+  "h": "/exercises/images/plaque-vibrante/pompes-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/rowing-sangles-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/rowing-sangles-f.webp",
+  "f": "/exercises/images/plaque-vibrante/rowing-sangles-f.webp",
+  "h": "/exercises/images/plaque-vibrante/rowing-sangles-h.webp"
+ },
+ "/exercises/images/plaque-vibrante/curl-sangles-f.webp": {
+  "defaut": "/exercises/images/plaque-vibrante/curl-sangles-f.webp",
+  "f": "/exercises/images/plaque-vibrante/curl-sangles-f.webp",
+  "h": "/exercises/images/plaque-vibrante/curl-sangles-h.webp"
  }
 }

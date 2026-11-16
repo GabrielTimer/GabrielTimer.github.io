@@ -20588,7 +20588,7 @@
     "ex": 30,
     "exercise_mode": "statique",
     "id": "PLAQUE_01",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/debout-statique-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20626,7 +20626,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20658,7 +20657,7 @@
     "ex": 30,
     "exercise_mode": "isometrique",
     "id": "PLAQUE_02",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20698,7 +20697,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20730,7 +20728,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_03",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/squat-lent-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20769,7 +20767,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20801,7 +20798,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_04",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/pointes-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20840,7 +20837,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20874,7 +20870,7 @@
     "ex": 30,
     "exercise_mode": "isometrique",
     "id": "PLAQUE_05",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/fente-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20914,7 +20910,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true,
     "cote_marque": true
   },
@@ -20947,7 +20942,7 @@
     "ex": 20,
     "exercise_mode": "equilibre",
     "id": "PLAQUE_06",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/unipodal-f.webp",
     "materiel": [
       "Plaque vibrante"
     ],
@@ -20986,7 +20981,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true,
     "cote_marque": true
   },
@@ -21017,7 +21011,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_07",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/pont-fessier-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Tapis"
@@ -21058,7 +21052,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -21088,7 +21081,7 @@
     "ex": 20,
     "exercise_mode": "gainage",
     "id": "PLAQUE_08",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/planche-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Tapis"
@@ -21129,7 +21122,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -21159,7 +21151,7 @@
     "ex": 20,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_09",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/pompes-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Tapis"
@@ -21202,7 +21194,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -21234,7 +21225,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_10",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/rowing-sangles-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Sangles élastiques de la plaque"
@@ -21276,7 +21267,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -21308,7 +21298,7 @@
     "ex": 30,
     "exercise_mode": "renforcement",
     "id": "PLAQUE_11",
-    "image": "",
+    "image": "/exercises/images/plaque-vibrante/curl-sangles-f.webp",
     "materiel": [
       "Plaque vibrante",
       "Sangles élastiques de la plaque"
@@ -21347,7 +21337,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {

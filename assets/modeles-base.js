@@ -11943,7 +11943,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_02",
 "source": "CABINET",
 "nom": "Demi-squat statique sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
 "consignes": [
 "Mains sur le guidon, pieds à largeur de bassin",
 "Descendre en demi-squat, fesses en arrière",
@@ -30810,7 +30810,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_02",
 "source": "CABINET",
 "nom": "Demi-squat statique sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
 "consignes": [
 "Mains sur le guidon, pieds à largeur de bassin",
 "Descendre en demi-squat, fesses en arrière",
@@ -31334,7 +31334,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_09",
 "source": "CABINET",
 "nom": "Pompes mains sur la plaque",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/pompes-f.webp",
 "consignes": [
 "Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol",
 "Coudes légèrement fléchis, jamais verrouillés",
@@ -32606,7 +32606,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_01",
 "source": "CABINET",
 "nom": "Debout statique sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/debout-statique-f.webp",
 "consignes": [
 "Monter sur la plaque, pieds à largeur de bassin, mains sur le guidon",
 "Genoux légèrement fléchis, poids réparti sur tout le pied",
@@ -32659,7 +32659,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_02",
 "source": "CABINET",
 "nom": "Demi-squat statique sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
 "consignes": [
 "Mains sur le guidon, pieds à largeur de bassin",
 "Descendre en demi-squat, fesses en arrière",
@@ -32814,7 +32814,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_03",
 "source": "CABINET",
 "nom": "Squat dynamique lent sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/squat-lent-f.webp",
 "consignes": [
 "Sur la plaque, sans tenir le guidon (mains prêtes)",
 "Descendre en 3 s en demi-squat",
@@ -33147,7 +33147,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_08",
 "source": "CABINET",
 "nom": "Planche, avant-bras sur la plaque",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/planche-f.webp",
 "consignes": [
 "Avant-bras posés sur la plaque, pieds au sol derrière",
 "Corps aligné des épaules aux chevilles",
@@ -33376,7 +33376,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_02",
 "source": "CABINET",
 "nom": "Demi-squat statique sur plaque vibrante",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/demi-squat-f.webp",
 "consignes": [
 "Mains sur le guidon, pieds à largeur de bassin",
 "Descendre en demi-squat, fesses en arrière",
@@ -33512,7 +33512,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_10",
 "source": "CABINET",
 "nom": "Rowing aux sangles en demi-squat",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/rowing-sangles-f.webp",
 "consignes": [
 "Sur la plaque, une poignée de sangle dans chaque main",
 "Demi-squat, buste droit",
@@ -33710,7 +33710,7 @@ export const MODELES_BASE = [
 "id": "PLAQUE_09",
 "source": "CABINET",
 "nom": "Pompes mains sur la plaque",
-"image": "",
+"image": "/exercises/images/plaque-vibrante/pompes-f.webp",
 "consignes": [
 "Mains sur la plaque à largeur d'épaules, pieds (ou genoux) au sol",
 "Coudes légèrement fléchis, jamais verrouillés",
