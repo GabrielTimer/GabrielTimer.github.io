@@ -1623,5 +1623,20 @@
   "defaut": "/exercises/images/plaque-vibrante/etirement-assis-f.webp",
   "f": "/exercises/images/plaque-vibrante/etirement-assis-f.webp",
   "h": "/exercises/images/plaque-vibrante/etirement-assis-h.webp"
+ },
+ "/exercises/images/velo/pedalage-arriere-f.webp": {
+  "defaut": "/exercises/images/velo/pedalage-arriere-f.webp",
+  "f": "/exercises/images/velo/pedalage-arriere-f.webp",
+  "h": "/exercises/images/velo/pedalage-arriere-h.webp"
+ },
+ "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
+  "f": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
+  "h": "/exercises/images/aide-marche/pompage-chevilles-lit-h.webp"
+ },
+ "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp": {
+  "defaut": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
+  "f": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
+  "h": "/exercises/images/aide-marche/coussin-sous-genou-lit-h.webp"
  }
 }

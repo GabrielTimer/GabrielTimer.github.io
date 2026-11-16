@@ -21625,7 +21625,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "VELO_04",
-    "image": "",
+    "image": "/exercises/images/velo/pedalage-arriere-f.webp",
     "materiel": [
       "Vélo semi-allongé"
     ],
@@ -21665,7 +21665,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -22708,7 +22707,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "LIT_01",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -22754,7 +22753,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ]
@@ -22780,7 +22778,7 @@
     "ex": 40,
     "exercise_mode": "isometrique",
     "id": "LIT_02",
-    "image": "",
+    "image": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
     "materiel": [
       "Lit",
       "Petit coussin ou serviette roulée"
@@ -22821,7 +22819,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité"
     ],

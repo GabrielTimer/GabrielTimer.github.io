@@ -14371,7 +14371,7 @@ export const MODELES_BASE = [
 "id": "LIT_01",
 "source": "CABINET",
 "nom": "Pompage des chevilles au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Tirer les pointes de pied vers soi",
@@ -14391,7 +14391,7 @@ export const MODELES_BASE = [
 "id": "LIT_02",
 "source": "CABINET",
 "nom": "Écraser le coussin sous le genou",
-"image": "",
+"image": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, petit coussin roulé sous le genou",
 "Tirer la pointe du pied vers soi",
@@ -15312,7 +15312,7 @@ export const MODELES_BASE = [
 "id": "LIT_01",
 "source": "CABINET",
 "nom": "Pompage des chevilles au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Tirer les pointes de pied vers soi",
@@ -15332,7 +15332,7 @@ export const MODELES_BASE = [
 "id": "LIT_02",
 "source": "CABINET",
 "nom": "Écraser le coussin sous le genou",
-"image": "",
+"image": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, petit coussin roulé sous le genou",
 "Tirer la pointe du pied vers soi",
@@ -19790,7 +19790,7 @@ export const MODELES_BASE = [
 "id": "LIT_02",
 "source": "CABINET",
 "nom": "Écraser le coussin sous le genou",
-"image": "",
+"image": "/exercises/images/aide-marche/coussin-sous-genou-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, petit coussin roulé sous le genou",
 "Tirer la pointe du pied vers soi",
@@ -20753,7 +20753,7 @@ export const MODELES_BASE = [
 "id": "LIT_01",
 "source": "CABINET",
 "nom": "Pompage des chevilles au lit",
-"image": "",
+"image": "/exercises/images/aide-marche/pompage-chevilles-lit-f.webp",
 "consignes": [
 "Allongé sur le dos, jambes tendues",
 "Tirer les pointes de pied vers soi",
@@ -30659,7 +30659,7 @@ export const MODELES_BASE = [
 "id": "VELO_04",
 "source": "CABINET",
 "nom": "Pédalage arrière",
-"image": "",
+"image": "/exercises/images/velo/pedalage-arriere-f.webp",
 "consignes": [
 "Résistance faible",
 "Pédaler en arrière, lentement",
