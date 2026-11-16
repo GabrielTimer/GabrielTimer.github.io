@@ -17187,7 +17187,7 @@
     "ex": 30,
     "exercise_mode": "mobilite",
     "id": "VEST_08",
-    "image": "",
+    "image": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
     "materiel": [
       "Lit"
     ],
@@ -17225,8 +17225,7 @@
     "version_avancee": [],
     "version_facile": [],
     "zones": [],
-    "zones_corporelles": [],
-    "sans_image": true
+    "zones_corporelles": []
   },
   {
     "audio_cues": [],

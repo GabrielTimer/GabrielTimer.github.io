@@ -1328,5 +1328,10 @@
   "defaut": "/exercises/images/geriatrie/pointes-chaise-f.webp",
   "f": "/exercises/images/geriatrie/pointes-chaise-f.webp",
   "h": "/exercises/images/geriatrie/pointes-chaise-h.webp"
+ },
+ "/exercises/images/vestibulaire/brandt-daroff-f.webp": {
+  "defaut": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
+  "f": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
+  "h": "/exercises/images/vestibulaire/brandt-daroff-h.webp"
  }
 }

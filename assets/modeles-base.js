@@ -28994,7 +28994,7 @@ export const MODELES_BASE = [
 "id": "VEST_08",
 "source": "CABINET",
 "nom": "Exercices de Brandt-Daroff",
-"image": "",
+"image": "/exercises/images/vestibulaire/brandt-daroff-f.webp",
 "consignes": [
 "Assis au milieu du lit, jambes pendantes",
 "Tourner la tête de 45° vers la gauche, puis se coucher vite sur le côté droit",
