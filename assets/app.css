@@ -909,3 +909,17 @@ dialog.sheet.gsearch{ width:min(100%,680px); }
 @keyframes gt-pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--lagon) 55%, transparent)}100%{box-shadow:0 0 0 16px transparent}}
 .btn.pulse{animation:gt-pulse 1.1s ease-out 3}
 @media (prefers-reduced-motion: reduce){.btn.pulse{animation:none}}
+
+/* Ressenti de fin de séance : code couleur léger + grille 2×2 sur smartphone */
+.chips.ressenti{ display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px; }
+.chips.ressenti .chip{ --rc:var(--ink-3); justify-content:center; min-height:48px; font-size:15px;
+  border-color:color-mix(in srgb, var(--rc) 45%, transparent);
+  background:color-mix(in srgb, var(--rc) 9%, var(--surface)); color:var(--ink); }
+.chips.ressenti .chip::before{ content:""; width:10px; height:10px; border-radius:50%; background:var(--rc); flex:none; }
+.chips.ressenti .chip[data-r="facile"]{ --rc:var(--lagon); }
+.chips.ressenti .chip[data-r="adapte"]{ --rc:var(--eva-0); }
+.chips.ressenti .chip[data-r="difficile"]{ --rc:var(--eva-6); }
+.chips.ressenti .chip[data-r="trop_dur"]{ --rc:var(--eva-10); }
+.chips.ressenti .chip:hover{ border-color:var(--rc); }
+.chips.ressenti .chip[aria-pressed="true"]{ background:color-mix(in srgb, var(--rc) 22%, var(--surface)); border-color:var(--rc); border-width:2px; color:var(--ink); font-weight:700; }
+@media (max-width: 560px){ .chips.ressenti{ grid-template-columns:repeat(2, minmax(0,1fr)); } }
