@@ -11315,7 +11315,7 @@ export const MODELES_BASE = [
 "id": "BARRE_08",
 "source": "CABINET",
 "nom": "Hip thrust barre",
-"image": "",
+"image": "/exercises/images/barre/hip-thrust-f.webp",
 "consignes": [
 "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
 "Pieds à plat, genoux pliés à 90° en haut",
@@ -12093,7 +12093,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -12521,7 +12521,7 @@ export const MODELES_BASE = [
 "id": "BARRE_03",
 "source": "CABINET",
 "nom": "Squat tempo (descente 3 s, pause en bas)",
-"image": "",
+"image": "/exercises/images/barre/squat-tempo-f.webp",
 "consignes": [
 "Barre sur les trapèzes",
 "Descendre en 3 s en comptant",
@@ -13125,7 +13125,7 @@ export const MODELES_BASE = [
 "id": "BARRE_09",
 "source": "CABINET",
 "nom": "Montées sur pointes debout, barre sur les trapèzes",
-"image": "",
+"image": "/exercises/images/barre/pointes-barre-f.webp",
 "consignes": [
 "Barre sur les trapèzes, pieds à largeur de bassin",
 "Monter lentement sur la pointe des pieds",
@@ -13906,7 +13906,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -29442,7 +29442,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -29744,7 +29744,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -29786,7 +29786,7 @@ export const MODELES_BASE = [
 "id": "BARRE_07",
 "source": "CABINET",
 "nom": "Split squat bulgare, pied arrière sur banc",
-"image": "",
+"image": "/exercises/images/barre/split-squat-bulgare-f.webp",
 "consignes": [
 "Dos à un banc, le dessus du pied arrière posé sur le banc",
 "Barre sur les trapèzes (ou haltères)",
@@ -29958,7 +29958,7 @@ export const MODELES_BASE = [
 "id": "BARRE_03",
 "source": "CABINET",
 "nom": "Squat tempo (descente 3 s, pause en bas)",
-"image": "",
+"image": "/exercises/images/barre/squat-tempo-f.webp",
 "consignes": [
 "Barre sur les trapèzes",
 "Descendre en 3 s en comptant",
@@ -30375,7 +30375,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -30446,7 +30446,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -30488,7 +30488,7 @@ export const MODELES_BASE = [
 "id": "BARRE_06",
 "source": "CABINET",
 "nom": "Fente arrière barre sur les trapèzes",
-"image": "",
+"image": "/exercises/images/barre/fente-arriere-f.webp",
 "consignes": [
 "Barre sur les trapèzes, pieds à largeur de bassin",
 "Reculer un pied et descendre le genou arrière vers le sol",
@@ -30920,7 +30920,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -31650,7 +31650,7 @@ export const MODELES_BASE = [
 "id": "BARRE_08",
 "source": "CABINET",
 "nom": "Hip thrust barre",
-"image": "",
+"image": "/exercises/images/barre/hip-thrust-f.webp",
 "consignes": [
 "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
 "Pieds à plat, genoux pliés à 90° en haut",
@@ -31732,7 +31732,7 @@ export const MODELES_BASE = [
 "id": "BARRE_05",
 "source": "CABINET",
 "nom": "Soulevé de terre roumain",
-"image": "",
+"image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
 "consignes": [
 "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
 "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
@@ -32701,7 +32701,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -32793,7 +32793,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -32835,7 +32835,7 @@ export const MODELES_BASE = [
 "id": "BARRE_06",
 "source": "CABINET",
 "nom": "Fente arrière barre sur les trapèzes",
-"image": "",
+"image": "/exercises/images/barre/fente-arriere-f.webp",
 "consignes": [
 "Barre sur les trapèzes, pieds à largeur de bassin",
 "Reculer un pied et descendre le genou arrière vers le sol",
@@ -33085,7 +33085,7 @@ export const MODELES_BASE = [
 "id": "BARRE_04",
 "source": "CABINET",
 "nom": "Good morning barre sur les trapèzes",
-"image": "",
+"image": "/exercises/images/barre/good-morning-f.webp",
 "consignes": [
 "Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis",
 "Pencher le buste en avant en poussant les fesses en arrière, dos droit",
@@ -33106,7 +33106,7 @@ export const MODELES_BASE = [
 "id": "BARRE_08",
 "source": "CABINET",
 "nom": "Hip thrust barre",
-"image": "",
+"image": "/exercises/images/barre/hip-thrust-f.webp",
 "consignes": [
 "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
 "Pieds à plat, genoux pliés à 90° en haut",
@@ -33221,7 +33221,7 @@ export const MODELES_BASE = [
 "id": "BARRE_05",
 "source": "CABINET",
 "nom": "Soulevé de terre roumain",
-"image": "",
+"image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
 "consignes": [
 "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
 "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
@@ -33242,7 +33242,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -33263,7 +33263,7 @@ export const MODELES_BASE = [
 "id": "BARRE_10",
 "source": "CABINET",
 "nom": "Rowing barre buste penché",
-"image": "",
+"image": "/exercises/images/barre/rowing-barre-f.webp",
 "consignes": [
 "Debout, barre tenue mains en pronation, genoux fléchis",
 "Pencher le buste à 45°, dos droit",
@@ -33491,7 +33491,7 @@ export const MODELES_BASE = [
 "id": "BARRE_01",
 "source": "CABINET",
 "nom": "Squat sur box",
-"image": "",
+"image": "/exercises/images/barre/squat-box-f.webp",
 "consignes": [
 "Debout devant un banc, barre sur les trapèzes (ou bâton pour commencer)",
 "Pousser les fesses en arrière et descendre jusqu'à toucher le banc",
@@ -33668,7 +33668,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -33689,7 +33689,7 @@ export const MODELES_BASE = [
 "id": "BARRE_05",
 "source": "CABINET",
 "nom": "Soulevé de terre roumain",
-"image": "",
+"image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
 "consignes": [
 "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
 "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
@@ -33731,7 +33731,7 @@ export const MODELES_BASE = [
 "id": "BARRE_10",
 "source": "CABINET",
 "nom": "Rowing barre buste penché",
-"image": "",
+"image": "/exercises/images/barre/rowing-barre-f.webp",
 "consignes": [
 "Debout, barre tenue mains en pronation, genoux fléchis",
 "Pencher le buste à 45°, dos droit",
@@ -33977,7 +33977,7 @@ export const MODELES_BASE = [
 "id": "BARRE_03",
 "source": "CABINET",
 "nom": "Squat tempo (descente 3 s, pause en bas)",
-"image": "",
+"image": "/exercises/images/barre/squat-tempo-f.webp",
 "consignes": [
 "Barre sur les trapèzes",
 "Descendre en 3 s en comptant",
@@ -34049,7 +34049,7 @@ export const MODELES_BASE = [
 "id": "BARRE_07",
 "source": "CABINET",
 "nom": "Split squat bulgare, pied arrière sur banc",
-"image": "",
+"image": "/exercises/images/barre/split-squat-bulgare-f.webp",
 "consignes": [
 "Dos à un banc, le dessus du pied arrière posé sur le banc",
 "Barre sur les trapèzes (ou haltères)",
@@ -34110,7 +34110,7 @@ export const MODELES_BASE = [
 "id": "BARRE_02",
 "source": "CABINET",
 "nom": "Squat barre sur les trapèzes (back squat)",
-"image": "",
+"image": "/exercises/images/barre/back-squat-f.webp",
 "consignes": [
 "Barre posée sur les trapèzes, mains un peu plus larges que les épaules",
 "Sortir du rack en deux pas, pieds à largeur d'épaules",
@@ -34295,7 +34295,7 @@ export const MODELES_BASE = [
 "id": "BARRE_05",
 "source": "CABINET",
 "nom": "Soulevé de terre roumain",
-"image": "",
+"image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
 "consignes": [
 "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
 "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
@@ -34337,7 +34337,7 @@ export const MODELES_BASE = [
 "id": "BARRE_04",
 "source": "CABINET",
 "nom": "Good morning barre sur les trapèzes",
-"image": "",
+"image": "/exercises/images/barre/good-morning-f.webp",
 "consignes": [
 "Barre sur les trapèzes, pieds à largeur de bassin, genoux légèrement fléchis",
 "Pencher le buste en avant en poussant les fesses en arrière, dos droit",
@@ -34431,7 +34431,7 @@ export const MODELES_BASE = [
 "id": "BARRE_05",
 "source": "CABINET",
 "nom": "Soulevé de terre roumain",
-"image": "",
+"image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
 "consignes": [
 "Debout, barre tenue devant les cuisses, mains à largeur d'épaules",
 "Genoux légèrement fléchis, glisser la barre le long des cuisses en poussant les fesses en arrière",
@@ -34493,7 +34493,7 @@ export const MODELES_BASE = [
 "id": "BARRE_08",
 "source": "CABINET",
 "nom": "Hip thrust barre",
-"image": "",
+"image": "/exercises/images/barre/hip-thrust-f.webp",
 "consignes": [
 "Haut du dos appuyé sur un banc, barre avec mousse posée sur les hanches",
 "Pieds à plat, genoux pliés à 90° en haut",

@@ -19863,7 +19863,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_01",
-    "image": "",
+    "image": "/exercises/images/barre/squat-box-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -19914,7 +19914,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -19942,7 +19941,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_02",
-    "image": "",
+    "image": "/exercises/images/barre/back-squat-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -19989,7 +19988,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20016,7 +20014,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "BARRE_03",
-    "image": "",
+    "image": "/exercises/images/barre/squat-tempo-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -20060,7 +20058,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20088,7 +20085,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_04",
-    "image": "",
+    "image": "/exercises/images/barre/good-morning-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -20135,7 +20132,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20163,7 +20159,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_05",
-    "image": "",
+    "image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
     "materiel": [
       "Barre de squat",
       "Disques"
@@ -20206,7 +20202,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20233,7 +20228,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_06",
-    "image": "",
+    "image": "/exercises/images/barre/fente-arriere-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -20279,7 +20274,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true,
     "cote_marque": true
   },
@@ -20308,7 +20302,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_07",
-    "image": "",
+    "image": "/exercises/images/barre/split-squat-bulgare-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -20355,7 +20349,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true,
     "cote_marque": true
   },
@@ -20382,7 +20375,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_08",
-    "image": "",
+    "image": "/exercises/images/barre/hip-thrust-f.webp",
     "materiel": [
       "Barre de squat",
       "Mousse de barre",
@@ -20426,7 +20419,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20453,7 +20445,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_09",
-    "image": "",
+    "image": "/exercises/images/barre/pointes-barre-f.webp",
     "materiel": [
       "Barre de squat",
       "Rack",
@@ -20498,7 +20490,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {
@@ -20525,7 +20516,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "BARRE_10",
-    "image": "",
+    "image": "/exercises/images/barre/rowing-barre-f.webp",
     "materiel": [
       "Barre de squat",
       "Disques"
@@ -20566,7 +20557,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "au_cabinet": true
   },
   {

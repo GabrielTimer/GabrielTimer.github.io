@@ -1513,5 +1513,55 @@
   "defaut": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
   "f": "/exercises/images/chaise-romaine/nordic-assiste-f.webp",
   "h": "/exercises/images/chaise-romaine/nordic-assiste-h.webp"
+ },
+ "/exercises/images/barre/squat-box-f.webp": {
+  "defaut": "/exercises/images/barre/squat-box-f.webp",
+  "f": "/exercises/images/barre/squat-box-f.webp",
+  "h": "/exercises/images/barre/squat-box-h.webp"
+ },
+ "/exercises/images/barre/back-squat-f.webp": {
+  "defaut": "/exercises/images/barre/back-squat-f.webp",
+  "f": "/exercises/images/barre/back-squat-f.webp",
+  "h": "/exercises/images/barre/back-squat-h.webp"
+ },
+ "/exercises/images/barre/squat-tempo-f.webp": {
+  "defaut": "/exercises/images/barre/squat-tempo-f.webp",
+  "f": "/exercises/images/barre/squat-tempo-f.webp",
+  "h": "/exercises/images/barre/squat-tempo-h.webp"
+ },
+ "/exercises/images/barre/good-morning-f.webp": {
+  "defaut": "/exercises/images/barre/good-morning-f.webp",
+  "f": "/exercises/images/barre/good-morning-f.webp",
+  "h": "/exercises/images/barre/good-morning-h.webp"
+ },
+ "/exercises/images/barre/souleve-terre-roumain-f.webp": {
+  "defaut": "/exercises/images/barre/souleve-terre-roumain-f.webp",
+  "f": "/exercises/images/barre/souleve-terre-roumain-f.webp",
+  "h": "/exercises/images/barre/souleve-terre-roumain-h.webp"
+ },
+ "/exercises/images/barre/fente-arriere-f.webp": {
+  "defaut": "/exercises/images/barre/fente-arriere-f.webp",
+  "f": "/exercises/images/barre/fente-arriere-f.webp",
+  "h": "/exercises/images/barre/fente-arriere-h.webp"
+ },
+ "/exercises/images/barre/split-squat-bulgare-f.webp": {
+  "defaut": "/exercises/images/barre/split-squat-bulgare-f.webp",
+  "f": "/exercises/images/barre/split-squat-bulgare-f.webp",
+  "h": "/exercises/images/barre/split-squat-bulgare-h.webp"
+ },
+ "/exercises/images/barre/hip-thrust-f.webp": {
+  "defaut": "/exercises/images/barre/hip-thrust-f.webp",
+  "f": "/exercises/images/barre/hip-thrust-f.webp",
+  "h": "/exercises/images/barre/hip-thrust-h.webp"
+ },
+ "/exercises/images/barre/pointes-barre-f.webp": {
+  "defaut": "/exercises/images/barre/pointes-barre-f.webp",
+  "f": "/exercises/images/barre/pointes-barre-f.webp",
+  "h": "/exercises/images/barre/pointes-barre-h.webp"
+ },
+ "/exercises/images/barre/rowing-barre-f.webp": {
+  "defaut": "/exercises/images/barre/rowing-barre-f.webp",
+  "f": "/exercises/images/barre/rowing-barre-f.webp",
+  "h": "/exercises/images/barre/rowing-barre-h.webp"
  }
 }
