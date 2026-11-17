@@ -15616,7 +15616,7 @@ export const MODELES_BASE = [
 "id": "FAUT_08",
 "source": "CABINET",
 "nom": "Écarter les genoux contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
 "consignes": [
 "Assis, élastique en boucle au-dessus des genoux",
 "Pieds à plat, écartés de la largeur du bassin",
@@ -15768,7 +15768,7 @@ export const MODELES_BASE = [
 "id": "FAUT_08",
 "source": "CABINET",
 "nom": "Écarter les genoux contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
 "consignes": [
 "Assis, élastique en boucle au-dessus des genoux",
 "Pieds à plat, écartés de la largeur du bassin",
@@ -18845,7 +18845,7 @@ export const MODELES_BASE = [
 "id": "FAUT_08",
 "source": "CABINET",
 "nom": "Écarter les genoux contre l'élastique",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
 "consignes": [
 "Assis, élastique en boucle au-dessus des genoux",
 "Pieds à plat, écartés de la largeur du bassin",

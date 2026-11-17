@@ -1718,5 +1718,15 @@
   "defaut": "/exercises/images/aide-marche/marche-assise-f.webp",
   "f": "/exercises/images/aide-marche/marche-assise-f.webp",
   "h": "/exercises/images/aide-marche/marche-assise-h.webp"
+ },
+ "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp": {
+  "defaut": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
+  "f": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
+  "h": "/exercises/images/aide-marche/ecarter-genoux-elastique-h.webp"
+ },
+ "/exercises/images/aide-marche/ballon-genoux-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/ballon-genoux-assis-f.webp",
+  "f": "/exercises/images/aide-marche/ballon-genoux-assis-f.webp",
+  "h": "/exercises/images/aide-marche/ballon-genoux-assis-h.webp"
  }
 }

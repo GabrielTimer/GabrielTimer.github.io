@@ -23927,7 +23927,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "FAUT_08",
-    "image": "",
+    "image": "/exercises/images/aide-marche/ecarter-genoux-elastique-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Élastique en boucle"
@@ -23969,7 +23969,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -23996,7 +23995,7 @@
     "ex": 40,
     "exercise_mode": "isometrique",
     "id": "FAUT_09",
-    "image": "",
+    "image": "/exercises/images/aide-marche/ballon-genoux-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Ballon souple ou coussin"
@@ -24035,7 +24034,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
