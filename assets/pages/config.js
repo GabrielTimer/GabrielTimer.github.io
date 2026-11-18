@@ -40,13 +40,13 @@ const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"uniqu
    - S.ou = où le programme se fait : « maison » (le patient le reçoit) ou « cabinet »
      (rangé dans sa fiche, invisible pour lui). Un dessin peut aller à la maison, sauf le
      gros matériel du cabinet (signalé, pas bloqué). */
-const LIEUX = { HEP:"Photos HEP", CABINET:"Dessins ApiKiné" };
+const LIEUX = { HEP:"Photos", CABINET:"Dessins" };
 const OU = { maison:"À la maison", cabinet:"Au cabinet" };
-const nomType = l => l === "HEP" ? "photo HEP" : "dessin";
+const nomType = l => l === "HEP" ? "photo" : "dessin";
 const lieuExo = e => {
   if(e.source === "HEP" || e.source === "CABINET") return e.source;
   if(e.source) return null;                                       // exercice créé par le kiné
-  /* Anciennes séances et anciens modèles sans source : d'après l'image (photos HEP / dessins du cabinet) */
+  /* Anciennes séances et anciens modèles sans source : d'après l'image (photos / dessins du cabinet) */
   const img = e.image || "";
   return /\/HEP\//.test(img) ? "HEP" : /^\/?(exercises\/)?images\/(?!eva\/)/.test(img) ? "CABINET" : null;
 };
@@ -55,7 +55,7 @@ function deduireLieu(){
   if(S.lieu === "HEP" || S.lieu === "CABINET") return;
   const n = { HEP:0, CABINET:0 };
   S.exercices.forEach(e => { const l = lieuExo(e); if(l) n[l]++; });
-  S.lieu = n.HEP || n.CABINET ? (n.HEP >= n.CABINET ? "HEP" : "CABINET") : "HEP";   // photos HEP par défaut
+  S.lieu = n.HEP || n.CABINET ? (n.HEP >= n.CABINET ? "HEP" : "CABINET") : "HEP";   // photos par défaut
 }
 function deduireOu(){
   if(S.ou === "maison" || S.ou === "cabinet") return;
@@ -664,7 +664,7 @@ function renderLieuWarn(){
   const box = $("#lieu-warn"); if(!box) return;
   const hors = S.exercices.filter(e => horsLieu(e));
   const gros = mode.kind === "new" && S.ou === "maison" ? S.exercices.filter(e => cabinetSeul(e)) : [];
-  box.innerHTML = (hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} en ${S.lieu === "HEP" ? "dessin" : "photo HEP"} dans un programme en ${S.lieu === "HEP" ? "photos HEP" : "dessins"} : photos et dessins ne se mélangent pas.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "")
+  box.innerHTML = (hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} en ${S.lieu === "HEP" ? "dessin" : "photo"} dans un programme en ${S.lieu === "HEP" ? "photos" : "dessins"} : photos et dessins ne se mélangent pas.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "")
     + (gros.length ? `<div class="notice warn" style="margin-top:8px">${icon("cabinet")}<span>${gros.length > 1 ? `${gros.length} exercices demandent` : "1 exercice demande"} le gros matériel du cabinet (${esc(gros.slice(0, 3).map(e => e.nom).join(", "))}${gros.length > 3 ? "…" : ""}) : difficile à faire à la maison.</span></div>` : "");
   $("#lieu-fix")?.addEventListener("click", () => {
     S.exercices = S.exercices.filter(e => !horsLieu(e));
@@ -676,8 +676,8 @@ async function changerLieu(lieu){
   const hors = S.exercices.filter(e => horsLieu(e, lieu));
   if(hors.length){
     const ok = await confirmDialog({
-      title: lieu === "HEP" ? "Passer en photos HEP ?" : "Passer en dessins ?",
-      message: `Photos et dessins ne se mélangent pas : ${plural(hors.length, "exercice")} en ${lieu === "HEP" ? "dessin" : "photo HEP"} ${hors.length > 1 ? "seront retirés" : "sera retiré"} : ${hors.slice(0, 4).map(e => e.nom).join(", ")}${hors.length > 4 ? "…" : ""}`,
+      title: lieu === "HEP" ? "Passer en photos ?" : "Passer en dessins ?",
+      message: `Photos et dessins ne se mélangent pas : ${plural(hors.length, "exercice")} en ${lieu === "HEP" ? "dessin" : "photo"} ${hors.length > 1 ? "seront retirés" : "sera retiré"} : ${hors.slice(0, 4).map(e => e.nom).join(", ")}${hors.length > 4 ? "…" : ""}`,
       confirm: "Changer et retirer", danger: true
     });
     if(!ok) return;
@@ -689,7 +689,7 @@ async function changerLieu(lieu){
 }
 
 function addExercise(exo){
-  if(horsLieu(exo)){ toast(`« ${exo.nom} » est un ${nomType(lieuExo(exo))} : ce programme est en ${S.lieu === "HEP" ? "photos HEP" : "dessins"}, on ne mélange pas.`, { type:"err" }); return; }
+  if(horsLieu(exo)){ toast(`« ${exo.nom} » est un ${nomType(lieuExo(exo))} : ce programme est en ${S.lieu === "HEP" ? "photos" : "dessins"}, on ne mélange pas.`, { type:"err" }); return; }
   if(mode.kind === "new" && S.ou === "maison" && cabinetSeul(exo)) toast(`« ${exo.nom} » demande le gros matériel du cabinet.`, { duration:3500 });
   S.exercices.push(normExo(exo));
   persist(); renderExos(); renderSend(false);
@@ -734,13 +734,13 @@ async function applyModele(m){
   const tous = prog.exercices.map(e => normExo(e));
   const exos = tous.filter(e => !horsLieu(e));
   if(!exos.length){
-    toast(`Ce modèle est en ${S.lieu === "HEP" ? "dessins" : "photos HEP"} et ce programme en ${S.lieu === "HEP" ? "photos HEP" : "dessins"}. Choisissez un autre modèle, ou changez le type d'images.`, { type:"err", duration:7000 });
+    toast(`Ce modèle est en ${S.lieu === "HEP" ? "dessins" : "photos"} et ce programme en ${S.lieu === "HEP" ? "photos" : "dessins"}. Choisissez un autre modèle, ou changez le type d'images.`, { type:"err", duration:7000 });
     return;
   }
   if(exos.length < tous.length){
     const ok = await confirmDialog({
       title: "Modèle mixte",
-      message: `${plural(tous.length - exos.length, "exercice")} de ce modèle ${tous.length - exos.length > 1 ? "sont" : "est"} en ${S.lieu === "HEP" ? "dessin" : "photo HEP"} et ne seront pas ajoutés : ${tous.filter(e => horsLieu(e)).slice(0, 4).map(e => e.nom).join(", ")}${tous.length - exos.length > 4 ? "…" : ""}`,
+      message: `${plural(tous.length - exos.length, "exercice")} de ce modèle ${tous.length - exos.length > 1 ? "sont" : "est"} en ${S.lieu === "HEP" ? "dessin" : "photo"} et ne seront pas ajoutés : ${tous.filter(e => horsLieu(e)).slice(0, 4).map(e => e.nom).join(", ")}${tous.length - exos.length > 4 ? "…" : ""}`,
       confirm: `Utiliser les ${plural(exos.length, "autre")}`
     });
     if(!ok) return;

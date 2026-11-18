@@ -665,6 +665,14 @@ dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minm
 .lib-create{ flex:none; }
 .lib-search-row{ display:flex; gap:10px; align-items:center; }
 .lib-search-row > .input-icon{ flex:1; min-width:0; }
+.img-seg{ flex:none; }
+.img-seg button{ display:inline-flex; align-items:center; gap:6px; min-height:38px; padding:0 12px; }
+.img-seg .ic{ width:17px; height:17px; }
+@media (max-width:600px){
+  .lib-search-row:has(.img-seg){ flex-wrap:wrap; }
+  .lib-search-row .img-seg{ order:5; flex:1 1 100%; display:flex; }
+  .lib-search-row .img-seg button{ flex:1; justify-content:center; }
+}
 .lib-create .lbl-short{ display:none; }
 /* Taille des vignettes : petites / moyennes / grandes */
 .lib-count-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }

@@ -19,8 +19,10 @@ const FACETS = [
   { k:"aide",   label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
-const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["HEP", "Photos HEP"], ["CABINET", "Dessins ApiKiné"]];
-const sourceLabel = e => e.source === "HEP" ? "Photos HEP" : e.source === "PERSO" ? "Mes exercices" : "Dessin ApiKiné";
+const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["HEP", "Photos"], ["CABINET", "Dessins"]];
+/* Photos / Dessins : boutons toujours visibles à côté de la recherche (hors du tiroir des filtres) */
+const IMGS = [["", "Tous"], ["HEP", "Photos"], ["CABINET", "Dessins"]];
+const sourceLabel = e => e.source === "HEP" ? "Photo" : e.source === "PERSO" ? "Mes exercices" : "Dessin";
 const NIVEAUX = [["1", "Niveau 1"], ["2", "Niveau 2"], ["3", "Niveau 3"], ["4", "Niveau 4 et +"]];
 const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
 
@@ -37,7 +39,8 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   const state = {
     q: saved.q || "", limit: PAGE,
     masques: !!saved.masques || src0.includes("HIDDEN"),
-    source: src0.filter(v => v !== "HIDDEN"),
+    source: src0.filter(v => v === "FAV" || v === "PERSO"),
+    img: saved.img === "HEP" || saved.img === "CABINET" ? saved.img : (src0.filter(v => v === "HEP" || v === "CABINET").length === 1 ? src0.find(v => v === "HEP" || v === "CABINET") : ""),
     spec: asList(saved.spec).filter(x => SPECIALITES.includes(x)),
     cat: asList(saved.cat).filter(x => ZONES.includes(x)),
     patho: asList(saved.patho), type: asList(saved.type).map(x => x === "Au cabinet" ? "Gros matériel du cabinet" : x), aide: asList(saved.aide).filter(x => AIDES.includes(x)), niveau: asList(saved.niveau)
@@ -49,6 +52,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
           ${filterButtonHTML()}
+          ${lieu ? "" : `<div class="segmented img-seg" role="group" aria-label="Photos ou dessins">${IMGS.map(([v, l]) => `<button type="button" data-img="${v}" aria-pressed="${state.img === v}">${v ? icon(v === "HEP" ? "camera" : "image") : ""}${l}</button>`).join("")}</div>`}
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="lib-active" data-active hidden></div>
@@ -62,7 +66,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
   const all = await loadLibrary();
   all.forEach(e => classer(e));
 
-  const save = () => store.set(persistKey, { q: state.q, masques: state.masques, source: state.source, spec: state.spec, cat: state.cat, patho: state.patho, type: state.type, aide: state.aide, niveau: state.niveau });
+  const save = () => store.set(persistKey, { q: state.q, masques: state.masques, source: state.source, img: state.img, spec: state.spec, cat: state.cat, patho: state.patho, type: state.type, aide: state.aide, niveau: state.niveau });
 
   const match = (e, k, vals) => {
     if(!vals.length) return true;
@@ -77,7 +81,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     }
     return true;
   };
-  const base = () => all.filter(e => (state.masques ? isHidden(exerciseKey(e)) : !isHidden(exerciseKey(e))) && okLieu(e));
+  const base = () => all.filter(e => (state.masques ? isHidden(exerciseKey(e)) : !isHidden(exerciseKey(e))) && okLieu(e) && (lieu || !state.img || e.source === state.img));
   /* Exercices qui passent tous les filtres sauf « skip » (sert à compter les choix d'un tiroir) */
   const passe = (e, skip) => FACETS.every(f => f.k === skip || match(e, f.k, state[f.k]));
 
@@ -85,7 +89,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     let list = base().filter(e => passe(e));
     list = searchLibrary(list, state.q);
     /* Favoris en tête quand on ne cherche rien de précis */
-    /* Photos HEP en premier (toujours prioritaires), puis les dessins ; favoris en tête quand on ne cherche rien de précis */
+    /* Photos en premier (toujours prioritaires), puis les dessins ; favoris en tête quand on ne cherche rien de précis */
     if(!state.q){
       const rang = e => (isFavorite(exerciseKey(e)) ? 0 : 3) + (e.source === "HEP" ? 0 : e.source === "PERSO" ? 1 : 2);
       list = list.map((e, i) => [e, i]).sort((a, b) => (rang(a[0]) - rang(b[0])) || (a[1] - b[1])).map(x => x[0]);
@@ -102,7 +106,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     if(k === "source"){
       const l = lieu?.();
       list.forEach(e => { add(e.source); if(isFavorite(exerciseKey(e))) add("FAV"); });
-      opts = SOURCES.filter(([v]) => !l || !(v === "HEP" || v === "CABINET") || v === l).map(([v, label]) => ({ v, label }));
+      opts = SOURCES.filter(([v]) => v === "FAV" || v === "PERSO").map(([v, label]) => ({ v, label }));
     }else if(k === "spec"){
       list.forEach(e => e.specs.forEach(add));
       opts = SPECIALITES.map(v => ({ v, label:v }));
@@ -205,6 +209,11 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); renderDrawer(); }, 140));
   $("[data-filters]", root).onclick = openDrawer;
+  $$("[data-img]", root).forEach(b => b.onclick = () => {
+    state.img = b.dataset.img;
+    $$("[data-img]", root).forEach(x => x.setAttribute("aria-pressed", String(x.dataset.img === state.img)));
+    update();
+  });
   $("[data-more]", root).onclick = () => { state.limit = Infinity; renderResults(); };
   $("[data-create]", root).onclick = async () => {
     const { openExerciseEditor } = await import("./exercise-editor.js");
