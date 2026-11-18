@@ -6,7 +6,7 @@ import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, AIDES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
 import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "./filter-drawer.js";
 
-const PAGE = Infinity; // tout afficher (plus de bouton « Afficher plus »)
+const PAGE = 30;
 
 /* Filtres de la bibliothèque : chacun est un tiroir à cases à cocher dans le panneau « Filtres » */
 const FACETS = [
@@ -53,7 +53,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       </div>
       <div class="lib-count-row"><div class="lib-count small muted" data-count></div>${tailleVueHTML(layout === "grid" ? "gt_taille_lib" : "gt_taille_lib_liste")}</div>
       <div class="lib-results ${layout === "grid" ? "grid" : ""}" data-results><div class="loading"><div class="spinner"></div><span>Chargement des exercices…</span></div></div>
-      <button type="button" data-more hidden></button>
+      <div class="center" style="padding:12px 0"><button class="btn" type="button" data-more hidden>Tout afficher</button></div>
     </div>`;
 
   brancherTailleVue(root, $(".lib", root));
@@ -183,7 +183,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     const res = $("[data-results]", root);
     res.innerHTML = list.length ? list.slice(0, state.limit).map(card).join("")
       : `<div class="empty"><div class="e-ico">${icon("search")}</div><h3>Aucun exercice</h3><p>Essayez un autre mot ou retirez un filtre.</p></div>`;
-    $("[data-more]", root).hidden = list.length <= state.limit;
+    { const mb = $("[data-more]", root); mb.hidden = list.length <= state.limit; mb.textContent = `Tout afficher (${list.length})`; }
     $$("[data-add]", res).forEach(b => b.onclick = () => {
       const e = find(b.dataset.add);
       if(e && onAdd){
@@ -199,7 +199,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
 
   $("[data-q]", root).addEventListener("input", debounce(ev => { state.q = ev.target.value; state.limit = PAGE; save(); renderResults(); renderDrawer(); }, 140));
   $("[data-filters]", root).onclick = openDrawer;
-  $("[data-more]", root).onclick = () => { state.limit += PAGE; renderResults(); };
+  $("[data-more]", root).onclick = () => { state.limit = Infinity; renderResults(); };
   $("[data-create]", root).onclick = async () => {
     const { openExerciseEditor } = await import("./exercise-editor.js");
     openExerciseEditor(null, { onSaved: changed });
