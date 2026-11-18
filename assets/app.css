@@ -668,7 +668,7 @@ dialog.sheet.full .lib-results.grid{ grid-template-columns:repeat(auto-fill,minm
 .img-seg{ flex:none; }
 .img-seg button{ display:inline-flex; align-items:center; gap:6px; min-height:38px; padding:0 12px; }
 .img-seg .ic{ width:17px; height:17px; }
-@media (max-width:600px){
+@media (max-width:900px){
   .lib-search-row:has(.img-seg){ flex-wrap:wrap; }
   .lib-search-row .img-seg{ order:5; flex:1 1 100%; display:flex; }
   .lib-search-row .img-seg button{ flex:1; justify-content:center; }
