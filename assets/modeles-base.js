@@ -6065,7 +6065,7 @@ export const MODELES_BASE = [
 "id": "CHEV_009",
 "source": "CABINET",
 "nom": "Équilibre sur coussin",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/equilibre-coussin.webp",
 "consignes": [
 "Garder le tronc stable",
 "Regarder devant soi",
@@ -6104,7 +6104,7 @@ export const MODELES_BASE = [
 "id": "CHEV_008",
 "source": "CABINET",
 "nom": "Sauts sur place légers",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
 "consignes": [
 "Amortir doucement",
 "Garder les genoux souples",
@@ -6123,7 +6123,7 @@ export const MODELES_BASE = [
 "id": "CHEV_010",
 "source": "CABINET",
 "nom": "Sauts latéraux unipodaux",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
 "consignes": [
 "Amortir les réceptions",
 "Rester gainé",
@@ -6142,7 +6142,7 @@ export const MODELES_BASE = [
 "id": "CHEV_012",
 "source": "CABINET",
 "nom": "Réceptions unipodales contrôlées",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
 "consignes": [
 "Amortir doucement",
 "Aligner genou et pied",
@@ -7415,7 +7415,7 @@ export const MODELES_BASE = [
 "id": "CHEV_010",
 "source": "CABINET",
 "nom": "Sauts latéraux unipodaux",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
 "consignes": [
 "Amortir les réceptions",
 "Rester gainé",
@@ -7434,7 +7434,7 @@ export const MODELES_BASE = [
 "id": "CHEV_012",
 "source": "CABINET",
 "nom": "Réceptions unipodales contrôlées",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
 "consignes": [
 "Amortir doucement",
 "Aligner genou et pied",
@@ -7453,7 +7453,7 @@ export const MODELES_BASE = [
 "id": "CHEV_011",
 "source": "CABINET",
 "nom": "Course légère avec changements direction",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
 "consignes": [
 "Commencer lentement",
 "Rester fluide",
@@ -30475,7 +30475,7 @@ export const MODELES_BASE = [
 "id": "PERINEE_LENT",
 "source": "CABINET",
 "nom": "Contractions lentes du périnée",
-"image": "/exercises/images/post-partum/respiration-transverse.png",
+"image": "/exercises/images/post-partum/perinee-lent-f.webp",
 "consignes": [
 "Serrez et remontez le périnée vers l'intérieur, sans serrer les fesses ni bloquer la respiration.",
 "Tenez la contraction pendant tout le décompte en respirant calmement.",
@@ -30570,7 +30570,7 @@ export const MODELES_BASE = [
 "id": "PERINEE_RAPIDE",
 "source": "CABINET",
 "nom": "Contractions rapides du périnée",
-"image": "/exercises/images/post-partum/respiration-transverse.png",
+"image": "/exercises/images/post-partum/perinee-rapide-f.webp",
 "consignes": [
 "Serrez le périnée fort et vite, puis relâchez complètement.",
 "Enchaînez à votre rythme pendant tout le décompte, une contraction par seconde environ.",
@@ -30737,7 +30737,7 @@ export const MODELES_BASE = [
 "id": "PERINEE_DEBOUT",
 "source": "CABINET",
 "nom": "Périnée debout : lentes puis rapides",
-"image": "/exercises/images/post-partum/sit-to-stand.png",
+"image": "/exercises/images/post-partum/perinee-debout-f.webp",
 "consignes": [
 "Debout, serrez et remontez le périnée, tenez 5 secondes en respirant, relâchez.",
 "Puis enchaînez 5 contractions rapides.",
@@ -30903,7 +30903,7 @@ export const MODELES_BASE = [
 "id": "PERINEE_IMPACT",
 "source": "CABINET",
 "nom": "Périnée réflexe : toux et petits sauts",
-"image": "/exercises/images/post-partum/sit-to-stand.png",
+"image": "/exercises/images/post-partum/perinee-impact-f.webp",
 "consignes": [
 "Debout, serrez le périnée juste avant de tousser fort, 3 fois.",
 "Puis faites de petits sauts sur place en serrant le périnée à chaque réception.",
@@ -31243,7 +31243,7 @@ export const MODELES_BASE = [
 "id": "CHEV_009",
 "source": "CABINET",
 "nom": "Équilibre sur coussin",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/equilibre-coussin.webp",
 "consignes": [
 "Garder le tronc stable",
 "Regarder devant soi",
@@ -32166,7 +32166,7 @@ export const MODELES_BASE = [
 "id": "CHEV_012",
 "source": "CABINET",
 "nom": "Réceptions unipodales contrôlées",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
 "consignes": [
 "Amortir doucement",
 "Aligner genou et pied",
@@ -32337,7 +32337,7 @@ export const MODELES_BASE = [
 "id": "CHEV_010",
 "source": "CABINET",
 "nom": "Sauts latéraux unipodaux",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
 "consignes": [
 "Amortir les réceptions",
 "Rester gainé",
@@ -32470,7 +32470,7 @@ export const MODELES_BASE = [
 "id": "CHEV_011",
 "source": "CABINET",
 "nom": "Course légère avec changements direction",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/course-changements-direction.webp",
 "consignes": [
 "Commencer lentement",
 "Rester fluide",
@@ -32906,7 +32906,7 @@ export const MODELES_BASE = [
 "id": "CHEV_012",
 "source": "CABINET",
 "nom": "Réceptions unipodales contrôlées",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/receptions-unipodales.webp",
 "consignes": [
 "Amortir doucement",
 "Aligner genou et pied",
@@ -36790,7 +36790,7 @@ export const MODELES_BASE = [
 "id": "CHEV_008",
 "source": "CABINET",
 "nom": "Sauts sur place légers",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
 "consignes": [
 "Amortir doucement",
 "Garder les genoux souples",
@@ -37820,7 +37820,7 @@ export const MODELES_BASE = [
 "id": "CHEV_008",
 "source": "CABINET",
 "nom": "Sauts sur place légers",
-"image": "/images/placeholders/cheville.webp",
+"image": "/exercises/images/cheville/sauts-sur-place.webp",
 "consignes": [
 "Amortir doucement",
 "Garder les genoux souples",

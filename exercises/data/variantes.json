@@ -1963,5 +1963,30 @@
   "defaut": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
   "f": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
   "h": "/exercises/images/aide-marche/appui-jambe-barres-h.webp"
+ },
+ "/exercises/images/post-partum/perinee-lent-f.webp": {
+  "defaut": "/exercises/images/post-partum/perinee-lent-f.webp",
+  "f": "/exercises/images/post-partum/perinee-lent-f.webp",
+  "h": "/exercises/images/post-partum/perinee-lent-h.webp"
+ },
+ "/exercises/images/post-partum/perinee-rapide-f.webp": {
+  "defaut": "/exercises/images/post-partum/perinee-rapide-f.webp",
+  "f": "/exercises/images/post-partum/perinee-rapide-f.webp",
+  "h": "/exercises/images/post-partum/perinee-rapide-h.webp"
+ },
+ "/exercises/images/post-partum/perinee-debout-f.webp": {
+  "defaut": "/exercises/images/post-partum/perinee-debout-f.webp",
+  "f": "/exercises/images/post-partum/perinee-debout-f.webp",
+  "h": "/exercises/images/post-partum/perinee-debout-h.webp"
+ },
+ "/exercises/images/post-partum/perinee-impact-f.webp": {
+  "defaut": "/exercises/images/post-partum/perinee-impact-f.webp",
+  "f": "/exercises/images/post-partum/perinee-impact-f.webp",
+  "h": "/exercises/images/post-partum/perinee-impact-h.webp"
+ },
+ "/exercises/images/cervicales/etirement-trapeze.webp": {
+  "defaut": "/exercises/images/cervicales/etirement-trapeze.webp",
+  "f": "/exercises/images/cervicales/etirement-trapeze-f.webp",
+  "h": "/exercises/images/cervicales/etirement-trapeze.webp"
  }
 }
