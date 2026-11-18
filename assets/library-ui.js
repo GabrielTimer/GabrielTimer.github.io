@@ -1,6 +1,6 @@
 /* Composant « bibliothèque d'exercices » : recherche, filtres, fiche détaillée */
 
-import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast } from "./app.js";
+import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast, tailleVueHTML, brancherTailleVue } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, AIDES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
@@ -47,6 +47,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
           ${filterButtonHTML()}
+          ${tailleVueHTML(layout === "grid" ? "gt_taille_lib" : "gt_taille_lib_liste")}
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="lib-active" data-active hidden></div>
@@ -56,6 +57,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       <div class="center" style="padding:12px 0"><button class="btn" type="button" data-more hidden>Afficher plus</button></div>
     </div>`;
 
+  brancherTailleVue(root, $(".lib", root));
   const all = await loadLibrary();
   all.forEach(e => classer(e));
 
@@ -163,7 +165,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
           <h3>${esc(e.nom)}</h3>
           <div class="row wrap" style="--gap:6px">${e.materiel.slice(0, 2).map(m => `<span class="badge">${esc(m)}</span>`).join("")}<span class="badge lagon">Niveau ${e.niveau}</span></div>
         </div>
-        ${onAdd ? `<button class="btn soft block" type="button" data-add="${esc(e.source + ":" + e.id)}">${icon("plus")}${esc(addLabel)}</button>` : ""}
+        ${onAdd ? `<button class="btn soft block" type="button" data-add="${esc(e.source + ":" + e.id)}" aria-label="${esc(addLabel)} ${esc(e.nom)}">${icon("plus")}<span class="lbl">${esc(addLabel)}</span></button>` : ""}
       </article>`
     : `
       <div class="lib-row">

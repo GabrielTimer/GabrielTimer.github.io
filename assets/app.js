@@ -530,6 +530,24 @@ export const EXO_TABS = [
   { id:"historique", label:"Historique", href:"/exercises/historique.html", ico:"history" }
 ];
 const navHref = it => it.id === "bibliotheque" ? (EXO_TABS.find(t => t.id === store.get("gt_exo_tab"))?.href || it.href) : it.href;
+/* ---------- Taille des vignettes (bibliothèque, modèles) ----------
+   Trois boutons petites / moyennes / grandes vignettes ; le choix est gardé sur l'appareil. */
+const TAILLES = [["s", "Petites vignettes", "tailleS"], ["m", "Vignettes moyennes", "grid"], ["l", "Grandes vignettes", "tailleL"]];
+export const tailleVue = cle => { const v = store.get(cle); return v === "s" || v === "l" ? v : "m"; };
+export function tailleVueHTML(cle){
+  const c = tailleVue(cle);
+  return `<div class="taille-vue" role="group" aria-label="Taille des vignettes" data-taille-cle="${esc(cle)}">${TAILLES.map(([v, l, ic]) => `<button type="button" data-taille="${v}" aria-pressed="${v === c}" title="${l}" aria-label="${l}">${icon(ic)}</button>`).join("")}</div>`;
+}
+/** Relie les boutons trouvés dans root à cible (attribut data-taille, lu par le CSS). */
+export function brancherTailleVue(root, cible, onChange){
+  const g = root.querySelector("[data-taille-cle]");
+  if(!g || !cible) return;
+  const cle = g.dataset.tailleCle;
+  const appliquer = v => { cible.dataset.taille = v; g.querySelectorAll("[data-taille]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.taille === v))); };
+  appliquer(tailleVue(cle));
+  g.onclick = e => { const b = e.target.closest("[data-taille]"); if(!b) return; store.set(cle, b.dataset.taille); appliquer(b.dataset.taille); onChange?.(b.dataset.taille); };
+}
+
 /** Onglets en haut des pages Exercices (comme un sous-menu). */
 export function exoTabsHTML(active){
   store.set("gt_exo_tab", active);
