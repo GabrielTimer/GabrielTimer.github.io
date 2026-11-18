@@ -6,7 +6,7 @@ import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
 import { ZONES, TYPES, AIDES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
 import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "./filter-drawer.js";
 
-const PAGE = 30;
+const PAGE = Infinity; // tout afficher (plus de bouton « Afficher plus »)
 
 /* Filtres de la bibliothèque : chacun est un tiroir à cases à cocher dans le panneau « Filtres » */
 const FACETS = [
@@ -53,7 +53,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
       </div>
       <div class="lib-count-row"><div class="lib-count small muted" data-count></div>${tailleVueHTML(layout === "grid" ? "gt_taille_lib" : "gt_taille_lib_liste")}</div>
       <div class="lib-results ${layout === "grid" ? "grid" : ""}" data-results><div class="loading"><div class="spinner"></div><span>Chargement des exercices…</span></div></div>
-      <div class="center" style="padding:12px 0"><button class="btn" type="button" data-more hidden>Afficher plus</button></div>
+      <button type="button" data-more hidden></button>
     </div>`;
 
   brancherTailleVue(root, $(".lib", root));
