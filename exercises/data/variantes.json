@@ -1928,5 +1928,40 @@
   "defaut": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
   "f": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
   "h": "/exercises/images/aide-marche/huit-chaises-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-barres-f.webp",
+  "f": "/exercises/images/aide-marche/marche-barres-f.webp",
+  "h": "/exercises/images/aide-marche/marche-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/pas-cote-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pas-cote-barres-f.webp",
+  "f": "/exercises/images/aide-marche/pas-cote-barres-f.webp",
+  "h": "/exercises/images/aide-marche/pas-cote-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-arriere-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-arriere-barres-f.webp",
+  "f": "/exercises/images/aide-marche/marche-arriere-barres-f.webp",
+  "h": "/exercises/images/aide-marche/marche-arriere-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/equilibre-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/equilibre-barres-f.webp",
+  "f": "/exercises/images/aide-marche/equilibre-barres-f.webp",
+  "h": "/exercises/images/aide-marche/equilibre-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/obstacles-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/obstacles-barres-f.webp",
+  "f": "/exercises/images/aide-marche/obstacles-barres-f.webp",
+  "h": "/exercises/images/aide-marche/obstacles-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/step-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/step-barres-f.webp",
+  "f": "/exercises/images/aide-marche/step-barres-f.webp",
+  "h": "/exercises/images/aide-marche/step-barres-h.webp"
+ },
+ "/exercises/images/aide-marche/appui-jambe-barres-f.webp": {
+  "defaut": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
+  "f": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
+  "h": "/exercises/images/aide-marche/appui-jambe-barres-h.webp"
  }
 }

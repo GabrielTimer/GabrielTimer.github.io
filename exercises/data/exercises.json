@@ -26785,7 +26785,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "PARAL_01",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-barres-f.webp",
     "materiel": [
       "Barres parallèles"
     ],
@@ -26831,7 +26831,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -26862,7 +26861,7 @@
     "ex": 45,
     "exercise_mode": "dynamique",
     "id": "PARAL_02",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pas-cote-barres-f.webp",
     "materiel": [
       "Barres parallèles"
     ],
@@ -26900,7 +26899,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -26929,7 +26927,7 @@
     "ex": 45,
     "exercise_mode": "dynamique",
     "id": "PARAL_03",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-arriere-barres-f.webp",
     "materiel": [
       "Barres parallèles"
     ],
@@ -26969,7 +26967,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -26998,7 +26995,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "PARAL_04",
-    "image": "",
+    "image": "/exercises/images/aide-marche/equilibre-barres-f.webp",
     "materiel": [
       "Barres parallèles"
     ],
@@ -27040,7 +27037,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -27069,7 +27065,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "PARAL_05",
-    "image": "",
+    "image": "/exercises/images/aide-marche/obstacles-barres-f.webp",
     "materiel": [
       "Barres parallèles",
       "Petits obstacles ou haies basses"
@@ -27111,7 +27107,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -27140,7 +27135,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "PARAL_06",
-    "image": "",
+    "image": "/exercises/images/aide-marche/step-barres-f.webp",
     "materiel": [
       "Barres parallèles",
       "Step"
@@ -27185,7 +27180,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",
@@ -27215,7 +27209,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "PARAL_07",
-    "image": "",
+    "image": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
     "materiel": [
       "Barres parallèles"
     ],
@@ -27257,7 +27251,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Barres parallèles",
       "Au fauteuil",

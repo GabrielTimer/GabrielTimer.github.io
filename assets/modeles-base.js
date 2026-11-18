@@ -14887,7 +14887,7 @@ export const MODELES_BASE = [
 "id": "PARAL_06",
 "source": "CABINET",
 "nom": "Monter et descendre d'une marche entre les barres",
-"image": "",
+"image": "/exercises/images/aide-marche/step-barres-f.webp",
 "consignes": [
 "Marche (step) posée entre les barres, mains sur les barres",
 "Monter avec la jambe atteinte, puis l'autre",
@@ -20042,7 +20042,7 @@ export const MODELES_BASE = [
 "id": "PARAL_01",
 "source": "CABINET",
 "nom": "Marche entre les barres parallèles",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-barres-f.webp",
 "consignes": [
 "Debout entre les barres, une main sur chaque barre",
 "Avancer une main, puis le pied opposé",
@@ -20154,7 +20154,7 @@ export const MODELES_BASE = [
 "id": "PARAL_07",
 "source": "CABINET",
 "nom": "Appui sur la jambe atteinte entre les barres",
-"image": "",
+"image": "/exercises/images/aide-marche/appui-jambe-barres-f.webp",
 "consignes": [
 "Debout entre les barres, une main sur chaque barre",
 "Porter le poids sur la jambe atteinte",
@@ -20346,7 +20346,7 @@ export const MODELES_BASE = [
 "id": "PARAL_06",
 "source": "CABINET",
 "nom": "Monter et descendre d'une marche entre les barres",
-"image": "",
+"image": "/exercises/images/aide-marche/step-barres-f.webp",
 "consignes": [
 "Marche (step) posée entre les barres, mains sur les barres",
 "Monter avec la jambe atteinte, puis l'autre",
@@ -21814,7 +21814,7 @@ export const MODELES_BASE = [
 "id": "PARAL_05",
 "source": "CABINET",
 "nom": "Enjamber des obstacles entre les barres parallèles",
-"image": "",
+"image": "/exercises/images/aide-marche/obstacles-barres-f.webp",
 "consignes": [
 "Poser des petits obstacles au sol entre les barres",
 "Mains sur les barres",
