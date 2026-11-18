@@ -614,7 +614,8 @@ details[open] > .h-sum .chev{ transform:rotate(180deg); }
 .lib-row .icon-btn.added,.lib-card .btn.added{ background:var(--ok); color:#fff; border-color:var(--ok); }
 .lib-results.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px; }
 .lib-card{ display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; }
-.lib-results .lib-card, .lib-results .lib-row{ content-visibility:auto; contain-intrinsic-size:auto 300px; }
+.lib-results .lib-card{ content-visibility:auto; contain-intrinsic-size:auto 300px; }
+.lib-results .lib-row{ content-visibility:auto; contain-intrinsic-size:auto 72px; }
 .lib-card-img{ border:0; padding:0; background:#fff; cursor:pointer; aspect-ratio:4/3; display:block; }
 .lib-card-img img,.lib-card-img .ph-img{ width:100%; height:100%; object-fit:contain; border-radius:0; }
 .lib-card-body{ padding:12px 14px; display:flex; flex-direction:column; gap:6px; flex:1; }
