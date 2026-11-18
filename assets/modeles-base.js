@@ -16707,7 +16707,7 @@ export const MODELES_BASE = [
 "id": "FAUT_12",
 "source": "CABINET",
 "nom": "Se pencher en avant, nez au-dessus des orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
 "consignes": [
 "Avancer les fesses au bord du fauteuil",
 "Pieds à plat, un peu en arrière des genoux",
@@ -16727,7 +16727,7 @@ export const MODELES_BASE = [
 "id": "FAUT_13",
 "source": "CABINET",
 "nom": "Se lever du fauteuil et se rasseoir",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
 "consignes": [
 "Fesses au bord du fauteuil, pieds en arrière des genoux",
 "Mains sur les accoudoirs, buste penché en avant",
@@ -16807,7 +16807,7 @@ export const MODELES_BASE = [
 "id": "FAUT_15",
 "source": "CABINET",
 "nom": "Attraper un objet loin sur le côté",
-"image": "",
+"image": "/exercises/images/aide-marche/attraper-cote-assis-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, pieds à plat",
 "Objet posé sur une table à côté, un peu plus loin que le bras",
@@ -16827,7 +16827,7 @@ export const MODELES_BASE = [
 "id": "FAUT_11",
 "source": "CABINET",
 "nom": "Pédalier devant le fauteuil",
-"image": "",
+"image": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
 "consignes": [
 "Mini-pédalier posé au sol devant le fauteuil",
 "Fauteuil calé contre un mur pour ne pas reculer",
@@ -17973,7 +17973,7 @@ export const MODELES_BASE = [
 "id": "FAUT_12",
 "source": "CABINET",
 "nom": "Se pencher en avant, nez au-dessus des orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
 "consignes": [
 "Avancer les fesses au bord du fauteuil",
 "Pieds à plat, un peu en arrière des genoux",
@@ -17993,7 +17993,7 @@ export const MODELES_BASE = [
 "id": "FAUT_13",
 "source": "CABINET",
 "nom": "Se lever du fauteuil et se rasseoir",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
 "consignes": [
 "Fesses au bord du fauteuil, pieds en arrière des genoux",
 "Mains sur les accoudoirs, buste penché en avant",
@@ -18033,7 +18033,7 @@ export const MODELES_BASE = [
 "id": "FAUT_14",
 "source": "CABINET",
 "nom": "Lever les bras avec un bâton assis",
-"image": "",
+"image": "/exercises/images/aide-marche/baton-assis-f.webp",
 "consignes": [
 "Assis, dos droit, bâton tenu à deux mains",
 "Monter le bâton au-dessus de la tête en inspirant",
@@ -18093,7 +18093,7 @@ export const MODELES_BASE = [
 "id": "FAUT_11",
 "source": "CABINET",
 "nom": "Pédalier devant le fauteuil",
-"image": "",
+"image": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
 "consignes": [
 "Mini-pédalier posé au sol devant le fauteuil",
 "Fauteuil calé contre un mur pour ne pas reculer",
@@ -18265,7 +18265,7 @@ export const MODELES_BASE = [
 "id": "FAUT_14",
 "source": "CABINET",
 "nom": "Lever les bras avec un bâton assis",
-"image": "",
+"image": "/exercises/images/aide-marche/baton-assis-f.webp",
 "consignes": [
 "Assis, dos droit, bâton tenu à deux mains",
 "Monter le bâton au-dessus de la tête en inspirant",
@@ -18397,7 +18397,7 @@ export const MODELES_BASE = [
 "id": "FAUT_14",
 "source": "CABINET",
 "nom": "Lever les bras avec un bâton assis",
-"image": "",
+"image": "/exercises/images/aide-marche/baton-assis-f.webp",
 "consignes": [
 "Assis, dos droit, bâton tenu à deux mains",
 "Monter le bâton au-dessus de la tête en inspirant",
@@ -18865,7 +18865,7 @@ export const MODELES_BASE = [
 "id": "FAUT_10",
 "source": "CABINET",
 "nom": "Soulever les fesses en poussant sur les accoudoirs",
-"image": "",
+"image": "/exercises/images/aide-marche/pousser-accoudoirs-f.webp",
 "consignes": [
 "Assis au fond du fauteuil, mains sur les accoudoirs",
 "Pieds à plat au sol",
@@ -18885,7 +18885,7 @@ export const MODELES_BASE = [
 "id": "FAUT_15",
 "source": "CABINET",
 "nom": "Attraper un objet loin sur le côté",
-"image": "",
+"image": "/exercises/images/aide-marche/attraper-cote-assis-f.webp",
 "consignes": [
 "Assis au bord du fauteuil, pieds à plat",
 "Objet posé sur une table à côté, un peu plus loin que le bras",
@@ -18905,7 +18905,7 @@ export const MODELES_BASE = [
 "id": "FAUT_11",
 "source": "CABINET",
 "nom": "Pédalier devant le fauteuil",
-"image": "",
+"image": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
 "consignes": [
 "Mini-pédalier posé au sol devant le fauteuil",
 "Fauteuil calé contre un mur pour ne pas reculer",
@@ -20002,7 +20002,7 @@ export const MODELES_BASE = [
 "id": "FAUT_12",
 "source": "CABINET",
 "nom": "Se pencher en avant, nez au-dessus des orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
 "consignes": [
 "Avancer les fesses au bord du fauteuil",
 "Pieds à plat, un peu en arrière des genoux",
@@ -20022,7 +20022,7 @@ export const MODELES_BASE = [
 "id": "FAUT_13",
 "source": "CABINET",
 "nom": "Se lever du fauteuil et se rasseoir",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
 "consignes": [
 "Fesses au bord du fauteuil, pieds en arrière des genoux",
 "Mains sur les accoudoirs, buste penché en avant",
@@ -20905,7 +20905,7 @@ export const MODELES_BASE = [
 "id": "FAUT_14",
 "source": "CABINET",
 "nom": "Lever les bras avec un bâton assis",
-"image": "",
+"image": "/exercises/images/aide-marche/baton-assis-f.webp",
 "consignes": [
 "Assis, dos droit, bâton tenu à deux mains",
 "Monter le bâton au-dessus de la tête en inspirant",
@@ -20925,7 +20925,7 @@ export const MODELES_BASE = [
 "id": "FAUT_16",
 "source": "CABINET",
 "nom": "Cercles de chevilles assis",
-"image": "",
+"image": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
 "consignes": [
 "Assis, une jambe tendue, talon posé au sol",
 "Dessiner de grands cercles avec la pointe du pied",
@@ -20965,7 +20965,7 @@ export const MODELES_BASE = [
 "id": "FAUT_12",
 "source": "CABINET",
 "nom": "Se pencher en avant, nez au-dessus des orteils",
-"image": "",
+"image": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
 "consignes": [
 "Avancer les fesses au bord du fauteuil",
 "Pieds à plat, un peu en arrière des genoux",
@@ -21642,7 +21642,7 @@ export const MODELES_BASE = [
 "id": "FAUT_13",
 "source": "CABINET",
 "nom": "Se lever du fauteuil et se rasseoir",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
 "consignes": [
 "Fesses au bord du fauteuil, pieds en arrière des genoux",
 "Mains sur les accoudoirs, buste penché en avant",

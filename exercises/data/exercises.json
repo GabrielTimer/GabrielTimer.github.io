@@ -24060,7 +24060,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "FAUT_10",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pousser-accoudoirs-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -24111,7 +24111,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24137,7 +24136,7 @@
     "ex": 300,
     "exercise_mode": "dynamique",
     "id": "FAUT_11",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Mini-pédalier"
@@ -24182,7 +24181,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24212,7 +24210,7 @@
     "ex": 40,
     "exercise_mode": "mobilite",
     "id": "FAUT_12",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -24252,7 +24250,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24279,7 +24276,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "FAUT_13",
-    "image": "",
+    "image": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -24332,7 +24329,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24360,7 +24356,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "FAUT_14",
-    "image": "",
+    "image": "/exercises/images/aide-marche/baton-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Bâton ou manche à balai"
@@ -24402,7 +24398,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24430,7 +24425,7 @@
     "ex": 45,
     "exercise_mode": "equilibre",
     "id": "FAUT_15",
-    "image": "",
+    "image": "/exercises/images/aide-marche/attraper-cote-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs",
       "Table",
@@ -24474,7 +24469,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Au fauteuil",
       "Déambulateur",
@@ -24501,7 +24495,7 @@
     "ex": 45,
     "exercise_mode": "mobilite",
     "id": "FAUT_16",
-    "image": "",
+    "image": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
     "materiel": [
       "Fauteuil à accoudoirs"
     ],
@@ -24539,7 +24533,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Alité",
       "Au fauteuil",

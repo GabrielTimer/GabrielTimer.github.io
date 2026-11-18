@@ -1728,5 +1728,40 @@
   "defaut": "/exercises/images/aide-marche/ballon-genoux-assis-f.webp",
   "f": "/exercises/images/aide-marche/ballon-genoux-assis-f.webp",
   "h": "/exercises/images/aide-marche/ballon-genoux-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/pousser-accoudoirs-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pousser-accoudoirs-f.webp",
+  "f": "/exercises/images/aide-marche/pousser-accoudoirs-f.webp",
+  "h": "/exercises/images/aide-marche/pousser-accoudoirs-h.webp"
+ },
+ "/exercises/images/aide-marche/pedalier-fauteuil-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
+  "f": "/exercises/images/aide-marche/pedalier-fauteuil-f.webp",
+  "h": "/exercises/images/aide-marche/pedalier-fauteuil-h.webp"
+ },
+ "/exercises/images/aide-marche/pencher-avant-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
+  "f": "/exercises/images/aide-marche/pencher-avant-assis-f.webp",
+  "h": "/exercises/images/aide-marche/pencher-avant-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/lever-fauteuil-f.webp": {
+  "defaut": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
+  "f": "/exercises/images/aide-marche/lever-fauteuil-f.webp",
+  "h": "/exercises/images/aide-marche/lever-fauteuil-h.webp"
+ },
+ "/exercises/images/aide-marche/baton-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/baton-assis-f.webp",
+  "f": "/exercises/images/aide-marche/baton-assis-f.webp",
+  "h": "/exercises/images/aide-marche/baton-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/attraper-cote-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/attraper-cote-assis-f.webp",
+  "f": "/exercises/images/aide-marche/attraper-cote-assis-f.webp",
+  "h": "/exercises/images/aide-marche/attraper-cote-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp": {
+  "defaut": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
+  "f": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
+  "h": "/exercises/images/aide-marche/cercles-chevilles-assis-h.webp"
  }
 }
