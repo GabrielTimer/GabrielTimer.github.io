@@ -14583,7 +14583,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_11",
 "source": "CABINET",
 "nom": "Talon vers la fesse au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Plier un genou en amenant le talon vers la fesse",
@@ -14603,7 +14603,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -15524,7 +15524,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_10",
 "source": "CABINET",
 "nom": "Jambe tendue en arrière au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/jambe-arriere-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Emmener une jambe tendue vers l'arrière",
@@ -15544,7 +15544,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_11",
 "source": "CABINET",
 "nom": "Talon vers la fesse au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Plier un genou en amenant le talon vers la fesse",
@@ -15564,7 +15564,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -16959,7 +16959,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_15",
 "source": "CABINET",
 "nom": "Équilibre pieds serrés au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Rapprocher les pieds l'un contre l'autre",
@@ -16979,7 +16979,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_13",
 "source": "CABINET",
 "nom": "Faire demi-tour avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
 "consignes": [
 "Tourner le déambulateur petit à petit",
 "Suivre avec de petits pas, sans croiser les pieds",
@@ -16999,7 +16999,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -18185,7 +18185,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -18205,7 +18205,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_13",
 "source": "CABINET",
 "nom": "Faire demi-tour avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
 "consignes": [
 "Tourner le déambulateur petit à petit",
 "Suivre avec de petits pas, sans croiser les pieds",
@@ -18225,7 +18225,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_14",
 "source": "CABINET",
 "nom": "Pas de côté avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/pas-cote-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées",
 "Déplacer le déambulateur un peu sur le côté",
@@ -19037,7 +19037,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_15",
 "source": "CABINET",
 "nom": "Équilibre pieds serrés au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Rapprocher les pieds l'un contre l'autre",
@@ -19057,7 +19057,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_17",
 "source": "CABINET",
 "nom": "Marche avec pauses assises sur le rollator",
-"image": "",
+"image": "/exercises/images/aide-marche/pause-rollator-f.webp",
 "consignes": [
 "Marcher avec le rollator le temps prévu",
 "S'arrêter, serrer les deux freins",
@@ -20174,7 +20174,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -20194,7 +20194,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_13",
 "source": "CABINET",
 "nom": "Faire demi-tour avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
 "consignes": [
 "Tourner le déambulateur petit à petit",
 "Suivre avec de petits pas, sans croiser les pieds",
@@ -21097,7 +21097,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",
@@ -21794,7 +21794,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_12",
 "source": "CABINET",
 "nom": "Marcher avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
 "consignes": [
 "Avancer le déambulateur d'un petit pas devant soi",
 "Avancer la jambe la plus faible dans le cadre",

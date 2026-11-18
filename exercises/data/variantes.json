@@ -1808,5 +1808,45 @@
   "defaut": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
   "f": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
   "h": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/jambe-arriere-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/jambe-arriere-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/jambe-arriere-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/jambe-arriere-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/talon-fesse-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/marche-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/demi-tour-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/pas-cote-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pas-cote-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/pas-cote-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/pas-cote-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/pieds-serres-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/tandem-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/tandem-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/tandem-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/tandem-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/pause-rollator-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pause-rollator-f.webp",
+  "f": "/exercises/images/aide-marche/pause-rollator-f.webp",
+  "h": "/exercises/images/aide-marche/pause-rollator-h.webp"
  }
 }

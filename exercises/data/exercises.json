@@ -25186,7 +25186,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "DEAMB_10",
-    "image": "",
+    "image": "/exercises/images/aide-marche/jambe-arriere-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25229,7 +25229,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ],
@@ -25254,7 +25253,7 @@
     "ex": 40,
     "exercise_mode": "renforcement",
     "id": "DEAMB_11",
-    "image": "",
+    "image": "/exercises/images/aide-marche/talon-fesse-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25297,7 +25296,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ],
@@ -25325,7 +25323,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "DEAMB_12",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25375,7 +25373,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ],
@@ -25403,7 +25400,7 @@
     "ex": 45,
     "exercise_mode": "equilibre",
     "id": "DEAMB_13",
-    "image": "",
+    "image": "/exercises/images/aide-marche/demi-tour-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25446,7 +25443,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ]
@@ -25472,7 +25468,7 @@
     "ex": 40,
     "exercise_mode": "dynamique",
     "id": "DEAMB_14",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pas-cote-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25512,7 +25508,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ]
@@ -25536,7 +25531,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "DEAMB_15",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pieds-serres-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25580,7 +25575,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ]
@@ -25604,7 +25598,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "DEAMB_16",
-    "image": "",
+    "image": "/exercises/images/aide-marche/tandem-deambulateur-f.webp",
     "materiel": [
       "Déambulateur"
     ],
@@ -25647,7 +25641,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ]
@@ -25671,7 +25664,7 @@
     "ex": 180,
     "exercise_mode": "dynamique",
     "id": "DEAMB_17",
-    "image": "",
+    "image": "/exercises/images/aide-marche/pause-rollator-f.webp",
     "materiel": [
       "Rollator (déambulateur à roulettes avec siège)"
     ],
@@ -25716,7 +25709,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "Déambulateur"
     ]
