@@ -47,12 +47,11 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
           ${filterButtonHTML()}
-          ${tailleVueHTML(layout === "grid" ? "gt_taille_lib" : "gt_taille_lib_liste")}
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="lib-active" data-active hidden></div>
       </div>
-      <div class="lib-count small muted" data-count></div>
+      <div class="lib-count-row"><div class="lib-count small muted" data-count></div>${tailleVueHTML(layout === "grid" ? "gt_taille_lib" : "gt_taille_lib_liste")}</div>
       <div class="lib-results ${layout === "grid" ? "grid" : ""}" data-results><div class="loading"><div class="spinner"></div><span>Chargement des exercices…</span></div></div>
       <div class="center" style="padding:12px 0"><button class="btn" type="button" data-more hidden>Afficher plus</button></div>
     </div>`;

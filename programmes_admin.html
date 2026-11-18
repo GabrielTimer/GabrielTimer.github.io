@@ -140,12 +140,11 @@ app.innerHTML = `
     <div class="lib-search-row">
       <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
       ${filterButtonHTML()}
-      ${tailleVueHTML("gt_taille_modeles")}
       <button class="btn lib-mine-btn" type="button" id="mine" aria-pressed="${F.mine}" title="Seulement mes modèles">${icon("folder")}<span class="lbl">Mes modèles</span></button>
     </div>
     <div class="lib-active" id="actifs" hidden></div>
   </div>
-  <div class="small muted" id="count" style="margin-bottom:10px"></div>
+  <div class="lib-count-row" style="margin-bottom:10px"><div class="small muted" id="count"></div>${tailleVueHTML("gt_taille_modeles")}</div>
   <div id="list">${loadingHTML()}</div>
   <section class="mo-more"><div class="list">
     <a class="list-item" href="/mes_programmes.html"><span class="li-ico">${icon("star")}</span><span class="li-main"><span class="li-title">Séances favorites</span><span class="li-sub">Enregistrées sur cet appareil</span></span><span class="li-end">${icon("chevron")}</span></a>
