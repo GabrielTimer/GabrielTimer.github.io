@@ -60,7 +60,7 @@ const SPECS_PATHO = {
   "Maladie de Parkinson":[N], "Sclérose en plaques":[N], "SLA (maladie de Charcot)":[N], "Charcot-Marie-Tooth":[N],
   "Vertiges / vestibulaire":[VE], "Respiratoire (BPCO, asthme…)":[RE], "Post-opératoire":[O], "Ostéoporose":[R, G],
   "Déconditionnement / reprise":[RF, CA], "Lésion des ischio-jambiers":[T, SP], "Retour au sport":[SP],
-  "Lymphœdème / après cancer":[ON], "Développement moteur de l'enfant":[PD]
+  "Lymphœdème / après cancer":[ON], "Algoneurodystrophie (SDRC)":[R], "Développement moteur de l'enfant":[PD]
 };
 /* Spécialités déduites du type d'exercice */
 const SPECS_TYPE = { "Respiration":[RE], "Cardio":[CA], "Au fauteuil (seniors)":[G] };
@@ -122,6 +122,7 @@ export const PATHOLOGIES = [
   ["Lésion des ischio-jambiers", "Genou", /ischio-?jambiers? \(lesion|lesion des ischio|dechirure.*ischio|claquage.*ischio|ischio.*(lesion|dechirure|claquage)/],
   ["Retour au sport", "", /retour au sport|reprise du sport|pliometr/],
   ["Lymphœdème / après cancer", "", /lymph|cancer|oncolog|mastectom|curage/],
+  ["Algoneurodystrophie (SDRC)", "", /algoneuro|algodystroph|\bsdrc\b|syndrome epaule-main/],
   ["Développement moteur de l'enfant", "", /enfant|pediatr|developpement moteur/]
 ].map(([nom, zone, re]) => ({ nom, zone, re }));
 

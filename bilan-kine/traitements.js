@@ -72,7 +72,7 @@ HYP: {
   },
   "lombes:STE": {
     axes: ["Exercices en flexion, mobilité lombaire", "Renforcement des membres inférieurs et du tronc", "Endurance : vélo, marche fractionnée"],
-    patho: "Canal lombaire étroit", modeles: ["Lombalgie"]
+    patho: "Canal lombaire étroit", modeles: ["Canal lombaire étroit", "Lombalgie"]
   },
 
   "cerv:RAD": {
@@ -153,15 +153,15 @@ HYP: {
   "main:TFCC": {
     axes: ["Repos relatif et orthèse de poignet (ou bracelet) si douloureux", "Renforcement progressif des stabilisateurs du poignet et de l'avant-bras", "Adaptation des gestes en rotation et en appui"],
     avis: "Instabilité de l'articulation radio-ulnaire distale ou douleur persistante : avis chirurgical (imagerie).",
-    modeles: ["Canal carpien"], patho: "Fracture du poignet"
+    modeles: ["Fracture du poignet", "Canal carpien"], patho: "Fracture du poignet"
   },
   "dors:MEC": {
     axes: ["Mobilité thoracique et exercices posturaux", "Renforcement des muscles du haut du dos", "Ergonomie du poste et pauses actives"],
-    modeles: ["Dos au travail", "Cervicalgie"], patho: "Scoliose / posture"
+    modeles: ["Dorsalgie et raideur du haut du dos", "Dos au travail", "Cervicalgie"], patho: "Scoliose / posture"
   },
   "dors:COS": {
     axes: ["Mobilisation costale et thoracique", "Respiration ample, mobilité en rotation"],
-    modeles: ["Dos au travail"], patho: "Scoliose / posture"
+    modeles: ["Dorsalgie et raideur du haut du dos", "Dos au travail"], patho: "Scoliose / posture"
   },
   "dors:TAS": {
     axes: ["Antalgie et position de confort, sans flexion du tronc en charge", "Reprise de la marche, puis renforcement des extenseurs du dos", "Prévention des chutes"],
@@ -215,16 +215,16 @@ HYP: {
 },
 
 REGION: {
-  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)", "Tendinopathie rotulienne", "Lésion des ischio-jambiers", "Retour au sport (membre inférieur)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
-  epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule"], postop: ["Réparation de la coiffe des rotateurs"] },
-  lombes: { zone: "Dos", modeles: ["Lombalgie", "Lombalgie chronique (reconditionnement)", "Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
+  genou: { zone: "Genou", modeles: ["Syndrome fémoro-patellaire", "Gonarthrose", "Lésion méniscale", "Rupture du LCA (sans opération)", "Tendinopathie rotulienne", "Lésion des ischio-jambiers", "Retour au sport (membre inférieur)", "Syndrome de l'essuie-glace (bandelette ilio-tibiale)"], postop: ["Ligamentoplastie du LCA", "Prothèse totale de genou (PTG)"] },
+  epaule: { zone: "Épaule", modeles: ["Tendinopathie de la coiffe et conflit", "Capsulite rétractile", "Instabilité d'épaule", "Renforcement de l'épaule (coiffe et omoplate)"], postop: ["Réparation de la coiffe des rotateurs"] },
+  lombes: { zone: "Dos", modeles: ["Lombalgie", "Lumbago (lombalgie aiguë)", "Lombalgie chronique (reconditionnement)", "Canal lombaire étroit", "Sciatique", "Hernie discale", "Sciatique et hernie discale", "Cruralgie", "Dos au travail"] },
   cerv: { zone: "Cervicales", modeles: ["Cervicalgie", "Névralgie cervico-brachiale", "Mâchoire (ATM)"] },
   chev: { zone: "Cheville et pied", modeles: ["Entorse de cheville", "Tendinopathie d'Achille", "Fasciite plantaire", "Épine calcanéenne"] },
-  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire", "Pubalgie"], postop: ["Prothèse totale de hanche (PTH)"] },
+  hanche: { zone: "Hanche", modeles: ["Coxarthrose", "Tendinopathie du moyen fessier", "Conflit fémoro-acétabulaire", "Pubalgie", "Syndrome du piriforme"], postop: ["Prothèse totale de hanche (PTH)"] },
   coude: { zone: "Coude", modeles: ["Épicondylite (tennis elbow)", "Épitrochléite (golf elbow)"] },
-  main: { zone: "Poignet et main", modeles: ["Canal carpien", "Tendinite de De Quervain", "Rhizarthrose"] },
+  main: { zone: "Poignet et main", modeles: ["Canal carpien", "Tendinite de De Quervain", "Rhizarthrose", "Fracture du poignet"] },
   vertiges: { zone: "Corps entier", modeles: ["Rééducation vestibulaire", "VPPB (après manœuvre)"] },
-  dors: { zone: "Dos", modeles: ["Dos au travail", "Ostéoporose", "Lombalgie chronique (reconditionnement)"] },
+  dors: { zone: "Dos", modeles: ["Dorsalgie et raideur du haut du dos", "Dos au travail", "Ostéoporose", "Lombalgie chronique (reconditionnement)"] },
   thorax: { zone: "Tronc", modeles: ["Réhabilitation respiratoire (BPCO)"] },
   atm: { zone: "Cervicales", modeles: ["Mâchoire (ATM)"] },
   neuro: { zone: "Corps entier", modeles: ["Maladie de Parkinson", "Sclérose en plaques", "Hémiplégie (AVC)", "SLA (maladie de Charcot)", "Charcot-Marie-Tooth"] }
@@ -233,16 +233,16 @@ REGION: {
 MOTIF: {
   /* Motifs précis (liste par groupe du bilan) : modèles et pathologie du sur mesure */
   "Lombalgie chronique": { modeles: ["Lombalgie chronique (reconditionnement)", "Lombalgie"], patho: "Lombalgie" },
-  "Lumbago (lombalgie aiguë)": { modeles: ["Lumbago", "Lombalgie"], patho: "Lombalgie" },
+  "Lumbago (lombalgie aiguë)": { modeles: ["Lumbago (lombalgie aiguë)", "Lombalgie"], patho: "Lombalgie" },
   "Hernie discale": { modeles: ["Hernie discale", "Sciatique et hernie discale"], patho: "Hernie discale" },
   "Cruralgie": { modeles: ["Cruralgie"], patho: "Sciatique / radiculalgie" },
   "Canal lombaire étroit": { modeles: ["Canal lombaire étroit"], patho: "Canal lombaire étroit" },
   "Névralgie cervico-brachiale": { modeles: ["Névralgie cervico-brachiale"], patho: "Névralgie cervico-brachiale" },
   "Céphalées": { modeles: ["Cervicalgie", "Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées" },
   "Coup du lapin (whiplash)": { modeles: ["Cervicalgie"], patho: "Cervicalgie" },
-  "Scoliose / posture": { modeles: ["Dos au travail"], patho: "Scoliose / posture" },
+  "Scoliose / posture": { modeles: ["Dorsalgie et raideur du haut du dos", "Dos au travail"], patho: "Scoliose / posture" },
   "Tassement vertébral": { modeles: ["Ostéoporose", "Prévention des chutes"], patho: "Ostéoporose" },
-  "Épaule douloureuse (coiffe, conflit)": { modeles: ["Tendinopathie de la coiffe et conflit", "Tendinite de la coiffe"], patho: "Tendinopathie de la coiffe / conflit" },
+  "Épaule douloureuse (coiffe, conflit)": { modeles: ["Tendinopathie de la coiffe et conflit", "Renforcement de l'épaule (coiffe et omoplate)"], patho: "Tendinopathie de la coiffe / conflit" },
   "Rupture de la coiffe": { modeles: ["Tendinopathie de la coiffe et conflit"], patho: "Tendinopathie de la coiffe / conflit" },
   "Capsulite rétractile": { modeles: ["Capsulite rétractile"], patho: "Capsulite rétractile" },
   "Instabilité / luxation d’épaule": { modeles: ["Instabilité d'épaule"], patho: "Instabilité / luxation d'épaule" },
@@ -252,8 +252,8 @@ MOTIF: {
   "Canal carpien": { modeles: ["Canal carpien"], patho: "Canal carpien" },
   "Tendinite de De Quervain": { modeles: ["Tendinite de De Quervain"], patho: "Tendinite de De Quervain" },
   "Rhizarthrose": { modeles: ["Rhizarthrose"], patho: "Arthrose de la main / rhizarthrose" },
-  "Douleur du poignet côté petit doigt (TFCC)": { modeles: ["Canal carpien"], patho: "Fracture du poignet" },
-  "Fracture du poignet": { modeles: ["Canal carpien"], patho: "Fracture du poignet" },
+  "Douleur du poignet côté petit doigt (TFCC)": { modeles: ["Fracture du poignet", "Canal carpien"], patho: "Fracture du poignet" },
+  "Fracture du poignet": { modeles: ["Fracture du poignet", "Canal carpien"], patho: "Fracture du poignet" },
   "Doigt (entorse, fracture, tendon)": { modeles: ["Rhizarthrose"], patho: "Arthrose de la main / rhizarthrose" },
   "Coxarthrose": { modeles: ["Coxarthrose"], patho: "Coxarthrose / prothèse de hanche" },
   "Tendinopathie du moyen fessier": { modeles: ["Tendinopathie du moyen fessier"], patho: "Tendinopathie du moyen fessier" },
@@ -269,13 +269,13 @@ MOTIF: {
   "Tendinopathie d’Achille": { modeles: ["Tendinopathie d'Achille"], patho: "Tendinopathie d'Achille" },
   "Fasciite / épine calcanéenne": { modeles: ["Épine calcanéenne", "Fasciite plantaire"], patho: "Fasciite plantaire" },
   "Fracture de cheville ou du pied": { modeles: ["Entorse de cheville"], patho: "Fracture de cheville" },
-  "Post-op : prothèse de hanche": { modeles: ["Prothèse totale de hanche (PTH)"], patho: "Coxarthrose / prothèse de hanche" },
-  "Post-op : prothèse de genou": { modeles: ["Prothèse totale de genou (PTG)"], patho: "Gonarthrose / prothèse de genou" },
-  "Post-op : ligamentoplastie du LCA": { modeles: ["Ligamentoplastie du LCA"], patho: "Ligament croisé (LCA)" },
+  "Post-op : prothèse de hanche": { modeles: ["Prothèse totale de hanche (PTH)", "Béquilles et cannes (après une opération)"], patho: "Coxarthrose / prothèse de hanche" },
+  "Post-op : prothèse de genou": { modeles: ["Prothèse totale de genou (PTG)", "Béquilles et cannes (après une opération)"], patho: "Gonarthrose / prothèse de genou" },
+  "Post-op : ligamentoplastie du LCA": { modeles: ["Ligamentoplastie du LCA", "Béquilles et cannes (après une opération)"], patho: "Ligament croisé (LCA)" },
   "Post-op : épaule (coiffe, stabilisation)": { modeles: ["Réparation de la coiffe des rotateurs"], patho: "Tendinopathie de la coiffe / conflit" },
   "Post-op : rachis": { modeles: ["Lombalgie chronique (reconditionnement)", "Lombalgie"], patho: "Lombalgie" },
-  "Post-op : main, poignet": { modeles: ["Canal carpien"], patho: "Fracture du poignet" },
-  "Post-op : cheville, pied": { modeles: ["Entorse de cheville"], patho: "Fracture de cheville" },
+  "Post-op : main, poignet": { modeles: ["Fracture du poignet", "Canal carpien"], patho: "Fracture du poignet" },
+  "Post-op : cheville, pied": { modeles: ["Entorse de cheville", "Béquilles et cannes (après une opération)"], patho: "Fracture de cheville" },
   "Lésion musculaire (déchirure, claquage)": { modeles: ["Lésion des ischio-jambiers"], patho: "Lésion des ischio-jambiers" },
   "AVC / hémiplégie": { modeles: ["Hémiplégie (AVC)"], patho: "AVC / hémiplégie" },
   "Maladie de Parkinson": { modeles: ["Maladie de Parkinson"], patho: "Maladie de Parkinson" },
@@ -291,7 +291,7 @@ MOTIF: {
   "Respiratoire après une opération": { modeles: ["Kiné respiratoire après une opération"], patho: "Respiratoire (BPCO, asthme…)" },
   "Douleur thoracique": { modeles: [], patho: "Respiratoire (BPCO, asthme…)" },
   "Lymphœdème / après cancer du sein": { modeles: ["Lymphœdème du bras (après cancer du sein)"], patho: "Lymphœdème / après cancer" },
-  "Douleur chronique / fibromyalgie": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort"], patho: "Déconditionnement / reprise" },
+  "Douleur chronique / fibromyalgie": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort", "Relaxation et respiration", "Exercices en piscine"], patho: "Déconditionnement / reprise" },
   "Périnée / post-partum": { modeles: ["Abdos profonds et périnée (post-partum sportive)"], patho: "Post-partum / périnée" },
   "Enfant (développement moteur)": { modeles: ["Motricité de l'enfant"], patho: "Développement moteur de l'enfant" },
   "Lombalgie": { modeles: ["Lombalgie", "Lombalgie chronique (reconditionnement)"], patho: "Lombalgie" },
@@ -304,7 +304,7 @@ MOTIF: {
   "Respiratoire": { modeles: ["Réhabilitation respiratoire (BPCO)", "Désencombrement bronchique", "Kiné respiratoire après une opération"], patho: "Respiratoire (BPCO, asthme…)" },
   "Remise en forme / reconditionnement": { modeles: ["Remise en forme (gym adaptée)", "Reconditionnement à l'effort"] },
   "Mâchoire (ATM)": { modeles: ["Mâchoire (ATM)"], patho: "Mâchoire (ATM) / céphalées" },
-  "Dorsalgie": { modeles: ["Dos au travail"], patho: "Scoliose / posture" },
+  "Dorsalgie": { modeles: ["Dorsalgie et raideur du haut du dos", "Dos au travail"], patho: "Scoliose / posture" },
   "Reprise du sport": { modeles: ["Retour au sport (membre inférieur)", "Lésion des ischio-jambiers", "Pubalgie"] }
 },
 

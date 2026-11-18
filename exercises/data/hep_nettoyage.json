@@ -352,7 +352,7 @@
   "456": "Étirement du piriforme en 4, assis",
   "465": "Étirement du piriforme, genou vers l'épaule opposée, assis",
   "701": "Étirement du tibial postérieur, assis",
-  "535": "Étirement du carré des lombes, assis",
+  "535": "Étirement du carré des lombes, assis, main sur le dossier",
   "689": "Étirement des rhomboïdes, assis",
   "226": "Rowing avec élastique, assis",
   "627": "Ouverture d'un genou avec élastique, assis",
@@ -432,7 +432,7 @@
   "458": "Escaliers avec béquilles, appui partiel",
   "457": "Escaliers avec une canne ou béquille",
   "385": "Hanche dans 4 directions avec élastique, appui sur une chaise",
-  "384": "Flexion de hanche contre résistance, appui sur une chaise",
+  "384": "Hanche dans 4 directions, appui sur une chaise",
   "264": "Hanche dans 4 directions avec élastique, debout",
   "694": "Étreinte (bear hug) debout",
   "466": "Étirement des ischio-jambiers, debout",
@@ -2779,9 +2779,9 @@
    "Revenez lentement à chaque fois."
   ],
   "384": [
-   "Tronc droit et immobile.",
-   "Genou tendu, pointe du pied vers vous.",
-   "Avancez la jambe, puis revenez lentement."
+   "Debout, une main sur le dossier de la chaise, tronc droit.",
+   "Emmenez la jambe tendue vers l'avant, revenez, puis sur le côté, puis vers l'arrière.",
+   "Revenez au centre entre chaque direction, sans bouger le bassin."
   ],
   "264": [
    "Faites successivement contre l'élastique : jambe en avant, en arrière, sur le côté, puis vers l'intérieur.",
@@ -4286,6 +4286,42 @@
   "257": "Assis, élastique tenu entre les deux mains"
  },
  "masques": [
+  "CABINET_EPAULE_CAPS_01",
+  "CABINET_EPAULE_CAPS_07",
+  "CABINET_GAINAGE_03",
+  "CABINET_POSTPARTUM_01",
+  "CABINET_POSTPARTUM_02",
+  "CABINET_POSTPARTUM_03",
+  "CABINET_POSTPARTUM_04",
+  "CABINET_POSTPARTUM_05",
+  "CABINET_POSTPARTUM_06",
+  "CABINET_POSTPARTUM_08",
+  "CABINET_POSTPARTUM_09",
+  "CABINET_POSTPARTUM_10",
+  "CABINET_POSTPARTUM_11",
+  "CABINET_POSTPARTUM_12",
+  "CABINET_POSTPARTUM_13",
+  "CABINET_POSTPARTUM_15",
+  "CABINET_POSTPARTUM_17",
+  "CABINET_POSTPARTUM_24",
+  "CABINET_POSTPARTUM_25",
+  "CABINET_POSTPARTUM_26",
+  "CABINET_PUBALGIE_03",
+  "CABINET_PUBALGIE_04",
+  "CABINET_PUBALGIE_05",
+  "CABINET_PUBALGIE_07",
+  "CABINET_PUBALGIE_08",
+  "CABINET_PUBALGIE_B02",
+  "CABINET_PUBALGIE_B03",
+  "CABINET_PUBALGIE_B05",
+  "CABINET_PUBALGIE_B06",
+  "CABINET_PUBALGIE_B07",
+  "CABINET_TRONC_01",
+  "CABINET_TRONC_02",
+  "CABINET_TRONC_03",
+  "CABINET_lombalgie1_ex1",
+  "CABINET_tapiscourse",
+  "CABINET_tapismarche",
   "HEP_377"
  ]
 }

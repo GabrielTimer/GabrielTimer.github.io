@@ -42,7 +42,7 @@
     "respiration": [],
     "muscles_cibles": [],
     "materiel": [
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -59,6 +59,7 @@
     "zones": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -108,7 +109,7 @@
     "respiration": [],
     "muscles_cibles": [],
     "materiel": [
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -125,6 +126,7 @@
     "zones": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -174,7 +176,7 @@
     "respiration": [],
     "muscles_cibles": [],
     "materiel": [
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -192,6 +194,7 @@
     "zones": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -241,7 +244,7 @@
     "respiration": [],
     "muscles_cibles": [],
     "materiel": [
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -259,6 +262,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -309,7 +313,7 @@
     "muscles_cibles": [],
     "materiel": [
       "Élastique",
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -326,6 +330,7 @@
     "zones": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -359,7 +364,9 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -414,14 +421,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Élastique"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Syndrome fémoro-patellaire",
+      "Gonarthrose"
     ],
     "objectifs": [
       "Renforcement des membres inférieurs"
@@ -468,14 +479,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Élastique"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Syndrome fémoro-patellaire",
+      "Ligament croisé (LCA)"
     ],
     "objectifs": [
       "Contrôle moteur du genou"
@@ -521,14 +536,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Élastique"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Syndrome fémoro-patellaire",
+      "Gonarthrose"
     ],
     "objectifs": [
       "Contrôle de l’alignement du genou"
@@ -575,14 +594,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Ballon ou balle"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Ligament croisé (LCA)",
+      "Entorse de cheville"
     ],
     "objectifs": [
       "Travail de stabilité et proprioception"
@@ -629,14 +652,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Élastique"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Syndrome fémoro-patellaire",
+      "Ligament croisé (LCA)"
     ],
     "objectifs": [
       "Renforcement des fessiers et stabilité des genoux"
@@ -683,14 +710,18 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Ballon ou balle"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
     "coaching_court": [],
     "validation_medicale": true,
     "pathologies": [
-      "Genou"
+      "Genou",
+      "Ligament croisé (LCA)",
+      "Retour au sport"
     ],
     "objectifs": [
       "Travail de stabilité dynamique"
@@ -733,10 +764,16 @@
     "difficulte_percue": 2,
     "validation_medicale": true,
     "pathologies": [
-      "Cheville"
+      "Cheville",
+      "Entorse de cheville",
+      "Retour au sport"
     ],
     "objectifs": [
       "Proprioception de cheville"
+    ],
+    "materiel": [
+      "Ballon ou balle",
+      "Mur"
     ]
   },
   {
@@ -775,10 +812,16 @@
     "difficulte_percue": 2,
     "validation_medicale": true,
     "pathologies": [
-      "Cheville"
+      "Cheville",
+      "Entorse de cheville",
+      "Retour au sport"
     ],
     "objectifs": [
       "Proprioception de cheville"
+    ],
+    "materiel": [
+      "Ballon ou balle",
+      "Mur"
     ]
   },
   {
@@ -817,10 +860,16 @@
     "difficulte_percue": 2,
     "validation_medicale": true,
     "pathologies": [
-      "Cheville"
+      "Cheville",
+      "Entorse de cheville",
+      "Retour au sport"
     ],
     "objectifs": [
       "Proprioception de cheville"
+    ],
+    "materiel": [
+      "Ballon ou balle",
+      "Mur"
     ]
   },
   {
@@ -859,10 +908,16 @@
     "difficulte_percue": 1,
     "validation_medicale": true,
     "pathologies": [
-      "Cheville"
+      "Cheville",
+      "Entorse de cheville",
+      "Tendinopathie d'Achille"
     ],
     "objectifs": [
       "Gain de mobilité de cheville"
+    ],
+    "materiel": [
+      "Mur",
+      "Tapis"
     ]
   },
   {
@@ -902,10 +957,15 @@
     "difficulte_percue": 1,
     "validation_medicale": true,
     "pathologies": [
-      "Cheville"
+      "Cheville",
+      "Tendinopathie d'Achille",
+      "Fasciite plantaire"
     ],
     "objectifs": [
       "Renforcement du triceps sural"
+    ],
+    "materiel": [
+      "Mur"
     ]
   },
   {
@@ -942,7 +1002,9 @@
     "version_avancee": [],
     "respiration": [],
     "muscles_cibles": [],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -1007,7 +1069,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1108,7 +1172,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1209,7 +1275,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1310,7 +1378,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1404,7 +1474,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1505,7 +1577,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1547,7 +1621,7 @@
   },
   {
     "id": "POSTPARTUM_07",
-    "nom": "Sit-to-stand contrôlé",
+    "nom": "Assis-debout contrôlé",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -1562,9 +1636,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Assise au bord d'une chaise, pieds à plat, écartés de la largeur du bassin",
+      "Soufflez en rentrant le ventre et en remontant le périnée",
+      "Levez-vous en poussant dans les talons, sans vous aider des mains",
+      "Rasseyez-vous lentement en contrôlant la descente"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -1598,7 +1673,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Chaise"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1691,7 +1768,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1784,7 +1863,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Marche ou escalier"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1877,7 +1958,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -1970,7 +2053,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2063,7 +2148,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2156,7 +2243,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2213,9 +2302,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Debout, pieds écartés de la largeur du bassin",
+      "Descendez les fesses en arrière jusqu'à mi-hauteur, dos droit",
+      "Soufflez en remontant et en serrant le périnée",
+      "Gardez les genoux dans l'axe des pieds"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2249,7 +2339,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2342,7 +2434,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2384,7 +2478,7 @@
   },
   {
     "id": "POSTPARTUM_16",
-    "nom": "Farmer carry",
+    "nom": "Marche chargée des deux côtés (farmer carry)",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2399,9 +2493,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Une charge légère dans chaque main (sacs, haltères)",
+      "Grandissez-vous, épaules basses, ventre légèrement rentré",
+      "Marchez à pas réguliers sans vous pencher",
+      "Respirez normalement pendant toute la marche"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2435,7 +2530,10 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Haltère ou poids",
+      "Marche ou escalier"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2528,7 +2626,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Marche ou escalier"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2570,7 +2670,7 @@
   },
   {
     "id": "POSTPARTUM_18",
-    "nom": "Bear hover",
+    "nom": "Quadrupédie genoux décollés (bear hover)",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2585,9 +2685,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "À quatre pattes, mains sous les épaules, genoux sous les hanches",
+      "Soufflez et décollez les genoux de 2 à 3 cm du sol",
+      "Tenez sans creuser le dos, ventre légèrement rentré",
+      "Reposez les genoux doucement"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2621,7 +2722,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2663,7 +2766,7 @@
   },
   {
     "id": "POSTPARTUM_19",
-    "nom": "Dead bug élastique",
+    "nom": "Dead bug avec élastique",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2678,9 +2781,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Allongée sur le dos, élastique tenu bras tendus vers le plafond, genoux à 90°",
+      "Soufflez en tendant une jambe vers le sol, en tirant légèrement sur l'élastique",
+      "Gardez le bas du dos collé au sol",
+      "Revenez et changez de jambe"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2714,7 +2818,10 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Élastique",
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2756,7 +2863,7 @@
   },
   {
     "id": "POSTPARTUM_20",
-    "nom": "Side plank jambes tendues",
+    "nom": "Planche latérale jambes tendues",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2771,9 +2878,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Allongée sur le côté, appui sur l'avant-bras, jambes tendues",
+      "Soufflez et décollez le bassin pour aligner épaules, hanches et pieds",
+      "Tenez en respirant calmement",
+      "Redescendez doucement, puis changez de côté"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2807,7 +2915,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2824,7 +2934,10 @@
     "tags": [
       "Post-partum",
       "Core",
-      "Gainage"
+      "Gainage",
+      "Obliques",
+      "Tronc",
+      "Stabilité"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -2836,7 +2949,9 @@
     },
     "image": "/exercises/images/post-partum/side-plank-jambes.webp",
     "pathologies": [
-      "Post-partum"
+      "Post-partum",
+      "Lombalgie",
+      "Instabilité du bassin"
     ],
     "objectifs": [
       "Renforcement transverse, périnée et stabilité"
@@ -2849,7 +2964,7 @@
   },
   {
     "id": "POSTPARTUM_21",
-    "nom": "Squat tempo",
+    "nom": "Squat tempo lent",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2864,9 +2979,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Debout, pieds écartés de la largeur du bassin",
+      "Descendez en 3 secondes, fesses en arrière",
+      "Marquez une pause d'1 seconde en bas",
+      "Remontez en soufflant et en serrant le périnée"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2900,7 +3016,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -2942,7 +3060,7 @@
   },
   {
     "id": "POSTPARTUM_22",
-    "nom": "Bird dog pause",
+    "nom": "Bird dog avec pause",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -2957,9 +3075,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "À quatre pattes, dos neutre",
+      "Tendez un bras et la jambe opposée",
+      "Tenez 3 secondes sans bouger le bassin",
+      "Revenez lentement et alternez"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -2993,7 +3112,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3050,9 +3171,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Debout, mains sur les hanches",
+      "Reculez une jambe et descendez le genou arrière vers le sol",
+      "Gardez le buste droit et le genou avant au-dessus du pied",
+      "Remontez en soufflant, puis changez de jambe"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -3086,7 +3208,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3179,7 +3303,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3272,7 +3398,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3365,7 +3493,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3407,7 +3537,7 @@
   },
   {
     "id": "POSTPARTUM_27",
-    "nom": "Step up dynamique",
+    "nom": "Montée sur marche dynamique (step-up)",
     "type": "timer",
     "categorie": "Post-partum",
     "objectif": "Renforcement transverse, périnée et stabilité",
@@ -3422,9 +3552,10 @@
       "Lombaires"
     ],
     "consignes": [
-      "Contrôler le mouvement",
-      "Expirer pendant l'effort",
-      "Maintenir le gainage"
+      "Face à une marche stable",
+      "Montez avec une jambe en poussant dans le talon, montez le genou opposé",
+      "Redescendez en contrôlant",
+      "Soufflez à chaque montée en serrant le périnée"
     ],
     "precautions": [
       "Arrêter si douleur",
@@ -3458,7 +3589,9 @@
       "Périnée",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Marche ou escalier"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité",
@@ -3519,7 +3652,9 @@
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/mobilite-flexion-extension.webp",
     "video": "",
     "description": "Mobilisation douce de la cheville en flexion et extension.",
@@ -3531,7 +3666,11 @@
     "timer_config": {
       "mode": "repetitions",
       "repetitions": 15
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_002",
@@ -3555,7 +3694,7 @@
       "Cheville droite"
     ],
     "materiel": [
-      "Chaise/Fauteuil"
+      "Chaise"
     ],
     "image": "/exercises/images/cheville/cercles-cheville.webp",
     "video": "",
@@ -3568,7 +3707,11 @@
     "timer_config": {
       "mode": "repetitions",
       "repetitions": 10
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_003",
@@ -3591,7 +3734,9 @@
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/equilibre-bipodal.webp",
     "video": "",
     "description": "Travail d’équilibre debout pieds écartés.",
@@ -3603,7 +3748,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 30
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_004",
@@ -3627,7 +3776,9 @@
       "Cheville",
       "Mollets"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/demi-pointes.webp",
     "video": "",
     "description": "Montée contrôlée sur les pointes de pieds.",
@@ -3639,11 +3790,15 @@
     "timer_config": {
       "mode": "repetitions",
       "repetitions": 12
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_005",
-    "nom": "Équilibre unipodal simple",
+    "nom": "Équilibre sur une jambe",
     "categorie": "Cheville",
     "niveau": 2,
     "tags": [
@@ -3657,12 +3812,15 @@
       "Contrôle moteur"
     ],
     "pathologies": [
-      "Entorse chronique cheville"
+      "Entorse chronique cheville",
+      "Pubalgie"
     ],
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/equilibre-unipodal.webp",
     "video": "",
     "description": "Maintien de l’équilibre sur une jambe.",
@@ -3674,7 +3832,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 30
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_006",
@@ -3697,7 +3859,9 @@
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/equilibre-unipodal-bras.webp",
     "video": "",
     "description": "Travail d’équilibre dynamique avec mouvements des bras.",
@@ -3709,7 +3873,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 40
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_007",
@@ -3747,7 +3915,11 @@
     "timer_config": {
       "mode": "repetitions",
       "repetitions": 12
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_008",
@@ -3770,7 +3942,9 @@
     "zones": [
       "Cheville"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/sauts-sur-place.webp",
     "video": "",
     "description": "Petits sauts contrôlés sur place.",
@@ -3782,7 +3956,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 20
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_009",
@@ -3819,7 +3997,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 45
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_010",
@@ -3842,7 +4024,9 @@
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/sauts-lateraux-unipodaux.webp",
     "video": "",
     "description": "Petits sauts latéraux sur une jambe.",
@@ -3854,7 +4038,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 20
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_011",
@@ -3878,7 +4066,9 @@
       "Cheville",
       "Membres inférieurs"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/course-changements-direction.webp",
     "video": "",
     "description": "Course légère avec changements de direction progressifs.",
@@ -3890,7 +4080,11 @@
     "timer_config": {
       "mode": "temps",
       "temps": 60
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "CHEV_012",
@@ -3913,7 +4107,9 @@
     "zones": [
       "Cheville droite"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/receptions-unipodales.webp",
     "video": "",
     "description": "Travail de réception contrôlée sur une jambe.",
@@ -3925,7 +4121,11 @@
     "timer_config": {
       "mode": "repetitions",
       "repetitions": 10
-    }
+    },
+    "precautions": [
+      "Arrêter si douleur vive ou gonflement",
+      "Commencer près d'un appui"
+    ]
   },
   {
     "id": "EPAULE_01",
@@ -3969,6 +4169,9 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -4012,11 +4215,14 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
     "id": "EPAULE_03",
-    "nom": "Wall slide",
+    "nom": "Glissement des bras au mur (wall slide)",
     "type": "timer",
     "categorie": "Epaule",
     "objectif": "Contrôle scapulaire",
@@ -4034,7 +4240,10 @@
     "tags": [
       "Epaule",
       "Scapula",
-      "Mur"
+      "Mur",
+      "Capsulite",
+      "Mobilité",
+      "Raideur"
     ],
     "timer_config": {
       "mode": "dynamique",
@@ -4048,13 +4257,17 @@
     "reps": 10,
     "image": "/exercises/images/epaule/wallslideflexionepaule.png",
     "pathologies": [
-      "Tendinite coiffe des rotateurs"
+      "Tendinite coiffe des rotateurs",
+      "Capsulite rétractile de l’épaule"
     ],
     "objectifs": [
       "Contrôle scapulaire"
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Mur"
     ]
   },
   {
@@ -4077,7 +4290,8 @@
     "tags": [
       "Epaule",
       "Isométrique",
-      "Coiffe"
+      "Coiffe",
+      "Mur"
     ],
     "timer_config": {
       "mode": "statique",
@@ -4091,13 +4305,17 @@
     "reps": 10,
     "image": "/exercises/images/epaule/REisoepaule.png",
     "pathologies": [
-      "Tendinite coiffe des rotateurs"
+      "Tendinite coiffe des rotateurs",
+      "Capsulite rétractile de l’épaule"
     ],
     "objectifs": [
       "Renforcement isométrique"
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Mur"
     ]
   },
   {
@@ -4150,6 +4368,9 @@
     "zones": [
       "Epaule",
       "Scapula"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
@@ -4201,6 +4422,9 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
@@ -4252,6 +4476,9 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
@@ -4307,6 +4534,9 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
@@ -4362,6 +4592,9 @@
     ],
     "zones": [
       "Epaule"
+    ],
+    "materiel": [
+      "Élastique"
     ]
   },
   {
@@ -4724,12 +4957,12 @@
       "Epaule"
     ],
     "materiel": [
-      "Haltère léger"
+      "Haltère ou poids"
     ]
   },
   {
     "id": "EPAULE_CAPS_09",
-    "nom": "Wall slide avec élastique",
+    "nom": "Glissement des bras au mur avec élastique",
     "type": "timer",
     "categorie": "Epaule",
     "objectif": "Mobilité active et stabilité scapulaire",
@@ -4817,7 +5050,11 @@
     "reps": 10,
     "image": "/exercises/images/cabinet/huber.png",
     "video": "",
-    "pathologies": [],
+    "pathologies": [
+      "Déconditionnement / reprise",
+      "Lombalgie",
+      "Prévention des chutes"
+    ],
     "objectifs": [
       "échauffement",
       "cardio"
@@ -4865,7 +5102,10 @@
     "reps": 10,
     "image": "/exercises/images/cabinet/rameur.png",
     "video": "",
-    "pathologies": [],
+    "pathologies": [
+      "Déconditionnement / reprise",
+      "Reconditionnement"
+    ],
     "objectifs": [
       "endurance",
       "cardio"
@@ -5008,7 +5248,10 @@
     "reps": 10,
     "image": "/exercises/images/cabinet/velo.png",
     "video": "",
-    "pathologies": [],
+    "pathologies": [
+      "Déconditionnement / reprise",
+      "Gonarthrose"
+    ],
     "objectifs": [
       "cardio",
       "endurance"
@@ -5065,6 +5308,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "materiel": [
+      "Marche ou escalier"
     ]
   },
   {
@@ -5112,6 +5358,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -5138,7 +5387,11 @@
       "Cardio",
       "Tapis",
       "Marche",
-      "Endurance"
+      "Endurance",
+      "cabinet",
+      "tapis",
+      "marche",
+      "récupération"
     ],
     "timer_config": {
       "mode": "statique",
@@ -5159,6 +5412,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "materiel": [
+      "Marche ou escalier"
     ]
   },
   {
@@ -5185,7 +5441,11 @@
       "Cardio",
       "Tapis",
       "Course",
-      "Running"
+      "Running",
+      "cabinet",
+      "tapis",
+      "course",
+      "cardio"
     ],
     "timer_config": {
       "mode": "statique",
@@ -5206,6 +5466,9 @@
     ],
     "zones": [
       "Corps entier"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -5251,6 +5514,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -5296,6 +5562,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -5341,6 +5610,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -5386,6 +5658,9 @@
     ],
     "zones": [
       "Tronc"
+    ],
+    "materiel": [
+      "Tapis"
     ]
   },
   {
@@ -5414,7 +5689,8 @@
       "Gainage",
       "Transverse",
       "Lombalgie",
-      "Post-partum"
+      "Post-partum",
+      "Core"
     ],
     "timer_config": {
       "mode": "respiration",
@@ -5425,7 +5701,9 @@
     },
     "type_contraction": "statique",
     "difficulte_percue": 1,
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "muscles_cibles": [
       "Transverse",
       "Obliques",
@@ -5445,7 +5723,7 @@
   {
     "id": "GAINAGE_02",
     "image": "/exercises/images/post-partum/dead-bug-bras.png",
-    "nom": "Dead Bug bras seuls",
+    "nom": "Dead bug, bras seuls",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité du tronc",
@@ -5468,7 +5746,9 @@
       "Gainage",
       "Transverse",
       "Lombalgie",
-      "Débutant"
+      "Débutant",
+      "Post-partum",
+      "Core"
     ],
     "timer_config": {
       "mode": "dynamique",
@@ -5483,7 +5763,13 @@
       "Transverse",
       "Abdominaux profonds"
     ],
-    "validation_medicale": true
+    "validation_medicale": true,
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_03",
@@ -5534,7 +5820,9 @@
       "Multifides",
       "Abdominaux profonds"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité lombaire"
@@ -5620,7 +5908,9 @@
       "Transverse",
       "Ischio-jambiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité du bassin"
@@ -5636,7 +5926,11 @@
     "tags": [
       "Gainage",
       "Lombalgie",
-      "Fessiers"
+      "Fessiers",
+      "Post-partum",
+      "Core",
+      "Pubalgie",
+      "Pont"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -5648,7 +5942,9 @@
     },
     "image": "/exercises/images/post-partum/pont-fessier.png",
     "pathologies": [
-      "Lombalgie"
+      "Lombalgie",
+      "Pubalgie",
+      "Post-partum"
     ],
     "objectifs": [
       "Stabilité lombo-pelvienne"
@@ -5701,7 +5997,9 @@
       "Transverse",
       "Muscles posturaux"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la posture"
@@ -5738,7 +6036,7 @@
   },
   {
     "id": "GAINAGE_06",
-    "nom": "Respiration diaphragmatique",
+    "nom": "Respiration abdominale allongée",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Activation diaphragme et transverse",
@@ -5778,7 +6076,9 @@
       "Diaphragme",
       "Transverse"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore le contrôle respiratoire"
@@ -5816,7 +6116,7 @@
   },
   {
     "id": "GAINAGE_07",
-    "nom": "Dead Bug simplifié",
+    "nom": "Dead bug simplifié",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité du tronc",
@@ -5860,7 +6160,9 @@
       "Transverse",
       "Abdominaux profonds"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore le contrôle moteur"
@@ -5898,7 +6200,7 @@
   },
   {
     "id": "GAINAGE_08",
-    "nom": "Bird Dog jambe seule",
+    "nom": "Bird dog, jambe seule",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité lombo-pelvienne",
@@ -5940,11 +6242,19 @@
       "phase_descente": 2,
       "cycles": 20
     },
-    "image": "/exercises/images/gainage/bird-dog-jambe.webp"
+    "image": "/exercises/images/gainage/bird-dog-jambe.webp",
+    "pathologies": [
+      "Lombalgie",
+      "Post-partum",
+      "Déconditionnement / reprise"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_09",
-    "nom": "Bird Dog simplifié",
+    "nom": "Bird dog simplifié (bras, puis jambe)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Coordination et stabilité",
@@ -5972,7 +6282,11 @@
     ],
     "tags": [
       "Gainage",
-      "Contrôle moteur"
+      "Contrôle moteur",
+      "Post-partum",
+      "Core",
+      "Transverse",
+      "Lombalgie"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -5982,7 +6296,14 @@
       "phase_descente": 2,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/bird-dog-bras.png"
+    "image": "/exercises/images/post-partum/bird-dog-bras.png",
+    "pathologies": [
+      "Post-partum",
+      "Lombalgie"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_10",
@@ -6026,7 +6347,15 @@
       "phase_descente": 3,
       "cycles": 3
     },
-    "image": "/exercises/images/gainage/planche-genoux.webp"
+    "image": "/exercises/images/gainage/planche-genoux.webp",
+    "pathologies": [
+      "Lombalgie",
+      "Post-partum",
+      "Déconditionnement / reprise"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_11",
@@ -6069,11 +6398,19 @@
       "phase_descente": 3,
       "cycles": 10
     },
-    "image": "/exercises/images/post-partum/pont-fessier.png"
+    "image": "/exercises/images/post-partum/pont-fessier.png",
+    "pathologies": [
+      "Lombalgie",
+      "Post-partum",
+      "Déconditionnement / reprise"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_12",
-    "nom": "Heel Slide contrôlé",
+    "nom": "Glissé du talon contrôlé (heel slide)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Contrôle du transverse",
@@ -6102,7 +6439,9 @@
     ],
     "tags": [
       "Gainage",
-      "Transverse"
+      "Transverse",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6112,11 +6451,17 @@
       "phase_descente": 2,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/heel-slide.png"
+    "image": "/exercises/images/post-partum/heel-slide.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_13",
-    "nom": "Dead Bug complet",
+    "nom": "Dead bug complet",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Renforcement du gainage profond",
@@ -6148,7 +6493,9 @@
     "tags": [
       "Gainage",
       "Dead Bug",
-      "Lombalgie"
+      "Lombalgie",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6158,11 +6505,17 @@
       "phase_descente": 2,
       "cycles": 24
     },
-    "image": "/exercises/images/post-partum/dead-bug-complet.webp"
+    "image": "/exercises/images/post-partum/dead-bug-complet.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Aucun"
+    ]
   },
   {
     "id": "GAINAGE_14",
-    "nom": "Bird Dog complet",
+    "nom": "Bird dog complet (bras et jambe opposés)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité dynamique du tronc",
@@ -6194,7 +6547,9 @@
     ],
     "tags": [
       "Gainage",
-      "Bird Dog"
+      "Bird Dog",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6204,11 +6559,17 @@
       "phase_descente": 2,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/bird-dog-complet.webp"
+    "image": "/exercises/images/post-partum/bird-dog-complet.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_15",
-    "nom": "Planche ventrale",
+    "nom": "Planche ventrale (gainage)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Endurance du gainage",
@@ -6239,7 +6600,11 @@
     ],
     "tags": [
       "Gainage",
-      "Planche"
+      "Planche",
+      "Abdominaux",
+      "Tronc",
+      "Lombaires",
+      "Pubalgie"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6249,7 +6614,15 @@
       "phase_descente": 3,
       "cycles": 3
     },
-    "image": "/exercises/images/tronc/Gainage_Ventral.png"
+    "image": "/exercises/images/tronc/Gainage_Ventral.png",
+    "pathologies": [
+      "Lombalgie",
+      "Instabilité lombaire",
+      "Pubalgie"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_16",
@@ -6281,7 +6654,9 @@
     ],
     "tags": [
       "Gainage",
-      "Obliques"
+      "Obliques",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6291,11 +6666,17 @@
       "phase_descente": 2,
       "cycles": 3
     },
-    "image": "/exercises/images/post-partum/side-plank-genoux.webp"
+    "image": "/exercises/images/post-partum/side-plank-genoux.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_17",
-    "nom": "Gainage quadrupédie",
+    "nom": "Gainage à quatre pattes",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Activation profonde du tronc",
@@ -6325,7 +6706,9 @@
     ],
     "tags": [
       "Gainage",
-      "Quadrupédie"
+      "Quadrupédie",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6335,11 +6718,17 @@
       "phase_descente": 2,
       "cycles": 3
     },
-    "image": "/exercises/images/post-partum/gainage-quadrupedie.png"
+    "image": "/exercises/images/post-partum/gainage-quadrupedie.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_18",
-    "nom": "Pallof Press",
+    "nom": "Pallof press (anti-rotation à l'élastique)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Anti-rotation du tronc",
@@ -6371,7 +6760,9 @@
     "tags": [
       "Gainage",
       "Pallof",
-      "Anti-rotation"
+      "Anti-rotation",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6381,7 +6772,10 @@
       "phase_descente": 2,
       "cycles": 24
     },
-    "image": "/exercises/images/post-partum/pallof-press.webp"
+    "image": "/exercises/images/post-partum/pallof-press.webp",
+    "pathologies": [
+      "Post-partum"
+    ]
   },
   {
     "id": "GAINAGE_19",
@@ -6417,7 +6811,9 @@
     "tags": [
       "Gainage",
       "Pont",
-      "Fessiers"
+      "Fessiers",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6427,7 +6823,13 @@
       "phase_descente": 3,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/pont-fessier-1jambe.webp"
+    "image": "/exercises/images/post-partum/pont-fessier-1jambe.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_20",
@@ -6471,7 +6873,15 @@
       "phase_descente": 1,
       "cycles": 20
     },
-    "image": "/exercises/images/gainage/planche-toucher-epaule.webp"
+    "image": "/exercises/images/gainage/planche-toucher-epaule.webp",
+    "pathologies": [
+      "Lombalgie",
+      "Post-partum",
+      "Déconditionnement / reprise"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_21",
@@ -6503,7 +6913,9 @@
     ],
     "tags": [
       "Gainage",
-      "Marche"
+      "Marche",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6513,11 +6925,17 @@
       "phase_descente": 1,
       "cycles": 1
     },
-    "image": "/exercises/images/post-partum/marche-gainee.png"
+    "image": "/exercises/images/post-partum/marche-gainee.png",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Marche ou escalier"
+    ]
   },
   {
     "id": "GAINAGE_22",
-    "nom": "Farmer Walk unilatéral",
+    "nom": "Marche avec une charge d'un seul côté",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Gainage anti-inclinaison",
@@ -6546,11 +6964,13 @@
       "Carré des lombes"
     ],
     "materiel": [
-      "Haltère"
+      "Haltère ou poids"
     ],
     "tags": [
       "Gainage",
-      "Farmer Walk"
+      "Farmer Walk",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6560,11 +6980,14 @@
       "phase_descente": 1,
       "cycles": 2
     },
-    "image": "/exercises/images/post-partum/carry-asymetrique.webp"
+    "image": "/exercises/images/post-partum/carry-asymetrique.webp",
+    "pathologies": [
+      "Post-partum"
+    ]
   },
   {
     "id": "GAINAGE_23",
-    "nom": "Step-Up gainé",
+    "nom": "Montée sur marche gainée (step-up)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité fonctionnelle",
@@ -6594,7 +7017,9 @@
     ],
     "tags": [
       "Gainage",
-      "Step Up"
+      "Step Up",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6604,11 +7029,17 @@
       "phase_descente": 2,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/step-up-bas.webp"
+    "image": "/exercises/images/post-partum/step-up-bas.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Marche ou escalier"
+    ]
   },
   {
     "id": "GAINAGE_24",
-    "nom": "Mountain Climber lent",
+    "nom": "Montées de genoux lentes en planche (mountain climber)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Gainage dynamique",
@@ -6638,7 +7069,9 @@
     ],
     "tags": [
       "Gainage",
-      "Mountain Climber"
+      "Mountain Climber",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6648,11 +7081,17 @@
       "phase_descente": 1,
       "cycles": 20
     },
-    "image": "/exercises/images/post-partum/mountain-climber-lent.webp"
+    "image": "/exercises/images/post-partum/mountain-climber-lent.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Tapis"
+    ]
   },
   {
     "id": "GAINAGE_25",
-    "nom": "Bear Crawl",
+    "nom": "Marche de l'ours (bear crawl)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Gainage fonctionnel avancé",
@@ -6685,7 +7124,9 @@
     "tags": [
       "Gainage",
       "Bear Crawl",
-      "Sport"
+      "Sport",
+      "Post-partum",
+      "Core"
     ],
     "validation_medicale": true,
     "timer_config": {
@@ -6695,11 +7136,17 @@
       "phase_descente": 1,
       "cycles": 2
     },
-    "image": "/exercises/images/post-partum/bear-crawl.webp"
+    "image": "/exercises/images/post-partum/bear-crawl.webp",
+    "pathologies": [
+      "Post-partum"
+    ],
+    "materiel": [
+      "Marche ou escalier"
+    ]
   },
   {
     "id": "GAINAGE_26",
-    "nom": "Pont fessier sur Swiss Ball",
+    "nom": "Pont fessier sur swiss ball",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Stabilité lombo-pelvienne avancée",
@@ -6747,7 +7194,7 @@
       "Ischio-jambiers"
     ],
     "materiel": [
-      "Swiss Ball"
+      "Swiss ball"
     ],
     "contre_indications": [],
     "benefices": [
@@ -6789,7 +7236,7 @@
   },
   {
     "id": "GAINAGE_27",
-    "nom": "Planche avant-bras sur Swiss Ball",
+    "nom": "Planche avant-bras sur swiss ball",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Renforcement du gainage profond",
@@ -6834,7 +7281,7 @@
       "Grand droit"
     ],
     "materiel": [
-      "Swiss Ball"
+      "Swiss ball"
     ],
     "contre_indications": [],
     "benefices": [
@@ -6877,7 +7324,7 @@
   },
   {
     "id": "GAINAGE_28",
-    "nom": "Roll-Out Swiss Ball",
+    "nom": "Roulé avant sur swiss ball (roll-out)",
     "type": "timer",
     "categorie": "Gainage",
     "objectif": "Contrôle avancé du tronc",
@@ -6925,7 +7372,7 @@
       "Obliques"
     ],
     "materiel": [
-      "Swiss Ball"
+      "Swiss ball"
     ],
     "contre_indications": [],
     "benefices": [
@@ -6968,7 +7415,7 @@
   },
   {
     "id": "PUBALGIE_01",
-    "nom": "Serrage Ballon Genoux",
+    "nom": "Serrage d'un ballon entre les genoux",
     "type": "timer",
     "categorie": "Adducteurs",
     "objectif": "Réactivation des adducteurs",
@@ -7056,7 +7503,7 @@
   },
   {
     "id": "PUBALGIE_02",
-    "nom": "Serrage Ballon Jambes Tendues",
+    "nom": "Serrage d'un ballon, jambes tendues",
     "type": "timer",
     "categorie": "Adducteurs",
     "objectif": "Renforcement isométrique adducteurs",
@@ -7182,7 +7629,9 @@
       "Grand fessier",
       "Ischio-jambiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [
       "Améliore la stabilité du bassin"
@@ -7334,11 +7783,15 @@
     "zones": [
       "Obliques",
       "Bassin"
+    ],
+    "precautions": [
+      "Rester sous le seuil de douleur à l'aine",
+      "Mouvement lent et contrôlé"
     ]
   },
   {
     "id": "PUBALGIE_06",
-    "nom": "Clamshell",
+    "nom": "Ouverture du genou en coquillage (clamshell)",
     "type": "timer",
     "categorie": "Fessiers",
     "objectif": "Renforcement moyen fessier",
@@ -7354,10 +7807,13 @@
     "muscles_cibles": [
       "Moyen fessier"
     ],
-    "materiel": [],
-    "image": "/exercises/images/pubalgie/clamshell.png",
+    "materiel": [
+      "Aucun"
+    ],
+    "image": "/exercises/images/post-partum/clamshell.png",
     "pathologies": [
-      "Pubalgie"
+      "Pubalgie",
+      "Post-partum"
     ],
     "objectifs": [
       "Stabilité pelvienne"
@@ -7371,6 +7827,18 @@
       "Ouvrir le genou supérieur",
       "Ne pas tourner le bassin",
       "Redescendre lentement"
+    ],
+    "tags": [
+      "Post-partum",
+      "Core",
+      "Gainage",
+      "Hanche",
+      "Abducteurs",
+      "Pubalgie"
+    ],
+    "precautions": [
+      "Rester sous le seuil de douleur à l'aine",
+      "Mouvement lent et contrôlé"
     ]
   },
   {
@@ -7413,6 +7881,10 @@
       "Tendre bras et jambe opposés",
       "Garder le bassin stable",
       "Revenir lentement"
+    ],
+    "precautions": [
+      "Rester sous le seuil de douleur à l'aine",
+      "Mouvement lent et contrôlé"
     ]
   },
   {
@@ -7435,7 +7907,9 @@
       "Moyen fessier",
       "Stabilisateurs de cheville"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "image": "/exercises/images/cheville/equilibre-unipodal.webp",
     "pathologies": [
       "Pubalgie"
@@ -7447,11 +7921,15 @@
       "Cheville",
       "Genou",
       "Bassin"
+    ],
+    "precautions": [
+      "Rester sous le seuil de douleur à l'aine",
+      "Mouvement lent et contrôlé"
     ]
   },
   {
     "id": "PUBALGIE_B01",
-    "nom": "Bird Dog",
+    "nom": "Bird dog (bras et jambe opposés)",
     "type": "timer",
     "categorie": "Pubalgie",
     "objectif": "Stabilité lombo-pelvienne",
@@ -7499,6 +7977,9 @@
       "Abdomen",
       "Bassin",
       "Hanches"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -7547,6 +8028,9 @@
     ],
     "zones": [
       "Hanches"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -7596,11 +8080,14 @@
     "zones": [
       "Abdomen",
       "Bassin"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
     "id": "PUBALGIE_B04",
-    "nom": "Gainage latéral genoux",
+    "nom": "Gainage latéral sur les genoux",
     "type": "timer",
     "categorie": "Pubalgie",
     "objectif": "Renforcement des obliques et stabilisateurs",
@@ -7643,6 +8130,9 @@
     "zones": [
       "Abdomen",
       "Hanches"
+    ],
+    "materiel": [
+      "Aucun"
     ]
   },
   {
@@ -7692,6 +8182,9 @@
     "zones": [
       "Bassin",
       "Fessiers"
+    ],
+    "materiel": [
+      "Tapis"
     ]
   },
   {
@@ -7737,6 +8230,9 @@
     ],
     "zones": [
       "Adducteurs"
+    ],
+    "materiel": [
+      "Ballon ou balle"
     ]
   },
   {
@@ -7782,11 +8278,14 @@
     ],
     "zones": [
       "Adducteurs"
+    ],
+    "materiel": [
+      "Ballon ou balle"
     ]
   },
   {
     "id": "PUBALGIE_B08",
-    "nom": "Équilibre avec balle au mur",
+    "nom": "Équilibre sur une jambe avec lancer de balle",
     "type": "timer",
     "categorie": "Pubalgie",
     "objectif": "Contrôle neuromusculaire",
@@ -7830,28 +8329,78 @@
     "zones": [
       "Bassin",
       "Membre inférieur"
+    ],
+    "materiel": [
+      "Ballon ou balle"
     ]
   },
   {
     "id": "RESP_DEBUTER",
-    "nom": "🌿 Respiration guidée - Débuter",
+    "nom": "Respiration guidée : débuter",
     "categorie": "Respiration",
     "objectif": "Respiration guidée mode Débuter",
-    "image": "/exercises/images/post-partum/respiration-transverse.png"
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
+    "consignes": [
+      "Asseyez-vous ou allongez-vous confortablement",
+      "Suivez la bille : inspirez quand elle monte, soufflez quand elle descend",
+      "Rythme doux pour commencer"
+    ],
+    "pathologies": [
+      "Respiratoire",
+      "Douleur chronique (relaxation)"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ]
   },
   {
     "id": "RESP_EQUILIBRER",
-    "nom": "🌿 Respiration guidée - Équilibrer",
+    "nom": "Respiration guidée : équilibrer",
     "categorie": "Respiration",
     "objectif": "Respiration guidée mode Équilibrer",
-    "image": "/exercises/images/post-partum/respiration-transverse.png"
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
+    "consignes": [
+      "Asseyez-vous confortablement, dos droit",
+      "Suivez la bille : inspiration et expiration de même durée",
+      "Respirez par le nez si possible"
+    ],
+    "pathologies": [
+      "Respiratoire"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ]
   },
   {
     "id": "RESP_APAISER",
-    "nom": "🌿 Respiration guidée - Apaiser",
+    "nom": "Respiration guidée : apaiser",
     "categorie": "Respiration",
     "objectif": "Respiration guidée mode Apaiser",
-    "image": "/exercises/images/post-partum/respiration-transverse.png"
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
+    "consignes": [
+      "Allongez-vous ou asseyez-vous, épaules relâchées",
+      "Suivez la bille : l'expiration est plus longue que l'inspiration",
+      "Laissez le ventre se gonfler à l'inspiration"
+    ],
+    "pathologies": [
+      "Respiratoire",
+      "Douleur chronique (relaxation)"
+    ],
+    "materiel": [
+      "Tapis"
+    ],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ]
   },
   {
     "id": "COUDE_01",
@@ -7995,7 +8544,7 @@
       "Court extenseur radial du carpe"
     ],
     "materiel": [
-      "Haltère ou bouteille d'eau",
+      "Haltère ou poids",
       "Table"
     ],
     "pathologies": [
@@ -8085,7 +8634,7 @@
       "Extenseurs du poignet"
     ],
     "materiel": [
-      "Haltère ou bouteille d'eau",
+      "Haltère ou poids",
       "Table"
     ],
     "pathologies": [
@@ -8254,7 +8803,7 @@
       "Rond pronateur"
     ],
     "materiel": [
-      "Haltère ou bouteille d'eau",
+      "Haltère ou poids",
       "Table"
     ],
     "pathologies": [
@@ -8401,7 +8950,9 @@
       "Quadriceps",
       "Psoas"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -8893,7 +9444,7 @@
     ],
     "materiel": [
       "Banc",
-      "Haltère"
+      "Haltère ou poids"
     ],
     "contre_indications": [],
     "benefices": [],
@@ -9799,7 +10350,9 @@
     "muscles_cibles": [
       "Muscles du cou"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -10077,7 +10630,9 @@
       "Deltoïde postérieur",
       "Infra-épineux"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -10147,7 +10702,7 @@
       "Petit rond"
     ],
     "materiel": [
-      "Haltère",
+      "Haltère ou poids",
       "Serviette"
     ],
     "contre_indications": [],
@@ -10492,7 +11047,9 @@
     "muscles_cibles": [
       "Fléchisseurs des doigts"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [],
     "benefices": [],
     "audio_cues": [],
@@ -10510,6 +11067,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -10586,6 +11144,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -10859,7 +11418,9 @@
       "Quadriceps",
       "Ischio-jambiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [
       "Douleur aiguë du genou",
       "Instabilité importante de l'équilibre sans appui"
@@ -11048,7 +11609,9 @@
       "Érecteurs du rachis",
       "Fessiers"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [
       "Canal lombaire étroit",
       "Spondylolisthésis douloureux"
@@ -11234,7 +11797,9 @@
       "Obliques",
       "Grand dorsal"
     ],
-    "materiel": [],
+    "materiel": [
+      "Mur"
+    ],
     "contre_indications": [],
     "benefices": [
       "Assouplit le côté du tronc",
@@ -12668,6 +13233,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -12734,7 +13300,9 @@
       "Opposant du pouce",
       "Court abducteur du pouce"
     ],
-    "materiel": [],
+    "materiel": [
+      "Aucun"
+    ],
     "contre_indications": [
       "Poussée inflammatoire du pouce"
     ],
@@ -12766,6 +13334,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -13230,7 +13799,7 @@
       "Trapèze moyen"
     ],
     "materiel": [
-      "Haltère léger",
+      "Haltère ou poids",
       "Chaise ou banc"
     ],
     "contre_indications": [
@@ -13426,7 +13995,7 @@
       "Brachial"
     ],
     "materiel": [
-      "Haltère léger",
+      "Haltère ou poids",
       "Chaise"
     ],
     "contre_indications": [
@@ -13649,6 +14218,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -13750,6 +14320,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -13819,7 +14390,9 @@
       "Nerf médian",
       "Fléchisseurs des doigts"
     ],
-    "materiel": [],
+    "materiel": [
+      "Tapis"
+    ],
     "contre_indications": [
       "Perte de force ou de sensibilité qui s'aggrave : avis médical"
     ],
@@ -13852,6 +14425,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -13976,7 +14550,8 @@
     "tags": [
       "Dos",
       "Muscles paravertébraux",
-      "Grand dorsal"
+      "Grand dorsal",
+      "lombalgie"
     ],
     "timer_config": {
       "mode": "statique",
@@ -14762,7 +15337,7 @@
       "Grand fessier"
     ],
     "materiel": [
-      "Chaise stable"
+      "Chaise"
     ],
     "contre_indications": [
       "Vertiges au lever non évalués"
@@ -15168,7 +15743,8 @@
     ],
     "aide_marche": [
       "Alité",
-      "Au fauteuil"
+      "Au fauteuil",
+      "Barres parallèles"
     ]
   },
   {
@@ -15435,6 +16011,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -15527,6 +16104,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -15620,6 +16198,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur"
     ]
   },
@@ -15708,6 +16287,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -15770,7 +16350,7 @@
       "Muscles stabilisateurs"
     ],
     "materiel": [
-      "Chaise pour appui"
+      "Chaise"
     ],
     "contre_indications": [
       "Chutes fréquentes sans surveillance"
@@ -15944,7 +16524,7 @@
       "Muscles du dos"
     ],
     "materiel": [
-      "Chaise sans accoudoirs"
+      "Chaise"
     ],
     "contre_indications": [
       "Aucune"
@@ -15971,7 +16551,8 @@
       "Tronc"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Barres parallèles"
     ]
   },
   {
@@ -16062,6 +16643,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -16156,6 +16738,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -16336,7 +16919,8 @@
       "Bras"
     ],
     "aide_marche": [
-      "Au fauteuil"
+      "Au fauteuil",
+      "Barres parallèles"
     ]
   },
   {
@@ -16519,6 +17103,7 @@
     ],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -16673,7 +17258,7 @@
       "Bras"
     ],
     "materiel": [
-      "Chaise stable",
+      "Chaise",
       "Tapis"
     ],
     "contre_indications": [
@@ -17263,7 +17848,10 @@
       "Respiratoire (BPCO, asthme…)",
       "Stress / anxiété"
     ],
-    "precautions": [],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [
@@ -17326,7 +17914,10 @@
     "pathologies": [
       "Respiratoire (BPCO, asthme…)"
     ],
-    "precautions": [],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [
@@ -17385,7 +17976,10 @@
       "Respiratoire (BPCO, asthme…)",
       "Post-opératoire"
     ],
-    "precautions": [],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -17689,7 +18283,10 @@
     "pathologies": [
       "Respiratoire (BPCO, asthme…)"
     ],
-    "precautions": [],
+    "precautions": [
+      "S'arrêter en cas de vertige ou de picotements",
+      "Ne pas forcer l'expiration"
+    ],
     "repos": 0,
     "reps": 1,
     "respiration": [],
@@ -17752,7 +18349,10 @@
       "Entorse / instabilité de cheville",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -17822,7 +18422,10 @@
       "Ligament croisé (LCA)",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -17958,7 +18561,10 @@
       "Ligament croisé (LCA)",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -18027,7 +18633,10 @@
       "Ligament croisé (LCA)",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 40,
     "reps": 4,
     "respiration": [],
@@ -18087,7 +18696,10 @@
       "Ligament croisé (LCA)",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 40,
     "reps": 4,
     "respiration": [],
@@ -18226,7 +18838,10 @@
       "Tendinopathie rotulienne",
       "Ligament croisé (LCA)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 40,
     "reps": 3,
     "respiration": [],
@@ -18365,7 +18980,10 @@
       "Ligament croisé (LCA)",
       "Retour au sport"
     ],
-    "precautions": [],
+    "precautions": [
+      "Bien s'échauffer avant",
+      "Arrêter si douleur vive ou boiterie"
+    ],
     "repos": 60,
     "reps": 5,
     "respiration": [],
@@ -18486,7 +19104,7 @@
     "id": "GERIA_02",
     "image": "/exercises/images/geriatrie/ramasser-objet-f.webp",
     "materiel": [
-      "Chaise stable",
+      "Chaise",
       "Objet léger"
     ],
     "muscles_cibles": [
@@ -18553,7 +19171,7 @@
     "id": "GERIA_03",
     "image": "/exercises/images/geriatrie/equilibre-yeux-fermes-chaise-f.webp",
     "materiel": [
-      "Chaise stable"
+      "Chaise"
     ],
     "muscles_cibles": [],
     "niveau": 2,
@@ -18618,7 +19236,7 @@
     "id": "GERIA_04",
     "image": "/exercises/images/geriatrie/pointes-chaise-f.webp",
     "materiel": [
-      "Chaise stable"
+      "Chaise"
     ],
     "muscles_cibles": [
       "Mollets"
@@ -18634,7 +19252,10 @@
       "Senior",
       "Ostéoporose"
     ],
-    "precautions": [],
+    "precautions": [
+      "Appui stable à portée de main",
+      "Chaussures fermées"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -18702,7 +19323,10 @@
     "pathologies": [
       "Développement moteur de l'enfant"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -18766,7 +19390,10 @@
     "pathologies": [
       "Développement moteur de l'enfant"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -18825,7 +19452,10 @@
     "pathologies": [
       "Développement moteur de l'enfant"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -18887,7 +19517,10 @@
     "pathologies": [
       "Développement moteur de l'enfant"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -18954,7 +19587,10 @@
       "Développement moteur de l'enfant",
       "Scoliose / posture"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -19014,7 +19650,10 @@
     "pathologies": [
       "Développement moteur de l'enfant"
     ],
-    "precautions": [],
+    "precautions": [
+      "Toujours sous la surveillance d'un adulte",
+      "Dans un espace dégagé"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -19064,7 +19703,7 @@
     "id": "ONCO_01",
     "image": "/exercises/images/oncologie/pompage-main-bras-sureleve-f.webp",
     "materiel": [
-      "Coussins"
+      "Coussin"
     ],
     "muscles_cibles": [],
     "niveau": 1,
@@ -19125,7 +19764,7 @@
     "id": "ONCO_02",
     "image": "/exercises/images/oncologie/coude-bras-sureleve-f.webp",
     "materiel": [
-      "Coussins"
+      "Coussin"
     ],
     "muscles_cibles": [],
     "niveau": 1,
@@ -19867,7 +20506,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques",
+      "Disques (barre)",
       "Banc"
     ],
     "muscles_cibles": [
@@ -19945,7 +20584,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Quadriceps",
@@ -20018,7 +20657,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Quadriceps",
@@ -20089,7 +20728,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Ischio-jambiers",
@@ -20162,7 +20801,7 @@
     "image": "/exercises/images/barre/souleve-terre-roumain-f.webp",
     "materiel": [
       "Barre de squat",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Ischio-jambiers",
@@ -20232,7 +20871,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Quadriceps",
@@ -20306,7 +20945,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques",
+      "Disques (barre)",
       "Banc"
     ],
     "muscles_cibles": [
@@ -20379,7 +21018,7 @@
     "materiel": [
       "Barre de squat",
       "Mousse de barre",
-      "Disques",
+      "Disques (barre)",
       "Banc"
     ],
     "muscles_cibles": [
@@ -20397,7 +21036,10 @@
       "Lombalgie",
       "Ligament croisé (LCA)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Charge légère au début, technique d'abord",
+      "Dos neutre pendant tout le mouvement"
+    ],
     "repos": 75,
     "reps": 3,
     "respiration": [],
@@ -20449,7 +21091,7 @@
     "materiel": [
       "Barre de squat",
       "Rack",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Mollets"
@@ -20519,7 +21161,7 @@
     "image": "/exercises/images/barre/rowing-barre-f.webp",
     "materiel": [
       "Barre de squat",
-      "Disques"
+      "Disques (barre)"
     ],
     "muscles_cibles": [
       "Dorsaux",
@@ -20537,7 +21179,10 @@
       "Scoliose / posture",
       "Cervicalgie"
     ],
-    "precautions": [],
+    "precautions": [
+      "Charge légère au début, technique d'abord",
+      "Dos neutre pendant tout le mouvement"
+    ],
     "repos": 75,
     "reps": 3,
     "respiration": [],
@@ -20677,7 +21322,10 @@
       "Déconditionnement / reprise",
       "Gonarthrose / prothèse de genou"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -20747,7 +21395,10 @@
       "Prévention des chutes",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -20817,7 +21468,10 @@
       "Déconditionnement / reprise",
       "Tendinopathie d'Achille"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -20890,7 +21544,10 @@
       "Déconditionnement / reprise",
       "Ligament croisé (LCA)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21032,7 +21689,10 @@
       "Déconditionnement / reprise",
       "Lombalgie"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21100,7 +21760,10 @@
       "Lombalgie",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21171,7 +21834,10 @@
       "Déconditionnement / reprise",
       "Instabilité / luxation d'épaule"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21247,7 +21913,10 @@
       "Déconditionnement / reprise",
       "Cervicalgie"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21317,7 +21986,10 @@
       "Prévention des chutes",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -21386,7 +22058,10 @@
       "Prévention des chutes",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Genoux légèrement fléchis, jamais verrouillés",
+      "Arrêter en cas de vertige, de douleur ou de gêne inhabituelle"
+    ],
     "repos": 20,
     "reps": 2,
     "respiration": [],
@@ -21515,7 +22190,10 @@
       "Déconditionnement / reprise",
       "Respiratoire (BPCO, asthme…)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Siège réglé avant de commencer",
+      "Rester essoufflé mais capable de parler"
+    ],
     "repos": 0,
     "reps": 1,
     "respiration": [],
@@ -21580,7 +22258,10 @@
       "Gonarthrose / prothèse de genou",
       "Coxarthrose / prothèse de hanche"
     ],
-    "precautions": [],
+    "precautions": [
+      "Siège réglé avant de commencer",
+      "Rester essoufflé mais capable de parler"
+    ],
     "repos": 0,
     "reps": 1,
     "respiration": [],
@@ -21645,7 +22326,10 @@
       "Respiratoire (BPCO, asthme…)",
       "Gonarthrose / prothèse de genou"
     ],
-    "precautions": [],
+    "precautions": [
+      "Siège réglé avant de commencer",
+      "Rester essoufflé mais capable de parler"
+    ],
     "repos": 30,
     "reps": 2,
     "respiration": [],
@@ -21769,7 +22453,10 @@
       "AVC / hémiplégie",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Siège réglé avant de commencer",
+      "Rester essoufflé mais capable de parler"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -22377,7 +23064,7 @@
     "id": "DIPS_01",
     "image": "/exercises/images/dips/dips-chaise-genoux-plies-f.webp",
     "materiel": [
-      "Chaise stable"
+      "Chaise"
     ],
     "muscles_cibles": [
       "Triceps",
@@ -22442,7 +23129,7 @@
     "id": "DIPS_02",
     "image": "/exercises/images/dips/dips-chaise-jambes-tendues-f.webp",
     "materiel": [
-      "Chaise stable"
+      "Chaise"
     ],
     "muscles_cibles": [
       "Triceps",
@@ -22799,7 +23486,10 @@
       "Prothèse de hanche",
       "Senior"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -22999,7 +23689,10 @@
       "Déconditionnement / reprise",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23066,7 +23759,10 @@
       "Senior",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -23132,7 +23828,10 @@
       "Déconditionnement / reprise",
       "SLA (maladie de Charcot)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23266,7 +23965,10 @@
       "Déconditionnement / reprise",
       "Senior"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23328,7 +24030,10 @@
       "Sclérose en plaques",
       "Charcot-Marie-Tooth"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -23456,7 +24161,10 @@
       "Prévention des chutes",
       "Senior"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -23482,6 +24190,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -23527,7 +24236,10 @@
       "Maladie de Parkinson",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -23551,6 +24263,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -23596,7 +24309,10 @@
       "Entorse chronique cheville",
       "Prévention des chutes"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23621,6 +24337,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -23666,7 +24383,10 @@
       "Senior",
       "Pied plat"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -23690,6 +24410,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -23759,6 +24480,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -23806,7 +24528,10 @@
       "Sclérose en plaques",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23830,6 +24555,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -23877,7 +24603,10 @@
       "Déconditionnement / reprise",
       "AVC / hémiplégie"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23903,6 +24632,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -23948,7 +24678,10 @@
       "Déconditionnement / reprise",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -23971,6 +24704,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -24014,7 +24748,10 @@
       "Déconditionnement / reprise",
       "Post-opératoire"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 20,
     "reps": 3,
     "respiration": [],
@@ -24036,6 +24773,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -24113,6 +24851,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes"
     ]
@@ -24157,7 +24896,10 @@
       "Perte d'autonomie",
       "Respiratoire (BPCO, asthme…)"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 60,
     "reps": 2,
     "respiration": [],
@@ -24183,6 +24925,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -24229,7 +24972,10 @@
       "AVC / hémiplégie",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -24252,6 +24998,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -24331,6 +25078,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -24400,6 +25148,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -24471,6 +25220,7 @@
     "zones_corporelles": [],
     "aide_marche": [
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne"
@@ -24512,7 +25262,10 @@
       "Entorse chronique cheville",
       "Perte d'autonomie"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent, sans douleur",
+      "Arrêter en cas de malaise ou de douleur inhabituelle"
+    ],
     "repos": 15,
     "reps": 2,
     "respiration": [],
@@ -24536,6 +25289,7 @@
     "aide_marche": [
       "Alité",
       "Au fauteuil",
+      "Barres parallèles",
       "Déambulateur",
       "2 cannes",
       "1 canne",
@@ -26277,7 +27031,10 @@
       "Senior",
       "Prévention des chutes"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -26343,7 +27100,10 @@
       "Sclérose en plaques",
       "Charcot-Marie-Tooth"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -26610,7 +27370,10 @@
       "Prothèse de genou",
       "Maladie de Parkinson"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -26879,7 +27642,10 @@
       "Prévention des chutes",
       "Senior"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 45,
     "reps": 3,
     "respiration": [],
@@ -27014,7 +27780,10 @@
       "Maladie de Parkinson",
       "Senior"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 30,
     "reps": 3,
     "respiration": [],
@@ -27084,7 +27853,10 @@
       "Prévention des chutes",
       "Sclérose en plaques"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -27158,7 +27930,10 @@
       "Charcot-Marie-Tooth",
       "Déconditionnement / reprise"
     ],
-    "precautions": [],
+    "precautions": [
+      "Mouvement lent et contrôlé",
+      "Arrêter en cas de douleur vive"
+    ],
     "repos": 60,
     "reps": 3,
     "respiration": [],
@@ -27260,5 +28035,153 @@
     ],
     "cote_marque": true,
     "au_cabinet": true
+  },
+  {
+    "id": "PERINEE_LENT",
+    "nom": "Contractions lentes du périnée",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement du périnée",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "consignes": [
+      "Serrez et remontez le périnée vers l'intérieur, sans serrer les fesses ni bloquer la respiration.",
+      "Tenez la contraction pendant tout le décompte en respirant calmement.",
+      "Relâchez entièrement pendant le repos."
+    ],
+    "precautions": [
+      "Ne pas bloquer la respiration",
+      "Arrêter en cas de fuite ou de pesanteur"
+    ],
+    "tags": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
+    "pathologies": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "objectifs": [
+      "Renforcement du périnée"
+    ],
+    "ex": 8,
+    "repos": 8,
+    "reps": 6,
+    "description": "Allongée sur le dos, genoux pliés"
+  },
+  {
+    "id": "PERINEE_RAPIDE",
+    "nom": "Contractions rapides du périnée",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement du périnée",
+    "niveau": 1,
+    "exercise_mode": "statique",
+    "consignes": [
+      "Serrez le périnée fort et vite, puis relâchez complètement.",
+      "Enchaînez à votre rythme pendant tout le décompte, une contraction par seconde environ.",
+      "Le relâchement est aussi important que la contraction."
+    ],
+    "precautions": [
+      "Ne pas bloquer la respiration",
+      "Arrêter en cas de fuite ou de pesanteur"
+    ],
+    "tags": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "image": "/exercises/images/post-partum/respiration-transverse.png",
+    "pathologies": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "objectifs": [
+      "Renforcement du périnée"
+    ],
+    "ex": 15,
+    "repos": 15,
+    "reps": 3,
+    "description": "Allongée sur le dos, genoux pliés"
+  },
+  {
+    "id": "PERINEE_DEBOUT",
+    "nom": "Périnée debout : lentes puis rapides",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement du périnée",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "consignes": [
+      "Debout, serrez et remontez le périnée, tenez 5 secondes en respirant, relâchez.",
+      "Puis enchaînez 5 contractions rapides.",
+      "Recommencez jusqu'à la fin du décompte."
+    ],
+    "precautions": [
+      "Ne pas bloquer la respiration",
+      "Arrêter en cas de fuite ou de pesanteur"
+    ],
+    "tags": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "image": "/exercises/images/post-partum/sit-to-stand.png",
+    "pathologies": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "objectifs": [
+      "Renforcement du périnée"
+    ],
+    "ex": 30,
+    "repos": 15,
+    "reps": 3,
+    "description": "Debout"
+  },
+  {
+    "id": "PERINEE_IMPACT",
+    "nom": "Périnée réflexe : toux et petits sauts",
+    "type": "timer",
+    "categorie": "Post-partum",
+    "objectif": "Renforcement du périnée",
+    "niveau": 2,
+    "exercise_mode": "statique",
+    "consignes": [
+      "Debout, serrez le périnée juste avant de tousser fort, 3 fois.",
+      "Puis faites de petits sauts sur place en serrant le périnée à chaque réception.",
+      "Arrêtez dès que vous sentez une fuite ou une pesanteur."
+    ],
+    "precautions": [
+      "Ne pas bloquer la respiration",
+      "Arrêter en cas de fuite ou de pesanteur"
+    ],
+    "tags": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "image": "/exercises/images/post-partum/sit-to-stand.png",
+    "pathologies": [
+      "Post-partum",
+      "Périnée"
+    ],
+    "materiel": [
+      "Aucun"
+    ],
+    "objectifs": [
+      "Renforcement du périnée"
+    ],
+    "ex": 20,
+    "repos": 15,
+    "reps": 3,
+    "description": "Debout"
   }
 ]
