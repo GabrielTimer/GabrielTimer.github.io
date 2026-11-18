@@ -14483,7 +14483,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -14503,7 +14503,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_02",
 "source": "CABINET",
 "nom": "S'asseoir dans le fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
 "consignes": [
 "Reculer jusqu'à sentir le fauteuil derrière les mollets",
 "Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
@@ -14543,7 +14543,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_04",
 "source": "CABINET",
 "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Déplacer doucement le poids du corps sur la jambe droite",
@@ -14563,7 +14563,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_07",
 "source": "CABINET",
 "nom": "Mini-flexions des genoux au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Plier un peu les genoux, comme pour s'asseoir",
@@ -15444,7 +15444,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -15464,7 +15464,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_02",
 "source": "CABINET",
 "nom": "S'asseoir dans le fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
 "consignes": [
 "Reculer jusqu'à sentir le fauteuil derrière les mollets",
 "Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
@@ -15484,7 +15484,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_04",
 "source": "CABINET",
 "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Déplacer doucement le poids du corps sur la jambe droite",
@@ -15504,7 +15504,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_09",
 "source": "CABINET",
 "nom": "Écarter la jambe sur le côté au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Écarter une jambe tendue sur le côté",
@@ -16859,7 +16859,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -16879,7 +16879,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_02",
 "source": "CABINET",
 "nom": "S'asseoir dans le fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
 "consignes": [
 "Reculer jusqu'à sentir le fauteuil derrière les mollets",
 "Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
@@ -16899,7 +16899,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_05",
 "source": "CABINET",
 "nom": "Montées sur la pointe des pieds au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Monter lentement sur la pointe des pieds",
@@ -16919,7 +16919,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_07",
 "source": "CABINET",
 "nom": "Mini-flexions des genoux au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Plier un peu les genoux, comme pour s'asseoir",
@@ -16939,7 +16939,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_08",
 "source": "CABINET",
 "nom": "Marche sur place au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Lever un genou puis l'autre, comme pour marcher",
@@ -18125,7 +18125,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -18145,7 +18145,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_02",
 "source": "CABINET",
 "nom": "S'asseoir dans le fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
 "consignes": [
 "Reculer jusqu'à sentir le fauteuil derrière les mollets",
 "Lâcher une poignée et attraper l'accoudoir, puis l'autre main",
@@ -18165,7 +18165,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_08",
 "source": "CABINET",
 "nom": "Marche sur place au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Lever un genou puis l'autre, comme pour marcher",
@@ -18937,7 +18937,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -18977,7 +18977,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_04",
 "source": "CABINET",
 "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Déplacer doucement le poids du corps sur la jambe droite",
@@ -18997,7 +18997,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_07",
 "source": "CABINET",
 "nom": "Mini-flexions des genoux au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Plier un peu les genoux, comme pour s'asseoir",
@@ -19017,7 +19017,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_08",
 "source": "CABINET",
 "nom": "Marche sur place au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Lever un genou puis l'autre, comme pour marcher",
@@ -20074,7 +20074,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -20114,7 +20114,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_04",
 "source": "CABINET",
 "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Déplacer doucement le poids du corps sur la jambe droite",
@@ -20134,7 +20134,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_09",
 "source": "CABINET",
 "nom": "Écarter la jambe sur le côté au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Écarter une jambe tendue sur le côté",
@@ -21037,7 +21037,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_01",
 "source": "CABINET",
 "nom": "Se lever du fauteuil avec le déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
 "consignes": [
 "Déambulateur placé juste devant soi, freins serrés",
 "Avancer les fesses au bord, pieds en arrière des genoux",
@@ -21057,7 +21057,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_03",
 "source": "CABINET",
 "nom": "Tenir debout au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/debout-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Pieds écartés de la largeur du bassin",
@@ -21077,7 +21077,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_04",
 "source": "CABINET",
 "nom": "Transfert de poids d'une jambe sur l'autre au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Déplacer doucement le poids du corps sur la jambe droite",
@@ -21734,7 +21734,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_06",
 "source": "CABINET",
 "nom": "Relever les pointes de pied au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/talons-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Relever les pointes de pied en restant sur les talons",
@@ -21754,7 +21754,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_08",
 "source": "CABINET",
 "nom": "Marche sur place au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Lever un genou puis l'autre, comme pour marcher",
@@ -21774,7 +21774,7 @@ export const MODELES_BASE = [
 "id": "DEAMB_05",
 "source": "CABINET",
 "nom": "Montées sur la pointe des pieds au déambulateur",
-"image": "",
+"image": "/exercises/images/aide-marche/pointes-deambulateur-f.webp",
 "consignes": [
 "Debout, mains sur les poignées, freins serrés",
 "Monter lentement sur la pointe des pieds",

@@ -1763,5 +1763,50 @@
   "defaut": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
   "f": "/exercises/images/aide-marche/cercles-chevilles-assis-f.webp",
   "h": "/exercises/images/aide-marche/cercles-chevilles-assis-h.webp"
+ },
+ "/exercises/images/aide-marche/lever-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/lever-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/lever-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/asseoir-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/asseoir-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/asseoir-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/debout-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/debout-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/debout-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/debout-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/transfert-poids-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/transfert-poids-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/pointes-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/pointes-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/pointes-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/pointes-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/talons-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/talons-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/talons-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/talons-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/mini-flexions-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/mini-flexions-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-place-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/marche-place-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/marche-place-deambulateur-h.webp"
+ },
+ "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp": {
+  "defaut": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
+  "f": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-f.webp",
+  "h": "/exercises/images/aide-marche/ecarter-jambe-deambulateur-h.webp"
  }
 }
