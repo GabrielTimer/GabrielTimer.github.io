@@ -96,7 +96,7 @@ const FACETS = [
   { k:"aide", label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
-const LIEUX = [["HEP", "Photos"], ["CABINET", "Dessins"]];
+const LIEUX = [["HEP", "HEP"], ["CABINET", "Dessins"]];
 const toutEffacer = () => { F.q = ""; F.mine = false; FACETS.forEach(f => F[f.k] = []); F.masques = false; };
 /* Zone du corps et pathologie d'un modèle, déduites de sa zone et de son nom */
 const ZN = ZONES.map(z => [z, norm(z)]);
@@ -139,7 +139,7 @@ app.innerHTML = `
     <div class="lib-search-row">
       <label class="input-icon"><span class="sr-only">Rechercher</span>${icon("search")}<input class="input" id="q" type="search" placeholder="Rechercher : lombalgie, LCA, épaule…" value="${esc(F.q)}"></label>
       ${filterButtonHTML()}
-      <div class="segmented img-seg" role="group" aria-label="Photos ou dessins">${[["", "Tous"], ["HEP", "Photos"], ["CABINET", "Dessins"]].map(([v, l]) => `<button type="button" data-img="${v}" aria-pressed="${(F.lieu[0] || "") === v}">${v ? icon(v === "HEP" ? "camera" : "image") : ""}${l}</button>`).join("")}</div>
+      <div class="segmented img-seg" role="group" aria-label="HEP ou dessins">${[["", "Tous"], ["HEP", "HEP"], ["CABINET", "Dessins"]].map(([v, l]) => `<button type="button" data-img="${v}" aria-pressed="${(F.lieu[0] || "") === v}">${v ? icon(v === "HEP" ? "camera" : "image") : ""}${l}</button>`).join("")}</div>
       <button class="btn lib-mine-btn" type="button" id="mine" aria-pressed="${F.mine}" title="Seulement mes modèles">${icon("folder")}<span class="lbl">Mes modèles</span></button>
     </div>
     <div class="lib-active" id="actifs" hidden></div>
@@ -337,7 +337,7 @@ function render(){
         ${cur.mine ? `<span class="badge sun mo-own">${icon("star")}${cur.remplace ? "Ma version" : "Mon modèle"}</span>` : ""}
         <button class="mo-cover" type="button" data-see="${esc(g.key)}" aria-label="Voir ${esc(cur.titre)}">${modelCoverHTML(cur, { label: cur.options ? "Modèle à options" : "Modèle" })}</button>
         <div class="mo-body">
-          <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · Photos" : cur.lieu === "CABINET" ? " · Dessins" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
+          <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · HEP" : cur.lieu === "CABINET" ? " · Dessins" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
           <h2>${esc(g.nom)}</h2>
           ${showLevels ? levelRowsHTML(g, cur) : ""}
           <span class="small muted">${cur.options ? `${plural(cur.exercices.filter(e => !e.opt).length, "exercice")} + 1 par ${esc(cur.options.titre.toLowerCase().includes("nerf") ? "nerf choisi" : "choix")}` : `${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}`}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>

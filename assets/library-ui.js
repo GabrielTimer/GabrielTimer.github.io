@@ -19,10 +19,10 @@ const FACETS = [
   { k:"aide",   label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
-const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["HEP", "Photos"], ["CABINET", "Dessins"]];
+const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["HEP", "HEP"], ["CABINET", "Dessins"]];
 /* Photos / Dessins : boutons toujours visibles à côté de la recherche (hors du tiroir des filtres) */
-const IMGS = [["", "Tous"], ["HEP", "Photos"], ["CABINET", "Dessins"]];
-const sourceLabel = e => e.source === "HEP" ? "Photo" : e.source === "PERSO" ? "Mes exercices" : "Dessin";
+const IMGS = [["", "Tous"], ["HEP", "HEP"], ["CABINET", "Dessins"]];
+const sourceLabel = e => e.source === "HEP" ? "HEP" : e.source === "PERSO" ? "Mes exercices" : "Dessin";
 const NIVEAUX = [["1", "Niveau 1"], ["2", "Niveau 2"], ["3", "Niveau 3"], ["4", "Niveau 4 et +"]];
 const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
 
@@ -52,7 +52,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         <div class="lib-search-row">
           <label class="input-icon"><span class="sr-only">Rechercher un exercice</span>${icon("search")}<input class="input" type="search" data-q placeholder="Nom, zone, pathologie, matériel…" autocomplete="off" value="${esc(state.q)}"></label>
           ${filterButtonHTML()}
-          ${lieu ? "" : `<div class="segmented img-seg" role="group" aria-label="Photos ou dessins">${IMGS.map(([v, l]) => `<button type="button" data-img="${v}" aria-pressed="${state.img === v}">${v ? icon(v === "HEP" ? "camera" : "image") : ""}${l}</button>`).join("")}</div>`}
+          ${lieu ? "" : `<div class="segmented img-seg" role="group" aria-label="HEP ou dessins">${IMGS.map(([v, l]) => `<button type="button" data-img="${v}" aria-pressed="${state.img === v}">${v ? icon(v === "HEP" ? "camera" : "image") : ""}${l}</button>`).join("")}</div>`}
           <button class="btn primary lib-create" type="button" data-create title="Créer un exercice" aria-label="Créer un exercice">${icon("plus")}<span class="lbl">Créer un exercice</span><span class="lbl-short">Créer</span></button>
         </div>
         <div class="lib-active" data-active hidden></div>
