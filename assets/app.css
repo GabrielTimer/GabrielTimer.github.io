@@ -376,6 +376,9 @@ button.list-item:hover,a.list-item:hover{ background:var(--surface-2); }
 .stepper input:focus{ outline:none; }
 .stepper:focus-within{ border-color:var(--lagon); }
 
+.cfg-choix{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.cfg-choix .segmented button{ display:inline-flex; align-items:center; gap:6px; }
+.cfg-choix .segmented .ic{ width:18px; height:18px; }
 .segmented{ display:inline-flex; padding:4px; gap:4px; background:var(--surface-3); border-radius:var(--r-md); }
 .segmented button{ min-height:40px; padding:0 14px; border:0; border-radius:var(--r-sm); background:transparent; color:var(--ink-2); font-weight:700; cursor:pointer; }
 .segmented button[aria-pressed="true"]{ background:var(--surface); color:var(--ink); box-shadow:var(--shadow-1); }

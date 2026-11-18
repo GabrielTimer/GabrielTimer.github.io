@@ -7,6 +7,7 @@
    - spécialité (orthopédie, traumatologie, rhumatologie, neurologie…),
      déduite des pathologies et de certains types
    ========================================================= */
+import { cabinetSeul } from "./cabinet-seul.js";
 
 const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 
@@ -22,7 +23,7 @@ const CAT_VERS_ZONE = {
 const CAT_VERS_TYPE = {
   "gainage": "Gainage", "equilibre": "Équilibre et proprioception", "proprioception": "Équilibre et proprioception",
   "respiration": "Respiration", "cardio": "Cardio", "controle moteur": "Contrôle moteur", "ludique": "Ludique",
-  "fauteuil": "Au fauteuil (seniors)", "cabinet": "Au cabinet"
+  "fauteuil": "Au fauteuil (seniors)", "cabinet": "Gros matériel du cabinet"
 };
 const MODE_VERS_TYPE = {
   "renforcement": "Renforcement", "etirement": "Étirement", "mobilite": "Mobilité", "proprioception": "Équilibre et proprioception",
@@ -32,7 +33,7 @@ const MODE_VERS_TYPE = {
 /* Aide à la marche du patient pour laquelle l'exercice est prévu (de la moins autonome à la plus autonome) */
 export const AIDES = ["Alité", "Au fauteuil", "Barres parallèles", "Déambulateur", "2 cannes", "1 canne", "Sans aide"];
 
-export const TYPES = ["Renforcement", "Étirement", "Mobilité", "Gainage", "Équilibre et proprioception", "Isométrique", "Respiration", "Cardio", "Contrôle moteur", "Au fauteuil (seniors)", "Ludique", "Au cabinet"];
+export const TYPES = ["Renforcement", "Étirement", "Mobilité", "Gainage", "Équilibre et proprioception", "Isométrique", "Respiration", "Cardio", "Contrôle moteur", "Au fauteuil (seniors)", "Ludique", "Gros matériel du cabinet"];
 
 /* Spécialités, dans l'ordre d'affichage */
 export const SPECIALITES = [
@@ -135,7 +136,7 @@ export function classer(e){
   if(CAT_VERS_TYPE[cat]) types.add(CAT_VERS_TYPE[cat]);
   const mode = MODE_VERS_TYPE[norm(e.mode)];
   if(mode) types.add(mode);
-  if(e.source === "CABINET" && e.raw?.categorie === "cabinet") types.add("Au cabinet");
+  if(e.source === "CABINET" && e.raw?.categorie === "cabinet") types.add("Gros matériel du cabinet");
   const sources = [...(e.pathologies || []), cat === "post-partum" ? "post-partum" : "", cat === "pubalgie" ? "pubalgie" : ""].map(norm).filter(Boolean);
   const pathos = PATHOLOGIES.filter(p => sources.some(s => p.re.test(s))).map(p => p.nom);
   const specs = new Set();
@@ -144,7 +145,7 @@ export function classer(e){
   if(cat === "neurologie") specs.add(N);
   if(cat === "post-partum" || /^perinee/.test(cat)) specs.add(PE);
   /* Exercices du cabinet avec le gros matériel (chaise romaine, barre, plaque vibrante, vélo semi-allongé) */
-  if(e.source === "CABINET" && e.raw?.au_cabinet) types.add("Au cabinet");
+  if(cabinetSeul(e)) types.add("Gros matériel du cabinet");
   /* Spécialités ajoutées à la main sur l'exercice (éditeur) */
   (Array.isArray(e.specialites) ? e.specialites : []).forEach(x => { if(SPECIALITES.includes(x)) specs.add(x); });
   /* Aide à la marche (champ « aide_marche » des exercices, modifiable dans l'éditeur) */

@@ -73,7 +73,7 @@ export async function mountModelPicker(root, { onPick, lieu = null } = {}){
   };
 
   const render = () => {
-    const groups = groupModeles(all.filter(matches)).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
+    const groups = groupModeles(all.filter(matches)).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }) || ((a.items[0].lieu === "HEP" ? 0 : 1) - (b.items[0].lieu === "HEP" ? 0 : 1)));
     $("[data-count]", root).textContent = plural(groups.length, "modèle");
     const res = $("[data-results]", root);
     if(!groups.length){
@@ -88,7 +88,7 @@ export async function mountModelPicker(root, { onPick, lieu = null } = {}){
           <button class="lib-row-main" type="button" data-see="${esc(g.key)}">
             ${modelCoverHTML(cur, { small:true })}
             <span class="li-main"><span class="li-title">${esc(g.nom)}</span>
-              <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.lieu === "MIXTE" ? ` · <strong style="color:var(--danger)">Mixte maison + cabinet</strong>` : !lieu?.() && cur.lieu ? ` · ${cur.lieu === "HEP" ? "À la maison" : "Au cabinet"}` : ""}</span></span>
+              <span class="li-sub">${g.mine ? `<strong style="color:var(--soleil-strong)">Mon modèle</strong> · ` : ""}${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel.toLowerCase())}` : ""} · ${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}${cur.lieu === "MIXTE" ? ` · <strong style="color:var(--danger)">Mixte maison + cabinet</strong>` : !lieu?.() && cur.lieu ? ` · ${cur.lieu === "HEP" ? "Photos HEP" : "Dessins"}` : ""}</span></span>
           </button>
           <button class="icon-btn filled" type="button" data-pick="${esc(cur.id)}" aria-label="Utiliser ${esc(cur.titre)}" title="Utiliser ce modèle">${icon("plus")}</button>
           ${levels ? levelRowsHTML(g, cur, { cls:"mo-levels mp-levels" }) : ""}

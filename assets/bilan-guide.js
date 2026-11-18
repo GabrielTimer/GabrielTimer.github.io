@@ -392,7 +392,7 @@ export function mountGuide(app, ctx){
     const p = TX.profil(S);
     S.tx.prog = { nom, src };
     changed();
-    ctx.useProgram({ nom, series: series || 1, exercices }, { semaines: p.sem, parSemaine: p.lieu === "HEP" ? 3 : p.freq, origine });
+    ctx.useProgram({ nom, series: series || 1, exercices }, { semaines: p.sem, parSemaine: p.lieu === "HEP" ? 3 : p.freq, origine, ou: p.lieu === "CABINET" ? "cabinet" : "maison" });
   }
 
   /* ---------- Rendu ---------- */

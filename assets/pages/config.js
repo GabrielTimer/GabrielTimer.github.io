@@ -17,6 +17,7 @@ const choisirIllustrations = v => { try{ V.choisirIllustrations?.(v); }catch(e){
 const aVariantes = src => { try{ return V.aVariantes ? V.aVariantes(src) : false; }catch(e){ return false; } };
 const variantesPretes = V.variantesPretes || Promise.resolve();
 import { mountLibrary, exerciseSheet } from "../library-ui.js";
+import { cabinetSeul } from "../cabinet-seul.js";
 import { defaultEvol, normEvol, applyEvol, evolPreview, evolTexte, fmtKg } from "../evolution.js";
 
 const { requireKine } = await import("../kine.js");
@@ -30,13 +31,18 @@ const JOURS = [[1, "L", "lundi"], [2, "M", "mardi"], [3, "M", "mercredi"], [4, "
 const DEFAULT_JOURS = { 1:[3], 2:[2, 5], 3:[1, 3, 5], 4:[1, 2, 4, 5], 5:[1, 2, 3, 4, 5], 6:[1, 2, 3, 4, 5, 6], 7:[1, 2, 3, 4, 5, 6, 0] };
 const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
 
-const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"unique", semaines:4, parSemaine:3, jours:[1, 3, 5], debut:todayISO(), lieu:null });
+const blank = () => ({ nom:"", series:1, exercices:[], patient:null, type:"unique", semaines:4, parSemaine:3, jours:[1, 3, 5], debut:todayISO(), lieu:null, ou:null });
 
 /* ---------- Lieu : programme 100 % maison (HEP) ou 100 % cabinet ----------
-   Un exercice de la base HEP ne va que dans un programme HEP, un exercice
-   du cabinet que dans un programme cabinet. Les exercices créés par le kiné
-   et les exercices personnalisés vont dans les deux. */
-const LIEUX = { HEP:"À la maison (HEP)", CABINET:"Au cabinet" };
+   Deux choix séparés :
+   - S.lieu = le type d'images : « HEP » (photos + vidéos) ou « CABINET » (dessins ApiKiné).
+     On ne mélange jamais les deux dans un programme. Les exercices créés par le kiné vont partout.
+   - S.ou = où le programme se fait : « maison » (le patient le reçoit) ou « cabinet »
+     (rangé dans sa fiche, invisible pour lui). Un dessin peut aller à la maison, sauf le
+     gros matériel du cabinet (signalé, pas bloqué). */
+const LIEUX = { HEP:"Photos HEP", CABINET:"Dessins ApiKiné" };
+const OU = { maison:"À la maison", cabinet:"Au cabinet" };
+const nomType = l => l === "HEP" ? "photo HEP" : "dessin";
 const lieuExo = e => {
   if(e.source === "HEP" || e.source === "CABINET") return e.source;
   if(e.source) return null;                                       // exercice créé par le kiné
@@ -49,7 +55,12 @@ function deduireLieu(){
   if(S.lieu === "HEP" || S.lieu === "CABINET") return;
   const n = { HEP:0, CABINET:0 };
   S.exercices.forEach(e => { const l = lieuExo(e); if(l) n[l]++; });
-  S.lieu = n.HEP || n.CABINET ? (n.HEP >= n.CABINET ? "HEP" : "CABINET") : (store.get("gt_lieu") === "CABINET" ? "CABINET" : "HEP");
+  S.lieu = n.HEP || n.CABINET ? (n.HEP >= n.CABINET ? "HEP" : "CABINET") : "HEP";   // photos HEP par défaut
+}
+function deduireOu(){
+  if(S.ou === "maison" || S.ou === "cabinet") return;
+  /* Ancienne séance en préparation : « Au cabinet » voulait dire invisible pour le patient */
+  S.ou = restored && S.lieu === "CABINET" ? "cabinet" : "maison";
 }
 const normExo = e => ({ ...e, ex: Math.max(1, Math.round(Number(e.ex) || 30)), repos: Math.max(0, Math.round(Number(e.repos ?? 10))), reps: Math.max(1, Math.round(Number(e.reps) || 1)) });
 
@@ -119,6 +130,7 @@ async function init(){
   if(params.get("draft") && store.get("gt_draft")){
     const d = store.get("gt_draft");
     S = { ...blank(), nom: d.nom || "", series: d.series || 1, exercices: (d.exercices || []).map(normExo) };
+    if(d.ou === "maison" || d.ou === "cabinet") S.ou = d.ou;
     if(d.origine) S.origine = d.origine;   // modèle et niveau d'origine (pour faire évoluer le programme)
     if(d.origine?.nom) S.conseils = fichesDuModele(d.origine.nom);   // fiche conseils de la pathologie, jointe d'office
     if(d.semaines && d.semaines > 1){
@@ -181,7 +193,7 @@ const shell = mountShell({ role:"kine", active: params.get("patient") || mode.ki
 
 async function main(){
   if(!(await init())) return;
-  deduireLieu();
+  deduireLieu(); deduireOu();
   mountView();
   C.listPatients().then(list => { patients = list; renderSend(); }).catch(() => {});
 }
@@ -201,8 +213,13 @@ function mountView(){
         ${restored ? `<div class="notice" style="margin-bottom:14px">${icon("history")}<div class="row wrap" style="flex:1"><span style="flex:1 1 220px">Vous reprenez la séance en cours de préparation.</span><button class="btn sm" type="button" id="restart">${icon("plus")}Repartir de zéro</button></div></div>` : ""}
         <div class="panel cfg-head">
           <span class="cfg-mode badge lagon" style="align-self:flex-start">${esc(titleText())}</span>
-          <div class="segmented" role="group" aria-label="Type de programme" id="lieu">
-            ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "home" : "cabinet")}${esc(v)}</button>`).join("")}
+          <div class="cfg-choix">
+            <div class="segmented" role="group" aria-label="Type d'images" id="lieu">
+              ${Object.entries(LIEUX).map(([k, v]) => `<button type="button" data-lieu="${k}" aria-pressed="${S.lieu === k}">${icon(k === "HEP" ? "camera" : "image")}${esc(v)}</button>`).join("")}
+            </div>
+            ${mode.kind === "new" ? `<div class="segmented" role="group" aria-label="Où se fait le programme" id="ou">
+              ${Object.entries(OU).map(([k, v]) => `<button type="button" data-ou="${k}" aria-pressed="${S.ou === k}">${icon(k === "maison" ? "home" : "cabinet")}${esc(v)}</button>`).join("")}
+            </div>` : ""}
           </div>
           <p class="hint" id="lieu-hint"></p>
           <div id="lieu-warn"></div>
@@ -240,6 +257,7 @@ function mountView(){
   nomEl.addEventListener("input", e => { if(/\n/.test(nomEl.value)) nomEl.value = nomEl.value.replace(/\s*\n\s*/g, " "); S.nom = nomEl.value; ajusterNom(); persist(); renderSend(false); });
   requestAnimationFrame(ajusterNom); window.addEventListener("resize", ajusterNom);
   $$("[data-lieu]").forEach(b => b.onclick = () => changerLieu(b.dataset.lieu));
+  $$("[data-ou]").forEach(b => b.onclick = () => { S.ou = b.dataset.ou; persist(); $$("[data-ou]").forEach(x => x.setAttribute("aria-pressed", String(x.dataset.ou === S.ou))); renderLieuWarn(); });
   renderLieuWarn();
   $("#series").addEventListener("input", e => { S.series = clamp(+e.target.value, 1, 20); persist(); renderSummary(); });
   $("#series").addEventListener("change", e => { e.target.value = S.series; });
@@ -639,13 +657,15 @@ function majLieu(){
 /** Ancienne séance qui mélange HEP et cabinet : on le signale, avec un bouton pour corriger. */
 function renderLieuWarn(){
   const h = $("#lieu-hint");
-  if(h) h.innerHTML = mode.kind !== "new" ? "" : S.lieu === "CABINET"
+  if(h) h.innerHTML = mode.kind !== "new" ? "" : S.ou === "cabinet"
     ? `${icon("lock", "ic-inline")} <strong>Invisible pour le patient.</strong> Rangé dans sa fiche : vous lancez les séances avec lui au cabinet. Pas de rappel, pas d'alerte de retard.`
     : `${icon("home", "ic-inline")} Le patient le reçoit dans son application et le fait chez lui.`;
   updatePrimary();
   const box = $("#lieu-warn"); if(!box) return;
   const hors = S.exercices.filter(e => horsLieu(e));
-  box.innerHTML = hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} ${S.lieu === "HEP" ? "du cabinet" : "de la base HEP"} dans ce programme ${S.lieu === "HEP" ? "à la maison" : "au cabinet"}.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "";
+  const gros = mode.kind === "new" && S.ou === "maison" ? S.exercices.filter(e => cabinetSeul(e)) : [];
+  box.innerHTML = (hors.length ? `<div class="notice warn">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">${plural(hors.length, "exercice")} en ${S.lieu === "HEP" ? "dessin" : "photo HEP"} dans un programme en ${S.lieu === "HEP" ? "photos HEP" : "dessins"} : photos et dessins ne se mélangent pas.</span><button class="btn sm" type="button" id="lieu-fix">${icon("trash")}Les retirer</button></div></div>` : "")
+    + (gros.length ? `<div class="notice warn" style="margin-top:8px">${icon("cabinet")}<span>${gros.length > 1 ? `${gros.length} exercices demandent` : "1 exercice demande"} le gros matériel du cabinet (${esc(gros.slice(0, 3).map(e => e.nom).join(", "))}${gros.length > 3 ? "…" : ""}) : difficile à faire à la maison.</span></div>` : "");
   $("#lieu-fix")?.addEventListener("click", () => {
     S.exercices = S.exercices.filter(e => !horsLieu(e));
     persist(); renderExos(); renderSend(false); renderLieuWarn(); sideLib?.then(l => l.refresh());
@@ -656,20 +676,21 @@ async function changerLieu(lieu){
   const hors = S.exercices.filter(e => horsLieu(e, lieu));
   if(hors.length){
     const ok = await confirmDialog({
-      title: lieu === "HEP" ? "Passer en programme à la maison ?" : "Passer en programme au cabinet ?",
-      message: `${plural(hors.length, "exercice")} ${lieu === "HEP" ? "du cabinet" : "de la base HEP"} ne ${hors.length > 1 ? "peuvent" : "peut"} pas rester dans ce programme et ${hors.length > 1 ? "seront retirés" : "sera retiré"} : ${hors.slice(0, 4).map(e => e.nom).join(", ")}${hors.length > 4 ? "…" : ""}`,
+      title: lieu === "HEP" ? "Passer en photos HEP ?" : "Passer en dessins ?",
+      message: `Photos et dessins ne se mélangent pas : ${plural(hors.length, "exercice")} en ${lieu === "HEP" ? "dessin" : "photo HEP"} ${hors.length > 1 ? "seront retirés" : "sera retiré"} : ${hors.slice(0, 4).map(e => e.nom).join(", ")}${hors.length > 4 ? "…" : ""}`,
       confirm: "Changer et retirer", danger: true
     });
     if(!ok) return;
     S.exercices = S.exercices.filter(e => !horsLieu(e, lieu));
     renderExos(); renderSend(false);
   }
-  S.lieu = lieu; store.set("gt_lieu", lieu);
+  S.lieu = lieu;
   persist(); majLieu();
 }
 
 function addExercise(exo){
-  if(horsLieu(exo)){ toast(`« ${exo.nom} » ${S.lieu === "HEP" ? "est un exercice du cabinet" : "vient de la base HEP"} : il ne peut pas aller dans ce programme.`, { type:"err" }); return; }
+  if(horsLieu(exo)){ toast(`« ${exo.nom} » est un ${nomType(lieuExo(exo))} : ce programme est en ${S.lieu === "HEP" ? "photos HEP" : "dessins"}, on ne mélange pas.`, { type:"err" }); return; }
+  if(mode.kind === "new" && S.ou === "maison" && cabinetSeul(exo)) toast(`« ${exo.nom} » demande le gros matériel du cabinet.`, { duration:3500 });
   S.exercices.push(normExo(exo));
   persist(); renderExos(); renderSend(false);
   sideLib?.then(l => l.refresh());
@@ -713,13 +734,13 @@ async function applyModele(m){
   const tous = prog.exercices.map(e => normExo(e));
   const exos = tous.filter(e => !horsLieu(e));
   if(!exos.length){
-    toast(`Ce modèle ne contient que des exercices ${S.lieu === "HEP" ? "du cabinet" : "de la base HEP"}. Choisissez un modèle ${S.lieu === "HEP" ? "à la maison" : "au cabinet"}, ou changez le type de programme.`, { type:"err", duration:7000 });
+    toast(`Ce modèle est en ${S.lieu === "HEP" ? "dessins" : "photos HEP"} et ce programme en ${S.lieu === "HEP" ? "photos HEP" : "dessins"}. Choisissez un autre modèle, ou changez le type d'images.`, { type:"err", duration:7000 });
     return;
   }
   if(exos.length < tous.length){
     const ok = await confirmDialog({
       title: "Modèle mixte",
-      message: `${plural(tous.length - exos.length, "exercice")} de ce modèle ${S.lieu === "HEP" ? "sont du cabinet" : "viennent de la base HEP"} et ne seront pas ajoutés : ${tous.filter(e => horsLieu(e)).slice(0, 4).map(e => e.nom).join(", ")}${tous.length - exos.length > 4 ? "…" : ""}`,
+      message: `${plural(tous.length - exos.length, "exercice")} de ce modèle ${tous.length - exos.length > 1 ? "sont" : "est"} en ${S.lieu === "HEP" ? "dessin" : "photo HEP"} et ne seront pas ajoutés : ${tous.filter(e => horsLieu(e)).slice(0, 4).map(e => e.nom).join(", ")}${tous.length - exos.length > 4 ? "…" : ""}`,
       confirm: `Utiliser les ${plural(exos.length, "autre")}`
     });
     if(!ok) return;
@@ -997,7 +1018,7 @@ function updatePrimary(){
   const p = patients.find(x => x.cle === S.patient);
   const ready = !!S.patient && S.exercices.length && (S.type === "unique" || S.jours.length === S.parSemaine);
   b.disabled = !ready;
-  b.innerHTML = S.lieu === "CABINET"
+  b.innerHTML = mode.kind === "new" && S.ou === "cabinet"
     ? `${icon("lock")}${p ? `Enregistrer dans la fiche de ${esc(prenom(p.nom))}` : "Choisissez un patient"}`
     : `${icon("share")}${p ? `Envoyer à ${esc(prenom(p.nom))}` : "Choisissez un patient pour envoyer"}`;
 }
@@ -1014,7 +1035,7 @@ async function send(){
   {
     C.updatePatient(p.cle, { genre: data.illus, genreMaj: now }).then(() => { p.genre = data.illus; p.genreMaj = now; }).catch(e => console.warn("Genre :", e));
   }
-  const cab = S.lieu === "CABINET" ? { cabinet:true } : {};   // programme au cabinet : invisible côté patient
+  const cab = S.ou === "cabinet" ? { cabinet:true } : {};   // programme au cabinet : invisible côté patient
   try{
     let count = 1;
     if(S.type === "unique"){

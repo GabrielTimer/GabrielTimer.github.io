@@ -3,6 +3,7 @@
 import { $, $$, esc, icon, openSheet, exoImageHTML, safeRich, debounce, store, fmtDuree, toast, tailleVueHTML, brancherTailleVue } from "./app.js";
 import { loadLibrary, searchLibrary, videoEmbed, norm, findInLibrary, exerciseKey } from "./library.js";
 import { isHidden, isFavorite, toggleInList, setHidden } from "./settings.js";
+import { cabinetSeul } from "./cabinet-seul.js";
 import { ZONES, TYPES, AIDES, PATHOLOGIES, SPECIALITES, specialitesDe, classer } from "./classement.js";
 import { openFilterDrawer, renderActifs, effacerFiltres, filterButtonHTML } from "./filter-drawer.js";
 
@@ -18,7 +19,8 @@ const FACETS = [
   { k:"aide",   label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
-const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["CABINET", "Cabinet"], ["HEP", "Base HEP"]];
+const SOURCES = [["FAV", "★ Mes favoris"], ["PERSO", "Mes exercices"], ["HEP", "Photos HEP"], ["CABINET", "Dessins ApiKiné"]];
+const sourceLabel = e => e.source === "HEP" ? "Photos HEP" : e.source === "PERSO" ? "Mes exercices" : "Dessin ApiKiné";
 const NIVEAUX = [["1", "Niveau 1"], ["2", "Niveau 2"], ["3", "Niveau 3"], ["4", "Niveau 4 et +"]];
 const asList = v => Array.isArray(v) ? v.filter(Boolean).map(String) : (v ? [String(v)] : []);
 
@@ -38,7 +40,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     source: src0.filter(v => v !== "HIDDEN"),
     spec: asList(saved.spec).filter(x => SPECIALITES.includes(x)),
     cat: asList(saved.cat).filter(x => ZONES.includes(x)),
-    patho: asList(saved.patho), type: asList(saved.type), aide: asList(saved.aide).filter(x => AIDES.includes(x)), niveau: asList(saved.niveau)
+    patho: asList(saved.patho), type: asList(saved.type).map(x => x === "Au cabinet" ? "Gros matériel du cabinet" : x), aide: asList(saved.aide).filter(x => AIDES.includes(x)), niveau: asList(saved.niveau)
   };
 
   root.innerHTML = `
@@ -83,7 +85,11 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
     let list = base().filter(e => passe(e));
     list = searchLibrary(list, state.q);
     /* Favoris en tête quand on ne cherche rien de précis */
-    if(!state.q) list = [...list.filter(e => isFavorite(exerciseKey(e))), ...list.filter(e => !isFavorite(exerciseKey(e)))];
+    /* Photos HEP en premier (toujours prioritaires), puis les dessins ; favoris en tête quand on ne cherche rien de précis */
+    if(!state.q){
+      const rang = e => (isFavorite(exerciseKey(e)) ? 0 : 3) + (e.source === "HEP" ? 0 : e.source === "PERSO" ? 1 : 2);
+      list = list.map((e, i) => [e, i]).sort((a, b) => (rang(a[0]) - rang(b[0])) || (a[1] - b[1])).map(x => x[0]);
+    }
     return list;
   };
 
@@ -162,7 +168,7 @@ export async function mountLibrary(root, { onAdd, layout = "list", addLabel = "A
         <div class="lib-card-body">
           <div class="lib-meta">${esc(e.zone || e.categorie)}${e.mode ? `, ${esc(e.mode.toLowerCase())}` : ""}</div>
           <h3>${esc(e.nom)}</h3>
-          <div class="row wrap" style="--gap:6px">${e.materiel.slice(0, 2).map(m => `<span class="badge">${esc(m)}</span>`).join("")}<span class="badge lagon">Niveau ${e.niveau}</span></div>
+          <div class="row wrap" style="--gap:6px">${cabinetSeul(e) ? `<span class="badge warn" title="Gros matériel du cabinet">${icon("cabinet")}Cabinet</span>` : ""}${e.materiel.slice(0, 2).map(m => `<span class="badge">${esc(m)}</span>`).join("")}<span class="badge lagon">Niveau ${e.niveau}</span></div>
         </div>
         ${onAdd ? `<button class="btn soft block" type="button" data-add="${esc(e.source + ":" + e.id)}" aria-label="${esc(addLabel)} ${esc(e.nom)}">${icon("plus")}<span class="lbl">${esc(addLabel)}</span></button>` : ""}
       </article>`
@@ -233,7 +239,7 @@ export function exerciseSheet(e, opts = {}){
             <span class="badge lagon">${esc(e.categorie)}</span><span class="badge">Niveau ${e.niveau}</span>
             ${e.mode ? `<span class="badge">${esc(e.mode)}</span>` : ""}
             ${e.materiel.map(m => `<span class="badge">${esc(m)}</span>`).join("")}
-            <span class="badge">${e.source === "HEP" ? "Base HEP" : e.source === "PERSO" ? "Mes exercices" : "Cabinet"}</span>
+            <span class="badge">${esc(sourceLabel(e))}</span>${cabinetSeul(e) ? `<span class="badge warn">${icon("cabinet")}Gros matériel du cabinet</span>` : ""}
             ${e.modifie ? `<span class="badge sun">${icon("edit")}Corrigé</span>` : ""}
             ${e.tags?.length && e.source === "PERSO" ? e.tags.map(t => `<span class="badge">#${esc(t)}</span>`).join("") : ""}
           </div>

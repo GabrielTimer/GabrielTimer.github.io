@@ -110,7 +110,7 @@ export async function openGlobalSearch(initial = ""){
 
     const mods = trier(modeles.filter(x => tous(x.hay, ws)), x => x.g.nom, ws);
     html.push(groupe("Modèles", mods.slice(0, PAR_GROUPE).map(({ g, M }) => {
-      const lieu = g.items[0].lieu === "HEP" ? "à la maison" : g.items[0].lieu === "CABINET" ? "au cabinet" : "";
+      const lieu = g.items[0].lieu === "HEP" ? "photos HEP" : g.items[0].lieu === "CABINET" ? "dessins" : "";
       const sub = [M.catLabel(g.categorie), g.zoneLabel, lieu, g.items.length > 1 ? `${g.items.length} niveaux` : ""].filter(Boolean).join(", ");
       return ligne("layers", g.nom, sub, add(() => { store.set("gt_modeles_filters", { q: g.nom }); location.href = "/programmes_admin.html"; }), M.modelCoverHTML(g.items[0], { small:true }));
     }), mods.length > PAR_GROUPE ? `<button class="gs-more" type="button" data-i="${add(() => { store.set("gt_modeles_filters", { q }); location.href = "/programmes_admin.html"; })}">Voir les ${mods.length} modèles${icon("chevron")}</button>` : ""));

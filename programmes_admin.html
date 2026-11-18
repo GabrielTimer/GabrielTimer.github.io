@@ -89,7 +89,7 @@ const F = (() => {
     lieu: asList(s.lieu), cat: asList(s.cat), zone: asList(s.zone), spec: asList(s.spec), patho: asList(s.patho), aide: asList(s.aide), niveau: asList(s.niveau) };
 })();
 const FACETS = [
-  { k:"lieu", label:"Maison ou cabinet", ph:"Maison et cabinet" },
+  { k:"lieu", label:"Type d'images", ph:"Photos et dessins" },
   { k:"cat", label:"Catégorie", ph:"Toutes les catégories" },
   { k:"zone", label:"Zone du corps", ph:"Toutes les zones" },
   { k:"spec", label:"Spécialité", ph:"Toutes les spécialités" },
@@ -97,7 +97,7 @@ const FACETS = [
   { k:"aide", label:"Aide à la marche", ph:"Toutes les aides" },
   { k:"niveau", label:"Niveau", ph:"Tous les niveaux" }
 ];
-const LIEUX = [["HEP", "À la maison"], ["CABINET", "Au cabinet"]];
+const LIEUX = [["HEP", "Photos HEP"], ["CABINET", "Dessins ApiKiné"]];
 const toutEffacer = () => { F.q = ""; F.mine = false; FACETS.forEach(f => F[f.k] = []); F.masques = false; };
 /* Zone du corps et pathologie d'un modèle, déduites de sa zone et de son nom */
 const ZN = ZONES.map(z => [z, norm(z)]);
@@ -312,7 +312,8 @@ const update = () => { save(); renderFilters(); render(); };
 
 function render(){
   const visible = all().filter(matches);
-  const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }));
+  const rangLieu = g => g.items[0].lieu === "HEP" ? 0 : 1;   // photos HEP avant les dessins, à nom égal
+  const groups = groupModeles(visible).sort((a, b) => (b.mine - a.mine) || a.nom.localeCompare(b.nom, "fr", { numeric:true }) || (rangLieu(a) - rangLieu(b)));
   $("#count").innerHTML = groups.length ? esc(`${plural(groups.length, "modèle")}${visible.length > groups.length ? `, ${plural(visible.length, "niveau", "niveaux")} au total` : ""}`) : "";
   if(!groups.length){
     const filtered = F.q || F.mine || F.masques || FACETS.some(f => F[f.k].length);
@@ -330,7 +331,7 @@ function render(){
         ${cur.mine ? `<span class="badge sun mo-own">${icon("star")}${cur.remplace ? "Ma version" : "Mon modèle"}</span>` : ""}
         <button class="mo-cover" type="button" data-see="${esc(g.key)}" aria-label="Voir ${esc(cur.titre)}">${modelCoverHTML(cur, { label: cur.options ? "Modèle à options" : "Modèle" })}</button>
         <div class="mo-body">
-          <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · À la maison" : cur.lieu === "CABINET" ? " · Au cabinet" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
+          <span class="small faint" style="font-weight:700">${esc(catLabel(g.categorie))}${g.zoneLabel ? `, ${esc(g.zoneLabel)}` : ""}${cur.lieu === "HEP" ? " · Photos HEP" : cur.lieu === "CABINET" ? " · Dessins" : cur.lieu === "MIXTE" ? ` · <span style="color:var(--danger)">Mixte</span>` : ""}</span>
           <h2>${esc(g.nom)}</h2>
           ${showLevels ? levelRowsHTML(g, cur) : ""}
           <span class="small muted">${cur.options ? `${plural(cur.exercices.filter(e => !e.opt).length, "exercice")} + 1 par ${esc(cur.options.titre.toLowerCase().includes("nerf") ? "nerf choisi" : "choix")}` : `${plural(cur.exercices.length, "exercice")}, ${esc(fmtDuree(sessionDuration(cur)))}`}${cur.series > 1 ? `, ${cur.series} tours` : ""}</span>
