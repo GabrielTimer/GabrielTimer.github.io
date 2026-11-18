@@ -25732,7 +25732,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "CANNES_01",
-    "image": "",
+    "image": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises",
       "Fauteuil à accoudoirs"
@@ -25773,7 +25773,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ]
@@ -25799,7 +25798,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNES_02",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises"
     ],
@@ -25839,7 +25838,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ],
@@ -25864,7 +25862,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNES_03",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-4-temps-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises"
     ],
@@ -25906,7 +25904,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ]
@@ -25930,7 +25927,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNES_04",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-2-temps-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises"
     ],
@@ -25971,7 +25968,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ]
@@ -25997,7 +25993,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNES_05",
-    "image": "",
+    "image": "/exercises/images/aide-marche/escalier-monter-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises",
       "Escalier avec rampe"
@@ -26037,7 +26033,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes",
       "1 canne"
@@ -26065,7 +26060,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNES_06",
-    "image": "",
+    "image": "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises",
       "Escalier avec rampe"
@@ -26105,7 +26100,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes",
       "1 canne"
@@ -26131,7 +26125,7 @@
     "ex": 40,
     "exercise_mode": "equilibre",
     "id": "CANNES_07",
-    "image": "",
+    "image": "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises"
     ],
@@ -26170,7 +26164,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ],
@@ -26197,7 +26190,7 @@
     "ex": 45,
     "exercise_mode": "equilibre",
     "id": "CANNES_08",
-    "image": "",
+    "image": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
     "materiel": [
       "2 cannes anglaises"
     ],
@@ -26237,7 +26230,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "2 cannes"
     ],

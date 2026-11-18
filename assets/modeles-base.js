@@ -14635,7 +14635,7 @@ export const MODELES_BASE = [
 "id": "CANNES_01",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
 "consignes": [
 "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
 "Fesses au bord du fauteuil, buste penché en avant",
@@ -14675,7 +14675,7 @@ export const MODELES_BASE = [
 "id": "CANNES_07",
 "source": "CABINET",
 "nom": "Transfert d'appui sur la jambe opérée entre les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp",
 "consignes": [
 "Debout entre les deux cannes, pieds écartés",
 "Déplacer doucement le poids sur la jambe opérée",
@@ -14695,7 +14695,7 @@ export const MODELES_BASE = [
 "id": "CANNES_02",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp",
 "consignes": [
 "Avancer les deux cannes ensemble, un peu devant",
 "Avancer la jambe opérée entre les cannes",
@@ -14715,7 +14715,7 @@ export const MODELES_BASE = [
 "id": "CANNES_05",
 "source": "CABINET",
 "nom": "Monter l'escalier avec les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-cannes-f.webp",
 "consignes": [
 "Une main sur la rampe, les cannes dans l'autre main",
 "Monter d'abord la jambe saine sur la marche",
@@ -14735,7 +14735,7 @@ export const MODELES_BASE = [
 "id": "CANNES_06",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp",
 "consignes": [
 "Une main sur la rampe, les cannes dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -15596,7 +15596,7 @@ export const MODELES_BASE = [
 "id": "CANNES_01",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
 "consignes": [
 "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
 "Fesses au bord du fauteuil, buste penché en avant",
@@ -15636,7 +15636,7 @@ export const MODELES_BASE = [
 "id": "CANNES_07",
 "source": "CABINET",
 "nom": "Transfert d'appui sur la jambe opérée entre les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp",
 "consignes": [
 "Debout entre les deux cannes, pieds écartés",
 "Déplacer doucement le poids sur la jambe opérée",
@@ -15656,7 +15656,7 @@ export const MODELES_BASE = [
 "id": "CANNES_02",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp",
 "consignes": [
 "Avancer les deux cannes ensemble, un peu devant",
 "Avancer la jambe opérée entre les cannes",
@@ -15676,7 +15676,7 @@ export const MODELES_BASE = [
 "id": "CANNES_08",
 "source": "CABINET",
 "nom": "Faire demi-tour avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
 "consignes": [
 "Tourner en faisant de petits pas",
 "Déplacer les cannes avec les pieds",
@@ -15696,7 +15696,7 @@ export const MODELES_BASE = [
 "id": "CANNES_05",
 "source": "CABINET",
 "nom": "Monter l'escalier avec les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-cannes-f.webp",
 "consignes": [
 "Une main sur la rampe, les cannes dans l'autre main",
 "Monter d'abord la jambe saine sur la marche",
@@ -15716,7 +15716,7 @@ export const MODELES_BASE = [
 "id": "CANNES_06",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec les cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp",
 "consignes": [
 "Une main sur la rampe, les cannes dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -19089,7 +19089,7 @@ export const MODELES_BASE = [
 "id": "CANNES_01",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
 "consignes": [
 "Les deux cannes réunies dans une main, l'autre main sur l'accoudoir",
 "Fesses au bord du fauteuil, buste penché en avant",
@@ -19149,7 +19149,7 @@ export const MODELES_BASE = [
 "id": "CANNES_03",
 "source": "CABINET",
 "nom": "Marche en 4 temps avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-4-temps-deux-cannes-f.webp",
 "consignes": [
 "Avancer la canne droite",
 "Avancer le pied gauche",
@@ -19169,7 +19169,7 @@ export const MODELES_BASE = [
 "id": "CANNES_04",
 "source": "CABINET",
 "nom": "Marche en 2 temps avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-2-temps-deux-cannes-f.webp",
 "consignes": [
 "Avancer en même temps la canne droite et le pied gauche",
 "Puis la canne gauche et le pied droit",
@@ -19189,7 +19189,7 @@ export const MODELES_BASE = [
 "id": "CANNES_08",
 "source": "CABINET",
 "nom": "Faire demi-tour avec deux cannes",
-"image": "",
+"image": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
 "consignes": [
 "Tourner en faisant de petits pas",
 "Déplacer les cannes avec les pieds",

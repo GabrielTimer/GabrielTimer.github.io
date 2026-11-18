@@ -1848,5 +1848,45 @@
   "defaut": "/exercises/images/aide-marche/pause-rollator-f.webp",
   "f": "/exercises/images/aide-marche/pause-rollator-f.webp",
   "h": "/exercises/images/aide-marche/pause-rollator-h.webp"
+ },
+ "/exercises/images/aide-marche/lever-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/lever-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/lever-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/marche-3-temps-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-4-temps-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-4-temps-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/marche-4-temps-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/marche-4-temps-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-2-temps-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-2-temps-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/marche-2-temps-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/marche-2-temps-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/escalier-monter-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/escalier-monter-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/escalier-monter-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/escalier-monter-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/escalier-descendre-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/escalier-descendre-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/appui-jambe-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/appui-jambe-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp": {
+  "defaut": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
+  "f": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
+  "h": "/exercises/images/aide-marche/demi-tour-deux-cannes-h.webp"
  }
 }
