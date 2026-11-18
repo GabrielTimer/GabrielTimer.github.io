@@ -1888,5 +1888,45 @@
   "defaut": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
   "f": "/exercises/images/aide-marche/demi-tour-deux-cannes-f.webp",
   "h": "/exercises/images/aide-marche/demi-tour-deux-cannes-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-3-temps-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
+  "f": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
+  "h": "/exercises/images/aide-marche/marche-3-temps-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/marche-2-temps-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/marche-2-temps-canne-f.webp",
+  "f": "/exercises/images/aide-marche/marche-2-temps-canne-f.webp",
+  "h": "/exercises/images/aide-marche/marche-2-temps-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/escalier-monter-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
+  "f": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
+  "h": "/exercises/images/aide-marche/escalier-monter-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/escalier-descendre-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
+  "f": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
+  "h": "/exercises/images/aide-marche/escalier-descendre-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/unipodal-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/unipodal-canne-f.webp",
+  "f": "/exercises/images/aide-marche/unipodal-canne-f.webp",
+  "h": "/exercises/images/aide-marche/unipodal-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/lever-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/lever-canne-f.webp",
+  "f": "/exercises/images/aide-marche/lever-canne-f.webp",
+  "h": "/exercises/images/aide-marche/lever-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/obstacles-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/obstacles-canne-f.webp",
+  "f": "/exercises/images/aide-marche/obstacles-canne-f.webp",
+  "h": "/exercises/images/aide-marche/obstacles-canne-h.webp"
+ },
+ "/exercises/images/aide-marche/huit-chaises-canne-f.webp": {
+  "defaut": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
+  "f": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
+  "h": "/exercises/images/aide-marche/huit-chaises-canne-h.webp"
  }
 }

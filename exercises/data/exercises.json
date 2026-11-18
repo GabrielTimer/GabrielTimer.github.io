@@ -26256,7 +26256,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNE_01",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
     "materiel": [
       "Canne simple"
     ],
@@ -26297,7 +26297,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26322,7 +26321,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNE_02",
-    "image": "",
+    "image": "/exercises/images/aide-marche/marche-2-temps-canne-f.webp",
     "materiel": [
       "Canne simple"
     ],
@@ -26364,7 +26363,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26389,7 +26387,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNE_03",
-    "image": "",
+    "image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
     "materiel": [
       "Canne simple",
       "Escalier avec rampe"
@@ -26431,7 +26429,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26456,7 +26453,7 @@
     "ex": 60,
     "exercise_mode": "dynamique",
     "id": "CANNE_04",
-    "image": "",
+    "image": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
     "materiel": [
       "Canne simple",
       "Escalier avec rampe"
@@ -26498,7 +26495,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26523,7 +26519,7 @@
     "ex": 30,
     "exercise_mode": "equilibre",
     "id": "CANNE_05",
-    "image": "",
+    "image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
     "materiel": [
       "Canne simple",
       "Plan de travail"
@@ -26567,7 +26563,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26594,7 +26589,7 @@
     "ex": 45,
     "exercise_mode": "renforcement",
     "id": "CANNE_06",
-    "image": "",
+    "image": "/exercises/images/aide-marche/lever-canne-f.webp",
     "materiel": [
       "Canne simple",
       "Fauteuil à accoudoirs"
@@ -26635,7 +26630,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ]
@@ -26659,7 +26653,7 @@
     "ex": 60,
     "exercise_mode": "equilibre",
     "id": "CANNE_07",
-    "image": "",
+    "image": "/exercises/images/aide-marche/obstacles-canne-f.webp",
     "materiel": [
       "Canne simple",
       "Petits obstacles"
@@ -26702,7 +26696,6 @@
     ],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ],
@@ -26727,7 +26720,7 @@
     "ex": 60,
     "exercise_mode": "equilibre",
     "id": "CANNE_08",
-    "image": "",
+    "image": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
     "materiel": [
       "Canne simple",
       "2 chaises"
@@ -26769,7 +26762,6 @@
     "version_facile": [],
     "zones": [],
     "zones_corporelles": [],
-    "sans_image": true,
     "aide_marche": [
       "1 canne"
     ]

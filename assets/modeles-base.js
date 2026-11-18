@@ -14767,7 +14767,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -14807,7 +14807,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -14827,7 +14827,7 @@ export const MODELES_BASE = [
 "id": "CANNE_01",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer la canne",
@@ -14847,7 +14847,7 @@ export const MODELES_BASE = [
 "id": "CANNE_03",
 "source": "CABINET",
 "nom": "Monter l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Monter d'abord la jambe saine",
@@ -14867,7 +14867,7 @@ export const MODELES_BASE = [
 "id": "CANNE_04",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -15748,7 +15748,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -15788,7 +15788,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -15808,7 +15808,7 @@ export const MODELES_BASE = [
 "id": "CANNE_01",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer la canne",
@@ -15828,7 +15828,7 @@ export const MODELES_BASE = [
 "id": "CANNE_03",
 "source": "CABINET",
 "nom": "Monter l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Monter d'abord la jambe saine",
@@ -15848,7 +15848,7 @@ export const MODELES_BASE = [
 "id": "CANNE_04",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -17031,7 +17031,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -17072,7 +17072,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -17092,7 +17092,7 @@ export const MODELES_BASE = [
 "id": "CANNE_07",
 "source": "CABINET",
 "nom": "Enjamber de petits obstacles avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/obstacles-canne-f.webp",
 "consignes": [
 "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
 "Canne du côté sain",
@@ -17112,7 +17112,7 @@ export const MODELES_BASE = [
 "id": "CANNE_08",
 "source": "CABINET",
 "nom": "Marche en huit autour de deux chaises avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
 "consignes": [
 "Deux chaises posées à 2 m l'une de l'autre",
 "Marcher avec la canne en dessinant un huit autour",
@@ -17132,7 +17132,7 @@ export const MODELES_BASE = [
 "id": "CANNE_03",
 "source": "CABINET",
 "nom": "Monter l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Monter d'abord la jambe saine",
@@ -17152,7 +17152,7 @@ export const MODELES_BASE = [
 "id": "CANNE_04",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -18297,7 +18297,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -18317,7 +18317,7 @@ export const MODELES_BASE = [
 "id": "CANNE_01",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer la canne",
@@ -18337,7 +18337,7 @@ export const MODELES_BASE = [
 "id": "CANNE_08",
 "source": "CABINET",
 "nom": "Marche en huit autour de deux chaises avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
 "consignes": [
 "Deux chaises posées à 2 m l'une de l'autre",
 "Marcher avec la canne en dessinant un huit autour",
@@ -18377,7 +18377,7 @@ export const MODELES_BASE = [
 "id": "CANNE_07",
 "source": "CABINET",
 "nom": "Enjamber de petits obstacles avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/obstacles-canne-f.webp",
 "consignes": [
 "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
 "Canne du côté sain",
@@ -19221,7 +19221,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -19282,7 +19282,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -19302,7 +19302,7 @@ export const MODELES_BASE = [
 "id": "CANNE_02",
 "source": "CABINET",
 "nom": "Marche en 2 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-2-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer en même temps la canne et la jambe atteinte",
@@ -19322,7 +19322,7 @@ export const MODELES_BASE = [
 "id": "CANNE_08",
 "source": "CABINET",
 "nom": "Marche en huit autour de deux chaises avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/huit-chaises-canne-f.webp",
 "consignes": [
 "Deux chaises posées à 2 m l'une de l'autre",
 "Marcher avec la canne en dessinant un huit autour",
@@ -20226,7 +20226,7 @@ export const MODELES_BASE = [
 "id": "CANNE_06",
 "source": "CABINET",
 "nom": "Se lever et s'asseoir avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/lever-canne-f.webp",
 "consignes": [
 "Canne accrochée à l'accoudoir, à portée de main",
 "Pousser sur les deux accoudoirs pour se lever",
@@ -20246,7 +20246,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -20266,7 +20266,7 @@ export const MODELES_BASE = [
 "id": "CANNE_01",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer la canne",
@@ -20286,7 +20286,7 @@ export const MODELES_BASE = [
 "id": "CANNE_02",
 "source": "CABINET",
 "nom": "Marche en 2 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-2-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer en même temps la canne et la jambe atteinte",
@@ -20306,7 +20306,7 @@ export const MODELES_BASE = [
 "id": "CANNE_03",
 "source": "CABINET",
 "nom": "Monter l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Monter d'abord la jambe saine",
@@ -20326,7 +20326,7 @@ export const MODELES_BASE = [
 "id": "CANNE_04",
 "source": "CABINET",
 "nom": "Descendre l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-descendre-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Poser d'abord la canne sur la marche du dessous",
@@ -21886,7 +21886,7 @@ export const MODELES_BASE = [
 "id": "CANNE_05",
 "source": "CABINET",
 "nom": "Tenir sur la jambe atteinte avec la canne",
-"image": "",
+"image": "/exercises/images/aide-marche/unipodal-canne-f.webp",
 "consignes": [
 "Debout près d'un plan de travail, canne du côté sain",
 "Porter le poids sur la jambe atteinte",
@@ -21927,7 +21927,7 @@ export const MODELES_BASE = [
 "id": "CANNE_07",
 "source": "CABINET",
 "nom": "Enjamber de petits obstacles avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/obstacles-canne-f.webp",
 "consignes": [
 "Poser au sol 3 ou 4 petits obstacles (livres, bâtons)",
 "Canne du côté sain",
@@ -21947,7 +21947,7 @@ export const MODELES_BASE = [
 "id": "CANNE_01",
 "source": "CABINET",
 "nom": "Marche en 3 temps avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/marche-3-temps-canne-f.webp",
 "consignes": [
 "Tenir la canne du côté sain",
 "Avancer la canne",
@@ -21967,7 +21967,7 @@ export const MODELES_BASE = [
 "id": "CANNE_03",
 "source": "CABINET",
 "nom": "Monter l'escalier avec une canne",
-"image": "",
+"image": "/exercises/images/aide-marche/escalier-monter-canne-f.webp",
 "consignes": [
 "Une main sur la rampe, la canne dans l'autre main",
 "Monter d'abord la jambe saine",
