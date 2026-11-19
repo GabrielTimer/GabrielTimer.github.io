@@ -982,7 +982,7 @@ body::before{
     radial-gradient(circle 21vmax at 58% 38%, var(--bulle-lagon), var(--bulle-lagon-2) 99%, transparent 100%),
     radial-gradient(circle 27vmax at 30% 52%, var(--bulle-blanc), var(--bulle-blanc-2) 98.6%, var(--bulle-bord) 99.3%, transparent 100%),
     radial-gradient(circle 15vmax at 16% 92%, var(--bulle-lagon), var(--bulle-lagon-2) 99%, transparent 100%);
-  animation:bulles-a 46s ease-in-out infinite alternate;
+  animation:bulles-a 30s ease-in-out infinite alternate;
 }
 body::after{
   background:
@@ -990,7 +990,7 @@ body::after{
     radial-gradient(circle 16vmax at 75% 24%, var(--bulle-blanc), var(--bulle-blanc-2) 98.6%, var(--bulle-bord) 99.3%, transparent 100%),
     radial-gradient(circle 30vmax at 88% 86%, var(--bulle-lagon-2), var(--bulle-lagon) 99%, transparent 100%),
     radial-gradient(circle 34vmax at 74% 96%, var(--bulle-blanc-2), var(--bulle-blanc-2) 98.8%, var(--bulle-bord) 99.4%, transparent 100%);
-  animation:bulles-b 58s ease-in-out infinite alternate;
+  animation:bulles-b 38s ease-in-out infinite alternate;
 }
 @keyframes bulles-a{
   0%  { transform:translate3d(0, 0, 0) scale(1); }
