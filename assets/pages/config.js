@@ -318,7 +318,6 @@ function renderExos(){
           <div class="exo-actions">
             <button class="icon-btn sm" type="button" data-move="-1" data-i="${i}" aria-label="Monter" ${i === 0 ? "disabled" : ""}>${icon("up")}</button>
             <button class="icon-btn sm" type="button" data-move="1" data-i="${i}" aria-label="Descendre" ${i === S.exercices.length - 1 ? "disabled" : ""}>${icon("down")}</button>
-            ${e.id !== undefined && e.id !== null && e.id !== "" ? `<button class="icon-btn sm" type="button" data-var="${i}" aria-label="Variante plus facile ou plus difficile" title="Variante plus facile ou plus difficile">${icon("swap")}</button>` : ""}
             <button class="icon-btn sm" type="button" data-dup="${i}" aria-label="Dupliquer">${icon("copy")}</button>
             <button class="icon-btn sm danger" type="button" data-del="${i}" aria-label="Supprimer">${icon("trash")}</button>
           </div>
@@ -328,7 +327,7 @@ function renderExos(){
           ${stepper(i, "repos", "Repos (s)", 5, 0)}
           ${stepper(i, "reps", "Répétitions", 1, 1)}
         </div>
-        <div class="exo-foot"><span data-total="${i}">${exoTotal(e)}</span></div>
+        <div class="exo-foot"><span data-total="${i}">${exoTotal(e)}</span>${e.id !== undefined && e.id !== null && e.id !== "" ? `<button class="exo-var" type="button" data-var="${i}" hidden title="Remplacer par une variante plus facile ou plus difficile">${icon("swap")}<span>Plus facile / plus difficile</span></button>` : ""}</div>
         ${evolHTML(e, i)}
         <details class="exo-note" ${e.conseil_kine ? "open" : ""}><summary>${icon("message")}Consigne personnelle pour le patient</summary>
           <textarea class="textarea" data-note="${i}" maxlength="400" placeholder="Ex. Ne pas dépasser 3/10 de douleur, côté droit uniquement">${esc(e.conseil_kine || "")}</textarea>
@@ -337,6 +336,22 @@ function renderExos(){
     </article>`).join("");
   bindExos();
   renderSummary();
+  marquerVariantes();
+}
+
+/* Le bouton « Plus facile / plus difficile » n'apparaît que s'il y a vraiment une variante */
+async function marquerVariantes(){
+  const vis = e => !isHidden(exerciseKey(e));
+  for(const b of $$("[data-var]")){
+    const x = S.exercices[+b.dataset.var];
+    if(!x) continue;
+    const V = await variantesDe(x, { visible: vis });
+    if(!b.isConnected) return;
+    const n = Math.max(0, V.chaine.length - 1) + V.proches.length;
+    b.hidden = !n;
+    const lab = b.querySelector("span");
+    if(lab) lab.textContent = V.chaine.length > 1 ? (V.facile && V.difficile ? "Plus facile / plus difficile" : V.facile ? "Plus facile" : "Plus difficile") : "Exercices proches";
+  }
 }
 
 /* ---------- Évolution : charge par semaine, vitesse dans la semaine ---------- */

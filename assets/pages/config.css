@@ -120,3 +120,10 @@ body.exo-dragging{ -webkit-user-select:none; user-select:none; cursor:grabbing; 
 }
 #lieu button{ display:inline-flex; align-items:center; gap:6px; }
 #lieu svg{ width:18px; height:18px; }
+
+/* Bouton « Plus facile / plus difficile » sous le dosage */
+.exo-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+.exo-var{ display:inline-flex; align-items:center; gap:6px; min-height:34px; padding:0 12px; border-radius:999px; border:1.5px solid color-mix(in srgb, var(--lagon) 45%, transparent); background:var(--lagon-soft); color:var(--lagon-strong); font:inherit; font-size:var(--fs-sm); font-weight:700; cursor:pointer; }
+.exo-var:hover{ background:color-mix(in srgb, var(--lagon) 18%, var(--surface)); }
+.exo-var svg{ width:16px; height:16px; }
+.exo-var[hidden]{ display:none; }
