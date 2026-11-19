@@ -207,6 +207,7 @@ p{ margin:0; }
 
 @media (min-width:960px){
   .has-nav .shell{ padding-left:var(--side-w); }
+  .has-nav > main{ margin-left:var(--side-w); }   /* avant la mise en place de la page (menu affiché d'avance) */
   .nav{
     top:0; right:auto; width:var(--side-w); height:auto;
     flex-direction:column; justify-content:flex-start; align-items:stretch; gap:4px;

@@ -601,6 +601,9 @@ function surveillerVerrou(){
 
 export function mountShell({ role = "none", active = "", title = "", back = null, actions = "", apercu = false } = {}){
   const body = document.body;
+  /* Menu posé d'avance par nav-instant.js : remplacé par le vrai dans la même image (aucun clignotement) */
+  const navInstant = document.getElementById("nav-instant");
+  if(navInstant){ navInstant.remove(); body.classList.remove("has-nav"); }
   if(!document.title.includes(_APP)) document.title = document.title ? `${document.title} – ${_APP}` : _APP;
   const main = $("main") || h(`<main class="page"></main>`);
   const shell = h(`<div class="shell"></div>`);
@@ -635,6 +638,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   body.appendChild(shell);
 
   const items = NAV[role];
+  let nav = null;
   if(items){
     body.classList.add("has-nav");
     const foot = role === "kine"
@@ -646,18 +650,19 @@ export function mountShell({ role = "none", active = "", title = "", back = null
       : `<div class="nav-foot">
           <div class="nav-app">${appMarkHTML()}</div>
         </div>`;
-    const nav = h(`<nav class="nav" aria-label="Navigation principale">
+    nav = h(`<nav class="nav" aria-label="Navigation principale">
       <a class="nav-brand brand" href="/index.html"><img src="${esc(logoSrc())}" alt="" width="40" height="40"><span class="brand-text"><span class="brand-name">${esc(KINE.nom)}</span><span class="brand-sub">${esc(KINE.sousTitre || "")}</span></span></a>
       ${role === "kine" && !apercu ? `<button class="nav-search" type="button" data-gsearch>${icon("search")}<span>Rechercher…</span><kbd>Ctrl K</kbd></button>` : ""}
       ${items.map(it => it.id === "messages"
-        ? `<a class="nav-link nav-msg" href="${navHref(it)}" data-inbox-link aria-label="Messages des patients" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}<span class="inbox-badge" data-inbox-badge hidden></span></span><span>${it.label}</span></a>`
-        : `<a class="nav-link" href="${navHref(it)}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
+        ? `<a class="nav-link nav-msg" href="${navHref(it)}" data-nav="${it.id}" data-inbox-link aria-label="Messages des patients" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}<span class="inbox-badge" data-inbox-badge hidden></span></span><span>${it.label}</span></a>`
+        : `<a class="nav-link" href="${navHref(it)}" data-nav="${it.id}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
     body.appendChild(nav);
   }else{
     main.classList.add("no-nav");
   }
+  memoriserMenu(role === "kine" && !apercu ? nav : null, active);
   if(role === "kine" && !apercu){
     import("./messages.js").then(m => m.refreshUnread()).catch(() => {});
     /* Recherche globale : champ du menu, loupe du haut, Ctrl+K */
@@ -688,6 +693,25 @@ export function mountShell({ role = "none", active = "", title = "", back = null
   addEventListener("scroll", onScroll, { passive:true });
   onScroll();
   return { main, topbar };
+}
+
+/* Copie du menu kiné pour nav-instant.js (affiché dès le début du chargement des pages suivantes) */
+function memoriserMenu(nav, active){
+  try{
+    const chemin = location.pathname === "/" ? "/index.html" : location.pathname;
+    const c = JSON.parse(localStorage.getItem("gt_nav_kine") || "null") || { html:"", pages:{} };
+    if(nav){
+      const copie = nav.cloneNode(true);
+      copie.querySelectorAll("[aria-current]").forEach(a => a.removeAttribute("aria-current"));
+      copie.querySelectorAll("[data-inbox-badge]").forEach(b => { b.hidden = true; b.textContent = ""; });
+      c.html = copie.outerHTML;
+      c.pages[chemin] = active || "";
+    }else{
+      if(!(chemin in c.pages)) return;
+      delete c.pages[chemin];
+    }
+    localStorage.setItem("gt_nav_kine", JSON.stringify(c));
+  }catch(e){}
 }
 
 /* ---------- États d'affichage ---------- */
