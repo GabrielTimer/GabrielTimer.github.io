@@ -162,7 +162,13 @@
   .t-sub{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .t-info.t-consignes{ margin-top:6px; min-height:40px; }
   /* Barre du bas toujours visible, même si l'écran est trop petit ou le texte agrandi */
-  .t-foot{ flex:none; position:sticky; bottom:0; z-index:3; background:var(--t-bg); padding-top:6px; transition:background-color .35s ease; }
+  .t-wrap{ padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
+  .t-foot{
+    position:fixed; left:0; right:0; bottom:0; z-index:5;
+    padding:8px max(14px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
+    background:var(--t-bg); box-shadow:0 -1px 0 color-mix(in srgb, var(--t-fg) 10%, transparent);
+    transition:background-color .35s ease;
+  }
 }
 
 /* Pas de bulles de fond pendant la séance : écran calme, lisible de loin */
