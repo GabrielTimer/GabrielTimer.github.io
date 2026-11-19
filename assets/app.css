@@ -967,10 +967,10 @@ dialog.sheet.gsearch{ width:min(100%,680px); }
    Deux calques fixes (body::before / body::after), animés uniquement en transform (fluide, peu coûteux).
    Mouvement coupé si l'appareil demande moins d'animations. */
 :root{
-  --bulle-lagon: color-mix(in srgb, var(--lagon) 16%, transparent);
-  --bulle-lagon-2: color-mix(in srgb, var(--lagon) 10%, transparent);
-  --bulle-blanc: color-mix(in srgb, var(--surface) 55%, transparent);
-  --bulle-blanc-2: color-mix(in srgb, var(--surface) 30%, transparent);
+  --bulle-lagon: color-mix(in srgb, var(--lagon) 22%, transparent);
+  --bulle-lagon-2: color-mix(in srgb, var(--lagon) 14%, transparent);
+  --bulle-blanc: color-mix(in srgb, var(--surface) 70%, transparent);
+  --bulle-blanc-2: color-mix(in srgb, var(--surface) 40%, transparent);
   --bulle-bord: color-mix(in srgb, var(--surface) 85%, transparent);
 }
 body::before, body::after{
