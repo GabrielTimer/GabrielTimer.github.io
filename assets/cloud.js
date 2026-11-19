@@ -823,6 +823,18 @@ async function _propagateExerciseEdit(before, after){
   return { seances: nS, modeles: nM };
 }
 
+/* ---------- Recherche IA : clé Google Gemini ----------
+   acces/ia : lue par les kinés du cabinet, modifiée par le titulaire seul (jamais lisible par un patient). */
+
+export async function getIA(){
+  const snap = await getDoc(doc(db, "acces", "ia"));
+  return snap.exists() ? snap.data() : null;
+}
+
+export async function saveIA(data){
+  await setDoc(doc(db, "acces", "ia"), clean({ ...data, updatedAt: Date.now() }));
+}
+
 /* ---------- Réglages du cabinet (reglages/cabinet, lisibles par tous) ---------- */
 
 export async function getReglages(){

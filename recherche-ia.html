@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recherche IA</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  /* Recherche IA (espace kiné) : une question en langage courant, réponse de Google Gemini
+     appuyée sur les tests, modèles et exercices de l'appli (et sur une recherche Google pour les preuves). */
+  .ia{ width:min(100%, 760px); margin:0 auto; }
+  .ia-hero{ text-align:center; padding:clamp(24px, 9vh, 90px) 0 18px; }
+  .ia-hero h1{ margin:0; font-size:clamp(1.5rem, 4.6vw, 2.1rem); line-height:1.2; }
+  .ia.has-res .ia-hero{ padding:8px 0 12px; }
+  .ia.has-res .ia-hero h1{ font-size:var(--fs-lg); }
+  .ia-box{ border:1.5px solid var(--line-strong); border-radius:var(--r-lg, 18px); background:var(--surface); padding:12px 12px 10px 16px; box-shadow:0 2px 10px rgba(20,48,58,.06); }
+  .ia-box:focus-within{ border-color:var(--lagon); box-shadow:0 0 0 3px color-mix(in srgb, var(--lagon) 22%, transparent); }
+  .ia-box textarea{ width:100%; border:0; outline:none; resize:none; background:transparent; color:var(--ink); font:inherit; font-size:var(--fs-md, 1rem); line-height:1.45; min-height:52px; max-height:40vh; padding:4px 0; }
+  .ia-box textarea, .ia-box textarea:focus{ border:0; box-shadow:none; background:transparent; border-radius:0; }
+  .ia-box textarea::placeholder{ color:var(--ink-3); }
+  .ia-bar{ display:flex; align-items:center; gap:8px; margin-top:4px; }
+  .ia-mode{ display:inline-flex; align-items:center; gap:6px; padding:5px 8px 5px 10px; border-radius:999px; background:var(--lagon-soft); color:var(--lagon-strong); font-size:var(--fs-sm); font-weight:700; border:0; cursor:pointer; font-family:inherit; }
+  .ia-mode svg{ width:16px; height:16px; }
+  .ia-bar .sp{ flex:1; }
+  .ia-round{ width:46px; height:46px; border-radius:50%; border:0; display:grid; place-items:center; cursor:pointer; background:var(--surface-2); color:var(--ink-2); flex:none; }
+  .ia-round svg{ width:22px; height:22px; }
+  .ia-round.go{ background:var(--lagon); color:var(--on-lagon); }
+  .ia-round.go:disabled{ background:var(--surface-2); color:var(--ink-3); cursor:default; }
+  .ia-round.on{ background:var(--warn); color:#fff; animation:ia-pulse 1.2s ease-in-out infinite; }
+  @keyframes ia-pulse{ 50%{ opacity:.6; } }
+  .ia-shortcuts{ display:flex; flex-direction:column; align-items:center; gap:2px; margin:14px 0 6px; }
+  .ia-shortcuts button{ display:inline-flex; align-items:center; gap:10px; border:0; background:none; color:var(--ink-2); font:inherit; padding:8px 12px; border-radius:var(--r-sm); cursor:pointer; text-align:left; }
+  .ia-shortcuts button:hover, .ia-shortcuts button[aria-pressed="true"]{ background:var(--surface-2); color:var(--ink); }
+  .ia-shortcuts svg{ width:20px; height:20px; color:var(--ink-3); flex:none; }
+  .ia.has-res .ia-shortcuts{ flex-direction:row; flex-wrap:wrap; justify-content:center; }
+  .ia.has-res .ia-shortcuts button{ font-size:var(--fs-sm); padding:6px 10px; }
+  .ia-foot{ text-align:center; font-size:var(--fs-xs); color:var(--ink-3); margin:6px 0 0; }
+  .ia-foot details{ display:inline-block; }
+  .ia-foot summary{ cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:4px; }
+  .ia-foot summary::-webkit-details-marker{ display:none; }
+  .ia-foot summary svg{ width:14px; height:14px; }
+  .ia-foot details[open] summary svg{ transform:rotate(180deg); }
+  .ia-foot .more{ max-width:560px; margin:8px auto 0; text-align:left; line-height:1.45; }
+  .ia-foot button.lnk{ border:0; background:none; padding:0; color:var(--lagon-strong); font:inherit; text-decoration:underline; cursor:pointer; }
+  .ia-recent{ display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-top:18px; }
+  .ia-recent .chip{ max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .ia-res{ margin-top:18px; display:flex; flex-direction:column; gap:14px; }
+  .ia-q{ font-weight:800; font-size:var(--fs-lg); margin:0; }
+  .ia-q small{ display:block; font-weight:600; font-size:var(--fs-sm); color:var(--ink-3); margin-bottom:2px; }
+  .ia-txt{ line-height:1.55; }
+  .ia-txt p{ margin:0 0 10px; }
+  .ia-txt ul{ margin:0 0 10px; padding-left:22px; }
+  .ia-txt li{ margin:3px 0; }
+  .ia-txt h3{ font-size:var(--fs-md, 1rem); margin:14px 0 6px; color:var(--lagon-strong); }
+  .ia-txt > :last-child{ margin-bottom:0; }
+  .ia-sec h2{ font-size:var(--fs-md, 1rem); display:flex; align-items:center; gap:8px; margin:0 0 8px; }
+  .ia-sec h2 svg{ width:20px; height:20px; color:var(--lagon); }
+  .ia-item{ display:flex; gap:12px; align-items:flex-start; width:100%; padding:11px 12px; border:0; border-top:1px solid var(--line); background:none; text-align:left; color:inherit; font:inherit; cursor:pointer; }
+  .ia-item:first-child{ border-top:0; }
+  .ia-item:hover{ background:var(--surface-2); }
+  .ia-item .ico{ flex:none; width:42px; height:42px; border-radius:var(--r-sm); display:grid; place-items:center; background:var(--lagon-soft); color:var(--lagon-strong); }
+  .ia-item .ico svg{ width:20px; height:20px; }
+  .ia-item .thumb{ flex:none; width:52px; height:52px; border-radius:var(--r-sm); overflow:hidden; background:var(--surface-2); }
+  .ia-item .thumb img, .ia-item .thumb .ph-img{ width:100%; height:100%; object-fit:cover; }
+  .ia-item .thumb .mcover{ width:52px; height:52px; }
+  .ia-item .main{ flex:1; min-width:0; }
+  .ia-item .main > span{ display:block; }
+  .ia-item .main > .t{ display:flex; }
+  .ia-item .t{ font-weight:800; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+  .ia-item .s{ font-size:var(--fs-sm); color:var(--ink-2); margin-top:2px; }
+  .ia-item .w{ font-size:var(--fs-sm); color:var(--ink); margin-top:4px; }
+  .ia-item .badge{ font-size:var(--fs-xs); }
+  .ia-item.static{ cursor:default; }
+  .ia-item.static:hover{ background:none; }
+  .ia-src a{ display:flex; gap:8px; align-items:center; padding:7px 0; color:var(--lagon-strong); font-size:var(--fs-sm); text-decoration:none; border-top:1px solid var(--line); }
+  .ia-src a:first-child{ border-top:0; }
+  .ia-src a svg{ width:16px; height:16px; flex:none; }
+  .ia-wait{ display:flex; align-items:center; gap:10px; color:var(--ink-2); }
+  .ia-setup ol{ margin:8px 0 12px; padding-left:22px; line-height:1.55; }
+  .ia-setup .row{ display:flex; gap:8px; flex-wrap:wrap; }
+  .ia-setup .row .input{ flex:1; min-width:220px; font-family:var(--mono); }
+</style>
+</head>
+<body>
+<main class="page wide" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, store, toast, openSheet, exoImageHTML } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"history" });
+const IA = await import("/assets/ia.js");
+const { estTitulaire } = await import("/assets/cloud.js");
+const { norm, loadLibrary, exerciseKey } = await import("/assets/library.js");
+const { isHidden } = await import("/assets/settings.js");
+
+/* ---------- Données de l'appli (chargées en arrière-plan) ---------- */
+const donnees = (async () => {
+  const B = await import("/assets/bilan-core.js");
+  const TC = await import("/assets/tests-catalogue.js");
+  const K = await B.loadClinic();
+  const tests = TC.catalogue(K).map(t => ({ ...t, hay: norm([t.nom, t.region, ...(t.hyp || []), ...(t.specs || []), ...(t.motifs || [])].join(" ")) }));
+  const M = await import("/assets/modeles.js");
+  const C = await import("/assets/cloud.js");
+  const mine = await C.listModeles().then(r => r.map(x => M.normModele(x))).catch(() => []);
+  const replaced = new Set(mine.map(m => m.remplace).filter(Boolean));
+  const tousM = [...mine, ...M.BUILTIN.filter(b => !replaced.has(b.id) && !M.isBuiltinHidden(b.id))].filter(m => m.exercices?.length);
+  const modeles = M.groupModeles(tousM).map(g => ({ g, hay: norm([g.nom, M.catLabel(g.categorie), g.zoneLabel, ...g.items.flatMap(m => m.exercices.map(e => e.nom))].join(" ")) }));
+  const exercices = (await loadLibrary()).filter(e => !isHidden(exerciseKey(e)));
+  return { K, TC, M, tests, modeles, exercices };
+})();
+
+/* ---------- Recherche locale (sans IA) : score par mots, accents ignorés ---------- */
+const VIDES = new Set("les des une pour avec dans sur par aux est que qui quoi quel quels quelle quelles comment trouver faire chez son ses mon mes patient patiente apres avant plus moins tres bien entre".split(" "));
+const racine = w => w.length > 5 ? w.slice(0, w.length - 2) : w;
+const motsDe = q => [...new Set(norm(q).replace(/[^a-z0-9\s-]/g, " ").split(/[\s-]+/).filter(w => w.length >= 3 && !VIDES.has(w)).map(racine))];
+function classer(list, q, hay, titre, max){
+  const ws = motsDe(q);
+  if(!ws.length) return [];
+  return list.map(x => {
+    const h = hay(x), t = norm(titre(x));
+    let s = 0; ws.forEach(w => { if(h.includes(w)) s += t.includes(w) ? 3 : 1; });
+    return [s, x];
+  }).filter(([s]) => s > 0).sort((a, b) => b[0] - a[0]).slice(0, max).map(([, x]) => x);
+}
+/* HEP toujours en premier, à pertinence égale */
+const hepDabord = (list, lieu) => [...list.filter(x => lieu(x) === "HEP"), ...list.filter(x => lieu(x) !== "HEP")];
+/* Modèles : l'ordre de pertinence est gardé, mais la version HEP passe avant la version dessins du même modèle */
+const hepAvantJumeau = (list, g) => {
+  const ordre = new Map();
+  list.forEach((x, i) => { const k = norm(g(x).nom); if(!ordre.has(k)) ordre.set(k, i); });
+  return list.map((x, i) => [x, i]).sort((a, b) => {
+    const ka = ordre.get(norm(g(a[0]).nom)), kb = ordre.get(norm(g(b[0]).nom));
+    return (ka - kb) || ((g(b[0]).items[0].lieu === "HEP") - (g(a[0]).items[0].lieu === "HEP")) || (a[1] - b[1]);
+  }).map(([x]) => x);
+};
+
+/* ---------- Modes ---------- */
+const MODES = {
+  tests:{ ico:"stethoscope", court:"Tests cliniques", label:"Trouver les tests cliniques d'une pathologie", ph:"Ex. : rupture du LCA, conflit sous-acromial, radiculalgie L5…" },
+  preuves:{ ico:"book", court:"Preuves", label:"Résumer les preuves sur une prise en charge", ph:"Ex. : exercices pour la tendinopathie d'Achille, lombalgie chronique…" },
+  exos:{ ico:"layers", court:"Exercices et modèles", label:"Trouver des exercices et des programmes modèles", ph:"Ex. : renforcement après prothèse de genou, en déambulateur…" }
+};
+let mode = "";
+let cle = await IA.getCle();
+const RECENTS = "gt_ia_recents";
+
+$("#app").innerHTML = `
+  <div class="ia" id="ia">
+    <div class="ia-hero"><h1>Que cherchez-vous aujourd'hui ?</h1></div>
+    <form class="ia-box" id="f" autocomplete="off">
+      <label class="sr-only" for="q">Votre recherche</label>
+      <textarea id="q" rows="2" placeholder="Décrivez votre recherche…" enterkeyhint="search"></textarea>
+      <div class="ia-bar">
+        <span id="mode-chip"></span>
+        <span class="sp"></span>
+        <button class="ia-round" type="button" id="mic" aria-label="Dicter" title="Dicter" hidden>${icon("mic")}</button>
+        <button class="ia-round go" type="submit" id="go" aria-label="Rechercher" title="Rechercher" disabled>${icon("arrowUp")}</button>
+      </div>
+    </form>
+    <div class="ia-shortcuts" role="group" aria-label="Type de recherche">
+      ${Object.entries(MODES).map(([k, m]) => `<button type="button" data-mode="${k}" aria-pressed="false">${icon(m.ico)}<span>${esc(m.label)}</span></button>`).join("")}
+    </div>
+    <div class="ia-foot">
+      <details>
+        <summary>ApiKiné IA peut faire des erreurs. Vérifiez les informations.${icon("down")}</summary>
+        <div class="more">
+          Les réponses sont rédigées par Google Gemini (offre gratuite), à partir des tests, modèles et exercices d'ApiKiné et, pour les preuves, d'une recherche Google dont les sources sont affichées.
+          Google peut utiliser les questions posées pour améliorer ses services. Une réponse ne remplace pas votre jugement clinique.
+          <br><button type="button" class="lnk" id="reglages">Réglages de la recherche IA</button>
+        </div>
+      </details>
+    </div>
+    <div id="setup"></div>
+    <div class="ia-recent" id="recents"></div>
+    <div class="ia-res" id="res" aria-live="polite"></div>
+  </div>`;
+
+const q = $("#q"), go = $("#go");
+const ajuster = () => { q.style.height = "auto"; q.style.height = Math.min(q.scrollHeight, innerHeight * 0.4) + "px"; go.disabled = !q.value.trim(); };
+q.addEventListener("input", ajuster);
+q.addEventListener("keydown", e => { if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); if(q.value.trim()) lancer(); } });
+$("#f").onsubmit = e => { e.preventDefault(); if(q.value.trim()) lancer(); };
+
+function setMode(m){
+  mode = mode === m ? "" : m;
+  $$("[data-mode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.mode === mode)));
+  $("#mode-chip").innerHTML = mode ? `<button class="ia-mode" type="button" id="mode-x" title="Retirer">${icon(MODES[mode].ico)}${esc(MODES[mode].court)}${icon("close")}</button>` : "";
+  if(mode) $("#mode-x").onclick = () => setMode(mode);
+  q.placeholder = mode ? MODES[mode].ph : "Décrivez votre recherche…";
+  q.focus();
+}
+$$("[data-mode]").forEach(b => b.onclick = () => setMode(b.dataset.mode));
+
+/* ---------- Dictée (micro de la tablette) ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+if(SR){
+  const mic = $("#mic"); mic.hidden = false;
+  let rec = null;
+  mic.onclick = () => {
+    if(rec){ rec.stop(); return; }
+    rec = new SR(); rec.lang = "fr-FR"; rec.interimResults = true; rec.continuous = false;
+    const base = q.value.trim();
+    rec.onresult = e => { const t = [...e.results].map(r => r[0].transcript).join(""); q.value = (base ? base + " " : "") + t; ajuster(); };
+    rec.onerror = e => { if(e.error === "not-allowed") toast("Autorisez le micro pour dicter.", { type:"err" }); };
+    rec.onend = () => { rec = null; mic.classList.remove("on"); mic.setAttribute("aria-label", "Dicter"); q.focus(); };
+    mic.classList.add("on"); mic.setAttribute("aria-label", "Arrêter la dictée");
+    try{ rec.start(); }catch(e){ rec = null; mic.classList.remove("on"); }
+  };
+}
+
+/* ---------- Recherches récentes (sur cet appareil) ---------- */
+function recents(){
+  const list = store.get(RECENTS, []) || [];
+  const box = $("#recents");
+  if($("#ia").classList.contains("has-res") || !list.length){ box.innerHTML = ""; return; }
+  box.innerHTML = list.map((r, i) => `<button class="chip" type="button" data-r="${i}" title="${esc(r.q)}">${icon(MODES[r.mode]?.ico || "search")}${esc(r.q)}</button>`).join("");
+  $$("[data-r]", box).forEach(b => b.onclick = () => { const r = list[+b.dataset.r]; if(r.mode !== mode) setMode(r.mode || mode); q.value = r.q; ajuster(); lancer(); });
+}
+function memoriser(texte){
+  const list = (store.get(RECENTS, []) || []).filter(r => !(r.q === texte && r.mode === mode));
+  list.unshift({ q: texte, mode });
+  store.set(RECENTS, list.slice(0, 8));
+}
+
+/* ---------- Réglages : clé Google Gemini ---------- */
+const etapesHTML = `
+  <ol>
+    <li>Ouvrez <a href="${IA.LIEN_CLE}" target="_blank" rel="noopener"><strong>Google AI Studio</strong></a> avec votre compte Google (celui du cabinet).</li>
+    <li>Cliquez sur <strong>« Create API key »</strong> (Créer une clé API), puis copiez la clé (elle commence par « AIza »).</li>
+    <li>Collez-la ci-dessous et enregistrez. C'est fait une fois pour toutes, sur tous vos appareils.</li>
+  </ol>
+  <p class="hint">100 % gratuit : sans carte bancaire, Google ne peut rien facturer. Ne cliquez jamais sur « Set up billing » (activer la facturation) dans AI Studio. Si le quota gratuit du jour est atteint, la recherche IA attend simplement le lendemain.</p>`;
+function setupHTML(){
+  if(!estTitulaire()) return `<p>La recherche IA n'est pas encore activée. Le titulaire du cabinet doit enregistrer une clé Google Gemini.</p>`;
+  return `${etapesHTML}
+    <div class="row"><input class="input" id="cle" type="text" inputmode="text" spellcheck="false" autocapitalize="off" placeholder="AIza…" value="${esc(cle)}" aria-label="Clé Google Gemini">
+    <button class="btn primary" type="button" id="cle-ok">${icon("check")}Tester et enregistrer</button></div>`;
+}
+function brancherCle(root, apres){
+  const ok = $("#cle-ok", root);
+  if(!ok) return;
+  ok.onclick = async () => {
+    const v = $("#cle", root).value.trim().replace(/\s+/g, "");
+    if(!v){ toast("Collez d'abord la clé.", { type:"err" }); return; }
+    ok.disabled = true; ok.innerHTML = `Vérification…`;
+    try{
+      await IA.testerCle(v);
+      await IA.setCle(v); cle = v;
+      toast("Recherche IA activée.", { type:"ok" });
+      apres?.();
+    }catch(e){
+      toast(e.type === "quota" ? "Clé valide, mais quota atteint : elle est enregistrée, réessayez plus tard." : (e.message || "Clé refusée."), { type: e.type === "quota" ? "info" : "err", duration:7000 });
+      if(e.type === "quota"){ await IA.setCle(v).catch(() => {}); cle = v; apres?.(); }
+    }finally{ ok.disabled = false; ok.innerHTML = `${icon("check")}Tester et enregistrer`; }
+  };
+}
+function afficherSetup(){
+  $("#setup").innerHTML = cle ? "" : `<div class="panel ia-setup" style="margin-top:16px"><h2 style="margin:0 0 4px;font-size:var(--fs-md)">${icon("key")} Activer la recherche IA (gratuite)</h2>${setupHTML()}
+    <p class="hint" style="margin-top:10px">En attendant, la recherche trouve déjà vos tests, modèles et exercices, sans IA.</p></div>`;
+  brancherCle($("#setup"), afficherSetup);
+}
+$("#reglages").onclick = () => {
+  const s = openSheet({ title:"Recherche IA", body:`<div class="ia-setup">
+      <p>Les réponses viennent de Google Gemini, offre gratuite.${cle ? " Une clé est enregistrée." : " Aucune clé n'est enregistrée."}</p>
+      ${setupHTML()}
+      ${cle && estTitulaire() ? `<p style="margin-top:12px"><button class="btn danger" type="button" id="cle-x">${icon("trash")}Retirer la clé</button></p>` : ""}</div>`, foot:`<button class="btn" type="button" data-close>Fermer</button>` });
+  brancherCle(s.el, () => { s.close(); afficherSetup(); });
+  const x = $("#cle-x", s.el);
+  if(x) x.onclick = async () => { await IA.setCle(""); cle = ""; toast("Clé retirée."); s.close(); afficherSetup(); };
+};
+
+/* ---------- Affichage ---------- */
+function md(texte){
+  /* Markdown simple : titres, **gras**, *italique*, listes, paragraphes (texte échappé) */
+  const inl = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+  const out = []; let ul = null, p = [];
+  const flushP = () => { if(p.length){ out.push(`<p>${p.map(inl).join("<br>")}</p>`); p = []; } };
+  const flushU = () => { if(ul){ out.push(`<ul>${ul.map(x => `<li>${inl(x)}</li>`).join("")}</ul>`); ul = null; } };
+  String(texte || "").split(/\r?\n/).forEach(l => {
+    const t = l.trim();
+    if(!t){ flushP(); flushU(); return; }
+    const h = t.match(/^#{1,4}\s+(.*)$/);
+    const li = t.match(/^(?:[-*•]|\d+[.)])\s+(.*)$/);
+    if(h){ flushP(); flushU(); out.push(`<h3>${inl(h[1].replace(/\*\*/g, ""))}</h3>`); }
+    else if(li){ flushP(); (ul ||= []).push(li[1]); }
+    else { flushU(); p.push(t); }
+  });
+  flushP(); flushU();
+  return out.join("");
+}
+const f1 = x => x == null ? null : String(x).replace(".", ",");
+const lieuG = g => g.items[0].lieu;
+const lieuTxt = l => l === "HEP" ? "HEP" : l === "CABINET" ? "dessins" : "";
+
+let actions = [];
+const act = fn => actions.push(fn) - 1;
+function testHTML(t, pourquoi){
+  return `<button class="ia-item" type="button" data-a="${act(() => D.TC.ficheTest(D.K, t.nom, t.kind))}">
+    <span class="ico">${icon(t.kind === "fonctionnel" ? "clock" : "stethoscope")}</span>
+    <span class="main"><span class="t">${esc(t.nom)}${t.lrp != null ? `<span class="badge ${t.lrp >= 5 ? "ok" : ""}">LR+ ${esc(f1(t.lrp))}</span>` : ""}${t.lrm != null ? `<span class="badge ${t.lrm <= 0.2 ? "ok" : ""}">LR− ${esc(f1(t.lrm))}</span>` : ""}</span>
+    <span class="s">${t.kind === "clinique" ? `${esc(t.region)} · ${esc((t.hyp || []).join(", "))}` : `Test fonctionnel${t.unite ? ` (${esc(t.unite)})` : ""}`}</span>
+    ${pourquoi ? `<span class="w">${esc(pourquoi)}</span>` : ""}</span>${icon("chevron")}</button>`;
+}
+function modeleHTML(x, pourquoi){
+  const g = x.g, l = lieuTxt(lieuG(g));
+  const sub = [D.M.catLabel(g.categorie), g.zoneLabel, l, g.items.length > 1 ? `${g.items.length} niveaux` : ""].filter(Boolean).join(", ");
+  return `<button class="ia-item" type="button" data-a="${act(() => { store.set("gt_modeles_filters", { q: g.nom }); location.href = "/programmes_admin.html"; })}">
+    <span class="thumb">${D.M.modelCoverHTML(g.items[0], { small:true })}</span>
+    <span class="main"><span class="t">${esc(g.nom)}${g.mine ? `<span class="badge">Mon modèle</span>` : ""}</span><span class="s">${esc(sub)}</span>${pourquoi ? `<span class="w">${esc(pourquoi)}</span>` : ""}</span>${icon("chevron")}</button>`;
+}
+function exoHTML(e, pourquoi){
+  const sub = [e.source === "HEP" ? "HEP" : e.source === "PERSO" ? "Mon exercice" : "Dessin", e.zone || e.categorie, e.niveau ? `niveau ${e.niveau}` : "", e.materiel?.[0]].filter(Boolean).join(", ");
+  return `<button class="ia-item" type="button" data-a="${act(async () => { const { exerciseSheet } = await import("/assets/library-ui.js"); exerciseSheet(e); })}">
+    <span class="thumb">${exoImageHTML(e.image, "")}</span>
+    <span class="main"><span class="t">${esc(e.nom)}</span><span class="s">${esc(sub)}</span>${pourquoi ? `<span class="w">${esc(pourquoi)}</span>` : ""}</span>${icon("chevron")}</button>`;
+}
+const section = (ico, titre, items) => items.length ? `<section class="panel ia-sec"><h2>${icon(ico)}${esc(titre)}</h2><div class="panel" style="padding:0;box-shadow:none">${items.join("")}</div></section>` : "";
+
+function brancher(){
+  $$("[data-a]", $("#res")).forEach(b => b.onclick = () => actions[+b.dataset.a]());
+}
+
+/* ---------- Contexte envoyé à Gemini ---------- */
+const SYSTEME = `Tu es l'assistant de recherche clinique d'un masseur-kinésithérapeute libéral en France (cabinet et domicile).
+Réponds toujours en français, de façon concise, concrète et directement utilisable en séance.
+Appuie-toi sur les données probantes (recommandations HAS, guidelines internationales, revues systématiques).
+N'invente jamais de référence, d'auteur, de valeur chiffrée ni de test. Si une donnée est incertaine, dis-le.
+Respecte les contre-indications et signale les drapeaux rouges quand c'est utile.`;
+
+const ligneTest = (t, i) => `t${i} | ${t.nom} | ${t.kind === "clinique" ? `${t.region} | ${(t.hyp || []).join(", ")} | LR+ ${t.lrp ?? "?"} | LR- ${t.lrm ?? "?"}` : `fonctionnel | ${(t.motifs || []).slice(0, 4).join(", ")}`}`;
+const ligneModele = (x, i) => { const g = x.g; return `m${i} | ${g.nom} | ${D.M.catLabel(g.categorie)} | ${g.zoneLabel || "-"} | ${lieuTxt(lieuG(g)) || "-"} | ${[...new Set(g.items.map(m => m.aide).filter(Boolean))].join("/") || "-"} | ${g.items.length} niveau(x)`; };
+const ligneExo = (e, i) => `e${i} | ${e.source === "HEP" ? "HEP" : e.source === "PERSO" ? "perso" : "dessin"} | ${e.nom} | ${e.zone || e.categorie || "-"} | ${e.niveau || "-"} | ${(e.materiel || []).slice(0, 2).join(", ") || "-"}`;
+
+let D = null;
+async function lancer(){
+  const texte = q.value.trim();
+  if(!texte) return;
+  memoriser(texte);
+  $("#ia").classList.add("has-res"); recents();
+  actions = [];
+  const res = $("#res");
+  const entete = `<p class="ia-q"><small>${esc(mode ? MODES[mode].court : "Recherche")}</small>${esc(texte)}</p>`;
+  res.innerHTML = `${entete}<div class="panel ia-wait"><div class="spinner"></div><span>${cle ? "Recherche en cours…" : "Recherche dans ApiKiné…"}</span></div>`;
+  go.disabled = true;
+  try{
+    D = await donnees;
+    const tests = mode === "tests" ? D.tests : classer(D.tests, texte, t => t.hay, t => t.nom, mode === "exos" ? 0 : 40);
+    const modeles = hepDabord(mode === "tests" ? classer(D.modeles, texte, x => x.hay, x => x.g.nom, 15) : D.modeles, x => lieuG(x.g));
+    const exos = hepDabord(mode === "tests" ? [] : classer(D.exercices, texte, e => e.search, e => e.nom, mode === "exos" ? 90 : 50), e => e.source);
+
+    /* Sans clé : résultats locaux seulement */
+    if(!cle){
+      const lm = classer(D.modeles, texte, x => x.hay, x => x.g.nom, 6);
+      const trouve = section("stethoscope", "Tests", classer(D.tests, texte, t => t.hay, t => t.nom, 8).map(t => testHTML(t))) +
+        section("layers", "Modèles", hepAvantJumeau(lm, x => x.g).map(x => modeleHTML(x))) +
+        section("dumbbell", "Exercices", exos.slice(0, 8).map(e => exoHTML(e)));
+      res.innerHTML = entete +
+        `<div class="panel small muted">Recherche IA non activée : voici ce que l'appli trouve avec vos mots.</div>` +
+        (trouve || `<div class="panel">Rien trouvé. Essayez d'autres mots.</div>`);
+      brancher(); afficherSetup(); return;
+    }
+
+    if(mode === "preuves"){
+      const r = await IA.demander({ cle, systeme: SYSTEME, web: true, texte:
+`Résume les preuves actuelles sur la prise en charge kinésithérapique suivante : ${texte}
+
+Structure (environ 350 mots au plus) :
+### En bref
+2 ou 3 phrases.
+### Ce qui est efficace
+Interventions avec leur niveau de preuve (fort, modéré, faible).
+### Peu utile ou à éviter
+### En pratique
+Dosage, progression, durée, critères de reprise, éducation du patient.
+### Recommandations de référence
+Recommandations et revues principales, avec l'organisme ou les auteurs et l'année.` });
+      const lm = hepAvantJumeau(classer(D.modeles, texte, x => x.hay, x => x.g.nom, 4), x => x.g);
+      const lt = classer(D.tests, texte, t => t.hay, t => t.nom, 4);
+      res.innerHTML = entete +
+        `<div class="panel ia-txt">${md(r.texte)}</div>` +
+        (r.sources.length ? `<section class="panel ia-sec ia-src"><h2>${icon("link")}Sources</h2>${r.sources.slice(0, 8).map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${icon("link")}<span>${esc(s.titre)}</span></a>`).join("")}</section>` :
+          (r.web ? "" : `<p class="hint">Réponse rédigée sans recherche Google (indisponible avec l'offre gratuite pour le moment) : vérifiez les références citées.</p>`)) +
+        section("layers", "Dans ApiKiné : modèles", lm.map(x => modeleHTML(x))) +
+        section("stethoscope", "Dans ApiKiné : tests", lt.map(t => testHTML(t)));
+      brancher(); return;
+    }
+
+    const consigne = {
+      tests: "La question porte sur les tests cliniques et fonctionnels. Choisis les tests de l'appli les plus utiles (diagnostic et suivi), du plus utile au moins utile, et explique en une phrase quand et pourquoi les faire. Cite éventuellement dans autres_tests des tests reconnus absents de l'appli. modeles et exercices peuvent rester vides.",
+      exos: "La question porte sur les exercices et les programmes. Choisis d'abord les modèles de l'appli adaptés, puis des exercices complémentaires. Priorité aux éléments HEP ; ne mélange pas HEP et dessins dans une même proposition. Respecte l'aide à la marche si elle est indiquée.",
+      "": "Réponds à la question puis propose ce qui, dans l'appli, s'y rapporte (tests, modèles, exercices). Laisse vides les listes sans rapport avec la question."
+    }[mode];
+    const r = await IA.demander({ cle, systeme: SYSTEME, json: true, texte:
+`Question du kiné : ${texte}
+
+${consigne}
+
+TESTS DE L'APPLI (réf | nom | région | hypothèses | LR+ | LR-) :
+${tests.map(ligneTest).join("\n") || "(aucun)"}
+
+MODÈLES DE L'APPLI (réf | nom | catégorie | zone | images | aide à la marche | niveaux) :
+${modeles.map(ligneModele).join("\n") || "(aucun)"}
+
+EXERCICES DE L'APPLI (réf | images | nom | zone | niveau | matériel) :
+${exos.map(ligneExo).join("\n") || "(aucun)"}
+
+Réponds uniquement en JSON, de cette forme :
+{"reponse":"réponse courte et pratique (markdown simple : **gras**, listes avec « - »)",
+ "tests":[{"ref":"t0","pourquoi":"une phrase"}],
+ "autres_tests":[{"nom":"nom du test","pourquoi":"une phrase"}],
+ "modeles":[{"ref":"m0","pourquoi":"une phrase"}],
+ "exercices":[{"ref":"e0","pourquoi":"une phrase"}]}
+Au plus 8 tests, 3 autres_tests, 5 modèles et 8 exercices. Utilise uniquement les réf des listes ci-dessus.` });
+    const j = IA.lireJSON(r.texte);
+    if(!j){ res.innerHTML = entete + `<div class="panel ia-txt">${md(r.texte)}</div>`; return; }
+    const prendre = (arr, prefixe, liste) => (Array.isArray(arr) ? arr : []).map(x => {
+      const m = String(x?.ref || "").match(new RegExp(`^${prefixe}(\\d+)$`));
+      const el = m ? liste[+m[1]] : null;
+      return el ? [el, String(x.pourquoi || "")] : null;
+    }).filter(Boolean).filter((x, i, a) => a.findIndex(y => y[0] === x[0]) === i);
+    const jt = prendre(j.tests, "t", tests);
+    const jm = hepAvantJumeau(prendre(j.modeles, "m", modeles), x => x[0].g);
+    const je = hepDabord(prendre(j.exercices, "e", exos), x => x[0].source);
+    const autres = (Array.isArray(j.autres_tests) ? j.autres_tests : []).filter(x => x?.nom).slice(0, 3);
+    res.innerHTML = entete +
+      (j.reponse ? `<div class="panel ia-txt">${md(j.reponse)}</div>` : "") +
+      section("stethoscope", "Tests", jt.map(([t, w]) => testHTML(t, w))) +
+      (autres.length ? `<section class="panel ia-sec"><h2>${icon("info")}Autres tests (absents de l'appli)</h2>${autres.map(x => `<div class="ia-item static"><span class="ico">${icon("stethoscope")}</span><span class="main"><span class="t">${esc(x.nom)}</span>${x.pourquoi ? `<span class="w">${esc(x.pourquoi)}</span>` : ""}</span></div>`).join("")}</section>` : "") +
+      section("layers", "Modèles", jm.map(([x, w]) => modeleHTML(x, w))) +
+      section("dumbbell", "Exercices", je.map(([e, w]) => exoHTML(e, w)));
+    brancher();
+  }catch(e){
+    console.error(e);
+    res.innerHTML = entete + `<div class="panel" style="border-color:var(--warn)"><p style="margin:0">${esc(e.message || "La recherche n'a pas abouti.")}</p>${e.type === "cle" || e.type === "refus" ? `<p style="margin:10px 0 0"><button class="btn" type="button" id="err-cle">${icon("key")}Réglages de la recherche IA</button></p>` : ""}</div>`;
+    $("#err-cle")?.addEventListener("click", () => $("#reglages").click());
+  }finally{ go.disabled = !q.value.trim(); }
+}
+
+afficherSetup();
+recents();
+const initial = new URLSearchParams(location.search);
+if(initial.get("mode") && MODES[initial.get("mode")]) setMode(initial.get("mode"));
+if(initial.get("q")){ q.value = initial.get("q"); ajuster(); lancer(); } else q.focus();
+</script>
+</body>
+</html>

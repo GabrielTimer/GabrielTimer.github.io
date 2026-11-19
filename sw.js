@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.44.0";
+const VERSION = "gt-2.45.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -32,7 +32,7 @@ const KINE_EN_PLUS = [
   "/exercises/glossary.html", "/exercises/historique.html", "/folder.html", "/glossary.html", "/impression.html", "/liste_pathologies.html",
   "/login.html", "/messages.html", "/nerfs.html", "/ordonnance.html", "/pathologies.html", "/patients.html",
   "/program_pdf.html", "/programmes_admin.html", "/programmescourse.html", "/programs.html", "/questionnaires.html", "/reglages_cabinet.html",
-  "/ressources.html", "/salle-attente.html", "/stats.html", "/tests.html"
+  "/recherche-ia.html", "/assets/ia.js", "/ressources.html", "/salle-attente.html", "/stats.html", "/tests.html"
 ];
 
 /* « no-cache » : on demande toujours au serveur la dernière version (jamais une copie périmée du navigateur) */

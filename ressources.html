@@ -28,6 +28,11 @@ const link = (href, ico, title, sub) => `<a class="list-item" href="${href}"><sp
 $("#app").innerHTML = `
   <div class="page-head"><h1>Ressources</h1><p class="lead">Tout ce qui sert au bilan et aux patients. Les réglages sont dans Outils.</p></div>
   <section class="section">
+    <div class="list">
+      ${link("/recherche-ia.html", "sparkle", "Recherche IA", "Tests d'une pathologie, résumé des preuves, exercices et modèles")}
+    </div>
+  </section>
+  <section class="section">
     <div class="section-title">Bilan et examen</div>
     <div class="list">
       ${link("/tests.html", "stethoscope", "Tests cliniques et fonctionnels", "Technique, valeurs diagnostiques, vidéo")}
