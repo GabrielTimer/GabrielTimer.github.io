@@ -327,7 +327,7 @@ function renderExos(){
           ${stepper(i, "repos", "Repos (s)", 5, 0)}
           ${stepper(i, "reps", "Répétitions", 1, 1)}
         </div>
-        <div class="exo-foot"><span data-total="${i}">${exoTotal(e)}</span>${e.id !== undefined && e.id !== null && e.id !== "" ? `<button class="exo-var" type="button" data-var="${i}" hidden title="Remplacer par une variante plus facile ou plus difficile">${icon("swap")}<span>Plus facile / plus difficile</span></button>` : ""}</div>
+        <div class="exo-foot"><span data-total="${i}">${exoTotal(e)}</span>${e.id !== undefined && e.id !== null && e.id !== "" ? `<button class="exo-var" type="button" data-var="${i}" hidden title="Remplacer par une variante plus facile ou plus difficile">${icon("swap")}<span>Variantes</span></button>` : ""}</div>
         ${evolHTML(e, i)}
         <details class="exo-note" ${e.conseil_kine ? "open" : ""}><summary>${icon("message")}Consigne personnelle pour le patient</summary>
           <textarea class="textarea" data-note="${i}" maxlength="400" placeholder="Ex. Ne pas dépasser 3/10 de douleur, côté droit uniquement">${esc(e.conseil_kine || "")}</textarea>
@@ -349,8 +349,6 @@ async function marquerVariantes(){
     if(!b.isConnected) return;
     const n = Math.max(0, V.chaine.length - 1) + V.proches.length;
     b.hidden = !n;
-    const lab = b.querySelector("span");
-    if(lab) lab.textContent = V.chaine.length > 1 ? (V.facile && V.difficile ? "Plus facile / plus difficile" : V.facile ? "Plus facile" : "Plus difficile") : "Exercices proches";
   }
 }
 
@@ -493,25 +491,22 @@ function bindExos(){
 async function openVariantes(i){
   const x = S.exercices[i];
   if(!x) return;
-  const s = openSheet({ title:"Changer pour une variante", body:`<div class="loading"><div class="spinner"></div><span>Recherche des variantes…</span></div>`, foot:`<button class="btn" type="button" data-close>Fermer</button>` });
+  const s = openSheet({ title:"Variantes", body:`<div class="loading"><div class="spinner"></div><span>Recherche des variantes…</span></div>`, foot:`<button class="btn" type="button" data-close>Fermer</button>` });
   const V = await variantesDe(x, { visible: e => !isHidden(exerciseKey(e)) });
   const ligne = (e, label, cls = "") => `<button class="var-item ${cls}" type="button" data-pick="${esc(exerciseKey(e))}" ${cls === "cur" ? "disabled" : ""}>
       ${exoImageHTML(e.image, "", "var-thumb")}
       <span class="var-main">${label ? `<span class="var-lab">${label}</span>` : ""}<span class="var-nom">${esc(e.nom)}</span></span>
       ${cls === "cur" ? `<span class="badge">Actuel</span>` : icon("chevron")}
     </button>`;
-  let html = "";
-  if(V.chaine.length > 1){
-    html += `<p class="small muted" style="margin:0 0 10px">Du plus facile (en haut) au plus difficile (en bas). Le dosage et votre consigne sont gardés.</p><div class="var-list">` +
-      V.chaine.map((e, k) => ligne(e,
-        k === V.index ? "" : k === V.index - 1 ? `${icon("trendDown")}Plus facile` : k === V.index + 1 ? `${icon("trendUp")}Plus difficile` : k < V.index ? `Encore plus facile` : `Encore plus difficile`,
-        k === V.index ? "cur" : k < V.index ? "easy" : "hard")).join("") + `</div>`;
-  }
-  if(V.proches.length){
-    html += `<h3 class="var-h">${V.chaine.length > 1 ? "Autres exercices proches" : "Exercices proches"}</h3>
-      ${V.chaine.length > 1 ? "" : `<p class="small muted" style="margin:0 0 10px">Pas encore de progression définie pour cet exercice : voici des exercices de la même famille (difficulté non classée).</p>`}
-      <div class="var-list">${V.proches.map(e => ligne(e, "")).join("")}</div>`;
-  }
+  /* Trois choix : plus facile (du plus proche au plus éloigné), plus difficile, variantes de même niveau */
+  const faciles = V.chaine.slice(0, Math.max(0, V.index)).reverse();
+  const difficiles = V.index >= 0 ? V.chaine.slice(V.index + 1) : [];
+  const bloc = (titre, ico, cls, liste, aide = "") => liste.length ? `<h3 class="var-h ${cls}">${icon(ico)}${titre}</h3>${aide}<div class="var-list">${liste.map((e, k) => ligne(e, k && cls ? `Encore plus ${cls === "easy" ? "facile" : "difficile"}` : "", cls)).join("")}</div>` : "";
+  let html = `<p class="small muted" style="margin:0 0 10px">Touchez un exercice pour remplacer l'exercice actuel. Le dosage et votre consigne sont gardés.</p><div class="var-list">${ligne(V.courant || { ...x, image: exerciseImage(x) }, "", "cur")}</div>` +
+    bloc("Plus facile", "trendDown", "easy", faciles) +
+    bloc("Plus difficile", "trendUp", "hard", difficiles) +
+    bloc("Variantes", "swap", "", V.proches, `<p class="small muted" style="margin:0 0 8px">Même famille d'exercices, difficulté proche.</p>`);
+  if(!faciles.length && !difficiles.length && !V.proches.length) html = "";
   if(!html) html = `<div class="empty" style="padding:16px"><h3>Pas de variante pour cet exercice</h3><p>Ajoutez un autre exercice depuis la bibliothèque si besoin.</p></div>`;
   s.body.innerHTML = `<style>
       .var-list{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
@@ -525,7 +520,9 @@ async function openVariantes(i){
       .var-item.easy .var-lab{ color:var(--lagon-strong); } .var-item.hard .var-lab{ color:var(--soleil-strong, #8a5a00); }
       .var-lab svg{ width:14px; height:14px; }
       .var-nom{ font-weight:700; line-height:1.25; }
-      .var-h{ font-size:var(--fs-md); margin:16px 0 8px; }
+      .var-h{ display:flex; align-items:center; gap:6px; font-size:var(--fs-md); margin:16px 0 8px; }
+      .var-h svg{ width:18px; height:18px; }
+      .var-h.easy{ color:var(--lagon-strong); } .var-h.hard{ color:var(--soleil-strong, #8a5a00); }
     </style>${html}`;
   const tous = [...V.chaine, ...V.proches];
   s.body.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => {
