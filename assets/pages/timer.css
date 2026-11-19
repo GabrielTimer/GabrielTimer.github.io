@@ -160,3 +160,6 @@
   .t-ring{ width:min(64vw,28dvh,320px); }
   .t-foot{ flex:none; }
 }
+
+/* Pas de bulles de fond pendant la séance : écran calme, lisible de loin */
+body.timer-page::before, body.timer-page::after{ display:none; animation:none; }
