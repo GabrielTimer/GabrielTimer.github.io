@@ -517,7 +517,7 @@ const NAV = {
   kine: [
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
     { id:"patients", label:"Patients", href:"/patients.html", ico:"users" },
-    { id:"ia", label:"Recherche IA", court:"IA", href:"/recherche-ia.html", ico:"sparkle" },
+    { id:"ia", label:"Recherche IA", court:"IA", href:"/recherche-ia.html", ico:"sparkles" },
     { id:"creer", label:"Créer", href:"/config.html?nouveau=1", ico:"plus" },
     { id:"bibliotheque", label:"Exercices", href:"/programmes_admin.html", ico:"book" },
     { id:"messages", label:"Messages", href:"/messages.html", ico:"inbox" }

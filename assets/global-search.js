@@ -14,7 +14,7 @@ const PAGES = [
   ["/exercises/historique.html", "history", "Historique des programmes", "Programmes envoyés aux patients"],
   ["/messages.html", "inbox", "Messages des patients", "Questions, bilans, commentaires de séance"],
   ["/questionnaires.html", "list", "Questionnaires", "Oswestry, QuickDASH, KOOS, score"],
-  ["/recherche-ia.html", "sparkle", "Recherche IA", "Gemini, intelligence artificielle, preuves, tests, exercices, modèles"],
+  ["/recherche-ia.html", "sparkles", "Recherche IA", "Gemini, intelligence artificielle, preuves, tests, exercices, modèles"],
   ["/tests.html", "stethoscope", "Tests cliniques et fonctionnels", "Technique, valeurs diagnostiques, vidéo, bilan"],
   ["/nerfs.html", "body", "Territoires nerveux", "Dermatomes, nerfs périphériques, racines, réflexes"],
   ["/conseils.html", "book", "Fiches conseils", "Info kiné du mois, affiches, prévention"],
