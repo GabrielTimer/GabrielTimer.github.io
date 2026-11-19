@@ -52,6 +52,7 @@
 .t-figure .zoom svg{ width:20px; height:20px; }
 .t-names{ text-align:center; }
 .t-name{ font-size:clamp(1.35rem,5.6vw,2.1rem); line-height:1.15; text-wrap:balance; }
+.t-sub:empty{ display:none; }
 .t-sub{ margin-top:4px; color:var(--t-soft); font-weight:700; font-size:var(--fs-md); }
 .t-dose{ margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
 .t-dose[hidden]{ display:none; }
@@ -149,26 +150,24 @@
 
 
 /* Téléphone en portrait : tout tient dans l'écran, même avec un texte agrandi.
-   L'image prend la place qui reste au lieu d'une hauteur fixe. */
+   L'image prend la place qui reste (elle rétrécit en premier) ; minuteur et boutons suivent la hauteur de l'écran. */
 @media (max-aspect-ratio:1/1){
-  .t-wrap{ height:100vh; height:100dvh; min-height:0; overflow-x:hidden; overflow-y:auto; }
-  .t-main{ min-height:0; gap:10px; }
-  .t-visual{ flex:1 1 auto; min-height:0; gap:8px; }
-  .t-figure{ height:auto; flex:1 1 0; min-height:96px; max-height:380px; }
+  .t-wrap{ height:100vh; height:100dvh; min-height:0; overflow:hidden; gap:8px; }
+  .t-main{ min-height:0; gap:8px; }
+  .t-visual{ flex:1 1 auto; min-height:0; gap:6px; }
+  .t-figure{ height:auto; flex:1 1 0; min-height:60px; max-height:380px; }
   .t-figure img,.t-figure .ph-img{ position:absolute; inset:0; }
-  .t-control{ flex:none; gap:10px; }
-  .t-ring{ width:min(62vw,25dvh,320px); }
+  .t-name{ font-size:clamp(1.15rem,5.2vw,1.8rem); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   /* Conseil du kiné sur 2 lignes au plus (le reste est dans « Consignes ») */
-  .t-sub{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-  .t-info.t-consignes{ margin-top:6px; min-height:40px; }
-  /* Barre du bas toujours visible, même si l'écran est trop petit ou le texte agrandi */
-  .t-wrap{ padding-bottom:calc(72px + env(safe-area-inset-bottom)); }
-  .t-foot{
-    position:fixed; left:0; right:0; bottom:0; z-index:5;
-    padding:8px max(14px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
-    background:var(--t-bg); box-shadow:0 -1px 0 color-mix(in srgb, var(--t-fg) 10%, transparent);
-    transition:background-color .35s ease;
-  }
+  .t-sub{ font-size:var(--fs-sm); margin-top:2px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .t-info.t-consignes{ margin-top:6px; min-height:38px; padding:0 14px; }
+  .t-control{ flex:none; gap:8px; }
+  .t-ring{ width:min(58vw,22dvh,300px); }
+  .t-buttons{ gap:18px; }
+  .t-btn{ width:clamp(42px,6.5dvh,58px); height:clamp(42px,6.5dvh,58px); }
+  .t-btn.main{ width:clamp(56px,9dvh,80px); height:clamp(56px,9dvh,80px); }
+  .t-foot{ flex:none; }
+  .t-foot .t-info{ min-height:42px; }
 }
 
 /* Pas de bulles de fond pendant la séance : écran calme, lisible de loin */

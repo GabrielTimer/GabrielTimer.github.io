@@ -327,7 +327,7 @@ function render(full){
 
   let sub = "";
   if(finished) sub = "Bravo !";
-  else if(st.kind === "prep") sub = e.conseil_kine ? e.conseil_kine : `${e.reps} × ${fmtDuree(e.ex)}` + (e.repos ? `, repos ${fmtDuree(e.repos)}` : "");
+  else if(st.kind === "prep") sub = "";   /* préparation : seulement le nom de l'exercice et « Consignes » (le conseil du kiné est dans Consignes) */
   else if(st.kind === "ex") sub = e.reps > 1 ? `Répétition ${st.r} sur ${e.reps}` : fmtDuree(e.ex);
   else sub = e.reps > 1 ? `${st.r} sur ${e.reps} faite${st.r > 1 ? "s" : ""}` : "Récupération";
   el.sub.textContent = sub;
