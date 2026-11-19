@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.42.4";
+const VERSION = "gt-2.43.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -18,9 +18,12 @@ const PRECACHE = [
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"
 ];
 
+/* « no-cache » : on demande toujours au serveur la dernière version (jamais une copie périmée du navigateur) */
+const precacher = cache => Promise.all(PRECACHE.map(url => cache.add(new Request(url, { cache:"no-cache" })).catch(() => null)));
+
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(SHELL).then(cache => Promise.all(PRECACHE.map(url => cache.add(url).catch(() => null))))
+    caches.open(SHELL).then(precacher)
       .then(() => self.skipWaiting()) // la nouvelle version prend la main tout de suite
   );
 });
@@ -79,24 +82,53 @@ const isImmutableCdn = url =>
   url.hostname === "www.gstatic.com" && url.pathname.startsWith("/firebasejs/") ||
   url.hostname === "fonts.gstatic.com" || url.hostname === "fonts.googleapis.com";
 
-async function networkFirst(request, cacheName){
-  const cache = await caches.open(cacheName);
-  // « no-cache » : toujours revérifier auprès du serveur, pour ne jamais mélanger
-  // un fichier à jour avec un autre resté dans le cache du navigateur.
-  const net = fetch(request, request.mode === "navigate" ? undefined : { cache:"no-cache" }).then(response => {
-    if(response && response.ok) cache.put(request, response.clone());
-    return response;
-  });
-  net.catch(() => {});
+/* ---------- Pages et fichiers de l'appli : affichage immédiat ----------
+   La page est servie tout de suite depuis la copie gardée sur l'appareil (aucune attente au clic),
+   puis chaque fichier est revérifié auprès du site en arrière-plan.
+   Si un fichier a changé (nouvelle version du site), on ne mélange jamais : la page en cours garde
+   l'ancienne version complète, et à la page suivante toute la copie est jetée et reprise sur le réseau. */
+const PERIME = "/__gt-nouvelle-version__";
+const REVERIF_MS = 30000;          // un même fichier n'est revérifié qu'une fois toutes les 30 s
+const verifies = new Map();
+const signature = r => r.headers.get("etag") || r.headers.get("last-modified") || "";
+
+async function reverifier(url, cache, cached){
+  const t = verifies.get(url) || 0;
+  if(Date.now() - t < REVERIF_MS) return;
+  verifies.set(url, Date.now());
+  if(await cache.match(PERIME)) return;
+  const r = await fetch(url, { cache:"no-cache", credentials:"same-origin" });
+  if(!r.ok) return;
+  const a = signature(cached), b = signature(r);
+  const change = a && b ? a !== b : (await cached.clone().text()) !== (await r.clone().text());
+  if(!change) return;
+  await cache.put(PERIME, new Response("1"));
+  const pages = await self.clients.matchAll({ type:"window" });
+  pages.forEach(c => c.postMessage({ type:"gt-nouvelle-version" }));
+}
+
+async function rapide(event){
+  const request = event.request;
+  const nav = request.mode === "navigate";
+  let cache = await caches.open(SHELL);
+  if(nav && await cache.match(PERIME)){
+    // Nouvelle version du site : on repart d'une copie neuve (puis on remet de côté l'essentiel pour le hors connexion)
+    await caches.delete(SHELL);
+    verifies.clear();
+    cache = await caches.open(SHELL);
+    event.waitUntil(precacher(cache));
+  }
+  const cached = await cache.match(request, { ignoreSearch: nav });
+  if(cached){
+    event.waitUntil(reverifier(nav ? request.url.split("?")[0] : request.url, cache, cached).catch(() => {}));
+    return cached;
+  }
   try{
-    /* Réseau très lent (cave, campagne) : au-delà de 4 s, la copie gardée sur le téléphone est servie */
-    const cached = await cache.match(request, { ignoreSearch: request.mode === "navigate" });
-    if(!cached) return await net;
-    return await Promise.race([net, new Promise((_, rej) => setTimeout(() => rej(new Error("lent")), 4000))]);
+    const response = await fetch(request, nav ? undefined : { cache:"no-cache" });
+    if(response && response.ok && !response.redirected) cache.put(nav ? request.url.split("?")[0] : request, response.clone()).catch(() => {});
+    return response;
   }catch(err){
-    const cached = await cache.match(request, { ignoreSearch: request.mode === "navigate" });
-    if(cached) return cached;
-    if(request.mode === "navigate") return (await cache.match("/index.html")) || Response.error();
+    if(nav) return (await cache.match("/index.html")) || Response.error();
     throw err;
   }
 }
@@ -123,7 +155,7 @@ self.addEventListener("fetch", event => {
   if(url.pathname.startsWith("/musimix/")) return;
 
   if(request.mode === "navigate" || url.pathname.startsWith("/assets/") || url.pathname.startsWith("/exercises/data/") || url.pathname.endsWith(".html") || url.pathname === "/manifest.json"){
-    event.respondWith(networkFirst(request, SHELL));
+    event.respondWith(rapide(event));
     return;
   }
   if(/\.(png|jpe?g|webp|gif|svg|wav|mp3|pdf)$/i.test(url.pathname)){

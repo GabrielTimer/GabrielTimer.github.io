@@ -746,4 +746,12 @@ export function registerSW(){
   document.addEventListener("visibilitychange", () => {
     if(enAttente && document.visibilityState === "visible") recharger();
   });
+  /* Les pages s'affichent depuis la copie gardée sur l'appareil (instantané). Si le site a changé
+     entre-temps, la page suivante sera à jour ; et si celle-ci vient juste de s'ouvrir sans que
+     rien n'ait été touché, on la recharge aussitôt pour montrer la nouvelle version. */
+  let touche = false;
+  ["pointerdown", "keydown"].forEach(t => addEventListener(t, () => { touche = true; }, { once:true, capture:true }));
+  navigator.serviceWorker.addEventListener("message", e => {
+    if(e.data?.type === "gt-nouvelle-version" && !touche && Date.now() - ouvertureSW < 8000) recharger();
+  });
 }
