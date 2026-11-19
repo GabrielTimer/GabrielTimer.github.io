@@ -95,7 +95,7 @@ import { $, $$, esc, icon, mountShell, registerSW, store, toast, openSheet, exoI
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
-mountShell({ role:"kine", active:"", back:"history" });
+mountShell({ role:"kine", active:"ia", back:"history" });
 const IA = await import("/assets/ia.js");
 const { estTitulaire } = await import("/assets/cloud.js");
 const { norm, loadLibrary, exerciseKey } = await import("/assets/library.js");

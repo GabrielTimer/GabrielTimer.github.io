@@ -203,6 +203,7 @@ p{ margin:0; }
 .nav-link svg{ width:24px; height:24px; }
 .nav-link[aria-current="page"]{ color:var(--lagon-strong); }
 .nav-link[aria-current="page"] .nav-ico{ background:var(--lagon-soft); }
+.nav-long{ display:none; }
 .nav-ico{ display:grid; place-items:center; width:52px; height:30px; border-radius:999px; transition:background .2s; }
 
 @media (min-width:960px){
@@ -224,6 +225,8 @@ p{ margin:0; }
   .nav-link[aria-current="page"]{ background:var(--lagon-soft); color:var(--lagon-strong); }
   .nav-link[aria-current="page"] .nav-ico{ background:none; }
   .nav-ico{ width:auto; height:auto; }
+  .nav-court{ display:none; }
+  .nav-long{ display:inline; }
   .nav-foot{ display:flex; flex-direction:column; gap:4px; margin-top:auto; padding-top:12px; border-top:1px solid var(--line); }
   .has-nav .topbar .brand{ display:none; }
   .page{ padding-bottom:48px; }

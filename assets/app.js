@@ -517,6 +517,7 @@ const NAV = {
   kine: [
     { id:"accueil", label:"Accueil", href:"/index.html", ico:"home" },
     { id:"patients", label:"Patients", href:"/patients.html", ico:"users" },
+    { id:"ia", label:"Recherche IA", court:"IA", href:"/recherche-ia.html", ico:"sparkle" },
     { id:"creer", label:"Créer", href:"/config.html?nouveau=1", ico:"plus" },
     { id:"bibliotheque", label:"Exercices", href:"/programmes_admin.html", ico:"book" },
     { id:"messages", label:"Messages", href:"/messages.html", ico:"inbox" }
@@ -655,7 +656,7 @@ export function mountShell({ role = "none", active = "", title = "", back = null
       ${role === "kine" && !apercu ? `<button class="nav-search" type="button" data-gsearch>${icon("search")}<span>Rechercher…</span><kbd>Ctrl K</kbd></button>` : ""}
       ${items.map(it => it.id === "messages"
         ? `<a class="nav-link nav-msg" href="${navHref(it)}" data-nav="${it.id}" data-inbox-link aria-label="Messages des patients" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}<span class="inbox-badge" data-inbox-badge hidden></span></span><span>${it.label}</span></a>`
-        : `<a class="nav-link" href="${navHref(it)}" data-nav="${it.id}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.label}</span></a>`).join("")}
+        : `<a class="nav-link" href="${navHref(it)}" data-nav="${it.id}" ${it.id === active ? 'aria-current="page"' : ""}><span class="nav-ico">${icon(it.ico)}</span><span>${it.court ? `<span class="nav-court">${it.court}</span><span class="nav-long">${it.label}</span>` : it.label}</span></a>`).join("")}
       ${foot}
     </nav>`);
     body.appendChild(nav);
