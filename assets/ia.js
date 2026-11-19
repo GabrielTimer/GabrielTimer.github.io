@@ -42,6 +42,8 @@ export class ErreurIA extends Error{
 const MSG = {
   cle: "La clé Gemini n'est pas valide. Vérifiez-la dans les réglages de la recherche IA.",
   refus: "Google refuse cette clé. Recréez-en une sur aistudio.google.com, dans un projet sans facturation.",
+  jeton: "Google refuse pour l'instant cette clé de nouveau format (« AQ. ») : erreur connue chez Google sur certains comptes. Créez une nouvelle clé dans AI Studio, ou réessayez plus tard.",
+  delai: "Google met trop de temps à répondre. Réessayez dans un instant.",
   quota: "Le quota gratuit de Google est atteint pour le moment. Réessayez dans une minute (ou demain si la limite du jour est atteinte).",
   reseau: "Pas de connexion internet : la recherche IA a besoin du réseau.",
   bloque: "Google n'a pas voulu répondre à cette question. Reformulez-la.",
@@ -51,18 +53,24 @@ const MSG = {
 
 async function appel(modele, cle, body){
   let r;
+  const ctrl = new AbortController();
+  const minuteur = setTimeout(() => ctrl.abort(), 45000);
   try{
     r = await fetch(`${API}${modele}:generateContent`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-goog-api-key": cle },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      signal: ctrl.signal
     });
-  }catch(e){ throw new ErreurIA("reseau", MSG.reseau); }
+  }catch(e){ throw e.name === "AbortError" ? new ErreurIA("delai", MSG.delai) : new ErreurIA("reseau", MSG.reseau); }
+  finally{ clearTimeout(minuteur); }
   if(r.ok) return r.json();
   let err = {};
   try{ err = (await r.json()).error || {}; }catch(e){}
   const txt = `${err.status || ""} ${err.message || ""}`.toLowerCase();
   if(r.status === 429 || txt.includes("resource_exhausted")) throw new ErreurIA("quota", MSG.quota);
+  if(txt.includes("access_token_type_unsupported")) throw new ErreurIA("jeton", MSG.jeton);
+  if(r.status === 401) throw new ErreurIA("cle", MSG.cle);
   if(txt.includes("api_key_invalid") || txt.includes("api key not valid")) throw new ErreurIA("cle", MSG.cle);
   if(r.status === 404 || txt.includes("not found") || txt.includes("is not supported")) throw new ErreurIA("modele", err.message || "modèle indisponible");
   if(r.status === 403 || txt.includes("permission")) throw new ErreurIA("refus", MSG.refus);
@@ -109,7 +117,7 @@ export async function demander({ cle, systeme = "", texte, json = false, web = f
         derniere = e;
         /* Recherche Google refusée pour ce modèle : même question sans elle */
         if(e.type === "outil" && avecWeb){ avecWeb = false; continue; }
-        if(["cle", "refus", "reseau", "bloque"].includes(e.type)) throw e;
+        if(["cle", "refus", "reseau", "bloque", "jeton"].includes(e.type)) throw e;
         break;   // modèle indisponible ou quota épuisé : modèle suivant
       }
     }
