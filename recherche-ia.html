@@ -234,14 +234,14 @@ function memoriser(texte){
 const etapesHTML = `
   <ol>
     <li>Ouvrez <a href="${IA.LIEN_CLE}" target="_blank" rel="noopener"><strong>Google AI Studio</strong></a> avec votre compte Google (celui du cabinet).</li>
-    <li>Cliquez sur <strong>« Create API key »</strong> (Créer une clé API), puis copiez la clé (elle commence par « AIza »).</li>
+    <li>Cliquez sur <strong>« Create API key »</strong> (Créer une clé API), puis cliquez sur « Copier la clé ».</li>
     <li>Collez-la ci-dessous et enregistrez. C'est fait une fois pour toutes, sur tous vos appareils.</li>
   </ol>
   <p class="hint">100 % gratuit : sans carte bancaire, Google ne peut rien facturer. Ne cliquez jamais sur « Set up billing » (activer la facturation) dans AI Studio. Si le quota gratuit du jour est atteint, la recherche IA attend simplement le lendemain.</p>`;
 function setupHTML(){
   if(!estTitulaire()) return `<p>La recherche IA n'est pas encore activée. Le titulaire du cabinet doit enregistrer une clé Google Gemini.</p>`;
   return `${etapesHTML}
-    <div class="row"><input class="input" id="cle" type="text" inputmode="text" spellcheck="false" autocapitalize="off" placeholder="AIza…" value="${esc(cle)}" aria-label="Clé Google Gemini">
+    <div class="row"><input class="input" id="cle" type="text" inputmode="text" spellcheck="false" autocapitalize="off" placeholder="Collez la clé ici" value="${esc(cle)}" aria-label="Clé Google Gemini">
     <button class="btn primary" type="button" id="cle-ok">${icon("check")}Tester et enregistrer</button></div>`;
 }
 function brancherCle(root, apres){
