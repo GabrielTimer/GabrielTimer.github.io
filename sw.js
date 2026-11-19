@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.46.7";
+const VERSION = "gt-2.47.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -28,7 +28,7 @@ const KINE_EN_PLUS = [
   "/assets/questionnaire-pdf.js", "/assets/retour.js", "/bilan-kine/conseils-patient.js", "/bilan-kine/data.js", "/bilan-kine/entretien.js", "/bilan-kine/fonctionnels.js",
   "/bilan-kine/guide.js", "/bilan-kine/index.html", "/bilan-kine/traitements.js", "/bilan.html", "/cabinet.html", "/compte-rendu.html",
   "/confidentialite.html", "/config.html", "/conseils-bilan.html", "/corbeille.html", "/courrier.html", "/coursepdf.html",
-  "/exercises/data/exercises.json", "/exercises/data/hep_exercises.json", "/exercises/data/hep_nettoyage.json", "/exercises/data/hep_programmes.json", "/exercises/data/program_templates.json", "/exercises/data/variantes.json",
+  "/exercises/data/exercises.json", "/exercises/data/hep_exercises.json", "/exercises/data/hep_nettoyage.json", "/exercises/data/hep_programmes.json", "/exercises/data/program_templates.json", "/exercises/data/progressions.json", "/exercises/data/variantes.json",
   "/exercises/glossary.html", "/exercises/historique.html", "/folder.html", "/glossary.html", "/impression.html", "/liste_pathologies.html",
   "/login.html", "/messages.html", "/nerfs.html", "/ordonnance.html", "/pathologies.html", "/patients.html",
   "/program_pdf.html", "/programmes_admin.html", "/programmescourse.html", "/programs.html", "/questionnaires.html", "/reglages_cabinet.html",

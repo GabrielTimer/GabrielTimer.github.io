@@ -8,7 +8,8 @@ import {
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
   emptyHTML, byWeek, settings
 } from "../app.js";
-import { exerciseImage, toProgramExercise, updateSessionExercise, norm } from "../library.js";
+import { exerciseImage, toProgramExercise, updateSessionExercise, norm, variantesDe, exerciseKey } from "../library.js";
+import { isHidden } from "../settings.js";
 import * as V from "../variantes.js";
 import { compareNoms } from "../noms.js";
 import { nomAffiche } from "../noms.js";
@@ -317,6 +318,7 @@ function renderExos(){
           <div class="exo-actions">
             <button class="icon-btn sm" type="button" data-move="-1" data-i="${i}" aria-label="Monter" ${i === 0 ? "disabled" : ""}>${icon("up")}</button>
             <button class="icon-btn sm" type="button" data-move="1" data-i="${i}" aria-label="Descendre" ${i === S.exercices.length - 1 ? "disabled" : ""}>${icon("down")}</button>
+            ${e.id !== undefined && e.id !== null && e.id !== "" ? `<button class="icon-btn sm" type="button" data-var="${i}" aria-label="Variante plus facile ou plus difficile" title="Variante plus facile ou plus difficile">${icon("swap")}</button>` : ""}
             <button class="icon-btn sm" type="button" data-dup="${i}" aria-label="Dupliquer">${icon("copy")}</button>
             <button class="icon-btn sm danger" type="button" data-del="${i}" aria-label="Supprimer">${icon("trash")}</button>
           </div>
@@ -433,6 +435,7 @@ function bindExos(){
     setField(i, f, S.exercices[i][f] + Number(b.dataset.d), true);
   });
   $$("[data-move]", list).forEach(b => b.onclick = () => move(+b.dataset.i, +b.dataset.i + Number(b.dataset.move)));
+  $$("[data-var]", list).forEach(b => b.onclick = () => openVariantes(+b.dataset.var));
   $$("[data-dup]", list).forEach(b => b.onclick = () => {
     const i = +b.dataset.dup;
     S.exercices.splice(i + 1, 0, JSON.parse(JSON.stringify(S.exercices[i])));
@@ -467,6 +470,63 @@ function bindExos(){
   });
   bindEvol(list);
   bindExoDrag(list);
+}
+
+/* ---------- Variante plus facile / plus difficile d'un exercice ----------
+   Même nature, même objectif (exercises/data/progressions.json), même type d'images (HEP ou dessins).
+   Le dosage, la consigne personnelle et l'évolution de l'exercice sont gardés. */
+async function openVariantes(i){
+  const x = S.exercices[i];
+  if(!x) return;
+  const s = openSheet({ title:"Changer pour une variante", body:`<div class="loading"><div class="spinner"></div><span>Recherche des variantes…</span></div>`, foot:`<button class="btn" type="button" data-close>Fermer</button>` });
+  const V = await variantesDe(x, { visible: e => !isHidden(exerciseKey(e)) });
+  const ligne = (e, label, cls = "") => `<button class="var-item ${cls}" type="button" data-pick="${esc(exerciseKey(e))}" ${cls === "cur" ? "disabled" : ""}>
+      ${exoImageHTML(e.image, "", "var-thumb")}
+      <span class="var-main">${label ? `<span class="var-lab">${label}</span>` : ""}<span class="var-nom">${esc(e.nom)}</span></span>
+      ${cls === "cur" ? `<span class="badge">Actuel</span>` : icon("chevron")}
+    </button>`;
+  let html = "";
+  if(V.chaine.length > 1){
+    html += `<p class="small muted" style="margin:0 0 10px">Du plus facile (en haut) au plus difficile (en bas). Le dosage et votre consigne sont gardés.</p><div class="var-list">` +
+      V.chaine.map((e, k) => ligne(e,
+        k === V.index ? "" : k === V.index - 1 ? `${icon("trendDown")}Plus facile` : k === V.index + 1 ? `${icon("trendUp")}Plus difficile` : k < V.index ? `Encore plus facile` : `Encore plus difficile`,
+        k === V.index ? "cur" : k < V.index ? "easy" : "hard")).join("") + `</div>`;
+  }
+  if(V.proches.length){
+    html += `<h3 class="var-h">${V.chaine.length > 1 ? "Autres exercices proches" : "Exercices proches"}</h3>
+      ${V.chaine.length > 1 ? "" : `<p class="small muted" style="margin:0 0 10px">Pas encore de progression définie pour cet exercice : voici des exercices de la même famille (difficulté non classée).</p>`}
+      <div class="var-list">${V.proches.map(e => ligne(e, "")).join("")}</div>`;
+  }
+  if(!html) html = `<div class="empty" style="padding:16px"><h3>Pas de variante pour cet exercice</h3><p>Ajoutez un autre exercice depuis la bibliothèque si besoin.</p></div>`;
+  s.body.innerHTML = `<style>
+      .var-list{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
+      .var-item{ display:flex; align-items:center; gap:12px; width:100%; padding:10px 12px; border:0; border-top:1px solid var(--line); background:var(--surface); color:inherit; font:inherit; text-align:left; cursor:pointer; }
+      .var-item:first-child{ border-top:0; }
+      .var-item:hover:not(:disabled){ background:var(--surface-2); }
+      .var-item.cur{ background:var(--lagon-soft); cursor:default; }
+      .var-item .var-thumb{ width:56px; height:56px; flex:none; border-radius:var(--r-sm); object-fit:cover; background:#fff; }
+      .var-main{ flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; }
+      .var-lab{ display:inline-flex; align-items:center; gap:4px; font-size:var(--fs-xs); font-weight:800; text-transform:uppercase; letter-spacing:.02em; color:var(--ink-3); }
+      .var-item.easy .var-lab{ color:var(--lagon-strong); } .var-item.hard .var-lab{ color:var(--soleil-strong, #8a5a00); }
+      .var-lab svg{ width:14px; height:14px; }
+      .var-nom{ font-weight:700; line-height:1.25; }
+      .var-h{ font-size:var(--fs-md); margin:16px 0 8px; }
+    </style>${html}`;
+  const tous = [...V.chaine, ...V.proches];
+  s.body.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => {
+    const e = tous.find(y => exerciseKey(y) === b.dataset.pick);
+    if(!e) return;
+    const avant = S.exercices[i];
+    const garde = { ex: avant.ex, repos: avant.repos, reps: avant.reps,
+      ...(avant.conseil_kine ? { conseil_kine: avant.conseil_kine } : {}),
+      ...(avant.evol ? { evol: JSON.parse(JSON.stringify(avant.evol)) } : {}),
+      ...(avant.opt ? { opt: avant.opt } : {}) };
+    S.exercices[i] = toProgramExercise(e, garde);
+    persist(); renderExos(); renderSend(false);
+    sideLib?.then(l => l.refresh());
+    s.close();
+    toast(`« ${avant.nom} » remplacé par « ${e.nom} ».`, { type:"ok", action:{ label:"Annuler", run:() => { S.exercices[i] = avant; persist(); renderExos(); renderSend(false); } } });
+  });
 }
 
 function setField(i, f, v, rerenderInput){

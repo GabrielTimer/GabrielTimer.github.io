@@ -398,3 +398,41 @@ export function exerciseSteps(exo){
   }
   return [];
 }
+
+/* ---------- Variantes plus faciles / plus difficiles ----------
+   exercises/data/progressions.json : chaînes d'exercices de même nature, du plus facile au plus difficile.
+   HEP et dessins ne sont jamais dans la même chaîne. Sans chaîne : exercices proches (même source,
+   même catégorie, même début de nom), proposés sans ordre de difficulté. */
+let progCache = null;
+export function loadProgressions(){
+  if(!progCache) progCache = fetch("/exercises/data/progressions.json", FRAIS).then(r => r.json())
+    .then(d => { const pos = new Map(); (d.chaines || []).forEach((ch, c) => ch.forEach((k, i) => pos.set(k, [c, i]))); return { chaines: d.chaines || [], pos }; })
+    .catch(() => ({ chaines: [], pos: new Map() }));
+  return progCache;
+}
+
+const MOTS_VIDES = new Set("de du des la le les un une avec sans sur sous en au aux a et ou d l".split(" "));
+const debutNom = nom => norm(nom).replace(/\(.*?\)/g, " ").split(/[^a-z0-9]+/).filter(w => w && !MOTS_VIDES.has(w)).slice(0, 2).join(" ");
+
+/** Variantes d'un exercice : { chaine:[exercices], index, facile, difficile, proches:[exercices] }. */
+export async function variantesDe(x, { visible = () => true } = {}){
+  const [list, P] = await Promise.all([loadLibrary(), loadProgressions()]);
+  const key = `${x.source || "CABINET"}_${x.id}`;
+  const byKey = new Map(list.map(e => [exerciseKey(e), e]));
+  const cur = byKey.get(key) || null;
+  const out = { courant: cur, chaine: [], index: -1, facile: null, difficile: null, proches: [] };
+  if(!cur) return out;
+  const p = P.pos.get(key);
+  if(p){
+    out.chaine = P.chaines[p[0]].map(k => byKey.get(k)).filter(e => e && (e === cur || visible(e)));
+    out.index = out.chaine.indexOf(cur);
+    out.facile = out.chaine[out.index - 1] || null;
+    out.difficile = out.chaine[out.index + 1] || null;
+  }
+  const debut = debutNom(cur.nom);
+  if(debut){
+    const dans = new Set(out.chaine);
+    out.proches = list.filter(e => e !== cur && !dans.has(e) && e.source === cur.source && e.categorie === cur.categorie && visible(e) && debutNom(e.nom) === debut).slice(0, 8);
+  }
+  return out;
+}
