@@ -41,7 +41,8 @@ export function origineDe(prog, modeles){
   /* Ancien modèle maison « Sciatique et hernie discale » (7 nov. 2026) : séparé en « Sciatique » et « Hernie discale » */
   if(lieu === "HEP" && norm(base) === norm("Sciatique et hernie discale")) base = "Sciatique";
   const cands = modeles.filter(m => norm(m.nom) === norm(base) && m.niveau === niveau);
-  const m = cands.find(x => x.lieu === lieu && !x.aide) || cands.find(x => x.lieu === lieu) || cands[0] || null;
+  /* Jamais de passage HEP ↔ dessins : si le programme est tout HEP (ou tout dessins), seul un modèle du même type convient */
+  const m = cands.find(x => x.lieu === lieu && !x.aide) || cands.find(x => x.lieu === lieu) || (lieu ? null : cands[0]) || null;
   return { modele: m, niveau, base, choix: choixDuNom(m, prog.nom) };
 }
 
