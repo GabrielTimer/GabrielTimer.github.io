@@ -36,7 +36,12 @@
 .timer-page[data-phase="prep"] .t-spine > i.part::after{ background:var(--soleil); }
 
 .t-main{ flex:1; display:flex; flex-direction:column; gap:14px; min-height:0; }
-.t-visual{ display:flex; flex-direction:column; gap:12px; }
+.t-visual{ display:flex; flex-direction:column; gap:12px; position:relative; }
+/* « Consignes » posé sur l'image, en haut à gauche : toujours visible, quel que soit l'écran */
+.t-info.t-consignes{
+  position:absolute; top:10px; left:10px; z-index:2; min-height:44px; padding:0 14px;
+  background:var(--lagon); color:var(--on-lagon); box-shadow:0 4px 14px rgba(0,0,0,.18);
+}
 .t-figure{
   margin:0; position:relative;
   height:clamp(150px,30dvh,380px);
@@ -134,7 +139,7 @@
 /* Téléphone à l'horizontale */
 @media (max-height:500px) and (min-aspect-ratio:1/1){
   .t-main{ display:grid; grid-template-columns:1fr auto; align-items:center; gap:18px; }
-  .t-visual{ flex-direction:row; align-items:center; }
+  .t-visual{ flex-direction:row; align-items:flex-start; }
   .t-figure{ height:62dvh; flex:1; }
   .t-names{ text-align:left; flex:0 1 34%; }
   .t-dose{ justify-content:flex-start; }
@@ -146,7 +151,7 @@
 /* Téléphone en portrait : tout tient dans l'écran, même avec un texte agrandi.
    L'image prend la place qui reste au lieu d'une hauteur fixe. */
 @media (max-aspect-ratio:1/1){
-  .t-wrap{ height:100dvh; min-height:0; overflow:hidden; }
+  .t-wrap{ height:100vh; height:100dvh; min-height:0; overflow-x:hidden; overflow-y:auto; }
   .t-main{ min-height:0; gap:10px; }
   .t-visual{ flex:1 1 auto; min-height:0; gap:8px; }
   .t-figure{ height:auto; flex:1 1 0; min-height:96px; max-height:380px; }
