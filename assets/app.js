@@ -755,3 +755,26 @@ export function registerSW(){
     if(e.data?.type === "gt-nouvelle-version" && !touche && Date.now() - ouvertureSW < 8000) recharger();
   });
 }
+
+/* Page pas encore touchée (pour recharger sans rien faire perdre) */
+let pageTouchee = false;
+if(typeof addEventListener === "function") ["pointerdown", "keydown"].forEach(t => addEventListener(t, () => { pageTouchee = true; }, { once:true, capture:true }));
+
+/* Données modifiées sur un autre appareil depuis la dernière visite (voir lire() dans cloud.js) */
+if(typeof addEventListener === "function") addEventListener("gt-donnees-changees", () => {
+  if(/\/timer(\.html)?$/.test(location.pathname)) return;
+  let dernier = 0;
+  try{ dernier = Number(sessionStorage.getItem("gt_recharge_donnees") || 0); }catch(e){}
+  if(!pageTouchee && Date.now() - ouvertureSW < 15000 && Date.now() - dernier > 30000){
+    try{ sessionStorage.setItem("gt_recharge_donnees", String(Date.now())); }catch(e){}
+    location.reload(); return;
+  }
+  if(document.getElementById("gt-maj-donnees")) return;
+  const b = document.createElement("div");
+  b.id = "gt-maj-donnees";
+  b.setAttribute("role", "status");
+  b.style.cssText = "position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:9999;display:flex;gap:10px;align-items:center;max-width:calc(100vw - 24px);padding:10px 12px 10px 16px;border-radius:14px;background:var(--surface,#fff);color:var(--ink,#123);box-shadow:0 6px 24px rgba(0,0,0,.18);font-size:var(--fs-sm,15px);border:1px solid var(--line,#ddd)";
+  b.innerHTML = `<span>Des informations ont été modifiées sur un autre appareil.</span><button class="btn primary" type="button">Actualiser</button>`;
+  b.querySelector("button").onclick = () => location.reload();
+  document.body.appendChild(b);
+});

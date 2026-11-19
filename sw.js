@@ -18,6 +18,23 @@ const PRECACHE = [
   "/images/eva/0.png", "/images/eva/1.png", "/images/eva/2.png", "/images/eva/3.png", "/images/eva/4.png", "/images/eva/5.png"
 ];
 
+/* Espace kiné : tout le reste de l'appli, mis de côté dès que le kiné est connecté
+   (pas sur les téléphones des patients). Un fichier oublié ici est gardé à sa première ouverture. */
+const KINE_EN_PLUS = [
+  "/admin_exercises.html", "/admin_tools.html", "/aide.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
+  "/assets/bilan-traitement.js", "/assets/exercise-editor.js", "/assets/faire-evoluer.js", "/assets/filter-drawer.js", "/assets/global-search.js", "/assets/info-mois.js",
+  "/assets/kine-ui.js", "/assets/kine.js", "/assets/library-ui.js", "/assets/modeles-base.js", "/assets/modeles-ui.js", "/assets/modeles.js",
+  "/assets/pages/bilan.js", "/assets/pages/config.css", "/assets/pages/config.js", "/assets/pathologies.js", "/assets/photos-cabinet.js", "/assets/qr.js",
+  "/assets/questionnaire-pdf.js", "/assets/retour.js", "/bilan-kine/conseils-patient.js", "/bilan-kine/data.js", "/bilan-kine/entretien.js", "/bilan-kine/fonctionnels.js",
+  "/bilan-kine/guide.js", "/bilan-kine/index.html", "/bilan-kine/traitements.js", "/bilan.html", "/cabinet.html", "/compte-rendu.html",
+  "/confidentialite.html", "/config.html", "/conseils-bilan.html", "/corbeille.html", "/courrier.html", "/coursepdf.html",
+  "/exercises/data/exercises.json", "/exercises/data/hep_exercises.json", "/exercises/data/hep_nettoyage.json", "/exercises/data/hep_programmes.json", "/exercises/data/program_templates.json", "/exercises/data/variantes.json",
+  "/exercises/glossary.html", "/exercises/historique.html", "/folder.html", "/glossary.html", "/impression.html", "/liste_pathologies.html",
+  "/login.html", "/messages.html", "/nerfs.html", "/ordonnance.html", "/pathologies.html", "/patients.html",
+  "/program_pdf.html", "/programmes_admin.html", "/programmescourse.html", "/programs.html", "/questionnaires.html", "/reglages_cabinet.html",
+  "/ressources.html", "/salle-attente.html", "/stats.html", "/tests.html"
+];
+
 /* « no-cache » : on demande toujours au serveur la dernière version (jamais une copie périmée du navigateur) */
 const precacher = cache => Promise.all(PRECACHE.map(url => cache.add(new Request(url, { cache:"no-cache" })).catch(() => null)));
 
@@ -38,8 +55,21 @@ self.addEventListener("activate", event => {
 self.addEventListener("message", event => {
   if(event.data === "skipWaiting") self.skipWaiting();
   /* Accueil du patient : met de côté les images de ses prochaines séances, pour s'en servir sans réseau */
+  if(event.data?.type === "precache-kine") event.waitUntil(precacheKine());
   if(event.data?.type === "precache-media" && Array.isArray(event.data.urls)) event.waitUntil(precacheMedia(event.data.urls));
 });
+
+async function precacheKine(){
+  const cache = await caches.open(SHELL);
+  if(await cache.match(PERIME)) return;   // nouvelle version en attente : tout sera repris à la page suivante
+  for(const url of KINE_EN_PLUS){
+    try{
+      if(await cache.match(url)) continue;
+      const r = await fetch(url, { cache:"no-cache" });
+      if(r.ok && !r.redirected) await cache.put(url, r);
+    }catch(e){ /* hors ligne : on réessaiera à la prochaine connexion */ }
+  }
+}
 
 async function precacheMedia(urls){
   const cache = await caches.open(MEDIA);

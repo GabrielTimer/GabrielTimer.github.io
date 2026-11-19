@@ -16,7 +16,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager, getFirestore,
-  collection, collectionGroup, doc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, query, where
+  collection, collectionGroup as fsCollectionGroup, doc, getDoc as fsGetDoc, getDocs as fsGetDocs, setDoc, deleteDoc, writeBatch,
+  query as fsQuery, where as fsWhere, getDocFromCache, getDocsFromCache
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
   getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail,
@@ -39,6 +40,82 @@ try{
 }
 export { db };
 export const auth = getAuth(app);
+
+/* ---------- Lecture rapide : d'abord la copie gardée sur l'appareil ----------
+   Une donnée déjà lue sur cet appareil (même compte) s'affiche tout de suite depuis la copie locale
+   de Firestore ; le serveur est interrogé juste derrière. Si quelque chose a changé ailleurs
+   (autre appareil), la page est prévenue (événement « gt-donnees-changees ») : elle se recharge
+   d'elle-même si rien n'a encore été touché, sinon un bandeau propose d'actualiser.
+   Jamais pour : les droits d'accès (acces), les codes patients, les réglages (relus avant
+   d'être enregistrés), ni pendant une opération qui écrit (suppression, changement de code…). */
+const where = (champ, op, valeur) => { const c = fsWhere(champ, op, valeur); c.__k = `${champ}${op}${JSON.stringify(valeur)}`; return c; };
+const query = (ref, ...conds) => { const q = fsQuery(ref, ...conds); q.__k = `${ref.__k || ref.path}?${conds.map(c => c.__k).join("&")}`; return q; };
+const collectionGroup = (base, nom) => { const q = fsCollectionGroup(base, nom); q.__k = `**/${nom}`; return q; };
+
+const EXCLUS = /^(acces|codes|reglages)(\/|$)/;
+const LUS_KEY = "gt_lus_serveur";
+const LUS_JOURS = 30;
+let lus = null;
+const lusCharger = () => {
+  if(lus) return lus;
+  try{ lus = JSON.parse(localStorage.getItem(LUS_KEY) || "{}") || {}; }catch(e){ lus = {}; }
+  const limite = Date.now() - LUS_JOURS * 864e5;
+  Object.keys(lus).forEach(k => { if(lus[k] < limite) delete lus[k]; });
+  return lus;
+};
+let lusTimer = null;
+const marquerLu = id => {
+  lusCharger()[id] = Date.now();
+  clearTimeout(lusTimer);
+  lusTimer = setTimeout(() => { try{ localStorage.setItem(LUS_KEY, JSON.stringify(lus)); }catch(e){} }, 300);
+};
+let enEcriture = 0;
+/** Opération qui écrit à partir de ce qu'elle lit : toujours les données du serveur. */
+const surServeur = fn => async (...args) => { enEcriture++; try{ return await fn(...args); } finally{ enEcriture--; } };
+
+const triCles = v => Array.isArray(v) ? v.map(triCles)
+  : v && typeof v === "object" ? Object.keys(v).sort().reduce((o, k) => (o[k] = triCles(v[k]), o), {}) : v;
+const empreinte = (snap, une) => {
+  try{
+    return JSON.stringify(une ? [snap.exists(), triCles(snap.data() || null)]
+      : snap.docs.map(d => [d.ref.path, triCles(d.data())]).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+  }catch(e){ return Math.random(); }
+};
+const verifies = new Map();
+let changementSignale = false;
+
+async function lireDirect(ref, une, id){
+  const snap = await (une ? fsGetDoc(ref) : fsGetDocs(ref));
+  if(id && !snap.metadata.fromCache) marquerLu(id);
+  return snap;
+}
+async function lire(ref, une){
+  const cle = ref.__k || ref.path || "";
+  const id = `${auth.currentUser?.uid || "anonyme"}|${cle}`;
+  if(!cle || enEcriture || EXCLUS.test(cle) || typeof localStorage === "undefined") return lireDirect(ref, une, null);
+  if(!lusCharger()[id]) return lireDirect(ref, une, id);
+  let local;
+  try{ local = await (une ? getDocFromCache(ref) : getDocsFromCache(ref)); }
+  catch(e){ return lireDirect(ref, une, id); }
+  if(!une && local.empty) return lireDirect(ref, une, id);
+  /* Vérification auprès du serveur, juste derrière (une fois toutes les 5 s pour une même lecture) */
+  if(Date.now() - (verifies.get(id) || 0) > 5000){
+    verifies.set(id, Date.now());
+    const avant = empreinte(local, une);
+    (une ? fsGetDoc(ref) : fsGetDocs(ref)).then(srv => {
+      if(srv.metadata.fromCache) return;
+      marquerLu(id);
+      if(empreinte(srv, une) !== avant && !changementSignale && typeof window !== "undefined"){
+        changementSignale = true;
+        patientsCache = null;
+        window.dispatchEvent(new CustomEvent("gt-donnees-changees"));
+      }
+    }).catch(() => {});
+  }
+  return local;
+}
+const getDoc = ref => lire(ref, true);
+const getDocs = ref => lire(ref, false);
 
 /* ---------- Authentification du kiné ---------- */
 
@@ -88,13 +165,21 @@ async function verifierKine(user){
 /** Renvoie l'utilisateur kiné connecté, ou null. */
 export async function currentKine(){
   const user = auth.currentUser || await authReady;
-  return await verifierKine(user) ? user : null;
+  const ok = await verifierKine(user);
+  /* Kiné connecté : toute l'appli est mise de côté sur cet appareil (une fois par visite) */
+  try{
+    if(ok && !sessionStorage.getItem("gt_precache_kine") && navigator.serviceWorker?.controller){
+      sessionStorage.setItem("gt_precache_kine", "1");
+      navigator.serviceWorker.controller.postMessage({ type:"precache-kine" });
+    }
+  }catch(e){}
+  return ok ? user : null;
 }
 
 /* ---------- Migration : chaque patient existant appartient au titulaire ----------
    Une seule fois, au premier passage du titulaire : ajoute kine = titulaire aux
    patients, fiches et bilans qui n'ont pas encore ce champ. */
-export async function migrerKine(){
+async function _migrerKine(){
   if(!estTitulaire()) return 0;
   try{ if(localStorage.getItem("gt_migration_kine") === "2") return 0; }catch(e){}
   let n = 0;
@@ -379,7 +464,7 @@ async function subDocs(root, cle, name){
   return snap.docs;
 }
 
-export async function deletePatient(cle){
+async function _deletePatient(cle){
   const patient = (await getDoc(doc(db, "patients", cle))).data() || {};
   const code = await codeAcces(cle, patient).catch(() => cle);
   const erreurs = [];
@@ -411,7 +496,7 @@ export async function deletePatient(cle){
  * Ancien patient : sa messagerie passe sous le nouveau code (protégée des autres comptes).
  * Tout est d'abord copié ; l'ancien dossier n'est effacé que si la copie a réussi.
  */
-export async function renewAccessCode(cle){
+async function _renewAccessCode(cle){
   const patient = await getPatient(cle, { fiche: true });
   if(!patient) throw new Error("Patient introuvable");
   const ancienCode = await codeAcces(cle, patient);
@@ -536,7 +621,7 @@ export async function deleteSeance(cle, id){
   await deleteDoc(doc(db, "patients", cle, "seances", id));
 }
 
-export async function deleteProgramme(cle, programmeId){
+async function _deleteProgramme(cle, programmeId){
   const seances = (await listSeances(cle)).filter(s => s.programmeId === programmeId);
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
   return seances.length;
@@ -545,7 +630,7 @@ export async function deleteProgramme(cle, programmeId){
 /* ---------- Corbeille des programmes (kiné uniquement) ----------
    corbeille/{idSéance} : la séance telle quelle + corbeilleProgramme, corbeilleNom, deletedAt, raison.
    Gardée 30 jours puis effacée par la tâche automatique de nettoyage. */
-export async function mettreEnCorbeille(cle, programmeId, { raison = "kine" } = {}){
+async function _mettreEnCorbeille(cle, programmeId, { raison = "kine" } = {}){
   const seances = (await listSeances(cle)).filter(s => s.programmeId === programmeId);
   if(!seances.length) return 0;
   const deletedAt = Date.now();
@@ -573,7 +658,7 @@ export async function viderCorbeille(items){
  * Validation d'une séance par le patient.
  * Renvoie { programmeTermine } pour savoir si tout le programme est fait.
  */
-export async function validateSeance(cle, id, { eva = null, ressenti = null, commentaire = null, dureeReelle = null } = {}){
+async function _validateSeance(cle, id, { eva = null, ressenti = null, commentaire = null, dureeReelle = null } = {}){
   const patch = { terminee: true, dateValidation: Date.now() };
   if(eva !== null && eva !== undefined && !Number.isNaN(Number(eva))) patch.eva = Math.round(Number(eva));
   if(ressenti) patch.ressenti = String(ressenti).slice(0, 30);
@@ -702,7 +787,7 @@ export async function deleteExerciseEdit(key){
  * Reporte une correction dans les séances pas encore faites de tous les patients
  * et dans les modèles. Renvoie { seances, modeles } : le nombre de documents mis à jour.
  */
-export async function propagateExerciseEdit(before, after){
+async function _propagateExerciseEdit(before, after){
   const touch = data => {
     if(!data || !Array.isArray(data.exercices)) return null;
     const exercices = data.exercices.map(x => ({ ...x }));
@@ -918,7 +1003,7 @@ export async function deleteNote(cle, id){
 /* ---------- Sauvegarde complète et restauration (kiné) ---------- */
 
 /** Toutes les données du cabinet, dans un seul objet à enregistrer en fichier. */
-export async function exportAll(onProgress = () => {}){
+async function _exportAll(onProgress = () => {}){
   const out = { format: "gabrieltimer-sauvegarde", version: 1, date: new Date().toISOString(), collections: {} };
   const grab = async name => {
     onProgress(name);
@@ -1033,7 +1118,7 @@ export async function listLegacy(){
  * Sans danger si relancée : un patient déjà migré est réutilisé,
  * les séances gardent le même identifiant.
  */
-export async function migrateLegacy(onProgress = () => {}){
+async function _migrateLegacy(onProgress = () => {}){
   const legacy = (await listLegacy()).filter(p => p.data && Array.isArray(p.data.exercices));
   const patients = await listPatients();
   const byLegacy = new Map(patients.filter(p => p.legacyId).map(p => [p.legacyId, p]));
@@ -1071,3 +1156,12 @@ export async function migrateLegacy(onProgress = () => {}){
   rapport.ignores = legacy.length - rapport.seances - rapport.modeles;
   return rapport;
 }
+export const deletePatient = surServeur(_deletePatient);
+export const renewAccessCode = surServeur(_renewAccessCode);
+export const deleteProgramme = surServeur(_deleteProgramme);
+export const mettreEnCorbeille = surServeur(_mettreEnCorbeille);
+export const migrateLegacy = surServeur(_migrateLegacy);
+export const propagateExerciseEdit = surServeur(_propagateExerciseEdit);
+export const exportAll = surServeur(_exportAll);
+export const migrerKine = surServeur(_migrerKine);
+export const validateSeance = surServeur(_validateSeance);
