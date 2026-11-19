@@ -161,3 +161,10 @@
 
 /* Pas de bulles de fond pendant la séance : écran calme, lisible de loin */
 body.timer-page::before, body.timer-page::after{ display:none; animation:none; }
+
+/* Phase préparatoire (fond clair) : barre du temps et bouton « Enchaîner » bien visibles */
+.timer-page[data-phase="prep"] .t-foot .t-info{ border:1.5px solid var(--line-strong); box-shadow:0 2px 8px rgba(20,48,58,.08); }
+.timer-page[data-phase="prep"] .t-auto{ opacity:1; }
+.timer-page[data-phase="prep"] .t-auto[aria-pressed="true"]{ border-color:var(--lagon); }
+.timer-page[data-phase="prep"] .t-total{ color:var(--ink); }
+.timer-page[data-phase="prep"] .t-total .bar{ background:color-mix(in srgb, var(--ink) 22%, transparent); }
