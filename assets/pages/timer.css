@@ -181,3 +181,28 @@ body.timer-page::before, body.timer-page::after{ display:none; animation:none; }
 .timer-page[data-phase="prep"] .t-auto[aria-pressed="true"]{ border-color:var(--lagon); }
 .timer-page[data-phase="prep"] .t-total{ color:var(--ink); }
 .timer-page[data-phase="prep"] .t-total .bar{ background:color-mix(in srgb, var(--ink) 22%, transparent); }
+
+/* Très petits téléphones (ou texte très agrandi) : on gagne de la place sans rien cacher d'utile */
+@media (max-aspect-ratio:1/1) and (max-height:620px){
+  .t-count{ font-size:var(--fs-xs); line-height:1.2; }
+  .t-figure{ min-height:44px; }
+  .t-ring{ width:min(50vw,20dvh,240px); }
+  .t-hint{ display:none; }
+  .t-info.t-consignes{ min-height:34px; margin-top:4px; }
+}
+
+/* Téléphone à l'horizontale : tout tient dans l'écran, barre du bas comprise */
+@media (max-height:500px) and (min-aspect-ratio:1/1){
+  .t-wrap{ position:fixed; inset:0; min-height:0; overflow:hidden; gap:6px; padding-top:max(4px,env(safe-area-inset-top)); padding-bottom:max(6px,env(safe-area-inset-bottom)); }
+  .t-top .icon-btn{ width:40px; height:40px; }
+  .t-main{ flex:1 1 auto; min-height:0; }
+  .t-visual{ height:100%; min-height:0; }
+  .t-figure{ height:100%; min-height:0; }
+  .t-ring{ width:min(40dvh,34vw); }
+  .t-hint{ display:none; }
+  .t-control{ gap:8px; }
+  .t-btn{ width:44px; height:44px; }
+  .t-btn.main{ width:58px; height:58px; }
+  .t-foot{ display:flex; flex:none; }
+  .t-foot .t-info{ min-height:38px; }
+}
