@@ -152,7 +152,9 @@
 /* Téléphone en portrait : tout tient dans l'écran, même avec un texte agrandi.
    L'image prend la place qui reste (elle rétrécit en premier) ; minuteur et boutons suivent la hauteur de l'écran. */
 @media (max-aspect-ratio:1/1){
-  .t-wrap{ height:100vh; height:100dvh; min-height:0; overflow:hidden; gap:8px; }
+  /* Calée sur la zone réellement visible (comme un élément « fixe ») : sur certains Android,
+     100vh / 100dvh dépassent sous la barre de navigation et cachaient le bas de l'écran. */
+  .t-wrap{ position:fixed; inset:0; height:auto; min-height:0; overflow:hidden; gap:8px; }
   .t-main{ min-height:0; gap:8px; }
   .t-visual{ flex:1 1 auto; min-height:0; gap:6px; }
   .t-figure{ height:auto; flex:1 1 0; min-height:60px; max-height:380px; }
