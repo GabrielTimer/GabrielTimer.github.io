@@ -75,11 +75,13 @@ export function mountGuide(app, ctx){
     if(q){
       const mots = q.split(/\s+/);
       const res = K.MOTIFS.flatMap(([g, l]) => l.map(x => [x[0], g])).filter(([m, g]) => mots.every(w => sansAccent(m + " " + g).includes(w)));
-      return res.length ? `<div class="g-chips">${res.map(([m]) => chipMotif(m)).join("")}</div>`
-        : `<p class="g-hint">Aucun motif ne correspond. Choisissez le plus proche dans les groupes (effacez la recherche).</p>`;
+      return res.length ? `<div class="g-chips">${res.map(([m]) => chipMotif(m)).join("")}<button type="button" class="g-chip g-chip-ic" data-gautreok="${esc(ui.mq.trim())}">${icon("plus")}Autre : « ${esc(ui.mq.trim())} »</button></div>`
+        : `<p class="g-hint">Aucun motif de la liste ne correspond.</p><div class="g-chips"><button type="button" class="g-chip g-chip-ic" data-gautreok="${esc(ui.mq.trim())}">${icon("plus")}Ajouter « ${esc(ui.mq.trim())} » comme motif</button></div>`;
     }
     const choisis = S.c.patho || [];
-    return `${K.MOTIFS_FREQUENTS?.length ? `<div class="g-grp-t">Les plus fréquents</div><div class="g-chips">${K.MOTIFS_FREQUENTS.map(chipMotif).join("")}</div>` : ""}
+    const autre = `<button type="button" class="g-chip g-chip-ic" data-gautre aria-pressed="${!!ui.autre}">${icon("edit")}Autre…</button>`;
+    return `${K.MOTIFS_FREQUENTS?.length ? `<div class="g-grp-t">Les plus fréquents</div><div class="g-chips">${K.MOTIFS_FREQUENTS.map(chipMotif).join("")}${autre}</div>` : `<div class="g-chips">${autre}</div>`}
+      ${ui.autre ? `<div class="g-autre" style="display:flex;gap:8px;margin:8px 0 4px;flex-wrap:wrap"><input class="input" data-gautrein type="text" placeholder="Écrivez le motif (s'il n'est pas dans la liste)" style="flex:1 1 240px" autocomplete="off"><button type="button" class="btn primary" data-gautreok="">${icon("check")}Ajouter</button></div>` : ""}
       ${K.MOTIFS.map(([g, l]) => {
         const n = l.filter(x => choisis.includes(x[0])).length;
         return `<details class="g-grp" data-grp="${esc(g)}" ${n || ui.mopen.has(g) ? "open" : ""}><summary>${esc(g)}${n ? ` <span class="g-auto">${n}</span>` : ""}</summary><div class="g-chips">${l.map(x => chipMotif(x[0])).join("")}</div></details>`;
@@ -463,6 +465,16 @@ export function mountGuide(app, ctx){
     if(d.gstep){ go(+d.gstep); return; }
     if(d.gtype){ S.type = d.gtype; ui.step = Math.max(0, ST().findIndex(x => x[0] === S.gstep)); ui.key = ST()[ui.step][0]; changed(); refresh(); return; }
     if(d.gapprof !== undefined){ S.approf = !S.approf; changed(); refresh(); toast(S.approf ? "Bilan approfondi : toutes les étapes et tous les tests" : "Bilan rapide : seulement ce qui sert pour le motif"); return; }
+    if(d.gautre !== undefined){ ui.autre = !ui.autre; refresh(); if(ui.autre) root.querySelector("[data-gautrein]")?.focus(); return; }
+    if(d.gautreok !== undefined){
+      const v = (d.gautreok || root.querySelector("[data-gautrein]")?.value || "").trim().replace(/\s+/g, " ");
+      if(!v){ root.querySelector("[data-gautrein]")?.focus(); return; }
+      const m = v.charAt(0).toUpperCase() + v.slice(1);
+      S.c.patho = S.c.patho || [];
+      if(!S.c.patho.includes(m)) S.c.patho.push(m);
+      ui.autre = false; ui.mq = "";
+      changed(); refresh(); return;
+    }
     if(d.gc){
       const on = toggle(S.c[d.gc] = S.c[d.gc] || [], d.v);
       /* Le motif répond d'office à « Comment est-ce arrivé ? » (modifiable à l'étape Histoire) */
@@ -578,6 +590,11 @@ export function mountGuide(app, ctx){
     const g = e.target?.dataset?.grp;
     if(g){ if(e.target.open) ui.mopen.add(g); else ui.mopen.delete(g); }
   }, true);
+
+  /* « Autre motif » : Entrée ajoute le motif écrit */
+  root.addEventListener("keydown", e => {
+    if(e.key === "Enter" && e.target.dataset && "gautrein" in e.target.dataset){ e.preventDefault(); root.querySelector("button[data-gautreok]")?.click(); }
+  });
 
   root.addEventListener("input", e => {
     e.stopPropagation();
