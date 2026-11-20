@@ -177,8 +177,9 @@ function announce(st){
     beep(660, .15); beep(660, .15, .22);
     vibrate([100, 80, 100]);
     const nxt = steps[idx + 1];
-    if(nxt && nxt.kind === "prep") speak("Repos. Ensuite : " + nxt.e.nom);
-    else speak("Repos");
+    const rn = st.e.reposNom || "Repos";   // reposNom : « Marche », « Trottiner »… (reprise de course)
+    if(nxt && nxt.kind === "prep") speak(rn + ". Ensuite : " + nxt.e.nom);
+    else speak(rn);
   }
 }
 
@@ -335,8 +336,8 @@ function render(full){
   const shown = Math.max(0, Math.ceil(remaining));
   el.time.textContent = finished ? "✓" : fmtClock(shown);
   el.time.classList.toggle("long", shown >= 600);
-  el.phase.textContent = finished ? "Terminé" : waiting ? (idx === 0 ? "Prêt ?" : "Exercice suivant") : st.kind === "prep" ? "En position" : st.kind === "ex" ? "Effort" : "Repos";
-  el.hint.textContent = finished ? "" : waiting ? "Appuyez pour commencer" : !running ? "En pause, appuyez pour reprendre" : st.kind === "prep" ? "Préparez-vous" : st.kind === "rest" ? "Respirez calmement" : "";
+  el.phase.textContent = finished ? "Terminé" : waiting ? (idx === 0 ? "Prêt ?" : "Exercice suivant") : st.kind === "prep" ? "En position" : st.kind === "ex" ? "Effort" : (st.e.reposNom || "Repos");
+  el.hint.textContent = finished ? "" : waiting ? "Appuyez pour commencer" : !running ? "En pause, appuyez pour reprendre" : st.kind === "prep" ? "Préparez-vous" : st.kind === "rest" ? (st.e.reposNom ? `${st.e.reposNom} tranquillement` : "Respirez calmement") : "";
   const p = st.dur ? Math.min(1, Math.max(0, remaining / st.dur)) : 0;
   el.arc.style.strokeDashoffset = finished ? 0 : C * p;
 

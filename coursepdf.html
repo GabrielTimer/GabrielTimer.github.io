@@ -211,7 +211,17 @@ border-bottom:none;
 
 .typeSeance{
 white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 }
+
+/* Programmes longs : la page se resserre pour que toutes les semaines tiennent sur l'A4 */
+#page.dense #weeks{ grid-template-columns:1fr 1fr 1fr; gap:6px; }
+#page.dense .weekTitle{ font-size:13px; padding:3px 8px; }
+#page.dense .row{ grid-template-columns:34px 44px 1fr 12px; font-size:10.5px; column-gap:5px; }
+#page.dense2 .row{ font-size:9.5px; padding:1px 0; }
+#page.dense2 .weekTitle{ font-size:12px; padding:2px 8px; }
+#page.dense3 #weeks{ grid-template-columns:repeat(4, 1fr); }
 
 .footer{
 margin-top:4px;
@@ -321,7 +331,7 @@ class="infoValue"></div>
 
 <div class="bandeau">
 🚶 Échauffement : 5 min &nbsp;&nbsp;
-🔄 Alternance course/marche progressive &nbsp;&nbsp;
+🔄 5'/2' × 4 = 5 min de course, 2 min de marche, 4 fois &nbsp;&nbsp;
 🧘 Récupération : 3 min
 </div>
 
@@ -391,8 +401,11 @@ Conversation facile.</p>
 <p><b>🔥 Tempo</b><br>
 Allure soutenue mais contrôlée.</p>
 
-<p><b>🔄 Fractionné</b><br>
-Alternance effort et récupération.</p>
+<p><b>🔄 Course / marche</b><br>
+Alterner course lente et marche (ex. 5'/2' × 4).</p>
+
+<p><b>⚡ Fractionné</b><br>
+Courtes accélérations, récupération en trottinant.</p>
 
 <p><b>🏃 Sortie longue</b><br>
 Développe l'endurance générale.</p>
@@ -401,11 +414,11 @@ Développe l'endurance générale.</p>
 <div class="guideCard">
 <h3>🦵 Gestion de la douleur</h3>
 
-<p><b>0-2/10</b> : acceptable.</p>
-<p><b>3-5/10</b> : réduire l'intensité et surveiller.</p>
-<p><b>>5/10</b> : interrompre la séance.</p>
+<p><b>0-3/10</b> pendant la course : acceptable.</p>
+<p><b>Le lendemain matin</b>, la douleur doit être revenue à son niveau habituel. Sinon : refaire la semaine précédente.</p>
+<p><b>&gt;5/10</b> : arrêter la séance et marcher.</p>
 
-<p>Une douleur persistante plus de 48h doit être signalée à votre kinésithérapeute.</p>
+<p id="conseilPatho">Une douleur qui dure plus de 48 h doit être signalée à votre kinésithérapeute.</p>
 </div>
 
 <div class="guideCard">
@@ -550,6 +563,11 @@ data.pathologie || "Aucune";
 document.getElementById("semaines").textContent =
 data.semaines + " sem.";
 
+if(data.conseil){
+  document.getElementById("conseilPatho").innerHTML =
+    "<b>" + String(data.pathologie).replace(/</g, "&lt;") + "</b> : " + String(data.conseil).replace(/</g, "&lt;");
+}
+
 
 
 const weeks =
@@ -576,8 +594,9 @@ let dateTexte = "";
 
 if(data.dateDebut){
 
+const [ay, am, ad] = String(data.dateDebut).split("-").map(Number);
 const debutSemaine =
-new Date(data.dateDebut);
+new Date(ay, am - 1, ad);
 
 debutSemaine.setDate(
 debutSemaine.getDate()
@@ -621,6 +640,7 @@ ${seances.map(s=>`
 
 <div class="typeSeance">
 ${
+s.detail ? s.detail :
 s.typeSeance === "longue"
 
 ? (
@@ -660,6 +680,16 @@ data.modeAffichage === "distance"
 weeks.appendChild(block);
 
 }
+/* Ajuste la densité jusqu'à ce que toutes les semaines tiennent sur la page */
+(function ajuster(){
+  const page = document.getElementById("page");
+  const niveaux = [[], ["dense"], ["dense", "dense2"], ["dense", "dense2", "dense3"]];
+  for(const n of niveaux){
+    page.classList.remove("dense", "dense2", "dense3");
+    n.forEach(c => page.classList.add(c));
+    if(page.scrollHeight <= page.clientHeight + 1) break;
+  }
+})();
 async function downloadPdf(){
 
 const DOS = await import("/assets/dossiers.js");

@@ -16,11 +16,19 @@
   .form-grid{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
   .form-sec + .form-sec{ margin-top:16px; }
   .form-sec h2{ font-size:var(--fs-lg); margin-bottom:14px; }
+  .rc-jours{ display:flex; gap:6px; flex-wrap:wrap; }
+  .rc-jours .chip{ min-width:46px; justify-content:center; }
+  .rc-avert{ margin-top:14px; }
+  .rc-apercu{ margin-top:16px; }
+  .rc-apercu table{ width:100%; border-collapse:collapse; font-size:var(--fs-sm); }
+  .rc-apercu th, .rc-apercu td{ text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .rc-apercu th{ color:var(--ink-3); font-weight:700; }
+  .rc-phase{ display:inline-block; font-size:var(--fs-xs); font-weight:800; padding:2px 8px; border-radius:999px; background:var(--lagon-soft); color:var(--lagon-strong); }
 </style>
 </head>
 <body>
 <main class="page" id="app">
-  <div class="page-head"><h1>Reprise de course</h1><p class="lead">Un programme progressif d'alternance course et marche, adapté au niveau et à la pathologie du patient.</p></div>
+  <div class="page-head"><h1>Reprise de course</h1><p class="lead">Un programme progressif : d'abord l'alternance marche et course, puis la course continue, puis l'objectif. La progression suit la règle de la douleur.</p></div>
 
   <section class="panel form-sec">
     <h2>Patient</h2>
@@ -32,25 +40,30 @@
   <section class="panel form-sec">
     <h2>Profil de course</h2>
     <div class="form-grid">
-      <div class="field"><label for="objectif">Objectif</label><select class="select" id="objectif"><option>5 km</option><option selected>10 km</option><option>Semi</option></select></div>
+      <div class="field"><label for="objectif">Objectif</label><select class="select" id="objectif"><option value="30 min">Courir 30 min sans douleur</option><option>5 km</option><option selected>10 km</option><option>Semi</option></select></div>
       <div class="field"><label for="niveau">Niveau</label><select class="select" id="niveau"><option>Débutant</option><option selected>Reprise</option><option>Occasionnel</option><option>Régulier</option></select></div>
-      <div class="field"><label for="pathologie">Pathologie</label><select class="select" id="pathologie"><option>Aucune</option><option>Syndrome rotulien</option><option>Tendinopathie achilléenne</option><option>Fasciite plantaire</option><option>Lombalgie</option></select></div>
+      <div class="field"><label for="pathologie">Pathologie</label><select class="select" id="pathologie"><option>Aucune</option><option>Syndrome rotulien</option><option>Tendinopathie achilléenne</option><option>Fasciite plantaire</option><option>Lombalgie</option><option>Syndrome de l'essuie-glace</option><option>Périostite tibiale</option></select></div>
       <div class="field"><label for="sexe">Illustrations</label><select class="select" id="sexe"><option value="H" selected>Homme</option><option value="F">Femme</option></select></div>
-      <div class="field"><label for="tempsActuel">Course continue actuelle (min)</label><input class="input" id="tempsActuel" type="number" inputmode="numeric" value="10" min="0"></div>
-      <div class="field"><label for="allure">Allure moyenne (min/km)</label><input class="input" id="allure" type="number" inputmode="decimal" step="0.1" value="6" min="3" max="12"></div>
+      <div class="field"><label for="tempsActuel">Course continue actuelle, sans douleur (min)</label><input class="input" id="tempsActuel" type="number" inputmode="numeric" value="10" min="0" max="120"></div>
+      <div class="field"><label for="allure">Allure en endurance (min/km)</label><input class="input" id="allure" type="number" inputmode="decimal" step="0.1" value="6" min="3" max="12"></div>
     </div>
+    <label class="check" style="margin-top:12px"><input id="intensite" type="checkbox"> Autoriser les séances rapides (tempo, fractionné) malgré la pathologie</label>
+    <p class="hint">Avant de commencer, le patient doit pouvoir marcher 30 min, faire 20 montées sur la pointe d'un pied et 10 petits sauts sur une jambe, sans douleur.</p>
   </section>
 
   <section class="panel form-sec">
     <h2>Planning</h2>
     <div class="form-grid">
-      <div class="field"><label for="semaines">Nombre de semaines</label><input class="input" id="semaines" type="number" inputmode="numeric" value="8" min="1"></div>
-      <div class="field"><label for="seances">Séances par semaine</label><input class="input" id="seances" type="number" inputmode="numeric" value="3" min="1" max="5"></div>
+      <div class="field"><label for="semaines">Nombre de semaines</label><input class="input" id="semaines" type="number" inputmode="numeric" value="8" min="2" max="20"></div>
       <div class="field"><label for="dateDebut">Date de début</label><input class="input" id="dateDebut" type="date"></div>
       <div class="field"><label for="modeProgramme">Affichage de la fiche</label><select class="select" id="modeProgramme"><option value="auto" selected>Automatique</option><option value="temps">En temps</option><option value="distance">En distance</option></select></div>
     </div>
-    <label class="check" style="margin-top:12px"><input id="tapis" type="checkbox" checked> Tapis de course disponible</label>
+    <div class="field" style="margin-top:12px"><label>Jours de course (2 à 5, jamais deux jours d'affilée si possible)</label><div class="rc-jours" id="jours"></div></div>
+    <label class="check" style="margin-top:12px"><input id="tapis" type="checkbox"> Sur tapis de course</label>
+    <div id="avert" class="rc-avert"></div>
   </section>
+
+  <section class="panel form-sec rc-apercu" id="apercu" hidden></section>
 
   <div class="btn-row section">
     <button class="btn" type="button" id="preview">Prévisualiser la fiche</button>
@@ -59,856 +72,300 @@
 </main>
 
 <script type="module">
-import { $, icon, mountShell, registerSW, toast } from "/assets/app.js";
+/* =====================================================================
+   Reprise de course : générateur de programme.
+   Tout ce qu'on peut vouloir ajuster est dans REGLAGES ci-dessous.
+   Le calcul est dans planifier() ; la fiche PDF (coursepdf.html) affiche pdfData.
+   ===================================================================== */
+import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog } from "/assets/app.js";
 const { requireKine } = await import("/assets/kine.js");
 await requireKine();
 registerSW();
 mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
 const C = await import("/assets/cloud.js");
+
+const REGLAGES = {
+  echauffement: 5,                 // min de marche au début de chaque séance
+  retourCalme: 3,                  // min de marche à la fin
+  /* Phase 1 : alternance [course, marche, répétitions] en minutes. Un palier par semaine. */
+  paliers: [[1, 1.5, 8], [1.5, 2, 6], [2, 1.5, 6], [3, 1.5, 5], [5, 2, 4], [8, 2, 3], [12, 1, 2], [15, 1, 2]],
+  /* Phase 2 : course continue, de 20 à 30 min (+5 min par semaine) */
+  continuDebut: 20, continuFin: 30, continuPas: 5,
+  hausseMax: 0.10,                 // la durée augmente de 10 % par semaine au plus (au moins 2 min)
+  allegerTous: 4, allegement: 0.8, // une semaine sur 4 (phases 2 et 3) : volume −20 %, pas de séance rapide
+  /* Phase 3 : sortie longue finale (km), selon l'objectif */
+  longueFinaleKm: { "30 min": 0, "5 km": 5, "10 km": 10, "Semi": 18 },
+  affutageSemi: 0.6,               // dernière semaine du semi : sortie longue × 0,6
+  rpe: { facile:"3-4", longue:"4-5", recup:"2-3", tempo:"6-7", fractionne:"7-8" },
+  /* Rôle des séances de la semaine en phase 3 (la sortie longue est le dernier jour) */
+  roles: { 2:["endurance", "longue"], 3:["endurance", "qualite", "longue"], 4:["endurance", "qualite", "recuperation", "longue"], 5:["endurance", "qualite", "recuperation", "endurance", "longue"] },
+  joursParDefaut: { 2:[2, 6], 3:[1, 3, 6], 4:[1, 3, 5, 0], 5:[1, 2, 4, 5, 0] },
+  douleur: "Douleur au plus 3/10 pendant la course, et revenue à son niveau habituel le lendemain matin. Sinon : refaire la semaine précédente.",
+  conseils: {
+    "Syndrome rotulien": "Petits pas : augmenter la cadence de 5 à 10 %. Éviter les descentes et les escaliers au début.",
+    "Tendinopathie achilléenne": "Terrain plat, pas de côtes ni de sprints au début. Continuer le renforcement du mollet les autres jours.",
+    "Fasciite plantaire": "Chaussures amortissantes, terrain souple. Étirer le mollet et la voûte plantaire après la séance.",
+    "Lombalgie": "Terrain régulier, foulée souple. Garder le gainage les autres jours. Bouger reste le meilleur traitement.",
+    "Syndrome de l'essuie-glace": "Éviter les descentes et les virages serrés au début. Petits pas, cadence un peu plus rapide.",
+    "Périostite tibiale": "Terrain souple, petits pas. Pas de hausse de volume si douleur au tibia le lendemain."
+  }
+};
+const JOURS = [[1, "Lun"], [2, "Mar"], [3, "Mer"], [4, "Jeu"], [5, "Ven"], [6, "Sam"], [0, "Dim"]];
+const NOMS_JOURS = { 0:"dimanche", 1:"lundi", 2:"mardi", 3:"mercredi", 4:"jeudi", 5:"vendredi", 6:"samedi" };
+const LETTRES = "ABCDE";
+const arrondi = (x, pas = 1) => Math.round(x / pas) * pas;
+const fmtMin = m => (Math.round(m * 10) / 10).toString().replace(".", ",");
+
+/* ---------- Formulaire ---------- */
 let patients = [];
 const q = new URLSearchParams(location.search);
-
 async function loadPatients(sel){
   patients = await C.listPatients().catch(() => []);
-  $("#patient").innerHTML = `<option value="">Aucun (aperçu seulement)</option>` + patients.map(p => `<option value="${p.cle}">${p.nom.replace(/</g, "&lt;")}</option>`).join("");
+  $("#patient").innerHTML = `<option value="">Aucun (aperçu seulement)</option>` + patients.map(p => `<option value="${esc(p.cle)}">${esc(p.nom)}</option>`).join("");
   if(sel) $("#patient").value = sel;
 }
 await loadPatients(q.get("patient"));
 $("#new-patient").innerHTML = icon("userPlus") + $("#new-patient").innerHTML;
 $("#new-patient").onclick = async () => { const { newPatientSheet } = await import("/assets/kine-ui.js"); const p = await newPatientSheet(); if(p) await loadPatients(p.cle); };
-$("#dateDebut").value = new Date().toISOString().split("T")[0];
+const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+$("#dateDebut").value = iso(new Date());
 $("#preview").innerHTML = icon("pdf") + $("#preview").innerHTML;
 $("#generate").innerHTML = icon("share") + $("#generate").innerHTML;
 
-async function buildProgram(
-saveToCloud = true
-){
+let jours = [...REGLAGES.joursParDefaut[3]];
+function rendreJours(){
+  $("#jours").innerHTML = JOURS.map(([n, l]) => `<button type="button" class="chip" data-j="${n}" aria-pressed="${jours.includes(n)}">${l}</button>`).join("");
+  $$("[data-j]").forEach(b => b.onclick = () => {
+    const n = +b.dataset.j;
+    if(jours.includes(n)){ if(jours.length <= 2){ toast("Au moins 2 jours de course par semaine."); return; } jours = jours.filter(x => x !== n); }
+    else{ if(jours.length >= 5){ toast("Au plus 5 jours de course par semaine."); return; } jours.push(n); }
+    rendreJours(); majApercu();
+  });
+}
+rendreJours();
 
-const cle = document.getElementById("patient").value;
-const patientObj = patients.find(p => p.cle === cle) || null;
-if(saveToCloud && !patientObj){ toast("Choisissez un patient pour enregistrer le programme.", { type:"err" }); return; }
-const patient = patientObj ? patientObj.patientId : "apercu";
-const patientNom = patientObj ? patientObj.nom : "";
-const aEnvoyer = [];
-
-const objectif =
-document.getElementById("objectif")
-.value;
-
-const niveau =
-document.getElementById("niveau")
-.value;
-
-const pathologie =
-document.getElementById("pathologie")
-.value;
-
-const tempsActuel =
-parseInt(
-document.getElementById("tempsActuel")
-.value
-) || 10;
-
-const allure =
-parseFloat(
-document.getElementById("allure")
-.value
-) || 6;
-
-const modeProgramme =
-document.getElementById(
-"modeProgramme"
-).value;
-
-const semaines =
-parseInt(
-document.getElementById("semaines")
-.value
-) || 8;
-
-const seancesParSemaine =
-Math.max(
-1,
-Math.min(
-5,
-parseInt(
-document.getElementById("seances")
-.value
-) || 3
-)
-);
-
-const dateDebut =
-document.getElementById(
-"dateDebut"
-).value;
-
-const tapis =
-document.getElementById("tapis")
-.checked;
-
-const sexe =
-document.getElementById("sexe")
-.value;
-
-const lettres =
-["A","B","C","D","E"];
-
-const dossier =
-`Reprise course ${objectif}`;
-
-const programmeId =
-`${patient}_${Date.now()}`;
-
-const programmeNom =
-`Reprise course ${objectif}`;
-
-const exercises =
-await fetch(
-"/exercises/data/exercises.json"
-).then(r => r.json());
-
-let modeAffichage =
-modeProgramme;
-
-if(modeProgramme === "auto"){
-
-modeAffichage =
-(
-niveau === "Débutant"
-||
-niveau === "Reprise"
-)
-? "temps"
-: "distance";
-
+function lire(){
+  const v = id => $("#" + id).value;
+  return {
+    cle: v("patient"), objectif: v("objectif"), niveau: v("niveau"), pathologie: v("pathologie"), sexe: v("sexe"),
+    tempsActuel: Math.max(0, Math.min(120, parseInt(v("tempsActuel"), 10) || 0)),
+    allure: Math.max(3, Math.min(12, parseFloat(String(v("allure")).replace(",", ".")) || 6)),
+    semaines: Math.max(2, Math.min(20, parseInt(v("semaines"), 10) || 8)),
+    dateDebut: v("dateDebut"), modeProgramme: v("modeProgramme"), tapis: $("#tapis").checked,
+    intensiteOk: $("#intensite").checked,
+    jours: [...jours].sort((a, b) => ((a + 6) % 7) - ((b + 6) % 7))   // lundi d'abord
+  };
 }
 
-let marcheBase;
-let courseBase;
-
-if(tapis){
-
-marcheBase =
-structuredClone(
-exercises.find(
-e => e.id === "tapismarche"
-)
-);
-
-courseBase =
-structuredClone(
-exercises.find(
-e => e.id === "tapiscourse"
-)
-);
-
-}else{
-
-marcheBase =
-structuredClone(
-exercises.find(
-e => e.id === "marche"
-)
-);
-
-courseBase =
-structuredClone(
-exercises.find(
-e => e.id === "course"
-)
-);
-
+/* ---------- Calcul ----------
+   Phase 1 : alternance marche / course, un palier par semaine.
+   Phase 2 : course continue de 20 à 30 min.
+   Phase 3 : vers l'objectif (sortie longue +10 % par semaine au plus, une séance rapide si autorisée).
+   Une semaine sur 4 est allégée. Renvoie aussi le nombre de semaines conseillé. */
+function planifier(P, nbSemaines){
+  const R = REGLAGES;
+  const n = P.jours.length;
+  const pathologie = P.pathologie !== "Aucune";
+  const rapidesOk = (!pathologie || P.intensiteOk) && P.objectif !== "30 min" && (P.niveau !== "Débutant" || P.objectif !== "5 km");
+  const longueFinale = R.longueFinaleKm[P.objectif] * P.allure;      // minutes
+  // Point de départ : le dernier palier dont chaque bloc de course dure au plus la moitié de ce que le patient court déjà
+  let palier = 0;
+  R.paliers.forEach((p, i) => { if(p[0] <= Math.max(1, P.tempsActuel / 2)) palier = i; });
+  let phase = P.tempsActuel >= 30 ? 3 : P.tempsActuel >= R.continuDebut ? 2 : 1;
+  let continu = phase === 2 ? Math.max(R.continuDebut, P.tempsActuel) : phase === 3 ? Math.max(30, P.tempsActuel) : 0;
+  let longue = phase === 3 ? Math.max(30, P.tempsActuel) : 0;
+  const semaines = [];
+  let atteint = null;
+  for(let w = 1; w <= nbSemaines; w++){
+    const allege = phase > 1 && w > 1 && w % R.allegerTous === 0;   // l'alternance (phase 1) n'a pas besoin de semaine allégée
+    const semaine = { w, allege, phase, seances: [] };
+    if(phase === 1){
+      const [c, m, r] = R.paliers[allege ? Math.max(0, palier - 1) : palier];
+      for(let s = 0; s < n; s++){
+        const reps = s >= 3 ? Math.max(2, r - 1) : r;       // 4e et 5e séances un peu plus courtes
+        semaine.seances.push({ type:"alternance", c, m, reps, rpe:R.rpe.facile, course: c * reps });
+      }
+      if(!allege){
+        if(palier < R.paliers.length - 1) palier++;
+        else { phase = 2; continu = R.continuDebut; }
+      }
+    }else if(phase === 2){
+      const t = allege ? arrondi(continu * R.allegement) : continu;
+      for(let s = 0; s < n; s++){
+        const court = s === 1 && n >= 3 ? arrondi(t * 0.8) : s >= 3 ? arrondi(t * 0.7) : t;
+        semaine.seances.push({ type:"endurance", course: court, rpe:R.rpe.facile });
+      }
+      if(!allege){
+        if(continu >= R.continuFin){ phase = 3; longue = Math.max(longue, R.continuFin); }
+        else continu = Math.min(R.continuFin, continu + R.continuPas);
+      }
+    }else{
+      // Phase 3
+      const finale = Math.max(30, longueFinale);
+      let L = allege ? arrondi(longue * R.allegement) : longue;
+      const derniere = w === nbSemaines;
+      if(P.objectif === "Semi" && derniere && longue >= finale) L = arrondi(finale * R.affutageSemi);
+      const roles = R.roles[n];
+      roles.forEach((role, s) => {
+        const base = Math.min(arrondi(L * 0.85), Math.max(25, arrondi(L * 0.6)));   // toujours plus court que la sortie longue
+        if(role === "longue") semaine.seances.push({ type:"longue", course: L, rpe:R.rpe.longue });
+        else if(role === "recuperation") semaine.seances.push({ type:"recuperation", course: Math.max(20, arrondi(base * 0.7)), rpe:R.rpe.recup });
+        else if(role === "qualite" && rapidesOk && !allege){
+          if(w % 2) semaine.seances.push({ type:"tempo", facile:10, blocs:2, bloc: Math.min(15, 6 + Math.floor(w / 2)), recup:3, rpe:R.rpe.tempo });
+          else semaine.seances.push({ type:"fractionne", facile:10, reps: Math.min(10, 5 + Math.floor(w / 3)), effort:1, recup:2, rpe:R.rpe.fractionne });
+        }else semaine.seances.push({ type:"endurance", course: base, rpe:R.rpe.facile });
+      });
+      if(!allege && longue < finale) longue = Math.min(finale, longue + Math.max(2, arrondi(longue * R.hausseMax)));
+    }
+    semaines.push(semaine);
+    // L'objectif est atteint quand la sortie longue (ou 30 min continus) est au niveau visé
+    const max = Math.max(...semaine.seances.map(x => x.type === "longue" || x.type === "endurance" ? x.course : 0));
+    if(!atteint && (P.objectif === "30 min" ? max >= 30 : max >= Math.max(30, longueFinale) - 0.5)) atteint = w;
+  }
+  return { semaines, atteint };
+}
+/* Nombre de semaines nécessaire pour atteindre l'objectif (avec une semaine de marge, et l'affûtage du semi) */
+function semainesConseillees(P){
+  const { atteint } = planifier(P, 40);
+  return atteint ? Math.min(40, atteint + (P.objectif === "Semi" ? 2 : 1)) : 40;
 }
 
-
-
-
-
-if(!marcheBase || !courseBase){
-  toast("Exercices de marche ou de course introuvables dans la bibliothèque.", { type:"err" });
-  return;
+/* ---------- Textes d'une séance (fiche PDF et aperçu) ---------- */
+function minutesSeance(x){
+  const R = REGLAGES, eq = R.echauffement + R.retourCalme;
+  if(x.type === "alternance") return arrondi(eq + (x.c + x.m) * x.reps - x.m);
+  if(x.type === "tempo") return arrondi(eq + x.facile + x.blocs * x.bloc + (x.blocs - 1) * x.recup);
+  if(x.type === "fractionne") return arrondi(eq + x.facile + x.reps * (x.effort + x.recup) - x.recup);
+  return arrondi(eq + x.course);
+}
+function detail(x, P, mode){
+  /* Textes courts : ils doivent tenir sur une ligne de la fiche PDF */
+  const km = min => (min / P.allure).toFixed(1).replace(".", ",");
+  const rpe = ` · RPE ${x.rpe}`;
+  if(x.type === "alternance") return `🔄 ${fmtMin(x.c)}'/${fmtMin(x.m)}' × ${x.reps}${rpe}`;
+  if(x.type === "tempo") return `🔥 10' + ${x.blocs}×${x.bloc}' tempo${rpe}`;
+  if(x.type === "fractionne") return `⚡ 10' + ${x.reps}×1' vite${rpe}`;
+  if(x.type === "longue") return mode === "distance" ? `🏃 ${km(x.course)} km (~${x.course}')${rpe}` : `🏃 ${x.course}' (~${km(x.course)} km)${rpe}`;
+  if(x.type === "recuperation") return `🧘 ${x.course}' très facile${rpe}`;
+  return mode === "distance" ? `❤️ ${km(x.course)} km (~${x.course}')${rpe}` : `❤️ ${x.course}' continus${rpe}`;
 }
 
-let totalCrees = 0;
-
-try{
-
-const pdfData = [];
-
-for(
-let semaine = 1;
-semaine <= semaines;
-semaine++
-){
-
-for(
-let s = 0;
-s < seancesParSemaine;
-s++
-){
-
-const lettre =
-lettres[s];
-
-let dateSeance = null;
-
-if(dateDebut){
-
-const dateBase =
-new Date(dateDebut);
-
-const numeroSeance =
-((semaine - 1)
-* seancesParSemaine)
-+ s;
-
-dateSeance =
-new Date(dateBase);
-
-dateSeance.setDate(
-dateBase.getDate()
-+ (numeroSeance * 2)
-);
-
+/* ---------- Exercices de la séance (minuteur du patient) ---------- */
+let biblio = null;
+async function exercicesDe(x, P){
+  biblio ||= await fetch("/exercises/data/exercises.json").then(r => r.json());
+  const base = id => structuredClone(biblio.find(e => e.id === id));
+  const marche = () => base(P.tapis ? "tapismarche" : "marche"), course = () => base(P.tapis ? "tapiscourse" : "course");
+  if(!marche() || !course()) throw new Error("Exercices de marche ou de course introuvables dans la bibliothèque.");
+  const R = REGLAGES, regle = R.douleur + (R.conseils[P.pathologie] ? " " + R.conseils[P.pathologie] : "");
+  const fixe = (e, nom, ex, reps = 1, repos = 0, reposNom, consignes) => Object.assign(e, { nom, ex: Math.round(ex), reps, repos: Math.round(repos), ...(reposNom ? { reposNom } : {}), ...(consignes ? { consignes } : {}), conseil_kine: regle });
+  const liste = [fixe(marche(), "Marche d'échauffement", R.echauffement * 60, 1, 0, null, ["Marcher d'un bon pas", "Relâcher les épaules", "Respirer calmement"])];
+  const facile = ["Allure où l'on peut parler", "Petits pas souples", "Regarder devant soi"];
+  if(x.type === "alternance") liste.push(fixe(course(), "Course", x.c * 60, x.reps, x.m * 60, "Marche", ["Courir doucement : on doit pouvoir parler", "Petits pas souples", "Pendant la marche, récupérer en marchant d'un bon pas"]));
+  else if(x.type === "tempo"){
+    liste.push(fixe(course(), "Course facile", x.facile * 60, 1, 0, null, facile));
+    liste.push(fixe(course(), "Course soutenue (tempo)", x.bloc * 60, x.blocs, x.recup * 60, "Trottiner", ["Allure soutenue mais contrôlée : quelques mots seulement", "Garder la même allure du début à la fin"]));
+  }else if(x.type === "fractionne"){
+    liste.push(fixe(course(), "Course facile", x.facile * 60, 1, 0, null, facile));
+    liste.push(fixe(course(), "Course rapide", x.effort * 60, x.reps, x.recup * 60, "Trottiner", ["Vite mais relâché, sans sprinter", "Trottiner doucement pendant la récupération"]));
+  }else liste.push(fixe(course(), x.type === "longue" ? "Sortie longue" : x.type === "recuperation" ? "Course très facile" : "Course facile", x.course * 60, 1, 0, null, facile));
+  liste.push(fixe(marche(), "Marche de retour au calme", R.retourCalme * 60, 1, 0, null, ["Ralentir progressivement", "Respirer profondément"]));
+  return liste;
 }
 
-let typeSeance;
-
-if(seancesParSemaine === 2){
-
-typeSeance =
-[
-"endurance",
-"longue"
-][s];
-
-}else if(seancesParSemaine === 3){
-
-if(niveau === "Débutant"){
-
-typeSeance =
-[
-"endurance",
-"endurance",
-"longue"
-][s];
-
-}else{
-
-typeSeance =
-[
-"endurance",
-
-(semaine % 2 === 0)
-? "fractionne"
-: "tempo",
-
-"longue"
-][s];
-
+/* ---------- Dates : séances aux jours choisis, semaine n = 7 jours à partir de la date de début ---------- */
+function datesDe(P, nb){
+  if(!P.dateDebut) return [];
+  const [y, mo, d] = P.dateDebut.split("-").map(Number);
+  const debut = new Date(y, mo - 1, d, 9, 0, 0);
+  const out = [];
+  for(let w = 0; w < nb; w++){
+    const sem = [];
+    for(let k = 0; k < 7; k++){ const j = new Date(debut); j.setDate(debut.getDate() + w * 7 + k); if(P.jours.includes(j.getDay())) sem.push(j); }
+    out.push(sem);
+  }
+  return out;
 }
 
-}else if(seancesParSemaine === 4){
-
-typeSeance =
-[
-"endurance",
-"tempo",
-"longue",
-"fractionne"
-][s];
-
-}else{
-
-typeSeance =
-[
-"endurance",
-"tempo",
-"recuperation",
-"fractionne",
-"longue"
-][s];
-
+/* ---------- Aperçu et avertissements ---------- */
+function construire(){
+  const P = lire();
+  const plan = planifier(P, P.semaines);
+  const mode = P.modeProgramme === "auto" ? (["Débutant", "Reprise"].includes(P.niveau) || P.objectif === "30 min" ? "temps" : "distance") : P.modeProgramme;
+  const pdfData = [];
+  plan.semaines.forEach(sem => sem.seances.forEach((x, s) => pdfData.push({
+    semaine: sem.w, seance: LETTRES[s], duree: minutesSeance(x), typeSeance: x.type, rpe: x.rpe, detail: detail(x, P, mode),
+    estSortieLongue: x.type === "longue", dureeContinue: x.course || 0, distanceKm: ((x.course || 0) / P.allure).toFixed(1),
+    courseMinutes: x.c, marcheMinutes: x.m, repetitions: x.reps, allege: sem.allege, phase: sem.phase
+  })));
+  return { P, plan, mode, pdfData, conseillees: semainesConseillees(P) };
 }
-
-const indexSeance =
-(
-(semaine - 1)
-* seancesParSemaine
-)
-+ s;
-
-const totalSeances =
-semaines
-* seancesParSemaine;
-
-let dureeDebut;
-let dureeFin;
-
-switch(niveau){
-
-case "Débutant":
-dureeDebut = 20;
-dureeFin = 35;
-break;
-
-case "Reprise":
-dureeDebut = 25;
-dureeFin = 45;
-break;
-
-case "Occasionnel":
-dureeDebut = 35;
-dureeFin = 60;
-break;
-
-case "Régulier":
-dureeDebut = 45;
-dureeFin = 75;
-break;
-
-default:
-dureeDebut = 25;
-dureeFin = 45;
-
+function majApercu(){
+  const { P, plan, pdfData, conseillees } = construire();
+  const av = [];
+  if(!plan.atteint) av.push(`L'objectif « ${P.objectif === "30 min" ? "30 min sans douleur" : P.objectif} » n'est pas atteint en ${P.semaines} semaines avec une progression prudente. Durée conseillée : <b>${conseillees} semaines</b>${conseillees > 20 ? " (à faire en deux programmes, ou choisir un objectif intermédiaire)" : ""}. <button class="btn sm" type="button" id="appliquer" ${conseillees > 20 ? "hidden" : ""}>Passer à ${conseillees} semaines</button>`);
+  if(P.objectif === "Semi" && P.niveau === "Débutant") av.push("Un semi-marathon pour un débutant : viser d'abord le 10 km est plus sûr.");
+  if(P.pathologie !== "Aucune" && !P.intensiteOk && P.objectif !== "30 min") av.push("Pathologie : pas de séance rapide (tempo, fractionné). Cochez la case ci-dessus pour les autoriser.");
+  const consec = P.jours.some(j => P.jours.includes((j + 1) % 7));
+  if(consec) av.push("Deux jours de course se suivent : un jour de repos entre deux séances est préférable.");
+  $("#avert").innerHTML = av.map(t => `<div class="notice warn" style="margin-top:8px">${icon("alert")}<span>${t}</span></div>`).join("");
+  $("#appliquer")?.addEventListener("click", () => { $("#semaines").value = conseillees; majApercu(); });
+  const ph = { 1:"Alternance", 2:"Course continue", 3:"Objectif" };
+  $("#apercu").hidden = false;
+  $("#apercu").innerHTML = `<h2>Aperçu</h2><table><thead><tr><th>Sem.</th><th>Séances</th></tr></thead><tbody>${plan.semaines.map(sem => `<tr><td><b>${sem.w}</b><br><span class="rc-phase">${ph[sem.phase]}</span>${sem.allege ? `<br><span class="small muted">allégée</span>` : ""}</td><td>${pdfData.filter(d => d.semaine === sem.w).map(d => `${d.seance} · ${d.duree} min · ${esc(d.detail)}`).join("<br>")}</td></tr>`).join("")}</tbody></table>`;
 }
-
-let dureeCible =
-Math.round(
-dureeDebut +
-(
-(dureeFin - dureeDebut)
-*
-(indexSeance /
-Math.max(
-1,
-totalSeances - 1
-))
-)
-);
-
-if(
-semaine > 1
-&& semaine % 4 === 0
-){
-dureeCible =
-Math.round(
-dureeCible * 0.8
-);
-}
-
-let courseMinutes;
-let marcheMinutes;
-
-const progression =
-indexSeance /
-Math.max(
-1,
-totalSeances - 1
-);
-
-if(tempsActuel < 5){
-
-courseMinutes =
-Math.round(
-1 + progression * 4
-);
-
-marcheMinutes = 2;
-
-}else if(tempsActuel < 10){
-
-courseMinutes =
-Math.round(
-2 + progression * 6
-);
-
-marcheMinutes =
-progression > 0.5
-? 1
-: 2;
-
-}else if(tempsActuel < 20){
-
-courseMinutes =
-Math.round(
-3 + progression * 7
-);
-
-marcheMinutes =
-progression > 0.5
-? 1
-: 2;
-
-}else{
-
-courseMinutes =
-Math.round(
-5 + progression * 10
-);
-
-marcheMinutes = 1;
-
-}
-
-const tempsDisponible =
-dureeCible - 8;
-
-const repetitions =
-Math.max(
-2,
-Math.round(
-tempsDisponible /
-(
-courseMinutes +
-marcheMinutes
-)
-)
-);
-
-let semaineDebutSortieLongue;
-
-switch(niveau){
-
-case "Débutant":
-semaineDebutSortieLongue = 4;
-break;
-
-case "Reprise":
-semaineDebutSortieLongue = 3;
-break;
-
-case "Occasionnel":
-semaineDebutSortieLongue = 2;
-break;
-
-case "Régulier":
-semaineDebutSortieLongue = 2;
-break;
-
-default:
-semaineDebutSortieLongue = 3;
-
-}
-
-if(
-typeSeance === "longue"
-&& semaine < semaineDebutSortieLongue
-){
-  typeSeance = "endurance";
-}
-
-const estSortieLongue =
-(
-typeSeance === "longue"
-&& semaine >= semaineDebutSortieLongue
-);
-
-let distanceFinale;
-
-switch(objectif){
-
-case "5 km":
-
-switch(niveau){
-
-case "Débutant":
-distanceFinale = 6;
-break;
-
-case "Reprise":
-distanceFinale = 7;
-break;
-
-case "Occasionnel":
-distanceFinale = 8;
-break;
-
-case "Régulier":
-distanceFinale = 8;
-break;
-
-}
-
-break;
-
-case "10 km":
-
-switch(niveau){
-
-case "Débutant":
-distanceFinale = 10;
-break;
-
-case "Reprise":
-distanceFinale = 10;
-break;
-
-case "Occasionnel":
-distanceFinale = 11;
-break;
-
-case "Régulier":
-distanceFinale = 12;
-break;
-
-}
-
-break;
-
-case "Semi":
-
-switch(niveau){
-
-case "Débutant":
-distanceFinale = 18;
-break;
-
-case "Reprise":
-distanceFinale = 19;
-break;
-
-case "Occasionnel":
-distanceFinale = 20;
-break;
-
-case "Régulier":
-distanceFinale = 21;
-break;
-
-}
-
-break;
-
-default:
-
-distanceFinale = 10;
-
-}
-
-let dureeContinueFinale =
-Math.round(
-distanceFinale * allure
-);
-
-switch(pathologie){
-
-case "Syndrome rotulien":
-dureeContinueFinale =
-Math.round(dureeContinueFinale * 0.8);
-break;
-
-case "Tendinopathie achilléenne":
-dureeContinueFinale =
-Math.round(dureeContinueFinale * 0.85);
-break;
-
-case "Fasciite plantaire":
-dureeContinueFinale =
-Math.round(dureeContinueFinale * 0.75);
-break;
-
-case "Lombalgie":
-dureeContinueFinale =
-Math.round(dureeContinueFinale * 0.9);
-break;
-
-}
-
-
-const progressionSortieLongue =
-Math.max(
-1,
-semaines - semaineDebutSortieLongue
-);
-
-let dureeContinue;
-
-if(semaine < semaineDebutSortieLongue){
-
-dureeContinue = tempsActuel;
-
-}else{
-
-dureeContinue =
-Math.round(
-tempsActuel +
-(
-(semaine - semaineDebutSortieLongue)
-*
-(dureeContinueFinale - tempsActuel)
-/
-progressionSortieLongue
-)
-);
-
-}
-
-if(
-objectif === "Semi"
-&& semaine === semaines
-){
-
-dureeContinue =
-Math.round(
-dureeContinueFinale * 0.65
-);
-
-}
-
-pdfData.push({
-
-semaine,
-
-seance: lettre,
-
-rpe:
-
-estSortieLongue
-? "4-5"
-
-: typeSeance === "endurance"
-? "3-4"
-
-: typeSeance === "tempo"
-? "6-7"
-
-: typeSeance === "recuperation"
-? "2-3"
-
-: "7-8",
-
-duree:
-estSortieLongue
-? dureeContinue
-: dureeCible,
-
-courseMinutes,
-
-marcheMinutes,
-
-repetitions,
-
-estSortieLongue,
-
-dureeContinue,
-
-distanceKm:
-(
-dureeContinue /
-allure
-).toFixed(1),
-
-typeSeance:
-estSortieLongue
-? "longue"
-: typeSeance
-
-});
-
-const exoMarche =
-structuredClone(
-marcheBase
-);
-
-exoMarche.ex = 300;
-exoMarche.repos = 0;
-exoMarche.reps = 1;
-
-const exoCourse =
-structuredClone(
-courseBase
-);
-
-if(estSortieLongue){
-
-exoCourse.ex =
-dureeContinue * 60;
-
-exoCourse.repos = 0;
-
-exoCourse.reps = 1;
-
-}else if(typeSeance === "endurance"){
-
-exoCourse.ex =
-Math.round(
-dureeCible * 0.8
-) * 60;
-
-exoCourse.repos = 0;
-exoCourse.reps = 1;
-
-}else if(typeSeance === "tempo"){
-
-exoCourse.ex =
-Math.round(
-dureeCible * 0.4
-) * 60;
-
-exoCourse.repos = 0;
-exoCourse.reps = 1;
-}else if(typeSeance === "recuperation"){
-
-exoCourse.ex =
-Math.round(
-dureeCible * 0.5
-) * 60;
-
-exoCourse.repos = 0;
-exoCourse.reps = 1;
-
-}else{
-
-// Fractionné
-
-exoCourse.ex =
-courseMinutes * 60;
-
-exoCourse.repos =
-marcheMinutes * 60;
-
-exoCourse.reps =
-repetitions;
-
-}
-
-const exoRecup =
-structuredClone(
-marcheBase
-);
-
-exoRecup.ex = 180;
-exoRecup.repos = 0;
-exoRecup.reps = 1;
-
-
-const programme = {
-
-id:
-crypto.randomUUID(),
-
-programmeId,
-programmeNom,
-
-objectif,
-niveau,
-pathologie,
-semainesProgramme: semaines,
-modeAffichage,
-
-pdfData,
-
-nom:
-`S${semaine}${lettre}`,
-
-patientId:
-patient,
-
-categorie:
-"course",
-
-dossier:
-dossier,
-
-semaine:
-semaine,
-
-seance:
-lettre,
-
-createdAt:
-Date.now(),
-
-updatedAt:
-Date.now(),
-
-dateDebut,
-
-datePrevue:
-dateSeance
-? dateSeance.toISOString()
-: null,
-
-datePrevueTexte:
-dateSeance
-? dateSeance.toLocaleDateString(
-"fr-FR"
-)
-: "",
-
-auteur:
-"gabriel",
-
-data:{
-
-nom:
-`S${semaine}${lettre}`,
-
-series:1,
-
-exercices:[
-
-exoMarche,
-
-exoCourse,
-
-exoRecup
-
-]
-
-}
-
-
-};
-
-if(saveToCloud){ aEnvoyer.push(programme); }
-totalCrees++;
-
-}
-
-}
-
-if(saveToCloud){
-  await C.saveSeances(cle, aEnvoyer);
-  toast(`${aEnvoyer.length} séances envoyées à ${patientNom}.`, { type:"ok" });
-}
-localStorage.setItem(
-  "coursePdfData",
-  JSON.stringify({
-    patient: patientNom,
-    objectif,
-    niveau,
-    pathologie,
-    semaines,
-    dateDebut,
-    modeAffichage,
-    pdfData
-  })
-);
-
-if(saveToCloud){
-  setTimeout(() => { location.href = `/cloud.html?patient=${encodeURIComponent(cle)}`; }, 900);
+["objectif", "niveau", "pathologie", "tempsActuel", "allure", "semaines", "modeProgramme", "intensite", "tapis", "dateDebut"].forEach(id => $("#" + id).addEventListener("input", majApercu));
+majApercu();
+
+/* ---------- Générer ---------- */
+async function generer(envoyer){
+  const { P, plan, mode, pdfData } = construire();
+  const patientObj = patients.find(p => p.cle === P.cle) || null;
+  if(envoyer && !patientObj){ toast("Choisissez un patient pour envoyer le programme.", { type:"err" }); return; }
+  const fiche = { patient: patientObj ? patientObj.nom : "", objectif: P.objectif === "30 min" ? "30 min sans douleur" : P.objectif, niveau: P.niveau, pathologie: P.pathologie, semaines: P.semaines, dateDebut: P.dateDebut, modeAffichage: mode, conseil: REGLAGES.conseils[P.pathologie] || "", pdfData };
+  localStorage.setItem("coursePdfData", JSON.stringify(fiche));
+  if(!envoyer){ window.open("/coursepdf.html", "_blank"); return; }
+
+  // Un programme de course existe déjà ? On propose de remplacer ses séances pas encore faites.
+  const existantes = (await C.listSeances(P.cle).catch(() => [])).filter(s => s.categorie === "course" && !s.terminee);
+  if(existantes.length){
+    const ok = await confirmDialog({ title:"Remplacer le programme de course ?", message:`${patientObj.nom} a déjà ${existantes.length} séance${existantes.length > 1 ? "s" : ""} de course pas encore faite${existantes.length > 1 ? "s" : ""}. Elles seront supprimées et remplacées par ce nouveau programme.`, confirm:"Remplacer" });
+    if(!ok) return;
+    for(const s of existantes) await C.deleteSeance(P.cle, s.id).catch(() => {});
+  }
+
+  const dates = datesDe(P, P.semaines);
+  const programmeId = `${patientObj.patientId}_${Date.now()}`;
+  const programmeNom = `Reprise course ${fiche.objectif}`;
+  const now = Date.now();
+  const seances = [];
+  for(const sem of plan.semaines){
+    for(let s = 0; s < sem.seances.length; s++){
+      const x = sem.seances[s], d = dates[sem.w - 1]?.[s] || null, lettre = LETTRES[s];
+      seances.push({
+        id: crypto.randomUUID(), programmeId, programmeNom, objectif: fiche.objectif, niveau: P.niveau, pathologie: P.pathologie,
+        semainesProgramme: P.semaines, modeAffichage: mode,
+        ...(seances.length === 0 ? { pdfData } : {}),          // la fiche complète est gardée une seule fois (1re séance)
+        nom: `S${sem.w}${lettre}`, patientId: patientObj.patientId, categorie: "course", dossier: programmeNom,
+        semaine: sem.w, seance: lettre, ordre: s + 1, createdAt: now, updatedAt: now, dateDebut: P.dateDebut,
+        datePrevue: d ? d.toISOString() : null, datePrevueTexte: d ? d.toLocaleDateString("fr-FR") : "",
+        joursProgramme: P.jours.map(j => NOMS_JOURS[j]), auteur: "gabriel", terminee: false,
+        data: { nom: `S${sem.w}${lettre}`, series: 1, illus: P.sexe, exercices: await exercicesDe(x, P) }
+      });
+    }
+  }
+  await C.saveSeances(P.cle, seances);
+  toast(`${seances.length} séances envoyées à ${patientObj.nom}.`, { type:"ok" });
   window.open("/coursepdf.html", "_blank");
-}else{
-  window.open("/coursepdf.html", "_blank");
+  setTimeout(() => { location.href = `/cloud.html?patient=${encodeURIComponent(P.cle)}`; }, 900);
 }
 
-
-}catch(error){
-
-console.error(error);
-
-toast("Erreur lors de la génération : " + (error.message || error), { type:"err" });
-
-}
-
+$("#preview").onclick = () => generer(false).catch(e => { console.error(e); toast("Erreur : " + (e.message || e), { type:"err" }); });
+$("#generate").onclick = async () => {
+  $("#generate").disabled = true;
+  try{ await generer(true); }catch(e){ console.error(e); toast("Erreur lors de l'envoi : " + (e.message || e), { type:"err", duration:7000 }); }
+  finally{ $("#generate").disabled = false; }
 };
-
-
-$("#preview").onclick = () => buildProgram(false);
-$("#generate").onclick = async () => { $("#generate").disabled = true; try{ await buildProgram(true); } finally { $("#generate").disabled = false; } };
 </script>
 </body>
 </html>

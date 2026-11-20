@@ -34,6 +34,7 @@ Application web de Gabriel LAVEAU, masseur-kinésithérapeute à Loudun. Les pat
 | Questionnaires (scores) | `questionnaires.html`, `assets/questionnaires.js` |
 | Fiches conseils | `conseils.html`, `assets/conseils-data.js`, `assets/fiches-patho.js` |
 | Recherche IA (Google Gemini gratuit) | `recherche-ia.html`, `assets/ia.js` |
+| Reprise de course (générateur + fiche PDF) | `programmescourse.html` (réglages en haut du script : paliers, hausses, conseils par pathologie), `coursepdf.html` (fiche A4, se resserre seule pour les longs programmes) |
 | Réglages du cabinet | `reglages_cabinet.html`, `assets/settings.js` |
 | Hors connexion et mises à jour | `sw.js` (liste des fichiers mis de côté + `VERSION`) |
 | Tâches automatiques GitHub (rappels, sauvegarde, nettoyage, règles, vérification) | `.github/workflows/`, `.github/scripts/` |
