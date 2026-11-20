@@ -1,0 +1,22 @@
+# Vérifie le site à chaque modification sur main (syntaxe, JSON, modèles du bilan, progressions, fichiers de l'appli).
+# En cas de problème, GitHub envoie un e-mail : ouvrir l'onglet « Actions » du dépôt pour lire le message en français.
+name: Vérifier le site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Vérifier
+        run: node .github/scripts/verifier.mjs
