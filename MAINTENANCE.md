@@ -32,6 +32,8 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 - Une nouvelle fonction ou une nouvelle page.
 
 ## 3. Demander une modification à Claude gratuit
+Les deux messages ci-dessous sont aussi dans l'appli, prêts à copier : Outils → **Entretenir l'appli**.
+
 1. Ouvrez une **nouvelle conversation** pour chaque modification : Claude gratuit a peu de mémoire.
 2. Copiez-collez ce message, en remplaçant la dernière ligne :
 

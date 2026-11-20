@@ -29,7 +29,7 @@ const C = await import("/assets/cloud.js");
 
 /* Réglages du cabinet, statistiques, corbeille : le titulaire seulement */
 const TIT = C.estTitulaire();
-const RESERVE = ["/reglages_cabinet.html", "/contenu-bilan.html", "/stats.html", "/corbeille.html", "/cabinet.html"];
+const RESERVE = ["/entretien.html", "/reglages_cabinet.html", "/contenu-bilan.html", "/stats.html", "/corbeille.html", "/cabinet.html"];
 const link = (href, ico, title, sub, ext) => !TIT && RESERVE.includes(href) ? "" : `<a class="list-item" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
@@ -44,6 +44,7 @@ $("#app").innerHTML = `
     ${link("/historique.html", "history", "Historique de cet appareil", "Séances lancées depuis ici")}
     ${link("/reglages.html", "textSize", "Affichage de cet appareil", "Thème, sons, taille du texte")}
     ${link("/aide.html", "info", "Aide", "Comment tout faire depuis le site")}
+    ${link("/entretien.html", "wrench", "Entretenir l'appli", "Messages à copier pour Claude : modification, problème, point santé")}
   </div>
   <p class="small muted" style="margin-top:12px">Tests, territoires nerveux, questionnaires, modèles, fiches conseils, ordonnance… sont dans <a href="/ressources.html">Ressources</a>.</p>
 

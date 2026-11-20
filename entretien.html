@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entretenir l'appli</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  .en-msg{ white-space:pre-wrap; font-size:var(--fs-sm); line-height:1.5; background:var(--surface-2); border-radius:var(--r-md); padding:12px 14px; margin:12px 0; overflow-wrap:anywhere; }
+  .en-steps{ margin:8px 0 0; padding-left:20px; line-height:1.6; }
+  .en-steps li{ margin:2px 0; }
+  .en-fields{ display:grid; gap:10px; margin-top:12px; }
+</style>
+</head>
+<body>
+<main class="page" id="app"></main>
+<script type="module">
+/* Entretenir l'appli avec Claude gratuit : les messages à copier (même texte que MAINTENANCE.md, partie 3).
+   Pour changer un message : modifier MSG_MODIF ou MSG_SANTE ci-dessous. */
+import { $, esc, icon, mountShell, registerSW, toast } from "/assets/app.js";
+import { APP_VERSION } from "/assets/config.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+
+const CONSIGNES = "https://raw.githubusercontent.com/GabrielTimer/GabrielTimer.github.io/main/CLAUDE.md";
+const DEPOT = "https://github.com/GabrielTimer/GabrielTimer.github.io";
+
+const MSG_MODIF = d => `Tu m'aides à entretenir mon application ApiKiné (site statique sur GitHub Pages, sans compilation).
+Lis d'abord ses consignes : ${CONSIGNES}
+Règles : réponds en français simple ; dis-moi d'abord si ça se fait depuis le site sans code ; sinon donne-moi pour chaque fichier le texte exact à chercher et le texte complet qui le remplace ; ne me demande pas de coller de gros fichiers ; pense à augmenter VERSION dans sw.js.
+Ma demande : ${d.demande || "…"}`;
+
+const MSG_SANTE = d => `Tu m'aides à entretenir mon application ApiKiné (site statique sur GitHub Pages, données dans Firebase, tout doit rester gratuit).
+Lis d'abord ses consignes : ${CONSIGNES}
+Fais un point santé, en cherchant sur internet ce qui a changé depuis la version de l'appli :
+1. Firebase (offre gratuite Spark) : limites, fin de service ou failles connues pour le SDK web 10.12.2.
+2. Google AI Studio / Gemini : l'offre gratuite existe-t-elle encore, et les noms de modèles gemini-flash-latest et gemini-2.5-flash marchent-ils encore ?
+3. GitHub Actions : actions/checkout@v5, actions/setup-node@v5, Node 22 et firebase-admin@12 sont-ils encore pris en charge ? Les tâches programmées restent-elles gratuites pour un dépôt public ?
+4. html2canvas 1.4.1 et jsPDF 2.5.1 (sur cdnjs) : failles connues ?
+Mes infos : version de l'appli ${d.version} ; Actions : ${d.actions || "…"} ; alertes de l'accueil : ${d.alertes || "aucune"} ; ce qui me gêne : ${d.gene || "rien de particulier"}
+Réponds en français simple : ce qui va, puis au plus 3 choses à faire, de la plus urgente à la moins urgente. Pour chacune, donne le fichier, le texte exact à chercher et le texte qui le remplace. Ne me demande pas de coller de gros fichiers.`;
+
+const d = { version: APP_VERSION, demande:"", actions:"", alertes:"", gene:"" };
+try{ const ks = await caches.keys(); const k = ks.find(x => /^gt-[\d.]+-shell$/.test(x)); if(k) d.version = k.slice(3, -6); }catch(e){}
+
+const champ = (id, label, ph) => `<div class="field"><label for="${id}">${label}</label><input class="input" id="${id}" type="text" autocomplete="off" placeholder="${esc(ph)}"></div>`;
+
+$("#app").innerHTML = `
+  <div class="page-head"><h1>Entretenir l'appli</h1><p class="lead">Les messages à coller dans Claude (même gratuit). Une nouvelle conversation par sujet, une modification à la fois.</p></div>
+
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("wrench")}Une modification ou un problème</h2></div>
+    <p class="muted">Pour changer quelque chose, ou quand GitHub ou l'appli affichent une erreur (collez alors le message d'erreur).</p>
+    <div class="en-fields">${champ("f-demande", "Votre demande", "Ex. ajouter un exercice d'équilibre au modèle entorse de cheville")}</div>
+    <div class="en-msg" id="m-modif"></div>
+    <div class="row wrap" style="--gap:10px">
+      <button class="btn primary" type="button" data-copy="m-modif">${icon("copy")}Copier le message</button>
+      <a class="btn" href="https://claude.ai/new" target="_blank" rel="noopener">${icon("sparkles")}Ouvrir Claude</a>
+    </div>
+  </section>
+
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("heart")}Point santé, tous les 3 ou 4 mois</h2></div>
+    <p class="muted">Claude vérifie que les services gratuits utilisés par l'appli le sont toujours, et qu'il n'y a pas de faille connue. Le numéro de version est rempli tout seul.</p>
+    <div class="en-fields">
+      ${champ("f-actions", "Onglet Actions de GitHub", "Ex. tout est vert, ou « Rappels de séance » en rouge")}
+      ${champ("f-alertes", "Alertes sur l'accueil kiné", "Ex. aucune")}
+      ${champ("f-gene", "Ce qui vous gêne en ce moment", "Ex. rien de particulier")}
+    </div>
+    <div class="en-msg" id="m-sante"></div>
+    <div class="row wrap" style="--gap:10px">
+      <button class="btn primary" type="button" data-copy="m-sante">${icon("copy")}Copier le message</button>
+      <a class="btn" href="https://claude.ai/new" target="_blank" rel="noopener">${icon("sparkles")}Ouvrir Claude</a>
+      <a class="btn" href="${DEPOT}/actions" target="_blank" rel="noopener">${icon("checkCircle")}Voir les Actions GitHub</a>
+    </div>
+  </section>
+
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("info")}Ensuite</h2></div>
+    <ol class="en-steps">
+      <li>Sur GitHub, ouvrez le fichier indiqué par Claude, cliquez sur le <strong>crayon</strong>, trouvez le texte avec <strong>Ctrl+F</strong> et remplacez-le.</li>
+      <li>Dans <code>sw.js</code>, augmentez le dernier chiffre de <code>VERSION</code>.</li>
+      <li>Cliquez sur <strong>Commit changes</strong>.</li>
+      <li>Attendez que « Vérifier le site » soit vert dans Actions, puis testez sur le téléphone avant la modification suivante.</li>
+    </ol>
+    <div class="row wrap" style="--gap:10px;margin-top:14px">
+      <a class="btn" href="${DEPOT}/blob/main/MAINTENANCE.md" target="_blank" rel="noopener">${icon("book")}Mode d'emploi complet</a>
+      <a class="btn" href="${DEPOT}" target="_blank" rel="noopener">${icon("link")}Ouvrir le site sur GitHub</a>
+    </div>
+  </section>`;
+
+const maj = () => {
+  d.demande = $("#f-demande").value.trim();
+  d.actions = $("#f-actions").value.trim();
+  d.alertes = $("#f-alertes").value.trim();
+  d.gene = $("#f-gene").value.trim();
+  $("#m-modif").textContent = MSG_MODIF(d);
+  $("#m-sante").textContent = MSG_SANTE(d);
+};
+document.querySelectorAll(".en-fields input").forEach(i => i.addEventListener("input", maj));
+maj();
+
+document.querySelectorAll("[data-copy]").forEach(b => b.onclick = async () => {
+  const texte = $("#" + b.dataset.copy).textContent;
+  try{ await navigator.clipboard.writeText(texte); }
+  catch(e){
+    const t = document.createElement("textarea"); t.value = texte; t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select(); try{ document.execCommand("copy"); }catch(e2){} t.remove();
+  }
+  toast("Message copié. Collez-le dans une nouvelle conversation avec Claude.", { type:"ok" });
+});
+</script>
+</body>
+</html>
