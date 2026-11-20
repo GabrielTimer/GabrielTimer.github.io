@@ -273,6 +273,11 @@ function bind(cur){
   });
 }
 
+/* Sans patient précisé : on ouvre directement la conversation du dernier message reçu ou envoyé */
+if(!state.cle){
+  const recent = conversations().find(c => c.last);
+  if(recent) state.cle = recent.cle, history.replaceState(null, "", `?patient=${encodeURIComponent(recent.cle)}`);
+}
 render();
 if(state.cle){ const c = conversations().find(x => x.cle === state.cle); if(c?.unread) marquerLue(c).then(() => setTimeout(render, 1500)); }
 </script>
