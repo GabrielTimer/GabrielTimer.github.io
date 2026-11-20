@@ -16,6 +16,10 @@ Avant de toucher au code, vérifiez si c'est faisable ici (espace kiné → **Ou
 | Modifier les axes de traitement et les modèles proposés en fin de bilan | Outils → **Contenu du bilan** → « Traitement proposé » |
 | Questionnaires, fiches conseils | Outils → Questionnaires / Fiches conseils |
 | Clé de la recherche IA | Recherche IA → lien « Réglages de la recherche IA » en bas |
+| Donner l'accès à un remplaçant, le retirer | Outils → Réglages du cabinet → **Comptes autorisés** (si l'appli affiche « Encore une étape à faire à la main », suivre les 3 étapes indiquées) |
+| Délai de déconnexion automatique de la tablette ou du téléphone | Outils → Réglages du cabinet → **Déconnexion automatique de cet appareil** (12 h conseillées) |
+| Code du mode séance (7777 par défaut) | Outils → Réglages du cabinet → **Mode séance** |
+| Sauvegarder à la main, restaurer une sauvegarde | Outils → Réglages du cabinet → **Sauvegarde** |
 
 Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modifications.
 
@@ -23,6 +27,7 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 - Vocabulaire de la lettre au médecin : `courrier.html`
 - Délais de nettoyage des programmes (21, 28 et 30 jours) : `assets/inactivite.js` et `.github/scripts/nettoyage-programmes.mjs`
 - Plage horaire des rappels (7 h – 22 h) : `.github/scripts/rappels.mjs`
+- Réglages de la reprise de course (paliers marche/course, hausse de 10 % par semaine, conseils par pathologie) : bloc `REGLAGES` en haut du script de `programmescourse.html`
 - Votre nom et votre e-mail de titulaire : `assets/config.js` **et** `firestore.rules` (les deux, toujours ensemble)
 - Une nouvelle fonction ou une nouvelle page.
 
@@ -31,7 +36,7 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 2. Copiez-collez ce message, en remplaçant la dernière ligne :
 
 > Tu m'aides à entretenir mon application ApiKiné (site statique sur GitHub Pages, sans compilation).
-> Lis d'abord ses consignes : https://raw.githubusercontent.com/GabrielTimer/gabrieltimer.github.io/main/CLAUDE.md
+> Lis d'abord ses consignes : https://raw.githubusercontent.com/GabrielTimer/GabrielTimer.github.io/main/CLAUDE.md
 > Règles : réponds en français simple ; dis-moi d'abord si ça se fait depuis le site sans code ; sinon donne-moi pour chaque fichier le texte exact à chercher et le texte complet qui le remplace ; ne me demande pas de coller de gros fichiers ; pense à augmenter VERSION dans sw.js.
 > Ma demande : …
 
@@ -39,7 +44,7 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 4. Une modification à la fois. Testez-la avant de passer à la suivante.
 
 ## 4. Modifier un fichier sur GitHub (dans le navigateur)
-1. Allez sur https://github.com/GabrielTimer/gabrieltimer.github.io et ouvrez le fichier.
+1. Allez sur https://github.com/GabrielTimer/GabrielTimer.github.io et ouvrez le fichier.
 2. Cliquez sur le **crayon** (Modifier).
 3. **Ctrl+F** pour trouver le texte indiqué par Claude. Sélectionnez exactement ce texte et collez le nouveau à la place.
 4. Faites de même pour la ligne `const VERSION = "gt-…"` dans `sw.js` : augmentez le dernier chiffre.
@@ -54,7 +59,34 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 - **Revenir en arrière sur un fichier** : sur GitHub, ouvrez le fichier puis **History** (Historique). Ouvrez la version d'avant votre modification, puis **Raw**, et copiez tout. Ouvrez le fichier actuel, cliquez sur le crayon, remplacez tout le contenu par la copie, puis faites Commit.
 - Vos données (patients, bilans, messages) ne sont **pas** dans les fichiers du site : une erreur dans le code ne les efface pas. Elles sont aussi sauvegardées chaque semaine, chiffrées, dans votre dépôt GitHub privé.
 
-## 7. À garder gratuit
+## 7. Les tâches automatiques (onglet Actions de GitHub)
+Elles tournent toutes seules, gratuitement. GitHub vous envoie un e-mail si l'une d'elles échoue.
+
+| Tâche | Quand | Rôle |
+|---|---|---|
+| Vérifier le site | à chaque modification | contrôle les fichiers (voir partie 5) |
+| Rappels de séance | toutes les 15 minutes, de 7 h à 22 h | notifications aux patients (séance du jour, message du kiné) |
+| Programmes inutilisés | chaque nuit | préavis puis corbeille des programmes maison abandonnés |
+| Sauvegarde automatique | chaque dimanche vers 3 h | copie chiffrée de toutes les données dans le dépôt privé `apikine-sauvegardes` (26 gardées) |
+| Publier les règles Firebase | quand `firestore.rules` change | met à jour la sécurité de Firebase |
+| Garder les tâches actives | le 3 de chaque mois | empêche GitHub de mettre les tâches en pause après 60 jours sans modification du site |
+
+Pour en relancer une à la main : Actions → cliquez sur son nom → **Run workflow**.
+
+### Renouveler le jeton de la sauvegarde automatique
+L'accueil kiné prévient 30 jours avant qu'il expire. Il faut environ 5 minutes :
+1. Sur GitHub : votre photo (en haut à droite) → **Settings** → **Developer settings** → **Personal access tokens** → **Fine-grained tokens**.
+2. Ouvrez le jeton de la sauvegarde → **Regenerate token** → choisissez la durée la plus longue proposée → copiez le jeton affiché (il ne s'affiche qu'une fois).
+3. Dépôt `GabrielTimer.github.io` → **Settings** → **Secrets and variables** → **Actions** → `SAUVEGARDE_TOKEN` → crayon → collez le jeton → **Update secret**.
+4. Vérifiez : Actions → « Sauvegarde automatique » → **Run workflow**. Elle doit être verte.
+
+Le mot de passe de chiffrement (`SAUVEGARDE_MOT_DE_PASSE`) ne change pas : gardez-le en lieu sûr, il sert à restaurer.
+
+### Restaurer une sauvegarde automatique
+1. Dépôt privé `apikine-sauvegardes` → ouvrez le fichier `sauvegarde-kine-AAAA-MM-JJ.apikine` voulu → **Download raw file**.
+2. Outils → Réglages du cabinet → Sauvegarde → **Restaurer une sauvegarde…** → choisissez le fichier → saisissez le mot de passe de chiffrement → cochez ce qu'il faut restaurer.
+
+## 8. À garder gratuit
 - **Google AI Studio** (recherche IA) : ne jamais cliquer sur « Set up billing ». Si le quota gratuit est atteint, la recherche reprend le lendemain.
-- **Firebase** : rester sur l'offre gratuite (Spark). Ne pas activer de forfait payant.
+- **Firebase** : rester sur l'offre gratuite (Spark). Ne pas activer de forfait payant. Le quota gratuit (50 000 lectures par jour) est très large pour un cabinet ; les rappels automatiques ont été réglés pour lire le moins possible. Si un jour l'appli affiche des erreurs de chargement en fin de journée, c'est peut-être le quota : tout revient le lendemain matin.
 - **GitHub** : dépôt et Pages gratuits, rien à faire.
