@@ -40,6 +40,9 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 > Règles : réponds en français simple ; dis-moi d'abord si ça se fait depuis le site sans code ; sinon donne-moi pour chaque fichier le texte exact à chercher et le texte complet qui le remplace ; ne me demande pas de coller de gros fichiers ; pense à augmenter VERSION dans sw.js.
 > Ma demande : …
 
+3. Si Claude a besoin de voir un fichier : ouvrez-le sur GitHub, cliquez sur **Raw** et donnez-lui l'adresse, ou copiez-lui seulement le passage concerné.
+4. Une modification à la fois. Testez-la avant de passer à la suivante.
+
 ### Point santé, tous les 3 ou 4 mois
 Avant d'écrire à Claude, notez trois choses :
 - le numéro de version, affiché en bas de la page **Réglages** ;
@@ -57,9 +60,6 @@ Puis collez ce message dans une nouvelle conversation :
 > 4. html2canvas 1.4.1 et jsPDF 2.5.1 (sur cdnjs) : failles connues ?
 > Mes infos : version de l'appli … ; Actions : … ; alertes de l'accueil : … ; ce qui me gêne : …
 > Réponds en français simple : ce qui va, puis au plus 3 choses à faire, de la plus urgente à la moins urgente. Pour chacune, donne le fichier, le texte exact à chercher et le texte qui le remplace. Ne me demande pas de coller de gros fichiers.
-
-3. Si Claude a besoin de voir un fichier : ouvrez-le sur GitHub, cliquez sur **Raw** et donnez-lui l'adresse, ou copiez-lui seulement le passage concerné.
-4. Une modification à la fois. Testez-la avant de passer à la suivante.
 
 ## 4. Modifier un fichier sur GitHub (dans le navigateur)
 1. Allez sur https://github.com/GabrielTimer/GabrielTimer.github.io et ouvrez le fichier.
