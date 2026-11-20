@@ -7,6 +7,8 @@ Application web (installable sur téléphone) de programmes d'exercices sur mesu
 
 Mise en route de la version 2 : voir [MISE-EN-SERVICE.md](MISE-EN-SERVICE.md).
 
+**Entretien sans frais :** voir [MAINTENANCE.md](MAINTENANCE.md) (ce qui se fait depuis le site, comment demander une modification à Claude gratuit). Consignes pour Claude : [CLAUDE.md](CLAUDE.md).
+
 ## Organisation du code
 
 | Dossier / fichier | Rôle |
