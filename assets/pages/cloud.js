@@ -464,6 +464,18 @@ async function kineView(param){
       if(act === "tester") P.launchSeance(s, { cle:patient.cle, apercu:true });
       /* Séance au cabinet : faite avec le patient, enregistrée dans sa fiche (douleur, ressenti) */
       if(act === "faire") P.launchSeance(s, { cle:patient.cle, from:"fiche" });
+      if(act === "lieu"){
+        const versCabinet = s.cabinet !== true;
+        const nom = s.data?.nom || s.nom || "Séance";
+        const ok = await confirmDialog(versCabinet
+          ? { title:"Réserver au cabinet ?", message:`« ${nom} » disparaît de l'application de ${prenom(patient.nom)}. Vous la faites avec lui au cabinet (« Faire la séance »).`, confirm:"Réserver au cabinet" }
+          : { title:"Envoyer au patient ?", message:`« ${nom} » apparaît dans l'application de ${prenom(patient.nom)}, qui pourra la faire chez lui.`, confirm:"Envoyer" });
+        if(!ok) return;
+        await C.replanSeances(patient.cle, [{ id:s.id, cabinet:versCabinet }]);
+        s.cabinet = versCabinet;
+        toast(versCabinet ? "Séance réservée au cabinet." : "Séance visible par le patient.", { type:"ok" });
+        render();
+      }
       if(act === "modifier"){
         store.set("gt_edit", { type:"seance", cle:patient.cle, id:s.id });
         location.href = "/config.html?edit=1";

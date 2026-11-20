@@ -38,6 +38,7 @@ function sessionRow(s, { role, next }){
       ${s.cabinet === true
         ? `<button class="btn sm ${st === "next" ? "primary" : ""}" type="button" data-act="faire" data-id="${esc(s.id)}">${icon("play")}${s.terminee ? "Refaire" : "Faire la séance"}</button>`
         : `<button class="btn sm" type="button" data-act="tester" data-id="${esc(s.id)}">${icon("play")}Tester</button>`}
+      ${!s.programmeId ? `<button class="icon-btn sm" type="button" data-act="lieu" data-id="${esc(s.id)}" title="${s.cabinet === true ? "Envoyer au patient" : "Réserver au cabinet"}" aria-label="${s.cabinet === true ? "Envoyer au patient" : "Réserver au cabinet"}">${icon(s.cabinet === true ? "home" : "cabinet")}</button>` : ""}
       <button class="icon-btn sm" type="button" data-act="modifier" data-id="${esc(s.id)}" aria-label="Modifier la séance ${esc(s.label || "")}">${icon("edit")}</button>
       ${!s.terminee ? `<button class="icon-btn sm" type="button" data-act="valider" data-id="${esc(s.id)}" aria-label="Marquer comme faite">${icon("checkCircle")}</button>` : ""}
       <button class="icon-btn sm danger" type="button" data-act="supprimer" data-id="${esc(s.id)}" aria-label="Supprimer la séance ${esc(s.label || "")}">${icon("trash")}</button>`;
