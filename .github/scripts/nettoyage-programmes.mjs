@@ -37,6 +37,7 @@ for(const pd of patients.docs){
   for(const [pid, list] of progs){
     if(list.every(s => s.terminee)) continue;                       // programme terminé : conservé
     if(list.every(s => s.cabinet === true)) continue;               // programme au cabinet : conservé
+    if(list.every(s => !!s.archive)) continue;                     // programme archivé par le kiné : conservé
     const garder = patient.garderProgrammes?.[pid];
     if(garder === "toujours") continue;
     let t = Math.max(Number(garder) || 0, DEBUT_REGLE);

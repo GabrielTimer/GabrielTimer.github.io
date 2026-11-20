@@ -25,7 +25,7 @@ const DAY = 86400000;
 export function summarize(patient, seances){
   const { programmes, seules } = groupProgrammes(seances);
   /* Programme en cours, retard, inactivité : seulement ce que le patient fait chez lui */
-  const actif = programmes.find(p => !p.termine && !p.cabinet) || null;
+  const actif = programmes.find(p => !p.termine && !p.cabinet && !p.archive) || null;
   const today = startOfDay(new Date());
   const valides = seances.filter(s => s.terminee && s.dateValidation).sort((a, b) => a.dateValidation - b.dateValidation);
   const derniere = valides[valides.length - 1] || null;
@@ -57,11 +57,11 @@ export function summarize(patient, seances){
     alertes.push({ niveau:"info", ico:"message", texte:"Nouveau commentaire" });
   }
   /* Programme sans activité depuis 3 semaines : bientôt à la corbeille */
-  const bientot = programmes.filter(p => !p.termine && !p.cabinet).map(p => ({ p, e: etatSuppression(p, patient) })).filter(x => x.e.alerte).sort((a, b) => a.e.reste - b.e.reste)[0];
+  const bientot = programmes.filter(p => !p.termine && !p.cabinet && !p.archive).map(p => ({ p, e: etatSuppression(p, patient) })).filter(x => x.e.alerte).sort((a, b) => a.e.reste - b.e.reste)[0];
   if(bientot){
     alertes.push({ niveau:"warn", ico:"trash", texte:`Programme inutilisé : corbeille ${resteTexte(bientot.e.reste)}` });
   }
-  const termineRecent = programmes.find(p => p.termine && Date.now() - p.updatedAt < 10 * DAY);
+  const termineRecent = programmes.find(p => p.termine && !p.archive && Date.now() - p.updatedAt < 10 * DAY);
   if(termineRecent){
     alertes.push({ niveau:"ok", ico:"checkCircle", texte:"Programme terminé" });
   }

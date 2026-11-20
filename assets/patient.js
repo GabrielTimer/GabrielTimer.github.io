@@ -3,15 +3,15 @@
    ========================================================= */
 
 import { getPatient, listSeances, addMessage } from "./cloud.js";
-import { store, estCabinet, groupProgrammes, setRunProgram, KINE, SITE_URL, startOfDay, sessionDuration, evaTrend, fmtNum, openSheet, toast, esc, icon } from "./app.js";
+import { store, estCabinet, estArchive, groupProgrammes, setRunProgram, KINE, SITE_URL, startOfDay, sessionDuration, evaTrend, fmtNum, openSheet, toast, esc, icon } from "./app.js";
 
 /** Charge la fiche et les séances du patient. */
 export async function loadPatient(cle){
   const [patient, seances] = await Promise.all([getPatient(cle), listSeances(cle)]);
   if(!patient) return null;
   store.set("gt_patient_nom", patient.nom || "");
-  /* Les séances « au cabinet » restent dans la fiche du kiné : invisibles ici (aussi en « Vue patient ») */
-  const usable = seances.filter(s => s.data && Array.isArray(s.data.exercices) && !estCabinet(s));
+  /* Les séances « au cabinet » et les programmes archivés restent dans la fiche du kiné : invisibles ici (aussi en « Vue patient ») */
+  const usable = seances.filter(s => s.data && Array.isArray(s.data.exercices) && !estCabinet(s) && !estArchive(s));
   return { patient, seances: usable, ...groupProgrammes(usable) };
 }
 
@@ -34,7 +34,7 @@ export function lateCount(seances){
 /** Tous les programmes en cours réunis (un patient peut en suivre plusieurs en même temps).
  *  Les programmes « au cabinet » sont laissés de côté. */
 export function enCours(programmes){
-  const actifs = programmes.filter(p => !p.termine && !p.cabinet);
+  const actifs = programmes.filter(p => !p.termine && !p.cabinet && !p.archive);
   if(!actifs.length) return null;
   return {
     n: actifs.length,

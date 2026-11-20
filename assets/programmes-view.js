@@ -65,7 +65,7 @@ function sessionRow(s, { role, next }){
 /** HTML d'un programme complet. */
 export function programmeHTML(prog, { role = "patient", open = true, patient = null } = {}){
   /* Programme sans activité depuis 3 semaines : bientôt mis à la corbeille (voir inactivite.js) */
-  const sup = !prog.termine && patient ? etatSuppression(prog, patient) : null;
+  const sup = !prog.termine && !prog.archive && patient ? etatSuppression(prog, patient) : null;
   const supHTML = !sup ? "" : sup.alerte
     ? (role === "kine"
       ? `<div class="notice warn" style="margin:10px 0">${icon("alert")}<div class="row wrap" style="flex:1;--gap:8px"><span style="flex:1 1 220px">Aucune activité depuis ${sup.jours} jours : programme mis à la corbeille ${resteTexte(sup.reste)}.</span><button class="btn sm" type="button" data-pact="garder">${icon("check")}Garder</button><button class="btn sm" type="button" data-pact="toujours">${icon("lock")}Ne jamais supprimer</button></div></div>`
@@ -85,14 +85,21 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
 
   const dated = !prog.termine && prog.seances.some(x => !x.terminee && x.datePrevue);
   /* Le kiné peut aussi changer le rythme d'un programme en accès libre (et lui redonner des jours) */
-  const canMove = dated || (role === "kine" && !prog.termine);
+  const canMove = !prog.archive && (dated || (role === "kine" && !prog.termine));
   const pz = etatPause(prog);
   const daysBtn = canMove ? `<button class="btn sm" type="button" data-pact="jours">${icon("calendar")}${role === "kine" ? "Changer les jours" : "Changer mes jours"}</button>
       ${dated ? `<button class="btn sm" type="button" data-pact="pause">${icon(pz ? "play" : "pause")}${pz ? (pz.debut ? "Changer la date de début" : "Changer la reprise") : "Pause ou report"}</button>` : ""}` : "";
   const pauseHTML = pz ? `<div class="notice" style="margin:10px 0">${icon(pz.debut ? "calendar" : "pause")}<span>${pz.debut ? "Programme qui commence" : "Programme en pause, reprise"} <strong>${esc(fmtDate(pz.date, { weekday:"long", day:"numeric", month:"long" }).toLowerCase())}</strong>. ${role === "kine" ? "Les séances ne comptent pas en retard d'ici là." : "Aucune séance n'est en retard d'ici là."}</span></div>` : "";
-  const actions = role === "kine" ? `
+  const actions = role === "kine" && prog.archive ? `
+      <button class="btn sm primary" type="button" data-pact="desarchiver">${icon("send")}Renvoyer au patient</button>
+      <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
+      <button class="btn sm" type="button" data-pact="copier">${icon("copy")}Copier pour un patient</button>
+      ${!isCourse ? `<button class="btn sm" type="button" data-pact="modele">${icon("layers")}Enregistrer comme modèle</button>` : ""}
+      <button class="btn sm danger" type="button" data-pact="supprimer">${icon("trash")}Supprimer</button>`
+    : role === "kine" ? `
       ${daysBtn}
       <button class="btn sm" type="button" data-pact="pdf">${icon("pdf")}PDF</button>
+      <button class="btn sm${prog.termine ? " primary" : ""}" type="button" data-pact="archiver" title="Retiré de l'application du patient, gardé dans sa fiche (Archives)">${icon("archive")}Archiver</button>
       <button class="btn sm" type="button" data-pact="lieu">${icon(prog.cabinet ? "home" : "cabinet")}${prog.cabinet ? "Envoyer au patient" : "Réserver au cabinet"}</button>
       <button class="btn sm" type="button" data-pact="copier">${icon("copy")}Copier pour un patient</button>
       ${!isCourse ? `<button class="btn sm" type="button" data-pact="modele">${icon("layers")}Enregistrer comme modèle</button>` : ""}
@@ -108,6 +115,7 @@ export function programmeHTML(prog, { role = "patient", open = true, patient = n
         <div class="prog-title">
           <h2>${isCourse ? icon("run", "ic-inline lagon") + " " : ""}${esc(prog.nom)}</h2>
           ${prog.termine ? `<span class="badge ok">${icon("check")}Terminé</span>` : ""}
+          ${role === "kine" && prog.archive ? `<span class="badge" title="Invisible dans l'application du patient">${icon("archive")}Archivé le ${esc(fmtShortDate(prog.seances[0]?.archive))}</span>` : ""}
           ${role === "kine" && prog.cabinet ? `<span class="badge lagon" title="Invisible dans l'application du patient">${icon("cabinet")}Au cabinet</span>` : ""}
         </div>
         <div class="prog-meta">

@@ -23,6 +23,7 @@ export function derniereActivite(prog, patient){
   const garder = patient?.garderProgrammes?.[prog.id];
   if(garder === "toujours") return null;
   if(prog.cabinet || ((prog.seances || []).length && prog.seances.every(s => s.cabinet === true))) return null;   // au cabinet : jamais retiré
+  if(prog.archive || ((prog.seances || []).length && prog.seances.every(s => !!s.archive))) return null;          // archivé : jamais retiré
   let t = Math.max(Number(garder) || 0, DEBUT_REGLE);
   (prog.seances || []).forEach(s => { t = Math.max(t, s.dateValidation || 0, s.updatedAt || 0, s.createdAt || 0); });
   /* En pause ou pas encore commencé (prochaine séance dans le futur) : l'inactivité ne compte qu'à partir de la reprise */

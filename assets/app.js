@@ -303,6 +303,8 @@ export function sessionDuration(prog){
 /** Regroupe les séances d'un patient par programme. */
 /** Séance réservée au cabinet : faite avec le kiné, jamais montrée au patient (ni rappels ni alertes de retard). */
 export const estCabinet = s => s?.cabinet === true;
+/** Programme archivé par le kiné : gardé dans sa fiche (Archives), jamais montré au patient (ni rappels ni alertes). */
+export const estArchive = s => !!s?.archive;
 
 /** Ordre des séances d'un programme : semaine, puis date (ou rang si l'une n'a pas de date, en accès libre). */
 export function ordreSeances(a, b){
@@ -337,6 +339,7 @@ export function groupProgrammes(seances){
       nom: premier.programmeNom || premier.data?.nom || "Programme",
       categorie: premier.categorie || premier.data?.categorie || "kine",
       cabinet: list.every(s => s.cabinet === true),
+      archive: list.every(s => !!s.archive),
       seances: list,
       total: list.length,
       faites,

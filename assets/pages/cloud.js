@@ -29,7 +29,8 @@ async function bannieresEvolution(programmes){
     band.type = "button";
     band.className = "notice evol-band " + (p.type === "alleger" ? "warn" : "");
     band.style.cssText = "width:100%;text-align:left;cursor:pointer;margin-bottom:10px";
-    band.innerHTML = `${icon(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}<span><strong>${esc(p.titre)}</strong> · ${esc(E.changementTexte(p) || p.raison)}<br><span class="small muted">${esc(p.raison)}</span></span>`;
+    const ch = E.changementTexte(p);
+    band.innerHTML = `${icon(p.type === "alleger" ? "trendDown" : p.type === "monter" ? "trendUp" : "checkCircle")}<span><strong>${esc(p.titre)}</strong> · ${ch ? `${esc(ch)}<br><span class="small muted">${esc(p.raison)}</span>` : esc(p.raison)}</span>`;
     band.onclick = () => E.valider(C, cle, prog, p, { onDone: () => location.reload(), onIgnore: () => band.remove() });
     art.prepend(band);
   });
@@ -234,6 +235,7 @@ async function kineView(param){
   const P = await import("../patient.js");
 
   let seances = [], bilans = [], bilansErr = null, suiviBox = null, messages = [];
+  let archivesOuvertes = false;   // section « Programmes archivés » ouverte ou repliée
   const M = await import("../messages.js");
   const load = async () => {
     /* Les bilans ne doivent jamais empêcher l'affichage de la fiche
@@ -297,7 +299,10 @@ async function kineView(param){
 
   const render = () => {
     const sum = K.summarize(patient, seances);
-    const { programmes, seules } = sum;
+    const { seules } = sum;
+    /* Programmes archivés : à part, repliés en bas (le patient ne les voit plus) */
+    const programmes = sum.programmes.filter(p => !p.archive);
+    const archives = sum.programmes.filter(p => p.archive).sort((a, b) => (b.seances[0]?.archive || 0) - (a.seances[0]?.archive || 0));
     const actif = sum.actif;
     const tous = P.enCours(programmes);   // tous les programmes en cours, pas seulement le premier
     const reg = P.regularity(tous ? tous.seances : seances);
@@ -393,10 +398,15 @@ async function kineView(param){
         ${!programmes.length && !seules.length ? `<div class="panel">${emptyHTML({ ico:"calendar", title:"Aucun programme", text:"Créez un premier programme pour ce patient.", action:`<a class="btn primary" href="/config.html?patient=${encodeURIComponent(patient.cle)}">${icon("plus")}Créer un programme</a>` })}</div>` : ""}
         ${programmes.map(p => programmeHTML(p, { role:"kine", patient })).join("")}
         ${seules.length ? `<div style="margin-top:16px">${seulesHTML(seules, { role:"kine" })}</div>` : ""}
+        ${archives.length ? `<details class="archives" style="margin-top:16px"${archivesOuvertes ? " open" : ""}>
+          <summary class="btn ghost" style="cursor:pointer">${icon("archive")}Programmes archivés (${archives.length})<span class="small muted" style="font-weight:400">· invisibles pour le patient</span></summary>
+          <div style="margin-top:10px">${archives.map(p => programmeHTML(p, { role:"kine", patient, open:false })).join("")}</div>
+        </details>` : ""}
       </section>`;
 
     renderEvaChart($("#chart"), points);
     bannieresEvolution(programmes).catch(e => console.warn("Évolution :", e));
+    $("details.archives")?.addEventListener("toggle", e => { archivesOuvertes = e.target.open; });
     showRappels();
     if(!suiviBox){
       suiviBox = document.createElement("div");
@@ -500,6 +510,20 @@ async function kineView(param){
         const act = b.dataset.pact;
         const first = prog.seances[0];
         if(act === "pdf") openProgrammePdf(prog, patient.nom);
+        /* Archiver : le programme quitte l'application du patient (plus de rappels ni d'alertes), il reste ici dans « Programmes archivés » */
+        if(act === "archiver" || act === "desarchiver"){
+          const arch = act === "archiver";
+          const ok = await confirmDialog(arch
+            ? { title:"Archiver ce programme ?", message:`« ${prog.nom} » disparaît de l'application de ${prenom(patient.nom)} : plus de rappels ni d'alertes. Il reste dans sa fiche, en bas, dans « Programmes archivés », d'où vous pourrez le lui renvoyer.`, confirm:"Archiver" }
+            : { title:"Renvoyer au patient ?", message:`« ${prog.nom} » réapparaît dans l'application de ${prenom(patient.nom)}${prog.termine ? " (dans ses programmes terminés)" : ", qui pourra le reprendre (rappels compris)"}.`, confirm:"Renvoyer" });
+          if(!ok) return;
+          const quand = arch ? Date.now() : null;
+          const changes = prog.seances.map(s => ({ id:s.id, archive:quand }));
+          await C.replanSeances(patient.cle, changes);
+          changes.forEach(c => { const x = seances.find(s => s.id === c.id); if(x) x.archive = c.archive; });
+          toast(arch ? "Programme archivé : le patient ne le voit plus." : "Programme renvoyé : le patient le voit de nouveau.", { type:"ok" });
+          render();
+        }
         if(act === "lieu"){
           const versCabinet = !prog.cabinet;
           const ok = await confirmDialog(versCabinet
