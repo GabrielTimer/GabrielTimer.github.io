@@ -163,9 +163,54 @@ async function verifierKine(user){
 }
 
 /** Renvoie l'utilisateur kiné connecté, ou null. */
+/* ---------- Déconnexion automatique ----------
+   Réglage propre à chaque appareil (Réglages du cabinet → Sécurité de cet appareil).
+   Sans utilisation de l'espace kiné pendant ce délai, l'appareil se déconnecte :
+   une tablette oubliée ou perdue ne reste pas ouverte sur les dossiers. */
+const VU = "gt_kine_vu", DELAI = "gt_deconnexion_h", DELAI_DEFAUT = 12;
+export const deconnexionAuto = {
+  heures(){ try{ const v = localStorage.getItem(DELAI); return v === null ? DELAI_DEFAUT : Math.max(0, Number(v) || 0); }catch(e){ return DELAI_DEFAUT; } },
+  set(h){ try{ localStorage.setItem(DELAI, String(Number(h) || 0)); }catch(e){} }
+};
+const noterActivite = () => { try{ localStorage.setItem(VU, String(Date.now())); }catch(e){} };
+function expiree(){
+  const h = deconnexionAuto.heures();
+  if(!h) return false;
+  let vu = 0; try{ vu = Number(localStorage.getItem(VU) || 0); }catch(e){}
+  return vu > 0 && Date.now() - vu > h * 3600000;
+}
+async function deconnecterInactif(){
+  try{ await signOut(auth); }catch(e){}
+  try{ localStorage.removeItem(VU); localStorage.removeItem("gt_kine"); sessionStorage.setItem("gt_expire", "1"); }catch(e){}
+}
+let surveille = false;
+function surveiller(){
+  if(surveille || typeof window === "undefined") return;
+  surveille = true;
+  let dernier = 0;
+  const actif = () => { const t = Date.now(); if(t - dernier > 60000){ dernier = t; noterActivite(); } };
+  ["pointerdown", "keydown", "touchstart"].forEach(ev => window.addEventListener(ev, actif, { passive:true, capture:true }));
+  /* Page restée ouverte sans personne : vérifiée toutes les 5 minutes */
+  setInterval(async () => {
+    if(!expiree() || !auth.currentUser) return;
+    await deconnecterInactif();
+    location.replace("/login.html?expire=1&next=" + encodeURIComponent(location.pathname + location.search));
+  }, 5 * 60000);
+}
+
 export async function currentKine(){
   const user = auth.currentUser || await authReady;
+  if(user && expiree()){
+    await deconnecterInactif();
+    /* Ramène à la page de connexion (avec le message), sauf si l'appareil est en mode patient */
+    let modePatient = false; try{ modePatient = localStorage.getItem("gt_mode_patient") === "1"; }catch(e){}
+    if(!modePatient && typeof location !== "undefined" && !/\/login(\.html)?$/.test(location.pathname)){
+      location.replace("/login.html?expire=1&next=" + encodeURIComponent(location.pathname + location.search));
+    }
+    return null;
+  }
   const ok = await verifierKine(user);
+  if(ok){ noterActivite(); surveiller(); }
   /* Kiné connecté : toute l'appli est mise de côté sur cet appareil (une fois par visite) */
   try{
     if(ok && !sessionStorage.getItem("gt_precache_kine") && navigator.serviceWorker?.controller){
@@ -229,16 +274,20 @@ export async function ajouterCompte({ email, nom = "" }){
   await setComptes(comptes);
   /* Compte de connexion créé dans une instance à part, pour ne pas changer l'utilisateur connecté */
   const second = getAuth(initializeApp(FIREBASE_CONFIG, "creation-" + Date.now()));
-  let cree = false;
+  let cree = false, existe = false, bloque = "";
   try{
     const mdp = Array.from(crypto.getRandomValues(new Uint8Array(18)), b => b.toString(36)).join("") + "A1!";
     await createUserWithEmailAndPassword(second, email, mdp);
     cree = true;
   }catch(e){
-    if(e?.code !== "auth/email-already-in-use") console.warn("Création du compte :", e?.code || e);
+    if(e?.code === "auth/email-already-in-use") existe = true;
+    else{ bloque = e?.code || String(e?.message || e); console.warn("Création du compte :", bloque); }
   }finally{ try{ await signOut(second); }catch(e){} }
+  /* Inscription fermée dans Firebase (réglage conseillé) : le compte n'existe pas encore,
+     l'e-mail de mot de passe ne partirait pas. On le dit clairement au lieu de faire croire que c'est fait. */
+  if(bloque) return { cree:false, existe:false, bloque };
   await sendPasswordResetEmail(auth, email);
-  return { cree };
+  return { cree, existe, bloque:"" };
 }
 export async function retirerCompte(email){
   const comptes = (await getComptes()).filter(c => c.email !== String(email).toLowerCase());
@@ -261,6 +310,7 @@ export async function loginKine(email, password){
     err.code = "app/not-kine";
     throw err;
   }
+  noterActivite();
   return cred.user;
 }
 

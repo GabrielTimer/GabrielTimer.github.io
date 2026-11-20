@@ -113,8 +113,10 @@ $("#app").innerHTML = `
     <div><button class="btn danger" type="button" id="forget">${icon("logout")}Déconnecter cet appareil</button></div>
   </div>` : ""}
 
-  <footer class="app-foot section">${appMarkHTML("lg")}<span>Version ${esc(APP_VERSION)}</span><span>${esc(KINE.nom)}, ${esc(KINE.titre)}</span></footer>`;
+  <footer class="app-foot section">${appMarkHTML("lg")}<span id="app-version">Version ${esc(APP_VERSION)}</span><span>${esc(KINE.nom)}, ${esc(KINE.titre)}</span></footer>`;
 
+/* Numéro affiché = celui de sw.js (VERSION), le seul à changer à chaque modification */
+try{ caches.keys().then(ks => { const k = ks.find(x => /^gt-[\d.]+-shell$/.test(x)); if(k) $("#app-version").textContent = "Version " + k.slice(3, -6); }).catch(() => {}); }catch(e){}
 $("#big").onchange = e => { store.set("gt_text", e.target.checked ? "large" : "normal"); applyPrefs(); };
 document.querySelectorAll("[data-theme]").forEach(b => b.onclick = () => {
   store.set("gt_theme", b.dataset.theme); applyPrefs();

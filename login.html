@@ -55,6 +55,11 @@ const next = new URLSearchParams(location.search).get("next");
 const safeNext = next && next.startsWith("/") && !next.startsWith("//") ? next : "/index.html";
 
 if(await C.currentKine().catch(() => null)){ kineHint.set(true); location.replace(safeNext); }
+if(new URLSearchParams(location.search).get("expire") || sessionStorage.getItem("gt_expire")){
+  sessionStorage.removeItem("gt_expire");
+  const h = C.deconnexionAuto.heures();
+  $("#msg").textContent = `Déconnecté automatiquement après ${h} h sans utilisation, pour protéger les dossiers. Reconnectez-vous.`;
+}
 
 $("#email").value = localStorage.getItem("gt_kine_email") || ADMIN_EMAILS[0] || "";
 $("#show").innerHTML = icon("eye");

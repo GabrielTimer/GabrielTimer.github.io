@@ -21,14 +21,14 @@ const PRECACHE = [
 /* Espace kiné : tout le reste de l'appli, mis de côté dès que le kiné est connecté
    (pas sur les téléphones des patients). Un fichier oublié ici est gardé à sa première ouverture. */
 const KINE_EN_PLUS = [
-  "/admin_exercises.html", "/admin_tools.html", "/contenu-bilan.html", "/aide.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
+  "/admin_tools.html", "/contenu-bilan.html", "/aide.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
   "/assets/bilan-traitement.js", "/assets/exercise-editor.js", "/assets/faire-evoluer.js", "/assets/filter-drawer.js", "/assets/global-search.js", "/assets/info-mois.js",
   "/assets/kine-ui.js", "/assets/kine.js", "/assets/library-ui.js", "/assets/modeles-base.js", "/assets/modeles-ui.js", "/assets/modeles.js",
   "/assets/pages/bilan.js", "/assets/pages/config.css", "/assets/pages/config.js", "/assets/pathologies.js", "/assets/photos-cabinet.js", "/assets/qr.js",
   "/assets/questionnaire-pdf.js", "/assets/retour.js", "/bilan-kine/conseils-patient.js", "/bilan-kine/data.js", "/bilan-kine/entretien.js", "/bilan-kine/fonctionnels.js",
   "/bilan-kine/guide.js", "/bilan-kine/index.html", "/bilan-kine/traitements.js", "/bilan.html", "/cabinet.html", "/compte-rendu.html",
   "/confidentialite.html", "/config.html", "/conseils-bilan.html", "/corbeille.html", "/courrier.html", "/coursepdf.html",
-  "/exercises/data/exercises.json", "/exercises/data/hep_exercises.json", "/exercises/data/hep_nettoyage.json", "/exercises/data/hep_programmes.json", "/exercises/data/program_templates.json", "/exercises/data/progressions.json", "/exercises/data/variantes.json",
+  "/exercises/data/exercises.json", "/exercises/data/hep_exercises.json", "/exercises/data/hep_nettoyage.json", "/exercises/data/hep_programmes.json", "/exercises/data/progressions.json", "/exercises/data/variantes.json",
   "/exercises/glossary.html", "/exercises/historique.html", "/folder.html", "/glossary.html", "/impression.html", "/liste_pathologies.html",
   "/login.html", "/messages.html", "/nerfs.html", "/ordonnance.html", "/pathologies.html", "/patients.html",
   "/program_pdf.html", "/programmes_admin.html", "/programmescourse.html", "/programs.html", "/questionnaires.html", "/reglages_cabinet.html",

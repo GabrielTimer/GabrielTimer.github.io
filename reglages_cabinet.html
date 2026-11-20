@@ -148,10 +148,24 @@ async function initComptes(){
     if(!email){ $("#cp-mail").focus(); return; }
     const b = e.currentTarget; b.disabled = true;
     try{
-      await C.ajouterCompte({ email, nom });
+      const r = await C.ajouterCompte({ email, nom });
       $("#cp-mail").value = ""; $("#cp-nom").value = "";
-      toast(`Accès donné. ${email} va recevoir un e-mail pour choisir son mot de passe (pensez aux courriers indésirables).`, { type:"ok", duration:8000 });
       afficher();
+      if(r?.bloque){
+        const m = esc(email);
+        const f = openSheet({
+          title:"Encore une étape à faire à la main",
+          body:`<p>L'accès est noté, mais le compte de <b>${m}</b> n'a pas pu être créé automatiquement : l'inscription est fermée dans Firebase (c'est normal et plus sûr).</p>
+            <ol style="line-height:1.6;padding-left:20px">
+              <li>Ouvrez <b>console.firebase.google.com</b> → votre projet → <b>Authentication</b> → <b>Utilisateurs</b> → <b>Ajouter un utilisateur</b>.</li>
+              <li>Saisissez <b>${m}</b> et un mot de passe provisoire au hasard.</li>
+              <li>Revenez ici et cliquez une seconde fois sur «&nbsp;Donner l'accès&nbsp;» : ${m} recevra alors l'e-mail pour choisir son mot de passe.</li>
+            </ol>`,
+          foot:`<button class="btn primary" type="button" data-close>J'ai compris</button>`
+        });
+      }else{
+        toast(`Accès donné. ${email} va recevoir un e-mail pour choisir son mot de passe (pensez aux courriers indésirables).`, { type:"ok", duration:8000 });
+      }
     }catch(err){ toast(err.message || "Impossible de donner l'accès.", { type:"err" }); }
     finally{ b.disabled = false; }
   };
@@ -175,6 +189,19 @@ async function initModeSeance(){
   $("#ms-del").onclick = async () => {
     if(!(await MS.verifierPin("Saisissez le code actuel."))) return;
     MS.reglage.pinParDefaut(); toast("Le code est de nouveau 7777."); maj();
+  };
+}
+
+function initDeconnexion(){
+  const sel = $("#deco-h");
+  if(!sel || !C.deconnexionAuto) return;
+  ["input", "change"].forEach(t => $("#deco").addEventListener(t, e => e.stopPropagation()));
+  const h = String(C.deconnexionAuto.heures());
+  if(![...sel.options].some(o => o.value === h)) sel.insertAdjacentHTML("beforeend", `<option value="${esc(h)}">${esc(h)} heures sans utilisation</option>`);
+  sel.value = h;
+  sel.onchange = () => {
+    C.deconnexionAuto.set(sel.value);
+    toast(sel.value === "0" ? "Cet appareil ne se déconnectera plus tout seul." : `Cet appareil se déconnectera après ${sel.selectedOptions[0].textContent.replace(" (conseillé)", "")}.`, { type:"ok" });
   };
 }
 
@@ -394,6 +421,22 @@ function render(){
       <p class="hint" style="margin-top:10px">Pour que le patient ne puisse pas non plus sortir de l'application, activez aussi l'épinglage d'écran d'Android (Paramètres → Écran de verrouillage et sécurité → Autres paramètres de sécurité → Épingler les fenêtres) et le mode Ne pas déranger.</p>
     </section>
 
+    <section class="panel" id="deco">
+      <h2>${icon("lock")}Déconnexion automatique de cet appareil</h2>
+      <p class="muted">Si l'espace kiné n'est pas utilisé pendant ce délai, cet appareil se déconnecte tout seul : une tablette oubliée ou perdue ne reste pas ouverte sur vos dossiers. Il suffit ensuite de remettre votre mot de passe. Réglage propre à cet appareil, enregistré tout de suite.</p>
+      <div class="field" style="max-width:360px"><label for="deco-h">Se déconnecter après</label>
+        <select class="select" id="deco-h">
+          <option value="2">2 heures sans utilisation</option>
+          <option value="4">4 heures sans utilisation</option>
+          <option value="8">8 heures sans utilisation</option>
+          <option value="12">12 heures sans utilisation (conseillé)</option>
+          <option value="24">24 heures sans utilisation</option>
+          <option value="72">3 jours sans utilisation</option>
+          <option value="0">Jamais (déconseillé sur une tablette du cabinet)</option>
+        </select>
+      </div>
+    </section>
+
     <section class="panel" id="backup">
       <h2>${icon("download")}Sauvegarde</h2>
       <p class="muted"><strong>Tout sauvegarder</strong> télécharge deux fichiers à garder ensemble sur votre ordinateur ou une clé USB :</p>
@@ -417,6 +460,7 @@ function render(){
 
   renderLogo(); renderCats(); renderNivs(); renderMasks(); preview(); setDirty(false);
   initModeSeance();
+  initDeconnexion();
   initComptes();
   initDossiers();
   initPhotos();
