@@ -45,10 +45,24 @@ console.log(`Paris : ${today}, ${hour} h ${String(minute).padStart(2, "0")}.`);
 if(process.env.SEULEMENT_CLES === "1"){ console.log("Clés vérifiées, pas d'envoi."); process.exit(0); }
 if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0); }
 
-/* ---------- Messages du kiné : notification au patient ---------- */
+/* ---------- Messages du kiné : notification au patient ----------
+   Économie de lectures Firebase (quota gratuit : 50 000 par jour) : quand le kiné écrit,
+   l'appli dépose un petit avis dans notifs/{id}. On ne lit donc que ces avis à chaque passage.
+   Une fois par jour (vers midi), on relit tous les messages pour rattraper un avis manqué. */
 {
-  const msgs = (await db.collectionGroup("messages").get()).docs
-    .filter(d => { const m = d.data(); return m.de === "kine" && !m.notifie && !m.lu && Date.now() - (m.date || 0) < 3 * 864e5; });
+  const notifs = await db.collection("notifs").get();
+  const aTraiter = [];
+  for(const nd of notifs.docs){
+    const chemin = nd.data()?.chemin;
+    if(chemin){ const md = await db.doc(chemin).get().catch(() => null); if(md?.exists) aTraiter.push(md); }
+    await nd.ref.delete();
+  }
+  if(hour === 12 && minute < 15){
+    const tous = (await db.collectionGroup("messages").get()).docs;
+    const deja = new Set(aTraiter.map(d => d.ref.path));
+    tous.forEach(d => { if(!deja.has(d.ref.path)) aTraiter.push(d); });
+  }
+  const msgs = aTraiter.filter(d => { const m = d.data(); return m.de === "kine" && !m.notifie && !m.lu && Date.now() - (m.date || 0) < 3 * 864e5; });
   let n = 0;
   for(const d of msgs){
     /* Messagerie rangée sous le code du patient (codes/{code}) : ses rappels sont dans son dossier */
@@ -82,11 +96,14 @@ const seancesDe = async cle => {
   return seancesCache.get(cle);
 };
 
+/* Rien à envoyer aujourd'hui : noté, pour ne pas relire ses séances à chaque passage (quota gratuit) */
+const rienAujourdhui = d => d.ref.update({ dernierControle: today }).catch(() => {});
+
 let envoyes = 0, retires = 0, erreurs = 0;
 for(const d of subs.docs){
   const r = d.data();
   if(!r.actif || !r.endpoint) continue;
-  if(r.dernierEnvoi === today) continue;
+  if(r.dernierEnvoi === today || r.dernierControle === today) continue;
   const perso = r.mode === "perso" && r.jours && typeof r.jours === "object";
   const heureDuJour = perso ? Number(r.jours[JOUR]) : (Number(r.heure) || 18);
   if(!heureDuJour || heureDuJour > maintenant) continue;
@@ -97,8 +114,8 @@ for(const d of subs.docs){
   let payload;
   if(perso){
     const restantes = seances.filter(s => !s.terminee);
-    if(!restantes.length) continue;                                         // programme terminé
-    if(seances.some(s => s.terminee && s.dateValidation && dayOf(s.dateValidation) === today)) continue;   // déjà faite aujourd'hui
+    if(!restantes.length){ await rienAujourdhui(d); continue; }             // programme terminé
+    if(seances.some(s => s.terminee && s.dateValidation && dayOf(s.dateValidation) === today)){ await rienAujourdhui(d); continue; }   // déjà faite aujourd'hui
     payload = {
       title: "C'est l'heure de vos exercices",
       body: "Votre séance vous attend. Quelques minutes suffisent !",
@@ -107,7 +124,7 @@ for(const d of subs.docs){
     };
   }else{
   const dues = seances.filter(s => !s.terminee && s.datePrevue && dayOf(s.datePrevue) === today);
-  if(!dues.length) continue;
+  if(!dues.length){ await rienAujourdhui(d); continue; }
 
   const s = dues[0];
   const nom = (s.label || s.nom || s.data?.nom || "").trim();

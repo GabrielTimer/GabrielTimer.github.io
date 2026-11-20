@@ -1,0 +1,25 @@
+# Garde les tâches automatiques en marche, gratuitement et pour toujours.
+# GitHub met en pause les tâches programmées (rappels, sauvegarde, nettoyage) d'un dépôt public
+# quand il n'a pas été modifié depuis 60 jours. Cette tâche les réactive chaque mois : rien à faire.
+name: Garder les tâches actives
+
+on:
+  schedule:
+    - cron: "37 5 3 * *"   # le 3 de chaque mois
+  workflow_dispatch:
+
+jobs:
+  garder:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Réactiver toutes les tâches programmées
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=0
+          for id in $(gh api "repos/${{ github.repository }}/actions/workflows" --jq '.workflows[].id'); do
+            gh api -X PUT "repos/${{ github.repository }}/actions/workflows/${id}/enable" >/dev/null && n=$((n+1)) || true
+          done
+          echo "::notice::${n} tâche(s) maintenue(s) active(s)."

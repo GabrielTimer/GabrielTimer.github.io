@@ -402,26 +402,48 @@ async function renderPatient(ctx){
    Accueil kiné
    ========================================================= */
 
-/* Rappel de sauvegarde : plus de 30 jours sans « Tout sauvegarder » (Réglages du cabinet → Sauvegarde).
-   « Plus tard » le cache 7 jours sur cet appareil. */
-const SAUVEGARDE_JOURS = 30;
+/* Rappel de sauvegarde. La sauvegarde automatique (chaque dimanche, tâche GitHub) compte comme une sauvegarde :
+   le rappel n'apparaît que si elle s'arrête (plus de 10 jours) ou si son jeton GitHub expire bientôt.
+   Sans sauvegarde automatique : rappel après 30 jours sans « Tout sauvegarder ». « Plus tard » le cache 7 jours. */
+const SAUVEGARDE_JOURS = 30, AUTO_JOURS = 10, JETON_JOURS = 30;
 function rappelSauvegarde(){
+  let etat = store.get("gt_sauvegarde_etat", null);   // gardé sur l'appareil : pas de bandeau qui clignote
+  const fmt = t => new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long" });
   const show = () => {
     const box = document.getElementById("backup-banner");
     if(!box) return;
-    const last = Math.max(Number(store.get("gt_last_backup", 0)) || 0, Number(reglages.sauvegarde?.derniere || 0));
+    const manuelle = Math.max(Number(store.get("gt_last_backup", 0)) || 0, Number(reglages.sauvegarde?.derniere || 0));
+    const auto = Number(etat?.auto || 0);
+    const last = Math.max(manuelle, auto);
     const jours = last ? Math.floor((Date.now() - last) / 86400000) : null;
+    const joursAuto = auto ? Math.floor((Date.now() - auto) / 86400000) : null;
+    const jeton = Number(etat?.jetonExpire || 0);
+    const jetonJours = jeton ? Math.floor((jeton - Date.now()) / 86400000) : null;
     const snooze = Number(store.get("gt_backup_snooze", 0)) || 0;
-    if((jours !== null && jours < SAUVEGARDE_JOURS) || Date.now() < snooze){ box.innerHTML = ""; return; }
+    let titre = "", texte = "", lien = "/reglages_cabinet.html#backup", bouton = "Sauvegarder";
+    if(jetonJours !== null && jetonJours < JETON_JOURS){
+      titre = jetonJours < 0 ? "Sauvegarde automatique arrêtée : jeton GitHub expiré" : `Le jeton de la sauvegarde automatique expire le ${fmt(jeton)}`;
+      texte = "À renouveler sur GitHub (5 minutes) : voir MAINTENANCE.md, « Sauvegarde automatique ».";
+      lien = "https://github.com/settings/personal-access-tokens"; bouton = "Ouvrir GitHub";
+    }else if(joursAuto !== null && joursAuto > AUTO_JOURS){
+      titre = `La sauvegarde automatique ne s'est pas faite depuis ${joursAuto} jours`;
+      texte = "Regardez l'onglet Actions de GitHub (« Sauvegarde automatique ») et, en attendant, faites « Tout sauvegarder ».";
+    }else if(jours === null || jours >= SAUVEGARDE_JOURS){
+      titre = jours === null ? "Aucune sauvegarde enregistrée" : `Dernière sauvegarde il y a ${jours} jours`;
+      texte = "Gardez une copie de vos données sur l'ordinateur ou une clé USB.";
+    }
+    if(!titre || Date.now() < snooze){ box.innerHTML = ""; return; }
+    const externe = lien.startsWith("http");
     box.innerHTML = `<div class="inbox-banner backup-banner">
       <span class="t-ico">${icon("download")}</span>
-      <span class="li-main"><strong>${jours === null ? "Aucune sauvegarde enregistrée" : `Dernière sauvegarde il y a ${jours} jours`}</strong>
-      <span class="small">Gardez une copie de vos données sur l'ordinateur ou une clé USB.</span></span>
-      <span style="display:flex;gap:8px;flex:none"><a class="btn sm primary" href="/reglages_cabinet.html#backup">Sauvegarder</a><button class="btn sm" type="button" id="bk-later">Plus tard</button></span></div>`;
+      <span class="li-main"><strong>${esc(titre)}</strong>
+      <span class="small">${esc(texte)}</span></span>
+      <span style="display:flex;gap:8px;flex:none"><a class="btn sm primary" href="${lien}"${externe ? ' target="_blank" rel="noopener"' : ""}>${bouton}</a><button class="btn sm" type="button" id="bk-later">Plus tard</button></span></div>`;
     box.querySelector("#bk-later").onclick = () => { store.set("gt_backup_snooze", Date.now() + 7 * 86400000); box.innerHTML = ""; };
   };
   show();
   loadSettings({ force:true }).then(show).catch(() => {});
+  import("../cloud.js").then(C => C.getEtatSauvegarde?.()).then(e => { etat = e || null; store.set("gt_sauvegarde_etat", etat); show(); }).catch(() => {});
 }
 
 async function renderKine(user){

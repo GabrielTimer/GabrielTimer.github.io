@@ -465,7 +465,12 @@ function render(){
   initDossiers();
   initPhotos();
   const last = Math.max(Number(localStorage.getItem("gt_last_backup") || 0), Number(settings.sauvegarde?.derniere || 0));
-  $("#bk-last").textContent = last ? `Dernière sauvegarde : ${new Date(last).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" })}. Conseil : une fois par mois.` : "Conseil : faites une sauvegarde une fois par mois.";
+  const fmtJ = t => new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });
+  $("#bk-last").textContent = last ? `Dernière sauvegarde à la main : ${fmtJ(last)}.` : "Aucune sauvegarde à la main sur cet appareil.";
+  C.getEtatSauvegarde?.().then(e => {
+    if(!e?.auto) return;
+    $("#bk-last").textContent += ` Sauvegarde automatique (chaque dimanche) : la dernière date du ${fmtJ(e.auto)}.` + (e.jetonExpire ? ` Son jeton GitHub expire le ${fmtJ(e.jetonExpire)}.` : "");
+  }).catch(() => {});
   if(location.hash.length > 1) requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ block:"start" }));
 
   app.addEventListener("input", e => { if(!e.target.closest("#backup, #comptes")) setDirty(true); preview(); });
@@ -754,12 +759,14 @@ async function restoreBackup(ev){
   const parts = [
     ["patients", "Patients, coordonnées et codes d'accès", ["patients", "fiches", "codes"]],
     ["seances", "Séances des patients", ["seances"]],
-    ["suivis", "Messages, notes de séance et questionnaires", ["messages", "notes", "suivis"]],
+    ["suivis", "Messages, notes de séance et questionnaires", ["messages", "notes", "suivis", "questionnaires"]],
     ["bilans", "Bilans kiné", ["bilans"]],
     ["modeles", "Modèles", ["modeles"]],
     ["exercices", "Exercices créés et corrections", ["exercices"]],
-    ["reglages", "Réglages du cabinet", ["reglages"]]
-  ];
+    ["conseils", "Fiches conseils", ["conseils"]],
+    ["reglages", "Réglages du cabinet", ["reglages"]],
+    ["acces", "Contenu du bilan modifié, progressions, comptes autorisés et clé IA", ["acces"]]
+  ].filter(([, , cols]) => cols.some(c => (data.collections[c] || []).length));
   const count = k => (data.collections[k] || []).length;
   const s = openSheet({
     title:"Restaurer une sauvegarde",

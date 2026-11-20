@@ -23,7 +23,7 @@ const db = admin.firestore();
 /* ---------- Lecture : même format que exportAll() dans assets/cloud.js ---------- */
 const out = { format: "gabrieltimer-sauvegarde", version: 1, date: new Date().toISOString(), automatique: true, collections: {} };
 const docs = async name => (await db.collection(name).get()).docs.map(d => ({ id: d.id, data: d.data() }));
-for(const name of ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils"]){
+for(const name of ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils", "acces"]){
   out.collections[name] = await docs(name);
 }
 const parCode = new Map(out.collections.codes.map(c => [c.id, c.data.cle]));

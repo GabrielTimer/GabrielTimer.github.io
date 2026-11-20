@@ -909,6 +909,12 @@ export async function getReglages(){
   return snap.exists() ? snap.data() : null;
 }
 
+/** Dernière sauvegarde automatique (tâche GitHub « Sauvegarde automatique ») : { auto, jetonExpire } */
+export async function getEtatSauvegarde(){
+  const snap = await getDoc(doc(db, "reglages", "sauvegarde"));
+  return snap.exists() ? snap.data() : null;
+}
+
 export async function saveReglages(data){
   await setDoc(doc(db, "reglages", "cabinet"), clean({ ...data, updatedAt: Date.now() }));
 }
@@ -976,7 +982,10 @@ export async function deleteSuivi(cle, id){
 export async function addMessage(cle, { type = "message", sujet = "", texte = "", de = null }){
   const id = newId();
   /* de: "kine" → message du kiné au patient (lu = lu par le patient) ; sinon message du patient */
-  await setDoc(doc(await boite(cle), id), clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false, ...(de === "kine" ? { de:"kine" } : {}) }));
+  const ref = doc(await boite(cle), id);
+  await setDoc(ref, clean({ type, sujet: String(sujet).slice(0, 200), texte: String(texte).slice(0, 5000), date: Date.now(), lu: false, ...(de === "kine" ? { de:"kine" } : {}) }));
+  /* Petit avis pour la tâche GitHub « Rappels » : elle prévient le patient sans relire toute la messagerie */
+  if(de === "kine") setDoc(doc(db, "notifs", id), { chemin: ref.path, date: Date.now() }).catch(() => {});
   return id;
 }
 
@@ -1094,6 +1103,8 @@ async function _exportAll(onProgress = () => {}){
   await grab("bilans").catch(() => { out.collections.bilans = []; });
   await grab("questionnaires").catch(() => { out.collections.questionnaires = []; });
   await grab("conseils").catch(() => { out.collections.conseils = []; });
+  /* Contenu du bilan modifié, progressions, comptes autorisés, clé IA : titulaire seulement */
+  if(estTitulaire()) await grab("acces").catch(() => { out.collections.acces = []; });
   onProgress("suivis");
   const suivis = await getDocs(collectionGroup(db, "suivis")).catch(() => ({ docs: [] }));
   out.collections.suivis = suivis.docs.map(d => ({ id: d.id, cle: d.ref.parent.parent?.id, data: d.data() }));
@@ -1122,7 +1133,7 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   const want = name => !only || only.includes(name);
   const ops = [];
   const count = {};
-  ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils"].forEach(name => {
+  ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils", "acces"].forEach(name => {
     if(!want(name)) return;
     (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
   });

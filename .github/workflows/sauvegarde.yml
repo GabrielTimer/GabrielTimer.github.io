@@ -22,8 +22,8 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - run: npm install --no-save --no-audit --no-fund firebase-admin@12
@@ -33,6 +33,7 @@ jobs:
           SAUVEGARDE_MOT_DE_PASSE: ${{ secrets.SAUVEGARDE_MOT_DE_PASSE }}
         run: node .github/scripts/sauvegarde.mjs "$RUNNER_TEMP/sortie"
       - name: Envoi dans le dépôt privé
+        id: envoi
         env:
           TOKEN: ${{ secrets.SAUVEGARDE_TOKEN }}
         run: |
@@ -48,6 +49,14 @@ jobs:
           git add -A
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Date d'expiration du jeton (donnée par GitHub), affichée sur l'accueil kiné 30 jours avant
+          EXP=$(curl -sI -H "Authorization: Bearer ${TOKEN}" https://api.github.com/repos/GabrielTimer/apikine-sauvegardes | grep -i '^github-authentication-token-expiration:' | cut -d: -f2- | tr -d '\r' | xargs || true)
+          echo "expire=${EXP}" >> "$GITHUB_OUTPUT"
           git commit -q -m "Sauvegarde du $(date +%F)" || { echo "Rien de nouveau."; exit 0; }
           git push -q origin main
           echo "::notice::Sauvegarde envoyée dans le dépôt privé ($(ls -1 sauvegarde-kine-*.apikine | wc -l) gardées)."
+      - name: Date de la sauvegarde pour l'accueil kiné
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          JETON_EXPIRE: ${{ steps.envoi.outputs.expire }}
+        run: node .github/scripts/etat-sauvegarde.mjs

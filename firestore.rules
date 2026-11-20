@@ -250,6 +250,12 @@ service cloud.firestore {
       allow write: if isOwner();
     }
 
+    // Avis « nouveau message du kiné », lus puis effacés par la tâche GitHub « Rappels »
+    match /notifs/{id} {
+      allow create: if isKine();
+      allow read, delete: if isOwner();
+    }
+
     // Ancienne collection (avant migration) : réservée au kiné
     match /programmes/{id} {
       allow read, write: if isOwner();
