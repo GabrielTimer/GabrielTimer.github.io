@@ -403,12 +403,32 @@ export function exerciseSteps(exo){
    exercises/data/progressions.json : chaînes d'exercices de même nature, du plus facile au plus difficile.
    HEP et dessins ne sont jamais dans la même chaîne. Sans chaîne : exercices proches (même source,
    même catégorie, même début de nom), proposés sans ordre de difficulté. */
+/* Le kiné peut modifier les progressions depuis l'éditeur (fenêtre « Variantes ») :
+   sa version complète est rangée dans Firestore (acces/progressions) et remplace alors le fichier. */
 let progCache = null;
+const indexer = chaines => { const pos = new Map(); chaines.forEach((ch, c) => ch.forEach((k, i) => pos.set(k, [c, i]))); return { chaines, pos }; };
 export function loadProgressions(){
-  if(!progCache) progCache = fetch("/exercises/data/progressions.json", FRAIS).then(r => r.json())
-    .then(d => { const pos = new Map(); (d.chaines || []).forEach((ch, c) => ch.forEach((k, i) => pos.set(k, [c, i]))); return { chaines: d.chaines || [], pos }; })
-    .catch(() => ({ chaines: [], pos: new Map() }));
+  if(!progCache) progCache = (async () => {
+    let perso = null;
+    try{ perso = JSON.parse(localStorage.getItem("gt_progressions_perso") || "null"); }catch(e){}
+    try{
+      const C = await import("./cloud.js");
+      perso = await C.getAccesJSON("progressions");
+      try{ if(perso) localStorage.setItem("gt_progressions_perso", JSON.stringify(perso)); else localStorage.removeItem("gt_progressions_perso"); }catch(e){}
+    }catch(e){}
+    if(perso?.chaines) return indexer(perso.chaines);
+    const d = await fetch("/exercises/data/progressions.json", FRAIS).then(r => r.json()).catch(() => ({}));
+    return indexer(d.chaines || []);
+  })();
   return progCache;
+}
+
+/** Enregistre toutes les progressions (null = revenir au fichier d'origine). */
+export async function saveProgressions(chaines){
+  const C = await import("./cloud.js");
+  await C.saveAccesJSON("progressions", chaines ? { chaines } : null);
+  try{ if(chaines) localStorage.setItem("gt_progressions_perso", JSON.stringify({ chaines })); else localStorage.removeItem("gt_progressions_perso"); }catch(e){}
+  progCache = null;
 }
 
 const MOTS_VIDES = new Set("de du des la le les un une avec sans sur sous en au aux a et ou d l".split(" "));

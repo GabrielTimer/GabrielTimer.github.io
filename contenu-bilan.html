@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contenu du bilan</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  /* Contenu du bilan : le kiné modifie tests, questions et traitements proposés sans toucher au code.
+     Les modifications vont dans Firestore (acces/bilan) et s'appliquent par-dessus bilan-kine/*.js (voir bilan-core.js). */
+  .cb-tabs{ margin:0 0 14px; }
+  .cb-pick{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:14px; }
+  .cb-pick .select{ min-width:220px; flex:1 1 260px; max-width:460px; }
+  .cb-card{ border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); padding:12px 14px; margin-bottom:10px; }
+  .cb-card.mod{ border-color:color-mix(in srgb, var(--lagon) 55%, transparent); }
+  .cb-head{ display:flex; gap:8px; align-items:center; }
+  .cb-head .input{ flex:1; font-weight:700; }
+  .cb-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-top:10px; }
+  .cb-grid label, .cb-lab{ display:flex; flex-direction:column; gap:4px; font-size:var(--fs-sm); font-weight:700; color:var(--ink-2); }
+  .cb-checks{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+  .cb-checks label{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border:1px solid var(--line); border-radius:999px; font-size:var(--fs-sm); cursor:pointer; }
+  .cb-checks input{ accent-color:var(--lagon); }
+  .cb-card details{ margin-top:10px; }
+  .cb-card summary{ cursor:pointer; font-weight:700; color:var(--lagon-strong); font-size:var(--fs-sm); }
+  .cb-card textarea{ min-height:64px; }
+  .cb-sec{ margin:18px 0 8px; font-size:var(--fs-md); display:flex; align-items:center; gap:8px; }
+  .cb-bar{ position:sticky; bottom:0; z-index:4; display:flex; gap:10px; flex-wrap:wrap; align-items:center; padding:12px 0 max(12px, env(safe-area-inset-bottom)); background:linear-gradient(transparent, var(--bg) 30%); }
+  .cb-bar .sp{ flex:1; }
+  .cb-lock{ font-size:var(--fs-xs); color:var(--ink-3); margin-top:6px; }
+  .cb-rowlist{ display:flex; flex-direction:column; gap:6px; }
+  .cb-row{ display:flex; gap:6px; align-items:center; }
+  .cb-row .input{ flex:1; }
+  .cb-w{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .cb-w label{ display:inline-flex; align-items:center; gap:6px; font-size:var(--fs-sm); }
+  .cb-w input{ width:56px; }
+  .cb-mod{ font-size:var(--fs-xs); font-weight:800; color:var(--lagon-strong); background:var(--lagon-soft); border-radius:999px; padding:2px 8px; }
+</style>
+</head>
+<body>
+<main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<datalist id="dl-modeles"></datalist>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, toast, confirmDialog } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"history" });
+const C = await import("/assets/cloud.js");
+const B = await import("/assets/bilan-core.js");
+const TIT = C.estTitulaire();
+
+const K = await B.loadClinic();
+const K0 = await B.contenuOrigine();
+let O = (await B.lirePerso()) || {};
+const clone = x => JSON.parse(JSON.stringify(x ?? null));
+const lignes = t => String(t || "").split("\n").map(s => s.trim()).filter(Boolean);
+const num = v => { const s = String(v).replace(",", ".").trim(); return s === "" ? null : (isFinite(+s) ? +s : null); };
+const memes = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+/* Questions utilisées par le calcul du profil et du traitement : on peut changer leur texte,
+   pas leurs réponses (l'appli reconnaît ces réponses mot pour mot). */
+const PROTEGEES = new Set(["debut", "jaunes", "aide", "horaire", "evol", "duree", "avq", "pares", "irrad", "ressenti", "observance"]);
+
+/* Noms des modèles, pour vérifier les modèles proposés */
+const M = await import("/assets/modeles-base.js");
+const P = await import("/assets/pathologies.js");
+const mesModeles = await C.listModeles().catch(() => []);
+const nomBase = n => String(n || "").replace(/,? ?niveau \d+$/i, "").trim();
+const NOMS = [...new Set([...M.MODELES_BASE, ...P.PATHOLOGIES, ...mesModeles].map(m => nomBase(m.nom)).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
+$("#dl-modeles").innerHTML = NOMS.map(n => `<option value="${esc(n)}"></option>`).join("");
+const NOMSET = new Set(NOMS);
+
+const REGS = Object.entries(K0.REG).map(([k, r]) => [k, r.n]);
+let onglet = "tests", reg = REGS[0][0], regQ = REGS[0][0], txSec = "HYP", txKey = "";
+let travail = null;   // copie en cours de modification de la partie affichée
+let modifie = false;
+
+const app = $("#app");
+function page(){
+  app.innerHTML = `
+    <div class="page-head">
+      <h1>Contenu du bilan</h1>
+      <p class="lead">Modifiez vous-même les tests, les questions de l'entretien et les traitements proposés en fin de bilan. Vos modifications s'appliquent à tous vos bilans, sur tous vos appareils.${TIT ? "" : " Seul le titulaire du cabinet peut enregistrer des modifications."}</p>
+    </div>
+    <div class="segmented cb-tabs" role="tablist">
+      ${[["tests", "Tests par région"], ["entretien", "Questions de l'entretien"], ["tx", "Traitement proposé"]].map(([k, l]) => `<button type="button" role="tab" data-tab="${k}" aria-pressed="${onglet === k}" aria-selected="${onglet === k}">${l}</button>`).join("")}
+    </div>
+    <div id="vue"></div>`;
+  $$("[data-tab]").forEach(b => b.onclick = async () => {
+    if(modifie && !(await confirmDialog({ title:"Quitter sans enregistrer ?", message:"Vos modifications de cette partie seront perdues.", confirm:"Quitter" }))) return;
+    onglet = b.dataset.tab; modifie = false; page();
+  });
+  ({ tests:vueTests, entretien:vueEntretien, tx:vueTx })[onglet]();
+}
+const barre = (estPerso) => `<div class="cb-bar">
+    ${TIT ? `<button class="btn primary" type="button" id="save" disabled>${icon("check")}Enregistrer</button>` : ""}
+    <span class="sp"></span>
+    ${TIT && estPerso ? `<button class="btn" type="button" id="orig">${icon("history")}Revenir au contenu d'origine</button>` : ""}
+  </div>`;
+function suivre(root){
+  root.addEventListener("input", () => { modifie = true; const s = $("#save"); if(s) s.disabled = false; });
+  root.addEventListener("change", () => { modifie = true; const s = $("#save"); if(s) s.disabled = false; });
+  if(!TIT) $$("input, textarea, select:not(.cb-nav)", root).forEach(x => x.disabled = true);
+}
+async function sauver(maj, msg){
+  const s = $("#save"); if(s){ s.disabled = true; s.textContent = "Enregistrement…"; }
+  try{
+    const n = clone(O); maj(n);
+    await B.enregistrerPerso(n);
+    O = n; modifie = false;
+    toast(msg || "Enregistré. Les prochains bilans utilisent ce contenu.", { type:"ok" });
+    page();
+  }catch(e){
+    console.error(e);
+    toast("Enregistrement impossible (connexion ?).", { type:"err", duration:7000 });
+    if(s){ s.disabled = false; s.innerHTML = `${icon("check")}Enregistrer`; }
+  }
+}
+const deplacer = (arr, i, d) => { const j = i + d; if(j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; };
+const outils = (i, n) => `<button class="icon-btn sm" type="button" data-up="${i}" aria-label="Monter" ${i ? "" : "disabled"}>${icon("up")}</button>
+  <button class="icon-btn sm" type="button" data-down="${i}" aria-label="Descendre" ${i < n - 1 ? "" : "disabled"}>${icon("down")}</button>
+  <button class="icon-btn sm" type="button" data-del="${i}" aria-label="Supprimer">${icon("trash")}</button>`;
+
+/* ================= Tests par région ================= */
+function vueTests(){
+  const r = K.REG[reg];
+  const perso = !!O.reg?.[reg];
+  if(!modifie || !travail || travail.reg !== reg){
+    travail = { reg, H: clone(r.H), RF: clone(r.RF || []), RFm: r.RFm || "", note: r.note || "",
+      T: r.T.map(t => ({ nom:t[0], hyp:[...(t[1] || [])], lrp:t[2], lrm:t[3], src:t[4] || "", prec:t[5] || "", g: clone(K.GUIDE[t[0]] || {}) , orig:t[0] })) };
+  }
+  const W = travail;
+  const srcs = Object.keys(K.SRC || {});
+  $("#vue").innerHTML = `
+    <div class="cb-pick"><select class="select cb-nav" id="reg" aria-label="Région">${REGS.map(([k, n]) => `<option value="${k}" ${k === reg ? "selected" : ""}>${esc(n)}${O.reg?.[k] ? " (modifié)" : ""}</option>`).join("")}</select>
+      ${perso ? `<span class="cb-mod">Modifié par vous</span>` : ""}</div>
+    <div id="form">
+      <h2 class="cb-sec">${icon("target")}Hypothèses</h2>
+      <div class="cb-rowlist">${Object.entries(W.H).map(([k, l]) => `<div class="cb-row"><input class="input" data-h="${esc(k)}" value="${esc(l)}" aria-label="Hypothèse ${esc(k)}"></div>`).join("")}</div>
+      ${TIT ? `<p><button class="btn sm" type="button" id="addH">${icon("plus")}Ajouter une hypothèse</button></p>` : ""}
+      <h2 class="cb-sec">${icon("alert")}Drapeaux rouges</h2>
+      <label class="cb-lab">Un drapeau rouge par ligne<textarea class="textarea" id="rf" rows="4">${esc(W.RF.join("\n"))}</textarea></label>
+      <label class="cb-lab" style="margin-top:8px">Message affiché si un drapeau rouge est coché<input class="input" id="rfm" value="${esc(W.RFm)}"></label>
+      <h2 class="cb-sec">${icon("stethoscope")}Tests (${W.T.length})</h2>
+      <div id="tests">${W.T.map((t, i) => `
+        <div class="cb-card" data-t="${i}">
+          <div class="cb-head"><input class="input" data-f="nom" value="${esc(t.nom)}" aria-label="Nom du test">${TIT ? outils(i, W.T.length) : ""}</div>
+          <div class="cb-checks">${Object.entries(W.H).map(([k, l]) => `<label><input type="checkbox" data-hyp="${esc(k)}" ${t.hyp.includes(k) ? "checked" : ""}>${esc(l)}</label>`).join("")}</div>
+          <div class="cb-grid">
+            <label>LR+ (vide = inconnu)<input class="input" data-f="lrp" inputmode="decimal" value="${t.lrp ?? ""}"></label>
+            <label>LR− (vide = inconnu)<input class="input" data-f="lrm" inputmode="decimal" value="${t.lrm ?? ""}"></label>
+            <label>Précision (Se, Sp…)<input class="input" data-f="prec" value="${esc(t.prec)}"></label>
+            <label>Source<select class="select" data-f="src"><option value="">—</option>${srcs.map(s => `<option value="${esc(s)}" ${s === t.src ? "selected" : ""} title="${esc(K.SRC[s])}">${esc(s)}</option>`).join("")}</select></label>
+          </div>
+          <details><summary>Fiche technique du test</summary>
+            <div class="cb-grid" style="grid-template-columns:1fr">
+              <label>Réalisation<textarea class="textarea" data-g="t">${esc(t.g.t || "")}</textarea></label>
+              <label>Test positif si…<textarea class="textarea" data-g="p">${esc(t.g.p || "")}</textarea></label>
+              <label>Vidéo (lien YouTube)<input class="input" data-g="v" inputmode="url" value="${esc(t.g.v || "")}"></label>
+            </div>
+          </details>
+        </div>`).join("")}</div>
+      ${TIT ? `<p><button class="btn" type="button" id="addT">${icon("plus")}Ajouter un test</button></p>` : ""}
+      <p class="hint">Renommer un test garde sa fiche technique. Les bilans déjà enregistrés gardent l'ancien nom.</p>
+    </div>
+    ${barre(perso)}`;
+  const form = $("#form");
+  suivre(form);
+  $("#reg").onchange = async e => {
+    if(modifie && !(await confirmDialog({ title:"Changer de région sans enregistrer ?", message:"Vos modifications de cette région seront perdues.", confirm:"Changer" }))){ e.target.value = reg; return; }
+    reg = e.target.value; modifie = false; travail = null; vueTests();
+  };
+  const lire = () => {
+    $$("[data-h]", form).forEach(x => W.H[x.dataset.h] = x.value.trim() || W.H[x.dataset.h]);
+    W.RF = lignes($("#rf").value); W.RFm = $("#rfm").value.trim();
+    $$("[data-t]", form).forEach(card => {
+      const t = W.T[+card.dataset.t];
+      t.nom = $("[data-f=nom]", card).value.trim();
+      t.lrp = num($("[data-f=lrp]", card).value); t.lrm = num($("[data-f=lrm]", card).value);
+      t.prec = $("[data-f=prec]", card).value.trim(); t.src = $("[data-f=src]", card).value;
+      t.hyp = $$("[data-hyp]", card).filter(c => c.checked).map(c => c.dataset.hyp);
+      ["t", "p", "v"].forEach(k => { const v = $(`[data-g=${k}]`, card).value.trim(); if(v) t.g[k] = v; else delete t.g[k]; });
+    });
+  };
+  const refaire = () => { lire(); modifie = true; vueTests(); $("#save") && ($("#save").disabled = false); };
+  $$("[data-up]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.T, +b.dataset.up, -1); refaire(); });
+  $$("[data-down]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.T, +b.dataset.down, 1); refaire(); });
+  $$("[data-del]", form).forEach(b => b.onclick = async () => {
+    lire();
+    if(!(await confirmDialog({ title:`Retirer « ${W.T[+b.dataset.del].nom} » ?`, message:"Le test ne sera plus proposé dans les bilans de cette région.", confirm:"Retirer", danger:true }))) return;
+    W.T.splice(+b.dataset.del, 1); refaire();
+  });
+  $("#addT") && ($("#addT").onclick = () => { lire(); W.T.push({ nom:"Nouveau test", hyp:[], lrp:null, lrm:null, src:"", prec:"", g:{} }); refaire(); });
+  $("#addH") && ($("#addH").onclick = () => {
+    lire();
+    const lab = prompt("Nom de la nouvelle hypothèse :");
+    if(!lab?.trim()) return;
+    let k = lab.normalize("NFD").replace(/[^A-Za-z]/g, "").toUpperCase().slice(0, 4) || "HYP";
+    while(W.H[k]) k += "X";
+    W.H[k] = lab.trim(); refaire();
+  });
+  $("#save") && ($("#save").onclick = () => {
+    lire();
+    const vides = W.T.filter(t => !t.nom);
+    if(vides.length){ toast("Chaque test doit avoir un nom.", { type:"err" }); return; }
+    const noms = W.T.map(t => t.nom);
+    if(new Set(noms).size !== noms.length){ toast("Deux tests ont le même nom.", { type:"err" }); return; }
+    sauver(n => {
+      n.reg ||= {}; n.guide ||= {};
+      n.reg[reg] = { H: W.H, RF: W.RF, RFm: W.RFm, T: W.T.map(t => [t.nom, t.hyp, t.lrp, t.lrm, t.src || null, t.prec]) };
+      W.T.forEach(t => {
+        if(t.orig && t.orig !== t.nom) delete n.guide[t.orig];
+        if(memes(t.g, K0.GUIDE[t.nom] || {})) delete n.guide[t.nom]; else n.guide[t.nom] = t.g;
+      });
+      if(memes(n.reg[reg], { H:K0.REG[reg].H, RF:K0.REG[reg].RF || [], RFm:K0.REG[reg].RFm || "", T:K0.REG[reg].T.map(t => [t[0], t[1] || [], t[2], t[3], t[4] || null, t[5] || ""]) })) delete n.reg[reg];
+    });
+  });
+  $("#orig") && ($("#orig").onclick = async () => {
+    if(!(await confirmDialog({ title:"Revenir au contenu d'origine ?", message:`Vos modifications des tests « ${K0.REG[reg].n} » seront effacées.`, confirm:"Revenir à l'origine", danger:true }))) return;
+    sauver(n => { delete n.reg?.[reg]; K0.REG[reg].T.forEach(t => delete n.guide?.[t[0]]); (O.reg?.[reg]?.T || []).forEach(t => delete n.guide?.[t[0]]); }, "Contenu d'origine rétabli.");
+  });
+}
+
+/* ================= Questions de l'entretien ================= */
+function vueEntretien(){
+  if(!modifie || !travail || travail.regQ !== regQ){
+    travail = { regQ, G: clone(K.ENT.G), R: clone(K.ENT.REGQ[regQ] || []) };
+  }
+  const W = travail;
+  const groupes = [...new Set(K0.ENT.G.map(q => q[1]))];
+  const H = K.REG[regQ]?.H || {};
+  const persoG = !!O.entG, persoR = !!O.entR?.[regQ];
+  $("#vue").innerHTML = `
+    <div id="form">
+      <h2 class="cb-sec">${icon("message")}Questions générales ${persoG ? `<span class="cb-mod">Modifiées par vous</span>` : ""}</h2>
+      <p class="hint" style="margin-top:0">Posées à chaque bilan. Une réponse par ligne.</p>
+      ${W.G.map((q, i) => `
+        <div class="cb-card" data-q="${i}">
+          <div class="cb-head"><input class="input" data-f="txt" value="${esc(q[2])}" aria-label="Question">${TIT ? outils(i, W.G.length) : ""}</div>
+          <div class="cb-grid">
+            <label>Partie<select class="select" data-f="grp">${groupes.map(g => `<option ${g === q[1] ? "selected" : ""}>${esc(g)}</option>`).join("")}</select></label>
+            <label style="flex-direction:row;align-items:center;gap:8px;margin-top:22px"><input type="checkbox" data-f="multi" ${q[4] ? "checked" : ""}>Plusieurs réponses possibles</label>
+          </div>
+          <label class="cb-lab" style="margin-top:8px">Réponses proposées<textarea class="textarea" data-f="opts" rows="${Math.min(8, q[3].length + 1)}" ${PROTEGEES.has(q[0]) ? "readonly" : ""}>${esc(q[3].join("\n"))}</textarea></label>
+          ${PROTEGEES.has(q[0]) ? `<p class="cb-lock">${icon("lock")} L'appli se sert de ces réponses pour proposer le traitement : vous pouvez changer la question, pas les réponses.</p>` : ""}
+        </div>`).join("")}
+      ${TIT ? `<p><button class="btn" type="button" id="addG">${icon("plus")}Ajouter une question générale</button></p>` : ""}
+      ${TIT && persoG ? `<p><button class="btn sm" type="button" id="origG">${icon("history")}Questions générales d'origine</button></p>` : ""}
+
+      <h2 class="cb-sec">${icon("target")}Questions selon la région ${persoR ? `<span class="cb-mod">Modifiées par vous</span>` : ""}</h2>
+      <div class="cb-pick"><select class="select cb-nav" id="regq" aria-label="Région">${REGS.map(([k, n]) => `<option value="${k}" ${k === regQ ? "selected" : ""}>${esc(n)}${O.entR?.[k] ? " (modifié)" : ""}</option>`).join("")}</select></div>
+      <p class="hint" style="margin-top:0">Questions oui / non. Les points (0 à 3) renforcent les hypothèses quand le patient répond oui.</p>
+      ${W.R.map((q, i) => `
+        <div class="cb-card" data-r="${i}">
+          <div class="cb-head"><input class="input" data-f="txt" value="${esc(q[1])}" aria-label="Question">${TIT ? outils(i, W.R.length).replaceAll("data-up", "data-rup").replaceAll("data-down", "data-rdown").replaceAll("data-del", "data-rdel") : ""}</div>
+          <div class="cb-w">${Object.entries(H).map(([k, l]) => `<label><input class="input" type="number" min="0" max="3" step="1" data-w="${esc(k)}" value="${q[2]?.[k] || ""}">${esc(l)}</label>`).join("")}</div>
+        </div>`).join("")}
+      ${TIT ? `<p><button class="btn" type="button" id="addR">${icon("plus")}Ajouter une question pour cette région</button></p>` : ""}
+      ${TIT && persoR ? `<p><button class="btn sm" type="button" id="origR">${icon("history")}Questions d'origine de cette région</button></p>` : ""}
+    </div>
+    ${barre(false)}`;
+  const form = $("#form");
+  suivre(form);
+  const lire = () => {
+    $$("[data-q]", form).forEach(c => { const q = W.G[+c.dataset.q];
+      q[2] = $("[data-f=txt]", c).value.trim() || q[2]; q[1] = $("[data-f=grp]", c).value;
+      if(!PROTEGEES.has(q[0])) q[3] = lignes($("[data-f=opts]", c).value);
+      if($("[data-f=multi]", c).checked) q[4] = true; else q.length = 4; });
+    $$("[data-r]", form).forEach(c => { const q = W.R[+c.dataset.r];
+      q[1] = $("[data-f=txt]", c).value.trim() || q[1];
+      const w = {}; $$("[data-w]", c).forEach(x => { const v = Math.max(0, Math.min(3, parseInt(x.value, 10) || 0)); if(v) w[x.dataset.w] = v; }); q[2] = w; });
+  };
+  const refaire = () => { lire(); modifie = true; vueEntretien(); $("#save") && ($("#save").disabled = false); };
+  $$("[data-up]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.G, +b.dataset.up, -1); refaire(); });
+  $$("[data-down]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.G, +b.dataset.down, 1); refaire(); });
+  $$("[data-rup]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.R, +b.dataset.rup, -1); refaire(); });
+  $$("[data-rdown]", form).forEach(b => b.onclick = () => { lire(); deplacer(W.R, +b.dataset.rdown, 1); refaire(); });
+  $$("[data-del]", form).forEach(b => b.onclick = async () => {
+    lire(); const q = W.G[+b.dataset.del];
+    if(PROTEGEES.has(q[0])){ toast("Cette question sert au calcul du traitement : elle ne peut pas être retirée.", { type:"err", duration:6000 }); return; }
+    if(!(await confirmDialog({ title:"Retirer cette question ?", message:q[2], confirm:"Retirer", danger:true }))) return;
+    W.G.splice(+b.dataset.del, 1); refaire();
+  });
+  $$("[data-rdel]", form).forEach(b => b.onclick = async () => {
+    lire(); if(!(await confirmDialog({ title:"Retirer cette question ?", message:W.R[+b.dataset.rdel][1], confirm:"Retirer", danger:true }))) return;
+    W.R.splice(+b.dataset.rdel, 1); refaire();
+  });
+  $("#addG") && ($("#addG").onclick = () => { lire(); W.G.push([`perso${Date.now().toString(36)}`, groupes[groupes.length - 1], "Nouvelle question", ["Oui", "Non"]]); refaire(); });
+  $("#addR") && ($("#addR").onclick = () => { lire(); W.R.push([`perso${Date.now().toString(36)}`, "Nouvelle question", {}]); refaire(); });
+  $("#regq").onchange = async e => {
+    if(modifie && !(await confirmDialog({ title:"Changer de région sans enregistrer ?", message:"Vos modifications seront perdues.", confirm:"Changer" }))){ e.target.value = regQ; return; }
+    regQ = e.target.value; modifie = false; travail = null; vueEntretien();
+  };
+  $("#save") && ($("#save").onclick = () => {
+    lire();
+    sauver(n => {
+      if(memes(W.G, K0.ENT.G)) delete n.entG; else n.entG = W.G;
+      n.entR ||= {};
+      if(memes(W.R, K0.ENT.REGQ[regQ] || [])) delete n.entR[regQ]; else n.entR[regQ] = W.R;
+    });
+  });
+  $("#origG") && ($("#origG").onclick = async () => { if(await confirmDialog({ title:"Revenir aux questions générales d'origine ?", confirm:"Revenir à l'origine", danger:true })) sauver(n => { delete n.entG; }, "Questions d'origine rétablies."); });
+  $("#origR") && ($("#origR").onclick = async () => { if(await confirmDialog({ title:"Revenir aux questions d'origine de cette région ?", confirm:"Revenir à l'origine", danger:true })) sauver(n => { delete n.entR?.[regQ]; }, "Questions d'origine rétablies."); });
+}
+
+/* ================= Traitement proposé ================= */
+function vueTx(){
+  const SECS = { HYP:"Selon l'hypothèse retenue", REGION:"Selon la région", MOTIF:"Selon le motif de consultation" };
+  const libelle = (sec, k) => sec === "HYP" ? (() => { const [r, h] = k.split(":"); return `${K.REG[r]?.n || r} : ${K.REG[r]?.H?.[h] || h}`; })() : sec === "REGION" ? (K.REG[k]?.n || k) : k;
+  const cles = Object.keys(K0.TX?.[txSec] || {}).sort((a, b) => libelle(txSec, a).localeCompare(libelle(txSec, b), "fr"));
+  if(!cles.includes(txKey)) txKey = cles[0];
+  const e = K.TX[txSec][txKey] || {};
+  if(!modifie || !travail || travail.k !== txSec + txKey) travail = { k: txSec + txKey, e: clone(e) };
+  const W = travail.e;
+  const perso = !!O.tx?.[txSec]?.[txKey];
+  const liste = (f, titre) => `
+    <h2 class="cb-sec">${icon("layers")}${titre}</h2>
+    <div class="cb-rowlist" data-list="${f}">${(W[f] || []).map((n, i) => `<div class="cb-row"><input class="input" list="dl-modeles" data-m="${i}" value="${esc(n)}" aria-label="Modèle">${NOMSET.has(n) ? "" : `<span class="badge warn" title="Aucun modèle ne porte ce nom">Introuvable</span>`}${TIT ? `<button class="icon-btn sm" type="button" data-mdel="${f}:${i}" aria-label="Retirer">${icon("close")}</button>` : ""}</div>`).join("")}</div>
+    ${TIT ? `<p><button class="btn sm" type="button" data-madd="${f}">${icon("plus")}Ajouter un modèle</button></p>` : ""}`;
+  $("#vue").innerHTML = `
+    <div class="cb-pick">
+      <select class="select cb-nav" id="txsec" aria-label="Type">${Object.entries(SECS).map(([k, l]) => `<option value="${k}" ${k === txSec ? "selected" : ""}>${l}</option>`).join("")}</select>
+      <select class="select cb-nav" id="txkey" aria-label="Élément">${cles.map(k => `<option value="${esc(k)}" ${k === txKey ? "selected" : ""}>${esc(libelle(txSec, k))}${O.tx?.[txSec]?.[k] ? " (modifié)" : ""}</option>`).join("")}</select>
+      ${perso ? `<span class="cb-mod">Modifié par vous</span>` : ""}
+    </div>
+    <div id="form">
+      ${"axes" in W || txSec === "HYP" ? `<label class="cb-lab">Axes de traitement (un par ligne)<textarea class="textarea" id="axes" rows="5">${esc((W.axes || []).join("\n"))}</textarea></label>
+      <label class="cb-lab" style="margin-top:10px">À éviter (un par ligne)<textarea class="textarea" id="eviter" rows="3">${esc((W.eviter || []).join("\n"))}</textarea></label>
+      <label class="cb-lab" style="margin-top:10px">Avis médical ou chirurgical à évoquer<input class="input" id="avis" value="${esc(W.avis || "")}"></label>` : ""}
+      ${liste("modeles", "Modèles proposés (le premier est mis en avant)")}
+      ${liste("postop", "Modèles proposés après une opération")}
+      <p class="hint">Tapez quelques lettres pour retrouver un modèle par son nom exact. Un modèle « Introuvable » ne sera pas proposé.</p>
+    </div>
+    ${barre(perso)}`;
+  const form = $("#form");
+  suivre(form);
+  const lire = () => {
+    if($("#axes")){
+      const ax = lignes($("#axes").value), ev = lignes($("#eviter").value), a = $("#avis").value.trim();
+      if(ax.length || "axes" in e) W.axes = ax; if(ev.length || "eviter" in e) W.eviter = ev; else delete W.eviter;
+      if(a) W.avis = a; else delete W.avis;
+    }
+    $$("[data-list]", form).forEach(l => { const v = $$("[data-m]", l).map(x => x.value.trim()).filter(Boolean); if(v.length) W[l.dataset.list] = v; else delete W[l.dataset.list]; });
+  };
+  const refaire = () => { lire(); modifie = true; vueTx(); $("#save") && ($("#save").disabled = false); };
+  $$("[data-mdel]", form).forEach(b => b.onclick = () => { lire(); const [f, i] = b.dataset.mdel.split(":"); W[f].splice(+i, 1); refaire(); });
+  $$("[data-madd]", form).forEach(b => b.onclick = () => { lire(); const f = b.dataset.madd; (W[f] ||= []).push(""); refaire(); const l = $$(`[data-list=${f}] [data-m]`); l[l.length - 1]?.focus(); });
+  $("#txsec").onchange = async ev => { if(modifie && !(await confirmDialog({ title:"Changer sans enregistrer ?", confirm:"Changer" }))){ ev.target.value = txSec; return; } txSec = ev.target.value; txKey = ""; modifie = false; travail = null; vueTx(); };
+  $("#txkey").onchange = async ev => { if(modifie && !(await confirmDialog({ title:"Changer sans enregistrer ?", confirm:"Changer" }))){ ev.target.value = txKey; return; } txKey = ev.target.value; modifie = false; travail = null; vueTx(); };
+  $("#save") && ($("#save").onclick = () => {
+    lire();
+    const inconnus = [...(W.modeles || []), ...(W.postop || [])].filter(n => !NOMSET.has(n));
+    if(inconnus.length) toast(`Modèle introuvable : ${inconnus.join(", ")}. Vérifiez le nom.`, { type:"err", duration:7000 });
+    sauver(n => {
+      n.tx ||= {}; n.tx[txSec] ||= {};
+      if(memes(W, K0.TX[txSec][txKey])) delete n.tx[txSec][txKey]; else n.tx[txSec][txKey] = W;
+    });
+  });
+  $("#orig") && ($("#orig").onclick = async () => {
+    if(await confirmDialog({ title:"Revenir au traitement d'origine ?", message:libelle(txSec, txKey), confirm:"Revenir à l'origine", danger:true })) sauver(n => { delete n.tx?.[txSec]?.[txKey]; }, "Contenu d'origine rétabli.");
+  });
+}
+
+addEventListener("beforeunload", e => { if(modifie){ e.preventDefault(); e.returnValue = ""; } });
+page();
+</script>
+</body>
+</html>

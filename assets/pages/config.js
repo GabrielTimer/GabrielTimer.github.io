@@ -8,7 +8,7 @@ import {
   exoImageHTML, sessionDuration, fmtDuree, plural, setRunProgram, localProgs, prenom, fmtDate, startOfDay,
   emptyHTML, byWeek, settings
 } from "../app.js";
-import { exerciseImage, toProgramExercise, updateSessionExercise, norm, variantesDe, exerciseKey } from "../library.js";
+import { exerciseImage, toProgramExercise, updateSessionExercise, norm, variantesDe, exerciseKey, loadLibrary, loadProgressions, saveProgressions } from "../library.js";
 import { isHidden } from "../settings.js";
 import * as V from "../variantes.js";
 import { compareNoms } from "../noms.js";
@@ -508,6 +508,8 @@ async function openVariantes(i){
     bloc("Variantes", "swap", "", V.proches, `<p class="small muted" style="margin:0 0 8px">Même famille d'exercices, difficulté proche.</p>`);
   if(!faciles.length && !difficiles.length && !V.proches.length) html = "";
   if(!html) html = `<div class="empty" style="padding:16px"><h3>Pas de variante pour cet exercice</h3><p>Ajoutez un autre exercice depuis la bibliothèque si besoin.</p></div>`;
+  const C = await import("../cloud.js");
+  if(C.estTitulaire() && V.courant) html += `<p style="margin:16px 0 0"><button class="btn sm" type="button" id="var-edit">${icon("edit")}${V.chaine.length > 1 ? "Modifier cette progression" : "Créer une progression pour cet exercice"}</button></p>`;
   s.body.innerHTML = `<style>
       .var-list{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
       .var-item{ display:flex; align-items:center; gap:12px; width:100%; padding:10px 12px; border:0; border-top:1px solid var(--line); background:var(--surface); color:inherit; font:inherit; text-align:left; cursor:pointer; }
@@ -524,6 +526,7 @@ async function openVariantes(i){
       .var-h svg{ width:18px; height:18px; }
       .var-h.easy{ color:var(--lagon-strong); } .var-h.hard{ color:var(--soleil-strong, #8a5a00); }
     </style>${html}`;
+  s.body.querySelector("#var-edit")?.addEventListener("click", () => { s.close(); editerProgression(V.courant, () => openVariantes(i)); });
   const tous = [...V.chaine, ...V.proches];
   s.body.querySelectorAll("[data-pick]").forEach(b => b.onclick = () => {
     const e = tous.find(y => exerciseKey(y) === b.dataset.pick);
@@ -539,6 +542,60 @@ async function openVariantes(i){
     s.close();
     toast(`« ${avant.nom} » remplacé par « ${e.nom} ».`, { type:"ok", action:{ label:"Annuler", run:() => { S.exercices[i] = avant; persist(); renderExos(); renderSend(false); } } });
   });
+}
+
+/* ---------- Modifier une progression (titulaire) ----------
+   La chaîne de l'exercice : du plus facile au plus difficile, même type d'images (HEP ou dessins).
+   Un exercice ne peut être que dans une chaîne : l'ajouter ici le retire de son ancienne chaîne.
+   Tout est rangé dans Firestore (acces/progressions) par saveProgressions(). */
+async function editerProgression(cur, retour){
+  const [list, P] = await Promise.all([loadLibrary(), loadProgressions()]);
+  const byKey = new Map(list.map(e => [exerciseKey(e), e]));
+  const cle = exerciseKey(cur);
+  const p = P.pos.get(cle);
+  let ch = p ? [...P.chaines[p[0]]] : [cle];
+  const s = openSheet({ title:"Modifier la progression", body:"", foot:`<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" id="pg-ok">${icon("check")}Enregistrer</button>` });
+  let q = "";
+  const rendu = () => {
+    const ql = norm(q);
+    const res = ql.length < 2 ? [] : list.filter(e => e.source === cur.source && !isHidden(exerciseKey(e)) && !ch.includes(exerciseKey(e)) && (e.search || norm(e.nom)).includes(ql)).slice(0, 12);
+    s.body.innerHTML = `<style>
+        .pg-l{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden; }
+        .pg-r{ display:flex; align-items:center; gap:10px; padding:8px 10px; border-top:1px solid var(--line); background:var(--surface); }
+        .pg-r:first-child{ border-top:0; } .pg-r.cur{ background:var(--lagon-soft); }
+        .pg-r img, .pg-r .ph-img{ width:44px; height:44px; flex:none; border-radius:var(--r-sm); object-fit:cover; background:#fff; }
+        .pg-n{ flex:1; min-width:0; font-weight:700; line-height:1.25; } .pg-n small{ display:block; font-weight:600; color:var(--ink-3); }
+      </style>
+      <p class="small muted" style="margin:0 0 10px">Du plus facile (en haut) au plus difficile (en bas). Seulement des exercices ${cur.source === "HEP" ? "HEP" : "en dessins"}.</p>
+      <div class="pg-l">${ch.map((k, j) => { const e = byKey.get(k); if(!e) return ""; return `<div class="pg-r ${k === cle ? "cur" : ""}">${exoImageHTML(e.image, "")}<span class="pg-n">${esc(e.nom)}<small>${j === 0 ? "Le plus facile" : j === ch.length - 1 ? "Le plus difficile" : `Niveau ${j + 1}`}</small></span>
+        <button class="icon-btn sm" type="button" data-pu="${j}" aria-label="Plus facile" ${j ? "" : "disabled"}>${icon("up")}</button>
+        <button class="icon-btn sm" type="button" data-pd="${j}" aria-label="Plus difficile" ${j < ch.length - 1 ? "" : "disabled"}>${icon("down")}</button>
+        <button class="icon-btn sm" type="button" data-px="${j}" aria-label="Retirer de la progression">${icon("close")}</button></div>`; }).join("")}</div>
+      <h3 style="font-size:var(--fs-md);margin:16px 0 8px">Ajouter un exercice</h3>
+      <label class="input-icon">${icon("search")}<input class="input" id="pg-q" type="search" placeholder="Nom de l'exercice…" value="${esc(q)}" aria-label="Rechercher un exercice"></label>
+      <div class="pg-l" style="margin-top:8px;${res.length ? "" : "border:0"}">${res.map(e => { const k = exerciseKey(e); const ailleurs = P.pos.has(k); return `<div class="pg-r">${exoImageHTML(e.image, "")}<span class="pg-n">${esc(e.nom)}${ailleurs ? `<small>Déjà dans une autre progression : il en sera retiré</small>` : ""}</span><button class="btn sm" type="button" data-pa="${esc(k)}">${icon("plus")}Ajouter</button></div>`; }).join("")}</div>
+      ${ql.length >= 2 && !res.length ? `<p class="small muted">Aucun exercice trouvé.</p>` : ""}`;
+    const inp = s.body.querySelector("#pg-q");
+    inp.oninput = () => { q = inp.value; const pos = inp.selectionStart; rendu(); const n = s.body.querySelector("#pg-q"); n.focus(); try{ n.setSelectionRange(pos, pos); }catch(e){} };
+    s.body.querySelectorAll("[data-pu]").forEach(b => b.onclick = () => { const j = +b.dataset.pu; [ch[j - 1], ch[j]] = [ch[j], ch[j - 1]]; rendu(); });
+    s.body.querySelectorAll("[data-pd]").forEach(b => b.onclick = () => { const j = +b.dataset.pd; [ch[j + 1], ch[j]] = [ch[j], ch[j + 1]]; rendu(); });
+    s.body.querySelectorAll("[data-px]").forEach(b => b.onclick = () => { ch.splice(+b.dataset.px, 1); rendu(); });
+    s.body.querySelectorAll("[data-pa]").forEach(b => b.onclick = () => { ch.push(b.dataset.pa); q = ""; rendu(); });
+  };
+  rendu();
+  s.el.querySelector("#pg-ok").onclick = async () => {
+    const btn = s.el.querySelector("#pg-ok"); btn.disabled = true;
+    // Nouvelle liste : l'ancienne chaîne remplacée, les exercices ajoutés retirés de leur ancienne chaîne
+    const dans = new Set(ch);
+    let chaines = P.chaines.map((c, n) => p && n === p[0] ? null : c.filter(k => !dans.has(k)));
+    if(ch.length > 1){ if(p) chaines[p[0]] = ch; else chaines.push(ch); }
+    chaines = chaines.filter(c => c && c.length > 1);
+    try{
+      await saveProgressions(chaines);
+      toast("Progression enregistrée.", { type:"ok" });
+      s.close(); renderExos(); retour?.();
+    }catch(e){ btn.disabled = false; toast("Enregistrement impossible (connexion ?).", { type:"err" }); }
+  };
 }
 
 function setField(i, f, v, rerenderInput){

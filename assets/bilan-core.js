@@ -37,6 +37,58 @@ export async function loadClinic(){
   // Tests fonctionnels : même format que les mesures pour la comparaison [id, libellé, MID, sens]
   K.TFM = K.TF.map(([k, nom, u, mid, dir]) => [k, `${nom} (${u})`, mid, dir]);
   K.sec = key => K.SEC.find(s => s[0] === key) || [key, key, []];
+  K0 = { REG:K.REG, GUIDE:K.GUIDE, ENT:K.ENT, TX:K.TX };
+  appliquerPerso(K, await lirePerso());
+  return K;
+}
+
+/* ---------- Contenu du bilan modifié par le kiné (page « Contenu du bilan ») ----------
+   Rangé dans Firestore (acces/bilan), avec une copie sur l'appareil pour le hors connexion.
+   Seules les parties modifiées sont rangées ; le reste vient des fichiers bilan-kine/*.js.
+   Forme : { reg:{ genou:{ H, RF, RFm, T, note } }, guide:{ "Lachman":{ t, p, v, r } },
+             entG:[…questions générales], entR:{ genou:[…questions de la région] },
+             tx:{ HYP:{ "genou:LCA":{…} }, REGION:{ genou:{…} }, MOTIF:{ "Lombalgie":{…} } } } */
+let K0 = null;
+const PERSO_LOCAL = "gt_bilan_perso";
+
+export async function lirePerso({ reseau = true } = {}){
+  let local = null;
+  try{ local = JSON.parse(localStorage.getItem(PERSO_LOCAL) || "null"); }catch(e){}
+  if(!reseau) return local;
+  try{
+    const C = await import("./cloud.js");
+    const o = await C.getAccesJSON("bilan");
+    try{ if(o) localStorage.setItem(PERSO_LOCAL, JSON.stringify(o)); else localStorage.removeItem(PERSO_LOCAL); }catch(e){}
+    return o;
+  }catch(e){ return local; }
+}
+
+export async function enregistrerPerso(o){
+  const C = await import("./cloud.js");
+  /* On retire les parties vides (après « Revenir au contenu d'origine ») */
+  const net = x => { if(x && typeof x === "object" && !Array.isArray(x)) for(const k of Object.keys(x)){ net(x[k]); if(x[k] && typeof x[k] === "object" && !Array.isArray(x[k]) && !Object.keys(x[k]).length) delete x[k]; } return x; };
+  net(o);
+  const vide = !o || !Object.values(o).some(v => v && (Array.isArray(v) ? v.length : Object.keys(v).length));
+  await C.saveAccesJSON("bilan", vide ? null : o);
+  try{ if(vide) localStorage.removeItem(PERSO_LOCAL); else localStorage.setItem(PERSO_LOCAL, JSON.stringify(o)); }catch(e){}
+  K = null;   // le prochain loadClinic() relit tout
+}
+
+/** Contenu d'origine (fichiers bilan-kine), sans les modifications du kiné. */
+export async function contenuOrigine(){ await loadClinic(); return K0; }
+
+export function appliquerPerso(K, o){
+  if(!o || !K0) return K;
+  if(o.reg){
+    K.REG = { ...K0.REG };
+    for(const [r, v] of Object.entries(o.reg)) if(K0.REG[r]) K.REG[r] = { ...K0.REG[r], ...v };
+  }
+  if(o.guide) K.GUIDE = { ...K0.GUIDE, ...o.guide };
+  if(o.entG || o.entR) K.ENT = { ...K0.ENT, G: o.entG || K0.ENT.G, REGQ: { ...K0.ENT.REGQ, ...(o.entR || {}) } };
+  if(o.tx && K0.TX){
+    K.TX = { ...K0.TX };
+    for(const sec of ["HYP", "REGION", "MOTIF"]) if(o.tx[sec]) K.TX[sec] = { ...K0.TX[sec], ...o.tx[sec] };
+  }
   return K;
 }
 

@@ -835,6 +835,23 @@ export async function saveIA(data){
   await setDoc(doc(db, "acces", "ia"), clean({ ...data, updatedAt: Date.now() }));
 }
 
+/* ---------- Contenus personnalisés par le kiné (acces/{id}) ----------
+   Lus par les kinés du cabinet, modifiés par le titulaire seul, jamais lisibles par un patient.
+   Rangés en texte JSON (Firestore n'accepte pas les tableaux de tableaux).
+   - acces/bilan        : contenu du bilan modifié depuis « Contenu du bilan »
+   - acces/progressions : progressions plus facile / plus difficile modifiées depuis l'éditeur */
+
+export async function getAccesJSON(id){
+  const snap = await getDoc(doc(db, "acces", id));
+  if(!snap.exists()) return null;
+  try{ return JSON.parse(snap.data().json || "null"); }catch(e){ return null; }
+}
+
+export async function saveAccesJSON(id, data){
+  if(data == null) await deleteDoc(doc(db, "acces", id));
+  else await setDoc(doc(db, "acces", id), { json: JSON.stringify(data), updatedAt: Date.now() });
+}
+
 /* ---------- Réglages du cabinet (reglages/cabinet, lisibles par tous) ---------- */
 
 export async function getReglages(){

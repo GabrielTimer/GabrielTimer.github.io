@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.47.6";
+const VERSION = "gt-2.48.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -21,7 +21,7 @@ const PRECACHE = [
 /* Espace kiné : tout le reste de l'appli, mis de côté dès que le kiné est connecté
    (pas sur les téléphones des patients). Un fichier oublié ici est gardé à sa première ouverture. */
 const KINE_EN_PLUS = [
-  "/admin_exercises.html", "/admin_tools.html", "/aide.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
+  "/admin_exercises.html", "/admin_tools.html", "/contenu-bilan.html", "/aide.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
   "/assets/bilan-traitement.js", "/assets/exercise-editor.js", "/assets/faire-evoluer.js", "/assets/filter-drawer.js", "/assets/global-search.js", "/assets/info-mois.js",
   "/assets/kine-ui.js", "/assets/kine.js", "/assets/library-ui.js", "/assets/modeles-base.js", "/assets/modeles-ui.js", "/assets/modeles.js",
   "/assets/pages/bilan.js", "/assets/pages/config.css", "/assets/pages/config.js", "/assets/pathologies.js", "/assets/photos-cabinet.js", "/assets/qr.js",
