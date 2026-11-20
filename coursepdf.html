@@ -124,7 +124,14 @@ margin:20px auto;
 background:white;
 padding:8mm;
 box-sizing:border-box;
+overflow:hidden;
 }
+
+/* Page 2 : se resserre juste ce qu'il faut si le texte ne tient pas (taille réglée par le script) */
+#guidePage.serre .guideGrid{ gap:9px; margin-top:12px; }
+#guidePage.serre .guideCard{ padding:10px 12px; }
+#guidePage.serre .guideCard h3{ margin-bottom:6px; padding-bottom:4px; }
+#guidePage.serre .guideCard p{ font-size:var(--gp, 14px); margin:4px 0; line-height:1.35; }
 
 .guideGrid{
 display:grid;
@@ -681,7 +688,7 @@ weeks.appendChild(block);
 
 }
 /* Ajuste la densité jusqu'à ce que toutes les semaines tiennent sur la page */
-(function ajuster(){
+function ajuster(){
   const page = document.getElementById("page");
   const niveaux = [[], ["dense"], ["dense", "dense2"], ["dense", "dense2", "dense3"]];
   for(const n of niveaux){
@@ -689,8 +696,22 @@ weeks.appendChild(block);
     n.forEach(c => page.classList.add(c));
     if(page.scrollHeight <= page.clientHeight + 1) break;
   }
-})();
+  const guide = document.getElementById("guidePage");
+  guide.classList.remove("serre");
+  guide.style.removeProperty("--gp");
+  if(guide.scrollHeight > guide.clientHeight + 1){
+    guide.classList.add("serre");
+    for(let t = 14; t >= 10; t -= 0.5){
+      guide.style.setProperty("--gp", t + "px");
+      if(guide.scrollHeight <= guide.clientHeight + 1) break;
+    }
+  }
+}
+ajuster();
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(ajuster);
+window.addEventListener("load", ajuster);
 async function downloadPdf(){
+ajuster();
 
 const DOS = await import("/assets/dossiers.js");
 await DOS.autoriser("documents");
