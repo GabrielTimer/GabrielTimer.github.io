@@ -53,7 +53,7 @@
     .mx-pane{ height:calc(100dvh - var(--top-h) - 120px); }
     .mx.has-thread .mx-side{ display:none; }
     .mx:not(.has-thread) .mx-main{ display:none; }
-    .mx-back{ display:inline-flex; }
+    .mx-back{ display:inline-flex; align-items:center; gap:4px; flex:none; }
     .mx-b{ max-width:88%; }
     .mx-th-head{ flex-wrap:nowrap; gap:6px; padding:8px 10px; }
     .mx-th-head .avatar{ display:none; }
@@ -160,7 +160,7 @@ function threadHTML(c){
   });
   const tel = p.telephone ? String(p.telephone).replace(/[^\d+]/g, "") : "";
   return `<div class="mx-th-head">
-      <button class="icon-btn sm mx-back" type="button" data-back aria-label="Retour aux conversations">${icon("back")}</button>
+      <button class="btn sm ghost mx-back" type="button" data-back aria-label="Retour aux conversations">${icon("back")}<span>Conversations</span></button>
       <span class="avatar">${esc(initials(p.nom))}</span>
       <h2><a href="/cloud.html?patient=${encodeURIComponent(c.cle)}">${esc(nomAffiche(p.nom) || "Patient")}</a></h2>
       ${c.items.some(i => i.lu && i.kind !== "envoye") ? `<button class="btn sm ghost" type="button" data-nonlu aria-label="Marquer comme non lu">${icon("circle")}<span class="lbl">Non lu</span></button>` : ""}
@@ -214,9 +214,23 @@ async function marquerLue(c){
   M.setUnreadCache(items.filter(i => !i.lu).length);
 }
 
-function ouvrir(cle){
+/* Sur téléphone, la liste et la conversation sont deux écrans : ouvrir une conversation ajoute
+   une étape à l'historique, pour que le geste « retour » d'Android ramène à la liste. */
+const petitEcran = () => matchMedia("(max-width:760px)").matches;
+addEventListener("popstate", () => {
+  const cle = new URLSearchParams(location.search).get("patient") || null;
+  if(cle === state.cle) return;
   state.cle = cle;
-  history.replaceState(null, "", cle ? `?patient=${encodeURIComponent(cle)}` : location.pathname);
+  render();
+});
+
+function ouvrir(cle){
+  const avant = state.cle;
+  state.cle = cle;
+  const url = cle ? `?patient=${encodeURIComponent(cle)}` : location.pathname;
+  if(!cle && avant && history.state?.mxConv){ history.back(); return; }   // revient à la liste par l'historique
+  if(cle && !avant && petitEcran()) history.pushState({ mxConv:true }, "", url);
+  else history.replaceState(history.state, "", url);
   render();
   const c = conversations().find(x => x.cle === cle);
   if(c?.unread){
@@ -273,8 +287,9 @@ function bind(cur){
   });
 }
 
-/* Sans patient précisé : on ouvre directement la conversation du dernier message reçu ou envoyé */
-if(!state.cle){
+/* Sans patient précisé : sur ordinateur, on ouvre directement la conversation du dernier message
+   reçu ou envoyé. Sur téléphone, on montre d'abord la liste des conversations. */
+if(!state.cle && !petitEcran()){
   const recent = conversations().find(c => c.last);
   if(recent) state.cle = recent.cle, history.replaceState(null, "", `?patient=${encodeURIComponent(recent.cle)}`);
 }
