@@ -226,9 +226,15 @@ addEventListener("popstate", () => {
 
 function ouvrir(cle){
   const avant = state.cle;
-  state.cle = cle;
   const url = cle ? `?patient=${encodeURIComponent(cle)}` : location.pathname;
-  if(!cle && avant && history.state?.mxConv){ history.back(); return; }   // revient à la liste par l'historique
+  /* Retour à la liste par l'historique : l'affichage se fait dans « popstate » ci-dessus */
+  if(!cle && avant && history.state?.mxConv){
+    history.back();
+    /* Sécurité : si le navigateur ne revient pas en arrière, on affiche quand même la liste */
+    setTimeout(() => { if(state.cle === avant){ state.cle = null; history.replaceState(null, "", location.pathname); render(); } }, 500);
+    return;
+  }
+  state.cle = cle;
   if(cle && !avant && petitEcran()) history.pushState({ mxConv:true }, "", url);
   else history.replaceState(history.state, "", url);
   render();
