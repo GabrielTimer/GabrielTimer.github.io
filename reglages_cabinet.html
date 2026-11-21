@@ -232,6 +232,76 @@ async function initDossiers(){
   maj();
 }
 
+async function initTransfert(){
+  const T = await import("/assets/transfert.js");
+  const D = await import("/assets/dossiers.js");
+  const box = $("#tr-box"), old = $("#tr-old");
+  const maj = async () => {
+    const r = T.role();
+    $$("[data-tr-role]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.trRole === r)));
+    if(r === "reception"){
+      if(!T.codeValide(T.code())) T.regler({ code: T.nouveauCode() });
+      const h = D.supporte() ? await D.dossier("bilans") : null;
+      box.innerHTML = `<div class="stack" style="--gap:12px">
+        <div><div class="small muted">Code de transfert à taper une fois sur la tablette :</div>
+          <div class="row wrap" style="--gap:10px;align-items:center"><strong style="font-size:1.35em;letter-spacing:.08em;font-family:ui-monospace,monospace">${esc(T.code())}</strong>
+          <button class="btn sm" type="button" id="tr-copy">${icon("copy")}Copier</button>
+          <button class="btn sm" type="button" id="tr-new">Nouveau code</button></div></div>
+        ${!D.supporte() ? `<div class="notice warn">${icon("alert")}<span>Ce navigateur ne peut pas ranger les bilans dans un dossier. Ouvrez l'espace kiné dans <strong>Chrome ou Edge</strong> sur le PC.</span></div>`
+          : `<div class="row wrap" style="--gap:10px;align-items:center;justify-content:space-between">
+              <div><strong>Dossier des bilans</strong><div class="small muted">${h ? `${icon("folder")} « ${esc(h.name)} »` : "Pas encore choisi"}</div></div>
+              <button class="btn ${h ? "" : "primary"}" type="button" id="tr-dos">${icon("folder")}${h ? "Changer de dossier" : "Choisir le dossier"}</button></div>`}
+        <p class="hint">Les bilans arrivent tant qu'une page de l'espace kiné est ouverte sur ce PC (s'il est éteint, ils attendent, chiffrés). Quand Chrome demande l'accès au dossier, choisissez « Autoriser à chaque visite ».</p>
+      </div>`;
+      $("#tr-copy").onclick = () => navigator.clipboard?.writeText(T.code()).then(() => toast("Code copié."), () => {});
+      $("#tr-new").onclick = async () => {
+        if(!(await confirmDialog({ title:"Créer un nouveau code ?", message:"Il faudra taper le nouveau code sur la tablette. Les bilans déjà envoyés avec l'ancien code et pas encore reçus devront être renvoyés.", confirm:"Nouveau code" }))) return;
+        T.regler({ code: T.nouveauCode() }); maj();
+      };
+      const bd = $("#tr-dos");
+      if(bd) bd.onclick = async () => {
+        try{ const h2 = await D.choisir("bilans"); toast(`Les bilans iront dans « ${h2.name} ».`, { type:"ok" }); maj(); T.demarrerReception(); }
+        catch(e){ if(e?.name !== "AbortError") toast("Ce dossier ne peut pas être utilisé. Choisissez-en un autre (pas un dossier système).", { type:"err" }); }
+      };
+      T.demarrerReception();
+    }else if(r === "envoi"){
+      const att = await T.enAttente();
+      box.innerHTML = `<div class="stack" style="--gap:12px">
+        <div class="field"><label for="tr-code">Code de transfert (affiché sur le PC du cabinet, dans ce même réglage)</label>
+          <div class="row wrap" style="--gap:10px"><input class="input" id="tr-code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX-XXXX" value="${esc(T.code())}" style="max-width:280px;font-family:ui-monospace,monospace;letter-spacing:.06em">
+          <button class="btn primary" type="button" id="tr-save">${icon("check")}Enregistrer le code</button></div></div>
+        ${T.pret() ? `<div class="notice">${icon("checkCircle")}<span>Prêt : à « Terminer », chaque bilan modifié part vers le PC du cabinet.</span></div>` : ""}
+        ${att.length ? `<div class="notice warn">${icon("clock")}<span>${att.length > 1 ? `${att.length} bilans attendent` : "Un bilan attend"} le réseau pour partir.</span><button class="btn sm" type="button" id="tr-retry">Réessayer</button></div>` : ""}
+      </div>`;
+      $("#tr-save").onclick = () => {
+        const v = $("#tr-code").value;
+        if(!T.codeValide(v)){ toast("Ce code ne semble pas complet : 16 lettres et chiffres, comme affiché sur le PC.", { type:"err" }); return; }
+        T.regler({ code: v }); toast("Code enregistré.", { type:"ok" }); maj();
+      };
+      const rt = $("#tr-retry");
+      if(rt) rt.onclick = async () => { rt.disabled = true; const n = await T.relancer(); if(!n) toast("Toujours pas parti : vérifiez la connexion.", { type:"err" }); maj(); };
+    }else{
+      box.innerHTML = `<p class="hint">Sans transfert, téléchargez le PDF depuis le bilan (bouton « PDF » ou « Envoyer »).</p>`;
+    }
+    /* Anciens bilans encore dans Firebase */
+    const n = await C.bilansDansFirebase().catch(() => 0);
+    old.innerHTML = n ? `<div class="notice warn">${icon("alert")}<div class="stack" style="--gap:8px"><span><strong>${n} ancien${n > 1 ? "s" : ""} bilan${n > 1 ? "s sont" : " est"} encore dans Firebase.</strong> À faire <strong>sur la tablette</strong> : ils y sont copiés puis effacés de Firebase. Ensuite, ils ne seront plus visibles sur les autres appareils.</span>
+      <div><button class="btn sm primary" type="button" id="tr-rapatrier">Mettre les anciens bilans sur cet appareil</button></div></div></div>` : "";
+    const ra = $("#tr-rapatrier");
+    if(ra) ra.onclick = async () => {
+      if(T.role() !== "envoi" && !(await confirmDialog({ title:"Cet appareil n'est pas réglé comme tablette", message:"Les bilans ne seront ensuite lisibles que sur cet appareil. Continuer quand même ?", confirm:"Continuer" }))) return;
+      ra.disabled = true;
+      try{
+        const k = await C.rapatrierBilans((d, t) => { ra.textContent = `Copie… ${d} / ${t}`; });
+        toast(`${k} bilan${k > 1 ? "s" : ""} mis sur cet appareil et effacé${k > 1 ? "s" : ""} de Firebase.`, { type:"ok", duration:7000 });
+      }catch(e){ console.error(e); toast("La copie s'est arrêtée (connexion ?). Ce qui n'a pas été copié est resté dans Firebase : relancez.", { type:"err", duration:8000 }); }
+      maj();
+    };
+  };
+  $$("[data-tr-role]").forEach(b => b.onclick = () => { T.regler({ role: b.dataset.trRole }); maj(); if(b.dataset.trRole === "envoi") T.relancer(); });
+  maj();
+}
+
 function render(){
   R.cabinet.horaires = H.normaliser(R.cabinet.horaires);
   const A = R.messages.annonce;
@@ -397,6 +467,18 @@ function render(){
       <p class="hint" style="margin-top:10px">Au premier enregistrement après avoir rouvert le navigateur, Chrome peut demander de confirmer l'accès au dossier : choisissez « Autoriser à chaque visite » pour ne plus avoir la question.</p>
     </section>
 
+    <section class="panel" id="transfert">
+      <h2>${icon("upload")}Transfert des bilans vers le PC</h2>
+      <p class="muted">Les bilans sont enregistrés sur l'appareil qui les fait (la tablette), plus dans Firebase. À « Terminer », la tablette envoie le PDF <strong>chiffré</strong> au PC du cabinet : il arrive dans le dossier des bilans, prêt à glisser dans Maiia, puis il est effacé de Firebase. Réglage propre à chaque appareil.</p>
+      <div class="segmented block" role="group" aria-label="Rôle de cet appareil" id="tr-role">
+        <button type="button" data-tr-role="">Aucun</button>
+        <button type="button" data-tr-role="envoi">Tablette (envoie)</button>
+        <button type="button" data-tr-role="reception">PC du cabinet (reçoit)</button>
+      </div>
+      <div id="tr-box" style="margin-top:14px"></div>
+      <div id="tr-old" style="margin-top:14px"></div>
+    </section>
+
     ${C.isOwnerUser(C.auth.currentUser) ? `<section class="panel" id="comptes">
       <h2>${icon("users")}Comptes autorisés</h2>
       <p class="muted">Remplaçant, associé : il a son propre espace kiné, avec <strong>ses</strong> patients et <strong>sa</strong> messagerie. Il ne voit pas les vôtres, vous ne voyez pas les siens. Il reçoit un e-mail pour choisir son mot de passe, puis se connecte sur la page de connexion habituelle. Retirez-le à son départ : l'accès est coupé tout de suite.</p>
@@ -463,6 +545,7 @@ function render(){
   initDeconnexion();
   initComptes();
   initDossiers();
+  initTransfert();
   initPhotos();
   const last = Math.max(Number(localStorage.getItem("gt_last_backup") || 0), Number(settings.sauvegarde?.derniere || 0));
   const fmtJ = t => new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long", year:"numeric" });

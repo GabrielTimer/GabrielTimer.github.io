@@ -583,7 +583,7 @@ export function mountGuide(app, ctx){
       finally{ b.disabled = false; }
       return;
     }
-    if(act === "send"){ B.sendSheet(S, patient, ctx.opts()); ctx.save(); return; }
+    if(act === "send"){ B.sendSheet(S, patient, ctx.opts(), { versPc: ctx.versPc }); ctx.save(); return; }
   });
 
   root.addEventListener("toggle", e => {

@@ -228,6 +228,14 @@ service cloud.firestore {
       allow delete: if isOwner() || (isAutorise() && peutVoir(resource.data));
     }
 
+    // Bilans en transit de la tablette vers le PC du cabinet : chiffrés sur la tablette,
+    // effacés par le PC dès réception. Chaque kiné ne voit que ses propres envois.
+    match /transit/{id} {
+      allow create: if isKine() && request.resource.data.kine == moi()
+        && request.resource.data.data is string && request.resource.data.data.size() < 900000;
+      allow read, delete: if isKine() && resource.data.kine == moi();
+    }
+
     // Programmes modèles du cabinet
     match /modeles/{id} {
       allow read, write: if isKine();

@@ -543,7 +543,9 @@ export async function downloadPdf(S, patient, opts){
 
 /* ---------- Fenêtre « Envoyer » ---------- */
 
-export function sendSheet(S, patient, opts = {}){
+export function sendSheet(S, patient, opts = {}, { versPc = null } = {}){
+  let pc = false;
+  try{ pc = !!versPc && localStorage.getItem("gt_transfert_role") === "envoi"; }catch(e){}
   const text = summaryText(S, patient, opts);
   const probe = typeof File !== "undefined" ? new File(["x"], "x.pdf", { type:"application/pdf" }) : null;
   const canFiles = !!(probe && navigator.canShare && navigator.canShare({ files:[probe] }));
@@ -555,9 +557,11 @@ export function sendSheet(S, patient, opts = {}){
         <label for="sb-to">Destinataire</label>
         <input class="input" id="sb-to" type="email" autocomplete="off" placeholder="adresse e-mail du médecin, du patient…" value="${esc(S.f?.medmail || "")}">
       </div>
+      ${pc ? `<div class="btn-row"><button class="btn primary" type="button" id="sb-pc">${icon("upload")}Envoyer au PC du cabinet</button></div>
+      <p class="hint" style="margin-top:-8px">Le PDF arrive chiffré dans le dossier des bilans du PC, prêt à glisser dans Maiia. « Terminer » l'envoie aussi tout seul.</p>` : ""}
       <div class="btn-row">
-        ${canFiles ? `<button class="btn primary" type="button" id="sb-share">${icon("share")}Partager le PDF</button>` : ""}
-        <button class="btn ${canFiles ? "" : "primary"}" type="button" id="sb-mail">${icon("mail")}E-mail</button>
+        ${canFiles ? `<button class="btn ${pc ? "" : "primary"}" type="button" id="sb-share">${icon("share")}Partager le PDF</button>` : ""}
+        <button class="btn ${canFiles || pc ? "" : "primary"}" type="button" id="sb-mail">${icon("mail")}E-mail</button>
         <button class="btn" type="button" id="sb-pdf">${icon("download")}Télécharger le PDF</button>
         <button class="btn" type="button" id="sb-copy">${icon("copy")}Copier pour Maiia</button>
       </div>
@@ -587,6 +591,8 @@ export function sendSheet(S, patient, opts = {}){
   });
   $s("#sb-pdf").onclick = () => busy($s("#sb-pdf"), () => downloadPdf(S, patient, opts));
   $s("#sb-copy").onclick = () => copyText(text);
+  const bpc = $s("#sb-pc");
+  if(bpc) bpc.onclick = () => busy(bpc, async () => { await versPc(); });
   return s;
 }
 

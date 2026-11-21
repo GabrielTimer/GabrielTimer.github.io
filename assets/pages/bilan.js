@@ -1,6 +1,7 @@
 /* Bilan kiné d'un patient : saisie, enregistrement automatique, PDF, envoi.
    URL : /bilan.html?patient=CODE (nouveau bilan) ou ?patient=CODE&id=ID (bilan existant).
-   Les bilans sont dans la collection Firestore « bilans », réservée au compte kiné. */
+   Les bilans sont enregistrés sur cet appareil (bilans-local.js), plus dans Firebase.
+   À « Terminer », le PDF part chiffré vers le PC du cabinet si le transfert est réglé (transfert.js). */
 
 import {
   $, $$, esc, icon, params, store, mountShell, registerSW, toast, confirmDialog, openSheet,
@@ -386,6 +387,7 @@ const keepLocal = () => store.set(draftKey(), { at:Date.now(), S });
 
 function changed(){
   dirty = true;
+  S.aEnvoyer = true;   // à renvoyer au PC du cabinet à la fin
   keepLocal();
   setSt("", "Modifications…");
   queueSave();
@@ -397,7 +399,7 @@ async function save(){
   if(!dirty) return true;
   if(blocked){ setSt("err", "Gardé sur cet appareil"); return false; }
   dirty = false;
-  setSt("wait", navigator.onLine ? "Enregistrement…" : "Hors ligne : enregistré au retour du réseau");
+  setSt("wait", "Enregistrement…");
   const isNew = !id, oldKey = draftKey();
   if(isNew){ id = C.newId(); createdAt = Date.now(); }
   const S2 = JSON.parse(JSON.stringify(S));
@@ -429,10 +431,32 @@ const queueSave = debounce(() => save(), 1200);
 async function leave(href){
   const ok = await save();
   if(!ok && dirty){
-    const go = await confirmDialog({ title:"Bilan non enregistré dans Firebase", message:"Il reste gardé sur cet appareil et sera repris la prochaine fois que vous ouvrirez un bilan pour ce patient. Quitter quand même ?", confirm:"Quitter" });
+    const go = await confirmDialog({ title:"Bilan non enregistré", message:"Il reste gardé comme brouillon sur cet appareil et sera repris la prochaine fois que vous ouvrirez un bilan pour ce patient. Quitter quand même ?", confirm:"Quitter" });
     if(!go) return;
   }
   location.href = href;
+}
+
+/* ---------- Envoi au PC du cabinet (transfert chiffré) ---------- */
+
+async function envoyerAuPc({ force = false } = {}){
+  const T = await import("../transfert.js");
+  if(T.role() !== "envoi" || !T.pret()) return null;
+  if(!force && !S.aEnvoyer) return "deja";
+  await save();
+  if(!id) return null;
+  toast("Envoi du bilan au PC du cabinet…");
+  const d = await B.bilanPdf(S, patient, opts());
+  const r = await T.envoyer({ blob: d.output("blob"), nom: B.pdfName(S, patient), bilanId: id });
+  S.aEnvoyer = false; dirty = true; await save();
+  toast(r === "envoye" ? "Bilan envoyé au PC du cabinet." : "Pas de réseau : le bilan partira tout seul vers le PC dès le retour du réseau.", { type: r === "envoye" ? "ok" : "", duration: 6000 });
+  return r;
+}
+
+async function terminer(){
+  try{ await envoyerAuPc(); }
+  catch(err){ console.error(err); toast("Le bilan n'a pas pu être envoyé au PC. Il est bien enregistré sur la tablette : réessayez avec « Envoyer ».", { type:"err", duration:8000 }); }
+  leave(fiche);
 }
 
 addEventListener("beforeunload", e => {
@@ -503,7 +527,7 @@ app.addEventListener("click", async e => {
   if(d.info){ testSheet(d.info); return; }
 
   if(b.id === "a-photos"){ ouvrirPhotosBilan(); return; }
-  if(b.id === "a-done"){ leave(fiche); return; }
+  if(b.id === "a-done"){ b.disabled = true; await terminer(); b.disabled = false; return; }
   if(b.id === "a-guide"){ store.set("gt_bilan_mode", "guide"); start(); window.scrollTo(0, 0); return; }
   if(b.id === "a-copy"){ B.copyText($("#resume").value); return; }
   if(b.id === "a-pdf" || b.id === "a-pdf2"){
@@ -513,7 +537,7 @@ app.addEventListener("click", async e => {
     finally{ b.disabled = false; }
     return;
   }
-  if(b.id === "a-send"){ B.sendSheet(S, patient, opts()); save(); return; }
+  if(b.id === "a-send"){ B.sendSheet(S, patient, opts(), { versPc: () => envoyerAuPc({ force:true }) }); save(); return; }
   if(b.id === "a-del"){
     const ok = await confirmDialog({ title:"Supprimer ce bilan ?", message:`Le ${B.typeLabel(S.type).toLowerCase()} du ${B.fmtISO(S.date)} sera définitivement supprimé.`, confirm:"Supprimer", danger:true });
     if(!ok) return;
@@ -579,7 +603,8 @@ async function start(){
     photos: ouvrirPhotosBilan, majPhotos,
     bilanId: () => id,
     changed, save, opts,
-    leave: () => leave(fiche),
+    leave: () => terminer(),
+    versPc: () => envoyerAuPc({ force:true }),
     statusAgain: () => setSt(...lastSt),
     onFull: () => { store.set("gt_bilan_mode", "full"); render(); window.scrollTo(0, 0); },
     /* Proposition de traitement : modèles (fournis + cabinet), bibliothèque, ouverture dans l'éditeur */

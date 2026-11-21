@@ -17,7 +17,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   initializeFirestore, persistentLocalCache, persistentMultipleTabManager, getFirestore,
   collection, collectionGroup as fsCollectionGroup, doc, getDoc as fsGetDoc, getDocs as fsGetDocs, setDoc, deleteDoc, writeBatch,
-  query as fsQuery, where as fsWhere, getDocFromCache, getDocsFromCache
+  query as fsQuery, where as fsWhere, getDocFromCache, getDocsFromCache, onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
   getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail,
@@ -361,7 +361,7 @@ function withData(d){
    patients/{code} : ce que le patient peut lire (son nom).
    fiches/{code}   : coordonnées et note privée, réservées au kiné. */
 
-const PRIVATE = ["telephone", "email", "note", "legacyId"];
+const PRIVATE = ["telephone", "email", "note", "legacyId", "anciennesCles"];
 function split(data){
   const pub = {}, priv = {};
   Object.entries(data).forEach(([k, v]) => { (PRIVATE.includes(k) ? priv : pub)[k] = v; });
@@ -531,6 +531,7 @@ async function _deletePatient(cle){
   await batchDelete(seances.map(s => doc(db, "patients", cle, "seances", s.id)));
   const bilans = await bilanDocs(cle);
   await efface(batchDelete(bilans.map(d => d.ref)));
+  await efface(BL().then(L => L.effacerPatient(cle)));   // bilans gardés sur cet appareil
   if(code !== cle) await efface(deleteDoc(doc(db, "codes", code)));
   await efface(deleteDoc(doc(db, "fiches", cle)));
   await deleteDoc(doc(db, "patients", cle));
@@ -561,7 +562,9 @@ async function _renewAccessCode(cle){
   try{
     await setDoc(doc(db, "patients", nouveau), clean({ ...pub, codeV2: true, nouveauLien: Date.now(), updatedAt: Date.now() }));
     copies.push(doc(db, "patients", nouveau));
-    await setDoc(doc(db, "fiches", nouveau), clean({ ...priv, kine, updatedAt: Date.now() }));
+    /* anciennesCles : la tablette y retrouve les bilans rangés sous l'ancien identifiant */
+    const anciennesCles = [...new Set([...(patient.anciennesCles || []), cle])].slice(-10);
+    await setDoc(doc(db, "fiches", nouveau), clean({ ...priv, anciennesCles, kine, updatedAt: Date.now() }));
     copies.push(doc(db, "fiches", nouveau));
     await setDoc(doc(db, "codes", nouveauCode), { cle: nouveau, kine, createdAt: Date.now() });
     copies.push(doc(db, "codes", nouveauCode));
@@ -585,6 +588,7 @@ async function _renewAccessCode(cle){
   /* Bilans : rattachés au nouveau dossier */
   const bilans = await bilanDocs(cle);
   await batchWrite(bilans.map(d => [d.ref, { ...d.data(), cle: nouveau }])).catch(() => {});
+  await BL().then(L => L.renommer(cle, nouveau)).catch(() => {});
   /* Effacement de l'ancien dossier et de l'ancien code */
   await batchDelete(anciensMsg.docs.map(d => d.ref)).catch(() => {});
   for(const [root, name] of [["patients", "suivis"], ["fiches", "notes"], ["patients", "rappels"], ["patients", "messages"]]){
@@ -725,9 +729,14 @@ async function _validateSeance(cle, id, { eva = null, ressenti = null, commentai
 }
 
 /* ---------- Bilans (réservés au kiné) ----------
-   bilans/{id} : { id, cle, type, date (AAAA-MM-JJ), etat (JSON du formulaire),
-   resume (texte), zones, motif, createdAt, updatedAt }.
-   Collection à part : les patients lisent patients/{code}, jamais celle-ci. */
+   Depuis novembre 2026, les bilans sont enregistrés SUR L'APPAREIL qui les fait (la tablette),
+   plus dans Firebase : voir bilans-local.js. Leur PDF part chiffré vers le PC du cabinet (transfert.js).
+   Les anciens bilans encore dans Firebase (bilans/{id}) restent lisibles ; dès qu'on les modifie,
+   ou avec « Mettre les anciens bilans sur cet appareil » (Réglages du cabinet), ils quittent Firebase.
+   Forme : { id, cle, kine, type, date (AAAA-MM-JJ), etat, resume, zones, motif, createdAt, updatedAt }. */
+
+const BL = () => import("./bilans-local.js");
+const dansFirebase = new Set();   // bilans vus dans Firebase (à effacer de Firebase quand ils passent sur l'appareil)
 
 /* Les requêtes des comptes autres que le titulaire doivent filtrer sur le kiné du patient */
 async function kineDuPatient(cle){ return kineDe(await getPatient(cle).catch(() => null)); }
@@ -744,42 +753,138 @@ async function bilanDocs(cle){
 function mapBilan(d){
   const b = { ...d.data(), id: d.id };
   try{ b.etat = typeof b.etat === "string" ? JSON.parse(b.etat) : (b.etat || null); }catch(e){ b.etat = null; }
+  dansFirebase.add(b.id);
   return b;
+}
+const trierBilans = l => l.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.createdAt || 0) - (a.createdAt || 0));
+/* Bilans de l'appareil d'abord ; un bilan de Firebase n'est ajouté que s'il n'est pas déjà sur l'appareil */
+function fusion(locaux, distants){
+  const vus = new Set(locaux.map(b => b.id));
+  return [...locaux, ...distants.filter(b => !vus.has(b.id))];
+}
+
+/* Après un changement de code fait sur un autre appareil, les bilans de la tablette
+   sont encore rangés sous l'ancien identifiant : on les rattache au nouveau dossier. */
+async function rattacher(cle, anciennes){
+  const L = await BL();
+  for(const a of anciennes || []) await L.renommer(a, cle).catch(() => {});
 }
 
 export async function listBilans(cle){
-  const snap = await getDocs(await bilanQuery(cle));
-  return snap.docs.map(mapBilan)
-    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")) || (b.createdAt || 0) - (a.createdAt || 0));
+  const L = await BL();
+  const fiche = await getDoc(doc(db, "fiches", cle)).catch(() => null);
+  await rattacher(cle, fiche?.exists?.() ? fiche.data().anciennesCles : null);
+  const [locaux, distants] = await Promise.all([
+    L.duPatient(cle).catch(() => []),
+    getDocs(await bilanQuery(cle)).then(s => s.docs.map(mapBilan)).catch(() => [])
+  ]);
+  return trierBilans(fusion(locaux, distants));
 }
 
-/** Tous les bilans du cabinet (tableau de bord du kiné). */
+/** Tous les bilans du cabinet (tableau de bord du kiné) : ceux de cet appareil, plus les anciens de Firebase. */
 export async function listAllBilans(){
-  if(!estTitulaire()){
-    const kines = [moi(), ...(estDelegue() ? [OWNER] : [])];
-    const res = await Promise.all(kines.map(k => getDocs(query(collection(db, "bilans"), where("kine", "==", k)))));
-    return res.flatMap(r => r.docs).map(mapBilan);
-  }
-  const [snap, cles] = await Promise.all([getDocs(collection(db, "bilans")), mesCles()]);
-  return snap.docs.map(mapBilan).filter(b => cles.has(b.cle));
+  const L = await BL();
+  let distants = [];
+  try{
+    if(!estTitulaire()){
+      const kines = [moi(), ...(estDelegue() ? [OWNER] : [])];
+      const res = await Promise.all(kines.map(k => getDocs(query(collection(db, "bilans"), where("kine", "==", k)))));
+      distants = res.flatMap(r => r.docs).map(mapBilan);
+    }else{
+      const [snap, cles] = await Promise.all([getDocs(collection(db, "bilans")), mesCles()]);
+      distants = snap.docs.map(mapBilan).filter(b => cles.has(b.cle));
+    }
+  }catch(e){}
+  const patients = await listPatients().catch(() => []);
+  for(const p of patients) if(p.anciennesCles?.length) await rattacher(p.cle, p.anciennesCles);
+  const cles = new Set(patients.map(p => p.cle));
+  const locaux = (await L.tous().catch(() => [])).filter(b => !patients.length || cles.has(b.cle));
+  return fusion(locaux, distants);
 }
 
 export async function getBilan(id){
-  const snap = await getDoc(doc(db, "bilans", id));
-  return snap.exists() ? mapBilan(snap) : null;
+  const L = await BL();
+  const local = await L.lire(id).catch(() => null);
+  if(local) return local;
+  const snap = await getDoc(doc(db, "bilans", id)).catch(() => null);
+  return snap && snap.exists() ? mapBilan(snap) : null;
 }
 
 export async function saveBilan(bilan){
+  const L = await BL();
   const id = bilan.id || newId();
   const now = Date.now();
-  const { etat, ...rest } = bilan;
   const kine = bilan.kine || (bilan.cle ? await kineDuPatient(bilan.cle) : (moi() || OWNER));
-  await setDoc(doc(db, "bilans", id), clean({ ...rest, id, kine, etat: JSON.stringify(etat || {}), createdAt: bilan.createdAt || now, updatedAt: now }));
+  await L.ecrire({ ...bilan, id, kine, etat: bilan.etat || {}, createdAt: bilan.createdAt || now, updatedAt: now });
+  /* Ancien bilan de Firebase : il n'y reste pas */
+  if(dansFirebase.has(id)){
+    await deleteDoc(doc(db, "bilans", id)).then(() => dansFirebase.delete(id)).catch(() => {});
+  }
   return id;
 }
 
 export async function deleteBilan(id){
-  await deleteDoc(doc(db, "bilans", id));
+  const L = await BL();
+  await L.effacer(id);
+  await deleteDoc(doc(db, "bilans", id)).catch(e => { if(dansFirebase.has(id)) throw e; });
+  dansFirebase.delete(id);
+}
+
+/** Nombre d'anciens bilans encore dans Firebase (Réglages du cabinet). */
+export async function bilansDansFirebase(){
+  if(estTitulaire()){
+    const [snap, cles] = await Promise.all([fsGetDocs(collection(db, "bilans")), mesCles()]);
+    return snap.docs.filter(d => cles.has(d.data().cle)).length;
+  }
+  const snap = await fsGetDocs(fsQuery(collection(db, "bilans"), fsWhere("kine", "==", moi())));
+  return snap.docs.length;
+}
+
+/** Met sur cet appareil tous mes anciens bilans de Firebase, puis les efface de Firebase. */
+export async function rapatrierBilans(onProgress = () => {}){
+  const L = await BL();
+  let docs;
+  if(estTitulaire()){
+    const [snap, cles] = await Promise.all([fsGetDocs(collection(db, "bilans")), mesCles()]);
+    docs = snap.docs.filter(d => cles.has(d.data().cle));
+  }else{
+    docs = (await fsGetDocs(fsQuery(collection(db, "bilans"), fsWhere("kine", "==", moi())))).docs;
+  }
+  let faits = 0;
+  for(const d of docs){
+    onProgress(faits, docs.length);
+    const b = mapBilan(d);
+    const deja = await L.lire(b.id).catch(() => null);
+    /* Si l'appareil a une version plus récente, on la garde */
+    if(!deja || (deja.updatedAt || 0) < (b.updatedAt || 0)) await L.ecrire(b);
+    if(!(await L.lire(b.id))) throw new Error("Le bilan n'a pas pu être enregistré sur cet appareil.");
+    await deleteDoc(d.ref);
+    dansFirebase.delete(b.id);
+    faits++;
+  }
+  onProgress(faits, docs.length);
+  return faits;
+}
+
+/* ---------- Transfert des bilans vers le PC du cabinet ----------
+   transit/{envoi}_{n} : { kine, envoi, n, total, empreinte, data (morceau chiffré, base64),
+   nom, iv, ivNom (dans le morceau 0), createdAt }. Le contenu est chiffré sur la tablette avec
+   le code de transfert (connu seulement de la tablette et du PC) : Google ne peut pas le lire.
+   Le PC efface les morceaux dès que le PDF est rangé dans son dossier. */
+
+export async function transitEcrire(parts){
+  const k = moi();
+  for(const p of parts) await setDoc(doc(db, "transit", `${p.envoi}_${p.n}`), { ...p, kine: k, createdAt: Date.now() });
+}
+
+/** Écoute les envois destinés à ce compte ; cb(liste des morceaux) à chaque changement. */
+export function transitEcouter(cb, onErr = () => {}){
+  return onSnapshot(fsQuery(collection(db, "transit"), fsWhere("kine", "==", moi())),
+    snap => cb(snap.docs.map(d => ({ ...d.data(), _id: d.id }))), onErr);
+}
+
+export async function transitEffacer(envoi, total){
+  for(let n = 0; n < total; n++) await deleteDoc(doc(db, "transit", `${envoi}_${n}`)).catch(() => {});
 }
 
 /* ---------- Modèles du cabinet ---------- */
@@ -1101,6 +1206,12 @@ async function _exportAll(onProgress = () => {}){
   for(const name of ["patients", "fiches", "modeles", "exercices", "reglages"]) await grab(name);
   await grab("codes").catch(() => { out.collections.codes = []; });   // codes d'accès des patients (messagerie)
   await grab("bilans").catch(() => { out.collections.bilans = []; });
+  /* Bilans gardés sur cet appareil (ils ne sont plus dans Firebase) */
+  try{
+    const locaux = await (await BL()).tous();
+    const vus = new Set(out.collections.bilans.map(d => d.id));
+    locaux.filter(b => !vus.has(b.id)).forEach(b => out.collections.bilans.push({ id: b.id, data: { ...b, etat: JSON.stringify(b.etat || {}) } }));
+  }catch(e){}
   await grab("questionnaires").catch(() => { out.collections.questionnaires = []; });
   await grab("conseils").catch(() => { out.collections.conseils = []; });
   /* Contenu du bilan modifié, progressions, comptes autorisés, clé IA : titulaire seulement */
@@ -1133,7 +1244,18 @@ export async function importAll(backup, { only = null, onProgress = () => {} } =
   const want = name => !only || only.includes(name);
   const ops = [];
   const count = {};
-  ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "bilans", "questionnaires", "conseils", "acces"].forEach(name => {
+  /* Bilans : remis sur cet appareil, plus dans Firebase */
+  if(want("bilans") && (backup.collections.bilans || []).length){
+    const L = await BL();
+    for(const d of backup.collections.bilans){
+      const b = { ...d.data, id: d.id };
+      try{ b.etat = typeof b.etat === "string" ? JSON.parse(b.etat) : (b.etat || {}); }catch(e){ b.etat = {}; }
+      const deja = await L.lire(b.id).catch(() => null);
+      if(!deja || (deja.updatedAt || 0) <= (b.updatedAt || 0)) await L.ecrire(b);
+      count.bilans = (count.bilans || 0) + 1;
+    }
+  }
+  ["patients", "fiches", "codes", "modeles", "exercices", "reglages", "questionnaires", "conseils", "acces"].forEach(name => {
     if(!want(name)) return;
     (backup.collections[name] || []).forEach(d => { ops.push([doc(db, name, d.id), d.data]); count[name] = (count[name] || 0) + 1; });
   });

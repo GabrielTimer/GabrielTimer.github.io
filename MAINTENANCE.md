@@ -20,6 +20,7 @@ Avant de toucher au code, vérifiez si c'est faisable ici (espace kiné → **Ou
 | Délai de déconnexion automatique de la tablette ou du téléphone | Outils → Réglages du cabinet → **Déconnexion automatique de cet appareil** (12 h conseillées) |
 | Code du mode séance (7777 par défaut) | Outils → Réglages du cabinet → **Mode séance** |
 | Sauvegarder à la main, restaurer une sauvegarde | Outils → Réglages du cabinet → **Sauvegarde** |
+| Régler le transfert des bilans (tablette → PC), changer le code de transfert, mettre les anciens bilans sur la tablette | Outils → Réglages du cabinet → **Transfert des bilans vers le PC** (sur chaque appareil) |
 
 Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modifications.
 
@@ -78,6 +79,8 @@ Puis collez ce message dans une nouvelle conversation :
 - **Rouge dans Actions** : ouvrez la ligne rouge, puis « verifier ». Le message dit quel fichier et quelle ligne posent problème. Donnez ce message à Claude.
 - **Revenir en arrière sur un fichier** : sur GitHub, ouvrez le fichier puis **History** (Historique). Ouvrez la version d'avant votre modification, puis **Raw**, et copiez tout. Ouvrez le fichier actuel, cliquez sur le crayon, remplacez tout le contenu par la copie, puis faites Commit.
 - Vos données (patients, bilans, messages) ne sont **pas** dans les fichiers du site : une erreur dans le code ne les efface pas. Elles sont aussi sauvegardées chaque semaine, chiffrées, dans votre dépôt GitHub privé.
+- **Les bilans sont sur la tablette**, plus dans Firebase : la sauvegarde automatique ne les contient pas. Leur copie de référence est le PDF importé dans Maiia. « Tout sauvegarder », fait depuis la tablette, les inclut.
+- **Un bilan n'arrive pas sur le PC** : sur le PC, une page de l'espace kiné doit être ouverte dans Chrome ou Edge ; vérifiez que les deux appareils ont le même code (Réglages du cabinet → Transfert des bilans). Sur la tablette, ce même réglage dit si un bilan attend encore le réseau.
 
 ## 7. Les tâches automatiques (onglet Actions de GitHub)
 Elles tournent toutes seules, gratuitement. GitHub vous envoie un e-mail si l'une d'elles échoue.

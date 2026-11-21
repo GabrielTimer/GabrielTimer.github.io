@@ -16,6 +16,8 @@ export async function requireKine(){
   }
   kineHint.set(true);
   if(verrou.actif()) ecranVerrou();   // cadenas fermé : tablette prêtée à un patient
+  /* Transfert des bilans : réception sur le PC, renvoi de ce qui attend sur la tablette */
+  try{ if(localStorage.getItem("gt_transfert_role")) import("./transfert.js").then(T => T.demarrer()).catch(() => {}); }catch(e){}
   return user;
 }
 
