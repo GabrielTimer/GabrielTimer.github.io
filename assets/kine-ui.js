@@ -2,7 +2,7 @@
    Fenêtres partagées de l'espace kiné
    ========================================================= */
 
-import { openSheet, esc, icon, toast, accessLink, fmtCode, KINE, prenom, settings, logoSrc } from "./app.js";
+import { openSheet, esc, icon, toast, accessLink, fmtCode, KINE, SITE_URL, prenom, settings, logoSrc } from "./app.js";
 import { fillTemplate } from "./settings.js";
 import { createPatient, listPatients, codeAcces, lienEnvoye } from "./cloud.js";
 import { qrSVG } from "./qr.js";
@@ -156,6 +156,24 @@ export async function printAccessCard(patient){
         <p class="who">${esc(patient.nom)}</p>
         <p>Scannez ce code avec l'appareil photo de votre téléphone pour retrouver vos exercices dans l'application ApiKiné.</p>
         <p class="code">Code : <b>${esc(fmtCode(patient.code))}</b></p>
+        <p class="small">Pas de lecteur de QR code ? Ouvrez Chrome (ou Safari sur iPhone), tapez <b>${esc(SITE_URL.replace(/^https?:\/\//, ""))}</b>, puis le code.</p>
+      </div>
+    </div>`;
+  /* Mode d'emploi à suivre chez soi (ou par un proche) */
+  const aide = `
+    <div class="aide">
+      <h2>Installer ApiKiné sur votre téléphone</h2>
+      <div class="cols">
+        <div><h3>Téléphone Android</h3><ol>
+          <li>Ouvrez le lien (QR code, SMS ou e-mail).</li>
+          <li>S'il s'ouvre dans une autre application (WhatsApp, Gmail…), touchez <b>Ouvrir dans Chrome</b>.</li>
+          <li>Touchez <b>Installer</b>. Sinon : menu <b>⋮</b> en haut à droite, puis <b>Installer l'application</b> ou <b>Ajouter à l'écran d'accueil</b>.</li>
+          <li>Ouvrez ensuite ApiKiné depuis son icône.</li></ol></div>
+        <div><h3>iPhone</h3><ol>
+          <li>Ouvrez le lien dans <b>Safari</b> (la boussole bleue).</li>
+          <li>Touchez <b>Partager</b> : le carré avec une flèche vers le haut, en bas de l'écran.</li>
+          <li>Faites défiler, touchez <b>Sur l'écran d'accueil</b>, puis <b>Ajouter</b> en haut à droite.</li>
+          <li>Ouvrez ensuite ApiKiné depuis son icône.</li></ol></div>
       </div>
     </div>`;
   w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Carte d'accès – ${esc(patient.nom)}</title>
@@ -169,6 +187,13 @@ export async function printAccessCard(patient){
       .who{font-size:13pt;font-weight:700;margin:3mm 0 1mm}
       p{margin:1.5mm 0;font-size:10pt}
       .code{font-family:ui-monospace,monospace;font-size:11pt}
-    </style></head><body>${card}${card}<script>window.onload=()=>setTimeout(()=>print(),300)<\/script></body></html>`);
+      .small{font-size:8.5pt;color:#47616B}
+      .aide{width:150mm;padding:5mm 6mm;border:1px solid #c9d8dc;border-radius:4mm}
+      .aide h2{font-size:12.5pt;margin:0 0 3mm}
+      .aide h3{font-size:11pt;margin:0 0 1.5mm}
+      .aide .cols{display:grid;grid-template-columns:1fr 1fr;gap:6mm}
+      .aide ol{margin:0;padding-left:5mm;font-size:10pt;line-height:1.35}
+      .aide li{margin-bottom:1.5mm}
+    </style></head><body>${card}${card}${aide}<script>window.onload=()=>setTimeout(()=>print(),300)<\/script></body></html>`);
   w.document.close();
 }
