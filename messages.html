@@ -160,7 +160,7 @@ function threadHTML(c){
   });
   const tel = p.telephone ? String(p.telephone).replace(/[^\d+]/g, "") : "";
   return `<div class="mx-th-head">
-      <button class="btn sm ghost mx-back" type="button" data-back aria-label="Retour aux conversations">${icon("back")}<span>Conversations</span></button>
+      <button class="btn sm ghost mx-back" type="button" data-mx-back aria-label="Retour aux conversations">${icon("back")}<span>Conversations</span></button>
       <span class="avatar">${esc(initials(p.nom))}</span>
       <h2><a href="/cloud.html?patient=${encodeURIComponent(c.cle)}">${esc(nomAffiche(p.nom) || "Patient")}</a></h2>
       ${c.items.some(i => i.lu && i.kind !== "envoye") ? `<button class="btn sm ghost" type="button" data-nonlu aria-label="Marquer comme non lu">${icon("circle")}<span class="lbl">Non lu</span></button>` : ""}
@@ -254,7 +254,7 @@ function bind(cur){
     render(); const n = $("#q"); n.focus(); try{ n.setSelectionRange(pos, pos); }catch(e){}
   };
   if(!cur) return;
-  $("[data-back]")?.addEventListener("click", () => ouvrir(null));
+  $("[data-mx-back]")?.addEventListener("click", () => ouvrir(null));
   $("[data-nonlu]")?.addEventListener("click", async () => {
     const dernier = [...cur.items].reverse().find(i => i.kind !== "envoye");
     if(!dernier) return;
