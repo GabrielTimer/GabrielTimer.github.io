@@ -46,6 +46,18 @@ function preparerIOS(cle){
   }catch(e){}
 }
 
+/* Lien qui ouvre directement cette page dans Chrome (Android) ou Safari (iPhone),
+   même quand le patient l'a touché dans WhatsApp, Messenger, Gmail ou les SMS. */
+function lienPatient(cle){ return cle ? `${location.origin}/?acces=${cle}` : location.href; }
+function lienChrome(cle){
+  const u = new URL(lienPatient(cle));
+  return `intent://${u.host}${u.pathname}${u.search}#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=${encodeURIComponent(u.href)};end`;
+}
+const lienSafari = cle => lienPatient(cle).replace(/^https:\/\//, "x-safari-https://");
+const boutonNavigateur = cle => estIOS
+  ? `<a class="btn primary big" href="${lienSafari(cle)}">${icon("link")}Ouvrir dans Safari</a>`
+  : `<a class="btn primary big" href="${lienChrome(cle)}">${icon("link")}Ouvrir dans Chrome</a>`;
+
 async function copierCode(cle){
   try{ await navigator.clipboard.writeText(`${location.origin}/?acces=${cle}`); return true; }catch(e){ return false; }
 }
@@ -103,9 +115,10 @@ export function ouvrirInstallation(cle){
   let body, foot;
   const intro = `<div class="inst-intro"><img src="/icon-192.png" alt=""><p>Ajoutez <strong>ApiKiné</strong> à votre écran d'accueil : vos exercices s'ouvriront d'un appui, comme une application, et vous pourrez recevoir les rappels de séance.</p></div>`;
   if(integre){
-    body = `${intro}<div class="notice warn">${icon("info")}<span>Ce lien s'est ouvert dans une autre application. Pour installer ApiKiné, ouvrez-le dans ${estIOS ? "<strong>Safari</strong>" : "<strong>Chrome</strong>"} : touchez le menu <strong>⋮</strong> ou <strong>…</strong> puis <strong>Ouvrir dans ${estIOS ? "Safari" : "le navigateur"}</strong>.</span></div>
-      <p class="small muted" style="margin-top:10px">Ou copiez le lien et collez-le dans ${estIOS ? "Safari" : "Chrome"}.</p>`;
-    foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary" type="button" id="inst-copy">${icon("copy")}Copier le lien</button>`;
+    body = `${intro}<div class="notice warn">${icon("info")}<span>Ce lien s'est ouvert dans une autre application. Pour installer ApiKiné, il faut l'ouvrir dans ${estIOS ? "<strong>Safari</strong>" : "<strong>Chrome</strong>"} : touchez le bouton ci-dessous.</span></div>
+      <div class="btn-row" style="margin-top:12px">${boutonNavigateur(cle)}</div>
+      <p class="small muted" style="margin-top:10px">Rien ne se passe ? Touchez le menu <strong>⋮</strong> ou <strong>…</strong> puis <strong>Ouvrir dans ${estIOS ? "Safari" : "le navigateur"}</strong>. Ou copiez le lien et collez-le dans ${estIOS ? "Safari" : "Chrome"}.</p>`;
+    foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn" type="button" id="inst-copy">${icon("copy")}Copier le lien</button>`;
   }else if(estIOS){
     body = `${intro}${etapesIOS()}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary" type="button" data-close>J'ai compris</button>`;
@@ -113,7 +126,10 @@ export function ouvrirInstallation(cle){
     body = `${intro}<p>Un seul appui suffit.</p>${ancienAndroidChrome ? noteAncienAndroid() : ""}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary big" type="button" id="inst-go">${icon("download")}Installer</button>`;
   }else{
-    body = `${intro}${etapesAndroidMenu()}${ancienAndroidChrome ? noteAncienAndroid() : ""}`;
+    /* Pas de bouton « Installer » : souvent le lien s'est ouvert dans un autre navigateur ou un
+       onglet intégré (Gmail, SMS). Ouvrir dans Chrome fait en général apparaître le bouton. */
+    const chrome = /Chrome\//.test(ua) && !estSamsung && !/EdgA|OPR|Firefox/i.test(ua);
+    body = `${intro}${!estSamsung && !ancienAndroidChrome ? `<p class="small">Le plus simple : <a href="${lienChrome(cle)}"><strong>ouvrir cette page dans Chrome</strong></a>${chrome ? " (si vous n'y êtes pas déjà)" : ""}, un bouton « Installer » apparaîtra. Sinon :</p>` : ""}${etapesAndroidMenu()}${ancienAndroidChrome ? noteAncienAndroid() : ""}`;
     foot = `<button class="btn" type="button" data-close>Plus tard</button><button class="btn primary" type="button" data-close>J'ai compris</button>`;
   }
   const s = openSheet({ title:"Installer l'application", body, foot, onClose: () => s?.el?.querySelector(".inst-arrow")?.remove() });
