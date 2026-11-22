@@ -83,7 +83,12 @@
   .g-sheet img{ border-radius:var(--r-md); margin:6px 0 12px; }
 
   /* ===== Entretien guidé (tablette d'abord) ===== */
-  .g-wrap{ max-width:980px; margin:0 auto; padding-bottom:96px; }
+  .g-wrap{ max-width:980px; margin:0 auto; padding-bottom:96px; min-width:0; }
+  /* Rien ne doit dépasser la largeur de l'écran : sinon, sur téléphone, la page glisse
+     de côté en défilant et les barres du bas se décalent */
+  html, body{ overflow-x:clip; }
+  .g-top > *{ min-width:0; }
+  .g-top .row{ flex-wrap:wrap; }
   .g-top{ display:flex; align-items:center; gap:12px; margin:8px 0 12px; flex-wrap:wrap; }
   .g-id{ flex:1 1 240px; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; }
   .g-id strong{ font-size:var(--fs-lg); }
