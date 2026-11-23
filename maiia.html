@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mettre dans Maiia</title>
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  .mx-dos{ display:grid; gap:10px; }
+  @media (min-width:760px){ .mx-dos{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .mx-d{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:14px 16px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); }
+  .mx-d .small{ margin-top:2px; }
+  .mx-big{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .mx-big .btn{ min-height:56px; font-size:1.05rem; }
+  .mx-table{ width:100%; border-collapse:collapse; }
+  .mx-table th, .mx-table td{ text-align:left; padding:10px 8px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  .mx-table th{ font-size:var(--fs-sm); color:var(--ink-3); font-weight:700; }
+  .mx-table td.r{ text-align:right; white-space:nowrap; }
+  .mx-wrap{ overflow-x:auto; }
+  .mx-tag{ display:inline-block; margin-left:6px; padding:1px 8px; border-radius:999px; font-size:.75rem; font-weight:800; background:var(--soleil); color:var(--on-soleil); }
+  .mx-log{ font-size:var(--fs-sm); color:var(--ink-2); margin-top:10px; }
+</style>
+</head>
+<body>
+<main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, mountShell, registerSW, toast, store } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const M = await import("/assets/vers-maiia.js");
+const D = await import("/assets/dossiers.js");
+const B = await import("/assets/bilan-core.js");
+
+const app = $("#app");
+let E = null, occupe = false;
+const fmtJ = d => d ? new Date(String(d).length === 10 ? d + "T12:00" : d).toLocaleDateString("fr-FR", { day:"2-digit", month:"2-digit", year:"numeric" }) : "";
+const fmtT = t => t ? new Date(t).toLocaleDateString("fr-FR", { day:"numeric", month:"long" }) : "";
+const nomDe = b => E.patients.get(b.cle)?.nom || "Patient";
+
+async function lignesDossiers(){
+  if(!D.supporte()) return `<div class="notice warn">${icon("alert")}<span>Ouvrez cette page sur le <strong>PC du cabinet</strong>, dans <strong>Chrome ou Edge</strong> : c'est là que les fichiers peuvent être rangés directement dans vos dossiers. Ici, ils iraient dans Téléchargements.</span></div>`;
+  const [hb, hp] = await Promise.all([D.dossier("bilans"), D.dossier("photos")]);
+  const ligne = (type, titre, h) => `<div class="mx-d"><div><strong>${titre}</strong><div class="small muted">${h ? `${icon("folder")} « ${esc(h.name)} »` : "Pas encore choisi (sinon : Téléchargements)"}</div></div>
+    <button class="btn ${h ? "" : "primary"}" type="button" data-choisir="${type}">${icon("folder")}${h ? "Changer" : "Choisir le dossier"}</button></div>`;
+  return `<div class="mx-dos">${ligne("bilans", "PDF des bilans", hb)}${ligne("photos", "Photos des bilans", hp)}</div>`;
+}
+
+async function dessiner(){
+  app.innerHTML = `<div class="page-head"><h1>Mettre dans Maiia</h1></div><div class="loading"><div class="spinner"></div><span>Recherche des bilans et des photos…</span></div>`;
+  try{ E = await M.etat(); }
+  catch(e){ console.error(e); app.innerHTML = `<div class="page-head"><h1>Mettre dans Maiia</h1></div><div class="notice danger">${icon("alert")}<span>Impossible de lire les bilans (connexion ?). Rechargez la page.</span></div>`; return; }
+  store.set("gt_maiia_compte", { bilans: E.bilans.length, photos: E.photos, at: Date.now() });
+  const rien = !E.bilans.length && !E.photos;
+  const dernier = Number(store.get("gt_maiia_dernier", 0)) || 0;
+  app.innerHTML = `
+    <div class="page-head"><h1>Mettre dans Maiia</h1></div>
+    <p class="muted">Un clic enregistre les <strong>PDF des bilans</strong> et les <strong>photos</strong> dans les dossiers de ce PC. Il ne reste qu'à les glisser dans le dossier du patient, dans Maiia. Une fois par semaine suffit.</p>
+
+    <section class="section panel">
+      <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Dossiers de ce PC</h2></div>
+      <div id="dos">${await lignesDossiers()}</div>
+    </section>
+
+    <section class="section panel">
+      <div class="mx-big">
+        <button class="btn primary" type="button" id="go" ${rien ? "disabled" : ""}>${icon("download")}${rien ? "Rien à enregistrer" : "Tout enregistrer dans les dossiers"}</button>
+        <span>${rien ? `Tout est à jour${dernier ? ` (dernier export le ${fmtT(dernier)})` : ""}.` : `<strong>${E.bilans.length}</strong> bilan${E.bilans.length > 1 ? "s" : ""} et <strong>${E.photos}</strong> photo${E.photos > 1 ? "s" : ""} à enregistrer.`}</span>
+      </div>
+      <div class="mx-log" id="log" aria-live="polite"></div>
+      ${E.bilans.length ? `<div class="mx-wrap" style="margin-top:12px"><table class="mx-table">
+        <thead><tr><th>Date</th><th>Patient</th><th>Bilan</th></tr></thead>
+        <tbody>${E.bilans.map(b => `<tr><td>${esc(fmtJ(b.date))}</td><td>${esc(nomDe(b))}</td><td>${esc(B.typeLabel(b.type || b.etat?.type))}${b.maiiaAt ? `<span class="mx-tag">modifié depuis l'export</span>` : ""}</td></tr>`).join("")}</tbody></table></div>` : ""}
+      <p class="hint" style="margin-top:12px">Les photos arrivent de la tablette dès qu'elles sont prises (il faut du réseau sur la tablette). Elles sont rangées ici en qualité d'origine, puis effacées du cloud ; elles restent sur la tablette.</p>
+    </section>
+
+    ${E.exportes.length ? `<section class="section panel">
+      <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Déjà enregistrés</h2></div>
+      <div class="mx-wrap"><table class="mx-table">
+        <thead><tr><th>Date</th><th>Patient</th><th>Bilan</th><th>Enregistré le</th><th></th></tr></thead>
+        <tbody>${E.exportes.slice(0, 30).map(b => `<tr><td>${esc(fmtJ(b.date))}</td><td>${esc(nomDe(b))}</td><td>${esc(B.typeLabel(b.type || b.etat?.type))}</td><td>${esc(fmtT(b.maiiaAt))}</td>
+          <td class="r"><button class="btn sm" type="button" data-refaire="${esc(b.id)}">Réenregistrer</button></td></tr>`).join("")}</tbody></table></div>
+    </section>` : ""}`;
+
+  $$("[data-choisir]").forEach(b => b.onclick = async () => {
+    try{ const h = await D.choisir(b.dataset.choisir); toast(`Les fichiers iront dans « ${h.name} ».`, { type:"ok" }); dessiner(); }
+    catch(e){ if(e?.name !== "AbortError") toast("Ce dossier ne peut pas être utilisé. Choisissez-en un autre (pas un dossier système).", { type:"err" }); }
+  });
+  const go = $("#go");
+  if(go) go.onclick = () => toutEnregistrer(go);
+  $$("[data-refaire]").forEach(b => b.onclick = async () => {
+    if(occupe) return;
+    occupe = true; b.disabled = true;
+    try{
+      await D.autoriser("bilans");
+      const bilan = E.exportes.find(x => x.id === b.dataset.refaire);
+      const r = await M.exporterBilan(bilan, E);
+      toast(`« ${r.nom} » ${r.dossier ? `est dans « ${r.dossier} »` : "est dans Téléchargements"}.`, { type:"ok", duration:6000 });
+    }catch(e){ console.error(e); toast("Le PDF n'a pas pu être créé.", { type:"err" }); }
+    occupe = false; b.disabled = false;
+  });
+}
+
+async function toutEnregistrer(go){
+  if(occupe) return;
+  occupe = true; go.disabled = true;
+  const log = $("#log");
+  const ecrire = t => { log.textContent = t; };
+  /* Accès aux dossiers demandé tout de suite, pendant que le clic compte encore */
+  await D.autoriser("bilans").catch(() => null);
+  await D.autoriser("photos").catch(() => null);
+  let okB = 0, erreurs = 0, dosB = "", resP = { faites: 0, incompletes: 0, dossier: "" };
+  for(const b of E.bilans){
+    ecrire(`Bilan ${okB + erreurs + 1} sur ${E.bilans.length} : ${nomDe(b)}…`);
+    try{ const r = await M.exporterBilan(b, E); okB++; dosB = r.dossier || dosB; }
+    catch(e){ console.error(e); erreurs++; }
+  }
+  if(E.photos){
+    ecrire("Photos…");
+    try{ resP = await M.exporterPhotos({ patients: E.patients, onProgress: (n, t) => ecrire(`Photo ${n} sur ${t}…`) }); }
+    catch(e){ console.error(e); erreurs++; }
+  }
+  store.set("gt_maiia_dernier", Date.now());
+  store.set("gt_maiia_compte", null);
+  const ou = (n, d) => d ? `dans « ${d} »` : "dans Téléchargements";
+  const msg = [okB ? `${okB} PDF ${ou(okB, dosB)}` : "", resP.faites ? `${resP.faites} photo${resP.faites > 1 ? "s" : ""} ${ou(resP.faites, resP.dossier)}` : ""].filter(Boolean).join(", ");
+  toast(msg ? `C'est fait : ${msg}. Glissez-les dans Maiia.` : "Rien n'a été enregistré.", { type: erreurs ? "err" : "ok", duration: 9000 });
+  if(erreurs) toast(`${erreurs} élément${erreurs > 1 ? "s n'ont" : " n'a"} pas pu être enregistré${erreurs > 1 ? "s" : ""} : relancez.`, { type:"err", duration:9000 });
+  if(resP.incompletes) toast(`${resP.incompletes} photo${resP.incompletes > 1 ? "s sont" : " est"} encore en cours d'envoi depuis la tablette : relancez dans quelques minutes.`, { duration:9000 });
+  occupe = false;
+  dessiner();
+}
+
+dessiner();
+</script>
+</body>
+</html>

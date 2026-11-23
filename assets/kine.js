@@ -16,6 +16,13 @@ export async function requireKine(){
   }
   kineHint.set(true);
   if(verrou.actif()) ecranVerrou();   // cadenas fermé : tablette prêtée à un patient
+  /* Photos des bilans prises sur cet appareil et pas encore parties vers le PC du cabinet */
+  try{
+    const att = JSON.parse(localStorage.getItem("gt_photos_a_envoyer") || "[]");
+    if(att.length || !localStorage.getItem("gt_photos_pc_v1")){
+      import("./vers-maiia.js").then(M => { M.relancerPhotos(); addEventListener("online", () => M.relancerPhotos()); }).catch(() => {});
+    }
+  }catch(e){}
   return user;
 }
 

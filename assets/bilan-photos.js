@@ -1,11 +1,12 @@
 /* Photos du bilan (posture, cicatrice, œdème, amplitude…).
-   Enregistrées UNIQUEMENT sur cet appareil (IndexedDB du navigateur) :
-   jamais envoyées dans le cloud, ni mises dans le PDF ou le résumé.
+   Gardées sur cet appareil (IndexedDB du navigateur), en QUALITÉ D'ORIGINE (aucune réduction).
+   Une copie part vers le PC du cabinet (vers-maiia.js : morceaux dans Firebase, rangés dans le dossier
+   « Photos » du PC puis effacés de Firebase). Jamais mises dans le PDF ni dans le résumé.
    Chaque photo est rattachée au patient (clé d'accès) et au bilan (S.pk, identifiant local du bilan). */
 
 import { esc, icon, toast, openSheet, confirmDialog } from "./app.js";
 
-const DB = "apikine-photos", STORE = "photos", MAX = 2560, QUALITE = .92;
+const DB = "apikine-photos", STORE = "photos";
 
 function base(){
   return new Promise((resolve, reject) => {
@@ -27,6 +28,9 @@ async function tx(mode, fn){
 const photosDuPatient = cle => tx("readonly", s => s.index("cle").getAll(cle)).then(l => (l || []).sort((a, b) => b.date - a.date));
 const ajouter = p => tx("readwrite", s => s.put(p));
 const supprimer = id => tx("readwrite", s => s.delete(id));
+/** Pour l'envoi vers le PC du cabinet (vers-maiia.js). */
+export const lirePhoto = id => tx("readonly", s => s.get(id)).then(p => p || null);
+export const idsPhotos = () => tx("readonly", s => s.getAllKeys()).then(l => l || []);
 
 /** Identifiant local du bilan (gardé dans l'état du bilan ; ne contient aucune image). */
 export function cleBilan(S){
@@ -39,26 +43,9 @@ export async function nombre(patient, S){
   try{ return (await photosDuPatient(patient.cle)).filter(p => p.pk === S.pk).length; }catch(e){ return 0; }
 }
 
-/* Réduit la photo (2560 px au plus, JPEG haute qualité) : assez pour zoomer, sans remplir la tablette. */
-function reduire(file){
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      const k = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
-      const c = document.createElement("canvas");
-      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
-      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
-      URL.revokeObjectURL(url);
-      c.toBlob(b => b ? resolve(b) : reject(new Error("photo")), "image/jpeg", QUALITE);
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("photo")); };
-    img.src = url;
-  });
-}
-
 const fmt = t => new Date(t).toLocaleString("fr-FR", { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" });
-const nomFichier = (patient, p) => `Photo ${patient.nom || "patient"} ${new Date(p.date).toLocaleDateString("fr-FR").replace(/\//g, "-")} ${new Date(p.date).toTimeString().slice(0, 5).replace(":", "h")}.jpg`.replace(/[\\/:*?"<>|]/g, "");
+export const extension = type => ({ "image/png":"png", "image/webp":"webp", "image/heic":"heic", "image/heif":"heif", "image/gif":"gif" })[String(type || "").toLowerCase()] || "jpg";
+const nomFichier = (patient, p) => `Photo ${patient.nom || "patient"} ${new Date(p.date).toLocaleDateString("fr-FR").replace(/\//g, "-")} ${new Date(p.date).toTimeString().slice(0, 5).replace(":", "h")}.${extension(p.blob?.type)}`.replace(/[\\/:*?"<>|]/g, "");
 
 function telecharger(blob, nom){
   const a = document.createElement("a");
@@ -90,7 +77,7 @@ export async function ouvrirPhotos({ patient, S, label = "Bilan", onChange = () 
   const urls = [];
   const libere = () => { urls.splice(0).forEach(u => URL.revokeObjectURL(u)); };
   const sh = openSheet({ title: "Photos du bilan", wide: true, tall: true, onClose: libere,
-    body: `<div class="notice">${icon("lock")}<span>Les photos restent <strong>uniquement sur cet appareil</strong> : elles ne sont envoyées ni dans le cloud, ni dans le PDF. Elles disparaissent si les données du navigateur sont effacées ou l'application désinstallée.</span></div>
+    body: `<div class="notice">${icon("lock")}<span>Les photos sont gardées <strong>sur cet appareil, en qualité d'origine</strong>. Une copie part vers le <strong>PC du cabinet</strong> (dossier des photos, page « Mettre dans Maiia »), puis elle est effacée du cloud. Elles ne vont jamais dans le PDF du bilan.</span></div>
       <div class="ph-actions" style="margin-top:12px">
         <label class="btn primary">${icon("camera")}Prendre une photo<input type="file" accept="image/*" capture="environment" data-ph-in></label>
         <label class="btn">${icon("image")}Depuis la galerie<input type="file" accept="image/*" multiple data-ph-in></label>
@@ -130,9 +117,12 @@ export async function ouvrirPhotos({ patient, S, label = "Bilan", onChange = () 
     let ok = 0;
     for(const f of files){
       try{
-        const blob = await reduire(f);
-        await ajouter({ id: "ph" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), cle: patient.cle, pk: S.pk,
+        /* La photo telle que prise par l'appareil photo, sans réduction ni recompression */
+        const blob = new Blob([await f.arrayBuffer()], { type: f.type || "image/jpeg" });
+        const id = "ph" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        await ajouter({ id, cle: patient.cle, pk: S.pk,
           bilan: [label, S.date ? new Date(S.date).toLocaleDateString("fr-FR") : ""].filter(Boolean).join(" du "), date: Date.now(), blob });
+        import("./vers-maiia.js").then(M => M.photoAEnvoyer(id)).catch(() => {});
         ok++;
       }catch(e){ console.error(e); }
     }
