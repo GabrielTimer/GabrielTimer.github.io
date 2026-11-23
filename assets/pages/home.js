@@ -446,29 +446,36 @@ function rappelSauvegarde(){
   import("../cloud.js").then(C => C.getEtatSauvegarde?.()).then(e => { etat = e || null; store.set("gt_sauvegarde_etat", etat); show(); }).catch(() => {});
 }
 
-/* Rappel « Mettre dans Maiia » : sur le PC du cabinet seulement (Chrome / Edge, choix de dossier possible),
-   quand des bilans ou des photos attendent et que le dernier export date d'au moins 7 jours.
+/* Rappel « Mettre dans Maiia ».
+   - Sur le PC du cabinet (Chrome / Edge, choix de dossier possible) : quand des bilans ou des photos
+     attendent et que le dernier export date d'au moins 7 jours.
+   - Alarme sur tous les appareils (tablette comprise) : plus de 10 bilans en attente, même avant 7 jours.
    Le décompte est gardé 6 heures sur l'appareil, pour ne pas relire tous les bilans à chaque passage. */
-const MAIIA_JOURS = 7;
+const MAIIA_JOURS = 7, MAIIA_ALARME = 10;
 async function rappelMaiia(){
   const box = document.getElementById("maiia-banner");
-  if(!box || !("showDirectoryPicker" in window)) return;
-  if(Date.now() < (Number(store.get("gt_maiia_snooze", 0)) || 0)) return;
-  const dernier = Number(store.get("gt_maiia_dernier", 0)) || 0;
-  if(dernier && Date.now() - dernier < MAIIA_JOURS * 86400000) return;
+  if(!box) return;
+  const pc = "showDirectoryPicker" in window;
   let c = store.get("gt_maiia_compte", null);
   if(!c || Date.now() - (c.at || 0) > 6 * 3600000){
     try{ const M = await import("../vers-maiia.js"); c = { ...(await M.aFaire()), at: Date.now() }; store.set("gt_maiia_compte", c); }
     catch(e){ return; }
   }
-  if(!c.bilans && !c.photos) return;
+  const alarme = c.bilans > MAIIA_ALARME;
+  const dernier = Number(store.get("gt_maiia_dernier", 0)) || 0;
+  const rappel = pc && (c.bilans || c.photos) && (!dernier || Date.now() - dernier >= MAIIA_JOURS * 86400000);
+  const snooze = Number(store.get(alarme ? "gt_maiia_snooze_alarme" : "gt_maiia_snooze", 0)) || 0;
+  if((!alarme && !rappel) || Date.now() < snooze){ box.innerHTML = ""; return; }
   const quoi = [c.bilans ? `${c.bilans} bilan${c.bilans > 1 ? "s" : ""}` : "", c.photos ? `${c.photos} photo${c.photos > 1 ? "s" : ""}` : ""].filter(Boolean).join(" et ");
-  box.innerHTML = `<div class="inbox-banner backup-banner">
-    <span class="t-ico">${icon("folder")}</span>
+  box.innerHTML = `<div class="inbox-banner backup-banner"${alarme ? ' style="border-color:var(--danger);box-shadow:inset 4px 0 0 var(--danger)"' : ""}>
+    <span class="t-ico"${alarme ? ' style="color:var(--danger)"' : ""}>${icon(alarme ? "alert" : "folder")}</span>
     <span class="li-main"><strong>${esc(quoi)} à mettre dans Maiia</strong>
-    <span class="small">Un clic les enregistre dans les dossiers du PC, prêts à glisser dans Maiia.</span></span>
-    <span style="display:flex;gap:8px;flex:none"><a class="btn sm primary" href="/maiia.html">Ouvrir</a><button class="btn sm" type="button" id="maiia-later">Plus tard</button></span></div>`;
-  box.querySelector("#maiia-later").onclick = () => { store.set("gt_maiia_snooze", Date.now() + 2 * 86400000); box.innerHTML = ""; };
+    <span class="small">${alarme ? (pc ? "Ça s'accumule : un clic les enregistre dans les dossiers du PC." : "Ça s'accumule : pensez à les enregistrer depuis le PC du cabinet (Outils → Mettre dans Maiia).") : "Un clic les enregistre dans les dossiers du PC, prêts à glisser dans Maiia."}</span></span>
+    <span style="display:flex;gap:8px;flex:none">${pc ? `<a class="btn sm primary" href="/maiia.html">Ouvrir</a>` : ""}<button class="btn sm" type="button" id="maiia-later">Plus tard</button></span></div>`;
+  box.querySelector("#maiia-later").onclick = () => {
+    store.set(alarme ? "gt_maiia_snooze_alarme" : "gt_maiia_snooze", Date.now() + (alarme ? 1 : 2) * 86400000);
+    box.innerHTML = "";
+  };
 }
 
 async function renderKine(user){
