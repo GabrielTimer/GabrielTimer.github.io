@@ -7,6 +7,7 @@
 
 export const TYPES = {
   bilans: "Bilans",
+  archive: "Archive des bilans (à garder)",
   photos: "Photos des bilans",
   documents: "Programmes et autres documents"
 };

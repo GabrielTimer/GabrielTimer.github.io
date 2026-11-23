@@ -129,15 +129,34 @@ async function pdfDuBilan(b, patient, tous){
   return { blob: d.output("blob"), nom: rang > 0 ? nom.replace(/\.pdf$/, ` (${rang + 1}).pdf`) : nom };
 }
 
-/** Enregistre un bilan en PDF dans le dossier « Bilans » et le marque comme exporté. */
+/** Enregistre un bilan en PDF dans le dossier « Bilans » (à importer dans Maiia, puis vidé par le kiné)
+    et, s'il est choisi, dans le dossier « Archive » (gardé : un sous-dossier par patient). Puis le marque comme exporté. */
 export async function exporterBilan(b, { patients, tous }){
   const C = await import("./cloud.js");
   const D = await import("./dossiers.js");
   const patient = patients.get(b.cle) || { cle: b.cle, nom: "Patient" };
   const { blob, nom } = await pdfDuBilan(b, patient, tous);
   const r = await D.enregistrer("bilans", blob, nom);
+  let archive = "";
+  if(await D.dossier("archive")){
+    /* Pas de téléchargement en double si l'archive n'est pas accessible : seulement le dossier choisi */
+    const h = await D.autoriser("archive").catch(() => null);
+    if(h){
+      const ra = await D.enregistrer("archive", blob, nom, propre(patient.nom || "Patient"));
+      archive = ra.dossier || "";
+    }
+  }
   await C.marquerBilanMaiia(b.id);
-  return { nom, dossier: r.dossier || "" };
+  return { nom, dossier: r.dossier || "", archive };
+}
+
+/** Archive seulement (bilans déjà importés dans Maiia avant que l'archive existe). */
+export async function archiverBilan(b, { patients, tous }){
+  const D = await import("./dossiers.js");
+  const patient = patients.get(b.cle) || { cle: b.cle, nom: "Patient" };
+  const { blob, nom } = await pdfDuBilan(b, patient, tous);
+  const r = await D.enregistrer("archive", blob, nom, propre(patient.nom || "Patient"));
+  return { nom, archive: r.dossier || "" };
 }
 
 /** Range toutes les photos arrivées dans le dossier « Photos », puis les efface de Firebase. */

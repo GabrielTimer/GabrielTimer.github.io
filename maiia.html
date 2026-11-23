@@ -13,7 +13,7 @@
 <script src="/assets/nav-instant.js"></script>
 <style>
   .mx-dos{ display:grid; gap:10px; }
-  @media (min-width:760px){ .mx-dos{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (min-width:760px){ .mx-dos{ grid-template-columns:repeat(3,minmax(0,1fr)); } }
   .mx-d{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; padding:14px 16px; border:1px solid var(--line); border-radius:var(--r-md); background:var(--surface); }
   .mx-d .small{ margin-top:2px; }
   .mx-big{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
@@ -47,10 +47,11 @@ const nomDe = b => E.patients.get(b.cle)?.nom || "Patient";
 
 async function lignesDossiers(){
   if(!D.supporte()) return `<div class="notice warn">${icon("alert")}<span>Ouvrez cette page sur le <strong>PC du cabinet</strong>, dans <strong>Chrome ou Edge</strong> : c'est là que les fichiers peuvent être rangés directement dans vos dossiers. Ici, ils iraient dans Téléchargements.</span></div>`;
-  const [hb, hp] = await Promise.all([D.dossier("bilans"), D.dossier("photos")]);
+  const [hb, ha, hp] = await Promise.all([D.dossier("bilans"), D.dossier("archive"), D.dossier("photos")]);
   const ligne = (type, titre, h) => `<div class="mx-d"><div><strong>${titre}</strong><div class="small muted">${h ? `${icon("folder")} « ${esc(h.name)} »` : "Pas encore choisi (sinon : Téléchargements)"}</div></div>
     <button class="btn ${h ? "" : "primary"}" type="button" data-choisir="${type}">${icon("folder")}${h ? "Changer" : "Choisir le dossier"}</button></div>`;
-  return `<div class="mx-dos">${ligne("bilans", "PDF des bilans", hb)}${ligne("photos", "Photos des bilans", hp)}</div>`;
+  return `<div class="mx-dos">${ligne("bilans", "PDF à importer dans Maiia", hb)}${ligne("archive", "Archive des bilans (à garder)", ha)}${ligne("photos", "Photos des bilans", hp)}</div>
+    <p class="hint" style="margin-top:10px">Chaque PDF va dans les deux premiers dossiers : videz le premier après l'import dans Maiia ; l'archive, elle, se garde (un sous-dossier par patient).</p>`;
 }
 
 async function dessiner(){
@@ -82,7 +83,8 @@ async function dessiner(){
     </section>
 
     ${E.exportes.length ? `<section class="section panel">
-      <div class="panel-head"><h2 style="font-size:var(--fs-lg)">Déjà enregistrés</h2></div>
+      <div class="panel-head" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap"><h2 style="font-size:var(--fs-lg)">Déjà enregistrés</h2>
+        ${D.supporte() ? `<button class="btn sm" type="button" id="archiver">${icon("folder")}Tout copier dans l'archive</button>` : ""}</div>
       <div class="mx-wrap"><table class="mx-table">
         <thead><tr><th>Date</th><th>Patient</th><th>Bilan</th><th>Enregistré le</th><th></th></tr></thead>
         <tbody>${E.exportes.slice(0, 30).map(b => `<tr><td>${esc(fmtJ(b.date))}</td><td>${esc(nomDe(b))}</td><td>${esc(B.typeLabel(b.type || b.etat?.type))}</td><td>${esc(fmtT(b.maiiaAt))}</td>
@@ -95,11 +97,26 @@ async function dessiner(){
   });
   const go = $("#go");
   if(go) go.onclick = () => toutEnregistrer(go);
+  const arc = $("#archiver");
+  if(arc) arc.onclick = async () => {
+    if(occupe) return;
+    if(!(await D.dossier("archive"))){ toast("Choisissez d'abord le dossier « Archive des bilans » en haut de la page.", { type:"err" }); return; }
+    occupe = true; arc.disabled = true;
+    const h = await D.autoriser("archive").catch(() => null);
+    let n = 0, err = 0;
+    if(h) for(const b of E.exportes){
+      arc.textContent = `Copie… ${n + err + 1} / ${E.exportes.length}`;
+      try{ await M.archiverBilan(b, E); n++; }catch(e){ console.error(e); err++; }
+    }
+    toast(h ? `${n} bilan${n > 1 ? "s" : ""} copié${n > 1 ? "s" : ""} dans l'archive${err ? ` (${err} en erreur : relancez)` : ""}.` : "Chrome n'a pas donné l'accès au dossier de l'archive.", { type: h && !err ? "ok" : "err", duration:8000 });
+    occupe = false; dessiner();
+  };
   $$("[data-refaire]").forEach(b => b.onclick = async () => {
     if(occupe) return;
     occupe = true; b.disabled = true;
     try{
       await D.autoriser("bilans");
+      await D.autoriser("archive").catch(() => null);
       const bilan = E.exportes.find(x => x.id === b.dataset.refaire);
       const r = await M.exporterBilan(bilan, E);
       toast(`« ${r.nom} » ${r.dossier ? `est dans « ${r.dossier} »` : "est dans Téléchargements"}.`, { type:"ok", duration:6000 });
@@ -115,6 +132,7 @@ async function toutEnregistrer(go){
   const ecrire = t => { log.textContent = t; };
   /* Accès aux dossiers demandé tout de suite, pendant que le clic compte encore */
   await D.autoriser("bilans").catch(() => null);
+  await D.autoriser("archive").catch(() => null);
   await D.autoriser("photos").catch(() => null);
   let okB = 0, erreurs = 0, derniere = null, dosB = "", resP = { faites: 0, incompletes: 0, dossier: "" };
   for(const b of E.bilans){
