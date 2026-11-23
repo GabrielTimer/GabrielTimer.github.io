@@ -28,29 +28,33 @@ const SVG_STYLE = `
   .bc-marks circle,.bc-marks ellipse{ fill:none; }
   .bc-outline{ fill:none; stroke:#7E98A1; stroke-width:1.5; stroke-linejoin:round; }
   .bc-side{ font-family:Helvetica,Arial,sans-serif; font-size:14px; font-weight:700; fill:#7E98A1; }
-  .bc-view{ font-family:Helvetica,Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:.18em; fill:#7E98A1; }`;
+  .bc-view{ font-family:Helvetica,Arial,sans-serif; font-size:9px; font-weight:700; letter-spacing:.18em; fill:#7E98A1; }
+  .bc-pthit{ fill:none; }
+  .bc-pthalo{ stroke:#fff; stroke-width:5; stroke-linecap:round; fill:none; }
+  .bc-ptx{ stroke:#d1263b; stroke-width:2.4; stroke-linecap:round; fill:none; }
+  .bc-ptn{ font-family:Helvetica,Arial,sans-serif; font-size:9px; font-weight:700; fill:#d1263b; stroke:#fff; stroke-width:2.5px; paint-order:stroke; }`;
 
 /** SVG autonome d'une vue (face / dos), zones douloureuses colorées. */
-export function silhouetteSVG(K, view, pain = {}){
-  const inner = bodySVG({ Z:K.Z, R:K.R, view, pain, sel:null, color: evaHex })
+export function silhouetteSVG(K, view, pain = {}, pts = []){
+  const inner = bodySVG({ Z:K.Z, R:K.R, view, pain, sel:null, color: evaHex, pts })
     .replace(/id="bc-clip-/g, `id="rc-clip-${view}-`).replace(/url\(#bc-clip-/g, `url(#rc-clip-${view}-`);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 430" width="400" height="860"><style>${SVG_STYLE}</style>${inner}</svg>`;
 }
 export const svgDataURL = svg => "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
 
 /** Vues à montrer : celles qui portent une zone douloureuse (face par défaut). */
-export function vuesUtiles(K, pain = {}){
+export function vuesUtiles(K, pain = {}, pts = []){
   const noms = view => {
     const d = K.Z[view];
     return new Set([...d.mid.map(z => z[0]), ...d.side.flatMap(z => [z[0] + " " + d.L, z[0] + " " + K.R[d.L]])]);
   };
   const zones = Object.keys(pain);
-  const v = ["face", "dos"].filter(view => zones.some(z => noms(view).has(z)));
+  const v = ["face", "dos"].filter(view => zones.some(z => noms(view).has(z)) || (pts || []).some(p => p.v === view));
   return v.length ? v : ["face", "dos"];
 }
 
 /** PNG (pour le PDF) d'une vue. Résout null si le navigateur refuse. */
-export function silhouettePNG(K, view, pain, scale = 2, jpeg = 0){
+export function silhouettePNG(K, view, pain, scale = 2, jpeg = 0, pts = []){
   return new Promise(resolve => {
     const img = new Image();
     img.onload = () => {
@@ -64,7 +68,7 @@ export function silhouettePNG(K, view, pain, scale = 2, jpeg = 0){
       }catch(e){ resolve(null); }
     };
     img.onerror = () => resolve(null);
-    img.src = svgDataURL(silhouetteSVG(K, view, pain));
+    img.src = svgDataURL(silhouetteSVG(K, view, pain, pts));
   });
 }
 
@@ -91,7 +95,8 @@ function barresHTML(ev){
 export function recapHTML(R, S, K){
   const pain = S.pain || {};
   const zones = Object.entries(pain);
-  const vues = vuesUtiles(K, pain);
+  const pts = S.pts || [];
+  const vues = vuesUtiles(K, pain, pts);
   const hyp = (S.c?.hyp || []);
   const sections = R.sections.filter(s => s.h !== "Douleur et examen" || s.rows.some(r => r[0] !== "Douleur"));
   const rowsHTML = rows => rows.map(([l, v]) => `<div class="rc-row"><span class="rc-l">${esc(l)}</span><span class="rc-v">${esc(v)}</span></div>`).join("");
@@ -105,8 +110,8 @@ export function recapHTML(R, S, K){
       ${hyp.length ? `<div class="rc-hyp"><span>Hypothèse retenue</span><strong>${hyp.map(esc).join(" · ")}</strong></div>` : ""}
     </header>
 
-    ${zones.length ? `<section class="rc-body">
-      <div class="rc-figs">${vues.map(v => `<figure><img src="${svgDataURL(silhouetteSVG(K, v, pain))}" alt="Schéma ${v === "dos" ? "de dos" : "de face"} avec les zones douloureuses"></figure>`).join("")}</div>
+    ${zones.length || pts.length ? `<section class="rc-body">
+      <div class="rc-figs">${vues.map(v => `<figure><img src="${svgDataURL(silhouetteSVG(K, v, pain, pts))}" alt="Schéma ${v === "dos" ? "de dos" : "de face"} avec les zones douloureuses"></figure>`).join("")}</div>
       <div class="rc-pains">
         <div class="rc-h">Douleurs</div>
         ${zones.map(([z, p]) => `<div class="rc-pain"><span class="rc-eva" style="background:${evaHex(p.eva)}">${esc(p.eva)}</span><span><strong>${esc(z)}</strong>${(p.types || []).length ? `<small>${esc(p.types.join(", "))}</small>` : ""}</span></div>`).join("")}

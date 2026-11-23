@@ -293,6 +293,7 @@ export function report(S, patient = {}, { prev = null, prevDate = "", initial = 
   const d4 = (S.c?.dn4 || []).length;
   add("Douleur et examen", [
     ["Douleur", pz.join(" ; ")],
+    ["Points précis", (S.pts || []).length ? `${S.pts.length} point${S.pts.length > 1 ? "s" : ""} marqué${S.pts.length > 1 ? "s" : ""} d'une croix sur le schéma (${["face", "dos"].filter(v => S.pts.some(q => q.v === v)).join(" et ")})` : ""],
     ...G.filter(g => g[1] === "douleur").map(([id, , q]) => [q.replace(/ \?$|…$/, ""), ans(id)]),
     ["Observation", joinSec(S, "obs")],
     ["DN4", d4 ? `${d4}/10 ${d4 >= 4 ? "(douleur neuropathique probable, seuil ≥ 4)" : "(seuil ≥ 4 non atteint)"}` + (S.c.dn4.length ? " : " + S.c.dn4.join(", ").toLowerCase() : "") : ""]
@@ -462,9 +463,9 @@ async function construirePdf(S, patient, opts, Q){
 
   /* Silhouettes avec les zones douloureuses, et la liste des douleurs */
   const zonesP = Object.entries(S.pain || {});
-  if(zonesP.length){
-    const vues = vuesUtiles(K, S.pain);
-    const pngs = Q.sansImages ? [] : await Promise.all(vues.map(v => silhouettePNG(K, v, S.pain, Q.silh, Q.jpeg)));
+  if(zonesP.length || (S.pts || []).length){
+    const vues = vuesUtiles(K, S.pain, S.pts);
+    const pngs = Q.sansImages ? [] : await Promise.all(vues.map(v => silhouettePNG(K, v, S.pain, Q.silh, Q.jpeg, S.pts)));
     const fw = 30, fh = fw * 430 / 200;
     ensure(fh + 6);
     let fx = M;

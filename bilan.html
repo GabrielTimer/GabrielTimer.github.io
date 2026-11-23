@@ -120,6 +120,25 @@
   .g-chip[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:var(--on-lagon); }
   .g-chip.rf[aria-pressed="true"]{ background:var(--danger); border-color:var(--danger); color:#fff; }
   .g-seg{ justify-content:center; margin-bottom:6px; }
+  /* Choix Rapide / Complet */
+  .g-mode{ display:inline-flex; gap:2px; padding:3px; border:1.5px solid var(--line-strong); border-radius:999px; background:var(--surface-2); }
+  .g-mode button{ display:inline-flex; align-items:center; gap:6px; min-height:40px; padding:0 16px; border:0; border-radius:999px; background:transparent; font:inherit; font-weight:800; color:var(--ink-2); cursor:pointer; transition:background .2s, color .2s, box-shadow .2s; }
+  .g-mode button svg{ width:16px; height:16px; }
+  .g-mode button[aria-pressed="true"]{ background:var(--lagon); color:var(--on-lagon); box-shadow:0 2px 10px rgba(0,0,0,.14); }
+  /* Arrivée d'une étape */
+  .g-anim{ animation:gIn .28s ease-out; }
+  @keyframes gIn{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion:reduce){ .g-anim{ animation:none; } }
+  .g-card h3 svg{ width:20px; height:20px; color:var(--lagon); flex:none; }
+  .g-rf h3 svg{ color:var(--danger); }
+  .g-txt{ width:100%; margin-top:12px; min-height:64px; font-size:1.02rem; }
+  /* Points précis sur le schéma */
+  .g-ptsw{ margin-top:10px; }
+  .g-ptsw .g-chip{ min-height:44px; padding:8px 14px; display:inline-flex; align-items:center; gap:6px; }
+  .g-ptsw .g-chip svg{ width:16px; height:16px; }
+  .g-pts{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:10px 14px; margin-bottom:14px; border:1.5px dashed rgba(209,38,59,.45); border-radius:14px; }
+  .g-pts > span{ display:inline-flex; align-items:center; gap:6px; }
+  .g-pts > span svg{ width:18px; height:18px; color:#d1263b; flex:none; }
   .g-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px; margin-bottom:16px; }
   .g-card h3{ font-size:1.25rem; margin:0 0 12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .g-box{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:16px; }

@@ -117,11 +117,31 @@ export const BACK = `
   <path d="M72 218 C82 224 92 224 99 220 M128 218 C118 224 108 224 101 220" class="bc-soft"/>
   <path d="M76 304 q4 4 8 0 M116 304 q4 4 8 0" class="bc-soft"/>`;
 
+/* Points précis (petites croix numérotées) posés sur le schéma : S.pts = [{ v:"face"|"dos", x, y }] */
+export function pointsSVG(pts = [], view){
+  return (pts || []).map((p, i) => p.v !== view ? "" : `<g class="bc-pt" data-pt="${i}"><title>Point ${i + 1}</title>
+    <circle class="bc-pthit" cx="${p.x}" cy="${p.y}" r="9"/>
+    <path class="bc-pthalo" d="M${p.x - 4.5} ${p.y - 4.5}L${p.x + 4.5} ${p.y + 4.5}M${p.x + 4.5} ${p.y - 4.5}L${p.x - 4.5} ${p.y + 4.5}"/>
+    <path class="bc-ptx" d="M${p.x - 4.5} ${p.y - 4.5}L${p.x + 4.5} ${p.y + 4.5}M${p.x + 4.5} ${p.y - 4.5}L${p.x - 4.5} ${p.y + 4.5}"/>
+    <text class="bc-ptn" x="${p.x + 6}" y="${p.y - 5}">${i + 1}</text></g>`).join("");
+}
+
+/** Coordonnées du schéma (viewBox 200 × 430) à l'endroit touché. */
+export function pointDuClic(svg, e){
+  try{
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const q = pt.matrixTransform(svg.getScreenCTM().inverse());
+    if(q.x < 0 || q.x > 200 || q.y < 0 || q.y > 430) return null;
+    return { x: Math.round(q.x * 10) / 10, y: Math.round(q.y * 10) / 10 };
+  }catch(err){ return null; }
+}
+
 /**
  * Contenu SVG du schéma.
- * opts : { Z, R, view: "face"|"dos", pain: {nom: {eva}}, sel, color: eva => couleur }
+ * opts : { Z, R, view: "face"|"dos", pain: {nom: {eva}}, sel, color: eva => couleur, pts: points précis }
  */
-export function bodySVG({ Z, R, view, pain = {}, sel = null, color = () => "#e66" }){
+export function bodySVG({ Z, R, view, pain = {}, sel = null, color = () => "#e66", pts = [] }){
   const d = Z[view];
   const shapes = zoneShapes(Z, R, view);
   const zonesHTML = shapes.map(s => {
@@ -141,6 +161,7 @@ export function bodySVG({ Z, R, view, pain = {}, sel = null, color = () => "#e66
     </g>
     ${selShape ? `<defs><clipPath id="${id}-sel"><path d="${selShape.d}"/></clipPath></defs><g clip-path="url(#${id}-sel)" class="bc-selout"><path d="${SIL}"/>${HEAD}${EARS}</g>` : ""}
     <g class="bc-outline"><path d="${SIL}"/>${HEAD}${EARS}</g>
+    <g class="bc-pts">${pointsSVG(pts, view)}</g>
     <text class="bc-side" x="6" y="22">${esc(d.L)}</text><text class="bc-side" x="194" y="22" text-anchor="end">${esc(R[d.L])}</text>
     <text class="bc-view" x="100" y="425" text-anchor="middle">${view === "dos" ? "DOS" : "FACE"}</text>`;
 }
@@ -162,4 +183,12 @@ export const BODY_CSS = `
   .body-svg .bc-outline{ fill:none; stroke:var(--bc-line); stroke-width:1.5; stroke-linejoin:round; pointer-events:none; }
   .body-svg .bc-side{ font-family:var(--font); font-size:14px; font-weight:800; fill:var(--ink-3); pointer-events:none; }
   .body-svg .bc-view{ font-family:var(--font); font-size:9px; font-weight:800; letter-spacing:.18em; fill:var(--ink-3); pointer-events:none; }
+  .body-svg .bc-pthit{ fill:transparent; cursor:pointer; }
+  .body-svg .bc-pthalo{ stroke:#fff; stroke-width:5; stroke-linecap:round; pointer-events:none; }
+  .body-svg .bc-ptx{ stroke:#d1263b; stroke-width:2.4; stroke-linecap:round; pointer-events:none; }
+  .body-svg .bc-ptn{ font-family:var(--font); font-size:9px; font-weight:900; fill:#d1263b; stroke:#fff; stroke-width:2.5px; paint-order:stroke; pointer-events:none; }
+  .body-svg.pt-mode{ cursor:crosshair; }
+  .body-svg.pt-mode .bc-zone{ cursor:crosshair; }
+  .body-svg .bc-pt{ animation:bcPop .22s ease-out; transform-box:fill-box; transform-origin:center; }
+  @keyframes bcPop{ from{ transform:scale(.3); opacity:0; } to{ transform:scale(1); opacity:1; } }
 `;

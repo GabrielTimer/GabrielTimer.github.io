@@ -157,6 +157,10 @@ function render(){
             <button type="button" data-view="face" aria-pressed="${ui.view === "face"}">Face</button>
             <button type="button" data-view="dos" aria-pressed="${ui.view === "dos"}">Dos</button>
           </div>
+          <div class="segmented block" role="group" aria-label="Ce que le toucher ajoute" style="margin-top:8px">
+            <button type="button" data-ptmode="0" aria-pressed="true">Zone</button>
+            <button type="button" data-ptmode="1" aria-pressed="false">Point précis</button>
+          </div>
           <svg class="body-svg" id="body" viewBox="0 0 200 430" role="img" aria-label="Schéma corporel : touchez une zone douloureuse"></svg>
           <div id="zone"></div>
         </section>
@@ -245,7 +249,9 @@ function drawNotes(){
 }
 
 function drawBody(){
-  $("#body").innerHTML = BC.bodySVG({ Z:K.Z, R:K.R, view:ui.view, pain:S.pain, sel:ui.sel, color:evaColor });
+  $("#body").innerHTML = BC.bodySVG({ Z:K.Z, R:K.R, view:ui.view, pain:S.pain, sel:ui.sel, color:evaColor, pts:S.pts || [] });
+  $("#body").classList.toggle("pt-mode", !!ui.ptMode);
+  $$("[data-ptmode]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.ptmode === (ui.ptMode ? "1" : "0"))));
   $$(".segmented [data-view]").forEach(b => { if(!b.closest("#neuro")) b.setAttribute("aria-pressed", b.dataset.view === ui.view); });
 }
 
@@ -253,8 +259,14 @@ function drawZone(){
   const el = $("#zone"), n = ui.sel, p = n && S.pain[n];
   const done = Object.entries(S.pain);
   const pills = done.length ? `<div class="zones-done">${done.map(([z, q]) => `<button class="chip" type="button" data-pick="${esc(z)}" aria-pressed="${z === n}"><span class="eva-pill" style="--c:${evaColor(q.eva)}"><i></i>${esc(z)} · ${q.eva}</span></button>`).join("")}</div>` : "";
+  const nPts = (S.pts || []).length;
+  const ptsInfo = nPts ? `<p class="hint" style="margin-top:8px">${nPts} point${nPts > 1 ? "s" : ""} précis sur le schéma. <button class="btn sm ghost" type="button" data-ptclear>Effacer les points</button></p>` : "";
+  if(ui.ptMode){
+    el.innerHTML = `<p class="hint" style="margin-top:6px">Touchez l'endroit exact : une petite croix numérotée s'ajoute. Touchez une croix pour l'enlever.</p>${ptsInfo}${pills}`;
+    return;
+  }
   if(!p){
-    el.innerHTML = `<p class="hint" style="margin-top:6px">${done.length ? "Touchez une zone pour l'ajouter ou la modifier." : "Touchez une zone douloureuse sur le schéma."}</p>${pills}`;
+    el.innerHTML = `<p class="hint" style="margin-top:6px">${done.length ? "Touchez une zone pour l'ajouter ou la modifier." : "Touchez une zone douloureuse sur le schéma."}</p>${ptsInfo}${pills}`;
     return;
   }
   el.innerHTML = `<div class="zone-box">
@@ -478,9 +490,20 @@ function pickZone(n){
 
 app.addEventListener("click", async e => {
   if(e.target.closest("#neuro")) return;
+  /* Point précis : une croix là où l'on touche (toucher une croix l'enlève) */
+  const svgB = e.target.closest("#body");
+  if(svgB && ui.ptMode){
+    const pt = e.target.closest("[data-pt]");
+    S.pts = S.pts || [];
+    if(pt) S.pts.splice(Number(pt.dataset.pt), 1);
+    else{ const c = BC.pointDuClic(svgB, e); if(c) S.pts.push({ v:ui.view, ...c }); }
+    drawBody(); drawZone(); changed(); return;
+  }
   const b = e.target.closest("button, [data-zone]");
   if(!b) return;
   const d = b.dataset;
+  if(d.ptmode !== undefined){ ui.ptMode = d.ptmode === "1"; drawBody(); drawZone(); return; }
+  if(d.ptclear !== undefined){ S.pts = []; drawBody(); drawZone(); changed(); return; }
 
   if(d.view){ ui.view = d.view; ui.sel = null; drawBody(); drawZone(); return; }
   if(d.zone){
