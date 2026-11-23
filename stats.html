@@ -154,7 +154,15 @@ app.innerHTML = `
       </tbody></table>` : `<p class="muted small">Les résultats apparaîtront quand vos patients auront rempli des questionnaires.</p>`}
       <div class="notice" style="margin-top:14px">${icon("info")}<span class="small">Ces chiffres décrivent votre patientèle dans l'application : ils ne remplacent pas une étude et ne tiennent pas compte des séances au cabinet.</span></div>
     </section>
-  </div>`;
+  </div>
+  <div id="res-box"><div class="loading"><div class="spinner"></div><span>Calcul de vos résultats par pathologie…</span></div></div>`;
+
+/* Mes résultats par pathologie (bilans + questionnaires + objectifs) */
+try{
+  const [R, bilans] = await Promise.all([import("/assets/resultats.js"), C.listAllBilans().catch(() => [])]);
+  R.monter($("#res-box"), { patients, suivis, questionnaires, bilans });
+  if(location.hash === "#resultats") $("#res-box").scrollIntoView({ block:"start" });
+}catch(err){ console.warn(err); $("#res-box").innerHTML = ""; }
 </script>
 </body>
 </html>

@@ -20,6 +20,8 @@ Avant de toucher au code, vérifiez si c'est faisable ici (espace kiné → **Ou
 | Délai de déconnexion automatique de la tablette ou du téléphone | Outils → Réglages du cabinet → **Déconnexion automatique de cet appareil** (12 h conseillées) |
 | Code du mode séance (7777 par défaut) | Outils → Réglages du cabinet → **Mode séance** |
 | Sauvegarder à la main, restaurer une sauvegarde | Outils → Réglages du cabinet → **Sauvegarde** |
+| Fiche « Si ça revient », test du mois à la maison, leçons, questionnaire avant le 1er rendez-vous | Fiche du patient → bloc **Accompagnement** |
+| Voir la part de patients qui progressent vraiment, par pathologie | Outils → **Mes résultats** |
 | Mettre les bilans (PDF) et leurs photos dans les dossiers du PC, pour Maiia | Outils → **Mettre dans Maiia** (sur le PC, dans Chrome ou Edge) ; dossiers à choisir sur cette page ou dans Réglages du cabinet → Dossiers d'enregistrement |
 
 Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modifications.
@@ -29,6 +31,8 @@ Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modif
 - Délais de nettoyage des programmes (21, 28 et 30 jours) : `assets/inactivite.js` et `.github/scripts/nettoyage-programmes.mjs`
 - Plage horaire des rappels (7 h – 22 h) : `.github/scripts/rappels.mjs`
 - Réglages de la reprise de course (paliers marche/course, hausse de 10 % par semaine, conseils par pathologie) : bloc `REGLAGES` en haut du script de `programmescourse.html`
+- Textes de la fiche « Si ça revient » (signes d'alerte, 3 exercices proposés par région) : `assets/rechute.js` ; consignes des tests du mois : `assets/test-maison.js`
+- Adresse du Manuel des preuves (si vous le refaites ailleurs) : `MANUEL_URL` dans `assets/manuel.js`
 - Votre nom et votre e-mail de titulaire : `assets/config.js` **et** `firestore.rules` (les deux, toujours ensemble)
 - Une nouvelle fonction ou une nouvelle page.
 

@@ -1,13 +1,18 @@
 /* Accompagnement du patient, avant, pendant et après la prise en charge :
    - questionnaire avant le 1er rendez-vous (prebilan.js, page prebilan.html) ;
    - petites leçons d'éducation (lecons.js) ;
-   - message de suivi 3 mois après la fin (envoyé par la tâche GitHub « Rappels »).
+   - message de suivi 3 mois après la fin (envoyé par la tâche GitHub « Rappels ») ;
+   - fiche « Si ça revient » (textes dans rechute.js) ;
+   - test du mois à la maison (test-maison.js).
    Réglages dans le dossier du patient (patients/{clé}) : preBilan { actif, date },
-   lecons { parcours, debut }, suivi3m { prevu: "AAAA-MM-JJ" | "fait", fin, envoyeLe }.
-   Réponses du patient : patients/{clé}/suivis, types "prebilan" et "suivi3m". */
+   lecons { parcours, debut }, suivi3m { prevu: "AAAA-MM-JJ" | "fait", fin, envoyeLe },
+   rechute { plan, exos, note, date }, testMois { test, jours, debut }.
+   Réponses du patient : patients/{clé}/suivis, types "prebilan", "suivi3m" et "test". */
 
 import { esc, icon, openSheet, toast, confirmDialog, fmtShortDate } from "./app.js";
 import { PARCOURS, debloquees, lues, marquerLue, JOURS_ENTRE } from "./lecons.js";
+import { PLANS, planPropose } from "./rechute.js";
+import { TESTS, testsDe, aFaire as testAFaire, evolutionHTML, passerTest } from "./test-maison.js";
 
 const DAY = 86400000;
 const iso = t => { const d = new Date(t), z = n => String(n).padStart(2, "0"); return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}`; };
@@ -62,6 +67,13 @@ export function panelKineHTML(patient, suivis){
           : "Programmé tout seul avec le bilan de fin de traitement, ou à la main ici.",
         s3 ? "" : sv?.prevu && sv.prevu !== "fait" ? `<button class="btn sm" type="button" data-s="acc-s3-off">Annuler</button>`
           : sv?.prevu === "fait" ? "" : `<button class="btn sm" type="button" data-s="acc-s3-on">${icon("calendar")}Programmer</button>`)}
+      ${ligne("heart", "Si ça revient",
+        patient.rechute?.plan && PLANS[patient.rechute.plan] ? `Fiche « ${esc(PLANS[patient.rechute.plan].nom)} » sur l'accueil du patient : quoi faire, 3 exercices, signes d'alerte.` : "Petite fiche pour le patient en cas de nouvelle douleur : quoi faire, 3 exercices à reprendre, quand vous recontacter.",
+        `<button class="btn sm" type="button" data-s="acc-rech">${icon(patient.rechute?.plan ? "edit" : "plus")}${patient.rechute?.plan ? "Modifier" : "Préparer"}</button>`)}
+      ${(() => { const tm = patient.testMois, T = tm && TESTS[tm.test], res = T ? testsDe(suivis, tm.test) : [];
+        return ligne("clock", "Test du mois à la maison",
+          T ? (res.length ? `${esc(T.court)} : ${evolutionHTML(res.slice(-4), T)}` : `${esc(T.court)} : proposé tous les ${tm.jours || 30} jours, pas encore fait.`) : "Le patient refait un test simple chez lui (lever de chaise, équilibre), chronométré par l'appli. Résultat dans « Avant la séance ».",
+          `<button class="btn sm" type="button" data-s="acc-test">${icon(T ? "edit" : "plus")}${T ? "Changer" : "Proposer"}</button>`); })()}
     </div></section>`;
 }
 
@@ -101,7 +113,57 @@ export function actionsKine({ patient, suivis, savePatient }){
       if(!(await confirmDialog({ title: "Programmer les nouvelles à 3 mois ?", message: `La prise en charge est considérée comme terminée aujourd'hui. Le ${frDate(programmeSuivi().prevu)}, le patient recevra un message (et une notification s'il les a activées) avec 3 questions rapides. Sa réponse arrivera dans vos messages.`, confirm: "Programmer" }))) return;
       await savePatient({ suivi3m: programmeSuivi() });
     },
-    "acc-s3-off": () => savePatient({ suivi3m: null })
+    "acc-s3-off": () => savePatient({ suivi3m: null }),
+    "acc-rech": async () => {
+      let zones = [];
+      try{ const C = await import("./cloud.js"); zones = (await C.listBilans(patient.cle))[0]?.zones || []; }catch(e){}
+      const r = patient.rechute || {};
+      let plan = r.plan && PLANS[r.plan] ? r.plan : planPropose(zones);
+      const exosDe = p => (r.plan === p && r.exos?.length ? r.exos : PLANS[p].exos);
+      const s = openSheet({ title: "Si ça revient", wide: true,
+        body: `<p class="small muted" style="margin-top:0">Le patient retrouve cette fiche sur son accueil, même quand il n'a plus de programme en cours.</p>
+          <div class="field"><label>Région</label><div class="chips">${Object.entries(PLANS).map(([k, p]) => `<button type="button" class="chip" data-plan="${k}" aria-pressed="${k === plan}">${esc(p.nom)}</button>`).join("")}</div></div>
+          <div id="rc-apercu"></div>
+          <div class="field"><label>3 exercices à reprendre tout de suite</label>
+            ${[0, 1, 2].map(i => `<input class="input" data-ex="${i}" maxlength="140" style="margin-bottom:6px">`).join("")}</div>
+          <div class="field"><label for="rc-note">Un mot de votre part (facultatif)</label><textarea class="textarea" id="rc-note" rows="2" maxlength="400" placeholder="Ex. Reprenez aussi la marche nordique dès que possible.">${esc(r.note || "")}</textarea></div>`,
+        foot: `${r.plan ? `<button class="btn danger" type="button" id="rc-off">Retirer</button>` : ""}<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" data-ok>${icon("check")}Enregistrer</button>` });
+      const montrer = () => {
+        const P = PLANS[plan];
+        s.el.querySelectorAll("[data-plan]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.plan === plan)));
+        s.el.querySelector("#rc-apercu").innerHTML = `<div class="notice" style="margin:10px 0">${icon("info")}<span class="small">${esc(P.rassurer)}<br><strong>Signes d'alerte affichés :</strong> ${P.alerte.map(esc).join(" ")}</span></div>`;
+        const ex = exosDe(plan);
+        s.el.querySelectorAll("[data-ex]").forEach((el, i) => { el.value = ex[i] || ""; });
+      };
+      s.el.querySelectorAll("[data-plan]").forEach(b => b.onclick = () => { plan = b.dataset.plan; montrer(); });
+      montrer();
+      s.el.querySelector("#rc-off")?.addEventListener("click", async () => { await savePatient({ rechute: null }); s.close(); });
+      s.el.querySelector("[data-ok]").onclick = async () => {
+        const exos = [...s.el.querySelectorAll("[data-ex]")].map(el => el.value.trim()).filter(Boolean);
+        try{
+          await savePatient({ rechute: { plan, exos, note: s.el.querySelector("#rc-note").value.trim(), date: Date.now() } });
+          s.close();
+          toast("Fiche « Si ça revient » visible sur l'accueil du patient.", { type:"ok" });
+        }catch(err){ toast("Enregistrement impossible : " + (err.message || err), { type:"err" }); }
+      };
+    },
+    "acc-test": () => {
+      const tm = patient.testMois || {};
+      const s = openSheet({ title: "Test du mois à la maison",
+        body: `<div class="stack" style="--gap:10px">
+          ${Object.entries(TESTS).map(([id, t]) => `<label class="check" style="align-items:flex-start"><input type="radio" name="tm" value="${id}" ${tm.test === id ? "checked" : ""}><span><strong>${esc(t.nom)}</strong><br><span class="small muted">${esc(t.pour)}</span></span></label>`).join("")}
+          <label class="check"><input type="radio" name="tm" value="" ${tm.test ? "" : "checked"}><span>Aucun test</span></label>
+          <div class="field"><label for="tm-j">Le patient le refait tous les</label><select class="select" id="tm-j">${[14, 30, 60].map(j => `<option value="${j}" ${(tm.jours || 30) === j ? "selected" : ""}>${j} jours</option>`).join("")}</select></div>
+          <p class="small muted">Une carte apparaît sur l'accueil du patient quand c'est le moment. L'appli donne les consignes, le compte à rebours et le chronomètre. Faites-le une première fois avec lui au cabinet.</p></div>`,
+        foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" data-ok>${icon("check")}Enregistrer</button>` });
+      s.el.querySelector("[data-ok]").onclick = async () => {
+        const v = s.el.querySelector('input[name="tm"]:checked')?.value || "";
+        try{
+          await savePatient({ testMois: v ? { test: v, jours: Number(s.el.querySelector("#tm-j").value) || 30, debut: tm.test === v ? (tm.debut || Date.now()) : Date.now() } : null });
+          s.close();
+        }catch(err){ toast("Enregistrement impossible : " + (err.message || err), { type:"err" }); }
+      };
+    }
   };
 }
 
@@ -128,6 +190,14 @@ export function cartesPatientHTML(patient, suivis, { cle } = {}){
       <span class="li-main"><strong>Votre kiné prend de vos nouvelles</strong><span class="small">3 questions, 1 minute.</span></span>
       <span class="btn sm primary" style="flex:none">Répondre</span></button>`);
   }
+  /* Test du mois à la maison */
+  if(testAFaire(patient.testMois, suivis)){
+    const T = TESTS[patient.testMois.test];
+    out.push(`<button class="inbox-banner" type="button" data-acc="test" style="width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer">
+      <span class="t-ico">${icon("clock")}</span>
+      <span class="li-main"><strong>Votre test du mois</strong><span class="small">${esc(T.nom)} : 2 minutes, l'appli vous guide.</span></span>
+      <span class="btn sm primary" style="flex:none">Commencer</span></button>`);
+  }
   /* Petites leçons */
   const deb = debloquees(patient.lecons);
   if(deb.length){
@@ -140,7 +210,55 @@ export function cartesPatientHTML(patient, suivis, { cle } = {}){
         <span class="li-main"><span class="li-title">${esc((nouvelle || deb[deb.length - 1]).titre)}${nouvelle ? ` <span class="badge lagon">Nouvelle</span>` : ""}</span><span class="li-sub">${esc(P.nom)} · 1 minute de lecture</span></span>
         <span class="li-end">${icon("chevron")}</span></button></section>`);
   }
+  /* Si ça revient (et résultats du test du mois, s'il y en a) */
+  const R = patient.rechute, PR = R?.plan && PLANS[R.plan];
+  const T = patient.testMois?.test && TESTS[patient.testMois.test];
+  const resT = T ? testsDe(suivis, patient.testMois.test) : [];
+  if(PR || resT.length){
+    out.push(`<section class="section"><div class="list">
+      ${PR ? `<button class="list-item" type="button" data-acc="rechute" style="width:100%;text-align:left;font:inherit;color:inherit;border:0;cursor:pointer">
+        <span class="li-ico">${icon("heart")}</span>
+        <span class="li-main"><span class="li-title">Si ça revient</span><span class="li-sub">${esc(PR.nom)} : que faire, 3 exercices, quand me recontacter</span></span>
+        <span class="li-end">${icon("chevron")}</span></button>` : ""}
+      ${resT.length ? `<button class="list-item" type="button" data-acc="test-res" style="width:100%;text-align:left;font:inherit;color:inherit;border:0;cursor:pointer">
+        <span class="li-ico">${icon("chart")}</span>
+        <span class="li-main"><span class="li-title">Mon test du mois</span><span class="li-sub">${esc(T.court)} : dernier résultat ${esc(String(resT[resT.length - 1].score).replace(".", ","))} ${T.unite === "s" ? "s" : esc(T.unite)}</span></span>
+        <span class="li-end">${icon("chevron")}</span></button>` : ""}
+    </div></section>`);
+  }
   return out.join("");
+}
+
+function ficheRechute(R, { cle, apercu, nom } = {}){
+  const P = PLANS[R.plan];
+  const exos = R.exos?.length ? R.exos : P.exos;
+  const voix = "speechSynthesis" in window;
+  const s = openSheet({ title: "Si ça revient : " + P.nom,
+    body: `<p style="line-height:1.6;margin-top:0">${esc(P.rassurer)}</p>
+      <h3 style="margin:14px 0 6px">Que faire</h3><ul style="line-height:1.6;padding-left:1.2em">${P.faire.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <h3 style="margin:14px 0 6px">Les 3 exercices à reprendre</h3><ol style="line-height:1.6;padding-left:1.2em">${exos.map(x => `<li>${esc(x)}</li>`).join("")}</ol>
+      ${R.note ? `<div class="notice" style="margin-top:12px">${icon("message")}<span><strong>Le mot de votre kiné :</strong> ${esc(R.note)}</span></div>` : ""}
+      <div class="notice danger" style="margin-top:12px">${icon("alert")}<span><strong>Consultez rapidement si :</strong><br>${P.alerte.map(esc).join("<br>")}</span></div>
+      <p style="line-height:1.6;margin-top:12px"><strong>${esc(P.appeler)}</strong></p>
+      ${voix ? `<button class="btn soft" type="button" data-lire>${icon("sound")}Écouter</button>` : ""}`,
+    foot: `<button class="btn" type="button" data-ecrire>${icon("mail")}Écrire à mon kiné</button><button class="btn primary" type="button" data-close>Fermer</button>`,
+    onClose: () => { try{ speechSynthesis.cancel(); }catch(e){} } });
+  s.el.querySelector("[data-ecrire]")?.addEventListener("click", async () => {
+    s.close();
+    const PT = await import("./patient.js");
+    PT.writeToKine({ cle, apercu, patientNom: nom });
+  });
+  s.el.querySelector("[data-lire]")?.addEventListener("click", () => {
+    try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance([P.rassurer, "Que faire.", ...P.faire, "Les exercices à reprendre.", ...exos, R.note ? "Le mot de votre kiné : " + R.note : "", "Consultez rapidement si : ", ...P.alerte, P.appeler].filter(Boolean).join(". ")); u.lang = "fr-FR"; u.rate = .95; speechSynthesis.speak(u); }catch(e){}
+  });
+}
+
+function resultatsTest(patient, suivis){
+  const T = TESTS[patient.testMois.test], res = testsDe(suivis, patient.testMois.test);
+  openSheet({ title: "Mon test du mois",
+    body: `<p class="muted" style="margin-top:0">${esc(T.nom)}</p><p style="line-height:1.8">${evolutionHTML(res, T)}</p>
+      <p class="small muted">${T.sens > 0 ? "Plus le chiffre monte, mieux c'est." : "Plus le temps baisse, mieux c'est."} Le prochain test vous sera proposé ici dans ${patient.testMois.jours || 30} jours environ.</p>`,
+    foot: `<button class="btn primary" type="button" data-close>Fermer</button>` });
 }
 
 function lireLecon(reglage, i, apres = () => {}){
@@ -203,9 +321,12 @@ function repondreSuivi({ cle, apercu, patient, apres }){
 }
 
 /** Branche les boutons des cartes. apres() : redessine l'accueil (ex. carte « Nouvelle » lue). */
-export function lierPatient(box, { patient, cle, apercu, apres = () => {} }){
+export function lierPatient(box, { patient, cle, apercu, suivis = [], apres = () => {} }){
   box.querySelectorAll("[data-acc]").forEach(b => b.addEventListener("click", () => {
     const a = b.dataset.acc;
+    if(a === "rechute") ficheRechute(patient.rechute, { cle, apercu, nom: patient.nom });
+    if(a === "test") passerTest(patient.testMois.test, { cle, apercu, avant: testsDe(suivis, patient.testMois.test), apres });
+    if(a === "test-res") resultatsTest(patient, suivis);
     if(a === "lecon") lireLecon(patient.lecons, Number(b.dataset.i), apres);
     if(a === "lecons") toutesLecons(patient.lecons, apres);
     if(a === "suivi3m") repondreSuivi({ cle, apercu, patient, apres });

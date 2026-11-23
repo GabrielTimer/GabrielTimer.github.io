@@ -696,3 +696,11 @@ export const BUT = {
   ICIQ: "Périnée : fuites urinaires et gêne"
 };
 export const butOf = q => q.but || BUT[String(q.cle || "").toUpperCase()] || q.zone || "";
+
+/* ---------- STarT Back : conduite proposée selon le risque (Hill 2011, essai STarT Back) ---------- */
+export const CONDUITE_STARTBACK = {
+  "faible": "Risque faible : 1 à 2 séances de conseils suffisent souvent (rassurer, rester actif, reprise du travail). Pas besoin d'un long traitement.",
+  "moyen": "Risque moyen : kiné centrée sur l'exercice et la reprise d'activité, environ 4 à 6 séances.",
+  "élevé": "Risque élevé : approche psychologiquement informée (peurs, exposition graduée au mouvement, recadrage des croyances), environ 6 à 10 séances ; penser à un relais psychologique si besoin."
+};
+export const conduiteStartBack = sous => CONDUITE_STARTBACK[String(sous?.Risque || "").toLowerCase()] || "";

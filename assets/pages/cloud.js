@@ -318,6 +318,7 @@ async function kineView(param){
       motPatient ? ligne("message", "Son dernier mot", `<span class="av-quote">« ${esc(String(motPatient.texte).slice(0, 160))}${String(motPatient.texte).length > 160 ? "…" : ""} »</span> <span class="small muted">${esc(fmtShortDate(motPatient.date))}</span>`) : "",
       auj.length ? ligne("play", "Prévu aujourd'hui", auj.map(s => esc(s.label || s.nom || "Séance")).join(", ")) : "",
       dernierBilan ? ligne("stethoscope", "Dernier bilan", `${esc(BT[dernierBilan.type] || "Bilan")} du ${esc(fmtISO(dernierBilan.date))}${dernierBilan.motif ? ` · ${esc(dernierBilan.motif)}` : ""}`) : "",
+      `<div id="av-test"></div>`,
       C.estSien(patient) ? `<div id="av-note"></div>` : ""
     ].filter(Boolean);
     return `<section class="section panel avant-seance">
@@ -332,6 +333,20 @@ async function kineView(param){
       const n = (await C.listNotes(patient.cle))[0];
       const txt = n && (n.texte || n.note || n.contenu || "");
       if(txt && $("#av-note")) $("#av-note").outerHTML = `<div class="av-l">${icon("edit")}<span class="av-lab">Votre dernière note</span><span class="av-val"><span class="av-quote">${esc(String(txt).slice(0, 200))}${String(txt).length > 200 ? "…" : ""}</span> <span class="small muted">${esc(fmtShortDate(n.date))}</span></span></div>`;
+    }catch(e){}
+  };
+
+  /* Test du mois fait à la maison (s'il y en a un) */
+  const afficherTestMois = async () => {
+    if(!$("#av-test")) return;
+    try{
+      const TM = await import("../test-maison.js");
+      const suivis = await C.listSuivis(patient.cle);
+      const lignes = Object.entries(TM.TESTS).map(([id, t]) => {
+        const res = TM.testsDe(suivis, id);
+        return res.length ? `<div class="av-l">${icon("clock")}<span class="av-lab">${esc(t.court)}</span><span class="av-val">${TM.evolutionHTML(res.slice(-4), t)}</span></div>` : "";
+      }).join("");
+      if($("#av-test")) $("#av-test").outerHTML = lignes || "";
     }catch(e){}
   };
 
@@ -461,6 +476,7 @@ async function kineView(param){
     const nl = $("#nouveau-lien");
     if(nl) nl.onclick = async () => { await UI.accessSheet(patient); patient.nouveauLien = null; nl.closest(".notice")?.remove(); };
     afficherDerniereNote();
+    afficherTestMois();
     $("#note-jour").onclick = () => {
       document.dispatchEvent(new CustomEvent("kine:note-du-jour"));
     };

@@ -21,6 +21,8 @@ const TF=[
 ["tf_ybalasym","Y-Balance : asymétrie antérieure","cm",0,-1],
 ["tf_hop","Single hop test (LSI)","%",0,1],
 ["tf_triplehop","Triple hop test (LSI)","%",0,1],
+["tf_quadlsi","Force du quadriceps (LSI)","%",0,1],
+["tf_ischiolsi","Force des ischio-jambiers (LSI)","%",0,1],
 ["tf_wblt","Fente en charge (knee to wall)","cm",0,1],
 ["tf_grip","Force de préhension (dynamomètre)","kg",5,1]
 ];
@@ -95,6 +97,14 @@ const GUIDE_TF={
  n:"LSI ≥ 90 % : critère habituellement retenu pour la reprise du sport, avec les autres hop tests.",
  v:"https://www.youtube.com/watch?v=2JgKSPO95Hc", // Sportsmetrics ACL Injury Prevention
  src:"Noyes et al. 1991"},
+"Force du quadriceps (LSI)":{
+ t:"Dynamomètre à main ou isocinétisme. Assis en bout de table, genou à 60 à 90° de flexion, dynamomètre fixé à la cheville (sangle à un point fixe de préférence). Contraction maximale en extension, 3 à 5 s, 3 essais par côté, après 1 essai d'échauffement. LSI = moyenne côté atteint ÷ moyenne côté sain × 100 (bouton « Calculer »).",
+ n:"LSI ≥ 90 % : critère habituel de reprise du sport après LCA (avec les tests de saut et l'ACL-RSI). Vers 70 à 80 % : seuil souvent retenu pour reprendre la course. Un LSI élevé peut masquer une baisse des deux côtés : comparer aussi aux valeurs d'avant la blessure si connues.",
+ src:"Grindem et al. 2016 ; Kotsifaki et al. (consensus Aspetar) 2023"},
+"Force des ischio-jambiers (LSI)":{
+ t:"Dynamomètre à main ou isocinétisme. À plat ventre genou à 30 à 90° ou assis genou à 90°, dynamomètre au-dessus du talon. Contraction maximale en flexion, 3 à 5 s, 3 essais par côté. LSI = moyenne côté atteint ÷ moyenne côté sain × 100 (bouton « Calculer »).",
+ n:"LSI ≥ 90 % : critère habituel de reprise du sport (LCA, lésion des ischio-jambiers). Prudence avec un greffon ischio-jambier les 8 à 12 premières semaines.",
+ src:"Grindem et al. 2016 ; Kotsifaki et al. 2023"},
 "Fente en charge (knee to wall)":{
  t:"Fente face au mur, pied testé en avant, talon au sol, genou dans l'axe du 2e orteil. Avancer le pied jusqu'à la distance maximale où le genou touche encore le mur sans décoller le talon. Mesurer la distance gros orteil – mur (cm). Chaque côté.",
  n:"Fiabilité excellente (Bennell 1998). Interpréter surtout par comparaison au côté sain et dans le temps (entorse, tendinopathie d'Achille, reprise de course).",

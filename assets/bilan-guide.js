@@ -12,6 +12,7 @@ import { esc, icon, toast, openSheet, evaColor } from "./app.js";
 import * as TX from "./bilan-traitement.js";
 import { exerciseImage } from "./library.js";
 import { nomAffiche } from "./noms.js";
+import { fichesPour } from "./manuel.js";
 
 const STEPS = [
   ["motif", "Motif"],
@@ -240,8 +241,8 @@ export function mountGuide(app, ctx){
         ${cliniques || `<p class="g-hint">Pas de tests cliniques pour les zones notées.</p>`}
         ${tf.length || tfAutres.length ? `<section class="g-card"><h3>Tests fonctionnels conseillés</h3>
           <p class="g-hint">Remplissez seulement ceux réalisés. Touchez le nom pour le protocole et la vidéo.</p>
-          <div class="mes-grid">${tf.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})${String(tfAvant[k] ?? "") !== "" ? ` · avant ${esc(tfAvant[k])}` : ""}</span></label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("") || `<p class="g-hint">Aucun test fonctionnel particulier pour ce motif.</p>`}</div>
-          ${tfAutres.length ? `<details class="g-more"><summary>Autres tests fonctionnels (${tfAutres.length})</summary><div class="mes-grid">${tfAutres.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div></details>` : ""}
+          <div class="mes-grid">${tf.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})${String(tfAvant[k] ?? "") !== "" ? ` · avant ${esc(tfAvant[k])}` : ""}</span>${/\(LSI\)/.test(nom) ? ` <button class="btn sm ghost" type="button" data-lsi="${esc(nom)}" style="min-height:0;padding:2px 8px">Calculer</button>` : ""}</label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("") || `<p class="g-hint">Aucun test fonctionnel particulier pour ce motif.</p>`}</div>
+          ${tfAutres.length ? `<details class="g-more"><summary>Autres tests fonctionnels (${tfAutres.length})</summary><div class="mes-grid">${tfAutres.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span>${/\(LSI\)/.test(nom) ? ` <button class="btn sm ghost" type="button" data-lsi="${esc(nom)}" style="min-height:0;padding:2px 8px">Calculer</button>` : ""}</label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div></details>` : ""}
         </section>` : ""}
         ${!S.approf ? `<p class="g-hint">Bilan rapide : seuls les tests utiles pour le motif sont proposés. Bouton « Rapide » en haut pour passer en bilan approfondi.</p>` : ""}`;
     },
@@ -324,6 +325,7 @@ export function mountGuide(app, ctx){
         <section class="g-card">
           <h3>Profil du patient</h3>
           <p class="g-hint">${P.hyps.length ? `Hypothèse${P.hyps.length > 1 ? "s" : ""} : <strong>${P.hyps.map(h => esc(h.label)).join(", ")}</strong>${P.hyps.some(h => !h.retenue) ? " (d'après l'entretien, à confirmer dans la synthèse)" : ""}` : "Aucune hypothèse retenue : la proposition s'appuie sur le motif et les zones."}</p>
+          ${(() => { const F = fichesPour({ hyps:P.hyps, regions:B.bilanRegions(S), motifs:B.motifs(S), postop:P.post }); return F.length ? `<p class="g-hint">${icon("book")} Manuel des preuves (doses, tests, scores) : ${F.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener"><strong>${esc(f.titre)}</strong></a> <span class="faint">(onglet ${esc(f.nomOnglet)})</span>`).join(", ")}</p>` : ""; })()}
           <div class="g-q"><div class="g-qt">Phase</div>${opt("phase", ["Aiguë", "Subaiguë", "Chronique"], p.phase, a.phase)}</div>
           <div class="g-q"><div class="g-qt">Irritabilité<span class="g-multi">douleur, nuit, repos, évolution, gêne</span></div>${opt("irrit", ["Élevée", "Modérée", "Faible"], p.irrit, a.irrit)}</div>
         </section>

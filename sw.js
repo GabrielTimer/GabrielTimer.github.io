@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.54.0";
+const VERSION = "gt-2.55.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -8,7 +8,7 @@ const MEDIA_MAX = 600;   // nombre d'images gardées au plus
 
 const PRECACHE = [
   "/", "/index.html", "/cloud.html", "/timer.html", "/fin.html", "/progression.html", "/suivi.html", "/conseils.html",
-  "/prebilan.html", "/assets/prebilan.js", "/assets/lecons.js", "/assets/accompagnement.js", "/assets/encouragements.js",
+  "/prebilan.html", "/assets/prebilan.js", "/assets/lecons.js", "/assets/accompagnement.js", "/assets/encouragements.js", "/assets/rechute.js", "/assets/test-maison.js",
   "/assets/suivi.js", "/assets/marches.js", "/assets/messages.js", "/assets/smileys.js", "/assets/bodychart.js", "/assets/nerfs-data.js", "/assets/nerfs-ui.js", "/assets/evolution.js", "/assets/questionnaires.js", "/assets/conseils-data.js", "/assets/fiches-patho.js",
   "/historique.html", "/mes_programmes.html", "/reglages.html", "/respir/index.html",
   "/manifest.json", "/logo.png", "/icon-192.png", "/icon-512.png",
@@ -24,7 +24,7 @@ const PRECACHE = [
 const KINE_EN_PLUS = [
   "/admin_tools.html", "/maiia.html", "/assets/vers-maiia.js", "/contenu-bilan.html", "/aide.html", "/entretien.html", "/assets/bilan-core.js", "/assets/bilan-guide.js", "/assets/bilan-recap.js",
   "/assets/bilan-traitement.js", "/assets/exercise-editor.js", "/assets/faire-evoluer.js", "/assets/filter-drawer.js", "/assets/global-search.js", "/assets/info-mois.js",
-  "/assets/kine-ui.js", "/assets/kine.js", "/assets/dictee.js", "/assets/library-ui.js", "/assets/modeles-base.js", "/assets/modeles-ui.js", "/assets/modeles.js",
+  "/assets/kine-ui.js", "/assets/kine.js", "/assets/dictee.js", "/assets/manuel.js", "/assets/resultats.js", "/assets/library-ui.js", "/assets/modeles-base.js", "/assets/modeles-ui.js", "/assets/modeles.js",
   "/assets/pages/bilan.js", "/assets/pages/config.css", "/assets/pages/config.js", "/assets/pathologies.js", "/assets/photos-cabinet.js", "/assets/qr.js",
   "/assets/questionnaire-pdf.js", "/assets/retour.js", "/bilan-kine/conseils-patient.js", "/bilan-kine/data.js", "/bilan-kine/entretien.js", "/bilan-kine/fonctionnels.js",
   "/bilan-kine/guide.js", "/bilan-kine/index.html", "/bilan-kine/traitements.js", "/bilan.html", "/cabinet.html", "/compte-rendu.html",
