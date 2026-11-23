@@ -81,6 +81,24 @@ function arreter(){
   ecoute = false; maj();
 }
 
+/* Place le bouton au-dessus des barres fixées en bas de l'écran (« Précédent / Suivant » du bilan,
+   menu du bas sur téléphone), quelle que soit la taille de l'écran. */
+function placer(){
+  if(!btn || btn.style.display === "none") return;
+  const H = window.innerHeight;
+  let haut = H;   // bord haut de la barre la plus haute posée en bas de l'écran
+  document.querySelectorAll(".g-foot, .nav, [data-barre-bas]").forEach(el => {
+    const r = el.getBoundingClientRect();
+    /* Seulement les barres basses (pas le menu latéral de la tablette, qui prend toute la hauteur) */
+    if(r.height && r.height < H / 3 && r.bottom >= H - 2 && getComputedStyle(el).position === "fixed") haut = Math.min(haut, r.top);
+  });
+  if(haut === H){
+    btn.style.bottom = "calc(18px + env(safe-area-inset-bottom))";
+  }else{
+    btn.style.bottom = `${Math.round(H - haut + 12)}px`;
+  }
+}
+
 export function init(){
   if(!Reco || init.fait) return;
   init.fait = true;
@@ -89,13 +107,11 @@ export function init(){
     clearTimeout(cacher);
     if(ecoute && cible !== e.target) arreter();
     cible = e.target;
-    const b = bouton();
-    /* Au-dessus d'une barre fixe du bas (ex. « Précédent / Suivant » du bilan) */
-    const barre = document.querySelector(".g-foot");
-    const h = barre && barre.offsetParent !== null ? barre.offsetHeight : 0;
-    b.style.bottom = `calc(var(--nav-h,68px) + ${18 + h}px + env(safe-area-inset-bottom))`;
-    b.style.display = "inline-flex";
+    bouton().style.display = "inline-flex";
+    placer();
   });
+  window.addEventListener("resize", placer);
+  window.visualViewport?.addEventListener("resize", placer);
   document.addEventListener("focusout", e => {
     if(e.target !== cible) return;
     /* Petit délai : le focus peut passer à une autre zone de texte */
