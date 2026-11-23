@@ -113,6 +113,7 @@ export async function aFaire(){
 
 async function pdfDuBilan(b, patient, tous){
   const B = await import("./bilan-core.js");
+  await B.loadClinic();   // contenu du bilan (régions, tests…) : indispensable au PDF
   const S = { ...(b.etat || {}) };
   S.f = S.f || {}; S.c = S.c || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
   S.type = S.type || b.type; S.date = S.date || b.date;

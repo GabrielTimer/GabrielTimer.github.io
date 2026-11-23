@@ -116,11 +116,11 @@ async function toutEnregistrer(go){
   /* Accès aux dossiers demandé tout de suite, pendant que le clic compte encore */
   await D.autoriser("bilans").catch(() => null);
   await D.autoriser("photos").catch(() => null);
-  let okB = 0, erreurs = 0, dosB = "", resP = { faites: 0, incompletes: 0, dossier: "" };
+  let okB = 0, erreurs = 0, derniere = null, dosB = "", resP = { faites: 0, incompletes: 0, dossier: "" };
   for(const b of E.bilans){
     ecrire(`Bilan ${okB + erreurs + 1} sur ${E.bilans.length} : ${nomDe(b)}…`);
     try{ const r = await M.exporterBilan(b, E); okB++; dosB = r.dossier || dosB; }
-    catch(e){ console.error(e); erreurs++; }
+    catch(e){ console.error(e); erreurs++; derniere = e; }
   }
   if(E.photos){
     ecrire("Photos…");
@@ -132,7 +132,7 @@ async function toutEnregistrer(go){
   const ou = (n, d) => d ? `dans « ${d} »` : "dans Téléchargements";
   const msg = [okB ? `${okB} PDF ${ou(okB, dosB)}` : "", resP.faites ? `${resP.faites} photo${resP.faites > 1 ? "s" : ""} ${ou(resP.faites, resP.dossier)}` : ""].filter(Boolean).join(", ");
   toast(msg ? `C'est fait : ${msg}. Glissez-les dans Maiia.` : "Rien n'a été enregistré.", { type: erreurs ? "err" : "ok", duration: 9000 });
-  if(erreurs) toast(`${erreurs} élément${erreurs > 1 ? "s n'ont" : " n'a"} pas pu être enregistré${erreurs > 1 ? "s" : ""} : relancez.`, { type:"err", duration:9000 });
+  if(erreurs) toast(`${erreurs} élément${erreurs > 1 ? "s n'ont" : " n'a"} pas pu être enregistré${erreurs > 1 ? "s" : ""} : relancez.${derniere ? ` (Détail pour Claude : ${String(derniere.message || derniere).slice(0, 120)})` : ""}`, { type:"err", duration:15000 });
   if(resP.incompletes) toast(`${resP.incompletes} photo${resP.incompletes > 1 ? "s sont" : " est"} encore en cours d'envoi depuis la tablette : relancez dans quelques minutes.`, { duration:9000 });
   occupe = false;
   dessiner();
