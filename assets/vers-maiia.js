@@ -157,7 +157,8 @@ export async function exporterPhotos({ patients, onProgress = () => {} }){
     let o = 0; bouts.forEach(x => { tout.set(x, o); o += x.length; });
     const nomPatient = patients.get(p0.cle)?.nom || "Patient";
     const nom = propre(`${iso(p0.date)} ${heure(p0.date)} ${nomPatient}${p0.bilan ? ` - ${p0.bilan.replace(/\//g, "-")}` : ""}`) + "." + P.extension(p0.type);
-    const r = await D.enregistrer("photos", new Blob([tout], { type: p0.type || "image/jpeg" }), nom);
+    /* Un sous-dossier par patient (ex. « Photos des bilans/AUTHIER Fabienne ») */
+    const r = await D.enregistrer("photos", new Blob([tout], { type: p0.type || "image/jpeg" }), nom, propre(nomPatient));
     dossier = r.dossier || dossier;
     await C.photosPcEffacer(photo, p0.total);
     faites++;
