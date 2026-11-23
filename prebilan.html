@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avant votre premier rendez-vous</title>
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="apple-touch-icon" href="/icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  .pb-q{ padding:14px 0; border-top:1px solid var(--line); }
+  .pb-q:first-child{ border-top:0; }
+  .pb-qt{ font-weight:800; margin-bottom:10px; }
+  .pb-multi{ font-weight:500; color:var(--ink-3); font-size:var(--fs-sm); margin-left:6px; }
+  .pb-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pb-chip{ min-height:46px; padding:8px 14px; border-radius:999px; border:1.5px solid var(--line); background:var(--surface); color:var(--ink); font:inherit; font-weight:600; cursor:pointer; text-align:left; }
+  .pb-chip[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:var(--on-lagon, #fff); }
+  .pb-eva{ display:grid; grid-template-columns:repeat(11,minmax(0,1fr)); gap:4px; }
+  .pb-eva button{ min-height:44px; border-radius:10px; border:1.5px solid var(--line); background:var(--surface); font:inherit; font-weight:800; cursor:pointer; color:var(--ink); }
+  .pb-eva button[aria-pressed="true"]{ background:var(--lagon); border-color:var(--lagon); color:var(--on-lagon, #fff); }
+  .pb-ends{ display:flex; justify-content:space-between; font-size:var(--fs-xs); color:var(--ink-3); margin-top:4px; }
+</style>
+</head>
+<body>
+<main class="page" id="app"><div class="loading" style="min-height:50dvh"><div class="spinner"></div><span>Chargement…</span></div></main>
+<script type="module">
+import { $, $$, esc, icon, readPatientContext, mountShell, registerSW, toast, KINE, store } from "/assets/app.js";
+import { FERMEES, ZONES, SIGNES, TEXTES, resume } from "/assets/prebilan.js";
+
+registerSW();
+const ctx = readPatientContext();
+if(!ctx.cle){ location.replace("/index.html"); throw new Error("patient"); }
+mountShell({ role:"patient", active:"accueil", back:"/index.html", apercu:ctx.apercu });
+const app = $("#app");
+const R = { q:{}, zones:[], signes:[], t:{} };
+
+const chips = (key, opts, multi, sel) => `<div class="pb-chips">${opts.map(o => `<button type="button" class="pb-chip" data-k="${esc(key)}" data-v="${esc(o)}" data-multi="${multi ? 1 : 0}" aria-pressed="${multi ? (sel || []).includes(o) : sel === o}">${esc(o)}</button>`).join("")}</div>`;
+const eva = key => `<div class="pb-eva">${Array.from({ length: 11 }, (_, i) => `<button type="button" data-eva="${key}" data-v="${i}" aria-pressed="false">${i}</button>`).join("")}</div><div class="pb-ends"><span>0 : aucune douleur</span><span>10 : la pire imaginable</span></div>`;
+
+app.innerHTML = `
+  <div class="page-head"><h1>Avant votre premier rendez-vous</h1></div>
+  <p class="muted">Quelques questions pour que ${esc(KINE.nom)} prépare votre bilan. Environ 3 minutes. Répondez à ce que vous savez : rien n'est obligatoire.</p>
+  <form id="pb" class="stack" style="--gap:16px;margin-top:12px">
+    <section class="panel">
+      <div class="field"><label for="t-motif"><strong>${esc(TEXTES[0][1])}</strong></label><textarea class="textarea" id="t-motif" data-t="motif" rows="2" maxlength="600" placeholder="${esc(TEXTES[0][2])}"></textarea></div>
+      <div class="pb-q"><div class="pb-qt">Où avez-vous mal ?<span class="pb-multi">plusieurs choix</span></div>${chips("zones", ZONES, true, [])}</div>
+      <div class="pb-q"><div class="pb-qt">Votre douleur habituelle</div>${eva("eva")}</div>
+      <div class="pb-q"><div class="pb-qt">Votre douleur la plus forte</div>${eva("evaMax")}</div>
+    </section>
+    <section class="panel">
+      ${FERMEES.map(([id, q, opts, multi]) => `<div class="pb-q"><div class="pb-qt">${esc(q)}${multi ? `<span class="pb-multi">plusieurs choix</span>` : ""}</div>${chips(id, opts, !!multi, multi ? [] : "")}</div>`).join("")}
+    </section>
+    <section class="panel">
+      <div class="pb-q"><div class="pb-qt">Avez-vous l'un de ces signes ?<span class="pb-multi">plusieurs choix</span></div>${chips("signes", [...SIGNES, "Aucun"], true, [])}</div>
+      ${TEXTES.slice(1).map(([k, lab, ph]) => `<div class="field" style="margin-top:12px"><label for="t-${k}"><strong>${esc(lab)}</strong></label><textarea class="textarea" id="t-${k}" data-t="${k}" rows="2" maxlength="600" ${ph ? `placeholder="${esc(ph)}"` : ""}></textarea></div>`).join("")}
+    </section>
+    <p class="small muted">${icon("lock")} Vos réponses sont envoyées seulement à votre kiné. Pour une urgence, appelez le 15.</p>
+    <button class="btn primary big block" type="submit">${icon("send")}Envoyer à mon kiné</button>
+  </form>`;
+
+app.addEventListener("click", e => {
+  const c = e.target.closest(".pb-chip");
+  if(c){
+    const k = c.dataset.k, v = c.dataset.v, multi = c.dataset.multi === "1";
+    const liste = k === "zones" ? R.zones : k === "signes" ? R.signes : null;
+    if(multi){
+      let l = liste || (R.q[k] = R.q[k] || []);
+      if(k === "signes" && v === "Aucun") l.splice(0, l.length);
+      else if(k === "signes"){ const i = l.indexOf("Aucun"); if(i >= 0) l.splice(i, 1); }
+      const i = l.indexOf(v);
+      if(i >= 0) l.splice(i, 1); else l.push(v);
+      $$(`.pb-chip[data-k="${CSS.escape(k)}"]`).forEach(b => b.setAttribute("aria-pressed", String(l.includes(b.dataset.v))));
+    }else{
+      R.q[k] = R.q[k] === v ? undefined : v;
+      $$(`.pb-chip[data-k="${CSS.escape(k)}"]`).forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === R.q[k])));
+    }
+    return;
+  }
+  const ev = e.target.closest("[data-eva]");
+  if(ev){
+    const k = ev.dataset.eva, v = Number(ev.dataset.v);
+    R[k] = R[k] === v ? undefined : v;
+    $$(`[data-eva="${k}"]`).forEach(b => b.setAttribute("aria-pressed", String(Number(b.dataset.v) === R[k])));
+  }
+});
+
+$("#pb").addEventListener("submit", async e => {
+  e.preventDefault();
+  $$("[data-t]").forEach(t => { const v = t.value.trim(); if(v) R.t[t.dataset.t] = v; });
+  Object.keys(R.q).forEach(k => { if(R.q[k] === undefined || (Array.isArray(R.q[k]) && !R.q[k].length)) delete R.q[k]; });
+  const vide = !Object.keys(R.q).length && !R.zones.length && !Object.keys(R.t).length && R.eva === undefined;
+  if(vide){ toast("Répondez au moins à une question.", { type:"err" }); return; }
+  if(ctx.apercu){ toast("Aperçu : les réponses ne sont pas envoyées."); return; }
+  const btn = e.submitter || $("#pb button[type=submit]");
+  btn.disabled = true;
+  try{
+    const C = await import("/assets/cloud.js");
+    const donnees = JSON.parse(JSON.stringify(R));
+    await C.addSuivi(ctx.cle, { type:"prebilan", donnees });
+    await C.addMessage(ctx.cle, { type:"message", sujet:"Questionnaire avant le 1er rendez-vous", texte: resume(donnees).slice(0, 4900) }).catch(() => {});
+    store.set("gt_prebilan_fait", ctx.cle);
+    app.innerHTML = `<div class="panel" style="text-align:center;padding:32px 20px">
+      <div style="font-size:2.4rem;color:var(--ok)">${icon("checkCircle")}</div>
+      <h1 style="margin:8px 0">Merci !</h1>
+      <p class="muted">Vos réponses sont chez ${esc(KINE.nom)}. À bientôt au cabinet.</p>
+      <a class="btn primary" href="/index.html" style="margin-top:12px">Revenir à l'accueil</a></div>`;
+  }catch(err){
+    console.error(err);
+    btn.disabled = false;
+    toast("L'envoi n'a pas marché. Vérifiez la connexion et réessayez.", { type:"err" });
+  }
+});
+</script>
+</body>
+</html>

@@ -165,11 +165,19 @@ save.addEventListener("click", async () => {
     }
   }
   session.del("gt_run_ctx");
-  done({ programmeTermine, offline });
+  /* Palier de séances atteint : un mot du kiné */
+  let palier = null;
+  if(cloud && !apercu && !offline && !MS.actif()){
+    try{
+      const [C, E] = await Promise.all([import("../cloud.js"), import("../encouragements.js")]);
+      palier = E.palierAtteint(await withTimeout(C.listSeances(cle), 5000).then(r => Array.isArray(r) ? r : []));
+    }catch(e){}
+  }
+  done({ programmeTermine, offline, palier });
 });
 
-function done({ programmeTermine, offline }){
-  if(programmeTermine) confetti();
+function done({ programmeTermine, offline, palier = null }){
+  if(programmeTermine || palier) confetti();
   const next = from === "fiche" && cle ? `/cloud.html?patient=${encodeURIComponent(cle)}`
     : programmeTermine ? "/progression.html?bravo=1"
     : from === "config" ? "/config.html"
@@ -188,9 +196,10 @@ function done({ programmeTermine, offline }){
         ? "Vous avez réalisé toutes les séances prévues. Découvrez votre progression et envoyez votre bilan à votre kiné."
         : offline ? "Vous êtes hors connexion : la séance sera transmise automatiquement dès le retour du réseau."
         : cloud && !apercu ? "Votre kiné peut voir votre séance et votre ressenti." : "Votre séance est ajoutée à l'historique de cet appareil."}</p>
+      ${palier ? `<div class="notice" style="text-align:left">${icon("starFill")}<span><strong>${palier.n} séance${palier.n > 1 ? "s" : ""} !</strong> ${esc(palier.mot)}<br><span class="small muted">${esc(KINE.nom)}</span></span></div>` : ""}
       <a class="btn primary big block" href="${next}">${from === "fiche" ? icon("user") + "Retour à la fiche" : programmeTermine ? icon("chart") + "Voir ma progression" : icon("home") + "Retour à l'accueil"}</a>
     </section>`;
-  if((!programmeTermine || from === "fiche") && !offline) setTimeout(() => { location.href = next; }, 2600);
+  if((!programmeTermine || from === "fiche") && !offline && !palier) setTimeout(() => { location.href = next; }, 2600);
 }
 
 function confetti(){

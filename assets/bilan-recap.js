@@ -72,6 +72,22 @@ export function silhouettePNG(K, view, pain, scale = 2, jpeg = 0){
  * Récapitulatif HTML.
  * R : rapport (B.report), S : état du bilan, K : contenu clinique.
  */
+/* Bilan de sortie : avant / après en barres (EVA sur 10 ; mesures à l'échelle de la plus grande valeur) */
+function barresHTML(ev){
+  const ligne = e => {
+    const eva = String(e.label).startsWith("EVA");
+    const max = eva ? 10 : Math.max(Math.abs(e.from), Math.abs(e.to), 1);
+    const w = v => Math.max(2, Math.round(Math.abs(v) / max * 100));
+    const coul = e.sens === "mieux" ? "var(--ok, #2e8b57)" : e.sens === "moins" ? "var(--danger, #c0392b)" : "var(--lagon, #138FA6)";
+    return `<div style="margin:6px 0"><div class="small" style="font-weight:700">${esc(e.label)}</div>
+      <div style="display:grid;grid-template-columns:52px 1fr 40px;gap:6px;align-items:center;font-size:.8rem">
+        <span class="muted">Initial</span><span style="height:9px;border-radius:5px;background:var(--surface-3, #dde7ea);width:${w(e.from)}%"></span><span>${esc(e.from)}</span>
+        <span class="muted">Sortie</span><span style="height:9px;border-radius:5px;background:${coul};width:${w(e.to)}%"></span><span><strong>${esc(e.to)}</strong></span>
+      </div></div>`;
+  };
+  return `<div style="margin:4px 0 10px">${ev.slice(0, 10).map(ligne).join("")}</div>`;
+}
+
 export function recapHTML(R, S, K){
   const pain = S.pain || {};
   const zones = Object.entries(pain);
@@ -101,6 +117,8 @@ export function recapHTML(R, S, K){
     <div class="rc-grid">${sections.map(s => `<section class="rc-card ${s.h.startsWith("Plan de traitement") || s.h.startsWith("Conclusion") ? "rc-wide" : ""}">
       <div class="rc-h">${esc(s.h)}</div>
       ${s.alerte ? `<div class="rc-alert">${esc(s.alerte)}</div>` : ""}
+      ${s.texte ? `<p style="margin:0 0 8px;font-weight:700">${esc(s.texte)}</p>` : ""}
+      ${s.barres?.length ? barresHTML(s.barres) : ""}
       ${rowsHTML(s.rows.filter(r => !(s.h === "Douleur et examen" && r[0] === "Douleur")))}
     </section>`).join("")}</div>
   </div>`;

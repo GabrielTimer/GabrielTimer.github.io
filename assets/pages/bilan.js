@@ -75,6 +75,23 @@ if(saved && saved.etat){
   const last = list.find(b => b.etat);
   S = last ? B.carryOver(last.etat) : B.blankState("initial");
   if(last) info = `Bilan de suivi pré-rempli d'après le bilan du ${B.fmtISO(last.date)} (zones, contexte, hypothèse, plan) : modifiez seulement ce qui a changé. Les tests et mesures sont à refaire.`;
+  else{
+    /* Premier bilan : réponses du questionnaire rempli par le patient avant le rendez-vous */
+    try{
+      const pre = (await C.listSuivis(cle)).filter(x => x.type === "prebilan").pop();
+      if(pre?.donnees){
+        const PB = await import("../prebilan.js");
+        const n = PB.preremplir(S, pre.donnees);
+        const d = pre.donnees, sig = (d.signes || []).filter(x => x !== "Aucun");
+        info = [`Questionnaire rempli par le patient le ${new Date(pre.date).toLocaleDateString("fr-FR")} : ${n} réponse${n > 1 ? "s" : ""} reprise${n > 1 ? "s" : ""} dans l'entretien (à vérifier avec lui).`,
+          d.t?.motif ? `Ses mots : « ${d.t.motif} ».` : "",
+          d.zones?.length ? `Zones : ${d.zones.join(", ")}.` : "",
+          d.eva !== undefined ? `Douleur habituelle ${d.eva}/10${d.evaMax !== undefined ? `, la pire ${d.evaMax}/10` : ""}.` : "",
+          sig.length ? `⚠ Signes signalés : ${sig.join(", ")}.` : "",
+          d.t?.objectif ? `Objectif : « ${d.t.objectif} ».` : ""].filter(Boolean).join(" ");
+      }
+    }catch(e){ console.warn("Questionnaire avant le bilan :", e); }
+  }
 }
 const draft = store.get(draftKey(), null);
 let restored = false;
@@ -87,7 +104,13 @@ const ui = { view: S.view === "dos" ? "dos" : "face", sel: null };
 delete S.sel;
 
 const prevBilan = () => B.previousOf(list, id, S.date);
-const opts = () => { const p = prevBilan(); return p ? { prev:p.etat, prevDate:p.date } : {}; };
+/* Bilan initial (le plus ancien) : comparé au bilan de sortie */
+const initialBilan = () => list.filter(b => b.id !== id && b.etat && (b.type || b.etat.type) === "initial" && String(b.date || "") <= String(S.date || "9999"))
+  .sort((a, b) => String(a.date).localeCompare(String(b.date)) || (a.createdAt || 0) - (b.createdAt || 0))[0] || null;
+const opts = () => {
+  const p = prevBilan(), i = S.type === "final" ? initialBilan() : null;
+  return { ...(p ? { prev:p.etat, prevDate:p.date } : {}), ...(i ? { initial:i.etat, initialDate:i.date } : {}) };
+};
 
 /* ---------- Rendu ---------- */
 
@@ -411,6 +434,11 @@ async function save(){
     const entry = { id, cle, type:S2.type, date:S2.date, etat:S2, createdAt };
     i < 0 ? list.push(entry) : (list[i] = entry);
     if(isNew){ history.replaceState(null, "", `/bilan.html?patient=${encodeURIComponent(cle)}&id=${encodeURIComponent(id)}`); drawDanger(); }
+    /* Bilan de fin de traitement : nouvelles du patient programmées 3 mois plus tard (une seule fois) */
+    if(S2.type === "final" && !patient.suivi3m){
+      import("../accompagnement.js").then(A => { const s3 = A.programmeSuivi(); patient.suivi3m = s3; return C.updatePatient(cle, { suivi3m: s3 }); })
+        .then(() => toast("Fin de prise en charge : le patient recevra un message de suivi dans 3 mois.", { duration:5000 })).catch(() => {});
+    }
     setSt("ok", "Enregistré");
     return true;
   }).catch(err => {

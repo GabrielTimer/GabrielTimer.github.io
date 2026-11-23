@@ -604,6 +604,8 @@ function surveillerVerrou(){
 
 export function mountShell({ role = "none", active = "", title = "", back = null, actions = "", apercu = false } = {}){
   const body = document.body;
+  /* Dictée vocale dans les zones de texte de l'espace kiné */
+  if(role === "kine") import("./dictee.js").then(D => D.init()).catch(() => {});
   /* Menu posé d'avance par nav-instant.js : remplacé par le vrai dans la même image (aucun clignotement) */
   const navInstant = document.getElementById("nav-instant");
   if(navInstant){ navInstant.remove(); body.classList.remove("has-nav"); }
