@@ -446,6 +446,31 @@ function rappelSauvegarde(){
   import("../cloud.js").then(C => C.getEtatSauvegarde?.()).then(e => { etat = e || null; store.set("gt_sauvegarde_etat", etat); show(); }).catch(() => {});
 }
 
+/* Rappel « Mettre dans Maiia » : sur le PC du cabinet seulement (Chrome / Edge, choix de dossier possible),
+   quand des bilans ou des photos attendent et que le dernier export date d'au moins 7 jours.
+   Le décompte est gardé 6 heures sur l'appareil, pour ne pas relire tous les bilans à chaque passage. */
+const MAIIA_JOURS = 7;
+async function rappelMaiia(){
+  const box = document.getElementById("maiia-banner");
+  if(!box || !("showDirectoryPicker" in window)) return;
+  if(Date.now() < (Number(store.get("gt_maiia_snooze", 0)) || 0)) return;
+  const dernier = Number(store.get("gt_maiia_dernier", 0)) || 0;
+  if(dernier && Date.now() - dernier < MAIIA_JOURS * 86400000) return;
+  let c = store.get("gt_maiia_compte", null);
+  if(!c || Date.now() - (c.at || 0) > 6 * 3600000){
+    try{ const M = await import("../vers-maiia.js"); c = { ...(await M.aFaire()), at: Date.now() }; store.set("gt_maiia_compte", c); }
+    catch(e){ return; }
+  }
+  if(!c.bilans && !c.photos) return;
+  const quoi = [c.bilans ? `${c.bilans} bilan${c.bilans > 1 ? "s" : ""}` : "", c.photos ? `${c.photos} photo${c.photos > 1 ? "s" : ""}` : ""].filter(Boolean).join(" et ");
+  box.innerHTML = `<div class="inbox-banner backup-banner">
+    <span class="t-ico">${icon("folder")}</span>
+    <span class="li-main"><strong>${esc(quoi)} à mettre dans Maiia</strong>
+    <span class="small">Un clic les enregistre dans les dossiers du PC, prêts à glisser dans Maiia.</span></span>
+    <span style="display:flex;gap:8px;flex:none"><a class="btn sm primary" href="/maiia.html">Ouvrir</a><button class="btn sm" type="button" id="maiia-later">Plus tard</button></span></div>`;
+  box.querySelector("#maiia-later").onclick = () => { store.set("gt_maiia_snooze", Date.now() + 2 * 86400000); box.innerHTML = ""; };
+}
+
 async function renderKine(user){
   mountShell({ role:"kine", active:"accueil" });
   app.classList.add("wide");
@@ -453,6 +478,7 @@ async function renderKine(user){
     <div class="hello"><p class="date">${esc(fmtDate(new Date()))}</p><h1 id="hello-nom">Bonjour ${esc(prenom(KINE.nom))}</h1></div>
     <div id="inbox-banner"></div>
     <div id="backup-banner"></div>
+    <div id="maiia-banner"></div>
     <div class="tiles">
       <button data-tile="nouveau" class="tile main" type="button" id="t-new">${`<span class="t-ico">${icon("userPlus")}</span>`}<strong>Nouveau patient</strong><span class="t-sub">Dossier et lien d'accès</span></button>
       <a data-tile="libre" class="tile" href="/config.html?libre=1"><span class="t-ico">${icon("zap")}</span><strong>Mode libre</strong><span class="t-sub">Minuteur immédiat</span></a>
@@ -481,6 +507,7 @@ async function renderKine(user){
   }).catch(() => {});
   /* Compte du titulaire ou compte autorisé (remplaçant, associé) */
   import("../cloud.js").then(C => {
+    rappelMaiia().catch(() => {});
     if(C.estTitulaire()){ C.migrerKine().catch(e => console.warn("Migration :", e)); rappelSauvegarde(); return; }
     const h = document.getElementById("hello-nom"); if(h) h.textContent = "Bonjour " + prenom(C.monNom());
     document.querySelectorAll('[data-tile="outils"] .t-sub').forEach(x => { x.textContent = "Affichage, aide"; });

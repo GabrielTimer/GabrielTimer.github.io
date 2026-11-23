@@ -228,6 +228,14 @@ service cloud.firestore {
       allow delete: if isOwner() || (isAutorise() && peutVoir(resource.data));
     }
 
+    // Photos des bilans en route de la tablette vers le PC du cabinet (morceaux de moins de 1 Mo),
+    // effacées par le PC dès qu'elles sont rangées dans son dossier. Chaque kiné ne voit que les siennes.
+    match /photos_pc/{id} {
+      allow create: if isKine() && request.resource.data.kine == moi()
+        && request.resource.data.data is string && request.resource.data.data.size() < 1000000;
+      allow read, delete: if isKine() && resource.data.kine == moi();
+    }
+
     // Programmes modèles du cabinet
     match /modeles/{id} {
       allow read, write: if isKine();

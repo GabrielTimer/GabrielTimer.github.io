@@ -1,4 +1,4 @@
-/* Dossiers d'enregistrement des documents (bilans, programmes PDF).
+/* Dossiers d'enregistrement des documents (bilans, photos des bilans, programmes PDF).
    Le kiné choisit une fois le dossier (ex. Documents/ApiKiné/Bilans) dans Réglages du cabinet ;
    les fichiers y sont ensuite enregistrés directement, sans fenêtre « Enregistrer sous ».
    Possible seulement dans Chrome / Edge sur ordinateur (API « File System Access ») :
@@ -7,6 +7,7 @@
 
 export const TYPES = {
   bilans: "Bilans",
+  photos: "Photos des bilans",
   documents: "Programmes et autres documents"
 };
 

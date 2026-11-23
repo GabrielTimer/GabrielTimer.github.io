@@ -782,6 +782,31 @@ export async function deleteBilan(id){
   await deleteDoc(doc(db, "bilans", id));
 }
 
+/* ---------- Export vers Maiia (PC du cabinet) ----------
+   Bilans : le PC crée lui-même les PDF (depuis Firebase) ; maiiaAt = date du dernier export.
+   Photos des bilans : prises sur la tablette (gardées sur la tablette, en qualité d'origine),
+   elles transitent par photos_pc/{photo}_{n} (morceaux de moins de 1 Mo) jusqu'à ce que le PC
+   les range dans son dossier « Photos », puis elles sont effacées de Firebase. Voir vers-maiia.js. */
+
+export async function marquerBilanMaiia(id, quand = Date.now()){
+  await setDoc(doc(db, "bilans", id), { maiiaAt: quand }, { merge: true });
+}
+
+export async function photosPcEcrire(parts){
+  const k = moi();
+  for(const p of parts) await setDoc(doc(db, "photos_pc", `${p.photo}_${p.n}`), { ...p, kine: k, createdAt: Date.now() });
+}
+
+/** Morceaux de photos en attente pour ce compte (lus sur le serveur, pas dans le cache). */
+export async function photosPcLister(){
+  const snap = await fsGetDocs(fsQuery(collection(db, "photos_pc"), fsWhere("kine", "==", moi())));
+  return snap.docs.map(d => d.data());
+}
+
+export async function photosPcEffacer(photo, total){
+  for(let n = 0; n < total; n++) await deleteDoc(doc(db, "photos_pc", `${photo}_${n}`)).catch(() => {});
+}
+
 /* ---------- Modèles du cabinet ---------- */
 
 /* Format actuel : { type:"modele", nom, categorie, zoneLabel, niveau, cover, series, exercices }.
