@@ -26,6 +26,15 @@ const STEPS = [
   ["traitement", "Traitement"]
 ];
 
+/* Bilan rapide : l'essentiel en 5 étapes (motif, patient, douleur, objectifs, traitement avec les modèles) */
+const STEPS_RAPIDE = [
+  ["motif", "Motif"],
+  ["patient", "Patient"],
+  ["zones", "Douleur"],
+  ["objectifs", "Objectifs"],
+  ["traitement", "Traitement"]
+];
+
 /* Bilan de suivi (intermédiaire ou final, avec un bilan précédent) : entretien court,
    tout est pré-rempli d'après le bilan précédent, on ne touche qu'à ce qui a changé. */
 const STEPS_SUIVI = [
@@ -42,15 +51,19 @@ export function mountGuide(app, ctx){
   const { S, K, B, BC, TC, patient } = ctx;
   const prevS = () => ctx.opts().prev || null;
   const suivi = () => S.type !== "initial" && !!prevS();
-  /* Bilan rapide (par défaut) : on saute les étapes sans objet pour le motif. Approfondi (S.approf) : tout. */
+  /* Deux modes (S.mode) : « rapide » (5 étapes, par défaut pour un nouveau bilan) et « complet »
+     (entretien, questions ciblées, tests liés au motif, synthèse). Un bilan commencé avant cette version
+     s'ouvre en complet. S.approf = afficher aussi les tests sans lien avec le motif (étape Tests). */
+  S.q = S.q || {}; S.c = S.c || {}; S.f = S.f || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
+  if(!S.mode) S.mode = !S.gstep && !(S.c.patho || []).length && !Object.keys(S.pain).length ? "rapide" : "complet";
+  const rapide = () => S.mode === "rapide" && !suivi();
   const ST = () => {
     if(suivi()) return STEPS_SUIVI;
-    if(S.approf) return STEPS;
+    if(rapide()) return STEPS_RAPIDE;
     const regs = B.bilanRegions(S), douleur = regs.length > 0 || Object.keys(S.pain || {}).length > 0;
     return STEPS.filter(([k]) => (k !== "cible" || regs.length) && (k !== "douleur" || douleur));
   };
-  S.q = S.q || {}; S.c = S.c || {}; S.f = S.f || {}; S.pain = S.pain || {}; S.cl = S.cl || {};
-  const ui = { key: S.gstep, hypAuto: false, mq: "", mopen: new Set(), step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
+  const ui = { key: S.gstep, hypAuto: false, ptMode: false, mq: "", mopen: new Set(), step: Math.max(0, ST().findIndex(s => s[0] === S.gstep)), view: "face", sel: null,
     modeles: null, lib: null, choix: {}, gen: null, seed: 1, loading: false };
   if(ui.step < 0) ui.step = 0;
 
@@ -120,6 +133,17 @@ export function mountGuide(app, ctx){
   };
   const regOfZone = n => B.regionOf(n);
 
+  /* Hypothèses possibles par région (indices de l'entretien, tests positifs), en puces à cocher */
+  const hypsChips = regs => regs.map(reg => {
+    const r = K.REG[reg], o = B.orientation(S, reg);
+    const zs = B.zonesOfRegion(S, reg);
+    return `<div class="g-q"><div class="g-qt">${esc(r.n)}</div><div class="g-chips">${o.map(h => {
+      const pos = r.T.filter(t => t[1].includes(h.k) && zs.some(z => (S.cl[z]?.t || {})[t[0]] === 1)).map(t => t[0]);
+      const lab = h.label + (h.score ? ` · ${h.pour.length} indice${h.pour.length > 1 ? "s" : ""}` : "") + (pos.length ? ` · test + : ${pos.join(", ")}` : "");
+      return `<button type="button" class="g-chip" data-gc="hyp" data-v="${esc(h.label)}" aria-pressed="${has(S.c.hyp, h.label)}">${esc(lab)}</button>`;
+    }).join("")}</div></div>`;
+  }).join("");
+
   /* ---------- Étapes ---------- */
 
   const views = {
@@ -136,15 +160,21 @@ export function mountGuide(app, ctx){
         <div class="g-zones">
           <div class="g-body">
             <div class="g-chips g-seg">${["face", "dos"].map(v => `<button type="button" class="g-chip" data-gview="${v}" aria-pressed="${ui.view === v}">${v === "face" ? "Face" : "Dos"}</button>`).join("")}</div>
-            <svg class="body-svg" viewBox="0 0 200 430" role="img" aria-label="Schéma corporel">${BC.bodySVG({ Z:K.Z, R:K.R, view:ui.view, pain:S.pain, sel:n, color:evaColor })}</svg>
+            <svg class="body-svg${ui.ptMode ? " pt-mode" : ""}" viewBox="0 0 200 430" role="img" aria-label="Schéma corporel">${BC.bodySVG({ Z:K.Z, R:K.R, view:ui.view, pain:S.pain, sel:ui.ptMode ? null : n, color:evaColor, pts:S.pts || [] })}</svg>
+            <div class="g-chips g-seg g-ptsw" role="group" aria-label="Ce que le toucher ajoute">
+              <button type="button" class="g-chip" data-gptmode="0" aria-pressed="${!ui.ptMode}">${icon("target")}Zone</button>
+              <button type="button" class="g-chip" data-gptmode="1" aria-pressed="${ui.ptMode}">${icon("plus")}Point précis</button>
+            </div>
           </div>
           <div class="g-zpanel">
-            ${p ? `<div class="g-q"><div class="g-qt">${esc(n)} : intensité (EVA)${prevS()?.pain?.[n] ? `<span class="g-multi">au dernier bilan : ${esc(prevS().pain[n].eva)}/10</span>` : ""}</div>
+            ${ui.ptMode ? `<p class="g-ori">${icon("plus")}<span>Touchez l'endroit exact sur le schéma : une petite croix numérotée s'ajoute. Touchez une croix pour l'enlever.</span></p>` : ""}
+            ${(S.pts || []).length ? `<div class="g-pts"><span>${icon("plus")}<strong>${S.pts.length}</strong> point${S.pts.length > 1 ? "s" : ""} précis (${["face", "dos"].filter(v => S.pts.some(q => q.v === v)).map(v => v === "face" ? "face" : "dos").join(" et ")})</span><button type="button" class="btn ghost sm" data-gptclear>${icon("trash")}Effacer</button></div>` : ""}
+            ${p && !ui.ptMode ? `<div class="g-q"><div class="g-qt">${esc(n)} : intensité (EVA)${prevS()?.pain?.[n] ? `<span class="g-multi">au dernier bilan : ${esc(prevS().pain[n].eva)}/10</span>` : ""}</div>
                 <div class="g-eva">${[...Array(11).keys()].map(i => `<button type="button" data-geva="${i}" style="--c:${evaColor(i)}" aria-pressed="${p.eva === i}">${i}</button>`).join("")}</div></div>
               <div class="g-q"><div class="g-qt">Type de douleur<span class="g-multi">plusieurs choix</span></div>
                 <div class="g-chips">${K.TYPES.map(t => `<button type="button" class="g-chip" data-gptype="${esc(t)}" aria-pressed="${has(p.types, t)}">${esc(t)}</button>`).join("")}</div></div>
               <button type="button" class="btn ghost sm" data-grm>${icon("trash")}Retirer ${esc(n)}</button>`
-            : `${!z.length && regions().length ? `<p class="g-ori">${icon("target")}<span>Motif : <strong>${regions().map(r => esc(K.REG[r].n)).join(", ")}</strong>. Touchez la zone et le côté sur le schéma, ou passez à la suite : les questions et tests de cette région seront proposés.</span></p>` : ""}<p class="g-hint">${suivi() && z.length ? "Zones reprises du dernier bilan : touchez chacune pour noter la douleur d'aujourd'hui." : z.length ? "Touchez une zone pour la modifier, ou une autre zone pour l'ajouter." : "Touchez la zone douloureuse sur le schéma."}</p>`}
+            : ui.ptMode ? "" : `${!z.length && regions().length ? `<p class="g-ori">${icon("target")}<span>Motif : <strong>${regions().map(r => esc(K.REG[r].n)).join(", ")}</strong>. Touchez la zone et le côté sur le schéma, ou passez à la suite : les questions et tests de cette région seront proposés.</span></p>` : ""}<p class="g-hint">${suivi() && z.length ? "Zones reprises du dernier bilan : touchez chacune pour noter la douleur d'aujourd'hui." : z.length ? "Touchez une zone pour la modifier, ou une autre zone pour l'ajouter." : "Touchez la zone douloureuse sur le schéma."}</p>`}
             ${z.length ? `<div class="g-qt" style="margin-top:18px">Zones notées</div><div class="g-chips">${z.map(([zn, q]) => `<button type="button" class="g-chip" data-gpick="${esc(zn)}" aria-pressed="${zn === n}"><span class="eva-pill" style="--c:${evaColor(q.eva)}"><i></i>${esc(zn)} · ${q.eva}${prevS()?.pain?.[zn] ? ` <span class="faint">(avant ${esc(prevS().pain[zn].eva)})</span>` : ""}</span></button>`).join("")}</div>` : ""}
           </div>
         </div>`;
@@ -163,6 +193,38 @@ export function mountGuide(app, ctx){
           <p class="g-hint">Remplissez ceux refaits aujourd'hui. Valeur du dernier bilan en gris.</p>
           <div class="mes-grid">${mes.map(([k, l]) => `<div class="field"><label for="g-${k}">${esc(l)}${String(P.f?.[k] ?? "").trim() !== "" ? ` <span class="faint">· avant ${esc(P.f[k])}</span>` : ""}</label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div>
         </section>`;
+    },
+
+    /* ---------- Bilan rapide ---------- */
+    patient(){
+      const regs = regions();
+      const rfs = regs.map(reg => {
+        const r = K.REG[reg], zs = B.zonesOfRegion(S, reg);
+        const rfOn = r.RF.filter(x => zs.some(z => has(B.zoneState(S, z).s, x)));
+        return `<div class="g-q"><div class="g-qt">${esc(r.n)}<span class="g-multi">touchez ceux qui sont présents</span></div>
+          <div class="g-chips">${r.RF.map(x => `<button type="button" class="g-chip rf" data-grf="${esc(reg)}" data-v="${esc(x)}" aria-pressed="${rfOn.includes(x)}">${esc(x)}</button>`).join("")}</div>
+          ${rfOn.length ? `<div class="notice danger" style="margin-top:12px">${icon("alert")}<span><strong>${esc(r.RFm)}</strong></span></div>` : ""}</div>`;
+      }).join("");
+      return `<h2 class="g-h">Le patient</h2>
+        <section class="g-card"><h3>${icon("heart")}Antécédents</h3>
+          ${chipsMulti("atcd", K.sec("atcd")[2])}
+          <textarea class="textarea g-txt" data-gf="atcd" rows="2" placeholder="Autres antécédents, opérations, date… (ou dictez avec le micro)">${esc(S.f.atcd || "")}</textarea></section>
+        <section class="g-card"><h3>${icon("list")}Traitements en cours</h3>
+          ${chipsMulti("medic", K.sec("medic")[2])}
+          <textarea class="textarea g-txt" data-gf="medic" rows="2" placeholder="Médicaments, autres soins en cours…">${esc(S.f.medic || "")}</textarea></section>
+        <section class="g-card g-rf"><h3>${icon("alert")}Drapeaux rouges</h3>
+          ${rfs || `<p class="g-hint" style="margin:0">Choisissez un motif pour voir les drapeaux rouges de la région.</p>`}</section>`;
+    },
+
+    objectifs(){
+      return `<h2 class="g-h">Objectifs et remarques</h2>
+        <section class="g-card"><h3>${icon("target")}Objectifs du patient</h3>
+          ${chipsMulti("obj", K.sec("obj")[2])}</section>
+        <section class="g-card"><h3>${icon("layers")}Traitement prévu</h3>
+          ${chipsMulti("plan", K.sec("plan")[2])}
+          <p class="g-hint" style="margin:10px 0 0">Séances par semaine, durée et programme d'exercices : à l'étape suivante.</p></section>
+        <section class="g-card"><h3>${icon("edit")}Remarque libre</h3>
+          <textarea class="textarea g-txt" data-gf="concl" rows="4" placeholder="Ce qui compte pour la suite : contexte, impression clinique, précision… Touchez le champ puis « Dicter » pour parler au lieu d'écrire.">${esc(S.f.concl || "")}</textarea></section>`;
     },
 
     histoire(){
@@ -244,7 +306,7 @@ export function mountGuide(app, ctx){
           <div class="mes-grid">${tf.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})${String(tfAvant[k] ?? "") !== "" ? ` · avant ${esc(tfAvant[k])}` : ""}</span>${/\(LSI\)/.test(nom) ? ` <button class="btn sm ghost" type="button" data-lsi="${esc(nom)}" style="min-height:0;padding:2px 8px">Calculer</button>` : ""}</label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("") || `<p class="g-hint">Aucun test fonctionnel particulier pour ce motif.</p>`}</div>
           ${tfAutres.length ? `<details class="g-more"><summary>Autres tests fonctionnels (${tfAutres.length})</summary><div class="mes-grid">${tfAutres.map(([k, nom, u]) => `<div class="field"><label for="g-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span>${/\(LSI\)/.test(nom) ? ` <button class="btn sm ghost" type="button" data-lsi="${esc(nom)}" style="min-height:0;padding:2px 8px">Calculer</button>` : ""}</label><input class="input" id="g-${k}" data-gf="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"></div>`).join("")}</div></details>` : ""}
         </section>` : ""}
-        ${!S.approf ? `<p class="g-hint">Bilan rapide : seuls les tests utiles pour le motif sont proposés. Bouton « Rapide » en haut pour passer en bilan approfondi.</p>` : ""}`;
+        <button type="button" class="btn ghost sm" data-gapprof>${icon("eye")}${S.approf ? "Ne montrer que les tests liés au motif" : "Voir tous les tests de la région (y compris sans lien avec le motif)"}</button>`;
     },
 
     synthese(){
@@ -255,15 +317,7 @@ export function mountGuide(app, ctx){
         if(auto.length){ S.c.hyp = auto; changed(); }
       }
       ui.hypAuto = true;
-      const hyps = regs.map(reg => {
-        const r = K.REG[reg], o = B.orientation(S, reg);
-        const zs = B.zonesOfRegion(S, reg);
-        return `<div class="g-q"><div class="g-qt">${esc(r.n)}</div><div class="g-chips">${o.map(h => {
-          const pos = r.T.filter(t => t[1].includes(h.k) && zs.some(z => (S.cl[z]?.t || {})[t[0]] === 1)).map(t => t[0]);
-          const lab = h.label + (h.score ? ` · ${h.pour.length} indice${h.pour.length > 1 ? "s" : ""}` : "") + (pos.length ? ` · test + : ${pos.join(", ")}` : "");
-          return `<button type="button" class="g-chip" data-gc="hyp" data-v="${esc(h.label)}" aria-pressed="${has(S.c.hyp, h.label)}">${esc(lab)}</button>`;
-        }).join("")}</div></div>`;
-      }).join("");
+      const hyps = hypsChips(regs);
       return `<h2 class="g-h">Synthèse</h2>
         ${hyps ? `<div class="g-q"><div class="g-qt" style="font-size:var(--fs-md)">Hypothèse retenue<span class="g-multi">indices de l'entretien et tests positifs</span></div></div>${hyps}` : ""}
         <div class="g-q"><div class="g-qt">Objectifs<span class="g-multi">plusieurs choix</span></div>${chipsMulti("obj", K.sec("obj")[2])}</div>
@@ -275,7 +329,7 @@ export function mountGuide(app, ctx){
 
     traitement(){
       const P = TX.proposition(S, K, B);
-      if(!S.tx?.init){ S.tx = { init:true, axes: P.axes.slice() }; changed(); }
+      if(!S.tx?.init){ S.tx = { ...(S.tx || {}), init:true, axes: P.axes.slice() }; changed(); }
       S.tx.avis = P.avis;
       const p = P.profil, a = p.auto, t = S.tx;
       const opt = (key, vals, cur, auto, fmt = v => v) => `<div class="g-chips">${vals.map(v => `<button type="button" class="g-chip" data-gtx="${key}" data-v="${esc(String(v))}" aria-pressed="${cur === v}">${esc(fmt(v))}${auto === v ? `<span class="g-auto">proposé</span>` : ""}</button>`).join("")}</div>`;
@@ -324,6 +378,7 @@ export function mountGuide(app, ctx){
         </section>` : ""}
         <section class="g-card">
           <h3>Profil du patient</h3>
+          ${rapide() && regions().length ? `<div class="g-q"><div class="g-qt">Hypothèse<span class="g-multi">facultatif : affine les axes et les modèles</span></div></div>${hypsChips(regions())}` : ""}
           <p class="g-hint">${P.hyps.length ? `Hypothèse${P.hyps.length > 1 ? "s" : ""} : <strong>${P.hyps.map(h => esc(h.label)).join(", ")}</strong>${P.hyps.some(h => !h.retenue) ? " (d'après l'entretien, à confirmer dans la synthèse)" : ""}` : "Aucune hypothèse retenue : la proposition s'appuie sur le motif et les zones."}</p>
           ${(() => { const F = fichesPour({ hyps:P.hyps, regions:B.bilanRegions(S), motifs:B.motifs(S), postop:P.post }); return F.length ? `<p class="g-hint">${icon("book")} Manuel des preuves (doses, tests, scores) : ${F.map(f => `<a href="${esc(f.url)}" target="_blank" rel="noopener"><strong>${esc(f.titre)}</strong></a> <span class="faint">(onglet ${esc(f.nomOnglet)})</span>`).join(", ")}</p>` : ""; })()}
           <div class="g-q"><div class="g-qt">Phase</div>${opt("phase", ["Aiguë", "Subaiguë", "Chronique"], p.phase, a.phase)}</div>
@@ -333,7 +388,7 @@ export function mountGuide(app, ctx){
         <section class="g-card">
           <h3>Plan de traitement kiné</h3>
           <div class="g-qt">Axes<span class="g-multi">pré-cochés d'après le bilan, touchez pour retirer ou ajouter</span></div>
-          <div class="g-chips g-axes">${axesTous.map(x => `<button type="button" class="g-chip" data-gtxa="${esc(x)}" aria-pressed="${(t.axes || []).includes(x)}">${esc(x)}</button>`).join("") || `<span class="g-hint">Choisissez une hypothèse dans la synthèse pour des axes ciblés.</span>`}</div>
+          <div class="g-chips g-axes">${axesTous.map(x => `<button type="button" class="g-chip" data-gtxa="${esc(x)}" aria-pressed="${(t.axes || []).includes(x)}">${esc(x)}</button>`).join("") || `<span class="g-hint">${rapide() ? "Choisissez une hypothèse ci-dessus pour des axes ciblés." : "Choisissez une hypothèse dans la synthèse pour des axes ciblés."}</span>`}</div>
           ${P.eviter.length ? `<p class="g-eviter">${icon("alert")}<span><strong>Non recommandé :</strong> ${P.eviter.map(esc).join(" ; ")}</span></p>` : ""}
           <div class="g-q" style="margin-top:18px"><div class="g-qt">Séances au cabinet par semaine</div>${opt("freq", [1, 2, 3, 4], p.freq, a.freq)}</div>
           <div class="g-q"><div class="g-qt">Durée</div>${opt("sem", [4, 6, 8, 12], p.sem, a.sem, v => v + " semaines")}</div>
@@ -410,11 +465,11 @@ export function mountGuide(app, ctx){
     root.innerHTML = `
       <div class="g-top">
         <div class="g-id"><strong>${esc(B.typeLabel(S.type))}</strong><span>${esc(nomAffiche(patient.nom))}</span><span id="st" class="save-st"></span></div>
-        <div class="row" style="--gap:8px">${suivi() ? "" : `<button class="btn sm ${S.approf ? "primary" : ""}" type="button" data-gapprof aria-pressed="${!!S.approf}" title="Rapide : seulement ce qui sert pour le motif. Approfondi : toutes les étapes et tous les tests.">${icon(S.approf ? "layers" : "sparkle")}${S.approf ? "Approfondi" : "Rapide"}</button>`}<button class="btn sm" type="button" data-gact="photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
+        <div class="row" style="--gap:8px">${suivi() ? "" : `<div class="g-mode" role="group" aria-label="Type de bilan"><button type="button" data-gmode="rapide" aria-pressed="${rapide()}" title="L'essentiel : motif, patient, douleur, objectifs, traitement">${icon("sparkle")}Rapide</button><button type="button" data-gmode="complet" aria-pressed="${!rapide()}" title="Entretien, questions ciblées, tests liés au motif, synthèse">${icon("layers")}Complet</button></div>`}<button class="btn sm" type="button" data-gact="photos">${icon("camera")}Photos<span class="badge" data-ph-n hidden></span></button>
         <button class="btn sm" type="button" data-gact="full">${icon("list")}Vue complète</button></div>
       </div>
       <nav class="g-steps" aria-label="Étapes du bilan">${ST().map(([sk, l], i) => `<button type="button" data-gstep="${i}" aria-current="${i === ui.step ? "step" : "false"}" class="${stepDone(sk) ? "done" : ""}"><b>${stepDone(sk) && i !== ui.step ? icon("check") : i + 1}</b><span>${esc(l)}</span></button>`).join("")}</nav>
-      <div class="g-body-step">${views[k]()}</div>
+      <div class="g-body-step${ui.anim ? " g-anim" : ""}">${views[k]()}</div>
       <div class="g-foot">
         <button class="btn" type="button" data-gnav="-1" ${ui.step === 0 ? "disabled" : ""}>${icon("back")}Précédent</button>
         <span class="g-count">${ui.step + 1} / ${ST().length}</span>
@@ -422,6 +477,7 @@ export function mountGuide(app, ctx){
           ? `<button class="btn primary" type="button" data-gnav="1">Suivant${icon("chevron")}</button>`
           : `<button class="btn primary" type="button" data-gact="done">${icon("check")}Terminer</button>`}
       </div>`;
+    ui.anim = false;
     ctx.majPhotos?.();
     ctx.statusAgain?.();
     root.querySelector('.g-steps [aria-current="step"]')?.scrollIntoView({ block:"nearest", inline:"center" });
@@ -437,12 +493,15 @@ export function mountGuide(app, ctx){
     if(k === "tests") return Object.values(S.cl).some(c => Object.keys(c.t || {}).length) || (K.TF || []).some(t => (S.f[t[0]] ?? "") !== "");
     if(k === "synthese") return (S.c.hyp || []).length > 0 || (S.c.obj || []).length > 0;
     if(k === "traitement") return !!S.tx?.prog;
+    if(k === "patient") return (S.c.atcd || []).length > 0 || (S.c.medic || []).length > 0 || !!String(S.f.atcd || S.f.medic || "").trim();
+    if(k === "objectifs") return (S.c.obj || []).length > 0 || (S.c.plan || []).length > 0 || !!String(S.f.concl || "").trim();
     return false;
   }
 
   const go = i => {
     ui.step = Math.max(0, Math.min(ST().length - 1, i));
     ui.key = ST()[ui.step][0];
+    ui.anim = true;
     render();
     window.scrollTo({ top:0, behavior:"smooth" });
     changed();
@@ -459,6 +518,15 @@ export function mountGuide(app, ctx){
 
   root.addEventListener("click", async e => {
     e.stopPropagation();
+    /* Point précis : une croix là où l'on touche le schéma (toucher une croix l'enlève) */
+    const svgB = ui.ptMode && e.target.closest("svg.body-svg");
+    if(svgB){
+      const pt = e.target.closest("[data-pt]");
+      S.pts = S.pts || [];
+      if(pt) S.pts.splice(Number(pt.dataset.pt), 1);
+      else{ const c = BC.pointDuClic(svgB, e); if(c){ S.pts.push({ v:ui.view, ...c }); try{ navigator.vibrate?.(15); }catch(err){} } }
+      changed(); refresh(); return;
+    }
     const b = e.target.closest("button, [data-zone]");
     if(!b || !root.contains(b)) return;
     const d = b.dataset;
@@ -466,7 +534,19 @@ export function mountGuide(app, ctx){
     if(d.gnav){ go(ui.step + Number(d.gnav)); return; }
     if(d.gstep){ go(+d.gstep); return; }
     if(d.gtype){ S.type = d.gtype; ui.step = Math.max(0, ST().findIndex(x => x[0] === S.gstep)); ui.key = ST()[ui.step][0]; changed(); refresh(); return; }
-    if(d.gapprof !== undefined){ S.approf = !S.approf; changed(); refresh(); toast(S.approf ? "Bilan approfondi : toutes les étapes et tous les tests" : "Bilan rapide : seulement ce qui sert pour le motif"); return; }
+    if(d.gapprof !== undefined){ S.approf = !S.approf; changed(); refresh(); return; }
+    if(d.gmode){
+      if(S.mode === d.gmode) return;
+      S.mode = d.gmode;
+      const L = ST(), i = L.findIndex(x => x[0] === ui.key);
+      ui.step = i >= 0 ? i : (d.gmode === "complet" ? Math.max(0, L.findIndex(x => x[0] === "histoire")) : Math.min(ui.step, L.length - 1));
+      ui.key = L[ui.step][0];
+      ui.anim = true; changed(); render(); window.scrollTo({ top:0, behavior:"smooth" });
+      toast(d.gmode === "rapide" ? "Bilan rapide : l'essentiel en 5 étapes. Rien de ce qui est déjà noté n'est perdu." : "Bilan complet : entretien, tests liés au motif et synthèse. Ce qui est déjà noté est gardé.");
+      return;
+    }
+    if(d.gptmode !== undefined){ ui.ptMode = d.gptmode === "1"; if(ui.ptMode) ui.sel = null; refresh(); return; }
+    if(d.gptclear !== undefined){ S.pts = []; changed(); refresh(); return; }
     if(d.gautre !== undefined){ ui.autre = !ui.autre; refresh(); if(ui.autre) root.querySelector("[data-gautrein]")?.focus(); return; }
     if(d.gautreok !== undefined){
       const v = (d.gautreok || root.querySelector("[data-gautrein]")?.value || "").trim().replace(/\s+/g, " ");
@@ -484,6 +564,8 @@ export function mountGuide(app, ctx){
         if(/^Post-op|Après une opération|^Post-opératoire$/.test(d.v)) S.q.debut = "Après une opération";
         else if(/Entorse|Fracture|Luxation|Coup du lapin|Lésion musculaire/.test(d.v)) S.q.debut = "Traumatisme / accident";
       }
+      /* Bilan rapide : une hypothèse choisie à l'étape Traitement recalcule les axes */
+      if(d.gc === "hyp" && ui.key === "traitement" && S.tx) S.tx.init = false;
       changed(); refresh(); return;
     }
     if(d.gm){ toggle(S.q[d.gm] = Array.isArray(S.q[d.gm]) ? S.q[d.gm] : [], d.v); changed(); refresh(); return; }
@@ -495,7 +577,7 @@ export function mountGuide(app, ctx){
       ui.sel = d.zone; refresh(); return;
     }
     if(d.gpick){
-      ui.sel = d.gpick;
+      ui.sel = d.gpick; ui.ptMode = false;
       if(!B.zones(ui.view).some(z => z[0] === d.gpick)) ui.view = ui.view === "face" ? "dos" : "face";
       refresh(); return;
     }
