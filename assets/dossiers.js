@@ -74,13 +74,17 @@ function telecharger(blob, nom){
 
 /**
  * Enregistre le fichier dans le dossier choisi pour ce type, sinon le télécharge.
+ * sousDossier : rangé dans ce sous-dossier (créé au besoin), ex. le nom du patient.
  * Renvoie { dossier: "Bilans" } si enregistré dans le dossier, { dossier: null } sinon.
  */
-export async function enregistrer(type, blob, nom){
+export async function enregistrer(type, blob, nom, sousDossier = ""){
   const h = await autoriser(type);
   if(h){
     try{
-      const fh = await h.getFileHandle(nom, { create: true });
+      /* Sous-dossier facultatif (ex. un par patient pour les photos), créé s'il n'existe pas */
+      const sd = String(sousDossier || "").replace(/[\\/:*?"<>|]/g, "").replace(/[. ]+$/, "").trim();
+      const cible = sd ? await h.getDirectoryHandle(sd, { create: true }) : h;
+      const fh = await cible.getFileHandle(nom, { create: true });
       const w = await fh.createWritable();
       await w.write(blob);
       await w.close();
