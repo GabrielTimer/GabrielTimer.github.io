@@ -120,7 +120,13 @@ async function pdfDuBilan(b, patient, tous){
   const liste = tous.filter(x => x.cle === b.cle);
   const prev = B.previousOf(liste, b.id, S.date);
   const d = await B.bilanPdf(S, patient, prev ? { prev: prev.etat, prevDate: prev.date } : {});
-  return { blob: d.output("blob"), nom: B.pdfName(S, patient) };
+  /* Deux bilans du même type, le même jour, pour le même patient : « (2) », « (3) »… pour qu'aucun
+     fichier n'en écrase un autre. Toujours le même nom pour un même bilan (s'il est réenregistré). */
+  const memes = liste.filter(x => (x.type || x.etat?.type) === S.type && (x.date || x.etat?.date) === S.date)
+    .sort((x, y) => (x.createdAt || 0) - (y.createdAt || 0) || String(x.id).localeCompare(String(y.id)));
+  const rang = memes.findIndex(x => x.id === b.id);
+  const nom = B.pdfName(S, patient);
+  return { blob: d.output("blob"), nom: rang > 0 ? nom.replace(/\.pdf$/, ` (${rang + 1}).pdf`) : nom };
 }
 
 /** Enregistre un bilan en PDF dans le dossier « Bilans » et le marque comme exporté. */
