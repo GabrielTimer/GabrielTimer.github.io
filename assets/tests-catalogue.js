@@ -34,6 +34,8 @@ const TF_TAGS = {
   tf_ybalasym:  { m:[SP, EN], z:ZMI, s:["Sport", "Traumatologie"] },
   tf_hop:       { m:[SP, PO], z:ZG, s:["Sport", "Orthopédie"] },
   tf_triplehop: { m:[SP, PO], z:ZG, s:["Sport", "Orthopédie"] },
+  tf_quadlsi:   { m:[SP, PO], z:ZG, s:["Sport", "Orthopédie"] },
+  tf_ischiolsi: { m:[SP, PO], z:ZG, s:["Sport", "Orthopédie"] },
   tf_wblt:      { m:[EN, TE], z:ZC, zoneSeule:true, s:["Traumatologie", "Sport", "Rhumatologie"] },
   tf_grip:      { m:[CH, FR], z:ZM, zoneSeule:true, s:["Gériatrie et chutes", "Rhumatologie", "Traumatologie"] }
 };
@@ -62,12 +64,12 @@ const TF_MOTIF = {
   "Rhizarthrose":["tf_grip"], "Douleur du poignet côté petit doigt (TFCC)":["tf_grip"], "Fracture du poignet":["tf_grip"], "Doigt (entorse, fracture, tendon)":["tf_grip"],
   "Coxarthrose":["tf_30sts", "tf_tug", "tf_6mwt"], "Tendinopathie du moyen fessier":["tf_sls", "tf_30sts"], "Conflit fémoro-acétabulaire":["tf_ybal"], "Pubalgie":["tf_ybal", "tf_ybalasym"],
   "Gonalgie":["tf_30sts"], "Gonarthrose":["tf_30sts", "tf_tug", "tf_6mwt"], "Syndrome fémoro-patellaire":["tf_ybal", "tf_5sts"],
-  "Entorse du genou / LCA":["tf_ybal", "tf_hop", "tf_triplehop"], "Entorse d’un ligament collatéral (LLI / LLE)":["tf_ybal", "tf_sls"],
-  "Lésion méniscale":["tf_ybal", "tf_5sts"], "Tendinopathie rotulienne":["tf_ybal", "tf_hop"],
+  "Entorse du genou / LCA":["tf_ybal", "tf_hop", "tf_triplehop", "tf_quadlsi", "tf_ischiolsi"], "Entorse d’un ligament collatéral (LLI / LLE)":["tf_ybal", "tf_sls"],
+  "Lésion méniscale":["tf_ybal", "tf_5sts"], "Tendinopathie rotulienne":["tf_ybal", "tf_hop", "tf_quadlsi"],
   "Entorse de cheville":["tf_sls", "tf_ybal", "tf_wblt"], "Tendinopathie d’Achille":["tf_wblt", "tf_sls"], "Fasciite / épine calcanéenne":["tf_wblt"],
   "Fracture de cheville ou du pied":["tf_wblt", "tf_sls", "tf_tug"],
   "Post-op : prothèse de hanche":["tf_tug", "tf_30sts", "tf_10mwt"], "Post-op : prothèse de genou":["tf_tug", "tf_30sts", "tf_10mwt"],
-  "Post-op : ligamentoplastie du LCA":["tf_ybal", "tf_hop", "tf_triplehop"], "Post-op : épaule (coiffe, stabilisation)":[], "Post-op : rachis":["tf_tug", "tf_6mwt"],
+  "Post-op : ligamentoplastie du LCA":["tf_ybal", "tf_hop", "tf_triplehop", "tf_quadlsi", "tf_ischiolsi"], "Post-op : épaule (coiffe, stabilisation)":[], "Post-op : rachis":["tf_tug", "tf_6mwt"],
   "Post-op : main, poignet":["tf_grip"], "Post-op : cheville, pied":["tf_wblt", "tf_sls", "tf_tug"],
   "AVC / hémiplégie":["tf_10mwt", "tf_tug", "tf_berg", "tf_6mwt"], "Maladie de Parkinson":["tf_tug", "tf_10mwt", "tf_minibest", "tf_5sts"],
   "Sclérose en plaques":["tf_10mwt", "tf_6mwt", "tf_berg"], "SLA (maladie de Charcot)":["tf_10mwt", "tf_tug", "tf_grip"],
@@ -183,4 +185,38 @@ export function questionnairesConseilles(S){
   /* Douleur qui dure : facteurs psychosociaux */
   if(motifs.some(m => ["Lombalgie", "Cervicalgie", "Sciatique"].includes(m))) add(["PCS"]);
   return out;
+}
+
+/* ---------- Symétrie gauche / droite (LSI) ---------- */
+
+/** Le test se calcule-t-il en symétrie (LSI) ? */
+export const estLSI = nom => /\(LSI\)/.test(String(nom || ""));
+
+/**
+ * Calculette LSI : jusqu'à 3 essais par côté → moyenne côté atteint ÷ moyenne côté sain × 100.
+ * onOk(valeur arrondie) remplit le champ du bilan.
+ */
+export function calculLSI(nom, onOk){
+  const essai = (c, i) => `<input class="input" inputmode="decimal" data-c="${c}" data-i="${i}" aria-label="${c === "a" ? "Côté atteint" : "Côté sain"}, essai ${i + 1}" placeholder="Essai ${i + 1}" style="text-align:center">`;
+  const s = openSheet({ title: "Calculer la symétrie (LSI)",
+    body: `<p class="small muted" style="margin-top:0">${esc(nom)} : notez 1 à 3 essais de chaque côté (distance, temps ou force, même unité des deux côtés).</p>
+      <div style="display:grid;grid-template-columns:auto repeat(3,minmax(0,1fr));gap:8px;align-items:center">
+        <strong>Atteint</strong>${[0, 1, 2].map(i => essai("a", i)).join("")}
+        <strong>Sain</strong>${[0, 1, 2].map(i => essai("s", i)).join("")}
+      </div>
+      <div id="lsi-out" class="notice" style="margin-top:14px">${icon("info")}<span>Remplissez au moins un essai de chaque côté.</span></div>`,
+    foot: `<button class="btn" type="button" data-close>Annuler</button><button class="btn primary" type="button" data-ok disabled>${icon("check")}Reporter dans le bilan</button>` });
+  let lsi = null;
+  const moy = c => { const v = [...s.el.querySelectorAll(`[data-c="${c}"]`)].map(x => parseFloat(x.value.replace(",", "."))).filter(x => !isNaN(x) && x > 0); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  s.el.addEventListener("input", () => {
+    const a = moy("a"), b = moy("s");
+    const ok = s.el.querySelector("[data-ok]");
+    if(a === null || b === null){ lsi = null; ok.disabled = true; return; }
+    lsi = Math.round(a / b * 1000) / 10;
+    const f = n => String(Math.round(n * 10) / 10).replace(".", ",");
+    s.el.querySelector("#lsi-out").className = "notice " + (lsi >= 90 ? "" : "warn");
+    s.el.querySelector("#lsi-out").innerHTML = `${icon(lsi >= 90 ? "checkCircle" : "alert")}<span>Moyenne atteint ${f(a)}, sain ${f(b)} : <strong>LSI ${f(lsi)} %</strong>${lsi >= 90 ? " (seuil de reprise du sport atteint)" : " (sous le seuil de 90 % habituel pour la reprise du sport)"}.</span>`;
+    ok.disabled = false;
+  });
+  s.el.querySelector("[data-ok]").onclick = () => { if(lsi !== null){ onOk(lsi); s.close(); } };
 }

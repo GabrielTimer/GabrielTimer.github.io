@@ -336,7 +336,7 @@ function drawTF(){
   const box = $("#tf-box"); if(!box) return;
   const reco = TC.tfRecommandes(S);
   const rempli = k => S.f[k] !== undefined && S.f[k] !== "";
-  const champ = ([k, nom, u]) => `<div class="field"><label for="f-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span></label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`;
+  const champ = ([k, nom, u]) => `<div class="field"><label for="f-${k}"><button class="t-name" type="button" data-tf="${esc(nom)}" style="font-size:inherit">${icon("info")}${esc(nom)}</button> <span class="faint">(${esc(u)})</span>${TC.estLSI(nom) ? ` <button class="btn sm ghost" type="button" data-lsi="${esc(nom)}" style="min-height:0;padding:2px 8px">Calculer</button>` : ""}</label><input class="input" id="f-${k}" data-f="${k}" inputmode="decimal" value="${esc(S.f[k] ?? "")}"><span class="hint" data-prevm="${k}"></span></div>`;
   const haut = K.TF.filter(t => reco.has(t[0]) || rempli(t[0]));
   const bas = K.TF.filter(t => !haut.includes(t));
   if(!haut.length){
@@ -594,6 +594,14 @@ if(back) back.addEventListener("click", e => { e.preventDefault(); leave(fiche);
 
 function tfSheet(n){ TC.ficheTest(K, n, "fonctionnel"); }
 document.addEventListener("click", e => { const b = e.target.closest("[data-tf]"); if(b){ e.preventDefault(); tfSheet(b.dataset.tf); } });
+/* Calculette de symétrie (LSI) : remplit le champ du test, dans la vue complète comme dans l'entretien guidé */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-lsi]");
+  if(!b) return;
+  e.preventDefault();
+  const input = b.closest(".field")?.querySelector("input");
+  TC.calculLSI(b.dataset.lsi, v => { if(!input) return; input.value = String(v).replace(".", ","); input.dispatchEvent(new Event("input", { bubbles:true })); });
+});
 
 function testSheet(n){ TC.ficheTest(K, n, "clinique"); }
 

@@ -4,7 +4,7 @@
    ========================================================= */
 
 import { esc, icon, openSheet, toast, confirmDialog, promptDialog, fmtShortDate, fmtDate, startOfDay, plural, evaColor } from "./app.js";
-import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions, butOf } from "./questionnaires.js";
+import { fmtScore, isDue, unitOf, comparer, VERDICT_TXT, parseQuestions, butOf, conduiteStartBack } from "./questionnaires.js";
 import { CONSEILS_FOURNIS, mergeConseils } from "./conseils-data.js";
 
 const DAY = 864e5;
@@ -169,7 +169,7 @@ export async function mountKineSuivi(box, patient, C){
             const lo = q.scoring === "somme" && q.items ? 0 : 0;
             const hi = unitOf(q) === "/24" ? 24 : unitOf(q) === "/80" ? 80 : 100;
             return `<div class="sv-row">
-              <div class="sv-main"><strong>${esc(q.nom)}</strong><span class="small muted">${res.length ? `${plural(res.length, "réponse")}, la dernière le ${esc(fmtShortDate(last.date))}` : "En attente de réponse"}${a ? (a.jours ? `, tous les ${a.jours} jours` : ", une fois") : ", plus proposé"}</span>${res.length > 1 ? avantApresLigne(q, res[0], last) : ""}</div>
+              <div class="sv-main"><strong>${esc(q.nom)}</strong><span class="small muted">${res.length ? `${plural(res.length, "réponse")}, la dernière le ${esc(fmtShortDate(last.date))}` : "En attente de réponse"}${a ? (a.jours ? `, tous les ${a.jours} jours` : ", une fois") : ", plus proposé"}</span>${res.length > 1 ? avantApresLigne(q, res[0], last) : ""}${q.scoring === "startback" && last?.sousScores?.Risque ? `<span class="small" style="font-weight:700">Risque ${esc(last.sousScores.Risque)} : ${esc(conduiteStartBack(last.sousScores).split(" : ")[1] || "")}</span>` : ""}</div>
               ${(() => { const sc = res.map(r => r.score).filter(v => typeof v === "number"); const pad = Math.max(2, (hi - lo) * .08); return sparkHTML(sc, { min:Math.max(lo, Math.min(...sc) - pad), max:Math.min(hi, Math.max(...sc) + pad), better:q.sens === "haut" ? "haut" : "bas" }); })()}
               <span class="sv-val num">${last ? esc(fmtScore(last.score, q)) : "–"}</span>
               <button class="icon-btn sm" type="button" data-s="q-detail" data-id="${esc(id)}" aria-label="Détail">${icon("chevron")}</button>
@@ -317,6 +317,7 @@ export async function mountKineSuivi(box, patient, C){
         title: q.nom,
         body: `<div class="stack" style="--gap:14px">
           ${q.interpretation ? `<p class="small muted">${esc(q.interpretation)}</p>` : ""}
+          ${q.scoring === "startback" && conduiteStartBack(res[0]?.sousScores) ? `<div class="notice">${icon("target")}<span><strong>Conduite proposée</strong> (dernière réponse) : ${esc(conduiteStartBack(res[0].sousScores))}</span></div>` : ""}
           ${res.length > 1 ? `<div class="panel" style="padding:14px"><div class="row" style="gap:8px;flex-wrap:wrap;align-items:center"><strong>Avant / après</strong><span class="spacer"></span>
             <select class="select" id="aa-a" aria-label="Avant" style="width:auto">${res.map((r, k) => `<option value="${k}" ${k === res.length - 1 ? "selected" : ""}>${esc(fmtShortDate(r.date))}</option>`).join("")}</select>
             <span>→</span>
