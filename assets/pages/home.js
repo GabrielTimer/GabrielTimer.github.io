@@ -616,7 +616,12 @@ async function homeSuivi(ctx, patient, seances, tous){
   /* Carnet de marches : activé par le kiné dans la fiche patient */
   const M = patient.marche?.actif ? await import("../marches.js") : null;
   let marches = M ? M.marchesDe(suivis) : [];
+  /* Questionnaire avant le 1er rendez-vous, petites leçons, nouvelles à 3 mois */
+  const ACC = await import("../accompagnement.js");
+  const ENC = await import("../encouragements.js");
   box.innerHTML = `
+    <div id="acc-box">${ACC.cartesPatientHTML(patient, suivis, { cle: ctx.cle })}</div>
+    ${ENC.blocAccueilHTML(seances, { esc, icon })}
     ${M ? `<div id="mar-box">${M.sectionHTML(marches, patient.marche)}</div>` : ""}
     ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}
     ${todo.length ? `<section class="section"><div class="section-title">À faire pour votre kiné</div>
@@ -632,6 +637,12 @@ async function homeSuivi(ctx, patient, seances, tous){
     ${fiches.length ? `<section class="section"><div class="section-title">Conseils de votre kiné<span class="spacer"></span>${fiches.length > 3 ? `<a class="btn sm ghost" href="/conseils.html">Tout voir</a>` : ""}</div>
       <div class="list">${fiches.slice(0, 3).map(({ id, c }) => `<a class="list-item" href="/conseils.html?id=${encodeURIComponent(id)}"><span class="li-ico">${icon(c.ico || "book")}</span><span class="li-main"><span class="li-title">${esc(c.titre)}</span><span class="li-sub">${esc(c.resume || "")}</span></span><span class="li-end">${icon("chevron")}</span></a>`).join("")}</div></section>` : ""}`;
 
+  const lierAcc = () => ACC.lierPatient(box.querySelector("#acc-box"), { patient, cle: ctx.cle, apercu: ctx.apercu, apres: async () => {
+    const frais = await C.listSuivis(ctx.cle).catch(() => suivis);
+    box.querySelector("#acc-box").innerHTML = ACC.cartesPatientHTML(patient, frais, { cle: ctx.cle });
+    lierAcc();
+  } });
+  lierAcc();
   if(M){
     const lierMarche = () => {
       box.querySelector('[data-marche="add"]')?.addEventListener("click", () => M.saisir({

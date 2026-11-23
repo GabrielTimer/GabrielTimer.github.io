@@ -297,6 +297,44 @@ async function kineView(param){
       : `<span class="muted">${icon("bell")}Rappels non activés</span>`;
   };
 
+  /* « Avant la séance » : l'essentiel en un coup d'œil quand le patient arrive au cabinet */
+  const avantSeanceHTML = (valides) => {
+    const DAY = 86400000, now = Date.now();
+    const debutJour = new Date(); debutJour.setHours(0, 0, 0, 0);
+    const finJour = debutJour.getTime() + DAY;
+    const sem = valides.filter(s => now - s.dateValidation < 7 * DAY);
+    const prevues7 = seances.filter(s => s.datePrevue && !s.archive && new Date(s.datePrevue).getTime() >= now - 7 * DAY && new Date(s.datePrevue).getTime() < finJour).length;
+    const auj = seances.filter(s => !s.terminee && !s.archive && s.datePrevue && new Date(s.datePrevue).getTime() >= debutJour.getTime() && new Date(s.datePrevue).getTime() < finJour);
+    const derniere = valides[valides.length - 1];
+    const motPatient = [
+      ...valides.filter(s => s.commentaire).map(s => ({ date: s.dateValidation, texte: s.commentaire })),
+      ...messages.filter(m => m.de !== "kine" && m.texte).map(m => ({ date: m.date || 0, texte: m.texte }))
+    ].sort((a, b) => b.date - a.date)[0];
+    const dernierBilan = bilans[0];
+    const ligne = (ico, lab, val) => `<div class="av-l">${icon(ico)}<span class="av-lab">${lab}</span><span class="av-val">${val}</span></div>`;
+    const lignes = [
+      ligne("calendar", "7 derniers jours", sem.length ? `<strong>${sem.length}</strong> séance${sem.length > 1 ? "s" : ""} faite${sem.length > 1 ? "s" : ""}${prevues7 ? ` sur ${prevues7} prévue${prevues7 > 1 ? "s" : ""}` : ""}` : (prevues7 ? `<span style="color:var(--danger)">aucune séance faite sur ${prevues7} prévue${prevues7 > 1 ? "s" : ""}</span>` : "aucune séance faite")),
+      derniere ? ligne("heart", "Dernière séance", `${esc(fmtRelDay(derniere.dateValidation))}${derniere.ressenti ? `, ${esc(ressentiLabel(derniere.ressenti).toLowerCase())}` : ""}${derniere.eva !== undefined && derniere.eva !== null && derniere.eva !== "" ? `, douleur <strong>${esc(derniere.eva)}/10</strong>` : ""}`) : "",
+      motPatient ? ligne("message", "Son dernier mot", `<span class="av-quote">« ${esc(String(motPatient.texte).slice(0, 160))}${String(motPatient.texte).length > 160 ? "…" : ""} »</span> <span class="small muted">${esc(fmtShortDate(motPatient.date))}</span>`) : "",
+      auj.length ? ligne("play", "Prévu aujourd'hui", auj.map(s => esc(s.label || s.nom || "Séance")).join(", ")) : "",
+      dernierBilan ? ligne("stethoscope", "Dernier bilan", `${esc(BT[dernierBilan.type] || "Bilan")} du ${esc(fmtISO(dernierBilan.date))}${dernierBilan.motif ? ` · ${esc(dernierBilan.motif)}` : ""}`) : "",
+      C.estSien(patient) ? `<div id="av-note"></div>` : ""
+    ].filter(Boolean);
+    return `<section class="section panel avant-seance">
+      <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("list")}Avant la séance</h2></div>
+      <div class="av-list">${lignes.join("")}</div></section>`;
+  };
+  /* Dernière note de séance privée (chargée à part : la fiche s'affiche sans l'attendre) */
+  const afficherDerniereNote = async () => {
+    const slot = $("#av-note");
+    if(!slot || typeof C.listNotes !== "function") return;
+    try{
+      const n = (await C.listNotes(patient.cle))[0];
+      const txt = n && (n.texte || n.note || n.contenu || "");
+      if(txt && $("#av-note")) $("#av-note").outerHTML = `<div class="av-l">${icon("edit")}<span class="av-lab">Votre dernière note</span><span class="av-val"><span class="av-quote">${esc(String(txt).slice(0, 200))}${String(txt).length > 200 ? "…" : ""}</span> <span class="small muted">${esc(fmtShortDate(n.date))}</span></span></div>`;
+    }catch(e){}
+  };
+
   const render = () => {
     const sum = K.summarize(patient, seances);
     const { seules } = sum;
@@ -341,6 +379,8 @@ async function kineView(param){
           <button class="btn ghost" type="button" id="more">${icon("settings")}Plus</button>
         </div>
       </section>
+
+      ${avantSeanceHTML(valides)}
 
       <section class="section kpis four">
         <div class="kpi"><span class="k-val">${tous ? `${tous.faites}<span class="faint" style="font-size:.7em">/${tous.total}</span>` : seances.filter(s => s.terminee).length}</span><span class="k-lab">séances faites${tous ? (tous.n > 1 ? ` (${tous.n} programmes en cours)` : " (programme en cours)") : ""}</span></div>
@@ -420,6 +460,7 @@ async function kineView(param){
     $("#acces").onclick = () => UI.accessSheet(patient);
     const nl = $("#nouveau-lien");
     if(nl) nl.onclick = async () => { await UI.accessSheet(patient); patient.nouveauLien = null; nl.closest(".notice")?.remove(); };
+    afficherDerniereNote();
     $("#note-jour").onclick = () => {
       document.dispatchEvent(new CustomEvent("kine:note-du-jour"));
     };

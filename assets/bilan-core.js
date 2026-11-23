@@ -256,7 +256,7 @@ const joinSec = (S, key) => {
  * Le bilan mis en forme : { titre, date, patient:[[libellé, valeur]], sections:[{ h, rows:[[libellé, valeur]], alerte }] }
  * prev : état du bilan précédent (pour l'évolution), prevDate : sa date.
  */
-export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
+export function report(S, patient = {}, { prev = null, prevDate = "", initial = null, initialDate = "" } = {}){
   const f = S.f || {};
   const R = { titre: typeLabel(S.type), date: fmtISO(S.date), patient:[], sections:[] };
   const add = (h, rows, extra = {}) => { rows = rows.filter(r => r && r[1]); if(rows.length || extra.texte) R.sections.push({ h, rows, ...extra }); };
@@ -329,6 +329,17 @@ export function report(S, patient = {}, { prev = null, prevDate = "" } = {}){
   if(prev){
     const ev = compare(prev, S);
     if(ev.length) add("Évolution depuis le " + fmtISO(prevDate), ev.map(e => [e.label, e.texte.replace(e.label + " : ", "")]));
+  }
+  /* Bilan de sortie : comparaison avec le bilan initial (en plus du précédent, s'il y a eu un intermédiaire) */
+  if(S.type === "final" && initial && (!prev || initialDate !== prevDate)){
+    const ev = compare(initial, S);
+    if(ev.length){
+      const mieux = ev.filter(e => e.sens === "mieux").length, moins = ev.filter(e => e.sens === "moins").length;
+      const resume = `${mieux} amélioration${mieux > 1 ? "s" : ""} nette${mieux > 1 ? "s" : ""}${moins ? `, ${moins} aggravation${moins > 1 ? "s" : ""}` : ""}`;
+      add("Bilan de sortie : évolution depuis le bilan initial du " + fmtISO(initialDate),
+        [["En résumé", resume], ...ev.map(e => [e.label, e.texte.replace(e.label + " : ", "")])],
+        { barres: ev.filter(e => e.from != null && e.to != null) });
+    }
   }
 
   add("Conclusion et projet", [

@@ -87,7 +87,8 @@ let finished = false;
 const pref = {
   sound: store.get("gt_sound", 1) !== 0,
   voice: store.get("gt_voice", 1) !== 0,
-  auto: store.get("gt_autonext", 0) === 1
+  auto: store.get("gt_autonext", 0) === 1,
+  lire: store.get("gt_lire_consignes", 0) === 1    // lire les consignes à voix haute avant chaque exercice
 };
 
 function stepStartOf(i){
@@ -130,6 +131,29 @@ function speak(text){
     speechSynthesis.speak(u);
   }catch(e){}
 }
+/* Lecture des consignes à voix haute (voix française du téléphone) */
+function texteConsignes(e){
+  const morceaux = [e.nom || "Exercice"];
+  if(e.conseil_kine) morceaux.push("Conseil de votre kiné : " + e.conseil_kine);
+  if(e.position) morceaux.push("Position de départ : " + e.position);
+  const et = exerciseSteps(e);
+  if(et.length) morceaux.push(...et);
+  else if(e.description_fr) morceaux.push(String(e.description_fr).replace(/<[^>]+>/g, " "));
+  const d = doseOf(e);
+  if(d?.chargeTxt) morceaux.push("Charge : " + d.chargeTxt);
+  return morceaux.map(t => String(t).replace(/\s+/g, " ").trim()).filter(Boolean).map(t => /[.!?]$/.test(t) ? t : t + ".").join(" ");
+}
+function lireConsignes(e){
+  if(!("speechSynthesis" in window)) return false;
+  try{
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(texteConsignes(e));
+    u.lang = "fr-FR"; u.rate = .95;
+    speechSynthesis.speak(u);
+    return true;
+  }catch(e){ return false; }
+}
+
 let wakeLock = null;
 async function keepAwake(){
   try{ if("wakeLock" in navigator && !wakeLock) wakeLock = await navigator.wakeLock.request("screen"); wakeLock?.addEventListener("release", () => { wakeLock = null; }); }catch(e){}
@@ -151,8 +175,10 @@ function goTo(i, { silent = false, wait = null } = {}){
   lastWhole = null;
   if(st.kind === "prep"){
     if(RESP[st.e.id] && !silent){ toRespir(st); return; }
-    const mustWait = wait !== null ? wait : !(pref.auto && running);
-    if(mustWait){ running = false; waiting = true; }
+    /* Consignes lues à voix haute : on attend que le patient appuie pour démarrer */
+    const lire = pref.lire && pref.sound && !silent;
+    const mustWait = lire || (wait !== null ? wait : !(pref.auto && running));
+    if(mustWait){ running = false; waiting = true; if(lire) lireConsignes(st.e); }
     else { waiting = false; endAt = performance.now() + remaining * 1000; if(!silent) speak("Préparez-vous"); }
   }else{
     waiting = false;
@@ -435,13 +461,25 @@ function openInfo(){
       ${vid ? `<h3>${icon("video")}Vidéo</h3>${vid.src ? `<button class="btn soft block" type="button" id="play-video">${icon("play")}Lire la vidéo</button><div id="video-slot"></div>` : `<a class="btn soft block" href="${esc(vid.url)}" target="_blank" rel="noopener">${icon("video")}${esc(vid.title || "Voir la vidéo")}</a>`}` : ""}
       ${!stepsList.length && !e.description_fr && !vid ? `<p class="muted">Suivez les indications de votre kiné.</p>` : ""}
     </div>`;
+  const voix = "speechSynthesis" in window;
   const s = openSheet({
     title: e.nom || "Consignes",
     tall: true,
-    body,
+    body: (voix ? `<div class="row wrap" style="--gap:10px;margin-bottom:12px">
+        <button class="btn primary" type="button" id="ecouter">${icon("sound")}Écouter les consignes</button>
+        <label class="row" style="--gap:8px;cursor:pointer"><input type="checkbox" id="lire-auto" ${pref.lire ? "checked" : ""}><span class="small">Les lire avant chaque exercice</span></label>
+      </div>` : "") + body,
     foot: `<button class="btn primary" type="button" data-close>${wasRunning ? "Reprendre" : "Fermer"}</button>`,
-    onClose: () => { if(wasRunning) start(); }
+    onClose: () => { try{ speechSynthesis.cancel(); }catch(err){} if(wasRunning) start(); }
   });
+  const ec = s.el.querySelector("#ecouter");
+  if(ec) ec.onclick = () => { if(!lireConsignes(e)) toast("La lecture à voix haute n'est pas disponible sur ce téléphone."); };
+  const la = s.el.querySelector("#lire-auto");
+  if(la) la.onchange = () => {
+    pref.lire = la.checked;
+    store.set("gt_lire_consignes", pref.lire ? 1 : 0);
+    toast(pref.lire ? "Les consignes seront lues avant chaque exercice. Appuyez sur Démarrer quand vous êtes prêt." : "Les consignes ne seront plus lues.", { duration:3000 });
+  };
   const pv = s.el.querySelector("#play-video");
   if(pv) pv.onclick = () => {
     s.el.querySelector("#video-slot").innerHTML = `<iframe class="video-frame" src="${esc(vid.src)}" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Vidéo de l'exercice"></iframe>`;

@@ -23,6 +23,13 @@
   .pt-contact a,.pt-contact span{ display:inline-flex; align-items:center; gap:6px; color:inherit; }
   .pt-contact svg{ width:16px; height:16px; }
   .pt-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+  /* Avant la séance */
+  .avant-seance .av-list{ display:flex; flex-direction:column; gap:8px; }
+  .av-l{ display:grid; grid-template-columns:22px 150px minmax(0,1fr); gap:10px; align-items:baseline; }
+  .av-l > svg{ width:18px; height:18px; color:var(--lagon-strong); align-self:center; }
+  .av-lab{ color:var(--ink-3); font-weight:700; font-size:var(--fs-sm); }
+  .av-quote{ font-style:italic; }
+  @media (max-width:560px){ .av-l{ grid-template-columns:22px minmax(0,1fr); } .av-l .av-val{ grid-column:2; } }
   .kpis.four{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   @media (min-width:700px){ .kpis.four{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
   .cols{ display:grid; gap:16px; }

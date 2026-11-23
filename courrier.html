@@ -209,10 +209,16 @@ const nb = v => fmtNum(Math.round(Number(String(v).replace(",", ".")) * 10) / 10
 const unite = l => { const u = (l.match(/\(([^)]*)\)$/) || [])[1] || ""; return u === "%" ? " %" : u.startsWith("/") ? u : u === "0-10" ? "/10" : ""; };
 const scoreDe = nom => /^[AEIOUYÉÈ]/i.test(nom) ? `le score d'${nom}` : `le score ${nom}`;   // le score d'Oswestry, le score QuickDASH
 
+function initialDe(bl){
+  return liste.filter(b => b.id !== bl.id && b.etat && (b.type || b.etat.type) === "initial" && String(b.date || "") <= String(bl.date || "9999"))
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)) || (a.createdAt || 0) - (b.createdAt || 0))[0] || null;
+}
+
 function rediger(bl){
   const S = bl?.etat || null;
   const type = S?.type || "intermediaire";
-  const prev = S ? B.previousOf(liste, bl.id, bl.date) : null;
+  /* Lettre de fin de traitement : l'évolution se compte depuis le bilan initial */
+  const prev = S ? (type === "final" && initialDe(bl)) || B.previousOf(liste, bl.id, bl.date) : null;
   const motifs = S ? joinSec(S, "patho") : [];
   const motif = motifs.length ? et(motifs.map(art)) : "";
   const motifObjet = motifs.length ? et(motifs.map(low)) : "";
@@ -405,7 +411,8 @@ function annexes(bl){
   const S = bl?.etat, out = [], noms = [];
   const prev = S ? B.previousOf(liste, bl.id, bl.date) : null;
   if(opt("j-bilan") && S){
-    const R = B.report(S, { ...patient, nom }, prev ? { prev: prev.etat, prevDate: prev.date } : {});
+    const ini = S.type === "final" ? initialDe(bl) : null;
+    const R = B.report(S, { ...patient, nom }, { ...(prev ? { prev: prev.etat, prevDate: prev.date } : {}), ...(ini ? { initial: ini.etat, initialDate: ini.date } : {}) });
     noms.push(`${R.titre} du ${R.date}`);
     out.push(`<div class="sheet-a4 ax">${enTete(R.titre, R.date)}${table(R.patient.filter(p => p[0] !== "Patient"))}${R.sections.map(s => `<h2>${esc(s.h)}</h2>${s.alerte ? `<p class="alerte">${esc(s.alerte)}</p>` : ""}${table(s.rows)}`).join("")}</div>`);
   }

@@ -85,6 +85,39 @@ if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0)
   if(msgs.length) console.log(`::notice::${msgs.length} message(s) du kiné, ${n} notification(s) envoyée(s).`);
 }
 
+/* ---------- Nouvelles 3 mois après la fin de la prise en charge ----------
+   patients/{clé}.suivi3m.prevu = "AAAA-MM-JJ" (posé par le bilan de fin de traitement ou la fiche) :
+   le jour venu, un message du kiné arrive dans la messagerie du patient, avec une notification,
+   puis prevu passe à "fait" (« fait » est après toute date : la requête ne le relit plus). */
+{
+  const dus = await db.collection("patients").where("suivi3m.prevu", "<=", today).get().catch(e => { console.log(`Suivi 3 mois : ${e.message}`); return { docs: [] }; });
+  let n = 0;
+  for(const pd of dus.docs){
+    const p = pd.data(), cle = pd.id;
+    if(!p.suivi3m?.prevu || p.suivi3m.prevu === "fait") continue;
+    let boite = db.collection(`patients/${cle}/messages`);
+    if(p.codeV2){
+      const c = await db.collection("codes").where("cle", "==", cle).limit(1).get();
+      if(!c.empty) boite = c.docs[0].ref.collection("messages");
+    }
+    const mots = String(p.nom || "").trim().split(/\s+/);
+    const prenom = mots.find(m => m !== m.toUpperCase()) || "";
+    const texte = `Bonjour${prenom ? " " + prenom : ""}, cela fait 3 mois que nos séances sont terminées. Comment allez-vous ? Vous pouvez me répondre en 1 minute depuis l'accueil de l'application (« Votre kiné prend de vos nouvelles »).`;
+    await boite.add({ type: "message", sujet: "Des nouvelles ?", texte, date: Date.now(), lu: false, de: "kine", notifie: true });
+    const subsP = await db.collection(`patients/${cle}/rappels`).get();
+    for(const sd of subsP.docs){
+      const r = sd.data();
+      if(!r.actif || !r.endpoint) continue;
+      const payload = { title: "Votre kiné prend de vos nouvelles", body: "Comment allez-vous depuis la fin des séances ? 1 minute pour répondre.", url: "/index.html", tag: `suivi3m-${cle}` };
+      try{ await webpush.sendNotification({ endpoint: r.endpoint, keys: { p256dh: r.p256dh, auth: r.auth } }, JSON.stringify(payload), { TTL: 24 * 3600 }); }
+      catch(e){ if(e.statusCode === 404 || e.statusCode === 410) await sd.ref.delete(); }
+    }
+    await pd.ref.update({ "suivi3m.prevu": "fait", "suivi3m.envoyeLe": today });
+    n++;
+  }
+  if(n) console.log(`::notice::${n} message(s) de suivi à 3 mois envoyé(s).`);
+}
+
 /* ---------- Envoi ---------- */
 const subs = await db.collectionGroup("rappels").get();
 const seancesCache = new Map();

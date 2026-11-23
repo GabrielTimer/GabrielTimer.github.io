@@ -107,6 +107,7 @@ export function noteHTML(n, { actions = true, long = false } = {}){
  */
 export async function mountKineSuivi(box, patient, C){
   const MAR = await import("./marches.js");
+  const ACC = await import("./accompagnement.js");
   let suivis = [], questionnaires = [], notes = [], perso = [];
   let err = null;
   box.innerHTML = `<div class="loading"><div class="spinner"></div><span>Chargement du suivi…</span></div>`;
@@ -178,6 +179,8 @@ export async function mountKineSuivi(box, patient, C){
 
         ${MAR.panelKineHTML(MAR.marchesDe(suivis), patient.marche || {})}
 
+        ${ACC.panelKineHTML(patient, suivis)}
+
         <section class="panel">
           <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("book", "ic-inline lagon")} Fiches conseils</h2><button class="btn sm" type="button" data-s="c-edit">${icon("edit")}Choisir</button></div>
           ${(patient.conseils || []).length ? `<div class="chips">${patient.conseils.map(resolveConseil).filter(Boolean).map(c => `<a class="chip" href="/conseils.html?id=${encodeURIComponent(c.id)}" target="_blank" rel="noopener">${icon(c.ico || "book")}${esc(c.titre)}</a>`).join("")}</div><p class="small muted" style="margin-top:10px">Le patient les retrouve sur son accueil.</p>`
@@ -195,6 +198,7 @@ export async function mountKineSuivi(box, patient, C){
   };
 
   const bind = () => {
+    Object.assign(actions, ACC.actionsKine({ patient, suivis, savePatient }));
     box.querySelectorAll("[data-s]").forEach(b => b.addEventListener("click", () => actions[b.dataset.s]?.(b.dataset.id)));
   };
 

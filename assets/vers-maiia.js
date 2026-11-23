@@ -119,7 +119,9 @@ async function pdfDuBilan(b, patient, tous){
   S.type = S.type || b.type; S.date = S.date || b.date;
   const liste = tous.filter(x => x.cle === b.cle);
   const prev = B.previousOf(liste, b.id, S.date);
-  const d = await B.bilanPdf(S, patient, prev ? { prev: prev.etat, prevDate: prev.date } : {});
+  const init = S.type === "final" ? liste.filter(x => x.id !== b.id && x.etat && (x.type || x.etat.type) === "initial")
+    .sort((x, y) => String(x.date).localeCompare(String(y.date)))[0] : null;
+  const d = await B.bilanPdf(S, patient, { ...(prev ? { prev: prev.etat, prevDate: prev.date } : {}), ...(init ? { initial: init.etat, initialDate: init.date } : {}) });
   /* Deux bilans du même type, le même jour, pour le même patient : « (2) », « (3) »… pour qu'aucun
      fichier n'en écrase un autre. Toujours le même nom pour un même bilan (s'il est réenregistré). */
   const memes = liste.filter(x => (x.type || x.etat?.type) === S.type && (x.date || x.etat?.date) === S.date)
