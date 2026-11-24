@@ -20,7 +20,7 @@ Avant de toucher au code, vérifiez si c'est faisable ici (espace kiné → **Ou
 | Délai de déconnexion automatique de la tablette ou du téléphone | Outils → Réglages du cabinet → **Déconnexion automatique de cet appareil** (12 h conseillées) |
 | Code du mode séance (7777 par défaut) | Outils → Réglages du cabinet → **Mode séance** |
 | Sauvegarder à la main, restaurer une sauvegarde | Outils → Réglages du cabinet → **Sauvegarde** |
-| Fiche « Si ça revient », test du mois à la maison, leçons, questionnaire avant le 1er rendez-vous | Fiche du patient → bloc **Accompagnement** |
+| Fiche « Si ça revient », test du mois à la maison, leçons, questionnaire avant le 1er rendez-vous | Fiche du patient → bloc **Accompagnement** (caché pour l'instant ; pour le réafficher, demander à Claude : `VISIBLE` dans `assets/accompagnement.js`) |
 | Voir la part de patients qui progressent vraiment, par pathologie | Outils → **Mes résultats** |
 | Mettre les bilans (PDF) et leurs photos dans les dossiers du PC, pour Maiia | Outils → **Mettre dans Maiia** (sur le PC, dans Chrome ou Edge) ; dossiers à choisir sur cette page ou dans Réglages du cabinet → Dossiers d'enregistrement |
 

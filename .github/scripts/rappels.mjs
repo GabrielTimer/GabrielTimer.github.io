@@ -88,8 +88,10 @@ if(hour >= 22 || hour < 7){ console.log("Pas d'envoi la nuit."); process.exit(0)
 /* ---------- Nouvelles 3 mois après la fin de la prise en charge ----------
    patients/{clé}.suivi3m.prevu = "AAAA-MM-JJ" (posé par le bilan de fin de traitement ou la fiche) :
    le jour venu, un message du kiné arrive dans la messagerie du patient, avec une notification,
-   puis prevu passe à "fait" (« fait » est après toute date : la requête ne le relit plus). */
-{
+   puis prevu passe à "fait" (« fait » est après toute date : la requête ne le relit plus).
+   Mis de côté le 24/11/2026 (bloc Accompagnement caché) : remettre true pour réactiver. */
+const SUIVI3M_ACTIF = false;
+if(SUIVI3M_ACTIF){
   const dus = await db.collection("patients").where("suivi3m.prevu", "<=", today).get().catch(e => { console.log(`Suivi 3 mois : ${e.message}`); return { docs: [] }; });
   let n = 0;
   for(const pd of dus.docs){

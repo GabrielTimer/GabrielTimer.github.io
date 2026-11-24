@@ -620,7 +620,7 @@ async function homeSuivi(ctx, patient, seances, tous){
   const ACC = await import("../accompagnement.js");
   const ENC = await import("../encouragements.js");
   box.innerHTML = `
-    <div id="acc-box">${ACC.cartesPatientHTML(patient, suivis, { cle: ctx.cle })}</div>
+    <div id="acc-box">${ACC.VISIBLE ? ACC.cartesPatientHTML(patient, suivis, { cle: ctx.cle }) : ""}</div>
     ${ENC.blocAccueilHTML(seances, { esc, icon })}
     ${M ? `<div id="mar-box">${M.sectionHTML(marches, patient.marche)}</div>` : ""}
     ${streak ? `<div class="streak section">${icon("starFill")}<span>${esc(streak)}</span></div>` : ""}

@@ -179,7 +179,7 @@ export async function mountKineSuivi(box, patient, C){
 
         ${MAR.panelKineHTML(MAR.marchesDe(suivis), patient.marche || {})}
 
-        ${ACC.panelKineHTML(patient, suivis)}
+        ${ACC.VISIBLE ? ACC.panelKineHTML(patient, suivis) : ""}
 
         <section class="panel">
           <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("book", "ic-inline lagon")} Fiches conseils</h2><button class="btn sm" type="button" data-s="c-edit">${icon("edit")}Choisir</button></div>
