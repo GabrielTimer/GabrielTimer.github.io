@@ -448,8 +448,8 @@ async function save(){
     if(isNew){ history.replaceState(null, "", `/bilan.html?patient=${encodeURIComponent(cle)}&id=${encodeURIComponent(id)}`); drawDanger(); }
     /* Bilan de fin de traitement : nouvelles du patient programmées 3 mois plus tard (une seule fois) */
     if(S2.type === "final" && !patient.suivi3m){
-      import("../accompagnement.js").then(A => { const s3 = A.programmeSuivi(); patient.suivi3m = s3; return C.updatePatient(cle, { suivi3m: s3 }); })
-        .then(() => toast("Fin de prise en charge : le patient recevra un message de suivi dans 3 mois.", { duration:5000 })).catch(() => {});
+      import("../accompagnement.js").then(A => { if(!A.VISIBLE) return false; const s3 = A.programmeSuivi(); patient.suivi3m = s3; return C.updatePatient(cle, { suivi3m: s3 }).then(() => true); })
+        .then(ok => ok && toast("Fin de prise en charge : le patient recevra un message de suivi dans 3 mois.", { duration:5000 })).catch(() => {});
     }
     setSt("ok", "Enregistré");
     return true;

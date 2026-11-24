@@ -9,6 +9,11 @@
    rechute { plan, exos, note, date }, testMois { test, jours, debut }.
    Réponses du patient : patients/{clé}/suivis, types "prebilan", "suivi3m" et "test". */
 
+/* Bloc mis de côté à la demande de Gabriel (24/11/2026) pour garder un visuel léger :
+   rien n'est supprimé, il est seulement caché (fiche patient, accueil patient, message à 3 mois).
+   Pour le réafficher : mettre true ici ET SUIVI3M_ACTIF = true dans .github/scripts/rappels.mjs. */
+export const VISIBLE = false;
+
 import { esc, icon, openSheet, toast, confirmDialog, fmtShortDate } from "./app.js";
 import { PARCOURS, debloquees, lues, marquerLue, JOURS_ENTRE } from "./lecons.js";
 import { PLANS, planPropose } from "./rechute.js";
