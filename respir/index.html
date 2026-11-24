@@ -204,6 +204,26 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
 .d-foot button{ flex:1; min-height:48px; border-radius:999px; background:var(--glass); }
 .d-foot button.ok{ background:var(--pearl); color:#0B2a30; font-weight:600; }
 
+/* ===== Audios guidés (vraie voix) ===== */
+#audios .pill{ min-width:118px; max-width:170px; padding:8px 14px; white-space:normal; text-align:center; }
+#audios .pill .nm{ font-size:.92rem; }
+.credit{ font-size:.78rem; color:var(--faint); text-align:center; min-height:1.2em; }
+#durBlock{ display:contents; }
+body.audio #durBlock{ display:none; }
+body.running.audio #sound{ display:none; }
+body:not(.audio) #bgBtn{ display:none; }
+
+/* ===== Écoute en arrière-plan : écran noir, la voix continue ===== */
+.bgview{ position:fixed; inset:0; z-index:9; display:none; flex-direction:column; align-items:center; justify-content:center; gap:22px; padding:28px; text-align:center; background:#000; color:var(--soft); }
+body.bg .bgview{ display:flex; }
+body.bg .app, body.bg .dock, body.bg .sky, body.bg .tap-hint{ visibility:hidden; }
+.bgview h2{ font-weight:200; font-size:1.9rem; color:var(--text); }
+.bgview p{ max-width:30ch; line-height:1.55; }
+.bgview .time{ font-variant-numeric:tabular-nums; font-size:1.1rem; color:var(--faint); }
+.bgview .play{ width:72px; height:72px; border-radius:50%; background:var(--pearl); color:#0B2a30; display:grid; place-items:center; }
+.bgview .play svg{ width:30px; height:30px; }
+.bgview .ghost{ min-height:52px; padding:0 24px; border-radius:999px; border:1px solid var(--glass-line); color:var(--soft); }
+
 @media (prefers-reduced-motion:reduce){
   .aura,.stars i{ animation:none !important; }
   .word span{ transition-duration:.01ms; }
@@ -237,8 +257,13 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
     <div id="exercise"></div>
     <div class="label">rythme</div>
     <div class="row" id="modes" role="group" aria-label="Rythme"></div>
-    <div class="label">durée</div>
-    <div class="row" id="durations" role="group" aria-label="Durée"></div>
+    <div id="durBlock">
+      <div class="label">durée</div>
+      <div class="row" id="durations" role="group" aria-label="Durée"></div>
+    </div>
+    <div class="label">audio guidé · voix</div>
+    <div class="row" id="audios" role="group" aria-label="Audio guidé"></div>
+    <div class="credit" id="credit"></div>
     <button class="start" type="button" id="start">Commencer</button>
   </section>
 </div>
@@ -248,6 +273,15 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
   <button class="play" type="button" id="pause" aria-label="Pause"></button>
   <span class="time" id="time">0:00</span>
   <button class="icon" type="button" id="sound" aria-label="Sons"></button>
+  <button class="icon" type="button" id="bgBtn" aria-label="Écouter en arrière-plan" title="Écouter en arrière-plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3.5" y="14" width="4" height="6" rx="1.5"/><rect x="16.5" y="14" width="4" height="6" rx="1.5"/></svg></button>
+</div>
+<audio id="voix" preload="none"></audio>
+<div class="bgview" id="bgview" role="dialog" aria-label="Écoute en arrière-plan">
+  <h2>Écoute en cours</h2>
+  <p>Vous pouvez éteindre l'écran ou ouvrir une autre application : la voix continue.</p>
+  <div class="time" id="bgTime"></div>
+  <button class="play" type="button" id="bgPause" aria-label="Pause"></button>
+  <button class="ghost" type="button" id="bgBack">Revoir la bille</button>
 </div>
 <div class="progress"><i id="bar"></i></div>
 <div class="tap-hint">Touchez l'écran pour afficher les commandes</div>
@@ -302,6 +336,18 @@ const MODES = {
   custom:  { name:"Personnalisé", short:"Perso", inhale:4, hold:0, exhale:6 }
 };
 const DURATIONS = [2, 3, 5, 10, 15, 20];
+/* Audios guidés, vraie voix (fichiers dans respir/audio/, mono 64 kbit/s).
+   Méditations de pleine conscience de Johan Illy et Rollon Poinsot (pleineconscience-paca.com). */
+const AUDIOS = [
+  { id:"scan",        nom:"Scan corporel",            voix:"Johan Illy",     min:35, f:"scan-corporel.mp3" },
+  { id:"respiration", nom:"Respiration et sensations", voix:"Rollon Poinsot", min:34, f:"respiration-sensations.mp3" },
+  { id:"complete",    nom:"Méditation complète",      voix:"Rollon Poinsot", min:36, f:"meditation-complete.mp3" },
+  { id:"bienveillance", nom:"Bienveillance",          voix:"Johan Illy",     min:30, f:"bienveillance.mp3" },
+  { id:"faireface",   nom:"Faire face",               voix:"Rollon Poinsot", min:35, f:"faire-face.mp3" },
+  { id:"marche",      nom:"Marche",                   voix:"Rollon Poinsot", min:34, f:"marche.mp3" },
+  { id:"allonge",     nom:"Mouvements allongé",       voix:"Rollon Poinsot", min:30, f:"mouvements-allonge.mp3" },
+  { id:"debout",      nom:"Mouvements debout",        voix:"Rollon Poinsot", min:26, f:"mouvements-debout.mp3" }
+];
 const ls = {
   get(k, d){ try{ const v = localStorage.getItem("respir_" + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem("respir_" + k, JSON.stringify(v)); }catch(e){} }
@@ -320,6 +366,10 @@ const q = new URLSearchParams(location.search);
 const fromProgram = !!q.get("fromProgram");
 let mode = MODES[q.get("mode")] ? q.get("mode") : ls.get("mode", "beginner");
 let minutes = q.get("duree") ? Math.max(1, Math.round(Number(q.get("duree")) / 60)) : ls.get("minutes", 5);
+let audioSel = q.has("audio") ? q.get("audio") : ls.get("audio", "");
+if(!AUDIOS.some(a => a.id === audioSel)) audioSel = "";
+let audioOn = false;          // vrai pendant une séance avec audio guidé : pas de ding/dong, pas de vagues, pas de voix de synthèse
+let bgMode = false;           // écoute en arrière-plan (écran libre de s'éteindre)
 
 const $ = id => document.getElementById(id);
 const root = document.documentElement;
@@ -384,7 +434,7 @@ const bellGain = () => 1.73 * Math.pow(pref.bellVol / 100, 2);   // 70 → 0,85 
 const ambGain  = () => 1.8  * Math.pow(pref.ambVol / 100, 2);    // 75 → 1 (niveau d'origine), 100 → 1,8
 const fallback = { ding:new Audio("ding.wav"), dong:new Audio("dong.wav") };
 function bell(name){
-  if(!pref.bells || pref.bellVol <= 0) return;
+  if(audioOn || !pref.bells || pref.bellVol <= 0) return;
   const a = audio();
   if(a && buffers[name]){
     const src = a.createBufferSource(), g = a.createGain();
@@ -400,6 +450,7 @@ function bell(name){
    Enregistrement « Waves » de Luftrum (freesound.org/s/48412), édité par
    Porrumentzio pour l'application Blanket, licence CC BY. */
 function startAmbient(){
+  if(audioOn) return;
   ambWanted = true;
   const a = audio(); if(!a || amb || !buffers.vagues) return;   // relancé dès que le son est chargé
   const buf = buffers.vagues;
@@ -429,14 +480,14 @@ function ambientFollow(p){
 }
 
 function say(text){
-  if(!pref.voice || !("speechSynthesis" in window)) return;
+  if(audioOn || !pref.voice || !("speechSynthesis" in window)) return;
   try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "fr-FR"; u.rate = .82; u.pitch = .9; u.volume = .8; speechSynthesis.speak(u); }catch(e){}
 }
 function buzz(ms){ if(pref.vibe && navigator.vibrate) try{ navigator.vibrate(ms); }catch(e){} }
 
 let wake = null;
 async function keepAwake(){ try{ if("wakeLock" in navigator && !wake){ wake = await navigator.wakeLock.request("screen"); wake.addEventListener("release", () => { wake = null; }); } }catch(e){} }
-document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible" && state === "run") keepAwake(); });
+document.addEventListener("visibilitychange", () => { if(document.visibilityState === "visible" && state === "run" && !bgMode) keepAwake(); });
 
 /* =========================================================
    Mouvement de la bille
@@ -482,7 +533,7 @@ function frame(now){
   requestAnimationFrame(frame);
   if(state === "run" || state === "prep" || state === "ending"){
     const dt = Math.min(.25, (now - lastTick) / 1000); lastTick = now;
-    if(state === "run") elapsed += dt;
+    if(state === "run") elapsed = audioOn ? voix.currentTime : elapsed + dt;
     let t = (now - phaseStart) / 1000;
     if(t >= phaseDur){
       // fin de phase : enchaîner
@@ -491,7 +542,7 @@ function frame(now){
       else if(phase === "hold"){ startPhase("exhale", now); }
       else if(phase === "exhale"){
         p = 0; cycles++;
-        if(elapsed >= minutes * 60){ finish(now); }
+        if(!audioOn && elapsed >= minutes * 60){ finish(now); }   // avec un audio : fin quand la voix se termine
         else startPhase("inhale", now);
       }
       else if(phase === "settle"){ showEnd(); }
@@ -511,10 +562,56 @@ function frame(now){
 requestAnimationFrame(frame);
 
 function updateTime(){
-  const total = minutes * 60, left = Math.max(0, total - elapsed);
+  const a = curAudio();
+  const total = audioOn ? (isFinite(voix.duration) && voix.duration > 0 ? voix.duration : a.min * 60) : minutes * 60;
+  const left = Math.max(0, total - elapsed);
   const m = Math.floor(left / 60), s = Math.floor(left % 60);
   $("time").textContent = `${m}:${String(s).padStart(2, "0")}`;
+  $("bgTime").textContent = `${$("time").textContent} restantes`;
   $("bar").style.width = Math.min(100, elapsed * 100 / total) + "%";
+}
+
+/* =========================================================
+   Audio guidé (vraie voix) : élément <audio> classique, qui continue
+   écran éteint ou appli en arrière-plan (Android, iPhone).
+   ========================================================= */
+const voix = $("voix");
+const curAudio = () => AUDIOS.find(a => a.id === audioSel) || null;
+function mediaSession(){
+  const a = curAudio();
+  if(!a || !("mediaSession" in navigator)) return;
+  try{
+    navigator.mediaSession.metadata = new MediaMetadata({ title:a.nom, artist:a.voix, album:"Respiration guidée",
+      artwork:[{ src:"/icon-512.png", sizes:"512x512", type:"image/png" }] });
+    navigator.mediaSession.setActionHandler("play", () => { if(state.startsWith("pause")) togglePause(); });
+    navigator.mediaSession.setActionHandler("pause", () => { if(state === "run" || state === "prep") togglePause(); });
+    navigator.mediaSession.setActionHandler("stop", () => { if(state !== "idle" && state !== "done") stopNow(); });
+  }catch(e){}
+}
+function startVoice(){
+  const a = curAudio(); if(!a) return;
+  if(!voix.src.endsWith("/audio/" + a.f)) voix.src = "audio/" + a.f;
+  voix.currentTime = 0;
+  voix.play().catch(() => { $("count").textContent = "Touchez ▶ pour lancer la voix"; });
+  mediaSession();
+}
+/* La voix peut s'arrêter seule (appel, casque débranché, bouton du téléphone) : on suit */
+voix.addEventListener("pause", () => { if(audioOn && !voix.ended && (state === "run" || state === "prep")) togglePause(); });
+voix.addEventListener("play",  () => { if(audioOn && state.startsWith("pause")) togglePause(); });
+voix.addEventListener("ended", () => { if(audioOn && state !== "ending" && state !== "done"){ if(state.startsWith("pause")) state = "run"; finish(); } });
+voix.addEventListener("error", () => { if(audioOn && voix.src) $("count").textContent = "Audio indisponible : vérifiez la connexion internet"; });
+
+function enterBg(){
+  bgMode = true;
+  document.body.classList.add("bg");
+  try{ wake?.release(); }catch(e){}        // l'écran peut s'éteindre, la voix continue
+  renderPause();
+}
+function exitBg(){
+  bgMode = false;
+  document.body.classList.remove("bg");
+  if(state === "run" || state === "prep") keepAwake();
+  showControls();
 }
 
 /* =========================================================
@@ -528,9 +625,11 @@ function showControls(ms = 3500){
 }
 
 function begin(){
+  audioOn = !!curAudio();
   audio();
-  if(pref.ambient) startAmbient();
-  ls.set("mode", mode); ls.set("minutes", minutes);
+  if(audioOn){ stopAmbient(); try{ speechSynthesis.cancel(); }catch(e){} startVoice(); }
+  else if(pref.ambient) startAmbient();
+  ls.set("mode", mode); ls.set("minutes", minutes); ls.set("audio", audioSel);
   state = "prep"; elapsed = 0; cycles = 0;
   lastTick = performance.now();
   startPhase("prep", lastTick);
@@ -547,6 +646,7 @@ function togglePause(){
     state = "pause" + (state === "prep" ? "-prep" : "");
     setWord("En pause");
     if(amb && ctx) amb.out.gain.setTargetAtTime(0, ctx.currentTime, .3);
+    if(audioOn && !voix.paused) voix.pause();
     document.body.classList.add("controls"); clearTimeout(hideTimer);
   }else if(state.startsWith("pause")){
     const now = performance.now();
@@ -555,14 +655,22 @@ function togglePause(){
     lastWord = "";
     setWord(phase === "inhale" ? "Inspirez" : phase === "exhale" ? "Expirez" : phase === "hold" ? "Retenez" : "Installez-vous");
     if(amb && ctx) amb.out.gain.setTargetAtTime(1, ctx.currentTime, .6);
-    showControls(2200);
+    if(audioOn && voix.paused) voix.play().catch(() => {});
+    if(!bgMode) showControls(2200);
   }
   renderPause();
 }
 function renderPause(){
   const paused = state.startsWith("pause");
-  $("pause").innerHTML = paused ? ICON.play : ICON.pause;
-  $("pause").setAttribute("aria-label", paused ? "Reprendre" : "Pause");
+  ["pause", "bgPause"].forEach(id => {
+    $(id).innerHTML = paused ? ICON.play : ICON.pause;
+    $(id).setAttribute("aria-label", paused ? "Reprendre" : "Pause");
+  });
+  if("mediaSession" in navigator) try{ navigator.mediaSession.playbackState = audioOn ? (paused ? "paused" : "playing") : "none"; }catch(e){}
+}
+function stopNow(){
+  if(state.startsWith("pause")) state = "run";
+  finish();
 }
 function renderSound(){
   $("sound").innerHTML = pref.bells ? ICON.bell : ICON.bellOff;
@@ -574,12 +682,19 @@ function finish(now){
   phase = null; from = p;
   startPhase("settle", now || performance.now());
   stopAmbient();
+  if(audioOn) voix.pause();          // l'état « ending » empêche de repasser en « pause »
+  if(bgMode) exitBg();
 }
 function showEnd(){
   state = "done";
   document.body.classList.remove("controls");
   const mins = Math.round(elapsed / 60);
-  $("endText").textContent = (cycles ? `${cycles} respiration${cycles > 1 ? "s" : ""}${mins >= 1 ? ` en ${mins} minute${mins > 1 ? "s" : ""}` : ""}. ` : "")
+  if(audioOn){
+    audioOn = false; renderPause();
+    $("endText").textContent = `« ${curAudio().nom} »${mins >= 1 ? ` : ${mins} minute${mins > 1 ? "s" : ""} d'écoute` : ""}. `
+      + (fromProgram ? "Prenez un instant, puis reprenez votre séance à votre rythme." : "Prenez un instant avant de reprendre votre journée.");
+  }else
+  $("endText").textContent = (cycles ?`${cycles} respiration${cycles > 1 ? "s" : ""}${mins >= 1 ? ` en ${mins} minute${mins > 1 ? "s" : ""}` : ""}. ` : "")
     + (fromProgram ? "Prenez un instant, puis reprenez votre séance à votre rythme." : "Prenez un instant avant de reprendre votre journée.");
   $("endMain").textContent = fromProgram ? "Continuer ma séance" : "Terminer";
   $("again").hidden = fromProgram;
@@ -589,7 +704,10 @@ function showEnd(){
 
 $("start").onclick = begin;
 $("pause").onclick = e => { e.stopPropagation(); togglePause(); };
-$("stop").onclick = e => { e.stopPropagation(); if(state.startsWith("pause")){ state = "run"; } finish(); };
+$("stop").onclick = e => { e.stopPropagation(); stopNow(); };
+$("bgBtn").onclick = e => { e.stopPropagation(); enterBg(); };
+$("bgPause").onclick = () => togglePause();
+$("bgBack").onclick = () => exitBg();
 $("sound").onclick = e => { e.stopPropagation(); pref.bells = !pref.bells; ls.set("bells", pref.bells); if(pref.bells && pref.bellVol <= 0){ pref.bellVol = 70; ls.set("bellVol", 70); } renderSound(); showControls(); };
 $("stage").addEventListener("click", () => { if(state !== "idle" && state !== "done") showControls(); });
 document.addEventListener("keydown", e => {
@@ -617,6 +735,14 @@ function renderModes(){
     mode = b.dataset.mode; renderModes();
     if(mode === "custom") openSettings("rhythm");
   });
+}
+function renderAudios(){
+  const list = [{ id:"", nom:"Sans voix" }, ...AUDIOS];
+  $("audios").innerHTML = list.map(a => `<button class="pill" type="button" data-audio="${a.id}" aria-pressed="${a.id === audioSel}"><span class="nm">${a.nom}</span>${a.min ? `<small>${a.min} min</small>` : `<small>sons et vagues</small>`}</button>`).join("");
+  $("audios").querySelectorAll("[data-audio]").forEach(b => b.onclick = () => { audioSel = b.dataset.audio; ls.set("audio", audioSel); renderAudios(); });
+  const a = curAudio();
+  document.body.classList.toggle("audio", !!a);
+  $("credit").textContent = a ? `Voix de ${a.voix} · la bille suit votre rythme, sans ding ni vagues` : "";
 }
 function renderDurations(){
   const list = DURATIONS.includes(minutes) ? DURATIONS : [...DURATIONS, minutes].sort((a, b) => a - b);
@@ -689,7 +815,7 @@ if(exId){
 if(fromProgram){
   $("hint").textContent = "Cette respiration fait partie de votre séance. Touchez « Commencer » quand vous êtes prêt.";
 }
-renderModes(); renderDurations(); renderSound(); renderPause();
+renderModes(); renderDurations(); renderAudios(); renderSound(); renderPause();
 })();
 </script>
 <!-- Mode séance : tablette prêtée au patient, on ne quitte pas la respiration guidée sans le code du kiné -->

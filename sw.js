@@ -1,6 +1,6 @@
 /* Service worker : application utilisable hors connexion, mises à jour en douceur. */
 
-const VERSION = "gt-2.56.2";
+const VERSION = "gt-2.57.0";
 const SHELL = `${VERSION}-shell`;
 /* Images et sons : cache gardé d'une version à l'autre (les exercices du patient restent sur le téléphone) */
 const MEDIA = "gt-media-v1";
@@ -184,6 +184,7 @@ self.addEventListener("fetch", event => {
     return; // Firestore, vidéos… : directement sur le réseau
   }
   if(url.pathname.startsWith("/musimix/")) return;
+  if(url.pathname.startsWith("/respir/audio/")) return;   // audios guidés (30 min) : lus directement en continu, jamais mis de côté
 
   if(request.mode === "navigate" || url.pathname.startsWith("/assets/") || url.pathname.startsWith("/exercises/data/") || url.pathname.endsWith(".html") || url.pathname === "/manifest.json"){
     event.respondWith(rapide(event));
