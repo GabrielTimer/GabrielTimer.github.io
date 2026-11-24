@@ -207,6 +207,13 @@ dialog h3{ font-weight:400; font-size:1.3rem; margin-bottom:18px; text-align:cen
 /* ===== Audios guidés (vraie voix) ===== */
 #audios .pill{ min-width:118px; max-width:170px; padding:8px 14px; white-space:normal; text-align:center; }
 #audios .pill .nm{ font-size:.92rem; }
+/* Ordinateur (souris) : barre de défilement visible + molette et glisser à la souris (voir le script) */
+@media (pointer:fine){
+  #audios{ scrollbar-width:thin; scrollbar-color:rgba(156,201,204,.45) transparent; padding-bottom:8px; cursor:grab; }
+  #audios::-webkit-scrollbar{ display:block; height:6px; }
+  #audios::-webkit-scrollbar-thumb{ background:rgba(156,201,204,.45); border-radius:6px; }
+  #audios.drag{ cursor:grabbing; }
+}
 .credit{ font-size:.78rem; color:var(--faint); text-align:center; min-height:1.2em; }
 #durBlock{ display:contents; }
 body.audio #durBlock{ display:none; }
@@ -744,6 +751,24 @@ function renderAudios(){
   document.body.classList.toggle("audio", !!a);
   $("credit").textContent = a ? `Voix de ${a.voix} · la bille suit votre rythme, sans ding ni vagues` : "";
 }
+/* Faire défiler la ligne des audios à la souris : molette (haut/bas → gauche/droite) et glisser */
+(() => {
+  const row = $("audios");
+  row.addEventListener("wheel", e => {
+    if(Math.abs(e.deltaY) <= Math.abs(e.deltaX) || row.scrollWidth <= row.clientWidth) return;
+    e.preventDefault(); row.scrollLeft += e.deltaY;
+  }, { passive:false });
+  let x0 = 0, s0 = 0, down = false, moved = false;
+  row.addEventListener("pointerdown", e => { if(e.pointerType !== "mouse") return; down = true; moved = false; x0 = e.clientX; s0 = row.scrollLeft; });
+  addEventListener("pointermove", e => {
+    if(!down) return;
+    const dx = e.clientX - x0;
+    if(Math.abs(dx) > 5){ moved = true; row.classList.add("drag"); }
+    if(moved) row.scrollLeft = s0 - dx;
+  });
+  addEventListener("pointerup", () => { down = false; row.classList.remove("drag"); });
+  row.addEventListener("click", e => { if(moved){ e.stopPropagation(); e.preventDefault(); moved = false; } }, true);   // un glisser ne choisit pas d'audio
+})();
 function renderDurations(){
   const list = DURATIONS.includes(minutes) ? DURATIONS : [...DURATIONS, minutes].sort((a, b) => a - b);
   $("durations").innerHTML = list.map(n => `<button class="pill" type="button" data-min="${n}" aria-pressed="${n === minutes}">${n} min</button>`).join("");
