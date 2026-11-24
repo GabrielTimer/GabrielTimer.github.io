@@ -1,0 +1,36 @@
+name: Audios de la respiration
+# Compresse et range les audios déposés depuis l'espace kiné (Outils → Audios de la respiration).
+on:
+  push:
+    branches: [main]
+    paths: ["respir/a-convertir/**"]
+  workflow_dispatch:
+concurrency:
+  group: audios-respir
+  cancel-in-progress: false
+jobs:
+  convertir:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - run: node .github/scripts/audios-respir.mjs
+      - name: Enregistrer sur le site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "ApiKiné (automatique)"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A respir
+          if git diff --cached --quiet; then echo "Rien à enregistrer."; exit 0; fi
+          git commit -m "Respiration guidée : audio ajouté depuis l'espace kiné"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # Les envois faits par cette tâche ne relancent pas toujours la mise en ligne : on la demande
+          gh api -X POST "repos/${{ github.repository }}/pages/builds" || true

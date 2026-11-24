@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Audios de la respiration</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EDF3F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B181D" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+<link rel="stylesheet" href="/assets/app.css">
+<script src="/assets/nav-instant.js"></script>
+<style>
+  .ar-fields{ display:grid; gap:12px; margin-top:12px; }
+  .ar-steps{ margin:8px 0 0; padding-left:20px; line-height:1.6; }
+  .ar-steps li{ margin:2px 0; }
+  .ar-bar{ height:8px; border-radius:8px; background:var(--surface-2); overflow:hidden; margin-top:12px; }
+  .ar-bar i{ display:block; height:100%; width:0; background:var(--lagoon, #1E8A98); transition:width .3s; }
+  .ar-item{ display:flex; align-items:center; gap:12px; padding:10px 0; border-top:1px solid var(--line, rgba(0,0,0,.08)); }
+  .ar-item:first-child{ border-top:0; }
+  .ar-item .li-main{ flex:1; min-width:0; }
+  .ar-item audio{ width:100%; max-width:320px; height:36px; margin-top:6px; }
+</style>
+</head>
+<body>
+<main class="page" id="app"></main>
+<script type="module">
+/* Audios de la respiration guidée : ajouter ou retirer un audio, sans code.
+   1. Le kiné choisit un fichier (MP3…), son nom et la voix.
+   2. La page le dépose sur GitHub dans respir/a-convertir/ (avec une clé GitHub rangée dans acces/github).
+   3. La tâche GitHub « Audios de la respiration » le compresse, le range dans respir/audio/ et l'ajoute
+      à respir/audios.json (liste lue par la page Respiration guidée). Compter 2 à 5 minutes. */
+import { $, esc, icon, mountShell, registerSW, toast, confirmDialog } from "/assets/app.js";
+const { requireKine } = await import("/assets/kine.js");
+await requireKine();
+registerSW();
+mountShell({ role:"kine", active:"", back:"/admin_tools.html" });
+const C = await import("/assets/cloud.js");
+
+const DEPOT = "GabrielTimer/GabrielTimer.github.io";
+const API = "https://api.github.com/repos/" + DEPOT;
+const LIEN_CLE = "https://github.com/settings/personal-access-tokens/new";
+const TAILLE_MAX = 70 * 1024 * 1024;      // GitHub refuse au-delà d'environ 100 Mo une fois le fichier encodé
+const EXT = ["mp3", "m4a", "aac", "wav", "ogg", "opus", "flac", "webm"];
+
+if(!C.estTitulaire()){
+  $("#app").innerHTML = `<div class="page-head"><h1>Audios de la respiration</h1></div><p class="muted">Réservé au titulaire du cabinet.</p>`;
+  throw new Error("titulaire");
+}
+
+let jeton = (await C.getAccesJSON("github").catch(() => null))?.jeton || "";
+
+/* ---------- GitHub ---------- */
+async function gh(chemin, { method = "GET", body } = {}){
+  const r = await fetch(API + chemin, { method, body: body ? JSON.stringify(body) : undefined,
+    headers:{ Authorization:"Bearer " + jeton, Accept:"application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28", ...(body ? { "Content-Type":"application/json" } : {}) } });
+  if(!r.ok){
+    const e = new Error(r.status === 401 ? "Clé GitHub refusée ou expirée : enregistrez-en une nouvelle." : r.status === 403 ? "La clé GitHub n'a pas le droit d'écrire (permission « Contents : Read and write »)." : `GitHub a répondu ${r.status}.`);
+    e.status = r.status; throw e;
+  }
+  return r.status === 204 ? null : r.json();
+}
+/* Gros fichier : envoi avec barre de progression */
+function envoyerBlob(base64, progres){
+  return new Promise((ok, ko) => {
+    const x = new XMLHttpRequest();
+    x.open("POST", API + "/git/blobs");
+    x.setRequestHeader("Authorization", "Bearer " + jeton);
+    x.setRequestHeader("Accept", "application/vnd.github+json");
+    x.setRequestHeader("Content-Type", "application/json");
+    x.upload.onprogress = e => { if(e.lengthComputable) progres(e.loaded / e.total); };
+    x.onload = () => x.status >= 200 && x.status < 300 ? ok(JSON.parse(x.responseText)) : ko(Object.assign(new Error(x.status === 401 ? "Clé GitHub refusée ou expirée." : `GitHub a répondu ${x.status}.`), { status:x.status }));
+    x.onerror = () => ko(new Error("Envoi interrompu : vérifiez la connexion internet."));
+    x.send(JSON.stringify({ content: base64, encoding:"base64" }));
+  });
+}
+/* Un seul enregistrement (commit) avec plusieurs fichiers ; sha:null = fichier supprimé */
+async function enregistrer(message, fichiers){
+  for(let essai = 0; essai < 3; essai++){
+    const ref = await gh("/git/ref/heads/main");
+    const parent = await gh("/git/commits/" + ref.object.sha);
+    const tree = await gh("/git/trees", { method:"POST", body:{ base_tree: parent.tree.sha, tree: fichiers.map(f => ({ path:f.path, mode:"100644", type:"blob", sha:f.sha })) } });
+    const commit = await gh("/git/commits", { method:"POST", body:{ message, tree: tree.sha, parents:[ref.object.sha] } });
+    try{ await gh("/git/refs/heads/main", { method:"PATCH", body:{ sha: commit.sha } }); return; }
+    catch(e){ if(e.status !== 422 || essai === 2) throw e; }        // le site a bougé entre-temps : on recommence
+  }
+}
+const texteBlob = async texte => (await gh("/git/blobs", { method:"POST", body:{ content:texte, encoding:"utf-8" } })).sha;
+const lireBase64 = fichier => new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1] || ""); r.onerror = () => ko(new Error("Fichier illisible.")); r.readAsDataURL(fichier); });
+const slug = t => (String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "audio");
+const decode64 = b => new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g, "")), c => c.charCodeAt(0)));
+
+/* ---------- Affichage ---------- */
+const champ = (id, label, ph) => `<div class="field"><label for="${id}">${label}</label><input class="input" id="${id}" type="text" autocomplete="off" placeholder="${esc(ph)}"></div>`;
+
+function afficher(){
+  $("#app").innerHTML = `
+  <div class="page-head"><h1>Audios de la respiration</h1><p class="lead">Les audios guidés (vraie voix) proposés dans Respiration guidée. Ajoutez un fichier : il est compressé et mis en ligne tout seul en 2 à 5 minutes.</p></div>
+
+  ${jeton ? `
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("upload")}Ajouter un audio</h2></div>
+    <div class="ar-fields">
+      <div class="field"><label for="f-fichier">Fichier audio (MP3, M4A, WAV…)</label><input class="input" id="f-fichier" type="file" accept="audio/*,.mp3,.m4a,.wav,.ogg"><span class="small muted" id="f-info"></span></div>
+      ${champ("f-nom", "Nom affiché", "Ex. Scan corporel")}
+      ${champ("f-voix", "Voix", "Ex. Johan Illy")}
+    </div>
+    <div class="ar-bar" id="bar" hidden><i></i></div>
+    <p class="small muted" id="etat" style="margin-top:8px"></p>
+    <div class="row wrap" style="margin-top:12px"><button class="btn primary" type="button" id="envoyer">${icon("upload")}Ajouter dans Respiration guidée</button></div>
+  </section>
+
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("sound")}Audios proposés</h2>
+      <button class="btn" type="button" id="actualiser">${icon("repeat")}Actualiser</button></div>
+    <div id="attente"></div>
+    <div id="liste"><p class="muted">Chargement…</p></div>
+  </section>` : ""}
+
+  <section class="section panel">
+    <div class="panel-head"><h2 style="font-size:var(--fs-lg)">${icon("key")}Clé GitHub ${jeton ? "(enregistrée)" : "(à faire une fois)"}</h2></div>
+    ${jeton ? `<p class="muted">La clé est enregistrée. Si GitHub la refuse (clé expirée), refaites les étapes ci-dessous.</p>` : `<p>Pour mettre un audio en ligne, l'appli a besoin d'une clé qui l'autorise à écrire dans votre site GitHub. Gratuit, à faire une seule fois.</p>`}
+    <details ${jeton ? "" : "open"} style="margin-top:8px"><summary>Créer la clé</summary>
+      <ol class="ar-steps">
+        <li>Ouvrez <a href="${LIEN_CLE}" target="_blank" rel="noopener"><strong>cette page GitHub</strong></a> (connecté à votre compte GitHub).</li>
+        <li><strong>Token name</strong> : « ApiKiné audios ». <strong>Expiration</strong> : choisissez la durée la plus longue proposée.</li>
+        <li><strong>Repository access</strong> : « Only select repositories », puis choisissez <strong>GabrielTimer.github.io</strong>.</li>
+        <li><strong>Permissions</strong> → « Add permissions » → <strong>Contents</strong>, puis réglez-la sur <strong>« Read and write »</strong>.</li>
+        <li>En bas, <strong>Generate token</strong>, puis copiez la clé (elle commence par <code>github_pat_</code>) et collez-la ici.</li>
+      </ol>
+      <div class="row" style="margin-top:10px"><input class="input" id="cle" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Collez la clé ici" aria-label="Clé GitHub">
+      <button class="btn primary" type="button" id="cle-ok">${icon("check")}Tester et enregistrer</button></div>
+      <p class="hint small muted" style="margin-top:8px">La clé est rangée avec la clé de la recherche IA : lisible par les kinés du cabinet seulement, jamais par un patient. Elle ne donne accès qu'à ce site.</p>
+    </details>
+    ${jeton ? `<p style="margin-top:10px"><button class="btn danger" type="button" id="cle-x">${icon("trash")}Retirer la clé</button></p>` : ""}
+  </section>`;
+
+  $("#cle-ok").onclick = async () => {
+    const v = $("#cle").value.trim();
+    if(!v){ toast("Collez d'abord la clé.", { type:"err" }); return; }
+    const ancien = jeton; jeton = v;
+    try{
+      await gh("/contents/respir/audios.json");
+      await C.saveAccesJSON("github", { jeton:v });
+      toast("Clé GitHub enregistrée.", { type:"ok" });
+      afficher();
+    }catch(e){ jeton = ancien; toast(e.status === 404 ? "Cette clé ne voit pas le site GabrielTimer.github.io : choisissez-le dans « Repository access »." : e.message, { type:"err", duration:8000 }); }
+  };
+  if($("#cle-x")) $("#cle-x").onclick = async () => {
+    if(!await confirmDialog({ title:"Retirer la clé GitHub ?", message:"Vous ne pourrez plus ajouter d'audio depuis l'appli tant qu'une nouvelle clé n'est pas enregistrée. Les audios déjà en ligne restent.", confirm:"Retirer", danger:true })) return;
+    await C.saveAccesJSON("github", null); jeton = ""; afficher();
+  };
+  if(!jeton) return;
+
+  const fichierInput = $("#f-fichier");
+  fichierInput.onchange = () => {
+    const f = fichierInput.files[0]; $("#f-info").textContent = "";
+    if(!f) return;
+    if(!$("#f-nom").value) $("#f-nom").value = f.name.replace(/\.[^.]+$/, "").replace(/[_]+/g, " ").replace(/\s*-?\s*\d+\s*(mn|min)\b.*$/i, "").trim();
+    const a = new Audio(); a.preload = "metadata"; a.src = URL.createObjectURL(f);
+    a.onloadedmetadata = () => { $("#f-info").textContent = `${Math.round(a.duration / 60)} min · ${(f.size / 1048576).toFixed(0)} Mo`; URL.revokeObjectURL(a.src); };
+  };
+  $("#envoyer").onclick = envoyer;
+  $("#actualiser").onclick = charger;
+  charger();
+}
+
+/* ---------- Liste des audios en ligne et en préparation ---------- */
+let listeSha = "", liste = [];
+async function charger(){
+  try{
+    const j = await gh("/contents/respir/audios.json");
+    listeSha = j.sha; liste = JSON.parse(decode64(j.content));
+    let attente = [];
+    try{ attente = (await gh("/contents/respir/a-convertir")).filter(f => f.name.endsWith(".json")); }catch(e){ if(e.status !== 404) throw e; }
+    $("#attente").innerHTML = attente.length ? `<p class="small" style="margin:0 0 8px">${icon("clock", "ic-inline")} En préparation sur GitHub : ${attente.map(f => esc(f.name.replace(/\.json$/, ""))).join(", ")}. Touchez « Actualiser » dans quelques minutes.</p>` : "";
+    $("#liste").innerHTML = liste.length ? liste.map((a, i) => `
+      <div class="ar-item">
+        <div class="li-main"><strong>${esc(a.nom)}</strong> <span class="small muted">· ${esc(a.min)} min${a.voix ? " · " + esc(a.voix) : ""}</span>
+          <audio controls preload="none" src="/respir/audio/${esc(a.f)}"></audio></div>
+        <button class="btn danger" type="button" data-x="${i}" aria-label="Retirer ${esc(a.nom)}">${icon("trash")}Retirer</button>
+      </div>`).join("") : `<p class="muted">Aucun audio pour l'instant.</p>`;
+    $("#liste").querySelectorAll("[data-x]").forEach(b => b.onclick = () => retirer(liste[+b.dataset.x]));
+  }catch(e){ $("#liste").innerHTML = `<p class="muted">${esc(e.message)}</p>`; }
+}
+
+async function envoyer(){
+  const f = $("#f-fichier").files[0], nom = $("#f-nom").value.trim(), voix = $("#f-voix").value.trim();
+  if(!f){ toast("Choisissez d'abord un fichier audio.", { type:"err" }); return; }
+  if(!nom){ toast("Donnez un nom à l'audio.", { type:"err" }); return; }
+  const ext = (f.name.split(".").pop() || "").toLowerCase();
+  if(!EXT.includes(ext)){ toast("Ce fichier n'est pas un audio reconnu (MP3, M4A, WAV…).", { type:"err" }); return; }
+  if(f.size > TAILLE_MAX){ toast("Fichier trop gros (70 Mo au plus). Envoyez une version plus courte ou plus légère.", { type:"err", duration:8000 }); return; }
+  const btn = $("#envoyer"), bar = $("#bar"), etat = $("#etat");
+  btn.disabled = true; bar.hidden = false; bar.firstElementChild.style.width = "0";
+  try{
+    etat.textContent = "Préparation du fichier…";
+    const b64 = await lireBase64(f);
+    etat.textContent = "Envoi vers GitHub… (1 à 3 minutes, gardez la page ouverte)";
+    const blob = await envoyerBlob(b64, p => { bar.firstElementChild.style.width = Math.round(p * 100) + "%"; });
+    etat.textContent = "Enregistrement…";
+    const base = slug(nom) + (voix ? "-" + slug(voix).split("-")[0] : "");
+    await enregistrer(`Respiration guidée : audio « ${nom} » à préparer`, [
+      { path:`respir/a-convertir/${base}.${ext}`, sha: blob.sha },
+      { path:`respir/a-convertir/${base}.json`, sha: await texteBlob(JSON.stringify({ nom, voix })) }
+    ]);
+    bar.firstElementChild.style.width = "100%";
+    etat.textContent = "C'est envoyé. GitHub compresse l'audio et le met en ligne : il apparaîtra dans Respiration guidée d'ici 2 à 5 minutes.";
+    toast("Audio envoyé.", { type:"ok" });
+    $("#f-fichier").value = ""; $("#f-nom").value = ""; $("#f-info").textContent = "";
+    setTimeout(charger, 1500);
+  }catch(e){
+    etat.textContent = "";
+    toast(e.message || "L'envoi n'a pas abouti.", { type:"err", duration:8000 });
+  }finally{ btn.disabled = false; setTimeout(() => { bar.hidden = true; }, 1500); }
+}
+
+async function retirer(a){
+  if(!a) return;
+  if(!await confirmDialog({ title:`Retirer « ${a.nom} » ?`, message:"Il ne sera plus proposé dans Respiration guidée et le fichier sera effacé du site.", confirm:"Retirer", danger:true })) return;
+  try{
+    const j = await gh("/contents/respir/audios.json");
+    const actuelle = JSON.parse(decode64(j.content)).filter(x => x.id !== a.id);
+    const texte = "[\n" + actuelle.map(x => "  " + JSON.stringify(x)).join(",\n") + "\n]\n";
+    await enregistrer(`Respiration guidée : audio « ${a.nom} » retiré`, [
+      { path:"respir/audios.json", sha: await texteBlob(texte) },
+      { path:`respir/audio/${a.f}`, sha:null }
+    ]);
+    toast("Audio retiré. Le changement est en ligne d'ici 1 à 2 minutes.", { type:"ok" });
+    charger();
+  }catch(e){ toast(e.message || "Le retrait n'a pas abouti.", { type:"err" }); }
+}
+
+afficher();
+</script>
+</body>
+</html>

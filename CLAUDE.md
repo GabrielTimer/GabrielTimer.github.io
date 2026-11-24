@@ -45,6 +45,7 @@ Application web de Gabriel LAVEAU, masseur-kinésithérapeute à Loudun. Les pat
 | Recherche IA (Google Gemini gratuit) | `recherche-ia.html`, `assets/ia.js` |
 | Reprise de course (générateur + fiche PDF) | `programmescourse.html` (réglages en haut du script : paliers, hausses, conseils par pathologie), `coursepdf.html` (fiche A4, se resserre seule pour les longs programmes) |
 | Réglages du cabinet | `reglages_cabinet.html`, `assets/settings.js` |
+| Respiration guidée : audios guidés (vraie voix) | liste : `respir/audios.json` ; fichiers : `respir/audio/` ; ajout et retrait sans code : `audios-respir.html` (Outils → Audios de la respiration, clé GitHub dans `acces/github`), qui dépose le fichier dans `respir/a-convertir/` ; la tâche `.github/workflows/audios-respir.yml` (+ `.github/scripts/audios-respir.mjs`) le compresse (ffmpeg, mono 64 kbit/s) et l'ajoute à la liste |
 | Hors connexion et mises à jour | `sw.js` (liste des fichiers mis de côté + `VERSION`) |
 | Tâches automatiques GitHub (rappels, sauvegarde, nettoyage, règles, vérification, maintien actif) | `.github/workflows/`, `.github/scripts/` (tableau dans MAINTENANCE.md, partie 7) |
 | Déconnexion automatique du kiné (12 h par défaut, réglable par appareil) | `deconnexionAuto` dans `assets/cloud.js` ; réglage dans `reglages_cabinet.html` (`#deco`) ; message dans `login.html` (`?expire=1`) |

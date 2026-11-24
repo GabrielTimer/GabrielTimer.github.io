@@ -22,6 +22,7 @@ Avant de toucher au code, vérifiez si c'est faisable ici (espace kiné → **Ou
 | Sauvegarder à la main, restaurer une sauvegarde | Outils → Réglages du cabinet → **Sauvegarde** |
 | Fiche « Si ça revient », test du mois à la maison, leçons, questionnaire avant le 1er rendez-vous | Fiche du patient → bloc **Accompagnement** (caché pour l'instant ; pour le réafficher, demander à Claude : `VISIBLE` dans `assets/accompagnement.js`) |
 | Voir la part de patients qui progressent vraiment, par pathologie | Outils → **Mes résultats** |
+| Ajouter ou retirer un audio guidé (vraie voix) dans Respiration guidée | Outils → **Audios de la respiration** (la première fois : créer la clé GitHub, les étapes sont sur la page) |
 | Mettre les bilans (PDF) et leurs photos dans les dossiers du PC, pour Maiia | Outils → **Mettre dans Maiia** (sur le PC, dans Chrome ou Edge) ; dossiers à choisir sur cette page ou dans Réglages du cabinet → Dossiers d'enregistrement |
 
 Partout, un bouton « Revenir au contenu d'origine » permet d'annuler vos modifications.
@@ -94,6 +95,7 @@ Elles tournent toutes seules, gratuitement. GitHub vous envoie un e-mail si l'un
 | Programmes inutilisés | chaque nuit | préavis puis corbeille des programmes maison abandonnés |
 | Sauvegarde automatique | chaque dimanche vers 3 h | copie chiffrée de toutes les données dans le dépôt privé `apikine-sauvegardes` (26 gardées) |
 | Publier les règles Firebase | quand `firestore.rules` change | met à jour la sécurité de Firebase |
+| Audios de la respiration | quand un audio est ajouté depuis Outils → Audios de la respiration | compresse l'audio, le range dans `respir/audio/` et l'ajoute à la liste (2 à 5 minutes) |
 | Garder les tâches actives | le 3 de chaque mois | empêche GitHub de mettre les tâches en pause après 60 jours sans modification du site |
 
 Pour en relancer une à la main : Actions → cliquez sur son nom → **Run workflow**.

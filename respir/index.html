@@ -343,24 +343,9 @@ const MODES = {
   custom:  { name:"Personnalisé", short:"Perso", inhale:4, hold:0, exhale:6 }
 };
 const DURATIONS = [2, 3, 5, 10, 15, 20];
-/* Audios guidés, vraie voix (fichiers dans respir/audio/, mono 64 kbit/s).
-   Méditations de pleine conscience de Johan Illy et Rollon Poinsot (pleineconscience-paca.com). */
-const AUDIOS = [
-  { id:"scan",        nom:"Scan corporel",            voix:"Johan Illy",     min:35, f:"scan-corporel.mp3" },
-  { id:"scan20",      nom:"Scan corporel",            voix:"Johan Illy",     min:20, f:"scan-corporel-20.mp3" },
-  { id:"respiration", nom:"Respiration et sensations", voix:"Rollon Poinsot", min:34, f:"respiration-sensations.mp3" },
-  { id:"respiration20", nom:"Respiration et sensations", voix:"Johan Illy",   min:20, f:"respiration-sensations-20.mp3" },
-  { id:"complete",    nom:"Méditation complète",      voix:"Rollon Poinsot", min:36, f:"meditation-complete.mp3" },
-  { id:"complete20",  nom:"Méditation complète",      voix:"Johan Illy",     min:21, f:"meditation-complete-20.mp3" },
-  { id:"bienveillance", nom:"Bienveillance",          voix:"Johan Illy",     min:30, f:"bienveillance.mp3" },
-  { id:"bienveillance20", nom:"Bienveillance",        voix:"Johan Illy",     min:21, f:"bienveillance-20.mp3" },
-  { id:"faireface",   nom:"Faire face",               voix:"Rollon Poinsot", min:35, f:"faire-face.mp3" },
-  { id:"faireface20", nom:"Faire face",               voix:"Johan Illy",     min:20, f:"faire-face-20.mp3" },
-  { id:"marche",      nom:"Marche",                   voix:"Rollon Poinsot", min:34, f:"marche.mp3" },
-  { id:"marche20",    nom:"Marche",                   voix:"Johan Illy",     min:20, f:"marche-20.mp3" },
-  { id:"allonge",     nom:"Mouvements allongé",       voix:"Rollon Poinsot", min:30, f:"mouvements-allonge.mp3" },
-  { id:"debout",      nom:"Mouvements debout",        voix:"Rollon Poinsot", min:26, f:"mouvements-debout.mp3" }
-];
+/* Audios guidés, vraie voix : la liste est dans respir/audios.json (fichiers dans respir/audio/, mono 64 kbit/s).
+   Pour en ajouter : espace kiné → Outils → « Audios de la respiration » (GitHub compresse et range le fichier tout seul). */
+let AUDIOS = [];
 const ls = {
   get(k, d){ try{ const v = localStorage.getItem("respir_" + k); return v === null ? d : JSON.parse(v); }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem("respir_" + k, JSON.stringify(v)); }catch(e){} }
@@ -380,7 +365,7 @@ const fromProgram = !!q.get("fromProgram");
 let mode = MODES[q.get("mode")] ? q.get("mode") : ls.get("mode", "beginner");
 let minutes = q.get("duree") ? Math.max(1, Math.round(Number(q.get("duree")) / 60)) : ls.get("minutes", 5);
 let audioSel = q.has("audio") ? q.get("audio") : ls.get("audio", "");
-if(!AUDIOS.some(a => a.id === audioSel)) audioSel = "";
+
 let audioOn = false;          // vrai pendant une séance avec audio guidé : pas de ding/dong, pas de vagues, pas de voix de synthèse
 let bgMode = false;           // écoute en arrière-plan (écran libre de s'éteindre)
 
@@ -751,7 +736,8 @@ function renderModes(){
 }
 function renderAudios(){
   const list = [{ id:"", nom:"Sans voix" }, ...AUDIOS];
-  $("audios").innerHTML = list.map(a => `<button class="pill" type="button" data-audio="${a.id}" aria-pressed="${a.id === audioSel}"><span class="nm">${a.nom}</span>${a.min ? `<small>${a.min} min</small>` : `<small>sons et vagues</small>`}</button>`).join("");
+  const h = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+  $("audios").innerHTML = list.map(a => `<button class="pill" type="button" data-audio="${h(a.id)}" aria-pressed="${a.id === audioSel}"><span class="nm">${h(a.nom)}</span>${a.min ? `<small>${h(a.min)} min</small>` : `<small>sons et vagues</small>`}</button>`).join("");
   $("audios").querySelectorAll("[data-audio]").forEach(b => b.onclick = () => { audioSel = b.dataset.audio; ls.set("audio", audioSel); renderAudios(); });
   const a = curAudio();
   document.body.classList.toggle("audio", !!a);
@@ -847,6 +833,11 @@ if(fromProgram){
   $("hint").textContent = "Cette respiration fait partie de votre séance. Touchez « Commencer » quand vous êtes prêt.";
 }
 renderModes(); renderDurations(); renderAudios(); renderSound(); renderPause();
+fetch("audios.json", { cache:"no-cache" }).then(r => r.ok ? r.json() : []).catch(() => []).then(list => {
+  AUDIOS = Array.isArray(list) ? list.filter(a => a && a.id && a.f) : [];
+  if(!AUDIOS.some(a => a.id === audioSel)) audioSel = "";
+  if(state === "idle") renderAudios();
+});
 })();
 </script>
 <!-- Mode séance : tablette prêtée au patient, on ne quitte pas la respiration guidée sans le code du kiné -->

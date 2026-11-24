@@ -1,0 +1,16 @@
+[
+  {"id":"scan","nom":"Scan corporel","voix":"Johan Illy","min":35,"f":"scan-corporel.mp3"},
+  {"id":"scan20","nom":"Scan corporel","voix":"Johan Illy","min":20,"f":"scan-corporel-20.mp3"},
+  {"id":"respiration","nom":"Respiration et sensations","voix":"Rollon Poinsot","min":34,"f":"respiration-sensations.mp3"},
+  {"id":"respiration20","nom":"Respiration et sensations","voix":"Johan Illy","min":20,"f":"respiration-sensations-20.mp3"},
+  {"id":"complete","nom":"Méditation complète","voix":"Rollon Poinsot","min":36,"f":"meditation-complete.mp3"},
+  {"id":"complete20","nom":"Méditation complète","voix":"Johan Illy","min":21,"f":"meditation-complete-20.mp3"},
+  {"id":"bienveillance","nom":"Bienveillance","voix":"Johan Illy","min":30,"f":"bienveillance.mp3"},
+  {"id":"bienveillance20","nom":"Bienveillance","voix":"Johan Illy","min":21,"f":"bienveillance-20.mp3"},
+  {"id":"faireface","nom":"Faire face","voix":"Rollon Poinsot","min":35,"f":"faire-face.mp3"},
+  {"id":"faireface20","nom":"Faire face","voix":"Johan Illy","min":20,"f":"faire-face-20.mp3"},
+  {"id":"marche","nom":"Marche","voix":"Rollon Poinsot","min":34,"f":"marche.mp3"},
+  {"id":"marche20","nom":"Marche","voix":"Johan Illy","min":20,"f":"marche-20.mp3"},
+  {"id":"allonge","nom":"Mouvements allongé","voix":"Rollon Poinsot","min":30,"f":"mouvements-allonge.mp3"},
+  {"id":"debout","nom":"Mouvements debout","voix":"Rollon Poinsot","min":26,"f":"mouvements-debout.mp3"}
+]

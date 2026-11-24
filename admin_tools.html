@@ -29,7 +29,7 @@ const C = await import("/assets/cloud.js");
 
 /* Réglages du cabinet, statistiques, corbeille : le titulaire seulement */
 const TIT = C.estTitulaire();
-const RESERVE = ["/entretien.html", "/reglages_cabinet.html", "/contenu-bilan.html", "/stats.html", "/stats.html#resultats", "/corbeille.html", "/cabinet.html"];
+const RESERVE = ["/entretien.html", "/reglages_cabinet.html", "/contenu-bilan.html", "/stats.html", "/stats.html#resultats", "/audios-respir.html", "/corbeille.html", "/cabinet.html"];
 const link = (href, ico, title, sub, ext) => !TIT && RESERVE.includes(href) ? "" : `<a class="list-item" href="${href}"${ext ? ' target="_blank" rel="noopener"' : ""}><span class="li-ico">${icon(ico)}</span><span class="li-main"><span class="li-title">${title}</span><span class="li-sub">${sub}</span></span><span class="li-end">${icon("chevron")}</span></a>`;
 
 $("#app").innerHTML = `
@@ -39,6 +39,7 @@ $("#app").innerHTML = `
     ${link("/contenu-bilan.html", "stethoscope", "Contenu du bilan", "Tests, questions de l'entretien et traitements proposés, modifiables sans code")}
     ${link("/cabinet.html", "link", "Page publique du cabinet", "Coordonnées, horaires, plan : le lien à mettre sur Google Maps", true)}
     ${link("/maiia.html", "folder", "Mettre dans Maiia", "PDF des bilans et photos rangés dans les dossiers du PC, une fois par semaine")}
+    ${link("/audios-respir.html", "sound", "Audios de la respiration", "Ajouter ou retirer un audio guidé (vraie voix) dans Respiration guidée")}
     ${link("/messages.html", "inbox", "Messages des patients", "Questions, bilans et commentaires de séance, au même endroit")}
     ${link("/stats.html", "chart", "Statistiques du cabinet", "Assiduité, programmes les plus prescrits, évolution de la douleur")}
     ${link("/stats.html#resultats", "target", "Mes résultats", "Part des patients qui progressent vraiment, par pathologie et par questionnaire")}
