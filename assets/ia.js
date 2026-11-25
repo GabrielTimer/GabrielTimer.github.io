@@ -6,8 +6,15 @@ import { store } from "./app.js";
 
 const LOCAL = "gt_ia_cle";
 const DERNIER = "gt_ia_modele";
-/* Modèles gratuits, du meilleur au plus léger : si l'un est indisponible ou à court de quota, on passe au suivant */
-const MODELES = ["gemini-flash-latest", "gemini-flash-lite-latest", "gemini-2.5-flash", "gemini-2.5-flash-lite"];
+/* Modèles gratuits, du meilleur au plus léger : si l'un est indisponible, surchargé ou à court de quota, on passe au suivant.
+   Les noms « -latest » suivent tout seuls les nouvelles versions de Google ; les autres servent de secours
+   (Google retire régulièrement les anciens : les « 2.5 » ont été retirés en novembre 2026). */
+const MODELES = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-3.5-flash", "gemini-flash-lite-latest", "gemini-3.5-flash-lite"];
+/* Quota gratuit de la recherche Google (sources web) épuisé : on s'en passe jusqu'au lendemain.
+   Google remet les quotas à zéro à minuit, heure de Californie (9 h en France). */
+const WEB_OFF = "gt_ia_web_off";
+const jourGoogle = () => new Date().toLocaleDateString("en-CA", { timeZone:"America/Los_Angeles" });
+const pause = ms => new Promise(r => setTimeout(r, ms));
 const API = "https://generativelanguage.googleapis.com/v1beta/models/";
 
 export const LIEN_CLE = "https://aistudio.google.com/apikey";
@@ -48,6 +55,7 @@ const MSG = {
   reseau: "Pas de connexion internet : la recherche IA a besoin du réseau.",
   bloque: "Google n'a pas voulu répondre à cette question. Reformulez-la.",
   vide: "Google n'a renvoyé aucune réponse. Réessayez.",
+  surcharge: "Google est très sollicité en ce moment. Réessayez dans quelques minutes.",
   autre: "La recherche IA n'a pas abouti. Réessayez dans un instant."
 };
 
@@ -75,7 +83,7 @@ async function appel(modele, cle, body){
   if(r.status === 404 || txt.includes("not found") || txt.includes("is not supported")) throw new ErreurIA("modele", err.message || "modèle indisponible");
   if(r.status === 403 || txt.includes("permission")) throw new ErreurIA("refus", MSG.refus);
   if(r.status === 400 && (txt.includes("tool") || txt.includes("search") || txt.includes("grounding"))) throw new ErreurIA("outil", err.message || "outil indisponible");
-  if(r.status >= 500) throw new ErreurIA("serveur", MSG.autre);
+  if(r.status >= 500) throw new ErreurIA("serveur", MSG.surcharge);
   throw new ErreurIA("autre", err.message ? `${MSG.autre} (${err.message})` : MSG.autre);
 }
 
@@ -86,11 +94,12 @@ async function appel(modele, cle, body){
  */
 export async function demander({ cle, systeme = "", texte, json = false, web = false, temperature = 0.3 }){
   if(!cle) throw new ErreurIA("cle", MSG.cle);
-  const ordre = [...new Set([store.get(DERNIER, ""), ...MODELES].filter(Boolean))];
+  const ordre = [...new Set([store.get(DERNIER, ""), ...MODELES].filter(m => MODELES.includes(m)))];
   let derniere = null;
+  let webPossible = web && store.get(WEB_OFF, "") !== jourGoogle();
   for(const modele of ordre){
-    let avecWeb = web;
-    for(let essai = 0; essai < 2; essai++){
+    let avecWeb = webPossible, surcharge = 0;
+    for(let essai = 0; essai < 4; essai++){
       const body = {
         ...(systeme ? { systemInstruction: { parts: [{ text: systeme }] } } : {}),
         contents: [{ role: "user", parts: [{ text: texte }] }],
@@ -117,12 +126,17 @@ export async function demander({ cle, systeme = "", texte, json = false, web = f
         derniere = e;
         /* Recherche Google refusée pour ce modèle : même question sans elle */
         if(e.type === "outil" && avecWeb){ avecWeb = false; continue; }
+        /* Quota de la recherche Google épuisé : même question sans elle, et plus d'essai web aujourd'hui */
+        if(e.type === "quota" && avecWeb){ avecWeb = webPossible = false; store.set(WEB_OFF, jourGoogle()); continue; }
+        /* Modèle surchargé (souvent passager) : un nouvel essai 2 s plus tard, puis modèle suivant */
+        if(e.type === "serveur" && surcharge++ < 1){ await pause(2000); continue; }
         if(["cle", "refus", "reseau", "bloque", "jeton"].includes(e.type)) throw e;
-        break;   // modèle indisponible ou quota épuisé : modèle suivant
+        break;   // modèle indisponible, surchargé ou quota épuisé : modèle suivant
       }
     }
   }
   if(derniere?.type === "modele" || derniere?.type === "outil") throw new ErreurIA("autre", MSG.autre);
+  if(derniere?.type === "vide") throw new ErreurIA("vide", MSG.vide);
   throw derniere || new ErreurIA("autre", MSG.autre);
 }
 

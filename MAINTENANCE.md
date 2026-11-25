@@ -63,7 +63,7 @@ Puis collez ce message dans une nouvelle conversation :
 > Lis d'abord ses consignes : https://raw.githubusercontent.com/GabrielTimer/GabrielTimer.github.io/main/CLAUDE.md
 > Fais un point santé, en cherchant sur internet ce qui a changé depuis la version de l'appli :
 > 1. Firebase (offre gratuite Spark) : limites, fin de service ou failles connues pour le SDK web 10.12.2.
-> 2. Google AI Studio / Gemini : l'offre gratuite existe-t-elle encore, et les noms de modèles gemini-flash-latest et gemini-2.5-flash marchent-ils encore ?
+> 2. Google AI Studio / Gemini : l'offre gratuite existe-t-elle encore, et les noms de modèles gemini-flash-latest et gemini-3.8-flash marchent-ils encore ?
 > 3. GitHub Actions : actions/checkout@v5, actions/setup-node@v5, Node 22 et firebase-admin@12 sont-ils encore pris en charge ? Les tâches programmées restent-elles gratuites pour un dépôt public ?
 > 4. html2canvas 1.4.1 et jsPDF 2.5.1 (sur cdnjs) : failles connues ?
 > Mes infos : version de l'appli … ; Actions : … ; alertes de l'accueil : … ; ce qui me gêne : …
