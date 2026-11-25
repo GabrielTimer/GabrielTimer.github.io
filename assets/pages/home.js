@@ -227,13 +227,20 @@ async function renderPatient(ctx){
       const cls = x.terminee ? "done" : x.id === s.id ? "now" : (x.datePrevue && new Date(x.datePrevue) < today ? "late" : "");
       return `<i class="${cls}"></i>`;
     }).join("");
-    const doneTodayBanner = doneToday.length && !late && n > 0
-      ? `<div class="notice ok" style="margin-bottom:14px">${icon("checkCircle")}<span>Séance du jour faite. Bravo ! La prochaine est prévue ${esc(fmtRelDay(s.datePrevue).toLowerCase())}.</span></div>` : "";
+    /* Séance faite aujourd'hui : toujours le dire, même si la suivante est en retard ou prévue aujourd'hui
+       (sinon la carte « En retard · Commencer » donne l'impression que la séance n'a pas été enregistrée). */
+    const faiteAujourdhui = doneToday.length > 0;
+    const doneTodayBanner = faiteAujourdhui
+      ? `<div class="notice ok" style="margin-bottom:14px">${icon("checkCircle")}<span>Séance du jour faite et enregistrée. Bravo ! ${!late && n > 0
+          ? `La prochaine est prévue ${esc(fmtRelDay(s.datePrevue).toLowerCase())}.`
+          : "La suivante est ci-dessous : faites-la un autre jour, à votre rythme."}</span></div>` : "";
+    const tagAff = faiteAujourdhui && (late || n <= 0) ? "Prochaine séance" : tag;
+    const lateAff = late && !faiteAujourdhui;
     hero = `
       ${doneTodayBanner}
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-top">
-          <span class="tag ${late ? "late" : ""}">${icon(late ? "clock" : "calendar")}${esc(tag)}</span>
+          <span class="tag ${lateAff ? "late" : ""}">${icon(lateAff ? "clock" : "calendar")}${esc(tagAff)}</span>
           <span class="hero-prog">${esc(prog.nom)}</span>
         </div>
         <h2 class="hero-title" id="hero-title">Séance ${esc(label)}</h2>
@@ -243,7 +250,7 @@ async function renderPatient(ctx){
           ${Number(s.data.series) > 1 ? `<span>${icon("repeat")}${plural(Number(s.data.series), "tour")}</span>` : ""}
         </div>
         <div class="thumbs" aria-hidden="true">${thumbs}</div>
-        <button class="btn sun big block" type="button" id="start">${icon("play")}Commencer la séance</button>
+        <button class="btn sun big block" type="button" id="start">${icon("play")}${faiteAujourdhui ? "Faire la séance suivante" : "Commencer la séance"}</button>
         <div class="spine" aria-hidden="true" style="margin-top:18px">${spine}</div>
         <div class="hero-foot"><span>${prog.faites} sur ${prog.total} séances faites</span><span>${prog.pct} %</span></div>
       </section>`;
