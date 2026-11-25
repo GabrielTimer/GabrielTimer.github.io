@@ -198,6 +198,30 @@ async function renderPatient(ctx){
     return;
   }
 
+  /* Séances validées sur ce téléphone mais pas encore arrivées sur le serveur : on les renvoie */
+  try{
+    const attente = (store.get("gt_valid_attente", []) || []).filter(v => v && v.cle && v.sid && Date.now() - (v.at || 0) < 30 * 864e5);
+    const aRenvoyer = attente.filter(v => v.cle === ctx.cle && !ctx.apercu && data.seances.some(s => s.id === v.sid && !s.terminee));
+    const garder = attente.filter(v => v.cle !== ctx.cle || aRenvoyer.includes(v));
+    store.set("gt_valid_attente", garder);
+    if(aRenvoyer.length && navigator.onLine){
+      const C = await import("../cloud.js");
+      let ok = 0;
+      for(const v of aRenvoyer){
+        try{
+          await C.validateSeance(v.cle, v.sid, { eva:v.eva, ressenti:v.ressenti, commentaire:v.commentaire, dureeReelle:v.dureeReelle, date:v.at });
+          store.set("gt_valid_attente", (store.get("gt_valid_attente", []) || []).filter(x => !(x.cle === v.cle && x.sid === v.sid)));
+          ok++;
+        }catch(e){ console.warn("Renvoi de la séance :", e); }
+      }
+      if(ok){
+        toast(ok > 1 ? `${ok} séances faites sur ce téléphone viennent d'être transmises à votre kiné.` : "Votre dernière séance vient d'être transmise à votre kiné.", { type:"ok", duration:6000 });
+        const { loadPatient } = await import("../patient.js");
+        data = (await loadPatient(ctx.cle).catch(() => null)) || data;
+      }
+    }
+  }catch(e){ console.warn("Séances en attente :", e); }
+
   const { patient, seances, programmes, seules } = data;
   const P = await import("../patient.js");
   /* Hors ligne : les images des séances à venir sont mises de côté sur le téléphone */

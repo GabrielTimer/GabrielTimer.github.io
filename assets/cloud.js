@@ -708,8 +708,10 @@ export async function viderCorbeille(items){
  * Validation d'une séance par le patient.
  * Renvoie { programmeTermine } pour savoir si tout le programme est fait.
  */
-async function _validateSeance(cle, id, { eva = null, ressenti = null, commentaire = null, dureeReelle = null } = {}){
-  const patch = { terminee: true, dateValidation: Date.now() };
+async function _validateSeance(cle, id, { eva = null, ressenti = null, commentaire = null, dureeReelle = null, date = null } = {}){
+  /* date : heure où le patient a validé (renvoi automatique d'une séance restée en attente sur le téléphone) */
+  const quand = Number(date) > 0 && Number(date) <= Date.now() ? Math.round(Number(date)) : Date.now();
+  const patch = { terminee: true, dateValidation: quand };
   if(eva !== null && eva !== undefined && !Number.isNaN(Number(eva))) patch.eva = Math.round(Number(eva));
   if(ressenti) patch.ressenti = String(ressenti).slice(0, 30);
   if(commentaire) patch.commentaire = String(commentaire).slice(0, 1000);

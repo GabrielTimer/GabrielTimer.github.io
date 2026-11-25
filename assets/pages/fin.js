@@ -152,10 +152,20 @@ save.addEventListener("click", async () => {
   let programmeTermine = false;
   let offline = false;
   if(cloud && !apercu){
+    const valid = { eva, ressenti, commentaire, dureeReelle:duree || null };
+    /* Copie de sécurité sur le téléphone : si l'envoi n'arrive pas jusqu'au serveur (réseau lent,
+       page quittée trop tôt…), l'accueil du patient la renvoie tout seul à la prochaine ouverture. */
+    const attente = (store.get("gt_valid_attente", []) || []).filter(v => !(v.cle === cle && v.sid === sid));
+    attente.push({ cle, sid, ...valid, at: Date.now() });
+    store.set("gt_valid_attente", attente);
     try{
       const C = await import("../cloud.js");
-      const r = await withTimeout(C.validateSeance(cle, sid, { eva, ressenti, commentaire, dureeReelle:duree || null }), 8000);
-      if(r === "timeout") offline = true; else programmeTermine = r.programmeTermine;
+      const r = await withTimeout(C.validateSeance(cle, sid, valid), 15000);
+      if(r === "timeout") offline = true;
+      else{
+        programmeTermine = r.programmeTermine;
+        store.set("gt_valid_attente", (store.get("gt_valid_attente", []) || []).filter(v => !(v.cle === cle && v.sid === sid)));
+      }
     }catch(err){
       console.error(err);
       save.disabled = false;
@@ -194,7 +204,7 @@ function done({ programmeTermine, offline, palier = null }){
       <h1>${programmeTermine ? "Programme terminé !" : "Séance enregistrée"}</h1>
       <p class="muted">${programmeTermine
         ? "Vous avez réalisé toutes les séances prévues. Découvrez votre progression et envoyez votre bilan à votre kiné."
-        : offline ? "Vous êtes hors connexion : la séance sera transmise automatiquement dès le retour du réseau."
+        : offline ? "La connexion est lente : votre séance est gardée sur ce téléphone et sera transmise automatiquement à votre kiné, au plus tard à la prochaine ouverture de l'appli."
         : cloud && !apercu ? "Votre kiné peut voir votre séance et votre ressenti." : "Votre séance est ajoutée à l'historique de cet appareil."}</p>
       ${palier ? `<div class="notice" style="text-align:left">${icon("starFill")}<span><strong>${palier.n} séance${palier.n > 1 ? "s" : ""} !</strong> ${esc(palier.mot)}<br><span class="small muted">${esc(KINE.nom)}</span></span></div>` : ""}
       <a class="btn primary big block" href="${next}">${from === "fiche" ? icon("user") + "Retour à la fiche" : programmeTermine ? icon("chart") + "Voir ma progression" : icon("home") + "Retour à l'accueil"}</a>
