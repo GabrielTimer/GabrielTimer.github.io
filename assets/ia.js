@@ -9,7 +9,9 @@ const DERNIER = "gt_ia_modele";
 /* Modèles gratuits, du meilleur au plus léger : si l'un est indisponible, surchargé ou à court de quota, on passe au suivant.
    Les noms « -latest » suivent tout seuls les nouvelles versions de Google ; les autres servent de secours
    (Google retire régulièrement les anciens : les « 2.5 » ont été retirés en novembre 2026). */
-const MODELES = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-3.5-flash", "gemini-flash-lite-latest", "gemini-3.5-flash-lite"];
+/* Chaque modèle a son propre quota gratuit : plus la liste est longue, plus il y a de chances qu'un modèle réponde. */
+const MODELES = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash",
+  "gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite"];
 /* Quota gratuit de la recherche Google (sources web) épuisé : on s'en passe jusqu'au lendemain.
    Google remet les quotas à zéro à minuit, heure de Californie (9 h en France). */
 const WEB_OFF = "gt_ia_web_off";
@@ -62,7 +64,7 @@ const MSG = {
 async function appel(modele, cle, body){
   let r;
   const ctrl = new AbortController();
-  const minuteur = setTimeout(() => ctrl.abort(), 45000);
+  const minuteur = setTimeout(() => ctrl.abort(), 60000);
   try{
     r = await fetch(`${API}${modele}:generateContent`, {
       method: "POST",
