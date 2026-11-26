@@ -56330,5 +56330,656 @@ export const MODELES_BASE = [
 "conseil_kine": "Postures tenues en respirant lentement, sans douleur. Terminer par un temps de relaxation allongé."
 }
 ]
+},
+{
+"id": "cab_dos_epaules_abdos_halteres_1",
+"nom": "Dos, épaules et abdos à la maison (2 haltères)",
+"niveau": 1,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LOMB_02",
+"source": "CABINET",
+"nom": "Dos rond, dos creux",
+"image": "/exercises/images/dos/chat-vache.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"En expirant, arrondir le dos en rentrant le menton",
+"En inspirant, creuser doucement le dos en regardant devant",
+"Enchaîner lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>En expirant, arrondir le dos en rentrant le menton<br>En inspirant, creuser doucement le dos en regardant devant<br>Enchaîner lentement",
+"reps": 6,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Échauffement : grand mouvement lent, au rythme de la respiration.",
+"precautions": [
+"Rester dans une amplitude sans douleur"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "LOMB_11",
+"source": "CABINET",
+"nom": "Rotation thoracique à quatre pattes",
+"image": "/exercises/images/dos/rotation-quadrupedie.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"Poser une main derrière la tête",
+"Tourner le buste pour amener le coude vers le plafond en suivant du regard",
+"Revenir en amenant le coude vers le bras d'appui, puis changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>Poser une main derrière la tête<br>Tourner le buste pour amener le coude vers le plafond en suivant du regard<br>Revenir en amenant le coude vers le bras d'appui, puis changer de côté",
+"reps": 8,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "4 rotations de chaque côté. Suivez la main des yeux, le bassin ne bouge pas.",
+"precautions": [
+"Le bassin ne bouge pas",
+"Mouvement lent et contrôlé"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 20,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Haltère de 5 kg : 10 tirages à droite, puis 10 à gauche. Dos plat, on tire le coude vers la hanche en serrant l'omoplate.",
+"precautions": [
+"Charge légère au début",
+"Arrêter en cas de douleur à l'avant de l'épaule"
+],
+"materiel": [
+"Haltère ou poids",
+"Chaise ou banc"
+],
+"evol": {
+"charge": {
+"depart": 5,
+"pas": 0,
+"max": 5,
+"unite": "kg"
+},
+"vitesse": false
+}
+},
+{
+"id": "POMPE_03",
+"source": "CABINET",
+"nom": "Pompe sur les genoux",
+"image": "/exercises/images/pompes/pompe-genoux-f.webp",
+"consignes": [
+"À genoux sur un tapis, mains au sol un peu plus larges que les épaules",
+"Corps aligné des genoux aux épaules",
+"Descendre la poitrine vers le sol, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, mains au sol un peu plus larges que les épaules<br>Corps aligné des genoux aux épaules<br>Descendre la poitrine vers le sol, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Autant de pompes que possible en 30 s, en gardant le corps aligné. Trop facile : passez aux pompes classiques.",
+"precautions": [
+"Corps gainé : ne pas creuser le bas du dos",
+"Douleur d'épaule : rester à un niveau sans douleur"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "EPAULE_10",
+"source": "CABINET",
+"nom": "Élévation des bras en Y à plat ventre",
+"image": "/exercises/images/epaule/y-ventre.webp",
+"consignes": [
+"Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut",
+"Serrer les omoplates vers le bas",
+"Décoller les bras de quelques centimètres",
+"Redescendre lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongé à plat ventre, front sur une serviette, bras tendus en Y au-dessus de la tête, pouces vers le haut<br>Serrer les omoplates vers le bas<br>Décoller les bras de quelques centimètres<br>Redescendre lentement",
+"reps": 8,
+"ex": 3,
+"repos": 3,
+"conseil_kine": "Pouces vers le plafond, bras en Y. On décolle les bras en serrant les omoplates, sans cambrer.",
+"precautions": [
+"Ne pas hausser les épaules",
+"Pas de douleur à l'épaule"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "POSTPARTUM_16",
+"source": "CABINET",
+"nom": "Marche chargée des deux côtés (farmer carry)",
+"image": "/exercises/images/post-partum/farmer-carry.webp",
+"consignes": [
+"Une charge légère dans chaque main (sacs, haltères)",
+"Grandissez-vous, épaules basses, ventre légèrement rentré",
+"Marchez à pas réguliers sans vous pencher",
+"Respirez normalement pendant toute la marche"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Une charge légère dans chaque main (sacs, haltères)<br>Grandissez-vous, épaules basses, ventre légèrement rentré<br>Marchez à pas réguliers sans vous pencher<br>Respirez normalement pendant toute la marche",
+"reps": 2,
+"ex": 40,
+"repos": 20,
+"conseil_kine": "Un haltère de 5 kg dans chaque main. Grandissez-vous, épaules basses, et marchez lentement.",
+"precautions": [
+"Arrêter si douleur",
+"Éviter le ventre qui bombe"
+],
+"materiel": [
+"Haltère ou poids",
+"Marche ou escalier"
+],
+"evol": {
+"charge": {
+"depart": 5,
+"pas": 0,
+"max": 5,
+"unite": "kg"
+},
+"vitesse": false
+}
+},
+{
+"id": "GAINAGE_15",
+"source": "CABINET",
+"nom": "Planche ventrale (gainage)",
+"image": "/exercises/images/tronc/Gainage_Ventral.png",
+"consignes": [
+"Appui sur les avant-bras",
+"Corps aligné",
+"Contracter le transverse",
+"Respirer normalement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur les avant-bras<br>Corps aligné<br>Contracter le transverse<br>Respirer normalement",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Corps bien aligné, ventre serré, fessiers serrés. On respire normalement.",
+"precautions": [
+"Ne pas creuser le dos",
+"Ne pas relever les fesses"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "GAINAGE_13",
+"source": "CABINET",
+"nom": "Dead bug complet",
+"image": "/exercises/images/post-partum/dead-bug-complet.webp",
+"consignes": [
+"Bras tendus vers le plafond",
+"Hanches et genoux à 90°",
+"Tendre bras et jambe opposés",
+"Maintenir le ventre gainé",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Bras tendus vers le plafond<br>Hanches et genoux à 90°<br>Tendre bras et jambe opposés<br>Maintenir le ventre gainé<br>Revenir lentement",
+"reps": 10,
+"ex": 4,
+"repos": 2,
+"conseil_kine": "Bas du dos collé au sol pendant tout le mouvement. Soufflez en tendant bras et jambe.",
+"precautions": [
+"Ne pas cambrer",
+"Conserver les lombaires au sol"
+],
+"materiel": [
+"Aucun"
+]
+},
+{
+"id": "GAINAGE_16",
+"source": "CABINET",
+"nom": "Planche latérale genoux",
+"image": "/exercises/images/post-partum/side-plank-genoux.webp",
+"consignes": [
+"Appui sur l'avant-bras",
+"Genoux fléchis",
+"Décoller le bassin",
+"Maintenir l'alignement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Appui sur l'avant-bras<br>Genoux fléchis<br>Décoller le bassin<br>Maintenir l'alignement",
+"reps": 4,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "2 fois de chaque côté. Bassin haut : épaule, hanche et genou alignés.",
+"precautions": [
+"Ne pas laisser tomber le bassin"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "GAINAGE_14",
+"source": "CABINET",
+"nom": "Bird dog complet (bras et jambe opposés)",
+"image": "/exercises/images/post-partum/bird-dog-complet.webp",
+"consignes": [
+"Position à quatre pattes",
+"Tendre simultanément bras et jambe opposés",
+"Maintenir le bassin stable",
+"Tenir 2 secondes",
+"Revenir lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position à quatre pattes<br>Tendre simultanément bras et jambe opposés<br>Maintenir le bassin stable<br>Tenir 2 secondes<br>Revenir lentement",
+"reps": 8,
+"ex": 4,
+"repos": 2,
+"conseil_kine": "Bras et jambe opposés, tenez 2 secondes. Imaginez un verre d'eau posé sur le bas du dos.",
+"precautions": [
+"Ne pas tourner le bassin",
+"Ne pas cambrer"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "LOMB_14",
+"source": "CABINET",
+"nom": "Posture de l'enfant",
+"image": "/exercises/images/dos/posture-enfant.webp",
+"consignes": [
+"À genoux sur un tapis, gros orteils joints, genoux écartés",
+"Asseoir les fesses vers les talons",
+"Allonger les bras devant soi, front posé au sol",
+"Respirer lentement dans le dos pendant 30 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, gros orteils joints, genoux écartés<br>Asseoir les fesses vers les talons<br>Allonger les bras devant soi, front posé au sol<br>Respirer lentement dans le dos pendant 30 secondes",
+"reps": 1,
+"ex": 40,
+"repos": 0,
+"conseil_kine": "Retour au calme : relâchez le dos et respirez lentement par le ventre.",
+"precautions": [
+"Placer un coussin sous les fesses si les genoux tirent",
+"Éviter en cas de douleur de genou"
+],
+"materiel": [
+"Tapis"
+]
+}
+]
+},
+{
+"id": "cab_dos_epaules_abdos_halteres_2",
+"nom": "Dos, épaules et abdos à la maison (2 haltères)",
+"niveau": 2,
+"categorie": "sport",
+"zoneLabel": "Corps entier",
+"series": 1,
+"lieu": "CABINET",
+"exercices": [
+{
+"id": "LOMB_02",
+"source": "CABINET",
+"nom": "Dos rond, dos creux",
+"image": "/exercises/images/dos/chat-vache.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"En expirant, arrondir le dos en rentrant le menton",
+"En inspirant, creuser doucement le dos en regardant devant",
+"Enchaîner lentement"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>En expirant, arrondir le dos en rentrant le menton<br>En inspirant, creuser doucement le dos en regardant devant<br>Enchaîner lentement",
+"reps": 6,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Échauffement : grand mouvement lent, au rythme de la respiration.",
+"precautions": [
+"Rester dans une amplitude sans douleur"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "LOMB_11",
+"source": "CABINET",
+"nom": "Rotation thoracique à quatre pattes",
+"image": "/exercises/images/dos/rotation-quadrupedie.webp",
+"consignes": [
+"À quatre pattes, mains sous les épaules, genoux sous les hanches",
+"Poser une main derrière la tête",
+"Tourner le buste pour amener le coude vers le plafond en suivant du regard",
+"Revenir en amenant le coude vers le bras d'appui, puis changer de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, mains sous les épaules, genoux sous les hanches<br>Poser une main derrière la tête<br>Tourner le buste pour amener le coude vers le plafond en suivant du regard<br>Revenir en amenant le coude vers le bras d'appui, puis changer de côté",
+"reps": 8,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "4 rotations de chaque côté. Suivez la main des yeux, le bassin ne bouge pas.",
+"precautions": [
+"Le bassin ne bouge pas",
+"Mouvement lent et contrôlé"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "EPAULE_17",
+"source": "CABINET",
+"nom": "Rowing un bras avec haltère",
+"image": "/exercises/images/epaule/rowing-haltere.webp",
+"consignes": [
+"Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat",
+"L'haltère dans la main libre, bras tendu vers le sol",
+"Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne",
+"Redescendre lentement en 2 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Main et genou du même côté posés sur un banc, l'autre pied au sol, dos plat<br>L'haltère dans la main libre, bras tendu vers le sol<br>Tirer le coude vers le plafond en rapprochant l'omoplate de la colonne<br>Redescendre lentement en 2 secondes",
+"reps": 24,
+"ex": 3,
+"repos": 2,
+"conseil_kine": "Haltère de 5 kg : 12 tirages à droite, puis 12 à gauche. Descente lente en 3 secondes, petite pause en haut.",
+"precautions": [
+"Charge légère au début",
+"Arrêter en cas de douleur à l'avant de l'épaule"
+],
+"materiel": [
+"Haltère ou poids",
+"Chaise ou banc"
+],
+"evol": {
+"charge": {
+"depart": 5,
+"pas": 0,
+"max": 5,
+"unite": "kg"
+},
+"vitesse": false
+}
+},
+{
+"id": "POMPE_04",
+"source": "CABINET",
+"nom": "Pompe classique",
+"image": "/exercises/images/pompes/pompe-classique-f.webp",
+"consignes": [
+"Mains au sol un peu plus larges que les épaules, sur la pointe des pieds",
+"Corps aligné des épaules aux talons, ventre serré",
+"Descendre jusqu'à frôler le sol, coudes à 45°",
+"Pousser pour remonter"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Mains au sol un peu plus larges que les épaules, sur la pointe des pieds<br>Corps aligné des épaules aux talons, ventre serré<br>Descendre jusqu'à frôler le sol, coudes à 45°<br>Pousser pour remonter",
+"reps": 3,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Pompes classiques : autant que possible en 30 s, corps gainé. Si la forme se dégrade, finissez sur les genoux.",
+"precautions": [
+"Corps gainé : ne pas creuser le bas du dos",
+"Douleur d'épaule : rester à un niveau sans douleur"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "TRONC_04",
+"source": "CABINET",
+"nom": "Superman",
+"image": "/exercises/images/tronc/Superman.png",
+"consignes": [
+"S'allonger sur le ventre",
+"Lever simultanément les bras et les jambes",
+"Garder la tête dans l'axe",
+"Maintenir la position"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "S'allonger sur le ventre<br>Lever simultanément les bras et les jambes<br>Garder la tête dans l'axe<br>Maintenir la position",
+"reps": 6,
+"ex": 4,
+"repos": 3,
+"conseil_kine": "Bras et jambes décollés 4 secondes, regard vers le sol. On allonge plutôt qu'on ne monte.",
+"precautions": [
+"Ne pas forcer en cas de douleur lombaire",
+"Éviter les mouvements brusques"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "GAINAGE_22",
+"source": "CABINET",
+"nom": "Marche avec une charge d'un seul côté",
+"image": "/exercises/images/post-partum/carry-asymetrique.webp",
+"consignes": [
+"Tenir une charge d'un seul côté",
+"Rester parfaitement droit",
+"Marcher lentement",
+"Éviter de s'incliner"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Tenir une charge d'un seul côté<br>Rester parfaitement droit<br>Marcher lentement<br>Éviter de s'incliner",
+"reps": 2,
+"ex": 40,
+"repos": 15,
+"conseil_kine": "Un seul haltère de 5 kg : 40 s à droite, puis 40 s à gauche. Restez bien droit : le tronc ne penche pas vers la charge.",
+"precautions": [
+"Choisir une charge adaptée"
+],
+"materiel": [
+"Haltère ou poids"
+],
+"evol": {
+"charge": {
+"depart": 5,
+"pas": 0,
+"max": 5,
+"unite": "kg"
+},
+"vitesse": false
+}
+},
+{
+"id": "GAINAGE_20",
+"source": "CABINET",
+"nom": "Planche toucher épaule",
+"image": "/exercises/images/gainage/planche-toucher-epaule.webp",
+"consignes": [
+"Position de planche bras tendus",
+"Toucher l'épaule opposée",
+"Limiter les mouvements du bassin",
+"Alterner les côtés"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de planche bras tendus<br>Toucher l'épaule opposée<br>Limiter les mouvements du bassin<br>Alterner les côtés",
+"reps": 2,
+"ex": 30,
+"repos": 20,
+"conseil_kine": "Touchez l'épaule opposée en alternant. Pieds écartés pour plus de stabilité : le bassin ne tourne pas.",
+"precautions": [
+"Éviter la rotation du bassin"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "GAINAGE_24",
+"source": "CABINET",
+"nom": "Montées de genoux lentes en planche (mountain climber)",
+"image": "/exercises/images/post-partum/mountain-climber-lent.webp",
+"consignes": [
+"Position de planche bras tendus",
+"Ramener un genou vers la poitrine",
+"Conserver le bassin stable",
+"Alterner les jambes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Position de planche bras tendus<br>Ramener un genou vers la poitrine<br>Conserver le bassin stable<br>Alterner les jambes",
+"reps": 2,
+"ex": 25,
+"repos": 15,
+"conseil_kine": "Genou vers la poitrine lentement, en alternant. Le dos reste plat, pas de vitesse.",
+"precautions": [
+"Ne pas accélérer le mouvement"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "POSTPARTUM_20",
+"source": "CABINET",
+"nom": "Planche latérale jambes tendues",
+"image": "/exercises/images/post-partum/side-plank-jambes.webp",
+"consignes": [
+"Allongée sur le côté, appui sur l'avant-bras, jambes tendues",
+"Soufflez et décollez le bassin pour aligner épaules, hanches et pieds",
+"Tenez en respirant calmement",
+"Redescendez doucement, puis changez de côté"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "Allongée sur le côté, appui sur l'avant-bras, jambes tendues<br>Soufflez et décollez le bassin pour aligner épaules, hanches et pieds<br>Tenez en respirant calmement<br>Redescendez doucement, puis changez de côté",
+"reps": 4,
+"ex": 20,
+"repos": 10,
+"conseil_kine": "Jambes tendues, 2 fois de chaque côté. Trop dur : reposez le genou du dessous.",
+"precautions": [
+"Arrêter si douleur",
+"Éviter le ventre qui bombe"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "POSTPARTUM_22",
+"source": "CABINET",
+"nom": "Bird dog avec pause",
+"image": "/exercises/images/post-partum/bird-dog-complet.webp",
+"consignes": [
+"À quatre pattes, dos neutre",
+"Tendez un bras et la jambe opposée",
+"Tenez 3 secondes sans bouger le bassin",
+"Revenez lentement et alternez"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À quatre pattes, dos neutre<br>Tendez un bras et la jambe opposée<br>Tenez 3 secondes sans bouger le bassin<br>Revenez lentement et alternez",
+"reps": 8,
+"ex": 5,
+"repos": 2,
+"conseil_kine": "Bras et jambe opposés, tenez 3 secondes sans bouger le bassin, puis alternez.",
+"precautions": [
+"Arrêter si douleur",
+"Éviter le ventre qui bombe"
+],
+"materiel": [
+"Tapis"
+]
+},
+{
+"id": "LOMB_14",
+"source": "CABINET",
+"nom": "Posture de l'enfant",
+"image": "/exercises/images/dos/posture-enfant.webp",
+"consignes": [
+"À genoux sur un tapis, gros orteils joints, genoux écartés",
+"Asseoir les fesses vers les talons",
+"Allonger les bras devant soi, front posé au sol",
+"Respirer lentement dans le dos pendant 30 secondes"
+],
+"position": "",
+"youtube": "",
+"type": "timer",
+"conseil": "À genoux sur un tapis, gros orteils joints, genoux écartés<br>Asseoir les fesses vers les talons<br>Allonger les bras devant soi, front posé au sol<br>Respirer lentement dans le dos pendant 30 secondes",
+"reps": 1,
+"ex": 40,
+"repos": 0,
+"conseil_kine": "Retour au calme : relâchez le dos et respirez lentement par le ventre.",
+"precautions": [
+"Placer un coussin sous les fesses si les genoux tirent",
+"Éviter en cas de douleur de genou"
+],
+"materiel": [
+"Tapis"
+]
+}
+]
 }
 ];
