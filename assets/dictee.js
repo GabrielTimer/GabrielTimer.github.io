@@ -97,6 +97,13 @@ function placer(){
   }else{
     btn.style.bottom = `${Math.round(H - haut + 12)}px`;
   }
+  /* Bouton « Femme / Homme » des illustrations (en bas à droite sur grand écran) : on passe au-dessus */
+  const illus = document.querySelector(".illus-bascule:not([hidden])");
+  if(illus){
+    const r = illus.getBoundingClientRect(), b = btn.getBoundingClientRect();
+    const seCroisent = r.width && r.left < b.right && r.right > b.left && r.top < b.bottom && r.bottom > b.top;
+    if(seCroisent || (r.width && r.left < b.right && r.right > b.left && r.top >= b.top - 60)) btn.style.bottom = `${Math.round(H - r.top + 12)}px`;
+  }
 }
 
 export function init(){
@@ -109,6 +116,7 @@ export function init(){
     cible = e.target;
     bouton().style.display = "inline-flex";
     placer();
+    setTimeout(placer, 400);   // le bouton « Femme / Homme » peut apparaître un peu après
   });
   window.addEventListener("resize", placer);
   window.visualViewport?.addEventListener("resize", placer);
